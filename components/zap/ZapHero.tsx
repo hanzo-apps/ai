@@ -68,6 +68,7 @@ const ZapHero = () => {
         >
           MCP made tool integration easy — but JSON everywhere doesn't scale.
           ZAP uses zero-copy serialization: low allocation, low memory, built for agent swarms.
+          Drop-in for MCP, A2A, and ACP.
         </motion.p>
 
         {/* Stats */}
@@ -90,8 +91,8 @@ const ZapHero = () => {
             <div className="text-sm text-muted-foreground">Local hop</div>
           </div>
           <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">0</div>
-            <div className="text-sm text-muted-foreground">JSON parsing</div>
+            <div className="text-2xl font-bold text-foreground/70">MCP · A2A · ACP</div>
+            <div className="text-sm text-muted-foreground">All three protocols</div>
           </div>
         </motion.div>
 
