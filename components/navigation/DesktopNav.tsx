@@ -113,7 +113,8 @@ const MeetHanzoContent = ({ closeMenu }: { closeMenu: () => void }) => (
       <div className="space-y-0.5 mb-5">
         <IconLink href="/contact" icon={Mail} label="Contact Us" closeMenu={closeMenu} />
         <IconLink href="/enterprise" icon={Building2} label="Enterprise" closeMenu={closeMenu} />
-        <IconLink href="/referrals" icon={Gift} label="Referral Program" closeMenu={closeMenu} />
+        <IconLink href="/affiliate" icon={HeartHandshake} label="Affiliate" description="Partner program" closeMenu={closeMenu} />
+        <IconLink href="/referral" icon={Gift} label="Referral" description="Refer a friend" closeMenu={closeMenu} />
       </div>
       <h3 className="text-muted-foreground text-xs font-medium mb-3 uppercase tracking-wider">Trust</h3>
       <div className="space-y-0.5">
