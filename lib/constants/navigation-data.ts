@@ -89,20 +89,21 @@ export const productsNav: NavSection[] = [
     title: "Developer",
     items: [
       { title: "Dev", href: "/dev", icon: Terminal, github: `${ORG}/dev`, docs: `${DOCS}/dev`, featured: true },
+      { title: "Playground", href: "/playground", icon: PlayCircle, github: ORG, docs: `${DOCS}/playground`, featured: true },
       { title: "Code", href: "/code", icon: Code, github: `${ORG}/code`, docs: `${DOCS}/code` },
       { title: "CLI", href: "/cli", icon: Terminal, github: `${ORG}/cli`, docs: `${DOCS}/cli` },
       { title: "Desktop", href: "/desktop", icon: MonitorSmartphone, github: `${ORG}/desktop`, docs: `${DOCS}/desktop` },
       { title: "GUI", href: "/gui", icon: Layers, github: `${ORG}/gui`, docs: `${DOCS}/gui` },
       { title: "UI", href: "/ui", icon: Blocks, github: `${ORG}/ui`, docs: `${DOCS}/ui` },
       { title: "Extension", href: "/extension", icon: AppWindow, github: `${ORG}/extension`, docs: `${DOCS}/extension` },
-      { title: "Operative", href: "/operative", icon: Workflow, github: `${ORG}/operative`, docs: `${DOCS}/operative` },
+      { title: "Operative", href: "/operative", icon: Workflow, github: `${ORG}/operative`, docs: `${DOCS}/operative`, featured: true },
     ],
   },
   {
     title: "Apps",
     items: [
       { title: "Chat", href: "/chat", icon: MessageSquare, github: `${ORG}/chat`, docs: `${DOCS}/chat`, featured: true },
-      { title: "Bot", href: "/bot", icon: Bot, github: `${ORG}/bot`, docs: `${DOCS}/bot` },
+      { title: "Bot", href: "/bot", icon: Bot, github: `${ORG}/bot`, docs: `${DOCS}/bot`, featured: true },
       { title: "App", href: "/app", icon: AppWindow, github: `${ORG}/app`, docs: `${DOCS}/app` },
       { title: "Search", href: "/search", icon: Search, github: `${ORG}/search`, docs: `${DOCS}/search`, featured: true },
       { title: "Crawl", href: "/crawl", icon: Globe, github: ORG, docs: `${DOCS}/crawl` },
@@ -205,14 +206,14 @@ export const productsNav: NavSection[] = [
 ];
 
 export const featuredProducts: NavItem[] = [
-  { title: "Hanzo Dev", href: "/dev", icon: Terminal, description: "Multi-agent coding workspace", github: `${ORG}/dev`, docs: `${DOCS}/dev`, featured: true },
-  { title: "Zen Models", href: "/zen", icon: Brain, description: "100+ LLMs via unified API", github: ORG, docs: `${DOCS}/zen`, featured: true },
-  { title: "Agents", href: "/agents", icon: Bot, description: "Multi-agent SDK", github: `${ORG}/agent`, docs: `${DOCS}/agent`, featured: true },
-  { title: "Search", href: "/search", icon: Search, description: "Hybrid search + RAG chat", github: `${ORG}/search`, docs: `${DOCS}/search`, featured: true },
-  { title: "Crawl", href: "/crawl", icon: Globe, description: "AI-ready web crawler", github: ORG, docs: `${DOCS}/crawl`, featured: true },
-  { title: "Vector", href: "/vector", icon: Sparkles, description: "High-performance vector DB", github: `${ORG}/vector`, docs: `${DOCS}/vector`, featured: true },
+  { title: "Hanzo Dev", href: "/dev", icon: Terminal, description: "AI engineer that ships PRs from a sentence", github: `${ORG}/dev`, docs: `${DOCS}/dev`, featured: true },
+  { title: "Bot", href: "/bot", icon: Bot, description: "Multi-agent simulation framework", github: `${ORG}/bot`, docs: `${DOCS}/bot`, featured: true },
+  { title: "Playground", href: "/playground", icon: PlayCircle, description: "Hands-on sandbox for every Hanzo product", github: ORG, docs: `${DOCS}/playground`, featured: true },
+  { title: "Agents", href: "/agents", icon: Sparkles, description: "Agentic harness — SDK + runtime + tools", github: `${ORG}/agent`, docs: `${DOCS}/agent`, featured: true },
+  { title: "MCP", href: "/mcp", icon: Plug, description: "Model Context Protocol — open-source DX layer", github: `${ORG}/mcp`, docs: `${DOCS}/mcp`, featured: true },
+  { title: "Zen Models", href: "/zen", icon: Brain, description: "390+ open-weight frontier models", github: ORG, docs: `${DOCS}/zen`, featured: true },
   { title: "Cloud", href: "/cloud", icon: Cloud, description: "AI Cloud infrastructure", github: `${ORG}/cloud`, docs: `${DOCS}/cloud`, featured: true },
-  { title: "IAM", href: "/iam", icon: UserCheck, description: "Identity & access management", github: `${ORG}/iam`, docs: `${DOCS}/iam`, featured: true },
+  { title: "IAM", href: "/iam", icon: UserCheck, description: "Identity & access (hanzo.id)", github: `${ORG}/iam`, docs: `${DOCS}/iam`, featured: true },
 ];
 
 export const resourcesNav: NavSection[] = [
