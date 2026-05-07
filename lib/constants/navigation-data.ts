@@ -49,6 +49,7 @@ export type NavItem = {
   description?: string;
   icon?: React.ComponentType<any>;
   github?: string;
+  docs?: string;
   featured?: boolean;
 };
 
@@ -58,91 +59,93 @@ export type NavSection = {
 };
 
 const ORG = 'https://github.com/hanzoai';
+const DOCS = 'https://docs.hanzo.ai';
 
 export const productsNav: NavSection[] = [
   {
     title: "AI & Agents",
     items: [
-      { title: "Zen Models", href: "/zen", icon: Brain, github: `${ORG}/zen`, featured: true },
-      { title: "Agents", href: "/agents", icon: Bot, github: `${ORG}/agent`, featured: true },
-      { title: "AI Studio", href: "/ai-studio", icon: Sparkles, github: `${ORG}/ai`, featured: true },
-      { title: "MCP", href: "/mcp", icon: Plug, github: `${ORG}/mcp` },
-      { title: "ZAP", href: "/zap", icon: Zap, github: `${ORG}/zap` },
-      { title: "LLM Gateway", href: "/llm", icon: Network, github: `${ORG}/llm` },
+      { title: "Zen Models", href: "/zen", icon: Brain, github: `${ORG}/zen`, docs: `${DOCS}/zen`, featured: true },
+      { title: "Agents", href: "/agents", icon: Bot, github: `${ORG}/agent`, docs: `${DOCS}/agent`, featured: true },
+      { title: "AI Studio", href: "/ai-studio", icon: Sparkles, github: `${ORG}/ai`, docs: `${DOCS}/ai`, featured: true },
+      { title: "MCP", href: "/mcp", icon: Plug, github: `${ORG}/mcp`, docs: `${DOCS}/mcp` },
+      { title: "ZAP", href: "/zap", icon: Zap, github: `${ORG}/zap`, docs: `${DOCS}/zap` },
+      { title: "LLM Gateway", href: "/llm", icon: Network, github: `${ORG}/llm`, docs: `${DOCS}/llm` },
     ],
   },
   {
     title: "Developer",
     items: [
-      { title: "Dev", href: "/dev", icon: Terminal, github: `${ORG}/dev`, featured: true },
-      { title: "Code", href: "/code", icon: Code, github: `${ORG}/code` },
-      { title: "Extension", href: "/extension", icon: AppWindow, github: `${ORG}/extension` },
-      { title: "Operative", href: "/operative", icon: Workflow, github: `${ORG}/operative` },
+      { title: "Dev", href: "/dev", icon: Terminal, github: `${ORG}/dev`, docs: `${DOCS}/dev`, featured: true },
+      { title: "Code", href: "/code", icon: Code, github: `${ORG}/code`, docs: `${DOCS}/code` },
+      { title: "Extension", href: "/extension", icon: AppWindow, github: `${ORG}/extension`, docs: `${DOCS}/extension` },
+      { title: "Operative", href: "/operative", icon: Workflow, github: `${ORG}/operative`, docs: `${DOCS}/operative` },
     ],
   },
   {
     title: "Apps",
     items: [
-      { title: "Chat", href: "/chat", icon: MessageSquare, github: `${ORG}/chat`, featured: true },
-      { title: "Search", href: "/search", icon: Search, github: `${ORG}/search`, featured: true },
-      { title: "Crawl", href: "/crawl", icon: Globe, github: `${ORG}/crawl` },
-      { title: "Base", href: "/base", icon: Database, github: `${ORG}/base` },
-      { title: "Commerce", href: "/commerce", icon: ShoppingCart, github: `${ORG}/commerce` },
-      { title: "Captable", href: "/captable", icon: PieChart, github: `${ORG}/captable` },
-      { title: "Dataroom", href: "/dataroom", icon: FileText, github: `${ORG}/dataroom` },
-      { title: "Sign", href: "/sign", icon: ShieldCheck, github: `${ORG}/sign` },
+      { title: "Chat", href: "/chat", icon: MessageSquare, github: `${ORG}/chat`, docs: `${DOCS}/chat`, featured: true },
+      { title: "Bot", href: "/bot", icon: Bot, github: `${ORG}/bot`, docs: `${DOCS}/bot` },
+      { title: "App", href: "/app", icon: AppWindow, github: `${ORG}/app`, docs: `${DOCS}/app` },
+      { title: "Search", href: "/search", icon: Search, github: `${ORG}/search`, docs: `${DOCS}/search`, featured: true },
+      { title: "Crawl", href: "/crawl", icon: Globe, github: `${ORG}/crawl`, docs: `${DOCS}/crawl` },
+      { title: "Base", href: "/base", icon: Database, github: `${ORG}/base`, docs: `${DOCS}/base` },
+      { title: "Commerce", href: "/commerce", icon: ShoppingCart, github: `${ORG}/commerce`, docs: `${DOCS}/commerce` },
+      { title: "Payments", href: "/payments", icon: CreditCard, github: `${ORG}/payments`, docs: `${DOCS}/payments` },
+      { title: "Captable", href: "/captable", icon: PieChart, github: `${ORG}/captable`, docs: `${DOCS}/captable` },
+      { title: "Dataroom", href: "/dataroom", icon: FileText, github: `${ORG}/dataroom`, docs: `${DOCS}/dataroom` },
+      { title: "Sign", href: "/sign", icon: ShieldCheck, github: `${ORG}/sign`, docs: `${DOCS}/sign` },
     ],
   },
   {
     title: "Compute",
     items: [
-      { title: "Cloud", href: "/cloud", icon: Cloud, github: `${ORG}/cloud`, featured: true },
-      { title: "Functions", href: "/functions", icon: Zap, github: `${ORG}/functions` },
-      { title: "Machines", href: "/machines", icon: Server, github: `${ORG}/machines` },
-      { title: "Edge", href: "/edge", icon: Globe, github: `${ORG}/edge` },
-      { title: "Realtime", href: "/realtime", icon: Radio, github: `${ORG}/realtime` },
+      { title: "Cloud", href: "/cloud", icon: Cloud, github: `${ORG}/cloud`, docs: `${DOCS}/cloud`, featured: true },
+      { title: "Functions", href: "/functions", icon: Zap, github: `${ORG}/functions`, docs: `${DOCS}/functions` },
+      { title: "Machines", href: "/machines", icon: Server, github: `${ORG}/machines`, docs: `${DOCS}/machines` },
+      { title: "Edge", href: "/edge", icon: Globe, github: `${ORG}/edge`, docs: `${DOCS}/edge` },
+      { title: "Realtime", href: "/realtime", icon: Radio, github: `${ORG}/realtime`, docs: `${DOCS}/realtime` },
     ],
   },
   {
     title: "Data",
     items: [
-      { title: "Vector", href: "/vector", icon: Sparkles, github: `${ORG}/vector`, featured: true },
-      { title: "SQL", href: "/sql", icon: Database, github: `${ORG}/sql` },
-      { title: "KV", href: "/kv", icon: Key, github: `${ORG}/kv` },
-      { title: "Datastore", href: "/datastore", icon: Database, github: `${ORG}/datastore` },
-      { title: "Storage", href: "/storage", icon: HardDrive, github: `${ORG}/storage` },
-      { title: "S3", href: "/s3", icon: HardDrive, github: `${ORG}/s3` },
+      { title: "Vector", href: "/vector", icon: Sparkles, github: `${ORG}/vector`, docs: `${DOCS}/vector`, featured: true },
+      { title: "SQL", href: "/sql", icon: Database, github: `${ORG}/sql`, docs: `${DOCS}/sql` },
+      { title: "KV", href: "/kv", icon: Key, github: `${ORG}/kv`, docs: `${DOCS}/kv` },
+      { title: "Datastore", href: "/datastore", icon: Database, github: `${ORG}/datastore`, docs: `${DOCS}/datastore` },
+      { title: "Storage", href: "/storage", icon: HardDrive, github: `${ORG}/storage`, docs: `${DOCS}/storage` },
     ],
   },
   {
     title: "Async",
     items: [
-      { title: "Flow", href: "/flow", icon: Workflow, github: `${ORG}/flow` },
-      { title: "Auto", href: "/auto", icon: PlayCircle, github: `${ORG}/auto` },
-      { title: "Tasks", href: "/tasks", icon: ScrollText, github: `${ORG}/tasks` },
-      { title: "Pubsub", href: "/pubsub", icon: Radio, github: `${ORG}/pubsub` },
-      { title: "MQ", href: "/mq", icon: Network, github: `${ORG}/mq` },
-      { title: "Stream", href: "/stream", icon: Activity, github: `${ORG}/stream` },
+      { title: "Flow", href: "/flow", icon: Workflow, github: `${ORG}/flow`, docs: `${DOCS}/flow` },
+      { title: "Auto", href: "/auto", icon: PlayCircle, github: `${ORG}/auto`, docs: `${DOCS}/auto` },
+      { title: "Tasks", href: "/tasks", icon: ScrollText, github: `${ORG}/tasks`, docs: `${DOCS}/tasks` },
+      { title: "Pubsub", href: "/pubsub", icon: Radio, github: `${ORG}/pubsub`, docs: `${DOCS}/pubsub` },
+      { title: "MQ", href: "/mq", icon: Network, github: `${ORG}/mq`, docs: `${DOCS}/mq` },
+      { title: "Stream", href: "/stream", icon: Activity, github: `${ORG}/stream`, docs: `${DOCS}/stream` },
     ],
   },
   {
     title: "Platform",
     items: [
-      { title: "IAM", href: "/iam", icon: UserCheck, github: `${ORG}/iam`, featured: true },
-      { title: "KMS", href: "/kms", icon: KeyRound, github: `${ORG}/kms` },
-      { title: "Platform", href: "/platform", icon: Building2, github: `${ORG}/platform` },
-      { title: "DNS", href: "/dns", icon: Globe, github: `${ORG}/dns` },
-      { title: "Identity", href: "/identity", icon: UserCheck, github: `${ORG}/iam` },
-      { title: "Console", href: "/console", icon: LayoutDashboard, github: `${ORG}/console` },
+      { title: "IAM", href: "/iam", icon: UserCheck, github: `${ORG}/iam`, docs: `${DOCS}/iam`, featured: true },
+      { title: "KMS", href: "/kms", icon: KeyRound, github: `${ORG}/kms`, docs: `${DOCS}/kms` },
+      { title: "Platform", href: "/platform", icon: Building2, github: `${ORG}/platform`, docs: `${DOCS}/platform` },
+      { title: "DNS", href: "/dns", icon: Globe, github: `${ORG}/dns`, docs: `${DOCS}/dns` },
+      { title: "Console", href: "/console", icon: LayoutDashboard, github: `${ORG}/console`, docs: `${DOCS}/console` },
     ],
   },
   {
     title: "Observability",
     items: [
-      { title: "Insights", href: "/insights", icon: BarChart3, github: `${ORG}/insights`, featured: true },
-      { title: "Analytics", href: "/analytics", icon: BarChart3, github: `${ORG}/analytics` },
-      { title: "Status", href: "/status", icon: Activity, github: `${ORG}/status` },
-      { title: "Dashboards", href: "/dashboards", icon: PieChart, github: `${ORG}/dashboards` },
+      { title: "Insights", href: "/insights", icon: BarChart3, github: `${ORG}/insights`, docs: `${DOCS}/insights`, featured: true },
+      { title: "Analytics", href: "/analytics", icon: BarChart3, github: `${ORG}/analytics`, docs: `${DOCS}/analytics` },
+      { title: "Status", href: "/status", icon: Activity, github: `${ORG}/status`, docs: `${DOCS}/status` },
+      { title: "Dashboards", href: "/dashboards", icon: PieChart, github: `${ORG}/dashboards`, docs: `${DOCS}/dashboards` },
     ],
   },
   {
@@ -161,14 +164,14 @@ export const productsNav: NavSection[] = [
 ];
 
 export const featuredProducts: NavItem[] = [
-  { title: "Hanzo Dev", href: "/dev", icon: Terminal, description: "Multi-agent coding workspace", github: `${ORG}/dev`, featured: true },
-  { title: "Zen Models", href: "/zen", icon: Brain, description: "100+ LLMs via unified API", github: `${ORG}/zen`, featured: true },
-  { title: "Agents", href: "/agents", icon: Bot, description: "Multi-agent SDK", github: `${ORG}/agent`, featured: true },
-  { title: "Search", href: "/search", icon: Search, description: "Hybrid search + RAG chat", github: `${ORG}/search`, featured: true },
-  { title: "Crawl", href: "/crawl", icon: Globe, description: "AI-ready web crawler", github: `${ORG}/crawl`, featured: true },
-  { title: "Vector", href: "/vector", icon: Sparkles, description: "High-performance vector DB", github: `${ORG}/vector`, featured: true },
-  { title: "Cloud", href: "/cloud", icon: Cloud, description: "AI Cloud infrastructure", github: `${ORG}/cloud`, featured: true },
-  { title: "IAM", href: "/iam", icon: UserCheck, description: "Identity & access management", github: `${ORG}/iam`, featured: true },
+  { title: "Hanzo Dev", href: "/dev", icon: Terminal, description: "Multi-agent coding workspace", github: `${ORG}/dev`, docs: `${DOCS}/dev`, featured: true },
+  { title: "Zen Models", href: "/zen", icon: Brain, description: "100+ LLMs via unified API", github: `${ORG}/zen`, docs: `${DOCS}/zen`, featured: true },
+  { title: "Agents", href: "/agents", icon: Bot, description: "Multi-agent SDK", github: `${ORG}/agent`, docs: `${DOCS}/agent`, featured: true },
+  { title: "Search", href: "/search", icon: Search, description: "Hybrid search + RAG chat", github: `${ORG}/search`, docs: `${DOCS}/search`, featured: true },
+  { title: "Crawl", href: "/crawl", icon: Globe, description: "AI-ready web crawler", github: `${ORG}/crawl`, docs: `${DOCS}/crawl`, featured: true },
+  { title: "Vector", href: "/vector", icon: Sparkles, description: "High-performance vector DB", github: `${ORG}/vector`, docs: `${DOCS}/vector`, featured: true },
+  { title: "Cloud", href: "/cloud", icon: Cloud, description: "AI Cloud infrastructure", github: `${ORG}/cloud`, docs: `${DOCS}/cloud`, featured: true },
+  { title: "IAM", href: "/iam", icon: UserCheck, description: "Identity & access management", github: `${ORG}/iam`, docs: `${DOCS}/iam`, featured: true },
 ];
 
 export const resourcesNav: NavSection[] = [

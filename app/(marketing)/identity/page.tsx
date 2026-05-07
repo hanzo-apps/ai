@@ -3,7 +3,7 @@
 
 import React, { useState } from 'react';
 import { motion } from "framer-motion";
-import { User, UserCheck, Shield, Lock, UserCog, Key, Fingerprint, History } from "lucide-react";
+import { ArrowRight, User, UserCheck, Shield, Lock, UserCog, Key, Fingerprint, History } from "lucide-react";
 import { Button } from "@hanzo/ui";
 import ChromeText from "@/components/ui/chrome-text";
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner";
@@ -295,8 +295,21 @@ const Identity = () => {
           </div>
         </div>
       </section>
-      
-      
+
+      <section className="py-16 border-t border-neutral-800">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <h2 className="text-2xl font-bold mb-4">Get started with Identity</h2>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="https://docs.hanzo.ai/identity" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
+              Read the docs <ArrowRight className="h-4 w-4" />
+            </a>
+            <a href="https://github.com/hanzoai/identity" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };

@@ -55,7 +55,7 @@ const mobileNav = [
         items: [
           { title: "Contact", href: "/contact" },
           { title: "Enterprise", href: "/enterprise" },
-          { title: "Referrals", href: "/referrals" },
+          { title: "Referrals", href: "/referral" },
         ]
       },
       {
