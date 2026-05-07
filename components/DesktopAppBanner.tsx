@@ -35,8 +35,8 @@ const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
   };
 
   const downloadUrl = isMac
-    ? "https://github.com/hanzoai/hanzo-dev/releases/latest/download/Hanzo-Dev-darwin-arm64.dmg"
-    : "https://github.com/hanzoai/hanzo-dev/releases";
+    ? "https://github.com/hanzoai/dev/releases/latest/download/Hanzo-Dev-darwin-arm64.dmg"
+    : "https://github.com/hanzoai/dev/releases";
 
   if (variant === "inline") {
     return (
