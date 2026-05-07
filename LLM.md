@@ -2,14 +2,14 @@
 
 ## Project
 
-Main Hanzo AI marketing site. React SPA with Vite.
+Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
 
 - URL: https://hanzo.ai
-- Stack: React 18 + TypeScript + Vite + Tailwind CSS + Framer Motion
+- Stack: Next.js 14 + React 18 + TypeScript + Tailwind CSS + Framer Motion
 - Node: v20+ (`.nvmrc`)
-- Dev: `npm run dev` (port 8080)
-- Build: `npm run build`
-- Deploy: GitHub Pages
+- Dev: `pnpm dev`
+- Build: `pnpm build`
+- Deploy: Static export (`output: export` in `next.config.ts`) → GitHub Pages
 
 ## Brand Colors (Monochrome)
 
@@ -17,26 +17,71 @@ Main Hanzo AI marketing site. React SPA with Vite.
 - Secondary: `#d4d4d4` (neutral-300)
 - Hover: `#a3a3a3` (neutral-400)
 - Brand CSS var: `--brand: #e4e4e7`
-- Centralized in `/src/constants/brand.ts` with Tailwind class mappings
+- Centralized in `lib/constants/brand.ts`
 
 ## Key Files
 
 ```
-src/
-  constants/
-    brand.ts              # BRAND colors, brandClasses, partners
-    navigation-data.ts    # Products/solutions menu data
-  components/
-    shared/
-      PartnerCard.tsx     # Reusable partner card + PartnersSection
-      FeatureCard.tsx     # Grid and list item variants
-    ui/                   # shadcn-ui components
-    navigation/
-      products-menu/      # 8 featured products, 4 per category
-    ScrollToTop.tsx       # 50ms delay, instant behavior, skip initial load
-  pages/                  # Route handlers
-App.tsx                   # All routes defined here
+app/(marketing)/<slug>/page.tsx   # Flat product pages — /dev, /chat, /vector, etc.
+app/(marketing)/blockchain/<x>/   # Web3 pages
+lib/constants/
+  navigation-data.ts              # Single source of truth for header + footer menus
+  brand.ts                        # Brand tokens
+components/navigation/
+  DesktopNav.tsx                  # Header layout (Meet Hanzo / Products / Learn / Docs / Pricing)
+  products-menu/index.tsx         # Reads productsNav from navigation-data
+  resources-menu/                 # Reads resourcesNav from navigation-data
 ```
+
+## Header Menu (canonical)
+
+Defined in `lib/constants/navigation-data.ts`. Single source — every menu surface
+(desktop, mobile, footer) reads from the exports here.
+
+**Top level**: Meet Hanzo · Products · Learn · Docs · Pricing
+
+**Products dropdown** (9 categories, 50 items, all linking to live `/<slug>` pages):
+
+| Category       | Items |
+|----------------|-------|
+| AI & Agents    | Zen Models, Agents, AI Studio, MCP, ZAP, LLM Gateway |
+| Developer      | Dev, Code, Extension, Operative |
+| Apps           | Chat, Search, Crawl, Base, Commerce, Captable, Dataroom, Sign |
+| Compute        | Cloud, Functions, Machines, Edge, Realtime |
+| Data           | Vector, SQL, KV, Datastore, Storage, S3 |
+| Async          | Flow, Auto, Tasks, Pubsub, MQ, Stream |
+| Platform       | IAM, KMS, Platform, DNS, Identity, Console |
+| Observability  | Insights, Analytics, Status, Dashboards |
+| Web3           | Chains, Exchange, Wallets, Indexer, NFT, Tokens, Pay, Bridge |
+
+Every product item carries a `github:` field linking to its canonical
+`https://github.com/hanzoai/<repo>` repo (one-and-only-one-way).
+
+## Removed (2026-05-07 cleanup)
+
+- **Solutions dropdown** — every link pointed to non-existent
+  `/industries/*` and `/solutions/*` pages (50+ dead links). Component
+  `components/navigation/SolutionsMenu.tsx` and the `solutions-menu/`
+  directory deleted; `capabilitiesNav` / `industriesNav` exports removed.
+- **`/products/<cat>/<x>` URLs** — menu now points to flat `/<slug>` URLs
+  matching the actual route layout under `app/(marketing)/`.
+- **`/runtime`** menu item — no live page or published image; removed
+  pending Runtime product launch.
+
+## Lingering cruft (review before deleting)
+
+- `app/(marketing)/solutions/{capabilities,industries,[...slug]}/page.tsx`
+  — pages still exist for direct URL access but unlinked from header.
+  Pre-existing TS errors. Decide: delete or restore links.
+- `lib/constants/navigation.ts` (different from `navigation-data.ts`!) —
+  only imported by the orphaned `solutions/` pages above.
+- `lib/constants/solutions-data.ts` — only imported by `solutions/[...slug]/page.tsx`.
+- `components/navigation/products-menu/product-data.ts` — duplicate of
+  navigation-data.ts product list. Still imported by `landing/FeatureShowcase.tsx`.
+  Migrate FeatureShowcase to read from `navigation-data.ts` and delete.
+- Duplicate referrals pages: `/referral`, `/referrals`, `/referral-program`
+  — three implementations. Keep `/referral-program` (account-aware), delete the others.
+- `/home2` — duplicate of `/`.
 
 ## Design System
 
@@ -44,12 +89,12 @@ App.tsx                   # All routes defined here
 - Cards: `bg-neutral-900/50 border border-neutral-800 rounded-xl`
 - Animation: framer-motion, 0.4s base, 0.05s stagger
 - Buttons: rounded-full, brand primary + neutral-700 border secondary
-- Badge pills: icon + text, rounded-full
-- Font: Geist Sans (loaded via next/font/google)
+- Font: Geist Sans (`next/font/google`)
 
-## GitHub Pages SPA
+## Static Export
 
-`vite.config.ts` has `copyIndexTo404()` plugin for client-side routing on GitHub Pages.
+`next.config.ts` uses `output: 'export'` for static deploy to GitHub Pages.
+SPA routing works via the static export's automatic 404.html fallback.
 
 ## Certification Claims (Honest)
 
@@ -57,10 +102,3 @@ App.tsx                   # All routes defined here
 - HIPAA: "HIPAA Ready" / "BAA Available" (not "Compliant")
 - ISO 27001: removed (not yet certified)
 - No specific datacenter locations; use "Global High-Performance Edge"
-
-## Gotchas
-
-- `themes.css`: `--brand` is monochrome `#e4e4e7`, `--brand-muted` is `#a3a3a3`
-- Green status indicators (online dots, success states) are preserved, not replaced with brand
-- ProductsMenu uses named export (not default) for consistency
-- Open Graph/Twitter meta tags use absolute `https://hanzo.ai/` URLs
