@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import ProductsMenu from "./products-menu";
-import { SolutionsMenu } from "./solutions-menu";
 import { NavMenu } from "./NavMenu";
 import {
   Users, Lightbulb, Brain, Layers, FileText, ExternalLink,
@@ -199,9 +198,6 @@ const DesktopNav = () => {
 
       {/* Platform (Products) dropdown */}
       <ProductsMenu />
-
-      {/* Solutions dropdown */}
-      <SolutionsMenu />
 
       {/* Learn dropdown */}
       <NavMenu label="Learn">

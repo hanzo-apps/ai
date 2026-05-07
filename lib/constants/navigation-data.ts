@@ -1,15 +1,10 @@
 import {
   Activity,
-  AlertTriangle,
   AppWindow,
   BarChart3,
-  Bell,
-  Blocks,
   Bot,
   Brain,
-  Braces,
   Building2,
-  Car,
   Cloud,
   Code,
   Coins,
@@ -17,46 +12,30 @@ import {
   Cpu,
   CreditCard,
   Database,
-  DollarSign,
-  Factory,
-  FileCode,
   FileText,
-  Gauge,
-  GitBranch,
   Globe,
   HardDrive,
   Key,
   KeyRound,
-  Landmark,
   Laptop,
-  Layers,
   LayoutDashboard,
   LayoutGrid,
-  Leaf,
-  LineChart,
-  ListTodo,
   Lock,
-  LucideIcon,
   MessageSquare,
-  MonitorSmartphone,
   Network,
   PieChart,
-  Plane,
   PlayCircle,
   Plug,
   Radio,
   Rocket,
-  Route,
   ScrollText,
   Search,
   Server,
-  Settings,
   Shield,
   ShieldCheck,
   ShoppingCart,
   Sparkles,
   Terminal,
-  Upload,
   UserCheck,
   Users,
   Wallet,
@@ -69,6 +48,7 @@ export type NavItem = {
   href: string;
   description?: string;
   icon?: React.ComponentType<any>;
+  github?: string;
   featured?: boolean;
 };
 
@@ -77,210 +57,151 @@ export type NavSection = {
   items: NavItem[];
 };
 
-// New 9-category products navigation matching Hanzo Cloud catalog
+const ORG = 'https://github.com/hanzoai';
+
 export const productsNav: NavSection[] = [
   {
     title: "AI & Agents",
     items: [
-      { title: "Models", href: "/products/ml/zen", icon: Brain, featured: true },
-      { title: "Agent", href: "/products/apps/agent", icon: Bot, featured: true },
-      { title: "MCP", href: "/mcp", icon: Plug },
-      { title: "ZAP", href: "/zap", icon: Zap },
-      { title: "Router", href: "/products/ml/serving", icon: Route },
-      { title: "Notebooks", href: "/products/ml/notebooks", icon: FileText },
-      { title: "Pipelines", href: "/products/ml/pipelines", icon: GitBranch },
-      { title: "Training", href: "/products/ml/training", icon: Cpu },
-      { title: "Serving", href: "/products/ml/serving", icon: Rocket },
-    ]
+      { title: "Zen Models", href: "/zen", icon: Brain, github: `${ORG}/zen`, featured: true },
+      { title: "Agents", href: "/agents", icon: Bot, github: `${ORG}/agent`, featured: true },
+      { title: "AI Studio", href: "/ai-studio", icon: Sparkles, github: `${ORG}/ai`, featured: true },
+      { title: "MCP", href: "/mcp", icon: Plug, github: `${ORG}/mcp` },
+      { title: "ZAP", href: "/zap", icon: Zap, github: `${ORG}/zap` },
+      { title: "LLM Gateway", href: "/llm", icon: Network, github: `${ORG}/llm` },
+    ],
   },
   {
-    title: "Developer Tools",
+    title: "Developer",
     items: [
-      { title: "Dev", href: "/dev", icon: Terminal, featured: true },
-      { title: "CLI", href: "/docs/cli", icon: Terminal },
-      { title: "Console", href: "/products/apps/console", icon: LayoutDashboard },
-      { title: "SDKs", href: "/docs/sdk", icon: Code },
-      { title: "Templates", href: "/docs/templates", icon: FileCode },
-      { title: "Flow", href: "/products/async/flow", icon: Workflow },
-      { title: "Local", href: "/docs/local", icon: Laptop },
-      { title: "Inspector", href: "/docs/inspector", icon: Search },
-    ]
+      { title: "Dev", href: "/dev", icon: Terminal, github: `${ORG}/dev`, featured: true },
+      { title: "Code", href: "/code", icon: Code, github: `${ORG}/code` },
+      { title: "Extension", href: "/extension", icon: AppWindow, github: `${ORG}/extension` },
+      { title: "Operative", href: "/operative", icon: Workflow, github: `${ORG}/operative` },
+    ],
   },
   {
-    title: "App Platform",
+    title: "Apps",
     items: [
-      { title: "Base", href: "/products/apps/base", icon: Layers },
-      { title: "Auth", href: "/products/platform/iam", icon: Lock },
-      { title: "Functions", href: "/products/compute/functions", icon: Zap, featured: true },
-      { title: "Runtime", href: "/products/compute/runtime", icon: PlayCircle },
-      { title: "Machines", href: "/products/compute/machines", icon: Server },
-      { title: "API", href: "/docs/api", icon: Braces },
-      { title: "Realtime", href: "/realtime", icon: Radio },
-      { title: "Commerce", href: "/products/apps/commerce", icon: ShoppingCart },
-    ]
+      { title: "Chat", href: "/chat", icon: MessageSquare, github: `${ORG}/chat`, featured: true },
+      { title: "Search", href: "/search", icon: Search, github: `${ORG}/search`, featured: true },
+      { title: "Crawl", href: "/crawl", icon: Globe, github: `${ORG}/crawl` },
+      { title: "Base", href: "/base", icon: Database, github: `${ORG}/base` },
+      { title: "Commerce", href: "/commerce", icon: ShoppingCart, github: `${ORG}/commerce` },
+      { title: "Captable", href: "/captable", icon: PieChart, github: `${ORG}/captable` },
+      { title: "Dataroom", href: "/dataroom", icon: FileText, github: `${ORG}/dataroom` },
+      { title: "Sign", href: "/sign", icon: ShieldCheck, github: `${ORG}/sign` },
+    ],
   },
   {
-    title: "Cloud Infrastructure",
+    title: "Compute",
     items: [
-      { title: "Edge", href: "/products/platform/edge", icon: Globe },
-      { title: "Gateway", href: "/products/compute/gateway", icon: Network },
-      { title: "HKE", href: "/products/platform/hke", icon: Container },
-      { title: "Networking", href: "/products/platform/networking", icon: Network },
-      { title: "DNS", href: "/dns", icon: Globe },
-      { title: "Tunnel", href: "/products/platform/tunnel", icon: Route },
-      { title: "Proxy", href: "/products/platform/edge", icon: Shield },
-      { title: "Registry", href: "/products/ml/registry", icon: Database },
-    ]
+      { title: "Cloud", href: "/cloud", icon: Cloud, github: `${ORG}/cloud`, featured: true },
+      { title: "Functions", href: "/functions", icon: Zap, github: `${ORG}/functions` },
+      { title: "Machines", href: "/machines", icon: Server, github: `${ORG}/machines` },
+      { title: "Edge", href: "/edge", icon: Globe, github: `${ORG}/edge` },
+      { title: "Realtime", href: "/realtime", icon: Radio, github: `${ORG}/realtime` },
+    ],
   },
   {
-    title: "Databases & Search",
+    title: "Data",
     items: [
-      { title: "Search", href: "/search", icon: Search, featured: true },
-      { title: "Crawl", href: "/crawl", icon: Globe, featured: true },
-      { title: "Vector", href: "/vector", icon: Sparkles, featured: true },
-      { title: "SQL", href: "/products/data/sql", icon: Database },
-      { title: "SQL Vector", href: "/products/data/sql-vector", icon: Sparkles },
-      { title: "DocumentDB", href: "/products/data/documentdb", icon: FileText },
-      { title: "KV", href: "/products/data/kv", icon: Key },
-      { title: "Storage", href: "/products/data/storage", icon: HardDrive },
-    ]
+      { title: "Vector", href: "/vector", icon: Sparkles, github: `${ORG}/vector`, featured: true },
+      { title: "SQL", href: "/sql", icon: Database, github: `${ORG}/sql` },
+      { title: "KV", href: "/kv", icon: Key, github: `${ORG}/kv` },
+      { title: "Datastore", href: "/datastore", icon: Database, github: `${ORG}/datastore` },
+      { title: "Storage", href: "/storage", icon: HardDrive, github: `${ORG}/storage` },
+      { title: "S3", href: "/s3", icon: HardDrive, github: `${ORG}/s3` },
+    ],
   },
   {
-    title: "Integrations",
+    title: "Async",
     items: [
-      { title: "Automations", href: "/products/async/auto", icon: PlayCircle },
-      { title: "Connectors", href: "/products/integrations", icon: Plug },
-      { title: "Webhooks", href: "/docs/webhooks", icon: Zap },
-      { title: "Event Routing", href: "/products/async/pubsub", icon: Radio },
-      { title: "API Gateway", href: "/products/compute/gateway", icon: Network },
-      { title: "ETL", href: "/products/async/flow", icon: GitBranch },
-      { title: "MQ", href: "/products/async/mq", icon: ListTodo },
-      { title: "Tasks", href: "/products/async/tasks", icon: ListTodo },
-    ]
+      { title: "Flow", href: "/flow", icon: Workflow, github: `${ORG}/flow` },
+      { title: "Auto", href: "/auto", icon: PlayCircle, github: `${ORG}/auto` },
+      { title: "Tasks", href: "/tasks", icon: ScrollText, github: `${ORG}/tasks` },
+      { title: "Pubsub", href: "/pubsub", icon: Radio, github: `${ORG}/pubsub` },
+      { title: "MQ", href: "/mq", icon: Network, github: `${ORG}/mq` },
+      { title: "Stream", href: "/stream", icon: Activity, github: `${ORG}/stream` },
+    ],
   },
   {
-    title: "Security",
+    title: "Platform",
     items: [
-      { title: "IAM", href: "/products/platform/iam", icon: UserCheck, featured: true },
-      { title: "Policy", href: "/products/platform/guard", icon: Shield },
-      { title: "KMS", href: "/products/platform/kms", icon: KeyRound },
-      { title: "Audit", href: "/docs/audit", icon: ScrollText },
-      { title: "Approvals", href: "/docs/approvals", icon: ShieldCheck },
-      { title: "Orgs & Teams", href: "/docs/orgs", icon: Users },
-      { title: "Billing", href: "/pricing", icon: CreditCard },
-      { title: "Admin", href: "/products/apps/console", icon: Settings },
-    ]
+      { title: "IAM", href: "/iam", icon: UserCheck, github: `${ORG}/iam`, featured: true },
+      { title: "KMS", href: "/kms", icon: KeyRound, github: `${ORG}/kms` },
+      { title: "Platform", href: "/platform", icon: Building2, github: `${ORG}/platform` },
+      { title: "DNS", href: "/dns", icon: Globe, github: `${ORG}/dns` },
+      { title: "Identity", href: "/identity", icon: UserCheck, github: `${ORG}/iam` },
+      { title: "Console", href: "/console", icon: LayoutDashboard, github: `${ORG}/console` },
+    ],
   },
   {
     title: "Observability",
     items: [
-      { title: "Telemetry", href: "/products/observability/telemetry", icon: Activity },
-      { title: "Metrics", href: "/products/observability/metrics", icon: BarChart3 },
-      { title: "Logs", href: "/products/observability/logs", icon: ScrollText },
-      { title: "Traces", href: "/products/observability/traces", icon: Route },
-      { title: "Dashboards", href: "/products/observability/metrics", icon: PieChart },
-      { title: "Alerts", href: "/docs/alerts", icon: Bell },
-      { title: "LLM Observability", href: "/products/apps/console", icon: Brain },
-      { title: "Incidents", href: "/docs/incidents", icon: AlertTriangle },
-    ]
-  },
-  {
-    title: "Hosting",
-    items: [
-      { title: "Deploy", href: "/products/platform/platform", icon: Upload },
-      { title: "Containers", href: "/products/platform/hke", icon: Container },
-      { title: "Static Hosting", href: "/products/platform/edge", icon: Globe },
-      { title: "CDN", href: "/products/platform/edge", icon: Globe },
-      { title: "Domains", href: "/dns", icon: Globe },
-      { title: "TLS", href: "/products/platform/edge", icon: Lock },
-      { title: "Load Balancing", href: "/products/platform/networking", icon: Gauge },
-      { title: "Environments", href: "/docs/environments", icon: Layers },
-    ]
+      { title: "Insights", href: "/insights", icon: BarChart3, github: `${ORG}/insights`, featured: true },
+      { title: "Analytics", href: "/analytics", icon: BarChart3, github: `${ORG}/analytics` },
+      { title: "Status", href: "/status", icon: Activity, github: `${ORG}/status` },
+      { title: "Dashboards", href: "/dashboards", icon: PieChart, github: `${ORG}/dashboards` },
+    ],
   },
   {
     title: "Web3",
     items: [
       { title: "Chains", href: "/blockchain/chains", icon: Server, featured: true },
-      { title: "Exchange", href: "/defi/exchange", icon: Route },
-      { title: "Indexer", href: "/blockchain/indexer", icon: Search },
-      { title: "NFT API", href: "/blockchain/nft", icon: LayoutGrid },
-      { title: "Payments", href: "/fintech/payments", icon: CreditCard },
-      { title: "Staking", href: "/defi/staking", icon: Layers },
-      { title: "Token API", href: "/blockchain/tokens", icon: Coins },
+      { title: "Exchange", href: "/blockchain/exchange", icon: Rocket },
       { title: "Wallets", href: "/blockchain/wallets", icon: Wallet },
-    ]
-  }
+      { title: "Indexer", href: "/blockchain/indexer", icon: Search },
+      { title: "NFT", href: "/blockchain/nft", icon: LayoutGrid },
+      { title: "Tokens", href: "/blockchain/tokens", icon: Coins },
+      { title: "Pay", href: "/blockchain/pay", icon: CreditCard },
+      { title: "Bridge", href: "/blockchain/bridge", icon: Network },
+    ],
+  },
 ];
 
-// Featured products for quick access
 export const featuredProducts: NavItem[] = [
-  { title: "Hanzo Dev", href: "/dev", icon: Terminal, description: "Multi-agent coding workspace", featured: true },
-  { title: "Models", href: "/products/ml/zen", icon: Brain, description: "100+ LLMs via unified API", featured: true },
-  { title: "Agent", href: "/products/apps/agent", icon: Bot, description: "Multi-agent SDK", featured: true },
-  { title: "Search", href: "/search", icon: Search, description: "Hybrid search + RAG chat", featured: true },
-  { title: "Crawl", href: "/crawl", icon: Globe, description: "AI-ready web crawler", featured: true },
-  { title: "Vector", href: "/vector", icon: Sparkles, description: "High-performance vector DB", featured: true },
-  { title: "Functions", href: "/products/compute/functions", icon: Zap, description: "Serverless compute", featured: true },
-  { title: "Cloud", href: "/cloud", icon: Cloud, description: "AI Cloud infrastructure", featured: true },
-];
-
-export const capabilitiesNav: NavSection[] = [
-  {
-    title: "Capabilities",
-    items: [
-      { title: "Cloud", href: "/solutions/cloud", icon: Globe },
-      { title: "Cybersecurity", href: "/solutions/cybersecurity", icon: Shield },
-      { title: "Data and AI", href: "/solutions/data-ai", icon: Brain },
-      { title: "Engineering", href: "/solutions/engineering", icon: Code },
-      { title: "Emerging Tech", href: "/solutions/emerging-tech", icon: Rocket },
-      { title: "Partners", href: "/solutions/partners", icon: Network },
-      { title: "Finance", href: "/solutions/finance", icon: DollarSign },
-      { title: "Infrastructure", href: "/solutions/infrastructure", icon: Building2 },
-    ]
-  }
-];
-
-export const industriesNav: NavSection[] = [
-  {
-    title: "Industries",
-    items: [
-      { title: "Aerospace & Defense", href: "/industries/aerospace", icon: Plane },
-      { title: "Automotive", href: "/industries/automotive", icon: Car },
-      { title: "Banking", href: "/industries/banking", icon: Landmark },
-      { title: "Capital Markets", href: "/industries/capital-markets", icon: Globe },
-      { title: "Chemicals", href: "/industries/chemicals", icon: Factory },
-      { title: "Communications", href: "/industries/communications", icon: Laptop },
-      { title: "Consumer", href: "/industries/consumer", icon: ShoppingCart },
-      { title: "Energy", href: "/industries/energy", icon: Leaf },
-    ]
-  }
+  { title: "Hanzo Dev", href: "/dev", icon: Terminal, description: "Multi-agent coding workspace", github: `${ORG}/dev`, featured: true },
+  { title: "Zen Models", href: "/zen", icon: Brain, description: "100+ LLMs via unified API", github: `${ORG}/zen`, featured: true },
+  { title: "Agents", href: "/agents", icon: Bot, description: "Multi-agent SDK", github: `${ORG}/agent`, featured: true },
+  { title: "Search", href: "/search", icon: Search, description: "Hybrid search + RAG chat", github: `${ORG}/search`, featured: true },
+  { title: "Crawl", href: "/crawl", icon: Globe, description: "AI-ready web crawler", github: `${ORG}/crawl`, featured: true },
+  { title: "Vector", href: "/vector", icon: Sparkles, description: "High-performance vector DB", github: `${ORG}/vector`, featured: true },
+  { title: "Cloud", href: "/cloud", icon: Cloud, description: "AI Cloud infrastructure", github: `${ORG}/cloud`, featured: true },
+  { title: "IAM", href: "/iam", icon: UserCheck, description: "Identity & access management", github: `${ORG}/iam`, featured: true },
 ];
 
 export const resourcesNav: NavSection[] = [
   {
     title: "Documentation",
     items: [
-      { title: "Getting Started", href: "/docs/getting-started", description: "Quick start guides", icon: Braces },
-      { title: "API Reference", href: "/docs/api", description: "API documentation", icon: Code },
-      { title: "Tutorials", href: "/docs/tutorials", description: "Step-by-step guides", icon: AppWindow }
-    ]
+      { title: "Docs", href: "/docs", description: "Product documentation", icon: FileText },
+      { title: "API Reference", href: "/docs/api", description: "REST API documentation", icon: Code },
+      { title: "CLI", href: "/docs/cli", description: "Command line reference", icon: Terminal },
+      { title: "SDK", href: "/docs/sdk", description: "Client libraries", icon: Code },
+    ],
   },
   {
     title: "Community",
     items: [
-      { title: "Discord", href: "https://discord.gg/hanzo", description: "Join our Discord", icon: MessageSquare },
-      { title: "GitHub", href: "https://github.com/hanzoai", description: "Open-source projects", icon: Code },
-      { title: "Support", href: "/support", description: "Get help", icon: Users }
-    ]
+      { title: "GitHub", href: ORG, description: "Open source", icon: Code },
+      { title: "Discord", href: "https://discord.gg/hanzo", description: "Chat with the community", icon: MessageSquare },
+      { title: "Blog", href: "/blog", description: "Latest news", icon: FileText },
+      { title: "Press", href: "/press", description: "Press kit", icon: ScrollText },
+    ],
   },
   {
     title: "Company",
     items: [
+      { title: "About", href: "/about", description: "Our story", icon: Users },
       { title: "Team", href: "/team", description: "Meet the team", icon: Users },
+      { title: "Leadership", href: "/leadership", description: "Leadership", icon: Users },
+      { title: "Brand", href: "/brand", description: "Brand assets", icon: AppWindow },
+      { title: "Careers", href: "/careers", description: "Open positions", icon: Rocket },
       { title: "Security", href: "/security", description: "Security practices", icon: ShieldCheck },
-      { title: "Philosophy", href: "/philosophy", description: "Our principles", icon: Zap }
-    ]
-  }
+      { title: "Open Source", href: "/open-source", description: "Open source program", icon: Code },
+    ],
+  },
 ];
 
 export type MainNavItem = {
@@ -291,64 +212,68 @@ export type MainNavItem = {
 
 export const mainNav: MainNavItem[] = [
   { title: "Products", sections: productsNav },
-  { title: "Solutions", sections: [...capabilitiesNav, ...industriesNav] },
   { title: "Resources", sections: resourcesNav },
-  { title: "Pricing", href: "/pricing" }
+  { title: "Pricing", href: "/pricing" },
+  { title: "Enterprise", href: "/enterprise" },
 ];
 
-export const footerNav = [
+export const footerNav: NavSection[] = [
   {
     title: "Products",
     items: [
       { title: "Hanzo Dev", href: "/dev" },
-      { title: "Models", href: "/products/ml/zen" },
-      { title: "Agent", href: "/products/apps/agent" },
+      { title: "Zen Models", href: "/zen" },
+      { title: "Agents", href: "/agents" },
+      { title: "Chat", href: "/chat" },
       { title: "Search", href: "/search" },
       { title: "Crawl", href: "/crawl" },
       { title: "Vector", href: "/vector" },
-      { title: "Functions", href: "/products/compute/functions" }
-    ]
+    ],
+  },
+  {
+    title: "Platform",
+    items: [
+      { title: "Cloud", href: "/cloud" },
+      { title: "IAM", href: "/iam" },
+      { title: "KMS", href: "/kms" },
+      { title: "Platform", href: "/platform" },
+      { title: "Console", href: "/console" },
+      { title: "Insights", href: "/insights" },
+    ],
   },
   {
     title: "Web3",
     items: [
       { title: "Chains", href: "/blockchain/chains" },
-      { title: "Exchange", href: "/defi/exchange" },
-      { title: "Payments", href: "/fintech/payments" },
-      { title: "Wallets", href: "/blockchain/wallets" }
-    ]
-  },
-  {
-    title: "Platform",
-    items: [
-      { title: "Cloud", href: "/products/apps/cloud" },
-      { title: "Edge", href: "/products/platform/edge" },
-      { title: "IAM", href: "/products/platform/iam" },
-      { title: "Console", href: "/products/apps/console" }
-    ]
+      { title: "Exchange", href: "/blockchain/exchange" },
+      { title: "Wallets", href: "/blockchain/wallets" },
+      { title: "Pay", href: "/blockchain/pay" },
+    ],
   },
   {
     title: "Resources",
     items: [
       { title: "Documentation", href: "/docs" },
-      { title: "API Reference", href: "/docs/api" },
-      { title: "GitHub", href: "https://github.com/hanzoai" },
-      { title: "Support", href: "/support" }
-    ]
+      { title: "API", href: "/docs/api" },
+      { title: "GitHub", href: ORG },
+      { title: "Discord", href: "https://discord.gg/hanzo" },
+    ],
   },
   {
     title: "Company",
     items: [
+      { title: "About", href: "/about" },
       { title: "Team", href: "/team" },
+      { title: "Careers", href: "/careers" },
       { title: "Security", href: "/security" },
-      { title: "Philosophy", href: "/philosophy" },
-      { title: "Zen Models", href: "/zen" },
-      { title: "Careers", href: "/careers" }
-    ]
-  }
+      { title: "Press", href: "/press" },
+      { title: "Privacy", href: "/privacy" },
+      { title: "Terms", href: "/terms" },
+    ],
+  },
 ];
 
 export const utilityNav = {
   search: { title: "Search", href: "/search", icon: Search },
-  chat: { title: "Chat with AI", href: "/chat", icon: MessageSquare }
+  chat: { title: "Chat with AI", href: "/chat", icon: MessageSquare },
 };
