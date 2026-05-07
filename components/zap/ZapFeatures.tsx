@@ -28,9 +28,9 @@ const features = [
   },
   {
     icon: Network,
-    title: "Built for ZAP↔ZAP",
+    title: "Speaks every agent protocol",
     description:
-      "Run pure ZAP for maximum efficiency, or bridge MCP while migrating. Full interoperability.",
+      "Drop-in for MCP, A2A, and ACP. Run pure ZAP for max efficiency, or bridge any of the three while you migrate.",
   },
   {
     icon: Blocks,
