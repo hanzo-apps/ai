@@ -298,7 +298,9 @@ url = s3.generate_presigned_url("get_object",
                   <ArrowRight className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://github.com/hanzos3"
+                  href="https://github.com/hanzoai/storage"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors"
                 >
                   View on GitHub

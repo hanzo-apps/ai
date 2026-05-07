@@ -157,7 +157,7 @@ const DXPlatformGrid: React.FC<DXPlatformGridProps> = ({ isHovered, setIsHovered
             <Link href="/signup">Get Started Free</Link>
           </Button>
           <p className="mt-4 text-sm text-muted-foreground">
-            No credit card required. <Link href="/referrals" className="text-foreground hover:text-foreground/70 underline">Learn more</Link> about our referral program.
+            No credit card required. <Link href="/referral" className="text-foreground hover:text-foreground/70 underline">Learn more</Link> about our referral program.
           </p>
         </div>
       </motion.div>

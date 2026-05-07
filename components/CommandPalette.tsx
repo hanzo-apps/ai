@@ -161,7 +161,7 @@ const commands: CommandItem[] = [
   { id: "solutions", title: "Solutions", description: "Industry solutions", href: "/solutions", icon: Layers, category: "Company", keywords: ["solutions", "industries", "use cases"] },
   { id: "philosophy", title: "Zen of Hanzo", description: "Our principles", href: "/philosophy", icon: Heart, category: "Company", keywords: ["philosophy", "values", "zen"] },
   { id: "open-source", title: "Open Source", description: "OSS projects", href: "/open-source", icon: Code, category: "Company", keywords: ["oss", "github", "open source"] },
-  { id: "referrals", title: "Referrals", description: "Referral program", href: "/referrals", icon: Users, category: "Company", keywords: ["refer", "affiliate", "rewards"] },
+  { id: "referrals", title: "Referrals", description: "Referral program", href: "/referral", icon: Users, category: "Company", keywords: ["refer", "affiliate", "rewards"] },
 
   // Resources
   { id: "docs", title: "Documentation", description: "API docs and guides", href: "https://docs.hanzo.ai", icon: FileText, category: "Resources", external: true, keywords: ["api", "guide", "tutorial", "docs"] },

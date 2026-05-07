@@ -9,7 +9,7 @@ const ReferralBanner = () => {
   const router = useRouter()
 
   const handleReferralClick = () => {
-    router.push('/referrals')
+    router.push('/referral')
   }
 
   return (
