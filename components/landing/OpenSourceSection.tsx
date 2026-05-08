@@ -27,13 +27,14 @@ interface Repo {
   tag?: string;
 }
 
+// Monochrome language pills — same chrome for every language.
 const LANG_COLOR: Record<string, string> = {
-  TypeScript: "bg-blue-500/20 text-blue-300",
-  Python:     "bg-yellow-500/20 text-yellow-300",
-  Rust:       "bg-orange-500/20 text-orange-300",
-  Go:         "bg-cyan-500/20 text-cyan-300",
-  Solidity:   "bg-purple-500/20 text-purple-300",
-  MDX:        "bg-pink-500/20 text-pink-300",
+  TypeScript: "bg-white/10 text-white/80",
+  Python:     "bg-white/10 text-white/80",
+  Rust:       "bg-white/10 text-white/80",
+  Go:         "bg-white/10 text-white/80",
+  Solidity:   "bg-white/10 text-white/80",
+  MDX:        "bg-white/10 text-white/80",
 };
 
 const repos: Repo[] = [

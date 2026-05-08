@@ -46,7 +46,7 @@ const TIER_STYLES: Record<string, { bg: string; text: string; border: string }> 
   ultra: { bg: "bg-primary/10", text: "text-foreground/60", border: "border-border" },
   "pro max": { bg: "bg-primary/10", text: "text-foreground/70", border: "border-border" },
   pro: { bg: "bg-primary/10", text: "text-foreground/70", border: "border-border" },
-  starter: { bg: "bg-green-500/10", text: "text-green-400", border: "border-green-500/20" },
+  starter: { bg: "bg-white/5", text: "text-white/60", border: "border-white/10" },
 };
 
 function TierBadge({ tier }: { tier: string }) {
