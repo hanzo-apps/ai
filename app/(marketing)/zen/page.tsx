@@ -93,13 +93,14 @@ const ZEN_MODELS: ZenModel[] = allModels.map(m => ({
     : `zenlm/${m.id}`,
 }))
 
+// Monochrome tier badges — opacity carries the rank, not hue.
 const TIER_STYLE: Record<string, string> = {
-  edge:       "bg-green-500/15 text-green-300 border-green-500/20",
-  pro:        "bg-blue-500/15 text-blue-300 border-blue-500/20",
-  max:        "bg-purple-500/15 text-purple-300 border-purple-500/20",
-  ultra:      "bg-orange-500/15 text-orange-300 border-orange-500/20",
-  vision:     "bg-pink-500/15 text-pink-300 border-pink-500/20",
-  multimodal: "bg-cyan-500/15 text-cyan-300 border-cyan-500/20",
+  edge:       "bg-white/5 text-white/70 border-white/10",
+  pro:        "bg-white/10 text-white/85 border-white/15",
+  max:        "bg-white/15 text-white/90 border-white/20",
+  ultra:      "bg-white/20 text-white border-white/30",
+  vision:     "bg-white/10 text-white/85 border-white/15",
+  multimodal: "bg-white/12 text-white/85 border-white/15",
 }
 const TIER_LABEL: Record<string, string> = {
   edge: "Edge", pro: "Pro", max: "Max", ultra: "Ultra", vision: "Vision", multimodal: "Multimodal",

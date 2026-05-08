@@ -278,7 +278,7 @@ export default async function ModelPage({ params }: Props) {
                     </span>
                   )}
                   {model.status === 'preview' && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-yellow-500/15 text-yellow-400">
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-white/70">
                       preview
                     </span>
                   )}

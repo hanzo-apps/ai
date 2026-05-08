@@ -183,7 +183,7 @@ export default async function OrgPage({ params }: Props) {
                       <ModalityBadge key={m} modality={m} />
                     ))}
                     {model.status === 'preview' && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium uppercase tracking-wide bg-yellow-500/15 text-yellow-400">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium uppercase tracking-wide bg-white/10 text-white/70">
                         preview
                       </span>
                     )}
