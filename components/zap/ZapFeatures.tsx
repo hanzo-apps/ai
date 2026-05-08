@@ -28,9 +28,9 @@ const features = [
   },
   {
     icon: Network,
-    title: "Speaks every agent protocol",
+    title: "Carries every agent protocol",
     description:
-      "Drop-in for MCP, A2A, and ACP. Run pure ZAP for max efficiency, or bridge any of the three while you migrate.",
+      "MCP, A2A, and ACP all layer natively on ZAP. Keep the protocol your stack already speaks — ZAP is the zero-copy transport underneath.",
   },
   {
     icon: Blocks,
