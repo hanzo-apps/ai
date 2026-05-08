@@ -507,7 +507,7 @@ const HeroSection = () => {
                 <h1 className="text-4xl xl:text-5xl 2xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6">
                   <span className="text-foreground">The complete AI ecosystem.</span>
                   <br />
-                  <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-orange-400 bg-clip-text text-transparent">Ship AI.</span>
+                  <span className="bg-gradient-to-r from-white via-white/80 to-white/60 bg-clip-text text-transparent">Ship AI.</span>
                 </h1>
               </motion.div>
 
@@ -625,7 +625,7 @@ const HeroSection = () => {
                 <h1 className="text-4xl font-medium tracking-tight leading-[1.1] mb-6">
                   <span className="text-foreground">The complete AI ecosystem.</span>
                   <br />
-                  <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-orange-400 bg-clip-text text-transparent">Ship AI.</span>
+                  <span className="bg-gradient-to-r from-white via-white/80 to-white/60 bg-clip-text text-transparent">Ship AI.</span>
                 </h1>
               </motion.div>
 
@@ -738,7 +738,7 @@ const HeroSection = () => {
                 <h1 className="text-2xl font-medium tracking-tight leading-[1.1] mb-4">
                   <span className="text-foreground">The complete AI ecosystem.</span>
                   <br />
-                  <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-orange-400 bg-clip-text text-transparent">Ship AI.</span>
+                  <span className="bg-gradient-to-r from-white via-white/80 to-white/60 bg-clip-text text-transparent">Ship AI.</span>
                 </h1>
               </motion.div>
 
