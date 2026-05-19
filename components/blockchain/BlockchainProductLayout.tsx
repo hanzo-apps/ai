@@ -11,6 +11,7 @@ import {
 
 
 import { Button } from "@hanzo/ui";
+import { ProductFooter } from "@/components/products/ProductFooter";
 
 export interface CodeExample {
   language: string;
@@ -39,6 +40,9 @@ export interface BlockchainProductProps {
     code: string;
   };
   codeExamples?: CodeExample[];
+  /** Product slug for the canonical OSS + Deploy footer.
+      Defaults to the lowercased final word of `name`. */
+  slug?: string;
 }
 
 const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
@@ -52,8 +56,11 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
   chains,
   codeExample,
   codeExamples,
+  slug,
 }) => {
   const [activeTab, setActiveTab] = useState(0);
+  // Derive slug from product name when caller didn't supply one (e.g. "Hanzo Chains" → "chains").
+  const resolvedSlug = slug ?? name.replace(/^[Hh]anzo\s+/, '').trim().toLowerCase().split(/\s+/).pop() ?? '';
 
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -445,7 +452,8 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
         </div>
       </section>
 
-      
+      {/* Canonical OSS + Deploy footer — one block for every product page. */}
+      <ProductFooter slug={resolvedSlug} name={name} />
     </div>
   );
 };

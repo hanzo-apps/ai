@@ -7,6 +7,7 @@ import {
 } from "@/components/vector"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export const metadata = {
   title: "Hanzo Vector - High-Performance Vector Database",
   description:
@@ -22,6 +23,7 @@ export default function VectorPage() {
       <VectorPricing />
       <OSSRevenueBanner upstreamName="Qdrant" />
       <VectorCTA />
+          <ProductFooter slug="vector" name="Vector" />
     </>
   )
 }

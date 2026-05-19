@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   Cpu,
   ArrowRight,
@@ -208,7 +209,8 @@ export default function EnginePage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="engine" name="Engine" />
+</div>
       </section>
     </>
   )

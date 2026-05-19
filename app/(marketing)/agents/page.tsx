@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function AgentsPage() {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -34,7 +35,8 @@ export default function AgentsPage() {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="agents" name="Agents" />
+</main>
     </div>
   )
 }

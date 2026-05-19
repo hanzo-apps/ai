@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   ArrowRight,
   BookOpen,
@@ -114,7 +115,8 @@ await ledger.transactions.create({
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="ledger" name="Ledger" />
+</div>
       </section>
     </>
   )

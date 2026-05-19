@@ -14,6 +14,7 @@ import {
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 import OSSComputeDividends from "@/components/oss/OSSComputeDividends"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function MQPage() {
   return (
     <>
@@ -314,7 +315,8 @@ const worker = new Worker("emails", async (job) => {
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="mq" name="MQ" />
+</div>
       </section>
     </>
   )

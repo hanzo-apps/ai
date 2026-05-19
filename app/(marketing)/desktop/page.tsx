@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   ArrowRight,
   MonitorSmartphone,
@@ -271,7 +272,8 @@ export default function DesktopPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="desktop" name="Desktop" />
+</div>
       </section>
     </>
   )

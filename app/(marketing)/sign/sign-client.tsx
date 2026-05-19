@@ -7,6 +7,7 @@ import Pricing from "@/components/sign/Pricing"
 import OpenSource from "@/components/sign/OpenSource"
 import CallToAction from "@/components/sign/CallToAction"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function SignClient() {
   return (
     <>
@@ -28,6 +29,7 @@ export default function SignClient() {
           </div>
         </div>
       </section>
+          <ProductFooter slug="sign" name="Sign" />
     </>
   )
 }

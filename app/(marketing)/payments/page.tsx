@@ -11,6 +11,7 @@ import UseCases from "@/components/payments/UseCases";
 import TrustedBy from "@/components/payments/TrustedBy";
 import CallToAction from "@/components/payments/CallToAction";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const Payments = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -24,7 +25,8 @@ const Payments = () => {
         <UseCases />
         <TrustedBy />
         <CallToAction />
-      </main>
+              <ProductFooter slug="payments" name="Payments" />
+</main>
       
     </div>
   );

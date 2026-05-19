@@ -14,6 +14,7 @@ import CallToAction from "@/components/base/CallToAction";
 import Community from "@/components/base/Community";
 import Compliance from "@/components/base/Compliance";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const Base = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -42,7 +43,8 @@ const Base = () => {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="base" name="Base" />
+</main>
 
     </div>
   );

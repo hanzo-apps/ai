@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function StoragePage() {
   return (
     <>
@@ -308,7 +309,8 @@ url = s3.generate_presigned_url("get_object",
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="storage" name="Storage" />
+</div>
       </section>
     </>
   )

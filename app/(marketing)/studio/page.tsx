@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   Sparkles,
   ArrowRight,
@@ -240,7 +241,8 @@ export default function StudioPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="studio" name="Studio" />
+</div>
       </section>
     </>
   )
