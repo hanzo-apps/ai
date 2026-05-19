@@ -177,18 +177,16 @@ const CloudHero = () => {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
             >
-              90+ Managed Services • Global Edge • 99.999% SLA
+              Managed AI infrastructure
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.05 }}
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6"
+              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.08] mb-6"
             >
-              <span className="text-foreground">Cloud that</span>
-              <br />
-              <span className="text-muted-foreground">scales with you.</span>
+              <span className="text-foreground">Hanzo Cloud — managed AI infrastructure.</span>
             </motion.h1>
 
             <motion.p
@@ -197,8 +195,7 @@ const CloudHero = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl"
             >
-              AI infrastructure, managed databases, serverless compute, and global edge deployment.
-              Build, deploy, and scale modern applications on a unified platform.
+              The hosted Hanzo platform. Provision agents, models, vector DB, sandboxes, IAM, KMS, and audit logs in one click. Or run the same software on your own Kubernetes.
             </motion.p>
 
             {/* CTAs */}
@@ -206,23 +203,29 @@ const CloudHero = () => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.15 }}
-              className="flex flex-wrap items-center gap-4 mb-6"
+              className="flex flex-wrap items-center gap-3 mb-6"
             >
-              <Link
-                href="/signup"
-                className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
-
-              >
-                Start free
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
               <a
-                href="https://docs.hanzo.ai/cloud"
-                target="_blank"
-                rel="noreferrer noopener"
+                href="https://console.hanzo.ai/signup"
+                className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
+              >
+                Sign up free
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+              <Link
+                href="/contact-sales"
                 className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"
               >
-                Documentation
+                Talk to sales
+              </Link>
+              <a
+                href="https://docs.hanzo.ai/self-host"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors text-sm text-foreground/80 hover:text-foreground"
+              >
+                Self-host
+                <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </motion.div>
 

@@ -1,101 +1,28 @@
 'use client'
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import { Github, ExternalLink, Heart, ArrowRight, Network } from "lucide-react";
+import { Github, ExternalLink, ArrowRight, Network } from "lucide-react";
 
-// Real verified counts as of 2026-02-27 — refreshed dynamically on mount
-const ORG_DEFAULTS: Record<string, number> = {
-  hanzoai: 303, luxfi: 289, zenlm: 83, "hanzo-js": 15, "hanzo-apps": 8, "zoo-labs": 25,
-};
-
-const githubOrgsBase = [
-  { name: "hanzoai",    label: "Hanzo AI",    description: "AI platform & infrastructure",    url: "https://github.com/hanzoai"    },
-  { name: "luxfi",      label: "Lux",          description: "L1 blockchain & consensus",        url: "https://github.com/luxfi"      },
-  { name: "zenlm",      label: "Zen LM",       description: "Open frontier AI models",          url: "https://github.com/zenlm"      },
-  { name: "hanzo-js",   label: "Hanzo JS",     description: "TypeScript / JavaScript SDKs",    url: "https://github.com/hanzo-js"   },
-  { name: "hanzo-apps", label: "Hanzo Apps",   description: "Templates & starters",            url: "https://github.com/hanzo-apps" },
-  { name: "zoo-labs",   label: "Zoo Labs",     description: "DeAI research foundation",        url: "https://github.com/zooai"   },
-];
-
-interface Repo {
+interface CoreProject {
   org: string;
   name: string;
   description: string;
-  language: string;
-  tag?: string;
 }
 
-// Monochrome language pills — same chrome for every language.
-const LANG_COLOR: Record<string, string> = {
-  TypeScript: "bg-white/10 text-white/80",
-  Python:     "bg-white/10 text-white/80",
-  Rust:       "bg-white/10 text-white/80",
-  Go:         "bg-white/10 text-white/80",
-  Solidity:   "bg-white/10 text-white/80",
-  MDX:        "bg-white/10 text-white/80",
-};
-
-const repos: Repo[] = [
-  // hanzoai — AI infra
-  { org: "hanzoai",    name: "hanzo",        description: "The complete AI platform — deploy anywhere, any model",         language: "TypeScript", tag: "platform" },
-  { org: "hanzoai",    name: "mcp",          description: "260+ Model Context Protocol tools and servers",                  language: "TypeScript", tag: "mcp"      },
-  { org: "hanzoai",    name: "llm",          description: "Unified gateway to 100+ AI models via one OpenAI-compatible API", language: "Python",    tag: "infra"    },
-  { org: "hanzoai",    name: "dev",          description: "AI coding agent for the terminal and IDE",                       language: "TypeScript"                  },
-  { org: "hanzoai",    name: "auto",         description: "Workflow automation with AI agents",                             language: "TypeScript"                  },
-  { org: "hanzoai",    name: "flow",         description: "Visual LLM workflow builder",                                    language: "TypeScript"                  },
-  { org: "hanzoai",    name: "agent",        description: "Multi-agent orchestration framework",                            language: "TypeScript"                  },
-  { org: "hanzoai",    name: "candle",       description: "High-performance ML framework in Rust",                          language: "Rust"                        },
-  { org: "hanzoai",    name: "jin",          description: "Unified multimodal AI framework (vision + language + audio)",    language: "Rust"                        },
-  { org: "hanzoai",    name: "aci",          description: "AI Chain Infrastructure — decentralized compute and inference",  language: "Go"                          },
-  { org: "hanzoai",    name: "ui",           description: "React component library for AI applications",                    language: "TypeScript"                  },
-  { org: "hanzoai",    name: "evals",        description: "Model evaluation harness and benchmark suite",                   language: "Python"                      },
-  // luxfi — Lux blockchain
-  { org: "luxfi",      name: "node",         description: "Lux blockchain node — multi-consensus, post-quantum ready",      language: "Go"                          },
-  { org: "luxfi",      name: "sdk",          description: "Client SDK for Lux — Go, TypeScript, Python",                   language: "Go"                          },
-  { org: "luxfi",      name: "cli",          description: "Command-line interface for Lux network operations",              language: "Go"                          },
-  { org: "luxfi",      name: "wallet",       description: "HD wallet with multi-chain support and hardware wallet integration", language: "Go"                      },
-  { org: "luxfi",      name: "netrunner",    description: "Blockchain network testing and simulation tool",                  language: "Go"                          },
-  { org: "luxfi",      name: "genesis",      description: "Genesis block configuration and validator bootstrapping",         language: "Go"                          },
-  // zenlm — Zen models
-  { org: "zenlm",      name: "zen",          description: "Zen AI model family — nano to 1T+ frontier, Zen MoDE architecture", language: "Python",    tag: "models"   },
-  { org: "zenlm",      name: "zen-max-trainer", description: "QLoRA cloud training for zen-max (671B MoE)",                language: "Python"                      },
-  { org: "zenlm",      name: "zen4-ultra-trainer", description: "GT-QLoRA gate-targeted training for 1T MoE",              language: "Python"                      },
-  // hanzo-js
-  { org: "hanzo-js",   name: "hanzo.js",     description: "Core JavaScript SDK for the Hanzo platform",                    language: "TypeScript"                  },
-  { org: "hanzo-js",   name: "ui",           description: "@hanzo/ui — React components with unified analytics",            language: "TypeScript"                  },
-  { org: "hanzo-js",   name: "commerce",     description: "Headless commerce engine with AI recommendations",               language: "TypeScript"                  },
-  // hanzo-apps
-  { org: "hanzo-apps", name: "ai-chat",      description: "Full-featured AI chat — streaming, tools, memory",              language: "TypeScript", tag: "template" },
-  { org: "hanzo-apps", name: "rag-starter",  description: "RAG application with vector search and reranking",              language: "TypeScript", tag: "template" },
-  { org: "hanzo-apps", name: "agent-toolkit", description: "Multi-agent application starter with MCP tools",              language: "TypeScript", tag: "template" },
-  // zoo-labs
-  { org: "zoo-labs",   name: "zoo",          description: "Zoo ecosystem — DeAI research and DeSci governance",            language: "TypeScript"                  },
-  { org: "zoo-labs",   name: "zips",         description: "Zoo Improvement Proposals — open AI governance (zips.zoo.ngo)", language: "MDX"                         },
-  { org: "zoo-labs",   name: "contracts",    description: "Smart contracts — ERC20/721/1155, staking, governance",         language: "Solidity"                    },
+// "Core projects" — the canonical 7-card block. Other repo lists were moved
+// to /open-source. This page shows only the projects users land on first.
+const CORE_PROJECTS: CoreProject[] = [
+  { org: "hanzoai", name: "hanzo",  description: "The complete AI platform for agents, tools, models, and deployment." },
+  { org: "hanzoai", name: "mcp",    description: "260+ Model Context Protocol tools and servers." },
+  { org: "hanzoai", name: "llm",    description: "Unified gateway for model routing through an OpenAI-compatible API." },
+  { org: "hanzoai", name: "dev",    description: "AI coding agent for terminal and IDE workflows." },
+  { org: "hanzoai", name: "agent",  description: "Multi-agent orchestration framework." },
+  { org: "hanzoai", name: "evals",  description: "Evaluation harness for models, agents, and workflows." },
+  { org: "hanzoai", name: "ui",     description: "React components for AI applications." },
 ];
 
 const OpenSourceSection = () => {
-  const [orgCounts, setOrgCounts] = useState<Record<string, number>>(ORG_DEFAULTS);
-
-  useEffect(() => {
-    const orgs = githubOrgsBase.map(o => o.name);
-    orgs.forEach(org => {
-      fetch(`https://api.github.com/orgs/${org}`)
-        .then(r => r.ok ? r.json() : null)
-        .then(d => {
-          if (d?.public_repos) {
-            setOrgCounts(prev => ({ ...prev, [org]: d.public_repos }));
-          }
-        })
-        .catch(() => {});
-    });
-  }, []);
-
-  const totalRepos = Object.values(orgCounts).reduce((a, b) => a + b, 0);
-  const githubOrgs = githubOrgsBase.map(o => ({ ...o, count: `${orgCounts[o.name] ?? ORG_DEFAULTS[o.name]}` }));
-
   return (
     <section className="py-24 px-4 md:px-8 bg-background relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.025]" style={{
@@ -116,56 +43,24 @@ const OpenSourceSection = () => {
             Open Source
           </div>
           <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-4">
-            Built in the open
+            Built in the open.
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {totalRepos}+ open-source repositories across AI infrastructure, blockchain, frontier models, and developer tools.
-            View, fork, or self-host anything.
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Hanzo is open-source infrastructure for the AI-native software stack. Use the hosted cloud, inspect the source, fork the tools, or run the platform yourself.
           </p>
         </motion.div>
 
-        {/* GitHub Orgs */}
+        {/* Core projects — 7 cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-14"
+          className="mb-12"
         >
-          {githubOrgs.map((org) => (
-            <a
-              key={org.name}
-              href={org.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col gap-1.5 p-3 rounded-xl border border-border bg-secondary/30 hover:bg-secondary hover:border-border/80 transition-all text-center"
-            >
-              <Github className="w-4 h-4 text-muted-foreground mx-auto group-hover:text-foreground transition-colors" />
-              <div className="text-xs font-semibold text-foreground">{org.label}</div>
-              <div className="text-[10px] text-muted-foreground leading-snug hidden sm:block">{org.description}</div>
-              <div className="text-[10px] font-mono text-muted-foreground/60">{org.count} repos</div>
-            </a>
-          ))}
-        </motion.div>
-
-        {/* Repo Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="mb-14"
-        >
-          <div className="flex items-center justify-between mb-5">
-            <h3 className="text-lg font-semibold text-foreground">Selected Projects</h3>
-            <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer"
-               className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors">
-              View all on GitHub <ExternalLink className="w-3 h-3" />
-            </a>
-          </div>
-
+          <h3 className="text-lg font-semibold text-foreground mb-5">Core projects</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {repos.map((repo, i) => (
+            {CORE_PROJECTS.map((repo, i) => (
               <motion.a
                 key={`${repo.org}/${repo.name}`}
                 href={`https://github.com/${repo.org}/${repo.name}`}
@@ -174,137 +69,40 @@ const OpenSourceSection = () => {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: 0.05 + (i % 6) * 0.04 }}
-                className="group p-4 rounded-xl border border-border/50 bg-secondary/20 hover:bg-secondary/50 hover:border-border transition-all"
+                transition={{ duration: 0.3, delay: 0.05 + (i % 7) * 0.04 }}
+                className="group p-5 rounded-xl border border-border/60 bg-secondary/30 hover:bg-secondary/60 hover:border-border transition-all"
               >
-                <div className="flex items-start justify-between gap-2 mb-2">
+                <div className="flex items-start justify-between gap-2 mb-3">
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <Github className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
-                    <span className="font-mono text-xs text-muted-foreground truncate">{repo.org}/</span>
-                    <span className="font-mono text-xs font-semibold text-foreground truncate">{repo.name}</span>
+                    <Github className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                    <span className="font-mono text-sm text-muted-foreground truncate">{repo.org}/</span>
+                    <span className="font-mono text-sm font-semibold text-foreground truncate">{repo.name}</span>
                   </div>
-                  <ExternalLink className="w-3 h-3 text-muted-foreground/40 group-hover:text-muted-foreground flex-shrink-0 transition-colors" />
+                  <ExternalLink className="w-3.5 h-3.5 text-muted-foreground/40 group-hover:text-muted-foreground flex-shrink-0 transition-colors" />
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed mb-2.5 line-clamp-2">{repo.description}</p>
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${LANG_COLOR[repo.language] ?? "bg-neutral-700/50 text-neutral-400"}`}>
-                    {repo.language}
-                  </span>
-                  {repo.tag && (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-foreground/60 font-medium">
-                      {repo.tag}
-                    </span>
-                  )}
-                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed">{repo.description}</p>
               </motion.a>
             ))}
           </div>
         </motion.div>
 
-        {/* Hanzo Network callout */}
+        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent p-6 md:p-8 mb-10"
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="text-center"
         >
-          <div className="grid lg:grid-cols-2 gap-6 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 text-xs font-medium rounded-full px-3 py-1.5 border border-white/20 text-white/80 mb-4">
-                <Network className="w-3.5 h-3.5" />
-                Hanzo Network
-              </div>
-              <h3 className="text-2xl font-medium text-foreground mb-3">
-                Decentralized AI compute
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-5">
-                Contribute GPU power for AI inference and training. Earn rewards while powering the next generation of AI applications on a decentralized, verifiable network.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <a href="https://hanzo.network" target="_blank" rel="noopener noreferrer"
-                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-primary text-primary-foreground hover:opacity-90 transition-all">
-                  Learn more <ArrowRight className="w-3.5 h-3.5" />
-                </a>
-                <a href="https://github.com/hanzoai/network" target="_blank" rel="noopener noreferrer"
-                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border border-border text-foreground hover:bg-secondary transition-colors">
-                  <Github className="w-3.5 h-3.5" /> View source
-                </a>
-              </div>
-            </div>
-            <div className="hidden lg:flex items-center justify-center">
-              <div className="w-28 h-28 rounded-2xl bg-neutral-800/50 flex items-center justify-center">
-                <Network className="w-14 h-14 text-foreground/60" />
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Open Source values row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10"
-        >
-          {[
-            { icon: "MIT/Apache", title: "Open Licensed", desc: "Every core component is MIT or Apache 2.0 licensed" },
-            { icon: <Heart className="w-5 h-5" />, title: "Community Driven", desc: "Built with and for developers worldwide" },
-            { icon: <Github className="w-5 h-5" />, title: "Self-Hostable", desc: "Run the entire platform on your own infrastructure" },
-          ].map((f, i) => (
-            <div key={f.title} className="text-center p-5 rounded-xl border border-border/40 bg-secondary/20">
-              <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-3 text-foreground font-bold text-xs">
-                {typeof f.icon === "string" ? f.icon : f.icon}
-              </div>
-              <h3 className="text-sm font-semibold text-foreground mb-1">{f.title}</h3>
-              <p className="text-xs text-muted-foreground">{f.desc}</p>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Research link → blog */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center mb-10"
-        >
-          <p className="text-muted-foreground text-sm mb-3">
-            Read our research, model releases, and technical deep-dives
-          </p>
-          <a href="https://hanzo.blog" target="_blank" rel="noopener noreferrer"
-             className="inline-flex items-center gap-2 text-foreground text-sm hover:underline underline-offset-4">
-            Hanzo Blog — AI Research &amp; Infrastructure
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
-        </motion.div>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <Link
-            href="/open-source"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
-            Browse all projects
-            <ArrowRight className="w-4 h-4" />
-          </Link>
           <a
             href="https://github.com/hanzoai"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-foreground border border-border hover:bg-secondary transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium bg-primary text-primary-foreground hover:opacity-90 transition-all"
           >
             <Github className="w-5 h-5" />
             View on GitHub
-            <ExternalLink className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4" />
           </a>
         </motion.div>
       </div>

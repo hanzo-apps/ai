@@ -18,18 +18,18 @@ interface AuthButtonsProps {
 
 const zenFamilies = [
   {
-    name: "Zen5",
-    tag: "Latest",
-    description: "Frontier architecture. Long context, deep reasoning, multimodal — live on api.hanzo.ai.",
-    icon: Zap,
-    href: "/zen#zen5",
-  },
-  {
     name: "Zen4",
-    tag: "Stable",
-    description: "30+ open models — nano to 1T. Abliterated, multimodal, agentic.",
+    tag: "Current",
+    description: "30+ open models — nano to 1T frontier. Abliterated, multimodal, agentic.",
     icon: Sparkles,
     href: "/zen",
+  },
+  {
+    name: "Zen5",
+    tag: "Coming Soon",
+    description: "Next-gen architecture. Faster inference, longer context, deeper reasoning.",
+    icon: Zap,
+    href: "/zen#zen5",
   },
 ];
 
@@ -94,7 +94,7 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
       {/* When logged out: Contact Sales */}
       {!user && (
         <Link
-          href="/contact"
+          href="/contact-sales"
           className="inline-flex items-center justify-center rounded-full h-9 px-4 text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-200 cursor-pointer"
         >
           Contact sales
@@ -141,13 +141,13 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
         </a>
       )}
 
-      {/* Try Zen5 — primary top-right CTA (matches zenlm.org). */}
+      {/* Get Started CTA — single primary action, no dropdown */}
       {!user && (
       <a
-        href="https://hanzo.chat/?model=zen5"
-        className="inline-flex items-center justify-center gap-1.5 bg-primary text-primary-foreground hover:opacity-90 rounded-full h-9 px-4 text-sm font-semibold transition-all duration-200 cursor-pointer"
+        href="https://cloud.hanzo.ai/signup"
+        className="inline-flex items-center justify-center gap-1.5 bg-primary text-primary-foreground hover:opacity-90 rounded-full h-9 px-4 text-sm font-medium transition-all duration-200 cursor-pointer"
       >
-        Try Zen5
+        Get started
         <ArrowRight className="w-4 h-4" />
       </a>
       )}
