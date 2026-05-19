@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import {
@@ -78,6 +78,94 @@ const getTerminalLines = (brand: string) => [
 // Mobile view tabs
 type MobileTab = "dashboard" | "terminal" | "mobile";
 
+type TerminalLine = {
+  text: string;
+  type: "command" | "success" | "prompt";
+  highlight?: boolean;
+};
+
+// Standalone Terminal component — DECLARED AT MODULE SCOPE so it isn't
+// rebuilt on every render of HeroSection (the old inline declaration
+// caused React to remount the whole terminal each time terminalStep
+// changed, which produced the flicker / "all text flashes" effect the
+// user reported). Lines are keyed by ``${cycleId}-${idx}`` so React
+// reconciles cleanly across cycle resets, and the container scrolls
+// the latest line into view as it appears.
+type TerminalMockProps = {
+  className?: string;
+  lines: TerminalLine[];
+  step: number;
+  cycleId: number;
+  copied: boolean;
+  onCopy: () => void;
+};
+const TerminalMock = React.memo(function TerminalMock({
+  className = "",
+  lines,
+  step,
+  cycleId,
+  copied,
+  onCopy,
+}: TerminalMockProps) {
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  // Smooth-scroll to the newest line as the typing animation advances.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+  }, [step, cycleId]);
+
+  return (
+    <div className={`rounded-xl border border-border bg-secondary/95 backdrop-blur-sm overflow-hidden shadow-2xl ${className}`}>
+      {/* Terminal header */}
+      <div className="flex items-center gap-2 px-3 py-2 border-b border-border bg-secondary shrink-0">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+          <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+          <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+        </div>
+        <span className="ml-2 text-[10px] text-muted-foreground font-mono">terminal</span>
+        <div className="ml-auto flex items-center gap-2">
+          <button onClick={onCopy} className="p-1 rounded hover:bg-accent transition-colors">
+            {copied ? <Check className="h-3 w-3 text-foreground/70" /> : <Copy className="h-3 w-3 text-muted-foreground" />}
+          </button>
+        </div>
+      </div>
+      {/* Terminal content — fixed height, auto-scroll to bottom. */}
+      <div
+        ref={scrollRef}
+        className="p-4 font-mono text-xs bg-background h-[220px] overflow-y-auto"
+        style={{ willChange: "scroll-position" }}
+      >
+        {lines.slice(0, step).map((line, idx) => (
+          <motion.div
+            key={`${cycleId}-${idx}`}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className={`mb-1 ${
+              line.type === "command" ? "text-foreground/80" :
+              line.type === "success" ? "text-muted-foreground" :
+              line.type === "prompt"  ? "text-foreground/60" : "text-muted-foreground"
+            }`}
+          >
+            {line.type === "success" && <span className="text-foreground/70">✓ </span>}
+            {line.type === "prompt"  && <span className="text-foreground/60">? </span>}
+            <span className={line.highlight ? "text-foreground" : ""}>
+              {line.text.replace(/^[✓?]\s*/, "")}
+            </span>
+          </motion.div>
+        ))}
+        <div className="flex items-center gap-1 mt-2">
+          <span className="text-muted-foreground">$</span>
+          <span className="w-2 h-4 bg-primary/80 animate-pulse" />
+        </div>
+      </div>
+    </div>
+  );
+});
+
 const HeroSection = () => {
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -85,6 +173,11 @@ const HeroSection = () => {
   const [terminalStep, setTerminalStep] = useState(0);
   const [brandIdx, setBrandIdx] = useState(0);
   const [terminalBrand, setTerminalBrand] = useState("lux");
+  // ``cycleId`` increments on every full restart so the rendered line
+  // keys (``${cycleId}-${idx}``) change atomically between cycles and
+  // React doesn't try to reconcile lines across cycle boundaries
+  // (which used to look like a flash).
+  const [cycleId, setCycleId] = useState(0);
 
   useEffect(() => {
     setMounted(true);
@@ -113,11 +206,15 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, [mounted, terminalLines.length]);
 
-  // When terminal finishes, reset with current brand after a pause
+  // When terminal finishes, reset with current brand after a pause.
+  // ``cycleId`` bumps too so the new lines mount under fresh keys and
+  // the old lines unmount cleanly via AnimatePresence, eliminating the
+  // empty-flash that used to happen when ``step`` jumped to 0.
   useEffect(() => {
     if (terminalStep < terminalLines.length) return;
     const t = setTimeout(() => {
       setTerminalBrand(ROTATING_BRANDS[brandIdx].name.toLowerCase());
+      setCycleId((c) => c + 1);
       setTerminalStep(0);
     }, 2800);
     return () => clearTimeout(t);
@@ -264,69 +361,20 @@ const HeroSection = () => {
     </div>
   );
 
-  // Terminal Mock Component - fixed height with scrolling content
-  const TerminalMock = ({ className = "" }: { className?: string }) => (
-    <div className={`rounded-xl border border-border bg-secondary/95 backdrop-blur-sm overflow-hidden shadow-2xl ${className}`}>
-      {/* Terminal header */}
-      <div className="flex items-center gap-2 px-3 py-2 border-b border-border bg-secondary shrink-0">
-        <div className="flex gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-          <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-          <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-        </div>
-        <span className="ml-2 text-[10px] text-muted-foreground font-mono">terminal</span>
-        <div className="ml-auto flex items-center gap-2">
-          <button
-            onClick={handleCopy}
-            className="p-1 rounded hover:bg-accent transition-colors"
-          >
-            {copied ? (
-              <Check className="h-3 w-3 text-foreground/70" />
-            ) : (
-              <Copy className="h-3 w-3 text-muted-foreground" />
-            )}
-          </button>
-        </div>
-      </div>
-      {/* Terminal content - fixed height with scroll */}
-      <div className="p-4 font-mono text-xs bg-background h-[220px] overflow-y-auto">
-        {terminalLines.slice(0, terminalStep).map((line, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.15 }}
-            className={`mb-1 ${
-              line.type === "command" ? "text-foreground/80" :
-              line.type === "success" ? "text-muted-foreground" :
-              line.type === "prompt" ? "text-foreground/60" : "text-muted-foreground"
-            }`}
-          >
-            {line.type === "success" && (
-              <span className="text-foreground/70">✓ </span>
-            )}
-            {line.type === "prompt" && (
-              <span className="text-foreground/60">? </span>
-            )}
-            <span className={line.highlight ? "text-foreground" : ""}>
-              {line.text.replace(/^[✓?]\s*/, "")}
-            </span>
-          </motion.div>
-        ))}
-        {terminalStep < terminalLines.length && (
-          <div className="flex items-center gap-1">
-            <span className="text-muted-foreground">$</span>
-            <span className="w-2 h-4 bg-primary/80 animate-pulse" />
-          </div>
-        )}
-        {terminalStep >= terminalLines.length && (
-          <div className="flex items-center gap-1 mt-2">
-            <span className="text-muted-foreground">$</span>
-            <span className="w-2 h-4 bg-primary/80 animate-pulse" />
-          </div>
-        )}
-      </div>
-    </div>
+  // Wrapper that forwards to the module-scope ``TerminalMock`` so the
+  // terminal element keeps a stable identity across renders. The old
+  // inline arrow-function created a new component type every render,
+  // which made React tear down and remount the whole subtree — that
+  // was the flicker.
+  const TerminalView = ({ className = "" }: { className?: string }) => (
+    <TerminalMock
+      className={className}
+      lines={terminalLines}
+      step={terminalStep}
+      cycleId={cycleId}
+      copied={copied}
+      onCopy={handleCopy}
+    />
   );
 
   // Mobile Device Mock Component - iPhone 15 Pro dimensions (71.6mm x 146.6mm = ~2.05:1 ratio)
@@ -585,7 +633,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="relative z-20 mt-4 w-full max-w-[400px]"
               >
-                <TerminalMock />
+                <TerminalView />
               </motion.div>
 
               {/* Mobile Device - Floating/overlapping right */}
@@ -699,7 +747,7 @@ const HeroSection = () => {
                   animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 20 }}
                   transition={{ duration: 0.6, delay: 0.5 }}
                 >
-                  <TerminalMock />
+                  <TerminalView />
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -832,7 +880,7 @@ const HeroSection = () => {
                     exit={{ opacity: 0, x: 10 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <TerminalMock />
+                    <TerminalView />
                   </motion.div>
                 )}
                 {mobileTab === "mobile" && (
