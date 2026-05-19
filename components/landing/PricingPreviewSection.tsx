@@ -3,21 +3,21 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Check, ArrowRight, Sparkles } from "lucide-react";
+import { Check, ArrowRight, Sparkles, Building2 } from "lucide-react";
 
-const freeFeatures = [
+const FREE_FEATURES = [
   "100K API calls / month",
   "1GB vector storage",
   "10GB file storage",
-  "Community support",
-  "All core features",
   "Unlimited projects",
+  "Core agent features",
+  "Community support",
 ];
 
 const PricingPreviewSection = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -31,101 +31,118 @@ const PricingPreviewSection = () => {
           >
             Pricing
           </p>
-          <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-6">
-            Scale forever
+          <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-4">
+            Start free. Scale on your terms.
           </h2>
-          <p className="text-lg text-muted-foreground">
-            No credit card required. Upgrade when you're ready.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            No credit card to get started. Move to Enterprise when you need higher limits or private deployment.
           </p>
         </motion.div>
 
-        {/* Pricing card */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="relative"
-        >
-          {/* Glow effect */}
-          <div
-            className="absolute inset-0 rounded-2xl blur-xl opacity-20"
-            style={{ background: "linear-gradient(135deg, #ffffff, #ffffff)" }}
-          />
-
-          <div className="relative p-8 md:p-12 rounded-2xl border border-border bg-secondary/80 backdrop-blur-sm">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              {/* Left: Free tier info */}
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <Sparkles className="w-5 h-5 text-foreground" />
-                  <span className="text-sm font-medium text-foreground">Free Forever</span>
-                </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-                  $0<span className="text-lg font-normal text-muted-foreground">/month</span>
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  Everything you need to start building. No strings attached.
-                </p>
-
-                <ul className="space-y-3">
-                  {freeFeatures.map((feature) => (
-                    <li key={feature} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3 h-3 text-foreground" />
-                      </div>
-                      <span className="text-foreground/80 text-sm">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Right: CTAs */}
-              <div className="flex flex-col items-center md:items-end gap-4">
-                <a
-                  href="https://iam.hanzo.ai/sign-up"
-                  className="w-full md:w-auto inline-flex justify-center items-center px-8 py-4 rounded-full font-medium text-foreground transition-all hover:opacity-90 bg-primary text-primary-foreground"
-                  style={{ backgroundColor: "#ffffff" }}
-                >
-                  Start Building Free
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </a>
-
-                <Link
-                  href="/pricing"
-                  className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  View all plans
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-
-                <p className="text-xs text-muted-foreground/60 text-center md:text-right mt-4">
-                  No credit card required
-                  <br />
-                  Cancel anytime
-                </p>
-              </div>
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Free tier */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="p-8 rounded-2xl border border-border bg-secondary/80 backdrop-blur-sm"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Sparkles className="w-5 h-5 text-foreground" />
+              <span className="text-sm font-medium text-foreground">Free</span>
             </div>
-          </div>
-        </motion.div>
+            <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+              $0<span className="text-lg font-normal text-muted-foreground">/month</span>
+            </h3>
+            <p className="text-muted-foreground mb-6">
+              Everything you need to build and ship your first AI agents.
+            </p>
 
-        {/* Enterprise callout */}
+            <ul className="space-y-3 mb-8">
+              {FREE_FEATURES.map((feature) => (
+                <li key={feature} className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3 h-3 text-foreground" />
+                  </div>
+                  <span className="text-foreground/80 text-sm">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href="https://cloud.hanzo.ai/signup"
+              className="inline-flex justify-center items-center w-full px-6 py-3 rounded-full font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 transition-all"
+            >
+              Start building free
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
+            <p className="text-xs text-muted-foreground/70 text-center mt-3">
+              No credit card required
+            </p>
+          </motion.div>
+
+          {/* Enterprise tier */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="p-8 rounded-2xl border border-white/30 bg-gradient-to-br from-white/[0.08] to-transparent backdrop-blur-sm"
+          >
+            <div className="flex items-center gap-2 mb-4">
+              <Building2 className="w-5 h-5 text-foreground" />
+              <span className="text-sm font-medium text-foreground">Enterprise</span>
+            </div>
+            <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+              Custom
+            </h3>
+            <p className="text-muted-foreground mb-6 leading-relaxed">
+              For teams that need higher limits, private deployment, SLAs, dedicated support, compliance, and custom infrastructure.
+            </p>
+
+            <ul className="space-y-3 mb-8">
+              {[
+                "Higher API and storage limits",
+                "Private cloud or on-prem deployment",
+                "SLAs and dedicated support",
+                "SOC 2 and HIPAA documentation",
+                "Custom contracts and procurement",
+                "Solution architect engagement",
+              ].map((feature) => (
+                <li key={feature} className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3 h-3 text-foreground" />
+                  </div>
+                  <span className="text-foreground/80 text-sm">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              href="/contact-sales"
+              className="inline-flex justify-center items-center w-full px-6 py-3 rounded-full font-medium text-sm border border-white/40 hover:border-white/60 hover:bg-white/10 transition-all"
+            >
+              Contact sales
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </motion.div>
+        </div>
+
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-8 text-center"
         >
-          <p className="text-muted-foreground">
-            Need custom limits, SLAs, or dedicated support?{" "}
-            <Link
-              href="/enterprise"
-              className="text-foreground hover:underline"
-            >
-              Talk to sales
-            </Link>
-          </p>
+          <Link
+            href="/pricing"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            View detailed pricing
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </motion.div>
       </div>
     </section>

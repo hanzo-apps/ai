@@ -2,45 +2,36 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, X, Minus } from "lucide-react";
+import { Shield, FileCheck, Workflow, UserCheck } from "lucide-react";
 
-const features = [
-  { name: "Multi-agent parallelism + consensus", hanzo: "full", others: "none", desc: "Best patch wins" },
-  { name: "Policy / approvals / audit by default", hanzo: "full", others: "none", desc: "Humans + agents" },
-  { name: "Self-host and air-gapped options", hanzo: "full", others: "partial", desc: "On-prem ready" },
-  { name: "Evidence-driven output", hanzo: "full", others: "partial", desc: "Diffs + tests + traces, not screenshots" },
-  { name: "Long-running sandboxes", hanzo: "full", others: "partial", desc: "Install, refactor, iterate" },
+// "Why Hanzo" — agents need infrastructure, not just prompts.
+const WHY_CARDS = [
+  {
+    icon: Shield,
+    title: "Policy by default",
+    desc: "Permissions, approvals, and rate limits are enforced at the platform — not bolted on per agent.",
+  },
+  {
+    icon: FileCheck,
+    title: "Evidence over vibes",
+    desc: "Every agent run produces a diff, a log, and a test result. Decisions are reviewable, not guessed.",
+  },
+  {
+    icon: Workflow,
+    title: "Persistent execution",
+    desc: "Long-running sandboxes install dependencies, refactor large codebases, and iterate until tests pass.",
+  },
+  {
+    icon: UserCheck,
+    title: "Human control",
+    desc: "Plan-only, implement, test, deploy — pick the autonomy level. Humans approve what matters.",
+  },
 ];
-
-const renderStatus = (status: string) => {
-  switch (status) {
-    case "full":
-      return (
-        <div className="flex items-center justify-center">
-          <Check className="w-5 h-5 text-foreground/70" />
-        </div>
-      );
-    case "partial":
-      return (
-        <div className="flex items-center justify-center">
-          <Minus className="w-5 h-5 text-foreground/60" />
-        </div>
-      );
-    case "none":
-      return (
-        <div className="flex items-center justify-center">
-          <X className="w-5 h-5 text-muted-foreground/60" />
-        </div>
-      );
-    default:
-      return null;
-  }
-};
 
 const UseCasesSection = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -52,67 +43,36 @@ const UseCasesSection = () => {
             className="inline-flex text-xs font-medium rounded-full px-4 py-2 border mb-6"
             style={{ color: "var(--primary)", borderColor: "color-mix(in srgb, var(--primary) 30%, transparent)" }}
           >
-            Comparison
+            Why Hanzo
           </p>
-          <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-            Why Hanzo vs agents + glue
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mb-4">
+            AI agents need infrastructure, not just prompts.
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Production software needs more than autocomplete.
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            A good demo can autocomplete a function. A production agent needs context, permissions, tools, memory, tests, secrets, sandboxes, and a way for humans to approve what matters. Hanzo gives agents the operating environment they need to do real work safely.
           </p>
         </motion.div>
 
-        {/* Comparison Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="rounded-xl border border-border overflow-hidden"
-        >
-          {/* Header */}
-          <div className="grid grid-cols-3 gap-4 p-4 bg-secondary border-b border-border">
-            <div className="text-sm font-medium text-muted-foreground">Capability</div>
-            <div className="text-sm font-medium text-center">Hanzo</div>
-            <div className="text-sm font-medium text-muted-foreground text-center">Others</div>
-          </div>
-
-          {/* Rows */}
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.name}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-              className={`grid grid-cols-3 gap-4 p-4 ${
-                index !== features.length - 1 ? "border-b border-border" : ""
-              } hover:bg-secondary/50 transition-colors`}
-            >
-              <div>
-                <div className="text-sm text-foreground font-medium">{feature.name}</div>
-                <div className="text-xs text-muted-foreground mt-0.5">{feature.desc}</div>
-              </div>
-              <div className="flex justify-center items-center">{renderStatus(feature.hanzo)}</div>
-              <div className="flex justify-center items-center">{renderStatus(feature.others)}</div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Legend */}
-        <div className="flex justify-center gap-6 mt-6">
-          <div className="flex items-center gap-2">
-            <Check className="w-4 h-4 text-foreground/70" />
-            <span className="text-xs text-muted-foreground">Full support</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Minus className="w-4 h-4 text-foreground/60" />
-            <span className="text-xs text-muted-foreground">Partial / varies</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <X className="w-4 h-4 text-muted-foreground/60" />
-            <span className="text-xs text-muted-foreground">Not available</span>
-          </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {WHY_CARDS.map((card, index) => {
+            const Icon = card.icon;
+            return (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="p-5 rounded-xl border border-border bg-secondary/50"
+              >
+                <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
+                  <Icon className="w-5 h-5 text-muted-foreground" />
+                </div>
+                <h3 className="text-base font-semibold text-foreground mb-2">{card.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
