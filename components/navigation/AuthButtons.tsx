@@ -18,18 +18,18 @@ interface AuthButtonsProps {
 
 const zenFamilies = [
   {
-    name: "Zen4",
-    tag: "Current",
-    description: "30+ open models — nano to 1T frontier. Abliterated, multimodal, agentic.",
-    icon: Sparkles,
-    href: "/zen",
-  },
-  {
     name: "Zen5",
-    tag: "Coming Soon",
-    description: "Next-gen architecture. Faster inference, longer context, deeper reasoning.",
+    tag: "Latest",
+    description: "Frontier architecture. Long context, deep reasoning, multimodal — live on api.hanzo.ai.",
     icon: Zap,
     href: "/zen#zen5",
+  },
+  {
+    name: "Zen4",
+    tag: "Stable",
+    description: "30+ open models — nano to 1T. Abliterated, multimodal, agentic.",
+    icon: Sparkles,
+    href: "/zen",
   },
 ];
 
@@ -141,8 +141,19 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
         </a>
       )}
 
-      {/* Try Zen dropdown — only shown when logged out */}
+      {/* Try Zen5 — primary top-right CTA (matches zenlm.org). */}
       {!user && (
+      <a
+        href="https://hanzo.chat/?model=zen5"
+        className="inline-flex items-center justify-center gap-1.5 bg-primary text-primary-foreground hover:opacity-90 rounded-full h-9 px-4 text-sm font-semibold transition-all duration-200 cursor-pointer"
+      >
+        Try Zen5
+        <ArrowRight className="w-4 h-4" />
+      </a>
+      )}
+
+      {/* Legacy Try Zen dropdown — kept for reference, never rendered. */}
+      {false && !user && (
       <div
         className="relative"
         ref={dropdownRef}
