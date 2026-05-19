@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   Sparkles,
   ArrowRight,
@@ -231,7 +232,8 @@ export default function JinPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="jin" name="Jin" />
+</div>
       </section>
     </>
   )

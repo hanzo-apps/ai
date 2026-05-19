@@ -16,6 +16,7 @@ import Community from "@/components/analytics/Community";
 import CallToAction from "@/components/analytics/CallToAction";
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const Analytics = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -46,7 +47,8 @@ const Analytics = () => {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="analytics" name="Analytics" />
+</main>
 
     </div>
   );

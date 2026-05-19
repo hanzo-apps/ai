@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   ZapHero,
   ZapFeatures,
@@ -32,7 +33,8 @@ export default function ZapPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="zap" name="ZAP" />
+</div>
       </section>
     </>
   )

@@ -2,6 +2,7 @@
 
 import { ArrowRight, UserCheck, FileText, Building2, ShieldCheck, Globe, Activity } from "lucide-react"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const features = [
   {
     icon: UserCheck,
@@ -92,7 +93,8 @@ export default function IdvPage() {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="idv" name="IDV" />
+</main>
     </div>
   )
 }

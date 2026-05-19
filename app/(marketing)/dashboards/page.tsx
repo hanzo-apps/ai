@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function DashboardsPage() {
   return (
     <>
@@ -252,7 +253,8 @@ export default function DashboardsPage() {
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="dashboards" name="Dashboards" />
+</div>
       </section>
     </>
   )

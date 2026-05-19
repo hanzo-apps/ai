@@ -12,6 +12,7 @@ import Community from "@/components/hanzobot/Community";
 import OSSComputeDividends from "@/components/oss/OSSComputeDividends";
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const HanzoBot = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -26,7 +27,8 @@ const HanzoBot = () => {
         <OSSRevenueBanner upstreamName="LibreChat" />
         <OSSComputeDividends variant="banner" />
         <Community />
-      </main>
+              <ProductFooter slug="bot" name="Bot" />
+</main>
       
     </div>
   );

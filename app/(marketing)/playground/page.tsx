@@ -19,6 +19,7 @@ import {
 } from 'lucide-react'
 import ChromeText from '@/components/ui/chrome-text'
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const tryOut = [
   {
     icon: Brain,
@@ -180,7 +181,8 @@ const Playground = () => {
           </div>
         </div>
       </section>
-    </div>
+            <ProductFooter slug="playground" name="Playground" />
+</div>
   )
 }
 

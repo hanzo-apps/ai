@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function KMSPage() {
   return (
     <>
@@ -305,7 +306,8 @@ hanzo kms rotate DATABASE_PASSWORD --env production`}</code>
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="kms" name="KMS" />
+</div>
       </section>
     </>
   )

@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   Settings,
   ArrowRight,
@@ -208,7 +209,8 @@ export default function OperatorPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="operator" name="Operator" />
+</div>
       </section>
     </>
   )

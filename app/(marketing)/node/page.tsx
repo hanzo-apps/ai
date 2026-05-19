@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Server, Cpu, Network, Shield, Coins, Activity, Zap, Container } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const Node = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -169,7 +170,8 @@ const Node = () => {
           </div>
         </div>
       </section>
-    </div>
+            <ProductFooter slug="node" name="Node" />
+</div>
   );
 };
 

@@ -15,6 +15,7 @@ import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner";
 import { motion } from "framer-motion";
 import { Github, Cloud, Server, Lock, Code2, Network, Terminal, ArrowRight } from "lucide-react";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const DeploymentOptions = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
@@ -237,7 +238,8 @@ const Platform = () => {
         <OSSRevenueBanner upstreamName="Dokploy" />
         <OSSComputeDividends variant="banner" />
         <CallToAction />
-      </main>
+              <ProductFooter slug="platform" name="Platform" />
+</main>
 
       
     </div>

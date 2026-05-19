@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function ConsolePage() {
   return (
     <>
@@ -308,7 +309,8 @@ response = client.chat.completions.create(
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="console" name="Console" />
+</div>
       </section>
     </>
   )

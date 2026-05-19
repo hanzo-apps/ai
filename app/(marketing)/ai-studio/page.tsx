@@ -7,6 +7,7 @@ import StudioLayout from "@/components/ai-studio/StudioLayout"
 import { MessageInterface, ModelInterface } from "@/components/ai-studio/types"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function AIStudioPage() {
   const [activeTab, setActiveTab] = useState("chat")
   const [promptText, setPromptText] = useState("")
@@ -92,6 +93,7 @@ export default function AIStudioPage() {
           </div>
         </div>
       </section>
-    </div>
+            <ProductFooter slug="ai-studio" name="AI Studio" />
+</div>
   )
 }

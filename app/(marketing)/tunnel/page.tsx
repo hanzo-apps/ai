@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Route, Lock, Globe, Terminal, Zap, Shield, Network as NetworkIcon, Activity } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const Tunnel = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -183,7 +184,8 @@ const Tunnel = () => {
           </div>
         </div>
       </section>
-    </div>
+            <ProductFooter slug="tunnel" name="Tunnel" />
+</div>
   );
 };
 
