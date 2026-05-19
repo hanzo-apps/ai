@@ -11,6 +11,7 @@ import OperativeDemo from '@/components/operator/OperativeDemo';
 import OperativeCTA from '@/components/operator/OperativeCTA';
 import { OSSRevenueBanner } from '@/components/oss/OSSRevenueBanner';
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const Operative = () => {
   return (
     <>
@@ -38,7 +39,8 @@ const Operative = () => {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="operative" name="Operative" />
+</main>
 
 
     </>

@@ -7,6 +7,7 @@ import HowItWorks from "@/components/hanzoapp/HowItWorks";
 import FAQSection from "@/components/hanzoapp/FAQSection";
 import FooterCTA from "@/components/hanzoapp/FooterCTA";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const HanzoApp = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -17,7 +18,8 @@ const HanzoApp = () => {
         <HowItWorks />
         <FAQSection />
         <FooterCTA />
-      </main>
+              <ProductFooter slug="app" name="App" />
+</main>
       
     </div>
   );

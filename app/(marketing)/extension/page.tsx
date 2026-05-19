@@ -5,6 +5,7 @@ import HanzoExtensionBrowsers from "@/components/extension/HanzoExtensionBrowser
 import HanzoExtensionUseCases from "@/components/extension/HanzoExtensionUseCases"
 import HanzoExtensionCTA from "@/components/extension/HanzoExtensionCTA"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export const metadata = {
   title: "Hanzo Extension - Browser AI Assistant",
   description:
@@ -30,7 +31,8 @@ export default function ExtensionPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="extension" name="Extension" />
+</div>
       </section>
     </>
   )

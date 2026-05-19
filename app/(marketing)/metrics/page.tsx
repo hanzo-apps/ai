@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   BarChart3,
   ArrowRight,
@@ -209,7 +210,8 @@ export default function MetricsPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="metrics" name="Metrics" />
+</div>
       </section>
     </>
   )

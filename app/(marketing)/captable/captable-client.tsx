@@ -7,6 +7,7 @@ import Pricing from "@/components/captable/Pricing"
 import OpenSource from "@/components/captable/OpenSource"
 import CallToAction from "@/components/captable/CallToAction"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function CaptableClient() {
   return (
     <>
@@ -28,6 +29,7 @@ export default function CaptableClient() {
           </div>
         </div>
       </section>
+          <ProductFooter slug="captable" name="Captable" />
     </>
   )
 }

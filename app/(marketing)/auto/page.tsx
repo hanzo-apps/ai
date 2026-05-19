@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function AutoPage() {
   return (
     <>
@@ -288,7 +289,8 @@ export default function AutoPage() {
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="auto" name="Auto" />
+</div>
       </section>
     </>
   )

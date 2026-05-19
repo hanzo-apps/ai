@@ -21,6 +21,7 @@ import {
 import Link from "next/link"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function MCPPage() {
   return (
     <>
@@ -593,7 +594,8 @@ servers:
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="mcp" name="MCP" />
+</div>
       </section>
     </>
   )

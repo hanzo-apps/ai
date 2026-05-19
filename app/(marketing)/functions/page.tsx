@@ -7,6 +7,7 @@ import { ArrowRight, Code, Terminal, Database, Server, Cpu, Network, Shield } fr
 import { Button } from "@hanzo/ui";
 import ChromeText from "@/components/ui/chrome-text";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const Functions = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -303,7 +304,8 @@ const Functions = () => {
         </div>
       </section>
 
-    </div>
+            <ProductFooter slug="functions" name="Functions" />
+</div>
   );
 };
 

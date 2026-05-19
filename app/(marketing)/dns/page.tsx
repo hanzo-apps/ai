@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   Globe,
   ArrowRight,
@@ -625,7 +626,8 @@ hanzo dns records example.com`}</code>
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="dns" name="DNS" />
+</div>
       </section>
     </>
   )

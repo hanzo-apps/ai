@@ -25,6 +25,7 @@ tsconfig.tsbuildinfo
 next-env.d.ts
 playwright-report
 test-results
+tests/screenshots
 
 # Editor directories and files
 .vscode/*

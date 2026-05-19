@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   Server,
   ArrowRight,
@@ -207,7 +208,8 @@ export default function VisorPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="visor" name="Visor" />
+</div>
       </section>
     </>
   )

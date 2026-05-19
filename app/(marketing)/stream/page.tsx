@@ -14,6 +14,7 @@ import {
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 import OSSComputeDividends from "@/components/oss/OSSComputeDividends"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function StreamPage() {
   return (
     <>
@@ -129,7 +130,8 @@ for message in consumer:
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="stream" name="Stream" />
+</div>
       </section>
     </>
   )

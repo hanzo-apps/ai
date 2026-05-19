@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   CheckCircle,
   Server,
@@ -533,7 +534,8 @@ const StatusPage = () => {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="status" name="Status" />
+</main>
 
 
     </div>
