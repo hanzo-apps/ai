@@ -6,8 +6,14 @@ import NavMenu from "../NavMenu";
 import { Bot, Terminal, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-// Show all items - no truncation
-const MAX_ITEMS_PER_CATEGORY = 20;
+// Cap each category to 6 items inside the mega-menu — anything past
+// that falls behind a "View all in <category>" link so columns stay short.
+const MAX_ITEMS_PER_CATEGORY = 6;
+
+// Slugify a category title for the deep-link target (e.g. "AI & Agents"
+// → "ai-agents"). Used by the "View all" overflow link.
+const slugify = (s: string) =>
+  s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 export const ProductsMenu = () => {
   return (
@@ -84,11 +90,11 @@ export const ProductsMenu = () => {
                     })}
                     {hasMore && (
                       <Link
-                        href="/products"
+                        href={`/products#${slugify(section.title)}`}
                         onClick={closeMenu}
-                        className="flex items-center gap-1 py-0.5 text-[10px] transition-colors hover:text-foreground text-muted-foreground/60"
+                        className="flex items-center gap-1 py-0.5 text-[10px] font-semibold uppercase tracking-wider transition-colors hover:text-foreground text-foreground/70"
                       >
-                        +{section.items.length - MAX_ITEMS_PER_CATEGORY} more
+                        View all {section.items.length}
                         <ArrowRight className="h-2.5 w-2.5" />
                       </Link>
                     )}
