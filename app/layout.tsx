@@ -14,22 +14,25 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
+const SITE_TITLE = 'Hanzo — Open-source cloud for AI agents'
+const SITE_DESCRIPTION = 'Build, deploy, and govern AI agents with unified access to models, MCP tools, memory, vector search, secure sandboxes, IAM, KMS, and audit logs. Open-source. Self-host or use the cloud.'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://hanzo.ai'),
-  title: 'Hanzo AI — The Open-Source AI Cloud',
-  description: 'The complete AI ecosystem: 390+ models, agent SDK, MCP tools, vector DB, IAM, KMS. Self-host or cloud. Earn $AI on Hanzo Network. Open source.',
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   openGraph: {
-    title: 'Hanzo AI — The Open-Source AI Cloud',
-    description: 'The complete AI ecosystem: 390+ models, agent SDK, MCP tools, vector DB, IAM, KMS. Self-host or cloud. Earn $AI on Hanzo Network. Open source.',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     url: 'https://hanzo.ai',
     siteName: 'Hanzo AI',
     type: 'website',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Hanzo AI — The Open-Source AI Cloud' }],
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: SITE_TITLE }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hanzo AI — The Open-Source AI Cloud',
-    description: 'The complete AI ecosystem: 390+ models, agent SDK, MCP tools, vector DB, IAM, KMS. Self-host or cloud. Earn $AI on Hanzo Network. Open source.',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ['/opengraph-image'],
   },
 }
