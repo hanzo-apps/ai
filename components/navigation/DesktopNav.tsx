@@ -222,6 +222,14 @@ const DesktopNav = () => {
       >
         Pricing
       </Link>
+
+      {/* Open Source direct link */}
+      <Link
+        href="/open-source"
+        className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+      >
+        Open Source
+      </Link>
     </div>
   );
 };

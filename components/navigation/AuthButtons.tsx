@@ -94,7 +94,7 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
       {/* When logged out: Contact Sales */}
       {!user && (
         <Link
-          href="/contact"
+          href="/contact-sales"
           className="inline-flex items-center justify-center rounded-full h-9 px-4 text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-200 cursor-pointer"
         >
           Contact sales

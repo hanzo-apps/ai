@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   ArrowRight,
   CreditCard,
@@ -118,7 +119,8 @@ await billing.subscriptions.create({
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="billing" name="Billing" />
+</div>
       </section>
     </>
   )

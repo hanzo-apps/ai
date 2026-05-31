@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   LineChart,
   ArrowRight,
@@ -209,7 +210,8 @@ export default function O11yPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="o11y" name="O11y" />
+</div>
       </section>
     </>
   )

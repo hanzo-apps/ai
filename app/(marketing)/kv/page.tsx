@@ -14,6 +14,7 @@ import {
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 import OSSComputeDividends from "@/components/oss/OSSComputeDividends"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function KVPage() {
   return (
     <>
@@ -123,7 +124,8 @@ kv.on("message", (channel, message) => {
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="kv" name="KV" />
+</div>
       </section>
     </>
   )

@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   ArrowRight,
   BarChart3,
@@ -121,7 +122,8 @@ GROUP BY 1 ORDER BY 1;`}</code></pre>
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="database" name="Database" />
+</div>
       </section>
     </>
   )

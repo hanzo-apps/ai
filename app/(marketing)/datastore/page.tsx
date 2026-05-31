@@ -6,6 +6,7 @@ import UseCasesSection from "@/components/datastore/UseCasesSection"
 import GetStartedSection from "@/components/datastore/GetStartedSection"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export const metadata = {
   title: "Hanzo Datastore - Managed Database",
   description:
@@ -32,7 +33,8 @@ export default function DatastorePage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="datastore" name="Datastore" />
+</div>
       </section>
     </>
   )

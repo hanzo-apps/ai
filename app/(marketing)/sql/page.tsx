@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function SQLPage() {
   return (
     <>
@@ -125,7 +126,8 @@ LIMIT 10;`}</code></pre>
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="sql" name="SQL" />
+</div>
       </section>
     </>
   )

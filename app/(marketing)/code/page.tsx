@@ -13,6 +13,7 @@ import HanzoCodeCompanies from "@/components/hanzocode/HanzoCodeCompanies";
 import HanzoCodeCompatibility from "@/components/hanzocode/HanzoCodeCompatibility";
 import HanzoCodeAgents from "@/components/hanzocode/HanzoCodeAgents";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const HanzoCode = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -40,7 +41,8 @@ const HanzoCode = () => {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="code" name="Code" />
+</main>
 
     </div>
   );

@@ -7,6 +7,7 @@ import {
 } from "@/components/crawl"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export const metadata = {
   title: "Hanzo Crawl - AI-Ready Web Crawler",
   description:
@@ -22,6 +23,7 @@ export default function CrawlPage() {
       <CrawlPricing />
       <OSSRevenueBanner upstreamName="Crawl4AI" />
       <CrawlCTA />
+          <ProductFooter slug="crawl" name="Crawl" />
     </>
   )
 }

@@ -10,6 +10,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   output: 'export',
   poweredByHeader: false,
+  // Allow per-build override so a parallel `next dev` (sibling agent on the
+  // same branch) doesn't clobber our build artifacts. Defaults to `.next`.
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   images: {
     unoptimized: true,
   },

@@ -12,6 +12,7 @@ import TechStack from "@/components/cloud/TechStack"
 import CallToAction from "@/components/cloud/CallToAction"
 import DesktopAppBanner from "@/components/DesktopAppBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export const metadata = {
   title: "Hanzo Cloud - Complete Cloud Platform",
   description:
@@ -46,7 +47,8 @@ export default function CloudPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="cloud" name="Cloud" />
+</div>
       </section>
       <DesktopAppBanner />
     </>

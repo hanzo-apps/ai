@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   ArrowRight,
   Terminal,
@@ -289,7 +290,8 @@ hanzo logs --follow`}</code>
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="cli" name="CLI" />
+</div>
       </section>
     </>
   )

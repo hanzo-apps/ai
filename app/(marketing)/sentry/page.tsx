@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   AlertTriangle,
   ArrowRight,
@@ -209,7 +210,8 @@ export default function SentryPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="sentry" name="Sentry" />
+</div>
       </section>
     </>
   )
