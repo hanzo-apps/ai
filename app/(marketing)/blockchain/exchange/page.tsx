@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   ArrowLeftRight,
   TrendingUp,
@@ -377,7 +378,8 @@ await exchange.orderbook.placeLimitOrder({
       </section>
 
       
-    </div>
+            <ProductFooter slug="blockchain/exchange" name="Exchange" />
+</div>
   );
 };
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   ArrowRight,
   FileText,
@@ -114,7 +115,8 @@ const top = await orders.aggregate([
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="docdb" name="DocDB" />
+</div>
       </section>
     </>
   )

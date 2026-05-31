@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Container, Lock, KeyRound, Shield, Zap, Globe, Layers, UserCheck } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const Registry = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -183,7 +184,8 @@ const Registry = () => {
           </div>
         </div>
       </section>
-    </div>
+            <ProductFooter slug="registry" name="Registry" />
+</div>
   );
 };
 

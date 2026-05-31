@@ -7,6 +7,7 @@ import Pricing from "@/components/dataroom/Pricing"
 import OpenSource from "@/components/dataroom/OpenSource"
 import CallToAction from "@/components/dataroom/CallToAction"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function DataroomClient() {
   return (
     <>
@@ -28,6 +29,7 @@ export default function DataroomClient() {
           </div>
         </div>
       </section>
+          <ProductFooter slug="dataroom" name="Dataroom" />
     </>
   )
 }

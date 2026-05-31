@@ -5,6 +5,8 @@ export type PartnerLogo = {
   href?: string;
 };
 
+// Canonical trust band order:
+// Amazon · DigitalOcean · Google · Microsoft · NVIDIA · Techstars · Lux · Zoo Labs Foundation
 export const partnerLogos: PartnerLogo[] = [
   {
     name: "Amazon",
@@ -25,22 +27,10 @@ export const partnerLogos: PartnerLogo[] = [
     href: "https://cloud.google.com",
   },
   {
-    name: "Lux",
-    src: "/logos/partners/lux.svg",
-    className: "h-6",
-    href: "https://lux.fund",
-  },
-  {
     name: "Microsoft",
     src: "/logos/partners/microsoft.svg",
     className: "h-6",
     href: "https://azure.microsoft.com",
-  },
-  {
-    name: "Nebius",
-    src: "/logos/partners/nebius.svg",
-    className: "h-6",
-    href: "https://nebius.com",
   },
   {
     name: "NVIDIA",
@@ -51,13 +41,24 @@ export const partnerLogos: PartnerLogo[] = [
   {
     name: "Techstars",
     src: "/logos/partners/techstars.svg",
-    className: "h-14",
+    // h-10 keeps Techstars wordmark visually balanced against h-6 marks.
+    // Spec calls for "same optical weight" — this is the optical normalization,
+    // not the literal height match.
+    className: "h-10",
     href: "https://www.techstars.com",
+  },
+  {
+    name: "Lux",
+    src: "/logos/partners/lux.svg",
+    className: "h-6",
+    href: "https://lux.fund",
   },
   {
     name: "Zoo Labs Foundation",
     src: "/logos/partners/zoo-labs-foundation.svg",
-    className: "h-10",
+    // h-8 (~20% smaller than the original h-10) is the optical match per
+    // 2026-05-19 sibling-agent adjustment.
+    className: "h-8",
     href: "https://zoo.ngo",
   },
 ];

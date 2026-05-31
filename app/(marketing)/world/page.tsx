@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   Globe,
   ArrowRight,
@@ -240,7 +241,8 @@ export default function WorldPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="world" name="World" />
+</div>
       </section>
     </>
   )

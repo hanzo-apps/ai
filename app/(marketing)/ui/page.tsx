@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   ArrowRight,
   Blocks,
@@ -287,7 +288,8 @@ export function Hello() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="ui" name="UI" />
+</div>
       </section>
     </>
   )

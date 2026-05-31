@@ -9,6 +9,7 @@ import TechStack from "@/components/commerce/TechStack"
 import Integrations from "@/components/commerce/Integrations"
 import CallToAction from "@/components/commerce/CallToAction"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function CommerceClient() {
   return (
     <>
@@ -32,6 +33,7 @@ export default function CommerceClient() {
           </div>
         </div>
       </section>
+          <ProductFooter slug="commerce" name="Commerce" />
     </>
   )
 }

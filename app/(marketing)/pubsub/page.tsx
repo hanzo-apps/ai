@@ -14,6 +14,7 @@ import {
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 import OSSComputeDividends from "@/components/oss/OSSComputeDividends"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function PubSubPage() {
   return (
     <>
@@ -314,7 +315,8 @@ for _, msg := range msgs {
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="pubsub" name="Pubsub" />
+</div>
       </section>
     </>
   )

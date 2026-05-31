@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   ListChecks,
   ArrowRight,
@@ -668,7 +669,8 @@ export default function TasksPage() {
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="tasks" name="Tasks" />
+</div>
       </section>
     </>
   )

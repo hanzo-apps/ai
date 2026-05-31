@@ -2,6 +2,7 @@
 
 import { ArrowRight, Shield, Network, Zap, GitBranch, ScrollText, Search } from "lucide-react"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const features = [
   {
     icon: Network,
@@ -92,7 +93,8 @@ export default function AuthzPage() {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="authz" name="Authz" />
+</main>
     </div>
   )
 }

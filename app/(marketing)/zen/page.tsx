@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { allModels } from "@zenlm/models";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const PRICING_API = 'https://api.hanzo.ai/v1/pricing'
 
 interface ModelStats {
@@ -522,7 +523,8 @@ const Zen = () => {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="zen" name="Zen Models" />
+</main>
     </div>
   );
 };

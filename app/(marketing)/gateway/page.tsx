@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   Network,
   ArrowRight,
@@ -207,7 +208,8 @@ export default function GatewayPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="gateway" name="Gateway" />
+</div>
       </section>
     </>
   )

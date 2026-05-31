@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ProductFooter } from "@/components/products/ProductFooter"
 import {
   LayoutGrid,
   ArrowRight,
@@ -239,7 +240,8 @@ export default function GalleryPage() {
               View on GitHub
             </a>
           </div>
-        </div>
+                <ProductFooter slug="gallery" name="Gallery" />
+</div>
       </section>
     </>
   )

@@ -10,6 +10,7 @@ import Integration from "@/components/realtime/Integration";
 import Scaling from "@/components/realtime/Scaling";
 import CallToAction from "@/components/realtime/CallToAction";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const Realtime = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -34,7 +35,8 @@ const Realtime = () => {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="realtime" name="Realtime" />
+</main>
 
     </div>
   );

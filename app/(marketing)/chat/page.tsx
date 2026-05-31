@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 export default function ChatPage() {
   return (
     <>
@@ -301,7 +302,8 @@ export default function ChatPage() {
               </div>
             </div>
           </motion.div>
-        </div>
+                <ProductFooter slug="chat" name="Chat" />
+</div>
       </section>
     </>
   )

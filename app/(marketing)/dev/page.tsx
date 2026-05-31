@@ -11,6 +11,7 @@ import OpenSource from "@/components/hanzodev/OpenSource";
 import FAQSection from "@/components/hanzodev/FAQSection";
 import FooterCTA from "@/components/hanzodev/FooterCTA";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const HanzoDev = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -37,7 +38,8 @@ const HanzoDev = () => {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="dev" name="Dev" />
+</main>
 
     </div>
   );

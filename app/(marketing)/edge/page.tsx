@@ -7,6 +7,7 @@ import { ArrowRight, Zap, Globe, Network, Server, Cloud, Code, Shield } from "lu
 import { Button } from "@hanzo/ui";
 import ChromeText from "@/components/ui/chrome-text";
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const Edge = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -298,7 +299,8 @@ const Edge = () => {
         </div>
       </section>
 
-    </div>
+            <ProductFooter slug="edge" name="Edge" />
+</div>
   );
 };
 

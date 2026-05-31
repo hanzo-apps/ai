@@ -2,6 +2,7 @@
 
 import { ArrowRight, KeyRound, ShieldCheck, Cpu, Lock, FileCheck, Network } from "lucide-react"
 
+import { ProductFooter } from "@/components/products/ProductFooter"
 const features = [
   {
     icon: ShieldCheck,
@@ -92,7 +93,8 @@ export default function HsmPage() {
             </div>
           </div>
         </section>
-      </main>
+              <ProductFooter slug="hsm" name="HSM" />
+</main>
     </div>
   )
 }
