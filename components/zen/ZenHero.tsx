@@ -24,7 +24,7 @@ const ZenHero = () => {
       setCurrentPrinciple((prev) => (prev + 1) % principles.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [principles.length]);
 
   return (
     <section className="min-h-screen flex flex-col justify-center items-center px-4 py-24 relative">
