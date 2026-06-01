@@ -193,7 +193,11 @@ export function updateBillingInfo(updates: Partial<BillingInfo>): BillingInfo {
   const current = getBillingInfo();
   const updated = { ...current, ...updates };
   if (typeof window !== 'undefined') {
-    try { localStorage.setItem(BILLING_STORAGE_KEY, JSON.stringify(updated)); } catch {}
+    try {
+      localStorage.setItem(BILLING_STORAGE_KEY, JSON.stringify(updated));
+    } catch {
+      // localStorage may be unavailable (Safari private mode, quota exceeded) — best-effort persistence
+    }
   }
   return updated;
 }

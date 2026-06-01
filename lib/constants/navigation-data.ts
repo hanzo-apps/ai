@@ -55,7 +55,7 @@ export type NavItem = {
   title: string;
   href: string;
   description?: string;
-  icon?: React.ComponentType<any>;
+  icon?: React.ComponentType<{ className?: string; size?: number | string }>;
   github?: string;
   docs?: string;
   featured?: boolean;
