@@ -219,10 +219,10 @@ const HanzoDeFiStack = () => {
             className="flex flex-wrap justify-center gap-4"
           >
             <a
-              href="https://www.npmjs.com/package/@luxfi/contracts"
+              href="https://www.npmjs.com/package/@luxfi/standard"
               className="inline-flex items-center gap-2 px-8 py-3 bg-primary/10 hover:bg-primary/10 text-foreground font-medium rounded-full transition-colors"
             >
-              npm install @luxfi/contracts
+              npm install @luxfi/standard
             </a>
             <a
               href="https://standard.lux.network"
@@ -338,11 +338,11 @@ const HanzoDeFiStack = () => {
               <code className="text-foreground/80">{`// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import "@luxfi/contracts/tokens/LRC20.sol";
-import "@luxfi/contracts/liquid/LiquidLUX.sol";
-import "@luxfi/contracts/safe/Safe.sol";
-import "@luxfi/contracts/safe/SafeFROSTSigner.sol";
-import "@luxfi/contracts/crypto/precompiles/IMLDSA.sol";
+import "@luxfi/standard/tokens/LRC20.sol";
+import "@luxfi/standard/liquid/LiquidLUX.sol";
+import "@luxfi/standard/safe/Safe.sol";
+import "@luxfi/standard/safe/SafeFROSTSigner.sol";
+import "@luxfi/standard/crypto/precompiles/IMLDSA.sol";
 
 // Create your token
 contract MyToken is LRC20 {
