@@ -1,4 +1,4 @@
-# LLM.md - hanzo.ai
+# hanzo.ai
 
 ## Project
 
