@@ -2,14 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import { Button } from "@hanzo/ui";
-import { Loader2 } from "lucide-react";
 import DatastorePricing from "@/components/pricing/DatastorePricing";
 import VectorPricing from "@/components/pricing/VectorPricing";
 import ObservabilityPricing from "@/components/pricing/ObservabilityPricing";
 import ManagedServicesPricing from "@/components/pricing/ManagedServicesPricing";
 
-const CLOUD_API = "https://api.hanzo.ai/v1/cloud";
-const GPU_API = "https://api.hanzo.ai/v1/gpu";
+const CLOUD_API = "https://pricing.hanzo.ai/v1/cloud";
+const GPU_API = "https://pricing.hanzo.ai/v1/gpu";
 
 interface CloudPlan {
   id: string;
@@ -53,42 +52,74 @@ interface CloudData {
   blockStorage: BlockStorage;
 }
 
+// Static fallback so the section renders instantly even if the public
+// pricing API is slow or unreachable. Mirrors pricing.hanzo.ai/v1/cloud.
+const STATIC_CLOUD_DATA: CloudData = {
+  plans: [
+    { id: "starter", name: "Starter", description: "Get started for free. Perfect for side projects, bots, and learning.", vcpus: 1, memoryGB: 1, diskGB: 20, cpuType: "shared", maxVMs: 1, priceMonthly: 5, priceHourly: 0.0069, features: ["1 VM", "1 vCPU", "1 GB RAM", "20 GB SSD", "500 GB transfer", "Free $5 credit"], freeTier: true },
+    { id: "builder", name: "Builder", description: "For developers shipping real products. Run bots, APIs, and automation.", vcpus: 2, memoryGB: 2, diskGB: 40, cpuType: "shared", maxVMs: 5, priceMonthly: 10, priceHourly: 0.0139, features: ["Up to 5 VMs", "2 vCPU", "2 GB RAM", "40 GB SSD", "1 TB transfer"] },
+    { id: "dev", name: "Dev", description: "The sweet spot. Full dev environment with room to grow.", vcpus: 2, memoryGB: 8, diskGB: 25, cpuType: "shared", maxVMs: 25, priceMonthly: 15, priceHourly: 0.0208, features: ["Up to 25 VMs", "2 vCPU", "8 GB RAM", "25 GB SSD", "3 TB transfer"], popular: true },
+    { id: "pro", name: "Pro", description: "Dedicated CPU. Zero noisy neighbors. Consistent performance, always.", vcpus: 2, memoryGB: 8, diskGB: 80, cpuType: "dedicated", maxVMs: 25, priceMonthly: 25, priceHourly: 0.0347, features: ["Up to 25 VMs", "2 dedicated vCPU", "8 GB RAM", "80 GB SSD", "2 TB transfer"] },
+    { id: "turbo", name: "Turbo", description: "4x the power. Browser automation, CI/CD, and heavy workloads.", vcpus: 4, memoryGB: 16, diskGB: 160, cpuType: "shared", maxVMs: 25, priceMonthly: 39, priceHourly: 0.0542, features: ["Up to 25 VMs", "4 vCPU", "16 GB RAM", "160 GB SSD", "4 TB transfer"] },
+    { id: "business", name: "Business", description: "Team-scale compute. Run production services, staging environments, and fleets.", vcpus: 8, memoryGB: 32, diskGB: 240, cpuType: "dedicated", maxVMs: 50, priceMonthly: 219, priceHourly: 0.3042, features: ["Up to 50 VMs", "8 dedicated vCPU", "32 GB RAM", "240 GB SSD", "20 TB transfer"] },
+    { id: "enterprise", name: "Enterprise", description: "Mission-critical infrastructure. Full isolation, maximum throughput.", vcpus: 16, memoryGB: 64, diskGB: 360, cpuType: "dedicated", maxVMs: 100, priceMonthly: 429, priceHourly: 0.5958, features: ["Up to 100 VMs", "16 dedicated vCPU", "64 GB RAM", "360 GB SSD", "40 TB transfer"] },
+    { id: "scale", name: "Scale", description: "Platform-scale compute. Run hundreds of services across global regions.", vcpus: 32, memoryGB: 128, diskGB: 600, cpuType: "dedicated", maxVMs: 250, priceMonthly: 849, priceHourly: 1.1792, features: ["Up to 250 VMs", "32 dedicated vCPU", "128 GB RAM", "600 GB SSD", "50 TB transfer"] },
+  ],
+  regions: [
+    { id: "us-east", name: "US East", location: "Ashburn, VA", flag: "us" },
+    { id: "us-west", name: "US West", location: "Hillsboro, OR", flag: "us" },
+    { id: "eu-central", name: "Europe", location: "Frankfurt, DE", flag: "de" },
+    { id: "ap-southeast", name: "Asia Pacific", location: "Singapore", flag: "sg" },
+  ],
+  blockStorage: { pricePerGBMonthly: 0.08, minSizeGB: 1, maxSizeGB: 16384 },
+};
+
+const STATIC_GPU_TIERS: GpuTier[] = [
+  { name: "GPU Basic", gpu: "1x H100", vram: "80 GB", price: 3.48 },
+  { name: "GPU Pro", gpu: "2x H100", vram: "160 GB", price: 6.96 },
+  { name: "GPU Max", gpu: "4x H100", vram: "320 GB", price: 13.92 },
+];
+
+// The public /v1/gpu payload uses `gpus`/`priceHourly`; normalize to the
+// GpuTier shape this component renders so live data is render-safe.
+function normalizeGpuTiers(raw: unknown): GpuTier[] {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .map((t): GpuTier => ({
+      name: String(t?.name ?? ""),
+      gpu: String(t?.gpu ?? t?.gpus ?? ""),
+      vram: String(t?.vram ?? ""),
+      price: Number(t?.price ?? t?.priceHourly ?? 0),
+    }))
+    .filter((t) => t.name && Number.isFinite(t.price));
+}
+
 function CloudComputePricing() {
   const [showAll, setShowAll] = useState(false);
-  const [cloudData, setCloudData] = useState<CloudData | null>(null);
-  const [gpuTiers, setGpuTiers] = useState<GpuTier[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Initialize with static data immediately -- no loading flash, no error state.
+  const [cloudData, setCloudData] = useState<CloudData>(STATIC_CLOUD_DATA);
+  const [gpuTiers, setGpuTiers] = useState<GpuTier[]>(STATIC_GPU_TIERS);
 
   useEffect(() => {
     Promise.all([
-      fetch(CLOUD_API).then((r) => r.json()),
-      fetch(GPU_API).then((r) => r.json()),
+      fetch(CLOUD_API).then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      }),
+      fetch(GPU_API).then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      }),
     ])
       .then(([cloud, gpu]) => {
-        setCloudData(cloud);
-        setGpuTiers(gpu.tiers || []);
-        setLoading(false);
+        if (cloud?.plans?.length) setCloudData(cloud);
+        const tiers = normalizeGpuTiers(gpu?.tiers);
+        if (tiers.length) setGpuTiers(tiers);
       })
-      .catch((err) => {
-        console.error("Failed to fetch infrastructure pricing:", err);
-        setLoading(false);
+      .catch(() => {
+        // keep static data already set
       });
   }, []);
-
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-24">
-        <Loader2 className="w-6 h-6 animate-spin mr-2 text-muted-foreground" />
-        <span className="text-muted-foreground">Loading cloud pricing...</span>
-      </div>
-    );
-  }
-
-  if (!cloudData || !cloudData.plans?.length) {
-    return (
-      <div className="text-center py-12 text-muted-foreground">Failed to load cloud compute pricing.</div>
-    );
-  }
 
   const { plans, regions, blockStorage } = cloudData;
   const visiblePlans = showAll ? plans : plans.slice(0, 6);
