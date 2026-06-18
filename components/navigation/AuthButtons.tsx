@@ -134,7 +134,7 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
         </a>
       ) : (
         <a
-          href={`https://hanzo.id/login?redirect_uri=${encodeURIComponent("https://hanzo.ai")}`}
+          href="https://hanzo.id/login"
           className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer"
         >
           Log in
@@ -144,7 +144,7 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
       {/* Try Zen5 — primary top-right CTA (matches zenlm.org). */}
       {!user && (
       <a
-        href="https://hanzo.chat/?model=zen5"
+        href="https://hanzo.id/signup"
         className="inline-flex items-center justify-center gap-1.5 bg-primary text-primary-foreground hover:opacity-90 rounded-full h-9 px-4 text-sm font-semibold transition-all duration-200 cursor-pointer"
       >
         Try Zen5

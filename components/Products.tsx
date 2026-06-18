@@ -331,7 +331,7 @@ const Products = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
               >
-                <a href="https://app.hanzo.ai/signup" target="_blank" rel="noopener noreferrer">
+                <a href="https://hanzo.id/signup" target="_blank" rel="noopener noreferrer">
                   <Button
                     className="w-full sm:w-auto bg-[var(--white)] text-primary-foreground border border-gray-300 hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all duration-300"
                   >
