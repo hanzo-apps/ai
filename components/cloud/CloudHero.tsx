@@ -206,7 +206,7 @@ const CloudHero = () => {
               className="flex flex-wrap items-center gap-3 mb-6"
             >
               <a
-                href="https://console.hanzo.ai/signup"
+                href="https://hanzo.id/signup"
                 className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
               >
                 Sign up free

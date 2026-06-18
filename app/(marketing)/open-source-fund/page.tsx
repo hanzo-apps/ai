@@ -139,7 +139,7 @@ export default function OpenSourceFundPage() {
                 Start Contributing
               </a>
               <a
-                href="https://console.hanzo.ai/contributor"
+                href="https://hanzo.id/login"
                 className="inline-flex items-center px-7 py-3.5 rounded-full font-medium text-sm transition-colors border border-border bg-transparent hover:bg-secondary text-foreground"
               >
                 Register as Contributor
@@ -325,7 +325,7 @@ export default function OpenSourceFundPage() {
                   your GitHub account. Link a wallet or Stripe account to receive payouts automatically.
                 </p>
                 <a
-                  href="https://console.hanzo.ai/contributor"
+                  href="https://hanzo.id/login"
                   className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-white transition-colors"
                 >
                   Register Now

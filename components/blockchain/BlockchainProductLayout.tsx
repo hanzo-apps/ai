@@ -173,7 +173,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
                 <Button
                   className="w-full py-3 rounded-lg font-medium"
                   style={{ backgroundColor: accentColor }}
-                  onClick={() => window.open('https://cloud.hanzo.ai/signup', '_blank')}
+                  onClick={() => window.open('https://hanzo.id/signup', '_blank')}
                 >
                   <span className="flex items-center justify-center gap-2">
                     Start Building Free
@@ -434,7 +434,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
-                onClick={() => window.open('https://cloud.hanzo.ai/signup', '_blank')}
+                onClick={() => window.open('https://hanzo.id/signup', '_blank')}
                 className="px-6 py-3 rounded-lg font-medium"
                 style={{ backgroundColor: accentColor }}
               >
