@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import IamClientProvider from '@/components/auth/IamClientProvider'
 import './globals.css'
 
 const geist = Geist({
@@ -51,7 +52,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <IamClientProvider>{children}</IamClientProvider>
         </ThemeProvider>
         {/* Hanzo Analytics (Umami) */}
         <Script

@@ -94,35 +94,6 @@ const mobileNav = [
     ]
   },
   {
-    title: "Solutions",
-    sections: [
-      {
-        title: "Featured",
-        items: [
-          { title: "Hanzo Agency", href: "/agency" },
-          { title: "Enterprise", href: "/enterprise" },
-        ]
-      },
-      {
-        title: "Use Cases",
-        items: [
-          { title: "AI Agents", href: "/solutions/automation" },
-          { title: "Automation", href: "/solutions/automation" },
-          { title: "Analytics", href: "/solutions/analytics" },
-          { title: "Content Generation", href: "/solutions/content" },
-          { title: "Customer Support", href: "/solutions/customer-support" },
-        ]
-      },
-      {
-        title: "Industries",
-        items: [
-          { title: "Financial Services", href: "/solutions/industries" },
-          { title: "Healthcare", href: "/solutions/industries" },
-        ]
-      }
-    ]
-  },
-  {
     title: "Pricing",
     href: "/pricing"
   },

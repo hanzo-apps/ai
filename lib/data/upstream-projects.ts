@@ -568,8 +568,8 @@ export const sbomRevenueConfig = {
   sharePercentage: 25,
   payoutOptions: ['USD', 'Hanzo Network', 'AI Coin'] as const,
   supportedChains: ['Ethereum', 'Solana', 'Polygon', 'Base', 'Arbitrum'] as const,
-  dashboardUrl: '/oss/dashboard',
-  connectUrl: '/oss/connect',
+  dashboardUrl: '/open-source/dividends',
+  connectUrl: '/open-source/dividends',
   description: 'Hanzo dedicates 25% of all compute costs to open source contributors, distributed transparently based on verified SBOMs.',
 };
 

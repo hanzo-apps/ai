@@ -425,14 +425,14 @@ const OpenSource = () => {
               className="flex flex-wrap items-center justify-center gap-4"
             >
               <a
-                href="/oss/connect"
+                href="/open-source/dividends"
                 className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
               >
                 Connect &amp; Start Earning
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
               <a
-                href="/oss/dashboard"
+                href="/open-source/dividends"
                 className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"
               >
                 View Payout Dashboard

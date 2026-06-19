@@ -2,7 +2,8 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Search, ChevronDown, Sparkles, Zap, MessageSquare, Terminal, ArrowRight, Bot, AppWindow, LayoutDashboard } from "lucide-react";
+import { useIam } from "@hanzo/iam/react";
+import { Search, ChevronDown, Sparkles, Zap, MessageSquare, Terminal, ArrowRight, Bot, AppWindow } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface User {
@@ -43,6 +44,7 @@ const apps = [
 const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { login } = useIam();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -123,37 +125,28 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
 
       {/* Log in / User account */}
       {user ? (
-        <a
-          href="https://hanzo.id/account"
+        <Link
+          href="/account"
           className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer gap-2"
         >
           <span className="w-5 h-5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center flex-shrink-0">
             {(user.name || user.email).charAt(0).toUpperCase()}
           </span>
           <span className="max-w-[100px] truncate">{user.name || user.email}</span>
-        </a>
+        </Link>
       ) : (
-        <a
-          href="https://hanzo.id/login"
+        <button
+          type="button"
+          onClick={() => login()}
           className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer"
         >
           Log in
-        </a>
+        </button>
       )}
 
-      {/* Try Zen5 — primary top-right CTA (matches zenlm.org). */}
+      {/* Try Zen — primary top-right CTA. A model+apps dropdown (one control,
+          one way). Opens on hover and on click; closes on outside-click / Esc. */}
       {!user && (
-      <a
-        href="https://hanzo.id/signup"
-        className="inline-flex items-center justify-center gap-1.5 bg-primary text-primary-foreground hover:opacity-90 rounded-full h-9 px-4 text-sm font-semibold transition-all duration-200 cursor-pointer"
-      >
-        Try Zen5
-        <ArrowRight className="w-4 h-4" />
-      </a>
-      )}
-
-      {/* Legacy Try Zen dropdown — kept for reference, never rendered. */}
-      {false && !user && (
       <div
         className="relative"
         ref={dropdownRef}
@@ -161,7 +154,11 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
         <button
-          className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-accent active:bg-neutral-300 rounded-full h-9 px-4 text-sm font-medium transition-all duration-200 cursor-pointer"
+          type="button"
+          aria-haspopup="menu"
+          aria-expanded={isDropdownOpen}
+          onClick={() => setIsDropdownOpen(true)}
+          className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:opacity-90 rounded-full h-9 px-4 text-sm font-semibold transition-all duration-200 cursor-pointer"
         >
           Try Zen
           <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -265,17 +262,17 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
                 </div>
               </div>
 
-              {/* CTA — Cloud Console */}
+              {/* Primary CTA — jump straight into Zen5 (what "Try Zen" promises). */}
               <div className="p-3 pt-0">
                 <a
-                  href="https://console.hanzo.ai"
+                  href="https://hanzo.chat/?model=zen5"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsDropdownOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition"
                 >
-                  <LayoutDashboard className="w-3.5 h-3.5" />
-                  Cloud Console
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Chat with Zen5
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>

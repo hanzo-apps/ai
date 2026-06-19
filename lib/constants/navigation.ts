@@ -67,7 +67,7 @@ export const products = [
       { name: "Logs", href: "/products/observability/logs", description: "Scalable log aggregation" },
       { name: "Traces", href: "/products/observability/traces", description: "Distributed tracing" },
       { name: "Telemetry", href: "/products/observability/telemetry", description: "OpenTelemetry collector" },
-      { name: "Insights", href: "/products/observability/insights", description: "Product analytics" }
+      { name: "Insights", href: "/insights", description: "Product analytics" }
     ]
   },
   {

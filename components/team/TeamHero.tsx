@@ -97,7 +97,7 @@ const TeamHero = () => {
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <Link
-              href="/demo"
+              href="/contact-sales"
               className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-accent text-sm text-foreground"
             >
               Watch Demo
