@@ -20,10 +20,10 @@ interface AuthButtonsProps {
 const zenFamilies = [
   {
     name: "Zen5",
-    tag: "Latest",
-    description: "Frontier architecture. Long context, deep reasoning, multimodal — live on api.hanzo.ai.",
+    tag: "Try free",
+    description: "Jump straight into chat and use Zen5 — free, no signup.",
     icon: Zap,
-    href: "/zen#zen5",
+    href: "https://hanzo.chat",
   },
   {
     name: "Zen4",
