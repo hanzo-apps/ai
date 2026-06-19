@@ -13,6 +13,8 @@ interface User {
 
 interface AuthButtonsProps {
   user: User | null;
+  onLogin?: () => void;
+  onLogout?: () => void;
   onOpenCommandPalette?: () => void;
 }
 
@@ -40,7 +42,7 @@ const apps = [
   { label: "Hanzo Dev", description: "AI coding agent for your IDE", href: "/dev", icon: Terminal, external: false },
 ];
 
-const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
+const AuthButtons = ({ user, onLogin, onLogout, onOpenCommandPalette }: AuthButtonsProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -123,22 +125,31 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
 
       {/* Log in / User account */}
       {user ? (
-        <a
-          href="https://hanzo.id/account"
-          className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer gap-2"
-        >
-          <span className="w-5 h-5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center flex-shrink-0">
-            {(user.name || user.email).charAt(0).toUpperCase()}
-          </span>
-          <span className="max-w-[100px] truncate">{user.name || user.email}</span>
-        </a>
+        <div className="flex items-center gap-1.5">
+          <Link
+            href="/account"
+            className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer gap-2"
+          >
+            <span className="w-5 h-5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center flex-shrink-0">
+              {(user.name || user.email).charAt(0).toUpperCase()}
+            </span>
+            <span className="max-w-[100px] truncate">{user.name || user.email}</span>
+          </Link>
+          <button
+            onClick={onLogout}
+            className="inline-flex items-center justify-center rounded-full h-9 px-3 text-sm font-medium text-foreground/70 hover:text-foreground transition-all duration-200 cursor-pointer"
+            aria-label="Sign out"
+          >
+            Sign out
+          </button>
+        </div>
       ) : (
-        <a
-          href="https://hanzo.id/login"
+        <button
+          onClick={onLogin}
           className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer"
         >
           Log in
-        </a>
+        </button>
       )}
 
       {/* Try Zen5 — primary top-right CTA (matches zenlm.org). */}

@@ -7,44 +7,22 @@ import DesktopNav from "./navigation/DesktopNav";
 import AuthButtons from "./navigation/AuthButtons";
 import NavbarContainer from "./navigation/NavbarContainer";
 import CommandPalette from "./CommandPalette";
-
-interface User {
-  id: string;
-  email: string;
-  name?: string;
-}
-
-// Fetch user info from hanzo.id using the session token stored in cookies.
-// hanzo.id sets a cookie named `hanzo_token` (or we fall back to localStorage `hanzo_token`).
-async function fetchHanzoUser(): Promise<User | null> {
-  try {
-    const res = await fetch("https://hanzo.id/api/userinfo", {
-      credentials: "include", // send cookies cross-origin
-      headers: { Accept: "application/json" },
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    if (!data || data.error) return null;
-    return {
-      id: data.sub || data.id || "",
-      email: data.email || "",
-      name: data.name || data.preferred_username || data.displayName || undefined,
-    };
-  } catch {
-    return null;
-  }
-}
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
 
-  // Check for logged-in session from hanzo.id on mount
-  useEffect(() => {
-    fetchHanzoUser().then(setUser);
-  }, []);
+  // Single source of auth truth: the @hanzo/iam session.
+  const { user: iamUser, isAuthenticated, login, logout } = useAuth();
+  const user = isAuthenticated && iamUser
+    ? {
+        id: iamUser.sub || "",
+        email: iamUser.email || "",
+        name: iamUser.name || iamUser.preferred_username || undefined,
+      }
+    : null;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -91,7 +69,12 @@ const Navbar = () => {
 
           {/* Right: Auth Buttons */}
           <div className="flex-shrink-0">
-            <AuthButtons user={user} onOpenCommandPalette={handleOpenCommandPalette} />
+            <AuthButtons
+              user={user}
+              onLogin={() => { void login(); }}
+              onLogout={logout}
+              onOpenCommandPalette={handleOpenCommandPalette}
+            />
           </div>
 
           {/* Mobile Menu */}
