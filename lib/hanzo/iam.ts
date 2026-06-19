@@ -3,12 +3,15 @@ import type { IAMConfig } from '@hanzo/iam/browser';
 /**
  * Canonical Hanzo IAM config (HIP-0111).
  *
- * One way: the `@hanzo/iam` SDK against the canonical OIDC endpoints.
- * hanzo brand → serverUrl `iam.hanzo.ai`; client_id `<org>-<app>` = `hanzo-ai`.
- * No legacy `/oauth/*`, no `/api/login`, no hand-rolled OAuth.
+ * One way: the `@hanzo/iam` SDK against the canonical OIDC endpoints via
+ * discovery. hanzo brand → serverUrl `hanzo.id` (the per-brand OIDC issuer —
+ * hanzo.id/lux.id/zoo.id/pars.id each self-issue; hanzo.id serves
+ * `/.well-known` + `/v1/iam/*`); client_id `<org>-<app>` = `hanzo-app`. PKCE
+ * S256, public client (no secret). No legacy `/oauth/*`, no `/api/`, no
+ * hand-rolled OAuth.
  */
-const SERVER_URL = process.env.NEXT_PUBLIC_HANZO_IAM_URL || 'https://iam.hanzo.ai';
-const CLIENT_ID = process.env.NEXT_PUBLIC_HANZO_CLIENT_ID || 'hanzo-ai';
+const SERVER_URL = process.env.NEXT_PUBLIC_HANZO_IAM_URL || 'https://hanzo.id';
+const CLIENT_ID = process.env.NEXT_PUBLIC_HANZO_CLIENT_ID || 'hanzo-app';
 const REDIRECT_URI =
   process.env.NEXT_PUBLIC_HANZO_REDIRECT_URI ||
   (typeof window !== 'undefined'
@@ -42,7 +45,7 @@ function memoryStorage(): Storage {
 export const iamConfig: IAMConfig = {
   serverUrl: SERVER_URL,
   clientId: CLIENT_ID,
-  appName: 'hanzo-ai',
+  appName: 'hanzo-app',
   redirectUri: REDIRECT_URI,
   scope: 'openid profile email',
   storage: typeof window !== 'undefined' ? window.sessionStorage : memoryStorage(),

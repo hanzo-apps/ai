@@ -58,14 +58,14 @@ try {
   // ---- FIX #3: Login triggers IAM OIDC redirect (no legacy /login link) ----
   const loginBtn = page.locator('button', { hasText: /^Log in$/ }).first()
   results.loginTag = await loginBtn.evaluate((el) => el.tagName).catch(() => 'NOT FOUND')
-  // Click and capture where it navigates (should hit iam.hanzo.ai authorize with PKCE).
+  // Click and capture where it navigates (should hit hanzo.id authorize with PKCE).
   let navUrl = null
   page.on('framenavigated', (f) => { if (f === page.mainFrame()) navUrl = f.url() })
   await loginBtn.click().catch(() => {})
   await sleep(2500)
   navUrl = page.url()
   results.loginNavUrl = navUrl
-  results.loginHitsIam = /iam\.hanzo\.ai/.test(navUrl) && /client_id=hanzo-ai/.test(navUrl)
+  results.loginHitsIam = /hanzo\.id/.test(navUrl) && /client_id=hanzo-app/.test(navUrl)
   results.loginUsesPKCE = /code_challenge=/.test(navUrl) && /code_challenge_method=S256/.test(navUrl)
   results.loginNoLegacyPath = !/\/login\?redirect_uri=/.test(navUrl)
   await page.screenshot({ path: OUT + '02-login-iam-redirect.png', fullPage: false })

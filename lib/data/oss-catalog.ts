@@ -627,7 +627,7 @@ export const ossCatalog: OSSRepo[] = [
       deployUrl: 'https://cloud.hanzo.ai/new?template=rag-starter',
       docsUrl: 'https://docs.hanzo.ai/templates/rag',
       githubUrl: 'https://github.com/hanzoai/rag-starter',
-      learnUrl: '/templates/rag',
+      learnUrl: '/docs/templates',
     },
     signals: {
       updatedAt: '2026-01-15',
@@ -653,7 +653,7 @@ export const ossCatalog: OSSRepo[] = [
       deployUrl: 'https://cloud.hanzo.ai/new?template=agent-starter',
       docsUrl: 'https://docs.hanzo.ai/templates/agent',
       githubUrl: 'https://github.com/hanzoai/agent-starter',
-      learnUrl: '/templates/agent',
+      learnUrl: '/docs/templates',
     },
     signals: {
       updatedAt: '2026-01-14',
@@ -678,7 +678,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/mcp/create',
       githubUrl: 'https://github.com/hanzoai/mcp-template',
-      learnUrl: '/templates/mcp',
+      learnUrl: '/docs/templates',
     },
     signals: {
       updatedAt: '2026-01-13',

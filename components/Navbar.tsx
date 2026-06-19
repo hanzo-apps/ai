@@ -14,7 +14,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
-  // Auth state from Hanzo IAM (hanzo.id / iam.hanzo.ai) via @hanzo/iam.
+  // Auth state from Hanzo IAM (hanzo.id) via @hanzo/iam.
   const { user: iamUser, isAuthenticated } = useIam();
   const user =
     isAuthenticated && iamUser
