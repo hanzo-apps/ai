@@ -136,7 +136,7 @@ export default function VectorPricing() {
                 if (tier.price === "Custom") {
                   window.location.href = "/contact/sales"
                 } else {
-                  window.open("https://hanzo.id/signup", "_blank")
+                  window.open("https://console.hanzo.ai", "_blank")
                 }
               }}
             >

@@ -8,12 +8,12 @@
  */
 
 import { useEffect } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
+import { useIam } from '@hanzo/iam/react';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
-  const { login, isAuthenticated, isLoading } = useAuth();
+  const { login, isAuthenticated, isLoading } = useIam();
   const router = useRouter();
 
   useEffect(() => {

@@ -10,13 +10,13 @@
 
 import { useEffect, useState, Suspense } from 'react';
 
-import { useAuth } from '@/contexts/AuthContext';
+import { useIam } from '@hanzo/iam/react';
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 const AuthCallbackInner = () => {
   const router = useRouter();
-  const { handleCallback } = useAuth();
+  const { handleCallback } = useIam();
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

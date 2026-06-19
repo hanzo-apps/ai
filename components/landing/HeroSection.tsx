@@ -151,7 +151,7 @@ const HeroSection = () => {
                 className="flex flex-row flex-wrap items-center gap-3 sm:gap-4 mb-8"
               >
                 <a
-                  href="https://hanzo.id/signup"
+                  href="https://console.hanzo.ai"
                   className="inline-flex justify-center items-center px-5 sm:px-6 py-3 rounded-full font-medium tracking-tight transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground whitespace-nowrap"
                 >
                   Get started free

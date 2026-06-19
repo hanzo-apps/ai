@@ -238,7 +238,7 @@ const APIPricing = () => {
           <Button
             className="bg-[var(--white)] text-primary-foreground border border-gray-300 hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all duration-300"
             onClick={() => {
-              window.open('https://hanzo.id/signup', '_blank');
+              window.open('https://console.hanzo.ai', '_blank');
             }}
           >
             Start Using {model.name}

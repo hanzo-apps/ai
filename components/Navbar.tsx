@@ -7,7 +7,7 @@ import DesktopNav from "./navigation/DesktopNav";
 import AuthButtons from "./navigation/AuthButtons";
 import NavbarContainer from "./navigation/NavbarContainer";
 import CommandPalette from "./CommandPalette";
-import { useAuth } from "@/contexts/AuthContext";
+import { useIam } from "@hanzo/iam/react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,7 +15,7 @@ const Navbar = () => {
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
   // Single source of auth truth: the @hanzo/iam session.
-  const { user: iamUser, isAuthenticated, login, logout } = useAuth();
+  const { user: iamUser, isAuthenticated, logout } = useIam();
   const user = isAuthenticated && iamUser
     ? {
         id: iamUser.sub || "",
@@ -71,7 +71,6 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <AuthButtons
               user={user}
-              onLogin={() => { void login(); }}
               onLogout={logout}
               onOpenCommandPalette={handleOpenCommandPalette}
             />
