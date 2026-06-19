@@ -151,19 +151,8 @@ const AuthButtons = ({ user, onLogout, onOpenCommandPalette }: AuthButtonsProps)
         </a>
       )}
 
-      {/* Try Zen5 — drop straight into Chat to use Zen5 (SSOs via IAM). */}
+      {/* Try Zen — dropdown of Zen models + apps; primary top-right CTA. */}
       {!user && (
-      <a
-        href="https://hanzo.chat"
-        className="inline-flex items-center justify-center gap-1.5 bg-primary text-primary-foreground hover:opacity-90 rounded-full h-9 px-4 text-sm font-semibold transition-all duration-200 cursor-pointer"
-      >
-        Try Zen5
-        <ArrowRight className="w-4 h-4" />
-      </a>
-      )}
-
-      {/* Legacy Try Zen dropdown — kept for reference, never rendered. */}
-      {false && !user && (
       <div
         className="relative"
         ref={dropdownRef}
