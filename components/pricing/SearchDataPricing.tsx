@@ -83,7 +83,7 @@ const searchTiers: PricingTier[] = [
       "Standard support",
     ],
     cta: "Start Free Trial",
-    ctaHref: "https://hanzo.id/signup",
+    ctaHref: "https://console.hanzo.ai",
   },
   {
     name: "Growth",
@@ -101,7 +101,7 @@ const searchTiers: PricingTier[] = [
       "Priority support",
     ],
     cta: "Start Free Trial",
-    ctaHref: "https://hanzo.id/signup",
+    ctaHref: "https://console.hanzo.ai",
   },
   {
     name: "Scale",
@@ -119,7 +119,7 @@ const searchTiers: PricingTier[] = [
       "24/7 priority support",
     ],
     cta: "Start Free Trial",
-    ctaHref: "https://hanzo.id/signup",
+    ctaHref: "https://console.hanzo.ai",
   },
   {
     name: "Enterprise",
@@ -158,7 +158,7 @@ const crawlTiers: PricingTier[] = [
       "Standard support",
     ],
     cta: "Start Free Trial",
-    ctaHref: "https://hanzo.id/signup",
+    ctaHref: "https://console.hanzo.ai",
   },
   {
     name: "Growth",
@@ -176,7 +176,7 @@ const crawlTiers: PricingTier[] = [
       "Priority support",
     ],
     cta: "Start Free Trial",
-    ctaHref: "https://hanzo.id/signup",
+    ctaHref: "https://console.hanzo.ai",
   },
   {
     name: "Enterprise",
@@ -215,7 +215,7 @@ const vectorTiers: PricingTier[] = [
       "Standard support",
     ],
     cta: "Start Free Trial",
-    ctaHref: "https://hanzo.id/signup",
+    ctaHref: "https://console.hanzo.ai",
   },
   {
     name: "Growth",
@@ -234,7 +234,7 @@ const vectorTiers: PricingTier[] = [
       "Priority support",
     ],
     cta: "Start Free Trial",
-    ctaHref: "https://hanzo.id/signup",
+    ctaHref: "https://console.hanzo.ai",
   },
   {
     name: "Enterprise",
@@ -338,7 +338,7 @@ export default function SearchDataPricing() {
           asChild
         >
           <a
-            href="https://hanzo.id/signup"
+            href="https://console.hanzo.ai"
             target="_blank"
             rel="noopener noreferrer"
           >

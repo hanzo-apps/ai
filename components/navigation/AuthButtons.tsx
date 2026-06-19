@@ -13,16 +13,17 @@ interface User {
 
 interface AuthButtonsProps {
   user: User | null;
+  onLogout?: () => void;
   onOpenCommandPalette?: () => void;
 }
 
 const zenFamilies = [
   {
     name: "Zen5",
-    tag: "Latest",
-    description: "Frontier architecture. Long context, deep reasoning, multimodal — live on api.hanzo.ai.",
+    tag: "Try free",
+    description: "Jump straight into chat and use Zen5 — free, no signup.",
     icon: Zap,
-    href: "/zen#zen5",
+    href: "https://hanzo.chat",
   },
   {
     name: "Zen4",
@@ -40,7 +41,7 @@ const apps = [
   { label: "Hanzo Dev", description: "AI coding agent for your IDE", href: "/dev", icon: Terminal, external: false },
 ];
 
-const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
+const AuthButtons = ({ user, onLogout, onOpenCommandPalette }: AuthButtonsProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -121,39 +122,37 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
         </>
       )}
 
-      {/* Log in / User account */}
+      {/* Log in / User account — drop into the Console (it SSOs via IAM). */}
       {user ? (
-        <a
-          href="https://hanzo.id/account"
-          className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer gap-2"
-        >
-          <span className="w-5 h-5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center flex-shrink-0">
-            {(user.name || user.email).charAt(0).toUpperCase()}
-          </span>
-          <span className="max-w-[100px] truncate">{user.name || user.email}</span>
-        </a>
+        <div className="flex items-center gap-1.5">
+          <a
+            href="https://console.hanzo.ai"
+            className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer gap-2"
+          >
+            <span className="w-5 h-5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center flex-shrink-0">
+              {(user.name || user.email).charAt(0).toUpperCase()}
+            </span>
+            <span className="max-w-[100px] truncate">{user.name || user.email}</span>
+          </a>
+          <button
+            onClick={onLogout}
+            className="inline-flex items-center justify-center rounded-full h-9 px-3 text-sm font-medium text-foreground/70 hover:text-foreground transition-all duration-200 cursor-pointer"
+            aria-label="Sign out"
+          >
+            Sign out
+          </button>
+        </div>
       ) : (
         <a
-          href="https://hanzo.id/login"
+          href="https://console.hanzo.ai"
           className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer"
         >
           Log in
         </a>
       )}
 
-      {/* Try Zen5 — primary top-right CTA (matches zenlm.org). */}
+      {/* Try Zen — dropdown of Zen models + apps; primary top-right CTA. */}
       {!user && (
-      <a
-        href="https://hanzo.id/signup"
-        className="inline-flex items-center justify-center gap-1.5 bg-primary text-primary-foreground hover:opacity-90 rounded-full h-9 px-4 text-sm font-semibold transition-all duration-200 cursor-pointer"
-      >
-        Try Zen5
-        <ArrowRight className="w-4 h-4" />
-      </a>
-      )}
-
-      {/* Legacy Try Zen dropdown — kept for reference, never rendered. */}
-      {false && !user && (
       <div
         className="relative"
         ref={dropdownRef}
