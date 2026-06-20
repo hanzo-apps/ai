@@ -299,7 +299,7 @@ const DeveloperExperienceSection = () => {
                 ))}
               </ul>
               <a
-                href="https://docs.hanzo.ai/dev"
+                href="https://docs.hanzo.ai/docs/dev"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium transition-colors bg-primary text-primary-foreground hover:opacity-90"

@@ -1421,7 +1421,7 @@ export const cxProducts: Product[] = [
     description: 'Your complete customer experience platform. Unified inbox for email, chat, social, and phone. AI-powered responses, routing, and analytics. Chatwoot-compatible.',
     category: 'cx',
     icon: 'MessageSquare',
-    href: '/products/cx/suite',
+    href: '/products/cx/cx-suite',
     github: 'https://github.com/hanzoai/cx',
     docs: 'https://docs.hanzo.ai/cx',
     install: {

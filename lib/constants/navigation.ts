@@ -5,7 +5,16 @@
  * See src/data/product-taxonomy.ts for full product definitions.
  */
 
-export const products = [
+export type NavLink = string | { name: string; href: string; description?: string };
+
+export type NavGroup = {
+  title: string;
+  description?: string;
+  href: string;
+  items: NavLink[];
+};
+
+export const products: NavGroup[] = [
   {
     title: "Data",
     description: "Core persistence & retrieval primitives",
@@ -67,7 +76,7 @@ export const products = [
       { name: "Logs", href: "/products/observability/logs", description: "Scalable log aggregation" },
       { name: "Traces", href: "/products/observability/traces", description: "Distributed tracing" },
       { name: "Telemetry", href: "/products/observability/telemetry", description: "OpenTelemetry collector" },
-      { name: "Insights", href: "/products/observability/insights", description: "Product analytics" }
+      { name: "Insights", href: "/insights", description: "Product analytics" }
     ]
   },
   {
@@ -118,7 +127,7 @@ export const legacyProducts = [
   }
 ];
 
-export const solutions = [
+export const solutions: NavGroup[] = [
   {
     title: "Use Cases",
     href: "/solutions",

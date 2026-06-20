@@ -38,7 +38,7 @@ const exchangeProducts = [
       "Flash loan support",
       "MEV-resistant design",
     ],
-    href: "/blockchain/amm",
+    href: "/blockchain/defi",
   },
   {
     id: "dex",
@@ -54,7 +54,7 @@ const exchangeProducts = [
       "Gas optimization",
       "MEV protection",
     ],
-    href: "/blockchain/dex",
+    href: "/blockchain/defi",
   },
   {
     id: "orderbook",
@@ -70,7 +70,7 @@ const exchangeProducts = [
       "Margin trading support",
       "Real-time feeds",
     ],
-    href: "/blockchain/orderbook",
+    href: "/blockchain/defi",
   },
   {
     id: "liquidity",
@@ -86,7 +86,7 @@ const exchangeProducts = [
       "Liquidity mining",
       "LP analytics",
     ],
-    href: "/blockchain/liquidity",
+    href: "/blockchain/defi",
   },
 ];
 

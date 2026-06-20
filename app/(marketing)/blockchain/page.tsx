@@ -171,8 +171,8 @@ const PRODUCTS = [
   { id: "nft", name: "NFT API", description: "NFT metadata, ownership & transfers", icon: Blocks, color: "#ec4899", href: "/blockchain/nft" },
   { id: "transfers", name: "Transfers API", description: "Track token & NFT transfers", icon: ArrowLeftRight, color: "#06b6d4", href: "/blockchain/transfers" },
   // Trading & DeFi APIs
-  { id: "prices", name: "Prices API", description: "Real-time & historical price feeds", icon: Database, color: "#22c55e", href: "/blockchain/prices" },
-  { id: "dex", name: "DEX API", description: "Swap routing & liquidity aggregation", icon: ArrowLeftRight, color: "#f59e0b", href: "/blockchain/dex" },
+  { id: "prices", name: "Prices API", description: "Real-time & historical price feeds", icon: Database, color: "#22c55e", href: "/blockchain/tokens" },
+  { id: "dex", name: "DEX API", description: "Swap routing & liquidity aggregation", icon: ArrowLeftRight, color: "#f59e0b", href: "/blockchain/exchange" },
   { id: "oracle", name: "Oracle API", description: "On-chain price oracles & data feeds", icon: Radio, color: "#ffffff", href: "/blockchain/oracle" },
   // Realtime & Events
   { id: "webhooks", name: "Webhooks", description: "Real-time blockchain event notifications", icon: Radio, color: "#f97316", href: "/blockchain/webhooks" },
@@ -180,10 +180,10 @@ const PRODUCTS = [
   // Account Abstraction
   { id: "bundler", name: "Bundler API", description: "ERC-4337 UserOp bundling service", icon: Blocks, color: "#14b8a6", href: "/blockchain/bundler" },
   { id: "gas", name: "Gas Manager", description: "Sponsor gas for your users", icon: Zap, color: "#eab308", href: "/blockchain/gas" },
-  { id: "simulation", name: "Simulation API", description: "UserOp & transaction simulation", icon: Code, color: "#06b6d4", href: "/blockchain/simulation" },
+  { id: "simulation", name: "Simulation API", description: "UserOp & transaction simulation", icon: Code, color: "#06b6d4", href: "/blockchain/bundler" },
   // Debug & Development
-  { id: "debug", name: "Debug API", description: "Transaction tracing & debugging", icon: Code, color: "#64748b", href: "/blockchain/debug" },
-  { id: "trace", name: "Trace API", description: "Internal transaction traces", icon: Search, color: "#94a3b8", href: "/blockchain/trace" },
+  { id: "debug", name: "Debug API", description: "Transaction tracing & debugging", icon: Code, color: "#64748b", href: "/blockchain/explorer" },
+  { id: "trace", name: "Trace API", description: "Internal transaction traces", icon: Search, color: "#94a3b8", href: "/blockchain/explorer" },
   // Payments
   { id: "pay", name: "Payments", description: "Crypto payments gateway", icon: CreditCard, color: "#f97316", href: "/blockchain/pay" },
 ];

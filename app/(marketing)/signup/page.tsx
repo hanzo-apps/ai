@@ -1,15 +1,29 @@
 'use client'
 
+import { useEffect } from 'react'
+import { useIam } from '@hanzo/iam/react'
+import { Loader2 } from 'lucide-react'
 
-import React from 'react';
-import SignUp from '@/components/auth/SignUp';
-
+/**
+ * /signup — no local registration form. HIP-0111: IAM owns onboarding. We
+ * start the OAuth2 PKCE redirect with a signup hint; IAM hosts the form.
+ */
 const SignUpPage = () => {
-  return (
-    <>
-            <SignUp />
-    </>
-  );
-};
+  const { login } = useIam()
 
-export default SignUpPage;
+  useEffect(() => {
+    login({ additionalParams: { signup: 'true' } })
+  }, [login])
+
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background">
+      <div className="text-center space-y-6">
+        <Loader2 className="w-12 h-12 animate-spin text-foreground mx-auto" />
+        <h1 className="text-xl font-medium text-foreground">Redirecting to sign up…</h1>
+        <p className="text-muted-foreground">Taking you to Hanzo ID.</p>
+      </div>
+    </div>
+  )
+}
+
+export default SignUpPage

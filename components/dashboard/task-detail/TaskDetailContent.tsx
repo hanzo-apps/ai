@@ -11,7 +11,7 @@ import StatusSelector from "./StatusSelector";
 import PrioritySelector from "./PrioritySelector";
 import { Task } from "../data/tasks/task-data";
 
-type TaskFieldValue = string | string[] | number | Date | null;
+export type TaskFieldValue = Task[keyof Task];
 
 interface TaskDetailContentProps {
   task: Task;

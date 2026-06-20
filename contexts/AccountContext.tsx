@@ -1,9 +1,18 @@
 'use client'
 
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, ReactNode } from 'react';
+import { useIam, useOrganizations } from '@hanzo/iam/react';
+import type { User as IamUser, Organization as IamOrg } from '@hanzo/iam';
 
-// Types for organizations and user
+export interface OrganizationMember {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  avatar?: string;
+}
+
 export interface Organization {
   id: string;
   name: string;
@@ -11,6 +20,7 @@ export interface Organization {
   avatar?: string;
   plan?: string;
   memberCount?: number;
+  members?: OrganizationMember[];
   description?: string;
   website?: string;
   location?: string;
@@ -41,117 +51,82 @@ interface AccountContextType {
 
 const AccountContext = createContext<AccountContextType | undefined>(undefined);
 
-// Mock data for demonstration
-const MOCK_USER: User = {
-  id: 'user-1',
-  name: 'Alex Johnson',
-  email: 'alex@hanzo.ai',
-  bio: 'Senior Developer specializing in AI and cloud infrastructure',
-  location: 'San Francisco, CA',
-  joinedDate: 'January 2022',
-  website: 'https://alexjohnson.dev',
-  phone: '+1 (555) 123-4567'
-};
+function mapUser(u: IamUser): User {
+  return {
+    id: u.id ?? u.name,
+    name: u.displayName || u.name,
+    email: u.email ?? '',
+    avatar: u.avatar,
+    phone: u.phone,
+    joinedDate: u.createdTime,
+  };
+}
 
-const MOCK_ORGANIZATIONS: Organization[] = [
-  { 
-    id: 'org-1', 
-    name: 'Personal Account', 
-    role: 'owner',
-    plan: 'Pro',
-    memberCount: 1,
-    description: 'Your personal workspace',
-    website: 'https://hanzo.ai',
-    location: 'San Francisco, CA'
-  },
-  { 
-    id: 'org-2', 
-    name: 'Hanzo Industries', 
-    role: 'admin',
-    plan: 'Enterprise',
-    memberCount: 26,
-    description: 'Leading AI and development solutions provider',
-    website: 'https://hanzo.industries',
-    location: 'San Francisco, CA'
-  },
-  { 
-    id: 'org-3', 
-    name: 'Example Organization',
-    role: 'member',
-    plan: 'Team',
-    memberCount: 12,
-    description: 'Demo organization for account management',
-    website: 'https://example.com',
-    location: 'Austin, TX'
-  }
-];
+function mapOrg(o: IamOrg): Organization {
+  return {
+    id: o.name,
+    name: o.displayName || o.name,
+    role: o.isPersonal ? 'owner' : 'member',
+    avatar: o.logo,
+    website: o.websiteUrl,
+    members: [],
+  };
+}
 
 export const AccountProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [organizations, setOrganizations] = useState<Organization[]>([]);
-  const [currentOrganization, setCurrentOrganization] = useState<Organization | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const { user: iamUser, isLoading: authLoading } = useIam();
+  const { organizations: iamOrgs, currentOrgId, switchOrg, isLoading: orgsLoading } = useOrganizations();
+
+  const [userOverrides, setUserOverrides] = useState<Partial<User>>({});
+  const [orgOverrides, setOrgOverrides] = useState<Record<string, Partial<Organization>>>({});
 
   useEffect(() => {
-    // Simulate loading user and organizations
-    const loadUserData = () => {
-      try {
-        setIsLoading(true);
-        // In a real app, this would be an API call
-        setUser(MOCK_USER);
-        setOrganizations(MOCK_ORGANIZATIONS);
-        setCurrentOrganization(MOCK_ORGANIZATIONS[0]);
-      } catch (error) {
-        console.error('Error loading user data:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    setUserOverrides({});
+    setOrgOverrides({});
+  }, [iamUser?.id, iamUser?.name]);
 
-    loadUserData();
-  }, []);
+  const user = useMemo<User | null>(() => {
+    if (!iamUser) return null;
+    return { ...mapUser(iamUser), ...userOverrides };
+  }, [iamUser, userOverrides]);
 
-  const switchOrganization = (orgId: string) => {
-    const organization = organizations.find(org => org.id === orgId);
-    if (organization) {
-      setCurrentOrganization(organization);
-      // In a real app, this might trigger other changes like reloading billing data
-    }
-  };
+  const organizations = useMemo<Organization[]>(
+    () => iamOrgs.map((o) => {
+      const base = mapOrg(o);
+      return { ...base, ...orgOverrides[base.id] };
+    }),
+    [iamOrgs, orgOverrides]
+  );
 
-  const updateUserProfile = (userData: Partial<User>) => {
-    if (user) {
-      setUser({ ...user, ...userData });
-      // In a real app, this would call an API to update the user data
-    }
-  };
+  const currentOrganization = useMemo<Organization | null>(
+    () => organizations.find((o) => o.id === currentOrgId) ?? organizations[0] ?? null,
+    [organizations, currentOrgId]
+  );
+
+  const setUser = (next: User) => setUserOverrides(next);
+
+  const updateUserProfile = (userData: Partial<User>) =>
+    setUserOverrides((prev) => ({ ...prev, ...userData }));
 
   const updateOrganization = (orgData: Partial<Organization>) => {
-    if (currentOrganization) {
-      const updatedOrg = { ...currentOrganization, ...orgData };
-      setCurrentOrganization(updatedOrg);
-      
-      // Update the organization in the organizations list
-      const updatedOrgs = organizations.map(org => 
-        org.id === currentOrganization.id ? updatedOrg : org
-      );
-      setOrganizations(updatedOrgs);
-      
-      // In a real app, this would call an API to update the organization data
-    }
+    if (!currentOrganization) return;
+    setOrgOverrides((prev) => ({
+      ...prev,
+      [currentOrganization.id]: { ...prev[currentOrganization.id], ...orgData },
+    }));
   };
 
   return (
-    <AccountContext.Provider 
-      value={{ 
-        user, 
+    <AccountContext.Provider
+      value={{
+        user,
         setUser,
-        organizations, 
+        organizations,
         currentOrganization,
-        isLoading, 
-        switchOrganization,
+        isLoading: authLoading || orgsLoading,
+        switchOrganization: switchOrg,
         updateUserProfile,
-        updateOrganization
+        updateOrganization,
       }}
     >
       {children}

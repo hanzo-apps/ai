@@ -33,9 +33,9 @@ const infrastructureCategories = [
     subtitle: "Accept and send digital assets",
     products: [
       { name: "Payments", description: "Accept crypto payments with fiat settlement", icon: CreditCard, href: "/blockchain/pay" },
-      { name: "Network for Payments", description: "Global payment rails for stablecoins", icon: Globe, href: "/blockchain/payments-network" },
-      { name: "Compliance", description: "KYC/AML and transaction monitoring", icon: Shield, href: "/blockchain/compliance" },
-      { name: "Batched Transactions", description: "Bundle multiple transfers for gas efficiency", icon: Layers, href: "/blockchain/batch" },
+      { name: "Network for Payments", description: "Global payment rails for stablecoins", icon: Globe, href: "/blockchain/pay" },
+      { name: "Compliance", description: "KYC/AML and transaction monitoring", icon: Shield, href: "/idv" },
+      { name: "Batched Transactions", description: "Bundle multiple transfers for gas efficiency", icon: Layers, href: "/blockchain/bundler" },
     ],
   },
   {
@@ -43,8 +43,8 @@ const infrastructureCategories = [
     subtitle: "Secure custody solutions",
     products: [
       { name: "Wallets-as-a-Service", description: "Deploy branded wallets instantly", icon: Wallet, href: "/blockchain/wallets" },
-      { name: "Embedded Wallets", description: "Invisible wallets for Web2 UX", icon: Sparkles, href: "/blockchain/embedded-wallets" },
-      { name: "Policy & Governance", description: "Multi-sig and approval workflows", icon: Settings, href: "/blockchain/governance" },
+      { name: "Embedded Wallets", description: "Invisible wallets for Web2 UX", icon: Sparkles, href: "/blockchain/wallets" },
+      { name: "Policy & Governance", description: "Multi-sig and approval workflows", icon: Settings, href: "/blockchain/safe" },
       { name: "Security (MPC + FHE)", description: "Threshold signatures with encrypted rules", icon: Lock, href: "/blockchain/mpc" },
     ],
   },
@@ -52,20 +52,20 @@ const infrastructureCategories = [
     title: "Manage",
     subtitle: "Optimize your digital assets",
     products: [
-      { name: "Automation", description: "Scheduled transactions and triggers", icon: RefreshCw, href: "/blockchain/automation" },
-      { name: "Staking", description: "Stake assets across protocols", icon: Coins, href: "/blockchain/staking" },
-      { name: "Swaps", description: "DEX aggregation for best execution", icon: ArrowLeftRight, href: "/blockchain/dex" },
-      { name: "Treasury Management", description: "Multi-chain treasury operations", icon: Building2, href: "/blockchain/treasury" },
+      { name: "Automation", description: "Scheduled transactions and triggers", icon: RefreshCw, href: "/blockchain/webhooks" },
+      { name: "Staking", description: "Stake assets across protocols", icon: Coins, href: "/defi/staking" },
+      { name: "Swaps", description: "DEX aggregation for best execution", icon: ArrowLeftRight, href: "/blockchain/exchange" },
+      { name: "Treasury Management", description: "Multi-chain treasury operations", icon: Building2, href: "/treasury" },
     ],
   },
   {
     title: "Issue",
     subtitle: "Create new digital assets",
     products: [
-      { name: "Tokenization", description: "Tokenize RWAs, securities, and more", icon: FileCode, href: "/blockchain/tokenization" },
+      { name: "Tokenization", description: "Tokenize RWAs, securities, and more", icon: FileCode, href: "/blockchain/tokens" },
       { name: "Network", description: "Launch your own L2/L3 chain", icon: Globe, href: "/blockchain/rollups" },
-      { name: "Stablecoin Infrastructure", description: "Issue and manage stablecoins", icon: Coins, href: "/blockchain/stablecoins" },
-      { name: "Token Launchpad", description: "Fair launch and distribution tools", icon: Zap, href: "/blockchain/launchpad" },
+      { name: "Stablecoin Infrastructure", description: "Issue and manage stablecoins", icon: Coins, href: "/blockchain/tokens" },
+      { name: "Token Launchpad", description: "Fair launch and distribution tools", icon: Zap, href: "/blockchain/tokens" },
     ],
   },
 ];

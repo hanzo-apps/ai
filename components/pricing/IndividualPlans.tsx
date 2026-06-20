@@ -8,16 +8,16 @@ import TeamPlanDetails from "./TeamPlanDetails";
 
 const IndividualPlans = () => {
   const [fromProPlan, setFromProPlan] = useState(false);
-  const [fromDevPlan, setFromDevPlan] = useState(false);
+  const [fromMaxPlan, setFromMaxPlan] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const from = urlParams.get('from');
     if (from === 'pro') {
       setFromProPlan(true);
-      setFromDevPlan(false);
-    } else if (from === 'dev') {
-      setFromDevPlan(true);
+      setFromMaxPlan(false);
+    } else if (from === 'max') {
+      setFromMaxPlan(true);
       setFromProPlan(false);
     }
     window.history.replaceState({}, '', window.location.pathname);
@@ -99,7 +99,7 @@ const IndividualPlans = () => {
         ))}
       </div>
       
-      <TeamPlanDetails fromProPlan={fromProPlan} fromDevPlan={fromDevPlan} />
+      <TeamPlanDetails fromProPlan={fromProPlan} fromMaxPlan={fromMaxPlan} />
     </div>
   );
 };

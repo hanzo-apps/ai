@@ -28,7 +28,7 @@ export function OSSRevenueBanner({ upstreamName, compact = false }: OSSRevenueBa
             </span>
           </p>
           <Link
-            href="/oss/connect"
+            href="/open-source/dividends"
             className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-foreground/80 transition-colors whitespace-nowrap"
           >
             Connect &amp; Earn
@@ -76,7 +76,7 @@ export function OSSRevenueBanner({ upstreamName, compact = false }: OSSRevenueBa
             {/* Right buttons */}
             <div className="flex flex-col sm:flex-row md:flex-col gap-3 flex-shrink-0">
               <Link
-                href="/oss/connect"
+                href="/open-source/dividends"
                 className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-foreground text-background font-medium rounded-full text-sm transition-colors hover:bg-foreground/90"
               >
                 Connect &amp; Earn

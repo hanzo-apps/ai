@@ -13,8 +13,8 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <IamProvider
       config={{
-        serverUrl: process.env.NEXT_PUBLIC_HANZO_IAM_URL || 'https://iam.hanzo.ai',
-        clientId: process.env.NEXT_PUBLIC_HANZO_CLIENT_ID || 'hanzo-console',
+        serverUrl: process.env.NEXT_PUBLIC_HANZO_IAM_URL || 'https://hanzo.id',
+        clientId: process.env.NEXT_PUBLIC_HANZO_CLIENT_ID || 'hanzo-app',
         redirectUri:
           (typeof window !== 'undefined' ? window.location.origin : 'https://hanzo.ai') +
           '/auth/callback',

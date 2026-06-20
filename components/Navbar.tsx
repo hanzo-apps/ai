@@ -18,9 +18,9 @@ const Navbar = () => {
   const { user: iamUser, isAuthenticated, logout } = useIam();
   const user = isAuthenticated && iamUser
     ? {
-        id: iamUser.sub || "",
+        id: iamUser.id || iamUser.name || "",
         email: iamUser.email || "",
-        name: iamUser.name || iamUser.preferred_username || undefined,
+        name: iamUser.displayName || iamUser.name || undefined,
       }
     : null;
 

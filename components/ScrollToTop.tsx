@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 const SCROLL_DELAY_MS = 50;
 
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const pathname = usePathname();
   const isFirstRender = useRef(true);
 
   useEffect(() => {

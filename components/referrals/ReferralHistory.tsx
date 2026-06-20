@@ -8,15 +8,7 @@ import {
   TableHeader,
   TableRow
 } from "@hanzo/ui";
-
-interface ReferralRecord {
-  id: number;
-  name: string;
-  email: string;
-  status: string;
-  date: string;
-  credits: number;
-}
+import type { ReferralRecord } from "@/components/referrals/types";
 
 interface ReferralHistoryProps {
   referralHistory: ReferralRecord[];

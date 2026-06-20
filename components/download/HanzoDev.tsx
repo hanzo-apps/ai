@@ -119,7 +119,7 @@ const HanzoDev = () => {
               <ArrowRight className="ml-2 h-5 w-5" />
             </a>
             <a
-              href="/hanzodev"
+              href="/dev"
               className="inline-flex items-center justify-center border border-border bg-transparent hover:bg-secondary text-[var(--white)] px-8 py-4 rounded-lg text-lg font-medium transition-all"
             >
               Learn More

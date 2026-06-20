@@ -3,7 +3,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
@@ -51,7 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           `group-hover:${hoverColor}`,
           "group-hover:shadow-lg group-hover:scale-110"
         )}>
-          {React.cloneElement(icon as React.ReactElement, { className: "h-12 w-12" })}
+          {React.cloneElement(icon as React.ReactElement<{ className?: string }>, { className: "h-12 w-12" })}
         </div>
         
         <h3 className="text-xl font-bold mb-3 text-[var(--white)] group-hover:text-foreground/70 transition-colors">{title}</h3>

@@ -99,7 +99,7 @@ const commands: CommandItem[] = [
   { id: "cloud", title: "Hanzo Cloud", description: "Complete cloud platform", href: "/cloud", icon: Cloud, category: "Platform", keywords: ["hosting", "deploy", "infrastructure"] },
   { id: "platform", title: "Hanzo Platform", description: "Open source PaaS", href: "/platform", icon: Server, category: "Platform", keywords: ["self-host", "open source", "paas"] },
   { id: "edge", title: "Edge", description: "Edge computing", href: "/edge", icon: Globe, category: "Platform", keywords: ["cdn", "edge", "global"] },
-  { id: "nodes", title: "Nodes", description: "Distributed compute nodes", href: "/nodes", icon: Network, category: "Platform", keywords: ["nodes", "distributed", "compute"] },
+  { id: "nodes", title: "Nodes", description: "Distributed compute nodes", href: "/blockchain/nodes", icon: Network, category: "Platform", keywords: ["nodes", "distributed", "compute"] },
   { id: "defi", title: "DeFi Stack", description: "DeFi infrastructure", href: "/defi", icon: Coins, category: "Platform", keywords: ["defi", "finance", "protocol"] },
 
   // Blockchain
