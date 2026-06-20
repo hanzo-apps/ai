@@ -5,7 +5,16 @@
  * See src/data/product-taxonomy.ts for full product definitions.
  */
 
-export const products = [
+export type NavLink = string | { name: string; href: string; description?: string };
+
+export type NavGroup = {
+  title: string;
+  description?: string;
+  href: string;
+  items: NavLink[];
+};
+
+export const products: NavGroup[] = [
   {
     title: "Data",
     description: "Core persistence & retrieval primitives",
@@ -118,7 +127,7 @@ export const legacyProducts = [
   }
 ];
 
-export const solutions = [
+export const solutions: NavGroup[] = [
   {
     title: "Use Cases",
     href: "/solutions",

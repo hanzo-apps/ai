@@ -104,7 +104,7 @@ const BlockchainDashboard = () => {
               style={{ width: `${usage.percentUsed}%` }}
             />
           </div>
-          <p className="text-xs text-muted-foreground mt-1">{usage.percentUsed}% of {formatNumber(usage.limit)} limit</p>
+          <p className="text-xs text-muted-foreground mt-1">{usage.percentUsed}% of {formatNumber(usage.currentPeriod.limit)} limit</p>
         </div>
 
         <div className="bg-secondary/50 border border-border rounded-xl p-4">

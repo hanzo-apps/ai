@@ -11,6 +11,7 @@ import {
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import { useAccount } from '@/contexts/AccountContext';
+import { useIam } from '@hanzo/iam/react';
 import { 
   Select, 
   SelectContent, 
@@ -24,7 +25,8 @@ import AnimatedSection, { AnimatedHeading } from "@/components/ui/animated-secti
 import { usePathname } from "next/navigation";
 
 const AccountLayout = ({ children }: { children?: React.ReactNode }) => {
-  const { user, organizations, currentOrganization, switchOrganization, isLoading } = useAccount();
+  const { organizations, currentOrganization, switchOrganization, isLoading } = useAccount();
+  const { logout } = useIam();
   const pathname = usePathname();
 
   const accountNavItems = [
@@ -115,8 +117,9 @@ const AccountLayout = ({ children }: { children?: React.ReactNode }) => {
                     </Link>
                   ))}
                   
-                  <Button 
-                    variant="ghost" 
+                  <Button
+                    variant="ghost"
+                    onClick={logout}
                     className="w-full justify-start text-foreground/70 hover:text-foreground/70 hover:bg-primary/5 mt-6 p-3"
                   >
                     <LogOut className="w-5 h-5 mr-3" />
@@ -128,7 +131,7 @@ const AccountLayout = ({ children }: { children?: React.ReactNode }) => {
               {/* Main Content */}
               <div className="col-span-1 md:col-span-3">
                 <div className="backdrop-blur-xl bg-[var(--black)]/40 border border-border rounded-xl p-8">
-                  {children || <Outlet />}
+                  {children}
                 </div>
               </div>
             </div>

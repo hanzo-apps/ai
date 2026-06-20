@@ -10,7 +10,7 @@ import {
 } from "@hanzo/ui/dialog";
 import { Button } from "@hanzo/ui";
 import { Input } from "@hanzo/ui";
-import TaskDetailContent from "./TaskDetailContent";
+import TaskDetailContent, { type TaskFieldValue } from "./TaskDetailContent";
 import { Task } from "../data/tasks/task-data";
 
 interface TaskDetailModalProps {
@@ -30,7 +30,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
     setEditedTask(prev => ({ ...prev, title: e.target.value }));
   };
 
-  const handleTaskChange = (field: string, value: string | string[] | number | Date | null) => {
+  const handleTaskChange = (field: string, value: TaskFieldValue) => {
     setEditedTask(prev => ({ ...prev, [field]: value }));
   };
 

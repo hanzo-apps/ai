@@ -1,31 +1,40 @@
 
 import React from "react";
-import { aiCloudItems, dxPlatformItems } from "../navigation/products-menu/product-data";
+import { productsNav, type NavSection, type NavItem } from "@/lib/constants/navigation-data";
+import type { LucideIcon } from "lucide-react";
+import { ProductItem } from "../navigation/products-menu/types";
 import MainSection from "./feature-showcase/MainSection";
 import AICloudSection from "./feature-showcase/AICloudSection";
 import DXPlatformSection from "./feature-showcase/DXPlatformSection";
 import IndustriesSection from "./feature-showcase/IndustriesSection";
 import ServiceCards from "./feature-showcase/ServiceCards";
 
+const section = (title: string): NavSection =>
+  productsNav.find((s) => s.title === title) ?? { title, items: [] };
+
+const toProductItems = (items: NavItem[]): ProductItem[] =>
+  items.map((item) => ({
+    name: item.title,
+    icon: item.icon as LucideIcon,
+    description: item.description ?? "",
+    link: item.href,
+    id: item.href,
+  }));
+
 const FeatureShowcase: React.FC = () => {
-  // Take exactly 11 items from the aiCloudItems array
-  const limitedCloudItems = aiCloudItems.slice(0, 11);
-  
-  // Take exactly 11 items from the dxPlatformItems array
-  const limitedPlatformItems = dxPlatformItems.slice(0, 11);
+  const cloudItems = toProductItems([
+    ...section("AI & Agents").items,
+    ...section("Compute").items,
+    ...section("Data").items,
+  ]).slice(0, 11);
+
+  const platformItems = toProductItems(section("Developer").items).slice(0, 11);
 
   return (
     <MainSection>
-      {/* AI Cloud Section */}
-      <AICloudSection products={limitedCloudItems} />
-
-      {/* DX Platform Section */}
-      <DXPlatformSection products={limitedPlatformItems} />
-
-      {/* Industries Section */}
+      <AICloudSection products={cloudItems} />
+      <DXPlatformSection products={platformItems} />
       <IndustriesSection />
-
-      {/* Agency and Sensei Group Cards */}
       <ServiceCards />
     </MainSection>
   );

@@ -5,15 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Info, X } from "lucide-react";
 import Link from "next/link";
 import { principles } from "./data/zenPrinciples";
+import { ZenPrinciple } from "./ZenPrincipleCard";
 
 interface WisdomDialogProps {
-  principle: {
-    number: string;
-    title: string;
-    description: string;
-    discipline: string;
-    emoji: string;
-  };
+  principle: ZenPrinciple;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -81,16 +76,8 @@ const WisdomDialog: React.FC<WisdomDialogProps> = ({ principle, isOpen, onClose 
   );
 };
 
-interface Principle {
-  number: string;
-  title: string;
-  description: string;
-  discipline: string;
-  emoji: string;
-}
-
 const PrinciplesPreview = () => {
-  const [selectedPrinciple, setSelectedPrinciple] = useState<Principle | null>(null);
+  const [selectedPrinciple, setSelectedPrinciple] = useState<ZenPrinciple | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedDiscipline, setSelectedDiscipline] = useState<string | null>(null);
 
@@ -102,7 +89,7 @@ const PrinciplesPreview = () => {
     return principles.find(p => p.discipline === discipline);
   }).filter(Boolean);
 
-  const openWisdomDialog = (principle: Principle) => {
+  const openWisdomDialog = (principle: ZenPrinciple) => {
     setSelectedPrinciple(principle);
     setIsDialogOpen(true);
   };

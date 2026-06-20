@@ -7,6 +7,11 @@ import InteractiveHexagram, { HexagramDetails } from "./InteractiveHexagram";
 import HexagramDetail from "./HexagramDetail";
 import { ichingPrinciples } from "./data/ichingPrinciples";
 
+const hexagrams: HexagramDetails[] = ichingPrinciples.map((h) => ({
+  ...h,
+  id: String(h.id),
+}));
+
 interface HexagramsGridProps {
   title?: string;
   description?: string;
@@ -57,7 +62,7 @@ const HexagramsGrid: React.FC<HexagramsGridProps> = ({
               <React.Fragment key={`row-${rowIndex}`}>
                 {Array.from({ length: columns }).map((_, colIndex) => {
                   const index = rowIndex * columns + colIndex;
-                  const hexagram = ichingPrinciples[index] || null;
+                  const hexagram = hexagrams[index] || null;
                   
                   if (!hexagram) return <div key={`empty-${index}`} className="aspect-square"></div>;
                   
