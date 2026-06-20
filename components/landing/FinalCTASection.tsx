@@ -51,7 +51,7 @@ const FinalCTASection = () => {
           className="flex flex-col sm:flex-row items-stretch justify-center gap-3 sm:gap-4 mb-12"
         >
           <a
-            href="https://hanzo.id/signup"
+            href="https://console.hanzo.ai"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 transition-all"
           >
             Get started free

@@ -71,7 +71,7 @@ const PricingPreviewSection = () => {
             </ul>
 
             <a
-              href="https://hanzo.id/signup"
+              href="https://console.hanzo.ai"
               className="inline-flex justify-center items-center w-full px-6 py-3 rounded-full font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 transition-all"
             >
               Start building free

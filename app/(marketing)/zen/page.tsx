@@ -162,7 +162,7 @@ const Zen = () => {
                 </motion.div>
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.2 }}
                   className="flex flex-wrap gap-3">
-                  <a href="https://hanzo.id/signup" target="_blank" rel="noopener noreferrer"
+                  <a href="https://console.hanzo.ai" target="_blank" rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-secondary border border-border text-muted-foreground hover:text-foreground transition-all">
                     <Globe className="w-4 h-4" /> Get API Key
                   </a>
@@ -437,7 +437,7 @@ const Zen = () => {
               {[
                 { href: "/zen/models", icon: Brain,   title: "Model Catalog",    desc: `All ${ZEN_MODELS.length}+ models with specs, tiers, and pricing`, internal: true },
                 { href: "/pricing",   icon: Layers,  title: "API Pricing",      desc: "Transparent per-token pricing for all tiers", internal: true },
-                { href: "https://hanzo.id/signup", icon: Globe, title: "API Access", desc: "Get your API key and start building", internal: false },
+                { href: "https://console.hanzo.ai", icon: Globe, title: "API Access", desc: "Get your API key and start building", internal: false },
               ].map((card, i) => {
                 const Icon = card.icon;
                 const inner = (
@@ -501,7 +501,7 @@ const Zen = () => {
                   className="inline-flex items-center px-6 py-3 rounded-full font-medium border border-border bg-transparent hover:bg-secondary text-sm text-foreground transition-colors">
                   Try Hanzo Dev
                 </Link>
-                <a href="https://hanzo.id/signup" target="_blank" rel="noopener noreferrer"
+                <a href="https://console.hanzo.ai" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center px-6 py-3 rounded-full font-medium border border-border bg-transparent hover:bg-secondary text-sm text-foreground transition-colors">
                   <Globe className="mr-2 h-4 w-4" /> Get API Key
                 </a>

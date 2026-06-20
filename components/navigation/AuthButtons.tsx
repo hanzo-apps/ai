@@ -2,8 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { useIam } from "@hanzo/iam/react";
-import { Search, ChevronDown, Sparkles, Zap, MessageSquare, Terminal, ArrowRight, Bot, AppWindow } from "lucide-react";
+import { Search, ChevronDown, Sparkles, Zap, MessageSquare, Terminal, ArrowRight, Bot, AppWindow, LayoutDashboard } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface User {
@@ -14,16 +13,17 @@ interface User {
 
 interface AuthButtonsProps {
   user: User | null;
+  onLogout?: () => void;
   onOpenCommandPalette?: () => void;
 }
 
 const zenFamilies = [
   {
     name: "Zen5",
-    tag: "Latest",
-    description: "Frontier architecture. Long context, deep reasoning, multimodal — live on api.hanzo.ai.",
+    tag: "Try free",
+    description: "Jump straight into chat and use Zen5 — free, no signup.",
     icon: Zap,
-    href: "/zen#zen5",
+    href: "https://hanzo.chat",
   },
   {
     name: "Zen4",
@@ -41,10 +41,9 @@ const apps = [
   { label: "Hanzo Dev", description: "AI coding agent for your IDE", href: "/dev", icon: Terminal, external: false },
 ];
 
-const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
+const AuthButtons = ({ user, onLogout, onOpenCommandPalette }: AuthButtonsProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { login } = useIam();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -123,29 +122,36 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
         </>
       )}
 
-      {/* Log in / User account */}
+      {/* Log in / User account — drop into the Console (it SSOs via IAM). */}
       {user ? (
-        <Link
-          href="/account"
-          className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer gap-2"
-        >
-          <span className="w-5 h-5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center flex-shrink-0">
-            {(user.name || user.email).charAt(0).toUpperCase()}
-          </span>
-          <span className="max-w-[100px] truncate">{user.name || user.email}</span>
-        </Link>
+        <div className="flex items-center gap-1.5">
+          <a
+            href="https://console.hanzo.ai"
+            className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer gap-2"
+          >
+            <span className="w-5 h-5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center flex-shrink-0">
+              {(user.name || user.email).charAt(0).toUpperCase()}
+            </span>
+            <span className="max-w-[100px] truncate">{user.name || user.email}</span>
+          </a>
+          <button
+            onClick={onLogout}
+            className="inline-flex items-center justify-center rounded-full h-9 px-3 text-sm font-medium text-foreground/70 hover:text-foreground transition-all duration-200 cursor-pointer"
+            aria-label="Sign out"
+          >
+            Sign out
+          </button>
+        </div>
       ) : (
-        <button
-          type="button"
-          onClick={() => login()}
+        <a
+          href="https://console.hanzo.ai"
           className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer"
         >
           Log in
-        </button>
+        </a>
       )}
 
-      {/* Try Zen — primary top-right CTA. A model+apps dropdown (one control,
-          one way). Opens on hover and on click; closes on outside-click / Esc. */}
+      {/* Try Zen — dropdown of Zen models + apps; primary top-right CTA. */}
       {!user && (
       <div
         className="relative"
@@ -154,11 +160,7 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
         <button
-          type="button"
-          aria-haspopup="menu"
-          aria-expanded={isDropdownOpen}
-          onClick={() => setIsDropdownOpen(true)}
-          className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:opacity-90 rounded-full h-9 px-4 text-sm font-semibold transition-all duration-200 cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-accent active:bg-neutral-300 rounded-full h-9 px-4 text-sm font-medium transition-all duration-200 cursor-pointer"
         >
           Try Zen
           <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -262,17 +264,17 @@ const AuthButtons = ({ user, onOpenCommandPalette }: AuthButtonsProps) => {
                 </div>
               </div>
 
-              {/* Primary CTA — jump straight into Zen5 (what "Try Zen" promises). */}
+              {/* CTA — Cloud Console */}
               <div className="p-3 pt-0">
                 <a
-                  href="https://hanzo.chat/?model=zen5"
+                  href="https://console.hanzo.ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsDropdownOpen(false)}
                   className="flex items-center justify-center gap-2 w-full py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition"
                 >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Chat with Zen5
+                  <LayoutDashboard className="w-3.5 h-3.5" />
+                  Cloud Console
                   <ArrowRight className="w-3.5 h-3.5" />
                 </a>
               </div>

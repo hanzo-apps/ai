@@ -241,7 +241,7 @@ const Blockchain = () => {
               <Button
                 className="px-8 py-3 rounded-lg font-medium transition-all"
                 style={{ backgroundColor: "#ffffff" }}
-                onClick={() => window.open('https://hanzo.id/signup', '_blank')}
+                onClick={() => window.open('https://console.hanzo.ai', '_blank')}
               >
                 Start Building Free
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -656,7 +656,7 @@ await agent.run(\`
               <Button
                 className="px-8 py-3 rounded-lg font-medium"
                 style={{ backgroundColor: "#ffffff" }}
-                onClick={() => window.open('https://hanzo.id/signup', '_blank')}
+                onClick={() => window.open('https://console.hanzo.ai', '_blank')}
               >
                 Get Started Free
                 <ArrowRight className="w-4 h-4 ml-2" />

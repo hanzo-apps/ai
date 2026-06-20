@@ -1,31 +1,41 @@
 'use client'
 
 /**
- * /auth/callback — OAuth2 PKCE callback handler.
+ * AuthCallback - OAuth2/OIDC Callback Handler
  *
- * Hanzo IAM redirects here after authorization. The @hanzo/iam SDK reads the
- * code + state from the URL, exchanges them at the token endpoint with PKCE,
- * and stores the tokens. HIP-0111 canonical flow — no hand-rolled OAuth.
+ * Handles the redirect back from Hanzo IAM. The @hanzo/iam SDK reads the
+ * authorization code + state from the URL and the PKCE verifier from
+ * storage, exchanges the code at /v1/iam/oauth/token, and stores tokens.
  */
 
-import { useEffect, useState, Suspense } from 'react'
-import { useIam } from '@hanzo/iam/react'
-import { Loader2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { useEffect, useState, Suspense } from 'react';
+
+import { useIam } from '@hanzo/iam/react';
+import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const AuthCallbackInner = () => {
-  const router = useRouter()
-  const { handleCallback } = useIam()
-  const [error, setError] = useState<string | null>(null)
+  const router = useRouter();
+  const { handleCallback } = useIam();
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
+
     handleCallback()
-      .then(() => router.push('/account'))
-      .catch((e: unknown) => {
-        setError(e instanceof Error ? e.message : 'Authentication failed')
-        setTimeout(() => router.push('/login'), 3000)
+      .then(() => {
+        if (!cancelled) router.replace('/account');
       })
-  }, [handleCallback, router])
+      .catch((err: unknown) => {
+        if (cancelled) return;
+        setError(err instanceof Error ? err.message : 'Sign-in failed');
+        setTimeout(() => router.replace('/login'), 3000);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [handleCallback, router]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background">
@@ -38,19 +48,21 @@ const AuthCallbackInner = () => {
         ) : (
           <>
             <Loader2 className="w-12 h-12 animate-spin text-foreground mx-auto" />
-            <h1 className="text-xl font-medium text-foreground">Completing authentication...</h1>
+            <h1 className="text-xl font-medium text-foreground">
+              Completing authentication...
+            </h1>
             <p className="text-muted-foreground">Please wait while we sign you in.</p>
           </>
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 const AuthCallback = () => (
   <Suspense fallback={<div className="min-h-screen bg-background" />}>
     <AuthCallbackInner />
   </Suspense>
-)
+);
 
-export default AuthCallback
+export default AuthCallback;

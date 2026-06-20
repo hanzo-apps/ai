@@ -1,29 +1,28 @@
 'use client'
 
 import { useState, useEffect, useCallback } from "react";
-import { useIam } from "@hanzo/iam/react";
 import { MobileMenu } from "./navigation/MobileMenu";
 import Logo from "./navigation/Logo";
 import DesktopNav from "./navigation/DesktopNav";
 import AuthButtons from "./navigation/AuthButtons";
 import NavbarContainer from "./navigation/NavbarContainer";
 import CommandPalette from "./CommandPalette";
+import { useIam } from "@hanzo/iam/react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
-  // Auth state from Hanzo IAM (hanzo.id) via @hanzo/iam.
-  const { user: iamUser, isAuthenticated } = useIam();
-  const user =
-    isAuthenticated && iamUser
-      ? {
-          id: iamUser.id || iamUser.name || "",
-          email: iamUser.email || "",
-          name: iamUser.displayName || iamUser.name || undefined,
-        }
-      : null;
+  // Single source of auth truth: the @hanzo/iam session.
+  const { user: iamUser, isAuthenticated, logout } = useIam();
+  const user = isAuthenticated && iamUser
+    ? {
+        id: iamUser.id || iamUser.name || "",
+        email: iamUser.email || "",
+        name: iamUser.displayName || iamUser.name || undefined,
+      }
+    : null;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,7 +69,11 @@ const Navbar = () => {
 
           {/* Right: Auth Buttons */}
           <div className="flex-shrink-0">
-            <AuthButtons user={user} onOpenCommandPalette={handleOpenCommandPalette} />
+            <AuthButtons
+              user={user}
+              onLogout={logout}
+              onOpenCommandPalette={handleOpenCommandPalette}
+            />
           </div>
 
           {/* Mobile Menu */}

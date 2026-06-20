@@ -276,7 +276,7 @@ await ipfs.unpin(cid);`}</code>
 
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href="https://hanzo.id/signup"
+                href="https://console.hanzo.ai"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-primary/10 hover:bg-primary/10 text-foreground font-medium rounded-full transition-colors"
               >
                 Start Free
