@@ -259,7 +259,7 @@ export const ossCatalog: OSSRepo[] = [
   {
     id: 'gateway',
     name: 'LLM Gateway',
-    slug: 'hanzoai/llm',
+    slug: 'hanzoai/ai',
     description: 'Unified proxy for 100+ LLM providers. OpenAI-compatible API with load balancing, caching, and observability.',
     type: 'core',
     categories: ['AI & Agents', 'Infrastructure'],
@@ -270,7 +270,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       deployUrl: 'https://cloud.hanzo.ai/deploy/gateway',
       docsUrl: 'https://docs.hanzo.ai/gateway',
-      githubUrl: 'https://github.com/hanzoai/llm',
+      githubUrl: 'https://github.com/hanzoai/ai',
       learnUrl: '/products/ml/zen',
     },
     signals: {

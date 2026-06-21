@@ -78,7 +78,7 @@ export const productsNav: NavSection[] = [
       { title: "AI Studio", href: "/ai-studio", icon: Sparkles, github: ORG, docs: `${DOCS}/ai`, featured: true },
       { title: "MCP", href: "/mcp", icon: Plug, github: `${ORG}/mcp`, docs: `${DOCS}/mcp` },
       { title: "ZAP", href: "/zap", icon: Zap, github: `${ORG}/zap`, docs: `${DOCS}/zap` },
-      { title: "LLM Gateway", href: "/llm", icon: Network, github: ORG, docs: `${DOCS}/llm` },
+      { title: "LLM Gateway", href: "/llm", icon: Network, github: `${ORG}/ai`, docs: `${DOCS}/llm` },
       { title: "Engine", href: "/engine", icon: Cpu, github: `${ORG}/engine`, docs: `${DOCS}/engine` },
       { title: "Jin", href: "/jin", icon: Sparkles, github: `${ORG}/jin`, docs: `${DOCS}/jin` },
       { title: "Guard", href: "/guard", icon: Shield, github: `${ORG}/guard`, docs: `${DOCS}/guard` },
