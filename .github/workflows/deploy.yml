@@ -9,87 +9,16 @@ concurrency:
   group: pages-deploy
   cancel-in-progress: false
 
+# Canonical, deterministic deploy: the shared reusable workflow builds the
+# static export and ships it to Cloudflare Pages (project hanzo-ai). CF creds
+# come from KMS via the org-level scoped cf-pages machine identity
+# (KMS_CF_PAGES_CLIENT_ID/SECRET), inherited — zero per-repo secret config.
 jobs:
   deploy:
-    runs-on: hanzo-build-linux-amd64
-    permissions:
-      contents: read
-      deployments: write
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Build
-        run: pnpm build
-
-      - name: Create 404.html for SPA routing
-        run: cp out/index.html out/404.html
-
-      - name: Smoke test static build
-        run: |
-          pnpm dlx serve out -l 3333 &
-          SERVER_PID=$!
-          for i in $(seq 1 30); do
-            if curl -s -o /dev/null http://localhost:3333 2>/dev/null; then
-              echo "Server ready after ${i}s"; break
-            fi
-            sleep 1
-          done
-          BODY=$(curl -s http://localhost:3333)
-          if echo "$BODY" | grep -q "Application error"; then
-            echo "FATAL: Homepage contains 'Application error'"; kill $SERVER_PID 2>/dev/null; exit 1
-          fi
-          FAILED=0
-          for page in index about pricing contact enterprise zen; do
-            if [ ! -f "out/${page}.html" ] && [ ! -f "out/${page}/index.html" ]; then
-              echo "FATAL: Missing page: ${page}"; FAILED=1
-            fi
-          done
-          kill $SERVER_PID 2>/dev/null
-          if [ "$FAILED" = "1" ]; then exit 1; fi
-          echo "All smoke tests passed"
-
-      # Cloudflare credentials live in KMS (never in GitHub secrets) — same
-      # shared /deploy workspace used by hanzo-docs / hanzo-blog.
-      - name: Fetch CF credentials from KMS
-        id: kms
-        env:
-          KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
-          KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}
-          HANZO_API_KEY: ${{ secrets.HANZO_API_KEY }}
-          KMS_ENDPOINT: ${{ vars.KMS_ENDPOINT || 'https://kms.hanzo.ai' }}
-        run: |
-          if [ -n "${KMS_CLIENT_ID}" ] && [ -n "${KMS_CLIENT_SECRET}" ]; then
-            HANZO_API_KEY=$(curl -sf "${KMS_ENDPOINT}/api/v1/auth/universal-auth/login" \
-              -H "Content-Type: application/json" \
-              -d "{\"clientId\":\"${KMS_CLIENT_ID}\",\"clientSecret\":\"${KMS_CLIENT_SECRET}\"}" | jq -r '.accessToken')
-          fi
-          response=$(curl -sf "${KMS_ENDPOINT}/api/v3/secrets/raw?workspaceId=e1359bf4-31b4-4dfa-bb90-323e2c298ad8&secretPath=/deploy&environment=prod" \
-            -H "Authorization: Bearer ${HANZO_API_KEY}" 2>/dev/null || echo "")
-          cf_token=$(echo "$response" | jq -r '.secrets[] | select(.secretKey=="CLOUDFLARE_API_TOKEN") | .secretValue // empty')
-          cf_account=$(echo "$response" | jq -r '.secrets[] | select(.secretKey=="CLOUDFLARE_ACCOUNT_ID") | .secretValue // empty')
-          if [ -z "${cf_token:-}" ]; then
-            echo "::error::CF credentials not found in KMS (workspace /deploy, env prod)."
-            exit 1
-          fi
-          echo "::add-mask::${cf_token}"
-          echo "::add-mask::${cf_account}"
-          echo "cf_token=${cf_token}" >> "$GITHUB_OUTPUT"
-          echo "cf_account=${cf_account}" >> "$GITHUB_OUTPUT"
-
-      - name: Deploy to Cloudflare Pages
-        run: pnpm dlx wrangler pages deploy out --project-name=hanzo-ai --commit-dirty=true
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ steps.kms.outputs.cf_token }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ steps.kms.outputs.cf_account }}
+    uses: hanzoai/universe/.github/workflows/reusable-deploy-cf-pages.yml@main
+    with:
+      project-name: hanzo-ai
+      build-command: pnpm build
+      output-dir: out
+      node-version: '20'
+    secrets: inherit
