@@ -35,7 +35,7 @@ const Terms = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-sm text-muted-foreground"
             >
-              Last updated: February 2026
+              Last updated: June 2026
             </motion.p>
           </div>
         </section>
@@ -162,7 +162,23 @@ const Terms = () => {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-foreground mb-3">16. Contact Us</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-3">16. SMS and Email Communications</h2>
+                <p className="text-muted-foreground leading-relaxed mb-2">
+                  By providing your phone number and opting in, you consent to receive text messages (SMS) from Hanzo at that number, including via automated systems. Message types include: one-time passcodes and two-factor authentication, account and security alerts, and transactional notifications; and, only if you separately opt in, product and marketing updates. Consent to messaging is not a condition of purchase.
+                </p>
+                <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
+                  <li><strong className="text-foreground/90">Opt-out:</strong> reply <strong className="text-foreground/90">STOP</strong> to any message to unsubscribe; reply <strong className="text-foreground/90">HELP</strong> for help.</li>
+                  <li><strong className="text-foreground/90">Frequency:</strong> message frequency varies (e.g., per sign-in for 2FA).</li>
+                  <li><strong className="text-foreground/90">Rates:</strong> message and data rates may apply; carriers are not liable for delayed or undelivered messages.</li>
+                  <li><strong className="text-foreground/90">Privacy:</strong> we never sell or share your mobile number with third parties for marketing — see our <a href="/privacy" className="text-foreground hover:underline">Privacy Policy</a>.</li>
+                </ul>
+                <p className="text-muted-foreground leading-relaxed mt-2">
+                  Email communications (transactional and, where you opt in, marketing) are sent by Hanzo or its email providers. You can manage email preferences in your <a href="https://account.hanzo.ai" className="text-foreground hover:underline">account settings</a> or via the unsubscribe link in marketing emails. Transactional and security emails are required for account operation and cannot be unsubscribed.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-semibold text-foreground mb-3">17. Contact Us</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   If you have questions about these Terms, please contact us at:
                 </p>
