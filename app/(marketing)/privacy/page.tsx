@@ -35,7 +35,7 @@ const Privacy = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-sm text-muted-foreground"
             >
-              Last updated: February 2026
+              Last updated: June 2026
             </motion.p>
           </div>
         </section>
@@ -57,6 +57,7 @@ const Privacy = () => {
                 <h3 className="text-base font-medium text-foreground mb-2">2.1 Information You Provide</h3>
                 <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
                   <li>Account registration information (name, email address, password)</li>
+                  <li>Phone/mobile number (for two-factor authentication, account security alerts, and service notifications you opt into)</li>
                   <li>Organization and billing information</li>
                   <li>Communications you send to us (support requests, feedback)</li>
                   <li>Content you submit through our Services (prompts, code, files)</li>
@@ -100,24 +101,34 @@ const Privacy = () => {
                   <li><strong className="text-foreground/90">Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets</li>
                   <li><strong className="text-foreground/90">With Your Consent:</strong> When you have given us permission to share</li>
                 </ul>
+                <p className="text-muted-foreground leading-relaxed mt-3">
+                  <strong className="text-foreground/90">We do not sell your personal information.</strong> We do not share your mobile phone number or SMS/text-messaging opt-in or consent data with third parties or affiliates for their own marketing or promotional purposes. Phone numbers and consent collected for messaging are used solely to deliver the messages you requested (such as one-time passcodes, two-factor authentication, and account or transactional notifications).
+                </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-foreground mb-3">6. Data Security</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-3">6. SMS / Text Messaging</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  If you provide your mobile number and opt in, we send SMS for two-factor authentication (one-time passcodes), account security, and transactional notifications, and — only with your separate consent — occasional product updates. Message frequency varies. <strong className="text-foreground/90">Message and data rates may apply.</strong> Reply <strong className="text-foreground/90">STOP</strong> to opt out at any time and <strong className="text-foreground/90">HELP</strong> for help. Opting out of SMS does not affect your ability to sign in via other methods. Mobile information is never shared with third parties or affiliates for marketing. SMS is delivered via our messaging provider (Twilio) acting as our processor.
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-xl font-semibold text-foreground mb-3">7. Data Security</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   We implement industry-standard security measures including encryption at rest (AES-256) and in transit (TLS 1.3), access controls, audit logging, and regular security assessments. However, no method of transmission over the Internet is 100% secure.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-foreground mb-3">7. Data Retention</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-3">8. Data Retention</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   We retain your information for as long as your account is active or as needed to provide Services. We will delete or anonymize your data upon request, subject to legal retention obligations.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-foreground mb-3">8. Your Rights</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-3">9. Your Rights</h2>
                 <p className="text-muted-foreground leading-relaxed mb-2">Depending on your jurisdiction, you may have the right to:</p>
                 <ul className="list-disc pl-6 space-y-1 text-muted-foreground">
                   <li>Access the personal information we hold about you</li>
@@ -133,28 +144,28 @@ const Privacy = () => {
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-foreground mb-3">9. International Data Transfers</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-3">10. International Data Transfers</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place for such transfers in compliance with applicable data protection laws, including GDPR and CCPA.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-foreground mb-3">10. Children&apos;s Privacy</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-3">11. Children&apos;s Privacy</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   Our Services are not directed to individuals under 16. We do not knowingly collect personal information from children. If we learn that we have collected information from a child, we will take steps to delete it promptly.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-foreground mb-3">11. Changes to This Policy</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-3">12. Changes to This Policy</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   We may update this Privacy Policy from time to time. We will notify you of material changes by posting the updated policy on our website and updating the &quot;Last updated&quot; date.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-xl font-semibold text-foreground mb-3">12. Contact Us</h2>
+                <h2 className="text-xl font-semibold text-foreground mb-3">13. Contact Us</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   If you have questions about this Privacy Policy, please contact us at:
                 </p>
