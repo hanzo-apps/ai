@@ -11,8 +11,10 @@
 FROM node:20-bookworm-slim AS build
 WORKDIR /app
 
-# Enable pnpm via corepack (repo ships pnpm-lock.yaml).
-RUN corepack enable
+# Enable pnpm via corepack, pinned to the version that generated the lockfile
+# (pnpm 11+ requires Node 22; this image is Node 20). Avoids corepack pulling
+# an incompatible latest pnpm.
+RUN corepack enable && corepack prepare pnpm@10.33.4 --activate
 
 # Install deps against the committed lockfile for reproducible builds.
 COPY package.json pnpm-lock.yaml ./
