@@ -1,0 +1,36 @@
+# Hanzo Cloud marketing site (cloud.hanzo.ai)
+# Builds the @hanzo/site static export and serves ONLY the /cloud landing
+# page as the site root via ghcr.io/hanzoai/static. CTAs point to
+# console.hanzo.ai; /signin & /signup are handled by the hanzo.id routers.
+#
+# Build (BuildKit, on-cluster — no GHA):
+#   --opt=filename=Dockerfile.production
+#   --output=type=image,name=ghcr.io/hanzoai/cloud-site:<tag>,push=true
+
+# ---- build stage: Next.js static export ----------------------------------
+FROM node:20-bookworm-slim AS build
+WORKDIR /app
+
+# Enable pnpm via corepack (repo ships pnpm-lock.yaml).
+RUN corepack enable
+
+# Install deps against the committed lockfile for reproducible builds.
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
+# Build the static export (next.config.ts: output: 'export' -> ./out).
+COPY . .
+RUN pnpm build
+
+# Promote the chrome-free /cloud-site landing page to the web root. With
+# trailingSlash:false Next emits out/cloud-site.html (flat file); _next assets
+# are absolute so they resolve from / unchanged. cloud-site has NO site
+# Navbar/Footer (root layout only) — it ships its own minimal nav + footer.
+RUN cp out/cloud-site.html out/index.html
+
+# ---- serve stage: hanzoai/static (scratch + single Go binary) ------------
+FROM ghcr.io/hanzoai/static:0.4.1
+COPY --from=build /app/out /srv
+# static (>=0.4.0) is configured by FLAGS: --root, --port, --spa.
+ENTRYPOINT ["/static"]
+CMD ["--root=/srv", "--spa", "--port=3000"]

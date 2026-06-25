@@ -1,6 +1,11 @@
 import type { Metadata } from "next"
 import CloudLanding from "@/components/cloud/CloudLanding"
 
+// Standalone Hanzo Cloud marketing site served at cloud.hanzo.ai ROOT.
+// Lives OUTSIDE the (marketing) route group so it is wrapped only by the
+// root layout (no site Navbar/Footer) — CloudLanding ships its own minimal
+// nav + footer. The Dockerfile promotes out/cloud-site.html to the web root.
+
 export const metadata: Metadata = {
   title: "Hanzo Cloud — open-source cloud for AI agents & apps",
   description:
@@ -15,6 +20,6 @@ export const metadata: Metadata = {
   },
 }
 
-export default function CloudPage() {
+export default function CloudSitePage() {
   return <CloudLanding />
 }
