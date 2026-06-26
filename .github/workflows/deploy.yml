@@ -24,14 +24,19 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # This is a large static export (hundreds of pages); the default heap
+      # OOMs the export on the runner. Match the proven hanzo-blog build env.
       - name: Build
         run: pnpm build
+        env:
+          NODE_OPTIONS: '--max-old-space-size=8192'
+        timeout-minutes: 30
 
       - name: Create 404.html for SPA routing
         run: cp out/index.html out/404.html
@@ -71,9 +76,14 @@ jobs:
           KMS_ENDPOINT: ${{ vars.KMS_ENDPOINT || 'https://kms.hanzo.ai' }}
         run: |
           if [ -n "${KMS_CLIENT_ID}" ] && [ -n "${KMS_CLIENT_SECRET}" ]; then
-            HANZO_API_KEY=$(curl -sf "${KMS_ENDPOINT}/api/v1/auth/universal-auth/login" \
+            login_token=$(curl -sf "${KMS_ENDPOINT}/api/v1/auth/universal-auth/login" \
               -H "Content-Type: application/json" \
-              -d "{\"clientId\":\"${KMS_CLIENT_ID}\",\"clientSecret\":\"${KMS_CLIENT_SECRET}\"}" | jq -r '.accessToken')
+              -d "{\"clientId\":\"${KMS_CLIENT_ID}\",\"clientSecret\":\"${KMS_CLIENT_SECRET}\"}" | jq -r '.accessToken // empty')
+            # Only adopt the exchanged token if login actually succeeded — never
+            # clobber a valid HANZO_API_KEY secret with an empty/null result.
+            if [ -n "${login_token}" ] && [ "${login_token}" != "null" ]; then
+              HANZO_API_KEY="${login_token}"
+            fi
           fi
           response=$(curl -sf "${KMS_ENDPOINT}/api/v3/secrets/raw?workspaceId=e1359bf4-31b4-4dfa-bb90-323e2c298ad8&secretPath=/deploy&environment=prod" \
             -H "Authorization: Bearer ${HANZO_API_KEY}" 2>/dev/null || echo "")

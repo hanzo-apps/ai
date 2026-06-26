@@ -18,9 +18,15 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
-      - run: pnpm build
+      # Large static export (hundreds of pages) — bump the heap so the build
+      # doesn't OOM on the runner. Matches the Deploy workflow.
+      - name: Build
+        run: pnpm build
+        env:
+          NODE_OPTIONS: '--max-old-space-size=8192'
+        timeout-minutes: 30

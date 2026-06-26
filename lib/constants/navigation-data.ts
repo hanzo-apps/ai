@@ -27,6 +27,10 @@ export type NavItem = {
   icon?: React.ComponentType<{ className?: string; size?: number | string }>;
   github?: string;
   docs?: string;
+  /** Console quick-launch deep link (mega-menu primary click). */
+  console?: string;
+  /** Short menu descriptor shown under the leaf title. */
+  desc?: string;
   featured?: boolean;
 };
 
@@ -52,6 +56,8 @@ export const productsNav: NavSection[] = cloudCategories.map((category) => ({
     icon: item.icon,
     github: item.github,
     docs: item.docs,
+    console: item.console,
+    desc: item.desc,
   })),
 }));
 
@@ -137,7 +143,7 @@ export const footerNav: NavSection[] = [
     ],
   },
   {
-    title: "Chain",
+    title: "Web3",
     items: [
       { title: "Settlement", href: "/blockchain/settlement" },
       { title: "Wallets", href: "/blockchain/wallets" },

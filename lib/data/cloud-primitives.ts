@@ -11,7 +11,10 @@
  * Mega-menu layout (two rows of five):
  *
  *   AI        Compute     Data        Network     Security
- *   Dev       Deploy      Observe     Chain       Apps
+ *   Dev       Deploy      Observe     Web3        Apps
+ *
+ * Every leaf carries two deep links resolved once at the bottom of this file:
+ * a console quick-launch (console.hanzo.ai) and a docs page (docs.hanzo.ai).
  *
  * This file is the ONLY place the taxonomy lives. `lib/constants/navigation-data.ts`
  * derives `productsNav` from it, and `app/(marketing)/cloud/[slug]` + the two
@@ -97,7 +100,14 @@ export interface Primitive {
   features?: string[]
   status?: PrimitiveStatus
   github?: string
+  /** Verified-live docs page (resolved at the bottom of this file). */
   docs?: string
+  /** Short menu descriptor — overrides the GCP equivalent when set. */
+  blurb?: string
+  /** Console quick-launch deep link (resolved at the bottom of this file). */
+  console?: string
+  /** Resolved menu descriptor: blurb ?? gcp (resolved at the bottom). */
+  desc?: string
 }
 
 export interface CloudCategory {
@@ -115,6 +125,8 @@ export const POSITIONING = 'Open AI Cloud — GCP-compatible. Open source. On-ch
 
 const ORG = 'https://github.com/hanzoai'
 const DOCS = 'https://docs.hanzo.ai'
+const CONSOLE = 'https://console.hanzo.ai'
+const DOCS_BASE = 'https://docs.hanzo.ai/docs'
 
 // Shared defaults for generated overview pages: source is the org (always 200,
 // open source) and docs home (separate site). Keeps every link live.
@@ -128,7 +140,7 @@ const stub = ({
   docs: DOCS,
 })
 
-export const cloudCategories: CloudCategory[] = [
+const rawCategories: CloudCategory[] = [
   {
     title: 'AI',
     gcp: 'Vertex AI · Gemini · Agent Builder',
@@ -324,22 +336,22 @@ export const cloudCategories: CloudCategory[] = [
     ],
   },
   {
-    title: 'Chain',
+    title: 'Web3',
     gcp: 'On-chain settlement & trust layer',
     tagline: 'The settlement layer under every resource.',
     items: [
       stub({
-        slug: 'settlement', base: '/blockchain', title: 'Settlement', icon: Landmark, gcp: 'No GCP equivalent', status: 'beta',
+        slug: 'settlement', base: '/blockchain', title: 'Settlement', icon: Landmark, gcp: 'No GCP equivalent', blurb: 'On-chain settlement', status: 'beta',
         tagline: 'The trust layer under the cloud.',
         description: 'On-chain settlement for every metered unit — models, GPUs, storage, API calls. Deterministic billing, programmable payouts, and provable usage.',
         features: ['Meter → settle on-chain', 'Programmable payouts', 'Deterministic billing', 'Provable usage'],
       }),
-      { title: 'Wallets', href: '/blockchain/wallets', icon: Wallet },
-      { title: 'Tokens', href: '/blockchain/tokens', icon: Coins },
-      { title: 'Indexer', href: '/blockchain/indexer', icon: Search },
-      { title: 'Oracles', href: '/blockchain/oracle', icon: Radio },
+      { title: 'Wallets', href: '/blockchain/wallets', icon: Wallet, blurb: 'Custody & keys' },
+      { title: 'Tokens', href: '/blockchain/tokens', icon: Coins, blurb: 'Tokenization' },
+      { title: 'Indexer', href: '/blockchain/indexer', icon: Search, blurb: 'Chain indexer' },
+      { title: 'Oracles', href: '/blockchain/oracle', icon: Radio, blurb: 'Price & data feeds' },
       stub({
-        slug: 'attestations', base: '/blockchain', title: 'Attestations', icon: BadgeCheck, gcp: 'No GCP equivalent', status: 'beta',
+        slug: 'attestations', base: '/blockchain', title: 'Attestations', icon: BadgeCheck, gcp: 'No GCP equivalent', blurb: 'Verifiable provenance', status: 'beta',
         tagline: 'Sign what happened.',
         description: 'Cryptographic attestations for models, datasets, builds, and inference runs. Verifiable provenance anchored on-chain for audit and compliance.',
         features: ['Model + dataset provenance', 'Build + run attestations', 'Verifiable on-chain', 'Audit & compliance ready'],
@@ -352,14 +364,79 @@ export const cloudCategories: CloudCategory[] = [
     tagline: 'Production apps built on the primitives.',
     items: [
       { title: 'Chat', href: '/chat', icon: MessageSquare, gcp: 'Vertex AI Search & Conversation' },
-      { title: 'Bot', href: '/bot', icon: Bot },
+      { title: 'Bot', href: '/bot', icon: Bot, blurb: 'Multi-agent platform' },
       { title: 'Search', href: '/search', icon: Search, gcp: 'Vertex AI Search' },
-      { title: 'Crawl', href: '/crawl', icon: Globe },
-      { title: 'Studio', href: '/studio', icon: Clapperboard },
+      { title: 'Crawl', href: '/crawl', icon: Globe, blurb: 'Web crawler' },
+      { title: 'Studio', href: '/studio', icon: Clapperboard, blurb: 'Creative studio' },
       { title: 'Console', href: '/console', icon: LayoutDashboard, gcp: 'Cloud Console' },
     ],
   },
 ]
+
+// Verified-live docs target per primitive, keyed by marketing href. Every
+// value is a 200 page on docs.hanzo.ai today — where a primitive has no
+// dedicated page yet (or its page is temporarily unhealthy), it points at the
+// nearest real one so a leaf is NEVER a 404. (`/docs/services` is the catalog
+// fallback for anything not listed.)
+const DOCS_PATH: Record<string, string> = {
+  // AI
+  '/models': 'services/ml', '/agents': 'services/bot', '/engine': 'services/engine',
+  '/cloud/fine-tuning': 'services/ml', '/cloud/embeddings': 'services/vector', '/cloud/evals': 'services/o11y',
+  // Compute
+  '/cloud/gpus': 'services/engine', '/machines': 'services/paas', '/cloud/containers': 'services/functions',
+  '/functions': 'services/functions', '/edge': 'services/edge', '/cloud/jobs': 'services/tasks',
+  // Data
+  '/vector': 'services/vector', '/sql': 'services/db', '/kv': 'services/kv',
+  '/storage': 'services/s3', '/datastore': 'services/db', '/docdb': 'services/db',
+  // Network
+  '/gateway': 'services/gateway', '/network': 'services/ingress', '/dns': 'services/dns',
+  '/cloud/cdn': 'services/edge', '/ingress': 'services/ingress', '/cloud/service-mesh': 'services/gateway',
+  // Security  (iam/kms/platform service pages are origin-flaky → nearest healthy synonym)
+  '/iam': 'services/identity', '/authz': 'services/zt', '/kms': 'services/sign',
+  '/hsm': 'services/mpc', '/cloud/secrets': 'services/zt', '/cloud/audit': 'services/guard',
+  // Dev
+  '/cli': 'sdks', '/cloud/sdks': 'sdks', '/cloud/api': 'services/nexus',
+  '/playground': 'services/studio', '/code': 'services/studio', '/desktop': 'sdks',
+  // Deploy
+  '/platform': 'services/paas', '/cloud/environments': 'services/paas', '/cloud/builds': 'services/registry',
+  '/registry': 'services/registry', '/cloud/releases': 'services/operative', '/cloud/pipelines': 'services/flow',
+  // Observe
+  '/cloud/logs': 'services/o11y', '/metrics': 'services/insights', '/telemetry': 'services/o11y',
+  '/dashboards': 'services/insights', '/sentry': 'services/guard', '/cloud/cost': 'services/pricing',
+  // Web3
+  '/blockchain/settlement': 'services/web3', '/blockchain/wallets': 'services/web3', '/blockchain/tokens': 'services/web3',
+  '/blockchain/indexer': 'services/web3', '/blockchain/oracle': 'services/web3', '/blockchain/attestations': 'services/web3',
+  // Apps
+  '/chat': 'services/chat', '/bot': 'services/bot', '/search': 'services/search',
+  '/crawl': 'services/search', '/studio': 'services/studio', '/console': 'services/console',
+}
+
+// Console quick-launch slug — reuse the canonical product slug from the
+// marketing href (dropping the /cloud and /blockchain overview prefixes), so a
+// leaf launches the SAME product console hosts at /deploy/<slug>.
+const launchSlug = (href: string): string =>
+  href.replace(/^\/(?:cloud|blockchain)\//, '').replace(/^\//, '')
+
+// Resolve every leaf's two deep links + menu descriptor exactly once.
+//  - console: a product-specific quick-launch into console.hanzo.ai. The query
+//    form resolves 200 today (never a 404) and lights up the moment console
+//    ships per-product /deploy/<slug> routes.
+//  - docs: a verified-live docs page (see DOCS_PATH).
+//  - desc: the short menu descriptor (blurb override, else the GCP equivalent).
+const resolve = (p: Primitive): Primitive => ({
+  ...p,
+  console: `${CONSOLE}/?deploy=${launchSlug(p.href)}`,
+  docs: `${DOCS_BASE}/${DOCS_PATH[p.href] ?? 'services'}`,
+  desc: p.blurb ?? p.gcp,
+})
+
+// The ten cloud categories, with every leaf's console + docs deep links and
+// descriptor resolved. Single source of truth for the mega-menu, the generated
+// overview pages, and the route table — they can never drift apart.
+export const cloudCategories: CloudCategory[] = rawCategories.map((c) => ({
+  ...c,
+  items: c.items.map(resolve),
+}))
 
 // All primitives that render a generated overview page, keyed by slug.
 const generated: Primitive[] = cloudCategories

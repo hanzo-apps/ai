@@ -68,7 +68,7 @@ export const ProductsMenu = () => {
           </div>
 
           {/* 10-category cloud taxonomy — 5 columns × 2 rows (AI…Security / Dev…Apps) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-5 max-h-[70vh] overflow-y-auto">
             {productsNav.map((section) => {
               const displayItems = section.items.slice(0, MAX_ITEMS_PER_CATEGORY);
               const hasMore = section.items.length > MAX_ITEMS_PER_CATEGORY;
@@ -88,21 +88,42 @@ export const ProductsMenu = () => {
                       </p>
                     )}
                   </div>
-                  <div className="space-y-0.5">
+                  <div className="space-y-1">
                     {displayItems.map((item) => {
                       const Icon = item.icon;
                       return (
-                        <Link
-                          key={item.title}
-                          href={item.href || "#"}
-                          onClick={closeMenu}
-                          className="flex items-center gap-1.5 py-0.5 group"
-                        >
-                          {Icon && <Icon className="h-3 w-3 group-hover:text-foreground text-muted-foreground" />}
-                          <span className="text-xs transition-colors group-hover:text-foreground text-muted-foreground">
-                            {item.title}
-                          </span>
-                        </Link>
+                        <div key={item.title} className="group/leaf flex items-start gap-1.5">
+                          {Icon && (
+                            <Icon className="mt-[3px] h-3 w-3 flex-shrink-0 text-muted-foreground transition-colors group-hover/leaf:text-foreground" />
+                          )}
+                          {/* Primary click — quick-launch the product in the console */}
+                          <a
+                            href={item.console || item.href || "#"}
+                            onClick={closeMenu}
+                            className="min-w-0 flex-1 leading-tight"
+                          >
+                            <span className="block text-xs text-muted-foreground transition-colors group-hover/leaf:text-foreground">
+                              {item.title}
+                            </span>
+                            {item.desc && (
+                              <span className="block truncate text-[10px] leading-tight text-muted-foreground/50">
+                                {item.desc}
+                              </span>
+                            )}
+                          </a>
+                          {/* Small affordance — deep-link into the docs */}
+                          {item.docs && (
+                            <a
+                              href={item.docs}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="mt-[2px] flex-shrink-0 text-[10px] text-muted-foreground/40 transition-colors hover:text-foreground"
+                            >
+                              Docs
+                            </a>
+                          )}
+                        </div>
                       );
                     })}
                     {hasMore && (
