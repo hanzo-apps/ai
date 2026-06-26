@@ -60,7 +60,14 @@ export const ProductsMenu = () => {
             </div>
           </div>
 
-          {/* 10-Category Grid - 5 columns x 2 rows for symmetry */}
+          {/* Positioning — the cloud-console identity line */}
+          <div className="mb-3">
+            <p className="text-[11px] text-muted-foreground">
+              Open AI Cloud — <span className="text-foreground/80">GCP-compatible. Open source. On-chain.</span>
+            </p>
+          </div>
+
+          {/* 10-category cloud taxonomy — 5 columns × 2 rows (AI…Security / Dev…Apps) */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-4">
             {productsNav.map((section) => {
               const displayItems = section.items.slice(0, MAX_ITEMS_PER_CATEGORY);
@@ -68,9 +75,19 @@ export const ProductsMenu = () => {
 
               return (
                 <div key={section.title} className="space-y-1.5">
-                  <h3 className="text-[10px] font-semibold uppercase tracking-wider mb-2 text-muted-foreground">
-                    {section.title}
-                  </h3>
+                  <div className="mb-2">
+                    <h3 className="text-[11px] font-semibold uppercase tracking-wider text-foreground">
+                      {section.title}
+                    </h3>
+                    {section.subtitle && (
+                      <p
+                        className="mt-0.5 text-[9px] leading-tight text-muted-foreground/60 line-clamp-2"
+                        title={section.subtitle}
+                      >
+                        {section.subtitle}
+                      </p>
+                    )}
+                  </div>
                   <div className="space-y-0.5">
                     {displayItems.map((item) => {
                       const Icon = item.icon;

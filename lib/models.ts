@@ -195,7 +195,7 @@ export function orgDisplayName(org: string): string {
 // Map org slug → logo path (relative to /public)
 export function orgLogoPath(org: string): string | null {
   const logoMap: Record<string, string> = {
-    hanzo: '/icon.svg',
+    hanzo: '/favicon.svg',
     openai: '/logos/openai.svg',
     anthropic: '/logos/anthropic.svg',
     google: '/logos/google.svg',
