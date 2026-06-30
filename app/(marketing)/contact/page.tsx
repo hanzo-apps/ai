@@ -6,7 +6,6 @@ import Link from "next/link"
 import {
   Mail,
   MapPin,
-  Phone,
   MessageSquare,
   Github,
   Linkedin,
@@ -71,14 +70,51 @@ export default function ContactPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [notice, setNotice] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setIsSubmitting(false)
-    setSubmitted(true)
-    setFormData({ name: "", email: "", subject: "", message: "" })
+    setNotice(null)
+
+    const trimmedName = formData.name.trim()
+    const [firstName, ...rest] = trimmedName.split(" ")
+    const payload = {
+      firstName: firstName || trimmedName,
+      lastName: rest.join(" "),
+      email: formData.email,
+      metadata: {
+        subject: formData.subject,
+        message: formData.message,
+        source: "contact-form",
+        requestedAt: new Date().toISOString(),
+      },
+      tags: ["contact"],
+    }
+
+    try {
+      const res = await fetch("https://api.hanzo.ai/v1/customers", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) throw new Error(`Request failed (${res.status})`)
+      setSubmitted(true)
+      setFormData({ name: "", email: "", subject: "", message: "" })
+    } catch {
+      // No fabricated confirmation. Fall back to the user's mail client addressed
+      // to a real inbox so the message actually reaches us.
+      const subject = encodeURIComponent(formData.subject || "Contact from hanzo.ai")
+      const body = encodeURIComponent(
+        `From: ${formData.name} <${formData.email}>\n\n${formData.message}`
+      )
+      if (typeof window !== "undefined") {
+        window.location.href = `mailto:hello@hanzo.ai?subject=${subject}&body=${body}`
+      }
+      setNotice("Opening your email app to send to hello@hanzo.ai.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (
@@ -220,6 +256,10 @@ export default function ContactPage() {
                         </>
                       )}
                     </Button>
+
+                    {notice ? (
+                      <p className="text-sm text-muted-foreground">{notice}</p>
+                    ) : null}
                   </form>
                 )}
               </motion.div>
@@ -247,19 +287,6 @@ export default function ContactPage() {
                       <div>
                         <p className="font-medium text-foreground">Email</p>
                         <p className="text-sm text-muted-foreground">hello@hanzo.ai</p>
-                      </div>
-                    </a>
-
-                    <a
-                      href="tel:+14155551234"
-                      className="flex items-start gap-4 p-4 rounded-xl border border-border bg-secondary hover:border-border hover:bg-accent/50 transition-all group"
-                    >
-                      <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                        <Phone className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">Phone</p>
-                        <p className="text-sm text-muted-foreground">+1 (415) 555-1234</p>
                       </div>
                     </a>
 
