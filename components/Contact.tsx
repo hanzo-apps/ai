@@ -3,7 +3,7 @@ import React from "react";
 
 
 
-import { Mail, MapPin, Phone, MessageSquare, Send, Github, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
+import { Mail, MapPin, MessageSquare, Send, Github, Linkedin, Twitter, Facebook, Instagram } from "lucide-react";
 import { Button } from "@hanzo/ui";
 
 const Contact = () => {
@@ -96,18 +96,6 @@ const Contact = () => {
                       <p className="text-foreground/80">
                         <a href="mailto:info@hanzo.ai" className="hover:text-foreground/70 transition-colors">
                           info@hanzo.ai
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <Phone className="h-6 w-6 text-foreground/70 mr-4 mt-1" />
-                    <div>
-                      <h3 className="font-medium">Phone</h3>
-                      <p className="text-foreground/80">
-                        <a href="tel:+18005551234" className="hover:text-foreground/70 transition-colors">
-                          +1 (800) 555-1234
                         </a>
                       </p>
                     </div>
