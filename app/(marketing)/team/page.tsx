@@ -20,6 +20,7 @@ import {
   Lock
 } from "lucide-react";
 import TeamHero from "@/components/team/TeamHero";
+import HumanLeadership from "@/components/team/HumanLeadership";
 import AgentGallery from "@/components/team/AgentGallery";
 import HumanAIIntegration from "@/components/team/HumanAIIntegration";
 import WorkspaceIntegration from "@/components/team/WorkspaceIntegration";
@@ -40,6 +41,7 @@ const Team = () => {
 
       <main>
         <TeamHero />
+        <HumanLeadership />
         <AgentGallery />
         <HumanAIIntegration />
         <WorkspaceIntegration />

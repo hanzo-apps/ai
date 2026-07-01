@@ -140,28 +140,6 @@ const TeamHero = () => {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, repeatType: "loop" }}
-          className="w-1 h-8 rounded-full opacity-70"
-          style={{ background: `linear-gradient(to bottom, var(--primary), #ffffff)` }}
-        />
-        <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 1.5, delay: 0.2, repeat: Infinity, repeatType: "loop" }}
-          className="w-1 h-6 rounded-full opacity-40"
-          style={{ background: `linear-gradient(to bottom, var(--primary), #ffffff)` }}
-        />
-        <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 1.5, delay: 0.4, repeat: Infinity, repeatType: "loop" }}
-          className="w-1 h-4 rounded-full opacity-20"
-          style={{ background: `linear-gradient(to bottom, var(--primary), #ffffff)` }}
-        />
-      </div>
     </section>
   );
 };

@@ -297,9 +297,9 @@ const AgentGallery = () => {
           </p>
         </motion.div>
 
-        <TeamGroup 
-          title="Leadership & Core Team" 
-          members={coreTeamMembers} 
+        <TeamGroup
+          title="AI Core Team"
+          members={coreTeamMembers}
           onMemberClick={openAgentDetail}
         />
         <TeamGroup 
