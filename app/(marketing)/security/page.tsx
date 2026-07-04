@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 
 const COMPLIANCE_BADGES = [
-  { name: "SOC 2 Type II", description: "Audit in progress" },
+  { name: "SOC 2 Type II", description: "Controls aligned; assessment planned" },
   { name: "GDPR", description: "Data protection ready" },
   { name: "CCPA", description: "Privacy controls" },
   { name: "HIPAA", description: "BAA available" },
@@ -36,15 +36,15 @@ const COMPLIANCE_BADGES = [
 const SECURITY_FEATURES = [
   {
     icon: Lock,
-    title: "End-to-End Encryption",
+    title: "Encryption at Rest & in Transit",
     description:
-      "All data is encrypted at rest with AES-256 and in transit with TLS 1.3. Your data remains protected throughout its lifecycle.",
+      "Data is encrypted at rest with per-tenant AES-256-GCM keys and post-quantum age, and in transit with TLS 1.3 — including hybrid ML-KEM-768 key exchange at the edge.",
   },
   {
     icon: Fingerprint,
     title: "Multi-Factor Authentication",
     description:
-      "Enforce MFA across your organization with support for TOTP, hardware keys, and biometric authentication.",
+      "Multi-factor authentication with TOTP, WebAuthn hardware keys, push, and SMS. Organization admins can require MFA for their members.",
   },
   {
     icon: Key,
@@ -68,7 +68,7 @@ const SECURITY_FEATURES = [
     icon: Database,
     title: "Data Residency",
     description:
-      "Choose where your data lives. Deploy to specific regions to meet compliance and sovereignty requirements.",
+      "Dedicated and self-hosted deployments can pin data to specific regions to meet sovereignty requirements.",
   },
 ];
 
@@ -120,7 +120,7 @@ const Security = () => {
                 style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
               >
                 <Shield className="w-3.5 h-3.5" />
-                SOC 2 Audit in Progress
+                SOC 2 readiness — controls aligned to NIST 800-53
               </motion.div>
 
               <motion.h1
