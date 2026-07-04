@@ -11,7 +11,7 @@ import { ProductFooter } from "@/components/products/ProductFooter"
 export default function AIStudioPage() {
   const [activeTab, setActiveTab] = useState("chat")
   const [promptText, setPromptText] = useState("")
-  const [modelSelection, setModelSelection] = useState("gpt-5.3")
+  const [modelSelection, setModelSelection] = useState("glm-5.2")
   const [showSidebar, setShowSidebar] = useState(true)
 
   const [conversation, setConversation] = useState<MessageInterface[]>([
@@ -32,13 +32,10 @@ export default function AIStudioPage() {
   ])
 
   const models: ModelInterface[] = [
-    { id: "gpt-4o", name: "GPT-4o", provider: "OpenAI" },
-    { id: "claude-sonnet-4-6", name: "Claude Sonnet 4.6", provider: "Anthropic" },
-    { id: "zen4", name: "zen4", provider: "Hanzo" },
-    { id: "llama-4-maverick", name: "Llama 4 Maverick", provider: "Meta" },
-    { id: "gemini-3.1-pro", name: "Gemini 3.1 Pro", provider: "Google" },
-    { id: "zen", name: "Zen 32B", provider: "Zen" },
-    { id: "mistral-large", name: "Mistral Large", provider: "Mistral" },
+    { id: "glm-5.2", name: "GLM 5.2", provider: "Hanzo" },
+    { id: "deepseek-v4-flash", name: "DeepSeek V4 Flash", provider: "Hanzo" },
+    { id: "deepseek-v4-pro", name: "DeepSeek V4 Pro", provider: "Hanzo" },
+    { id: "zen5-max", name: "Zen5 Max", provider: "Hanzo" },
   ]
 
   const handleSubmit = (e: React.FormEvent) => {

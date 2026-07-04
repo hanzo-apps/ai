@@ -120,7 +120,7 @@ const hanzo = new Hanzo({
 
 // Create a conversation with memory
 const conversation = hanzo.conversation({
-  model: 'gpt-5.3',
+  model: 'glm-5.2',
   memory: true,
   system: 'You are a helpful assistant'
 });
@@ -169,7 +169,7 @@ const results = await vectorStore.search(
                   <pre className="text-xs text-foreground/80 overflow-x-auto">
 {`// Create an agent with tools
 const agent = hanzo.agent({
-  model: 'claude-opus-4-6',
+  model: 'zen5-max',
   tools: [
     hanzo.tools.webSearch(),
     hanzo.tools.codeInterpreter(),
