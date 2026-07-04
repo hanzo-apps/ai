@@ -1,0 +1,47 @@
+# Canonical CI/CD config for hanzoai/hanzo.ai — read by BOTH the shared
+# hanzoai/ci reusable workflow (.github/workflows/cicd.yml) AND platform.hanzo.ai
+# (push webhook → in-cluster BuildKit → operator rollout).
+#
+# This is the "one way" build+deploy contract that escapes GitHub-Actions
+# dispatch latency (the "build queued for minutes even with idle runners"
+# problem): a push builds the container image in-cluster on our own runner
+# pool, then the operator rolls it — no GHA runner dispatch on the hot path.
+#
+# The image is the static site: a Next.js `output: export` built with pnpm and
+# served by ghcr.io/hanzoai/static (scratch + a single Go binary, `--spa`).
+# Dockerfile.production promotes the chrome-free /cloud-site landing to the web
+# root for cloud.hanzo.ai (the `www` operator Service CR).
+images:
+  - name: cloud-site
+    context: .
+    dockerfile: Dockerfile.production
+    repo: ghcr.io/hanzoai/cloud-site
+
+# CI gate. The heavy `pnpm build` runs inside the image build (above); `test:`
+# only carries the fast lint gate the image build does not.
+test:
+  - name: lint
+    run: |
+      corepack enable
+      corepack prepare pnpm@10.33.4 --activate
+      pnpm install --frozen-lockfile
+      pnpm lint
+
+# Deploy: roll the freshly-built image onto the `www` operator Service CR
+# (cloud.hanzo.ai) in the hanzo namespace on do-sfo3-hanzo-k8s. Fires only on
+# `main`; PRs build+test but never deploy.
+deploy:
+  cluster: do-sfo3-hanzo-k8s
+  namespace: hanzo
+  # Quoted to dodge YAML 1.1 boolean coercion of a bare `on:` key.
+  "on": [main]
+  services:
+    - name: www
+      image: cloud-site
+
+# KMS (kms.hanzo.ai, Universal Auth) supplies the GHCR push token and the
+# target kubeconfig at run time. Only KMS_CLIENT_ID / KMS_CLIENT_SECRET live in
+# GitHub; everything else is fetched here.
+kms:
+  path: /deploy
+  environment: prod
