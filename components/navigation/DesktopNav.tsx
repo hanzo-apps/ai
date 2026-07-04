@@ -8,7 +8,7 @@ import {
   Users, Lightbulb, Brain, Layers, FileText, ExternalLink,
   GitBranch, Cpu, Cloud, Server, ArrowRight, Mail, Building2, Gift, Shield,
   Activity, BookOpen, GraduationCap, Code, MessageCircle, PenLine, LifeBuoy,
-  Palette, Newspaper, HeartHandshake, HelpCircle
+  Palette, Newspaper, HeartHandshake, HelpCircle, Rocket
 } from "lucide-react";
 
 // Reusable icon link component for menu items
@@ -112,6 +112,7 @@ const MeetHanzoContent = ({ closeMenu }: { closeMenu: () => void }) => (
       <h3 className="text-muted-foreground text-xs font-medium mb-3 uppercase tracking-wider">Connect</h3>
       <div className="space-y-0.5 mb-5">
         <IconLink href="/contact" icon={Mail} label="Contact Us" closeMenu={closeMenu} />
+        <IconLink href="/startups" icon={Rocket} label="Startups" description="Credits & program" closeMenu={closeMenu} />
         <IconLink href="/enterprise" icon={Building2} label="Enterprise" closeMenu={closeMenu} />
         <IconLink href="/affiliate" icon={HeartHandshake} label="Affiliate" description="Partner program" closeMenu={closeMenu} />
         <IconLink href="/referral" icon={Gift} label="Referral" description="Refer a friend" closeMenu={closeMenu} />
@@ -229,6 +230,14 @@ const DesktopNav = () => {
         className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
       >
         Open Source
+      </Link>
+
+      {/* Startups program direct link */}
+      <Link
+        href="/startups"
+        className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+      >
+        Startups
       </Link>
     </div>
   );

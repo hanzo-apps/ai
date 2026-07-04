@@ -54,6 +54,7 @@ const mobileNav = [
         title: "Connect",
         items: [
           { title: "Contact", href: "/contact" },
+          { title: "Startups", href: "/startups" },
           { title: "Enterprise", href: "/enterprise" },
           { title: "Referrals", href: "/referral" },
         ]
