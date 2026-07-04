@@ -68,6 +68,7 @@ export const featuredProducts: NavItem[] = [
   { title: "Agents", href: "/agents", icon: Sparkles, description: "Agentic harness — SDK + runtime + tools", github: `${ORG}/agent`, docs: `${DOCS}/agent`, featured: true },
   { title: "MCP", href: "/mcp", icon: Plug, description: "Model Context Protocol — open-source DX layer", github: `${ORG}/mcp`, docs: `${DOCS}/mcp`, featured: true },
   { title: "Zen Models", href: "/zen", icon: Brain, description: "390+ open-weight frontier models", github: ORG, docs: `${DOCS}/zen`, featured: true },
+  { title: "Studio", href: "/studio", icon: AppWindow, description: "Visual AI engine — node-graph workflows (studio.hanzo.ai)", github: `${ORG}/studio`, docs: `${DOCS}/studio`, featured: true },
   { title: "Cloud", href: "/cloud", icon: Cloud, description: "AI Cloud infrastructure", github: `${ORG}/cloud`, docs: `${DOCS}/cloud`, featured: true },
   { title: "IAM", href: "/iam", icon: UserCheck, description: "Identity & access (hanzo.id)", github: `${ORG}/iam`, docs: `${DOCS}/iam`, featured: true },
 ];
