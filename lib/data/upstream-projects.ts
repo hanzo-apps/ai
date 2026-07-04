@@ -145,19 +145,6 @@ export const upstreamProjects: Record<string, UpstreamProject> = {
     sbomPackages: ['@activepieces/shared'],
     revenueShareEligible: true,
   },
-  temporal: {
-    name: 'Temporal',
-    description: 'Durable execution platform for mission-critical code. Never lose work to failures.',
-    url: 'https://temporal.io',
-    github: 'https://github.com/temporalio/temporal',
-    license: 'MIT',
-    stars: '12k+',
-    creator: 'Temporal Technologies / Maxim Fateev',
-    creatorUrl: 'https://github.com/temporalio',
-    gratitude: 'Temporal\'s durable execution model fundamentally changed how we think about reliability. Mission-critical code deserves nothing less.',
-    sbomPackages: ['temporalio'],
-    revenueShareEligible: true,
-  },
   bullmq: {
     name: 'BullMQ',
     description: 'Premium message queue for Node.js based on Redis. Fast, reliable, and feature-rich.',
@@ -327,7 +314,6 @@ export const productUpstreamMap: Record<string, string> = {
 
   // Async & messaging
   'mq': 'bullmq',
-  'tasks': 'temporal',
 
   // Growth & analytics
   'insights': 'hanzo-insights',

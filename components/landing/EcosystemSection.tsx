@@ -15,7 +15,6 @@ const ecosystemItems: CompatibilityItem[] = [
   { name: "Engage", compatible: "Dittofeed" },
   { name: "Automations", compatible: "Activepieces" },
   { name: "PubSub", compatible: "NATS" },
-  { name: "Tasks", compatible: "Temporal" },
   { name: "CX", compatible: "Chatwoot" },
 ];
 
