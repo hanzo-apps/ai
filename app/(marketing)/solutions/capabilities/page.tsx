@@ -61,7 +61,7 @@ const SolutionCapabilities: React.FC = () => {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.2, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
-                  className="relative group rounded-xl border border-gray-800 bg-[var(--black)]/50 p-6 backdrop-blur-sm overflow-hidden"
+                  className="relative group rounded-xl border border-neutral-800 bg-[var(--black)]/50 p-6 backdrop-blur-sm overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="relative">
@@ -119,13 +119,13 @@ const SolutionCapabilities: React.FC = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className="bg-gradient-to-br from-gray-900/70 to-background/80 rounded-xl border border-gray-800 overflow-hidden"
+      className="bg-gradient-to-br from-neutral-900/70 to-background/80 rounded-xl border border-neutral-800 overflow-hidden"
     >
       <div className="grid grid-cols-1 lg:grid-cols-5">
         <div className="col-span-3 p-8">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-xs text-muted-foreground">Case Study</span>
-            <span className="w-1 h-1 rounded-full bg-gray-500"></span>
+            <span className="w-1 h-1 rounded-full bg-neutral-500"></span>
             <span className="text-xs px-2 py-1 bg-primary/20 rounded-full text-foreground border border-white/30">
               {industry}
             </span>
@@ -148,7 +148,7 @@ const SolutionCapabilities: React.FC = () => {
             </div>
           </div>
           
-          <Button className="flex items-center gap-2 bg-[var(--white)] text-primary-foreground hover:bg-gray-200">
+          <Button className="flex items-center gap-2 bg-[var(--white)] text-primary-foreground hover:bg-neutral-200">
             Read Full Case Study <ArrowRight size={16} />
           </Button>
         </div>
@@ -210,7 +210,7 @@ const SolutionCapabilities: React.FC = () => {
           </div>
           
           <div className="space-y-6">
-            <div className="bg-gradient-to-br from-gray-900/70 to-background/90 rounded-xl border border-gray-800 p-6">
+            <div className="bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 p-6">
               <h4 className="text-lg font-semibold mb-3">Case Study: Financial Services</h4>
               <p className="text-muted-foreground mb-4">
                 How a leading investment firm used Hanzo's AI platform to analyze market trends and automate 
@@ -221,7 +221,7 @@ const SolutionCapabilities: React.FC = () => {
               </a>
             </div>
 
-            <div className="bg-gradient-to-br from-gray-900/70 to-background/90 rounded-xl border border-gray-800 p-6">
+            <div className="bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 p-6">
               <h4 className="text-lg font-semibold mb-3">White Paper: Enterprise AI Adoption</h4>
               <p className="text-muted-foreground mb-4">
                 Download our comprehensive guide to implementing AI across large organizations, addressing
@@ -232,7 +232,7 @@ const SolutionCapabilities: React.FC = () => {
               </a>
             </div>
 
-            <div className="bg-gradient-to-br from-gray-900/70 to-background/90 rounded-xl border border-gray-800 p-6">
+            <div className="bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 p-6">
               <h4 className="text-lg font-semibold mb-3">Webinar: The Future of GenAI in Enterprise</h4>
               <p className="text-muted-foreground mb-4">
                 Join our expert panel discussing how generative AI is transforming enterprise operations and
@@ -330,7 +330,7 @@ const SolutionCapabilities: React.FC = () => {
   );
   
   const renderPartnerSection = () => (
-    <div className="mb-20 bg-gradient-to-br from-gray-900/70 to-background/90 p-10 rounded-2xl border border-gray-800">
+    <div className="mb-20 bg-gradient-to-br from-neutral-900/70 to-background/90 p-10 rounded-2xl border border-neutral-800">
       <SectionHeader 
         title="Expert Partners" 
         description="Access our specialized agencies and expert talent to accelerate your success"

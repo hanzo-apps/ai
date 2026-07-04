@@ -47,7 +47,7 @@ const DemoComponentsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-gray-900/50 p-8 rounded-lg border border-gray-800"
+            className="bg-neutral-900/50 p-8 rounded-lg border border-neutral-800"
           >
             <h3 className="text-xl font-semibold mb-6 text-foreground">Form Elements</h3>
             
@@ -95,7 +95,7 @@ const DemoComponentsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-900/50 p-8 rounded-lg border border-gray-800"
+            className="bg-neutral-900/50 p-8 rounded-lg border border-neutral-800"
           >
             <h3 className="text-xl font-semibold mb-6 text-foreground">Interactive Components</h3>
             

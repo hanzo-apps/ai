@@ -12,7 +12,7 @@ const FeatureCard = ({ icon: Icon, title, description }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="bg-gray-900/30 border border-gray-800 rounded-xl p-6 h-full"
+      className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6 h-full"
     >
       <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/20">
         <Icon className="h-6 w-6 text-foreground" />

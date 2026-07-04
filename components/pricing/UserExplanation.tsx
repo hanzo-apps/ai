@@ -10,13 +10,13 @@ const UserExplanation = () => {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
-          className="flex items-center gap-2 text-muted-foreground hover:text-[var(--white)] border-gray-800 bg-transparent"
+          className="flex items-center gap-2 text-muted-foreground hover:text-[var(--white)] border-neutral-800 bg-transparent"
         >
           <HelpCircle className="h-4 w-4" />
           What are users?
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 bg-gray-900 border-gray-800 text-[var(--white)] p-4">
+      <PopoverContent className="w-80 bg-neutral-900 border-neutral-800 text-[var(--white)] p-4">
         <div className="space-y-3">
           <div className="flex items-center gap-2">
             <User className="h-5 w-5 text-muted-foreground" />

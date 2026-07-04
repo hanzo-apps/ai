@@ -6,7 +6,7 @@ import { Github, PenLine, Building2, Rocket } from "lucide-react";
 
 const Pricing = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-background to-gray-900/40">
+    <section className="py-16 bg-gradient-to-b from-background to-neutral-900/40">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Simple, Transparent Pricing</h2>

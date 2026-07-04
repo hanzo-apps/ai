@@ -92,7 +92,7 @@ const HeroSection = () => {
           <Button 
             size="lg"
             variant="outline"
-            className="text-[var(--white)] border-gray-700 hover:bg-[var(--white)]/10 px-8 py-6 text-lg rounded-lg font-medium flex items-center"
+            className="text-[var(--white)] border-neutral-700 hover:bg-[var(--white)]/10 px-8 py-6 text-lg rounded-lg font-medium flex items-center"
           >
             <Terminal className="mr-2 h-5 w-5" />
             <span className="flex-1">Quick Start</span>
@@ -101,7 +101,7 @@ const HeroSection = () => {
           <Button 
             size="lg"
             variant="outline"
-            className="text-[var(--white)] border-gray-700 hover:bg-[var(--white)]/10 px-8 py-6 text-lg rounded-lg font-medium flex items-center"
+            className="text-[var(--white)] border-neutral-700 hover:bg-[var(--white)]/10 px-8 py-6 text-lg rounded-lg font-medium flex items-center"
           >
             <Download className="mr-2 h-5 w-5" />
             <span className="flex-1">Download CLI</span>
@@ -112,7 +112,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 px-4 py-3 bg-gray-900/50 rounded-lg inline-block"
+          className="mt-16 px-4 py-3 bg-neutral-900/50 rounded-lg inline-block"
         >
           <code className="text-sm text-foreground/80">
             npx @hanzo/cli create my-new-project

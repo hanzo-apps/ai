@@ -42,7 +42,7 @@ const ExpandableFeatureCard: React.FC<ExpandableFeatureCardProps> = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="bg-gray-900/20 border border-gray-800 rounded-2xl p-6 h-full"
+      className="bg-neutral-900/20 border border-neutral-800 rounded-2xl p-6 h-full"
     >
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
@@ -53,7 +53,7 @@ const ExpandableFeatureCard: React.FC<ExpandableFeatureCardProps> = ({
         </div>
         <button 
           onClick={toggleExpand}
-          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isExpanded ? 'bg-primary/20' : 'bg-gray-800/50 hover:bg-gray-700/50'}`}
+          className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isExpanded ? 'bg-primary/20' : 'bg-neutral-800/50 hover:bg-neutral-700/50'}`}
         >
           {isExpanded ? (
             <Minus className="h-4 w-4 text-foreground/70" />
@@ -74,7 +74,7 @@ const ExpandableFeatureCard: React.FC<ExpandableFeatureCardProps> = ({
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="pt-2 border-t border-gray-800">
+            <div className="pt-2 border-t border-neutral-800">
               <h4 className="font-medium text-[var(--white)] mb-3 mt-3">Key Features:</h4>
               <ul className="space-y-2">
                 {featurePoints.map((point, index) => (

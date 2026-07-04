@@ -71,7 +71,7 @@ const MigrationStepsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="bg-gray-900/50 border-gray-800 hover:border-white/30 transition-all duration-300">
+              <Card className="bg-neutral-900/50 border-neutral-800 hover:border-white/30 transition-all duration-300">
                 <CardHeader className="flex flex-row items-start gap-4">
                   <div className="bg-primary/20 rounded-lg p-2 w-12 h-12 flex items-center justify-center flex-shrink-0">
                     <span className="text-lg font-bold text-foreground">{step.number}</span>
@@ -85,7 +85,7 @@ const MigrationStepsSection = () => {
                 </CardHeader>
                 {index < steps.length - 1 && (
                   <CardContent className="pt-0 pb-4 flex justify-center">
-                    <ArrowRight className="text-gray-600 h-5 w-5" />
+                    <ArrowRight className="text-neutral-600 h-5 w-5" />
                   </CardContent>
                 )}
               </Card>

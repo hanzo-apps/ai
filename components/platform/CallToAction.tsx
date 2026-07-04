@@ -42,7 +42,7 @@ const CallToAction = () => {
             <Button 
               size="lg"
               variant="outline"
-              className="text-[var(--white)] border-gray-700 hover:bg-[var(--white)]/10 px-8 py-6 text-lg rounded-lg font-medium flex items-center"
+              className="text-[var(--white)] border-neutral-700 hover:bg-[var(--white)]/10 px-8 py-6 text-lg rounded-lg font-medium flex items-center"
             >
               <span className="flex-1">Read the Docs</span>
               <ArrowRight className="ml-2 h-5 w-5" />

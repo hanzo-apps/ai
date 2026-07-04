@@ -66,7 +66,7 @@ const TeamMemberPage = ({ memberId }: TeamMemberPageProps) => {
                 <motion.div 
                   key={index}
                   whileHover={{ y: -5 }}
-                  className="p-6 rounded-2xl border border-gray-800 bg-background/50 backdrop-blur-lg"
+                  className="p-6 rounded-2xl border border-neutral-800 bg-background/50 backdrop-blur-lg"
                 >
                   <FeatureIcon className={`h-8 w-8 ${feature.color} mb-4`} />
                   <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>

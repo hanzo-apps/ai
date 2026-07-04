@@ -101,7 +101,7 @@ export default function VectorPricing() {
             className={`rounded-xl p-6 border flex flex-col ${
               tier.highlighted
                 ? "border-white bg-primary/5"
-                : "border-gray-800 bg-gray-900/30"
+                : "border-neutral-800 bg-neutral-900/30"
             }`}
           >
             {tier.highlighted && (
@@ -130,7 +130,7 @@ export default function VectorPricing() {
               className={`w-full ${
                 tier.highlighted
                   ? "bg-primary hover:bg-[#cccccc] text-primary-foreground"
-                  : "bg-primary text-primary-foreground hover:bg-gray-100"
+                  : "bg-primary text-primary-foreground hover:bg-neutral-100"
               }`}
               onClick={() => {
                 if (tier.price === "Custom") {
@@ -152,10 +152,10 @@ export default function VectorPricing() {
         <p className="text-muted-foreground text-sm mb-6">
           Metered on top of your base tier. Pro and Business plans include generous free allocations.
         </p>
-        <div className="overflow-x-auto rounded-xl border border-gray-800/50">
+        <div className="overflow-x-auto rounded-xl border border-neutral-800/50">
           <table className="w-full text-left">
             <thead>
-              <tr className="border-b border-gray-800 bg-gray-900/30">
+              <tr className="border-b border-neutral-800 bg-neutral-900/30">
                 <th className="py-3 px-5 text-muted-foreground font-medium">Resource</th>
                 <th className="py-3 px-5 text-muted-foreground font-medium text-right">Rate</th>
                 <th className="py-3 px-5 text-muted-foreground font-medium hidden md:table-cell">Notes</th>
@@ -163,7 +163,7 @@ export default function VectorPricing() {
             </thead>
             <tbody>
               {usageRates.map((row) => (
-                <tr key={row.resource} className="border-b border-gray-800/50 hover:bg-gray-900/20 transition-colors">
+                <tr key={row.resource} className="border-b border-neutral-800/50 hover:bg-neutral-900/20 transition-colors">
                   <td className="py-4 px-5 font-medium">{row.resource}</td>
                   <td className="py-4 px-5 text-right font-mono">
                     {row.rate}<span className="text-muted-foreground text-xs ml-1">{row.unit}</span>

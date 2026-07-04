@@ -55,7 +55,7 @@ const PurchaseCredits = () => {
           <Button 
             variant="ghost" 
             onClick={() => router.push('/account/billing')} 
-            className="mr-4 hover:bg-gray-900/20"
+            className="mr-4 hover:bg-neutral-900/20"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Billing
@@ -80,7 +80,7 @@ const PurchaseCredits = () => {
                       placeholder="50"
                       value={creditAmount}
                       onChange={handleCreditAmountChange}
-                      className="bg-gray-900/20 border-gray-800/30 pl-8"
+                      className="bg-neutral-900/20 border-neutral-800/30 pl-8"
                     />
                   </div>
                   <p className="text-sm text-muted-foreground">Minimum amount: $10</p>
@@ -93,7 +93,7 @@ const PurchaseCredits = () => {
                       key={amount}
                       type="button"
                       variant="outline"
-                      className={`bg-[var(--black)] border-gray-800/30 hover:bg-gray-900/30 ${
+                      className={`bg-[var(--black)] border-neutral-800/30 hover:bg-neutral-900/30 ${
                         creditAmount === amount ? 'border-white/30 bg-primary/10' : ''
                       }`}
                       onClick={() => setCreditAmount(amount)}
@@ -105,8 +105,8 @@ const PurchaseCredits = () => {
 
                 <div className="space-y-4">
                   <Label htmlFor="card">Payment Method</Label>
-                  <div className="p-4 border-0 rounded-lg bg-gray-900/20 flex items-center">
-                    <div className="h-10 w-14 bg-gray-900/50 rounded flex items-center justify-center mr-4">
+                  <div className="p-4 border-0 rounded-lg bg-neutral-900/20 flex items-center">
+                    <div className="h-10 w-14 bg-neutral-900/50 rounded flex items-center justify-center mr-4">
                       <div className="text-foreground font-bold text-xs">VISA</div>
                     </div>
                     <div>
@@ -130,7 +130,7 @@ const PurchaseCredits = () => {
                 
                 <Button 
                   type="submit" 
-                  className="w-full bg-gray-900 hover:bg-gray-800 border-0" 
+                  className="w-full bg-neutral-900 hover:bg-neutral-800 border-0" 
                   disabled={isProcessing}
                 >
                   {isProcessing ? 'Processing...' : 'Purchase Credits'}
@@ -148,7 +148,7 @@ const PurchaseCredits = () => {
                   <span>Credits</span>
                   <span className="font-medium">${creditAmount}</span>
                 </div>
-                <div className="flex justify-between py-2 border-t border-gray-800/10">
+                <div className="flex justify-between py-2 border-t border-neutral-800/10">
                   <span>Subtotal</span>
                   <span className="font-medium">${creditAmount}</span>
                 </div>
@@ -156,7 +156,7 @@ const PurchaseCredits = () => {
                   <span>Tax</span>
                   <span className="font-medium">$0.00</span>
                 </div>
-                <div className="flex justify-between py-2 border-t border-gray-800/10">
+                <div className="flex justify-between py-2 border-t border-neutral-800/10">
                   <span className="font-bold">Total</span>
                   <span className="font-bold">${creditAmount}</span>
                 </div>

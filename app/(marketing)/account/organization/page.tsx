@@ -77,7 +77,7 @@ const Organization = () => {
         </AnimatedHeading>
 
         <div className="flex flex-col md:flex-row md:items-center gap-6">
-          <div className="h-24 w-24 bg-gray-900/30 rounded-xl flex items-center justify-center">
+          <div className="h-24 w-24 bg-neutral-900/30 rounded-xl flex items-center justify-center">
             <Building className="h-12 w-12 text-muted-foreground" />
           </div>
           
@@ -89,12 +89,12 @@ const Organization = () => {
             </div>
             
             <div className="mt-4 space-x-4">
-              <Button variant="outline" size="sm" className="bg-[var(--black)] border-gray-800/30 hover:bg-gray-900/30 space-x-2">
+              <Button variant="outline" size="sm" className="bg-[var(--black)] border-neutral-800/30 hover:bg-neutral-900/30 space-x-2">
                 <Upload className="h-4 w-4" />
                 <span>Upload Logo</span>
               </Button>
               <Link href="/organization-profile">
-                <Button variant="outline" size="sm" className="bg-[var(--black)] border-gray-800/30 hover:bg-gray-900/30">
+                <Button variant="outline" size="sm" className="bg-[var(--black)] border-neutral-800/30 hover:bg-neutral-900/30">
                   View Public Profile
                 </Button>
               </Link>
@@ -102,7 +102,7 @@ const Organization = () => {
           </div>
         </div>
         
-        <div className="border-t border-gray-800/10 pt-6">
+        <div className="border-t border-neutral-800/10 pt-6">
           <h3 className="text-xl font-medium mb-4">Organization Details</h3>
           
           <form onSubmit={handleSubmit} className="space-y-6 max-w-xl">
@@ -112,7 +112,7 @@ const Organization = () => {
                 id="orgName"
                 value={orgName}
                 onChange={(e) => setOrgName(e.target.value)}
-                className="bg-gray-900/20 border-gray-800/30"
+                className="bg-neutral-900/20 border-neutral-800/30"
               />
             </div>
             
@@ -122,7 +122,7 @@ const Organization = () => {
                 id="orgDescription"
                 value={orgDescription}
                 onChange={(e) => setOrgDescription(e.target.value)}
-                className="bg-gray-900/20 border-gray-800/30 min-h-24"
+                className="bg-neutral-900/20 border-neutral-800/30 min-h-24"
                 placeholder="Tell us about your organization"
               />
             </div>
@@ -133,7 +133,7 @@ const Organization = () => {
                 id="orgWebsite"
                 value={orgWebsite}
                 onChange={(e) => setOrgWebsite(e.target.value)}
-                className="bg-gray-900/20 border-gray-800/30"
+                className="bg-neutral-900/20 border-neutral-800/30"
                 placeholder="https://example.com"
               />
             </div>
@@ -144,12 +144,12 @@ const Organization = () => {
                 id="orgLocation"
                 value={orgLocation}
                 onChange={(e) => setOrgLocation(e.target.value)}
-                className="bg-gray-900/20 border-gray-800/30"
+                className="bg-neutral-900/20 border-neutral-800/30"
                 placeholder="City, Country"
               />
             </div>
             
-            <Button type="submit" className="bg-gray-900 hover:bg-gray-800 border-none">
+            <Button type="submit" className="bg-neutral-900 hover:bg-neutral-800 border-none">
               Update Organization
             </Button>
           </form>
@@ -159,7 +159,7 @@ const Organization = () => {
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-medium">Team Members</h3>
             
-            <Button onClick={handleInviteMember} className="space-x-2 bg-gray-900 hover:bg-gray-800 border-none">
+            <Button onClick={handleInviteMember} className="space-x-2 bg-neutral-900 hover:bg-neutral-800 border-none">
               <UserPlus className="h-4 w-4" />
               <span>Invite Member</span>
             </Button>
@@ -167,7 +167,7 @@ const Organization = () => {
           
           <div className="rounded-lg overflow-hidden">
             <Table>
-              <TableHeader className="bg-gray-900/30">
+              <TableHeader className="bg-neutral-900/30">
                 <TableRow className="border-0">
                   <TableHead>User</TableHead>
                   <TableHead>Role</TableHead>
@@ -183,12 +183,12 @@ const Organization = () => {
                   </TableRow>
                 ) : (
                   teamMembers.map((member: { id: string; name: string; email: string; role: string; avatar?: string }) => (
-                    <TableRow key={member.id} className="border-gray-800/10">
+                    <TableRow key={member.id} className="border-neutral-800/10">
                       <TableCell>
                         <div className="flex items-center space-x-3">
                           <Avatar className="h-8 w-8">
                             {member.avatar ? <AvatarImage src={member.avatar} /> : null}
-                            <AvatarFallback className="bg-gray-900/50">
+                            <AvatarFallback className="bg-neutral-900/50">
                               {member.name.split(" ").map((part: string) => part[0]).slice(0, 2).join("")}
                             </AvatarFallback>
                           </Avatar>
@@ -204,7 +204,7 @@ const Organization = () => {
                             ? 'bg-primary/10 text-foreground'
                             : member.role === 'Admin'
                               ? 'bg-primary/10 text-foreground/70'
-                              : 'bg-gray-900/20 text-foreground/80'
+                              : 'bg-neutral-900/20 text-foreground/80'
                         }`}>
                           {member.role}
                         </span>
@@ -216,11 +216,11 @@ const Organization = () => {
                               <MoreVertical className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end" className="bg-[var(--black)] border-gray-800/30">
-                            <DropdownMenuItem className="text-[var(--white)] hover:bg-gray-900/30">
+                          <DropdownMenuContent align="end" className="bg-[var(--black)] border-neutral-800/30">
+                            <DropdownMenuItem className="text-[var(--white)] hover:bg-neutral-900/30">
                               View Profile
                             </DropdownMenuItem>
-                            <DropdownMenuItem className="text-[var(--white)] hover:bg-gray-900/30">
+                            <DropdownMenuItem className="text-[var(--white)] hover:bg-neutral-900/30">
                               Change Role
                             </DropdownMenuItem>
                             <DropdownMenuItem className="text-foreground/70 hover:bg-primary/5 hover:text-foreground/70">

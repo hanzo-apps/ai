@@ -62,7 +62,7 @@ const FeatureComparison = () => {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="border-b border-gray-800">
+            <tr className="border-b border-neutral-800">
               <th className="py-4 px-4 text-left">Feature</th>
               <th className="py-4 px-6 text-center">Pro</th>
               <th className="py-4 px-6 text-center">Max</th>
@@ -73,13 +73,13 @@ const FeatureComparison = () => {
           <tbody>
             {featureCategories.map((category) => (
               <React.Fragment key={category.name}>
-                <tr className="bg-gray-900/30">
+                <tr className="bg-neutral-900/30">
                   <td colSpan={5} className="py-3 px-4 font-medium text-foreground/80">
                     {category.name}
                   </td>
                 </tr>
                 {category.features.map((feature) => (
-                  <tr key={feature.name} className="border-b border-gray-800/50">
+                  <tr key={feature.name} className="border-b border-neutral-800/50">
                     <td className="py-3 px-4 text-muted-foreground">{feature.name}</td>
                     <td className="py-3 px-6">{renderFeatureValue(feature.pro)}</td>
                     <td className="py-3 px-6">{renderFeatureValue(feature.max)}</td>

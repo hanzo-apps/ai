@@ -18,7 +18,7 @@ const Toolbar = ({
   setActiveTab 
 }: ToolbarProps) => {
   return (
-    <div className="bg-gray-900/70 p-2 border-b border-gray-800 flex items-center">
+    <div className="bg-neutral-900/70 p-2 border-b border-neutral-800 flex items-center">
       <Button 
         variant="ghost" 
         size="icon"

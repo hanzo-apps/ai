@@ -58,7 +58,7 @@ const CallToAction = () => {
           <Button 
             size="lg" 
             variant="outline" 
-            className="border-gray-700 text-[var(--white)] hover:bg-gray-800 px-8 py-6 text-lg w-full sm:w-auto"
+            className="border-neutral-700 text-[var(--white)] hover:bg-neutral-800 px-8 py-6 text-lg w-full sm:w-auto"
           >
             <a href="https://docs.hanzo.ai" className="flex items-center">
               Documentation <ChevronRight className="ml-2 h-5 w-5" />

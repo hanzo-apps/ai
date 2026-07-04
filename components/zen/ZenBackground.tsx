@@ -16,8 +16,8 @@ const ZenBackground: React.FC = () => {
       />
       
       {/* Ultra-subtle gradient overlays */}
-      <div className="absolute top-0 left-0 right-0 h-[30vh] bg-gradient-to-b from-gray-950/70 to-transparent" />
-      <div className="absolute left-0 bottom-0 right-0 h-[30vh] bg-gradient-to-t from-gray-950/70 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[30vh] bg-gradient-to-b from-neutral-950/70 to-transparent" />
+      <div className="absolute left-0 bottom-0 right-0 h-[30vh] bg-gradient-to-t from-neutral-950/70 to-transparent" />
       
       {/* Depth radial gradient */}
       <div 

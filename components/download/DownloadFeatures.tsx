@@ -34,8 +34,8 @@ const DownloadFeatures = () => {
             </div>
           </div>
           
-          <div className="rounded-xl overflow-hidden shadow-2xl border border-gray-800">
-            <div className="relative pb-[120%] h-0 bg-gray-900">
+          <div className="rounded-xl overflow-hidden shadow-2xl border border-neutral-800">
+            <div className="relative pb-[120%] h-0 bg-neutral-900">
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-muted-foreground">Transcription preview</span>
               </div>

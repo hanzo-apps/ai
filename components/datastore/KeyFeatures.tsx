@@ -21,7 +21,7 @@ const FeatureCard = ({
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.4, delay }}
-    className="bg-gray-900/20 border border-gray-800 rounded-xl p-8"
+    className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-8"
   >
     <div className="h-12 w-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
       <Icon className="h-6 w-6 text-foreground/70" />

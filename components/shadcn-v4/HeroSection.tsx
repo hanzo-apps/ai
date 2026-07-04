@@ -65,7 +65,7 @@ const HeroSection = () => {
           <Button 
             size="lg" 
             variant="outline"
-            className="border-gray-700 text-foreground hover:bg-primary/10 rounded-md py-6"
+            className="border-neutral-700 text-foreground hover:bg-primary/10 rounded-md py-6"
           >
             <Github className="mr-2 h-5 w-5" /> Star on GitHub
           </Button>

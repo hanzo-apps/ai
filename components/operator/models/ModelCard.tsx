@@ -20,8 +20,8 @@ const ModelCard = ({ model, index }: ModelCardProps) => {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className={`
-        bg-gray-900/30 border rounded-xl p-6 hover:bg-gray-900/50 transition-colors relative
-        ${model.recommended ? 'border-white/50' : 'border-gray-800'}
+        bg-neutral-900/30 border rounded-xl p-6 hover:bg-neutral-900/50 transition-colors relative
+        ${model.recommended ? 'border-white/50' : 'border-neutral-800'}
       `}
     >
       {model.recommended && (

@@ -30,7 +30,7 @@ const BillingHistory = () => {
       case 'Failed':
         return 'bg-primary/10 text-foreground/70';
       default:
-        return 'bg-gray-900/20 text-muted-foreground';
+        return 'bg-neutral-900/20 text-muted-foreground';
     }
   };
 
@@ -46,7 +46,7 @@ const BillingHistory = () => {
         </Button>
       </div>
       
-      <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+      <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
         <h3 className="text-xl font-medium mb-6">Invoice History</h3>
         
         <div className="overflow-x-auto">

@@ -136,7 +136,7 @@ const WebAnalytics = () => {
             className="relative"
             ref={chartRef}
           >
-            <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-800">
+            <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-medium">Live User Activity</h3>
                 <div className="bg-primary/10 animate-pulse h-2 w-2 rounded-full"></div>
@@ -146,7 +146,7 @@ const WebAnalytics = () => {
                 {/* Chart grid */}
                 <div className="absolute inset-0 grid grid-cols-6 grid-rows-5">
                   {Array(30).fill(0).map((_, i) => (
-                    <div key={i} className="border-b border-r border-gray-800 opacity-30"></div>
+                    <div key={i} className="border-b border-r border-neutral-800 opacity-30"></div>
                   ))}
                 </div>
                 
@@ -199,7 +199,7 @@ const WebAnalytics = () => {
                 
                 {/* Tooltip */}
                 <motion.div
-                  className="absolute bg-gray-800 rounded p-2 text-xs w-32 shadow-lg border border-gray-700"
+                  className="absolute bg-neutral-800 rounded p-2 text-xs w-32 shadow-lg border border-neutral-700"
                   style={{ top: "30%", left: "60%" }}
                   initial={{ opacity: 0, y: 10 }}
                   animate={controls}

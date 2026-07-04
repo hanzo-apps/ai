@@ -25,7 +25,7 @@ const NodeDetailsDialog: React.FC<NodeDetailsDialogProps> = ({ isOpen, onOpenCha
           </DialogDescription>
         </DialogHeader>
         
-        <div className="p-4 bg-gray-800/50 rounded-md mb-4">
+        <div className="p-4 bg-neutral-800/50 rounded-md mb-4">
           <h4 className="text-sm font-medium text-foreground/80 mb-2">Service Details</h4>
           <div className="grid grid-cols-2 gap-y-2 text-sm">
             <div className="text-muted-foreground">Status</div>
@@ -45,7 +45,7 @@ const NodeDetailsDialog: React.FC<NodeDetailsDialogProps> = ({ isOpen, onOpenCha
         
         <div className="flex justify-end space-x-2">
           <button 
-            className="px-3 py-1.5 rounded bg-gray-800 hover:bg-gray-700 text-foreground/80 text-sm"
+            className="px-3 py-1.5 rounded bg-neutral-800 hover:bg-neutral-700 text-foreground/80 text-sm"
             onClick={() => onOpenChange(false)}
           >
             Close

@@ -5,7 +5,7 @@ import { Button } from "@hanzo/ui";
 
 const ChatHeader: React.FC = () => {
   return (
-    <div className="bg-gray-900/70 p-4 border-b border-gray-800 flex items-center">
+    <div className="bg-neutral-900/70 p-4 border-b border-neutral-800 flex items-center">
       <div className="bg-primary/10 h-8 w-8 rounded-full flex items-center justify-center mr-3">
         <Bot className="h-4 w-4 text-[var(--white)]" />
       </div>

@@ -7,7 +7,7 @@ import { Check, Code2, PanelLeft, Plug, Settings, Shield } from "lucide-react";
 
 const HanzoCodeCompatibility = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-950">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,7 +28,7 @@ const HanzoCodeCompatibility = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-8 border border-gray-700"
+            className="bg-gradient-to-br from-neutral-900 to-neutral-800 rounded-xl p-8 border border-neutral-700"
           >
             <h3 className="text-2xl font-bold mb-6 text-foreground">Works With Your Favorite Editors</h3>
             
@@ -78,25 +78,25 @@ const HanzoCodeCompatibility = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="grid grid-cols-2 gap-6">
-              <div className="bg-gray-900/80 rounded-lg p-6 border border-gray-800">
+              <div className="bg-neutral-900/80 rounded-lg p-6 border border-neutral-800">
                 <PanelLeft className="h-10 w-10 text-foreground mb-4" />
                 <h4 className="text-lg font-semibold mb-2">Extension API</h4>
                 <p className="text-foreground/80 text-sm">Full integration with standard VS Code extension API</p>
               </div>
               
-              <div className="bg-gray-900/80 rounded-lg p-6 border border-gray-800">
+              <div className="bg-neutral-900/80 rounded-lg p-6 border border-neutral-800">
                 <Code2 className="h-10 w-10 text-foreground mb-4" />
                 <h4 className="text-lg font-semibold mb-2">Native Experience</h4>
                 <p className="text-foreground/80 text-sm">Feels like a native part of your existing editor</p>
               </div>
               
-              <div className="bg-gray-900/80 rounded-lg p-6 border border-gray-800">
+              <div className="bg-neutral-900/80 rounded-lg p-6 border border-neutral-800">
                 <Plug className="h-10 w-10 text-foreground mb-4" />
                 <h4 className="text-lg font-semibold mb-2">Plugin System</h4>
                 <p className="text-foreground/80 text-sm">Extend with custom plugins for your workflow</p>
               </div>
               
-              <div className="bg-gray-900/80 rounded-lg p-6 border border-gray-800">
+              <div className="bg-neutral-900/80 rounded-lg p-6 border border-neutral-800">
                 <Shield className="h-10 w-10 text-foreground mb-4" />
                 <h4 className="text-lg font-semibold mb-2">Enterprise Ready</h4>
                 <p className="text-foreground/80 text-sm">Security and compliance features for teams</p>

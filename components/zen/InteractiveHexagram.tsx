@@ -33,8 +33,8 @@ const InteractiveHexagram: React.FC<InteractiveHexagramProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay: index * 0.02 }}
-      className={`p-3 border ${isSelected ? 'border-white/50 bg-primary/10' : 'border-gray-800/50 bg-gray-900/30'}
-                 rounded-md cursor-pointer hover:bg-gray-800/40 transition-all duration-200 flex flex-col items-center justify-center`}
+      className={`p-3 border ${isSelected ? 'border-white/50 bg-primary/10' : 'border-neutral-800/50 bg-neutral-900/30'}
+                 rounded-md cursor-pointer hover:bg-neutral-800/40 transition-all duration-200 flex flex-col items-center justify-center`}
       onClick={() => onClick(hexagram)}
       whileHover={{ y: -2 }}
     >

@@ -39,12 +39,12 @@ const Scaling = () => {
               Perfect for high-frequency data updates and time-sensitive applications.
             </p>
 
-            <div className="mt-6 pt-6 border-t border-gray-800">
+            <div className="mt-6 pt-6 border-t border-neutral-800">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-muted-foreground text-sm">Message throughput</span>
                 <span className="text-[var(--white)] font-medium">Unlimited</span>
               </div>
-              <div className="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
                 <div className="bg-primary h-full rounded-full" style={{ width: "100%" }}></div>
               </div>
             </div>
@@ -64,12 +64,12 @@ const Scaling = () => {
               scaling. No connection limits or throttling to worry about.
             </p>
 
-            <div className="mt-6 pt-6 border-t border-gray-800">
+            <div className="mt-6 pt-6 border-t border-neutral-800">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-muted-foreground text-sm">Connection capacity</span>
                 <span className="text-[var(--white)] font-medium">Millions+</span>
               </div>
-              <div className="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
                 <div className="bg-primary h-full rounded-full" style={{ width: "95%" }}></div>
               </div>
             </div>
@@ -89,12 +89,12 @@ const Scaling = () => {
               low-latency connections for users anywhere on the planet.
             </p>
 
-            <div className="mt-6 pt-6 border-t border-gray-800">
+            <div className="mt-6 pt-6 border-t border-neutral-800">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-muted-foreground text-sm">Global coverage</span>
                 <span className="text-[var(--white)] font-medium">200+ regions</span>
               </div>
-              <div className="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+              <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
                 <div className="bg-primary h-full rounded-full" style={{ width: "90%" }}></div>
               </div>
             </div>
@@ -108,7 +108,7 @@ const Scaling = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6"
         >
-          <div className="bg-[var(--black)]/40 rounded-lg border border-gray-800 p-4 flex items-center">
+          <div className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
             <Zap className="h-8 w-8 text-foreground mr-4" />
             <div>
               <h4 className="text-[var(--white)] font-medium">Auto-scaling</h4>
@@ -116,7 +116,7 @@ const Scaling = () => {
             </div>
           </div>
 
-          <div className="bg-[var(--black)]/40 rounded-lg border border-gray-800 p-4 flex items-center">
+          <div className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
             <Cpu className="h-8 w-8 text-foreground mr-4" />
             <div>
               <h4 className="text-[var(--white)] font-medium">High Availability</h4>
@@ -124,7 +124,7 @@ const Scaling = () => {
             </div>
           </div>
 
-          <div className="bg-[var(--black)]/40 rounded-lg border border-gray-800 p-4 flex items-center">
+          <div className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
             <Server className="h-8 w-8 text-foreground mr-4" />
             <div>
               <h4 className="text-[var(--white)] font-medium">Zero Management</h4>

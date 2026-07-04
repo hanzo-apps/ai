@@ -75,8 +75,8 @@ const getColorClasses = (color: string = "brand", isHovered: boolean) => {
       hoverText: "text-foreground"
     },
     gray: {
-      bg: "bg-gray-900/30",
-      hoverBg: "bg-gray-700/30",
+      bg: "bg-neutral-900/30",
+      hoverBg: "bg-neutral-700/30",
       text: "text-muted-foreground",
       hoverText: "text-foreground/80"
     }
@@ -125,7 +125,7 @@ const DXPlatformCard: React.FC<DXPlatformCardProps> = ({
     </>
   );
 
-  const containerClasses = "bg-gray-900/20 border border-gray-800 rounded-xl p-6 group hover:bg-gray-900/30 transition-colors h-full flex flex-col";
+  const containerClasses = "bg-neutral-900/20 border border-neutral-800 rounded-xl p-6 group hover:bg-neutral-900/30 transition-colors h-full flex flex-col";
 
   return (
     <motion.div

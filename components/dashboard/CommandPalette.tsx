@@ -75,7 +75,7 @@ const CommandPalette: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 bg-[var(--black)]/60 backdrop-blur-sm flex items-start justify-center pt-[20vh]">
-      <div className="w-full max-w-2xl bg-[var(--black)] border border-gray-800 rounded-lg shadow-xl overflow-hidden">
+      <div className="w-full max-w-2xl bg-[var(--black)] border border-neutral-800 rounded-lg shadow-xl overflow-hidden">
         <Command
           className="bg-[var(--black)] text-[var(--white)] border-none"
           filter={(value, search, keywords) => {
@@ -84,16 +84,16 @@ const CommandPalette: React.FC = () => {
             return 0;
           }}
         >
-          <div className="border-b border-gray-800 p-2 flex items-center">
+          <div className="border-b border-neutral-800 p-2 flex items-center">
             <Search className="ml-2 h-4 w-4 text-muted-foreground" />
             <Command.Input 
               value={search}
               onValueChange={setSearch}
-              className="w-full bg-transparent border-none focus:outline-none px-2 py-1.5 text-neutral-200 placeholder-gray-500" 
+              className="w-full bg-transparent border-none focus:outline-none px-2 py-1.5 text-neutral-200 placeholder-neutral-500" 
               placeholder="Search commands..." 
               autoFocus
             />
-            <kbd className="mr-2 px-1.5 py-0.5 text-xs rounded bg-gray-800 text-muted-foreground">
+            <kbd className="mr-2 px-1.5 py-0.5 text-xs rounded bg-neutral-800 text-muted-foreground">
               Esc
             </kbd>
           </div>
@@ -107,7 +107,7 @@ const CommandPalette: React.FC = () => {
               <Command.Item 
                 id="view-board" 
                 onSelect={handleSelect} 
-                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-gray-800 text-neutral-200"
+                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-neutral-800 text-neutral-200"
                 keywords={["kanban", "board", "tasks"]}
               >
                 <LayoutGrid className="h-4 w-4 text-muted-foreground" />
@@ -116,7 +116,7 @@ const CommandPalette: React.FC = () => {
               <Command.Item 
                 id="view-agents" 
                 onSelect={handleSelect} 
-                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-gray-800 text-neutral-200"
+                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-neutral-800 text-neutral-200"
                 keywords={["agents", "ai", "list"]}
               >
                 <Bot className="h-4 w-4 text-muted-foreground" />
@@ -125,7 +125,7 @@ const CommandPalette: React.FC = () => {
               <Command.Item 
                 id="view-analytics" 
                 onSelect={handleSelect} 
-                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-gray-800 text-neutral-200"
+                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-neutral-800 text-neutral-200"
                 keywords={["analytics", "stats", "metrics"]}
               >
                 <ChartBar className="h-4 w-4 text-muted-foreground" />
@@ -137,7 +137,7 @@ const CommandPalette: React.FC = () => {
               <Command.Item 
                 id="new-agent" 
                 onSelect={handleSelect} 
-                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-gray-800 text-neutral-200"
+                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-neutral-800 text-neutral-200"
                 keywords={["create", "agent", "new", "add"]}
               >
                 <PlusCircle className="h-4 w-4 text-muted-foreground" />
@@ -146,7 +146,7 @@ const CommandPalette: React.FC = () => {
               <Command.Item 
                 id="new-task" 
                 onSelect={handleSelect} 
-                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-gray-800 text-neutral-200"
+                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-neutral-800 text-neutral-200"
                 keywords={["create", "task", "new", "add"]}
               >
                 <PlusCircle className="h-4 w-4 text-muted-foreground" />
@@ -155,7 +155,7 @@ const CommandPalette: React.FC = () => {
               <Command.Item 
                 id="refresh" 
                 onSelect={handleSelect} 
-                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-gray-800 text-neutral-200"
+                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-neutral-800 text-neutral-200"
                 keywords={["refresh", "reload", "update"]}
               >
                 <RefreshCw className="h-4 w-4 text-muted-foreground" />
@@ -164,7 +164,7 @@ const CommandPalette: React.FC = () => {
               <Command.Item 
                 id="settings" 
                 onSelect={handleSelect} 
-                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-gray-800 text-neutral-200"
+                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-neutral-800 text-neutral-200"
                 keywords={["settings", "preferences", "config"]}
               >
                 <Settings className="h-4 w-4 text-muted-foreground" />
@@ -178,7 +178,7 @@ const CommandPalette: React.FC = () => {
                   key={agent.id}
                   id={`toggle-agent-${agent.id}`}
                   onSelect={handleSelect}
-                  className="flex items-center justify-between px-2 py-1.5 rounded cursor-pointer hover:bg-gray-800 text-neutral-200"
+                  className="flex items-center justify-between px-2 py-1.5 rounded cursor-pointer hover:bg-neutral-800 text-neutral-200"
                   keywords={[agent.name, agent.type, agent.status, "toggle", "agent"]}
                 >
                   <div className="flex items-center space-x-2">
@@ -199,7 +199,7 @@ const CommandPalette: React.FC = () => {
               <Command.Item 
                 id="data-sources" 
                 onSelect={handleSelect} 
-                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-gray-800 text-neutral-200"
+                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-neutral-800 text-neutral-200"
                 keywords={["data", "sources", "database", "vector", "rag"]}
               >
                 <Database className="h-4 w-4 text-muted-foreground" />
@@ -208,7 +208,7 @@ const CommandPalette: React.FC = () => {
               <Command.Item 
                 id="infrastructure" 
                 onSelect={handleSelect} 
-                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-gray-800 text-neutral-200"
+                className="flex items-center space-x-2 px-2 py-1.5 rounded cursor-pointer hover:bg-neutral-800 text-neutral-200"
                 keywords={["infrastructure", "server", "deploy", "resources"]}
               >
                 <Server className="h-4 w-4 text-muted-foreground" />

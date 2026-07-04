@@ -18,7 +18,7 @@ const techStacks = [
 
 const TechStack = () => {
   return (
-    <section id="learn-more" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900">
+    <section id="learn-more" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-wrap justify-center gap-8 mb-16">
           {techStacks.map((tech, index) => (
@@ -28,7 +28,7 @@ const TechStack = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="px-6 py-3 bg-gray-800/50 rounded-full border border-gray-700 hover:border-white/30/50 hover:bg-gray-800 transition-colors"
+              className="px-6 py-3 bg-neutral-800/50 rounded-full border border-neutral-700 hover:border-white/30/50 hover:bg-neutral-800 transition-colors"
             >
               {tech}
             </motion.div>

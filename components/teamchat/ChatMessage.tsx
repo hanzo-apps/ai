@@ -36,7 +36,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, formatTimestamp }) =
         className={`max-w-3xl p-3 rounded-lg ${
           message.sender === "user"
             ? "bg-primary/30 border border-white/30"
-            : "bg-gray-800/60 border border-gray-700/50"
+            : "bg-neutral-800/60 border border-neutral-700/50"
         }`}
       >
         <div

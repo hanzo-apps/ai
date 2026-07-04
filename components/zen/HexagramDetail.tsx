@@ -17,7 +17,7 @@ const HexagramDetail: React.FC<HexagramDetailProps> = ({ hexagram }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.4 }}
-      className="bg-gray-900/40 border border-gray-800/70 rounded-lg p-6 backdrop-blur-sm"
+      className="bg-neutral-900/40 border border-neutral-800/70 rounded-lg p-6 backdrop-blur-sm"
     >
       <div className="flex items-center mb-4">
         <div className="mr-4">
@@ -33,7 +33,7 @@ const HexagramDetail: React.FC<HexagramDetailProps> = ({ hexagram }) => {
         </div>
       </div>
       
-      <div className="mt-4 mb-6 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+      <div className="mt-4 mb-6 h-px bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
       
       <p className="text-foreground/80 mb-4">{hexagram.description || hexagram.principle}</p>
       

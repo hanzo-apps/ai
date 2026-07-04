@@ -119,7 +119,7 @@ const PaymentMethods = () => {
       
       {/* Add new card form */}
       {showAddCard && (
-        <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-6">
+        <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-6">
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg font-medium">Add Payment Method</h3>
             <Button variant="ghost" size="sm" onClick={handleCloseAddCard}>
@@ -136,7 +136,7 @@ const PaymentMethods = () => {
                 placeholder="John Doe"
                 value={newCard.cardName}
                 onChange={handleCardInputChange}
-                className="bg-gray-800 border-gray-700"
+                className="bg-neutral-800 border-neutral-700"
               />
             </div>
             
@@ -148,7 +148,7 @@ const PaymentMethods = () => {
                 placeholder="4242 4242 4242 4242"
                 value={newCard.cardNumber}
                 onChange={handleCardInputChange}
-                className="bg-gray-800 border-gray-700"
+                className="bg-neutral-800 border-neutral-700"
               />
             </div>
             
@@ -162,7 +162,7 @@ const PaymentMethods = () => {
                   maxLength={2}
                   value={newCard.expMonth}
                   onChange={handleCardInputChange}
-                  className="bg-gray-800 border-gray-700"
+                  className="bg-neutral-800 border-neutral-700"
                 />
               </div>
               
@@ -175,7 +175,7 @@ const PaymentMethods = () => {
                   maxLength={2}
                   value={newCard.expYear}
                   onChange={handleCardInputChange}
-                  className="bg-gray-800 border-gray-700"
+                  className="bg-neutral-800 border-neutral-700"
                 />
               </div>
               
@@ -188,7 +188,7 @@ const PaymentMethods = () => {
                   maxLength={3}
                   value={newCard.cvc}
                   onChange={handleCardInputChange}
-                  className="bg-gray-800 border-gray-700"
+                  className="bg-neutral-800 border-neutral-700"
                 />
               </div>
             </div>
@@ -208,11 +208,11 @@ const PaymentMethods = () => {
             className={`flex items-center justify-between p-4 rounded-lg border ${
               card.isDefault 
                 ? 'border-white bg-primary/5' 
-                : 'border-gray-800 bg-gray-900/30'
+                : 'border-neutral-800 bg-neutral-900/30'
             }`}
           >
             <div className="flex items-center">
-              <div className="h-10 w-14 bg-gray-800 rounded flex items-center justify-center mr-4">
+              <div className="h-10 w-14 bg-neutral-800 rounded flex items-center justify-center mr-4">
                 {getCardIcon(card.type)}
               </div>
               <div>
@@ -256,7 +256,7 @@ const PaymentMethods = () => {
         ))}
       </div>
       
-      <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+      <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
         <h3 className="text-lg font-medium mb-4">Billing Address</h3>
         <div className="space-y-1 mb-4">
           <div>Jane Doe</div>

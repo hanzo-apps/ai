@@ -198,7 +198,7 @@ const AgentGallery = () => {
       role: "Core Engineer",
       description: "Your expert AI core engineer, building reliable system foundations and architecture.",
       icon: BrainCircuit,
-      gradient: "from-gray-500 to-slate-500"
+      gradient: "from-neutral-500 to-neutral-500"
     },
     {
       name: "Algo",

@@ -73,7 +73,7 @@ const HanzoDev = () => {
 
           {/* Main install command */}
           <div className="flex justify-center mb-8">
-            <div className="bg-gray-900 border border-gray-800 rounded-lg px-6 py-4 flex items-center">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-lg px-6 py-4 flex items-center">
               <Terminal className="h-5 w-5 text-foreground mr-3 flex-shrink-0" />
               <code className="text-foreground/80 font-mono text-lg">curl -fsSL hanzo.sh | bash</code>
               <Button
@@ -97,7 +97,7 @@ const HanzoDev = () => {
                   href={`https://hanzo.sh${s.path}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gray-900/50 border border-gray-800 rounded-lg p-4 hover:border-white/30/50 transition-colors text-left"
+                  className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4 hover:border-white/30/50 transition-colors text-left"
                 >
                   <Icon className="h-5 w-5 text-foreground mb-2" />
                   <div className="font-mono text-sm text-foreground/80">{s.name}</div>

@@ -37,8 +37,8 @@ const Regions = () => {
               Functions and apps boot and respond to web requests in 250ms or less with Hanzo Machines. You decide to keep them running or automatically put them to sleep.
             </p>
             
-            <div className="rounded-lg bg-gray-900/50 border border-gray-800 overflow-hidden">
-              <div className="bg-gray-800 py-2 px-4 flex items-center space-x-2">
+            <div className="rounded-lg bg-neutral-900/50 border border-neutral-800 overflow-hidden">
+              <div className="bg-neutral-800 py-2 px-4 flex items-center space-x-2">
                 <div className="w-3 h-3 rounded-full bg-primary/10"></div>
                 <div className="w-3 h-3 rounded-full bg-primary/10"></div>
                 <div className="w-3 h-3 rounded-full bg-primary/10"></div>

@@ -56,7 +56,7 @@ const WhyHanzo = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-gray-900/30 rounded-xl p-6 border border-gray-800"
+              className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800"
             >
               <div className="h-12 w-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
                 {feature.icon}

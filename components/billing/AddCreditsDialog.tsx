@@ -44,7 +44,7 @@ const AddCreditsDialog = ({ isOpen, onClose }: AddCreditsDialogProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="bg-gray-900/50 border border-gray-800 rounded-lg p-6">
+    <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-6">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-medium">Add Credits to Your Account</h3>
         <Button variant="ghost" size="sm" onClick={onClose}>
@@ -63,7 +63,7 @@ const AddCreditsDialog = ({ isOpen, onClose }: AddCreditsDialogProps) => {
               placeholder="50"
               value={creditAmount}
               onChange={handleCreditAmountChange}
-              className="bg-gray-800 border-gray-700 pl-8"
+              className="bg-neutral-800 border-neutral-700 pl-8"
             />
           </div>
           <p className="text-sm text-muted-foreground">Minimum amount: $10</p>

@@ -254,7 +254,7 @@ const Analytics = () => {
         <div className="relative mb-4 flex justify-center">
           <div className="relative w-full max-w-4xl">
             {/* Background line */}
-            <div className="absolute top-6 left-0 w-full h-1.5 bg-gray-800 rounded-full"></div>
+            <div className="absolute top-6 left-0 w-full h-1.5 bg-neutral-800 rounded-full"></div>
             
             {/* Animated progress lines in segments - with fixed percentages for equal spacing */}
             <motion.div className="absolute top-6 left-0 h-1.5 bg-[var(--white)] rounded-full origin-left" variants={milestoneLineVariants} initial="hidden" whileInView="visible" viewport={{
@@ -276,7 +276,7 @@ const Analytics = () => {
             <div className="flex justify-between items-center relative w-full">
               {/* First Milestone */}
               <div className="text-center relative w-1/3 pr-4">
-                <motion.div className="w-12 h-12 rounded-full bg-gray-900 border-2 border-white flex items-center justify-center mx-auto relative" variants={milestoneCircleVariants} initial="hidden" whileInView="visible" viewport={{
+                <motion.div className="w-12 h-12 rounded-full bg-neutral-900 border-2 border-white flex items-center justify-center mx-auto relative" variants={milestoneCircleVariants} initial="hidden" whileInView="visible" viewport={{
                 once: true,
                 margin: "-100px"
               }} custom={1}>
@@ -287,7 +287,7 @@ const Analytics = () => {
               
               {/* Second Milestone - Center */}
               <div className="text-center relative w-1/3 px-2">
-                <motion.div className="w-12 h-12 rounded-full bg-gray-900 border-2 border-white flex items-center justify-center mx-auto" variants={milestoneCircleVariants} initial="hidden" whileInView="visible" viewport={{
+                <motion.div className="w-12 h-12 rounded-full bg-neutral-900 border-2 border-white flex items-center justify-center mx-auto" variants={milestoneCircleVariants} initial="hidden" whileInView="visible" viewport={{
                 once: true,
                 margin: "-100px"
               }} custom={2}>
@@ -298,7 +298,7 @@ const Analytics = () => {
               
               {/* Third Milestone */}
               <div className="text-center relative w-1/3 pl-4">
-                <motion.div className="w-12 h-12 rounded-full bg-gray-900 border-2 border-border flex items-center justify-center mx-auto" variants={milestoneCircleVariants} initial="hidden" whileInView="visible" viewport={{
+                <motion.div className="w-12 h-12 rounded-full bg-neutral-900 border-2 border-border flex items-center justify-center mx-auto" variants={milestoneCircleVariants} initial="hidden" whileInView="visible" viewport={{
                 once: true,
                 margin: "-100px"
               }} custom={3}>
@@ -314,15 +314,15 @@ const Analytics = () => {
         once: true,
         margin: "-50px"
       }} className="grid grid-cols-3 gap-4 md:gap-8 mb-16 mt-10">
-          <motion.div variants={itemVariants} whileHover="hover" whileTap="tap" className="p-4 md:p-6 bg-gradient-to-br from-gray-900/20 to-transparent rounded-xl transition-all duration-300 flex flex-col items-center text-center">
+          <motion.div variants={itemVariants} whileHover="hover" whileTap="tap" className="p-4 md:p-6 bg-gradient-to-br from-neutral-900/20 to-transparent rounded-xl transition-all duration-300 flex flex-col items-center text-center">
             <p className="text-xs xs:text-sm md:text-base text-foreground/80">Track user behavior, system events, and business metrics in real-time with millisecond latency.</p>
           </motion.div>
 
-          <motion.div variants={itemVariants} whileHover="hover" whileTap="tap" className="p-4 md:p-6 bg-gradient-to-br from-gray-900/20 to-transparent rounded-xl transition-all duration-300 flex flex-col items-center text-center">
+          <motion.div variants={itemVariants} whileHover="hover" whileTap="tap" className="p-4 md:p-6 bg-gradient-to-br from-neutral-900/20 to-transparent rounded-xl transition-all duration-300 flex flex-col items-center text-center">
             <p className="text-xs xs:text-sm md:text-base text-foreground/80">Understand user journeys, cohorts, and behavior patterns with AI-powered analytics.</p>
           </motion.div>
 
-          <motion.div variants={itemVariants} whileHover="hover" whileTap="tap" className="p-4 md:p-6 bg-gradient-to-br from-gray-900/20 to-transparent rounded-xl transition-all duration-300 flex flex-col items-center text-center">
+          <motion.div variants={itemVariants} whileHover="hover" whileTap="tap" className="p-4 md:p-6 bg-gradient-to-br from-neutral-900/20 to-transparent rounded-xl transition-all duration-300 flex flex-col items-center text-center">
             <p className="text-xs xs:text-sm md:text-base text-foreground/80">Use machine learning to predict trends, detect anomalies, and optimize performance.</p>
           </motion.div>
         </motion.div>
@@ -340,7 +340,7 @@ const Analytics = () => {
         duration: 0.6,
         type: "spring",
         stiffness: 100
-      }} className="bg-gradient-to-r from-gray-900/20 via-background to-gray-900/20 rounded-xl p-8 mb-16">
+      }} className="bg-gradient-to-r from-neutral-900/20 via-background to-neutral-900/20 rounded-xl p-8 mb-16">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <motion.div initial={{
             opacity: 0,
@@ -423,7 +423,7 @@ const Analytics = () => {
             transition: {
               duration: 0.2
             }
-          }} className="bg-gradient-to-br from-gray-900/30 to-transparent rounded-xl p-4 md:p-6 ring-1 ring-border flex flex-col items-center text-center">
+          }} className="bg-gradient-to-br from-neutral-900/30 to-transparent rounded-xl p-4 md:p-6 ring-1 ring-border flex flex-col items-center text-center">
               <div className="bg-gradient-to-br from-white/20 to-white/10 rounded-full p-2 md:p-3 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center mb-3 md:mb-4">
                 <Users className="h-5 w-5 sm:h-6 sm:w-6 text-foreground/70" />
               </div>
@@ -436,7 +436,7 @@ const Analytics = () => {
             transition: {
               duration: 0.2
             }
-          }} className="bg-gradient-to-br from-gray-900/30 to-transparent rounded-xl p-4 md:p-6 ring-1 ring-border flex flex-col items-center text-center">
+          }} className="bg-gradient-to-br from-neutral-900/30 to-transparent rounded-xl p-4 md:p-6 ring-1 ring-border flex flex-col items-center text-center">
               <div className="bg-gradient-to-br from-white/20 to-white/10 rounded-full p-2 md:p-3 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center mb-3 md:mb-4">
                 <LineChart className="h-5 w-5 sm:h-6 sm:w-6 text-foreground/70" />
               </div>
@@ -449,7 +449,7 @@ const Analytics = () => {
             transition: {
               duration: 0.2
             }
-          }} className="bg-gradient-to-br from-gray-900/30 to-transparent rounded-xl p-4 md:p-6 ring-1 ring-border flex flex-col items-center text-center">
+          }} className="bg-gradient-to-br from-neutral-900/30 to-transparent rounded-xl p-4 md:p-6 ring-1 ring-border flex flex-col items-center text-center">
               <div className="bg-gradient-to-br from-white/20 to-white/10 rounded-full p-2 md:p-3 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center mb-3 md:mb-4">
                 <PieChart className="h-5 w-5 sm:h-6 sm:w-6 text-foreground/70" />
               </div>
@@ -472,7 +472,7 @@ const Analytics = () => {
         duration: 0.6,
         type: "spring",
         stiffness: 85
-      }} className="bg-gradient-to-r from-gray-900/20 via-background to-gray-900/20 rounded-xl p-8 mb-16">
+      }} className="bg-gradient-to-r from-neutral-900/20 via-background to-neutral-900/20 rounded-xl p-8 mb-16">
           <motion.h2 initial={{
           opacity: 0,
           y: 15
@@ -496,7 +496,7 @@ const Analytics = () => {
             transition: {
               duration: 0.2
             }
-          }} className="bg-gradient-to-br from-gray-900/40 to-background/20 rounded-lg p-5 ring-1 ring-white/5 flex items-start space-x-4">
+          }} className="bg-gradient-to-br from-neutral-900/40 to-background/20 rounded-lg p-5 ring-1 ring-white/5 flex items-start space-x-4">
               <div className="bg-gradient-to-br from-white/20 to-white/10 rounded-lg p-3">
                 <Brain className="h-5 w-5 sm:h-6 sm:w-6 text-foreground/70" />
               </div>
@@ -511,7 +511,7 @@ const Analytics = () => {
             transition: {
               duration: 0.2
             }
-          }} className="bg-gradient-to-br from-gray-900/40 to-background/20 rounded-lg p-5 ring-1 ring-white/5 flex items-start space-x-4">
+          }} className="bg-gradient-to-br from-neutral-900/40 to-background/20 rounded-lg p-5 ring-1 ring-white/5 flex items-start space-x-4">
               <div className="bg-gradient-to-br from-white/20 to-white/10 rounded-lg p-3">
                 <Activity className="h-5 w-5 sm:h-6 sm:w-6 text-foreground/70" />
               </div>
@@ -526,7 +526,7 @@ const Analytics = () => {
             transition: {
               duration: 0.2
             }
-          }} className="bg-gradient-to-br from-gray-900/40 to-background/20 rounded-lg p-5 ring-1 ring-white/5 flex items-start space-x-4">
+          }} className="bg-gradient-to-br from-neutral-900/40 to-background/20 rounded-lg p-5 ring-1 ring-white/5 flex items-start space-x-4">
               <div className="bg-gradient-to-br from-white/20 to-white/10 rounded-lg p-3">
                 <BarChart className="h-5 w-5 sm:h-6 sm:w-6 text-foreground/70" />
               </div>
@@ -559,7 +559,7 @@ const Analytics = () => {
           stiffness: 400,
           damping: 10
         }}>
-            <Button className="bg-gray-600 hover:bg-gray-700 text-[var(--white)] px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg rounded-xl">
+            <Button className="bg-neutral-600 hover:bg-neutral-700 text-[var(--white)] px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg rounded-xl">
               Get Started with Analytics
             </Button>
           </motion.div>

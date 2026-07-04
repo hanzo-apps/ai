@@ -7,7 +7,7 @@ import { TrendingUp, Users, CreditCard, ArrowRight } from "lucide-react";
 
 const BuildForGrowth = () => {
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900/20 to-background">
+    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900/20 to-background">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,12 +49,12 @@ const BuildForGrowth = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-900/30 rounded-xl p-8 border border-gray-800"
+              className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800"
             >
               <div className="mb-5">{item.icon}</div>
               <h3 className="text-xl font-bold mb-3">{item.title}</h3>
               <p className="text-muted-foreground mb-5">{item.description}</p>
-              <div className="text-sm font-medium px-3 py-1 bg-gray-800 rounded-full inline-block text-foreground/70">
+              <div className="text-sm font-medium px-3 py-1 bg-neutral-800 rounded-full inline-block text-foreground/70">
                 {item.metrics}
               </div>
             </motion.div>

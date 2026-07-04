@@ -36,7 +36,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
       onDragOver={onDragOver}
       onDrop={onDrop}
     >
-      <div className="flex items-center justify-between p-3 border-b border-gray-800">
+      <div className="flex items-center justify-between p-3 border-b border-neutral-800">
         <div className="flex items-center">
           {column.icon}
           <h3 className="font-medium ml-2">{column.title}</h3>

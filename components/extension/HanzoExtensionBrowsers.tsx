@@ -13,7 +13,7 @@ const BrowserCard = ({ icon: Icon, title, description, buttonText }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="bg-gray-900/30 border border-gray-800 rounded-xl p-8 flex flex-col"
+      className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 flex flex-col"
     >
       <div className="mb-4">
         <Icon className="h-12 w-12 text-foreground mb-4" />

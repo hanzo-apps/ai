@@ -47,13 +47,13 @@ const ResourceBreakdown = () => {
   return (
     <motion.div 
       variants={cardAnimation}
-      className="rounded-xl border border-gray-800 bg-gray-900/20 overflow-hidden p-6"
+      className="rounded-xl border border-neutral-800 bg-neutral-900/20 overflow-hidden p-6"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {resources.map((resource, index) => (
           <div 
             key={index} 
-            className="bg-[var(--black)]/30 rounded-xl p-5 border border-gray-800"
+            className="bg-[var(--black)]/30 rounded-xl p-5 border border-neutral-800"
           >
             <div className="flex items-center gap-3 mb-4">
               <div className="text-muted-foreground">
@@ -67,7 +67,7 @@ const ResourceBreakdown = () => {
               <div className="font-medium">{resource.cost}</div>
             </div>
             
-            <div className="w-full bg-gray-800 rounded-full h-2.5">
+            <div className="w-full bg-neutral-800 rounded-full h-2.5">
               <div 
                 className="bg-primary h-2.5 rounded-full" 
                 style={{ width: `${resource.percentage}%` }}

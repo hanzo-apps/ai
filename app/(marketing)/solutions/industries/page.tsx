@@ -63,7 +63,7 @@ const SolutionIndustries: React.FC = () => {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.2, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
-                  className="relative group rounded-xl border border-gray-800 bg-[var(--black)]/50 p-6 backdrop-blur-sm overflow-hidden"
+                  className="relative group rounded-xl border border-neutral-800 bg-[var(--black)]/50 p-6 backdrop-blur-sm overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="relative">
@@ -284,12 +284,12 @@ const SolutionIndustries: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
           <div>
             <h4 className="text-xl font-semibold mb-6 flex items-center">
-              <span className="bg-gray-800 rounded-full h-8 w-8 inline-flex items-center justify-center mr-3 text-sm">1</span>
+              <span className="bg-neutral-800 rounded-full h-8 w-8 inline-flex items-center justify-center mr-3 text-sm">1</span>
               Industry Challenges
             </h4>
             <ul className="space-y-4">
               {industry.challenges.map((challenge, idx) => (
-                <li key={idx} className="flex items-start gap-3 bg-[var(--black)]/40 p-4 rounded-lg border border-gray-800">
+                <li key={idx} className="flex items-start gap-3 bg-[var(--black)]/40 p-4 rounded-lg border border-neutral-800">
                   <CheckCircle className="h-5 w-5 text-foreground flex-shrink-0 mt-0.5" />
                   <span className="text-foreground/80">{challenge}</span>
                 </li>
@@ -299,12 +299,12 @@ const SolutionIndustries: React.FC = () => {
           
           <div>
             <h4 className="text-xl font-semibold mb-6 flex items-center">
-              <span className="bg-gray-800 rounded-full h-8 w-8 inline-flex items-center justify-center mr-3 text-sm">2</span>
+              <span className="bg-neutral-800 rounded-full h-8 w-8 inline-flex items-center justify-center mr-3 text-sm">2</span>
               Our Solutions
             </h4>
             <ul className="space-y-4">
               {industry.solutions.map((solution, idx) => (
-                <li key={idx} className="flex items-start gap-3 bg-[var(--black)]/40 p-4 rounded-lg border border-gray-800">
+                <li key={idx} className="flex items-start gap-3 bg-[var(--black)]/40 p-4 rounded-lg border border-neutral-800">
                   <ArrowRight className="h-5 w-5 text-foreground flex-shrink-0 mt-0.5" />
                   <span className="text-foreground/80">{solution}</span>
                 </li>
@@ -313,7 +313,7 @@ const SolutionIndustries: React.FC = () => {
           </div>
         </div>
         
-        <div className="bg-gradient-to-br from-gray-900/50 to-background/90 rounded-xl border border-gray-800 p-8 mb-10">
+        <div className="bg-gradient-to-br from-neutral-900/50 to-background/90 rounded-xl border border-neutral-800 p-8 mb-10">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
             <div className="lg:col-span-3">
               <h4 className="text-xl font-semibold mb-4">Case Study: {industry.caseStudy.title}</h4>
@@ -322,7 +322,7 @@ const SolutionIndustries: React.FC = () => {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {industry.caseStudy.results.map((result, idx) => (
-                  <div key={idx} className="bg-[var(--black)]/40 p-4 rounded-lg border border-gray-800">
+                  <div key={idx} className="bg-[var(--black)]/40 p-4 rounded-lg border border-neutral-800">
                     <CheckCircle className="h-5 w-5 text-foreground mb-2" />
                     <p className="text-foreground/80">{result}</p>
                   </div>
@@ -330,7 +330,7 @@ const SolutionIndustries: React.FC = () => {
               </div>
             </div>
             <div className="lg:col-span-2 flex items-center justify-center">
-              <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 p-8 rounded-xl border border-gray-700 flex flex-col items-center">
+              <div className="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 p-8 rounded-xl border border-neutral-700 flex flex-col items-center">
                 <Briefcase className="h-16 w-16 text-foreground mb-4" />
                 <span className="text-3xl font-bold text-[var(--white)] mb-2">25+</span>
                 <span className="text-foreground">{activeIndustry} Clients</span>
@@ -342,7 +342,7 @@ const SolutionIndustries: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <a
             href="#"
-            className="block p-6 bg-gradient-to-br from-gray-900/70 to-background/90 rounded-xl border border-gray-800 hover:border-white/30 transition-colors"
+            className="block p-6 bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 hover:border-white/30 transition-colors"
           >
             <div className="flex items-center gap-3 mb-3">
               <FileText className="h-5 w-5 text-foreground" />
@@ -358,7 +358,7 @@ const SolutionIndustries: React.FC = () => {
 
           <a
             href="#"
-            className="block p-6 bg-gradient-to-br from-gray-900/70 to-background/90 rounded-xl border border-gray-800 hover:border-white/30 transition-colors"
+            className="block p-6 bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 hover:border-white/30 transition-colors"
           >
             <div className="flex items-center gap-3 mb-3">
               <BookOpen className="h-5 w-5 text-foreground/70" />
@@ -458,7 +458,7 @@ const SolutionIndustries: React.FC = () => {
   );
 
   const renderPartnerSection = () => (
-    <div className="mb-20 bg-gradient-to-br from-gray-900/70 to-background/90 p-10 rounded-2xl border border-gray-800">
+    <div className="mb-20 bg-gradient-to-br from-neutral-900/70 to-background/90 p-10 rounded-2xl border border-neutral-800">
       <SectionHeader 
         title="Expert Partners" 
         description="Access our specialized agencies and expert talent to accelerate your success"
@@ -555,7 +555,7 @@ const SolutionIndustries: React.FC = () => {
                   className={`px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
                     activeIndustry === industry
                       ? "bg-primary text-[var(--white)]"
-                      : "bg-gray-900 text-foreground/80 hover:bg-gray-800"
+                      : "bg-neutral-900 text-foreground/80 hover:bg-neutral-800"
                   }`}
                 >
                   {industry}

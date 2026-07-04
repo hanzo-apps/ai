@@ -31,7 +31,7 @@ const UseCases = () => {
   };
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 to-background">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900 to-background">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           className="text-center mb-16"
@@ -61,7 +61,7 @@ const UseCases = () => {
           {useCases.map((useCase, index) => (
             <motion.div 
               key={index}
-              className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-4 flex items-center gap-3 hover:bg-gray-800/50 transition-colors"
+              className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-4 flex items-center gap-3 hover:bg-neutral-800/50 transition-colors"
               variants={item}
             >
               <div className="p-2 bg-primary/20 rounded-lg text-foreground/70">
@@ -74,7 +74,7 @@ const UseCases = () => {
 
         <div className="grid md:grid-cols-2 gap-12 my-16">
           <motion.div 
-            className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-6"
+            className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-6"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -87,7 +87,7 @@ const UseCases = () => {
           </motion.div>
 
           <motion.div 
-            className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-6"
+            className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-6"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}

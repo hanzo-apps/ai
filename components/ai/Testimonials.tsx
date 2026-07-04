@@ -57,7 +57,7 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-900/20 border border-gray-800 rounded-xl p-8 hover:bg-gray-900/30 transition-colors relative"
+              className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/30 transition-colors relative"
             >
               <Quote className="absolute top-6 right-6 h-6 w-6 text-foreground/40" />
               <p className="text-foreground/80 mb-8 mt-4">"{testimonial.quote}"</p>
@@ -79,7 +79,7 @@ const Testimonials = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-20 bg-gray-900/30 border border-gray-800 rounded-xl p-8 md:p-12"
+          className="mt-20 bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 md:p-12"
         >
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-8 md:mb-0 md:mr-8 md:w-2/3">
@@ -91,15 +91,15 @@ const Testimonials = () => {
                 Share experiences, get support, and collaborate on best practices.
               </p>
               <div className="flex flex-wrap gap-4">
-                <div className="flex items-center bg-gray-800/50 rounded-full px-4 py-2">
+                <div className="flex items-center bg-neutral-800/50 rounded-full px-4 py-2">
                   <div className="w-2 h-2 rounded-full bg-primary/10 mr-2"></div>
                   <span className="text-foreground/80 text-sm">Active developer community</span>
                 </div>
-                <div className="flex items-center bg-gray-800/50 rounded-full px-4 py-2">
+                <div className="flex items-center bg-neutral-800/50 rounded-full px-4 py-2">
                   <div className="w-2 h-2 rounded-full bg-primary/10 mr-2"></div>
                   <span className="text-foreground/80 text-sm">Weekly office hours</span>
                 </div>
-                <div className="flex items-center bg-gray-800/50 rounded-full px-4 py-2">
+                <div className="flex items-center bg-neutral-800/50 rounded-full px-4 py-2">
                   <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
                   <span className="text-foreground/80 text-sm">Dedicated support team</span>
                 </div>
@@ -110,12 +110,12 @@ const Testimonials = () => {
                 {[...Array(5)].map((_, i) => (
                   <div 
                     key={i} 
-                    className="h-12 w-12 rounded-full bg-primary/30 border-2 border-gray-900 flex items-center justify-center text-foreground/70 text-sm font-medium"
+                    className="h-12 w-12 rounded-full bg-primary/30 border-2 border-neutral-900 flex items-center justify-center text-foreground/70 text-sm font-medium"
                   >
                     {["JS", "MK", "AL", "TN", "RW"][i]}
                   </div>
                 ))}
-                <div className="h-12 w-12 rounded-full bg-primary/20 border-2 border-gray-900 flex items-center justify-center text-[var(--white)] text-sm font-medium">
+                <div className="h-12 w-12 rounded-full bg-primary/20 border-2 border-neutral-900 flex items-center justify-center text-[var(--white)] text-sm font-medium">
                   +
                 </div>
               </div>

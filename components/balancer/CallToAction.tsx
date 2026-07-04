@@ -86,7 +86,7 @@ const CallToAction = () => {
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="w-full px-4 py-2 bg-gray-800 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#ffffff]"
+                className="w-full px-4 py-2 bg-neutral-800 rounded-md border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-[#ffffff]"
               />
               <Button className="bg-primary hover:bg-[#cccccc]">
                 Subscribe
@@ -94,7 +94,7 @@ const CallToAction = () => {
             </div>
             <div className="mt-2 text-left">
               <label className="inline-flex items-center">
-                <input type="checkbox" className="rounded bg-gray-800 border-gray-700 text-foreground" />
+                <input type="checkbox" className="rounded bg-neutral-800 border-neutral-700 text-foreground" />
                 <span className="ml-2 text-sm text-muted-foreground">
                   I agree to receive communications from Hanzo
                 </span>

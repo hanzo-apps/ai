@@ -10,7 +10,7 @@ const OperativeCTA = () => {
     <section className="py-16 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background to-white/10"></div>
-      <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-gray-950 to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-neutral-950 to-transparent"></div>
       <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-primary/10 rounded-full blur-3xl"></div>
       
       <div className="mx-auto px-4 py-6 relative z-10 max-w-1618px">
@@ -46,21 +46,21 @@ const OperativeCTA = () => {
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 max-w-2xl mx-auto">
               <a 
                 href="https://blog.hanzo.ai/operative"
-                className="flex flex-col items-center p-4 rounded-xl hover:bg-gray-900/30 transition-colors"
+                className="flex flex-col items-center p-4 rounded-xl hover:bg-neutral-900/30 transition-colors"
               >
                 <ExternalLink className="h-6 w-6 text-foreground " />
                 <span className="text-[var(--white)] font-medium">Read the Blog</span>
               </a>
               <a 
                 href="https://twitter.com/hanzoai"
-                className="flex flex-col items-center p-4 rounded-xl hover:bg-gray-900/30 transition-colors"
+                className="flex flex-col items-center p-4 rounded-xl hover:bg-neutral-900/30 transition-colors"
               >
                 <Twitter className="h-6 w-6 text-foreground " />
                 <span className="text-[var(--white)] font-medium">Follow Updates</span>
               </a>
               <a 
                 href="https://github.com/hanzoai/operative/contribute"
-                className="flex flex-col items-center p-4 rounded-xl hover:bg-gray-900/30 transition-colors"
+                className="flex flex-col items-center p-4 rounded-xl hover:bg-neutral-900/30 transition-colors"
               >
                 <Github className="h-6 w-6 text-foreground " />
                 <span className="text-[var(--white)] font-medium">Contribute</span>

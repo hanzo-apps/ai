@@ -12,7 +12,7 @@ const UseCaseCard = ({ icon: Icon, title, description }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="bg-gray-900/30 border border-gray-800 rounded-xl p-8"
+      className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8"
     >
       <Icon className="h-10 w-10 text-foreground mb-4" />
       <h3 className="text-2xl font-bold mb-2">{title}</h3>
@@ -23,7 +23,7 @@ const UseCaseCard = ({ icon: Icon, title, description }) => {
 
 const HanzoExtensionUseCases = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-950">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

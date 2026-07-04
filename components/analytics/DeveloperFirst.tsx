@@ -160,15 +160,15 @@ const DeveloperFirst = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="lg:col-span-4"
           >
-            <div className="bg-gray-900/50 rounded-xl border border-gray-800 overflow-hidden shadow-xl">
-              <div className="flex border-b border-gray-800">
+            <div className="bg-neutral-900/50 rounded-xl border border-neutral-800 overflow-hidden shadow-xl">
+              <div className="flex border-b border-neutral-800">
                 {tabs.map((tab) => (
                   <button
                     key={tab.id}
                     className={`flex items-center px-4 py-3 text-sm font-medium ${
                       activeTab === tab.id
-                        ? "bg-gray-800 text-[var(--white)]"
-                        : "text-muted-foreground hover:text-[var(--white)] hover:bg-gray-800/50"
+                        ? "bg-neutral-800 text-[var(--white)]"
+                        : "text-muted-foreground hover:text-[var(--white)] hover:bg-neutral-800/50"
                     }`}
                     onClick={() => setActiveTab(tab.id)}
                   >
@@ -184,7 +184,7 @@ const DeveloperFirst = () => {
                 </pre>
               </div>
               
-              <div className="bg-gray-900 p-3 border-t border-gray-800 text-sm text-muted-foreground">
+              <div className="bg-neutral-900 p-3 border-t border-neutral-800 text-sm text-muted-foreground">
                 {activeTab === "js" && "npm install hanzo-analytics"}
                 {activeTab === "py" && "pip install hanzo-analytics"}
                 {activeTab === "api" && "API Key: Get yours from the Hanzo Analytics dashboard"}

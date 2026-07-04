@@ -31,7 +31,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400"
+            className="text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400"
           >
             Unified Intelligence for AI Applications
           </motion.h1>
@@ -54,7 +54,7 @@ const HeroSection = () => {
             <Button size="lg" className="bg-primary hover:bg-[#cccccc] text-[var(--white)] border-none px-8 py-6 rounded-md text-lg">
               Get Started
             </Button>
-            <Button size="lg" variant="outline" className="border-gray-600 hover:bg-gray-800/50 px-8 py-6 rounded-md text-lg">
+            <Button size="lg" variant="outline" className="border-neutral-600 hover:bg-neutral-800/50 px-8 py-6 rounded-md text-lg">
               View Documentation
             </Button>
           </motion.div>
@@ -67,19 +67,19 @@ const HeroSection = () => {
           className="mt-16 relative"
         >
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 h-20 bottom-0"></div>
-          <div className="bg-gradient-to-br from-gray-900 to-background p-2 rounded-xl border border-gray-800/50 shadow-2xl overflow-hidden">
+          <div className="bg-gradient-to-br from-neutral-900 to-background p-2 rounded-xl border border-neutral-800/50 shadow-2xl overflow-hidden">
             <div className="grid grid-cols-5 gap-3 p-4 bg-[var(--black)]/60 rounded-lg">
               <div className="col-span-1 space-y-4">
-                <div className="h-8 bg-gray-800 rounded-md"></div>
-                <div className="h-8 bg-gray-800/60 rounded-md"></div>
-                <div className="h-8 bg-gray-800/60 rounded-md"></div>
-                <div className="h-8 bg-gray-800/60 rounded-md"></div>
-                <div className="h-8 bg-gray-800/60 rounded-md"></div>
-                <div className="h-32 bg-gray-800/40 rounded-md mt-8"></div>
+                <div className="h-8 bg-neutral-800 rounded-md"></div>
+                <div className="h-8 bg-neutral-800/60 rounded-md"></div>
+                <div className="h-8 bg-neutral-800/60 rounded-md"></div>
+                <div className="h-8 bg-neutral-800/60 rounded-md"></div>
+                <div className="h-8 bg-neutral-800/60 rounded-md"></div>
+                <div className="h-32 bg-neutral-800/40 rounded-md mt-8"></div>
               </div>
               <div className="col-span-4 space-y-4">
-                <div className="h-12 bg-gray-800/60 rounded-md"></div>
-                <div className="h-64 bg-gradient-to-br from-gray-800/60 to-gray-900/60 rounded-lg relative overflow-hidden">
+                <div className="h-12 bg-neutral-800/60 rounded-md"></div>
+                <div className="h-64 bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 rounded-lg relative overflow-hidden">
                   <div className="absolute inset-x-0 bottom-0 h-40">
                     <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="w-full h-full">
                       <path
@@ -98,8 +98,8 @@ const HeroSection = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="h-32 bg-gray-800/40 rounded-lg"></div>
-                  <div className="h-32 bg-gray-800/40 rounded-lg"></div>
+                  <div className="h-32 bg-neutral-800/40 rounded-lg"></div>
+                  <div className="h-32 bg-neutral-800/40 rounded-lg"></div>
                 </div>
               </div>
             </div>

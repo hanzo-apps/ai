@@ -44,7 +44,7 @@ const HexagramsGrid: React.FC<HexagramsGridProps> = ({
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
           {description}
         </p>
-        <div className="h-px w-20 bg-gray-800 mx-auto mt-6"></div>
+        <div className="h-px w-20 bg-neutral-800 mx-auto mt-6"></div>
       </motion.div>
       
       <AnimatePresence mode="wait">
@@ -57,7 +57,7 @@ const HexagramsGrid: React.FC<HexagramsGridProps> = ({
       
       <div className="relative px-4">
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-2 md:gap-3 min-w-[320px] p-4 md:p-6 bg-gray-900/20 border border-gray-800/50 rounded-lg mx-auto max-w-5xl">
+          <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-2 md:gap-3 min-w-[320px] p-4 md:p-6 bg-neutral-900/20 border border-neutral-800/50 rounded-lg mx-auto max-w-5xl">
             {Array.from({ length: rows }).map((_, rowIndex) => (
               <React.Fragment key={`row-${rowIndex}`}>
                 {Array.from({ length: columns }).map((_, colIndex) => {

@@ -202,7 +202,7 @@ const APIPricing = () => {
   const audioModels = hanzoModels.filter((m: any) => m.endpoint === "/v1/audio/transcriptions");
 
   const HanzoModelCard = ({ model }: { model: HanzoModel }) => (
-    <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-800/50 mb-4">
+    <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50 mb-4">
       <div className="flex justify-between items-start mb-4">
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-2 flex-wrap">
@@ -236,7 +236,7 @@ const APIPricing = () => {
 
         <div className="ml-6 shrink-0">
           <Button
-            className="bg-[var(--white)] text-primary-foreground border border-gray-300 hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all duration-300"
+            className="bg-[var(--white)] text-primary-foreground border border-neutral-300 hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all duration-300"
             onClick={() => {
               window.open('https://console.hanzo.ai', '_blank');
             }}
@@ -282,7 +282,7 @@ const APIPricing = () => {
   );
 
   const ToolCard = ({ tool }: { tool: ToolEntry }) => (
-    <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-800/50">
+    <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50">
       <h3 className="text-xl font-semibold mb-2">{tool.name}</h3>
       <div className="text-right">
         <span className="text-muted-foreground">{tool.unit}</span>
@@ -306,7 +306,7 @@ const APIPricing = () => {
           ].map((stat) => (
             <div
               key={stat.label}
-              className="bg-gray-900/30 rounded-xl p-4 border border-gray-800/50 text-center"
+              className="bg-neutral-900/30 rounded-xl p-4 border border-neutral-800/50 text-center"
             >
               <div className="text-2xl font-bold text-foreground">{stat.value}</div>
               <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
@@ -423,7 +423,7 @@ const APIPricing = () => {
         </div>
 
         <div className="flex justify-center">
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-gray-100 px-8 py-3">
+          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-neutral-100 px-8 py-3">
             Start building
           </Button>
         </div>
@@ -444,7 +444,7 @@ const APIPricing = () => {
           </div>
 
           <div className="flex justify-center">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-gray-100 px-8 py-3">
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-neutral-100 px-8 py-3">
               Start building
             </Button>
           </div>
@@ -462,7 +462,7 @@ const APIPricing = () => {
             {featuredModels.map((model) => (
               <div
                 key={model.id || model.name}
-                className="bg-gray-900/30 rounded-xl p-5 border border-gray-800/50 hover:border-border transition-colors"
+                className="bg-neutral-900/30 rounded-xl p-5 border border-neutral-800/50 hover:border-border transition-colors"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div>

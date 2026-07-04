@@ -45,7 +45,7 @@ const ViewAllButton: React.FC<ViewAllButtonProps> = ({ href, text, hoverColor })
           variant="outline" 
           size="sm"
           className={cn(
-            "group border-gray-700 transition-all duration-300",
+            "group border-neutral-700 transition-all duration-300",
             colorClasses.bg,
             colorClasses.border,
             colorClasses.text

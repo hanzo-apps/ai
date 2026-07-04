@@ -73,7 +73,7 @@ const EcosystemDetail: React.FC<EcosystemDetailProps> = ({ isOpen, onClose, type
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", damping: 25 }}
-            className="bg-gradient-to-br from-gray-900 to-background border border-border rounded-2xl max-w-3xl w-full p-6 shadow-xl overflow-y-auto max-h-[80vh]"
+            className="bg-gradient-to-br from-neutral-900 to-background border border-border rounded-2xl max-w-3xl w-full p-6 shadow-xl overflow-y-auto max-h-[80vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {type === 'cloud' ? (
@@ -420,7 +420,7 @@ const ProductsOverview = () => {
                 y: -5,
                 transition: { duration: 0.2 }
               }}
-              className="bg-gradient-to-br from-gray-900/40 to-background border border-border rounded-2xl p-6 hover:border-border transition-all duration-300 group"
+              className="bg-gradient-to-br from-neutral-900/40 to-background border border-border rounded-2xl p-6 hover:border-border transition-all duration-300 group"
             >
               <div className="flex items-center mb-4">
                 <div className="w-10 h-10 rounded-full bg-[var(--white)]/5 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
@@ -446,7 +446,7 @@ const ProductsOverview = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="mt-16 text-center border border-border rounded-2xl p-8 bg-gradient-to-b from-transparent to-gray-900/20"
+          className="mt-16 text-center border border-border rounded-2xl p-8 bg-gradient-to-b from-transparent to-neutral-900/20"
         >
           <h3 className="text-2xl font-medium mb-4 text-[var(--white)]">Seek guidance from a Sensei</h3>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-6">

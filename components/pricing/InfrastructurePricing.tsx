@@ -160,7 +160,7 @@ function CloudComputePricing() {
             <div key={plan.id} className={`rounded-xl p-6 border transition-colors ${
               plan.popular
                 ? "bg-primary/5 border-primary/30"
-                : "bg-gray-900/30 border-gray-800/50"
+                : "bg-neutral-900/30 border-neutral-800/50"
             }`}>
               <div className="flex items-center justify-between mb-2">
                 <h4 className="font-semibold text-lg">{plan.name}</h4>
@@ -208,7 +208,7 @@ function CloudComputePricing() {
           <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
             <span className="font-medium text-foreground">Regions:</span>
             {regions.map((r) => (
-              <span key={r.id} className="bg-gray-900/50 px-3 py-1 rounded-full border border-gray-800/50">
+              <span key={r.id} className="bg-neutral-900/50 px-3 py-1 rounded-full border border-neutral-800/50">
                 {r.name} ({r.location})
               </span>
             ))}
@@ -223,7 +223,7 @@ function CloudComputePricing() {
           <p className="text-muted-foreground text-sm mb-6">
             Attach additional SSD volumes to any VM. Resize on the fly.
           </p>
-          <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-800/50 inline-block">
+          <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50 inline-block">
             <div className="text-3xl font-bold mb-1">${blockStorage.pricePerGBMonthly}<span className="text-lg font-normal text-muted-foreground">/GB/mo</span></div>
             <p className="text-muted-foreground text-sm">{blockStorage.minSizeGB} GB to {formatDisk(blockStorage.maxSizeGB)} per volume. SSD-backed, all regions.</p>
           </div>
@@ -237,7 +237,7 @@ function CloudComputePricing() {
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead>
-                <tr className="border-b border-gray-800">
+                <tr className="border-b border-neutral-800">
                   <th className="py-3 px-4 text-muted-foreground font-medium">Tier</th>
                   <th className="py-3 px-4 text-muted-foreground font-medium">GPUs</th>
                   <th className="py-3 px-4 text-muted-foreground font-medium">VRAM</th>
@@ -246,7 +246,7 @@ function CloudComputePricing() {
               </thead>
               <tbody>
                 {gpuTiers.map((tier) => (
-                  <tr key={tier.name} className="border-b border-gray-800/50 hover:bg-gray-900/30 transition-colors">
+                  <tr key={tier.name} className="border-b border-neutral-800/50 hover:bg-neutral-900/30 transition-colors">
                     <td className="py-4 px-4 font-medium">{tier.name}</td>
                     <td className="py-4 px-4 text-muted-foreground">{tier.gpu}</td>
                     <td className="py-4 px-4 text-muted-foreground">{tier.vram}</td>
@@ -261,7 +261,7 @@ function CloudComputePricing() {
       )}
 
       {/* Included */}
-      <div className="mb-12 bg-gray-900/30 rounded-xl p-8 border border-gray-800/50">
+      <div className="mb-12 bg-neutral-900/30 rounded-xl p-8 border border-neutral-800/50">
         <h3 className="text-xl font-semibold mb-4">Included with every deployment</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
           <div>DDoS protection</div>
@@ -278,7 +278,7 @@ function CloudComputePricing() {
       <div className="flex justify-center mb-20">
         <Button
           size="lg"
-          className="bg-primary text-primary-foreground hover:bg-gray-100 px-8 py-3"
+          className="bg-primary text-primary-foreground hover:bg-neutral-100 px-8 py-3"
           onClick={() => window.open('https://cloud.hanzo.ai', '_blank')}
         >
           Deploy Now

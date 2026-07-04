@@ -8,7 +8,7 @@ import { ArrowRight, LineChart } from "lucide-react";
 
 const CallToAction = () => {
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900/30 to-background relative overflow-hidden">
+    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900/30 to-background relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-70"></div>
       
       <div className="max-w-6xl mx-auto relative z-10">
@@ -71,7 +71,7 @@ const CallToAction = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-900/20 p-6 rounded-xl border border-gray-800 hover:border-white/30 transition-colors"
+              className="bg-neutral-900/20 p-6 rounded-xl border border-neutral-800 hover:border-white/30 transition-colors"
             >
               <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
               <p className="text-muted-foreground">{feature.description}</p>

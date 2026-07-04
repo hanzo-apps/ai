@@ -36,7 +36,7 @@ const DateRangePicker = ({ dateRange, onDateRangeChange }: DateRangePickerProps)
       <Button 
         variant="outline" 
         size="sm" 
-        className="border-gray-700 hover:bg-gray-800"
+        className="border-neutral-700 hover:bg-neutral-800"
         onClick={handlePrevious}
       >
         <ChevronLeft className="h-4 w-4" />
@@ -44,7 +44,7 @@ const DateRangePicker = ({ dateRange, onDateRangeChange }: DateRangePickerProps)
       
       <Button 
         variant="outline"
-        className="border-gray-700 hover:bg-gray-800"
+        className="border-neutral-700 hover:bg-neutral-800"
       >
         <Calendar className="h-4 w-4 mr-2" />
         <span>{dateRange.start} - {dateRange.end}</span>
@@ -53,7 +53,7 @@ const DateRangePicker = ({ dateRange, onDateRangeChange }: DateRangePickerProps)
       <Button 
         variant="outline" 
         size="sm" 
-        className="border-gray-700 hover:bg-gray-800"
+        className="border-neutral-700 hover:bg-neutral-800"
         onClick={handleNext}
       >
         <ChevronRight className="h-4 w-4" />

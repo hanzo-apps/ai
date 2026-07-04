@@ -52,7 +52,7 @@ const QuickStart = () => {
     >
       {/* Parallax background */}
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-b from-background via-gray-900/50 to-background bg-background/[0.12] z-0"
+        className="absolute inset-0 bg-gradient-to-b from-background via-neutral-900/50 to-background bg-background/[0.12] z-0"
         style={{ y: backgroundY }}
       />
       
@@ -123,7 +123,7 @@ const QuickStart = () => {
                 duration: 0.02
               }
             }} 
-            className={`group relative p-6 bg-gradient-to-br from-gray-900/50 via-background to-gray-900/30 backdrop-blur-sm rounded-xl 
+            className={`group relative p-6 bg-gradient-to-br from-neutral-900/50 via-background to-neutral-900/30 backdrop-blur-sm rounded-xl 
                 border border-border transition-all duration-50 hover:border-border ${app.glowColor} ${app.borderColor}`}>
               <div className="p-3 rounded-lg w-fit bg-[var(--white)]/5 text-[var(--white)] mx-auto">
                 {app.icon}

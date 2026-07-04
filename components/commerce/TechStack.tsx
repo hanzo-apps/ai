@@ -10,7 +10,7 @@ interface TechCardProps {
 
 const TechCard = ({ icon, title, description }: TechCardProps) => {
   return (
-    <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6 hover:border-border transition-all duration-300">
+    <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6 hover:border-border transition-all duration-300">
       <div className="mb-4">
         {icon}
       </div>
@@ -55,7 +55,7 @@ const TechStack = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-900/30 to-background">
+    <section className="py-16 bg-gradient-to-b from-neutral-900/30 to-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold">Technology Stack</h2>

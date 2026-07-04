@@ -38,7 +38,7 @@ const TeamSlack = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="rounded-xl border border-gray-800 bg-[var(--black)]/50 backdrop-blur-sm overflow-hidden"
+        className="rounded-xl border border-neutral-800 bg-[var(--black)]/50 backdrop-blur-sm overflow-hidden"
       >
         <div className="grid grid-cols-4">
           {/* Sidebar */}
@@ -47,7 +47,7 @@ const TeamSlack = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="col-span-1 border-r border-gray-800 p-4"
+            className="col-span-1 border-r border-neutral-800 p-4"
           >
             <div className="flex items-center justify-between p-2 mb-4">
               <h3 className="text-foreground/70 font-semibold">Hanzo Team</h3>
@@ -84,7 +84,7 @@ const TeamSlack = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: 0.6 }}
-              className="flex items-center gap-4 p-4 border-b border-gray-800 mb-4"
+              className="flex items-center gap-4 p-4 border-b border-neutral-800 mb-4"
             >
               <Hash className="w-5 h-5 text-muted-foreground" />
               <span className="text-[var(--white)] font-medium">general</span>

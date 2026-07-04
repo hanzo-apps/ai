@@ -15,7 +15,7 @@ const AnalyticsView = () => {
             <BarChart className="w-3 h-3 mr-1" />
             Reports
           </button>
-          <button className="px-2 py-1 bg-gray-800 rounded-md text-xs text-muted-foreground flex items-center">
+          <button className="px-2 py-1 bg-neutral-800 rounded-md text-xs text-muted-foreground flex items-center">
             <Terminal className="w-3 h-3 mr-1" />
             Export
           </button>
@@ -23,7 +23,7 @@ const AnalyticsView = () => {
       </div>
 
       <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="bg-gray-800/40 border border-gray-700/40 rounded-lg p-3">
+        <div className="bg-neutral-800/40 border border-neutral-700/40 rounded-lg p-3">
           <div className="text-xs text-muted-foreground mb-1">Model Usage</div>
           <div className="relative h-32 mt-2">
             <div className="absolute inset-0">
@@ -74,7 +74,7 @@ const AnalyticsView = () => {
             </div>
           </div>
         </div>
-        <div className="bg-gray-800/40 border border-gray-700/40 rounded-lg p-3">
+        <div className="bg-neutral-800/40 border border-neutral-700/40 rounded-lg p-3">
           <div className="text-xs text-muted-foreground mb-1">Cost Analysis</div>
           <div className="h-32 relative">
             <div className="absolute bottom-0 w-full flex items-end space-x-1">
@@ -101,7 +101,7 @@ const AnalyticsView = () => {
         </div>
       </div>
 
-      <div className="bg-gray-800/40 border border-gray-700/40 rounded-lg p-3">
+      <div className="bg-neutral-800/40 border border-neutral-700/40 rounded-lg p-3">
         <div className="text-xs text-muted-foreground mb-2">Performance Metrics</div>
         <div className="space-y-3">
           <div>
@@ -109,7 +109,7 @@ const AnalyticsView = () => {
               <span className="text-foreground/80">Response Quality</span>
               <span className="text-foreground/80">89%</span>
             </div>
-            <div className="w-full bg-gray-700/40 rounded-full h-1.5">
+            <div className="w-full bg-neutral-700/40 rounded-full h-1.5">
               <motion.div 
                 className="bg-primary/10 h-1.5 rounded-full" 
                 initial={{ width: 0 }}
@@ -123,7 +123,7 @@ const AnalyticsView = () => {
               <span className="text-foreground/80">User Satisfaction</span>
               <span className="text-foreground/80">94%</span>
             </div>
-            <div className="w-full bg-gray-700/40 rounded-full h-1.5">
+            <div className="w-full bg-neutral-700/40 rounded-full h-1.5">
               <motion.div 
                 className="bg-primary/10 h-1.5 rounded-full" 
                 initial={{ width: 0 }}
@@ -137,7 +137,7 @@ const AnalyticsView = () => {
               <span className="text-foreground/80">System Reliability</span>
               <span className="text-foreground/80">99.8%</span>
             </div>
-            <div className="w-full bg-gray-700/40 rounded-full h-1.5">
+            <div className="w-full bg-neutral-700/40 rounded-full h-1.5">
               <motion.div 
                 className="bg-primary/10 h-1.5 rounded-full" 
                 initial={{ width: 0 }}

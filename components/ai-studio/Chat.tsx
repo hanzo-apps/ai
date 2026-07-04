@@ -35,7 +35,7 @@ const Chat = ({
               className={`max-w-3xl p-3 rounded-lg ${
                 message.role === "user" 
                   ? "bg-primary/10 border border-border" 
-                  : "bg-gray-800/60 border border-gray-700/50"
+                  : "bg-neutral-800/60 border border-neutral-700/50"
               }`}
             >
               <div
@@ -52,7 +52,7 @@ const Chat = ({
       </div>
       
       {/* Input */}
-      <div className="p-4 border-t border-gray-800">
+      <div className="p-4 border-t border-neutral-800">
         <form onSubmit={handleSubmit}>
           <div className="flex items-center">
             <input
@@ -60,7 +60,7 @@ const Chat = ({
               value={promptText}
               onChange={(e) => setPromptText(e.target.value)}
               placeholder="Send a message..."
-              className="flex-1 bg-gray-800/50 border border-gray-700 rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white/30"
+              className="flex-1 bg-neutral-800/50 border border-neutral-700 rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white/30"
             />
             <button 
               type="submit" 

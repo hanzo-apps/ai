@@ -15,7 +15,7 @@ const ObservabilityView = () => {
             <Activity className="w-3 h-3 mr-1" />
             Real-time
           </button>
-          <button className="px-2 py-1 bg-gray-800 rounded-md text-xs text-muted-foreground flex items-center">
+          <button className="px-2 py-1 bg-neutral-800 rounded-md text-xs text-muted-foreground flex items-center">
             <Terminal className="w-3 h-3 mr-1" />
             Logs
           </button>
@@ -23,7 +23,7 @@ const ObservabilityView = () => {
       </div>
 
       <div className="grid grid-cols-3 gap-3 mb-4">
-        <div className="bg-gray-800/40 border border-gray-700/40 rounded-lg p-3">
+        <div className="bg-neutral-800/40 border border-neutral-700/40 rounded-lg p-3">
           <div className="text-xs text-muted-foreground mb-1">Requests</div>
           <div className="text-lg font-medium text-[var(--white)]">3,452</div>
           <div className="mt-1 text-xs text-foreground/70 flex items-center">
@@ -31,7 +31,7 @@ const ObservabilityView = () => {
             +18% from yesterday
           </div>
         </div>
-        <div className="bg-gray-800/40 border border-gray-700/40 rounded-lg p-3">
+        <div className="bg-neutral-800/40 border border-neutral-700/40 rounded-lg p-3">
           <div className="text-xs text-muted-foreground mb-1">Avg. Latency</div>
           <div className="text-lg font-medium text-[var(--white)]">94ms</div>
           <div className="mt-1 text-xs text-foreground/70 flex items-center">
@@ -39,7 +39,7 @@ const ObservabilityView = () => {
             -12ms from yesterday
           </div>
         </div>
-        <div className="bg-gray-800/40 border border-gray-700/40 rounded-lg p-3">
+        <div className="bg-neutral-800/40 border border-neutral-700/40 rounded-lg p-3">
           <div className="text-xs text-muted-foreground mb-1">Error Rate</div>
           <div className="text-lg font-medium text-[var(--white)]">0.4%</div>
           <div className="mt-1 text-xs text-foreground/70 flex items-center">
@@ -49,7 +49,7 @@ const ObservabilityView = () => {
         </div>
       </div>
 
-      <div className="bg-gray-800/40 border border-gray-700/40 rounded-lg p-3 mb-4">
+      <div className="bg-neutral-800/40 border border-neutral-700/40 rounded-lg p-3 mb-4">
         <div className="text-xs text-muted-foreground mb-2">Response Time Trend</div>
         <div className="h-24 flex items-end space-x-1">
           {[35, 42, 38, 30, 45, 55, 47, 40, 48, 60, 53, 41, 48, 50, 58, 45, 43, 49, 55, 62].map((value, index) => (
@@ -70,7 +70,7 @@ const ObservabilityView = () => {
         </div>
       </div>
 
-      <div className="bg-gray-800/40 border border-gray-700/40 rounded-lg p-3">
+      <div className="bg-neutral-800/40 border border-neutral-700/40 rounded-lg p-3">
         <div className="text-xs text-muted-foreground mb-2">Recent Traces</div>
         <div className="space-y-2">
           {[
@@ -79,7 +79,7 @@ const ObservabilityView = () => {
             { id: "t3", model: "Claude", time: "12m ago", status: "error", duration: "176ms" },
             { id: "t4", model: "Mixtral", time: "18m ago", status: "success", duration: "78ms" },
           ].map((trace) => (
-            <div key={trace.id} className="flex items-center justify-between text-xs p-1.5 rounded hover:bg-gray-700/30">
+            <div key={trace.id} className="flex items-center justify-between text-xs p-1.5 rounded hover:bg-neutral-700/30">
               <div className="flex items-center">
                 <div className={`w-1.5 h-1.5 rounded-full mr-2 ${trace.status === "success" ? "bg-primary/10" : "bg-primary/10"}`}></div>
                 <span className="text-foreground/80">{trace.model}</span>

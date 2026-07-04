@@ -16,12 +16,12 @@ interface ReferralHistoryProps {
 
 const ReferralHistory = ({ referralHistory }: ReferralHistoryProps) => {
   return (
-    <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+    <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
       <h2 className="text-xl font-medium mb-4">Referral History</h2>
       
-      <div className="rounded-lg border border-gray-800 overflow-hidden">
+      <div className="rounded-lg border border-neutral-800 overflow-hidden">
         <Table>
-          <TableHeader className="bg-gray-900">
+          <TableHeader className="bg-neutral-900">
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
@@ -32,7 +32,7 @@ const ReferralHistory = ({ referralHistory }: ReferralHistoryProps) => {
           </TableHeader>
           <TableBody>
             {referralHistory.map((referral) => (
-              <TableRow key={referral.id} className="border-gray-800">
+              <TableRow key={referral.id} className="border-neutral-800">
                 <TableCell className="font-medium">{referral.name}</TableCell>
                 <TableCell>{referral.email}</TableCell>
                 <TableCell>{referral.date}</TableCell>

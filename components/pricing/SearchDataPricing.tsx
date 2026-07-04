@@ -23,7 +23,7 @@ function TierCard({ tier }: { tier: PricingTier }) {
       className={`rounded-xl p-7 border flex flex-col h-full ${
         tier.popular
           ? "bg-primary/5 border-primary/40"
-          : "bg-gray-900/30 border-gray-800/50"
+          : "bg-neutral-900/30 border-neutral-800/50"
       }`}
     >
       {tier.popular && (
@@ -314,7 +314,7 @@ export default function SearchDataPricing() {
       />
 
       {/* Integration note */}
-      <div className="bg-gray-900/30 rounded-xl p-8 border border-gray-800/50 mb-12">
+      <div className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800/50 mb-12">
         <h3 className="text-xl font-semibold mb-4">
           All products work together
         </h3>
@@ -334,7 +334,7 @@ export default function SearchDataPricing() {
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <Button
           size="lg"
-          className="bg-primary text-primary-foreground hover:bg-gray-100 px-8"
+          className="bg-primary text-primary-foreground hover:bg-neutral-100 px-8"
           asChild
         >
           <a

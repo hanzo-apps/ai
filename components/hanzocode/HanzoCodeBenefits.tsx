@@ -46,9 +46,9 @@ const HanzoCodeBenefits = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-900/30 border border-gray-800 rounded-xl overflow-hidden"
+            className="bg-neutral-900/30 border border-neutral-800 rounded-xl overflow-hidden"
           >
-            <div className="h-96 bg-gray-900 flex items-center justify-center p-8">
+            <div className="h-96 bg-neutral-900 flex items-center justify-center p-8">
               <div className="space-y-4 text-left w-full">
                 <div className="border-l-4 border-white pl-4 py-2">
                   <h3 className="font-semibold text-[var(--white)]">What Cursor/Windsurf Users Say:</h3>

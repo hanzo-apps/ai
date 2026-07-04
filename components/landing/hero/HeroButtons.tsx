@@ -32,7 +32,7 @@ const HeroButtons: React.FC<HeroButtonsProps> = ({ titleAnimationComplete }) => 
       <Button 
         size="sm" 
         variant="outline" 
-        className="text-[var(--white)] border-gray-700 hover:bg-[var(--white)]/10 rounded-full px-4 py-2 h-10 min-w-[120px]"
+        className="text-[var(--white)] border-neutral-700 hover:bg-[var(--white)]/10 rounded-full px-4 py-2 h-10 min-w-[120px]"
         onClick={() => router.push('/philosophy')}
       >
         Zen of Hanzo
@@ -42,7 +42,7 @@ const HeroButtons: React.FC<HeroButtonsProps> = ({ titleAnimationComplete }) => 
       <Button 
         size="sm" 
         variant="outline" 
-        className="text-[var(--white)] border-gray-700 hover:bg-[var(--white)]/10 rounded-full px-4 py-2 h-10 min-w-[120px]"
+        className="text-[var(--white)] border-neutral-700 hover:bg-[var(--white)]/10 rounded-full px-4 py-2 h-10 min-w-[120px]"
         onClick={() => window.open('https://github.com/hanzoai', '_blank')}
       >
         Star on GitHub

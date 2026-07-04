@@ -12,8 +12,8 @@ interface EndpointProps {
 
 const EndpointCard = ({ path, description }: EndpointProps) => {
   return (
-    <div className="bg-gray-900/40 border border-gray-800 rounded-lg p-4 hover:border-border transition-all duration-300">
-      <div className="font-mono text-sm text-foreground/60 mb-2">{path}</div>
+    <div className="min-w-0 bg-neutral-900/40 border border-neutral-800 rounded-lg p-4 hover:border-border transition-all duration-300">
+      <div className="font-mono text-sm text-foreground/60 mb-2 break-all">{path}</div>
       <p className="text-muted-foreground text-sm">{description}</p>
     </div>
   );
@@ -112,7 +112,7 @@ const APIEndpoints = () => {
   const tabClasses = "data-[state=active]:bg-primary/5 data-[state=active]:text-foreground/60 border-b-0";
 
   return (
-    <section className="py-16 bg-gradient-to-b from-background to-gray-900/30">
+    <section className="py-16 bg-gradient-to-b from-background to-neutral-900/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold mb-4">Comprehensive API</h2>
@@ -123,7 +123,7 @@ const APIEndpoints = () => {
         
         <div className="max-w-5xl mx-auto">
           <Tabs defaultValue="commerce" className="w-full" onValueChange={setActiveCategory}>
-            <TabsList className="w-full mb-6 bg-gray-900/50 border border-gray-800 rounded-lg p-1 h-auto flex flex-wrap">
+            <TabsList className="w-full mb-6 bg-neutral-900/50 border border-neutral-800 rounded-lg p-1 h-auto flex flex-wrap">
               <TabsTrigger value="commerce" className={cn(tabClasses, "flex-1")}>
                 Commerce
               </TabsTrigger>
@@ -143,7 +143,7 @@ const APIEndpoints = () => {
             
             {Object.keys(endpointCategories).map((category) => (
               <TabsContent key={category} value={category} className="mt-0">
-                <div className="bg-gray-900/20 border border-gray-800 rounded-xl p-6">
+                <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
                   <h3 className="text-xl font-semibold mb-4 text-foreground/60">
                     Hanzo {category.charAt(0).toUpperCase() + category.slice(1)} API Endpoints
                   </h3>

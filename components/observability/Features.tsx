@@ -59,7 +59,7 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900/20 to-background relative">
+    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900/20 to-background relative">
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:30px_30px]"></div>
       
       <div className="max-w-6xl mx-auto relative z-10">
@@ -84,9 +84,9 @@ const Features = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="bg-gray-900/30 p-6 rounded-xl border border-gray-800 hover:border-gray-700 transition-colors"
+              className="bg-neutral-900/30 p-6 rounded-xl border border-neutral-800 hover:border-neutral-700 transition-colors"
             >
-              <div className="bg-gray-800/60 p-3 rounded-lg w-fit mb-5">
+              <div className="bg-neutral-800/60 p-3 rounded-lg w-fit mb-5">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-bold mb-3">{feature.title}</h3>

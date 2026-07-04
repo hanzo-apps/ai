@@ -19,7 +19,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="bg-gradient-to-br from-gray-900 to-background border border-gray-800 rounded-xl p-6"
+      className="bg-gradient-to-br from-neutral-900 to-background border border-neutral-800 rounded-xl p-6"
     >
       <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
         <Icon className="h-6 w-6 text-foreground" />

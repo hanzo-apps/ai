@@ -33,16 +33,16 @@ const PricingPlan = ({
 }: PricingPlanProps) => {
   // Use monochrome design
   const borderColor = popular 
-    ? "border-gray-700" 
-    : "border-gray-800";
+    ? "border-neutral-700" 
+    : "border-neutral-800";
   
   const bgColor = popular 
-    ? "bg-gray-900/30" 
+    ? "bg-neutral-900/30" 
     : "bg-[var(--black)]/50";
 
   // Button color - prominent option gets white bg, others get outline
   const buttonClass = popular 
-    ? "bg-[var(--white)] text-primary-foreground border border-gray-300 hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all duration-300" 
+    ? "bg-[var(--white)] text-primary-foreground border border-neutral-300 hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all duration-300" 
     : "bg-transparent border border-border text-foreground hover:bg-[var(--white)] hover:text-primary-foreground transition-all duration-300";
 
   const renderButton = () => {
@@ -108,7 +108,7 @@ const PricingPlan = ({
 
   return (
     <div 
-      className={`relative rounded-2xl border ${borderColor} ${bgColor} p-8 backdrop-blur-sm transition-all duration-300 hover:border-gray-700 hover:bg-gray-900/20`}
+      className={`relative rounded-2xl border ${borderColor} ${bgColor} p-8 backdrop-blur-sm transition-all duration-300 hover:border-neutral-700 hover:bg-neutral-900/20`}
     >
       {popular && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2">

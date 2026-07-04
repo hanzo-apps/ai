@@ -60,7 +60,7 @@ const Dev = () => {
   const [activeTab, setActiveTab] = useState<string>("getting-started");
   
   return (
-    <section className="py-20 bg-[var(--white)] dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800">
+    <section className="py-20 bg-[var(--white)] dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
@@ -94,7 +94,7 @@ const Dev = () => {
                       "flex items-center px-3 py-2 text-sm rounded-md group",
                       item.active 
                         ? "bg-primary/10 text-foreground dark:bg-primary/20 dark:text-foreground/70" 
-                        : "text-neutral-700 hover:bg-gray-50 dark:text-foreground/80 dark:hover:bg-gray-800/50"
+                        : "text-neutral-700 hover:bg-neutral-50 dark:text-foreground/80 dark:hover:bg-neutral-800/50"
                     )}
                   >
                     <span className={cn(
@@ -157,7 +157,7 @@ const Dev = () => {
                 </h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  <div className="border border-gray-200 dark:border-gray-800 rounded-md p-4">
+                  <div className="border border-neutral-200 dark:border-neutral-800 rounded-md p-4">
                     <h4 className="font-medium text-neutral-900 dark:text-[var(--white)] mb-2">Operating Systems</h4>
                     <ul className="text-sm text-muted-foreground/60 dark:text-muted-foreground space-y-1 list-disc ml-4">
                       <li>macOS 10.15+</li>
@@ -166,7 +166,7 @@ const Dev = () => {
                     </ul>
                   </div>
                   
-                  <div className="border border-gray-200 dark:border-gray-800 rounded-md p-4">
+                  <div className="border border-neutral-200 dark:border-neutral-800 rounded-md p-4">
                     <h4 className="font-medium text-neutral-900 dark:text-[var(--white)] mb-2">Software</h4>
                     <ul className="text-sm text-muted-foreground/60 dark:text-muted-foreground space-y-1 list-disc ml-4">
                       <li>Node.js 18+</li>
@@ -185,8 +185,8 @@ const Dev = () => {
                 
                 <div className="space-y-4">
                   {setupSteps.map((step, index) => (
-                    <div key={index} className="border border-gray-200 dark:border-gray-800 rounded-md overflow-hidden">
-                      <div className="bg-gray-50 dark:bg-gray-900 px-4 py-2 border-b border-gray-200 dark:border-gray-800">
+                    <div key={index} className="border border-neutral-200 dark:border-neutral-800 rounded-md overflow-hidden">
+                      <div className="bg-neutral-50 dark:bg-neutral-900 px-4 py-2 border-b border-neutral-200 dark:border-neutral-800">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-6 w-6 rounded-full bg-primary text-[var(--white)] flex items-center justify-center text-sm font-medium">
                             {index + 1}
@@ -197,7 +197,7 @@ const Dev = () => {
                       <div className="px-4 py-3">
                         <p className="text-sm text-muted-foreground/60 dark:text-muted-foreground mb-3">{step.description}</p>
                         {step.code && (
-                          <div className="bg-gray-100 dark:bg-gray-800 rounded p-3 font-mono text-sm overflow-x-auto">
+                          <div className="bg-neutral-100 dark:bg-neutral-800 rounded p-3 font-mono text-sm overflow-x-auto">
                             {step.code}
                           </div>
                         )}
@@ -214,7 +214,7 @@ const Dev = () => {
                 </h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="border border-gray-200 dark:border-gray-800 rounded-md p-4">
+                  <div className="border border-neutral-200 dark:border-neutral-800 rounded-md p-4">
                     <Code className="h-5 w-5 text-foreground mb-2" />
                     <h4 className="font-medium text-neutral-900 dark:text-[var(--white)] mb-2">Understand Code</h4>
                     <p className="text-sm text-muted-foreground/60 dark:text-muted-foreground">
@@ -222,7 +222,7 @@ const Dev = () => {
                     </p>
                   </div>
                   
-                  <div className="border border-gray-200 dark:border-gray-800 rounded-md p-4">
+                  <div className="border border-neutral-200 dark:border-neutral-800 rounded-md p-4">
                     <Terminal className="h-5 w-5 text-foreground/70 mb-2" />
                     <h4 className="font-medium text-neutral-900 dark:text-[var(--white)] mb-2">Execute Commands</h4>
                     <p className="text-sm text-muted-foreground/60 dark:text-muted-foreground">
@@ -230,7 +230,7 @@ const Dev = () => {
                     </p>
                   </div>
                   
-                  <div className="border border-gray-200 dark:border-gray-800 rounded-md p-4">
+                  <div className="border border-neutral-200 dark:border-neutral-800 rounded-md p-4">
                     <FileText className="h-5 w-5 text-foreground mb-2" />
                     <h4 className="font-medium text-neutral-900 dark:text-[var(--white)] mb-2">Edit Files</h4>
                     <p className="text-sm text-muted-foreground/60 dark:text-muted-foreground">
@@ -238,7 +238,7 @@ const Dev = () => {
                     </p>
                   </div>
                   
-                  <div className="border border-gray-200 dark:border-gray-800 rounded-md p-4">
+                  <div className="border border-neutral-200 dark:border-neutral-800 rounded-md p-4">
                     <Search className="h-5 w-5 text-foreground/60 mb-2" />
                     <h4 className="font-medium text-neutral-900 dark:text-[var(--white)] mb-2">Search & Navigate</h4>
                     <p className="text-sm text-muted-foreground/60 dark:text-muted-foreground">
@@ -254,7 +254,7 @@ const Dev = () => {
                   Example Usage
                 </h3>
                 
-                <div className="bg-gray-100 dark:bg-gray-800 rounded-md p-4 font-mono text-sm mb-6 overflow-x-auto">
+                <div className="bg-neutral-100 dark:bg-neutral-800 rounded-md p-4 font-mono text-sm mb-6 overflow-x-auto">
                   <div className="text-muted-foreground dark:text-muted-foreground"># Ask about your codebase</div>
                   <div className="text-neutral-900 dark:text-neutral-100">hanzo</div>
                   <div className="text-foreground dark:text-foreground">&gt; how does our authentication system work?</div>

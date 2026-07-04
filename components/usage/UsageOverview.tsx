@@ -37,9 +37,9 @@ const UsageOverview = ({
   return (
     <motion.div 
       variants={cardAnimation}
-      className="rounded-xl border border-gray-800 bg-gray-900/20 overflow-hidden"
+      className="rounded-xl border border-neutral-800 bg-neutral-900/20 overflow-hidden"
     >
-      <div className="p-6 border-b border-gray-800">
+      <div className="p-6 border-b border-neutral-800">
         <h2 className="text-xl font-semibold mb-1">
           {dateRange.start} to {dateRange.end} Credit Usage
         </h2>
@@ -66,7 +66,7 @@ const UsageOverview = ({
             </div>
           </div>
           
-          <div className="bg-gray-900/30 rounded-xl p-6 flex flex-col items-center justify-center text-center">
+          <div className="bg-neutral-900/30 rounded-xl p-6 flex flex-col items-center justify-center text-center">
             <div className="mb-2">
               <div className="text-sm text-muted-foreground">Credits Available</div>
               <div className="text-3xl font-bold">{creditsAvailable}</div>

@@ -16,7 +16,7 @@ const CreditBalance = () => {
   };
 
   return (
-    <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+    <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-xl font-medium">Credit Balance</h3>
         <Button onClick={handleAddCredits}>

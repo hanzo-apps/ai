@@ -37,8 +37,8 @@ const TeamPlanDetails = ({ fromMaxPlan = false, fromProPlan = false }: TeamPlanD
 
   return (
     <section id="team-config-section" className="max-w-7xl mx-auto mb-16 mt-24 scroll-mt-24">
-      <div className="bg-[var(--black)] border border-gray-800 rounded-2xl p-6 backdrop-blur-sm">
-        <div className="border-b border-gray-800/40 px-2 py-4 mb-6">
+      <div className="bg-[var(--black)] border border-neutral-800 rounded-2xl p-6 backdrop-blur-sm">
+        <div className="border-b border-neutral-800/40 px-2 py-4 mb-6">
           <h2 className="text-2xl font-bold">{getTitle()}</h2>
           <p className="text-muted-foreground mt-2">Scale resources to match your exact needs</p>
         </div>
@@ -122,7 +122,7 @@ const TeamPlanDetails = ({ fromMaxPlan = false, fromProPlan = false }: TeamPlanD
             </div>
           </div>
 
-          <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-800/50 mb-8">
+          <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50 mb-8">
             <h3 className="text-xl font-semibold mb-4">{fromProPlan ? "Pro Plan Benefits" : "Team Plan Benefits"}</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex items-start gap-3">
@@ -157,7 +157,7 @@ const TeamPlanDetails = ({ fromMaxPlan = false, fromProPlan = false }: TeamPlanD
           </div>
 
           <div className="flex justify-center">
-            <Button size="lg" className="bg-primary text-primary-foreground border border-gray-300 hover:bg-gray-100 hover:text-primary-foreground hover:border-gray-400 transition-all duration-300 px-10 py-6 text-lg">
+            <Button size="lg" className="bg-primary text-primary-foreground border border-neutral-300 hover:bg-neutral-100 hover:text-primary-foreground hover:border-neutral-400 transition-all duration-300 px-10 py-6 text-lg">
               Get Started with {fromProPlan ? "Pro" : "Team"} Plan
             </Button>
           </div>

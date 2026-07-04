@@ -32,7 +32,7 @@ const DownloadFooter = () => {
   ];
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-[var(--black)]/80 border-t border-gray-800">
+    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-[var(--black)]/80 border-t border-neutral-800">
       <div className="max-w-6xl mx-auto">
         <motion.div 
           className="grid grid-cols-2 md:grid-cols-5 gap-8"
@@ -48,7 +48,7 @@ const DownloadFooter = () => {
           <FooterSection title="Prompt Library" links={promptLibrary} />
         </motion.div>
         
-        <div className="mt-12 pt-6 border-t border-gray-800 text-center text-muted-foreground text-sm">
+        <div className="mt-12 pt-6 border-t border-neutral-800 text-center text-muted-foreground text-sm">
           © 2025 Hanzo AI. All rights reserved. Not associated with or endorsed by ChatGPT, Perplexity, or Claude.
         </div>
       </div>

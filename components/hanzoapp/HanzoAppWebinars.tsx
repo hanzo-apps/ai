@@ -12,7 +12,7 @@ const WebinarCard = ({ title, partner }: { title: string; partner: string }) => 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="bg-gray-900/30 border border-gray-800 rounded-xl overflow-hidden group hover:border-gray-700 transition-colors"
+      className="bg-neutral-900/30 border border-neutral-800 rounded-xl overflow-hidden group hover:border-neutral-700 transition-colors"
     >
       <div className="h-48 bg-gradient-to-br from-white/25 via-background/40 to-white/10 relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12),transparent_55%)]" />
@@ -28,7 +28,7 @@ const WebinarCard = ({ title, partner }: { title: string; partner: string }) => 
           <div className="text-lg font-semibold">{title}</div>
           <div className="text-muted-foreground">{partner}</div>
         </div>
-        <Button className="w-full bg-gray-800 hover:bg-gray-700">
+        <Button className="w-full bg-neutral-800 hover:bg-neutral-700">
           Learn More
         </Button>
       </div>

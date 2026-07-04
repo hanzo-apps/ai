@@ -71,14 +71,14 @@ const HeroSection = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="border-gray-600 text-[var(--white)] hover:bg-[var(--white)]/10 rounded-full py-6"
+              className="border-neutral-600 text-[var(--white)] hover:bg-[var(--white)]/10 rounded-full py-6"
             >
               <span className="py-1 leading-relaxed">Start Free Trial</span>
             </Button>
             <Button 
               variant="outline" 
               size="lg"
-              className="border-gray-600 text-[var(--white)] hover:bg-[var(--white)]/10 rounded-full py-6"
+              className="border-neutral-600 text-[var(--white)] hover:bg-[var(--white)]/10 rounded-full py-6"
             >
               <span className="py-1 leading-relaxed">Request Demo</span>
             </Button>

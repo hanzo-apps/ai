@@ -11,7 +11,7 @@ interface PlatformTabsProps {
 
 const PlatformTabs: React.FC<PlatformTabsProps> = ({ activeTab, setActiveTab }) => {
   return (
-    <div className="flex space-x-2 border-b border-gray-800 pb-2 overflow-x-auto">
+    <div className="flex space-x-2 border-b border-neutral-800 pb-2 overflow-x-auto">
       <button
         onClick={() => setActiveTab("platform")}
         className={`px-4 py-2 rounded-t-lg whitespace-nowrap ${

@@ -46,7 +46,7 @@ const Templates = () => {
   ];
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-900/30">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-neutral-900/30">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -69,7 +69,7 @@ const Templates = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700/50 hover:border-gray-600/50 transition-colors group"
+              className="bg-neutral-800/50 rounded-lg overflow-hidden border border-neutral-700/50 hover:border-neutral-600/50 transition-colors group"
             >
               <div className={`h-2 bg-gradient-to-r ${template.color}`}></div>
               <div className="p-6">

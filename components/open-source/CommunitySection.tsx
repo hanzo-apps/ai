@@ -31,7 +31,7 @@ const CommunitySection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-gray-900/60 rounded-xl border border-gray-800 p-6 text-center"
+            className="bg-neutral-900/60 rounded-xl border border-neutral-800 p-6 text-center"
           >
             <div className="bg-primary/5 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-6">
               <Users className="h-8 w-8 text-foreground/70" />
@@ -50,7 +50,7 @@ const CommunitySection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-900/60 rounded-xl border border-gray-800 p-6 text-center"
+            className="bg-neutral-900/60 rounded-xl border border-neutral-800 p-6 text-center"
           >
             <div className="bg-primary/5 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-6">
               <Github className="h-8 w-8 text-foreground/70" />
@@ -59,7 +59,7 @@ const CommunitySection = () => {
             <p className="text-foreground/80 mb-6">
               Ask questions, share ideas, and collaborate on code with our maintainers.
             </p>
-            <Button className="w-full bg-gray-700 hover:bg-gray-600" size="sm">
+            <Button className="w-full bg-neutral-700 hover:bg-neutral-600" size="sm">
               <a href="https://github.com/hanzoai/platform/discussions" target="_blank" rel="noopener noreferrer">Go to Discussions</a>
             </Button>
           </motion.div>
@@ -69,7 +69,7 @@ const CommunitySection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-gray-900/60 rounded-xl border border-gray-800 p-6 text-center"
+            className="bg-neutral-900/60 rounded-xl border border-neutral-800 p-6 text-center"
           >
             <div className="bg-primary/5 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-6">
               <Code className="h-8 w-8 text-foreground/70" />

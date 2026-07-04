@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const FeaturesOverview = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900/30">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-900/30">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,7 +28,7 @@ const FeaturesOverview = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-gray-800/30 p-8 rounded-lg border border-gray-700"
+            className="bg-neutral-800/30 p-8 rounded-lg border border-neutral-700"
           >
             <h3 className="text-2xl font-semibold mb-4">Simplified Operation, Complex Deployments</h3>
             <p className="text-foreground/80">
@@ -42,7 +42,7 @@ const FeaturesOverview = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-800/30 p-8 rounded-lg border border-gray-700"
+            className="bg-neutral-800/30 p-8 rounded-lg border border-neutral-700"
           >
             <h3 className="text-2xl font-semibold mb-4">Enhanced with Powerful Middleware Suite</h3>
             <p className="text-foreground/80">
@@ -56,7 +56,7 @@ const FeaturesOverview = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-gray-800/30 p-8 rounded-lg border border-gray-700"
+            className="bg-neutral-800/30 p-8 rounded-lg border border-neutral-700"
           >
             <h3 className="text-2xl font-semibold mb-4">Upgrade from Other Proxies in Seconds</h3>
             <p className="text-foreground/80">

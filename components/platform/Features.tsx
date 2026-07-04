@@ -95,7 +95,7 @@ const Features = () => {
                 <p className="text-sm text-muted-foreground mb-2">Replaces</p>
                 <div className="flex flex-wrap gap-4">
                   {feature.replaces.map((replace, i) => (
-                    <span key={i} className="px-3 py-1 bg-gray-800 rounded-full text-xs text-muted-foreground">
+                    <span key={i} className="px-3 py-1 bg-neutral-800 rounded-full text-xs text-muted-foreground">
                       {replace}
                     </span>
                   ))}
@@ -103,7 +103,7 @@ const Features = () => {
               </div>
             </div>
             
-            <div className="w-full lg:w-1/2 bg-gray-900/50 rounded-xl overflow-hidden border border-gray-800">
+            <div className="w-full lg:w-1/2 bg-neutral-900/50 rounded-xl overflow-hidden border border-neutral-800">
               <div className="aspect-video p-8 flex items-center justify-center bg-gradient-to-br from-white/20 to-white/10">
                 <feature.icon className="h-24 w-24 text-foreground/70" />
               </div>
@@ -116,7 +116,7 @@ const Features = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="bg-gradient-to-br from-gray-900 to-gray-800/50 rounded-xl p-8 border border-gray-700"
+          className="bg-gradient-to-br from-neutral-900 to-neutral-800/50 rounded-xl p-8 border border-neutral-700"
         >
           <div className="grid md:grid-cols-3 gap-8">
             <div className="space-y-4">

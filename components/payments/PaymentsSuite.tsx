@@ -67,9 +67,9 @@ const PaymentsSuite = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-gray-900/30 border border-gray-800 p-6 rounded-lg"
+                className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
               >
-                <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+                <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
                   {item.icon}
                 </div>
                 <h4 className="text-xl font-semibold mb-3">{item.title}</h4>
@@ -84,7 +84,7 @@ const PaymentsSuite = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="relative bg-gradient-to-br from-gray-900/50 to-white/10 border border-gray-800 rounded-xl p-8 overflow-hidden"
+          className="relative bg-gradient-to-br from-neutral-900/50 to-white/10 border border-neutral-800 rounded-xl p-8 overflow-hidden"
         >
           <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
           <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
@@ -105,7 +105,7 @@ const PaymentsSuite = () => {
                 </li>
               </ul>
             </div>
-            <div className="md:w-1/3 bg-gray-900/70 border border-gray-700 rounded-lg p-5">
+            <div className="md:w-1/3 bg-neutral-900/70 border border-neutral-700 rounded-lg p-5">
               <div className="text-center">
                 <h4 className="text-lg font-semibold mb-3">Payment Growth</h4>
                 <div className="flex items-end justify-center space-x-2 h-32 mb-4">

@@ -70,8 +70,8 @@ const DeveloperExperience = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="lg:pl-8"
           >
-            <div className="bg-gray-900/30 rounded-xl border border-gray-800 p-1 shadow-xl overflow-hidden">
-              <div className="flex items-center bg-gray-900 rounded-t-lg px-4 py-2">
+            <div className="bg-neutral-900/30 rounded-xl border border-neutral-800 p-1 shadow-xl overflow-hidden">
+              <div className="flex items-center bg-neutral-900 rounded-t-lg px-4 py-2">
                 <div className="flex space-x-2">
                   <div className="w-3 h-3 rounded-full bg-primary/10"></div>
                   <div className="w-3 h-3 rounded-full bg-primary/10"></div>
@@ -79,7 +79,7 @@ const DeveloperExperience = () => {
                 </div>
                 <div className="mx-auto text-muted-foreground text-sm">Terminal</div>
               </div>
-              <div className="bg-gray-950 p-4 rounded-b-lg overflow-hidden">
+              <div className="bg-neutral-950 p-4 rounded-b-lg overflow-hidden">
                 <div className="font-mono text-sm">
                   <p className="text-muted-foreground mb-2">$ npx create-hanzo-app my-project</p>
                   <p className="text-foreground/70 mb-2">Initializing Hanzo Base project...</p>

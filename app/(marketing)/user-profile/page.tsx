@@ -82,10 +82,10 @@ const UserProfile = () => {
         </div>
         
         {/* Organization Info */}
-        <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+        <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
           <h2 className="text-xl font-medium mb-4">Current Organization</h2>
           <div className="flex items-center space-x-4">
-            <div className="h-12 w-12 bg-gray-800 rounded-lg flex items-center justify-center text-lg font-bold">
+            <div className="h-12 w-12 bg-neutral-800 rounded-lg flex items-center justify-center text-lg font-bold">
               {currentOrganization?.name.charAt(0)}
             </div>
             <div>
@@ -96,11 +96,11 @@ const UserProfile = () => {
         </div>
         
         {/* Projects */}
-        <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+        <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
           <h2 className="text-xl font-medium mb-4">Recent Projects</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {userProfile.projects.map(project => (
-              <div key={project.id} className="bg-gray-800/50 rounded-lg p-4 hover:bg-gray-800 transition-colors">
+              <div key={project.id} className="bg-neutral-800/50 rounded-lg p-4 hover:bg-neutral-800 transition-colors">
                 <h3 className="font-medium">{project.name}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
               </div>

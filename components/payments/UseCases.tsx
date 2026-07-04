@@ -53,15 +53,15 @@ const UseCases = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-900/30 border border-gray-800 rounded-lg p-6"
+              className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6"
             >
-              <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+              <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
                 {useCase.icon}
               </div>
               <h3 className="text-xl font-semibold mb-3">{useCase.title}</h3>
               <p className="text-muted-foreground mb-4">{useCase.description}</p>
               
-              <div className="mt-6 pt-6 border-t border-gray-800">
+              <div className="mt-6 pt-6 border-t border-neutral-800">
                 <h4 className="text-lg font-medium mb-3">Key Features</h4>
                 <div className="grid grid-cols-2 gap-3">
                   {[...Array(4)].map((_, i) => (
@@ -86,7 +86,7 @@ const UseCases = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-16 p-8 bg-gradient-to-r from-gray-900/50 to-white/10 border border-gray-800 rounded-lg text-center"
+          className="mt-16 p-8 bg-gradient-to-r from-neutral-900/50 to-white/10 border border-neutral-800 rounded-lg text-center"
         >
           <h3 className="text-2xl font-bold mb-4">Start Quickly, Scale Instantly</h3>
           <p className="text-foreground/80 max-w-2xl mx-auto mb-6">
@@ -96,7 +96,7 @@ const UseCases = () => {
             <button className="px-6 py-3 bg-primary hover:bg-[#cccccc] rounded-md transition duration-200">
               Get Started
             </button>
-            <button className="px-6 py-3 bg-transparent border border-gray-600 hover:border-gray-400 rounded-md transition duration-200">
+            <button className="px-6 py-3 bg-transparent border border-neutral-600 hover:border-neutral-400 rounded-md transition duration-200">
               View Documentation
             </button>
           </div>

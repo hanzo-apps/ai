@@ -18,7 +18,7 @@ const InvoicesSummary = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <motion.div 
         variants={cardAnimation}
-        className="p-6 rounded-xl border border-gray-800 bg-gray-900/20"
+        className="p-6 rounded-xl border border-neutral-800 bg-neutral-900/20"
       >
         <div className="flex items-center gap-3 mb-4">
           <CreditCard className="h-5 w-5 text-muted-foreground" />
@@ -39,7 +39,7 @@ const InvoicesSummary = () => {
       
       <motion.div 
         variants={cardAnimation}
-        className="p-6 rounded-xl border border-gray-800 bg-gray-900/20"
+        className="p-6 rounded-xl border border-neutral-800 bg-neutral-900/20"
       >
         <div className="flex items-center gap-3 mb-4">
           <Receipt className="h-5 w-5 text-muted-foreground" />
@@ -61,14 +61,14 @@ const InvoicesSummary = () => {
           </div>
         </div>
         
-        <Button className="bg-[var(--white)] hover:bg-gray-200 text-primary-foreground w-full">
+        <Button className="bg-[var(--white)] hover:bg-neutral-200 text-primary-foreground w-full">
           Purchase Credits
         </Button>
       </motion.div>
       
       <motion.div 
         variants={cardAnimation}
-        className="p-6 rounded-xl border border-gray-800 bg-gray-900/20"
+        className="p-6 rounded-xl border border-neutral-800 bg-neutral-900/20"
       >
         <div className="flex items-center gap-3 mb-4">
           <Clock className="h-5 w-5 text-muted-foreground" />
@@ -82,7 +82,7 @@ const InvoicesSummary = () => {
         
         <Button 
           variant="outline" 
-          className="border-gray-700 w-full"
+          className="border-neutral-700 w-full"
         >
           View Pricing
         </Button>

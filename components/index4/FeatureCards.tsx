@@ -15,16 +15,16 @@ type FeatureCardProps = {
 const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
   return (
     <ArchitecturalBox
-      className="backdrop-blur-lg bg-zinc-900/30 border border-zinc-800/50 rounded-xl p-6 hover:border-zinc-700/50 transition-all duration-300"
+      className="backdrop-blur-lg bg-neutral-900/30 border border-neutral-800/50 rounded-xl p-6 hover:border-neutral-700/50 transition-all duration-300"
       showCorners={true}
       cornerColor="rgba(100, 100, 100, 0.2)"
       cornerSize={20}
     >
-      <div className="mb-4 p-2 bg-zinc-800/50 rounded-lg w-10 h-10 flex items-center justify-center">
+      <div className="mb-4 p-2 bg-neutral-800/50 rounded-lg w-10 h-10 flex items-center justify-center">
         {icon}
       </div>
       <h3 className="text-xl font-medium mb-2 text-[var(--white)]">{title}</h3>
-      <p className="text-zinc-400 text-sm leading-relaxed">
+      <p className="text-neutral-400 text-sm leading-relaxed">
         {description}
       </p>
     </ArchitecturalBox>
@@ -34,17 +34,17 @@ const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
 const FeatureCards = () => {
   const features = [
     {
-      icon: <Terminal className="h-5 w-5 text-zinc-300" />,
+      icon: <Terminal className="h-5 w-5 text-neutral-300" />,
       title: "Developer Experience",
       description: "Intuitive CLI and dashboard designed for efficient workflow and rapid development."
     },
     {
-      icon: <Code className="h-5 w-5 text-zinc-300" />,
+      icon: <Code className="h-5 w-5 text-neutral-300" />,
       title: "Instant Deployments",
       description: "From code to production in seconds with automatic builds and zero downtime updates."
     },
     {
-      icon: <Database className="h-5 w-5 text-zinc-300" />,
+      icon: <Database className="h-5 w-5 text-neutral-300" />,
       title: "Global Infrastructure",
       description: "Scale effortlessly with our distributed network optimized for performance and reliability."
     }

@@ -71,7 +71,7 @@ const CallToAction = () => {
             </Button>
             <Button 
               size="sm"
-              className="bg-gradient-to-r from-gray-600 to-gray-500 hover:from-gray-500 hover:to-gray-400 text-[var(--white)] shadow-lg hover:shadow-xl transition-all flex items-center"
+              className="bg-gradient-to-r from-neutral-600 to-neutral-500 hover:from-neutral-500 hover:to-neutral-400 text-[var(--white)] shadow-lg hover:shadow-xl transition-all flex items-center"
             >
               <ArrowDown className="mr-2 h-4 w-4" />
               Download for Windows
@@ -82,7 +82,7 @@ const CallToAction = () => {
             <Button 
               size="sm"
               variant="outline"
-              className="border-gray-700 text-[var(--white)] hover:bg-gray-800"
+              className="border-neutral-700 text-[var(--white)] hover:bg-neutral-800"
             >
               <Chrome className="mr-2 h-4 w-4" />
               Chrome Extension
@@ -90,7 +90,7 @@ const CallToAction = () => {
             <Button 
               size="sm"
               variant="outline"
-              className="border-gray-700 text-[var(--white)] hover:bg-gray-800"
+              className="border-neutral-700 text-[var(--white)] hover:bg-neutral-800"
             >
               <Chrome className="mr-2 h-4 w-4" />
               Safari Extension
@@ -98,7 +98,7 @@ const CallToAction = () => {
             <Button 
               size="sm"
               variant="outline"
-              className="border-gray-700 text-[var(--white)] hover:bg-gray-800"
+              className="border-neutral-700 text-[var(--white)] hover:bg-neutral-800"
             >
               <Chrome className="mr-2 h-4 w-4" />
               Firefox Add-on
@@ -106,7 +106,7 @@ const CallToAction = () => {
             <Button 
               size="sm"
               variant="outline"
-              className="border-gray-700 text-[var(--white)] hover:bg-gray-800"
+              className="border-neutral-700 text-[var(--white)] hover:bg-neutral-800"
             >
               <Chrome className="mr-2 h-4 w-4" />
               Edge Extension

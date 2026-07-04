@@ -44,7 +44,7 @@ const TeamVi = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <motion.div 
               whileHover={{ y: -5 }}
-              className="p-6 rounded-2xl border border-gray-800 bg-[var(--black)]/50"
+              className="p-6 rounded-2xl border border-neutral-800 bg-[var(--black)]/50"
             >
               <MessagesSquare className="h-8 w-8 text-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">Strategic Vision</h3>
@@ -56,7 +56,7 @@ const TeamVi = () => {
 
             <motion.div 
               whileHover={{ y: -5 }}
-              className="p-6 rounded-2xl border border-gray-800 bg-[var(--black)]/50"
+              className="p-6 rounded-2xl border border-neutral-800 bg-[var(--black)]/50"
             >
               <Bot className="h-8 w-8 text-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">Team Leadership</h3>
@@ -68,7 +68,7 @@ const TeamVi = () => {
 
             <motion.div 
               whileHover={{ y: -5 }}
-              className="p-6 rounded-2xl border border-gray-800 bg-[var(--black)]/50"
+              className="p-6 rounded-2xl border border-neutral-800 bg-[var(--black)]/50"
             >
               <Lock className="h-8 w-8 text-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">Innovation Drive</h3>

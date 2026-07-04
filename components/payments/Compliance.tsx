@@ -7,7 +7,7 @@ import { ShieldCheck, Receipt, AlertTriangle } from "lucide-react";
 
 const Compliance = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900/20">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20">
       <div className="max-w-6xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -28,9 +28,9 @@ const Compliance = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0 }}
-            className="bg-gray-900/30 border border-gray-800 p-6 rounded-lg"
+            className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <ShieldCheck className="h-6 w-6 text-foreground" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Automated Tax Management</h3>
@@ -58,9 +58,9 @@ const Compliance = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-gray-900/30 border border-gray-800 p-6 rounded-lg"
+            className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <Receipt className="h-6 w-6 text-foreground" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Merchant of Record</h3>
@@ -88,9 +88,9 @@ const Compliance = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-900/30 border border-gray-800 p-6 rounded-lg"
+            className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <AlertTriangle className="h-6 w-6 text-foreground" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Fraud Protection</h3>

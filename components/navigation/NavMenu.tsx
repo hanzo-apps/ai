@@ -105,7 +105,7 @@ export const NavMenu = ({ label, children }: NavMenuProps) => {
           {isDesktop ? (
             <div className={cn(
                    "fixed left-0 w-full backdrop-blur-md z-50 border-b shadow-2xl",
-                   "bg-background/95 border-gray-800/50"
+                   "bg-background/95 border-neutral-800/50"
                  )}
                  style={{
                    top: 'var(--header-height)',

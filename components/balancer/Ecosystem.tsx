@@ -69,7 +69,7 @@ const Ecosystem = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-800/30 p-6 rounded-lg border border-gray-700"
+              className="bg-neutral-800/30 p-6 rounded-lg border border-neutral-700"
             >
               <h3 className="text-xl font-semibold mb-4">{category.title}</h3>
               <ul className="space-y-2">

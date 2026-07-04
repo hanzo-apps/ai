@@ -34,7 +34,7 @@ const HeroTitle: React.FC<HeroTitleProps> = ({
       </div>
       
       <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-gray-300">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-neutral-300">
           Build As Fast
         </span>
         <br />

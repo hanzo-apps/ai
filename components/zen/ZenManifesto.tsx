@@ -183,7 +183,7 @@ const ZenManifesto: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.07 }}
-              className="bg-gradient-to-br from-gray-900/80 to-gray-900/20 backdrop-blur-sm border border-border rounded-lg p-6 group"
+              className="bg-gradient-to-br from-neutral-900/80 to-neutral-900/20 backdrop-blur-sm border border-border rounded-lg p-6 group"
             >
               <div className="flex items-start gap-4 mb-3">
                 <div className="text-5xl leading-none text-foreground/40 group-hover:text-foreground/80 transition-colors font-light select-none">

@@ -7,7 +7,7 @@ import { Cpu, Clock, Users, LineChart } from "lucide-react";
 
 const UnifiedPlatform = () => {
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900/20 relative">
+    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20 relative">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"></div>
       
       <div className="max-w-6xl mx-auto relative z-10">
@@ -51,7 +51,7 @@ const UnifiedPlatform = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gradient-to-br from-gray-900 to-background/80 rounded-xl p-8 border border-gray-800 hover:border-gray-700 transition-colors"
+              className="bg-gradient-to-br from-neutral-900 to-background/80 rounded-xl p-8 border border-neutral-800 hover:border-neutral-700 transition-colors"
             >
               <div className="bg-primary/10 p-3 rounded-lg w-fit mb-5">
                 {feature.icon}
@@ -67,7 +67,7 @@ const UnifiedPlatform = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-20 relative h-80 overflow-hidden rounded-xl border border-gray-800"
+          className="mt-20 relative h-80 overflow-hidden rounded-xl border border-neutral-800"
         >
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background z-10"></div>
           
@@ -76,7 +76,7 @@ const UnifiedPlatform = () => {
               {Array.from({ length: 12 }).map((_, idx) => (
                 <div 
                   key={idx} 
-                  className="h-20 bg-gradient-to-br from-gray-800/60 to-gray-900/60 rounded-lg border border-gray-700/30 opacity-60"
+                  className="h-20 bg-gradient-to-br from-neutral-800/60 to-neutral-900/60 rounded-lg border border-neutral-700/30 opacity-60"
                   style={{ 
                     opacity: Math.random() * 0.5 + 0.3,
                     transform: `scale(${Math.random() * 0.3 + 0.8})` 

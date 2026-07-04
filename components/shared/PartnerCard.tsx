@@ -102,7 +102,7 @@ interface PartnersSectionProps {
 
 export const PartnersSection: React.FC<PartnersSectionProps> = ({ className = "" }) => {
   return (
-    <div className={`bg-gradient-to-br from-gray-900/70 to-background/90 p-10 rounded-2xl border border-gray-800 ${className}`}>
+    <div className={`bg-gradient-to-br from-neutral-900/70 to-background/90 p-10 rounded-2xl border border-neutral-800 ${className}`}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <PartnerCard
           name="Hanzo Agency"

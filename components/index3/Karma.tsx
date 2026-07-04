@@ -65,7 +65,7 @@ const Karma = () => {
             }} transition={{
               duration: 0.4,
               delay: 0.1
-            }} className="flex flex-col items-center text-center p-4 rounded-lg bg-gray-900/20 border border-gray-800">
+            }} className="flex flex-col items-center text-center p-4 rounded-lg bg-neutral-900/20 border border-neutral-800">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
                   <Leaf className="h-6 w-6 text-foreground/70" />
                 </div>
@@ -84,7 +84,7 @@ const Karma = () => {
             }} transition={{
               duration: 0.4,
               delay: 0.2
-            }} className="flex flex-col items-center text-center p-4 rounded-lg bg-gray-900/20 border border-gray-800">
+            }} className="flex flex-col items-center text-center p-4 rounded-lg bg-neutral-900/20 border border-neutral-800">
                 <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-3">
                   <ThermometerSun className="h-6 w-6 text-foreground/70" />
                 </div>
@@ -103,7 +103,7 @@ const Karma = () => {
             }} transition={{
               duration: 0.4,
               delay: 0.3
-            }} className="flex flex-col items-center text-center p-4 rounded-lg bg-gray-900/20 border border-gray-800">
+            }} className="flex flex-col items-center text-center p-4 rounded-lg bg-neutral-900/20 border border-neutral-800">
                 <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-3">
                   <Recycle className="h-6 w-6 text-foreground" />
                 </div>
@@ -143,9 +143,9 @@ const Karma = () => {
           once: true
         }} transition={{
           duration: 0.6
-        }} className="bg-gray-900/20 border border-gray-800 rounded-xl p-8">
+        }} className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-8">
             <div className="flex items-start mb-6">
-              <div className="w-16 h-16 rounded-full bg-gray-800 mr-4"></div>
+              <div className="w-16 h-16 rounded-full bg-neutral-800 mr-4"></div>
               <div>
                 <h3 className="text-xl font-bold mb-1">Zach Kelling</h3>
                 <p className="text-muted-foreground">CTO, Hanzo AI</p>

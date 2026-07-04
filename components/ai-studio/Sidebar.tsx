@@ -26,7 +26,7 @@ const Sidebar = ({
       initial={{ width: 0, opacity: 0 }}
       animate={{ width: 240, opacity: 1 }}
       exit={{ width: 0, opacity: 0 }}
-      className="bg-gray-900/50 border-r border-gray-800 h-full mr-4 p-4 overflow-y-auto"
+      className="bg-neutral-900/50 border-r border-neutral-800 h-full mr-4 p-4 overflow-y-auto"
     >
       <div className="space-y-6">
         <div>
@@ -37,7 +37,7 @@ const Sidebar = ({
                 key={model.id}
                 onClick={() => setModelSelection(model.id)}
                 className={`w-full text-left px-3 py-2 rounded-md text-sm flex items-center ${
-                  modelSelection === model.id ? "bg-primary/10 text-[var(--white)]" : "text-foreground/80 hover:bg-gray-800"
+                  modelSelection === model.id ? "bg-primary/10 text-[var(--white)]" : "text-foreground/80 hover:bg-neutral-800"
                 }`}
               >
                 <Cpu className="w-4 h-4 mr-2" />
@@ -53,15 +53,15 @@ const Sidebar = ({
         <div>
           <h3 className="text-sm font-medium text-muted-foreground mb-2">SAVED PROJECTS</h3>
           <div className="space-y-1">
-            <button className="w-full text-left px-3 py-2 rounded-md text-sm text-foreground/80 hover:bg-gray-800 flex items-center">
+            <button className="w-full text-left px-3 py-2 rounded-md text-sm text-foreground/80 hover:bg-neutral-800 flex items-center">
               <MessageSquare className="w-4 h-4 mr-2" />
               <span>Customer Support Bot</span>
             </button>
-            <button className="w-full text-left px-3 py-2 rounded-md text-sm text-foreground/80 hover:bg-gray-800 flex items-center">
+            <button className="w-full text-left px-3 py-2 rounded-md text-sm text-foreground/80 hover:bg-neutral-800 flex items-center">
               <Code className="w-4 h-4 mr-2" />
               <span>Code Generator</span>
             </button>
-            <button className="w-full text-left px-3 py-2 rounded-md text-sm text-foreground/80 hover:bg-gray-800 flex items-center">
+            <button className="w-full text-left px-3 py-2 rounded-md text-sm text-foreground/80 hover:bg-neutral-800 flex items-center">
               <Bot className="w-4 h-4 mr-2" />
               <span>Data Analysis Agent</span>
             </button>

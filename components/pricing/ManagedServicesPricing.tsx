@@ -57,10 +57,10 @@ export default function ManagedServicesPricing() {
         and zero-downtime scaling. All services include IAM SSO and KMS-managed secrets.
       </p>
 
-      <div className="overflow-x-auto rounded-xl border border-gray-800/50">
+      <div className="overflow-x-auto rounded-xl border border-neutral-800/50">
         <table className="w-full text-left">
           <thead>
-            <tr className="border-b border-gray-800 bg-gray-900/30">
+            <tr className="border-b border-neutral-800 bg-neutral-900/30">
               <th className="py-3 px-5 text-muted-foreground font-medium">Service</th>
               <th className="py-3 px-5 text-muted-foreground font-medium">Free Tier</th>
               <th className="py-3 px-5 text-muted-foreground font-medium">Pro</th>
@@ -69,7 +69,7 @@ export default function ManagedServicesPricing() {
           </thead>
           <tbody>
             {services.map((svc) => (
-              <tr key={svc.name} className="border-b border-gray-800/50 hover:bg-gray-900/20 transition-colors">
+              <tr key={svc.name} className="border-b border-neutral-800/50 hover:bg-neutral-900/20 transition-colors">
                 <td className="py-4 px-5">
                   <div className="font-medium">{svc.name}</div>
                   <div className="text-xs text-muted-foreground">{svc.description}</div>
@@ -91,7 +91,7 @@ export default function ManagedServicesPricing() {
       <div className="flex justify-center mt-8">
         <Button
           size="lg"
-          className="bg-primary text-primary-foreground hover:bg-gray-100 px-8 py-3"
+          className="bg-primary text-primary-foreground hover:bg-neutral-100 px-8 py-3"
           onClick={() => window.open("https://cloud.hanzo.ai", "_blank")}
         >
           Deploy Now

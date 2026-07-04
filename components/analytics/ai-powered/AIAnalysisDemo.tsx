@@ -12,7 +12,7 @@ const AIAnalysisDemo = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.7 }}
-      className="bg-gradient-to-r from-gray-900 to-gray-900/50 rounded-xl p-6 border border-gray-800 shadow-xl overflow-hidden relative"
+      className="bg-gradient-to-r from-neutral-900 to-neutral-900/50 rounded-xl p-6 border border-neutral-800 shadow-xl overflow-hidden relative"
     >
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:24px_24px]"></div>
       
@@ -24,7 +24,7 @@ const AIAnalysisDemo = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="col-span-2">
-            <div className="bg-[var(--black)]/50 rounded-lg p-5 border border-gray-800">
+            <div className="bg-[var(--black)]/50 rounded-lg p-5 border border-neutral-800">
               <h4 className="text-lg font-medium mb-4">Traffic Anomaly Detection</h4>
               <div className="h-60 relative">
                 {/* Base line chart */}
@@ -83,7 +83,7 @@ const AIAnalysisDemo = () => {
           </div>
           
           <div className="space-y-4">
-            <div className="bg-[var(--black)]/50 rounded-lg p-5 border border-gray-800">
+            <div className="bg-[var(--black)]/50 rounded-lg p-5 border border-neutral-800">
               <h4 className="text-lg font-medium mb-3">AI Insights</h4>
               <motion.div
                 initial={{ opacity: 0 }}

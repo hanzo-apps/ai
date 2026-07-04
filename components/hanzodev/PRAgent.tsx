@@ -7,7 +7,7 @@ import { GitPullRequest, MessageSquare, Shield, Clock } from "lucide-react";
 
 const PRAgent = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900">
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -73,8 +73,8 @@ const PRAgent = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <div className="bg-gray-800/50 border border-gray-700/50 rounded-lg overflow-hidden">
-              <div className="p-4 bg-gray-900/70 border-b border-gray-700/50">
+            <div className="bg-neutral-800/50 border border-neutral-700/50 rounded-lg overflow-hidden">
+              <div className="p-4 bg-neutral-900/70 border-b border-neutral-700/50">
                 <div className="flex space-x-2">
                   <div className="w-3 h-3 rounded-full bg-primary/10"></div>
                   <div className="w-3 h-3 rounded-full bg-primary/10"></div>
@@ -82,13 +82,13 @@ const PRAgent = () => {
                 </div>
               </div>
               <div className="p-6">
-                <div className="bg-gray-900/70 rounded-lg p-4 mb-4">
+                <div className="bg-neutral-900/70 rounded-lg p-4 mb-4">
                   <div className="flex items-start gap-3 mb-4">
-                    <div className="w-8 h-8 rounded-full bg-gray-700"></div>
+                    <div className="w-8 h-8 rounded-full bg-neutral-700"></div>
                     <div>
                       <div className="font-medium">Senior Developer</div>
                       <div className="text-muted-foreground text-sm">2 hours ago</div>
-                      <div className="mt-2 p-3 bg-gray-800 rounded-lg">
+                      <div className="mt-2 p-3 bg-neutral-800 rounded-lg">
                         <p>Could you add error handling to this component and improve the accessibility?</p>
                       </div>
                     </div>
@@ -99,10 +99,10 @@ const PRAgent = () => {
                     <div>
                       <div className="font-medium">Hanzo Dev</div>
                       <div className="text-muted-foreground text-sm">1 hour ago</div>
-                      <div className="mt-2 p-3 bg-gray-800 rounded-lg">
+                      <div className="mt-2 p-3 bg-neutral-800 rounded-lg">
                         <p>I've added comprehensive error handling with try/catch blocks and implemented proper ARIA attributes to improve accessibility. The changes have been committed to the PR.</p>
                       </div>
-                      <div className="bg-gray-800/70 rounded mt-3 p-2 text-sm border border-gray-700">
+                      <div className="bg-neutral-800/70 rounded mt-3 p-2 text-sm border border-neutral-700">
                         <div className="text-foreground/70">+ 15 lines added</div>
                         <div className="text-foreground/70">- 3 lines removed</div>
                       </div>

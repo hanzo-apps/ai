@@ -8,7 +8,7 @@ import { Button } from "@hanzo/ui";
 
 const OperativeUsage = () => {
   return (
-    <section className="py-24 bg-gray-950 relative overflow-hidden" id="get-started">
+    <section className="py-24 bg-neutral-950 relative overflow-hidden" id="get-started">
       {/* Background gradient */}
       <div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-primary/10 rounded-full blur-3xl"></div>
       
@@ -36,21 +36,21 @@ const OperativeUsage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-gray-900/30 border border-gray-800 rounded-xl p-6"
+              className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6"
             >
               <h3 className="text-xl font-semibold text-[var(--white)] mb-4">Installation</h3>
               
               <div className="space-y-4">
                 <div>
                   <p className="text-muted-foreground mb-2">1. Install Hanzo tools</p>
-                  <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
+                  <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
                     curl -fsSL hanzo.sh | bash
                   </div>
                 </div>
                 
                 <div>
                   <p className="text-muted-foreground mb-2">2. Run the operative</p>
-                  <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
+                  <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
                     operative
                   </div>
                 </div>
@@ -61,7 +61,7 @@ const OperativeUsage = () => {
               </div>
               
               <div className="mt-6">
-                <Button size="sm" variant="outline" className="text-foreground/80 border-gray-700">
+                <Button size="sm" variant="outline" className="text-foreground/80 border-neutral-700">
                   <Terminal className="h-4 w-4 mr-2" />
                   Copy Installation Commands
                 </Button>
@@ -73,7 +73,7 @@ const OperativeUsage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-gray-900/30 border border-gray-800 rounded-xl p-6"
+              className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6"
             >
               <h3 className="text-xl font-semibold text-[var(--white)] mb-4">System Requirements</h3>
               
@@ -91,35 +91,35 @@ const OperativeUsage = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-3 bg-gray-900/30 border border-gray-800 rounded-xl p-6 h-full"
+            className="lg:col-span-3 bg-neutral-900/30 border border-neutral-800 rounded-xl p-6 h-full"
           >
             <h3 className="text-xl font-semibold text-[var(--white)] mb-4">Basic Usage</h3>
             
             <div className="space-y-6">
               <div>
                 <p className="text-muted-foreground mb-2">Running with default settings (GPT-5.3)</p>
-                <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
+                <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
                   operative
                 </div>
               </div>
               
               <div>
                 <p className="text-muted-foreground mb-2">Using voice input mode</p>
-                <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
+                <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
                   operative --voice
                 </div>
               </div>
               
               <div>
                 <p className="text-muted-foreground mb-2">Using OCR mode for enhanced element detection</p>
-                <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
+                <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
                   operative -m gpt-5.3-with-ocr
                 </div>
               </div>
               
               <div>
                 <p className="text-muted-foreground mb-2">Using Set-of-Mark (SoM) prompting</p>
-                <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
+                <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
                   operative -m gpt-5.3-with-som
                 </div>
               </div>

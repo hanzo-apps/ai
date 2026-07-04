@@ -24,7 +24,7 @@ const ZenPrincipleCard: React.FC<ZenPrincipleCardProps> = ({ principle, index })
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="bg-gradient-to-br from-gray-900/80 to-gray-900/40 backdrop-blur-sm border border-border rounded-lg p-6 relative overflow-hidden group"
+      className="bg-gradient-to-br from-neutral-900/80 to-neutral-900/40 backdrop-blur-sm border border-border rounded-lg p-6 relative overflow-hidden group"
     >
       {principle.discipline && (
         <div className="absolute top-2 right-2 text-xs text-foreground/30 opacity-50 group-hover:opacity-100 transition-opacity">

@@ -40,7 +40,7 @@ const Usage = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
         >
           {capabilities.map((cap, i) => (
-            <div key={i} className="bg-gray-900/30 border border-gray-800 rounded-xl p-6">
+            <div key={i} className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6">
               <div className="font-semibold text-foreground mb-1">{cap.label}</div>
               <div className="text-sm text-muted-foreground">{cap.description}</div>
             </div>

@@ -45,7 +45,7 @@ const FeatureSlide: React.FC<FeatureSlideProps> = ({
 
   return (
     <motion.div 
-      className="feature-card backdrop-blur-sm bg-[var(--black)]/30 border border-gray-800 p-6 rounded-xl relative group"
+      className="feature-card backdrop-blur-sm bg-[var(--black)]/30 border border-neutral-800 p-6 rounded-xl relative group"
       whileHover={{
         y: -5,
         borderColor: "rgba(255, 255, 255, 0.3)",

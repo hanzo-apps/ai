@@ -48,7 +48,7 @@ const Integrations = () => {
           </p>
         </div>
         
-        <div className="bg-gray-900/30 border border-gray-800 rounded-xl p-8">
+        <div className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8">
           {integrationCategories.map((category, index) => (
             <IntegrationCategory 
               key={index}

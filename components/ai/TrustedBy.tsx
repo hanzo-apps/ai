@@ -18,7 +18,7 @@ const TrustedBy = () => {
   ];
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-950">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-neutral-950">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +43,7 @@ const TrustedBy = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="flex items-center justify-center p-6 bg-gray-900/50 rounded-xl border border-gray-800 hover:bg-gray-900/80 transition-colors"
+              className="flex items-center justify-center p-6 bg-neutral-900/50 rounded-xl border border-neutral-800 hover:bg-neutral-900/80 transition-colors"
             >
               {/* In a real implementation, this would be an image */}
               <div className={`text-muted-foreground font-semibold text-xl ${logo.class}`}>
@@ -60,7 +60,7 @@ const TrustedBy = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          <div className="bg-gray-900/30 border border-gray-800 rounded-xl p-6">
+          <div className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6">
             <div className="flex items-center mb-2">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
@@ -88,7 +88,7 @@ const TrustedBy = () => {
             </div>
           </div>
 
-          <div className="bg-gray-900/30 border border-gray-800 rounded-xl p-6">
+          <div className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6">
             <div className="flex items-center mb-2">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (
@@ -116,7 +116,7 @@ const TrustedBy = () => {
             </div>
           </div>
 
-          <div className="bg-gray-900/30 border border-gray-800 rounded-xl p-6">
+          <div className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6">
             <div className="flex items-center mb-2">
               <div className="flex">
                 {[...Array(5)].map((_, i) => (

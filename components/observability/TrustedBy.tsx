@@ -15,7 +15,7 @@ const clients = [
 
 const TrustedBy = () => {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900/20">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -35,7 +35,7 @@ const TrustedBy = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: client.delay }}
-              className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-gray-400 to-gray-300 bg-clip-text text-transparent"
+              className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-neutral-400 to-neutral-300 bg-clip-text text-transparent"
             >
               {client.name}
             </motion.div>

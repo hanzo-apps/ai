@@ -34,7 +34,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
-      className="bg-gray-900/30 border border-gray-800 rounded-xl p-6 h-full flex flex-col"
+      className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6 h-full flex flex-col"
     >
       <div className={`w-12 h-12 rounded-lg ${iconBgClass} flex items-center justify-center mb-4`}>
         <div className={iconTextClass}>{icon}</div>

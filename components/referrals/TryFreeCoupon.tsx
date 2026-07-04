@@ -36,7 +36,7 @@ const TryFreeCoupon = () => {
   }
 
   return (
-    <div className="bg-gradient-to-r from-white/5 to-white/[0.02] border border-gray-800 rounded-lg overflow-hidden">
+    <div className="bg-gradient-to-r from-white/5 to-white/[0.02] border border-neutral-800 rounded-lg overflow-hidden">
       <div className="p-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="h-10 w-10 rounded-full bg-white/10 flex items-center justify-center">
@@ -51,7 +51,7 @@ const TryFreeCoupon = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div className="flex items-start gap-3 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
+          <div className="flex items-start gap-3 p-4 bg-neutral-900/50 rounded-lg border border-neutral-800">
             <div className="h-8 w-8 rounded bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
               <Bot className="h-4 w-4 text-white" />
             </div>
@@ -71,7 +71,7 @@ const TryFreeCoupon = () => {
             </div>
           </div>
 
-          <div className="flex items-start gap-3 p-4 bg-gray-900/50 rounded-lg border border-gray-800">
+          <div className="flex items-start gap-3 p-4 bg-neutral-900/50 rounded-lg border border-neutral-800">
             <div className="h-8 w-8 rounded bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
               <Cpu className="h-4 w-4 text-white" />
             </div>
@@ -93,7 +93,7 @@ const TryFreeCoupon = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center gap-3">
-          <div className="flex items-center gap-2 bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 font-mono text-lg tracking-wider">
+          <div className="flex items-center gap-2 bg-neutral-900 border border-neutral-700 rounded-lg px-4 py-2.5 font-mono text-lg tracking-wider">
             <span className="select-all">{COUPON_CODE}</span>
             <button onClick={handleCopy} className="text-muted-foreground hover:text-white transition-colors">
               {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}

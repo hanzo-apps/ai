@@ -47,7 +47,7 @@ const CoreCapabilities = () => {
   ];
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-900/20">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-neutral-900/20">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -70,7 +70,7 @@ const CoreCapabilities = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-800/30 p-6 rounded-lg border border-gray-700/50"
+              className="bg-neutral-800/30 p-6 rounded-lg border border-neutral-700/50"
             >
               <div className="bg-primary/10 p-3 rounded-full w-fit mb-4">
                 <capability.icon className="h-6 w-6 text-foreground" />

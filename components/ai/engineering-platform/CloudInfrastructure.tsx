@@ -7,7 +7,7 @@ import { BrainCog, Cloud, Server, Database, Monitor, Network, Activity } from "l
 
 const CloudInfrastructure = () => {
   return (
-    <div className="relative h-64 w-full rounded-xl bg-gradient-to-br from-background to-gray-900 overflow-hidden">
+    <div className="relative h-64 w-full rounded-xl bg-gradient-to-br from-background to-neutral-900 overflow-hidden">
       <div className="absolute inset-0" style={{
         backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px)",
         backgroundSize: "20px 20px",
@@ -15,7 +15,7 @@ const CloudInfrastructure = () => {
       
       <div className="absolute inset-0 flex items-center justify-center">
         <motion.div 
-          className="relative h-20 w-20 rounded-xl bg-gray-900/70 border border-white/30 flex items-center justify-center z-30"
+          className="relative h-20 w-20 rounded-xl bg-neutral-900/70 border border-white/30 flex items-center justify-center z-30"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.5 }}
@@ -40,7 +40,7 @@ const CloudInfrastructure = () => {
           return (
             <motion.div 
               key={i}
-              className="absolute h-12 w-12 rounded-lg bg-gray-900/70 border border-gray-700 flex items-center justify-center"
+              className="absolute h-12 w-12 rounded-lg bg-neutral-900/70 border border-neutral-700 flex items-center justify-center"
               initial={{ 
                 x: 0,
                 y: 0,

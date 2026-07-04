@@ -27,7 +27,7 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
   );
 
   const statusColors = {
-    idle: "bg-gray-500",
+    idle: "bg-neutral-500",
     running: "bg-primary/10",
     paused: "bg-primary/10",
     error: "bg-primary/10"
@@ -74,7 +74,7 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
           <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input 
             placeholder="Search agents..." 
-            className="bg-[var(--black)] border-gray-800 pl-10"
+            className="bg-[var(--black)] border-neutral-800 pl-10"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -82,13 +82,13 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
         <div className="flex space-x-2">
           <Button 
             variant="ghost" 
-            className="border border-gray-800" 
+            className="border border-neutral-800" 
             onClick={toggleDisplayMode}
             title={displayMode === "grid" ? "Switch to List View" : "Switch to Grid View"}
           >
             {displayMode === "grid" ? <List className="h-4 w-4" /> : <LayoutGrid className="h-4 w-4" />}
           </Button>
-          <Button className="bg-[var(--black)] hover:bg-gray-900 border border-gray-800">
+          <Button className="bg-[var(--black)] hover:bg-neutral-900 border border-neutral-800">
             <PlusCircle className="h-4 w-4 mr-2" />
             New Agent
           </Button>
@@ -96,7 +96,7 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
       </div>
       
       {displayMode === "grid" ? (
-        <div className="border border-gray-800 rounded-lg overflow-hidden">
+        <div className="border border-neutral-800 rounded-lg overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-[var(--black)] text-left">
@@ -111,11 +111,11 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
                 <th className="px-4 py-3 font-medium text-muted-foreground">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-800">
+            <tbody className="divide-y divide-neutral-800">
               {filteredAgents.map((agent) => (
                 <tr 
                   key={agent.id} 
-                  className="bg-[var(--black)] hover:bg-gray-900/60 cursor-pointer"
+                  className="bg-[var(--black)] hover:bg-neutral-900/60 cursor-pointer"
                   onClick={() => handleAgentClick(agent)}
                 >
                   <td className="px-4 py-3">
@@ -149,7 +149,7 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
                     <div className="flex items-center">
                       <Progress 
                         value={agent.memory} 
-                        className="h-1.5 w-16 mr-2 bg-gray-800" 
+                        className="h-1.5 w-16 mr-2 bg-neutral-800" 
                         style={{
                           '--progress-background': agent.memory > 80 ? 'bg-primary/10' : 
                             agent.memory > 60 ? 'bg-primary/10' : 
@@ -187,7 +187,7 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
           {filteredAgents.map((agent) => (
             <div 
               key={agent.id}
-              className="bg-[var(--black)] border border-gray-800 rounded-lg p-4 cursor-pointer hover:bg-gray-900/20 transition-colors"
+              className="bg-[var(--black)] border border-neutral-800 rounded-lg p-4 cursor-pointer hover:bg-neutral-900/20 transition-colors"
               onClick={() => handleAgentClick(agent)}
             >
               <div className="flex items-center justify-between mb-3">
@@ -239,7 +239,7 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
                   <span className="text-muted-foreground mr-2">Memory:</span>
                   <Progress 
                     value={agent.memory} 
-                    className="h-1.5 w-16 mr-2 bg-gray-800" 
+                    className="h-1.5 w-16 mr-2 bg-neutral-800" 
                     style={{
                       '--progress-background': agent.memory > 80 ? 'bg-primary/10' : 
                         agent.memory > 60 ? 'bg-primary/10' : 

@@ -34,7 +34,7 @@ const OpenSource = () => {
   const [isInView, setIsInView] = useState(false);
   
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900/20 to-background relative">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900/20 to-background relative">
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -66,7 +66,7 @@ const OpenSource = () => {
                 }
               }}
               viewport={{ once: true }}
-              className="text-center p-6 bg-gray-900/30 rounded-xl border border-gray-800"
+              className="text-center p-6 bg-neutral-900/30 rounded-xl border border-neutral-800"
               onViewportEnter={() => {
                 if (!isInView) {
                   setIsInView(true);

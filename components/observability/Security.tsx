@@ -62,7 +62,7 @@ const Security = () => {
             className="relative"
           >
             <div className="absolute -inset-0.5 bg-gradient-to-r from-white/20 to-white/10 rounded-xl blur opacity-75"></div>
-            <div className="relative bg-[var(--black)] rounded-xl border border-gray-800 p-8">
+            <div className="relative bg-[var(--black)] rounded-xl border border-neutral-800 p-8">
               <div className="space-y-6">
                 <div className="flex items-center">
                   <div className="p-2 bg-primary/20 rounded-md mr-4">
@@ -74,11 +74,11 @@ const Security = () => {
                   </div>
                 </div>
 
-                <div className="bg-gray-900/50 rounded-lg p-4">
+                <div className="bg-neutral-900/50 rounded-lg p-4">
                   <div className="mb-3 text-sm text-muted-foreground">Security Standards</div>
                   <div className="grid grid-cols-2 gap-3">
                     {["SOC 2*", "GDPR", "HIPAA", "Privacy"].map((cert, idx) => (
-                      <div key={idx} className="bg-gray-800/50 p-2 rounded flex items-center">
+                      <div key={idx} className="bg-neutral-800/50 p-2 rounded flex items-center">
                         <CheckCircle className="h-4 w-4 text-foreground mr-2" />
                         <span className="text-sm">{cert}</span>
                       </div>
@@ -87,24 +87,24 @@ const Security = () => {
                   <p className="text-xs text-muted-foreground mt-2">*Audit in progress</p>
                 </div>
 
-                <div className="bg-gray-900/50 rounded-lg p-4">
+                <div className="bg-neutral-900/50 rounded-lg p-4">
                   <div className="mb-3 text-sm text-muted-foreground">Data Privacy Controls</div>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-sm">Data Retention</span>
-                      <div className="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="w-24 h-2 bg-neutral-700 rounded-full overflow-hidden">
                         <div className="w-5/6 h-full bg-primary"></div>
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm">Access Controls</span>
-                      <div className="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="w-24 h-2 bg-neutral-700 rounded-full overflow-hidden">
                         <div className="w-full h-full bg-primary"></div>
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-sm">Audit Logging</span>
-                      <div className="w-24 h-2 bg-gray-700 rounded-full overflow-hidden">
+                      <div className="w-24 h-2 bg-neutral-700 rounded-full overflow-hidden">
                         <div className="w-5/6 h-full bg-primary"></div>
                       </div>
                     </div>

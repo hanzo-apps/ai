@@ -31,7 +31,7 @@ const ArchitectureOverview = () => {
             transition={{ duration: 0.5 }}
             className="w-full md:w-1/2"
           >
-            <div className="bg-gray-800/30 border border-gray-700 rounded-lg p-4 aspect-video flex items-center justify-center">
+            <div className="bg-neutral-800/30 border border-neutral-700 rounded-lg p-4 aspect-video flex items-center justify-center">
               <p className="text-xl text-muted-foreground">Hanzo Balancer Architecture Diagram</p>
               {/* Replace with actual diagram image when available */}
             </div>

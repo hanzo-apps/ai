@@ -36,7 +36,7 @@ const TaskDetailContent: React.FC<TaskDetailContentProps> = ({ task, onTaskChang
             value={task.description || ""}
             onChange={handleDescriptionChange}
             placeholder="Add a description..."
-            className="min-h-32 bg-gray-900 border-gray-800"
+            className="min-h-32 bg-neutral-900 border-neutral-800"
           />
         </div>
 
@@ -74,7 +74,7 @@ const TaskDetailContent: React.FC<TaskDetailContentProps> = ({ task, onTaskChang
             type="date"
             value={task.dueDate || ""}
             onChange={handleDateChange}
-            className="bg-gray-900 border-gray-800"
+            className="bg-neutral-900 border-neutral-800"
           />
         </div>
 
@@ -82,7 +82,7 @@ const TaskDetailContent: React.FC<TaskDetailContentProps> = ({ task, onTaskChang
           <label className="block text-sm font-medium text-muted-foreground mb-1">AI Agents</label>
           <Button 
             variant="outline" 
-            className="w-full justify-start bg-gray-900 border-gray-800"
+            className="w-full justify-start bg-neutral-900 border-neutral-800"
           >
             <Bot className="mr-2 h-4 w-4" />
             Assign Agent

@@ -25,7 +25,7 @@ const Contact = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
             {/* Contact Form */}
-            <div className="bg-gray-900/30 rounded-xl p-8 border border-gray-800">
+            <div className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800">
               <h2 className="text-2xl font-semibold mb-6">Send Us a Message</h2>
               <form className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -36,7 +36,7 @@ const Contact = () => {
                     <input
                       type="text"
                       id="name"
-                      className="w-full px-4 py-2 bg-[var(--black)]/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
+                      className="w-full px-4 py-2 bg-[var(--black)]/50 border border-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
                       placeholder="Your name"
                     />
                   </div>
@@ -47,7 +47,7 @@ const Contact = () => {
                     <input
                       type="email"
                       id="email"
-                      className="w-full px-4 py-2 bg-[var(--black)]/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
+                      className="w-full px-4 py-2 bg-[var(--black)]/50 border border-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -60,7 +60,7 @@ const Contact = () => {
                   <input
                     type="text"
                     id="subject"
-                    className="w-full px-4 py-2 bg-[var(--black)]/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
+                    className="w-full px-4 py-2 bg-[var(--black)]/50 border border-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30"
                     placeholder="What is this regarding?"
                   />
                 </div>
@@ -72,7 +72,7 @@ const Contact = () => {
                   <textarea
                     id="message"
                     rows={6}
-                    className="w-full px-4 py-2 bg-[var(--black)]/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30 resize-none"
+                    className="w-full px-4 py-2 bg-[var(--black)]/50 border border-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white/30 resize-none"
                     placeholder="Tell us how we can help..."
                   />
                 </div>
@@ -114,7 +114,7 @@ const Contact = () => {
                 </div>
               </div>
               
-              <div className="bg-gray-900/30 rounded-xl p-8 border border-gray-800 flex-grow">
+              <div className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800 flex-grow">
                 <h2 className="text-2xl font-semibold mb-6">Connect With Us</h2>
                 <p className="text-foreground/80 mb-6">
                   Follow us on social media or join our community platforms to stay updated
@@ -122,32 +122,32 @@ const Contact = () => {
                 </p>
                 
                 <div className="space-y-4">
-                  <a href="https://discord.gg/XthHQQj" className="flex items-center px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors">
+                  <a href="https://discord.gg/XthHQQj" className="flex items-center px-4 py-3 bg-neutral-800 hover:bg-neutral-700 rounded-lg transition-colors">
                     <MessageSquare className="h-5 w-5 text-foreground/70 mr-3" />
                     <span>Join our Discord Community</span>
                   </a>
                   
-                  <a href="https://github.com/hanzoai" className="flex items-center px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors">
+                  <a href="https://github.com/hanzoai" className="flex items-center px-4 py-3 bg-neutral-800 hover:bg-neutral-700 rounded-lg transition-colors">
                     <Github className="h-5 w-5 text-foreground/70 mr-3" />
                     <span>Follow us on GitHub</span>
                   </a>
                   
-                  <a href="https://twitter.com/hanzoai" className="flex items-center px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors">
+                  <a href="https://twitter.com/hanzoai" className="flex items-center px-4 py-3 bg-neutral-800 hover:bg-neutral-700 rounded-lg transition-colors">
                     <Twitter className="h-5 w-5 text-foreground/70 mr-3" />
                     <span>Follow us on Twitter</span>
                   </a>
 
-                  <a href="https://linkedin.com/company/hanzo-ai" className="flex items-center px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors">
+                  <a href="https://linkedin.com/company/hanzo-ai" className="flex items-center px-4 py-3 bg-neutral-800 hover:bg-neutral-700 rounded-lg transition-colors">
                     <Linkedin className="h-5 w-5 text-foreground/70 mr-3" />
                     <span>Connect on LinkedIn</span>
                   </a>
 
-                  <a href="https://facebook.com/hanzo-inc" className="flex items-center px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors">
+                  <a href="https://facebook.com/hanzo-inc" className="flex items-center px-4 py-3 bg-neutral-800 hover:bg-neutral-700 rounded-lg transition-colors">
                     <Facebook className="h-5 w-5 text-foreground/70 mr-3" />
                     <span>Like us on Facebook</span>
                   </a>
 
-                  <a href="https://instagram.com/hanzoai" className="flex items-center px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors">
+                  <a href="https://instagram.com/hanzoai" className="flex items-center px-4 py-3 bg-neutral-800 hover:bg-neutral-700 rounded-lg transition-colors">
                     <Instagram className="h-5 w-5 text-foreground/70 mr-3" />
                     <span>Follow us on Instagram</span>
                   </a>

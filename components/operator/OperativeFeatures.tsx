@@ -40,7 +40,7 @@ const OperativeFeatures = () => {
   ];
 
   return (
-    <section className="py-24 bg-gray-950 relative overflow-hidden">
+    <section className="py-24 bg-neutral-950 relative overflow-hidden">
       {/* Background gradient */}
       <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3/4 h-1/2 bg-primary/10 rounded-full blur-3xl"></div>
       
@@ -70,7 +70,7 @@ const OperativeFeatures = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-900/30 border border-gray-800 rounded-xl p-6 hover:bg-gray-900/50 transition-colors"
+              className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-900/50 transition-colors"
             >
               <div className="h-12 w-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4">
                 <feature.icon className="h-6 w-6 text-foreground" />
@@ -87,7 +87,7 @@ const OperativeFeatures = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex items-center space-x-3 bg-gray-900/50 border border-gray-800 rounded-full px-6 py-3"
+            className="flex items-center space-x-3 bg-neutral-900/50 border border-neutral-800 rounded-full px-6 py-3"
           >
             <Github className="h-5 w-5 text-muted-foreground" />
             <span className="text-foreground/80">Open Source on</span>

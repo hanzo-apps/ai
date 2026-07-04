@@ -8,7 +8,7 @@ import { Button } from "@hanzo/ui";
 
 const Security = () => {
   return (
-    <section id="security" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 to-background">
+    <section id="security" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900 to-background">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -80,10 +80,10 @@ const Security = () => {
         >
           <p className="text-xl font-semibold mb-8">Trusted by teams at</p>
           <div className="flex flex-wrap justify-center items-center gap-12">
-            <div className="h-12 w-32 bg-gray-800/50 rounded-md"></div>
-            <div className="h-12 w-32 bg-gray-800/50 rounded-md"></div>
-            <div className="h-12 w-32 bg-gray-800/50 rounded-md"></div>
-            <div className="h-12 w-32 bg-gray-800/50 rounded-md"></div>
+            <div className="h-12 w-32 bg-neutral-800/50 rounded-md"></div>
+            <div className="h-12 w-32 bg-neutral-800/50 rounded-md"></div>
+            <div className="h-12 w-32 bg-neutral-800/50 rounded-md"></div>
+            <div className="h-12 w-32 bg-neutral-800/50 rounded-md"></div>
           </div>
         </motion.div>
       </div>

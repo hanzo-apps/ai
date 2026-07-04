@@ -32,7 +32,7 @@ const InfrastructureComponents = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-gray-900/60 rounded-xl border border-gray-800 p-6 hover:border-border transition-colors"
+            className="bg-neutral-900/60 rounded-xl border border-neutral-800 p-6 hover:border-border transition-colors"
           >
             <div className="flex items-center mb-4">
               <Database className="h-8 w-8 text-foreground/70 mr-3" />
@@ -71,7 +71,7 @@ const InfrastructureComponents = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-900/60 rounded-xl border border-gray-800 p-6 hover:border-border transition-colors"
+            className="bg-neutral-900/60 rounded-xl border border-neutral-800 p-6 hover:border-border transition-colors"
           >
             <div className="flex items-center mb-4">
               <Brain className="h-8 w-8 text-foreground/70 mr-3" />
@@ -110,7 +110,7 @@ const InfrastructureComponents = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-gray-900/60 rounded-xl border border-gray-800 p-6 hover:border-border transition-colors"
+            className="bg-neutral-900/60 rounded-xl border border-neutral-800 p-6 hover:border-border transition-colors"
           >
             <div className="flex items-center mb-4">
               <Zap className="h-8 w-8 text-foreground/70 mr-3" />

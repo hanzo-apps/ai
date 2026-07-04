@@ -78,9 +78,9 @@ const CommerceAnalytics = () => {
           
           <motion.div
             style={{ scale, opacity }}
-            className="rounded-xl overflow-hidden bg-gradient-to-br from-gray-900 to-background border border-gray-800 shadow-xl"
+            className="rounded-xl overflow-hidden bg-gradient-to-br from-neutral-900 to-background border border-neutral-800 shadow-xl"
           >
-            <div className="p-4 border-b border-gray-800">
+            <div className="p-4 border-b border-neutral-800">
               <div className="flex items-center">
                 <ShoppingCart className="h-5 w-5 text-foreground mr-2" />
                 <span className="text-[var(--white)] font-medium">Commerce Dashboard</span>
@@ -90,7 +90,7 @@ const CommerceAnalytics = () => {
             <div className="p-6">
               <div className="mb-6">
                 <h4 className="text-lg font-medium mb-4">Sales Performance</h4>
-                <div className="h-40 bg-gray-800/50 rounded-lg relative overflow-hidden">
+                <div className="h-40 bg-neutral-800/50 rounded-lg relative overflow-hidden">
                   {/* Bar chart */}
                   <div className="absolute inset-0 flex items-end justify-around px-4 pb-4">
                     {[65, 80, 55, 90, 70, 85, 60].map((height, i) => (
@@ -108,7 +108,7 @@ const CommerceAnalytics = () => {
               </div>
               
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="bg-gray-800/30 p-4 rounded-lg">
+                <div className="bg-neutral-800/30 p-4 rounded-lg">
                   <div className="text-sm text-muted-foreground">Conversion Rate</div>
                   <div className="text-2xl font-bold mt-2">4.78%</div>
                   <div className="text-foreground/70 text-sm flex items-center mt-1">
@@ -118,7 +118,7 @@ const CommerceAnalytics = () => {
                     +0.6%
                   </div>
                 </div>
-                <div className="bg-gray-800/30 p-4 rounded-lg">
+                <div className="bg-neutral-800/30 p-4 rounded-lg">
                   <div className="text-sm text-muted-foreground">Avg. Order Value</div>
                   <div className="text-2xl font-bold mt-2">$87.32</div>
                   <div className="text-foreground/70 text-sm flex items-center mt-1">
@@ -130,7 +130,7 @@ const CommerceAnalytics = () => {
                 </div>
               </div>
               
-              <div className="border-t border-gray-800 pt-4">
+              <div className="border-t border-neutral-800 pt-4">
                 <h4 className="text-lg font-medium mb-4">Product Recommendations</h4>
                 <div className="space-y-3">
                   {[
@@ -141,7 +141,7 @@ const CommerceAnalytics = () => {
                     <div key={i} className="flex items-center justify-between">
                       <span className="text-foreground/80">{product.name}</span>
                       <div className="flex items-center">
-                        <div className="w-24 h-2 bg-gray-800 rounded-full mr-2 overflow-hidden">
+                        <div className="w-24 h-2 bg-neutral-800 rounded-full mr-2 overflow-hidden">
                           <motion.div
                             className="h-full bg-primary"
                             initial={{ width: 0 }}

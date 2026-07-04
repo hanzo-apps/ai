@@ -32,13 +32,13 @@ const HanzoAppHero = () => {
             <p className="text-muted-foreground text-lg mb-4">Trusted and used by teams around the globe</p>
           </div>
           
-          <div className="max-w-xl mx-auto bg-gray-900/30 border border-gray-800 rounded-xl p-6 mb-12">
+          <div className="max-w-xl mx-auto bg-neutral-900/30 border border-neutral-800 rounded-xl p-6 mb-12">
             <h3 className="text-2xl font-semibold mb-4">Iterate, fast</h3>
             <p className="text-foreground/80 mb-6">
               Developing LLM apps takes countless iterations. With AI engineering approach, we enable quick iterations to go from testing to production
             </p>
             
-            <div className="bg-gray-950 rounded-lg p-4 font-mono text-sm text-foreground/80 text-left mb-6">
+            <div className="bg-neutral-950 rounded-lg p-4 font-mono text-sm text-foreground/80 text-left mb-6">
               <pre>
                 $ npm install -g flowise<br/>
                 $ npx flowise start

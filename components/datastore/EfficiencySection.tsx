@@ -19,7 +19,7 @@ const EfficiencyCard = ({ title, mainText, subText, initialY, delay }: Efficienc
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
-      className="bg-gray-900/30 rounded-xl p-8 border border-gray-800 flex flex-col items-center text-center"
+      className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800 flex flex-col items-center text-center"
     >
       <ChromeText as="h3" className="text-2xl font-bold mb-4">
         {title}
@@ -67,7 +67,7 @@ const EfficiencySection = () => {
   ];
 
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900/50">
+    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/50">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <ChromeText as="h2" className="text-3xl md:text-5xl font-bold mb-6">

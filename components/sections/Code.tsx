@@ -32,7 +32,7 @@ const Code = () => {
           className="relative mx-auto max-w-5xl"
         >
           <div className="rounded-xl overflow-hidden border border-border">
-            <div className="bg-gray-900 px-4 py-2 flex items-center space-x-2">
+            <div className="bg-neutral-900 px-4 py-2 flex items-center space-x-2">
               <div className="flex space-x-1">
                 <div className="w-3 h-3 rounded-full bg-primary/10"></div>
                 <div className="w-3 h-3 rounded-full bg-primary/10"></div>

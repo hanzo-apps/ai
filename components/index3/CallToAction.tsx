@@ -30,7 +30,7 @@ const CallToAction = () => {
           
           <Button 
             size="lg"
-            className="bg-[var(--white)] hover:bg-gray-100 text-primary-foreground px-8 py-6 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all"
+            className="bg-[var(--white)] hover:bg-neutral-100 text-primary-foreground px-8 py-6 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all"
           >
             <a href="https://dashboard.hanzo.cloud">Get Started with Hanzo</a>
           </Button>

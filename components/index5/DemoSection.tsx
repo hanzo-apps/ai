@@ -65,9 +65,9 @@ const DemoSection: React.FC = () => {
           transition={{ duration: 0.7 }}
           className="relative"
         >
-          <div className="bg-gray-900/50 rounded-xl border border-gray-800 p-4 backdrop-blur-sm">
+          <div className="bg-neutral-900/50 rounded-xl border border-neutral-800 p-4 backdrop-blur-sm">
             <div className="bg-[var(--black)]/70 rounded-lg overflow-hidden shadow-xl">
-              <div className="flex items-center bg-gray-900 py-2 px-4 border-b border-gray-800">
+              <div className="flex items-center bg-neutral-900 py-2 px-4 border-b border-neutral-800">
                 <div className="flex space-x-2 mr-4">
                   <div className="w-3 h-3 rounded-full bg-primary/10"></div>
                   <div className="w-3 h-3 rounded-full bg-primary/10"></div>
@@ -81,7 +81,7 @@ const DemoSection: React.FC = () => {
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      className="text-sm gap-2 bg-gray-800 hover:bg-gray-700"
+                      className="text-sm gap-2 bg-neutral-800 hover:bg-neutral-700"
                       onClick={playDemo}
                     >
                       <Play className="h-4 w-4" /> Run Demo
@@ -90,7 +90,7 @@ const DemoSection: React.FC = () => {
                     <Button 
                       variant="ghost" 
                       size="sm" 
-                      className="text-sm gap-2 bg-gray-800 hover:bg-gray-700"
+                      className="text-sm gap-2 bg-neutral-800 hover:bg-neutral-700"
                       disabled
                     >
                       <RefreshCw className="h-4 w-4 animate-spin" /> Running...
@@ -111,7 +111,7 @@ const DemoSection: React.FC = () => {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="mt-4 border border-gray-800 rounded-md p-3 bg-gray-900/50"
+                    className="mt-4 border border-neutral-800 rounded-md p-3 bg-neutral-900/50"
                   >
                     <div className="text-foreground mb-2">// Execute code</div>
                     <div className="text-[var(--white)] whitespace-pre">{demoSteps[demoStep].code}</div>

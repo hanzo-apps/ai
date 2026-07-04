@@ -47,14 +47,14 @@ const TabsManager: React.FC<TabsManagerProps> = ({ initialTabs, onAddTab }) => {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex border-b border-gray-800">
+      <div className="flex border-b border-neutral-800">
         <div className="flex-1 flex overflow-x-auto scrollbar-none">
           {tabs.map(tab => (
             <div
               key={tab.id}
               className={cn(
-                "flex items-center px-4 py-2 border-r border-gray-800 cursor-pointer group transition-colors",
-                activeTabId === tab.id ? "bg-gray-900" : "hover:bg-gray-900/50"
+                "flex items-center px-4 py-2 border-r border-neutral-800 cursor-pointer group transition-colors",
+                activeTabId === tab.id ? "bg-neutral-900" : "hover:bg-neutral-900/50"
               )}
               onClick={() => handleTabClick(tab.id)}
             >
@@ -74,14 +74,14 @@ const TabsManager: React.FC<TabsManagerProps> = ({ initialTabs, onAddTab }) => {
         <div className="flex items-center">
           <button
             onClick={onAddTab}
-            className="p-2 hover:bg-gray-800 transition-colors"
+            className="p-2 hover:bg-neutral-800 transition-colors"
             title="New Tab"
           >
             <Plus size={16} />
           </button>
           <button
             onClick={toggleViewMode}
-            className="p-2 hover:bg-gray-800 transition-colors"
+            className="p-2 hover:bg-neutral-800 transition-colors"
             title={viewMode === "kanban" ? "Switch to List View" : "Switch to Kanban View"}
           >
             {viewMode === "kanban" ? <List size={16} /> : <LayoutGrid size={16} />}

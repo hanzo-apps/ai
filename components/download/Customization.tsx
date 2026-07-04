@@ -16,7 +16,7 @@ const Customization = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <div className="bg-gray-900/50 p-8 rounded-xl border border-gray-800">
+          <div className="bg-neutral-900/50 p-8 rounded-xl border border-neutral-800">
             <User className="h-10 w-10 text-foreground mb-4" />
             <h3 className="text-2xl font-bold mb-3 text-[var(--white)]">Customized to you</h3>
             <p className="text-foreground/80">
@@ -24,7 +24,7 @@ const Customization = () => {
             </p>
           </div>
           
-          <div className="bg-gray-900/50 p-8 rounded-xl border border-gray-800">
+          <div className="bg-neutral-900/50 p-8 rounded-xl border border-neutral-800">
             <Laptop className="h-10 w-10 text-foreground mb-4" />
             <h3 className="text-2xl font-bold mb-3 text-[var(--white)]">Sees files & context</h3>
             <p className="text-foreground/80">
@@ -32,7 +32,7 @@ const Customization = () => {
             </p>
           </div>
           
-          <div className="bg-gray-900/50 p-8 rounded-xl border border-gray-800">
+          <div className="bg-neutral-900/50 p-8 rounded-xl border border-neutral-800">
             <Settings className="h-10 w-10 text-foreground mb-4" />
             <h3 className="text-2xl font-bold mb-3 text-[var(--white)]">Grounded using screen data</h3>
             <p className="text-foreground/80">
@@ -43,7 +43,7 @@ const Customization = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
           <motion.div 
-            className="bg-gray-900/50 p-8 rounded-xl border border-gray-800"
+            className="bg-neutral-900/50 p-8 rounded-xl border border-neutral-800"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -56,7 +56,7 @@ const Customization = () => {
           </motion.div>
           
           <motion.div 
-            className="bg-gray-900/50 p-8 rounded-xl border border-gray-800"
+            className="bg-neutral-900/50 p-8 rounded-xl border border-neutral-800"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}

@@ -18,7 +18,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
   isTyping 
 }) => {
   return (
-    <div className="p-4 border-t border-gray-800">
+    <div className="p-4 border-t border-neutral-800">
       <form onSubmit={handleSendMessage} className="flex items-center">
         <div className="flex items-center space-x-2 mr-2">
           <Button type="button" variant="ghost" size="icon" className="text-muted-foreground hover:text-[var(--white)]">
@@ -37,7 +37,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type your message..."
-          className="flex-1 bg-gray-800/50 border border-gray-700 rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white/30"
+          className="flex-1 bg-neutral-800/50 border border-neutral-700 rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white/30"
         />
         <Button 
           type="submit" 

@@ -72,7 +72,7 @@ const Extensions = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           {/* VS Code & AI Editors */}
           <motion.div
-            className="bg-gradient-to-br from-white/30 to-gray-900/50 p-8 rounded-xl border border-white/30"
+            className="bg-gradient-to-br from-white/30 to-neutral-900/50 p-8 rounded-xl border border-white/30"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -108,7 +108,7 @@ const Extensions = () => {
 
           {/* JetBrains IDEs */}
           <motion.div
-            className="bg-gradient-to-br from-white/20 to-gray-900/50 p-8 rounded-xl border border-white/30"
+            className="bg-gradient-to-br from-white/20 to-neutral-900/50 p-8 rounded-xl border border-white/30"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -142,7 +142,7 @@ const Extensions = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Browser Extensions */}
           <motion.div
-            className="bg-gray-900/50 p-8 rounded-xl border border-gray-800"
+            className="bg-neutral-900/50 p-8 rounded-xl border border-neutral-800"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -166,14 +166,14 @@ const Extensions = () => {
             </div>
 
             <div className="flex gap-3">
-              <Button variant="outline" className="flex-1 border-gray-700 text-[var(--white)] hover:bg-gray-800">
+              <Button variant="outline" className="flex-1 border-neutral-700 text-[var(--white)] hover:bg-neutral-800">
                 <Chrome className="mr-2 h-4 w-4" />
                 Chrome
               </Button>
-              <Button variant="outline" className="flex-1 border-gray-700 text-[var(--white)] hover:bg-gray-800">
+              <Button variant="outline" className="flex-1 border-neutral-700 text-[var(--white)] hover:bg-neutral-800">
                 Firefox
               </Button>
-              <Button variant="outline" className="flex-1 border-gray-700 text-[var(--white)] hover:bg-gray-800">
+              <Button variant="outline" className="flex-1 border-neutral-700 text-[var(--white)] hover:bg-neutral-800">
                 Safari
               </Button>
             </div>
@@ -181,7 +181,7 @@ const Extensions = () => {
 
           {/* Desktop App */}
           <motion.div
-            className="bg-gradient-to-br from-white/20 to-gray-900/50 p-8 rounded-xl border border-white/30"
+            className="bg-gradient-to-br from-white/20 to-neutral-900/50 p-8 rounded-xl border border-white/30"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}

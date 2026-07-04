@@ -29,7 +29,7 @@ const EnterpriseSolutions = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-gradient-to-br from-gray-800/40 to-gray-900/40 p-8 rounded-xl border border-gray-700/50"
+            className="bg-gradient-to-br from-neutral-800/40 to-neutral-900/40 p-8 rounded-xl border border-neutral-700/50"
           >
             <div className="flex items-start mb-6">
               <div className="bg-primary/10 p-3 rounded-full mr-4">
@@ -60,7 +60,7 @@ const EnterpriseSolutions = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gradient-to-br from-gray-800/40 to-gray-900/40 p-8 rounded-xl border border-gray-700/50"
+            className="bg-gradient-to-br from-neutral-800/40 to-neutral-900/40 p-8 rounded-xl border border-neutral-700/50"
           >
             <div className="flex items-start mb-6">
               <div className="bg-primary/10 p-3 rounded-full mr-4">

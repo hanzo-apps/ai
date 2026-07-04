@@ -27,7 +27,7 @@ const ResourceSection = ({
   unit
 }: ResourceSectionProps) => {
   return (
-    <div className="p-6 rounded-xl border border-[#333] bg-gray-900/50 hover:border-gray-700">
+    <div className="p-6 rounded-xl border border-[#333] bg-neutral-900/50 hover:border-neutral-700">
       <div className="flex items-center gap-3 mb-4">
         <div className="text-muted-foreground">
           {icon}

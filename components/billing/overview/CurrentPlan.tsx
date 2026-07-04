@@ -13,7 +13,7 @@ const CurrentPlan = () => {
   };
 
   return (
-    <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+    <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
       <h3 className="text-xl font-medium mb-4">Current Plan</h3>
       <div className="flex items-center justify-between">
         <div>
@@ -22,7 +22,7 @@ const CurrentPlan = () => {
         </div>
         <Button onClick={handleUpgradePlan}>Upgrade Plan</Button>
       </div>
-      <div className="mt-6 pt-6 border-t border-gray-800 flex items-center justify-between">
+      <div className="mt-6 pt-6 border-t border-neutral-800 flex items-center justify-between">
         <div className="text-muted-foreground">Next billing date: July 15, 2024</div>
         <Button variant="outline" size="sm">Cancel Subscription</Button>
       </div>

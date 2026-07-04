@@ -116,8 +116,8 @@ const BillingPlans = () => {
           {plans.map(plan => (
             <Card 
               key={plan.id} 
-              className={`bg-gray-900/30 border ${
-                plan.popular ? 'border-white' : 'border-gray-800'
+              className={`bg-neutral-900/30 border ${
+                plan.popular ? 'border-white' : 'border-neutral-800'
               } relative`}
             >
               {plan.popular && (
@@ -164,7 +164,7 @@ const BillingPlans = () => {
           ))}
         </div>
         
-        <div className="mt-8 bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+        <div className="mt-8 bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
           <h3 className="text-xl font-medium mb-4">Enterprise Plan</h3>
           <p className="text-muted-foreground mb-4">
             Need a custom solution for your organization? Our Enterprise plan offers custom pricing, 

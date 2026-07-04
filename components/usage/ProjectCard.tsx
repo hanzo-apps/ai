@@ -24,10 +24,10 @@ const ProjectCard = ({ project, onToggleExpand }: ProjectCardProps) => {
   return (
     <motion.div 
       variants={cardAnimation}
-      className="rounded-xl border border-gray-800 bg-gray-900/20 overflow-hidden"
+      className="rounded-xl border border-neutral-800 bg-neutral-900/20 overflow-hidden"
     >
       <div 
-        className="p-4 flex items-center justify-between cursor-pointer hover:bg-gray-800/30"
+        className="p-4 flex items-center justify-between cursor-pointer hover:bg-neutral-800/30"
         onClick={() => onToggleExpand(project.id)}
       >
         <div className="flex items-center gap-4">
@@ -51,7 +51,7 @@ const ProjectCard = ({ project, onToggleExpand }: ProjectCardProps) => {
       </div>
       
       {project.expanded && (
-        <div className="p-6 border-t border-gray-800">
+        <div className="p-6 border-t border-neutral-800">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <ResourceUsageSection resources={project.resources} />
             <ProjectCostSection costs={project.costs} currentCost={project.currentCost} />

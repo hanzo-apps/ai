@@ -25,7 +25,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon: Ico
         boxShadow: "0 10px 30px -15px rgba(255, 255, 255, 0.15)",
         borderColor: "rgba(255, 255, 255, 0.3)"
       }}
-      className="bg-gradient-to-br from-gray-900 to-background p-6 rounded-xl border border-gray-800 transition-all duration-300"
+      className="bg-gradient-to-br from-neutral-900 to-background p-6 rounded-xl border border-neutral-800 transition-all duration-300"
     >
       <motion.div 
         initial={{ scale: 0.8, opacity: 0 }}

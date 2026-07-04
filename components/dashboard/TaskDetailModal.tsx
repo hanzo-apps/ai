@@ -48,7 +48,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
   };
 
   const priorityOptions = [
-    { value: "low", label: "Low", color: "bg-gray-500" },
+    { value: "low", label: "Low", color: "bg-neutral-500" },
     { value: "medium", label: "Medium", color: "bg-primary/10" },
     { value: "high", label: "High", color: "bg-primary/10" }
   ];
@@ -83,7 +83,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
                 value={editedTask.description || ""}
                 onChange={handleChange}
                 placeholder="Add a description..."
-                className="min-h-32 bg-gray-900 border-gray-800"
+                className="min-h-32 bg-neutral-900 border-neutral-800"
               />
             </div>
 
@@ -99,7 +99,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
                 {editedTask.assignees?.map(assignee => (
                   <div 
                     key={assignee.id}
-                    className="flex items-center gap-2 bg-gray-800 px-2 py-1 rounded text-sm"
+                    className="flex items-center gap-2 bg-neutral-800 px-2 py-1 rounded text-sm"
                   >
                     <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-xs">
                       {assignee.name.charAt(0)}
@@ -154,7 +154,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
                     className={`px-3 py-2 rounded cursor-pointer ${
                       editedTask.status === option.value 
                         ? 'bg-primary/10 border border-border' 
-                        : 'hover:bg-gray-800'
+                        : 'hover:bg-neutral-800'
                     }`}
                     onClick={() => setEditedTask(prev => ({ ...prev, status: option.value }))}
                   >
@@ -172,8 +172,8 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
                     key={option.value}
                     className={`px-3 py-2 rounded cursor-pointer flex items-center ${
                       editedTask.priority === option.value 
-                        ? 'bg-gray-800' 
-                        : 'hover:bg-gray-800/50'
+                        ? 'bg-neutral-800' 
+                        : 'hover:bg-neutral-800/50'
                     }`}
                     onClick={() => setEditedTask(prev => ({ ...prev, priority: option.value as "low" | "medium" | "high" }))}
                   >
@@ -191,7 +191,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
                 name="dueDate"
                 value={editedTask.dueDate || ""}
                 onChange={handleChange}
-                className="bg-gray-900 border-gray-800"
+                className="bg-neutral-900 border-neutral-800"
               />
             </div>
 
@@ -199,7 +199,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
               <label className="block text-sm font-medium text-muted-foreground mb-1">AI Agents</label>
               <Button 
                 variant="outline" 
-                className="w-full justify-start bg-gray-900 border-gray-800"
+                className="w-full justify-start bg-neutral-900 border-neutral-800"
               >
                 <Bot className="mr-2 h-4 w-4" />
                 Assign Agent

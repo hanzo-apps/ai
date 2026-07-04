@@ -76,8 +76,8 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-16 max-w-5xl mx-auto relative"
         >
-          <div className="bg-gradient-to-br from-gray-900 to-background p-4 rounded-xl border border-gray-800 shadow-2xl overflow-hidden">
-            <div className="flex items-center justify-between mb-4 border-b border-gray-800 pb-2">
+          <div className="bg-gradient-to-br from-neutral-900 to-background p-4 rounded-xl border border-neutral-800 shadow-2xl overflow-hidden">
+            <div className="flex items-center justify-between mb-4 border-b border-neutral-800 pb-2">
               <div className="flex items-center">
                 <LineChart className="h-5 w-5 text-foreground mr-2" />
                 <span className="text-[var(--white)] font-medium">Hanzo Analytics Dashboard</span>
@@ -89,11 +89,11 @@ const HeroSection = () => {
               </div>
             </div>
             <div className="grid grid-cols-3 gap-4">
-              <div className="col-span-2 bg-gray-800/50 rounded-lg p-4 h-64">
+              <div className="col-span-2 bg-neutral-800/50 rounded-lg p-4 h-64">
                 {/* Animated chart lines */}
                 <div className="h-full w-full relative">
-                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gray-700"></div>
-                  <div className="absolute left-0 top-0 h-full w-[1px] bg-gray-700"></div>
+                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-neutral-700"></div>
+                  <div className="absolute left-0 top-0 h-full w-[1px] bg-neutral-700"></div>
                   
                   {/* Chart line */}
                   <svg className="h-full w-full" viewBox="0 0 100 50">
@@ -119,7 +119,7 @@ const HeroSection = () => {
                 </div>
               </div>
               <div className="space-y-4">
-                <div className="bg-gray-800/50 rounded-lg p-4 h-[30%]">
+                <div className="bg-neutral-800/50 rounded-lg p-4 h-[30%]">
                   <div className="text-sm text-muted-foreground">Users</div>
                   <motion.div 
                     className="text-2xl font-bold text-[var(--white)] mt-1"
@@ -131,7 +131,7 @@ const HeroSection = () => {
                   </motion.div>
                   <div className="text-foreground/70 text-xs mt-1">+12.4% vs last week</div>
                 </div>
-                <div className="bg-gray-800/50 rounded-lg p-4 h-[30%]">
+                <div className="bg-neutral-800/50 rounded-lg p-4 h-[30%]">
                   <div className="text-sm text-muted-foreground">Conversion Rate</div>
                   <motion.div 
                     className="text-2xl font-bold text-[var(--white)] mt-1"
@@ -143,7 +143,7 @@ const HeroSection = () => {
                   </motion.div>
                   <div className="text-foreground/70 text-xs mt-1">+0.8% vs last week</div>
                 </div>
-                <div className="bg-gray-800/50 rounded-lg p-4 h-[30%]">
+                <div className="bg-neutral-800/50 rounded-lg p-4 h-[30%]">
                   <div className="text-sm text-muted-foreground">Revenue</div>
                   <motion.div 
                     className="text-2xl font-bold text-[var(--white)] mt-1"

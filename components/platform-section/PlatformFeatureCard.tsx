@@ -24,7 +24,7 @@ const PlatformFeatureCard: React.FC<PlatformFeatureCardProps> = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.1 * index }}
-      className="bg-gray-900/20 border border-gray-800 rounded-xl p-6"
+      className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6"
     >
       <div className="h-12 w-12 bg-primary/20 rounded-lg flex items-center justify-center mb-4">
         <Icon className="h-6 w-6 text-foreground" />

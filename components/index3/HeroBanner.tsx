@@ -10,7 +10,7 @@ import ChromeText from "@/components/ui/chrome-text";
 const HeroBanner = () => {
   return (
     <section className="min-h-screen flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background to-gray-900/30 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-background to-neutral-900/30 pointer-events-none"></div>
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
       

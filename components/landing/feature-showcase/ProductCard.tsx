@@ -34,10 +34,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
         y: -8,
         transition: { duration: 0.2 }
       }}
-      className="bg-gray-900/20 border border-gray-800 rounded-xl p-6 hover:border-gray-700 h-full transition-all group relative overflow-hidden"
+      className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6 hover:border-neutral-700 h-full transition-all group relative overflow-hidden"
     >
       {/* Background gradient effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-900/90 to-gray-900/70 opacity-50 z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-neutral-900/80 via-neutral-900/90 to-neutral-900/70 opacity-50 z-0"></div>
       
       {/* Hover background effect */}
       <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>

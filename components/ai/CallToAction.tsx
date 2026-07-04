@@ -8,7 +8,7 @@ import { Button } from "@hanzo/ui";
 
 const CallToAction = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-950 relative overflow-hidden">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-950 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-2/3 h-1/2 bg-primary/5 rounded-full blur-3xl transform -translate-x-1/4 -translate-y-1/4"></div>
@@ -56,7 +56,7 @@ const CallToAction = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          <div className="bg-gray-900/30 border border-gray-800 rounded-xl p-8 hover:bg-gray-900/40 transition-colors">
+          <div className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/40 transition-colors">
             <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
               <BookOpen className="h-6 w-6 text-foreground" />
             </div>
@@ -70,7 +70,7 @@ const CallToAction = () => {
             </a>
           </div>
 
-          <div className="bg-gray-900/30 border border-gray-800 rounded-xl p-8 hover:bg-gray-900/40 transition-colors">
+          <div className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/40 transition-colors">
             <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
               <Code className="h-6 w-6 text-foreground" />
             </div>
@@ -84,7 +84,7 @@ const CallToAction = () => {
             </a>
           </div>
 
-          <div className="bg-gray-900/30 border border-gray-800 rounded-xl p-8 hover:bg-gray-900/40 transition-colors">
+          <div className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/40 transition-colors">
             <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
               <MessageCircle className="h-6 w-6 text-foreground" />
             </div>
@@ -104,7 +104,7 @@ const CallToAction = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-20 border border-gray-800 rounded-xl p-6 bg-gradient-to-r from-white/10 to-white/10"
+          className="mt-20 border border-neutral-800 rounded-xl p-6 bg-gradient-to-r from-white/10 to-white/10"
         >
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-6 md:mb-0">

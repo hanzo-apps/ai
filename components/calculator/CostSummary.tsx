@@ -29,7 +29,7 @@ const CostSummary = ({
   support
 }: CostSummaryProps) => {
   return (
-    <div className="p-6 rounded-xl border border-[#333] bg-gray-900/50 hover:border-gray-700">
+    <div className="p-6 rounded-xl border border-[#333] bg-neutral-900/50 hover:border-neutral-700">
       <h3 className="text-xl font-semibold mb-6">Cost Summary</h3>
 
       <div className="space-y-4 mb-8">

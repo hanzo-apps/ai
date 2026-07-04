@@ -8,7 +8,7 @@ import { Button } from "@hanzo/ui";
 
 const Features = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <motion.h2 
@@ -37,7 +37,7 @@ const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-gray-900/50 rounded-xl p-8 border border-gray-800 hover:border-white/30 transition-colors"
+            className="bg-neutral-900/50 rounded-xl p-8 border border-neutral-800 hover:border-white/30 transition-colors"
           >
             <Globe className="w-12 h-12 text-foreground mb-6" />
             <h3 className="text-xl font-bold mb-4">Global Reach</h3>
@@ -51,7 +51,7 @@ const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-900/50 rounded-xl p-8 border border-gray-800 hover:border-white/30 transition-colors"
+            className="bg-neutral-900/50 rounded-xl p-8 border border-neutral-800 hover:border-white/30 transition-colors"
           >
             <Server className="w-12 h-12 text-foreground mb-6" />
             <h3 className="text-xl font-bold mb-4">Instant Scaling</h3>
@@ -65,7 +65,7 @@ const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-gray-900/50 rounded-xl p-8 border border-gray-800 hover:border-white/30 transition-colors"
+            className="bg-neutral-900/50 rounded-xl p-8 border border-neutral-800 hover:border-white/30 transition-colors"
           >
             <Cpu className="w-12 h-12 text-foreground mb-6" />
             <h3 className="text-xl font-bold mb-4">GPU Acceleration</h3>
@@ -79,7 +79,7 @@ const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="bg-gray-900/50 rounded-xl p-8 border border-gray-800 hover:border-white/30 transition-colors"
+            className="bg-neutral-900/50 rounded-xl p-8 border border-neutral-800 hover:border-white/30 transition-colors"
           >
             <Database className="w-12 h-12 text-foreground mb-6" />
             <h3 className="text-xl font-bold mb-4">AI-Native Storage</h3>
@@ -93,7 +93,7 @@ const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="bg-gray-900/50 rounded-xl p-8 border border-gray-800 hover:border-white/30 transition-colors"
+            className="bg-neutral-900/50 rounded-xl p-8 border border-neutral-800 hover:border-white/30 transition-colors"
           >
             <Bot className="w-12 h-12 text-foreground mb-6" />
             <h3 className="text-xl font-bold mb-4">Model Management</h3>
@@ -107,7 +107,7 @@ const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 1.0 }}
-            className="bg-gray-900/50 rounded-xl p-8 border border-gray-800 hover:border-white/30 transition-colors"
+            className="bg-neutral-900/50 rounded-xl p-8 border border-neutral-800 hover:border-white/30 transition-colors"
           >
             <Lock className="w-12 h-12 text-foreground mb-6" />
             <h3 className="text-xl font-bold mb-4">Enterprise Security</h3>
@@ -142,7 +142,7 @@ const Features = () => {
           transition={{ duration: 0.5, delay: 0.8 }}
           className="mt-16 text-center"
         >
-          <div className="max-w-3xl mx-auto bg-gradient-to-r from-gray-900 via-background to-gray-900 rounded-xl p-8 ring-1 ring-border hover:ring-white/30 transition-all duration-300">
+          <div className="max-w-3xl mx-auto bg-gradient-to-r from-neutral-900 via-background to-neutral-900 rounded-xl p-8 ring-1 ring-border hover:ring-white/30 transition-all duration-300">
             <h3 className="text-2xl font-bold mb-4">Enterprise Support</h3>
             <p className="text-foreground/80 mb-8">
               Paid support packages include a team of actual engineers (not chatbots) who themselves ship code on our platform. Emergency support and guaranteed response times available.

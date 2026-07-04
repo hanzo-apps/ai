@@ -19,7 +19,7 @@ const Testimonial: React.FC<TestimonialProps> = ({ quote, name, title, delay }) 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="bg-gradient-to-br from-gray-900 to-gray-950 border border-gray-800 rounded-xl p-6 shadow-lg"
+      className="bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 rounded-xl p-6 shadow-lg"
     >
       <Quote className="h-8 w-8 text-foreground mb-4" />
       <p className="text-foreground/80 text-lg mb-6">{quote}</p>

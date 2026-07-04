@@ -45,7 +45,7 @@ const UseCasesSection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="bg-gray-900/20 border border-gray-800 rounded-lg p-6 text-center flex flex-col items-center hover:bg-gray-900/40 hover:border-gray-700 transition-all"
+                className="bg-neutral-900/20 border border-neutral-800 rounded-lg p-6 text-center flex flex-col items-center hover:bg-neutral-900/40 hover:border-neutral-700 transition-all"
               >
                 <Icon className="h-8 w-8 text-foreground/70 mb-3" />
                 <p className="text-foreground/80">{useCase.name}</p>

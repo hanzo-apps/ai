@@ -24,7 +24,7 @@ const integrationGroups = [
 
 const Integrations = () => {
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900/20 relative">
+    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20 relative">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -48,7 +48,7 @@ const Integrations = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-gradient-to-br from-gray-900 to-background rounded-xl overflow-hidden border border-gray-800 p-8"
+            className="bg-gradient-to-br from-neutral-900 to-background rounded-xl overflow-hidden border border-neutral-800 p-8"
           >
             <div className="flex items-center mb-6">
               <Code className="h-6 w-6 text-foreground mr-3" />
@@ -96,7 +96,7 @@ const Integrations = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.3, delay: 0.1 + (index * 0.05) }}
-                      className="flex items-center p-3 bg-gray-800/30 rounded-lg border border-gray-700/40"
+                      className="flex items-center p-3 bg-neutral-800/30 rounded-lg border border-neutral-700/40"
                     >
                       <CheckCircle className="h-4 w-4 text-foreground mr-2 flex-shrink-0" />
                       <span className="text-foreground/80 text-sm">{item}</span>

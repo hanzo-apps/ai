@@ -61,19 +61,19 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
         >
-          <div className="bg-gray-900/30 border border-border rounded-xl p-6 text-center">
+          <div className="bg-neutral-900/30 border border-border rounded-xl p-6 text-center">
             <Server className="h-8 w-8 text-foreground mx-auto mb-4" />
             <h3 className="text-lg font-semibold mb-2">Global Infrastructure</h3>
             <p className="text-muted-foreground text-sm">35+ regions worldwide for ultra-low latency at the edge</p>
           </div>
           
-          <div className="bg-gray-900/30 border border-border rounded-xl p-6 text-center">
+          <div className="bg-neutral-900/30 border border-border rounded-xl p-6 text-center">
             <Zap className="h-8 w-8 text-foreground mx-auto mb-4" />
             <h3 className="text-lg font-semibold mb-2">Instant Deployment</h3>
             <p className="text-muted-foreground text-sm">Deploy in seconds with push-button simplicity</p>
           </div>
           
-          <div className="bg-gray-900/30 border border-border rounded-xl p-6 text-center">
+          <div className="bg-neutral-900/30 border border-border rounded-xl p-6 text-center">
             <Globe className="h-8 w-8 text-foreground mx-auto mb-4" />
             <h3 className="text-lg font-semibold mb-2">AI-Optimized</h3>
             <p className="text-muted-foreground text-sm">Purpose-built for complex AI workloads and inference</p>

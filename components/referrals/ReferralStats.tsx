@@ -10,9 +10,9 @@ interface ReferralStatsProps {
 const ReferralStatsComponent = ({ referralStats }: ReferralStatsProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+      <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
         <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-gray-800 flex items-center justify-center">
+          <div className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
             <Mail className="h-6 w-6 text-muted-foreground" />
           </div>
           <div>
@@ -22,9 +22,9 @@ const ReferralStatsComponent = ({ referralStats }: ReferralStatsProps) => {
         </div>
       </div>
       
-      <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+      <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
         <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-gray-800 flex items-center justify-center">
+          <div className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
             <User className="h-6 w-6 text-muted-foreground" />
           </div>
           <div>
@@ -34,9 +34,9 @@ const ReferralStatsComponent = ({ referralStats }: ReferralStatsProps) => {
         </div>
       </div>
       
-      <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+      <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
         <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-gray-800 flex items-center justify-center">
+          <div className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
             <DollarSign className="h-6 w-6 text-muted-foreground" />
           </div>
           <div>
@@ -46,9 +46,9 @@ const ReferralStatsComponent = ({ referralStats }: ReferralStatsProps) => {
         </div>
       </div>
       
-      <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+      <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
         <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-gray-800 flex items-center justify-center">
+          <div className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
             <Clock className="h-6 w-6 text-muted-foreground" />
           </div>
           <div>

@@ -22,8 +22,8 @@ const EnterpriseFeatures = () => {
           className="grid md:grid-cols-2 gap-16 items-center"
         >
           <div>
-            <div className="rounded-lg bg-gradient-to-br from-gray-900 to-background border border-gray-800 overflow-hidden shadow-2xl">
-              <div className="bg-gray-800 py-2 px-4 flex items-center justify-between">
+            <div className="rounded-lg bg-gradient-to-br from-neutral-900 to-background border border-neutral-800 overflow-hidden shadow-2xl">
+              <div className="bg-neutral-800 py-2 px-4 flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 rounded-full bg-primary/10"></div>
                   <div className="w-3 h-3 rounded-full bg-primary/10"></div>

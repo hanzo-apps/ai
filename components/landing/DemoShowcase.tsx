@@ -47,14 +47,14 @@ const DemoShowcase: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden shadow-2xl">
-              <div className="bg-gray-950 p-3 flex items-center border-b border-gray-800">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden shadow-2xl">
+              <div className="bg-neutral-950 p-3 flex items-center border-b border-neutral-800">
                 <div className="flex space-x-2 mr-4">
                   <div className="w-3 h-3 rounded-full bg-primary/10"></div>
                   <div className="w-3 h-3 rounded-full bg-primary/10"></div>
                   <div className="w-3 h-3 rounded-full bg-primary/10"></div>
                 </div>
-                <div className="flex items-center bg-gray-800 px-4 py-1 rounded-md text-muted-foreground text-sm">
+                <div className="flex items-center bg-neutral-800 px-4 py-1 rounded-md text-muted-foreground text-sm">
                   <Terminal className="h-4 w-4 mr-2" /> hanzo-demo.tsx
                 </div>
               </div>

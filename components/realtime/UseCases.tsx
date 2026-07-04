@@ -20,7 +20,7 @@ const UseCaseCard: React.FC<UseCaseCardProps> = ({ icon: Icon, title, descriptio
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: 0.1 * index }}
-      className="bg-gradient-to-br from-gray-900 to-background border border-gray-800 rounded-xl p-6 hover:border-white/30 transition-colors"
+      className="bg-gradient-to-br from-neutral-900 to-background border border-neutral-800 rounded-xl p-6 hover:border-white/30 transition-colors"
     >
       <div className="bg-primary/10 h-10 w-10 rounded-full flex items-center justify-center mb-4">
         <Icon className="h-5 w-5 text-foreground" />

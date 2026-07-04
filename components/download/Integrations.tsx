@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Github, CalendarDays, FileEdit, Trello, MessageSquare, Code } from "lucide-react";
 
 const IntegrationCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (
-  <div className="flex items-start space-x-4 p-6 rounded-xl border border-gray-800 bg-gray-900/50">
+  <div className="flex items-start space-x-4 p-6 rounded-xl border border-neutral-800 bg-neutral-900/50">
     <div className="flex-shrink-0">
       {icon}
     </div>

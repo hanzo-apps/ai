@@ -8,7 +8,7 @@ import ChromeText from "@/components/ui/chrome-text";
 
 const GetStartedSection = () => {
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900/50 to-background">
+    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900/50 to-background">
       <div className="max-w-5xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -24,7 +24,7 @@ const GetStartedSection = () => {
           </p>
 
           <div className="flex flex-col items-center justify-center space-y-8 mb-12">
-            <div className="bg-gray-900/50 p-6 rounded-xl border border-gray-800 w-full max-w-2xl">
+            <div className="bg-neutral-900/50 p-6 rounded-xl border border-neutral-800 w-full max-w-2xl">
               <div className="flex items-center mb-3">
                 <Terminal className="h-5 w-5 text-foreground/70 mr-2" />
                 <span className="text-sm text-muted-foreground">Installation Command</span>

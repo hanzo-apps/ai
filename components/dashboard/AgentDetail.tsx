@@ -113,7 +113,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
           </DialogTitle>
         </DialogHeader>
 
-        <div className="flex border-b border-gray-800 mt-2">
+        <div className="flex border-b border-neutral-800 mt-2">
           <button 
             className={`px-4 py-2 text-sm font-medium ${activeTab === 'overview' ? 'text-[var(--white)] border-b-2 border-white' : 'text-muted-foreground hover:text-[var(--white)]'}`}
             onClick={() => setActiveTab('overview')}
@@ -144,19 +144,19 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                   value={editedAgent.description || ""}
                   onChange={handleInputChange}
                   placeholder="Agent description..."
-                  className="min-h-24 bg-gray-900 border-gray-800"
+                  className="min-h-24 bg-neutral-900 border-neutral-800"
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-muted-foreground mb-1">Status</label>
-                  <div className="flex items-center justify-between p-3 bg-gray-900 border border-gray-800 rounded-md">
+                  <div className="flex items-center justify-between p-3 bg-neutral-900 border border-neutral-800 rounded-md">
                     <div className="flex items-center">
                       <div className={`h-2 w-2 rounded-full mr-2 ${
                         editedAgent.status === 'running' ? 'bg-primary/10' : 
                         editedAgent.status === 'paused' ? 'bg-primary/10' : 
-                        editedAgent.status === 'error' ? 'bg-primary/10' : 'bg-gray-500'
+                        editedAgent.status === 'error' ? 'bg-primary/10' : 'bg-neutral-500'
                       }`}></div>
                       <span>{
                         editedAgent.status.charAt(0).toUpperCase() + editedAgent.status.slice(1)
@@ -176,7 +176,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
 
                 <div>
                   <label className="block text-sm font-medium text-muted-foreground mb-1">Model</label>
-                  <div className="flex items-center p-3 bg-gray-900 border border-gray-800 rounded-md">
+                  <div className="flex items-center p-3 bg-neutral-900 border border-neutral-800 rounded-md">
                     <Input 
                       name="model"
                       value={editedAgent.model}
@@ -224,19 +224,19 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground mb-2">Usage Statistics</h3>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <div className="bg-gray-900 border border-gray-800 rounded-md p-3">
+                  <div className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
                     <h4 className="text-xs text-muted-foreground mb-1">Tokens Used</h4>
                     <p className="text-lg font-medium">{editedAgent.tokens.toLocaleString()}</p>
                   </div>
-                  <div className="bg-gray-900 border border-gray-800 rounded-md p-3">
+                  <div className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
                     <h4 className="text-xs text-muted-foreground mb-1">Cost</h4>
                     <p className="text-lg font-medium">${editedAgent.cost.toFixed(2)}</p>
                   </div>
-                  <div className="bg-gray-900 border border-gray-800 rounded-md p-3">
+                  <div className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
                     <h4 className="text-xs text-muted-foreground mb-1">Tasks Assigned</h4>
                     <p className="text-lg font-medium">{editedAgent.tasks}</p>
                   </div>
-                  <div className="bg-gray-900 border border-gray-800 rounded-md p-3">
+                  <div className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
                     <h4 className="text-xs text-muted-foreground mb-1">Last Active</h4>
                     <p className="text-lg font-medium">{editedAgent.lastActive}</p>
                   </div>
@@ -247,7 +247,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
 
           {activeTab === 'rag' && (
             <div className="grid grid-cols-3 gap-6 h-[400px]">
-              <div className="col-span-1 border-r border-gray-800 pr-4">
+              <div className="col-span-1 border-r border-neutral-800 pr-4">
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="text-sm font-medium">Knowledge Sources</h3>
                   <Button size="sm" variant="ghost" onClick={handleAddRagSource}>
@@ -259,7 +259,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                     <div 
                       key={source.id}
                       className={`p-2 rounded flex items-center justify-between cursor-pointer ${
-                        selectedRagSource?.id === source.id ? 'bg-gray-800' : 'hover:bg-gray-900'
+                        selectedRagSource?.id === source.id ? 'bg-neutral-800' : 'hover:bg-neutral-900'
                       }`}
                       onClick={() => setSelectedRagSource(source)}
                     >
@@ -306,7 +306,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                           handleRagSourceChange(updated);
                           setSelectedRagSource(updated);
                         }}
-                        className="bg-gray-900 border-gray-800"
+                        className="bg-neutral-900 border-neutral-800"
                       />
                     </div>
 
@@ -319,7 +319,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                             className={`p-2 border rounded flex flex-col items-center justify-center cursor-pointer ${
                               selectedRagSource.type === type 
                                 ? 'border-white bg-primary/10' 
-                                : 'border-gray-800 hover:border-gray-700'
+                                : 'border-neutral-800 hover:border-neutral-700'
                             }`}
                             onClick={() => {
                               const updated = { ...selectedRagSource, type };
@@ -346,7 +346,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                           handleRagSourceChange(updated);
                           setSelectedRagSource(updated);
                         }}
-                        className="bg-gray-900 border-gray-800 font-mono text-xs"
+                        className="bg-neutral-900 border-neutral-800 font-mono text-xs"
                         placeholder={
                           selectedRagSource.type === 'database' ? 'postgres://user:pass@host/db' :
                           selectedRagSource.type === 'vector' ? 'pinecone://index' :
@@ -373,13 +373,13 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                   name="type"
                   value={editedAgent.type}
                   onChange={handleInputChange}
-                  className="bg-gray-900 border-gray-800"
+                  className="bg-neutral-900 border-neutral-800"
                 />
               </div>
 
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground mb-2">Advanced Settings</h3>
-                <div className="space-y-4 bg-gray-900 border border-gray-800 rounded-md p-4">
+                <div className="space-y-4 bg-neutral-900 border border-neutral-800 rounded-md p-4">
                   <div>
                     <label className="block text-xs text-muted-foreground mb-1">Memory Limit (%)</label>
                     <Input 
@@ -389,13 +389,13 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                       onChange={handleInputChange}
                       min="0"
                       max="100"
-                      className="bg-gray-900 border-gray-800"
+                      className="bg-neutral-900 border-neutral-800"
                     />
                   </div>
                   
                   <div>
                     <label className="block text-xs text-muted-foreground mb-1">Execution Priority</label>
-                    <select className="w-full bg-gray-900 border-gray-800 rounded-md p-2 text-sm">
+                    <select className="w-full bg-neutral-900 border-neutral-800 rounded-md p-2 text-sm">
                       <option>Normal</option>
                       <option>High</option>
                       <option>Low</option>
@@ -404,7 +404,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
 
                   <div>
                     <label className="block text-xs text-muted-foreground mb-1">Execution Mode</label>
-                    <select className="w-full bg-gray-900 border-gray-800 rounded-md p-2 text-sm">
+                    <select className="w-full bg-neutral-900 border-neutral-800 rounded-md p-2 text-sm">
                       <option>Automatic</option>
                       <option>Manual</option>
                       <option>Scheduled</option>
@@ -416,7 +416,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
           )}
         </div>
 
-        <div className="flex justify-end gap-2 pt-4 border-t border-gray-800 mt-4">
+        <div className="flex justify-end gap-2 pt-4 border-t border-neutral-800 mt-4">
           <Button variant="ghost" onClick={onClose}>
             Cancel
           </Button>

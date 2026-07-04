@@ -60,7 +60,7 @@ const StarRating = ({ rating }) => {
 
 const Testimonials = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900/30 relative overflow-hidden">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-900/30 relative overflow-hidden">
       <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
       
@@ -86,7 +86,7 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-800/30 p-6 rounded-lg border border-gray-700"
+              className="bg-neutral-800/30 p-6 rounded-lg border border-neutral-700"
             >
               <p className="text-lg mb-4">"{testimonial.quote}"</p>
               <StarRating rating={testimonial.rating} />

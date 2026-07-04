@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const Architecture = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-950">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-950">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -30,7 +30,7 @@ const Architecture = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-gray-900/20 border border-gray-800 rounded-xl p-8"
+            className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-8"
           >
             <div className="relative overflow-hidden rounded-lg bg-[var(--black)]/50 p-6 h-64 flex items-center justify-center">
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10"></div>
@@ -48,7 +48,7 @@ const Architecture = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-4"
           >
-            <div className="bg-gray-900/20 border border-gray-800 rounded-xl p-6">
+            <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
               <h3 className="text-xl font-semibold text-[var(--white)] mb-2">Character Files</h3>
               <p className="text-muted-foreground">
                 Contains the agent's personality, backstory, knowledge, and topics to discuss. 
@@ -56,7 +56,7 @@ const Architecture = () => {
               </p>
             </div>
             
-            <div className="bg-gray-900/20 border border-gray-800 rounded-xl p-6">
+            <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
               <h3 className="text-xl font-semibold text-[var(--white)] mb-2">Database</h3>
               <p className="text-muted-foreground">
                 Stores relevant information for generating responses, including previous interactions 
@@ -64,7 +64,7 @@ const Architecture = () => {
               </p>
             </div>
             
-            <div className="bg-gray-900/20 border border-gray-800 rounded-xl p-6">
+            <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
               <h3 className="text-xl font-semibold text-[var(--white)] mb-2">Runtime</h3>
               <p className="text-muted-foreground">
                 The core agent logic that coordinates between modules and external services. 
@@ -72,7 +72,7 @@ const Architecture = () => {
               </p>
             </div>
             
-            <div className="bg-gray-900/20 border border-gray-800 rounded-xl p-6">
+            <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
               <h3 className="text-xl font-semibold text-[var(--white)] mb-2">Clients</h3>
               <p className="text-muted-foreground">
                 The platforms where agents interact with users (Discord, Twitter, Slack, Farcaster). 

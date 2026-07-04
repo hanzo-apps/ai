@@ -28,7 +28,7 @@ const CheckoutExperience = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-gray-900/30 border border-gray-800 rounded-lg overflow-hidden"
+            className="bg-neutral-900/30 border border-neutral-800 rounded-lg overflow-hidden"
           >
             <div className="p-6">
               <h3 className="text-2xl font-bold mb-4">Global Payment Methods</h3>
@@ -49,7 +49,7 @@ const CheckoutExperience = () => {
 
               <div className="flex flex-wrap gap-2 mt-4">
                 {['Visa', 'Mastercard', 'Amex', 'PayPal', 'Apple Pay', 'Google Pay', 'iDEAL', 'Bancontact', 'SOFORT', '+190 more'].map((method, index) => (
-                  <span key={index} className="inline-block px-3 py-1 bg-gray-800 rounded-full text-sm text-foreground/80">
+                  <span key={index} className="inline-block px-3 py-1 bg-neutral-800 rounded-full text-sm text-foreground/80">
                     {method}
                   </span>
                 ))}
@@ -62,7 +62,7 @@ const CheckoutExperience = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col justify-between bg-gray-900/30 border border-gray-800 rounded-lg overflow-hidden"
+            className="flex flex-col justify-between bg-neutral-900/30 border border-neutral-800 rounded-lg overflow-hidden"
           >
             <div className="p-6">
               <h3 className="text-2xl font-bold mb-4">Checkout Interface</h3>
@@ -70,13 +70,13 @@ const CheckoutExperience = () => {
                 Fully customizable checkout UI that matches your brand and maximizes conversions.
               </p>
               
-              <div className="bg-gray-900 border border-gray-700 rounded-lg p-4 mb-4">
-                <div className="h-8 w-32 bg-gray-800 rounded mb-3"></div>
+              <div className="bg-neutral-900 border border-neutral-700 rounded-lg p-4 mb-4">
+                <div className="h-8 w-32 bg-neutral-800 rounded mb-3"></div>
                 <div className="grid grid-cols-2 gap-3 mb-3">
-                  <div className="h-10 bg-gray-800 rounded"></div>
-                  <div className="h-10 bg-gray-800 rounded"></div>
+                  <div className="h-10 bg-neutral-800 rounded"></div>
+                  <div className="h-10 bg-neutral-800 rounded"></div>
                 </div>
-                <div className="h-10 bg-gray-800 rounded mb-3"></div>
+                <div className="h-10 bg-neutral-800 rounded mb-3"></div>
                 <div className="h-10 bg-primary rounded"></div>
               </div>
               
@@ -91,9 +91,9 @@ const CheckoutExperience = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0 }}
-            className="bg-gray-900/30 border border-gray-800 p-6 rounded-lg"
+            className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <Globe className="h-6 w-6 text-foreground" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Global Reach</h3>
@@ -107,9 +107,9 @@ const CheckoutExperience = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-gray-900/30 border border-gray-800 p-6 rounded-lg"
+            className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <Smartphone className="h-6 w-6 text-foreground" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Mobile Optimized</h3>
@@ -123,9 +123,9 @@ const CheckoutExperience = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-900/30 border border-gray-800 p-6 rounded-lg"
+            className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <Paintbrush className="h-6 w-6 text-foreground" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Fully Customizable</h3>

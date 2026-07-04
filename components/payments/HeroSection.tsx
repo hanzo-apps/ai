@@ -8,7 +8,7 @@ import { CreditCard, Lock, Globe, Zap } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900/20">
+    <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -19,7 +19,7 @@ const HeroSection = () => {
           <span className="inline-block px-4 py-1 rounded-full bg-primary/10 border border-white/30 text-foreground/70 text-sm font-medium mb-4">
             Integrated Global Payments Platform
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 mb-6">
+          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400 mb-6">
             Hanzo Payments
           </h1>
           <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto mb-8">
@@ -41,7 +41,7 @@ const HeroSection = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="border-gray-600 text-[var(--white)] hover:bg-gray-800"
+              className="border-neutral-600 text-[var(--white)] hover:bg-neutral-800"
             >
               Explore APIs
             </Button>
@@ -65,9 +65,9 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              className="bg-gray-900/50 p-6 rounded-lg border border-gray-800"
+              className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800"
             >
-              <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+              <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
                 {item.icon}
               </div>
               <h3 className="text-lg font-semibold mb-2">{item.title}</h3>

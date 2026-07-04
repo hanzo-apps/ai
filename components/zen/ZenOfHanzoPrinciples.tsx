@@ -29,17 +29,17 @@ const ZenOfHanzoPrinciples: React.FC = () => {
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
           Time-tested principles guiding the development of next-generation AI systems and applications
         </p>
-        <div className="h-px w-20 bg-gray-700 mx-auto mt-6"></div>
+        <div className="h-px w-20 bg-neutral-700 mx-auto mt-6"></div>
       </motion.div>
 
       {/* Sticky Discipline Filter */}
-      <div className="sticky top-0 z-40 bg-[var(--black)]/95 backdrop-blur-sm border-b border-gray-800/50 py-6 mb-8">
+      <div className="sticky top-0 z-40 bg-[var(--black)]/95 backdrop-blur-sm border-b border-neutral-800/50 py-6 mb-8">
         <div className="flex flex-wrap justify-center gap-2">
           <button
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
               selectedDiscipline === null 
                 ? "bg-primary text-primary-foreground shadow-lg" 
-                : "bg-gray-800/50 text-gray-400 hover:bg-gray-700/50 hover:text-gray-300"
+                : "bg-neutral-800/50 text-neutral-400 hover:bg-neutral-700/50 hover:text-neutral-300"
             }`}
             onClick={() => setSelectedDiscipline(null)}
           >
@@ -51,7 +51,7 @@ const ZenOfHanzoPrinciples: React.FC = () => {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                 selectedDiscipline === discipline 
                   ? "bg-primary text-primary-foreground shadow-lg" 
-                  : "bg-gray-800/50 text-gray-400 hover:bg-gray-700/50 hover:text-gray-300"
+                  : "bg-neutral-800/50 text-neutral-400 hover:bg-neutral-700/50 hover:text-neutral-300"
               }`}
               onClick={() => setSelectedDiscipline(discipline)}
             >
@@ -91,7 +91,7 @@ const ZenOfHanzoPrinciples: React.FC = () => {
               href="https://docs.hanzo.ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-gray-100 transition-all duration-300"
+              className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-neutral-100 transition-all duration-300"
             >
               Read Documentation
             </a>

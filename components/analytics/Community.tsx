@@ -73,7 +73,7 @@ const Community = () => {
   };
 
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900/30 relative overflow-hidden">
+    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/30 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
@@ -101,7 +101,7 @@ const Community = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="bg-gray-900/50 rounded-xl p-8 border border-gray-800 text-center"
+                className="bg-neutral-900/50 rounded-xl p-8 border border-neutral-800 text-center"
               >
                 <div className="flex justify-center mb-4">
                   <div className="p-3 bg-primary/10 rounded-full border border-border text-foreground">
@@ -131,7 +131,7 @@ const Community = () => {
           >
             <motion.div
               variants={itemVariants}
-              className="bg-gray-900/50 rounded-xl border border-gray-800 p-8"
+              className="bg-neutral-900/50 rounded-xl border border-neutral-800 p-8"
             >
               <div className="flex items-center mb-6">
                 <Github className="h-6 w-6 text-foreground mr-3" />
@@ -144,24 +144,24 @@ const Community = () => {
               
               <div className="space-y-4 mb-8">
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-gray-700 mr-3"></div>
+                  <div className="w-8 h-8 rounded-full bg-neutral-700 mr-3"></div>
                   <div className="flex-1">
-                    <div className="h-2 w-3/4 bg-gray-700 rounded"></div>
-                    <div className="h-2 w-1/2 bg-gray-700 rounded mt-2"></div>
+                    <div className="h-2 w-3/4 bg-neutral-700 rounded"></div>
+                    <div className="h-2 w-1/2 bg-neutral-700 rounded mt-2"></div>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-gray-700 mr-3"></div>
+                  <div className="w-8 h-8 rounded-full bg-neutral-700 mr-3"></div>
                   <div className="flex-1">
-                    <div className="h-2 w-3/4 bg-gray-700 rounded"></div>
-                    <div className="h-2 w-1/2 bg-gray-700 rounded mt-2"></div>
+                    <div className="h-2 w-3/4 bg-neutral-700 rounded"></div>
+                    <div className="h-2 w-1/2 bg-neutral-700 rounded mt-2"></div>
                   </div>
                 </div>
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-gray-700 mr-3"></div>
+                  <div className="w-8 h-8 rounded-full bg-neutral-700 mr-3"></div>
                   <div className="flex-1">
-                    <div className="h-2 w-3/4 bg-gray-700 rounded"></div>
-                    <div className="h-2 w-1/2 bg-gray-700 rounded mt-2"></div>
+                    <div className="h-2 w-3/4 bg-neutral-700 rounded"></div>
+                    <div className="h-2 w-1/2 bg-neutral-700 rounded mt-2"></div>
                   </div>
                 </div>
               </div>
@@ -175,7 +175,7 @@ const Community = () => {
             
             <motion.div
               variants={itemVariants}
-              className="bg-gray-900/50 rounded-xl border border-gray-800 p-8"
+              className="bg-neutral-900/50 rounded-xl border border-neutral-800 p-8"
             >
               <div className="flex items-center mb-6">
                 <BookOpen className="h-6 w-6 text-foreground/70 mr-3" />
@@ -212,7 +212,7 @@ const Community = () => {
                   <a 
                     key={i} 
                     href={resource.link || "#"} 
-                    className="block p-4 bg-gray-800/50 hover:bg-gray-800 rounded-lg border border-gray-700 transition-colors"
+                    className="block p-4 bg-neutral-800/50 hover:bg-neutral-800 rounded-lg border border-neutral-700 transition-colors"
                   >
                     <h4 className="font-medium text-[var(--white)] mb-1">{resource.title}</h4>
                     <p className="text-sm text-muted-foreground">{resource.description}</p>

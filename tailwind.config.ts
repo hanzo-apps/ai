@@ -8,6 +8,12 @@ export default {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    // Scan the @hanzo/ui component library (consumed at 250+ call sites) so
+    // its utility classes are emitted — including the Tabs orientation
+    // variants (`data-[orientation=horizontal]:flex-col`) that stack the tab
+    // bar above the panel. Tailwind v4 excludes node_modules from automatic
+    // detection, so the library must be listed explicitly.
+    "./node_modules/@hanzo/ui/dist/**/*.{js,mjs}",
   ],
   theme: {
     container: {

@@ -7,7 +7,7 @@ import { Button } from "@hanzo/ui";
 
 const HanzoAppEnterprise = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-950">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950">
       <div className="max-w-3xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

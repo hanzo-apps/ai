@@ -16,8 +16,8 @@ const VoiceFeature = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <div className="order-2 md:order-1 rounded-xl overflow-hidden shadow-2xl border border-gray-800">
-            <div className="relative pb-[120%] h-0 bg-gray-900">
+          <div className="order-2 md:order-1 rounded-xl overflow-hidden shadow-2xl border border-neutral-800">
+            <div className="relative pb-[120%] h-0 bg-neutral-900">
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="text-muted-foreground">Voice input preview</span>
               </div>

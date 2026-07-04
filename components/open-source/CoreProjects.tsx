@@ -32,7 +32,7 @@ const CoreProjects = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-gray-900/60 rounded-xl border border-gray-800 p-8 hover:border-border transition-colors"
+            className="bg-neutral-900/60 rounded-xl border border-neutral-800 p-8 hover:border-border transition-colors"
           >
             <div className="flex items-center mb-4">
               <Server className="h-12 w-12 text-foreground/70 mr-4" />
@@ -87,7 +87,7 @@ const CoreProjects = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-900/60 rounded-xl border border-gray-800 p-8 hover:border-border transition-colors"
+            className="bg-neutral-900/60 rounded-xl border border-neutral-800 p-8 hover:border-border transition-colors"
           >
             <div className="flex items-center mb-4">
               <Bot className="h-12 w-12 text-foreground/70 mr-4" />

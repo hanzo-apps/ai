@@ -34,7 +34,7 @@ const IChingPrinciplesGrid: React.FC<IChingPrinciplesGridProps> = ({
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
           {description}
         </p>
-        <div className="h-px w-20 bg-gray-700 mx-auto mt-6"></div>
+        <div className="h-px w-20 bg-neutral-700 mx-auto mt-6"></div>
       </motion.div>
       
       <div className="relative">
@@ -43,7 +43,7 @@ const IChingPrinciplesGrid: React.FC<IChingPrinciplesGridProps> = ({
         </div>
         
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-8 gap-4 min-w-[800px] p-8 bg-gray-900/30 border border-gray-800 rounded-lg">
+          <div className="grid grid-cols-8 gap-4 min-w-[800px] p-8 bg-neutral-900/30 border border-neutral-800 rounded-lg">
             {Array.from({ length: rows }).map((_, rowIndex) => (
               <React.Fragment key={`row-${rowIndex}`}>
                 {Array.from({ length: columns }).map((_, colIndex) => {
@@ -59,7 +59,7 @@ const IChingPrinciplesGrid: React.FC<IChingPrinciplesGridProps> = ({
                       whileInView={{ opacity: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.3, delay: (index % 16) * 0.05 }}
-                      className="flex flex-col items-center justify-center p-2 border border-gray-800 bg-gray-900/50 hover:bg-gray-800/50 rounded-md transition-all aspect-square cursor-pointer group"
+                      className="flex flex-col items-center justify-center p-2 border border-neutral-800 bg-neutral-900/50 hover:bg-neutral-800/50 rounded-md transition-all aspect-square cursor-pointer group"
                       title={`${hexagram.id}. ${hexagram.name} (${hexagram.chineseName} - ${hexagram.pinyin}): ${hexagram.principle}`}
                     >
                       <div className="mb-2 text-xs text-muted-foreground">{hexagram.id}</div>

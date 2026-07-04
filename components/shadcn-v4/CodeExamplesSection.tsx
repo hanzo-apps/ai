@@ -40,7 +40,7 @@ const CodeExamplesSection = () => {
           </TabsList>
           
           <TabsContent value="css-variables" className="rounded-lg overflow-hidden">
-            <div className="bg-background/50 border border-gray-800 rounded-lg p-4">
+            <div className="bg-background/50 border border-neutral-800 rounded-lg p-4">
               <div className="flex justify-between items-center mb-2">
                 <div className="text-sm text-muted-foreground">globals.css</div>
                 <Button
@@ -81,7 +81,7 @@ const CodeExamplesSection = () => {
           </TabsContent>
           
           <TabsContent value="components" className="rounded-lg overflow-hidden">
-            <div className="bg-background/50 border border-gray-800 rounded-lg p-4">
+            <div className="bg-background/50 border border-neutral-800 rounded-lg p-4">
               <div className="flex justify-between items-center mb-2">
                 <div className="text-sm text-muted-foreground">Button.tsx</div>
                 <Button
@@ -122,7 +122,7 @@ const CodeExamplesSection = () => {
           </TabsContent>
           
           <TabsContent value="tailwind-config" className="rounded-lg overflow-hidden">
-            <div className="bg-background/50 border border-gray-800 rounded-lg p-4">
+            <div className="bg-background/50 border border-neutral-800 rounded-lg p-4">
               <div className="flex justify-between items-center mb-2">
                 <div className="text-sm text-muted-foreground">tailwind.config.ts</div>
                 <Button

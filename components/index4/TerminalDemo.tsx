@@ -15,42 +15,42 @@ const TerminalDemo = () => {
         transition={{ duration: 0.8 }}
       >
         <ArchitecturalBox
-          className="backdrop-blur-lg bg-zinc-900/50 border border-zinc-800/50 rounded-xl overflow-hidden"
+          className="backdrop-blur-lg bg-neutral-900/50 border border-neutral-800/50 rounded-xl overflow-hidden"
           showGrid={true}
           gridColor="rgba(255,255,255,0.03)"
           gridSpacing={30}
           gridOpacity={0.1}
         >
-          <div className="flex items-center border-b border-zinc-800/70 px-4 py-3">
+          <div className="flex items-center border-b border-neutral-800/70 px-4 py-3">
             <div className="flex space-x-2 mr-4">
-              <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
-              <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
-              <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
+              <div className="w-3 h-3 rounded-full bg-neutral-700"></div>
+              <div className="w-3 h-3 rounded-full bg-neutral-700"></div>
+              <div className="w-3 h-3 rounded-full bg-neutral-700"></div>
             </div>
             <div className="flex-1 text-center">
-              <span className="text-xs font-mono text-zinc-400">terminal</span>
+              <span className="text-xs font-mono text-neutral-400">terminal</span>
             </div>
           </div>
           
           <div className="p-6 font-mono text-sm">
             <div className="flex items-start mb-4">
               <span className="text-foreground/70 mr-2">$</span>
-              <span className="text-zinc-300">hanzo deploy</span>
+              <span className="text-neutral-300">hanzo deploy</span>
             </div>
             
-            <div className="pl-4 text-zinc-500 space-y-1">
+            <div className="pl-4 text-neutral-500 space-y-1">
               <p>Initializing deployment...</p>
-              <p>Building application <span className="text-zinc-400">v2.3.5</span></p>
-              <p className="text-zinc-400">Installing dependencies...</p>
-              <p className="text-zinc-400">Running build command...</p>
+              <p>Building application <span className="text-neutral-400">v2.3.5</span></p>
+              <p className="text-neutral-400">Installing dependencies...</p>
+              <p className="text-neutral-400">Running build command...</p>
               <p className="text-foreground/70">✓ Build successful</p>
-              <p className="text-zinc-400">Uploading artifacts...</p>
+              <p className="text-neutral-400">Uploading artifacts...</p>
               <p className="text-foreground/70">✓ Deployment complete</p>
             </div>
             
             <div className="mt-6 flex items-start">
               <span className="text-foreground/70 mr-2">$</span>
-              <span className="text-zinc-300">_</span>
+              <span className="text-neutral-300">_</span>
             </div>
           </div>
         </ArchitecturalBox>

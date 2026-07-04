@@ -8,7 +8,7 @@ import { Download, ExternalLink, Github } from "lucide-react";
 
 const HanzoCodeCTA = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-950">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,14 +43,14 @@ const HanzoCodeCTA = () => {
             <Button 
               size="sm" 
               variant="outline"
-              className="bg-transparent border-gray-600 text-[var(--white)] hover:bg-gray-800 w-full sm:w-auto"
+              className="bg-transparent border-neutral-600 text-[var(--white)] hover:bg-neutral-800 w-full sm:w-auto"
             >
               <Github className="mr-2 h-4 w-4" />
               GitHub
             </Button>
           </div>
           
-          <div className="bg-[var(--black)]/40 rounded-xl p-8 border border-gray-800 mb-12">
+          <div className="bg-[var(--black)]/40 rounded-xl p-8 border border-neutral-800 mb-12">
             <h3 className="text-xl font-semibold mb-4">Already Using Cursor or Windsurf?</h3>
             <p className="text-foreground/80 mb-6">
               Install Hanzo Code alongside your current editor and supercharge it with our agentic capabilities. No need to switch or change your workflow.

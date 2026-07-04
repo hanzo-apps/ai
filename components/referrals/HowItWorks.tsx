@@ -3,11 +3,11 @@ import React from 'react'
 
 const HowItWorks = () => {
   return (
-    <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+    <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
       <h2 className="text-xl font-medium mb-4">How It Works</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="p-4 bg-gray-900/50 rounded-lg">
+        <div className="p-4 bg-neutral-900/50 rounded-lg">
           <div className="flex items-center mb-3">
             <div className="h-8 w-8 rounded-full bg-primary/10 text-foreground flex items-center justify-center mr-3">
               1
@@ -19,7 +19,7 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        <div className="p-4 bg-gray-900/50 rounded-lg">
+        <div className="p-4 bg-neutral-900/50 rounded-lg">
           <div className="flex items-center mb-3">
             <div className="h-8 w-8 rounded-full bg-primary/10 text-foreground flex items-center justify-center mr-3">
               2
@@ -31,7 +31,7 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        <div className="p-4 bg-gray-900/50 rounded-lg">
+        <div className="p-4 bg-neutral-900/50 rounded-lg">
           <div className="flex items-center mb-3">
             <div className="h-8 w-8 rounded-full bg-primary/10 text-foreground flex items-center justify-center mr-3">
               3

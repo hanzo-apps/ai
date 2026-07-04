@@ -8,7 +8,7 @@ import { FileText, ArrowRight } from "lucide-react";
 
 const CallToAction = () => {
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900/30 to-background relative overflow-hidden">
+    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900/30 to-background relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-70"></div>
       
       <div className="max-w-5xl mx-auto relative z-10">
@@ -19,7 +19,7 @@ const CallToAction = () => {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+          <h2 className="text-3xl md:text-5xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400">
             Ready to see the difference clarity makes?
           </h2>
           
@@ -37,7 +37,7 @@ const CallToAction = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-gray-700">
+              <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-neutral-700">
                 <FileText className="mr-2 h-5 w-5" /> View Docs
               </Button>
             </motion.div>
@@ -46,7 +46,7 @@ const CallToAction = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-gray-700">
+              <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-neutral-700">
                 <span className="flex items-center">
                   Request a Demo <ArrowRight className="ml-2 h-5 w-5" />
                 </span>
@@ -75,7 +75,7 @@ const CallToAction = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 + (index * 0.1) }}
-                className="bg-gray-900/20 p-6 rounded-xl border border-gray-800"
+                className="bg-neutral-900/20 p-6 rounded-xl border border-neutral-800"
               >
                 <h3 className="text-lg font-bold mb-2">{option.title}</h3>
                 <p className="text-muted-foreground text-sm">{option.description}</p>

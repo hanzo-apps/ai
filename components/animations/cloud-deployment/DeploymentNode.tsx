@@ -19,7 +19,7 @@ const DeploymentNode: React.FC<DeploymentNodeProps> = ({ node, onClick }) => {
       case 'app': return 'bg-primary/20 border border-white/30';
       case 'redis': return 'bg-primary/10 border border-border';
       case 'postgres': return 'bg-primary/20 border border-white/30';
-      case 'github': return 'bg-gray-500/20 border border-gray-500/30';
+      case 'github': return 'bg-neutral-500/20 border border-neutral-500/30';
       case 'volume': return 'bg-primary/10 border border-border';
       case 'network': 
         return node.id === 'network-public' 
@@ -53,7 +53,7 @@ const DeploymentNode: React.FC<DeploymentNodeProps> = ({ node, onClick }) => {
       <div className={`flex h-14 w-14 items-center justify-center rounded-lg ${getNodeBackgroundClass()}`}>
         {renderIcon(node.iconType, node.iconProps)}
         {node.status && (
-          <div className="absolute -right-1 -bottom-1 rounded-full bg-gray-800 border border-gray-700 p-0.5">
+          <div className="absolute -right-1 -bottom-1 rounded-full bg-neutral-800 border border-neutral-700 p-0.5">
             {node.status === 'deployed' && <Check className="h-3 w-3 text-foreground/70" />}
             {node.status === 'pending' && (
               <motion.div 

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ShoppingCart, CreditCard, DollarSign, BarChart } from "lucide-react";
 import { Button } from "@hanzo/ui";
 const Commerce = () => {
-  return <section className="py-20 bg-gradient-to-b from-background to-gray-900 bg-[var(--black)]">
+  return <section className="py-20 bg-gradient-to-b from-background to-neutral-900 bg-[var(--black)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{
         opacity: 0,

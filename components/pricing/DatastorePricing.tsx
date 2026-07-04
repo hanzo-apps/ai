@@ -140,7 +140,7 @@ export default function DatastorePricing() {
           <span className={`text-sm ${!annual ? "text-foreground" : "text-muted-foreground"}`}>Monthly</span>
           <button
             onClick={() => setAnnual(!annual)}
-            className={`relative w-10 h-6 rounded-full transition-colors ${annual ? "bg-primary" : "bg-gray-700"}`}
+            className={`relative w-10 h-6 rounded-full transition-colors ${annual ? "bg-primary" : "bg-neutral-700"}`}
           >
             <span className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform ${annual ? "translate-x-4" : ""}`} />
           </button>
@@ -163,7 +163,7 @@ export default function DatastorePricing() {
               <div
                 key={tier.id}
                 className={`rounded-xl p-7 border flex flex-col ${
-                  tier.popular ? "bg-primary/5 border-primary/40" : "bg-gray-900/30 border-gray-800/50"
+                  tier.popular ? "bg-primary/5 border-primary/40" : "bg-neutral-900/30 border-neutral-800/50"
                 }`}
               >
                 {tier.popular && (
@@ -214,45 +214,45 @@ export default function DatastorePricing() {
             <p className="text-muted-foreground text-sm mb-6">
               Billed on top of your base tier. Metered per minute; no minimums.
             </p>
-            <div className="overflow-x-auto rounded-xl border border-gray-800/50">
+            <div className="overflow-x-auto rounded-xl border border-neutral-800/50">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="border-b border-gray-800 bg-gray-900/30">
+                  <tr className="border-b border-neutral-800 bg-neutral-900/30">
                     <th className="py-3 px-5 text-muted-foreground font-medium">Resource</th>
                     <th className="py-3 px-5 text-muted-foreground font-medium text-right">Rate</th>
                     <th className="py-3 px-5 text-muted-foreground font-medium hidden md:table-cell">Notes</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b border-gray-800/50 hover:bg-gray-900/20 transition-colors">
+                  <tr className="border-b border-neutral-800/50 hover:bg-neutral-900/20 transition-colors">
                     <td className="py-4 px-5 font-medium">Storage</td>
                     <td className="py-4 px-5 text-right font-mono">
                       ${data.usage.storage.pricePerGBMonth?.toFixed(4)}<span className="text-muted-foreground text-xs ml-1">/GB/mo</span>
                     </td>
                     <td className="py-4 px-5 text-muted-foreground text-sm hidden md:table-cell">{data.usage.storage.note}</td>
                   </tr>
-                  <tr className="border-b border-gray-800/50 hover:bg-gray-900/20 transition-colors">
+                  <tr className="border-b border-neutral-800/50 hover:bg-neutral-900/20 transition-colors">
                     <td className="py-4 px-5 font-medium">Data ingestion</td>
                     <td className="py-4 px-5 text-right font-mono">
                       ${data.usage.ingestion.pricePerGB?.toFixed(2)}<span className="text-muted-foreground text-xs ml-1">/GB</span>
                     </td>
                     <td className="py-4 px-5 text-muted-foreground text-sm hidden md:table-cell">{data.usage.ingestion.note}</td>
                   </tr>
-                  <tr className="border-b border-gray-800/50 hover:bg-gray-900/20 transition-colors">
+                  <tr className="border-b border-neutral-800/50 hover:bg-neutral-900/20 transition-colors">
                     <td className="py-4 px-5 font-medium">Public egress</td>
                     <td className="py-4 px-5 text-right font-mono">
                       ${data.usage.egress.public_internet.pricePerGB?.toFixed(4)}<span className="text-muted-foreground text-xs ml-1">/GB</span>
                     </td>
                     <td className="py-4 px-5 text-muted-foreground text-sm hidden md:table-cell">{data.usage.egress.public_internet.note}</td>
                   </tr>
-                  <tr className="border-b border-gray-800/50 hover:bg-gray-900/20 transition-colors">
+                  <tr className="border-b border-neutral-800/50 hover:bg-neutral-900/20 transition-colors">
                     <td className="py-4 px-5 font-medium">Cross-region transfer</td>
                     <td className="py-4 px-5 text-right font-mono">
                       ${data.usage.egress.cross_region.pricePerGB?.toFixed(4)}<span className="text-muted-foreground text-xs ml-1">/GB</span>
                     </td>
                     <td className="py-4 px-5 text-muted-foreground text-sm hidden md:table-cell">{data.usage.egress.cross_region.note}</td>
                   </tr>
-                  <tr className="hover:bg-gray-900/20 transition-colors">
+                  <tr className="hover:bg-neutral-900/20 transition-colors">
                     <td className="py-4 px-5 font-medium">Intra-region</td>
                     <td className="py-4 px-5 text-right font-mono text-green-400">Free</td>
                     <td className="py-4 px-5 text-muted-foreground text-sm hidden md:table-cell">{data.usage.egress.intra_region.note}</td>
@@ -263,7 +263,7 @@ export default function DatastorePricing() {
           </div>
 
           {/* Included */}
-          <div className="mb-12 bg-gray-900/30 rounded-xl p-8 border border-gray-800/50">
+          <div className="mb-12 bg-neutral-900/30 rounded-xl p-8 border border-neutral-800/50">
             <h3 className="text-xl font-semibold mb-4">Included with every tier</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
               {data.included.map((item) => <div key={item}>{item}</div>)}
@@ -275,7 +275,7 @@ export default function DatastorePricing() {
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <Button
           size="lg"
-          className="bg-primary text-primary-foreground hover:bg-gray-100 px-8"
+          className="bg-primary text-primary-foreground hover:bg-neutral-100 px-8"
           onClick={() => window.open(signup, "_blank")}
         >
           Start 30-day trial

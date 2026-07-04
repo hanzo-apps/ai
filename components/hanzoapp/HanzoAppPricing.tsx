@@ -16,7 +16,7 @@ const PricingTier = ({ title, price, description, features, highlight = false, c
       className={`border rounded-xl p-8 h-full ${
         highlight
           ? "border-white bg-gradient-to-b from-white/10 to-background"
-          : "border-gray-800 bg-gray-900/20"
+          : "border-neutral-800 bg-neutral-900/20"
       }`}
     >
       <h3 className="text-2xl font-semibold mb-2">{title}</h3>
@@ -38,7 +38,7 @@ const PricingTier = ({ title, price, description, features, highlight = false, c
         className={`w-full ${
           highlight
             ? "bg-primary hover:bg-[#cccccc] text-[var(--white)]"
-            : "bg-gray-800 text-[var(--white)] hover:bg-gray-700"
+            : "bg-neutral-800 text-[var(--white)] hover:bg-neutral-700"
         }`}
       >
         {cta}

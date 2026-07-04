@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const HanzoCodeTestimonials = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 to-background">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900 to-background">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           className="text-center mb-16"
@@ -26,14 +26,14 @@ const HanzoCodeTestimonials = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {/* Just showing one testimonial for example, but you can replicate this */}
           <motion.div 
-            className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-6 hover:bg-gray-800/50 transition-colors"
+            className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-6 hover:bg-neutral-800/50 transition-colors"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-start gap-4 mb-4">
-              <div className="w-12 h-12 rounded-full bg-gray-700"></div>
+              <div className="w-12 h-12 rounded-full bg-neutral-700"></div>
               <div>
                 <div className="font-medium">Enterprise Developer</div>
                 <div className="text-muted-foreground flex items-center">

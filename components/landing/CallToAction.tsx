@@ -16,7 +16,7 @@ const CallToAction: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="max-w-5xl mx-auto bg-gray-900 border border-border rounded-2xl p-10 relative z-10"
+        className="max-w-5xl mx-auto bg-neutral-900 border border-border rounded-2xl p-10 relative z-10"
       >
         <div className="text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--white)] mb-6">
@@ -39,7 +39,7 @@ const CallToAction: React.FC = () => {
             <Button 
               size="sm"
               variant="outline"
-              className="text-[var(--white)] border-gray-700 hover:bg-[var(--white)]/10 rounded-full"
+              className="text-[var(--white)] border-neutral-700 hover:bg-[var(--white)]/10 rounded-full"
             >
               <Github className="mr-2 h-4 w-4" />
               Star on GitHub

@@ -35,7 +35,7 @@ const CallToAction: React.FC = () => {
           
           <Button 
             size="lg"
-            className="bg-[var(--white)] hover:bg-gray-100 text-primary-foreground px-10 py-7 rounded-lg text-xl font-medium shadow-lg hover:shadow-xl transition-all"
+            className="bg-[var(--white)] hover:bg-neutral-100 text-primary-foreground px-10 py-7 rounded-lg text-xl font-medium shadow-lg hover:shadow-xl transition-all"
             onClick={() => router.push('/signup')}
           >
             Start Building for Free <ArrowRight className="ml-2 h-5 w-5" />

@@ -6,7 +6,7 @@ import BillingTabsLink from '../BillingTabsLink';
 
 const RecentInvoices = () => {
   return (
-    <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+    <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-xl font-medium">Recent Invoices</h3>
         <BillingTabsLink tabId="history">
@@ -17,7 +17,7 @@ const RecentInvoices = () => {
       </div>
       
       <div className="space-y-4">
-        <div className="flex items-center justify-between p-4 bg-gray-800/30 rounded-lg">
+        <div className="flex items-center justify-between p-4 bg-neutral-800/30 rounded-lg">
           <div className="flex items-center">
             <Clock className="h-5 w-5 text-muted-foreground mr-3" />
             <div>
@@ -31,7 +31,7 @@ const RecentInvoices = () => {
           </Button>
         </div>
         
-        <div className="flex items-center justify-between p-4 bg-gray-800/30 rounded-lg">
+        <div className="flex items-center justify-between p-4 bg-neutral-800/30 rounded-lg">
           <div className="flex items-center">
             <Clock className="h-5 w-5 text-muted-foreground mr-3" />
             <div>

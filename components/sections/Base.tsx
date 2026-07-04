@@ -7,7 +7,7 @@ import { Button } from "@hanzo/ui";
 
 const Base = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-gray-900">
+    <section className="py-20 bg-gradient-to-b from-background to-neutral-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-transparent">
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
@@ -30,7 +30,7 @@ const Base = () => {
             initial={{ opacity: 0, y: 20 }} 
             whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }} 
-            className="bg-gradient-to-br from-gray-900/20 to-transparent p-8 rounded-xl ring-1 ring-border"
+            className="bg-gradient-to-br from-neutral-900/20 to-transparent p-8 rounded-xl ring-1 ring-border"
           >
             <h3 className="text-2xl font-semibold text-[var(--white)] mb-6">One-Line Backend</h3>
             <div className="bg-[var(--black)]/50 p-6 rounded-lg mb-6">
@@ -50,22 +50,22 @@ const client = createClient();`}</code>
             viewport={{ once: true }} 
             className="grid grid-cols-2 gap-4"
           >
-            <div className="p-6 bg-gradient-to-br from-gray-900/20 to-transparent rounded-xl ring-1 ring-border">
+            <div className="p-6 bg-gradient-to-br from-neutral-900/20 to-transparent rounded-xl ring-1 ring-border">
               <Lock className="h-8 w-8 text-muted-foreground mb-4" />
               <h4 className="text-lg font-semibold text-[var(--white)] mb-2">Authentication</h4>
               <p className="text-foreground/80">Multi-provider auth with social logins and enterprise SSO</p>
             </div>
-            <div className="p-6 bg-gradient-to-br from-gray-900/20 to-transparent rounded-xl ring-1 ring-border">
+            <div className="p-6 bg-gradient-to-br from-neutral-900/20 to-transparent rounded-xl ring-1 ring-border">
               <Database className="h-8 w-8 text-muted-foreground mb-4" />
               <h4 className="text-lg font-semibold text-[var(--white)] mb-2">Database</h4>
               <p className="text-foreground/80">Real-time database with powerful querying and indexing</p>
             </div>
-            <div className="p-6 bg-gradient-to-br from-gray-900/20 to-transparent rounded-xl ring-1 ring-border">
+            <div className="p-6 bg-gradient-to-br from-neutral-900/20 to-transparent rounded-xl ring-1 ring-border">
               <Cloud className="h-8 w-8 text-muted-foreground mb-4" />
               <h4 className="text-lg font-semibold text-[var(--white)] mb-2">Storage</h4>
               <p className="text-foreground/80">Secure file storage with CDN and image transformations</p>
             </div>
-            <div className="p-6 bg-gradient-to-br from-gray-900/20 to-transparent rounded-xl ring-1 ring-border">
+            <div className="p-6 bg-gradient-to-br from-neutral-900/20 to-transparent rounded-xl ring-1 ring-border">
               <Settings className="h-8 w-8 text-muted-foreground mb-4" />
               <h4 className="text-lg font-semibold text-[var(--white)] mb-2">Functions</h4>
               <p className="text-foreground/80">Serverless functions with automatic scaling</p>
@@ -77,7 +77,7 @@ const client = createClient();`}</code>
           initial={{ opacity: 0, y: 20 }} 
           whileInView={{ opacity: 1, y: 0 }} 
           viewport={{ once: true }} 
-          className="bg-gradient-to-r from-gray-900/20 via-background to-gray-900/20 rounded-xl p-8 mb-16"
+          className="bg-gradient-to-r from-neutral-900/20 via-background to-neutral-900/20 rounded-xl p-8 mb-16"
         >
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
@@ -118,7 +118,7 @@ const client = createClient();`}</code>
         </motion.div>
 
         <div className="text-center">
-          <Button className="bg-gray-600 hover:bg-gray-700 text-[var(--white)] px-8 py-6 text-lg rounded-xl">
+          <Button className="bg-neutral-600 hover:bg-neutral-700 text-[var(--white)] px-8 py-6 text-lg rounded-xl">
             Start Building with Base
           </Button>
         </div>

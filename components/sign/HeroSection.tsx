@@ -7,7 +7,7 @@ import { PenLine, ExternalLink } from "lucide-react";
 const HeroSection = () => {
   return (
     <section className="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-gray-900/50 to-background" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-background via-neutral-900/50 to-background" />
       <div className="absolute top-0 left-0 right-0 h-96 bg-gradient-to-br from-white/20 via-white/15 to-transparent z-0" />
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,7 +39,7 @@ const HeroSection = () => {
             <Button
               variant="outline"
               size="lg"
-              className="border-gray-600 text-[var(--white)] hover:bg-[var(--white)]/10"
+              className="border-neutral-600 text-[var(--white)] hover:bg-[var(--white)]/10"
               onClick={() => window.open('https://docs.hanzo.ai/docs/services/sign', '_blank')}
             >
               Documentation

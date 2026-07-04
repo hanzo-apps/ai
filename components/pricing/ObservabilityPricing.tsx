@@ -100,7 +100,7 @@ export default function ObservabilityPricing() {
             className={`rounded-xl p-6 border flex flex-col ${
               tier.highlighted
                 ? "border-white bg-primary/5"
-                : "border-gray-800 bg-gray-900/30"
+                : "border-neutral-800 bg-neutral-900/30"
             }`}
           >
             {tier.highlighted && (
@@ -129,7 +129,7 @@ export default function ObservabilityPricing() {
               className={`w-full ${
                 tier.highlighted
                   ? "bg-primary hover:bg-[#cccccc] text-primary-foreground"
-                  : "bg-primary text-primary-foreground hover:bg-gray-100"
+                  : "bg-primary text-primary-foreground hover:bg-neutral-100"
               }`}
               onClick={() => {
                 if (tier.price === "Custom") {
@@ -146,7 +146,7 @@ export default function ObservabilityPricing() {
       </div>
 
       {/* Overage */}
-      <div className="bg-gray-900/30 rounded-xl p-6 border border-gray-800/50 inline-block mb-8">
+      <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50 inline-block mb-8">
         <h3 className="text-lg font-semibold mb-2">Overage pricing</h3>
         <div className="text-2xl font-bold mb-1">
           {overage.rate}<span className="text-base font-normal text-muted-foreground">{overage.unit}</span>
@@ -155,7 +155,7 @@ export default function ObservabilityPricing() {
       </div>
 
       {/* Included */}
-      <div className="bg-gray-900/30 rounded-xl p-8 border border-gray-800/50">
+      <div className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800/50">
         <h3 className="text-xl font-semibold mb-4">Included with every plan</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
           <div>OpenTelemetry native</div>

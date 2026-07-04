@@ -47,8 +47,8 @@ const DXPlatformSection: React.FC<DXPlatformSectionProps> = ({ products }) => {
             ))}
           </CarouselContent>
           <div className="hidden md:flex items-center justify-end gap-2 mt-6">
-            <CarouselPrevious className="relative -top-0 -left-0 bg-gray-800/50 hover:bg-gray-700/70 border-gray-700" />
-            <CarouselNext className="relative -top-0 -right-0 bg-gray-800/50 hover:bg-gray-700/70 border-gray-700" />
+            <CarouselPrevious className="relative -top-0 -left-0 bg-neutral-800/50 hover:bg-neutral-700/70 border-neutral-700" />
+            <CarouselNext className="relative -top-0 -right-0 bg-neutral-800/50 hover:bg-neutral-700/70 border-neutral-700" />
           </div>
         </Carousel>
       </div>

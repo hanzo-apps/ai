@@ -34,7 +34,7 @@ const OpenSource = () => {
   const [isInView, setIsInView] = useState(false);
   
   return (
-    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900/20 relative">
+    <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20 relative">
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:30px_30px]"></div>
       
       <div className="max-w-6xl mx-auto relative z-10">
@@ -113,9 +113,9 @@ const OpenSource = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gradient-to-br from-gray-900 to-background rounded-xl overflow-hidden border border-gray-800 shadow-xl"
+            className="bg-gradient-to-br from-neutral-900 to-background rounded-xl overflow-hidden border border-neutral-800 shadow-xl"
           >
-            <div className="flex items-center p-4 bg-gray-900 border-b border-gray-800">
+            <div className="flex items-center p-4 bg-neutral-900 border-b border-neutral-800">
               <div className="flex space-x-2 mr-4">
                 <div className="w-3 h-3 rounded-full bg-primary/10"></div>
                 <div className="w-3 h-3 rounded-full bg-primary/10"></div>

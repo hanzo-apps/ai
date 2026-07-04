@@ -7,7 +7,7 @@ import { Globe, Zap, Shield } from "lucide-react";
 
 const Infrastructure = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-900/30 overflow-hidden">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-neutral-900/30 overflow-hidden">
       <div className="max-w-7xl mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,7 +28,7 @@ const Infrastructure = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-6 text-center"
+            className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-6 text-center"
           >
             <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary/20 text-foreground mb-5 mx-auto">
               <Globe className="h-6 w-6" />
@@ -44,7 +44,7 @@ const Infrastructure = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-6 text-center"
+            className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-6 text-center"
           >
             <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary/20 text-foreground mb-5 mx-auto">
               <Zap className="h-6 w-6" />
@@ -60,7 +60,7 @@ const Infrastructure = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-6 text-center"
+            className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-6 text-center"
           >
             <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary/20 text-foreground mb-5 mx-auto">
               <Shield className="h-6 w-6" />

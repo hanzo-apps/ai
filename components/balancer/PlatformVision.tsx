@@ -25,7 +25,7 @@ const PlatformVision = () => {
   ];
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900/30">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/30">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,7 +49,7 @@ const PlatformVision = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-800/30 p-8 rounded-lg"
+              className="bg-neutral-800/30 p-8 rounded-lg"
             >
               <div className="mb-4">{point.icon}</div>
               <h3 className="text-xl font-semibold mb-3">{point.title}</h3>

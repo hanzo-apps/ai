@@ -41,7 +41,7 @@ const OrganizationProfile = () => {
       <div className="space-y-8">
         {/* Organization Header */}
         <div className="flex flex-col md:flex-row gap-8 items-start">
-          <div className="h-32 w-32 bg-gray-900/30 rounded-xl flex items-center justify-center">
+          <div className="h-32 w-32 bg-neutral-900/30 rounded-xl flex items-center justify-center">
             <Building className="h-16 w-16 text-muted-foreground" />
           </div>
           
@@ -74,7 +74,7 @@ const OrganizationProfile = () => {
               <Button 
                 onClick={() => router.push('/account/organization')} 
                 variant="outline" 
-                className="flex items-center bg-[var(--black)] hover:bg-gray-900/30 border-gray-800/30"
+                className="flex items-center bg-[var(--black)] hover:bg-neutral-900/30 border-neutral-800/30"
               >
                 <Edit className="h-4 w-4 mr-2" />
                 Edit Organization
@@ -120,7 +120,7 @@ const OrganizationProfile = () => {
             <Button 
               onClick={() => router.push('/account/organization')} 
               size="sm"
-              className="bg-gray-900 hover:bg-gray-800 border-0"
+              className="bg-neutral-900 hover:bg-neutral-800 border-0"
             >
               View All
             </Button>
@@ -128,8 +128,8 @@ const OrganizationProfile = () => {
           
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {teamMembers.slice(0, 3).map(member => (
-              <div key={member.id} className="flex items-center p-3 bg-gray-900/20 rounded-lg">
-                <div className="h-10 w-10 bg-gray-900/50 rounded-full mr-3 flex items-center justify-center text-sm font-medium">
+              <div key={member.id} className="flex items-center p-3 bg-neutral-900/20 rounded-lg">
+                <div className="h-10 w-10 bg-neutral-900/50 rounded-full mr-3 flex items-center justify-center text-sm font-medium">
                   {member.name.charAt(0)}
                 </div>
                 <div>

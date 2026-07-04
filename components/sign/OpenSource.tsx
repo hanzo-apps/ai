@@ -9,7 +9,7 @@ const OpenSource = () => {
     <section className="py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-8">
+          <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-8">
             <div className="flex items-center gap-3 mb-4">
               <Heart className="h-6 w-6 text-[#fd4444]" />
               <h3 className="text-xl font-semibold">Built on Open Source</h3>
@@ -25,7 +25,7 @@ const OpenSource = () => {
             <div className="flex flex-wrap gap-3">
               <Button
                 variant="outline"
-                className="border-gray-700 text-foreground/80 hover:bg-gray-800"
+                className="border-neutral-700 text-foreground/80 hover:bg-neutral-800"
                 onClick={() => window.open('https://github.com/hanzoai/sign', '_blank')}
               >
                 <Github className="mr-2 h-4 w-4" />
@@ -33,7 +33,7 @@ const OpenSource = () => {
               </Button>
               <Button
                 variant="outline"
-                className="border-gray-700 text-foreground/80 hover:bg-gray-800"
+                className="border-neutral-700 text-foreground/80 hover:bg-neutral-800"
                 onClick={() => window.open('https://github.com/documenso/documenso', '_blank')}
               >
                 <ExternalLink className="mr-2 h-4 w-4" />

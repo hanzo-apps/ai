@@ -53,7 +53,7 @@ const getInitials = (name: string) => name.split(" ").map((part) => part[0]).sli
 
 const DeveloperLove = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 to-background">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900 to-background">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -83,7 +83,7 @@ const DeveloperLove = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
-              className="bg-gray-900/50 rounded-xl p-4 border border-gray-800"
+              className="bg-neutral-900/50 rounded-xl p-4 border border-neutral-800"
             >
               <div className="flex items-center mb-3">
                 <div className="h-10 w-10 rounded-full mr-3 bg-primary/20 border border-white/30 text-[var(--white)] flex items-center justify-center text-sm font-semibold">

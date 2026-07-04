@@ -72,9 +72,9 @@ const InvoicesList = () => {
   return (
     <motion.div 
       variants={cardAnimation}
-      className="rounded-xl border border-gray-800 bg-[var(--black)]/60 overflow-hidden"
+      className="rounded-xl border border-neutral-800 bg-[var(--black)]/60 overflow-hidden"
     >
-      <div className="p-6 border-b border-gray-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div className="p-6 border-b border-neutral-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center gap-3">
           <Calendar className="h-5 w-5 text-muted-foreground" />
           <div className="space-y-1">
@@ -84,12 +84,12 @@ const InvoicesList = () => {
         </div>
         
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="border-gray-700 bg-[var(--black)] hover:bg-gray-900">
+          <Button variant="outline" size="sm" className="border-neutral-700 bg-[var(--black)] hover:bg-neutral-900">
             <Filter className="h-4 w-4 mr-2" />
             Filter
           </Button>
           
-          <Button className="bg-[var(--white)] hover:bg-gray-200 text-primary-foreground">
+          <Button className="bg-[var(--white)] hover:bg-neutral-200 text-primary-foreground">
             <Download className="h-4 w-4 mr-2" />
             Export All
           </Button>
@@ -100,7 +100,7 @@ const InvoicesList = () => {
         <div className="overflow-x-auto">
           <Table>
             <TableHeader className="bg-[var(--black)]">
-              <TableRow className="border-b border-gray-800 hover:bg-transparent">
+              <TableRow className="border-b border-neutral-800 hover:bg-transparent">
                 <TableHead className="text-muted-foreground font-medium py-3 px-6">Invoice</TableHead>
                 <TableHead className="text-muted-foreground font-medium py-3 px-6">Date</TableHead>
                 <TableHead className="text-muted-foreground font-medium py-3 px-6">Due Date</TableHead>
@@ -111,7 +111,7 @@ const InvoicesList = () => {
             </TableHeader>
             <TableBody>
               {filteredInvoices.map((invoice) => (
-                <TableRow key={invoice.id} className="border-t border-gray-800 hover:bg-gray-900/30">
+                <TableRow key={invoice.id} className="border-t border-neutral-800 hover:bg-neutral-900/30">
                   <TableCell className="py-4 px-6">{invoice.id}</TableCell>
                   <TableCell className="py-4 px-6">{invoice.date}</TableCell>
                   <TableCell className="py-4 px-6">{invoice.dueDate}</TableCell>
@@ -125,7 +125,7 @@ const InvoicesList = () => {
                     <Button 
                       variant="ghost" 
                       size="sm"
-                      className="text-muted-foreground hover:text-[var(--white)] hover:bg-gray-800"
+                      className="text-muted-foreground hover:text-[var(--white)] hover:bg-neutral-800"
                     >
                       <Download className="h-4 w-4 mr-2" />
                       Download

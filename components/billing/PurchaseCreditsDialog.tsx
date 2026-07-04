@@ -57,7 +57,7 @@ const PurchaseCreditsDialog = ({ open, onOpenChange }: PurchaseCreditsDialogProp
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] bg-[var(--black)] border-gray-800">
+      <DialogContent className="sm:max-w-[425px] bg-[var(--black)] border-neutral-800">
         <DialogHeader>
           <DialogTitle className="text-xl">Purchase Credits</DialogTitle>
           <DialogDescription>
@@ -78,7 +78,7 @@ const PurchaseCreditsDialog = ({ open, onOpenChange }: PurchaseCreditsDialogProp
                   className={`${
                     selectedAmount === amount
                       ? "bg-primary hover:bg-[#cccccc] text-[var(--white)]"
-                      : "border-gray-700 text-[var(--white)]"
+                      : "border-neutral-700 text-[var(--white)]"
                   }`}
                 >
                   ${amount}
@@ -101,12 +101,12 @@ const PurchaseCreditsDialog = ({ open, onOpenChange }: PurchaseCreditsDialogProp
                 step="1"
                 value={customAmount}
                 onChange={handleCustomAmountChange}
-                className="pl-8 bg-gray-900 border-gray-700 text-[var(--white)]"
+                className="pl-8 bg-neutral-900 border-neutral-700 text-[var(--white)]"
               />
             </div>
           </div>
 
-          <div className="bg-gray-900/50 p-4 rounded-lg border border-gray-800">
+          <div className="bg-neutral-900/50 p-4 rounded-lg border border-neutral-800">
             <div className="flex justify-between text-sm mb-1">
               <span className="text-muted-foreground">Amount:</span>
               <span>${getEffectiveAmount().toFixed(2)}</span>
@@ -123,14 +123,14 @@ const PurchaseCreditsDialog = ({ open, onOpenChange }: PurchaseCreditsDialogProp
             type="button"
             variant="ghost"
             onClick={() => onOpenChange(false)}
-            className="text-muted-foreground hover:text-[var(--white)] hover:bg-gray-800"
+            className="text-muted-foreground hover:text-[var(--white)] hover:bg-neutral-800"
             disabled={isProcessing}
           >
             Cancel
           </Button>
           <Button
             type="button"
-            className="bg-[var(--white)] hover:bg-gray-200 text-primary-foreground"
+            className="bg-[var(--white)] hover:bg-neutral-200 text-primary-foreground"
             onClick={handlePurchase}
             disabled={isProcessing || getEffectiveAmount() <= 0}
           >

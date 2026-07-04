@@ -76,9 +76,9 @@ const FeaturesSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-900/50 p-6 rounded-lg border border-gray-800 hover:border-white/30 transition-colors"
+              className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800 hover:border-white/30 transition-colors"
             >
-              <div className="bg-gray-800/50 rounded-lg w-12 h-12 flex items-center justify-center mb-4">
+              <div className="bg-neutral-800/50 rounded-lg w-12 h-12 flex items-center justify-center mb-4">
                 {feature.icon}
               </div>
               <h3 className="text-lg font-semibold mb-2 text-foreground">{feature.title}</h3>

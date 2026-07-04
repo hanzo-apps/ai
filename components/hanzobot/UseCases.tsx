@@ -30,7 +30,7 @@ const UseCases = () => {
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-950">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -53,7 +53,7 @@ const UseCases = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gradient-to-br from-gray-900/50 to-gray-900/30 border border-gray-800 rounded-xl p-6 hover:border-white/30 transition-colors"
+              className="bg-gradient-to-br from-neutral-900/50 to-neutral-900/30 border border-neutral-800 rounded-xl p-6 hover:border-white/30 transition-colors"
             >
               <div className="bg-primary/10 p-3 rounded-lg inline-block mb-4">
                 <useCase.icon className="h-6 w-6 text-foreground" />

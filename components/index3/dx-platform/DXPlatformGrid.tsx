@@ -25,7 +25,7 @@ const DXPlatformGrid: React.FC<DXPlatformGridProps> = ({ isHovered, setIsHovered
         transition={{ duration: 0.5 }}
         className="mb-12"
       >
-        <div className="relative h-80 w-full bg-gray-900/30 rounded-xl overflow-hidden border border-gray-800">
+        <div className="relative h-80 w-full bg-neutral-900/30 rounded-xl overflow-hidden border border-neutral-800">
           <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10"></div>
           
           {/* Background grid pattern with enhanced visibility */}
@@ -109,7 +109,7 @@ const DXPlatformGrid: React.FC<DXPlatformGridProps> = ({ isHovered, setIsHovered
           onMouseEnter={() => setIsHovered("more")}
           onMouseLeave={() => setIsHovered(null)}
         >
-          <Link href="/platform" className="bg-gray-900/20 border border-gray-800 rounded-xl p-6 group hover:bg-gray-900/30 transition-colors h-full flex flex-col">
+          <Link href="/platform" className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6 group hover:bg-neutral-900/30 transition-colors h-full flex flex-col">
             <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 transition-colors duration-300 bg-primary/20 group-hover:bg-[#cccccc]/30">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-foreground group-hover:text-foreground/70 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />

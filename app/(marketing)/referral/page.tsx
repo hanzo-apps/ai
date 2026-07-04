@@ -94,9 +94,9 @@ const ReferralProgram = () => {
         {loading ? (
           <div className="space-y-6">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-gray-900/30 border border-gray-800 rounded-lg p-6 animate-pulse">
-                <div className="h-4 bg-gray-800 rounded w-1/3 mb-4" />
-                <div className="h-8 bg-gray-800 rounded w-full" />
+              <div key={i} className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6 animate-pulse">
+                <div className="h-4 bg-neutral-800 rounded w-1/3 mb-4" />
+                <div className="h-8 bg-neutral-800 rounded w-full" />
               </div>
             ))}
           </div>

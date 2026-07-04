@@ -356,7 +356,7 @@ const Features = () => {
                   <span className="text-[var(--white)] font-bold">AI</span>
                   <span> to drive growth, efficiency, and innovation.</span>
                 </motion.div>
-                <Button variant="outline" className="mt-6 bg-[var(--white)] text-primary-foreground border-white hover:bg-gray-100 hover:text-primary-foreground">
+                <Button variant="outline" className="mt-6 bg-[var(--white)] text-primary-foreground border-white hover:bg-neutral-100 hover:text-primary-foreground">
                   Our Testimonial
                 </Button>
               </div>

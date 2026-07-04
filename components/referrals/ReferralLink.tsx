@@ -53,14 +53,14 @@ const ReferralLink = ({ referralLink, referralCode }: ReferralLinkProps) => {
   }
 
   return (
-    <div className="bg-gray-900/30 border border-gray-800 rounded-lg p-6">
+    <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
       <h2 className="text-xl font-medium mb-4">Your Referral Link</h2>
       <div className="flex flex-col md:flex-row gap-4">
         <div className="relative flex-1">
           <Input
             value={referralLink}
             readOnly
-            className="pr-12 bg-gray-900 border-gray-700"
+            className="pr-12 bg-neutral-900 border-neutral-700"
           />
           <Button
             variant="ghost"
@@ -77,7 +77,7 @@ const ReferralLink = ({ referralLink, referralCode }: ReferralLinkProps) => {
         </Button>
       </div>
 
-      <div className="mt-6 pt-6 border-t border-gray-800">
+      <div className="mt-6 pt-6 border-t border-neutral-800">
         <h3 className="text-lg font-medium mb-4">Send Invites via Email</h3>
         <form onSubmit={handleSendInvites} className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
@@ -89,7 +89,7 @@ const ReferralLink = ({ referralLink, referralCode }: ReferralLinkProps) => {
               placeholder="Enter email addresses, separated by commas"
               value={emailInput}
               onChange={(e) => setEmailInput(e.target.value)}
-              className="bg-gray-900 border-gray-700"
+              className="bg-neutral-900 border-neutral-700"
               disabled={sending}
             />
           </div>

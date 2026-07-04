@@ -34,7 +34,7 @@ const ProjectCostSection = ({ costs, currentCost }: ProjectCostSectionProps) => 
           </div>
         ))}
         
-        <div className="pt-4 border-t border-gray-800 flex justify-between">
+        <div className="pt-4 border-t border-neutral-800 flex justify-between">
           <div className="text-sm">Metrics are shown as minutely accumulated values</div>
           <div className="font-bold">{currentCost}</div>
         </div>

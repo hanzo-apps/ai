@@ -84,7 +84,7 @@ const UseCases = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-900/20 border border-gray-800 rounded-xl p-8 hover:bg-gray-900/40 transition-colors group"
+              className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/40 transition-colors group"
             >
               <div className={`h-14 w-14 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300 ${useCase.color} group-hover:bg-opacity-30`}>
                 <useCase.icon className={`h-7 w-7 ${useCase.textColor}`} />
@@ -101,7 +101,7 @@ const UseCases = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 bg-gray-900/30 border border-gray-800 rounded-xl overflow-hidden"
+          className="mt-16 bg-neutral-900/30 border border-neutral-800 rounded-xl overflow-hidden"
         >
           <div className="flex flex-col lg:flex-row">
             <div className="lg:w-1/2 p-8 flex flex-col justify-center">
@@ -109,7 +109,7 @@ const UseCases = () => {
               <p className="text-muted-foreground mb-6">
                 Build powerful AI applications with just a few lines of code using our intuitive SDK
               </p>
-              <div className="bg-gray-950 rounded-lg p-4 font-mono text-sm text-foreground/80 overflow-x-auto">
+              <div className="bg-neutral-950 rounded-lg p-4 font-mono text-sm text-foreground/80 overflow-x-auto">
                 <pre>
 {`import { Hanzo } from '@hanzo/ai';
 
@@ -132,13 +132,13 @@ console.log(response);`}
                 </pre>
               </div>
             </div>
-            <div className="lg:w-1/2 bg-gray-950 p-8 flex flex-col">
+            <div className="lg:w-1/2 bg-neutral-950 p-8 flex flex-col">
               <h4 className="text-lg font-semibold text-[var(--white)] mb-4 flex items-center">
                 <BookOpen className="h-4 w-4 mr-2 text-foreground" />
                 Documentation Example
               </h4>
               <div className="flex flex-col h-full space-y-4 overflow-y-auto">
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-neutral-900 rounded-lg p-4">
                   <div className="flex items-center mb-2">
                     <Database className="h-4 w-4 text-foreground mr-2" />
                     <h5 className="text-foreground font-medium">Vector Search</h5>
@@ -161,7 +161,7 @@ const results = await vectorStore.search(
                   </pre>
                 </div>
 
-                <div className="bg-gray-900 rounded-lg p-4">
+                <div className="bg-neutral-900 rounded-lg p-4">
                   <div className="flex items-center mb-2">
                     <Bot className="h-4 w-4 text-foreground/70 mr-2" />
                     <h5 className="text-foreground/70 font-medium">AI Agents</h5>

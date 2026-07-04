@@ -109,7 +109,7 @@ const Testimonials = () => {
           }} transition={{
             duration: 0.5,
             delay: index * 0.1
-          }} className="bg-gray-900/50 backdrop-blur-sm rounded-xl overflow-hidden">
+          }} className="bg-neutral-900/50 backdrop-blur-sm rounded-xl overflow-hidden">
                 <div className="aspect-video w-full">
                   <iframe src={study.videoUrl} className="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                 </div>
@@ -143,7 +143,7 @@ const Testimonials = () => {
         }} transition={{
           duration: 0.5,
           delay: index * 0.1
-        }} className="p-6 bg-gray-900/50 backdrop-blur-sm rounded-xl ring-1 ring-border">
+        }} className="p-6 bg-neutral-900/50 backdrop-blur-sm rounded-xl ring-1 ring-border">
               <p className="text-foreground/80 italic">{testimonial.quote}</p>
               <div className="mt-4">
                 <p className="text-[var(--white)] font-semibold">{testimonial.author}</p>

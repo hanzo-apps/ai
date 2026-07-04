@@ -36,7 +36,7 @@ const AIFeatureCard = ({
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="bg-gray-900/20 border border-gray-800 rounded-lg p-6"
+      className="bg-neutral-900/20 border border-neutral-800 rounded-lg p-6"
     >
       <div className="flex items-center mb-6">
         <div className="flex-shrink-0">

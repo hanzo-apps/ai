@@ -36,7 +36,7 @@ const HeroButtons: React.FC<HeroButtonsProps> = ({ titleAnimationComplete }) => 
       <Button 
         size="sm" 
         radius="full"
-        className="bg-primary text-primary-foreground border border-gray-300 hover:bg-gray-100 hover:text-primary-foreground hover:border-gray-400 transition-all duration-300 h-10 min-w-[140px]"
+        className="bg-primary text-primary-foreground border border-neutral-300 hover:bg-neutral-100 hover:text-primary-foreground hover:border-neutral-400 transition-all duration-300 h-10 min-w-[140px]"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >

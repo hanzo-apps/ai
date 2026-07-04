@@ -170,13 +170,13 @@ const ChatExample = () => {
   };
 
   return (
-    <div className="bg-gray-900 rounded-lg border border-gray-800 p-4 w-full max-w-xl mx-auto">
-      <div className="mb-4 h-64 overflow-y-auto bg-gray-950 rounded p-3 border border-gray-800">
+    <div className="bg-neutral-900 rounded-lg border border-neutral-800 p-4 w-full max-w-xl mx-auto">
+      <div className="mb-4 h-64 overflow-y-auto bg-neutral-950 rounded p-3 border border-neutral-800">
         {chatHistory.map((msg, index) => (
           <div 
             key={index} 
             className={`mb-3 p-2 rounded ${
-              msg.role === "user" ? "bg-primary/10 ml-12" : "bg-gray-800/50"
+              msg.role === "user" ? "bg-primary/10 ml-12" : "bg-neutral-800/50"
             }`}
           >
             <div className="text-xs text-muted-foreground mb-1">
@@ -199,7 +199,7 @@ const ChatExample = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Ask Hanzo AI something..."
-          className="flex-1 bg-gray-800 text-[var(--white)] border border-gray-700 rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white/30"
+          className="flex-1 bg-neutral-800 text-[var(--white)] border border-neutral-700 rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-white/30"
         />
         <Button type="submit" disabled={isLoading} className="bg-primary/10 hover:bg-primary/10">
           Send
@@ -256,7 +256,7 @@ const Products = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-900/60 rounded-xl border border-gray-800 p-6 hover:border-border transition-colors"
+              className="bg-neutral-900/60 rounded-xl border border-neutral-800 p-6 hover:border-border transition-colors"
             >
               <div className="flex items-center mb-4">
                 <div className="h-12 w-12 bg-primary/10 rounded-lg flex items-center justify-center mr-4">
@@ -265,7 +265,7 @@ const Products = () => {
                 <h3 className="text-xl font-semibold text-[var(--white)]">{product.title}</h3>
               </div>
               <p className="text-foreground/80 mb-4">{product.description}</p>
-              <div className="bg-gray-950 rounded-md p-3 font-mono text-sm text-muted-foreground mb-4 overflow-x-auto">
+              <div className="bg-neutral-950 rounded-md p-3 font-mono text-sm text-muted-foreground mb-4 overflow-x-auto">
                 {product.code}
               </div>
               <ul className="space-y-2 mb-6">
@@ -287,7 +287,7 @@ const Products = () => {
                   </a>
                 </Button>
                 <Button 
-                  className="flex-1 bg-gray-800 hover:bg-gray-700"
+                  className="flex-1 bg-neutral-800 hover:bg-neutral-700"
                   size="sm"
                 >
                   <a href={product.github || "#"} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-full">
@@ -333,7 +333,7 @@ const Products = () => {
               >
                 <a href="https://console.hanzo.ai" target="_blank" rel="noopener noreferrer">
                   <Button
-                    className="w-full sm:w-auto bg-[var(--white)] text-primary-foreground border border-gray-300 hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all duration-300"
+                    className="w-full sm:w-auto bg-[var(--white)] text-primary-foreground border border-neutral-300 hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all duration-300"
                   >
                     Get Started Free
                   </Button>

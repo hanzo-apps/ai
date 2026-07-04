@@ -18,7 +18,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="bg-gray-900/30 border border-gray-800 rounded-xl p-6"
+      className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6"
     >
       <Icon className="h-10 w-10 text-foreground mb-4" />
       <h3 className="text-xl font-bold mb-2">{title}</h3>
@@ -101,7 +101,7 @@ const HanzoCodeAgents: React.FC = () => {
               </div>
             </div>
             
-            <div className="bg-[var(--black)]/40 rounded-xl p-6 border border-gray-800">
+            <div className="bg-[var(--black)]/40 rounded-xl p-6 border border-neutral-800">
               <div className="text-sm font-mono text-foreground/80 space-y-2">
                 <div className="text-foreground">// Creating a team of agents to refactor an entire codebase</div>
                 <div className="text-[var(--white)]">const project = await HanzoCode.createProject('./my-app');</div>

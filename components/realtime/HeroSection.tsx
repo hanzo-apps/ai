@@ -62,7 +62,7 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="border-gray-700 text-[var(--white)] hover:bg-gray-800"
+                className="border-neutral-700 text-[var(--white)] hover:bg-neutral-800"
               >
                 View Documentation
               </Button>
@@ -74,7 +74,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.9 }} 
               animate={{ opacity: 1, scale: 1 }} 
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-[var(--black)]/60 border border-gray-800 p-6 rounded-xl"
+              className="bg-[var(--black)]/60 border border-neutral-800 p-6 rounded-xl"
             >
               <div className="flex justify-between items-center mb-4">
                 <div className="flex items-center">
@@ -97,7 +97,7 @@ const HeroSection = () => {
                   {[1, 2, 3].map((i) => (
                     <div 
                       key={i}
-                      className="h-24 rounded-lg border border-gray-800 p-4 flex flex-col justify-center items-center bg-gradient-to-br from-gray-900 to-gray-950"
+                      className="h-24 rounded-lg border border-neutral-800 p-4 flex flex-col justify-center items-center bg-gradient-to-br from-neutral-900 to-neutral-950"
                     >
                       <div className="h-2 w-2 rounded-full bg-primary mb-2 animate-pulse" />
                       <span className="text-xs text-muted-foreground text-center">Client {i}</span>
@@ -106,7 +106,7 @@ const HeroSection = () => {
                   ))}
                 </div>
                 
-                <div className="h-36 bg-gray-900 rounded-lg border border-gray-800 p-3 overflow-hidden font-mono text-xs">
+                <div className="h-36 bg-neutral-900 rounded-lg border border-neutral-800 p-3 overflow-hidden font-mono text-xs">
                   <div className="text-foreground/70">// Subscribe to real-time updates</div>
                   <div className="text-foreground/80">const channel = await hanzo.realtime.subscribe(</div>
                   <div className="text-foreground/80 pl-4">'room-updates',</div>

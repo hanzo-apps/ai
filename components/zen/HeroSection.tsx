@@ -29,7 +29,7 @@ const HeroSection = () => {
           </p>
           
           <motion.div 
-            className="w-20 h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent mx-auto"
+            className="w-20 h-px bg-gradient-to-r from-transparent via-neutral-600 to-transparent mx-auto"
             initial={{ width: 0 }}
             animate={{ width: 80 }}
             transition={{ delay: 0.5, duration: 0.8 }}

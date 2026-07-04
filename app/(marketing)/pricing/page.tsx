@@ -66,7 +66,7 @@ export default function PricingPage() {
         {/* Tab Navigation */}
         <div className="max-w-3xl mx-auto mb-12">
           <div className="flex justify-center">
-            <div className="bg-gray-900/50 rounded-full p-1 border border-gray-800">
+            <div className="bg-neutral-900/50 rounded-full p-1 border border-neutral-800">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}

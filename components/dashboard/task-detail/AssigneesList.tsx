@@ -29,7 +29,7 @@ const AssigneesList: React.FC<AssigneesListProps> = ({ assignees = [], onRemove 
         {assignees.map(assignee => (
           <div 
             key={assignee.id}
-            className="flex items-center gap-2 bg-gray-800 px-2 py-1 rounded text-sm"
+            className="flex items-center gap-2 bg-neutral-800 px-2 py-1 rounded text-sm"
           >
             <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-xs">
               {assignee.name.charAt(0)}

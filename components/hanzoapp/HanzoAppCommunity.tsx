@@ -13,10 +13,10 @@ const TweetCard = ({ username, handle, content, date, replies }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="bg-gray-900/30 border border-gray-800 rounded-xl p-6 hover:border-gray-700 transition-colors"
+      className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6 hover:border-neutral-700 transition-colors"
     >
       <div className="flex items-center mb-4">
-        <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-[var(--white)] text-xl font-bold">
+        <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center text-[var(--white)] text-xl font-bold">
           {username[0]}
         </div>
         <div className="ml-3">
@@ -82,7 +82,7 @@ const HanzoAppCommunity = () => {
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-950">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

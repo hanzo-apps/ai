@@ -29,7 +29,7 @@ const WisdomDialog: React.FC<WisdomDialogProps> = ({ principle, isOpen, onClose 
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", damping: 25 }}
-            className="bg-gradient-to-br from-gray-900 to-background border border-border rounded-2xl max-w-md w-full p-6 shadow-xl"
+            className="bg-gradient-to-br from-neutral-900 to-background border border-border rounded-2xl max-w-md w-full p-6 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between mb-4">
@@ -130,7 +130,7 @@ const PrinciplesPreview = () => {
             className={`px-3 py-1 rounded-full text-sm ${
               selectedDiscipline === null 
                 ? "bg-primary/20 text-foreground" 
-                : "bg-gray-800/50 text-gray-400 hover:bg-gray-800 hover:text-gray-300"
+                : "bg-neutral-800/50 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-300"
             } transition-colors`}
             onClick={() => setSelectedDiscipline(null)}
           >
@@ -142,7 +142,7 @@ const PrinciplesPreview = () => {
               className={`px-3 py-1 rounded-full text-sm ${
                 selectedDiscipline === discipline 
                   ? "bg-primary/20 text-foreground" 
-                  : "bg-gray-800/50 text-gray-400 hover:bg-gray-800 hover:text-gray-300"
+                  : "bg-neutral-800/50 text-neutral-400 hover:bg-neutral-800 hover:text-neutral-300"
               } transition-colors`}
               onClick={() => setSelectedDiscipline(discipline)}
             >
@@ -171,7 +171,7 @@ const PrinciplesPreview = () => {
                 y: -5, 
                 transition: { duration: 0.2 }
               }}
-              className="bg-gradient-to-br from-gray-900/40 to-gray-950/70 border border-border rounded-2xl p-6 hover:border-white/30 hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
+              className="bg-gradient-to-br from-neutral-900/40 to-neutral-950/70 border border-border rounded-2xl p-6 hover:border-white/30 hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
               onClick={() => openWisdomDialog(principle)}
             >
               <div className="absolute top-2 right-2 text-foreground/40 opacity-0 group-hover:opacity-100 transition-opacity">

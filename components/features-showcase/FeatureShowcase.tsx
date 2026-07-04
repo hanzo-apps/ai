@@ -76,24 +76,24 @@ const FeatureShowcase: React.FC = () => {
         <FeatureShowcaseHeader />
         
         <div className="flex justify-center mb-10">
-          <div className="inline-flex rounded-full bg-gray-900/50 p-1.5 backdrop-blur-sm">
+          <div className="inline-flex rounded-full bg-neutral-900/50 p-1.5 backdrop-blur-sm">
             <Button
               variant={activeTab === 'all' ? 'default' : 'ghost'}
-              className={`rounded-full px-6 ${activeTab === 'all' ? 'bg-primary hover:bg-[#cccccc]' : 'text-foreground/80 hover:text-[var(--white)] hover:bg-gray-800/50'}`}
+              className={`rounded-full px-6 ${activeTab === 'all' ? 'bg-primary hover:bg-[#cccccc]' : 'text-foreground/80 hover:text-[var(--white)] hover:bg-neutral-800/50'}`}
               onClick={() => setActiveTab('all')}
             >
               All
             </Button>
             <Button
               variant={activeTab === 'ai-cloud' ? 'default' : 'ghost'}
-              className={`rounded-full px-6 ${activeTab === 'ai-cloud' ? 'bg-primary hover:bg-[#cccccc]' : 'text-foreground/80 hover:text-[var(--white)] hover:bg-gray-800/50'}`}
+              className={`rounded-full px-6 ${activeTab === 'ai-cloud' ? 'bg-primary hover:bg-[#cccccc]' : 'text-foreground/80 hover:text-[var(--white)] hover:bg-neutral-800/50'}`}
               onClick={() => setActiveTab('ai-cloud')}
             >
               AI Cloud
             </Button>
             <Button
               variant={activeTab === 'dx-platform' ? 'default' : 'ghost'}
-              className={`rounded-full px-6 ${activeTab === 'dx-platform' ? 'bg-primary hover:bg-[#cccccc]' : 'text-foreground/80 hover:text-[var(--white)] hover:bg-gray-800/50'}`}
+              className={`rounded-full px-6 ${activeTab === 'dx-platform' ? 'bg-primary hover:bg-[#cccccc]' : 'text-foreground/80 hover:text-[var(--white)] hover:bg-neutral-800/50'}`}
               onClick={() => setActiveTab('dx-platform')}
             >
               DX Platform

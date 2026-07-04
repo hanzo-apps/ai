@@ -7,7 +7,7 @@ import { Plug, Code, FileText } from "lucide-react";
 
 const Integrations = () => {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-gray-900/20">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -28,9 +28,9 @@ const Integrations = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="lg:col-span-2 bg-gray-900/30 border border-gray-800 p-6 rounded-lg"
+            className="lg:col-span-2 bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <Plug className="h-6 w-6 text-foreground" />
             </div>
             <h3 className="text-2xl font-bold mb-4">Pre-built Integrations</h3>
@@ -39,7 +39,7 @@ const Integrations = () => {
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {['Salesforce', 'Adobe', 'SAP', 'QuickBooks', 'Shopify', 'WooCommerce', 'Magento', 'WordPress', 'Squarespace', 'NetSuite', 'Xero', 'HubSpot'].map((integration, index) => (
-                <div key={index} className="py-2 px-3 bg-gray-800 rounded-md text-sm text-center text-foreground/80">
+                <div key={index} className="py-2 px-3 bg-neutral-800 rounded-md text-sm text-center text-foreground/80">
                   {integration}
                 </div>
               ))}
@@ -54,15 +54,15 @@ const Integrations = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-3 bg-gray-900/30 border border-gray-800 rounded-lg overflow-hidden"
+            className="lg:col-span-3 bg-neutral-900/30 border border-neutral-800 rounded-lg overflow-hidden"
           >
-            <div className="p-6 border-b border-gray-800">
+            <div className="p-6 border-b border-neutral-800">
               <h3 className="text-2xl font-bold mb-2">Developer-First APIs</h3>
               <p className="text-muted-foreground">
                 Comprehensive API and detailed developer documentation for custom integrations.
               </p>
             </div>
-            <div className="p-6 bg-gray-950 font-mono text-sm overflow-auto" style={{ maxHeight: '300px' }}>
+            <div className="p-6 bg-neutral-950 font-mono text-sm overflow-auto" style={{ maxHeight: '300px' }}>
               <pre className="text-foreground/80">
 {`// Create a payment intent
 const paymentIntent = await hanzo.paymentIntents.create({
@@ -89,10 +89,10 @@ const { paymentIntent, error } = await stripe.confirmCardPayment(
 );`}
               </pre>
             </div>
-            <div className="p-4 flex justify-between items-center border-t border-gray-800">
+            <div className="p-4 flex justify-between items-center border-t border-neutral-800">
               <span className="text-sm text-muted-foreground">API Reference</span>
               <div className="flex space-x-2">
-                <button className="px-3 py-1 bg-gray-800 rounded text-sm">Copy</button>
+                <button className="px-3 py-1 bg-neutral-800 rounded text-sm">Copy</button>
                 <button className="px-3 py-1 bg-primary rounded text-sm">Try it</button>
               </div>
             </div>
@@ -105,9 +105,9 @@ const { paymentIntent, error } = await stripe.confirmCardPayment(
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-gray-900/30 border border-gray-800 p-6 rounded-lg"
+            className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <Code className="h-6 w-6 text-foreground" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Easy to Implement</h3>
@@ -121,9 +121,9 @@ const { paymentIntent, error } = await stripe.confirmCardPayment(
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-gray-900/30 border border-gray-800 p-6 rounded-lg"
+            className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-gray-800/50 p-3 rounded-full w-fit mb-4">
+            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <FileText className="h-6 w-6 text-foreground" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Comprehensive Documentation</h3>
@@ -137,7 +137,7 @@ const { paymentIntent, error } = await stripe.confirmCardPayment(
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-gray-900/30 border border-gray-800 p-6 rounded-lg flex flex-col justify-between"
+            className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg flex flex-col justify-between"
           >
             <div>
               <h3 className="text-xl font-semibold mb-3">Explore Our APIs</h3>

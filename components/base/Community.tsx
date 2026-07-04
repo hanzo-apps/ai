@@ -24,7 +24,7 @@ const Community = () => {
               href="https://github.com/hanzoai" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex items-center bg-gray-800 hover:bg-gray-700 transition-colors px-4 py-2 rounded-lg"
+              className="flex items-center bg-neutral-800 hover:bg-neutral-700 transition-colors px-4 py-2 rounded-lg"
             >
               <Github className="mr-2 h-5 w-5 text-[var(--white)]" />
               <span className="text-[var(--white)]">GitHub</span>
@@ -33,7 +33,7 @@ const Community = () => {
               href="https://discord.gg/XthHQQj" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex items-center bg-gray-800 hover:bg-gray-700 transition-colors px-4 py-2 rounded-lg"
+              className="flex items-center bg-neutral-800 hover:bg-neutral-700 transition-colors px-4 py-2 rounded-lg"
             >
               <MessagesSquare className="mr-2 h-5 w-5 text-[var(--white)]" />
               <span className="text-[var(--white)]">Discord</span>
@@ -42,7 +42,7 @@ const Community = () => {
               href="https://twitter.com/hanzoai" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex items-center bg-gray-800 hover:bg-gray-700 transition-colors px-4 py-2 rounded-lg"
+              className="flex items-center bg-neutral-800 hover:bg-neutral-700 transition-colors px-4 py-2 rounded-lg"
             >
               <Twitter className="mr-2 h-5 w-5 text-[var(--white)]" />
               <span className="text-[var(--white)]">Twitter</span>

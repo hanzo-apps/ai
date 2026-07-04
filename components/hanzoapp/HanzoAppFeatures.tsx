@@ -12,7 +12,7 @@ const FeatureCard = ({ title, description, icon, list, code = null }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="bg-gray-900/30 border border-gray-800 rounded-xl p-8 h-full"
+      className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 h-full"
     >
       <div className="flex flex-col h-full">
         <div className="mb-6">
@@ -31,7 +31,7 @@ const FeatureCard = ({ title, description, icon, list, code = null }) => {
         
         {code && (
           <div className="mt-auto">
-            <div className="bg-gray-950 rounded-lg p-4 font-mono text-xs text-foreground/80 text-left overflow-auto">
+            <div className="bg-neutral-950 rounded-lg p-4 font-mono text-xs text-foreground/80 text-left overflow-auto">
               <pre>{code}</pre>
             </div>
           </div>

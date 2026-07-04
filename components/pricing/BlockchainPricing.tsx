@@ -164,7 +164,7 @@ const BlockchainPricing = () => {
               className={`rounded-xl p-6 border ${
                 plan.highlighted
                   ? "border-white bg-primary/5"
-                  : "border-gray-800 bg-gray-900/30"
+                  : "border-neutral-800 bg-neutral-900/30"
               }`}
             >
               {plan.highlighted && (
@@ -196,7 +196,7 @@ const BlockchainPricing = () => {
                 className={`w-full ${
                   plan.highlighted
                     ? "bg-primary hover:bg-[#cccccc] text-primary-foreground"
-                    : "bg-primary text-primary-foreground hover:bg-gray-100"
+                    : "bg-primary text-primary-foreground hover:bg-neutral-100"
                 }`}
               >
                 {plan.price === "Custom" ? "Contact Sales" : "Get Started"}
@@ -222,7 +222,7 @@ const BlockchainPricing = () => {
           {apiPricing.map((api) => {
             const Icon = api.icon;
             return (
-              <div key={api.name} className="rounded-xl p-6 border border-gray-800 bg-gray-900/30">
+              <div key={api.name} className="rounded-xl p-6 border border-neutral-800 bg-neutral-900/30">
                 <div className="flex items-start gap-4 mb-4">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5 text-foreground" />
@@ -259,7 +259,7 @@ const BlockchainPricing = () => {
           {premiumFeatures.map((feature) => {
             const Icon = feature.icon;
             return (
-              <div key={feature.name} className="rounded-xl p-6 border border-gray-800 bg-gray-900/30">
+              <div key={feature.name} className="rounded-xl p-6 border border-neutral-800 bg-neutral-900/30">
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                   <Icon className="w-5 h-5 text-foreground" />
                 </div>

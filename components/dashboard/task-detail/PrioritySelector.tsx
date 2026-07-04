@@ -9,7 +9,7 @@ interface PrioritySelectorProps {
 
 const PrioritySelector: React.FC<PrioritySelectorProps> = ({ priority, onChange }) => {
   const priorityOptions = [
-    { value: "low", label: "Low", color: "bg-gray-500" },
+    { value: "low", label: "Low", color: "bg-neutral-500" },
     { value: "medium", label: "Medium", color: "bg-primary/10" },
     { value: "high", label: "High", color: "bg-primary/10" }
   ];
@@ -23,8 +23,8 @@ const PrioritySelector: React.FC<PrioritySelectorProps> = ({ priority, onChange 
             key={option.value}
             className={`px-3 py-2 rounded cursor-pointer flex items-center ${
               priority === option.value 
-                ? 'bg-gray-800' 
-                : 'hover:bg-gray-800/50'
+                ? 'bg-neutral-800' 
+                : 'hover:bg-neutral-800/50'
             }`}
             onClick={() => onChange(option.value as "low" | "medium" | "high")}
           >

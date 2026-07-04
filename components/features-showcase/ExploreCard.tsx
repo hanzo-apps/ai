@@ -18,7 +18,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({
 }) => {
   return (
     <motion.div 
-      className="feature-card h-full w-full flex flex-col items-center p-6 rounded-xl border border-gray-800 bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-sm"
+      className="feature-card h-full w-full flex flex-col items-center p-6 rounded-xl border border-neutral-800 bg-gradient-to-br from-white/20 to-white/10 backdrop-blur-sm"
       whileHover={{ scale: 1.03 }}
       transition={{ duration: 0.2 }}
     >

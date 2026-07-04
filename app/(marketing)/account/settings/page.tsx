@@ -29,7 +29,7 @@ const AccountSettings = () => {
             type="email"
             value={user?.email || ''}
             disabled
-            className="bg-gray-900/20 border-gray-800/30"
+            className="bg-neutral-900/20 border-neutral-800/30"
           />
         </div>
 
@@ -40,7 +40,7 @@ const AccountSettings = () => {
               <input
                 type="checkbox"
                 id="marketing"
-                className="rounded border-gray-800/30 bg-gray-900/20"
+                className="rounded border-neutral-800/30 bg-neutral-900/20"
                 defaultChecked
               />
               <label htmlFor="marketing">Marketing updates</label>
@@ -49,7 +49,7 @@ const AccountSettings = () => {
               <input
                 type="checkbox"
                 id="security"
-                className="rounded border-gray-800/30 bg-gray-900/20"
+                className="rounded border-neutral-800/30 bg-neutral-900/20"
                 defaultChecked
               />
               <label htmlFor="security">Security alerts</label>
@@ -57,7 +57,7 @@ const AccountSettings = () => {
           </div>
         </div>
 
-        <Button type="submit" className="bg-gray-900 hover:bg-gray-800 border-none">
+        <Button type="submit" className="bg-neutral-900 hover:bg-neutral-800 border-none">
           Save Changes
         </Button>
       </form>

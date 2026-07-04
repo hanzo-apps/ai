@@ -35,7 +35,7 @@ const benefits = [
 
 const Benefits = () => {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900/20 to-background relative">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900/20 to-background relative">
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -55,9 +55,9 @@ const Benefits = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-gray-900/30 rounded-xl p-6 border border-gray-800"
+              className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800"
             >
-              <div className="bg-gray-800/60 p-3 rounded-lg w-fit mb-5">
+              <div className="bg-neutral-800/60 p-3 rounded-lg w-fit mb-5">
                 {benefit.icon}
               </div>
               <h3 className="text-lg font-bold mb-3">{benefit.title}</h3>
@@ -73,7 +73,7 @@ const Benefits = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-20 text-center"
         >
-          <div className="inline-block p-4 bg-gradient-to-r from-gray-800/50 to-gray-900/50 rounded-xl">
+          <div className="inline-block p-4 bg-gradient-to-r from-neutral-800/50 to-neutral-900/50 rounded-xl">
             <blockquote className="text-xl italic text-foreground/80 max-w-2xl mx-auto">
               "Hanzo Observability has been critical to our AI operations, giving us unprecedented visibility into our models' performance and significantly improving our debugging time."
             </blockquote>

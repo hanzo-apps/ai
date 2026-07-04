@@ -25,7 +25,7 @@ const SecurityFeatures = [
 const Security = () => {
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-gray-900/40 via-transparent to-transparent"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-neutral-900/40 via-transparent to-transparent"></div>
       
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
@@ -52,7 +52,7 @@ const Security = () => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-1"
           >
-            <div className="bg-gradient-to-br from-gray-900 to-gray-900/50 rounded-xl border border-gray-800 p-6 h-full">
+            <div className="bg-gradient-to-br from-neutral-900 to-neutral-900/50 rounded-xl border border-neutral-800 p-6 h-full">
               <div className="flex justify-center mb-6">
                 <div className="p-3 bg-primary/20 rounded-full border border-white/30">
                   <Lock className="h-8 w-8 text-foreground" />
@@ -86,7 +86,7 @@ const Security = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="lg:col-span-2"
           >
-            <div className="bg-gradient-to-br from-gray-900 to-gray-900/50 rounded-xl border border-gray-800 p-6 h-full">
+            <div className="bg-gradient-to-br from-neutral-900 to-neutral-900/50 rounded-xl border border-neutral-800 p-6 h-full">
               <h3 className="text-xl font-bold mb-6">Compliance Certifications</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -97,7 +97,7 @@ const Security = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.1 * index }}
-                    className="bg-gray-800/30 rounded-lg p-5 border border-gray-700"
+                    className="bg-neutral-800/30 rounded-lg p-5 border border-neutral-700"
                   >
                     <div className="flex items-center">
                       <div className="mr-3 p-2 bg-primary/30 rounded-full">

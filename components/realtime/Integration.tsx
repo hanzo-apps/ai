@@ -90,14 +90,14 @@ const Integration = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-[var(--black)] rounded-xl border border-gray-800 p-6"
+            className="bg-[var(--black)] rounded-xl border border-neutral-800 p-6"
           >
             <div className="flex items-center mb-4">
               <Code className="h-5 w-5 text-foreground mr-2" />
               <span className="text-foreground/80">JavaScript Example</span>
             </div>
             
-            <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm overflow-auto max-h-[400px]">
+            <div className="bg-neutral-900 rounded-lg p-4 font-mono text-sm overflow-auto max-h-[400px]">
               <div className="text-foreground/70">// Initialize the Hanzo Realtime client</div>
               <div className="text-foreground/80">import {`{ Realtime }`} from '@hanzo/cloud';</div>
               <div className="text-foreground/80 mb-4">const realtime = new Realtime('YOUR_API_KEY');</div>

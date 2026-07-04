@@ -20,13 +20,13 @@ interface TaskCardProps {
 
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   const priorityColors = {
-    low: "bg-gray-500",
+    low: "bg-neutral-500",
     medium: "bg-primary/10",
     high: "bg-primary/10"
   };
 
   return (
-    <div className="bg-gray-900 rounded-md p-3 border border-gray-800 hover:border-gray-700 cursor-pointer transition-colors">
+    <div className="bg-neutral-900 rounded-md p-3 border border-neutral-800 hover:border-neutral-700 cursor-pointer transition-colors">
       {/* Task ID and Priority */}
       <div className="flex items-center justify-between mb-2">
         <div className="text-xs text-muted-foreground flex items-center">
@@ -67,7 +67,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           {task.assignees && task.assignees.map((assignee, index) => (
             <div 
               key={assignee.id} 
-              className="h-6 w-6 rounded-full bg-gray-700 border-2 border-gray-900 flex items-center justify-center text-[10px]"
+              className="h-6 w-6 rounded-full bg-neutral-700 border-2 border-neutral-900 flex items-center justify-center text-[10px]"
               title={assignee.name}
             >
               {assignee.avatar ? (
@@ -80,7 +80,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           
           {task.agentCount && task.agentCount > 0 && (
             <div 
-              className="h-6 w-6 rounded-full bg-primary/10 border-2 border-gray-900 flex items-center justify-center"
+              className="h-6 w-6 rounded-full bg-primary/10 border-2 border-neutral-900 flex items-center justify-center"
               title={`${task.agentCount} AI agents`}
             >
               <Bot className="h-3 w-3 text-foreground" />
