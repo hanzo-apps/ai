@@ -84,6 +84,7 @@ const footerLinks = {
     title: "Company",
     items: [
       { title: "About", href: "/team" },
+      { title: "Startups", href: "/startups" },
       { title: "Careers", href: "/careers" },
       { title: "Contact", href: "/contact" },
       { title: "Philosophy", href: "/philosophy" },
