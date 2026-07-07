@@ -280,7 +280,7 @@ const rawCategories: CloudCategory[] = [
     ],
   },
   {
-    title: 'Deploy',
+    title: 'Platform',
     gcp: 'Cloud Build · Artifact Registry · Cloud Deploy',
     tagline: 'Source to production as declared state.',
     items: [
