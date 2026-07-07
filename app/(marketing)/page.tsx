@@ -7,6 +7,7 @@ import UseCasesSection from "@/components/landing/UseCasesSection"
 import MultiAgentSection from "@/components/landing/MultiAgentSection"
 import DeveloperExperienceSection from "@/components/landing/DeveloperExperienceSection"
 import NativeSurfacesSection from "@/components/landing/NativeSurfacesSection"
+import UsagePlaneSection from "@/components/landing/UsagePlaneSection"
 import OpenSourceSection from "@/components/landing/OpenSourceSection"
 import HanzoNetworkSection from "@/components/landing/HanzoNetworkSection"
 import PricingPreviewSection from "@/components/landing/PricingPreviewSection"
@@ -23,6 +24,7 @@ export default function HomePage() {
         <MultiAgentSection />
         <DeveloperExperienceSection />
         <NativeSurfacesSection />
+        <UsagePlaneSection />
         <OpenSourceSection />
         <HanzoNetworkSection />
         <PricingPreviewSection />
