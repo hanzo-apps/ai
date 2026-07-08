@@ -195,8 +195,8 @@ const HanzoWeb3Cloud = () => {
               <div className="text-sm text-muted-foreground">Chains Supported</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">99.999%</div>
-              <div className="text-sm text-muted-foreground">Uptime SLA</div>
+              <div className="text-2xl font-bold text-foreground">HA</div>
+              <div className="text-sm text-muted-foreground">Failover</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">&lt;50ms</div>

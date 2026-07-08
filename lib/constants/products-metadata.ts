@@ -119,7 +119,7 @@ export const productsMetadata: Record<string, ProductMetadata> = {
   visor:        { slug: 'visor',      tagline: 'Cluster visualizer', license: 'Apache-2.0', github_repo: `${G}/visor` },
   world:        { slug: 'world',      tagline: '3D world building', license: 'Apache-2.0', github_repo: `${G}/world` },
   zap:          { slug: 'zap',        tagline: 'Zero-config app deploy', license: 'Apache-2.0', github_repo: `${G}/zap` },
-  zen:          { slug: 'zen',        tagline: '390+ open-weight models', license: 'Apache-2.0', github_repo: 'https://github.com/zenlm/zen', docs_slug: 'zen' },
+  zen:          { slug: 'zen',        tagline: 'Open-weight frontier models', license: 'Apache-2.0', github_repo: 'https://github.com/zenlm/zen', docs_slug: 'zen' },
 
   // Web3 — these live under /blockchain/<slug>
   bridge:       { slug: 'bridge',     tagline: 'Cross-chain bridge', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/bridge', deploy_slug: 'bridge', docs_slug: 'blockchain/bridge' },

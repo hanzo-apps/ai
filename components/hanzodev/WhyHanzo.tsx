@@ -76,7 +76,7 @@ const VALUE_PROPS = [
         icon: Settings,
         title: "Use the best model for the job",
         description:
-          "With 500+ models, you can control the right tradeoffs between latency, cost, context, and reasoning for each task.",
+          "With 50+ models, you can control the right tradeoffs between latency, cost, context, and reasoning for each task.",
       },
     ],
   },

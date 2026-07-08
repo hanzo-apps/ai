@@ -120,7 +120,7 @@ const Scaling = () => {
             <Cpu className="h-8 w-8 text-foreground mr-4" />
             <div>
               <h4 className="text-[var(--white)] font-medium">High Availability</h4>
-              <p className="text-muted-foreground text-sm">99.999% uptime SLA guarantee</p>
+              <p className="text-muted-foreground text-sm">Automatic failover and redundancy</p>
             </div>
           </div>
 

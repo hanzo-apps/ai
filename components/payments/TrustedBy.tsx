@@ -69,49 +69,6 @@ const TrustedBy = () => {
             </div>
           </div>
         </motion.div>
-
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0 }}
-            className="p-4"
-          >
-            <div className="text-3xl font-bold text-foreground mb-2">200+</div>
-            <div className="text-muted-foreground">Currencies Supported</div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="p-4"
-          >
-            <div className="text-3xl font-bold text-foreground mb-2">99.999%</div>
-            <div className="text-muted-foreground">Uptime SLA</div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="p-4"
-          >
-            <div className="text-3xl font-bold text-foreground mb-2">190+</div>
-            <div className="text-muted-foreground">Countries Served</div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="p-4"
-          >
-            <div className="text-3xl font-bold text-foreground mb-2">24/7</div>
-            <div className="text-muted-foreground">Global Support</div>
-          </motion.div>
-        </div>
       </div>
     </section>
   );

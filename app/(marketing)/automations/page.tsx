@@ -192,7 +192,7 @@ const Automations = () => {
               </p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6">
                 <span className="text-foreground">Connect with</span>{" "}
-                <span>500+ apps</span>
+                <span>Hundreds of apps</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
                 Hanzo Automations connects your AI agents to the tools you use every day. Build powerful workflows without code.

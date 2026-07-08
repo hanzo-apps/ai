@@ -1,12 +1,11 @@
 "use client"
 
 /**
- * /contact-sales — Enterprise sales contact.
+ * /contact-sales — legacy slug kept for inbound links only.
  *
- * On the static export this is a real page that mirrors /contact's intent
- * but is scoped to enterprise sales. It also redirects to /contact for any
- * client navigation so we have ONE form, not two — but the URL slug
- * `/contact-sales` is preserved as the canonical entry point for sales CTAs.
+ * Canonical enterprise sales page is /contact/sales. This stub redirects
+ * there client-side (static export — no server redirects) and shows a
+ * fallback link for crawlers and no-JS visitors.
  */
 
 import { useEffect } from "react"
@@ -18,7 +17,7 @@ export default function ContactSalesPage() {
   // Crawlers and direct visits still see the content below.
   useEffect(() => {
     const t = setTimeout(() => {
-      window.location.replace("/contact?reason=sales")
+      window.location.replace("/contact/sales")
     }, 1200)
     return () => clearTimeout(t)
   }, [])
@@ -40,7 +39,7 @@ export default function ContactSalesPage() {
 
           <div className="flex flex-col sm:flex-row items-stretch justify-center gap-3 sm:gap-4">
             <Link
-              href="/contact?reason=sales"
+              href="/contact/sales"
               className="inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 transition-all"
             >
               <Mail className="mr-2 h-4 w-4" />
@@ -66,7 +65,7 @@ export default function ContactSalesPage() {
           </div>
 
           <p className="mt-8 text-xs text-muted-foreground/70">
-            Redirecting to /contact in a moment.
+            Redirecting to /contact/sales in a moment.
           </p>
         </div>
       </section>

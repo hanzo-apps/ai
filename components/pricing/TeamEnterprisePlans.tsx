@@ -16,6 +16,7 @@ interface SubscriptionPlan {
   category: string;
   popular?: boolean;
   contactSales?: boolean;
+  pricePerUser?: boolean;
   features: string[];
   limits?: Record<string, number | null>;
   payouts?: { idleResalePercent: number; description: string };
@@ -23,35 +24,34 @@ interface SubscriptionPlan {
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
   team: <Users className="h-6 w-6 text-muted-foreground" />,
+  'team-max': <Users className="h-6 w-6 text-muted-foreground" />,
   enterprise: <Shield className="h-6 w-6 text-muted-foreground" />,
-  agency: <Shield className="h-6 w-6 text-muted-foreground" />,
 };
 
 const STATIC_PLANS: SubscriptionPlan[] = [
   {
     id: 'team',
     name: 'Team',
-    description: 'Collaborate with your team. Includes hanzo.team workspace access.',
-    priceMonthly: 25,
+    description: 'For teams building together. SSO, shared billing, and custom training.',
+    priceMonthly: 199,
+    priceAnnual: 159,
     category: 'team',
     popular: true,
     features: [
-      'Everything in Unified AI',
-      'hanzo.team workspace included',
-      'Shared team credits & billing',
-      'Up to 25 members',
-      'Team usage analytics',
+      'Up to 10 members',
       'SSO / SAML',
+      'Shared billing',
+      'Usage analytics',
+      'Custom model training',
       'Priority support',
-      'Custom model fine-tuning',
-      '5M tokens/min',
-      '$25/mo per seat',
+      'Hanzo World Team included',
+      '$159/mo billed annually',
     ],
   },
   {
-    id: 'agency',
-    name: 'Agency',
-    description: 'Full-scale AI infrastructure for agencies and enterprises. Dedicated support and SLA.',
+    id: 'enterprise',
+    name: 'Enterprise',
+    description: 'Full-scale AI infrastructure. Dedicated support and on-prem deployment.',
     priceMonthly: null,
     category: 'enterprise',
     contactSales: true,
@@ -61,9 +61,9 @@ const STATIC_PLANS: SubscriptionPlan[] = [
       'Dedicated inference capacity',
       'Custom rate limits',
       'On-premise / VPC deployment',
-      'SOC 2 compliance',
+      'Enterprise SLA',
+      'SOC 2 readiness — controls aligned',
       'Custom model fine-tuning',
-      '99.99% uptime SLA',
       'Dedicated account manager',
       '24/7 engineering support',
     ],
@@ -114,7 +114,7 @@ const TeamEnterprisePlans = () => {
 
   function billingPeriod(plan: SubscriptionPlan) {
     if (plan.contactSales || plan.priceMonthly == null || plan.priceMonthly === 0) return undefined;
-    return "/mo per seat";
+    return plan.pricePerUser ? "/mo per seat" : "/month";
   }
 
   const iconFallback = <Building2 className="h-6 w-6 text-muted-foreground" />;

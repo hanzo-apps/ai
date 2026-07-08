@@ -40,7 +40,7 @@ const CAPABILITIES = [
       "Archive nodes for historical data access",
       "WebSocket subscriptions for real-time events",
       "Rate limiting and load balancing built-in",
-      "99.9% uptime SLA with global distribution",
+      "High availability with global distribution",
     ],
   },
   {
@@ -306,7 +306,7 @@ const Blockchain = () => {
             className="grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {[
-              { value: "99.999%", label: "Uptime SLA", detail: "7+ years running" },
+              { value: "HA", label: "High availability", detail: "Automatic failover" },
               { value: "<50ms", label: "Avg Latency", detail: "Global edge network" },
               { value: "100+", label: "Chains Supported", detail: "EVM, Solana, Cosmos" },
               { value: "10B+", label: "Requests Served", detail: "And counting" },

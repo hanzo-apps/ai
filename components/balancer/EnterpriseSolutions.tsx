@@ -49,7 +49,7 @@ const EnterpriseSolutions = () => {
               <div>
                 <h3 className="text-2xl font-semibold mb-2">High Availability Clustering</h3>
                 <p className="text-foreground/80">
-                  Multi-region and multi-zone failover capabilities with automated health checks and self-healing for 99.999% uptime SLAs.
+                  Multi-region and multi-zone failover capabilities with automated health checks and self-healing for high availability.
                 </p>
               </div>
             </div>

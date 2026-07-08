@@ -67,7 +67,7 @@ const FinalCTASection = () => {
             <ExternalLink className="ml-2 h-4 w-4" />
           </a>
           <Link
-            href="/contact-sales"
+            href="/contact/sales"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-sm border border-border hover:bg-secondary hover:border-neutral-600 transition-all"
           >
             Talk to sales

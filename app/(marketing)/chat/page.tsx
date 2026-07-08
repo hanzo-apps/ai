@@ -79,7 +79,7 @@ export default function ChatPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            14 Zen models, 100+ third-party providers, MCP tools, image
+            14 Zen models, 50+ third-party providers, MCP tools, image
             generation, and code execution. All in one unified chat experience
             with full conversation history.
           </motion.p>
@@ -95,12 +95,12 @@ export default function ChatPage() {
               <div className="text-sm text-muted-foreground">Zen models</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">100+</div>
+              <div className="text-2xl font-bold text-foreground">50+</div>
               <div className="text-sm text-muted-foreground">Providers</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">260+</div>
-              <div className="text-sm text-muted-foreground">MCP tools</div>
+              <div className="text-2xl font-bold text-foreground">13</div>
+              <div className="text-sm text-muted-foreground">Unified MCP tools</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">Free</div>
@@ -156,13 +156,13 @@ export default function ChatPage() {
                 icon: Brain,
                 title: "Multi-Model",
                 description:
-                  "Switch between Zen, GPT, Claude, Gemini, and 100+ models in the same conversation thread.",
+                  "Switch between Zen, GPT, Claude, Gemini, and more in the same conversation thread.",
               },
               {
                 icon: Wrench,
                 title: "MCP Tools",
                 description:
-                  "Connect 260+ MCP tools. Let models read files, query databases, browse the web, and more.",
+                  "Connect MCP tools. Let models read files, query databases, browse the web, and more.",
               },
               {
                 icon: Zap,

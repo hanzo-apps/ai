@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     question: "What integrations are available?",
-    answer: "Hanzo Dev integrates with 500+ tools including GitHub, GitLab, Slack, VS Code, JetBrains IDEs, and all major cloud providers. Check our automations page for the full list.",
+    answer: "Hanzo Dev integrates with GitHub, GitLab, Slack, VS Code, JetBrains IDEs, and all major cloud providers. Check our automations page for the full list.",
   },
   {
     question: "Do you offer volume discounts for large teams?",

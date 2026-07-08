@@ -65,7 +65,7 @@ const tiers = [
     features: [
       "Unlimited events",
       "1-year retention",
-      "SLA guarantee (99.9%)",
+      "Custom SLA",
       "Dedicated support engineer",
       "Audit logs",
       "BYOC / self-hosted",

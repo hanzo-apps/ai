@@ -55,7 +55,7 @@ const PricingFAQ = () => {
     },
     {
       question: "Is there a free trial available?",
-      answer: "Yes, every new account gets a $5 free credit to start — no card required. The Unified AI plan includes a 7-day free trial. After your credit or trial, you pay as you go for what you use."
+      answer: "Yes — every new account gets a $5 free credit to start, no card required. After your credit, you pay as you go for what you use."
     },
     {
       question: "What happens if I exceed my plan's resource limits?",

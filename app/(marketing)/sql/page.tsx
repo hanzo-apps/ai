@@ -45,7 +45,7 @@ export default function SQLPage() {
             <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">PG 18</div><div className="text-sm text-muted-foreground">Latest</div></div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">ACID</div><div className="text-sm text-muted-foreground">Compliant</div></div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">100+</div><div className="text-sm text-muted-foreground">Extensions</div></div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">99.99%</div><div className="text-sm text-muted-foreground">Uptime SLA</div></div>
+            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">HA</div><div className="text-sm text-muted-foreground">Failover</div></div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap justify-center gap-4">
             <a href="https://docs.hanzo.ai/sql" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Get Started <ArrowRight className="w-4 h-4" /></a>

@@ -176,7 +176,7 @@ const AuditFeatures = () => {
             </div>
             <div className="flex items-center">
               <Bookmark className="h-6 w-6 mr-2" />
-              <span className="text-muted-foreground">99.9% Uptime SLA</span>
+              <span className="text-muted-foreground">High Availability</span>
             </div>
           </div>
           <p className="text-xs text-muted-foreground/60 mt-4">*SOC 2 audit in progress</p>

@@ -83,7 +83,7 @@ const pricingTiers = [
     features: [
       "Everything in Team",
       "Dedicated cluster",
-      "99.99% SLA",
+      "Custom SLA",
       "24/7 support",
     ],
     cta: "Contact Sales",

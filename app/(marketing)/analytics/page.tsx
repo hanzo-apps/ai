@@ -4,7 +4,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import HeroSection from "@/components/analytics/HeroSection";
-import TrustedBy from "@/components/analytics/TrustedBy";
 import WebAnalytics from "@/components/analytics/WebAnalytics";
 import BuildForGrowth from "@/components/analytics/BuildForGrowth";
 import CommerceAnalytics from "@/components/analytics/CommerceAnalytics";
@@ -23,7 +22,6 @@ const Analytics = () => {
 
       <main>
         <HeroSection />
-        <TrustedBy />
         <WebAnalytics />
         <BuildForGrowth />
         <CommerceAnalytics />

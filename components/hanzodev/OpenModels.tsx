@@ -33,7 +33,7 @@ const OpenModels = () => {
               Open Models
             </h2>
             <p className="text-xl text-foreground/80 mb-6">
-              Switch between 500+ custom, local, and frontier LLMs.
+              Switch between custom, local, and frontier LLMs.
             </p>
             <p className="text-muted-foreground mb-8">
               Hanzo is the best gateway to discover and compare models. Use new

@@ -46,7 +46,7 @@ const HanzoNodes = () => {
         },
         {
           icon: Shield,
-          title: "99.9% Uptime SLA",
+          title: "High Availability",
           description: "Enterprise-grade reliability with automatic failover and redundancy across regions.",
         },
         {

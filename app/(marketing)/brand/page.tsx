@@ -432,15 +432,13 @@ const Brand = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 max-w-md mx-auto gap-6">
               {[
-                { title: "Logo Package", description: "SVG, PNG, and PDF formats", size: "2.4 MB" },
-                { title: "Icon Set", description: "500+ custom icons", size: "8.1 MB" },
-                { title: "Brand Guide", description: "Complete PDF guidelines", size: "4.2 MB" }
+                { title: "Press Kit", description: "Logos and brand assets (ZIP)", size: "", href: "/press/hanzo-press-kit.zip" },
               ].map((asset, index) => (
                 <motion.a
                   key={asset.title}
-                  href="#"
+                  href={asset.href}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -457,7 +455,6 @@ const Brand = () => {
                     {asset.title}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-2">{asset.description}</p>
-                  <span className="text-xs text-muted-foreground">{asset.size}</span>
                 </motion.a>
               ))}
             </div>

@@ -68,7 +68,7 @@ const tiers = [
       "Custom RAM & storage",
       "SSO & SAML",
       "Audit logs",
-      "SLA guarantee (99.99%)",
+      "Custom SLA",
       "Named engineer",
       "BYOC / on-premise",
       "Volume discounts",

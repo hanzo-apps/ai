@@ -284,7 +284,7 @@ export const solutionsData: SolutionData[] = [
     description: 'Deploy AI across trading, risk, compliance, and customer service with the security controls and explainability that financial regulators require.',
     badge: 'Industry',
     features: [
-      { title: 'SOC 2 Type II', description: 'Certified infrastructure with continuous compliance monitoring. Audit reports available on request.' },
+      { title: 'SOC 2 Type II', description: 'Controls aligned to SOC 2 Type II with continuous compliance monitoring.' },
       { title: 'Explainable AI', description: 'Every model decision includes a full reasoning trace. Meet model risk management requirements.' },
       { title: 'Market Data Integration', description: 'Real-time streaming of market data into AI context. Sub-millisecond latency on trading signals.' },
       { title: 'Fraud & AML', description: 'Graph-based fraud detection and AML transaction monitoring with adaptive ML models.' },
@@ -324,7 +324,7 @@ export const solutionsData: SolutionData[] = [
       { title: 'VPC & On-premise', description: 'Deploy on AWS, Azure, GCP, or your own data center. Full Terraform and Helm chart support.' },
       { title: 'Enterprise SSO', description: 'SAML 2.0, OIDC, and Active Directory integration. SCIM provisioning for automated user management.' },
       { title: 'Role-based Access Control', description: 'Fine-grained RBAC at the model, endpoint, and data level. Full audit trail for every request.' },
-      { title: 'SLA Guarantees', description: '99.99% uptime SLA with dedicated support engineers. P0 response in under 15 minutes.' },
+      { title: 'SLA Guarantees', description: 'Custom SLA with dedicated support engineers. P0 response in under 15 minutes.' },
       { title: 'Custom Model Training', description: 'Train and fine-tune models on your proprietary data without it ever leaving your environment.' },
     ],
     useCases: ['Fortune 500 enterprises', 'Government and defense', 'Critical infrastructure', 'Financial institutions', 'Healthcare systems'],

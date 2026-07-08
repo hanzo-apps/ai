@@ -157,7 +157,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
               {/* Performance Stats */}
               <div className="grid grid-cols-3 gap-4 mb-6">
                 {[
-                  { value: "99.999%", label: "Uptime" },
+                  { value: "HA", label: "Failover" },
                   { value: "<50ms", label: "Latency" },
                   { value: "100+", label: "Chains" },
                 ].map((stat) => (

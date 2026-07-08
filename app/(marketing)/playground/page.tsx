@@ -24,7 +24,7 @@ const tryOut = [
   {
     icon: Brain,
     title: 'Zen Models',
-    blurb: 'Run prompts against 390+ open-weight models. Compare side-by-side.',
+    blurb: 'Run prompts against 50+ open-weight models. Compare side-by-side.',
     href: '/zen',
     cta: 'Try a model',
   },

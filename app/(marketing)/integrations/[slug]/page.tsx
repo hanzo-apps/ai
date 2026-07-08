@@ -123,7 +123,7 @@ export default async function IntegrationPage({ params }: Props) {
               <Link href="/signup" className="text-brand hover:underline">
                 hanzo.ai/signup
               </Link>{' '}
-              · Fully OpenAI-compatible · 390+ models available
+              · Fully OpenAI-compatible · 50+ models available
             </p>
           </div>
 
@@ -190,7 +190,7 @@ export default async function IntegrationPage({ params }: Props) {
                 href="/models"
                 className="rounded-lg border border-border px-6 py-2.5 text-sm font-semibold text-foreground hover:bg-muted transition-colors"
               >
-                Browse 390+ Models
+                Browse Models
               </Link>
             </div>
           </div>

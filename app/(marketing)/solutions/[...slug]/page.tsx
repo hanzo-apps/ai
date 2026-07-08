@@ -219,7 +219,7 @@ export default async function SolutionPage({ params }: PageProps) {
               Deploy with confidence
             </h2>
             <p className="text-neutral-500 max-w-lg mx-auto mb-8 text-sm">
-              SOC 2 Type II certified. GDPR and CCPA compliant. 99.99% SLA.
+              SOC 2 Type II readiness. GDPR and CCPA compliant. Custom SLA.
               Dedicated support engineers for Enterprise plans.
             </p>
             <div className="flex flex-wrap justify-center gap-4">

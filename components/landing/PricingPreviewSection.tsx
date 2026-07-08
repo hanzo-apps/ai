@@ -6,12 +6,12 @@ import Link from "next/link";
 import { Check, ArrowRight, Sparkles, Building2 } from "lucide-react";
 
 const FREE_FEATURES = [
-  "100K API calls / month",
-  "1GB vector storage",
-  "10GB file storage",
-  "Unlimited projects",
-  "Core agent features",
+  "$5 free credit — no card required",
+  "60 requests/min, 100K tokens/min",
+  "OpenAI-compatible API",
+  "Chat, agents, and MCP tools",
   "Community support",
+  "Pay-as-you-go after credit",
 ];
 
 const PricingPreviewSection = () => {
@@ -106,7 +106,7 @@ const PricingPreviewSection = () => {
                 "Higher API and storage limits",
                 "Private cloud or on-prem deployment",
                 "SLAs and dedicated support",
-                "SOC 2 and HIPAA documentation",
+                "SOC 2 readiness, HIPAA BAA available",
                 "Custom contracts and procurement",
                 "Solution architect engagement",
               ].map((feature) => (
@@ -120,7 +120,7 @@ const PricingPreviewSection = () => {
             </ul>
 
             <Link
-              href="/contact-sales"
+              href="/contact/sales"
               className="inline-flex justify-center items-center w-full px-6 py-3 rounded-full font-medium text-sm border border-white/40 hover:border-white/60 hover:bg-white/10 transition-all"
             >
               Contact sales

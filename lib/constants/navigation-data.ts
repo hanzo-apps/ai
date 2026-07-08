@@ -67,7 +67,7 @@ export const featuredProducts: NavItem[] = [
   { title: "Playground", href: "/playground", icon: PlayCircle, description: "Hands-on sandbox for every Hanzo product", github: ORG, docs: `${DOCS}/playground`, featured: true },
   { title: "Agents", href: "/agents", icon: Sparkles, description: "Agentic harness — SDK + runtime + tools", github: `${ORG}/agent`, docs: `${DOCS}/agent`, featured: true },
   { title: "MCP", href: "/mcp", icon: Plug, description: "Model Context Protocol — open-source DX layer", github: `${ORG}/mcp`, docs: `${DOCS}/mcp`, featured: true },
-  { title: "Zen Models", href: "/zen", icon: Brain, description: "390+ open-weight frontier models", github: ORG, docs: `${DOCS}/zen`, featured: true },
+  { title: "Zen Models", href: "/zen", icon: Brain, description: "Open-weight frontier models", github: ORG, docs: `${DOCS}/zen`, featured: true },
   { title: "Studio", href: "/studio", icon: AppWindow, description: "Visual AI engine — node-graph workflows (studio.hanzo.ai)", github: `${ORG}/studio`, docs: `${DOCS}/studio`, featured: true },
   { title: "Cloud", href: "/cloud", icon: Cloud, description: "AI Cloud infrastructure", github: `${ORG}/cloud`, docs: `${DOCS}/cloud`, featured: true },
   { title: "IAM", href: "/iam", icon: UserCheck, description: "Identity & access (hanzo.id)", github: `${ORG}/iam`, docs: `${DOCS}/iam`, featured: true },
@@ -117,62 +117,6 @@ export const mainNav: MainNavItem[] = [
   { title: "Resources", sections: resourcesNav },
   { title: "Pricing", href: "/pricing" },
   { title: "Enterprise", href: "/enterprise" },
-];
-
-export const footerNav: NavSection[] = [
-  {
-    title: "Products",
-    items: [
-      { title: "Hanzo Dev", href: "/dev" },
-      { title: "Zen Models", href: "/zen" },
-      { title: "Agents", href: "/agents" },
-      { title: "Chat", href: "/chat" },
-      { title: "Search", href: "/search" },
-      { title: "Crawl", href: "/crawl" },
-      { title: "Vector", href: "/vector" },
-    ],
-  },
-  {
-    title: "Cloud",
-    items: [
-      { title: "Cloud", href: "/cloud" },
-      { title: "IAM", href: "/iam" },
-      { title: "KMS", href: "/kms" },
-      { title: "Platform", href: "/platform" },
-      { title: "Console", href: "/console" },
-      { title: "Metrics", href: "/metrics" },
-    ],
-  },
-  {
-    title: "Web3",
-    items: [
-      { title: "Settlement", href: "/blockchain/settlement" },
-      { title: "Wallets", href: "/blockchain/wallets" },
-      { title: "Tokens", href: "/blockchain/tokens" },
-      { title: "Indexer", href: "/blockchain/indexer" },
-    ],
-  },
-  {
-    title: "Resources",
-    items: [
-      { title: "Documentation", href: "/docs" },
-      { title: "API", href: "/docs/api" },
-      { title: "GitHub", href: ORG },
-      { title: "Discord", href: "https://discord.gg/hanzo" },
-    ],
-  },
-  {
-    title: "Company",
-    items: [
-      { title: "About", href: "/about" },
-      { title: "Team", href: "/team" },
-      { title: "Careers", href: "/careers" },
-      { title: "Security", href: "/security" },
-      { title: "Press", href: "/press" },
-      { title: "Privacy", href: "/privacy" },
-      { title: "Terms", href: "/terms" },
-    ],
-  },
 ];
 
 export const utilityNav = {

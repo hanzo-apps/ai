@@ -53,11 +53,11 @@ const footerLinks = {
   models: {
     title: "Models",
     items: [
-      { title: "Zen Coder Flash", href: "/zen" },
-      { title: "Zen Coder", href: "/zen" },
-      { title: "Zen4 Coder", href: "/zen" },
-      { title: "Zen Ultra", href: "/zen" },
-      { title: "View All Models", href: "/zen", highlight: true },
+      { title: "Zen 5", href: "/zen" },
+      { title: "Zen 5 Coder", href: "/zen" },
+      { title: "Zen 5 Pro", href: "/zen" },
+      { title: "Zen 5 Max", href: "/zen" },
+      { title: "View All Models", href: "/models", highlight: true },
     ],
   },
   learn: {
@@ -71,19 +71,18 @@ const footerLinks = {
   helpSecurity: {
     title: "Help and security",
     items: [
-      { title: "Availability", href: "/status" },
       { title: "Status", href: "/status" },
       { title: "Support center", href: "/contact" },
+      { title: "Security", href: "/security" },
       { title: "Privacy", href: "/privacy" },
       { title: "Terms", href: "/terms" },
-      { title: "Responsible disclosure", href: "/security" },
-      { title: "Usage policy", href: "/terms" },
     ],
   },
   company: {
     title: "Company",
     items: [
-      { title: "About", href: "/team" },
+      { title: "About", href: "/about" },
+      { title: "Team", href: "/team" },
       { title: "Startups", href: "/startups" },
       { title: "Careers", href: "/careers" },
       { title: "Contact", href: "/contact" },

@@ -47,7 +47,7 @@ const HanzoChains = () => {
         },
         {
           icon: Shield,
-          title: "99.9% Uptime SLA",
+          title: "High Availability",
           description: "Enterprise reliability with automatic failover across regions.",
         },
         {

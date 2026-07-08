@@ -23,54 +23,53 @@ const BillingPlans = () => {
   const { checkout, billingInfo } = useBilling();
   const [isUpgrading, setIsUpgrading] = useState(false);
 
+  // Mirrors https://pricing.hanzo.ai/v1/plans — keep in lockstep.
   const plans = [
     {
-      id: 'dev',
+      id: 'developer',
       name: 'Developer',
-      price: 20,
+      price: 0,
       interval: 'month',
-      description: 'For hobbyists and personal projects',
+      description: 'Get started for free with included credits',
       features: [
-        'All core Hanzo platform features',
-        'Unlimited private projects',
-        'Unlimited deployments',
-        'Self-hosted on your infrastructure',
-        '1 AI Unit',
-        '1 Compute Unit (Server)'
+        '$5 free credit',
+        '60 requests/min',
+        '100K tokens/min',
+        'API access',
+        'Community support',
+        'Pay-as-you-go after credit'
       ],
       popular: false
     },
     {
       id: 'pro',
-      name: 'Professional',
+      name: 'Pro',
       price: 49,
       interval: 'month',
-      description: 'For professionals and small teams',
+      description: 'For developers shipping real products',
       features: [
-        'Everything in Developer plan',
-        'Extended messaging and data analysis',
-        'Full access to Hanzo App, Chat, Dev',
-        'Integration with Hanzo Models',
-        'Image generation',
-        'Up to 10 AI Units (Adjustable)',
-        'Up to 10 Compute Units (Adjustable)'
+        'Everything in Developer',
+        '500 requests/min',
+        '1M tokens/min',
+        'Priority inference',
+        'Analytics dashboard',
+        'Email support'
       ],
       popular: true
     },
     {
-      id: 'team',
-      name: 'Team',
-      price: 99,
+      id: 'max',
+      name: 'Max',
+      price: 200,
       interval: 'month',
-      description: 'For growing teams with advanced needs',
+      description: 'Maximum AI power for individuals',
       features: [
-        'Everything in Professional plan',
-        'Higher message limits',
-        'Advanced collaborative workspace',
-        'Secure workspace with admin console',
-        'Unified team billing',
-        'Team data excluded from training',
-        'Up to 10 AI Units per user (Adjustable)'
+        'Everything in Pro',
+        'Unlimited premium model access',
+        '5000 requests/min',
+        '10M tokens/min',
+        '$100/mo cloud credits included',
+        'Dedicated support channel'
       ],
       popular: false
     }

@@ -447,7 +447,7 @@ export default async function ModelPage({ params }: Props) {
               Use {model.name} via Hanzo AI
             </h2>
             <p className="text-muted-foreground mb-6">
-              One API key. 390+ models. OpenAI-compatible. Start free.
+              One API key. Every major model. OpenAI-compatible. Start free.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link

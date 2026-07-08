@@ -39,7 +39,7 @@ const features = [
   {
     icon: Shield,
     title: "High Availability",
-    description: "99.999% uptime SLA. Redundant infrastructure across regions.",
+    description: "Enterprise SLA available. Redundant infrastructure across regions.",
   },
   {
     icon: RefreshCw,
@@ -137,8 +137,8 @@ const HanzoGraph = () => {
               <div className="text-sm text-muted-foreground">Index Latency</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground/70">99.999%</div>
-              <div className="text-sm text-muted-foreground">Uptime</div>
+              <div className="text-2xl font-bold text-foreground/70">HA</div>
+              <div className="text-sm text-muted-foreground">Failover</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground/70">∞</div>

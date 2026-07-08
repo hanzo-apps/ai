@@ -45,7 +45,7 @@ const OSS_FOUNDATIONS = [
   { name: "Redis", description: "Fast caching and pub/sub throughout our platform", url: "https://redis.io", github: "https://github.com/redis/redis", creator: "Redis Ltd. / Salvatore Sanfilippo", license: "BSD-3-Clause", emoji: "🔴" },
   { name: "PyTorch", description: "Foundation of our ML training and inference", url: "https://pytorch.org", github: "https://github.com/pytorch/pytorch", creator: "Meta AI Research", license: "BSD-3-Clause", emoji: "🔥" },
   { name: "Kubernetes", description: "Orchestrates every workload in production", url: "https://kubernetes.io", github: "https://github.com/kubernetes/kubernetes", creator: "CNCF / Google", license: "Apache-2.0", emoji: "☸️" },
-  { name: "Docker", description: "Containers make our 260+ MCP tools portable", url: "https://docker.com", github: "https://github.com/moby/moby", creator: "Docker / Moby Project", license: "Apache-2.0", emoji: "🐳" },
+  { name: "Docker", description: "Containers make our MCP tools portable", url: "https://docker.com", github: "https://github.com/moby/moby", creator: "Docker / Moby Project", license: "Apache-2.0", emoji: "🐳" },
   { name: "OpenTelemetry", description: "Observability across every service", url: "https://opentelemetry.io", github: "https://github.com/open-telemetry/opentelemetry-specification", creator: "CNCF", license: "Apache-2.0", emoji: "📊" },
 ]
 

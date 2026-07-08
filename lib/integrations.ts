@@ -15,7 +15,7 @@ export const INTEGRATIONS: Integration[] = [
   {
     slug: 'openai-sdk',
     name: 'OpenAI Python SDK',
-    description: 'Use the official OpenAI Python SDK with Hanzo AI by pointing it to our OpenAI-compatible API endpoint. Access 390+ models with your existing OpenAI code — no refactor needed.',
+    description: 'Use the official OpenAI Python SDK with Hanzo AI by pointing it to our OpenAI-compatible API endpoint. Access 50+ models with your existing OpenAI code — no refactor needed.',
     category: 'sdk',
     icon: '🐍',
     upstream: 'https://github.com/openai/openai-python',
@@ -78,7 +78,7 @@ export OPENAI_BASE_URL="https://api.hanzo.ai/v1"`,
   {
     slug: 'anthropic-sdk',
     name: 'Anthropic SDK',
-    description: 'Use the Anthropic Python or TypeScript SDK with Hanzo AI to access Claude models alongside 390+ other models through a single API key and billing account.',
+    description: 'Use the Anthropic Python or TypeScript SDK with Hanzo AI to access Claude models alongside 50+ other models through a single API key and billing account.',
     category: 'sdk',
     icon: '🤖',
     upstream: 'https://github.com/anthropics/anthropic-sdk-python',
@@ -146,7 +146,7 @@ const message = await client.messages.create({
   {
     slug: 'langchain',
     name: 'LangChain',
-    description: 'Integrate LangChain with Hanzo AI to build chains, agents, and RAG pipelines using any of our 390+ models. Hanzo is OpenAI-compatible so ChatOpenAI just works.',
+    description: 'Integrate LangChain with Hanzo AI to build chains, agents, and RAG pipelines using any of our 50+ models. Hanzo is OpenAI-compatible so ChatOpenAI just works.',
     category: 'framework',
     icon: '⛓️',
     upstream: 'https://github.com/langchain-ai/langchain',
@@ -716,7 +716,7 @@ export HANZO_API_KEY="your-hanzo-api-key"`,
   {
     slug: 'cursor',
     name: 'Cursor',
-    description: 'Use Hanzo AI models inside Cursor IDE by adding a custom API provider. Access Zen, GPT-4.1, Claude Sonnet, and 390+ other models directly in your editor.',
+    description: 'Use Hanzo AI models inside Cursor IDE by adding a custom API provider. Access Zen, GPT-4.1, Claude Sonnet, and 50+ other models directly in your editor.',
     category: 'platform',
     icon: '🖱️',
     upstream: 'https://github.com/getcursor/cursor',
@@ -855,7 +855,7 @@ client = OpenAI(
     api_key="your-hanzo-api-key",
 )
 
-# Access 390+ models not in Copilot
+# Access 50+ models not in Copilot
 response = client.chat.completions.create(
     model="zen4-pro",
     messages=[{"role": "user", "content": "Review this code..."}],

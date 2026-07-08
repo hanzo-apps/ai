@@ -36,7 +36,7 @@ const features = [
   {
     icon: Globe,
     title: "Global Infrastructure",
-    description: "Multi-region deployment with 99.999% uptime SLA and dedicated support channels."
+    description: "Multi-region deployment with automatic failover and dedicated support channels."
   },
   {
     icon: Zap,
@@ -70,9 +70,9 @@ const benefits = [
 ];
 
 const stats = [
-  { value: "99.999%", label: "Uptime SLA" },
+  { value: "Custom", label: "SLA" },
   { value: "< 1hr", label: "Response Time" },
-  { value: "100+", label: "Enterprise Clients" },
+  { value: "Global", label: "Deployment" },
   { value: "24/7", label: "Support" },
 ];
 

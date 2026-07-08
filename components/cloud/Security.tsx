@@ -70,22 +70,6 @@ const Security = () => {
             </div>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-20 text-center"
-        >
-          <p className="text-xl font-semibold mb-8">Trusted by teams at</p>
-          <div className="flex flex-wrap justify-center items-center gap-12">
-            <div className="h-12 w-32 bg-neutral-800/50 rounded-md"></div>
-            <div className="h-12 w-32 bg-neutral-800/50 rounded-md"></div>
-            <div className="h-12 w-32 bg-neutral-800/50 rounded-md"></div>
-            <div className="h-12 w-32 bg-neutral-800/50 rounded-md"></div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

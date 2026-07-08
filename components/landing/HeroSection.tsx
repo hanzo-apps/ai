@@ -24,7 +24,7 @@ const TERMINAL_LINES: ReadonlyArray<{
 ];
 
 const STAT_BAND = [
-  "390+ models",
+  "50+ models",
   "Agent SDK",
   "MCP tools",
   "Vector DB",

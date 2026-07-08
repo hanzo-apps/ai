@@ -58,7 +58,7 @@ const node = connectNode();`}</code>
             <div className="p-6 bg-gradient-to-br from-white/5 to-transparent rounded-xl ring-1 ring-border">
               <Server className="h-8 w-8 text-[var(--white)] mb-4" />
               <h4 className="text-lg font-semibold text-[var(--white)] mb-2">Reliable</h4>
-              <p className="text-foreground/80">99.999% uptime guarantee</p>
+              <p className="text-foreground/80">High availability with automatic failover</p>
             </div>
             <div className="p-6 bg-gradient-to-br from-white/5 to-transparent rounded-xl ring-1 ring-border">
               <Shield className="h-8 w-8 text-[var(--white)] mb-4" />

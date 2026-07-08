@@ -104,7 +104,7 @@ export function CloudPrimitiveOverview({
             variant="outline"
             className="border-border bg-transparent text-foreground/80 hover:bg-accent hover:text-foreground"
           >
-            <Link href="/contact-sales">Talk to us</Link>
+            <Link href="/contact/sales">Talk to us</Link>
           </Button>
           {primitive.github && (
             <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">

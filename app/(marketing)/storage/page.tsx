@@ -99,8 +99,8 @@ export default function StoragePage() {
               <div className="text-sm text-muted-foreground">Encryption</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">99.99%</div>
-              <div className="text-sm text-muted-foreground">Uptime SLA</div>
+              <div className="text-2xl font-bold text-foreground">HA</div>
+              <div className="text-sm text-muted-foreground">Failover</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">OIDC</div>

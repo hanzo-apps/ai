@@ -90,8 +90,8 @@ export default function MCPPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Deploy MCP servers from any npx, uvx, or custom package. 260+
-            tools available. Instant scaling, zero infrastructure management.
+            Deploy MCP servers from any npx, uvx, or custom package. One
+            unified tool surface. Instant scaling, zero infrastructure management.
             Connect Claude, GPT, or any AI to your tools.
           </motion.p>
 
@@ -103,8 +103,8 @@ export default function MCPPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">260+</div>
-              <div className="text-sm text-muted-foreground">MCP tools</div>
+              <div className="text-2xl font-bold text-foreground">13</div>
+              <div className="text-sm text-muted-foreground">Unified tools</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">1-click</div>
@@ -348,7 +348,7 @@ export default function MCPPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              260+ MCP Tools Available
+              A Unified MCP Tool Surface
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Pre-built servers for every use case. Deploy with one click.
@@ -400,7 +400,7 @@ export default function MCPPage() {
               href="https://github.com/hanzoai/mcp"
               className="text-foreground hover:text-foreground/80 font-medium"
             >
-              View all 260+ tools &rarr;
+              View all tools &rarr;
             </a>
           </motion.div>
         </div>

@@ -205,7 +205,7 @@ export default function Products() {
       <section className="py-12 px-4 border-t border-border">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-xs uppercase tracking-widest text-muted-foreground mb-6">
-            Trusted by teams at
+            Built with technology partners
           </p>
           <PartnerLogoRow
             logos={partnerLogos}

@@ -87,7 +87,7 @@ const Testimonials = () => {
                 The AI Engineering Community
               </h3>
               <p className="text-foreground/80 mb-6">
-                Join thousands of AI engineers and developers building the future of intelligent applications. 
+                Build with the engineers shipping production AI.
                 Share experiences, get support, and collaborate on best practices.
               </p>
               <div className="flex flex-wrap gap-4">

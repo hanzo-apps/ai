@@ -37,7 +37,7 @@ const zenFamilies = [
 const apps = [
   { label: "Hanzo App", description: "Your AI workspace", href: "https://hanzo.app", icon: AppWindow, external: true },
   { label: "Hanzo Bot", description: "AI agent platform", href: "https://hanzo.bot", icon: Bot, external: true },
-  { label: "Hanzo Chat", description: "Chat with Zen + 100+ models", href: "https://hanzo.chat", icon: MessageSquare, external: true },
+  { label: "Hanzo Chat", description: "Chat with Zen + frontier models", href: "https://hanzo.chat", icon: MessageSquare, external: true },
   { label: "Hanzo Dev", description: "AI coding agent for your IDE", href: "/dev", icon: Terminal, external: false },
 ];
 
@@ -95,7 +95,7 @@ const AuthButtons = ({ user, onLogout, onOpenCommandPalette }: AuthButtonsProps)
       {/* When logged out: Contact Sales */}
       {!user && (
         <Link
-          href="/contact-sales"
+          href="/contact/sales"
           className="inline-flex items-center justify-center rounded-full h-9 px-4 text-sm font-medium text-foreground/80 hover:text-foreground transition-all duration-200 cursor-pointer"
         >
           Contact sales
