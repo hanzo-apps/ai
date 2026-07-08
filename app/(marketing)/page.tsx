@@ -9,6 +9,7 @@ import DeveloperExperienceSection from "@/components/landing/DeveloperExperience
 import NativeSurfacesSection from "@/components/landing/NativeSurfacesSection"
 import UsagePlaneSection from "@/components/landing/UsagePlaneSection"
 import ProviderGridSection from "@/components/landing/ProviderGridSection"
+import SmartRoutingSection from "@/components/landing/SmartRoutingSection"
 import OpenSourceSection from "@/components/landing/OpenSourceSection"
 import HanzoNetworkSection from "@/components/landing/HanzoNetworkSection"
 import PricingPreviewSection from "@/components/landing/PricingPreviewSection"
@@ -27,6 +28,7 @@ export default function HomePage() {
         <NativeSurfacesSection />
         <UsagePlaneSection />
         <ProviderGridSection />
+        <SmartRoutingSection />
         <OpenSourceSection />
         <HanzoNetworkSection />
         <PricingPreviewSection />
