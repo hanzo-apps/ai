@@ -384,7 +384,7 @@ const Zen = () => {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               className="relative p-8 md:p-12 rounded-2xl border border-border bg-background/80 overflow-hidden">
               <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary text-primary-foreground">
-                Coming Soon
+                In Training
               </div>
               <div className="flex items-center gap-2 mb-4">
                 <Zap className="w-5 h-5 text-foreground" />
@@ -412,7 +412,7 @@ const Zen = () => {
               <div className="flex flex-wrap gap-3">
                 <Link href="/research-access"
                   className="inline-flex items-center px-5 py-2.5 rounded-full font-medium bg-primary text-primary-foreground hover:opacity-90 text-sm gap-2">
-                  Request Research Access <ArrowRight className="w-4 h-4" />
+                  Zen 5 Research Preview <ArrowRight className="w-4 h-4" />
                 </Link>
                 <a href="https://hanzo.network" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center px-5 py-2.5 rounded-full font-medium border border-border text-foreground hover:bg-secondary text-sm gap-2 transition-colors">
