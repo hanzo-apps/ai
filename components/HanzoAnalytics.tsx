@@ -30,10 +30,13 @@
 import Script from 'next/script'
 
 /** Per-surface Hanzo-analytics website id. Defaults to the hanzo.ai property so
- *  first-party tracking keeps working even before the env var is provisioned. */
+ *  first-party tracking keeps working even before the env var is provisioned.
+ *  9b0b83b7 = the "Hanzo AI" / hanzo.ai website in analytics.hanzo.ai. (Was
+ *  a323a8ae, which is the docs.hanzo.ai property — that mis-attributed every
+ *  hanzo.ai pageview to Docs.) */
 const WEBSITE_ID =
   process.env.NEXT_PUBLIC_ANALYTICS_WEBSITE_ID ||
-  'a323a8ae-c811-4061-9626-22caaffc612f'
+  '9b0b83b7-4967-468c-9393-713a0b312a9c'
 
 /** Global GA4 measurement id (G-XXXXXXXXXX). Unset until the user supplies one. */
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID
