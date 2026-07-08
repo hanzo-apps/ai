@@ -4,6 +4,7 @@ import { useState } from "react"
 import PricingHeader from "@/components/pricing/PricingHeader"
 import PersonalPlans from "@/components/pricing/PersonalPlans"
 import TeamEnterprisePlans from "@/components/pricing/TeamEnterprisePlans"
+import WorldPricing from "@/components/pricing/WorldPricing"
 import APIPricing from "@/components/pricing/APIPricing"
 import SearchDataPricing from "@/components/pricing/SearchDataPricing"
 import BlockchainPricing from "@/components/pricing/BlockchainPricing"
@@ -16,6 +17,7 @@ import PricingCallouts from "@/components/pricing/PricingCallouts"
 const tabs = [
   { id: "personal", label: "Personal" },
   { id: "team", label: "Team & Enterprise" },
+  { id: "world", label: "World" },
   { id: "api", label: "API" },
   { id: "search", label: "Search & Data" },
   { id: "infrastructure", label: "Infrastructure" },
@@ -45,6 +47,8 @@ export default function PricingPage() {
             <BillingManagement />
           </>
         )
+      case "world":
+        return <WorldPricing />
       case "api":
         return <APIPricing />
       case "search":
