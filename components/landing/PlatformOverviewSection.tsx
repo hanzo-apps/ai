@@ -3,45 +3,59 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
+  ShieldCheck,
   Brain,
-  Bot,
-  Plug,
   Database,
-  Rocket,
-  Shield,
+  Radio,
+  Activity,
+  CreditCard,
+  Server,
+  LayoutGrid,
 } from "lucide-react";
 
-// Main value prop — "Everything you need to ship AI software" (6 cards)
-const VALUE_CARDS = [
+// The 67 capabilities, grouped into the eight categories of the capability
+// manifest (openapi/capabilities.yaml). One capability = one name =
+// one /v1/<name>. Breadth without overwhelm — eight movements, one API.
+const CATEGORY_CARDS = [
+  {
+    icon: ShieldCheck,
+    title: "Identity & Trust",
+    desc: "Who you are, what you may touch, where secrets live — IAM, authorization, KMS, and zero-trust.",
+  },
   {
     icon: Brain,
-    title: "Models",
-    desc: "Access leading proprietary, open, and local models through one API.",
-  },
-  {
-    icon: Bot,
-    title: "Agents",
-    desc: "Build agents that can use tools, inspect code, run tasks, and complete workflows.",
-  },
-  {
-    icon: Plug,
-    title: "Tools",
-    desc: "Use 260+ MCP tools for browser, files, git, code, data, cloud, and internal systems.",
+    title: "Intelligence",
+    desc: "The mind of the cloud — models, ML, the inference engine, agents, evals, and code execution.",
   },
   {
     icon: Database,
-    title: "Memory",
-    desc: "Keep context, history, and vector search available across terminal, IDE, browser, and API.",
+    title: "Data",
+    desc: "The stores every capability reads and writes — object storage, Base, SQL, KV, and vector search.",
   },
   {
-    icon: Rocket,
-    title: "Deployment",
-    desc: "Run locally, in Hanzo Cloud, in Kubernetes, or in your own private environment.",
+    icon: Radio,
+    title: "Streams",
+    desc: "Messaging, durable tasks, and async orchestration — pub/sub, queues, streams, and workflows.",
   },
   {
-    icon: Shield,
-    title: "Governance",
-    desc: "Control permissions with IAM, protect secrets with KMS, and review every action with audit logs.",
+    icon: Activity,
+    title: "Observability",
+    desc: "See everything — telemetry, tracing, and usage analytics across every request.",
+  },
+  {
+    icon: CreditCard,
+    title: "Commerce",
+    desc: "The economy — meter, price, bill, and reward, with billing, plans, and wallets built in.",
+  },
+  {
+    icon: Server,
+    title: "Platform",
+    desc: "The cloud fabric — deploy, provision, route, and host through the native PaaS and gateway.",
+  },
+  {
+    icon: LayoutGrid,
+    title: "Applications",
+    desc: "User-facing surfaces on top of it all — console, chat, search, git, teams, and knowledge.",
   },
 ];
 
@@ -57,15 +71,15 @@ const PlatformOverviewSection = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mb-4">
-            Everything you need to ship AI software
+            67 capabilities. One API.
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            One platform for the agent stack — from model access to deployment, governance, and audit.
+            Everything the cloud does is one route — <code className="font-mono text-foreground/90 text-[0.95em]">api.hanzo.ai/v1/&lt;capability&gt;</code>. Sixty-seven capabilities, grouped into eight categories. Breadth without the overwhelm.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {VALUE_CARDS.map((card, index) => {
+          {CATEGORY_CARDS.map((card, index) => {
             const Icon = card.icon;
             return (
               <motion.div

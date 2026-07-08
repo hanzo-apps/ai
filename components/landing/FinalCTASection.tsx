@@ -36,10 +36,10 @@ const FinalCTASection = () => {
           className="text-center mb-10"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium text-foreground mb-5">
-            Build agents you can actually ship.
+            The AI cloud you can run yourself.
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Start with the CLI, deploy through the cloud, or run Hanzo on your own infrastructure.
+            Build on it in our cloud, add compute to the network and earn, or self-host the whole thing. One binary, three paths — pick yours.
           </p>
         </motion.div>
 
@@ -54,24 +54,25 @@ const FinalCTASection = () => {
             href="https://console.hanzo.ai"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 transition-all"
           >
-            Get started free
+            Start building free
             <ArrowRight className="ml-2 h-4 w-4" />
           </a>
-          <a
-            href="https://docs.hanzo.ai"
-            target="_blank"
-            rel="noreferrer noopener"
+          <Link
+            href="/node"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-sm border border-white/25 bg-transparent hover:bg-white/10 hover:border-white/50 transition-colors"
           >
-            Read the docs
-            <ExternalLink className="ml-2 h-4 w-4" />
-          </a>
-          <Link
-            href="/contact/sales"
+            Add compute, earn
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+          <a
+            href="https://docs.hanzo.ai/self-host"
+            target="_blank"
+            rel="noreferrer noopener"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-sm border border-border hover:bg-secondary hover:border-neutral-600 transition-all"
           >
-            Talk to sales
-          </Link>
+            Self-host
+            <ExternalLink className="ml-2 h-4 w-4" />
+          </a>
         </motion.div>
 
         {/* Static code block — no animation */}

@@ -7,7 +7,6 @@ import {
   ArrowRight,
   Copy,
   Check,
-  ExternalLink,
 } from "lucide-react";
 
 // Static terminal block — one and only one demo, no rotation, no step-typing.
@@ -24,12 +23,12 @@ const TERMINAL_LINES: ReadonlyArray<{
 ];
 
 const STAT_BAND = [
-  "50+ models",
-  "Agent SDK",
-  "MCP tools",
-  "Vector DB",
-  "IAM/KMS",
-  "Self-hostable",
+  "67 capabilities",
+  "One API",
+  "One binary",
+  "Bring your own GPU or K8s",
+  "Mine on any device",
+  "Free for public + OSS",
   "Open source",
 ];
 
@@ -118,7 +117,7 @@ const HeroSection = () => {
                   className="inline-flex text-xs font-medium rounded-full px-4 py-2 border w-fit mb-6"
                   style={{ color: "#c4b5fd", borderColor: "rgba(167, 139, 250, 0.3)" }}
                 >
-                  The open-source cloud for production AI agents
+                  V8 · Open Edition — the decentralized AI cloud
                 </p>
               </motion.div>
 
@@ -128,10 +127,10 @@ const HeroSection = () => {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="text-[2rem] sm:text-4xl md:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.08] mb-6"
               >
-                <span className="text-foreground">The open-source</span>
+                <span className="text-foreground">The AI cloud</span>
                 <br />
                 <span className="bg-gradient-to-r from-white via-white/85 to-white/65 bg-clip-text text-transparent">
-                  AI cloud for agents.
+                  you can run yourself.
                 </span>
               </motion.h1>
 
@@ -141,7 +140,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className="text-base xl:text-lg text-muted-foreground leading-relaxed mb-8 max-w-[560px]"
               >
-                Build, deploy, and govern AI agents with one platform for models, tools, memory, vector search, sandboxes, IAM, KMS, and audit logs. Use Hanzo in the cloud, self-host it, or run it inside your own infrastructure.
+                Not another AI API. Hanzo is a decentralized cloud powered by hanzo.network — <code className="font-mono text-foreground/90 text-[0.9em]">hanzod</code> nodes spawn the same unified <code className="font-mono text-foreground/90 text-[0.9em]">cloud</code> binary we run in production. 67 capabilities behind one API. Open source, one binary. Bring your own GPU or Kubernetes, or run it all on your laptop.
               </motion.p>
 
               <motion.div
@@ -154,18 +153,16 @@ const HeroSection = () => {
                   href="https://console.hanzo.ai"
                   className="inline-flex justify-center items-center px-5 sm:px-6 py-3 rounded-full font-medium tracking-tight transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground whitespace-nowrap"
                 >
-                  Get started free
+                  Start building free
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
-                <a
-                  href="https://docs.hanzo.ai"
-                  target="_blank"
-                  rel="noreferrer noopener"
+                <Link
+                  href="/network"
                   className="inline-flex justify-center items-center px-5 sm:px-6 py-3 rounded-full font-medium tracking-tight transition-colors border border-white/25 bg-transparent hover:bg-white/10 hover:border-white/50 text-sm whitespace-nowrap"
                 >
-                  Read the docs
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
+                  Add compute, earn
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </motion.div>
 
               <motion.div
@@ -225,7 +222,7 @@ const HeroSection = () => {
               </div>
 
               <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
-                Hanzo reads your codebase, plans the work, edits across files, runs tests, and prepares a deployable service with a complete audit trail.
+                One command installs the whole cloud. The agent reads your codebase, plans the work, edits across files, runs tests, and deploys to the same binary — in our cloud, on your infrastructure, or on the network.
               </p>
             </motion.div>
           </div>

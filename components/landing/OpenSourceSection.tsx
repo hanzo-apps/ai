@@ -43,10 +43,10 @@ const OpenSourceSection = () => {
             Open Source
           </div>
           <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-4">
-            Built in the open.
+            Open source, one binary.
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Hanzo is open-source infrastructure for the AI-native software stack. Use the hosted cloud, inspect the source, fork the tools, or run the platform yourself.
+            The whole cloud is a single static binary you can read, fork, and run. <code className="font-mono text-foreground/90 text-[0.95em]">curl -fsSL hanzo.sh | bash</code> and self-host it on your own GPU or Kubernetes — the same cloud we run in production, no lock-in.
           </p>
         </motion.div>
 

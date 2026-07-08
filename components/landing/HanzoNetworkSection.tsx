@@ -2,23 +2,24 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { Github, Network, ArrowRight, Cpu, ShieldCheck, Globe } from "lucide-react";
 
 const NETWORK_CARDS = [
   {
     icon: Cpu,
-    title: "Compute marketplace",
-    desc: "Contributors provide GPU capacity; workloads route by price, latency, and trust.",
+    title: "Same binary, everywhere",
+    desc: "hanzod nodes spawn the exact unified cloud binary we run in production. The network is the substrate; the cloud is one binary on top.",
   },
   {
     icon: ShieldCheck,
-    title: "Verifiable work",
-    desc: "Every job carries proof. Outputs are signed, attested, and auditable end-to-end.",
+    title: "Mine on any device",
+    desc: "Bring your own GPU or Kubernetes and earn at market price. Confidential workloads run inside NVIDIA TEE / Confidential Compute.",
   },
   {
     icon: Globe,
-    title: "Open participation",
-    desc: "Run a node, serve inference, earn rewards. Open source. No gatekeeping.",
+    title: "Free for public + OSS",
+    desc: "Public and open-source workloads run free on public nodes. GitHub-for-compute — no gatekeeping, no lock-in.",
   },
 ];
 
@@ -38,10 +39,10 @@ const HanzoNetworkSection = () => {
             Hanzo Network
           </div>
           <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-4">
-            Decentralized AI compute.
+            The network is the cloud.
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Hanzo Network lets contributors provide GPU capacity for inference and training workloads. Developers get access to distributed AI compute. Contributors earn rewards for useful capacity.
+            hanzo.network is a decentralized network of <code className="font-mono text-foreground/90 text-[0.95em]">hanzod</code> nodes that spawn and power the same unified cloud binary we run in production. Bring any device, mine at market price, and run the whole cloud yourself — no single operator owns it.
           </p>
         </motion.div>
 
@@ -68,15 +69,20 @@ const HanzoNetworkSection = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href="https://hanzo.network"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/node"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium bg-primary text-primary-foreground hover:opacity-90 transition-all"
           >
-            Learn more
+            Add compute, earn
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
+          <Link
+            href="/network"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-foreground border border-border hover:bg-secondary transition-colors"
+          >
+            <Network className="w-4 h-4" />
+            Explore the network
+          </Link>
           <a
             href="https://github.com/hanzoai/network"
             target="_blank"
