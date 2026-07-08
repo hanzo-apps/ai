@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { HanzoAnalytics } from '@/components/HanzoAnalytics'
 import { Providers } from './providers'
 import './globals.css'
 
@@ -70,12 +71,9 @@ export default function RootLayout({
         >
           <Providers>{children}</Providers>
         </ThemeProvider>
-        {/* Hanzo Analytics (Umami) */}
-        <Script
-          src="https://analytics.hanzo.ai/script.js"
-          data-website-id="a323a8ae-c811-4061-9626-22caaffc612f"
-          strategy="afterInteractive"
-        />
+        {/* Hanzo Analytics — one tag, fans out to first-party + GA4 + Meta Pixel
+            (env-driven data-ga-id / data-fb-pixel-id). See components/HanzoAnalytics. */}
+        <HanzoAnalytics />
         {/* Hanzo Insights */}
         <Script
           id="hanzo-insights"
