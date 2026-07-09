@@ -55,9 +55,10 @@ const SmartRoutingSection = () => {
             One model id. The right model every time.
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Hanzo Cloud routes each prompt to the model that fits the task and your SLO —
-            local zen, a cheap tier, or a frontier model — so you get frontier quality
-            without frontier bills. Up to 90% lower AI spend, depending on your workload.
+            Hanzo Inference is the native router: it uses consensus to serve the most
+            optimal model for each prompt — local zen, a cheap tier, or a frontier API —
+            matched to the task and your SLO. Frontier quality without frontier bills: up to
+            90% lower AI spend, and up to 10× more efficient than a single-provider API.
           </p>
         </motion.div>
 
