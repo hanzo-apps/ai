@@ -41,10 +41,12 @@ export const partnerLogos: PartnerLogo[] = [
   {
     name: "Techstars",
     src: "/logos/partners/techstars.svg",
-    // h-10 keeps Techstars wordmark visually balanced against h-6 marks.
-    // Spec calls for "same optical weight" — this is the optical normalization,
-    // not the literal height match.
-    className: "h-10",
+    // Optical normalization, not a literal height match. The Techstars asset is
+    // a 120x60 viewBox whose star mark + wordmark only fill the middle ~1/3 of
+    // the height (y20-40), so a naive h-6/h-10 renders the glyphs far smaller
+    // than the h-6 wordmarks around it. h-16 brings the actual glyph height up
+    // to ~parity with Amazon/Google so Techstars reads clearly in the row.
+    className: "h-16",
     href: "https://www.techstars.com",
   },
   {
