@@ -206,15 +206,8 @@ const DesktopNav = () => {
         {(closeMenu) => <LearnContent closeMenu={closeMenu} />}
       </NavMenu>
 
-      {/* Docs - direct link for easy access */}
-      <a
-        href="https://docs.hanzo.ai"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
-      >
-        Docs
-      </a>
+      {/* No top-level Docs link — docs live per product (each product page owns
+          its own "Read the docs" CTA) and under the Learn dropdown. */}
 
       {/* Pricing direct link */}
       <Link
