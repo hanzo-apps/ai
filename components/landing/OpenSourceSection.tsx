@@ -2,7 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Github, ExternalLink, ArrowRight, Network } from "lucide-react";
+import Link from "next/link";
+import { Github, ExternalLink, ArrowRight, Brain, FileText } from "lucide-react";
 
 interface CoreProject {
   org: string;
@@ -86,7 +87,8 @@ const OpenSourceSection = () => {
           </div>
         </motion.div>
 
-        {/* CTA */}
+        {/* Research + CTA — the OSS models we research and maintain (Zen family),
+            with the code, the models, and the papers each one click away. */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -94,16 +96,37 @@ const OpenSourceSection = () => {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="text-center"
         >
-          <a
-            href="https://github.com/hanzoai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium bg-primary text-primary-foreground hover:opacity-90 transition-all"
-          >
-            <Github className="w-5 h-5" />
-            View on GitHub
-            <ArrowRight className="w-4 h-4" />
-          </a>
+          <p className="text-sm text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed">
+            We don&apos;t just ship the platform — we research and maintain the <span className="text-foreground font-medium">Zen family</span>, top open-weight models anyone can run, on-device or in the cloud.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href="https://github.com/hanzoai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium bg-primary text-primary-foreground hover:opacity-90 transition-all"
+            >
+              <Github className="w-5 h-5" />
+              View on GitHub
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <Link
+              href="/zen"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-sm border border-white/25 bg-transparent hover:bg-white/10 hover:border-white/50 transition-colors"
+            >
+              <Brain className="w-4 h-4" />
+              Explore Zen models
+            </Link>
+            <a
+              href="https://hanzo.blog"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-sm border border-white/25 bg-transparent hover:bg-white/10 hover:border-white/50 transition-colors"
+            >
+              <FileText className="w-4 h-4" />
+              Read the research
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

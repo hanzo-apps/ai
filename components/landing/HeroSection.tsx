@@ -9,39 +9,70 @@ import {
   Check,
 } from "lucide-react";
 
-// Static terminal block — one and only one demo, no rotation, no step-typing.
-// This block REPLACES the prior rotating-brand machinery (setInterval +
-// setTerminalStep) and the duplicate "Hanzo Dev" terminal in
-// DeveloperExperienceSection.
-const TERMINAL_LINES: ReadonlyArray<{
-  text: string;
-  type: "command" | "comment";
-}> = [
-  { text: "$ curl -fsSL hanzo.sh | bash", type: "command" },
-  { text: "$ hanzo login", type: "command" },
-  { text: '$ hanzo dev "Build a RAG API for ./docs. Add /chat. Write tests. Deploy it."', type: "command" },
+// The one CLI proof-point shown inside the product preview. One demo, no
+// rotation, no step-typing — the same install line the copy button yields.
+const INSTALL_CMD = "curl -fsSL hanzo.sh | bash";
+const DEV_CMD = '$ hanzo dev "Build a RAG API for ./docs. Add /chat. Write tests. Deploy it."';
+
+// Capability strip under the CTAs — V8's Open-Edition proof points, now each a
+// deep link to the product page that owns it. The header no longer carries a
+// flat Docs link; every product page owns its own docs + console CTAs. The
+// `dynamic:"models"` item resolves its count live at mount (see useModelCount).
+const STAT_BAND: ReadonlyArray<{ label: string; href: string; dynamic?: "models" }> = [
+  { label: "67 capabilities", href: "/products" },
+  { label: "open models", href: "/zen/models", dynamic: "models" },
+  { label: "One API", href: "/gateway" },
+  { label: "One binary", href: "/open-source" },
+  { label: "Bring your own GPU or K8s", href: "/cloud" },
+  { label: "Mine on any device", href: "/network" },
+  { label: "Free for public + OSS", href: "/pricing" },
+  { label: "Open source", href: "/open-source" },
 ];
 
-const STAT_BAND = [
-  "67 capabilities",
-  "One API",
-  "One binary",
-  "Bring your own GPU or K8s",
-  "Mine on any device",
-  "Free for public + OSS",
-  "Open source",
+// Rows rendered inside the animated console preview — a stylized, on-brand
+// snapshot of console.hanzo.ai (NOT a screenshot, so it never goes stale). Each
+// metric animates in on mount, restoring the motion the static terminal dropped.
+const CONSOLE_METRICS = [
+  { label: "Agents running", value: "12", accent: "#a78bfa" },
+  { label: "Requests / min", value: "48.2k", accent: "#e879f9" },
+  { label: "Models served", value: "390+", accent: "#c4b5fd" },
 ];
+const CONSOLE_NAV = ["Agents", "Models", "Vector", "Gateway", "IAM", "Audit"];
+
+// useModelCount resolves the live number of models the gateway serves, so the
+// hero's "N+ open models" is a real figure, not a hardcoded one. Static export →
+// this is a client fetch; on any failure it falls back to the last-known 390+.
+function useModelCount(): string {
+  const [count, setCount] = useState<string>("390+");
+  useEffect(() => {
+    let alive = true;
+    fetch("https://api.hanzo.ai/v1/models", { headers: { Accept: "application/json" } })
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((j) => {
+        const n = Array.isArray(j?.data) ? j.data.length : Array.isArray(j) ? j.length : 0;
+        if (alive && n > 0) {
+          // Round down to a clean floor (e.g. 394 → "390+") so the badge reads marketing-clean.
+          const floored = Math.max(50, Math.floor(n / 10) * 10);
+          setCount(`${floored}+`);
+        }
+      })
+      .catch(() => {/* keep fallback */});
+    return () => { alive = false; };
+  }, []);
+  return count;
+}
 
 const HeroSection = () => {
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const modelCount = useModelCount();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("curl -fsSL hanzo.sh | bash");
+    navigator.clipboard.writeText(INSTALL_CMD);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -51,12 +82,12 @@ const HeroSection = () => {
       {/* Main Hero Container */}
       <div className="relative mx-auto w-full max-w-[1400px] min-h-[640px] rounded-2xl border border-border overflow-hidden bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
 
-        {/* Background gradients */}
+        {/* Background gradients — slow, continuous drift (restores the ambient motion). */}
         <div className="absolute inset-0 overflow-hidden z-0">
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: mounted ? 0.18 : 0 }}
-            transition={{ duration: 1.5 }}
+            animate={{ opacity: mounted ? 0.20 : 0, x: [0, 40, 0], y: [0, -30, 0] }}
+            transition={{ opacity: { duration: 1.5 }, x: { duration: 18, repeat: Infinity, ease: "easeInOut" }, y: { duration: 22, repeat: Infinity, ease: "easeInOut" } }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
               background: `radial-gradient(circle, #a78bfa 0%, transparent 70%)`,
@@ -65,8 +96,8 @@ const HeroSection = () => {
           />
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: mounted ? 0.12 : 0 }}
-            transition={{ duration: 1.5, delay: 0.2 }}
+            animate={{ opacity: mounted ? 0.14 : 0, x: [0, -30, 0], y: [0, 24, 0] }}
+            transition={{ opacity: { duration: 1.5, delay: 0.2 }, x: { duration: 20, repeat: Infinity, ease: "easeInOut" }, y: { duration: 16, repeat: Infinity, ease: "easeInOut" } }}
             className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full"
             style={{
               background: `radial-gradient(circle, #e879f9 0%, transparent 70%)`,
@@ -100,25 +131,29 @@ const HeroSection = () => {
           <div className="grid lg:grid-cols-[1.1fr_1fr] lg:gap-10 xl:gap-14 items-center min-w-0">
           {/*
             min-w-0 above is critical: without it, the grid track stretches
-            to fit the widest child (the terminal block, which contains long
-            whitespace-pre lines). On narrow viewports that pushes the H1/body
+            to fit the widest child on narrow viewports and pushes the H1/body
             text past the viewport. min-w-0 lets each grid track shrink while
-            the terminal handles its own overflow-x-auto internally.
+            the preview handles its own overflow internally.
           */}
 
             {/* Left: Copy */}
             <div className="flex flex-col min-w-0">
+              {/* Eyebrow — V8 badge, now a linked pill (adopts the reference's
+                  linked-badge mechanic; V8 copy preserved verbatim). */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <p
-                  className="inline-flex text-xs font-medium rounded-full px-4 py-2 border w-fit mb-6"
+                <Link
+                  href="/network"
+                  className="group inline-flex items-center gap-2 text-xs font-medium rounded-full px-4 py-2 border w-fit mb-6 transition-colors hover:bg-white/5"
                   style={{ color: "#c4b5fd", borderColor: "rgba(167, 139, 250, 0.3)" }}
                 >
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#a78bfa] animate-pulse" />
                   V8 · Open Edition — the decentralized AI cloud
-                </p>
+                  <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                </Link>
               </motion.div>
 
               <motion.h1
@@ -140,7 +175,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className="text-base xl:text-lg text-muted-foreground leading-relaxed mb-8 max-w-[560px]"
               >
-                Not another AI API. Hanzo is a decentralized cloud powered by hanzo.network — <code className="font-mono text-foreground/90 text-[0.9em]">hanzod</code> nodes spawn the same unified <code className="font-mono text-foreground/90 text-[0.9em]">cloud</code> binary we run in production. 67 capabilities behind one API. Open source, one binary. Bring your own GPU or Kubernetes, or run it all on your laptop.
+                Not another AI API. Hanzo is a decentralized cloud powered by hanzo.network — <code className="font-mono text-foreground/90 text-[0.9em]">hanzod</code> nodes spawn the same unified <code className="font-mono text-foreground/90 text-[0.9em]">cloud</code> binary we run in production. 67 capabilities behind one API. Open source, one binary. Bring your own GPU or Kubernetes, or run it all on your laptop. Connect any provider, watch usage and cost in one place, and let the native router serve the most optimal model — <span className="text-foreground font-medium">saving up to 90% on compute</span>.
               </motion.p>
 
               <motion.div
@@ -165,15 +200,21 @@ const HeroSection = () => {
                 </Link>
               </motion.div>
 
+              {/* Capability strip — every item deep-links to its product page. */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.25 }}
                 className="flex flex-wrap gap-x-3 gap-y-2 text-xs text-muted-foreground"
               >
-                {STAT_BAND.map((label, idx) => (
-                  <React.Fragment key={label}>
-                    <span className="whitespace-nowrap">{label}</span>
+                {STAT_BAND.map((item, idx) => (
+                  <React.Fragment key={item.label}>
+                    <Link
+                      href={item.href}
+                      className="whitespace-nowrap transition-colors hover:text-foreground"
+                    >
+                      {item.dynamic === "models" ? `${modelCount} ${item.label}` : item.label}
+                    </Link>
                     {idx < STAT_BAND.length - 1 && (
                       <span aria-hidden className="text-muted-foreground/40">·</span>
                     )}
@@ -182,25 +223,36 @@ const HeroSection = () => {
               </motion.div>
             </div>
 
-            {/* Right: Single static terminal block — no rotation, no animation */}
+            {/* Right: animated product preview — a browser window framing a
+                stylized console.hanzo.ai, floating gently. Replaces the bare
+                terminal with a real "this is the product" moment. */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 20 }}
               transition={{ duration: 0.6, delay: 0.35 }}
               className="mt-10 lg:mt-0 w-full min-w-0"
             >
-              <div className="rounded-xl border border-border bg-secondary/95 backdrop-blur-sm overflow-hidden shadow-2xl">
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="rounded-xl border border-border bg-secondary/95 backdrop-blur-sm overflow-hidden shadow-2xl"
+              >
+                {/* Browser chrome */}
                 <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border bg-secondary">
                   <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]/70" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]/70" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]/70" />
                   </div>
-                  <span className="ml-2 text-[11px] text-muted-foreground font-mono">From prompt to production</span>
+                  <div className="ml-2 flex-1 flex items-center justify-center">
+                    <span className="text-[11px] text-muted-foreground font-mono px-3 py-1 rounded-md bg-background/60 border border-border/60">
+                      console.hanzo.ai
+                    </span>
+                  </div>
                   <button
                     onClick={handleCopy}
                     aria-label="Copy install command"
-                    className="ml-auto p-1 rounded hover:bg-accent transition-colors"
+                    className="p-1 rounded hover:bg-accent transition-colors"
                   >
                     {copied ? (
                       <Check className="h-3.5 w-3.5 text-foreground/70" />
@@ -209,20 +261,71 @@ const HeroSection = () => {
                     )}
                   </button>
                 </div>
-                <div className="p-5 font-mono text-[13px] leading-relaxed bg-background overflow-x-auto">
-                  {TERMINAL_LINES.map((line, idx) => (
-                    <div
-                      key={idx}
-                      className={`whitespace-pre ${idx === TERMINAL_LINES.length - 1 ? "mb-0" : "mb-2"} text-foreground/90`}
-                    >
-                      {line.text}
+
+                {/* Console body: sidebar + metric cards + activity + CLI strip */}
+                <div className="bg-background">
+                  <div className="grid grid-cols-[120px_1fr] min-h-[300px]">
+                    {/* Sidebar */}
+                    <div className="border-r border-border/60 p-3 hidden sm:flex flex-col gap-1">
+                      {CONSOLE_NAV.map((n, i) => (
+                        <motion.div
+                          key={n}
+                          initial={{ opacity: 0, x: -8 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: 0.5 + i * 0.06 }}
+                          className={`text-[11px] px-2 py-1.5 rounded-md ${i === 0 ? "bg-white/10 text-foreground" : "text-muted-foreground"}`}
+                        >
+                          {n}
+                        </motion.div>
+                      ))}
                     </div>
-                  ))}
+
+                    {/* Main */}
+                    <div className="p-4">
+                      <div className="grid grid-cols-3 gap-2.5 mb-4">
+                        {CONSOLE_METRICS.map((m, i) => (
+                          <motion.div
+                            key={m.label}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.6 + i * 0.1 }}
+                            className="rounded-lg border border-border/60 bg-secondary/40 p-2.5"
+                          >
+                            <div className="text-[10px] text-muted-foreground mb-1 truncate">{m.label}</div>
+                            <div className="text-lg font-semibold" style={{ color: m.accent }}>{m.value}</div>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      {/* Animated activity bars */}
+                      <div className="rounded-lg border border-border/60 bg-secondary/40 p-3 mb-4">
+                        <div className="text-[10px] text-muted-foreground mb-2">Inference throughput</div>
+                        <div className="flex items-end gap-1 h-14">
+                          {[40, 65, 45, 80, 55, 90, 70, 95, 60, 85, 50, 75].map((h, i) => (
+                            <motion.div
+                              key={i}
+                              initial={{ height: 0 }}
+                              animate={{ height: `${h}%` }}
+                              transition={{ duration: 0.6, delay: 0.8 + i * 0.04, ease: "easeOut" }}
+                              className="flex-1 rounded-sm"
+                              style={{ background: "linear-gradient(to top, #a78bfa, #e879f9)" }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* CLI strip — the dev proof-point, kept compact */}
+                      <div className="rounded-lg border border-border/60 bg-black/60 px-3 py-2 font-mono text-[11px] text-foreground/85 overflow-x-auto whitespace-pre">
+                        <span className="text-[#a78bfa]">{DEV_CMD}</span>
+                        <span className="inline-block w-1.5 h-3.5 ml-1 align-middle bg-foreground/70 animate-pulse" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </motion.div>
 
               <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
-                One command installs the whole cloud. The agent reads your codebase, plans the work, edits across files, runs tests, and deploys to the same binary — in our cloud, on your infrastructure, or on the network.
+                One console for the whole cloud — models, agents, vector search, gateways, IAM, and audit. Run it in our cloud, on your own infrastructure, or on the network, with a complete audit trail.
               </p>
             </motion.div>
           </div>

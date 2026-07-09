@@ -23,6 +23,17 @@
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --radius: 0.5rem;
+
+  /* Fonts — single source of truth (Tailwind v4 is CSS-first; without an
+     @config directive the legacy tailwind.config.ts fontFamily is not loaded,
+     so the Geist tokens must live here). These map next/font's CSS variables
+     (set on <body> in app/layout.tsx) onto Tailwind's font utilities AND the
+     base font: v4 derives --default-font-family from --font-sans, so unclassed
+     text renders in Geist Sans too. */
+  --font-sans: var(--font-geist), "Geist Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-geist), "Geist Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, monospace;
+  --font-serif: Georgia, serif;
 }
 
 :root {

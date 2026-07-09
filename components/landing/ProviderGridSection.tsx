@@ -24,8 +24,10 @@ const ProviderGridSection = () => {
             Every provider. One cloud.
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            {PROVIDERS.length}+ AI providers tracked, connected, and routable through
-            Hanzo — with limits, credits, and spend in one plane.
+            Connect Claude, Gemini, Grok, Groq, DeepSeek, Bedrock — {PROVIDERS.length}+ AI
+            providers in all. Hanzo is the login and usage manager in front of every one:
+            see limits, credits, and spend in one plane, then let the native router serve
+            the most optimal model for each request.
           </p>
         </motion.div>
 

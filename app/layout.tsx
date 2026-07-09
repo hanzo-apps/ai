@@ -55,9 +55,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Geist font CSS vars go on <html> (the :root element): Tailwind v4's @theme
+  // tokens (--font-sans: var(--font-geist)…) and the preflight base font resolve
+  // at :root, so the vars must be defined there — on <body> they'd be out of
+  // scope and the whole chain falls back to system fonts.
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geist.variable} ${geistMono.variable} antialiased bg-background text-foreground`}>
+    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable}`}>
+      <body className="antialiased bg-background text-foreground">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
