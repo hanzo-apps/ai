@@ -68,12 +68,12 @@ const PlatformOverviewSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-left mb-12"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mb-4">
             67 capabilities. One API.
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl">
             Everything the cloud does is one route — <code className="font-mono text-foreground/90 text-[0.95em]">api.hanzo.ai/v1/&lt;capability&gt;</code>. Sixty-seven capabilities, grouped into eight categories. Breadth without the overwhelm.
           </p>
         </motion.div>
