@@ -1,4 +1,5 @@
 import DataroomClient from "./dataroom-client"
+import { ProductFooter } from "@/components/products/ProductFooter"
 
 export const metadata = {
   title: "Hanzo Dataroom - Secure Document Sharing & Analytics",
@@ -6,5 +7,10 @@ export const metadata = {
 }
 
 export default function DataroomPage() {
-  return <DataroomClient />
+  return (
+    <>
+      <DataroomClient />
+      <ProductFooter slug="dataroom" name="Dataroom" />
+    </>
+  )
 }

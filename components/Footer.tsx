@@ -65,7 +65,7 @@ const footerLinks = {
     items: [
       { title: "Docs", href: "https://docs.hanzo.ai", external: true },
       { title: "Blog", href: "/blog" },
-      { title: "Tutorials", href: "https://docs.hanzo.ai/tutorials", external: true },
+      { title: "Tutorials", href: "https://docs.hanzo.ai/docs", external: true },
     ],
   },
   helpSecurity: {

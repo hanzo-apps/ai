@@ -40,8 +40,6 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "src",
-    "_src_vite_backup"
+    "node_modules"
   ]
 }

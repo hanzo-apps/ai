@@ -45,7 +45,7 @@ const CallToAction = () => {
               <p className="text-muted-foreground mb-4 text-center">Integrate our APIs into your applications</p>
               <Button 
                 className="mt-auto bg-primary/10 hover:bg-primary/10 text-primary-foreground"
-                onClick={() => window.open('https://docs.hanzo.ai/api', '_blank')}
+                onClick={() => window.open('https://docs.hanzo.ai/docs', '_blank')}
               >
                 API Reference <ArrowRight className="ml-2 h-4 w-4" />
               </Button>

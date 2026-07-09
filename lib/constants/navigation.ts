@@ -173,7 +173,7 @@ export const resources = [
       },
       {
         name: "API Reference",
-        url: "https://docs.hanzo.ai/api",
+        url: "https://docs.hanzo.ai/docs",
         description: "Detailed API documentation"
       },
       {

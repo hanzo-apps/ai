@@ -105,8 +105,8 @@ const mobileNav = [
         title: "Documentation",
         items: [
           { title: "Docs", href: "https://docs.hanzo.ai", external: true },
-          { title: "Tutorials", href: "https://docs.hanzo.ai/tutorials", external: true },
-          { title: "API Reference", href: "https://docs.hanzo.ai/api", external: true },
+          { title: "Tutorials", href: "https://docs.hanzo.ai/docs", external: true },
+          { title: "API Reference", href: "https://docs.hanzo.ai/docs", external: true },
         ]
       },
       {

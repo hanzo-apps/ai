@@ -68,20 +68,31 @@ Every product item carries a `github:` field linking to its canonical
 - **`/runtime`** menu item — no live page or published image; removed
   pending Runtime product launch.
 
-## Lingering cruft (review before deleting)
+## Cruft sweep (done)
 
-- `app/(marketing)/solutions/{capabilities,industries,[...slug]}/page.tsx`
-  — pages still exist for direct URL access but unlinked from header.
-  Pre-existing TS errors. Decide: delete or restore links.
-- `lib/constants/navigation.ts` (different from `navigation-data.ts`!) —
-  only imported by the orphaned `solutions/` pages above.
-- `lib/constants/solutions-data.ts` — only imported by `solutions/[...slug]/page.tsx`.
-- `components/navigation/products-menu/product-data.ts` — duplicate of
-  navigation-data.ts product list. Still imported by `landing/FeatureShowcase.tsx`.
-  Migrate FeatureShowcase to read from `navigation-data.ts` and delete.
-- Duplicate referrals pages: `/referral`, `/referrals`, `/referral-program`
-  — three implementations. Keep `/referral-program` (account-aware), delete the others.
-- `/home2` — duplicate of `/`.
+- Removed `components/shadcn-v4/` (unrouted Tailwind-migration demo) plus
+  ~245 other provably-dead Vite→Next migration components — old homepage
+  iterations (`index3`–`index6`, `hero/`, `landing/`, `features-showcase/`,
+  `animations/`), replaced product/section trees (`balancer`, `zen`,
+  `observability`, `open-source`, `hanzoapp`, `hanzodev`, the old `pricing`
+  subset, …), and orphan utils (`contexts/Web3Context`, `hooks/use-mobile`,
+  `lib/og-image`, `ui/{code-block,masonry-grid,radix-button}`). Each was
+  confirmed unreachable by a full static import-graph walk from the App
+  Router entrypoints (no dynamic imports exist, so the graph is complete).
+- Already resolved before this sweep: `products-menu/product-data.ts`
+  (deleted; `landing/FeatureShowcase.tsx` reads `navigation-data.ts`),
+  `/home2`, `/referrals`, `/referral-program`. `/referral` is the single
+  surviving referrals page — keep it.
+
+## One known duplication (load-bearing — do NOT blind-delete)
+
+- `lib/constants/navigation.ts` (NOT `navigation-data.ts`) and
+  `lib/constants/solutions-data.ts` back the `/solutions` section, which is
+  still LIVE: linked from `Footer.tsx`, `CommandPalette.tsx`, `Features.tsx`,
+  `PlatformHeader.tsx`, `IndustriesSection.tsx`, and the `[...slug]` page
+  serves real footer links (`/solutions/agents`, `/solutions/rag`, …).
+  Collapsing onto `navigation-data.ts` means migrating those pages and
+  scrubbing those links first; until then both files stay.
 
 ## Design System
 

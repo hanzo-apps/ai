@@ -133,8 +133,8 @@ const LearnContent = ({ closeMenu }: { closeMenu: () => void }) => (
       <h3 className="text-muted-foreground text-xs font-medium mb-3 uppercase tracking-wider">Documentation</h3>
       <div className="space-y-0.5">
         <IconLink href="https://docs.hanzo.ai" icon={BookOpen} label="Docs" external closeMenu={closeMenu} />
-        <IconLink href="https://docs.hanzo.ai/tutorials" icon={GraduationCap} label="Tutorials" external closeMenu={closeMenu} />
-        <IconLink href="https://docs.hanzo.ai/api" icon={Code} label="API Reference" external closeMenu={closeMenu} />
+        <IconLink href="https://docs.hanzo.ai/docs" icon={GraduationCap} label="Tutorials" external closeMenu={closeMenu} />
+        <IconLink href="https://docs.hanzo.ai/docs" icon={Code} label="API Reference" external closeMenu={closeMenu} />
       </div>
     </div>
     <div>

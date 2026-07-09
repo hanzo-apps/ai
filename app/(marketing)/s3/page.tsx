@@ -1,6 +1,7 @@
 'use client'
 
 import { ArrowRight } from "lucide-react"
+import { ProductFooter } from "@/components/products/ProductFooter"
 
 export default function S3Page() {
   return (
@@ -34,6 +35,8 @@ export default function S3Page() {
             </div>
           </div>
         </section>
+
+        <ProductFooter slug="s3" name="S3" />
       </main>
     </div>
   )

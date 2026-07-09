@@ -421,7 +421,7 @@ const DeveloperExperienceSection = () => {
                   Hanzo provides a unified API for chat, model routing, tool calling, memory, and agent execution. It is compatible with existing OpenAI-style SDKs. Change the base URL and start routing through Hanzo.
                 </p>
                 <a
-                  href="https://docs.hanzo.ai/api"
+                  href="https://docs.hanzo.ai/docs"
                   target="_blank"
                   rel="noreferrer noopener"
                   className="inline-flex items-center px-5 py-2.5 rounded-full text-sm font-medium transition-colors bg-primary text-primary-foreground hover:opacity-90"

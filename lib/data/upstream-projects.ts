@@ -350,10 +350,10 @@ export const hanzoSDKs: ProductSDK[] = [
   {
     language: 'typescript',
     name: 'Hanzo TypeScript SDK',
-    package: '@hanzo/ai',
+    package: 'hanzoai',
     registry: 'npm',
-    url: 'https://www.npmjs.com/package/@hanzo/ai',
-    installCommand: 'npm install @hanzo/ai',
+    url: 'https://www.npmjs.com/package/hanzoai',
+    installCommand: 'npm install hanzoai',
     docsUrl: 'https://docs.hanzo.ai/sdk/typescript'
   },
   {

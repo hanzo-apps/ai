@@ -1,4 +1,5 @@
 import SignClient from "./sign-client"
+import { ProductFooter } from "@/components/products/ProductFooter"
 
 export const metadata = {
   title: "Hanzo Sign - Document Signing Platform",
@@ -6,5 +7,10 @@ export const metadata = {
 }
 
 export default function SignPage() {
-  return <SignClient />
+  return (
+    <>
+      <SignClient />
+      <ProductFooter slug="sign" name="Sign" />
+    </>
+  )
 }
