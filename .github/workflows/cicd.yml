@@ -1,15 +1,18 @@
-# Canonical CI/CD — imports the shared hanzoai/ci reusable workflow, which
-# reads hanzo.yml (images + test + deploy + kms). No per-repo build logic, no
-# GitHub-hosted runners. Same shape every hanzo/lux/zoo repo uses.
+# Canonical CI/CD — imports the shared hanzoai/ci reusable workflow, which reads
+# the repo-root hanzo.yml (images + test + deploy + kms). No per-repo build
+# logic, no GitHub-hosted runners. All real config lives in hanzo.yml.
 #
-# Runner is pinned to the Hanzo arc scale set BY NAME (`hanzo-build-linux-amd64`):
-# ARC scale sets are matched by installation name, not the [self-hosted,linux,
-# amd64] label triple ci defaults to — without this the job sits queued.
+# `permissions` is REQUIRED here, not cosmetic: hanzoai/ci's build.yml requests
+# `packages: write` (it pushes the image to GHCR with the automatic
+# GITHUB_TOKEN). A reusable workflow can never hold more than its caller grants,
+# and this org's default GITHUB_TOKEN is read-only — so without granting
+# `packages: write` explicitly, GitHub rejects the call at compile time
+# ("requesting 'packages: write', but is only allowed 'packages: read'") and the
+# run startup-fails before any job launches. Granting the two scopes the
+# reusable declares (contents:read + packages:write) is least-privilege and
+# makes the caller portable across orgs regardless of their default-token policy.
 #
-# This replaces the bespoke ci.yml + deploy.yml. platform.hanzo.ai reads the
-# SAME hanzo.yml, so a push can also build in-cluster (BuildKit → operator)
-# with zero GHA dispatch once the repo's webhook is registered at
-# platform.hanzo.ai — the fully GHA-free fast path.
+# Deploy fires only on `main` per hanzo.yml; PRs build + test but never deploy.
 name: CI/CD
 
 on:
@@ -19,9 +22,11 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   cicd:
     uses: hanzoai/ci/.github/workflows/build.yml@main
-    with:
-      runner: '["hanzo-build-linux-amd64"]'
     secrets: inherit
