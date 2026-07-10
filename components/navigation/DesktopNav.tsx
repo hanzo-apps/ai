@@ -6,7 +6,7 @@ import ProductsMenu from "./products-menu";
 import { NavMenu } from "./NavMenu";
 import {
   Users, Lightbulb, Brain, Layers, FileText, ExternalLink,
-  GitBranch, Cpu, Cloud, Server, ArrowRight, Mail, Building2, Gift, Shield,
+  GitBranch, Mail, Building2, Gift, Shield,
   Activity, BookOpen, GraduationCap, Code, MessageCircle, PenLine, LifeBuoy,
   Palette, Newspaper, HeartHandshake, HelpCircle, Rocket
 } from "lucide-react";
@@ -54,7 +54,7 @@ const IconLink = ({
 
 // Meet Hanzo dropdown content
 const MeetHanzoContent = ({ closeMenu }: { closeMenu: () => void }) => (
-  <div className="grid grid-cols-4 gap-6">
+  <div className="grid grid-cols-3 gap-6">
     {/* Featured - About Hanzo (grey panel with Philosophy, Leadership, Blog inside) */}
     <div className="col-span-1">
       <div className="p-4 rounded-xl bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 border border-border/50 h-full">
@@ -92,18 +92,6 @@ const MeetHanzoContent = ({ closeMenu }: { closeMenu: () => void }) => (
         <IconLink href="https://hanzo.blog" icon={FileText} label="Papers & Blog" external closeMenu={closeMenu} />
         <IconLink href="https://huggingface.co/zenlm" icon={ExternalLink} label="HuggingFace" external closeMenu={closeMenu} />
         <IconLink href="/open-source" icon={GitBranch} label="Open Source" closeMenu={closeMenu} />
-      </div>
-    </div>
-
-    {/* Products */}
-    <div>
-      <h3 className="text-muted-foreground text-xs font-medium mb-3 uppercase tracking-wider">Products</h3>
-      <div className="space-y-0.5">
-        <IconLink href="/dev" icon={Code} label="Hanzo Dev" description="AI coding assistant" closeMenu={closeMenu} />
-        <IconLink href="/ai" icon={Cpu} label="AI Platform" closeMenu={closeMenu} />
-        <IconLink href="/cloud" icon={Cloud} label="Cloud" closeMenu={closeMenu} />
-        <IconLink href="/platform" icon={Server} label="Infrastructure" closeMenu={closeMenu} />
-        <IconLink href="/products" icon={ArrowRight} label="All Products →" closeMenu={closeMenu} />
       </div>
     </div>
 
@@ -223,22 +211,8 @@ const DesktopNav = () => {
       >
         Pricing
       </Link>
-
-      {/* Open Source direct link */}
-      <Link
-        href="/open-source"
-        className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
-      >
-        Open Source
-      </Link>
-
-      {/* Startups program direct link */}
-      <Link
-        href="/startups"
-        className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
-      >
-        Startups
-      </Link>
+      {/* Open Source + Startups live inside the Meet Hanzo dropdown (Research /
+          Connect) — kept out of the top bar to keep it clean. */}
     </div>
   );
 };

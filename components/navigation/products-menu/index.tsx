@@ -96,9 +96,10 @@ export const ProductsMenu = () => {
                           {Icon && (
                             <Icon className="mt-[3px] h-3 w-3 flex-shrink-0 text-muted-foreground transition-colors group-hover/leaf:text-foreground" />
                           )}
-                          {/* Primary click — quick-launch the product in the console */}
+                          {/* Marketing nav — link to the product page, not the
+                              login-gated console (Docs lives top-level, not per item). */}
                           <a
-                            href={item.console || item.href || "#"}
+                            href={item.href || "#"}
                             onClick={closeMenu}
                             className="min-w-0 flex-1 leading-tight"
                           >
@@ -111,18 +112,6 @@ export const ProductsMenu = () => {
                               </span>
                             )}
                           </a>
-                          {/* Small affordance — deep-link into the docs */}
-                          {item.docs && (
-                            <a
-                              href={item.docs}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => e.stopPropagation()}
-                              className="mt-[2px] flex-shrink-0 text-[10px] text-muted-foreground/40 transition-colors hover:text-foreground"
-                            >
-                              Docs
-                            </a>
-                          )}
                         </div>
                       );
                     })}

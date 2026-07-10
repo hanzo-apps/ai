@@ -104,8 +104,8 @@ export const NavMenu = ({ label, children }: NavMenuProps) => {
           {/* Desktop: Full viewport width dropdown with backdrop */}
           {isDesktop ? (
             <div className={cn(
-                   "fixed left-0 w-full backdrop-blur-md z-50 border-b shadow-2xl",
-                   "bg-background/95 border-neutral-800/50"
+                   "fixed left-0 w-full z-50 border-b shadow-2xl",
+                   "bg-background border-neutral-800"
                  )}
                  style={{
                    top: 'var(--header-height)',
@@ -120,8 +120,8 @@ export const NavMenu = ({ label, children }: NavMenuProps) => {
             /* Mobile: Full-viewport menu overlay */
             <div
               className={cn(
-                "fixed inset-0 left-0 right-0 backdrop-blur-md z-50 w-screen transition-opacity duration-300 ease-in-out",
-                "bg-background/95"
+                "fixed inset-0 left-0 right-0 z-50 w-screen transition-opacity duration-300 ease-in-out",
+                "bg-background"
               )}
               style={{
                 top: 'var(--header-height)',
