@@ -35,27 +35,41 @@ components/navigation/
 
 ## Header Menu (canonical)
 
-Defined in `lib/constants/navigation-data.ts`. Single source — every menu surface
-(desktop, mobile, footer) reads from the exports here.
+Single source: **`lib/data/cloud-primitives.ts`** → `cloudCategories`. It drives
+`lib/constants/navigation-data.ts` (`productsNav`), the mega-menu, the
+`/products/<slug>` category landing pages, and the generated `/cloud/[slug]`
+overview pages — so the nav, the pages, and the routes can never drift.
 
 **Top level**: Meet Hanzo · Products · Learn · Docs · Pricing
 
-**Products dropdown** (9 categories, 50 items, all linking to live `/<slug>` pages):
+**Products dropdown** — 10 cloud-primitive categories (two rows of five),
+positioned "Open AI Cloud — GCP-compatible. Open source. On-chain.":
 
-| Category       | Items |
-|----------------|-------|
-| AI & Agents    | Zen Models, Agents, AI Studio, MCP, ZAP, LLM Gateway |
-| Developer      | Dev, Code, Extension, Operative |
-| Apps           | Chat, Search, Crawl, Base, Commerce, Captable, Dataroom, Sign |
-| Compute        | Cloud, Functions, Machines, Edge, Realtime |
-| Data           | Vector, SQL, KV, Datastore, Storage, S3 |
-| Async          | Flow, Auto, Tasks, Pubsub, MQ, Stream |
-| Platform       | IAM, KMS, Platform, DNS, Identity, Console |
-| Observability  | Insights, Analytics, Status, Dashboards |
-| Web3           | Chains, Exchange, Wallets, Indexer, NFT, Tokens, Pay, Bridge |
+| Category | `/products/<slug>` | Items |
+|---|---|---|
+| AI       | `/products/ai`       | Models, Agents, Inference, Fine-tuning, Embeddings, Evals |
+| Compute  | `/products/compute`  | GPUs, Machines, Containers, Functions, Edge, Jobs |
+| Data     | `/products/data`     | Vector, SQL, KV, Object Storage, Datastore, DocDB |
+| Network  | `/products/network`  | Gateway, VPC, DNS, CDN, Load Balancer, Service Mesh |
+| Security | `/products/security` | IAM, Authz, KMS, HSM, Secrets, Audit |
+| Dev      | `/products/dev`      | CLI, SDKs, API, Playground, IDE, Desktop |
+| Platform | `/products/platform` | Projects, Environments, Builds, Registry, Releases, Pipelines |
+| Observe  | `/products/observe`  | Logs, Metrics, Traces, Dashboards, Alerts, Cost |
+| Web3     | `/products/web3`     | Settlement, Chains, Wallets, Tokens, Indexer, Oracles — **Lux** → lux.cloud |
+| Apps     | `/products/apps`     | Chat, Bot, Search, Crawl, Studio, Console |
 
-Every product item carries a `github:` field linking to its canonical
-`https://github.com/hanzoai/<repo>` repo (one-and-only-one-way).
+- Each mega-menu **category header links to its `/products/<slug>` page**
+  (`app/(marketing)/products/[categoryId]/page.tsx`, generated from
+  `categorySlugs`); the page is `components/cloud/CloudCategoryOverview.tsx`.
+- **Web3 = Lux Network.** Those leaves hand off to **lux.cloud** under the
+  **Lux** brand (white-label: never the Hanzo mark on a Lux surface); no Hanzo
+  console link, docs → docs.lux.cloud.
+- Product ↔ `/v1/<svc>` ↔ plan/usage mapping: **`docs/product-service-map.md`**
+  (reconciled against `~/work/hanzo/cloud/subsystems/subsystems.go`).
+
+> `lib/data/product-taxonomy.ts` is a SEPARATE, legacy catalog still used by
+> `components/products/ProductPageTemplate` (the ~80 bespoke `/<slug>` product
+> pages) and the orphaned `solutions/` pages — it is NOT the products-nav source.
 
 ## Removed (2026-05-07 cleanup)
 

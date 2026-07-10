@@ -108,6 +108,14 @@ export interface Primitive {
   console?: string
   /** Resolved menu descriptor: blurb ?? gcp (resolved at the bottom). */
   desc?: string
+  /**
+   * True for a leaf that links OUT to another surface (the Web3 leaves point at
+   * lux.cloud). External leaves get no Hanzo console deep-link and their docs
+   * resolve to the external brand's docs, not docs.hanzo.ai.
+   */
+  external?: boolean
+  /** White-label brand for a leaf that is NOT a Hanzo surface (e.g. 'lux'). */
+  brand?: 'lux'
 }
 
 export interface CloudCategory {
@@ -117,6 +125,12 @@ export interface CloudCategory {
   gcp: string
   /** One-line category positioning. */
   tagline: string
+  /**
+   * White-label brand for the whole category. Web3 is a Lux Network surface —
+   * the category page + mega-menu render the Lux brand and hand off to
+   * lux.cloud, never showing the Hanzo mark on a Lux surface.
+   */
+  brand?: 'lux'
   /** Exactly six primary primitives. */
   items: Primitive[]
 }
@@ -127,6 +141,14 @@ const ORG = 'https://github.com/hanzoai'
 const DOCS = 'https://docs.hanzo.ai'
 const CONSOLE = 'https://console.hanzo.ai'
 const DOCS_BASE = 'https://docs.hanzo.ai/docs'
+
+// Lux Network surfaces (the Web3 category). These are NOT Hanzo products: they
+// live at lux.cloud under the Lux brand. White-label separation is absolute —
+// a Lux leaf never carries a Hanzo console link, Hanzo docs, or the Hanzo mark.
+const LUX = 'https://lux.cloud'
+const LUX_SERVICES = 'https://lux.cloud/services'
+const LUX_DOCS = 'https://docs.lux.cloud'
+const LUX_ORG = 'https://github.com/luxfi'
 
 // Shared defaults for generated overview pages: source is the org (always 200,
 // open source) and docs home (separate site). Keeps every link live.
@@ -336,26 +358,34 @@ const rawCategories: CloudCategory[] = [
     ],
   },
   {
+    // Web3 is the Lux Network settlement layer. Every leaf hands off to
+    // lux.cloud under the Lux brand — retargeted off the old Hanzo-hosted
+    // /blockchain/* pages so the two brands stay strictly separate.
     title: 'Web3',
-    gcp: 'On-chain settlement & trust layer',
-    tagline: 'The settlement layer under every resource.',
+    gcp: 'Lux Network — on-chain settlement & trust',
+    tagline: 'The settlement layer under every resource — powered by Lux Network.',
+    brand: 'lux',
     items: [
-      stub({
-        slug: 'settlement', base: '/blockchain', title: 'Settlement', icon: Landmark, gcp: 'No GCP equivalent', blurb: 'On-chain settlement', status: 'beta',
+      // Settlement + Attestations keep their slug so the existing overview
+      // pages resolve them via getPrimitive(); the href points at lux.cloud.
+      {
+        slug: 'settlement', title: 'Settlement', href: LUX, icon: Landmark, blurb: 'On-chain settlement',
+        external: true, brand: 'lux', github: LUX_ORG, docs: LUX_DOCS, status: 'beta', gcp: 'No GCP equivalent',
         tagline: 'The trust layer under the cloud.',
-        description: 'On-chain settlement for every metered unit — models, GPUs, storage, API calls. Deterministic billing, programmable payouts, and provable usage.',
+        description: 'On-chain settlement for every metered unit — models, GPUs, storage, API calls. Deterministic billing, programmable payouts, and provable usage, settled on Lux Network.',
         features: ['Meter → settle on-chain', 'Programmable payouts', 'Deterministic billing', 'Provable usage'],
-      }),
-      { title: 'Wallets', href: '/blockchain/wallets', icon: Wallet, blurb: 'Custody & keys' },
-      { title: 'Tokens', href: '/blockchain/tokens', icon: Coins, blurb: 'Tokenization' },
-      { title: 'Indexer', href: '/blockchain/indexer', icon: Search, blurb: 'Chain indexer' },
-      { title: 'Oracles', href: '/blockchain/oracle', icon: Radio, blurb: 'Price & data feeds' },
-      stub({
-        slug: 'attestations', base: '/blockchain', title: 'Attestations', icon: BadgeCheck, gcp: 'No GCP equivalent', blurb: 'Verifiable provenance', status: 'beta',
+      },
+      { title: 'Chains', href: LUX_SERVICES, icon: Boxes, blurb: 'Launch L1 / L2 rollups', external: true, brand: 'lux', github: LUX_ORG },
+      { title: 'Wallets', href: LUX_SERVICES, icon: Wallet, blurb: 'MPC custody & keys', external: true, brand: 'lux', github: LUX_ORG },
+      { title: 'Tokens', href: LUX_SERVICES, icon: Coins, blurb: 'Tokenization & assets', external: true, brand: 'lux', github: LUX_ORG },
+      { title: 'Indexer', href: LUX_SERVICES, icon: Search, blurb: 'Explorer & chain data', external: true, brand: 'lux', github: LUX_ORG },
+      {
+        slug: 'attestations', title: 'Attestations', href: LUX_SERVICES, icon: BadgeCheck, blurb: 'Verifiable provenance',
+        external: true, brand: 'lux', github: LUX_ORG, docs: LUX_DOCS, status: 'beta', gcp: 'No GCP equivalent',
         tagline: 'Sign what happened.',
-        description: 'Cryptographic attestations for models, datasets, builds, and inference runs. Verifiable provenance anchored on-chain for audit and compliance.',
+        description: 'Cryptographic attestations for models, datasets, builds, and inference runs. Verifiable provenance anchored on Lux Network for audit and compliance.',
         features: ['Model + dataset provenance', 'Build + run attestations', 'Verifiable on-chain', 'Audit & compliance ready'],
-      }),
+      },
     ],
   },
   {
@@ -423,12 +453,17 @@ const launchSlug = (href: string): string =>
 //    ships per-product /deploy/<slug> routes.
 //  - docs: a verified-live docs page (see DOCS_PATH).
 //  - desc: the short menu descriptor (blurb override, else the GCP equivalent).
-const resolve = (p: Primitive): Primitive => ({
-  ...p,
-  console: `${CONSOLE}/?deploy=${launchSlug(p.href)}`,
-  docs: `${DOCS_BASE}/${DOCS_PATH[p.href] ?? 'services'}`,
-  desc: p.blurb ?? p.gcp,
-})
+const resolve = (p: Primitive): Primitive =>
+  p.external
+    ? // Lux (Web3) leaf: hand off to lux.cloud. No Hanzo console deep-link; docs
+      // resolve to the Lux docs, never docs.hanzo.ai (white-label separation).
+      { ...p, console: undefined, docs: p.docs ?? LUX_DOCS, desc: p.blurb ?? p.gcp }
+    : {
+        ...p,
+        console: `${CONSOLE}/?deploy=${launchSlug(p.href)}`,
+        docs: `${DOCS_BASE}/${DOCS_PATH[p.href] ?? 'services'}`,
+        desc: p.blurb ?? p.gcp,
+      }
 
 // The ten cloud categories, with every leaf's console + docs deep links and
 // descriptor resolved. Single source of truth for the mega-menu, the generated
@@ -456,4 +491,18 @@ export function getPrimitive(slug: string): Primitive | undefined {
 /** Category a primitive belongs to (for the overview breadcrumb / GCP context). */
 export function getPrimitiveCategory(slug: string): CloudCategory | undefined {
   return cloudCategories.find((c) => c.items.some((i) => i.slug === slug))
+}
+
+// Category slug — the ONE slugify used by both the mega-menu category headers
+// and the `/products/<slug>` category landing routes, so a header always links
+// to a page that exists. "AI" → "ai", "Web3" → "web3", "Observe" → "observe".
+export const categorySlug = (title: string): string =>
+  title.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+
+/** Every category slug — the `generateStaticParams` set for `/products/[categoryId]`. */
+export const categorySlugs: string[] = cloudCategories.map((c) => categorySlug(c.title))
+
+/** Look up a category by its slug (the `/products/<slug>` landing page). */
+export function getCategoryBySlug(slug: string): CloudCategory | undefined {
+  return cloudCategories.find((c) => categorySlug(c.title) === slug)
 }

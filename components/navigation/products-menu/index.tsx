@@ -1,6 +1,7 @@
 'use client'
 
 import { productsNav } from "@/lib/constants/navigation-data";
+import { categorySlug } from "@/lib/data/cloud-primitives";
 import Link from "next/link";
 import NavMenu from "../NavMenu";
 import { Bot, Terminal, ArrowRight } from "lucide-react";
@@ -9,11 +10,6 @@ import { Button } from "@/components/ui/button";
 // Cap each category to 6 items inside the mega-menu — anything past
 // that falls behind a "View all in <category>" link so columns stay short.
 const MAX_ITEMS_PER_CATEGORY = 6;
-
-// Slugify a category title for the deep-link target (e.g. "AI & Agents"
-// → "ai-agents"). Used by the "View all" overflow link.
-const slugify = (s: string) =>
-  s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 export const ProductsMenu = () => {
   return (
@@ -76,9 +72,15 @@ export const ProductsMenu = () => {
               return (
                 <div key={section.title} className="space-y-1.5">
                   <div className="mb-2">
-                    <h3 className="text-[11px] font-semibold uppercase tracking-wider text-foreground">
+                    {/* Category header links to its /products/<slug> landing page */}
+                    <Link
+                      href={`/products/${categorySlug(section.title)}`}
+                      onClick={closeMenu}
+                      className="group/head inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-foreground transition-colors hover:text-white"
+                    >
                       {section.title}
-                    </h3>
+                      <ArrowRight className="h-2.5 w-2.5 opacity-0 transition-opacity group-hover/head:opacity-100" />
+                    </Link>
                     {section.subtitle && (
                       <p
                         className="mt-0.5 text-[9px] leading-tight text-muted-foreground/60 line-clamp-2"
@@ -117,7 +119,7 @@ export const ProductsMenu = () => {
                     })}
                     {hasMore && (
                       <Link
-                        href={`/products#${slugify(section.title)}`}
+                        href={`/products/${categorySlug(section.title)}`}
                         onClick={closeMenu}
                         className="flex items-center gap-1 py-0.5 text-[10px] font-semibold uppercase tracking-wider transition-colors hover:text-foreground text-foreground/70"
                       >
