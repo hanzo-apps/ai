@@ -194,15 +194,8 @@ const DesktopNav = () => {
         {(closeMenu) => <LearnContent closeMenu={closeMenu} />}
       </NavMenu>
 
-      {/* Docs direct link — top-level entry point to docs.hanzo.ai */}
-      <a
-        href="https://docs.hanzo.ai"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
-      >
-        Docs
-      </a>
+      {/* No top-level Docs link — each product page owns its own docs + console
+          CTAs, so the header stays: Meet Hanzo · Products · Learn · Pricing. */}
 
       {/* Pricing direct link */}
       <Link
