@@ -30,3 +30,9 @@ jobs:
   cicd:
     uses: hanzoai/ci/.github/workflows/build.yml@main
     secrets: inherit
+    with:
+      # hanzo.ai lives in the hanzo-apps org; target its own arc runner
+      # scale set. The hanzoai/ci default ["hanzo-build-linux-amd64"] is a
+      # different org's pool and never picks up hanzo-apps jobs (org-scoped).
+      # Registered in universe infra/k8s/arc/values-hanzo-apps-build-amd64.yaml.
+      runner: '["hanzo-apps-build-linux-amd64"]'

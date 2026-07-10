@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   deploy:
-    runs-on: hanzo-build-linux-amd64
+    runs-on: hanzo-apps-build-linux-amd64
     permissions:
       contents: read
       deployments: write
