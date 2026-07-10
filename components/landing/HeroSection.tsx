@@ -221,6 +221,28 @@ const HeroSection = () => {
                   </React.Fragment>
                 ))}
               </motion.div>
+
+              {/* Techstars '17 badge — Hanzo AI is a Techstars '17 company.
+                  Uses the canonical asset; `invert` renders the black mark
+                  white on the dark hero (matching the trust band treatment). */}
+              <motion.a
+                href="https://www.techstars.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                aria-label="Hanzo AI is a Techstars 2017 company"
+                className="group mt-8 inline-flex items-center gap-2 w-fit text-xs text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <span className="uppercase tracking-wider text-[11px]">Backed by</span>
+                <img
+                  src="/logos/partners/techstars.svg"
+                  alt="Techstars"
+                  className="h-10 w-auto invert opacity-70 group-hover:opacity-100 transition-opacity"
+                />
+                <span className="font-medium text-foreground/90">&rsquo;17</span>
+              </motion.a>
             </div>
 
             {/* Right: animated product preview — a browser window framing a
