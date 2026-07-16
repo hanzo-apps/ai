@@ -65,7 +65,7 @@ const FinalCTASection = () => {
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
           <a
-            href="https://docs.hanzo.ai/self-host"
+            href="https://docs.hanzo.ai/docs/network"
             target="_blank"
             rel="noreferrer noopener"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-sm border border-border hover:bg-secondary hover:border-neutral-600 transition-all"

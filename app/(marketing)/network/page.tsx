@@ -24,7 +24,7 @@ const Network = () => {
               A decentralized AI compute marketplace. Buy verified inference from a global pool of nodes, settle on-chain, pay only for what you use.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="https://docs.hanzo.ai/network" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
+              <a href="https://docs.hanzo.ai/docs/network" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
                 Buy Compute <ArrowRight className="h-5 w-5" />
               </a>
               <a href="/node" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
@@ -145,7 +145,7 @@ const Network = () => {
                 Start with an API key, scale to thousands of requests per second, settle on-chain when you need verifiability.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://docs.hanzo.ai/network/quickstart" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
+                <a href="https://docs.hanzo.ai/docs/api-keys" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
                   Get an API Key <ArrowRight className="h-5 w-5" />
                 </a>
                 <a href="/node" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
@@ -161,7 +161,7 @@ const Network = () => {
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Get started with Network</h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="https://docs.hanzo.ai/network" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
+            <a href="https://docs.hanzo.ai/docs/network" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />
             </a>
             <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
