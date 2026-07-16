@@ -258,7 +258,7 @@ export const dataProducts: Product[] = [
     icon: 'Sparkles',
     href: '/vector',
     github: 'https://github.com/hanzoai/vector',
-    docs: 'https://docs.hanzo.ai/vector',
+    docs: 'https://docs.hanzo.ai/docs/vector',
     install: {
       cli: 'hanzo db create --type vector',
       docker: 'docker run -d hanzo/vector'
@@ -389,7 +389,7 @@ export const computeProducts: Product[] = [
     icon: 'Zap',
     href: '/products/compute/gateway',
     github: 'https://github.com/hanzoai/gateway',
-    docs: 'https://docs.hanzo.ai/gateway',
+    docs: 'https://docs.hanzo.ai/docs/gateway',
     features: ['100+ providers', 'Load balancing', 'Fallbacks', 'Response caching', 'Cost tracking', 'Rate limiting', 'Streaming', 'OpenAI compatible'],
     status: 'ga',
     openSource: true,
@@ -412,7 +412,7 @@ export const asyncProducts: Product[] = [
     icon: 'PlayCircle',
     href: '/products/async/auto',
     github: 'https://github.com/hanzoai/auto',
-    docs: 'https://docs.hanzo.ai/auto',
+    docs: 'https://docs.hanzo.ai/docs/services/auto',
     install: {
       cli: 'hanzo auto init',
       docker: 'docker run -d hanzo/auto',
@@ -433,7 +433,7 @@ export const asyncProducts: Product[] = [
     icon: 'Workflow',
     href: '/products/async/flow',
     github: 'https://github.com/hanzoai/flow',
-    docs: 'https://docs.hanzo.ai/flow',
+    docs: 'https://docs.hanzo.ai/docs/services/flow',
     install: {
       cli: 'hanzo flow init',
       docker: 'docker run -d hanzo/flow'
@@ -1149,7 +1149,7 @@ export const appsProducts: Product[] = [
     icon: 'Workflow',
     href: '/products/apps/flow',
     github: 'https://github.com/hanzoai/flow',
-    docs: 'https://docs.hanzo.ai/flow',
+    docs: 'https://docs.hanzo.ai/docs/services/flow',
     features: ['Visual builder', 'AI nodes', 'API connectors', 'Triggers', 'Versioning'],
     status: 'beta',
     openSource: true,
@@ -1165,7 +1165,7 @@ export const appsProducts: Product[] = [
     icon: 'LayoutDashboard',
     href: '/products/apps/console',
     github: 'https://github.com/hanzoai/console',
-    docs: 'https://docs.hanzo.ai/console',
+    docs: 'https://docs.hanzo.ai/docs/console',
     features: ['Resource management', 'User admin', 'Billing', 'Audit logs', 'Team management'],
     status: 'ga',
     openSource: false,
@@ -1197,7 +1197,7 @@ export const appsProducts: Product[] = [
     icon: 'Bot',
     href: '/products/apps/agent',
     github: 'https://github.com/hanzoai/agent',
-    docs: 'https://docs.hanzo.ai/agent',
+    docs: 'https://docs.hanzo.ai/docs/agents',
     install: {
       pip: 'pip install hanzo-agent',
       cli: 'hanzo agent create myagent'
