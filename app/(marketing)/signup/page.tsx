@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react'
 import { useIam } from '@hanzo/iam/react'
+import { useAnalytics } from '@hanzo/capture/react'
+import { EVENTS } from '@hanzo/capture'
 import { Loader2 } from 'lucide-react'
 
 /**
@@ -10,10 +12,15 @@ import { Loader2 } from 'lucide-react'
  */
 const SignUpPage = () => {
   const { login } = useIam()
+  const analytics = useAnalytics()
 
   useEffect(() => {
+    analytics.capture(EVENTS.SIGNUP_VIEWED)
+    const refCode = new URLSearchParams(window.location.search).get('ref')
+    if (refCode) analytics.capture(EVENTS.REFERRAL_USED, { refCode })
+    analytics.capture(EVENTS.SIGNUP_SUBMITTED)
     login({ additionalParams: { signup: 'true' } })
-  }, [login])
+  }, [login, analytics])
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background">

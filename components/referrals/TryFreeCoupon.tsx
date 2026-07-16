@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import { Copy, Check, Ticket, Bot, Cpu, ExternalLink } from 'lucide-react'
 import { Button } from '@hanzo/ui'
 import { toast } from 'sonner'
+import { useAnalytics } from '@hanzo/capture/react'
+import { EVENTS } from '@hanzo/capture'
 import { redeemCoupon } from '@/lib/hanzo/referrals'
 
 const COUPON_CODE = 'TRYFREE'
@@ -12,6 +14,7 @@ const TryFreeCoupon = () => {
   const [copied, setCopied] = useState(false)
   const [redeeming, setRedeeming] = useState(false)
   const [redeemed, setRedeemed] = useState(false)
+  const analytics = useAnalytics()
 
   const handleCopy = () => {
     navigator.clipboard.writeText(COUPON_CODE)
@@ -26,6 +29,7 @@ const TryFreeCoupon = () => {
       const result = await redeemCoupon(COUPON_CODE)
       if (result.success) {
         setRedeemed(true)
+        analytics.capture(EVENTS.REFERRAL_CLAIMED, { refCode: COUPON_CODE })
         toast.success('Coupon redeemed! Check your accounts for credits.')
       }
     } catch (err) {

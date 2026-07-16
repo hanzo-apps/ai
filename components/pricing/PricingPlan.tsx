@@ -3,6 +3,8 @@
 import React from "react";
 import { Button } from "@hanzo/ui";
 import { Check } from "lucide-react";
+import { useAnalytics } from "@hanzo/capture/react";
+import { EVENTS } from "@hanzo/capture";
 
 interface PricingPlanProps {
   name: string;
@@ -31,6 +33,9 @@ const PricingPlan = ({
   githubLink = false,
   contactSalesUrl,
 }: PricingPlanProps) => {
+  const analytics = useAnalytics();
+  const track = (cta: string) => analytics.capture(EVENTS.PLAN_CLICKED, { plan: name, cta });
+
   // Use monochrome design
   const borderColor = popular 
     ? "border-neutral-700" 
@@ -51,6 +56,7 @@ const PricingPlan = ({
         <Button
           className={`w-full mb-8 ${buttonClass}`}
           onClick={() => {
+            track('Contact Sales');
             window.open(contactSalesUrl, '_blank');
           }}
         >
@@ -62,6 +68,7 @@ const PricingPlan = ({
         <Button
           className={`w-full mb-8 ${buttonClass}`}
           onClick={() => {
+            track('Get on GitHub');
             window.open('https://github.com/hanzoai/', '_blank');
           }}
         >
@@ -73,6 +80,7 @@ const PricingPlan = ({
         <Button
           className={`w-full mb-8 ${buttonClass}`}
           onClick={() => {
+            track('Configure Plan');
             const teamConfigSection = document.getElementById('team-config-section');
             if (teamConfigSection) {
               teamConfigSection.scrollIntoView({ behavior: 'smooth' });
@@ -87,6 +95,7 @@ const PricingPlan = ({
         <Button
           className={`w-full mb-8 ${buttonClass}`}
           onClick={() => {
+            track('Get Started');
             const teamConfigSection = document.getElementById('team-config-section');
             if (teamConfigSection) {
               window.history.pushState({}, '', window.location.pathname + '?from=pro');
@@ -99,7 +108,10 @@ const PricingPlan = ({
       );
     } else {
       return (
-        <Button className={`w-full mb-8 ${buttonClass}`}>
+        <Button
+          className={`w-full mb-8 ${buttonClass}`}
+          onClick={() => track('Get Started')}
+        >
           Get Started
         </Button>
       );

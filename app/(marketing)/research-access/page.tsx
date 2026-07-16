@@ -12,6 +12,8 @@ import {
   Server,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useAnalytics } from '@hanzo/capture/react'
+import { EVENTS } from '@hanzo/capture'
 
 const ZEN5_MODELS = [
   { id: 'zen5', label: 'zen5', description: 'Flagship next-gen foundation model' },
@@ -40,6 +42,7 @@ const MOVE_UP = [
 ]
 
 export default function ResearchAccessPage() {
+  const analytics = useAnalytics()
   return (
     <div className="min-h-screen bg-background text-foreground">
       <main>
@@ -86,7 +89,12 @@ export default function ResearchAccessPage() {
               className="flex flex-wrap justify-center gap-4"
             >
               <Button asChild className="bg-primary text-primary-foreground hover:bg-accent">
-                <a href="https://console.hanzo.ai">
+                <a
+                  href="https://console.hanzo.ai"
+                  onClick={() =>
+                    analytics.capture(EVENTS.WAITLIST_JOINED, { source: 'research-preview' })
+                  }
+                >
                   Sign up free
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </a>

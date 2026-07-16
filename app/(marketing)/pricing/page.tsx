@@ -1,6 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useAnalytics } from "@hanzo/capture/react"
+import { EVENTS } from "@hanzo/capture"
 import PricingHeader from "@/components/pricing/PricingHeader"
 import PersonalPlans from "@/components/pricing/PersonalPlans"
 import TeamEnterprisePlans from "@/components/pricing/TeamEnterprisePlans"
@@ -26,6 +28,11 @@ const tabs = [
 
 export default function PricingPage() {
   const [activeTab, setActiveTab] = useState("personal")
+  const analytics = useAnalytics()
+
+  useEffect(() => {
+    analytics.capture(EVENTS.PRICING_VIEWED)
+  }, [analytics])
 
   const renderTabContent = () => {
     switch (activeTab) {

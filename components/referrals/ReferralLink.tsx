@@ -6,6 +6,8 @@ import { Button } from '@hanzo/ui'
 import { Input } from '@hanzo/ui'
 import { Label } from '@hanzo/ui'
 import { toast } from 'sonner'
+import { useAnalytics } from '@hanzo/capture/react'
+import { EVENTS } from '@hanzo/capture'
 import { sendReferralInvites } from '@/lib/hanzo/referrals'
 
 interface ReferralLinkProps {
@@ -17,10 +19,12 @@ const ReferralLink = ({ referralLink, referralCode }: ReferralLinkProps) => {
   const [isCopied, setIsCopied] = useState(false)
   const [emailInput, setEmailInput] = useState('')
   const [sending, setSending] = useState(false)
+  const analytics = useAnalytics()
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(referralLink)
     setIsCopied(true)
+    analytics.capture(EVENTS.WAITLIST_SHARED, { method: 'link', refCode: referralCode })
     toast.success('Referral link copied to clipboard!')
     setTimeout(() => setIsCopied(false), 3000)
   }
@@ -40,6 +44,11 @@ const ReferralLink = ({ referralLink, referralCode }: ReferralLinkProps) => {
     try {
       setSending(true)
       const result = await sendReferralInvites(emails, referralCode)
+      analytics.capture(EVENTS.WAITLIST_SHARED, {
+        method: 'email',
+        count: result.sent,
+        refCode: referralCode,
+      })
       toast.success(`Invitations sent to ${result.sent} contact${result.sent !== 1 ? 's' : ''}!`)
       if (result.failed?.length) {
         toast.error(`Failed to send to: ${result.failed.join(', ')}`)

@@ -1,7 +1,23 @@
 'use client'
 
 import { IamProvider } from '@hanzo/iam/react'
+import { AnalyticsProvider, usePageview } from '@hanzo/capture/react'
+import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
+
+const API_BASE = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.ai'
+
+/** Anonymous marketing traffic; forward a stored bearer when one exists. */
+function getToken(): string | undefined {
+  if (typeof window === 'undefined') return undefined
+  return window.localStorage.getItem('hanzo_access_token') ?? undefined
+}
+
+/** Route-change pageviews. Browser-only; safe under `output: export`. */
+function Pageview() {
+  usePageview(usePathname())
+  return null
+}
 
 /**
  * SSR/static-export-safe storage. The SDK constructor falls back to bare
@@ -36,17 +52,20 @@ function memoryStorage(): Storage {
  */
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <IamProvider
-      config={{
-        serverUrl: process.env.NEXT_PUBLIC_HANZO_IAM_URL || 'https://hanzo.id',
-        clientId: process.env.NEXT_PUBLIC_HANZO_CLIENT_ID || 'hanzo-app',
-        redirectUri:
-          (typeof window !== 'undefined' ? window.location.origin : 'https://hanzo.ai') +
-          '/auth/callback',
-        storage: typeof window !== 'undefined' ? window.sessionStorage : memoryStorage(),
-      }}
-    >
-      {children}
-    </IamProvider>
+    <AnalyticsProvider config={{ product: 'site', host: API_BASE, getToken }}>
+      <Pageview />
+      <IamProvider
+        config={{
+          serverUrl: process.env.NEXT_PUBLIC_HANZO_IAM_URL || 'https://hanzo.id',
+          clientId: process.env.NEXT_PUBLIC_HANZO_CLIENT_ID || 'hanzo-app',
+          redirectUri:
+            (typeof window !== 'undefined' ? window.location.origin : 'https://hanzo.ai') +
+            '/auth/callback',
+          storage: typeof window !== 'undefined' ? window.sessionStorage : memoryStorage(),
+        }}
+      >
+        {children}
+      </IamProvider>
+    </AnalyticsProvider>
   )
 }
