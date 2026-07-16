@@ -337,7 +337,7 @@ const DigitalAssets = () => {
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
-                href="https://docs.hanzo.ai/blockchain"
+                href="https://docs.hanzo.ai/docs/blockchain"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-neutral-600 hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors"
               >
                 Read Documentation

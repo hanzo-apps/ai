@@ -35,7 +35,7 @@ const CallToAction = () => {
 
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="https://docs.hanzo.ai/vector"
+              href="https://docs.hanzo.ai/docs/vector"
               className="inline-flex items-center gap-2 px-8 py-4 bg-primary/10 hover:bg-primary/20 text-primary-foreground font-medium rounded-full transition-colors"
             >
               <BookOpen className="w-5 h-5" />

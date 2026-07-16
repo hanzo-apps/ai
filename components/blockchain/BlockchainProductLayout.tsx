@@ -183,7 +183,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
                 <Button
                   variant="outline"
                   className="w-full py-3 rounded-lg font-medium border-border hover:border-neutral-600"
-                  onClick={() => window.open('https://docs.hanzo.ai/blockchain', '_blank')}
+                  onClick={() => window.open('https://docs.hanzo.ai/docs/blockchain', '_blank')}
                 >
                   View Documentation
                 </Button>

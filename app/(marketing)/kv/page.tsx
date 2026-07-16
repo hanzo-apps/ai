@@ -49,7 +49,7 @@ export default function KVPage() {
             <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Cluster</div><div className="text-sm text-muted-foreground">Mode</div></div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap justify-center gap-4">
-            <a href="https://docs.hanzo.ai/kv" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Get Started <ArrowRight className="w-4 h-4" /></a>
+            <a href="https://docs.hanzo.ai/docs/kv" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Get Started <ArrowRight className="w-4 h-4" /></a>
             <a href="https://github.com/hanzoai/kv" className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors">GitHub</a>
           </motion.div>
         </div>
@@ -119,7 +119,7 @@ kv.on("message", (channel, message) => {
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Cache Everything. Miss Nothing.</h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">Free tier includes 256 MB. Provision in seconds.</p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a href="https://docs.hanzo.ai/kv" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Get Started <ArrowRight className="w-4 h-4" /></a>
+                <a href="https://docs.hanzo.ai/docs/kv" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Get Started <ArrowRight className="w-4 h-4" /></a>
                 <a href="https://github.com/hanzoai/kv" className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors">View on GitHub</a>
               </div>
             </div>

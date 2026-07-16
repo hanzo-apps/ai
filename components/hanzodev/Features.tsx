@@ -47,7 +47,7 @@ const RECENTLY_SHIPPED = [
     title: "Deploy",
     description:
       "One-click deployment. Deploy your applications directly from Hanzo Dev with intelligent configuration detection and automated setup.",
-    link: "https://docs.hanzo.ai/deploy",
+    link: "https://docs.hanzo.ai/docs/deploy",
   },
   {
     icon: GitBranch,

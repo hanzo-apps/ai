@@ -39,7 +39,7 @@ const OperativeHero = () => {
                 <a href="#get-started">Get Started</a>
               </Button>
               <Button size="lg" variant="outline" className="text-lg px-8 text-[var(--white)] border-border bg-[var(--white)]/5 hover:bg-[var(--white)]/10">
-                <a href="https://docs.hanzo.ai/operative" className="flex items-center gap-2">
+                <a href="https://docs.hanzo.ai/docs/services/operative" className="flex items-center gap-2">
                   <Terminal className="h-5 w-5" />
                   View Docs
                 </a>

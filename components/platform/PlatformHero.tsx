@@ -218,7 +218,7 @@ const PlatformHero = () => {
                 Star on GitHub
               </a>
               <a
-                href="https://docs.hanzo.ai/platform"
+                href="https://docs.hanzo.ai/docs/services/platform"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"

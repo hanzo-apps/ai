@@ -89,7 +89,7 @@ export default function GuardPage() {
             className="flex flex-wrap justify-center gap-4"
           >
             <a
-              href="https://docs.hanzo.ai/guard"
+              href="https://docs.hanzo.ai/docs/services/guard"
               className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
             >
               Get started
@@ -192,7 +192,7 @@ export default function GuardPage() {
           <h2 className="text-2xl font-bold mb-4">Get started with Guard</h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href="https://docs.hanzo.ai/guard"
+              href="https://docs.hanzo.ai/docs/services/guard"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium"

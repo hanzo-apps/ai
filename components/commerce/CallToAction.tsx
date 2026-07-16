@@ -33,7 +33,7 @@ const CallToAction = () => {
               <p className="text-muted-foreground mb-4 text-center">Explore our guides and API references</p>
               <Button 
                 className="mt-auto bg-primary/10 hover:bg-primary/10 text-primary-foreground"
-                onClick={() => window.open('https://docs.hanzo.ai/commerce', '_blank')}
+                onClick={() => window.open('https://docs.hanzo.ai/docs/commerce', '_blank')}
               >
                 View Docs <ArrowRight className="ml-2 h-4 w-4" />
               </Button>

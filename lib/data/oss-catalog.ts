@@ -624,7 +624,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'k8s'],
     actions: {
-      docsUrl: 'https://docs.hanzo.ai/iam',
+      docsUrl: 'https://docs.hanzo.ai/docs/iam',
       githubUrl: 'https://github.com/hanzoai/iam',
       learnUrl: '/products/platform/iam',
     },
@@ -701,7 +701,7 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['one-click', 'docker'],
     actions: {
       deployUrl: 'https://cloud.hanzo.ai/deploy/sql',
-      docsUrl: 'https://docs.hanzo.ai/sql',
+      docsUrl: 'https://docs.hanzo.ai/docs/sql',
       githubUrl: 'https://github.com/hanzoai/sql',
       learnUrl: '/products/data/sql',
     },
@@ -727,7 +727,7 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['one-click'],
     actions: {
       deployUrl: 'https://cloud.hanzo.ai/deploy/kv',
-      docsUrl: 'https://docs.hanzo.ai/kv',
+      docsUrl: 'https://docs.hanzo.ai/docs/kv',
       githubUrl: 'https://github.com/hanzoai/kv',
       learnUrl: '/products/data/kv',
     },
@@ -753,7 +753,7 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['docker', 'one-click'],
     actions: {
       deployUrl: 'https://cloud.hanzo.ai/deploy/search',
-      docsUrl: 'https://docs.hanzo.ai/search',
+      docsUrl: 'https://docs.hanzo.ai/docs/search',
       githubUrl: 'https://github.com/hanzoai/search',
       learnUrl: '/products/data/search',
     },
@@ -784,7 +784,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'k8s'],
     actions: {
-      docsUrl: 'https://docs.hanzo.ai/telemetry',
+      docsUrl: 'https://docs.hanzo.ai/docs/projects/hanzoai/telemetry',
       githubUrl: 'https://github.com/hanzoai/telemetry',
       learnUrl: '/products/observability/telemetry',
     },
@@ -811,7 +811,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['one-click'],
     actions: {
-      docsUrl: 'https://docs.hanzo.ai/edge',
+      docsUrl: 'https://docs.hanzo.ai/docs/edge',
       githubUrl: 'https://github.com/hanzoai/edge',
       learnUrl: '/products/platform/edge',
     },

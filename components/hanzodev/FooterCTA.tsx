@@ -101,7 +101,7 @@ const FooterCTA = () => {
           transition={{ delay: 0.4 }}
         >
           <a
-            href="https://docs.hanzo.ai/dev"
+            href="https://docs.hanzo.ai/docs/dev"
             target="_blank"
             rel="noreferrer noopener"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"

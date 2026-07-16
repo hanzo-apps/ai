@@ -20,7 +20,7 @@ import {
 
 const CONSOLE = "https://console.hanzo.ai"
 const SIGNIN = "https://hanzo.id"
-const DOCS = "https://docs.hanzo.ai/cloud"
+const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
 const GH = "https://github.com/hanzoai/cloud"
 
 /* ----------------------------------------------------------------- nav --- */
