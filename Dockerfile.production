@@ -24,11 +24,15 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm build
 
-# Promote the chrome-free /cloud-site landing page to the web root. With
-# trailingSlash:false Next emits out/cloud-site.html (flat file); _next assets
-# are absolute so they resolve from / unchanged. cloud-site has NO site
-# Navbar/Footer (root layout only) — it ships its own minimal nav + footer.
-RUN cp out/cloud-site.html out/index.html
+# Promote the FULL detailed homepage (/overview — the big components/landing/*
+# story: hero, platform, use-cases, multi-agent, DX, provider grid, routing,
+# open-source, network, pricing) to cloud.hanzo.ai's web root. This is the old
+# apex homepage that moved off the (now slim, chat-centric) hanzo.ai apex; it
+# belongs on the detailed cloud site and is wrapped by the (marketing)
+# Navbar/Footer. With trailingSlash:false Next emits out/overview.html (flat
+# file); _next assets are absolute so they resolve from / unchanged. (The
+# chrome-free cloud-site landing remains reachable at /cloud-site.)
+RUN cp out/overview.html out/index.html
 
 # ---- serve stage: hanzoai/static (scratch + single Go binary) ------------
 FROM ghcr.io/hanzoai/static:0.4.1
