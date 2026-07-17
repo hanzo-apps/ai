@@ -82,7 +82,7 @@ const PILLARS = [
 
 const STATS = [
   { icon: Gauge, value: '91.4', label: 'LiveCodeBench', sub: 'measured, routed live' },
-  { icon: Cpu, value: '300ns–12µs', label: 'Routing latency', sub: 'CPU, per request' },
+  { icon: Zap, value: '<15µs', label: 'Routing overhead', sub: 'per request' },
   { icon: Boxes, value: '100+', label: 'Models orchestrated', sub: 'frontier + open Zen' },
   { icon: Sparkles, value: '1 API', label: 'OpenAI-compatible', sub: 'drop-in' },
 ]
@@ -263,7 +263,7 @@ export default function EnsoLanding() {
             />
             <div className="grid gap-6 md:grid-cols-2">
               {[
-                { tag: 'Learned router', title: 'Microsecond, CPU-native routing', body: 'A lightweight coordinator scores every request and dispatches it to the right model in 300ns–12µs on CPU — routing overhead you can ignore, applied to every call.' },
+                { tag: 'Learned router', title: 'Microsecond routing', body: 'A lightweight coordinator scores every request and dispatches it to the right model in microseconds — routing overhead you can ignore, applied to every call.' },
                 { tag: 'Learned coordinator', title: 'Roles, turns, and verification', body: 'Enso assigns Thinker / Worker / Verifier roles and adaptively delegates across coding, math, reasoning, and knowledge tasks — coordinating diverse model pools to outperform any single worker.' },
               ].map((c, i) => (
                 <motion.div key={c.tag} {...fade} transition={{ duration: 0.5, delay: i * 0.06 }} className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-7">

@@ -11,6 +11,10 @@
  */
 
 export const CHAT = 'https://hanzo.chat'
+export const APP = 'https://hanzo.app'
+export const STUDIO = 'https://studio.hanzo.ai'
+export const TEAM = 'https://hanzo.team'
+export const SH = 'https://hanzo.sh'
 export const CLOUD = 'https://cloud.hanzo.ai'
 export const CONSOLE = 'https://console.hanzo.ai'
 export const DOCS = 'https://docs.hanzo.ai'
@@ -67,39 +71,41 @@ export const NAV: NavItem[] = [
     label: 'Products',
     explore: [
       { label: 'Enso', href: '/enso', desc: 'Flagship model orchestration · Hanzo Cloud' },
-      { label: 'Zen', href: cloud('/zen'), desc: 'Open-weight models · run anywhere' },
-      { label: 'Hanzo Chat', href: CHAT, desc: 'The assistant front door' },
-      { label: 'Hanzo Cloud', href: CLOUD, desc: 'The open-source AI cloud' },
+      { label: 'Hanzo Chat', href: CHAT, desc: 'Chat with frontier models' },
+      { label: 'Hanzo App', href: APP, desc: 'Build & ship AI apps' },
+      { label: 'Hanzo Studio', href: STUDIO, desc: 'The creative AI studio' },
     ],
     columns: [
       {
-        title: 'Models',
+        title: 'AI Cloud',
         links: [
           { label: 'Enso', href: '/enso', desc: 'Proprietary · Cloud only' },
           { label: 'Zen', href: cloud('/zen'), desc: 'Open weights' },
-          { label: 'All models', href: cloud('/models') },
-          { label: 'Agents', href: cloud('/agents') },
-          { label: 'Inference', href: cloud('/engine') },
-          { label: 'Embeddings', href: cloud('/cloud/embeddings') },
+          { label: 'Hanzo Base', href: cloud('/base') },
+          { label: 'Vector search', href: cloud('/vector') },
+          { label: 'Explore Cloud', href: CLOUD },
         ],
       },
       {
-        title: 'Data & Compute',
+        title: 'Apps',
         links: [
-          { label: 'Vector', href: cloud('/vector') },
-          { label: 'SQL', href: cloud('/sql') },
-          { label: 'GPUs', href: cloud('/cloud/gpus') },
-          { label: 'Functions', href: cloud('/functions') },
-          { label: 'Machines', href: cloud('/machines') },
+          { label: 'Chat', href: CHAT },
+          { label: 'App', href: APP },
+          { label: 'Studio', href: STUDIO },
+          { label: 'Team', href: TEAM },
+          { label: 'Bot', href: cloud('/bot') },
+          { label: 'Search', href: cloud('/search') },
         ],
       },
       {
-        title: 'Security',
+        title: 'Developers',
         links: [
-          { label: 'IAM', href: cloud('/iam') },
-          { label: 'KMS', href: cloud('/kms') },
-          { label: 'Authz', href: cloud('/authz') },
-          { label: 'Secrets', href: cloud('/cloud/secrets') },
+          { label: 'hanzo.sh — install', href: SH },
+          { label: 'hanzo CLI', href: cloud('/cli') },
+          { label: 'MCP', href: cloud('/mcp') },
+          { label: 'ZAP', href: cloud('/zap') },
+          { label: 'Dev', href: cloud('/dev') },
+          { label: 'SDKs', href: cloud('/cloud/sdks') },
         ],
       },
     ],
@@ -127,19 +133,27 @@ export const NAV: NavItem[] = [
   {
     label: 'Developers',
     explore: [
+      { label: 'hanzo.sh', href: SH, desc: 'One line to install — get started fast' },
+      { label: 'hanzo CLI', href: cloud('/cli'), desc: 'Run dev or any coding agent; log in to Cloud' },
       { label: 'API Platform', href: cloud('/cloud/api'), desc: 'One OpenAI-compatible API' },
-      { label: 'Agents', href: cloud('/agents'), desc: 'Build and run agents' },
-      { label: 'SDKs', href: cloud('/cloud/sdks'), desc: 'Python, TS, and more' },
-      { label: 'CLI', href: cloud('/cli'), desc: 'Ship from the terminal' },
+      { label: 'MCP', href: cloud('/mcp'), desc: 'Model Context Protocol tools' },
     ],
     columns: [
+      {
+        title: 'Build',
+        links: [
+          { label: 'Agents', href: cloud('/agents') },
+          { label: 'ZAP', href: cloud('/zap') },
+          { label: 'SDKs', href: cloud('/cloud/sdks') },
+          { label: 'Playground', href: cloud('/playground') },
+        ],
+      },
       {
         title: 'Resources',
         links: [
           { label: 'Docs', href: DOCS },
-          { label: 'Playground', href: cloud('/playground') },
-          { label: 'MCP', href: cloud('/mcp') },
           { label: 'GitHub', href: GITHUB },
+          { label: 'Blog', href: BLOG },
         ],
       },
     ],
@@ -181,7 +195,8 @@ export const LOGIN_LINKS: NavLink[] = [
 export const TRY_LINKS: NavLink[] = [
   { label: 'Hanzo Chat', href: CHAT, desc: 'Chat with frontier models' },
   { label: 'Enso', href: '/enso', desc: 'One model to command them all' },
-  { label: 'API Platform', href: CONSOLE, desc: 'Build with the API' },
+  { label: 'Hanzo App', href: APP, desc: 'Build & ship AI apps' },
+  { label: 'Hanzo Studio', href: STUDIO, desc: 'The creative AI studio' },
   { label: 'Hanzo Cloud', href: CLOUD, desc: 'The full open-source AI cloud' },
 ]
 
@@ -190,18 +205,19 @@ export const FOOTER: NavColumn[] = [
   {
     title: 'Product',
     links: [
+      { label: 'Enso', href: '/enso' },
       { label: 'Chat', href: CHAT },
+      { label: 'App', href: APP },
+      { label: 'Studio', href: STUDIO },
       { label: 'Cloud', href: CLOUD },
-      { label: 'API Platform', href: cloud('/cloud/api') },
-      { label: 'Models', href: cloud('/models') },
       { label: 'Pricing', href: cloud('/pricing') },
     ],
   },
   {
     title: 'Developers',
     links: [
+      { label: 'hanzo.sh', href: SH },
       { label: 'Docs', href: DOCS },
-      { label: 'SDKs', href: cloud('/cloud/sdks') },
       { label: 'CLI', href: cloud('/cli') },
       { label: 'GitHub', href: GITHUB },
     ],

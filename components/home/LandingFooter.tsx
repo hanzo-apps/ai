@@ -39,11 +39,7 @@ export default function LandingFooter() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-neutral-900 pt-8 sm:flex-row">
           <p className="text-sm text-neutral-500">
-            © {new Date().getFullYear()} Hanzo AI — governed by{' '}
-            <a href="https://zoo.ngo" target="_blank" rel="noreferrer noopener" className="text-neutral-400 transition-colors hover:text-white">
-              Zoo Labs Foundation
-            </a>
-            .
+            © {new Date().getFullYear()} Hanzo AI, Inc. All rights reserved.
           </p>
           <a
             href={GITHUB}
