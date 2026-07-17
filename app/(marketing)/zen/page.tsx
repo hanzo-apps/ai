@@ -148,7 +148,7 @@ const Zen = () => {
                 </motion.h1>
                 <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }}
                   className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
-                  {ZEN_MODELS.length}+ open-weight models from 0.6B to 1T+. Zen MoDE (Mixture of Diverse Experts) architecture.
+                  {ZEN_MODELS.length}+ open-weight models from 0.6B to 1T+, co-designed by Hanzo AI and the Zoo Labs Foundation (our nonprofit). Zen MoDE (Mixture of Diverse Experts) architecture.
                   {stats.cheapest !== '—' ? ` From ${stats.cheapest}/MTok.` : ''} All models on HuggingFace.
                 </motion.p>
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.15 }}
