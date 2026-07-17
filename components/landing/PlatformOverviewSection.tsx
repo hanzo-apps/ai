@@ -10,12 +10,12 @@ import {
   Activity,
   CreditCard,
   Server,
+  Cpu,
   LayoutGrid,
 } from "lucide-react";
 
-// The 67 capabilities, grouped into the eight categories of the capability
-// manifest (openapi/capabilities.yaml). One capability = one name =
-// one /v1/<name>. Breadth without overwhelm — eight movements, one API.
+// The 67 capabilities, grouped into nine categories (a symmetric 3×3 grid). One
+// capability = one name = one /v1/<name>. Breadth without overwhelm — one API.
 const CATEGORY_CARDS = [
   {
     icon: ShieldCheck,
@@ -26,6 +26,11 @@ const CATEGORY_CARDS = [
     icon: Brain,
     title: "Intelligence",
     desc: "The mind of the cloud — models, ML, the inference engine, agents, evals, and code execution.",
+  },
+  {
+    icon: Cpu,
+    title: "Compute",
+    desc: "Raw horsepower on demand — GPUs, machines, containers, functions, and edge runtimes.",
   },
   {
     icon: Database,
@@ -74,7 +79,7 @@ const PlatformOverviewSection = () => {
             67 capabilities. One API.
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Everything the cloud does is one route — <code className="font-mono text-foreground/90 text-[0.95em]">api.hanzo.ai/v1/&lt;capability&gt;</code>. Sixty-seven capabilities, grouped into eight categories. Breadth without the overwhelm.
+            Everything the cloud does is one route — <code className="font-mono text-foreground/90 text-[0.95em]">api.hanzo.ai/v1/&lt;capability&gt;</code>. Sixty-seven capabilities, grouped into nine categories. Breadth without the overwhelm.
           </p>
         </motion.div>
 
