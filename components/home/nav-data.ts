@@ -36,35 +36,50 @@ export interface NavItem {
   label: string
   /** Simple link (no mega-menu) — e.g. Foundation → zoo.ngo. */
   href?: string
-  /** Mega-menu columns (openai-style). */
+  /** Big "Explore <section>" links, rendered large in the left column (openai-style). */
+  explore?: NavLink[]
+  /** Secondary mega-menu columns. */
   columns?: NavColumn[]
 }
 
 export const NAV: NavItem[] = [
   {
     label: 'Research',
+    explore: [
+      { label: 'Overview', href: cloud('/overview'), desc: 'The Hanzo platform, end to end' },
+      { label: 'Enso', href: '/enso', desc: 'Model orchestration — one model to command them all' },
+      { label: 'Zen models', href: cloud('/zen'), desc: 'Open-weight frontier models' },
+      { label: 'Philosophy', href: cloud('/philosophy'), desc: 'How we build' },
+    ],
     columns: [
       {
-        title: 'Research',
+        title: 'Latest',
         links: [
-          { label: 'Overview', href: cloud('/overview'), desc: 'The Hanzo platform, end to end' },
-          { label: 'Zen models', href: cloud('/zen'), desc: 'Open frontier models' },
-          { label: 'Philosophy', href: cloud('/philosophy'), desc: 'How we build' },
-          { label: 'Blog', href: BLOG, desc: 'Notes and releases' },
+          { label: 'Enso Flash', href: '/enso' },
+          { label: 'Enso Pro', href: '/enso' },
+          { label: 'Enso Ultra', href: '/enso' },
+          { label: 'Blog', href: BLOG },
         ],
       },
     ],
   },
   {
     label: 'Products',
+    explore: [
+      { label: 'Enso', href: '/enso', desc: 'Flagship model orchestration · Hanzo Cloud' },
+      { label: 'Zen', href: cloud('/zen'), desc: 'Open-weight models · run anywhere' },
+      { label: 'Hanzo Chat', href: CHAT, desc: 'The assistant front door' },
+      { label: 'Hanzo Cloud', href: CLOUD, desc: 'The open-source AI cloud' },
+    ],
     columns: [
       {
-        title: 'AI',
+        title: 'Models',
         links: [
-          { label: 'Models', href: cloud('/models') },
+          { label: 'Enso', href: '/enso', desc: 'Proprietary · Cloud only' },
+          { label: 'Zen', href: cloud('/zen'), desc: 'Open weights' },
+          { label: 'All models', href: cloud('/models') },
           { label: 'Agents', href: cloud('/agents') },
           { label: 'Inference', href: cloud('/engine') },
-          { label: 'Fine-tuning', href: cloud('/cloud/fine-tuning') },
           { label: 'Embeddings', href: cloud('/cloud/embeddings') },
         ],
       },
@@ -87,67 +102,63 @@ export const NAV: NavItem[] = [
           { label: 'Secrets', href: cloud('/cloud/secrets') },
         ],
       },
-      {
-        title: 'Apps',
-        links: [
-          { label: 'Hanzo Chat', href: CHAT },
-          { label: 'Bot', href: cloud('/bot') },
-          { label: 'Search', href: cloud('/search') },
-          { label: 'Studio', href: cloud('/studio') },
-        ],
-      },
     ],
   },
   {
     label: 'Business',
+    explore: [
+      { label: 'Overview', href: cloud('/enterprise'), desc: 'Security, scale, and support' },
+      { label: 'Solutions', href: cloud('/solutions'), desc: 'By use case and industry' },
+      { label: 'Pricing', href: cloud('/pricing'), desc: 'Pay only for what you use' },
+      { label: 'Contact sales', href: cloud('/contact/sales'), desc: 'Talk to the team' },
+    ],
     columns: [
       {
         title: 'For business',
         links: [
-          { label: 'Enterprise', href: cloud('/enterprise'), desc: 'Security, scale, and support' },
-          { label: 'Solutions', href: cloud('/solutions'), desc: 'By use case and industry' },
-          { label: 'Startups', href: cloud('/startups'), desc: 'Credits and go-to-market' },
-          { label: 'Pricing', href: cloud('/pricing'), desc: 'Pay only for what you use' },
-          { label: 'Contact sales', href: cloud('/contact/sales'), desc: 'Talk to the team' },
+          { label: 'Enterprise', href: cloud('/enterprise') },
+          { label: 'Startups', href: cloud('/startups') },
+          { label: 'Enso for teams', href: '/enso' },
+          { label: 'Security', href: cloud('/security') },
         ],
       },
     ],
   },
   {
     label: 'Developers',
+    explore: [
+      { label: 'API Platform', href: cloud('/cloud/api'), desc: 'One OpenAI-compatible API' },
+      { label: 'Agents', href: cloud('/agents'), desc: 'Build and run agents' },
+      { label: 'SDKs', href: cloud('/cloud/sdks'), desc: 'Python, TS, and more' },
+      { label: 'CLI', href: cloud('/cli'), desc: 'Ship from the terminal' },
+    ],
     columns: [
       {
-        title: 'Build',
+        title: 'Resources',
         links: [
-          { label: 'API Platform', href: cloud('/cloud/api') },
-          { label: 'Agents', href: cloud('/agents') },
-          { label: 'Open Models', href: cloud('/models') },
-          { label: 'SDKs', href: cloud('/cloud/sdks') },
-        ],
-      },
-      {
-        title: 'Tools',
-        links: [
-          { label: 'CLI', href: cloud('/cli') },
+          { label: 'Docs', href: DOCS },
           { label: 'Playground', href: cloud('/playground') },
           { label: 'MCP', href: cloud('/mcp') },
-          { label: 'Docs', href: DOCS },
+          { label: 'GitHub', href: GITHUB },
         ],
       },
     ],
   },
   {
     label: 'Company',
+    explore: [
+      { label: 'About', href: cloud('/about') },
+      { label: 'Careers', href: cloud('/careers') },
+      { label: 'News', href: cloud('/press') },
+      { label: 'Leadership', href: cloud('/leadership') },
+    ],
     columns: [
       {
-        title: 'Company',
+        title: 'Resources',
         links: [
-          { label: 'About', href: cloud('/about') },
-          { label: 'Careers', href: cloud('/careers') },
-          { label: 'News', href: cloud('/press') },
-          { label: 'Leadership', href: cloud('/leadership') },
           { label: 'Brand', href: cloud('/brand') },
           { label: 'Security', href: cloud('/security') },
+          { label: 'Status', href: cloud('/status') },
         ],
       },
     ],
@@ -164,6 +175,14 @@ export const LOGIN_LINKS: NavLink[] = [
   { label: 'Hanzo Chat', href: CHAT },
   { label: 'API Platform', href: CONSOLE },
   { label: 'Cloud', href: CLOUD },
+]
+
+/** "Try Hanzo" dropdown — the ONE uniform primary CTA, shared by hanzo.ai + cloud.hanzo.ai. */
+export const TRY_LINKS: NavLink[] = [
+  { label: 'Hanzo Chat', href: CHAT, desc: 'Chat with frontier models' },
+  { label: 'Enso', href: '/enso', desc: 'One model to command them all' },
+  { label: 'API Platform', href: CONSOLE, desc: 'Build with the API' },
+  { label: 'Hanzo Cloud', href: CLOUD, desc: 'The full open-source AI cloud' },
 ]
 
 /** Minimal footer columns. */
