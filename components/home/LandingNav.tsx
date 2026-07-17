@@ -79,6 +79,7 @@ export default function LandingNav() {
   const [mobile, setMobile] = useState(false)
   const [login, setLogin] = useState(false)
   const [tryOpen, setTryOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Lock body scroll while the mobile drawer is open.
@@ -88,6 +89,15 @@ export default function LandingNav() {
       document.body.style.overflow = ''
     }
   }, [mobile])
+
+  // Collapse the "Hanzo AI" wordmark to just the H mark once you scroll (matches
+  // cloud.hanzo.ai, which collapses "Hanzo Cloud" → H).
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const openMenu = (label: string) => {
     if (closeTimer.current) clearTimeout(closeTimer.current)
@@ -110,9 +120,16 @@ export default function LandingNav() {
       >
         <nav className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8">
           {/* Left: logo + desktop nav */}
-          <a href="/" className="flex flex-shrink-0 items-center gap-2" aria-label="Hanzo home">
+          <a href="/" className="flex flex-shrink-0 items-center" aria-label="Hanzo home">
             <HanzoLogo variant="white" size={22} />
-            <span className="text-[15px] font-semibold tracking-tight text-white">Hanzo</span>
+            <motion.span
+              initial={false}
+              animate={{ opacity: scrolled ? 0 : 1, width: scrolled ? 0 : 'auto', marginLeft: scrolled ? 0 : 8 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              className="overflow-hidden whitespace-nowrap text-[15px] font-semibold tracking-tight text-white"
+            >
+              Hanzo AI
+            </motion.span>
           </a>
 
           <div className="ml-4 hidden items-center lg:flex">
@@ -220,7 +237,7 @@ export default function LandingNav() {
             <div className="flex h-16 items-center justify-between border-b border-neutral-800/80 px-4">
               <a href="/" className="flex items-center gap-2" aria-label="Hanzo home">
                 <HanzoLogo variant="white" size={22} />
-                <span className="text-[15px] font-semibold tracking-tight text-white">Hanzo</span>
+                <span className="ml-2 text-[15px] font-semibold tracking-tight text-white">Hanzo AI</span>
               </a>
               <button onClick={() => setMobile(false)} aria-label="Close menu" className="rounded-full p-2 text-neutral-200 transition-colors hover:bg-neutral-900">
                 <X className="h-5 w-5" />

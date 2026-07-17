@@ -165,7 +165,7 @@ const Logo = () => {
               shouldShowWordmark ? "translate-x-0" : "-translate-x-full"
             }`}
           >
-            Hanzo
+            Hanzo Cloud
           </span>
         </div>
       </Link>
