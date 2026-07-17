@@ -20,6 +20,9 @@ interface SubscriptionPlan {
   features: string[];
   limits?: Record<string, number | null>;
   payouts?: { idleResalePercent: number; description: string };
+  /** Optional backend-supplied checkout deep link / id (honored if present). */
+  checkoutUrl?: string;
+  checkoutId?: string;
 }
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
@@ -27,6 +30,20 @@ const PLAN_ICONS: Record<string, React.ReactNode> = {
   'team-max': <Users className="h-6 w-6 text-muted-foreground" />,
   enterprise: <Shield className="h-6 w-6 text-muted-foreground" />,
 };
+
+const BILLING_URL = "https://billing.hanzo.ai";
+
+// Enterprise-tier (contact-sales, unpriced, or list price >= $9,999) books a
+// call; everything else checks out through the live billing shell. Mirrors the
+// canonical billing app's own plan-card logic.
+const isSales = (plan: SubscriptionPlan) =>
+  !!plan.contactSales || plan.priceMonthly == null || plan.priceMonthly >= 9999;
+
+function planCheckoutUrl(plan: SubscriptionPlan): string {
+  if (plan.checkoutUrl) return plan.checkoutUrl;
+  const id = plan.checkoutId || plan.id;
+  return `${BILLING_URL}/?plan=${encodeURIComponent(id)}#pricing`;
+}
 
 const STATIC_PLANS: SubscriptionPlan[] = [
   {
@@ -107,13 +124,13 @@ const TeamEnterprisePlans = () => {
   }, []);
 
   function formatPrice(plan: SubscriptionPlan) {
-    if (plan.contactSales || plan.priceMonthly == null) return "Contact Sales";
+    if (isSales(plan)) return "Contact Sales";
     if (plan.priceMonthly === 0) return "Free";
-    return `$${plan.priceMonthly.toLocaleString()}`;
+    return `$${plan.priceMonthly!.toLocaleString()}`;
   }
 
   function billingPeriod(plan: SubscriptionPlan) {
-    if (plan.contactSales || plan.priceMonthly == null || plan.priceMonthly === 0) return undefined;
+    if (isSales(plan) || plan.priceMonthly === 0) return undefined;
     return plan.pricePerUser ? "/mo per seat" : "/month";
   }
 
@@ -133,7 +150,9 @@ const TeamEnterprisePlans = () => {
             features={plan.features}
             popular={plan.popular || plan.category === "team"}
             showDetails={plan.category === "team"}
-            contactSalesUrl={plan.contactSales ? "https://cal.com/hanzo" : undefined}
+            contactSalesUrl={isSales(plan) ? "https://cal.com/hanzo" : undefined}
+            checkoutUrl={isSales(plan) ? undefined : planCheckoutUrl(plan)}
+            ctaLabel="Get started"
           />
         ))}
       </div>

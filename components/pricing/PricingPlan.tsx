@@ -18,6 +18,10 @@ interface PricingPlanProps {
   showDetails?: boolean;
   githubLink?: boolean;
   contactSalesUrl?: string;
+  /** Live checkout URL — clicking the CTA starts the subscription. */
+  checkoutUrl?: string;
+  /** Override the primary CTA label (e.g. "Start free"). */
+  ctaLabel?: string;
 }
 
 const PricingPlan = ({
@@ -32,9 +36,16 @@ const PricingPlan = ({
   showDetails = false,
   githubLink = false,
   contactSalesUrl,
+  checkoutUrl,
+  ctaLabel,
 }: PricingPlanProps) => {
   const analytics = useAnalytics();
   const track = (cta: string) => analytics.capture(EVENTS.PLAN_CLICKED, { plan: name, cta });
+  const openCta = (cta: string, url: string) => {
+    track(cta);
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+  const primaryLabel = ctaLabel || "Get Started";
 
   // Use monochrome design
   const borderColor = popular 
@@ -51,31 +62,19 @@ const PricingPlan = ({
     : "bg-transparent border border-border text-foreground hover:bg-[var(--white)] hover:text-primary-foreground transition-all duration-300";
 
   const renderButton = () => {
+    // Contact-sales tiers (Enterprise / Custom) → book a call.
     if (contactSalesUrl) {
       return (
         <Button
           className={`w-full mb-8 ${buttonClass}`}
-          onClick={() => {
-            track('Contact Sales');
-            window.open(contactSalesUrl, '_blank');
-          }}
+          onClick={() => openCta('Contact Sales', contactSalesUrl)}
         >
           Contact Sales
         </Button>
       );
-    } else if (githubLink || name === "Dev") {
-      return (
-        <Button
-          className={`w-full mb-8 ${buttonClass}`}
-          onClick={() => {
-            track('Get on GitHub');
-            window.open('https://github.com/hanzoai/', '_blank');
-          }}
-        >
-          Get on GitHub
-        </Button>
-      );
-    } else if (name === "Team" && showDetails) {
+    }
+    // Team tab: the Team card opens the seat/credit configurator inline.
+    if (name === "Team" && showDetails) {
       return (
         <Button
           className={`w-full mb-8 ${buttonClass}`}
@@ -90,7 +89,8 @@ const PricingPlan = ({
           Configure Plan
         </Button>
       );
-    } else if (name === "Pro" && showDetails) {
+    }
+    if (name === "Pro" && showDetails) {
       return (
         <Button
           className={`w-full mb-8 ${buttonClass}`}
@@ -106,16 +106,37 @@ const PricingPlan = ({
           Get Started
         </Button>
       );
-    } else {
+    }
+    // Real checkout — starts the subscription against the live billing stack.
+    if (checkoutUrl) {
       return (
         <Button
           className={`w-full mb-8 ${buttonClass}`}
-          onClick={() => track('Get Started')}
+          onClick={() => openCta(primaryLabel, checkoutUrl)}
         >
-          Get Started
+          {primaryLabel}
         </Button>
       );
     }
+    // Legacy fallback (open-source repos) only if no checkout is wired.
+    if (githubLink || name === "Dev") {
+      return (
+        <Button
+          className={`w-full mb-8 ${buttonClass}`}
+          onClick={() => openCta('Get on GitHub', 'https://github.com/hanzoai/')}
+        >
+          Get on GitHub
+        </Button>
+      );
+    }
+    return (
+      <Button
+        className={`w-full mb-8 ${buttonClass}`}
+        onClick={() => track('Get Started')}
+      >
+        {primaryLabel}
+      </Button>
+    );
   };
 
   return (

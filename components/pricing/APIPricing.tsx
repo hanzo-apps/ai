@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Button } from "@hanzo/ui";
 import Link from "next/link";
 import { Search, ChevronDown, ChevronUp, Star, Filter } from "lucide-react";
@@ -54,6 +54,90 @@ interface PricingResponse {
   tools: ToolEntry[];
   providers?: Record<string, { total: number; free: number; paid: number }>;
 }
+
+// ── Live catalog (api.hanzo.ai/v1/models) ──────────────────────────────
+// Backend-driven per-model retail. The static data built below is only a
+// fallback shown until this resolves — never fabricated once live loads.
+const MODELS_API = "https://api.hanzo.ai/v1/models";
+
+interface ApiModel {
+  id: string;
+  name?: string;
+  fullName?: string;
+  description?: string;
+  features?: string[];
+  tier?: string;
+  context?: number | null;
+  specs?: { params?: string; arch?: string };
+  pricing?: { input?: number | null; output?: number | null; cacheRead?: number | null; cacheWrite?: number | null; perUnit?: number };
+  pricingUnit?: string;
+  endpoint?: string;
+  provider?: string;
+  isFree?: boolean;
+  featured?: boolean;
+  family?: string;
+}
+
+interface ApiModelsResponse {
+  updated?: string;
+  summary?: PricingSummary;
+  families?: Array<{ id: string; name: string; models?: string[] }>;
+  data?: ApiModel[];
+}
+
+/** api.hanzo.ai/v1/models item → the Hanzo model card shape. */
+function apiToHanzo(m: ApiModel): HanzoModel {
+  return {
+    name: m.name || m.id,
+    fullName: m.fullName || m.name || m.id,
+    description: m.description || "",
+    features: m.features || [],
+    tier: m.tier || "pro",
+    specs: { params: m.specs?.params || "", arch: m.specs?.arch || "" },
+    pricing: m.pricing ?? { input: null, output: null, cacheRead: null, cacheWrite: null },
+    pricingUnit: m.pricingUnit,
+    endpoint: m.endpoint,
+  };
+}
+
+/** api.hanzo.ai/v1/models item (non-Hanzo provider) → third-party card shape. */
+function apiToThirdParty(m: ApiModel): ThirdPartyModel {
+  return {
+    id: m.id,
+    name: m.fullName || m.name || m.id,
+    provider: m.provider || "Third-Party",
+    features: m.features || [],
+    contextWindow: m.context ?? 0,
+    isFree: m.isFree ?? false,
+    featured: m.featured,
+    pricing: {
+      input: m.pricing?.input ?? 0,
+      output: m.pricing?.output ?? 0,
+      cacheRead: m.pricing?.cacheRead ?? null,
+      cacheWrite: m.pricing?.cacheWrite ?? null,
+    },
+  };
+}
+
+type ModelKind = "chat" | "embedding" | "rerank" | "image" | "audio" | "video";
+
+/** Classify a model into a pricing section from its endpoint / unit / id. */
+function kindOf(m: HanzoModel): ModelKind {
+  const id = (m.name || "").toLowerCase();
+  const ep = (m.endpoint || "").toLowerCase();
+  if (ep.includes("/embeddings") || id.includes("embedding")) return "embedding";
+  if (ep.includes("/rerank") || id.includes("rerank")) return "rerank";
+  if (ep.includes("/videos") || m.pricingUnit === "clip" || m.pricingUnit === "video" || id.includes("video")) return "video";
+  if (ep.includes("/images") || m.pricingUnit === "image" || id.includes("image")) return "image";
+  if (ep.includes("/audio") || ["asr", "tts", "voice", "speech", "foley", "music", "transcription"].some((k) => id.includes(k))) return "audio";
+  return "chat";
+}
+
+/** Enso = flagship frontier family (Flash / Pro / Ultra). */
+const isEnso = (m: HanzoModel) =>
+  (m.name || "").toLowerCase().startsWith("enso") || (m.fullName || "").toLowerCase().startsWith("enso");
+
+const ENSO_ORDER: Record<string, number> = { "enso-flash": 0, enso: 1, "enso-pro": 1, "enso-ultra": 2 };
 
 const fmt = (val: number | null) => {
   if (val == null) return "N/A";
@@ -154,7 +238,34 @@ const APIPricing = () => {
   const [showFreeOnly, setShowFreeOnly] = useState(false);
   const [showCount, setShowCount] = useState(MODELS_PER_PAGE);
 
-  const data = STATIC_DATA;
+  // Start with static data (no loading flash), then replace with the live
+  // catalog. Static remains only if the fetch fails — never fabricated.
+  const [data, setData] = useState<PricingResponse>(STATIC_DATA);
+
+  useEffect(() => {
+    fetch(MODELS_API)
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((d: ApiModelsResponse) => {
+        const models = (d.data || []).filter((m) => !String(m.id).startsWith("router:"));
+        if (!models.length) return;
+        const hanzo = models.filter((m) => (m.provider || "Hanzo") === "Hanzo");
+        const third = models.filter((m) => m.provider && m.provider !== "Hanzo");
+        setData({
+          updated: d.updated || STATIC_DATA.updated,
+          summary: d.summary || STATIC_DATA.summary,
+          hanzoModels: hanzo.map(apiToHanzo),
+          thirdPartyModels: third.map(apiToThirdParty),
+          tools: STATIC_DATA.tools,
+          providers: STATIC_DATA.providers,
+        });
+      })
+      .catch(() => {
+        // keep STATIC_DATA already set
+      });
+  }, []);
 
   // Derive providers list and filter models
   const providers = useMemo(() => {
@@ -194,12 +305,19 @@ const APIPricing = () => {
   const summary = data.summary;
   const visibleModels = filteredModels.slice(0, showCount);
 
-  // Group hanzo models by category
-  const llmModels = hanzoModels.filter((m: any) => !m.pricingUnit && !m.endpoint);
-  const embeddingModels = hanzoModels.filter((m: any) => m.endpoint === "/v1/embeddings");
-  const rerankerModels = hanzoModels.filter((m: any) => m.endpoint === "/v1/rerank");
-  const imageModels = hanzoModels.filter((m: any) => m.endpoint === "/v1/images/generations");
-  const audioModels = hanzoModels.filter((m: any) => m.endpoint === "/v1/audio/transcriptions");
+  // Enso = flagship family, surfaced first. Everything else grouped by kind
+  // (endpoint / unit / id) so chat, embedding, rerank, image, audio, and
+  // video models all render regardless of which fields the backend populates.
+  const ensoModels = [...hanzoModels.filter(isEnso)].sort(
+    (a, b) => (ENSO_ORDER[a.name.toLowerCase()] ?? 1) - (ENSO_ORDER[b.name.toLowerCase()] ?? 1)
+  );
+  const rest = hanzoModels.filter((m) => !isEnso(m));
+  const llmModels = rest.filter((m) => kindOf(m) === "chat");
+  const embeddingModels = rest.filter((m) => kindOf(m) === "embedding");
+  const rerankerModels = rest.filter((m) => kindOf(m) === "rerank");
+  const imageModels = rest.filter((m) => kindOf(m) === "image");
+  const audioModels = rest.filter((m) => kindOf(m) === "audio");
+  const videoModels = rest.filter((m) => kindOf(m) === "video");
 
   const HanzoModelCard = ({ model }: { model: HanzoModel }) => (
     <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50 mb-4">
@@ -317,13 +435,62 @@ const APIPricing = () => {
         </div>
       )}
 
+      {/* Hanzo Enso — flagship frontier family (Flash / Pro / Ultra) */}
+      <div className="mb-16">
+        <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
+          <div>
+            <h2 className="text-3xl font-bold">Hanzo Enso</h2>
+            <p className="text-muted-foreground text-lg mt-2">
+              Flagship frontier models — Flash, Pro, and Ultra. Live per-token retail, one API key.
+            </p>
+          </div>
+          <Link
+            href="/enso"
+            className="inline-flex items-center px-4 py-2 rounded-full font-medium text-sm bg-primary/10 text-foreground border border-border hover:bg-primary/20 transition-colors"
+          >
+            Explore Enso
+          </Link>
+        </div>
+
+        {ensoModels.length > 0 ? (
+          <div className="space-y-4">
+            {ensoModels.map((model) => (
+              <HanzoModelCard key={model.name} model={model} />
+            ))}
+          </div>
+        ) : (
+          <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50">
+            <div className="flex items-center gap-3 mb-2 flex-wrap">
+              <h3 className="text-xl font-semibold">Enso Flash · Pro · Ultra</h3>
+              <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full bg-primary/10 text-foreground/70 border border-border">
+                Rolling out
+              </span>
+            </div>
+            <p className="text-muted-foreground">
+              Enso is being enabled organization by organization. Live per-token retail pricing for
+              Flash, Pro, and Ultra appears here automatically the moment Enso is available for your
+              org — served straight from <code className="text-foreground/80">api.hanzo.ai/v1/models</code>,
+              no placeholder numbers.
+            </p>
+            <div className="mt-4">
+              <Button
+                className="bg-transparent border border-border text-foreground hover:bg-[var(--white)] hover:text-primary-foreground transition-all duration-300"
+                onClick={() => window.open("https://console.hanzo.ai", "_blank", "noopener,noreferrer")}
+              >
+                Request Enso access
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* Hanzo Zen Models Section */}
       <div className="mb-16">
         <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
           <div>
             <h2 className="text-3xl font-bold">Hanzo Zen Models</h2>
             <p className="text-muted-foreground text-lg mt-2">
-              {hanzoModels.length} models across LLM, embedding, reranker, image, and audio
+              {rest.length} models across LLM, embedding, reranker, image, audio, and video
               {data.updated && (
                 <span className="ml-2 text-xs text-muted-foreground/60">
                   Updated {new Date(data.updated).toLocaleDateString()}
@@ -397,13 +564,26 @@ const APIPricing = () => {
           </div>
         )}
 
-        {/* Audio Transcription Models */}
+        {/* Audio & Speech Models */}
         {audioModels.length > 0 && (
           <div className="mb-8">
-            <h3 className="text-2xl font-bold mb-2">Audio Transcription</h3>
-            <p className="text-muted-foreground mb-4">Speech-to-text via <code className="text-foreground/80">/v1/audio/transcriptions</code></p>
+            <h3 className="text-2xl font-bold mb-2">Audio &amp; Speech</h3>
+            <p className="text-muted-foreground mb-4">Speech-to-text, text-to-speech, and audio generation via <code className="text-foreground/80">/v1/audio/*</code></p>
             <div className="space-y-4">
               {audioModels.map((model) => (
+                <HanzoModelCard key={model.name} model={model} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Video Generation Models */}
+        {videoModels.length > 0 && (
+          <div className="mb-8">
+            <h3 className="text-2xl font-bold mb-2">Video Generation</h3>
+            <p className="text-muted-foreground mb-4">Text-to-video via <code className="text-foreground/80">/v1/videos/generations</code></p>
+            <div className="space-y-4">
+              {videoModels.map((model) => (
                 <HanzoModelCard key={model.name} model={model} />
               ))}
             </div>

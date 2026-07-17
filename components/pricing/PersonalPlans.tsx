@@ -18,6 +18,9 @@ interface SubscriptionPlan {
   features: string[];
   limits?: Record<string, number | null>;
   payouts?: { idleResalePercent: number; description: string };
+  /** Optional backend-supplied checkout deep link / id (honored if present). */
+  checkoutUrl?: string;
+  checkoutId?: string;
 }
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
@@ -25,6 +28,22 @@ const PLAN_ICONS: Record<string, React.ReactNode> = {
   pro: <Code className="h-6 w-6 text-muted-foreground" />,
   max: <Users className="h-6 w-6 text-muted-foreground" />,
 };
+
+// Canonical checkout. The billing shell reads the "#pricing" hash and opens the
+// subscription portal for the signed-in user (auto OIDC via hanzo.id when
+// needed), where selecting a plan starts the subscription. If /v1/plans ever
+// supplies a checkout link/id we honor it; otherwise we deep-link by plan id.
+const BILLING_URL = "https://billing.hanzo.ai";
+
+function planCheckoutUrl(plan: SubscriptionPlan): string {
+  if (plan.checkoutUrl) return plan.checkoutUrl;
+  const id = plan.checkoutId || plan.id;
+  return `${BILLING_URL}/?plan=${encodeURIComponent(id)}#pricing`;
+}
+
+function planCtaLabel(plan: SubscriptionPlan): string {
+  return plan.priceMonthly === 0 ? "Start free" : "Get started";
+}
 
 // Static fallback mirrors https://pricing.hanzo.ai/v1/plans (category: personal).
 // The live response replaces these on load — keep the two in lockstep.
@@ -130,7 +149,8 @@ const PersonalPlans = () => {
             description={plan.description}
             features={plan.features}
             popular={plan.popular}
-            githubLink={plan.priceMonthly === 0}
+            checkoutUrl={planCheckoutUrl(plan)}
+            ctaLabel={planCtaLabel(plan)}
           />
         ))}
       </div>

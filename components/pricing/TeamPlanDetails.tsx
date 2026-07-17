@@ -157,7 +157,17 @@ const TeamPlanDetails = ({ fromMaxPlan = false, fromProPlan = false }: TeamPlanD
           </div>
 
           <div className="flex justify-center">
-            <Button size="lg" className="bg-primary text-primary-foreground border border-neutral-300 hover:bg-neutral-100 hover:text-primary-foreground hover:border-neutral-400 transition-all duration-300 px-10 py-6 text-lg">
+            <Button
+              size="lg"
+              className="bg-primary text-primary-foreground border border-neutral-300 hover:bg-neutral-100 hover:text-primary-foreground hover:border-neutral-400 transition-all duration-300 px-10 py-6 text-lg"
+              onClick={() =>
+                window.open(
+                  `https://billing.hanzo.ai/?plan=${fromProPlan ? "pro" : "team"}#pricing`,
+                  "_blank",
+                  "noopener,noreferrer"
+                )
+              }
+            >
               Get Started with {fromProPlan ? "Pro" : "Team"} Plan
             </Button>
           </div>
