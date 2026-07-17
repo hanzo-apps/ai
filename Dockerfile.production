@@ -34,6 +34,17 @@ RUN pnpm build
 # chrome-free cloud-site landing remains reachable at /cloud-site.)
 RUN cp out/overview.html out/index.html
 
+# Clean URLs on hanzoai/static. The Next export is FLAT (trailingSlash:false →
+# out/pricing.html, out/enso.html, …). hanzoai/static serves a *directory's*
+# index.html, and in --spa mode a MISS (extensionless /pricing) falls through to
+# index.html (the homepage) — so every deep page rendered the homepage instead of
+# itself. Materialize a directory index per page (out/pricing/index.html, …) so
+# `root.Open("/pricing")` finds a directory and serves the real page; the flat
+# .html files stay too (so /pricing and /pricing.html both work).
+RUN cd out && for f in $(find . -type f -name '*.html' ! -name 'index.html' ! -name '404.html'); do \
+      d="${f%.html}"; mkdir -p "$d"; cp "$f" "$d/index.html"; \
+    done
+
 # ---- serve stage: hanzoai/static (scratch + single Go binary) ------------
 FROM ghcr.io/hanzoai/static:0.4.1
 COPY --from=build /app/out /srv
