@@ -3,11 +3,14 @@
  * minimal footer on the apex hanzo.ai landing (`app/page.tsx`).
  *
  * The apex is the clean, chat-centric front door. The DETAILED product /
- * marketing pages live on cloud.hanzo.ai (the same static export, served by the
- * cloud-site image), so every deep link here is an absolute cloud.hanzo.ai URL —
- * clicking "Products → Vector" takes you to the detailed site. Chat is the
- * product front door (hanzo.chat); the Foundation that governs Hanzo is Zoo Labs
- * (zoo.ngo). Every href resolves to a live surface — no dead links.
+ * marketing pages are part of THIS static export, so they resolve on hanzo.ai
+ * itself — every deep link here is a same-origin relative path (`/vector`,
+ * `/base`, `/cli`, …) that stays on hanzo.ai. The only absolute links are the
+ * external product apps (hanzo.chat / hanzo.app / studio / team), the install
+ * host (hanzo.sh), docs / blog / GitHub, the console you sign in to, the
+ * Foundation that governs Hanzo (Zoo Labs, zoo.ngo), and the single
+ * "Explore Cloud" umbrella door to the cloud-product site (cloud.hanzo.ai).
+ * Every href resolves to a live surface — no dead links.
  */
 
 export const CHAT = 'https://hanzo.chat'
@@ -21,9 +24,6 @@ export const DOCS = 'https://docs.hanzo.ai'
 export const BLOG = 'https://blog.hanzo.ai'
 export const GITHUB = 'https://github.com/hanzoai'
 export const FOUNDATION = 'https://zoo.ngo'
-
-/** Detailed pages now live under cloud.hanzo.ai. */
-const cloud = (path: string) => `${CLOUD}${path}`
 
 export interface NavLink {
   label: string
@@ -50,10 +50,10 @@ export const NAV: NavItem[] = [
   {
     label: 'Research',
     explore: [
-      { label: 'Overview', href: cloud('/overview'), desc: 'The Hanzo platform, end to end' },
+      { label: 'Overview', href: '/overview', desc: 'The Hanzo platform, end to end' },
       { label: 'Enso', href: '/enso', desc: 'Model orchestration — one model to command them all' },
-      { label: 'Zen models', href: cloud('/zen'), desc: 'Open-weight frontier models' },
-      { label: 'Philosophy', href: cloud('/philosophy'), desc: 'How we build' },
+      { label: 'Zen models', href: '/zen', desc: 'Open-weight frontier models' },
+      { label: 'Philosophy', href: '/philosophy', desc: 'How we build' },
     ],
     columns: [
       {
@@ -80,9 +80,9 @@ export const NAV: NavItem[] = [
         title: 'AI Cloud',
         links: [
           { label: 'Enso', href: '/enso', desc: 'Proprietary · Cloud only' },
-          { label: 'Zen', href: cloud('/zen'), desc: 'Open weights' },
-          { label: 'Hanzo Base', href: cloud('/base') },
-          { label: 'Vector search', href: cloud('/vector') },
+          { label: 'Zen', href: '/zen', desc: 'Open weights' },
+          { label: 'Hanzo Base', href: '/base' },
+          { label: 'Vector search', href: '/vector' },
           { label: 'Explore Cloud', href: CLOUD },
         ],
       },
@@ -93,19 +93,19 @@ export const NAV: NavItem[] = [
           { label: 'App', href: APP },
           { label: 'Studio', href: STUDIO },
           { label: 'Team', href: TEAM },
-          { label: 'Bot', href: cloud('/bot') },
-          { label: 'Search', href: cloud('/search') },
+          { label: 'Bot', href: '/bot' },
+          { label: 'Search', href: '/search' },
         ],
       },
       {
         title: 'Developers',
         links: [
           { label: 'hanzo.sh — install', href: SH },
-          { label: 'hanzo CLI', href: cloud('/cli') },
-          { label: 'MCP', href: cloud('/mcp') },
-          { label: 'ZAP', href: cloud('/zap') },
-          { label: 'Dev', href: cloud('/dev') },
-          { label: 'SDKs', href: cloud('/cloud/sdks') },
+          { label: 'hanzo CLI', href: '/cli' },
+          { label: 'MCP', href: '/mcp' },
+          { label: 'ZAP', href: '/zap' },
+          { label: 'Dev', href: '/dev' },
+          { label: 'SDKs', href: '/cloud/sdks' },
         ],
       },
     ],
@@ -113,19 +113,19 @@ export const NAV: NavItem[] = [
   {
     label: 'Business',
     explore: [
-      { label: 'Overview', href: cloud('/enterprise'), desc: 'Security, scale, and support' },
-      { label: 'Solutions', href: cloud('/solutions'), desc: 'By use case and industry' },
-      { label: 'Pricing', href: cloud('/pricing'), desc: 'Pay only for what you use' },
-      { label: 'Contact sales', href: cloud('/contact/sales'), desc: 'Talk to the team' },
+      { label: 'Overview', href: '/enterprise', desc: 'Security, scale, and support' },
+      { label: 'Solutions', href: '/solutions', desc: 'By use case and industry' },
+      { label: 'Pricing', href: '/pricing', desc: 'Pay only for what you use' },
+      { label: 'Contact sales', href: '/contact/sales', desc: 'Talk to the team' },
     ],
     columns: [
       {
         title: 'For business',
         links: [
-          { label: 'Enterprise', href: cloud('/enterprise') },
-          { label: 'Startups', href: cloud('/startups') },
+          { label: 'Enterprise', href: '/enterprise' },
+          { label: 'Startups', href: '/startups' },
           { label: 'Enso for teams', href: '/enso' },
-          { label: 'Security', href: cloud('/security') },
+          { label: 'Security', href: '/security' },
         ],
       },
     ],
@@ -134,18 +134,18 @@ export const NAV: NavItem[] = [
     label: 'Developers',
     explore: [
       { label: 'hanzo.sh', href: SH, desc: 'One line to install — get started fast' },
-      { label: 'hanzo CLI', href: cloud('/cli'), desc: 'Run dev or any coding agent; log in to Cloud' },
-      { label: 'API Platform', href: cloud('/cloud/api'), desc: 'One OpenAI-compatible API' },
-      { label: 'MCP', href: cloud('/mcp'), desc: 'Model Context Protocol tools' },
+      { label: 'hanzo CLI', href: '/cli', desc: 'Run dev or any coding agent; log in to Cloud' },
+      { label: 'API Platform', href: '/cloud/api', desc: 'One OpenAI-compatible API' },
+      { label: 'MCP', href: '/mcp', desc: 'Model Context Protocol tools' },
     ],
     columns: [
       {
         title: 'Build',
         links: [
-          { label: 'Agents', href: cloud('/agents') },
-          { label: 'ZAP', href: cloud('/zap') },
-          { label: 'SDKs', href: cloud('/cloud/sdks') },
-          { label: 'Playground', href: cloud('/playground') },
+          { label: 'Agents', href: '/agents' },
+          { label: 'ZAP', href: '/zap' },
+          { label: 'SDKs', href: '/cloud/sdks' },
+          { label: 'Playground', href: '/playground' },
         ],
       },
       {
@@ -161,18 +161,18 @@ export const NAV: NavItem[] = [
   {
     label: 'Company',
     explore: [
-      { label: 'About', href: cloud('/about') },
-      { label: 'Careers', href: cloud('/careers') },
-      { label: 'News', href: cloud('/press') },
-      { label: 'Leadership', href: cloud('/leadership') },
+      { label: 'About', href: '/about' },
+      { label: 'Careers', href: '/careers' },
+      { label: 'News', href: '/press' },
+      { label: 'Leadership', href: '/leadership' },
     ],
     columns: [
       {
         title: 'Resources',
         links: [
-          { label: 'Brand', href: cloud('/brand') },
-          { label: 'Security', href: cloud('/security') },
-          { label: 'Status', href: cloud('/status') },
+          { label: 'Brand', href: '/brand' },
+          { label: 'Security', href: '/security' },
+          { label: 'Status', href: '/status' },
         ],
       },
     ],
@@ -210,7 +210,7 @@ export const FOOTER: NavColumn[] = [
       { label: 'App', href: APP },
       { label: 'Studio', href: STUDIO },
       { label: 'Cloud', href: CLOUD },
-      { label: 'Pricing', href: cloud('/pricing') },
+      { label: 'Pricing', href: '/pricing' },
     ],
   },
   {
@@ -218,26 +218,26 @@ export const FOOTER: NavColumn[] = [
     links: [
       { label: 'hanzo.sh', href: SH },
       { label: 'Docs', href: DOCS },
-      { label: 'CLI', href: cloud('/cli') },
+      { label: 'CLI', href: '/cli' },
       { label: 'GitHub', href: GITHUB },
     ],
   },
   {
     title: 'Company',
     links: [
-      { label: 'About', href: cloud('/about') },
-      { label: 'Careers', href: cloud('/careers') },
-      { label: 'News', href: cloud('/press') },
-      { label: 'Contact', href: cloud('/contact') },
+      { label: 'About', href: '/about' },
+      { label: 'Careers', href: '/careers' },
+      { label: 'News', href: '/press' },
+      { label: 'Contact', href: '/contact' },
     ],
   },
   {
     title: 'More',
     links: [
       { label: 'Foundation', href: FOUNDATION },
-      { label: 'Brand', href: cloud('/brand') },
-      { label: 'Status', href: cloud('/status') },
-      { label: 'Security', href: cloud('/security') },
+      { label: 'Brand', href: '/brand' },
+      { label: 'Status', href: '/status' },
+      { label: 'Security', href: '/security' },
     ],
   },
 ]

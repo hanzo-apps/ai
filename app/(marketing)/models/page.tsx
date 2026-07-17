@@ -89,33 +89,37 @@ const response = await client.chat.completions.create({
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero */}
-      <section className="pt-24 pb-16 px-4 text-center border-b border-border">
-        <div className="max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/50 border border-border text-xs text-muted-foreground mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+      <section className="relative overflow-hidden border-b border-neutral-900 px-4 pb-20 pt-32 text-center">
+        <div
+          className="pointer-events-none absolute left-1/2 top-0 z-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full opacity-60"
+          style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 68%)', filter: 'blur(100px)' }}
+        />
+        <div className="relative z-10 mx-auto max-w-4xl">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 text-xs text-neutral-300">
+            <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
             {data.total} models available · Updated live
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-            AI Model Catalog
-            <br />
-            <span className="text-muted-foreground">{data.total}+ Models</span>
+          <h1 className="mb-6 text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl">
+            <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
+              {data.total}+ models, one API
+            </span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
+          <p className="mx-auto mb-8 max-w-2xl text-xl text-neutral-300">
             Access GPT-5.3, Claude Sonnet 4.6, Gemini 3.1 Pro, Zen, Llama 4, Grok, DeepSeek and{' '}
             {data.total - 10}+ more through one OpenAI-compatible API.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-4">
             <Link
               href="/signup"
-              className="px-6 py-3 rounded-lg bg-foreground text-background font-medium text-sm hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
             >
-              Get Free API Key
+              Get free API key
             </Link>
             <Link
               href="https://docs.hanzo.ai"
-              className="px-6 py-3 rounded-lg border border-border text-sm font-medium hover:bg-secondary/50 transition-colors"
+              className="inline-flex items-center gap-2 rounded-full border border-neutral-700 px-8 py-3 text-sm font-medium text-white transition-colors hover:border-neutral-400"
             >
-              View Docs
+              View docs
             </Link>
           </div>
         </div>

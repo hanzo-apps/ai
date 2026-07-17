@@ -1,42 +1,85 @@
 'use client'
 
-import { ArrowRight } from "lucide-react"
+import {
+  Bot,
+  Cloud,
+  Code2,
+  Workflow,
+  Plug,
+  BrainCircuit,
+  LineChart,
+  ShieldCheck,
+  Boxes,
+  Network,
+  Rocket,
+} from 'lucide-react'
+import { ProductLanding } from '@/components/product/ProductLanding'
+import { ProductFooter } from '@/components/products/ProductFooter'
 
-import { ProductFooter } from "@/components/products/ProductFooter"
+const DOCS = 'https://docs.hanzo.ai/agents'
+const GITHUB = 'https://github.com/hanzoai/agent'
+const CONSOLE = 'https://console.hanzo.ai'
+
 export default function AgentsPage() {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
-      <main>
-        <section className="relative pt-32 pb-20 px-4 md:px-8 lg:px-12 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20"
-              style={{ background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`, filter: "blur(100px)" }} />
-          </div>
-          <div className="max-w-4xl mx-auto relative z-10 text-center">
-            <h1 className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] mb-6 text-foreground">
-              Hanzo Agents
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              Multi-agent SDK with OpenAI compatibility. Build, orchestrate, and ship autonomous agents.
-            </p>
-          </div>
-        </section>
-
-        <section className="py-16 border-t border-neutral-800">
-          <div className="max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-2xl font-bold mb-4">Get started with Agents</h2>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href="https://docs.hanzo.ai/agents" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
-                Read the docs <ArrowRight className="h-4 w-4" />
-              </a>
-              <a href="https://github.com/hanzoai/agents" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
-                View on GitHub
-              </a>
-            </div>
-          </div>
-        </section>
-              <ProductFooter slug="agents" name="Agents" />
-</main>
-    </div>
+    <>
+      <ProductLanding
+        badge="Hanzo Agents · Build"
+        badgeIcon={Bot}
+        title="Ship agents that do the work"
+        lede="A multi-agent SDK, runtime, and tool harness with OpenAI compatibility. Build, orchestrate, and run autonomous agents that call tools, use memory, and coordinate — in Python or TypeScript."
+        ctas={[
+          { label: 'Read the docs', href: DOCS, icon: Rocket },
+          { label: 'View on GitHub', href: GITHUB },
+        ]}
+        note={{ icon: Cloud, text: 'Open source (Apache-2.0). Run it locally, self-host, or deploy on Hanzo Cloud.' }}
+        availableThrough={['Python SDK', 'TypeScript SDK', 'OpenAI-compatible API', 'MCP']}
+        what={{
+          eyebrow: 'What is Hanzo Agents',
+          title: 'One SDK for the whole agent loop',
+          sub: 'The pieces you would otherwise stitch together — model calls, tools, memory, and coordination — as one coherent, debuggable system.',
+          pillars: [
+            {
+              icon: Code2,
+              title: 'SDK',
+              body: 'Define agents, tools, and handoffs in a few lines — a typed API in Python and TypeScript that reads like the mental model.',
+            },
+            {
+              icon: Workflow,
+              title: 'Runtime',
+              body: 'A durable runtime that executes tool calls, retries, and multi-step plans — with tracing you can actually debug.',
+            },
+            {
+              icon: Plug,
+              title: 'Tool harness',
+              body: 'Give agents real capabilities — MCP tools, code execution, browser, and your own functions — behind one safe, uniform interface.',
+            },
+          ],
+        }}
+        features={{
+          eyebrow: 'Capabilities',
+          title: 'From prototype to production agents',
+          items: [
+            { icon: Network, title: 'OpenAI-compatible', body: 'Point the SDK at any OpenAI-compatible endpoint — Enso, Zen, or frontier models — with no rewrites.' },
+            { icon: Workflow, title: 'Multi-agent orchestration', body: 'Coordinate specialists with handoffs, roles, and shared memory instead of one overloaded prompt.' },
+            { icon: Plug, title: 'MCP-native tools', body: 'Every Model Context Protocol tool is available to your agents out of the box.' },
+            { icon: BrainCircuit, title: 'Memory', body: 'Short- and long-term memory backed by Hanzo Vector for retrieval-grounded agents.' },
+            { icon: LineChart, title: 'Tracing & evals', body: 'See every step, token, and tool call; evaluate runs to catch regressions before users do.' },
+            { icon: ShieldCheck, title: 'Guardrails', body: 'Scope tools, sandbox code, and gate actions so autonomy stays inside the lines.' },
+          ],
+        }}
+        finalCta={{
+          icon: Boxes,
+          title: 'Build your first agent today',
+          sub: 'Start from the docs, or deploy an agent on Hanzo Cloud in minutes.',
+          buttons: [
+            { label: 'Read the docs', href: DOCS, icon: Rocket },
+            { label: 'Deploy on Hanzo Cloud', href: CONSOLE },
+            { label: 'GitHub', href: GITHUB },
+          ],
+        }}
+      />
+      <ProductFooter slug="agents" name="Agents" />
+    </>
   )
 }

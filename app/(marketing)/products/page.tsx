@@ -57,7 +57,7 @@ export default function Products() {
             </div>
 
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/20" asChild>
+              <Button size="lg" className="rounded-full bg-white text-black hover:opacity-90" asChild>
                 <Link href="/pricing">
                   Start Free
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -66,7 +66,7 @@ export default function Products() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-border hover:border-neutral-600 hover:bg-secondary"
+                className="rounded-full border-neutral-700 text-white hover:border-neutral-400"
                 asChild
               >
                 <a href="https://docs.hanzo.ai" target="_blank" rel="noopener noreferrer">
@@ -185,7 +185,7 @@ export default function Products() {
             Free tier for every product. No credit card required. Scale as you grow.
           </p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/20" asChild>
+            <Button size="lg" className="rounded-full bg-white text-black hover:opacity-90" asChild>
               <Link href="/pricing">
                 Start Building
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -194,7 +194,7 @@ export default function Products() {
             <Button
               size="lg"
               variant="outline"
-              className="border-border hover:border-neutral-600 hover:bg-secondary"
+              className="rounded-full border-neutral-700 text-white hover:border-neutral-400"
               asChild
             >
               <Link href="/contact">Talk to Sales</Link>

@@ -1,51 +1,84 @@
 'use client'
 
+import {
+  Database,
+  Cloud,
+  Fingerprint,
+  Radio,
+  FileStack,
+  ShieldCheck,
+  Boxes,
+  Server,
+  Zap,
+  Rocket,
+} from 'lucide-react'
+import { ProductLanding } from '@/components/product/ProductLanding'
+import { ProductFooter } from '@/components/products/ProductFooter'
 
-import React from "react";
-import { ArrowRight } from "lucide-react";
-import HeroSection from "@/components/base/HeroSection";
-import CoreFeatures from "@/components/base/CoreFeatures";
-import Templates from "@/components/base/Templates";
-import DeveloperExperience from "@/components/base/DeveloperExperience";
-import Infrastructure from "@/components/base/Infrastructure";
-import AIEngineering from "@/components/base/AIEngineering";
-import CallToAction from "@/components/base/CallToAction";
-import Community from "@/components/base/Community";
-import Compliance from "@/components/base/Compliance";
+const DOCS = 'https://docs.hanzo.ai/base'
+const GITHUB = 'https://github.com/hanzoai/base'
+const CONSOLE = 'https://console.hanzo.ai'
 
-import { ProductFooter } from "@/components/products/ProductFooter"
-const Base = () => {
+export default function BasePage() {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
-
-      <main>
-        <HeroSection />
-        <CoreFeatures />
-        <Templates />
-        <DeveloperExperience />
-        <Infrastructure />
-        <AIEngineering />
-        <Compliance />
-        <CallToAction />
-        <Community />
-        <section className="py-16 border-t border-neutral-800">
-          <div className="max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-2xl font-bold mb-4">Get started with Base</h2>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href="https://docs.hanzo.ai/base" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
-                Read the docs <ArrowRight className="h-4 w-4" />
-              </a>
-              <a href="https://github.com/hanzoai/base" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
-                View on GitHub
-              </a>
-            </div>
-          </div>
-        </section>
-              <ProductFooter slug="base" name="Base" />
-</main>
-
-    </div>
-  );
-};
-
-export default Base;
+    <>
+      <ProductLanding
+        badge="Hanzo Base · App backend"
+        badgeIcon={Database}
+        title="The backend in one file"
+        lede="An embedded application backend — database, auth, file storage, and realtime — in a single deployable, with Hanzo IAM wired in natively. SQLite by default for instant local dev; scale out when you need to."
+        ctas={[
+          { label: 'Start free', href: CONSOLE, icon: Rocket },
+          { label: 'Read the docs', href: DOCS },
+          { label: 'View on GitHub', href: GITHUB },
+        ]}
+        note={{ icon: Cloud, text: 'Open source (MIT). Runs as one binary — self-host or deploy managed on Hanzo Cloud.' }}
+        what={{
+          eyebrow: 'What is Hanzo Base',
+          title: 'Everything an app backend needs, embedded',
+          sub: 'Stop re-implementing auth, storage, and realtime for every project. Base ships them as one cohesive backend that grows from a laptop to production.',
+          pillars: [
+            {
+              icon: Database,
+              title: 'Database',
+              body: 'A real database with schema, migrations, and a typed REST API generated for you — SQLite embedded by default, Postgres when you go multi-instance.',
+            },
+            {
+              icon: Fingerprint,
+              title: 'Auth via Hanzo IAM',
+              body: 'Users, sessions, and OAuth handled by Hanzo IAM — one identity across every Hanzo surface, with no bespoke auth to build or maintain.',
+            },
+            {
+              icon: Radio,
+              title: 'Files & realtime',
+              body: 'Object storage with access rules and live subscriptions over websockets — the pieces every app reinvents, built in from day one.',
+            },
+          ],
+        }}
+        features={{
+          eyebrow: 'Capabilities',
+          title: 'Batteries included, nothing hidden',
+          items: [
+            { icon: Zap, title: 'Instant REST API', body: 'Every collection gets a typed CRUD API and an admin UI the moment you define it.' },
+            { icon: Radio, title: 'Realtime subscriptions', body: 'Subscribe to records over websockets and push changes to clients without polling.' },
+            { icon: ShieldCheck, title: 'Rules-based access', body: 'Per-collection read/write rules evaluated on the edge of every request.' },
+            { icon: FileStack, title: 'File storage', body: 'Upload, transform, and serve files under the same access rules as your data.' },
+            { icon: Server, title: 'SQLite → Postgres', body: 'Embedded SQLite for fast local dev; switch to Postgres for multi-instance production.' },
+            { icon: Boxes, title: 'IAM-native SSO', body: 'Sign-in, org and tenant scoping, and audit come from Hanzo IAM out of the box.' },
+          ],
+        }}
+        finalCta={{
+          icon: Database,
+          title: 'Stand up your backend in minutes',
+          sub: 'Deploy Base on Hanzo Cloud, or run the single binary anywhere you like.',
+          buttons: [
+            { label: 'Deploy on Hanzo Cloud', href: CONSOLE, icon: Rocket },
+            { label: 'Read the docs', href: DOCS },
+            { label: 'GitHub', href: GITHUB },
+          ],
+        }}
+      />
+      <ProductFooter slug="base" name="Base" />
+    </>
+  )
+}
