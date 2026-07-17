@@ -5,11 +5,38 @@
 Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
 
 - URL: https://hanzo.ai
-- Stack: Next.js 14 + React 18 + TypeScript + Tailwind CSS + Framer Motion
+- Stack: Next.js 15 + React 19 + TypeScript + Tailwind v4 + Framer Motion
 - Node: v20+ (`.nvmrc`)
 - Dev: `pnpm dev`
 - Build: `pnpm build`
-- Deploy: Static export (`output: export` in `next.config.ts`) → GitHub Pages
+- Deploy: Static export (`output: export` in `next.config.ts`) → Cloudflare Pages
+  (`.github/workflows/deploy.yml`, project `hanzo-ai`, CF creds from KMS)
+
+## Two faces, one export
+
+This ONE static export (`out/`) serves TWO sites — split by host, not by build:
+
+1. **hanzo.ai apex** (Cloudflare Pages) — the clean, openai.com-style
+   **chat-centric landing**. Route: `app/page.tsx` → `components/home/HomeLanding`.
+   It lives at the app ROOT (outside `(marketing)`) so only the root layout
+   wraps it; it ships its OWN nav + footer (`components/home/*`). "What can I
+   help with?" composer forwards to `hanzo.chat/?q=…`; nav deep-links to
+   cloud.hanzo.ai; **Foundation → zoo.ngo** (Zoo Labs governs Hanzo).
+2. **cloud.hanzo.ai** (k8s `cloud-site` image, `ghcr.io/hanzoai/cloud-site`,
+   `hanzoai/static`) — the **detailed product/marketing site**. `Dockerfile.production`
+   does `cp out/cloud-site.html out/index.html`, so this host's ROOT is
+   `app/cloud-site/page.tsx` (`components/cloud/CloudLanding`) while every deep
+   `(marketing)/*` page (docdb, vector, kv, iam, …) serves beneath it. The apex
+   `/` change never touches this host (its root is decoupled via that `cp`).
+   Traefik router `cloud-hanzo-ai` (universe `infra/k8s/ingress/routes.yaml`) →
+   Service `www` → the image; App CR `infra/k8s/operator/crs/www.yaml` pins the tag.
+   Deploy cloud.hanzo.ai = rebuild the image (on-cluster BuildKit, NOT local) +
+   bump the `www` CR tag.
+
+- The old apex homepage (`app/(marketing)/page.tsx`, the `components/landing/*`
+  sections) was relocated to **`/overview`** (`app/(marketing)/overview/page.tsx`)
+  — kept on the detailed site, wrapped by the `(marketing)` Navbar/Footer.
+  Surfaced in the landing nav under Research → Overview.
 
 ## Brand Colors (Monochrome)
 
