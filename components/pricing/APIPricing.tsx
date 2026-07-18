@@ -463,13 +463,13 @@ const APIPricing = () => {
             <div className="flex items-center gap-3 mb-2 flex-wrap">
               <h3 className="text-xl font-semibold">Enso Flash · Pro · Ultra</h3>
               <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full bg-primary/10 text-foreground/70 border border-border">
-                Rolling out
+                Default
               </span>
             </div>
             <p className="text-muted-foreground">
-              Enso is being enabled organization by organization. Live per-token retail pricing for
-              Flash, Pro, and Ultra appears here automatically the moment Enso is available for your
-              org — served straight from <code className="text-foreground/80">api.hanzo.ai/v1/models</code>,
+              Enso is the default for every new chat and API request — Flash, Pro, and Ultra behind one
+              endpoint, with the Enso router picking the right tier per task. Live per-token retail pricing
+              appears here automatically — served straight from <code className="text-foreground/80">api.hanzo.ai/v1/models</code>,
               no placeholder numbers.
             </p>
             <div className="mt-4">
@@ -477,7 +477,7 @@ const APIPricing = () => {
                 className="bg-transparent border border-border text-foreground hover:bg-[var(--white)] hover:text-primary-foreground transition-all duration-300"
                 onClick={() => window.open("https://console.hanzo.ai", "_blank", "noopener,noreferrer")}
               >
-                Request Enso access
+                Start with Enso
               </Button>
             </div>
           </div>

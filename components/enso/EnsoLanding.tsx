@@ -127,7 +127,7 @@ const FAQ = [
   { q: 'Can I control which models or providers Enso uses?', a: 'Yes. Opt specific providers or models out of Enso’s pool to satisfy data-residency, privacy, or compliance requirements. Every request records which models actually ran.' },
   { q: 'Will my data be used to train models? Can I opt out?', a: 'No customer data is used to train models. Enso runs inside your Hanzo Cloud organization with a full audit trail; opt-out and data controls are first-class.' },
   { q: 'Can I see which underlying models Enso used for each query?', a: 'Yes. Each response carries the orchestration trace — the models selected, the roles they played, and the routing decisions — visible in the console and via the API.' },
-  { q: 'Is Enso generally available?', a: 'Enso is rolling out to Hanzo Cloud customers. Request access to enable it for your organization; enterprise and dedicated deployment are available on request.' },
+  { q: 'Is Enso generally available?', a: 'Yes. Enso is available now on Hanzo Cloud and is the default for new chats and API requests — every default request routes through the Enso router, which selects the right tier (Flash, Pro, or Ultra) per task. Zen and other models stay available for explicit selection. Enterprise and dedicated deployment are available on request.' },
 ]
 
 export default function EnsoLanding() {
