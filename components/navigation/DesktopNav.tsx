@@ -90,6 +90,8 @@ const MeetHanzoContent = ({ closeMenu }: { closeMenu: () => void }) => (
         <IconLink href="/zen" icon={Brain} label="Zen LM" description="30+ open foundation models" closeMenu={closeMenu} />
         <IconLink href="/zen/models" icon={Layers} label="All Models" closeMenu={closeMenu} />
         <IconLink href="https://hanzo.blog" icon={FileText} label="Papers & Blog" external closeMenu={closeMenu} />
+        <IconLink href="https://papers.hanzo.ai/refutation-driven-perf" icon={FileText} label="Refutation-Driven Perf" description="Multi-week GPU kernel campaign, measured" external closeMenu={closeMenu} />
+        <IconLink href="https://papers.hanzo.ai/evolutionary-schedule-search" icon={FileText} label="Evolutionary Schedule Search" description="Autotuning a one-source kernel DSL" external closeMenu={closeMenu} />
         <IconLink href="https://huggingface.co/zenlm" icon={ExternalLink} label="HuggingFace" external closeMenu={closeMenu} />
         <IconLink href="/open-source" icon={GitBranch} label="Open Source" closeMenu={closeMenu} />
       </div>
