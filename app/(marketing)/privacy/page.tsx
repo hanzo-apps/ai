@@ -92,9 +92,9 @@ const Privacy = () => {
                   When you use our AI Services, your prompts and inputs are processed to generate responses. We do not use your inputs or outputs to train our models unless you explicitly opt in. Enterprise customers may negotiate additional data handling terms through a Data Processing Agreement (DPA).
                 </p>
 
-                <h3 className="text-base font-medium text-foreground mt-4 mb-2">4.2 AI model improvement (opt-in)</h3>
+                <h3 className="text-base font-medium text-foreground mt-4 mb-2">4.2 AI model improvement</h3>
                 <p className="text-muted-foreground leading-relaxed mb-2">
-                  We continuously improve how your requests are routed to the most suitable model. You can help by opting in to model-improvement data collection. This is entirely optional and <strong className="text-foreground/90">off by default</strong> — you control it in your account settings and can withdraw at any time, with no change to how the Services work for you.
+                  We continuously improve how your requests are routed to the most suitable model, and you control whether your usage helps. The default depends on your region: for users in the <strong className="text-foreground/90">EU, UK, and EEA</strong> this is strictly <strong className="text-foreground/90">opt-in</strong> — off unless you turn it on; <strong className="text-foreground/90">elsewhere it is on by default and disclosed when you sign up</strong>. Either way, you control it in your account settings and can withdraw at any time, with no change to how the Services work for you.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-2">
                   When you turn it on, an automated system rates the <em>quality</em> of AI responses so we can improve routing. We collect <strong className="text-foreground/90">only a numeric quality score and non-identifying routing metadata</strong> (such as the type of task, which model handled it, and timing). We do <strong className="text-foreground/90">not store your prompts or AI outputs</strong> for this purpose.
