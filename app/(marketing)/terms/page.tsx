@@ -35,7 +35,7 @@ const Terms = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-sm text-muted-foreground"
             >
-              Last updated: June 2026
+              Last updated: July 2026
             </motion.p>
           </div>
         </section>
@@ -86,8 +86,11 @@ const Terms = () => {
 
               <div>
                 <h2 className="text-xl font-semibold text-foreground mb-3">5. AI Services and Output</h2>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed mb-2">
                   Our AI Services generate outputs based on your inputs. You retain ownership of your inputs. Subject to these Terms, you own the outputs generated for you, to the extent permitted by law. AI-generated outputs may not be unique and similar outputs may be generated for other users. We do not guarantee the accuracy, completeness, or fitness of any output for a particular purpose.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  We do not use your inputs or outputs to train or improve our models unless you explicitly opt in. Model-improvement data collection is optional and off by default; you control it in your account settings and may withdraw at any time. When enabled, an automated system records only a numeric quality score and non-identifying routing metadata to improve model routing — your prompts and outputs are not stored for this purpose. See our <a href="/privacy" className="text-foreground hover:underline">Privacy Policy</a> for details.
                 </p>
               </div>
 

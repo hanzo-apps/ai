@@ -35,7 +35,7 @@ const Privacy = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-sm text-muted-foreground"
             >
-              Last updated: June 2026
+              Last updated: July 2026
             </motion.p>
           </div>
         </section>
@@ -87,8 +87,20 @@ const Privacy = () => {
 
               <div>
                 <h2 className="text-xl font-semibold text-foreground mb-3">4. AI Model Inputs and Outputs</h2>
+                <h3 className="text-base font-medium text-foreground mb-2">4.1 Your inputs and outputs</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   When you use our AI Services, your prompts and inputs are processed to generate responses. We do not use your inputs or outputs to train our models unless you explicitly opt in. Enterprise customers may negotiate additional data handling terms through a Data Processing Agreement (DPA).
+                </p>
+
+                <h3 className="text-base font-medium text-foreground mt-4 mb-2">4.2 AI model improvement (opt-in)</h3>
+                <p className="text-muted-foreground leading-relaxed mb-2">
+                  We continuously improve how your requests are routed to the most suitable model. You can help by opting in to model-improvement data collection. This is entirely optional and <strong className="text-foreground/90">off by default</strong> — you control it in your account settings and can withdraw at any time, with no change to how the Services work for you.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mb-2">
+                  When you turn it on, an automated system rates the <em>quality</em> of AI responses so we can improve routing. We collect <strong className="text-foreground/90">only a numeric quality score and non-identifying routing metadata</strong> (such as the type of task, which model handled it, and timing). We do <strong className="text-foreground/90">not store your prompts or AI outputs</strong> for this purpose.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Rating is performed in a privacy-preserving, confidential-compute manner and is <strong className="text-foreground/90">anonymous</strong> — each score is keyed to a request identifier, not to your identity or content. This data is never sold or shared, and is used solely to improve model-routing quality.
                 </p>
               </div>
 
