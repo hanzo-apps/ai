@@ -52,7 +52,7 @@ const STATIC_PLANS: SubscriptionPlan[] = [
     category: "world",
     popular: true,
     description:
-      "Everything in Free plus priority feeds, unlimited alerts, ZAP + MCP API access, WhatsApp/Telegram/SMS notifications. Included free in Hanzo Pro / Max / Team / Enterprise.",
+      "Everything in Free plus priority feeds, unlimited alerts, ZAP + MCP API access, WhatsApp/Telegram/SMS notifications. Included free in Hanzo Pro / Plus / Max / Team / Enterprise.",
     features: [
       "Everything in Free",
       "Unlimited alerts",
@@ -153,7 +153,7 @@ const WorldPricing = () => {
         <p className="text-muted-foreground text-lg">
           Real-time global intelligence — live OSINT feeds, sentiment, and trader
           indicators streamed to your dashboard, agents, and API. Included free with
-          Hanzo Pro, Max, Team, and Enterprise.
+          Hanzo Pro, Plus, Max, Team, and Enterprise.
         </p>
       </div>
 

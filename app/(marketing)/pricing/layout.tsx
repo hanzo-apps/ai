@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Pricing — Hanzo AI',
-  description: 'Start with $5 free credit. Pay as you go. Developer: $5 credit included. Unified AI: $20/mo with all models and priority inference. Team: $25/mo per seat. Enterprise: custom SLAs and dedicated support.',
+  description: 'Start free with $5 credit. Pro $20/mo, Plus $100/mo, Max $200/mo — one subscription, unified AI usage across hanzo.ai, hanzo.app & hanzo.team, 3 invited guests included. Team $25/user/mo, minimum 2 seats. Enterprise: custom SLAs and dedicated support.',
   openGraph: {
     title: 'Pricing — Hanzo AI',
-    description: 'Start with $5 free credit. Pay as you go. Developer: $5 credit included. Unified AI: $20/mo with all models and priority inference. Team: $25/mo per seat. Enterprise: custom SLAs and dedicated support.',
+    description: 'Start free with $5 credit. Pro $20/mo, Plus $100/mo, Max $200/mo — one subscription, unified AI usage across hanzo.ai, hanzo.app & hanzo.team, 3 invited guests included. Team $25/user/mo, minimum 2 seats. Enterprise: custom SLAs and dedicated support.',
     url: 'https://hanzo.ai/pricing',
     siteName: 'Hanzo AI',
     type: 'website',
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing — Hanzo AI',
-    description: 'Start with $5 free credit. Pay as you go. Developer: $5 credit included. Unified AI: $20/mo with all models and priority inference. Team: $25/mo per seat. Enterprise: custom SLAs and dedicated support.',
+    description: 'Start free with $5 credit. Pro $20/mo, Plus $100/mo, Max $200/mo — one subscription, unified AI usage across hanzo.ai, hanzo.app & hanzo.team, 3 invited guests included. Team $25/user/mo, minimum 2 seats. Enterprise: custom SLAs and dedicated support.',
     images: ['/pricing/opengraph-image'],
   },
 }
