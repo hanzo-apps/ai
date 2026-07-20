@@ -8,6 +8,11 @@ import { HanzoLogo } from "@hanzo/logo/react";
 import { getWhiteSVG } from "@hanzo/logo";
 import { Copy, Download, Image, ExternalLink, FileCode } from "lucide-react";
 
+// The mark + wordmark motion (intro flip, idle breathe, wordmark slide-in →
+// collapse → return on hover) is the @hanzo/logo animated shell — the ONE brand
+// motion shared across hanzo.ai / console / app / team. Only the right-click
+// brand menu is local.
+
 // Context menu items for right-click
 const contextMenuItems = [
   { label: "Copy SVG", action: "copy-svg", icon: Copy },
@@ -21,30 +26,10 @@ const contextMenuItems = [
 ];
 
 const Logo = () => {
-  const [animationComplete, setAnimationComplete] = useState(false);
-  const [showIntroWordmark, setShowIntroWordmark] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const [contextMenu, setContextMenu] = useState<{ x: number; y: number } | null>(null);
   const [copied, setCopied] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-
-  // After mount, show wordmark briefly then hide
-  useEffect(() => {
-    const animTimer = setTimeout(() => {
-      setAnimationComplete(true);
-      setShowIntroWordmark(true);
-    }, 1200);
-
-    const hideTimer = setTimeout(() => {
-      setShowIntroWordmark(false);
-    }, 2500);
-
-    return () => {
-      clearTimeout(animTimer);
-      clearTimeout(hideTimer);
-    };
-  }, []);
 
   // Close context menu on click outside
   useEffect(() => {
@@ -135,39 +120,14 @@ const Logo = () => {
     }
   };
 
-  // Show wordmark when hovering OR during intro animation
-  const shouldShowWordmark = isHovered || showIntroWordmark;
-
   return (
     <>
       <Link
         href="/"
-        className="relative flex items-center group cursor-pointer"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        className="flex items-center group cursor-pointer text-foreground text-base"
         onContextMenu={handleContextMenu}
       >
-        <motion.div
-          initial={{ opacity: 0, rotateY: 180, scale: 0.6 }}
-          animate={{ opacity: 1, rotateY: 0, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="w-5 h-5 relative flex-shrink-0"
-          onAnimationComplete={() => setAnimationComplete(true)}
-          style={{ transformOrigin: "center center" }}
-        >
-          <HanzoLogo variant="white" size={20} />
-        </motion.div>
-
-        {/* Wordmark - absolute positioned so it doesn't shift other content */}
-        <div className="absolute left-7 overflow-hidden">
-          <span
-            className={`font-semibold text-base text-foreground whitespace-nowrap block transition-transform duration-300 ease-out ${
-              shouldShowWordmark ? "translate-x-0" : "-translate-x-full"
-            }`}
-          >
-            Hanzo Cloud
-          </span>
-        </div>
+        <HanzoLogo animated size={20} wordmark="Hanzo Cloud" />
       </Link>
 
       {/* Right-click context menu */}

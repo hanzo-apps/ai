@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { Search, ChevronDown, Sparkles, Zap, MessageSquare, Terminal, ArrowRight, Bot, AppWindow, LayoutDashboard } from "lucide-react";
+import { Search, ChevronDown, Sparkles, Zap, MessageSquare, Terminal, ArrowRight, Bot, AppWindow, LayoutDashboard, Building2, Users, CreditCard, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface User {
@@ -41,9 +41,40 @@ const apps = [
   { label: "Hanzo Dev", description: "AI coding agent for your IDE", href: "/dev", icon: Terminal, external: false },
 ];
 
+// The signed-in identity menu — mirrors the shared shell (console/app/team):
+// Console · Organizations (full IAM org scope lives in the Console) · Team ·
+// Billing · Sign out. Marketing site keeps it as plain links, no extra deps.
+const accountMenu = [
+  { label: "Console", hint: "console.hanzo.ai", href: "https://console.hanzo.ai", icon: LayoutDashboard },
+  { label: "Organizations", hint: "switch in Console", href: "https://console.hanzo.ai", icon: Building2 },
+  { label: "Team", hint: "hanzo.team", href: "https://hanzo.team", icon: Users },
+  { label: "Billing", hint: "billing.hanzo.ai", href: "https://billing.hanzo.ai", icon: CreditCard },
+];
+
 const AuthButtons = ({ user, onLogout, onOpenCommandPalette }: AuthButtonsProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close the user menu on outside click / escape.
+  useEffect(() => {
+    if (!isUserMenuOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsUserMenuOpen(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isUserMenuOpen]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -122,25 +153,60 @@ const AuthButtons = ({ user, onLogout, onOpenCommandPalette }: AuthButtonsProps)
         </>
       )}
 
-      {/* Log in / User account — drop into the Console (it SSOs via IAM). */}
+      {/* Log in / User account — the shared-shell identity menu (SSOs via IAM). */}
       {user ? (
-        <div className="flex items-center gap-1.5">
-          <a
-            href="https://console.hanzo.ai"
+        <div className="relative" ref={userMenuRef}>
+          <button
+            onClick={() => setIsUserMenuOpen((o) => !o)}
             className="inline-flex items-center justify-center border border-border hover:bg-accent rounded-full h-9 px-4 text-sm font-medium text-foreground transition-all duration-200 cursor-pointer gap-2"
+            aria-label="Account"
           >
             <span className="w-5 h-5 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center flex-shrink-0">
               {(user.name || user.email).charAt(0).toUpperCase()}
             </span>
             <span className="max-w-[100px] truncate">{user.name || user.email}</span>
-          </a>
-          <button
-            onClick={onLogout}
-            className="inline-flex items-center justify-center rounded-full h-9 px-3 text-sm font-medium text-foreground/70 hover:text-foreground transition-all duration-200 cursor-pointer"
-            aria-label="Sign out"
-          >
-            Sign out
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isUserMenuOpen ? "rotate-180" : ""}`} />
           </button>
+
+          <AnimatePresence>
+            {isUserMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                transition={{ duration: 0.15 }}
+                className="absolute right-0 mt-2 w-64 bg-secondary/95 backdrop-blur-xl border border-border rounded-2xl shadow-2xl overflow-hidden z-[100] p-1.5"
+              >
+                <div className="px-2.5 py-2 border-b border-border/60 mb-1">
+                  <div className="text-sm font-medium text-foreground truncate">{user.name || user.email}</div>
+                  {user.name && <div className="text-xs text-muted-foreground truncate">{user.email}</div>}
+                </div>
+                {accountMenu.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setIsUserMenuOpen(false)}
+                    className="group flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-accent transition-colors"
+                  >
+                    <item.icon className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                    <span className="flex-1 text-sm text-foreground/90">{item.label}</span>
+                    <span className="text-[10px] text-muted-foreground">{item.hint}</span>
+                  </a>
+                ))}
+                <div className="border-t border-border/60 my-1" />
+                <button
+                  onClick={() => {
+                    setIsUserMenuOpen(false);
+                    onLogout?.();
+                  }}
+                  className="group flex w-full items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-accent transition-colors"
+                >
+                  <LogOut className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  <span className="text-sm text-foreground/90">Sign out</span>
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       ) : (
         <a
