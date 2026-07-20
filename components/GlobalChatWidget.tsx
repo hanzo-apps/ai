@@ -19,10 +19,10 @@ import {
 
 // Available models for widget access (non-premium, allowed by hz_widget_public auth)
 const zenModels = [
-  { id: "llama-3.3-70b", name: "Llama 70B", params: "70B", description: "Fast general-purpose" },
-  { id: "claude-haiku-4-5", name: "Haiku 4.5", params: "Claude", description: "Quick & accurate" },
-  { id: "gpt-4o-mini", name: "GPT-4o Mini", params: "GPT", description: "General-purpose" },
-  { id: "deepseek-r1-distill-70b", name: "DeepSeek R1", params: "70B", description: "Reasoning & code" },
+  { id: "glm-5.2", name: "GLM 5.2", params: "Hanzo", description: "Fast all-rounder" },
+  { id: "deepseek-v4-flash", name: "DeepSeek V4 Flash", params: "Hanzo", description: "Cheapest & fastest" },
+  { id: "deepseek-v4-pro", name: "DeepSeek V4 Pro", params: "Hanzo", description: "Stronger reasoning" },
+  { id: "zen5-max", name: "Zen5 Max", params: "Hanzo", description: "Top tier" },
 ];
 
 // Chat action presets - matching footer order
