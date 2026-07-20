@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@hanzo/ui";
 import { Loader2 } from "lucide-react";
 
-const DATASTORE_API = "https://api.hanzo.ai/v1/pricing/datastore";
+const DATASTORE_API = "https://pricing.hanzo.ai/v1/pricing/datastore";
 
 interface DatastoreTier {
   id: string;
@@ -50,50 +50,17 @@ interface DatastorePricingData {
   endpoints?: { signup?: string; sales?: string };
 }
 
-// Static fallback — mirrors ~/work/hanzo/pricing/datastore.json
-const FALLBACK: DatastorePricingData = {
-  trial: { days: 30 },
-  tiers: [
-    {
-      id: "basic", name: "Basic", tagline: "For teams getting started with analytics",
-      replicas: 1, ramGiB: 8, vcpu: 2, storageGB: 1000, storageLimit: "1 TB",
-      priceMonthly: 66.52, priceHourly: 0.0922, availabilityZones: 1,
-      support: { level: "standard", responseTime: "next_business_day" },
-      features: ["1 replica","8 GiB RAM / 2 vCPU","Up to 1 TB storage","Single availability zone","Async inserts","JSONEachRow + Parquet","HTTP API"],
-    },
-    {
-      id: "scale", name: "Scale", tagline: "For production workloads with high availability",
-      replicas: 2, ramGiB: 8, vcpu: 2, storageGB: null, storageLimit: "Unlimited",
-      priceMonthly: 499.38, priceHourly: 0.6936, availabilityZones: 2, popular: true,
-      support: { level: "priority", responseTime: "1_hour_critical_24x7" },
-      features: ["2+ replicas","8 GiB RAM / 2 vCPU (per replica)","Unlimited storage","2 availability zones","Auto-scaling","Read replicas","Private endpoints"],
-    },
-    {
-      id: "enterprise", name: "Enterprise", tagline: "For mission-critical deployments at scale",
-      replicas: 2, ramGiB: 32, vcpu: 8, storageGB: 5000, storageLimit: "Unlimited",
-      priceMonthly: 2669.40, priceHourly: 3.7075, availabilityZones: 3, contactSales: true,
-      support: { level: "enterprise", responseTime: "30_min_critical", namedEngineer: true, sla: true },
-      features: ["2+ replicas","32 GiB RAM / 8 vCPU (per replica)","Unlimited storage","3 availability zones","Private VPC / BYOC","HIPAA & PCI DSS","CMEK","SSO & SAML","SLA"],
-    },
-  ],
-  usage: {
-    storage: { pricePerGBMonth: 0.0247, pricePerTBMonth: 25.30, note: "Compressed on-disk size" },
-    ingestion: { pricePerGB: 0.04, label: "Hanzo Pipes", note: "Kafka, S3, HTTP, Postgres CDC" },
-    egress: {
-      public_internet: { pricePerGB: 0.1152, note: "Outbound to public internet" },
-      cross_region: { pricePerGB: 0.0312, note: "Between Hanzo regions" },
-      intra_region: { pricePerGB: 0, note: "Always free" },
-    },
-  },
-  discounts: { annual: { percent: 17 } },
-  included: [
-    "30-day free trial","Automated backups","End-to-end encryption",
-    "SQL-compatible HTTP API","JSONEachRow + Parquet","Async inserts",
-    "IAM SSO","KMS-managed secrets","OpenTelemetry native","DDoS protection",
-    "Real-time query metrics","Hanzo Console UI",
-  ],
-  endpoints: { signup: "https://console.hanzo.ai", sales: "/contact/sales" },
-};
+// The payload this component renders. Validated before use so a non-conforming
+// response (an error body, a partial payload) can never reach the render phase.
+function isDatastorePricing(d: unknown): d is DatastorePricingData {
+  const v = d as DatastorePricingData | null;
+  return !!v
+    && Array.isArray(v.tiers) && v.tiers.length > 0
+    && v.tiers.every((t) => typeof t?.priceMonthly === "number" && typeof t?.support?.responseTime === "string")
+    && typeof v.usage?.storage?.pricePerGBMonth === "number"
+    && typeof v.usage?.egress?.public_internet?.pricePerGB === "number"
+    && Array.isArray(v.included);
+}
 
 function supportLabel(r: string) {
   return r
@@ -104,18 +71,25 @@ function supportLabel(r: string) {
 
 export default function DatastorePricing() {
   const router = useRouter();
-  const [data, setData] = useState<DatastorePricingData>(FALLBACK);
+  const [data, setData] = useState<DatastorePricingData | null>(null);
   const [annual, setAnnual] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(DATASTORE_API)
-      .then((r) => r.json())
-      .then((d) => { setData(d); setLoading(false); })
-      .catch(() => setLoading(false));
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((d) => {
+        if (!isDatastorePricing(d)) throw new Error("unrecognized payload");
+        setData(d);
+      })
+      .catch(() => setData(null))
+      .finally(() => setLoading(false));
   }, []);
 
-  const annualDiscount = (data.discounts?.annual?.percent ?? 17) / 100;
+  const annualDiscount = (data?.discounts?.annual?.percent ?? 17) / 100;
 
   function monthlyPrice(tier: DatastoreTier) {
     return annual ? tier.priceMonthly * (1 - annualDiscount) : tier.priceMonthly;
@@ -124,8 +98,8 @@ export default function DatastorePricing() {
     return annual ? tier.priceHourly * (1 - annualDiscount) : tier.priceHourly;
   }
 
-  const signup = data.endpoints?.signup ?? "https://console.hanzo.ai";
-  const sales = data.endpoints?.sales ?? "/contact/sales";
+  const signup = data?.endpoints?.signup ?? "https://console.hanzo.ai";
+  const sales = data?.endpoints?.sales ?? "/contact/sales";
 
   return (
     <div className="max-w-7xl mx-auto mb-16">
@@ -134,7 +108,7 @@ export default function DatastorePricing() {
         <p className="text-muted-foreground text-lg mb-6">
           Real-time analytics database as a service.
           Columnar storage, real-time inserts, petabyte-scale queries.
-          {data.trial && ` ${data.trial.days}-day free trial, no credit card required.`}
+          {data?.trial && ` ${data.trial.days}-day free trial, no credit card required.`}
         </p>
         <div className="flex items-center gap-3">
           <span className={`text-sm ${!annual ? "text-foreground" : "text-muted-foreground"}`}>Monthly</span>
@@ -145,7 +119,7 @@ export default function DatastorePricing() {
             <span className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform ${annual ? "translate-x-4" : ""}`} />
           </button>
           <span className={`text-sm ${annual ? "text-foreground" : "text-muted-foreground"}`}>
-            Annual <span className="text-green-400 text-xs ml-1">Save {data.discounts?.annual?.percent ?? 17}%</span>
+            Annual <span className="text-green-400 text-xs ml-1">Save {data?.discounts?.annual?.percent ?? 17}%</span>
           </span>
         </div>
       </div>
@@ -155,7 +129,7 @@ export default function DatastorePricing() {
           <Loader2 className="w-6 h-6 animate-spin mr-2 text-muted-foreground" />
           <span className="text-muted-foreground">Loading pricing...</span>
         </div>
-      ) : (
+      ) : data ? (
         <>
           {/* Tier cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
@@ -270,6 +244,13 @@ export default function DatastorePricing() {
             </div>
           </div>
         </>
+      ) : (
+        <div className="py-16 text-center">
+          <p className="text-muted-foreground">
+            Live pricing is temporarily unavailable.{" "}
+            <a href={sales} className="underline">Contact sales</a> for current rates.
+          </p>
+        </div>
       )}
 
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
