@@ -1,0 +1,69 @@
+name: Cloud Site
+
+# Builds ghcr.io/hanzoai/cloud-site — the cloud.hanzo.ai landing image the
+# universe Deployment `www` (infra/k8s/cloud/cloud-site.yaml) pins. Static
+# export via Dockerfile.production, served by ghcr.io/hanzoai/static.
+# Tag convention matches the live universe pin (X.Y.Z, e.g. 0.1.1 — next
+# patch over the pinned tag). NO GitHub-hosted builders — this repo lives in
+# the hanzo-apps org, so it targets that org's arcd DinD scale set (same
+# runner deploy.yml uses). GHCR push crosses into the hanzoai namespace,
+# which the org GITHUB_TOKEN cannot do — login uses GH_PAT (hanzo-dev,
+# write:packages), mirroring hanzoai/app release.yml.
+
+permissions:
+  contents: read
+  packages: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Image tag (X.Y.Z, next patch after the live universe pin)'
+        required: true
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ inputs.tag }}
+  cancel-in-progress: false
+
+env:
+  # Build-record/summary artifact uploads can wedge on a full Actions
+  # artifact quota and fail the push step; the image is what matters.
+  DOCKER_BUILD_SUMMARY: "false"
+  DOCKER_BUILD_RECORD_UPLOAD: "false"
+
+jobs:
+  build:
+    runs-on: hanzo-apps-build-linux-amd64
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver: docker-container
+          driver-opts: |
+            network=host
+
+      - name: Reset Docker credential store (runner hygiene)
+        run: |
+          mkdir -p "$HOME/.docker"
+          printf '{}' > "$HOME/.docker/config.json"
+
+      - name: Login to GHCR (GH_PAT — cross-org push to hanzoai)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: hanzo-dev
+          password: ${{ secrets.GH_PAT }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile.production
+          platforms: linux/amd64
+          tags: ghcr.io/hanzoai/cloud-site:${{ inputs.tag }}
+          provenance: false
+          push: true

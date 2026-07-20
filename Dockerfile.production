@@ -21,8 +21,10 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # Build the static export (next.config.ts: output: 'export' -> ./out).
+# Large export (hundreds of pages): the default Node heap OOMs it — same
+# headroom the CF-Pages deploy lane uses (.github/workflows/deploy.yml).
 COPY . .
-RUN pnpm build
+RUN NODE_OPTIONS=--max-old-space-size=8192 pnpm build
 
 # Promote the FULL detailed homepage (/overview — the big components/landing/*
 # story: hero, platform, use-cases, multi-agent, DX, provider grid, routing,
