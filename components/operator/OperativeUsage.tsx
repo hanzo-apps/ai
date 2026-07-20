@@ -97,8 +97,8 @@ const OperativeUsage = () => {
             
             <div className="space-y-6">
               <div>
-                <p className="text-muted-foreground mb-2">Running with default settings (GPT-5.3)</p>
-                <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
+                <p className="text-muted-foreground mb-2">Running with default settings (GLM 5.2)</p>
+                <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
                   operative
                 </div>
               </div>
@@ -112,15 +112,15 @@ const OperativeUsage = () => {
               
               <div>
                 <p className="text-muted-foreground mb-2">Using OCR mode for enhanced element detection</p>
-                <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
-                  operative -m gpt-5.3-with-ocr
+                <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
+                  operative -m glm-5.2-with-ocr
                 </div>
               </div>
               
               <div>
                 <p className="text-muted-foreground mb-2">Using Set-of-Mark (SoM) prompting</p>
-                <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
-                  operative -m gpt-5.3-with-som
+                <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
+                  operative -m glm-5.2-with-som
                 </div>
               </div>
               

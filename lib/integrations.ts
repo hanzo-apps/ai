@@ -125,7 +125,7 @@ const message = await client.messages.create({
         lang: 'python',
         label: 'Streaming',
         code: `with client.messages.stream(
-    model="anthropic/claude-opus-4-6",
+    model="glm-5.2",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Tell me a story"}],
 ) as stream:
