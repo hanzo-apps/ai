@@ -34,9 +34,11 @@ import {
   Workflow,
   Zap,
 } from 'lucide-react'
+import Link from 'next/link'
 import LandingNav from '@/components/home/LandingNav'
 import LandingFooter from '@/components/home/LandingFooter'
 import { EnsoLogo } from './EnsoLogo'
+import EnsoSavings from './EnsoSavings'
 
 const CONSOLE = 'https://console.hanzo.ai'
 const CLOUD = 'https://cloud.hanzo.ai'
@@ -87,29 +89,43 @@ const STATS = [
   { icon: Sparkles, value: '1 API', label: 'OpenAI-compatible', sub: 'drop-in' },
 ]
 
-/** The three DEFAULT preset models. Flash = fast/cheap, Pro = balanced default, Ultra = max quality. */
+/**
+ * The three DEFAULT presets as differentiated cost/quality contracts — monotonic
+ * in quality: Ultra (92.9) > Pro (87.9) > Flash (75.8). GPQA is Hanzo-measured;
+ * price bands are published input→output $/MTok.
+ */
 const TIERS = [
   {
-    name: 'Enso Flash',
-    tag: 'Fastest, most economical',
-    icon: Zap,
-    body: 'The high-volume default — lowest latency and cost for everyday chat, classification, extraction, and simple agent steps. Enso routes to lean, fast models and only escalates when a task needs it.',
-    points: ['High-volume, low latency', 'Cheapest per request', 'Great default for chat & tools'],
+    name: 'Enso Ultra',
+    id: 'enso-ultra',
+    gpqa: '92.9%',
+    priceBand: '$12.5 → $75',
+    tag: 'Maximum quality',
+    icon: Layers,
+    body: 'Coordinates a deeper pool of expert agents to maximize answer quality on hard, high-stakes problems — research reproduction, security analysis, and long-running autonomous work. Adaptive fan-out lets it price near Pro despite being top-tier.',
+    points: ['Research & paper reproduction', 'Security assessment', 'Deep, long-running tasks'],
+    flagship: true,
   },
   {
     name: 'Enso Pro',
+    id: 'enso · the default',
+    gpqa: '87.9%',
+    priceBand: '$20 → $75',
     tag: 'Balanced — the everyday default',
     icon: Workflow,
-    body: 'Strong performance with sensible latency, the ideal default for real work: coding, code review, and responsive agents. Opt agents out of the pool to meet data and compliance constraints.',
+    body: 'Strong performance with sensible latency, the ideal default for real work: coding, code review, and responsive agents. Routes down to a cheap model whenever one suffices, so you never overpay. Opt agents out of the pool to meet data and compliance constraints.',
     points: ['Coding & code review', 'Responsive agents', 'Opt-out agent controls'],
     featured: true,
   },
   {
-    name: 'Enso Ultra',
-    tag: 'Maximum quality',
-    icon: Layers,
-    body: 'Coordinates a deeper pool of expert agents to maximize answer quality on hard, high-stakes problems — research reproduction, security analysis, and long-running autonomous work.',
-    points: ['Research & paper reproduction', 'Security assessment', 'Deep, long-running tasks'],
+    name: 'Enso Flash',
+    id: 'enso-flash',
+    gpqa: '75.8%',
+    priceBand: '$2 → $6',
+    tag: 'Fastest, most economical',
+    icon: Zap,
+    body: 'The high-volume default — lowest latency and cost for everyday chat, classification, extraction, and simple agent steps. A single lean model that escalates only when a task needs it.',
+    points: ['High-volume, low latency', 'Cheapest per request', 'Great default for chat & tools'],
   },
 ]
 
@@ -170,9 +186,9 @@ export default function EnsoLanding() {
               <a href={CONSOLE} className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-black transition-opacity hover:opacity-90">
                 Start using Enso <ArrowRight className="h-4 w-4" />
               </a>
-              <a href={DOCS} className="inline-flex items-center gap-2 rounded-full border border-neutral-700 px-8 py-3 font-medium text-white transition-colors hover:border-neutral-400">
+              <Link href="/models/enso" className="inline-flex items-center gap-2 rounded-full border border-neutral-700 px-8 py-3 font-medium text-white transition-colors hover:border-neutral-400">
                 See the technology
-              </a>
+              </Link>
             </motion.div>
 
             <motion.p {...fade} transition={{ duration: 0.5, delay: 0.3 }} className="mx-auto mt-6 inline-flex max-w-xl items-center justify-center gap-2 text-sm text-neutral-500">
@@ -231,6 +247,9 @@ export default function EnsoLanding() {
                     <li key={x} className="flex items-center gap-2"><Check className="h-4 w-4 shrink-0 text-white" /> {x}</li>
                   ))}
                 </ul>
+                <Link href="/models/enso" className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-neutral-300 hover:text-white">
+                  Explore Enso benchmarks <ArrowUpRight className="h-4 w-4 text-neutral-500" />
+                </Link>
               </motion.div>
               <motion.div {...fade} transition={{ duration: 0.5, delay: 0.06 }} className="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-8">
                 <div className="mb-4 flex items-center gap-3">
@@ -245,9 +264,9 @@ export default function EnsoLanding() {
                     <li key={x} className="flex items-center gap-2"><Check className="h-4 w-4 shrink-0 text-neutral-400" /> {x}</li>
                   ))}
                 </ul>
-                <a href={`${CLOUD}/zen`} className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-neutral-300 hover:text-white">
+                <Link href="/models/zen" className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-neutral-300 hover:text-white">
                   Explore Zen models <ArrowUpRight className="h-4 w-4 text-neutral-500" />
-                </a>
+                </Link>
               </motion.div>
             </div>
           </div>
@@ -286,8 +305,8 @@ export default function EnsoLanding() {
           <div className="mx-auto max-w-7xl">
             <SectionHead
               eyebrow="How to use"
-              title="Three presets, one API"
-              sub="Enso Flash, Enso Pro, and Enso Ultra are the default presets — pick the one that fits your workload, or switch between them without changing your integration. Zen and other models stay available too."
+              title="Three presets — price × performance"
+              sub="Ultra, Pro, and Flash are distinct cost/quality contracts, monotonic in quality (92.9 > 87.9 > 75.8 GPQA-Diamond). Pick the one that fits your workload, or switch without changing your integration — Flash and Pro route down to a cheap model whenever one suffices; Ultra escalates only when a probe is uncertain."
             />
             <div className="grid gap-6 md:grid-cols-3">
               {TIERS.map((t, i) => (
@@ -295,7 +314,13 @@ export default function EnsoLanding() {
                   key={t.name}
                   {...fade}
                   transition={{ duration: 0.5, delay: i * 0.06 }}
-                  className={`flex flex-col rounded-2xl border p-8 ${t.featured ? 'border-neutral-600 bg-neutral-900/70' : 'border-neutral-800 bg-neutral-900/50'}`}
+                  className={`flex flex-col rounded-2xl border p-8 ${
+                    t.flagship
+                      ? 'border-white/30 bg-neutral-900/70'
+                      : t.featured
+                        ? 'border-neutral-600 bg-neutral-900/70'
+                        : 'border-neutral-800 bg-neutral-900/50'
+                  }`}
                 >
                   <div className="mb-4 flex items-center gap-3">
                     <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10">
@@ -304,11 +329,18 @@ export default function EnsoLanding() {
                     <div>
                       <div className="flex items-center gap-2">
                         <h3 className="text-xl font-semibold text-white">{t.name}</h3>
+                        {t.flagship && <span className="rounded-full border border-white/30 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Flagship</span>}
                         {t.featured && <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-black">Default</span>}
                       </div>
-                      <p className="text-sm text-neutral-500">{t.tag}</p>
+                      <p className="font-mono text-xs text-neutral-500">{t.id}</p>
                     </div>
                   </div>
+                  <div className="mb-4 flex items-baseline gap-2 border-y border-neutral-800 py-3">
+                    <span className="text-3xl font-bold text-white">{t.gpqa}</span>
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">GPQA-Diamond</span>
+                    <span className="ml-auto font-mono text-xs text-neutral-400">{t.priceBand}<span className="text-neutral-600"> /MTok</span></span>
+                  </div>
+                  <p className="mb-2 text-xs font-medium text-neutral-500">{t.tag}</p>
                   <p className="mb-5 text-sm leading-relaxed text-neutral-400">{t.body}</p>
                   <ul className="mt-auto space-y-2">
                     {t.points.map((pt) => (
@@ -319,6 +351,11 @@ export default function EnsoLanding() {
                   </ul>
                 </motion.div>
               ))}
+            </div>
+            <div className="mt-8 text-center">
+              <Link href="/models/enso" className="inline-flex items-center gap-1 text-sm font-medium text-neutral-300 hover:text-white">
+                Compare every measured benchmark <ArrowUpRight className="h-4 w-4 text-neutral-500" />
+              </Link>
             </div>
           </div>
         </section>
@@ -347,6 +384,9 @@ export default function EnsoLanding() {
             </p>
           </div>
         </section>
+
+        {/* ── Efficiency & savings ─────────────────────────────────────────── */}
+        <EnsoSavings />
 
         {/* ── Built for (use cases) ────────────────────────────────────────── */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">

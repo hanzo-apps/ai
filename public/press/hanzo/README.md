@@ -6,9 +6,8 @@
 - hanzo-logo-dark.svg (use on light backgrounds)
 
 ## Brand Colors
-- Primary: #fd4444
-- Secondary: #ff6b6b
-- Hover: #e03e3e
+- Hanzo Black: #0A0A0B
+- Hanzo White: #FFFFFF
 
 ## Usage Notes
 - Maintain clear space around the mark.

@@ -12,7 +12,7 @@
         --bg: #0a0a0a;
         --text: #e5e5e5;
         --muted: #737373;
-        --accent: #fd4444;
+        --accent: #ffffff;
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body {
