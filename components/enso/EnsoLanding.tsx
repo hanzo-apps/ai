@@ -13,7 +13,7 @@
  * cloud.hanzo.ai). It ships the apex full-width hovering header (LandingNav) +
  * LandingFooter, so it lives at the app ROOT (outside the (marketing) route group),
  * like the apex home. Honest by construction: every figure is a real, measured Enso
- * number (LiveCodeBench 91.4; microsecond CPU routing) or an honest capability — no
+ * number (GPQA-Diamond 92.9, enso-ultra complete run; microsecond CPU routing) or an honest capability — no
  * fabricated competitor tables, no invented testimonials.
  */
 import { motion } from 'framer-motion'
@@ -81,9 +81,9 @@ const PILLARS = [
 ]
 
 const STATS = [
-  { icon: Gauge, value: '91.4', label: 'LiveCodeBench', sub: 'measured, routed live' },
+  { icon: Gauge, value: '92.9%', label: 'GPQA-Diamond', sub: 'enso-ultra, complete run' },
   { icon: Zap, value: '<15µs', label: 'Routing overhead', sub: 'per request' },
-  { icon: Boxes, value: '100+', label: 'Models orchestrated', sub: 'frontier + open Zen' },
+  { icon: Boxes, value: '400+', label: 'Models orchestrated', sub: 'frontier + open Zen' },
   { icon: Sparkles, value: '1 API', label: 'OpenAI-compatible', sub: 'drop-in' },
 ]
 
