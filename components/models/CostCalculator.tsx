@@ -8,10 +8,12 @@
  */
 import { useState } from 'react'
 
-// modeled per-request cost, published token prices, short-answer request
-const TOP_REQ = 0.045 // always a top model
-const CHEAP_REQ = 0.002 // routed to a cheap model
-const HARD_REQ = 0.43 // adaptive fan-out on the hard fraction
+// Retail per-request cost at ~1K-in/1K-out. Every Enso tier is priced at or below the
+// top model, so Enso is cheaper at ANY hard fraction — easy requests route to Flash,
+// hard requests escalate to Ultra, and Ultra ($5/$25) still sits under GPT-5.6 ($5/$30).
+const TOP_REQ = 0.035 // GPT-5.6 $5/$30 on every request
+const FLASH_REQ = 0.006 // Enso Flash $2/$4 (easy requests)
+const ULTRA_REQ = 0.030 // Enso Ultra $5/$25 (hard requests) — still < top
 
 const money = (x: number) => `$${Math.round(x).toLocaleString()}`
 
@@ -21,7 +23,7 @@ export default function CostCalculator() {
 
   const hardFrac = hard / 100
   const top = reqs * TOP_REQ
-  const enso = reqs * ((1 - hardFrac) * CHEAP_REQ + hardFrac * HARD_REQ)
+  const enso = reqs * ((1 - hardFrac) * FLASH_REQ + hardFrac * ULTRA_REQ)
   const savePct = top > 0 ? Math.round((1 - enso / top) * 100) : 0
 
   return (

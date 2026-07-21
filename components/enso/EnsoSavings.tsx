@@ -45,7 +45,7 @@ const KPIS = [
   { v: '93.9%', k: 'GPQA · cheap-coordinator orchestration', note: 'projected' },
   { v: '~1%', k: 'coordinator cost vs a premium coordinator' },
   { v: '89%', k: 'saved by adaptive escalation' },
-  { v: '+2.5pp', k: 'above Fugu, on the same harness' },
+  { v: '+1.5pp', k: 'above Fugu, on the same harness' },
 ]
 
 const ESCALATION = [
