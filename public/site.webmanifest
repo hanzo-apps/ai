@@ -1,7 +1,7 @@
 {
   "name": "Hanzo",
   "short_name": "Hanzo",
-  "description": "Open AI Cloud — GCP-compatible. Open source. On-chain.",
+  "description": "The open-source AI cloud — one API for every capability. Open source. On-chain.",
   "icons": [
     { "src": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png" },
     { "src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png" },
