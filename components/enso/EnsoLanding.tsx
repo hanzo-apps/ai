@@ -275,7 +275,7 @@ export default function EnsoLanding() {
             </div>
             <div className="mt-8 text-center">
               <a href={DOCS} className="inline-flex items-center gap-1 text-sm font-medium text-neutral-300 hover:text-white">
-                Read the technical report <ArrowUpRight className="h-4 w-4 text-neutral-500" />
+                Learn more about Enso <ArrowUpRight className="h-4 w-4 text-neutral-500" />
               </a>
             </div>
           </div>
