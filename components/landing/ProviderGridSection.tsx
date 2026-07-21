@@ -6,8 +6,10 @@ import { providerCatalog } from "@hanzo/usage";
 
 // Every provider the usage plane can track and Hanzo Cloud can route —
 // names and icon paths come from the @hanzo/usage catalog (one source of
-// truth); the SVGs are mirrored under public/providers/.
-const PROVIDERS = providerCatalog.filter((p) => p.id !== "hanzo");
+// truth); the SVGs are mirrored under public/providers/. Google's models are
+// shown as "Gemini"; the redundant GCP-platform tile is dropped so the
+// open-source-AI-cloud positioning carries no Google Cloud brand.
+const PROVIDERS = providerCatalog.filter((p) => p.id !== "hanzo" && p.id !== "vertexai");
 
 const ProviderGridSection = () => {
   return (
