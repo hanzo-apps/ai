@@ -11,12 +11,12 @@ const OpenSource = () => {
         <div className="max-w-3xl mx-auto">
           <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-8">
             <div className="flex items-center gap-3 mb-4">
-              <Heart className="h-6 w-6 text-[#fd4444]" />
+              <Heart className="h-6 w-6 text-foreground" />
               <h3 className="text-xl font-semibold">Built on Open Source</h3>
             </div>
             <p className="text-foreground/80 mb-6">
               Hanzo Sign is built on{" "}
-              <a href="https://documenso.com" target="_blank" rel="noopener noreferrer" className="text-[var(--white)] underline underline-offset-4 hover:text-[#fd4444] transition-colors">
+              <a href="https://documenso.com" target="_blank" rel="noopener noreferrer" className="text-[var(--white)] underline underline-offset-4 hover:text-white/70 transition-colors">
                 Documenso
               </a>
               , the leading open-source document signing platform. We contribute back to the community
