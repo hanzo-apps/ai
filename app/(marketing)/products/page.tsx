@@ -108,7 +108,6 @@ export default function Products() {
                       <span className="text-sm text-muted-foreground">{category.items.length}</span>
                     </div>
                     <p className="mt-2 text-sm text-muted-foreground">{category.tagline}</p>
-                    <p className="mt-4 text-xs text-muted-foreground/60">{category.gcp}</p>
                   </div>
                 </Link>
               </motion.div>

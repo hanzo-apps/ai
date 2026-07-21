@@ -2,67 +2,17 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  ShieldCheck,
-  Brain,
-  Database,
-  Radio,
-  Activity,
-  CreditCard,
-  Server,
-  Cpu,
-  LayoutGrid,
-} from "lucide-react";
+import { capabilityCount, categoryCount, cloudCategories } from "@/lib/data/cloud-primitives";
 
-// The 67 capabilities, grouped into nine categories (a symmetric 3×3 grid). One
-// capability = one name = one /v1/<name>. Breadth without overwhelm — one API.
-const CATEGORY_CARDS = [
-  {
-    icon: ShieldCheck,
-    title: "Identity & Trust",
-    desc: "Who you are, what you may touch, where secrets live — IAM, authorization, KMS, and zero-trust.",
-  },
-  {
-    icon: Brain,
-    title: "Intelligence",
-    desc: "The mind of the cloud — models, ML, the inference engine, agents, evals, and code execution.",
-  },
-  {
-    icon: Cpu,
-    title: "Compute",
-    desc: "Raw horsepower on demand — GPUs, machines, containers, functions, and edge runtimes.",
-  },
-  {
-    icon: Database,
-    title: "Data",
-    desc: "The stores every capability reads and writes — object storage, Base, SQL, KV, and vector search.",
-  },
-  {
-    icon: Radio,
-    title: "Streams",
-    desc: "Messaging, durable tasks, and async orchestration — pub/sub, queues, streams, and workflows.",
-  },
-  {
-    icon: Activity,
-    title: "Observability",
-    desc: "See everything — telemetry, tracing, and usage analytics across every request.",
-  },
-  {
-    icon: CreditCard,
-    title: "Commerce",
-    desc: "The economy — meter, price, bill, and reward, with billing, plans, and wallets built in.",
-  },
-  {
-    icon: Server,
-    title: "Platform",
-    desc: "The cloud fabric — deploy, provision, route, and host through the native PaaS and gateway.",
-  },
-  {
-    icon: LayoutGrid,
-    title: "Applications",
-    desc: "User-facing surfaces on top of it all — console, chat, search, git, teams, and knowledge.",
-  },
-];
+// Category overview cards — derived from the ONE cloud-primitive taxonomy
+// (lib/data/cloud-primitives.ts), the same source the mega-menu and the
+// generated overview pages read, so the count and the categories can never
+// drift. One capability = one name = one /v1/<name>. Breadth without overwhelm.
+const CATEGORY_CARDS = cloudCategories.map((c) => ({
+  icon: c.icon,
+  title: c.title,
+  desc: c.tagline,
+}));
 
 const PlatformOverviewSection = () => {
   return (
@@ -76,14 +26,14 @@ const PlatformOverviewSection = () => {
           className="text-left mb-12"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mb-4">
-            67 capabilities. One API.
+            {capabilityCount} capabilities. One API.
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Everything the cloud does is one route — <code className="font-mono text-foreground/90 text-[0.95em]">api.hanzo.ai/v1/&lt;capability&gt;</code>. Sixty-seven capabilities, grouped into nine categories. Breadth without the overwhelm.
+            Everything the cloud does is one route — <code className="font-mono text-foreground/90 text-[0.95em]">api.hanzo.ai/v1/&lt;capability&gt;</code>. {capabilityCount} capabilities across {categoryCount} categories. Breadth without the overwhelm.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
           {CATEGORY_CARDS.map((card, index) => {
             const Icon = card.icon;
             return (

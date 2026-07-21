@@ -36,7 +36,7 @@ export type NavItem = {
 
 export type NavSection = {
   title: string;
-  /** Optional column subtitle — used by the products mega-menu for the GCP-equivalent line. */
+  /** Optional column subtitle — the products mega-menu shows the category tagline. */
   subtitle?: string;
   items: NavItem[];
 };
@@ -49,7 +49,7 @@ const DOCS = 'https://docs.hanzo.ai';
 // the route table can never drift apart. Ten categories, two rows of five.
 export const productsNav: NavSection[] = cloudCategories.map((category) => ({
   title: category.title,
-  subtitle: category.gcp,
+  subtitle: category.tagline,
   items: category.items.map((item) => ({
     title: item.title,
     href: item.href,

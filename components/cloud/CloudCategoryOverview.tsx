@@ -64,8 +64,7 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{category.title}</h1>
             <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{category.tagline}</p>
             <p className="mt-3 text-sm text-muted-foreground/70">
-              {isLux ? 'Lux Network' : 'GCP-compatible'} ·{' '}
-              <span className="text-foreground/70">{category.gcp}</span>
+              {isLux ? 'Powered by Lux Network' : 'Open source · On-chain settlement'}
             </p>
           </motion.div>
         </div>

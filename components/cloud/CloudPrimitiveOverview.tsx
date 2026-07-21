@@ -23,7 +23,6 @@ export function CloudPrimitiveOverview({
   category?: CloudCategory
 }) {
   const Icon = primitive.icon
-  const hasGcp = primitive.gcp && primitive.gcp !== 'No GCP equivalent'
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -57,13 +56,8 @@ export function CloudPrimitiveOverview({
           </div>
         </div>
 
-        {/* GCP equivalence + open-source + on-chain chips */}
+        {/* Open-source + on-chain chips */}
         <div className="mt-6 flex flex-wrap items-center gap-2 text-xs">
-          {hasGcp && (
-            <span className="rounded-md border border-border px-2.5 py-1 text-muted-foreground">
-              GCP-compatible · <span className="text-foreground/80">{primitive.gcp}</span>
-            </span>
-          )}
           <span className="rounded-md border border-border px-2.5 py-1 text-muted-foreground">Open source</span>
           <span className="rounded-md border border-border px-2.5 py-1 text-muted-foreground">On-chain settlement</span>
         </div>

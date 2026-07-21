@@ -2,11 +2,10 @@
  * Hanzo Cloud — primitive taxonomy (single source of truth).
  *
  * The cloud is organized like a console, not a product list: ten categories of
- * cloud primitives, each mapped to its Google Cloud equivalent. Every primitive
- * has an open-source runtime, a cryptographic identity, usage metering, and
- * on-chain settlement underneath.
+ * cloud primitives. Every primitive has an open-source runtime, a cryptographic
+ * identity, usage metering, and on-chain settlement underneath.
  *
- *   Positioning: Open AI Cloud — GCP-compatible. Open source. On-chain.
+ *   Positioning: The open-source AI cloud — one API for every capability.
  *
  * Mega-menu layout (two rows of five):
  *
@@ -17,9 +16,15 @@
  * a console quick-launch (console.hanzo.ai) and a docs page (docs.hanzo.ai).
  *
  * This file is the ONLY place the taxonomy lives. `lib/constants/navigation-data.ts`
- * derives `productsNav` from it, and `app/(marketing)/cloud/[slug]` + the two
+ * derives `productsNav` from it, the homepage overview + hero read `capabilityCount`
+ * / `categoryCount` from it, and `app/(marketing)/cloud/[slug]` + the two
  * `/blockchain` overview pages render generated pages from the same entries —
- * so a leaf can never become a dead link.
+ * so a leaf can never become a dead link and no count can drift.
+ *
+ * Future: `capabilityCount` / `cloudCategories` can be hydrated at runtime from
+ * `GET /v1/commerce/catalog` (the live capability catalog). That fetch is NOT
+ * wired yet — this static taxonomy is the source until the catalog API ships;
+ * the swap is a single hydration point (replace the `rawCategories` seed).
  */
 
 import type { ComponentType } from 'react'
@@ -87,12 +92,10 @@ export interface Primitive {
   /** Resolved link — an existing product page, or a generated overview route. */
   href: string
   icon: CloudIcon
-  /** Google Cloud equivalent (sells the GCP-compatible story). */
-  gcp?: string
   /**
    * Present only for primitives without a bespoke page. These render a real,
-   * unique overview page (hero, GCP-equivalent, positioning, features) so the
-   * leaf is never a 404 and never an empty stub.
+   * unique overview page (hero, positioning, features) so the leaf is never a
+   * 404 and never an empty stub.
    */
   slug?: string
   tagline?: string
@@ -102,11 +105,11 @@ export interface Primitive {
   github?: string
   /** Verified-live docs page (resolved at the bottom of this file). */
   docs?: string
-  /** Short menu descriptor — overrides the GCP equivalent when set. */
+  /** Short menu descriptor shown under the leaf title. */
   blurb?: string
   /** Console quick-launch deep link (resolved at the bottom of this file). */
   console?: string
-  /** Resolved menu descriptor: blurb ?? gcp (resolved at the bottom). */
+  /** Resolved menu descriptor: blurb ?? tagline (resolved at the bottom). */
   desc?: string
   /**
    * True for a leaf that links OUT to another surface (the Web3 leaves point at
@@ -121,9 +124,9 @@ export interface Primitive {
 export interface CloudCategory {
   /** Category label — one of the ten cloud primitives. */
   title: string
-  /** GCP-equivalent product(s) — shown as the menu column subtitle. */
-  gcp: string
-  /** One-line category positioning. */
+  /** Category icon — shown on the homepage overview grid. */
+  icon: CloudIcon
+  /** One-line category positioning — also the mega-menu column subtitle. */
   tagline: string
   /**
    * White-label brand for the whole category. Web3 is a Lux Network surface —
@@ -135,7 +138,7 @@ export interface CloudCategory {
   items: Primitive[]
 }
 
-export const POSITIONING = 'Open AI Cloud — GCP-compatible. Open source. On-chain.'
+export const POSITIONING = 'The open-source AI cloud — one API for every capability. Open source. On-chain.'
 
 const ORG = 'https://github.com/hanzoai'
 const DOCS = 'https://docs.hanzo.ai'
@@ -165,26 +168,26 @@ const stub = ({
 const rawCategories: CloudCategory[] = [
   {
     title: 'AI',
-    gcp: 'Vertex AI · Gemini · Agent Builder',
+    icon: Brain,
     tagline: 'Models, agents, and inference — open weights, one API.',
     items: [
-      { title: 'Models', href: '/models', icon: Brain, gcp: 'Model Garden' },
-      { title: 'Agents', href: '/agents', icon: Bot, gcp: 'Agent Builder' },
-      { title: 'Inference', href: '/engine', icon: Cpu, gcp: 'Vertex AI Prediction' },
+      { title: 'Models', href: '/models', icon: Brain },
+      { title: 'Agents', href: '/agents', icon: Bot },
+      { title: 'Inference', href: '/engine', icon: Cpu },
       stub({
-        slug: 'fine-tuning', title: 'Fine-tuning', icon: SlidersHorizontal, gcp: 'Vertex AI Training', status: 'beta',
+        slug: 'fine-tuning', title: 'Fine-tuning', icon: SlidersHorizontal, status: 'beta',
         tagline: 'Adapt open models to your domain.',
         description: 'LoRA and full fine-tuning for Zen and open-weight models with managed datasets, checkpoints, and one-click promotion to Inference. Every run is metered and attestable on-chain.',
         features: ['LoRA + full fine-tuning', 'Managed datasets & checkpoints', 'Promote straight to Inference', 'On-chain run attestations'],
       }),
       stub({
-        slug: 'embeddings', title: 'Embeddings', icon: Sparkles, gcp: 'Vertex AI Embeddings', status: 'ga',
+        slug: 'embeddings', title: 'Embeddings', icon: Sparkles, status: 'ga',
         tagline: 'Turn anything into vectors.',
         description: 'Open embedding models for text, code, and images behind one API, wired straight into Vector for retrieval. Batch or realtime, metered per token.',
         features: ['Text, code & image models', 'One API, many models', 'Pairs with Vector search', 'Token-metered billing'],
       }),
       stub({
-        slug: 'evals', title: 'Evals', icon: BadgeCheck, gcp: 'Vertex AI Eval', status: 'beta',
+        slug: 'evals', title: 'Evals', icon: BadgeCheck, status: 'beta',
         tagline: 'Measure model and agent quality.',
         description: 'Benchmark, grade, and regression-test models and agents. LLM-as-judge, golden sets, and drift detection with reproducible scorecards anchored on-chain.',
         features: ['LLM-as-judge & golden sets', 'Regression gates in CI', 'Drift detection', 'Anchored scorecards'],
@@ -193,26 +196,26 @@ const rawCategories: CloudCategory[] = [
   },
   {
     title: 'Compute',
-    gcp: 'Compute Engine · Cloud Run · GKE · Functions',
+    icon: Cpu,
     tagline: 'GPUs, containers, and functions that scale to zero.',
     items: [
       stub({
-        slug: 'gpus', title: 'GPUs', icon: Cpu, gcp: 'Compute Engine GPUs', status: 'ga',
+        slug: 'gpus', title: 'GPUs', icon: Cpu, status: 'ga',
         tagline: 'On-demand accelerators by the second.',
         description: 'Rent A10G to H100 GPUs by the second with spot pricing, fast checkpointing, and SSH. Schedule single cards or multi-node clusters for training and inference.',
         features: ['A10G → H100', 'Per-second + spot pricing', 'Multi-node clusters', 'Metered + on-chain settled'],
       }),
-      { title: 'Machines', href: '/machines', icon: Server, gcp: 'Compute Engine' },
+      { title: 'Machines', href: '/machines', icon: Server },
       stub({
-        slug: 'containers', title: 'Containers', icon: Container, gcp: 'Cloud Run', status: 'ga',
+        slug: 'containers', title: 'Containers', icon: Container, status: 'ga',
         tagline: 'Run any image, scale to zero.',
         description: 'Deploy OCI containers with autoscaling, scale-to-zero, and zero-config TLS. GitOps from a push, multi-tenant namespaces, and KMS-mounted secrets.',
         features: ['Any OCI image', 'Scale to zero', 'GitOps deploy', 'KMS secret mounts'],
       }),
-      { title: 'Functions', href: '/functions', icon: Zap, gcp: 'Cloud Functions' },
-      { title: 'Edge', href: '/edge', icon: Globe, gcp: 'Cloud Run (edge)' },
+      { title: 'Functions', href: '/functions', icon: Zap },
+      { title: 'Edge', href: '/edge', icon: Globe },
       stub({
-        slug: 'jobs', title: 'Jobs', icon: ListTodo, gcp: 'Cloud Run Jobs / Batch', status: 'ga',
+        slug: 'jobs', title: 'Jobs', icon: ListTodo, status: 'ga',
         tagline: 'Batch and scheduled compute.',
         description: 'Run one-shot, parallel, and cron-scheduled jobs with retries, timeouts, and exactly-once semantics. Backed by Tasks for durable execution.',
         features: ['Batch & parallel', 'Cron scheduling', 'Retries + timeouts', 'Durable, exactly-once'],
@@ -221,34 +224,34 @@ const rawCategories: CloudCategory[] = [
   },
   {
     title: 'Data',
-    gcp: 'Cloud SQL · Bigtable · Firestore · GCS',
+    icon: Database,
     tagline: 'Every persistence primitive, from vectors to objects.',
     items: [
-      { title: 'Vector', href: '/vector', icon: Sparkles, gcp: 'Vertex Vector Search' },
-      { title: 'SQL', href: '/sql', icon: Database, gcp: 'Cloud SQL / AlloyDB' },
-      { title: 'KV', href: '/kv', icon: Key, gcp: 'Memorystore' },
-      { title: 'Object Storage', href: '/storage', icon: HardDrive, gcp: 'Cloud Storage' },
-      { title: 'Datastore', href: '/datastore', icon: Boxes, gcp: 'Bigtable' },
-      { title: 'DocDB', href: '/docdb', icon: FileText, gcp: 'Firestore' },
+      { title: 'Vector', href: '/vector', icon: Sparkles },
+      { title: 'SQL', href: '/sql', icon: Database },
+      { title: 'KV', href: '/kv', icon: Key },
+      { title: 'Object Storage', href: '/storage', icon: HardDrive },
+      { title: 'Datastore', href: '/datastore', icon: Boxes },
+      { title: 'DocDB', href: '/docdb', icon: FileText },
     ],
   },
   {
     title: 'Network',
-    gcp: 'VPC · Cloud Load Balancing · CDN · Cloud DNS',
+    icon: Network,
     tagline: 'Connect, route, and protect every service.',
     items: [
-      { title: 'Gateway', href: '/gateway', icon: Network, gcp: 'API Gateway' },
-      { title: 'VPC', href: '/network', icon: Workflow, gcp: 'VPC' },
-      { title: 'DNS', href: '/dns', icon: Globe, gcp: 'Cloud DNS' },
+      { title: 'Gateway', href: '/gateway', icon: Network },
+      { title: 'VPC', href: '/network', icon: Workflow },
+      { title: 'DNS', href: '/dns', icon: Globe },
       stub({
-        slug: 'cdn', title: 'CDN', icon: Radio, gcp: 'Cloud CDN', status: 'beta',
+        slug: 'cdn', title: 'CDN', icon: Radio, status: 'beta',
         tagline: 'Cache at the edge.',
         description: 'Pull-through content delivery in front of Object Storage and Gateway. Global points of presence, instant purge, signed URLs, and per-request metering.',
         features: ['Global edge PoPs', 'Instant purge', 'Signed URLs', 'Origin: Storage + Gateway'],
       }),
-      { title: 'Load Balancer', href: '/ingress', icon: Scale, gcp: 'Cloud Load Balancing' },
+      { title: 'Load Balancer', href: '/ingress', icon: Scale },
       stub({
-        slug: 'service-mesh', title: 'Service Mesh', icon: Route, gcp: 'Anthos Service Mesh', status: 'beta',
+        slug: 'service-mesh', title: 'Service Mesh', icon: Route, status: 'beta',
         tagline: 'mTLS between every service.',
         description: 'Identity-aware service mesh with automatic mTLS, traffic policy, and retries. Workload identity is issued by IAM and rooted on-chain.',
         features: ['Automatic mTLS', 'Traffic policy & retries', 'IAM workload identity', 'On-chain trust root'],
@@ -257,21 +260,21 @@ const rawCategories: CloudCategory[] = [
   },
   {
     title: 'Security',
-    gcp: 'IAM · Cloud KMS · Secret Manager · Cloud Armor',
+    icon: Shield,
     tagline: 'Identity, keys, and audit for the whole cloud.',
     items: [
-      { title: 'IAM', href: '/iam', icon: UserCheck, gcp: 'Cloud IAM' },
-      { title: 'Authz', href: '/authz', icon: ShieldCheck, gcp: 'IAM Conditions' },
-      { title: 'KMS', href: '/kms', icon: KeyRound, gcp: 'Cloud KMS' },
-      { title: 'HSM', href: '/hsm', icon: Lock, gcp: 'Cloud HSM' },
+      { title: 'IAM', href: '/iam', icon: UserCheck },
+      { title: 'Authz', href: '/authz', icon: ShieldCheck },
+      { title: 'KMS', href: '/kms', icon: KeyRound },
+      { title: 'HSM', href: '/hsm', icon: Lock },
       stub({
-        slug: 'secrets', title: 'Secrets', icon: FileKey, gcp: 'Secret Manager', status: 'ga',
+        slug: 'secrets', title: 'Secrets', icon: FileKey, status: 'ga',
         tagline: 'Store and sync secrets.',
         description: 'Versioned secret storage with KMS-backed encryption, dynamic leases, and Kubernetes sync via KMSSecret CRDs. Audited reads, scoped tokens, zero plaintext.',
         features: ['KMS-backed encryption', 'Dynamic leases & rotation', 'K8s KMSSecret sync', 'Fully audited reads'],
       }),
       stub({
-        slug: 'audit', title: 'Audit', icon: FileClock, gcp: 'Cloud Audit Logs', status: 'ga',
+        slug: 'audit', title: 'Audit', icon: FileClock, status: 'ga',
         tagline: 'A tamper-evident trail.',
         description: 'Immutable, hash-chained audit logs for every identity, key, and API action. Export to Logs, alert on policy violations, and anchor digests on-chain.',
         features: ['Hash-chained events', 'Every IAM / KMS / API action', 'Policy-violation alerts', 'On-chain anchoring'],
@@ -280,54 +283,54 @@ const rawCategories: CloudCategory[] = [
   },
   {
     title: 'Dev',
-    gcp: 'Cloud SDK · APIs · Cloud Code · Console',
+    icon: Terminal,
     tagline: 'Build against the cloud from anywhere.',
     items: [
-      { title: 'CLI', href: '/cli', icon: Terminal, gcp: 'gcloud CLI' },
+      { title: 'CLI', href: '/cli', icon: Terminal },
       stub({
-        slug: 'sdks', title: 'SDKs', icon: Braces, gcp: 'Cloud Client Libraries', status: 'ga',
+        slug: 'sdks', title: 'SDKs', icon: Braces, status: 'ga',
         tagline: 'Typed clients, every language.',
         description: 'Idiomatic SDKs for TypeScript, Python, Go, and Rust covering the whole cloud — models, data, compute, chain. Generated from one OpenAPI spec.',
         features: ['TypeScript, Python, Go, Rust', 'One spec, many clients', 'Auth + retries built in', 'Open source'],
       }),
       stub({
-        slug: 'api', title: 'API', icon: Webhook, gcp: 'Google Cloud APIs', status: 'ga',
+        slug: 'api', title: 'API', icon: Webhook, status: 'ga',
         tagline: 'One REST + streaming surface.',
         description: 'A single, versioned API across every Hanzo primitive. OpenAI-compatible where it counts, OIDC-secured, usage-metered, and on-chain settleable.',
         features: ['One versioned surface', 'OpenAI-compatible', 'OIDC + scoped keys', 'Metered per call'],
       }),
-      { title: 'Playground', href: '/playground', icon: PlayCircle, gcp: 'Vertex AI Studio' },
-      { title: 'IDE', href: '/code', icon: Code2, gcp: 'Cloud Code' },
-      { title: 'Desktop', href: '/desktop', icon: MonitorSmartphone, gcp: 'Cloud Workstations' },
+      { title: 'Playground', href: '/playground', icon: PlayCircle },
+      { title: 'IDE', href: '/code', icon: Code2 },
+      { title: 'Desktop', href: '/desktop', icon: MonitorSmartphone },
     ],
   },
   {
     title: 'Platform',
-    gcp: 'Cloud Build · Artifact Registry · Cloud Deploy',
+    icon: Layers,
     tagline: 'Source to production as declared state.',
     items: [
-      { title: 'Projects', href: '/platform', icon: FolderGit2, gcp: 'Resource Manager' },
+      { title: 'Projects', href: '/platform', icon: FolderGit2 },
       stub({
-        slug: 'environments', title: 'Environments', icon: Layers, gcp: 'Deploy targets', status: 'ga',
+        slug: 'environments', title: 'Environments', icon: Layers, status: 'ga',
         tagline: 'Dev, staging, prod — isolated.',
         description: 'Promote the same build across isolated environments, each with its own secrets, domains, and scaling. Ephemeral preview environments per pull request.',
         features: ['Per-env secrets & domains', 'PR preview environments', 'Promote, don’t rebuild', 'Instant rollback'],
       }),
       stub({
-        slug: 'builds', title: 'Builds', icon: Hammer, gcp: 'Cloud Build', status: 'ga',
+        slug: 'builds', title: 'Builds', icon: Hammer, status: 'ga',
         tagline: 'Source to signed image.',
         description: 'The self-hosted arcd build farm turns a git push into a signed, multi-arch image. Reproducible, cached, and SBOM-attested — no third-party builders.',
         features: ['Push → signed image', 'Multi-arch', 'Build cache', 'SBOM + provenance'],
       }),
-      { title: 'Registry', href: '/registry', icon: Package, gcp: 'Artifact Registry' },
+      { title: 'Registry', href: '/registry', icon: Package },
       stub({
-        slug: 'releases', title: 'Releases', icon: Rocket, gcp: 'Cloud Deploy', status: 'beta',
+        slug: 'releases', title: 'Releases', icon: Rocket, status: 'beta',
         tagline: 'Ship with confidence.',
         description: 'Progressive delivery with canary and blue-green rollouts, health gates, and one-click rollback. Every release is versioned and attested.',
         features: ['Canary + blue-green', 'Health-gated rollout', 'One-click rollback', 'Versioned + attested'],
       }),
       stub({
-        slug: 'pipelines', title: 'Pipelines', icon: Workflow, gcp: 'Cloud Build / Deploy', status: 'beta',
+        slug: 'pipelines', title: 'Pipelines', icon: Workflow, status: 'beta',
         tagline: 'CI/CD as declared state.',
         description: 'Declarative pipelines wire builds, tests, and releases end to end. Semver images flow to the universe declared tag and the operator reconciles.',
         features: ['Declarative stages', 'Build → test → release', 'Semver image flow', 'GitOps reconcile'],
@@ -336,21 +339,21 @@ const rawCategories: CloudCategory[] = [
   },
   {
     title: 'Observe',
-    gcp: 'Cloud Logging · Monitoring · Trace · Billing',
+    icon: Activity,
     tagline: 'Logs, metrics, traces, and cost in one pane.',
     items: [
       stub({
-        slug: 'logs', title: 'Logs', icon: ScrollText, gcp: 'Cloud Logging', status: 'ga',
+        slug: 'logs', title: 'Logs', icon: ScrollText, status: 'ga',
         tagline: 'Search every line.',
         description: 'High-throughput log aggregation with structured queries, live tail, and retention policies. Correlate logs with Traces and Metrics in one pane.',
         features: ['Structured + full-text', 'Live tail', 'Retention policies', 'Trace correlation'],
       }),
-      { title: 'Metrics', href: '/metrics', icon: LineChart, gcp: 'Cloud Monitoring' },
-      { title: 'Traces', href: '/telemetry', icon: Activity, gcp: 'Cloud Trace' },
-      { title: 'Dashboards', href: '/dashboards', icon: LayoutDashboard, gcp: 'Monitoring Dashboards' },
-      { title: 'Alerts', href: '/sentry', icon: Bell, gcp: 'Cloud Alerting' },
+      { title: 'Metrics', href: '/metrics', icon: LineChart },
+      { title: 'Traces', href: '/telemetry', icon: Activity },
+      { title: 'Dashboards', href: '/dashboards', icon: LayoutDashboard },
+      { title: 'Alerts', href: '/sentry', icon: Bell },
       stub({
-        slug: 'cost', title: 'Cost', icon: Receipt, gcp: 'Cloud Billing', status: 'beta',
+        slug: 'cost', title: 'Cost', icon: Receipt, status: 'beta',
         tagline: 'See and settle spend.',
         description: 'Real-time cost attribution by project, model, and token. Budgets, alerts, and on-chain settlement so every unit of usage is paid for and provable.',
         features: ['Per-project / per-model', 'Budgets + alerts', 'Usage metering', 'On-chain settlement'],
@@ -362,7 +365,7 @@ const rawCategories: CloudCategory[] = [
     // lux.cloud under the Lux brand — retargeted off the old Hanzo-hosted
     // /blockchain/* pages so the two brands stay strictly separate.
     title: 'Web3',
-    gcp: 'Lux Network — on-chain settlement & trust',
+    icon: Landmark,
     tagline: 'The settlement layer under every resource — powered by Lux Network.',
     brand: 'lux',
     items: [
@@ -370,7 +373,7 @@ const rawCategories: CloudCategory[] = [
       // pages resolve them via getPrimitive(); the href points at lux.cloud.
       {
         slug: 'settlement', title: 'Settlement', href: LUX, icon: Landmark, blurb: 'On-chain settlement',
-        external: true, brand: 'lux', github: LUX_ORG, docs: LUX_DOCS, status: 'beta', gcp: 'No GCP equivalent',
+        external: true, brand: 'lux', github: LUX_ORG, docs: LUX_DOCS, status: 'beta',
         tagline: 'The trust layer under the cloud.',
         description: 'On-chain settlement for every metered unit — models, GPUs, storage, API calls. Deterministic billing, programmable payouts, and provable usage, settled on Lux Network.',
         features: ['Meter → settle on-chain', 'Programmable payouts', 'Deterministic billing', 'Provable usage'],
@@ -381,7 +384,7 @@ const rawCategories: CloudCategory[] = [
       { title: 'Indexer', href: LUX_SERVICES, icon: Search, blurb: 'Explorer & chain data', external: true, brand: 'lux', github: LUX_ORG },
       {
         slug: 'attestations', title: 'Attestations', href: LUX_SERVICES, icon: BadgeCheck, blurb: 'Verifiable provenance',
-        external: true, brand: 'lux', github: LUX_ORG, docs: LUX_DOCS, status: 'beta', gcp: 'No GCP equivalent',
+        external: true, brand: 'lux', github: LUX_ORG, docs: LUX_DOCS, status: 'beta',
         tagline: 'Sign what happened.',
         description: 'Cryptographic attestations for models, datasets, builds, and inference runs. Verifiable provenance anchored on Lux Network for audit and compliance.',
         features: ['Model + dataset provenance', 'Build + run attestations', 'Verifiable on-chain', 'Audit & compliance ready'],
@@ -390,15 +393,15 @@ const rawCategories: CloudCategory[] = [
   },
   {
     title: 'Apps',
-    gcp: 'Ready-to-use apps on the cloud',
+    icon: LayoutDashboard,
     tagline: 'Production apps built on the primitives.',
     items: [
-      { title: 'Chat', href: '/chat', icon: MessageSquare, gcp: 'Vertex AI Search & Conversation' },
+      { title: 'Chat', href: '/chat', icon: MessageSquare, blurb: 'Conversational AI' },
       { title: 'Bot', href: '/bot', icon: Bot, blurb: 'Multi-agent platform' },
-      { title: 'Search', href: '/search', icon: Search, gcp: 'Vertex AI Search' },
+      { title: 'Search', href: '/search', icon: Search, blurb: 'Retrieval & answers' },
       { title: 'Crawl', href: '/crawl', icon: Globe, blurb: 'Web crawler' },
       { title: 'Studio', href: '/studio', icon: Clapperboard, blurb: 'Creative studio' },
-      { title: 'Console', href: '/console', icon: LayoutDashboard, gcp: 'Cloud Console' },
+      { title: 'Console', href: '/console', icon: LayoutDashboard, blurb: 'The cloud console' },
     ],
   },
 ]
@@ -452,17 +455,17 @@ const launchSlug = (href: string): string =>
 //    form resolves 200 today (never a 404) and lights up the moment console
 //    ships per-product /deploy/<slug> routes.
 //  - docs: a verified-live docs page (see DOCS_PATH).
-//  - desc: the short menu descriptor (blurb override, else the GCP equivalent).
+//  - desc: the short menu descriptor (blurb override, else the leaf tagline).
 const resolve = (p: Primitive): Primitive =>
   p.external
     ? // Lux (Web3) leaf: hand off to lux.cloud. No Hanzo console deep-link; docs
       // resolve to the Lux docs, never docs.hanzo.ai (white-label separation).
-      { ...p, console: undefined, docs: p.docs ?? LUX_DOCS, desc: p.blurb ?? p.gcp }
+      { ...p, console: undefined, docs: p.docs ?? LUX_DOCS, desc: p.blurb ?? p.tagline }
     : {
         ...p,
         console: `${CONSOLE}/?deploy=${launchSlug(p.href)}`,
         docs: `${DOCS_BASE}/${DOCS_PATH[p.href] ?? 'services'}`,
-        desc: p.blurb ?? p.gcp,
+        desc: p.blurb ?? p.tagline,
       }
 
 // The ten cloud categories, with every leaf's console + docs deep links and
@@ -472,6 +475,12 @@ export const cloudCategories: CloudCategory[] = rawCategories.map((c) => ({
   ...c,
   items: c.items.map(resolve),
 }))
+
+/** Number of categories — the ONE count the homepage + hero read (never hard-coded). */
+export const categoryCount: number = cloudCategories.length
+
+/** Total capabilities across every category — derived, so no displayed count can drift. */
+export const capabilityCount: number = cloudCategories.reduce((n, c) => n + c.items.length, 0)
 
 // All primitives that render a generated overview page, keyed by slug.
 const generated: Primitive[] = cloudCategories
@@ -488,7 +497,7 @@ export function getPrimitive(slug: string): Primitive | undefined {
   return generated.find((i) => i.slug === slug)
 }
 
-/** Category a primitive belongs to (for the overview breadcrumb / GCP context). */
+/** Category a primitive belongs to (for the overview breadcrumb). */
 export function getPrimitiveCategory(slug: string): CloudCategory | undefined {
   return cloudCategories.find((c) => c.items.some((i) => i.slug === slug))
 }

@@ -8,6 +8,7 @@ import {
   Copy,
   Check,
 } from "lucide-react";
+import { capabilityCount } from "@/lib/data/cloud-primitives";
 
 // The one CLI proof-point shown inside the product preview. One demo, no
 // rotation, no step-typing — the same install line the copy button yields.
@@ -19,7 +20,7 @@ const DEV_CMD = '$ hanzo dev "Build a RAG API for ./docs. Add /chat. Write tests
 // flat Docs link; every product page owns its own docs + console CTAs. The
 // `dynamic:"models"` item resolves its count live at mount (see useModelCount).
 const STAT_BAND: ReadonlyArray<{ label: string; href: string; dynamic?: "models" }> = [
-  { label: "67 capabilities", href: "/products" },
+  { label: `${capabilityCount} capabilities`, href: "/products" },
   { label: "open models", href: "/zen/models", dynamic: "models" },
   { label: "One API", href: "/gateway" },
   { label: "One binary", href: "/open-source" },
@@ -175,7 +176,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className="text-base xl:text-lg text-muted-foreground leading-relaxed mb-8 max-w-[560px]"
               >
-                Not another AI API. Hanzo is a decentralized cloud powered by hanzo.network — <code className="font-mono text-foreground/90 text-[0.9em]">hanzod</code> nodes spawn the same unified <code className="font-mono text-foreground/90 text-[0.9em]">cloud</code> binary we run in production. 67 capabilities behind one API. Open source, one binary. Bring your own GPU or Kubernetes, or run it all on your laptop. Connect any provider, watch usage and cost in one place, and let the native router serve the most optimal model — <span className="text-foreground font-medium">saving up to 90% on compute</span>.
+                Not another AI API. Hanzo is a decentralized cloud powered by hanzo.network — <code className="font-mono text-foreground/90 text-[0.9em]">hanzod</code> nodes spawn the same unified <code className="font-mono text-foreground/90 text-[0.9em]">cloud</code> binary we run in production. {capabilityCount} capabilities behind one API. Open source, one binary. Bring your own GPU or Kubernetes, or run it all on your laptop. Connect any provider, watch usage and cost in one place, and let the native router serve the most optimal model — <span className="text-foreground font-medium">saving up to 90% on compute</span>.
               </motion.p>
 
               <motion.div
