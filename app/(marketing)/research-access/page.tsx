@@ -12,8 +12,8 @@ import {
   Server,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useAnalytics } from '@hanzo/capture/react'
-import { EVENTS } from '@hanzo/capture'
+import { useAnalytics } from '@hanzo/event/react'
+import { EVENTS } from '@hanzo/event'
 
 const ZEN5_MODELS = [
   { id: 'zen5', label: 'zen5', description: 'Flagship next-gen foundation model' },

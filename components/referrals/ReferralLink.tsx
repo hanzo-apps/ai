@@ -6,8 +6,8 @@ import { Button } from '@hanzo/ui'
 import { Input } from '@hanzo/ui'
 import { Label } from '@hanzo/ui'
 import { toast } from 'sonner'
-import { useAnalytics } from '@hanzo/capture/react'
-import { EVENTS } from '@hanzo/capture'
+import { useAnalytics } from '@hanzo/event/react'
+import { EVENTS } from '@hanzo/event'
 import { sendReferralInvites } from '@/lib/hanzo/referrals'
 
 interface ReferralLinkProps {

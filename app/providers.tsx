@@ -1,7 +1,7 @@
 'use client'
 
 import { IamProvider } from '@hanzo/iam/react'
-import { AnalyticsProvider, usePageview } from '@hanzo/capture/react'
+import { AnalyticsProvider, usePageview } from '@hanzo/event/react'
 import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 
