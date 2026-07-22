@@ -48,7 +48,7 @@ RUN cd out && for f in $(find . -type f -name '*.html' ! -name 'index.html' ! -n
     done
 
 # ---- serve stage: hanzoai/static (scratch + single Go binary) ------------
-FROM ghcr.io/hanzoai/static:0.4.1
+FROM ghcr.io/hanzoai/static:0.5.1
 COPY --from=build /app/out /srv
 # static (>=0.4.0) is configured by FLAGS: --root, --port, --spa.
 ENTRYPOINT ["/static"]
