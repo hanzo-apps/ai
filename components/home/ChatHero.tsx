@@ -47,7 +47,7 @@ export default function ChatHero() {
   }
 
   return (
-    <section className="relative overflow-hidden px-4 pb-16 pt-36 sm:px-6 sm:pt-44 lg:px-8">
+    <section className="relative overflow-hidden border-t border-neutral-900 px-4 pb-24 pt-16 sm:px-6 sm:pt-20 lg:px-8">
       {/* Ambient glow (matches the site's radial-gradient hero). */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
