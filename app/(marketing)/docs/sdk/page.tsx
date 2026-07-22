@@ -244,7 +244,7 @@ export default function SdkPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="https://docs.hanzo.ai/docs/sdk"
+                href="https://docs.hanzo.ai/docs/sdks"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium transition-colors"
@@ -387,7 +387,7 @@ export default function SdkPage() {
               <ExternalLink className="w-3 h-3" />
             </a>
             <a
-              href="https://docs.hanzo.ai/docs/sdk"
+              href="https://docs.hanzo.ai/docs/sdks"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"

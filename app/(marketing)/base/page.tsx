@@ -15,7 +15,7 @@ import {
 import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
 
-const DOCS = 'https://docs.hanzo.ai/base'
+const DOCS = 'https://docs.hanzo.ai/docs/base'
 const GITHUB = 'https://github.com/hanzoai/base'
 const CONSOLE = 'https://console.hanzo.ai'
 
