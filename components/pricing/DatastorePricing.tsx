@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@hanzo/ui";
 import { Loader2 } from "lucide-react";
 
-const DATASTORE_API = "https://pricing.hanzo.ai/v1/pricing/datastore";
+const DATASTORE_API = "https://api.hanzo.ai/v1/pricing/datastore";
 
 interface DatastoreTier {
   id: string;

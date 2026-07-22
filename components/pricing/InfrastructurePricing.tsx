@@ -7,8 +7,8 @@ import VectorPricing from "@/components/pricing/VectorPricing";
 import ObservabilityPricing from "@/components/pricing/ObservabilityPricing";
 import ManagedServicesPricing from "@/components/pricing/ManagedServicesPricing";
 
-const CLOUD_API = "https://pricing.hanzo.ai/v1/cloud";
-const GPU_API = "https://pricing.hanzo.ai/v1/gpu";
+const CLOUD_API = "https://api.hanzo.ai/v1/pricing/cloud";
+const GPU_API = "https://api.hanzo.ai/v1/pricing/gpu";
 
 interface CloudPlan {
   id: string;
