@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Github, Code, Zap, Users, Rocket } from "lucide-react";
 
-const PLANS_API = "https://pricing.hanzo.ai/v1/plans";
+const PLANS_API = "https://api.hanzo.ai/v1/plans";
 
 interface SubscriptionPlan {
   id: string;
@@ -47,7 +47,7 @@ function planCtaLabel(plan: SubscriptionPlan): string {
   return plan.priceMonthly === 0 ? "Start free" : "Get started";
 }
 
-// Static fallback mirrors https://pricing.hanzo.ai/v1/plans (category: personal).
+// Static fallback mirrors https://api.hanzo.ai/v1/plans (category: personal).
 // The live response replaces these on load — keep the two in lockstep.
 const STATIC_PLANS: SubscriptionPlan[] = [
   {

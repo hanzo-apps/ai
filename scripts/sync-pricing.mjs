@@ -4,7 +4,7 @@
  *
  * Sources (tried in order):
  *   1. PRICING_API_URL env var
- *   2. https://pricing.hanzo.ai/v1/pricing (public endpoint)
+ *   2. https://api.hanzo.ai/v1/pricing (public endpoint)
  *   3. Local sibling repo: ../pricing/data/pricing.json (dev only)
  *
  * Usage:
@@ -20,7 +20,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA_PATH = resolve(__dirname, "../data/pricing.json");
 const LIB_DATA_PATH = resolve(__dirname, "../lib/data/pricing.json");
 const LOCAL_PATH = resolve(__dirname, "../../pricing/data/pricing.json");
-const API_URL = process.env.PRICING_API_URL || "https://pricing.hanzo.ai/v1/pricing";
+const API_URL = process.env.PRICING_API_URL || "https://api.hanzo.ai/v1/pricing";
 const DRY_RUN = process.argv.includes("--dry-run");
 
 async function fetchPricing() {

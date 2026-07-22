@@ -23,7 +23,7 @@ const BillingPlans = () => {
   const { checkout, billingInfo } = useBilling();
   const [isUpgrading, setIsUpgrading] = useState(false);
 
-  // Mirrors https://pricing.hanzo.ai/v1/plans — keep in lockstep.
+  // Mirrors https://api.hanzo.ai/v1/plans — keep in lockstep.
   const plans = [
     {
       id: 'developer',

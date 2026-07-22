@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Globe, Zap, Users, Building2 } from "lucide-react";
 
-const PLANS_API = "https://pricing.hanzo.ai/v1/plans";
+const PLANS_API = "https://api.hanzo.ai/v1/plans";
 
 interface SubscriptionPlan {
   id: string;
@@ -27,7 +27,7 @@ const PLAN_ICONS: Record<string, React.ReactNode> = {
   "world-enterprise": <Building2 className="h-6 w-6 text-muted-foreground" />,
 };
 
-// Static fallback mirrors https://pricing.hanzo.ai/v1/plans (category: world).
+// Static fallback mirrors https://api.hanzo.ai/v1/plans (category: world).
 // The live response replaces these on load — keep the two in lockstep.
 const STATIC_PLANS: SubscriptionPlan[] = [
   {
