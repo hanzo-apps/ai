@@ -116,7 +116,7 @@ export default function MQPage() {
             className="flex flex-wrap justify-center gap-4"
           >
             <a
-              href="https://docs.hanzo.ai/mq"
+              href="https://docs.hanzo.ai/docs/services/mq"
               className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
             >
               Get Started
@@ -300,7 +300,7 @@ const worker = new Worker("emails", async (job) => {
 
               <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href="https://docs.hanzo.ai/mq"
+                  href="https://docs.hanzo.ai/docs/services/mq"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
                 >
                   Get Started

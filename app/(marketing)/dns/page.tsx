@@ -245,7 +245,7 @@ export default function DNSPage() {
             className="flex flex-wrap justify-center gap-4"
           >
             <a
-              href="https://docs.hanzo.ai/dns"
+              href="https://docs.hanzo.ai/docs/services/dns"
               className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
             >
               Get Started
@@ -611,7 +611,7 @@ hanzo dns records example.com`}</code>
 
               <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href="https://docs.hanzo.ai/dns"
+                  href="https://docs.hanzo.ai/docs/services/dns"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
                 >
                   Get Started

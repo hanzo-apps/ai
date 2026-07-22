@@ -15,7 +15,7 @@ import {
 import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
 
-const DOCS = 'https://docs.hanzo.ai/cli'
+const DOCS = 'https://docs.hanzo.ai/docs/cli'
 const GITHUB = 'https://github.com/hanzoai/cli'
 const CONSOLE = 'https://console.hanzo.ai'
 

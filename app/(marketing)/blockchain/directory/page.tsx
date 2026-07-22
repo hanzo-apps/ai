@@ -250,7 +250,7 @@ const CHAINS: Chain[] = [
     wsEndpoint: "wss://ws.hanzo.network/v1/{API_KEY}",
     explorer: "https://explorer.hanzo.network",
     github: "https://github.com/hanzoai",
-    docs: "https://docs.hanzo.ai/network",
+    docs: "https://docs.hanzo.ai/docs/networks",
     support: { rpc: true, archive: true, websockets: true, indexer: true, tokens: true, nft: true, webhooks: true, smartWallets: true, dex: true, prices: true },
   },
   {

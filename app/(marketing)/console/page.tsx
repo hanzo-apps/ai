@@ -122,7 +122,7 @@ export default function ConsolePage() {
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
-              href="https://docs.hanzo.ai/console"
+              href="https://docs.hanzo.ai/docs/console"
               className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors"
             >
               Documentation

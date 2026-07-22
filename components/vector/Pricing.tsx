@@ -62,7 +62,7 @@ const plans: PlanProps[] = [
       "REST API + gRPC",
     ],
     ctaLabel: "Get Started",
-    ctaHref: "https://docs.hanzo.ai/vector",
+    ctaHref: "https://docs.hanzo.ai/docs/vector",
   },
   {
     name: "Scale",
@@ -77,7 +77,7 @@ const plans: PlanProps[] = [
       "Priority support",
     ],
     ctaLabel: "Get Started",
-    ctaHref: "https://docs.hanzo.ai/vector",
+    ctaHref: "https://docs.hanzo.ai/docs/vector",
   },
   {
     name: "Enterprise",

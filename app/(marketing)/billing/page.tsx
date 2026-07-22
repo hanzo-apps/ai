@@ -48,7 +48,7 @@ export default function BillingPage() {
             <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Multi-Currency</div><div className="text-sm text-muted-foreground">Native</div></div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap justify-center gap-4">
-            <a href="https://docs.hanzo.ai/billing" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Get Started <ArrowRight className="w-4 h-4" /></a>
+            <a href="https://docs.hanzo.ai/docs/billing" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Get Started <ArrowRight className="w-4 h-4" /></a>
             <a href="https://github.com/hanzoai/billing" className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors">GitHub</a>
           </motion.div>
         </div>
@@ -112,7 +112,7 @@ await billing.subscriptions.create({
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Get started with Billing</h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="https://docs.hanzo.ai/billing" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
+            <a href="https://docs.hanzo.ai/docs/billing" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />
             </a>
             <a href="https://github.com/hanzoai/billing" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">

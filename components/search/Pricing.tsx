@@ -62,7 +62,7 @@ const plans: PlanProps[] = [
       "React hook + REST API",
     ],
     ctaLabel: "Get Started",
-    ctaHref: "https://docs.hanzo.ai/search",
+    ctaHref: "https://docs.hanzo.ai/docs/search",
   },
   {
     name: "Scale",
@@ -77,7 +77,7 @@ const plans: PlanProps[] = [
       "Priority support",
     ],
     ctaLabel: "Get Started",
-    ctaHref: "https://docs.hanzo.ai/search",
+    ctaHref: "https://docs.hanzo.ai/docs/search",
   },
   {
     name: "Enterprise",

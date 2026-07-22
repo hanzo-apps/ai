@@ -115,7 +115,7 @@ export default function DashboardsPage() {
             className="flex flex-wrap justify-center gap-4"
           >
             <a
-              href="https://docs.hanzo.ai/dashboards"
+              href="https://docs.hanzo.ai/docs/dashboards"
               className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
             >
               Get Started
@@ -238,7 +238,7 @@ export default function DashboardsPage() {
 
               <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href="https://docs.hanzo.ai/dashboards"
+                  href="https://docs.hanzo.ai/docs/dashboards"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
                 >
                   Get Started

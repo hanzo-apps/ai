@@ -345,7 +345,7 @@ export const hanzoSDKs: ProductSDK[] = [
     registry: 'PyPI',
     url: 'https://pypi.org/project/hanzoai/',
     installCommand: 'pip install hanzoai',
-    docsUrl: 'https://docs.hanzo.ai/sdk/python'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/python'
   },
   {
     language: 'typescript',
@@ -354,7 +354,7 @@ export const hanzoSDKs: ProductSDK[] = [
     registry: 'npm',
     url: 'https://www.npmjs.com/package/hanzoai',
     installCommand: 'npm install hanzoai',
-    docsUrl: 'https://docs.hanzo.ai/sdk/typescript'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/typescript'
   },
   {
     language: 'go',
@@ -363,7 +363,7 @@ export const hanzoSDKs: ProductSDK[] = [
     registry: 'Go Modules',
     url: 'https://pkg.go.dev/github.com/hanzoai/go-sdk',
     installCommand: 'go get github.com/hanzoai/go-sdk',
-    docsUrl: 'https://docs.hanzo.ai/sdk/go'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/go'
   },
   {
     language: 'rust',
@@ -372,7 +372,7 @@ export const hanzoSDKs: ProductSDK[] = [
     registry: 'crates.io',
     url: 'https://crates.io/crates/hanzoai',
     installCommand: 'cargo add hanzoai',
-    docsUrl: 'https://docs.hanzo.ai/sdk/rust'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/rust'
   }
 ];
 

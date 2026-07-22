@@ -110,7 +110,7 @@ export const productsMetadata: Record<string, ProductMetadata> = {
   storage:      { slug: 'storage',    tagline: 'S3-compatible object storage', license: 'Apache-2.0', github_repo: `${G}/s3`, upstream_fork: 'SeaweedFS', upstream_license: 'Apache-2.0', upstream_url: 'https://github.com/seaweedfs/seaweedfs' },
   stream:       { slug: 'stream',     tagline: 'Event stream', license: 'Apache-2.0', github_repo: `${G}/stream` },
   studio:       { slug: 'studio',     tagline: 'Visual builder studio', license: 'GPL-3.0', github_repo: `${G}/studio`, upstream_fork: 'ComfyUI', upstream_license: 'GPL-3.0', upstream_url: 'https://www.comfy.org' },
-  tasks:        { slug: 'tasks',      tagline: 'Durable workflows + scheduling', license: 'MIT', github_repo: `${G}/tasks`, upstream_fork: 'Temporal', upstream_license: 'MIT', upstream_url: 'https://temporal.io' },
+  tasks:        { slug: 'tasks',      tagline: 'Durable workflows + scheduling', license: 'MIT', github_repo: `${G}/tasks` },
   telemetry:    { slug: 'telemetry',  tagline: 'OpenTelemetry ingest', license: 'Apache-2.0', github_repo: `${G}/telemetry` },
   treasury:     { slug: 'treasury',   tagline: 'Treasury management', license: 'Apache-2.0', github_repo: `${G}/treasury` },
   tunnel:       { slug: 'tunnel',     tagline: 'Secure tunnels', license: 'Apache-2.0', github_repo: `${G}/tunnel` },
