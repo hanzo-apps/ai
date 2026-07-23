@@ -100,22 +100,6 @@ export function OssAttribution({ slug, meta: metaProp, className = '' }: Props) 
             </span>
           )}
         </div>
-
-        {/* Upstream credit (only forks) */}
-        {meta.upstream_fork && (
-          <p data-testid="oss-upstream" className="text-sm text-muted-foreground max-w-3xl">
-            Forked from{' '}
-            <a
-              href={meta.upstream_url || '#'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground underline decoration-foreground/30 underline-offset-2 hover:decoration-foreground/60"
-            >
-              {meta.upstream_fork}
-            </a>
-            {meta.upstream_license ? ` (${meta.upstream_license})` : ''}. We track upstream and contribute fixes back where possible.
-          </p>
-        )}
       </div>
     </section>
   )

@@ -26,7 +26,7 @@ export default function BasePage() {
         badge="Hanzo Base · App backend"
         badgeIcon={Database}
         title="The backend in one file"
-        lede="An embedded application backend — database, auth, file storage, and realtime — in a single deployable, with Hanzo IAM wired in natively. SQLite by default for instant local dev; scale out when you need to."
+        lede="Everything your app or business needs on the backend — database, auth, file storage, realtime, and server-side logic — in one embedded, deployable file, with Hanzo IAM wired in natively. Multi-tenant by design: every org gets its own encrypted database, streamed continuously to object storage, so one file scales from your laptop to a global fleet."
         ctas={[
           { label: 'Start free', href: CONSOLE, icon: Rocket },
           { label: 'Read the docs', href: DOCS },
@@ -36,12 +36,12 @@ export default function BasePage() {
         what={{
           eyebrow: 'What is Hanzo Base',
           title: 'Everything an app backend needs, embedded',
-          sub: 'Stop re-implementing auth, storage, and realtime for every project. Base ships them as one cohesive backend that grows from a laptop to production.',
+          sub: 'Stop stitching together a database, auth, storage, and realtime for every project. Base ships them as one cohesive, multi-tenant backend that grows with you — from a single file on your laptop to a replicated production fleet, with no rewrite.',
           pillars: [
             {
               icon: Database,
               title: 'Database',
-              body: 'A real database with schema, migrations, and a typed REST API generated for you — SQLite embedded by default, Postgres when you go multi-instance.',
+              body: 'A real database with schema, migrations, and a typed REST API generated for you. Per-tenant SQLite by default — instant and isolated per org — with Postgres when you need multi-primary writes.',
             },
             {
               icon: Fingerprint,
@@ -63,7 +63,7 @@ export default function BasePage() {
             { icon: Radio, title: 'Realtime subscriptions', body: 'Subscribe to records over websockets and push changes to clients without polling.' },
             { icon: ShieldCheck, title: 'Rules-based access', body: 'Per-collection read/write rules evaluated on the edge of every request.' },
             { icon: FileStack, title: 'File storage', body: 'Upload, transform, and serve files under the same access rules as your data.' },
-            { icon: Server, title: 'SQLite → Postgres', body: 'Embedded SQLite for fast local dev; switch to Postgres for multi-instance production.' },
+            { icon: Server, title: 'Scales horizontally', body: 'Every org runs its own encrypted database with continuous replication to object storage — durability, point-in-time restore, and read replicas from a laptop to a global fleet. Postgres for multi-primary writes.' },
             { icon: Boxes, title: 'IAM-native SSO', body: 'Sign-in, org and tenant scoping, and audit come from Hanzo IAM out of the box.' },
           ],
         }}
