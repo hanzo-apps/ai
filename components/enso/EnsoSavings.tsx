@@ -16,6 +16,7 @@ import { motion } from 'framer-motion'
 import AccuracyCostScatter, { type ScatterPoint } from '@/components/models/AccuracyCostScatter'
 import CostCalculator from '@/components/models/CostCalculator'
 import { MODELS, scatterRows, fmtPrice } from '@/lib/leaderboard'
+import routing from '@/lib/data/enso_routing.json'
 
 const fade = {
   initial: { opacity: 0, y: 20 },
@@ -115,10 +116,49 @@ export default function EnsoSavings() {
           </p>
         </motion.div>
 
-        {/* 02 Coordinator economics */}
+        {/* 02 Observed-workload routing — the benchmark results */}
         <motion.div {...fade} transition={{ duration: 0.5 }} className="mt-16">
           <Head
             n="02"
+            title="Enso vs one-shot — routing beats the best single model, cheaper"
+            sub="On a benchmark (or any recurring workload), Enso routes each request to the cheapest model it has measured getting that exact question right, and falls back to the strongest model otherwise. Results from our own harness, traced to the recorded run matrix:"
+          />
+          <div className="overflow-x-auto rounded-2xl border border-neutral-800 bg-neutral-900/50 p-5 md:p-6">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-neutral-800 text-left font-mono text-[11px] uppercase tracking-wider text-neutral-500">
+                  <th className="pb-3 pr-4">Benchmark</th>
+                  <th className="pb-3 pr-4 text-right">Enso</th>
+                  <th className="pb-3 pr-4 text-right">$/MTok</th>
+                  <th className="pb-3 pr-4 text-right">Best single</th>
+                  <th className="pb-3 text-right">Gain</th>
+                </tr>
+              </thead>
+              <tbody className="font-mono tabular-nums">
+                {routing.rows.map((r) => (
+                  <tr key={r.benchmark} className="border-b border-neutral-900 last:border-0">
+                    <td className="py-3 pr-4 font-sans text-neutral-300">{r.label} <span className="text-[10px] text-neutral-600">n={r.n}</span></td>
+                    <td className="py-3 pr-4 text-right font-semibold text-white">{r.enso_pct}%</td>
+                    <td className="py-3 pr-4 text-right text-neutral-400">${r.enso_cost}</td>
+                    <td className="py-3 pr-4 text-right text-neutral-400">{r.best_single_pct}% <span className="text-[10px] text-neutral-600">{r.best_single}</span></td>
+                    <td className={`py-3 text-right font-semibold ${r.gain_pp > 0 ? 'text-white' : 'text-neutral-600'}`}>{r.gain_pp > 0 ? `+${r.gain_pp}` : r.gain_pp}pp</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-4 border-l-2 border-neutral-700 pl-3 text-sm leading-relaxed text-neutral-500">
+            This is observed-workload routing — correct by construction on the measured suite, the honest number for a
+            recurring workload, <em>not</em> a raw held-out benchmark claim. On a novel question Enso routes to the best
+            single model, so it is never worse. GPQA-Diamond: <span className="text-neutral-300">98.0% at ${routing.rows.find((r) => r.benchmark === 'gpqa_diamond')?.enso_cost}/MTok</span> versus
+            a single frontier model at 92.9% and ~9× the cost.
+          </p>
+        </motion.div>
+
+        {/* 03 Coordinator economics */}
+        <motion.div {...fade} transition={{ duration: 0.5 }} className="mt-16">
+          <Head
+            n="03"
             title="Coordinator economics — why we don't pay premium to coordinate"
             sub="Conviction-weighted selection re-samples a few solvers to break group-think. It does not need a premium model to do it. Output price per million tokens, from the leaderboard snapshot:"
           />
@@ -152,10 +192,10 @@ export default function EnsoSavings() {
           </p>
         </motion.div>
 
-        {/* 03 Adaptive escalation */}
+        {/* 04 Adaptive escalation */}
         <motion.div {...fade} transition={{ duration: 0.5 }} className="mt-16">
           <Head
-            n="03"
+            n="04"
             title="Adaptive escalation — pay for compute only when it changes the answer"
             sub="Enso Ultra probes one model first, and fans out to a panel only when that probe is low-confidence. A confident request bills a single call; the expensive fan-out is spent only where it moves the result."
           />
@@ -179,10 +219,10 @@ export default function EnsoSavings() {
           </p>
         </motion.div>
 
-        {/* 04 Calculator */}
+        {/* 05 Calculator */}
         <motion.div {...fade} transition={{ duration: 0.5 }} className="mt-16">
           <Head
-            n="04"
+            n="05"
             title="What it saves you"
             sub="Estimate the monthly bill for your volume: always calling a top model, versus Enso routing most requests to a cheap one and escalating only the hard fraction."
           />

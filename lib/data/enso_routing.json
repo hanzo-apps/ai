@@ -1,0 +1,52 @@
+{
+  "schema": "enso.routing/1",
+  "source": "hanzoai/enso-bench observed-outcome route tables (registry/*.routes.json)",
+  "policy": "economy = cheapest model observed correct per item; naive = best single servable model",
+  "note": "Observed-workload routing on the measured benchmark suite \u2014 correct-by-construction, not a held-out generalization claim. On novel inputs Enso falls back to the best single model.",
+  "rows": [
+    {
+      "benchmark": "hle",
+      "label": "Humanity's Last Exam",
+      "enso_pct": 52.2,
+      "enso_cost": 7.13,
+      "best_single": "fable-5",
+      "best_single_pct": 38.3,
+      "wall": 239,
+      "n": 500,
+      "gain_pp": 13.9
+    },
+    {
+      "benchmark": "charxiv",
+      "label": "CharXiv",
+      "enso_pct": 92.0,
+      "enso_cost": 8.73,
+      "best_single": "gpt-5.5",
+      "best_single_pct": 85.5,
+      "wall": 16,
+      "n": 200,
+      "gain_pp": 6.5
+    },
+    {
+      "benchmark": "gpqa_diamond",
+      "label": "GPQA-Diamond",
+      "enso_pct": 98.0,
+      "enso_cost": 1.07,
+      "best_single": "grok-4.5",
+      "best_single_pct": 92.9,
+      "wall": 4,
+      "n": 198,
+      "gain_pp": 5.1
+    },
+    {
+      "benchmark": "livecodebench",
+      "label": "LiveCodeBench",
+      "enso_pct": 92.0,
+      "enso_cost": 2.66,
+      "best_single": "gpt-5.5",
+      "best_single_pct": 92.0,
+      "wall": 14,
+      "n": 175,
+      "gain_pp": 0.0
+    }
+  ]
+}
