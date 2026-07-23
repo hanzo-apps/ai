@@ -50,9 +50,9 @@ const KPIS = [
 ]
 
 const ESCALATION = [
-  { t: 'confident probe', c: '~$0.09', d: 'one call — the common case' },
-  { t: 'escalated fan-out', c: '~$0.43', d: 'panel, only when uncertain' },
-  { t: 'naive always-fan-out', c: '~$0.82', d: 'what a fixed ensemble costs', faint: true },
+  { t: 'simple request', c: '~$0.09', d: 'the common case' },
+  { t: 'harder request', c: '~$0.43', d: 'more compute, only when needed' },
+  { t: 'always-max baseline', c: '~$0.82', d: 'paying top rate every time', faint: true },
 ]
 
 function Head({ n, title, sub }: { n: string; title: string; sub: string }) {
@@ -116,8 +116,8 @@ export default function EnsoSavings() {
         <motion.div {...fade} transition={{ duration: 0.5 }} className="mt-16">
           <Head
             n="02"
-            title="Coordinator economics — why we don't pay premium to coordinate"
-            sub="Conviction-weighted selection re-samples a few solvers to break group-think. It does not need a premium model to do it. Output price per million tokens, from the leaderboard snapshot:"
+            title="Frontier accuracy without frontier prices"
+            sub="Top-tier results without paying a top-tier rate on every request. Output price per million tokens across models in the field:"
           />
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-5 md:p-6">
             <div className="space-y-3">
@@ -153,8 +153,8 @@ export default function EnsoSavings() {
         <motion.div {...fade} transition={{ duration: 0.5 }} className="mt-16">
           <Head
             n="03"
-            title="Adaptive escalation — pay for compute only when it changes the answer"
-            sub="Enso Ultra probes one model first, and fans out to a panel only when that probe is low-confidence. A confident request bills a single call; the expensive fan-out is spent only where it moves the result."
+            title="Pay for what each request needs"
+            sub="Simple requests cost little; only the hardest work costs more. You pick the tier, and Enso keeps every request inside that price/quality contract."
           />
           <div className="flex flex-wrap gap-3">
             {ESCALATION.map((s) => (
@@ -170,9 +170,8 @@ export default function EnsoSavings() {
             ))}
           </div>
           <p className="mt-4 border-l-2 border-neutral-700 pl-3 text-sm leading-relaxed text-neutral-500">
-            On confident requests, adaptive escalation is ~89% cheaper than always fanning out — and the fan-out cost
-            is incurred only on the hard fraction that benefits from it. Reasoning depth and fan-out are a property of
-            the tier, not a caller parameter. Per-request costs modeled from published token prices.
+            Everyday requests cost a fraction of always paying the top rate — extra spend goes only to the hard fraction that needs it. Quality and cost are a property of
+            the tier you choose, not a caller parameter. Per-request costs modeled from published token prices.
           </p>
         </motion.div>
 

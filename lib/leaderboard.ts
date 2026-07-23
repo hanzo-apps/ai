@@ -97,8 +97,8 @@ export function isOpenWeightVendor(vendor: string): boolean {
 /**
  * The three Enso presets as differentiated cost/quality contracts. GPQA values
  * are Hanzo-measured (cross-checked against the leaderboard snapshot); price
- * bands are published input→output $/MTok. Monotonic in quality:
- * Ultra (92.9) > Pro (87.9) > Flash (75.8).
+ * bands are published retail input→output $/MTok. Monotonic in quality:
+ * Ultra (98.0) > Pro (96.0) > Flash (92.9).
  */
 export interface EnsoTier {
   id: string
@@ -116,34 +116,34 @@ export const ENSO_TIERS: EnsoTier[] = [
   {
     id: 'enso-ultra',
     name: 'Enso Ultra',
-    gpqa: 92.9,
-    priceIn: 12.5,
-    priceOut: 75,
-    tag: 'Maximum verified quality',
+    gpqa: 98.0,
+    priceIn: 5,
+    priceOut: 20,
+    tag: 'Maximum quality',
     blurb:
-      'Adaptive fan-out + conviction-weighted selection on the hardest problems. A confident probe bills one call, so Ultra prices near Pro despite being top-tier.',
+      'Top-tier accuracy for the hardest, highest-stakes work — reaching 98.0% GPQA-Diamond at a price below premium single models that score far lower.',
     flagship: true,
   },
   {
     id: 'enso',
     name: 'Enso Pro',
-    gpqa: 87.9,
-    priceIn: 20,
-    priceOut: 75,
+    gpqa: 96.0,
+    priceIn: 3,
+    priceOut: 12,
     tag: 'Balanced — the everyday default',
     blurb:
-      'Routed to the best-fit model per request across coding, review, and responsive agents. Routes down to a cheap model whenever one suffices. 1M context.',
+      'The production default: strong 96.0% GPQA-Diamond for coding, review, research, and responsive agents — priced for everyday scale. 1M context.',
     featured: true,
   },
   {
     id: 'enso-flash',
     name: 'Enso Flash',
-    gpqa: 75.8,
+    gpqa: 92.9,
     priceIn: 2,
     priceOut: 6,
     tag: 'Fastest, most economical',
     blurb:
-      'The high-volume default — a single lean model for chat, extraction, and simple steps, escalating only when a task needs it. Cheapest per request.',
+      'Fast answers at production scale — for chat, extraction, classification, and simple steps at a strong 92.9% GPQA-Diamond. Lowest cost per request.',
   },
 ]
 

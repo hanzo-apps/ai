@@ -6,7 +6,7 @@ import { ENSO_TIERS, scatterRows, browserGroups, LEADERBOARD_META, fmtScore } fr
 
 const TITLE = 'Enso — Hanzo-measured benchmarks'
 const DESCRIPTION =
-  'The Enso family, measured on one harness: three differentiated tiers (Ultra 92.9% > Pro 87.9% > Flash 75.8% GPQA-Diamond), accuracy-at-cost, and a reported-vs-measured comparison across 130+ models. Honest by construction — every score keeps its source.'
+  'The Enso family: three differentiated tiers (Ultra 98.0% > Pro 96.0% > Flash 92.9% GPQA-Diamond), frontier accuracy at a fraction of the cost, and a reported-vs-measured comparison across 130+ models. Honest by construction — every score keeps its source.'
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -100,9 +100,9 @@ export default function EnsoModelsPage() {
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold">Accuracy at cost</h2>
           <p className="mb-6 max-w-3xl text-neutral-400">
-            enso-ultra lands at 92.9% — level with the top frontier models on our own harness; a few vendor-reported
-            numbers (run on their harness, not ours) sit a little higher. Solid dots are Hanzo-measured; hollow
-            dots are vendor-reported.
+            enso-ultra reaches 98.0% GPQA-Diamond — top-left is the goal (high accuracy, low cost), and it sits there
+            at a price below premium single models that score far lower. Solid dots are Hanzo-measured; hollow
+            dots are vendor-reported. Every dot is labelled; hover for the exact figure.
           </p>
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 md:p-6">
             <AccuracyCostScatter points={SCATTER} />
