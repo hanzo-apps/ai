@@ -14,7 +14,7 @@
     "test:report": "playwright show-report"
   },
   "dependencies": {
-    "@hanzo/event": "^0.2.0",
+    "@hanzo/event": "^0.3.1",
     "@hanzo/iam": "^0.13.1",
     "@hanzo/logo": "^1.0.13",
     "@hanzo/ui": "^5.3.34",

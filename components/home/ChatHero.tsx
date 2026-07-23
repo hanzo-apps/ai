@@ -2,6 +2,8 @@
 
 import { useState, useRef, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
+import { useAnalytics } from '@hanzo/event/react'
+import { EVENTS } from '@hanzo/event'
 import { ArrowUp, MessageSquare, Telescope, Code2, BookOpen, Sparkles } from 'lucide-react'
 import { CHAT, CLOUD, BLOG } from './nav-data'
 
@@ -31,13 +33,19 @@ const PILLS: Pill[] = [
 export default function ChatHero() {
   const [value, setValue] = useState('')
   const inputRef = useRef<HTMLTextAreaElement>(null)
+  const analytics = useAnalytics()
 
+  // Submitting the composer hands off to hanzo.chat (a cross-origin navigation a
+  // pageview can't see), so capture the intent here; the beacon-on-unload flush
+  // delivers it as the browser leaves.
   const submit = (e: FormEvent) => {
     e.preventDefault()
+    analytics.capture(EVENTS.CHAT_STARTED, { source: 'composer', hasPrompt: value.trim().length > 0 })
     goToChat(value)
   }
 
   const onPill = (pill: Pill) => {
+    analytics.capture(EVENTS.FEATURE_USED, { feature: 'home-pill', label: pill.label })
     if (pill.href) {
       window.location.href = pill.href
       return

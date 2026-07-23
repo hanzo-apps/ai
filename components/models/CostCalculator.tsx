@@ -80,8 +80,8 @@ export default function CostCalculator() {
       </div>
 
       <p className="mt-5 border-l-2 border-neutral-700 pl-3 text-xs leading-relaxed text-neutral-500">
-        Model: a top model bills the premium rate on every request; Enso serves the easy majority on a cheap
-        model (~$0.002/req) and only the hard fraction pays the adaptive fan-out (~$0.43/req). Illustrative at
+        Model: a top model bills the premium rate on every request; Enso serves the easy majority cheaply
+        (~$0.002/req) and only the hard fraction costs more (~$0.43/req). Illustrative at
         published token prices for a typical short-answer request — your mix sets the exact number.
       </p>
     </div>

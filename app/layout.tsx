@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
-import { HanzoAnalytics } from '@/components/HanzoAnalytics'
 import { Providers } from './providers'
 import './globals.css'
 
@@ -71,33 +69,10 @@ export default function RootLayout({
         >
           <Providers>{children}</Providers>
         </ThemeProvider>
-        {/* Hanzo Analytics — one tag, fans out to first-party + GA4 + Meta Pixel
-            (env-driven data-ga-id / data-fb-pixel-id). See components/HanzoAnalytics. */}
-        <HanzoAnalytics />
-        {/* Hanzo Insights */}
-        <Script
-          id="hanzo-insights"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(t,e){var o,n,p,r;e.__SV||(window.hi=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="hi",u.people=u.people||[],u.toString=function(t){var e="hi";return"hi"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture captureException identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId setPersonProperties".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.hi||[]);
-              hi.init('hi_e16a2d5a8033442d87f090b24c606825', {api_host: 'https://insights.hanzo.ai', person_profiles: 'identified_only'});
-              hi.register({app:'hanzo-ai',org:'hanzo'});
-            `,
-          }}
-        />
-        {/* Sentry error reporting — enable when sentry.hanzo.ai is deployed */}
-        {process.env.NEXT_PUBLIC_SENTRY_DSN && (
-          <Script
-            id="sentry-init"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                !function(n,e,t,r,i,o,a,c,s){for(var u=s=n[i]=n[i]||function(){(s.q=s.q||[]).push(arguments)},f=0;f<e.length;f++)u[e[f]]=u[e[f]]||function(n){return function(){u([n].concat(Array.prototype.slice.call(arguments)))}}(e[f]);(o=t.createElement(r)).async=1,o.src="https://browser.sentry-cdn.com/9.1.0/bundle.tracing.min.js",(a=t.getElementsByTagName(r)[0]).parentNode.insertBefore(o,a),o.addEventListener("load",function(){n.Sentry.init({dsn:"${process.env.NEXT_PUBLIC_SENTRY_DSN}"});})}(window,["captureException","captureMessage","captureEvent"],"script",document,"Sentry");
-              `,
-            }}
-          />
-        )}
+        {/* Telemetry (pageviews, product events, errors) is the ONE @hanzo/event
+            client wired in <Providers> → POST /v1/event, which Cloud fans out to
+            the web (analytics), product (insights), and error (sentry) lenses.
+            No per-lens client tags here — one front door, one client. */}
       </body>
     </html>
   )

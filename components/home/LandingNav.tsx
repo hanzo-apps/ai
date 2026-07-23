@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HanzoLogo } from '@hanzo/logo/react'
+import { useAnalytics } from '@hanzo/event/react'
+import { EVENTS } from '@hanzo/event'
 import { Search, ChevronDown, ArrowUpRight, Menu, X } from 'lucide-react'
 import { NAV, LOGIN_LINKS, TRY_LINKS, CHAT, type NavItem } from './nav-data'
 
@@ -81,6 +83,11 @@ export default function LandingNav() {
   const [tryOpen, setTryOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const analytics = useAnalytics()
+
+  // The primary CTA hands off to hanzo.chat; capture the intent before the
+  // cross-origin navigation the beacon-on-unload flush then delivers.
+  const onTry = () => analytics.capture(EVENTS.CHAT_STARTED, { source: 'nav' })
 
   // Lock body scroll while the mobile drawer is open.
   useEffect(() => {
@@ -194,6 +201,7 @@ export default function LandingNav() {
             <div className="relative" onMouseEnter={() => setTryOpen(true)} onMouseLeave={() => setTryOpen(false)}>
               <a
                 href={CHAT}
+                onClick={onTry}
                 className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition-opacity hover:opacity-90"
                 aria-haspopup="true"
                 aria-expanded={tryOpen}
@@ -245,7 +253,7 @@ export default function LandingNav() {
             </div>
 
             <div className="h-[calc(100dvh-4rem)] overflow-y-auto px-4 py-6">
-              <a href={CHAT} className="mb-6 inline-flex w-full items-center justify-center gap-1 rounded-full bg-white px-4 py-3 text-sm font-medium text-black">
+              <a href={CHAT} onClick={onTry} className="mb-6 inline-flex w-full items-center justify-center gap-1 rounded-full bg-white px-4 py-3 text-sm font-medium text-black">
                 Try Hanzo <ArrowUpRight className="h-4 w-4" />
               </a>
 

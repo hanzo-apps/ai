@@ -64,8 +64,8 @@ const PILLARS = [
   {
     n: '01',
     icon: Network,
-    title: 'One API to access all, optimized',
-    body: 'Reach a coordinated pool of specialized models through a single OpenAI-compatible endpoint. Enso selects, switches, and combines models per task — you write one integration, not ten.',
+    title: 'One API — every model, every modality',
+    body: 'Text, code, vision, documents, images, audio, and video through a single OpenAI-compatible endpoint. Enso unifies the frontier and open models across every modality — the first hyper-modal interface. You write one integration, not ten.',
   },
   {
     n: '02',

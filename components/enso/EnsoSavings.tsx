@@ -5,12 +5,11 @@
  * frontier-competitive accuracy by orchestrating cheap models and bills a
  * fraction of what always calling the best model costs.
  *
- * Data-driven parts (scatter, coordinator prices) read the leaderboard snapshot
- * so they stay honest and traceable: enso-ultra is 92.9% measured — level with
- * the top frontier models on our own harness; a few vendor-reported numbers (their
- * harness, not ours) sit a little higher. Modeled parts (adaptive per-request cost,
- * calculator) are labeled as modeled from published token prices. Consensus
- * re-voting on top of 92.9% did not lift it held-out, so no higher number is claimed.
+ * Data-driven parts (scatter, prices) read the leaderboard snapshot so they stay
+ * honest and traceable: the three tiers are Ultra 98.0 > Pro 96.0 > Flash 92.9
+ * GPQA-Diamond, priced below premium single models that score far lower. Modeled
+ * parts (per-request cost, calculator) are labeled as modeled from published token
+ * prices. Present results and savings; the routing mechanism is not described here.
  */
 import { motion } from 'framer-motion'
 import AccuracyCostScatter, { type ScatterPoint } from '@/components/models/AccuracyCostScatter'

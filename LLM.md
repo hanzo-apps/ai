@@ -148,6 +148,29 @@ positioned "Open AI Cloud — GCP-compatible. Open source. On-chain.":
 `next.config.ts` uses `output: 'export'` for static deploy to GitHub Pages.
 SPA routing works via the static export's automatic 404.html fallback.
 
+## Telemetry (one client, one door)
+
+All telemetry is the ONE `@hanzo/event` client, wired once in `app/providers.tsx`:
+`<AnalyticsProvider config={{ product: 'site', host: api.hanzo.ai, ingestKey,
+getToken, enabled }}>` → `POST /v1/event` (the canonical ingest), which Cloud fans
+out server-side to the web (analytics), product (insights), and error (sentry)
+lenses. There are no per-lens client tags — the old direct
+`analytics.hanzo.ai/script.js`, inline insights (PostHog), and Sentry CDN snippets
+were removed (`components/HanzoAnalytics.tsx` deleted).
+
+- **Auto pageview** on load + route change (`usePageview(usePathname())`).
+- **Auto error capture** (SDK default) + `<ErrorBoundary>` for React render errors
+  — the @sentry replacement; no browser Sentry SDK.
+- **Logged-out marketing** ingests via a publishable key
+  `NEXT_PUBLIC_HANZO_INGEST_KEY` (pk_, write-only, safe in the bundle). Without it,
+  signed-in visitors report via bearer and anonymous events fail closed server-side
+  — so provisioning the key (`POST /v1/ingest/keys`) is the go-live gate for
+  anonymous pageviews/errors.
+- **Consent**: honors Do Not Track / Global Privacy Control (via `enabled`).
+- **Product moments**: `EVENTS.CHAT_STARTED` (apex composer + nav "Try Hanzo"),
+  `EVENTS.FEATURE_USED` (home pills); the funnel events
+  (pricing/signup/waitlist/referral) live in their own pages.
+
 ## Certification Claims (Honest)
 
 - SOC 2: "Audit in Progress" (not "Certified")
