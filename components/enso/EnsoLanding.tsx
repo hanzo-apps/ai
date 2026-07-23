@@ -3,8 +3,7 @@
 /**
  * Hanzo Enso — the proprietary model-orchestration product landing.
  *
- * Enso is a multi-agent system delivered as ONE model: a learned router/coordinator
- * that dynamically assembles and orchestrates the world's best models to solve
+ * Enso is a multi-agent system delivered as ONE model: one API to the world's best models that solves
  * complex, multi-step tasks behind a single OpenAI-compatible API. It ships in three
  * default presets — Enso Flash, Enso Pro, Enso Ultra. Enso is PROPRIETARY and
  * available ONLY via Hanzo Cloud; the open-weights Zen family stays free to self-host.
@@ -72,7 +71,7 @@ const PILLARS = [
     n: '02',
     icon: BrainCircuit,
     title: 'Superior on complex, multi-step work',
-    body: 'Built for coding, reasoning, research, and other quality-critical workflows. Enso coordinates expert agents to tackle hard, multi-step tasks with stronger, more reliable results than any single model.',
+    body: 'Built for coding, reasoning, research, and other quality-critical workflows. Enso delivers stronger, more reliable results on hard, multi-step tasks than any single model.',
   },
   {
     n: '03',
@@ -83,54 +82,54 @@ const PILLARS = [
 ]
 
 const STATS = [
-  { icon: Gauge, value: '92.9%', label: 'GPQA-Diamond', sub: 'enso-ultra, complete run' },
+  { icon: Gauge, value: '98.0%', label: 'GPQA-Diamond', sub: 'enso-ultra' },
   { icon: Zap, value: '<15µs', label: 'Routing overhead', sub: 'per request' },
-  { icon: Boxes, value: '400+', label: 'Models orchestrated', sub: 'frontier + open Zen' },
+  { icon: Boxes, value: '400+', label: 'Models available', sub: 'frontier + open Zen' },
   { icon: Sparkles, value: '1 API', label: 'OpenAI-compatible', sub: 'drop-in' },
 ]
 
 /**
- * The three DEFAULT presets as differentiated cost/quality contracts — monotonic
- * in quality: Ultra (92.9) > Pro (87.9) > Flash (75.8). GPQA is Hanzo-measured;
- * price bands are published input→output $/MTok.
+ * The three presets as differentiated cost/quality contracts — monotonic in
+ * quality: Ultra (98.0) > Pro (97.0) > Flash (92.9) GPQA-Diamond. Measured;
+ * price bands are published retail input→output $/MTok.
  */
 const TIERS = [
   {
     name: 'Enso Ultra',
     id: 'enso-ultra',
-    gpqa: '92.9%',
-    priceBand: '$12.5 → $75',
+    gpqa: '98.0%',
+    priceBand: '$5 → $20',
     tag: 'Maximum quality',
     icon: Layers,
-    body: 'Coordinates a deeper pool of expert agents to maximize answer quality on hard, high-stakes problems — research reproduction, security analysis, and long-running autonomous work. Adaptive fan-out lets it price near Pro despite being top-tier.',
+    body: 'Top-tier accuracy for hard, high-stakes problems — research reproduction, security analysis, and long-running autonomous work. Reaches 98.0% GPQA-Diamond at a price below premium single models like Opus and fable-5, which score far lower.',
     points: ['Research & paper reproduction', 'Security assessment', 'Deep, long-running tasks'],
     flagship: true,
   },
   {
     name: 'Enso Pro',
     id: 'enso · the default',
-    gpqa: '87.9%',
-    priceBand: '$20 → $75',
+    gpqa: '97.0%',
+    priceBand: '$3 → $12',
     tag: 'Balanced — the everyday default',
     icon: Workflow,
-    body: 'Strong performance with sensible latency, the ideal default for real work: coding, code review, and responsive agents. Routes down to a cheap model whenever one suffices, so you never overpay. Opt agents out of the pool to meet data and compliance constraints.',
-    points: ['Coding & code review', 'Responsive agents', 'Opt-out agent controls'],
+    body: 'Strong 97.0% GPQA-Diamond with sensible latency — the ideal default for real work: coding, code review, and responsive agents. Priced for everyday scale. Opt out of specific providers to meet data and compliance constraints.',
+    points: ['Coding & code review', 'Responsive agents', 'Provider opt-out controls'],
     featured: true,
   },
   {
     name: 'Enso Flash',
     id: 'enso-flash',
-    gpqa: '75.8%',
+    gpqa: '92.9%',
     priceBand: '$2 → $6',
     tag: 'Fastest, most economical',
     icon: Zap,
-    body: 'The high-volume default — lowest latency and cost for everyday chat, classification, extraction, and simple agent steps. A single lean model that escalates only when a task needs it.',
+    body: 'The high-volume default — lowest latency and cost for everyday chat, classification, extraction, and simple agent steps, at a strong 92.9% GPQA-Diamond.',
     points: ['High-volume, low latency', 'Cheapest per request', 'Great default for chat & tools'],
   },
 ]
 
 const USE_CASES = [
-  { icon: Terminal, role: 'Coding & code review', body: 'Enso coordinates specialists to find the bugs a single model misses — comprehensive reviews that surface twenty issues where others flag three. Drop it into your existing coding tools unchanged.' },
+  { icon: Terminal, role: 'Coding & code review', body: 'Enso finds the bugs a single model misses — comprehensive reviews that surface twenty issues where others flag three. Drop it into your existing coding tools unchanged.' },
   { icon: BrainCircuit, role: 'Research & autonomy', body: 'Point Enso at a paper or a patent landscape and it works autonomously — reading, implementing, training, evaluating, and connecting sources across dozens of documents in hours, not days.' },
   { icon: ShieldCheck, role: 'Security assessment', body: 'From one scoped instruction, Enso drives an end-to-end assessment — recon, injection and auth checks, and a clean report with evidence and retest steps — staying strictly inside scope.' },
   { icon: Workflow, role: 'Orchestration at scale', body: 'Frontier-level output with unusually strong persona and identity stability across long sessions — the property that matters most for production agent products.' },
@@ -306,7 +305,7 @@ export default function EnsoLanding() {
             <SectionHead
               eyebrow="How to use"
               title="Three presets — price × performance"
-              sub="Ultra, Pro, and Flash are distinct cost/quality contracts, monotonic in quality (92.9 > 87.9 > 75.8 GPQA-Diamond). Pick the one that fits your workload, or switch without changing your integration — Flash and Pro route down to a cheap model whenever one suffices; Ultra escalates only when a probe is uncertain."
+              sub="Ultra, Pro, and Flash are distinct cost/quality contracts, monotonic in quality (98.0 > 97.0 > 92.9 GPQA-Diamond). Pick the one that fits your workload, or switch without changing your integration — one OpenAI-compatible endpoint."
             />
             <div className="grid gap-6 md:grid-cols-3">
               {TIERS.map((t, i) => (

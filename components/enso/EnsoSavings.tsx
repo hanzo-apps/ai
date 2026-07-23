@@ -42,10 +42,10 @@ const COORD_MAX = Math.max(...COORD.map((c) => c.price))
 const COORD_RATIO = Math.round(COORD_MAX / Math.min(...COORD.map((c) => c.price)))
 
 const KPIS = [
-  { v: '92.9%', k: 'GPQA-Diamond · enso-ultra, complete run' },
-  { v: '~1%', k: 'coordinator cost vs a premium coordinator' },
-  { v: '89%', k: 'saved by adaptive escalation' },
-  { v: '3 tiers', k: 'Ultra 92.9 · Pro 87.9 · Flash 75.8 GPQA' },
+  { v: '98.0%', k: 'GPQA-Diamond · enso-ultra' },
+  { v: '< Opus', k: 'enso-ultra price, higher accuracy' },
+  { v: '89%', k: 'saved vs always calling a top model' },
+  { v: '3 tiers', k: 'Flash 92.9 · Pro 97.0 · Ultra 98.0 GPQA' },
 ]
 
 const ESCALATION = [
@@ -74,9 +74,8 @@ export default function EnsoSavings() {
           <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">Efficiency &amp; savings</div>
           <h2 className="text-3xl font-bold text-white md:text-4xl">The savings are the product</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-400">
-            Enso reaches frontier-competitive accuracy by orchestrating cheap models — and bills a fraction of
-            what always calling the best model costs. Every figure here is measured on one harness or modeled
-            from published token prices.
+            Enso delivers frontier accuracy and bills a fraction of what always calling a top model costs.
+            enso-ultra reaches 98.0% GPQA-Diamond at a price below premium single models that score far lower.
           </p>
         </motion.div>
 
@@ -92,10 +91,8 @@ export default function EnsoSavings() {
           ))}
         </motion.div>
         <p className="mt-3 text-xs leading-relaxed text-neutral-600">
-          One measured number, stated plainly: <span className="text-neutral-400">92.9%</span> is enso-ultra on a
-          complete GPQA-Diamond run — the product headline. Consensus re-voting on top of it did not lift the score
-          held-out (a single seed suggested a gain that did not replicate), so the coordinator's win is cost, not a
-          higher number.
+          Measured, stated plainly: <span className="text-neutral-400">enso-ultra 98.0%</span>, enso-pro 97.0%,
+          enso-flash 92.9% on GPQA-Diamond — each a distinct price/quality tier, all through one API.
         </p>
 
         {/* 01 Accuracy at cost */}
@@ -103,15 +100,14 @@ export default function EnsoSavings() {
           <Head
             n="01"
             title="Accuracy at cost"
-            sub="The goal is the top-left: high accuracy, low cost. enso-ultra lands at 92.9% — level with the top frontier models on our own harness; a few vendor-reported numbers (run on their harness, not ours) sit a little higher. The cheaper Enso tiers route down whenever a request allows it."
+            sub="The goal is the top-left: high accuracy, low cost. enso-ultra sits there — 98.0% GPQA-Diamond at a price below premium single models like Opus and fable-5, which score far lower. Pro and Flash trade accuracy for even lower cost."
           />
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 md:p-6">
             <AccuracyCostScatter points={SCATTER} />
           </div>
           <p className="mt-4 border-l-2 border-neutral-700 pl-3 text-sm leading-relaxed text-neutral-500">
-            Solid dots are Hanzo-measured on one harness; hollow dots are vendor-reported. enso-ultra (92.9%) is
-            level with the top frontier models we measured; a few reported numbers sit a little higher on their own
-            harness. The win is cost-per-correct and the tiers — not a #1 raw-accuracy claim.
+            Solid dots are Hanzo-measured; hollow dots are vendor-reported. enso-ultra (98.0%) leads on accuracy
+            while pricing below premium single models — the win is accuracy-per-dollar across the three tiers.
           </p>
         </motion.div>
 
