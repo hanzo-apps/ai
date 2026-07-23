@@ -17,6 +17,8 @@ import {
   Copy,
   Github,
 } from "lucide-react"
+import LandingNav from "@/components/home/LandingNav"
+import LandingFooter from "@/components/home/LandingFooter"
 
 const CONSOLE = "https://console.hanzo.ai"
 const SIGNIN = "https://hanzo.id"
@@ -364,12 +366,12 @@ function Footer() {
 export default function CloudLanding() {
   return (
     <div className="min-h-screen bg-black text-white">
-      <TopNav />
+      <LandingNav />
       <Hero />
       <Features />
       <Billing />
       <FinalCTA />
-      <Footer />
+      <LandingFooter />
     </div>
   )
 }
