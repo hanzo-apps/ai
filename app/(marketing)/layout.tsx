@@ -5,7 +5,7 @@ import GlobalChatWidget from '@/components/GlobalChatWidget'
 import { AccountProvider } from '@/contexts/AccountContext'
 import { BillingProvider } from '@/contexts/BillingContext'
 
-const SITE_TITLE = 'Hanzo — Open-source cloud for AI agents'
+const SITE_TITLE = 'Hanzo — the AI cloud for agents and apps'
 const SITE_DESCRIPTION = 'Build, deploy, and govern AI agents with unified access to models, MCP tools, memory, vector search, secure sandboxes, IAM, KMS, and audit logs. Open-source. Self-host or use the cloud.'
 
 export const metadata: Metadata = {

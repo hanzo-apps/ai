@@ -15,7 +15,7 @@ export default function LandingFooter() {
               <span className="text-[15px] font-semibold tracking-tight text-white">Hanzo</span>
             </a>
             <p className="mt-3 max-w-[16rem] text-sm text-neutral-500">
-              The open-source cloud for AI agents.
+              The AI cloud for agents and apps.
             </p>
           </div>
 

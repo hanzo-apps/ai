@@ -17,8 +17,6 @@ import {
   Copy,
   Github,
 } from "lucide-react"
-import LandingNav from "@/components/home/LandingNav"
-import LandingFooter from "@/components/home/LandingFooter"
 
 const CONSOLE = "https://console.hanzo.ai"
 const SIGNIN = "https://hanzo.id"
@@ -97,8 +95,8 @@ function Hero() {
           transition={{ duration: 0.4, delay: 0.05 }}
           className="text-4xl font-semibold leading-[1.07] tracking-tight text-white sm:text-5xl lg:text-6xl"
         >
-          The open-source cloud for
-          <br className="hidden sm:block" /> AI agents and apps.
+          The AI cloud for
+          <br className="hidden sm:block" /> agents and apps.
         </motion.h1>
 
         <motion.p
@@ -107,7 +105,7 @@ function Hero() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400"
         >
-          One API for <span className="text-white">51 live models</span>, Base backends, identity,
+          One API for <span className="text-white">400+ models</span>, Base backends, identity,
           secrets, vector search, and full-text search. Pay-as-you-go, billed per organization.
           Run it on Hanzo Cloud or self-host the exact same stack on your own Kubernetes.
         </motion.p>
@@ -168,7 +166,7 @@ function Hero() {
 const FEATURES = [
   {
     icon: Bot,
-    title: "51 live models, one API",
+    title: "400+ models, one API",
     body: "OpenAI, Anthropic, and open-weight models behind a single OpenAI-compatible endpoint. Switch providers without touching code; route, fall back, and cache automatically.",
   },
   {
@@ -277,7 +275,7 @@ function Billing() {
             $0<span className="text-xl font-normal text-neutral-500"> to start</span>
           </div>
           <p className="mt-3 text-sm text-neutral-400">
-            Create an organization, add a balance, and call any of 51 models. Costs accrue per use
+            Create an organization, add a balance, and call any of 400+ models. Costs accrue per use
             and are debited from your organization balance in real time.
           </p>
           <a
@@ -348,7 +346,7 @@ function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 sm:flex-row">
         <div className="flex items-center gap-2">
           <HanzoLogo variant="white" size={18} />
-          <span className="text-sm text-neutral-400">© Hanzo AI — open-source cloud</span>
+          <span className="text-sm text-neutral-400">© Hanzo AI</span>
         </div>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-neutral-400">
           <a href={CONSOLE} className="transition-colors hover:text-white">Console</a>
@@ -365,13 +363,11 @@ function Footer() {
 
 export default function CloudLanding() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <LandingNav />
+    <>
       <Hero />
       <Features />
       <Billing />
       <FinalCTA />
-      <LandingFooter />
-    </div>
+    </>
   )
 }

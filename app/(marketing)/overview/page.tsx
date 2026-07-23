@@ -18,7 +18,7 @@ import FinalCTASection from '@/components/landing/FinalCTASection'
 // `/` (now the chat-centric landing) to `/overview` so it stays part of the
 // detailed cloud.hanzo.ai site, wrapped by the (marketing) Navbar/Footer.
 
-const TITLE = 'Hanzo — the open-source cloud for AI agents'
+const TITLE = 'Hanzo — the AI cloud for agents and apps'
 const DESCRIPTION =
   'Build, deploy, and govern AI agents with unified access to models, MCP tools, memory, vector search, secure sandboxes, IAM, KMS, and audit logs. Open-source. Self-host or use the cloud.'
 
