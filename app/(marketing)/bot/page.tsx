@@ -1,37 +1,20 @@
-'use client'
+import type { Metadata } from 'next'
+import BotLanding from '@/components/bot/BotLanding'
 
+export const metadata: Metadata = {
+  title: 'Hanzo Bot — publish AI agents to every channel',
+  description:
+    'Connect your AI agents to WhatsApp, Telegram, Discord, Slack, iMessage, and Signal — plus web chat — through one open-source gateway you run yourself. Multi-agent routing, media, group chats, automations, and skills.',
+  openGraph: {
+    title: 'Hanzo Bot — publish AI agents to every channel',
+    description:
+      'One open-source gateway connects your agents to WhatsApp, Telegram, Discord, Slack, iMessage, and Signal, plus web chat. Multi-agent routing, media, automations, and skills — self-hosted.',
+    url: 'https://hanzo.bot',
+    siteName: 'Hanzo Bot',
+    type: 'website',
+  },
+}
 
-import React from "react";
-import HeroSection from "@/components/hanzobot/HeroSection";
-import Features from "@/components/hanzobot/Features";
-import Architecture from "@/components/hanzobot/Architecture";
-import UseCases from "@/components/hanzobot/UseCases";
-import GettingStarted from "@/components/hanzobot/GettingStarted";
-import Documentation from "@/components/hanzobot/Documentation";
-import Community from "@/components/hanzobot/Community";
-import OSSComputeDividends from "@/components/oss/OSSComputeDividends";
-import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner";
-
-import { ProductFooter } from "@/components/products/ProductFooter"
-const HanzoBot = () => {
-  return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
-      
-      <main>
-        <HeroSection />
-        <Features />
-        <Architecture />
-        <UseCases />
-        <GettingStarted />
-        <Documentation />
-        <OSSRevenueBanner upstreamName="LibreChat" />
-        <OSSComputeDividends variant="banner" />
-        <Community />
-              <ProductFooter slug="bot" name="Bot" />
-</main>
-      
-    </div>
-  );
-};
-
-export default HanzoBot;
+export default function BotPage() {
+  return <BotLanding />
+}

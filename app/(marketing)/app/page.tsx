@@ -1,28 +1,20 @@
-'use client'
+import type { Metadata } from "next"
+import AppLanding from "@/components/app/AppLanding"
 
-import React from "react";
-import HeroSection from "@/components/hanzoapp/HeroSection";
-import WhyHanzoApp from "@/components/hanzoapp/WhyHanzoApp";
-import HowItWorks from "@/components/hanzoapp/HowItWorks";
-import FAQSection from "@/components/hanzoapp/FAQSection";
-import FooterCTA from "@/components/hanzoapp/FooterCTA";
+export const metadata: Metadata = {
+  title: "Hanzo App — build and ship AI apps from a prompt",
+  description:
+    "Describe the app or website you want in plain language and Hanzo builds it — UI, database, auth, and API — then ships it to a live URL on Hanzo Cloud with database, auth, AI, and storage already wired in. Open source (MIT).",
+  openGraph: {
+    title: "Hanzo App — build and ship AI apps from a prompt",
+    description:
+      "From a sentence to a shipped app: Hanzo generates the UI, database schema, auth, and API, refines with you in a live in-browser editor, and deploys to a live URL on Hanzo Cloud — database, auth, AI, and storage wired in.",
+    url: "https://hanzo.app",
+    siteName: "Hanzo App",
+    type: "website",
+  },
+}
 
-import { ProductFooter } from "@/components/products/ProductFooter"
-const HanzoApp = () => {
-  return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
-            
-      <main>
-        <HeroSection />
-        <WhyHanzoApp />
-        <HowItWorks />
-        <FAQSection />
-        <FooterCTA />
-              <ProductFooter slug="app" name="App" />
-</main>
-      
-    </div>
-  );
-};
-
-export default HanzoApp;
+export default function AppPage() {
+  return <AppLanding />
+}
