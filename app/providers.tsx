@@ -5,7 +5,11 @@ import { AnalyticsProvider, ErrorBoundary, usePageview } from '@hanzo/event/reac
 import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 
-const API_BASE = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.ai'
+// First-party web-analytics ingest host: the analytics.hanzo.ai property (Umami
+// fork) the live dashboard reads — the SAME door hanzo.app / hanzo.chat feed via
+// analytics.hanzo.ai/hz.js. Its OWN host (decoupled from the API base); the
+// @hanzo/event client POSTs pageviews/errors to `${ANALYTICS_HOST}/v1/event`.
+const ANALYTICS_HOST = process.env.NEXT_PUBLIC_ANALYTICS_URL || 'https://analytics.hanzo.ai'
 
 /** Publishable ingest key (pk_…) — write-only, safe to ship in the bundle. It lets
  *  logged-out marketing traffic reach the ONE front door (POST /v1/event) so
@@ -88,9 +92,9 @@ function memoryStorage(): Storage {
 }
 
 /**
- * Client providers. Telemetry is ONE client: `@hanzo/event` → the ONE front door
- * (POST /v1/event), which Cloud fans out to the web (analytics), product
- * (insights), and error (sentry) lenses. `AnalyticsProvider` auto-fires the first
+ * Client providers. Telemetry is ONE client: `@hanzo/event` → analytics.hanzo.ai
+ * (POST /v1/event) — the first-party analytics dashboard, the SAME door the static
+ * sites feed via analytics.hanzo.ai/hz.js. `AnalyticsProvider` auto-fires the first
  * pageview and wires auto error capture; `<Pageview/>` counts route changes; the
  * `ErrorBoundary` catches React render errors (which never reach window.onerror).
  * We mount the canonical @hanzo/iam provider directly — components call `useIam()`.
@@ -100,7 +104,7 @@ export function Providers({ children }: { children: ReactNode }) {
     <AnalyticsProvider
       config={{
         product: 'site',
-        host: API_BASE,
+        host: ANALYTICS_HOST,
         ingestKey: INGEST_KEY,
         getToken,
         enabled: telemetryEnabled(),

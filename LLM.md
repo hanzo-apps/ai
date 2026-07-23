@@ -151,21 +151,22 @@ SPA routing works via the static export's automatic 404.html fallback.
 ## Telemetry (one client, one door)
 
 All telemetry is the ONE `@hanzo/event` client, wired once in `app/providers.tsx`:
-`<AnalyticsProvider config={{ product: 'site', host: api.hanzo.ai, ingestKey,
-getToken, enabled }}>` → `POST /v1/event` (the canonical ingest), which Cloud fans
-out server-side to the web (analytics), product (insights), and error (sentry)
-lenses. There are no per-lens client tags — the old direct
-`analytics.hanzo.ai/script.js`, inline insights (PostHog), and Sentry CDN snippets
-were removed (`components/HanzoAnalytics.tsx` deleted).
+`<AnalyticsProvider config={{ product: 'site', host: analytics.hanzo.ai, ingestKey,
+getToken, enabled }}>` → `POST https://analytics.hanzo.ai/v1/event`. The host is the
+first-party **analytics.hanzo.ai** property (Umami fork) — the SAME dashboard the
+two static sites (hanzo.app, hanzo.chat) feed via the `analytics.hanzo.ai/hz.js`
+tag, so every Hanzo surface streams to one door. `ANALYTICS_HOST` is its own env
+(`NEXT_PUBLIC_ANALYTICS_URL`), decoupled from the API base. No per-lens client tags
+on this Next app — the @hanzo/event client IS the pageview/error capture (the old
+direct `script.js`, inline PostHog, and Sentry CDN snippets were removed,
+`components/HanzoAnalytics.tsx` deleted).
 
 - **Auto pageview** on load + route change (`usePageview(usePathname())`).
 - **Auto error capture** (SDK default) + `<ErrorBoundary>` for React render errors
   — the @sentry replacement; no browser Sentry SDK.
 - **Logged-out marketing** ingests via a publishable key
-  `NEXT_PUBLIC_HANZO_INGEST_KEY` (pk_, write-only, safe in the bundle). Without it,
-  signed-in visitors report via bearer and anonymous events fail closed server-side
-  — so provisioning the key (`POST /v1/ingest/keys`) is the go-live gate for
-  anonymous pageviews/errors.
+  `NEXT_PUBLIC_HANZO_INGEST_KEY` (pk_, write-only, safe in the bundle) when the
+  analytics.hanzo.ai ingest requires one; otherwise anonymous events fail closed.
 - **Consent**: honors Do Not Track / Global Privacy Control (via `enabled`).
 - **Product moments**: `EVENTS.CHAT_STARTED` (apex composer + nav "Try Hanzo"),
   `EVENTS.FEATURE_USED` (home pills); the funnel events
