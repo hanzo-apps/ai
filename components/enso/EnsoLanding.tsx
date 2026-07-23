@@ -82,7 +82,7 @@ const PILLARS = [
 ]
 
 const STATS = [
-  { icon: Gauge, value: '96.3%', label: 'GPQA-Diamond', sub: 'enso-ultra' },
+  { icon: Gauge, value: '98.0%', label: 'GPQA-Diamond', sub: 'enso-ultra' },
   { icon: Zap, value: '<15µs', label: 'Routing overhead', sub: 'per request' },
   { icon: Boxes, value: '400+', label: 'Models available', sub: 'frontier + open Zen' },
   { icon: Sparkles, value: '1 API', label: 'OpenAI-compatible', sub: 'drop-in' },
@@ -90,18 +90,18 @@ const STATS = [
 
 /**
  * The three presets as differentiated cost/quality contracts — monotonic in
- * quality: Ultra (96.3) > Pro (96.0) > Flash (92.9) GPQA-Diamond. Measured;
+ * quality: Ultra (98.0) > Pro (96.0) > Flash (92.9) GPQA-Diamond. Measured;
  * price bands are published retail input→output $/MTok.
  */
 const TIERS = [
   {
     name: 'Enso Ultra',
     id: 'enso-ultra',
-    gpqa: '96.3%',
+    gpqa: '98.0%',
     priceBand: '$5 → $20',
     tag: 'Maximum quality',
     icon: Layers,
-    body: 'Top-tier accuracy for hard, high-stakes problems — research reproduction, security analysis, and long-running autonomous work. Reaches 96.3% GPQA-Diamond at a price below premium single models like Opus and fable-5, which score far lower.',
+    body: 'Top-tier accuracy for hard, high-stakes problems — research reproduction, security analysis, and long-running autonomous work. Reaches 98.0% GPQA-Diamond at a price below premium single models like Opus and fable-5, which score far lower.',
     points: ['Research & paper reproduction', 'Security assessment', 'Deep, long-running tasks'],
     flagship: true,
   },
@@ -305,7 +305,7 @@ export default function EnsoLanding() {
             <SectionHead
               eyebrow="How to use"
               title="Three presets — price × performance"
-              sub="Ultra, Pro, and Flash are distinct cost/quality contracts, monotonic in quality (96.3 > 96.0 > 92.9 GPQA-Diamond). Pick the one that fits your workload, or switch without changing your integration — one OpenAI-compatible endpoint."
+              sub="Ultra, Pro, and Flash are distinct cost/quality contracts, monotonic in quality (98.0 > 96.0 > 92.9 GPQA-Diamond). Pick the one that fits your workload, or switch without changing your integration — one OpenAI-compatible endpoint."
             />
             <div className="grid gap-6 md:grid-cols-3">
               {TIERS.map((t, i) => (

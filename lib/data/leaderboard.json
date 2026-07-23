@@ -55,7 +55,7 @@
       "vendor": "Hanzo",
       "scores": {
         "gpqa_diamond": {
-          "value": 96.3,
+          "value": 98.0,
           "source": "hanzo-measured"
         },
         "charxiv_reasoning": {
@@ -68,7 +68,7 @@
         }
       },
       "price": 20,
-      "intelligence": 96.3
+      "intelligence": 98.0
     },
     {
       "model": "enso",
