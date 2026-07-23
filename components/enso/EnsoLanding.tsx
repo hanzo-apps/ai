@@ -4,7 +4,7 @@
  * Hanzo Enso — the proprietary model-orchestration product landing.
  *
  * Enso is a multi-agent system delivered as ONE model: one API to the world's best models that solves
- * complex, multi-step tasks behind a single OpenAI-compatible API. It ships in three
+ * complex, multi-step tasks behind a single OpenAI- and Anthropic-compatible API. It ships in three
  * default presets — Enso Flash, Enso Pro, Enso Ultra. Enso is PROPRIETARY and
  * available ONLY via Hanzo Cloud; the open-weights Zen family stays free to self-host.
  *
@@ -65,7 +65,7 @@ const PILLARS = [
     n: '01',
     icon: Network,
     title: 'One API — every model, every modality',
-    body: 'Text, code, vision, documents, images, audio, and video through a single OpenAI-compatible endpoint. Enso unifies the frontier and open models across every modality — the first hyper-modal interface. You write one integration, not ten.',
+    body: 'Text, code, vision, documents, images, audio, and video through one OpenAI- and Anthropic-compatible endpoint. Enso unifies the frontier and open models across every modality — the first hyper-modal interface. You write one integration, not ten.',
   },
   {
     n: '02',
@@ -85,7 +85,7 @@ const STATS = [
   { icon: Gauge, value: '98.0%', label: 'GPQA-Diamond', sub: 'enso-ultra' },
   { icon: Zap, value: '<15µs', label: 'Routing overhead', sub: 'per request' },
   { icon: Boxes, value: '400+', label: 'Models available', sub: 'frontier + open Zen' },
-  { icon: Sparkles, value: '1 API', label: 'OpenAI-compatible', sub: 'drop-in' },
+  { icon: Sparkles, value: '1 API', label: 'OpenAI + Anthropic', sub: 'drop-in, or via Hanzo CLI' },
 ]
 
 /**
@@ -136,7 +136,7 @@ const USE_CASES = [
 ]
 
 const FAQ = [
-  { q: 'Where can I use Hanzo Enso?', a: 'Enso is proprietary and available ONLY through Hanzo Cloud — a single OpenAI-compatible endpoint. Point your existing OpenAI client at the Hanzo base URL and call an `enso-*` model id. (The open-weights Zen family, by contrast, is free to run on Hanzo Cloud or self-host anywhere.)' },
+  { q: 'Where can I use Hanzo Enso?', a: 'Enso is proprietary and available ONLY through Hanzo Cloud — a single endpoint that speaks both the OpenAI and Anthropic API styles natively. Point your existing OpenAI or Anthropic client at the Hanzo base URL and call an `enso-*` model id — or use it in Claude Code or Codex via the Hanzo CLI. (The open-weights Zen family, by contrast, is free to run on Hanzo Cloud or self-host anywhere.)' },
   { q: 'What are Flash, Pro, and Ultra?', a: 'The three default Enso presets: Flash for fast, high-volume work; Pro as the balanced everyday default for coding and agents; Ultra for maximum quality on hard, high-stakes problems. All behind one API — switch by changing the model id. Zen and other models remain available too.' },
   { q: 'How is Enso different from the Zen models?', a: 'Zen is the family of OPEN-WEIGHT models co-designed by Hanzo AI and the Zoo Labs Foundation (our nonprofit) that you can self-host. Enso is Hanzo’s PROPRIETARY orchestration layer on top — a learned router that assembles and coordinates the best available models (Zen and frontier) per task. Enso runs only on Hanzo Cloud; Zen runs anywhere.' },
   { q: 'Can I control which models or providers Enso uses?', a: 'Yes. Opt specific providers or models out of Enso’s pool to satisfy data-residency, privacy, or compliance requirements. Every request records which models actually ran.' },
@@ -196,7 +196,7 @@ export default function EnsoLanding() {
 
             <motion.div {...fade} transition={{ duration: 0.5, delay: 0.36 }} className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-neutral-500">
               <span>Available through</span>
-              {['OpenAI-compatible API', 'Hanzo SDKs', 'CLI', 'MCP'].map((s) => (
+              {['OpenAI + Anthropic API', 'Claude Code / Codex via Hanzo CLI', 'Hanzo SDKs', 'MCP'].map((s) => (
                 <span key={s} className="text-neutral-300">{s}</span>
               ))}
             </motion.div>
@@ -242,7 +242,7 @@ export default function EnsoLanding() {
                   </div>
                 </div>
                 <ul className="space-y-2 text-sm text-neutral-300">
-                  {['Learned orchestration over the best models', 'Flash · Pro · Ultra presets', 'One OpenAI-compatible endpoint', 'Managed, metered, audited on Hanzo Cloud'].map((x) => (
+                  {['Learned orchestration over the best models', 'Flash · Pro · Ultra presets', 'One OpenAI + Anthropic endpoint', 'Managed, metered, audited on Hanzo Cloud'].map((x) => (
                     <li key={x} className="flex items-center gap-2"><Check className="h-4 w-4 shrink-0 text-white" /> {x}</li>
                   ))}
                 </ul>
@@ -305,7 +305,7 @@ export default function EnsoLanding() {
             <SectionHead
               eyebrow="How to use"
               title="Three presets — price × performance"
-              sub="Ultra, Pro, and Flash are distinct cost/quality contracts, monotonic in quality (98.0 > 96.0 > 92.9 GPQA-Diamond). Pick the one that fits your workload, or switch without changing your integration — one OpenAI-compatible endpoint."
+              sub="Ultra, Pro, and Flash are distinct cost/quality contracts, monotonic in quality (98.0 > 96.0 > 92.9 GPQA-Diamond). Pick the one that fits your workload, or switch without changing your integration — one endpoint, OpenAI- and Anthropic-compatible."
             />
             <div className="grid gap-6 md:grid-cols-3">
               {TIERS.map((t, i) => (
