@@ -6,11 +6,11 @@
  * fraction of what always calling the best model costs.
  *
  * Data-driven parts (scatter, coordinator prices) read the leaderboard snapshot
- * so they stay honest and traceable: enso-ultra is 92.9% measured — the top
- * model on our own harness, 4th once vendor-reported frontier numbers are
- * included. Modeled parts (adaptive per-request cost, calculator) are labeled as
- * modeled from published token prices. The projected 93.9% cheap-coordinator
- * figure is disclosed as pending validation, distinct from the 92.9% measured.
+ * so they stay honest and traceable: enso-ultra is 92.9% measured — level with
+ * the top frontier models on our own harness; a few vendor-reported numbers (their
+ * harness, not ours) sit a little higher. Modeled parts (adaptive per-request cost,
+ * calculator) are labeled as modeled from published token prices. Consensus
+ * re-voting on top of 92.9% did not lift it held-out, so no higher number is claimed.
  */
 import { motion } from 'framer-motion'
 import AccuracyCostScatter, { type ScatterPoint } from '@/components/models/AccuracyCostScatter'
@@ -42,10 +42,10 @@ const COORD_MAX = Math.max(...COORD.map((c) => c.price))
 const COORD_RATIO = Math.round(COORD_MAX / Math.min(...COORD.map((c) => c.price)))
 
 const KPIS = [
-  { v: '93.9%', k: 'GPQA · cheap-coordinator orchestration', note: 'projected' },
+  { v: '92.9%', k: 'GPQA-Diamond · enso-ultra, complete run' },
   { v: '~1%', k: 'coordinator cost vs a premium coordinator' },
   { v: '89%', k: 'saved by adaptive escalation' },
-  { v: '+1.5pp', k: 'above Fugu, on the same harness' },
+  { v: '3 tiers', k: 'Ultra 92.9 · Pro 87.9 · Flash 75.8 GPQA' },
 ]
 
 const ESCALATION = [
@@ -86,17 +86,16 @@ export default function EnsoSavings() {
             <div key={kpi.k} className="rounded-xl border border-neutral-800 bg-neutral-900/50 p-4">
               <div className="flex items-baseline gap-1.5">
                 <div className="text-2xl font-bold text-white md:text-3xl">{kpi.v}</div>
-                {kpi.note && <span className="font-mono text-[10px] uppercase tracking-wide text-neutral-500">{kpi.note}</span>}
               </div>
               <div className="mt-2 font-mono text-[10px] uppercase leading-snug tracking-wider text-neutral-500">{kpi.k}</div>
             </div>
           ))}
         </motion.div>
         <p className="mt-3 text-xs leading-relaxed text-neutral-600">
-          Two distinct numbers, kept distinct: <span className="text-neutral-400">92.9%</span> is enso-ultra measured
-          on a complete GPQA-Diamond run (the product headline); <span className="text-neutral-400">93.9%</span> is the
-          projected cheap-coordinator orchestration, which assumes the re-vote preserves already-correct items —
-          validation pending.
+          One measured number, stated plainly: <span className="text-neutral-400">92.9%</span> is enso-ultra on a
+          complete GPQA-Diamond run — the product headline. Consensus re-voting on top of it did not lift the score
+          held-out (a single seed suggested a gain that did not replicate), so the coordinator's win is cost, not a
+          higher number.
         </p>
 
         {/* 01 Accuracy at cost */}
@@ -104,15 +103,15 @@ export default function EnsoSavings() {
           <Head
             n="01"
             title="Accuracy at cost"
-            sub="The goal is the top-left: high accuracy, low cost. enso-ultra lands at 92.9% — the top model on our own harness, and competitive with vendor-reported frontier numbers that were run on their harness, not ours. The cheaper Enso tiers route down whenever a request allows it."
+            sub="The goal is the top-left: high accuracy, low cost. enso-ultra lands at 92.9% — level with the top frontier models on our own harness; a few vendor-reported numbers (run on their harness, not ours) sit a little higher. The cheaper Enso tiers route down whenever a request allows it."
           />
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 md:p-6">
             <AccuracyCostScatter points={SCATTER} />
           </div>
           <p className="mt-4 border-l-2 border-neutral-700 pl-3 text-sm leading-relaxed text-neutral-500">
-            Solid dots are Hanzo-measured on one harness; hollow dots are vendor-reported. enso-ultra (92.9%) is the
-            strongest we measured; reported frontier numbers sit a little higher on their own harness. The win is
-            cost-per-correct and the tiers — not a #1 raw-accuracy claim.
+            Solid dots are Hanzo-measured on one harness; hollow dots are vendor-reported. enso-ultra (92.9%) is
+            level with the top frontier models we measured; a few reported numbers sit a little higher on their own
+            harness. The win is cost-per-correct and the tiers — not a #1 raw-accuracy claim.
           </p>
         </motion.div>
 

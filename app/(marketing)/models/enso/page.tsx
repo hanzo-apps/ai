@@ -99,8 +99,8 @@ export default function EnsoModelsPage() {
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold">Accuracy at cost</h2>
           <p className="mb-6 max-w-3xl text-neutral-400">
-            enso-ultra lands at 92.9% — the strongest model on our own harness, and 4th once vendor-reported
-            frontier numbers (run on their harness, not ours) are included. Solid dots are Hanzo-measured; hollow
+            enso-ultra lands at 92.9% — level with the top frontier models on our own harness; a few vendor-reported
+            numbers (run on their harness, not ours) sit a little higher. Solid dots are Hanzo-measured; hollow
             dots are vendor-reported.
           </p>
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 md:p-6">

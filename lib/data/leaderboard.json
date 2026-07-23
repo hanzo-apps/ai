@@ -111,7 +111,7 @@
       "vendor": "OpenAI",
       "scores": {
         "gpqa_diamond": {
-          "value": 90.4,
+          "value": 92.9,
           "source": "hanzo-measured"
         }
       },
@@ -867,7 +867,7 @@
       "vendor": "DeepSeek",
       "scores": {
         "gpqa_diamond": {
-          "value": 70.7,
+          "value": 76.9,
           "source": "hanzo-measured"
         }
       },
@@ -987,7 +987,7 @@
       "vendor": "Anthropic",
       "scores": {
         "gpqa_diamond": {
-          "value": 86.9,
+          "value": 87.4,
           "source": "hanzo-measured"
         },
         "swe_bench_pro": {
@@ -1115,7 +1115,7 @@
       "vendor": "DeepSeek",
       "scores": {
         "gpqa_diamond": {
-          "value": 76.3,
+          "value": 75.3,
           "source": "hanzo-measured"
         },
         "terminal_bench": {
