@@ -99,10 +99,10 @@ const TIERS = [
     name: 'Enso Ultra',
     id: 'enso-ultra',
     gpqa: '92.9%',
-    priceBand: '$12.5 → $75',
+    priceBand: '$5 → $25',
     tag: 'Maximum quality',
     icon: Layers,
-    body: 'Coordinates a deeper pool of expert agents to maximize answer quality on hard, high-stakes problems — research reproduction, security analysis, and long-running autonomous work. Adaptive fan-out lets it price near Pro despite being top-tier.',
+    body: 'Maximum answer quality for hard, high-stakes problems — research reproduction, security analysis, and long-running autonomous work. Top-tier results, priced close to Pro.',
     points: ['Research & paper reproduction', 'Security assessment', 'Deep, long-running tasks'],
     flagship: true,
   },
@@ -110,11 +110,11 @@ const TIERS = [
     name: 'Enso Pro',
     id: 'enso · the default',
     gpqa: '87.9%',
-    priceBand: '$20 → $75',
+    priceBand: '$4 → $20',
     tag: 'Balanced — the everyday default',
     icon: Workflow,
-    body: 'Strong performance with sensible latency, the ideal default for real work: coding, code review, and responsive agents. Routes down to a cheap model whenever one suffices, so you never overpay. Opt agents out of the pool to meet data and compliance constraints.',
-    points: ['Coding & code review', 'Responsive agents', 'Opt-out agent controls'],
+    body: 'Strong performance with sensible latency, the ideal default for real work: coding, code review, and responsive agents. Priced for everyday scale, so you never overpay. Opt out of specific providers to meet data and compliance constraints.',
+    points: ['Coding & code review', 'Responsive agents', 'Provider opt-out controls'],
     featured: true,
   },
   {
@@ -124,7 +124,7 @@ const TIERS = [
     priceBand: '$2 → $6',
     tag: 'Fastest, most economical',
     icon: Zap,
-    body: 'The high-volume default — lowest latency and cost for everyday chat, classification, extraction, and simple agent steps. A single lean model that escalates only when a task needs it.',
+    body: 'The high-volume default — lowest latency and cost for everyday chat, classification, extraction, and simple agent steps.',
     points: ['High-volume, low latency', 'Cheapest per request', 'Great default for chat & tools'],
   },
 ]
@@ -143,7 +143,7 @@ const FAQ = [
   { q: 'Can I control which models or providers Enso uses?', a: 'Yes. Opt specific providers or models out of Enso’s pool to satisfy data-residency, privacy, or compliance requirements. Every request records which models actually ran.' },
   { q: 'Will my data be used to train models? Can I opt out?', a: 'No customer data is used to train models. Enso runs inside your Hanzo Cloud organization with a full audit trail; opt-out and data controls are first-class.' },
   { q: 'Can I see which underlying models Enso used for each query?', a: 'Yes. Each response carries the orchestration trace — the models selected, the roles they played, and the routing decisions — visible in the console and via the API.' },
-  { q: 'Is Enso generally available?', a: 'Yes. Enso is available now on Hanzo Cloud and is the default for new chats and API requests — every default request routes through the Enso router, which selects the right tier (Flash, Pro, or Ultra) per task. Zen and other models stay available for explicit selection. Enterprise and dedicated deployment are available on request.' },
+  { q: 'Is Enso generally available?', a: 'Yes. Enso is available now on Hanzo Cloud and is the default for new chats and API requests — every default request runs on Enso, which delivers the right tier (Flash, Pro, or Ultra) for the task. Zen and other models stay available for explicit selection. Enterprise and dedicated deployment are available on request.' },
 ]
 
 export default function EnsoLanding() {
@@ -243,7 +243,7 @@ export default function EnsoLanding() {
                   </div>
                 </div>
                 <ul className="space-y-2 text-sm text-neutral-300">
-                  {['Learned orchestration over the best models', 'Flash · Pro · Ultra presets', 'One OpenAI-compatible endpoint', 'Managed, metered, audited on Hanzo Cloud'].map((x) => (
+                  {['One API to every top model', 'Flash · Pro · Ultra presets', 'One OpenAI-compatible endpoint', 'Managed, metered, audited on Hanzo Cloud'].map((x) => (
                     <li key={x} className="flex items-center gap-2"><Check className="h-4 w-4 shrink-0 text-white" /> {x}</li>
                   ))}
                 </ul>
@@ -306,7 +306,7 @@ export default function EnsoLanding() {
             <SectionHead
               eyebrow="How to use"
               title="Three presets — price × performance"
-              sub="Ultra, Pro, and Flash are distinct cost/quality contracts, monotonic in quality (92.9 > 87.9 > 75.8 GPQA-Diamond). Pick the one that fits your workload, or switch without changing your integration — Flash and Pro route down to a cheap model whenever one suffices; Ultra escalates only when a probe is uncertain."
+              sub="Ultra, Pro, and Flash are distinct cost/quality contracts, monotonic in quality (92.9 > 87.9 > 75.8 GPQA-Diamond). Pick the one that fits your workload, or switch without changing your integration — one OpenAI-compatible endpoint."
             />
             <div className="grid gap-6 md:grid-cols-3">
               {TIERS.map((t, i) => (
