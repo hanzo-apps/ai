@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import LandingNav from '@/components/home/LandingNav'
+import LandingFooter from '@/components/home/LandingFooter'
 import GlobalChatWidget from '@/components/GlobalChatWidget'
 import { AccountProvider } from '@/contexts/AccountContext'
 import { BillingProvider } from '@/contexts/BillingContext'
@@ -35,9 +35,11 @@ export default function MarketingLayout({
   return (
     <AccountProvider>
       <BillingProvider>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <div className="min-h-screen bg-black text-white">
+          <LandingNav />
+          <main>{children}</main>
+          <LandingFooter />
+        </div>
         <GlobalChatWidget />
       </BillingProvider>
     </AccountProvider>
