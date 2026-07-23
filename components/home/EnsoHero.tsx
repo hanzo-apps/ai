@@ -89,18 +89,21 @@ export default function EnsoHero() {
           </a>
         </motion.div>
 
-        <motion.div
+        <motion.a
+          href="/models/enso"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-8 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm text-neutral-500"
+          className="group mt-8 inline-flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-sm text-neutral-500 transition-colors hover:text-neutral-300"
         >
-          {['Flash', 'Pro', 'Ultra'].map((t) => (
-            <span key={t} className="text-neutral-300">{t}</span>
-          ))}
-          <span aria-hidden>·</span>
-          <span>one OpenAI-compatible API</span>
-        </motion.div>
+          <span className="text-neutral-300 group-hover:text-white">Flash</span>
+          <span aria-hidden className="text-neutral-700">·</span>
+          <span className="text-neutral-300 group-hover:text-white">Pro</span>
+          <span aria-hidden className="text-neutral-700">·</span>
+          <span className="text-neutral-300 group-hover:text-white">Ultra</span>
+          <span aria-hidden className="text-neutral-700">—</span>
+          <span>one OpenAI- and Anthropic-compatible API</span>
+        </motion.a>
       </div>
     </section>
   )

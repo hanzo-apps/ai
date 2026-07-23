@@ -4,8 +4,8 @@ import { useState, useRef, type FormEvent } from 'react'
 import { motion } from 'framer-motion'
 import { useAnalytics } from '@hanzo/event/react'
 import { EVENTS } from '@hanzo/event'
-import { ArrowUp, MessageSquare, Telescope, Code2, BookOpen, Sparkles } from 'lucide-react'
-import { CHAT, CLOUD, BLOG } from './nav-data'
+import { ArrowUp, MessageSquare, Boxes, Cloud } from 'lucide-react'
+import { CHAT, APP, CLOUD } from './nav-data'
 
 /** The composer is the front door to hanzo.chat: submit forwards the prompt. */
 function goToChat(prompt: string) {
@@ -16,18 +16,18 @@ function goToChat(prompt: string) {
 interface Pill {
   label: string
   icon: typeof MessageSquare
-  /** Prefill the composer with a starter prompt (undefined string = just focus). */
-  prompt?: string
-  /** Or link out to a surface. */
+  /** chat: submit the current composer value to hanzo.chat (carries the input). */
+  chat?: boolean
+  /** Or link out to a surface (carries the composer value as ?q= when set). */
   href?: string
 }
 
+// The 3 core activities out of hanzo.ai: chat with Enso, build with the Hanzo app,
+// deploy on Hanzo Cloud. The chat pill carries whatever is in the composer.
 const PILLS: Pill[] = [
-  { label: 'Talk with Hanzo', icon: MessageSquare, prompt: '' },
-  { label: 'Research', icon: Telescope, prompt: 'Research the latest on ' },
-  { label: 'API Platform', icon: Code2, href: `${CLOUD}/cloud/api` },
-  { label: 'Stories', icon: BookOpen, href: BLOG },
-  { label: 'More', icon: Sparkles, href: CLOUD },
+  { label: 'Chat with Enso', icon: MessageSquare, chat: true },
+  { label: 'Build with the Hanzo app', icon: Boxes, href: APP },
+  { label: 'Deploy on Hanzo Cloud', icon: Cloud, href: CLOUD },
 ]
 
 export default function ChatHero() {
@@ -46,11 +46,16 @@ export default function ChatHero() {
 
   const onPill = (pill: Pill) => {
     analytics.capture(EVENTS.FEATURE_USED, { feature: 'home-pill', label: pill.label })
+    if (pill.chat) {
+      // carry whatever is in the composer straight into hanzo.chat
+      analytics.capture(EVENTS.CHAT_STARTED, { source: 'pill', hasPrompt: value.trim().length > 0 })
+      goToChat(value)
+      return
+    }
     if (pill.href) {
       window.location.href = pill.href
       return
     }
-    setValue(pill.prompt ?? '')
     inputRef.current?.focus()
   }
 
