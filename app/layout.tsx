@@ -69,10 +69,13 @@ export default function RootLayout({
         >
           <Providers>{children}</Providers>
         </ThemeProvider>
-        {/* Telemetry (pageviews, product events, errors) is the ONE @hanzo/event
-            client wired in <Providers> → POST /v1/event, which Cloud fans out to
-            the web (analytics), product (insights), and error (sentry) lenses.
-            No per-lens client tags here — one front door, one client. */}
+        {/* Product events + errors ride the @hanzo/event client (in <Providers>).
+            The web-analytics dashboard at analytics.hanzo.ai reads its OWN store, so
+            its pageviews + autocapture come from the ONE Hanzo tag below — a RAW
+            async <script> (next/script's afterInteractive is dropped by
+            output:'export', so the tag would otherwise never ship). It streams to
+            analytics.hanzo.ai/v1/event, the store the dashboard reads. */}
+        <script async src="https://analytics.hanzo.ai/hz.js" data-site="hanzo.ai" />
       </body>
     </html>
   )
