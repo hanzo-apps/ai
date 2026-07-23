@@ -29,6 +29,7 @@ const SCATTER: ScatterPoint[] = scatterRows().map((r) => ({
   gpqa: r.value,
   price: r.price as number,
   kind: r.kind,
+  vendor: r.vendor,
   highlight: r.vendor === 'Hanzo',
 }))
 
