@@ -17,6 +17,9 @@ importers:
       '@hanzo/logo':
         specifier: ^1.0.13
         version: 1.0.13(react@19.2.4)
+      '@hanzo/observe':
+        specifier: ^0.1.0
+        version: 0.1.0(react@19.2.4)
       '@hanzo/ui':
         specifier: ^5.3.34
         version: 5.3.36(@hookform/resolvers@3.10.0(react-hook-form@7.55.0(react@19.2.4)))(@tanstack/react-query@5.74.4(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(date-fns@3.6.0)(embla-carousel@8.6.0)(framer-motion@12.7.4(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(lucide-react@0.462.0(react@19.2.4))(mobx@6.15.0)(next-themes@0.3.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(next@15.5.13(@playwright/test@1.58.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-day-picker@8.10.1(date-fns@3.6.0)(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-hook-form@7.55.0(react@19.2.4))(react-resizable-panels@1.0.10(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(recharts@2.15.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(tailwindcss@4.2.1)(validator@13.15.26)
@@ -256,6 +259,14 @@ packages:
     resolution: {integrity: sha512-94VA6S7oVY5UZ816295Ez12p8a76ZGEct14JQwE6r5UCutD3K9TBgx5V01gjwxwVL9tWnXn/yut4PHRAY/9RNQ==}
     peerDependencies:
       react: '>=16.8.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+
+  '@hanzo/observe@0.1.0':
+    resolution: {integrity: sha512-VWfMz4F6gexchEaEjK9btxcTOVhWk8km64TN69hWLa1jWB4uTL9VdTj3cWZRDl/OP1lS8YcjpLdSI1q+C7fymg==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -3514,6 +3525,12 @@ snapshots:
       react: 19.2.4
 
   '@hanzo/logo@1.0.13(react@19.2.4)':
+    optionalDependencies:
+      react: 19.2.4
+
+  '@hanzo/observe@0.1.0(react@19.2.4)':
+    dependencies:
+      '@hanzo/event': 0.3.1(react@19.2.4)
     optionalDependencies:
       react: 19.2.4
 

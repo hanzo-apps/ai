@@ -2,6 +2,7 @@
 
 import { IamProvider } from '@hanzo/iam/react'
 import { AnalyticsProvider, ErrorBoundary, usePageview } from '@hanzo/event/react'
+import { ObserveProvider } from '@hanzo/observe/react'
 import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 
@@ -97,9 +98,15 @@ function memoryStorage(): Storage {
  * sites feed via analytics.hanzo.ai/hz.js. `AnalyticsProvider` auto-fires the first
  * pageview and wires auto error capture; `<Pageview/>` counts route changes; the
  * `ErrorBoundary` catches React render errors (which never reach window.onerror).
+ * `<ObserveProvider>` rides the SAME client (via context) and adds default-on
+ * interaction autocapture ($click/$input/$change/$submit) with a semantic DOM
+ * hierarchy — input values redacted by default (PII-free). `nav={false}`: the
+ * event layer already counts pageviews exactly once, so observe does not also
+ * patch history (no double-count); `enabled` mirrors the same DNT/GPC consent gate.
  * We mount the canonical @hanzo/iam provider directly — components call `useIam()`.
  */
 export function Providers({ children }: { children: ReactNode }) {
+  const enabled = telemetryEnabled()
   return (
     <AnalyticsProvider
       config={{
@@ -107,24 +114,26 @@ export function Providers({ children }: { children: ReactNode }) {
         host: ANALYTICS_HOST,
         ingestKey: INGEST_KEY,
         getToken,
-        enabled: telemetryEnabled(),
+        enabled,
       }}
     >
-      <Pageview />
-      <ErrorBoundary fallback={Crashed}>
-        <IamProvider
-          config={{
-            serverUrl: process.env.NEXT_PUBLIC_HANZO_IAM_URL || 'https://hanzo.id',
-            clientId: process.env.NEXT_PUBLIC_HANZO_CLIENT_ID || 'hanzo-app',
-            redirectUri:
-              (typeof window !== 'undefined' ? window.location.origin : 'https://hanzo.ai') +
-              '/auth/callback',
-            storage: typeof window !== 'undefined' ? window.sessionStorage : memoryStorage(),
-          }}
-        >
-          {children}
-        </IamProvider>
-      </ErrorBoundary>
+      <ObserveProvider nav={false} enabled={enabled}>
+        <Pageview />
+        <ErrorBoundary fallback={Crashed}>
+          <IamProvider
+            config={{
+              serverUrl: process.env.NEXT_PUBLIC_HANZO_IAM_URL || 'https://hanzo.id',
+              clientId: process.env.NEXT_PUBLIC_HANZO_CLIENT_ID || 'hanzo-app',
+              redirectUri:
+                (typeof window !== 'undefined' ? window.location.origin : 'https://hanzo.ai') +
+                '/auth/callback',
+              storage: typeof window !== 'undefined' ? window.sessionStorage : memoryStorage(),
+            }}
+          >
+            {children}
+          </IamProvider>
+        </ErrorBoundary>
+      </ObserveProvider>
     </AnalyticsProvider>
   )
 }
