@@ -1,15 +1,17 @@
 import type { Metadata } from 'next'
 import HomeLanding from '@/components/home/HomeLanding'
 
-// Apex hanzo.ai — the clean, chat-centric landing. Lives at the app root (outside
-// the (marketing) route group) so it is wrapped only by the root layout and
-// ships its own openai-style nav + footer. The DETAILED product/marketing pages
-// live on cloud.hanzo.ai (the cloud-site image serves cloud-site.html at root and
-// the full export beneath it); the nav here deep-links to cloud.hanzo.ai.
+// Apex hanzo.ai — the UNIFIED, claude.com-direction landing for the whole Hanzo
+// AI cloud. Lives at the app root (outside the (marketing) route group) so it is
+// wrapped only by the root layout and ships its own nav + footer. Platform is the
+// umbrella (the ten cloud-primitive categories); the nav routes out to each
+// product's own home (Console, Builder, Studio, Chat). The DETAILED product /
+// marketing pages live on cloud.hanzo.ai (the cloud-site image serves
+// cloud-site.html at root and the full export beneath it).
 
-const TITLE = 'Hanzo — Chat, models, and the open-source AI cloud'
+const TITLE = 'Hanzo — The open-source AI cloud'
 const DESCRIPTION =
-  'Ask Hanzo anything. Chat with open frontier models, build agents, and ship on the open-source AI cloud — models, Base backends, IAM, KMS, and vector search behind one API.'
+  'The unified surface over Hanzo’s models and cloud — every service behind one OpenAI-compatible gateway at api.hanzo.ai/v1. Open-weight Zen models and the Enso router, ten cloud-primitive categories, one identity, one bill. Managed or self-hosted, on-chain.'
 
 export const metadata: Metadata = {
   title: TITLE,

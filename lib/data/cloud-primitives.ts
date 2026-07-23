@@ -86,6 +86,13 @@ export interface Primitive {
   title: string
   /** Resolved link — an existing product page, or a generated overview route. */
   href: string
+  /**
+   * Canonical product home on its OWN subdomain, when the product ships one that
+   * is verified-live (e.g. Chat → hanzo.chat). The unified hanzo.ai apex routes
+   * OUT here; the detailed cloud.hanzo.ai site ignores it and keeps using `href`
+   * for its internal deep page. Absent unless a live public home exists.
+   */
+  home?: string
   icon: CloudIcon
   /** Google Cloud equivalent (sells the GCP-compatible story). */
   gcp?: string
@@ -393,12 +400,12 @@ const rawCategories: CloudCategory[] = [
     gcp: 'Ready-to-use apps on the cloud',
     tagline: 'Production apps built on the primitives.',
     items: [
-      { title: 'Chat', href: '/chat', icon: MessageSquare, gcp: 'Vertex AI Search & Conversation' },
+      { title: 'Chat', href: '/chat', home: 'https://hanzo.chat', icon: MessageSquare, gcp: 'Vertex AI Search & Conversation' },
       { title: 'Bot', href: '/bot', icon: Bot, blurb: 'Multi-agent platform' },
       { title: 'Search', href: '/search', icon: Search, gcp: 'Vertex AI Search' },
       { title: 'Crawl', href: '/crawl', icon: Globe, blurb: 'Web crawler' },
-      { title: 'Studio', href: '/studio', icon: Clapperboard, blurb: 'Creative studio' },
-      { title: 'Console', href: '/console', icon: LayoutDashboard, gcp: 'Cloud Console' },
+      { title: 'Studio', href: '/studio', home: 'https://studio.hanzo.ai', icon: Clapperboard, blurb: 'Creative studio' },
+      { title: 'Console', href: '/console', home: 'https://cloud.hanzo.ai', icon: LayoutDashboard, gcp: 'Cloud Console' },
     ],
   },
 ]
