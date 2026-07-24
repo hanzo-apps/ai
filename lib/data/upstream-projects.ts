@@ -331,8 +331,9 @@ export const productUpstreamMap: Record<string, string> = {
 // hanzo / @hanzo/ai) — see /sdks for the full two-line story.
 //
 // status reflects what actually resolves TODAY (verified against PyPI / npm /
-// Go modules): Python (hanzoai) and Go are GA; TS/Rust/C++/Swift/Kotlin show
-// their canonical target command and are marked 'soon' until published.
+// Go modules): Python (hanzoai), Go, and TypeScript (@hanzo/sdk 2.0.0) are GA;
+// Rust/C++/Swift/Kotlin show their canonical target command and are marked
+// 'soon' until published.
 export const hanzoSDKs: ProductSDK[] = [
   {
     language: 'python',
@@ -359,10 +360,10 @@ export const hanzoSDKs: ProductSDK[] = [
     name: 'Hanzo TypeScript SDK',
     package: '@hanzo/sdk',
     registry: 'npm',
-    url: 'https://github.com/hanzo-js/sdk',
+    url: 'https://www.npmjs.com/package/@hanzo/sdk',
     installCommand: 'npm install @hanzo/sdk',
     docsUrl: 'https://docs.hanzo.ai/docs/sdks/typescript',
-    status: 'soon'
+    status: 'ga'
   },
   {
     language: 'rust',
