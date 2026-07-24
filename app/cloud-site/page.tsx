@@ -1,12 +1,15 @@
 import type { Metadata } from "next"
+import { HanzoHeader, HanzoPreFooterCTA, HanzoFooter } from "@hanzogui/shell"
 import CloudLanding from "@/components/cloud/CloudLanding"
-import LandingNav from "@/components/home/LandingNav"
-import LandingFooter from "@/components/home/LandingFooter"
+import AccountControl from "@/components/navigation/AccountControl"
+import { shellProductCategories } from "@/lib/data/shell-products"
 
 // Standalone Hanzo Cloud marketing site served at cloud.hanzo.ai ROOT.
-// Lives OUTSIDE the (marketing) route group so it is wrapped only by the
-// root layout (no site Navbar/Footer) — CloudLanding ships its own minimal
-// nav + footer. The Dockerfile promotes out/cloud-site.html to the web root.
+// Lives OUTSIDE the (marketing) route group so it is wrapped only by the root
+// layout — this page supplies the UNIFIED Hanzo shell chrome directly: the shared
+// HanzoHeader with the RICH ten-category Products mega-menu (sourced from this
+// repo's OWN `cloudCategories`), plus the shared pre-footer CTA + footer. The
+// Dockerfile promotes out/cloud-site.html to the web root.
 
 export const metadata: Metadata = {
   title: "Hanzo Cloud — the AI cloud for agents & apps",
@@ -25,11 +28,16 @@ export const metadata: Metadata = {
 export default function CloudSitePage() {
   return (
     <div className="min-h-screen bg-black text-white">
-      <LandingNav />
+      <HanzoHeader
+        surface="cloud.hanzo.ai"
+        productsTaxonomy={shellProductCategories}
+        identitySlot={<AccountControl />}
+      />
       <main>
         <CloudLanding />
       </main>
-      <LandingFooter />
+      <HanzoPreFooterCTA surface="cloud.hanzo.ai" />
+      <HanzoFooter currentProductId="cloud" />
     </div>
   )
 }
