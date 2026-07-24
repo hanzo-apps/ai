@@ -28,6 +28,8 @@ export interface ProductSDK {
   url: string;
   installCommand: string;
   docsUrl?: string;
+  /** 'ga' = published & resolves today; 'soon' = canonical target, not yet published. */
+  status?: 'ga' | 'soon';
 }
 
 export interface ProductCommunity {
@@ -327,42 +329,50 @@ export const productUpstreamMap: Record<string, string> = {
 // Real code lives in the per-language org (hanzo-<lang>/sdk); the umbrella meta
 // package is hanzoai/sdk. AI + agents flagship is a separate line (pip install
 // hanzo / @hanzo/ai) — see /sdks for the full two-line story.
+//
+// status reflects what actually resolves TODAY (verified against PyPI / npm /
+// Go modules): Python (hanzoai) and Go are GA; TS/Rust/C++/Swift/Kotlin show
+// their canonical target command and are marked 'soon' until published.
 export const hanzoSDKs: ProductSDK[] = [
   {
     language: 'python',
     name: 'Hanzo Python SDK',
-    package: 'hanzo',
+    package: 'hanzoai',
     registry: 'PyPI',
-    url: 'https://pypi.org/project/hanzo/',
-    installCommand: 'pip install hanzo',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/python'
+    url: 'https://pypi.org/project/hanzoai/',
+    installCommand: 'pip install hanzoai',
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/python',
+    status: 'ga'
+  },
+  {
+    language: 'go',
+    name: 'Hanzo Go SDK',
+    package: 'github.com/hanzoai/go-sdk',
+    registry: 'Go Modules',
+    url: 'https://pkg.go.dev/github.com/hanzoai/go-sdk',
+    installCommand: 'go get github.com/hanzoai/go-sdk',
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/go',
+    status: 'ga'
   },
   {
     language: 'typescript',
     name: 'Hanzo TypeScript SDK',
     package: '@hanzo/sdk',
     registry: 'npm',
-    url: 'https://www.npmjs.com/package/@hanzo/sdk',
+    url: 'https://github.com/hanzo-js/sdk',
     installCommand: 'npm install @hanzo/sdk',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/typescript'
-  },
-  {
-    language: 'go',
-    name: 'Hanzo Go SDK',
-    package: 'github.com/hanzo-go/sdk',
-    registry: 'Go Modules',
-    url: 'https://pkg.go.dev/github.com/hanzo-go/sdk',
-    installCommand: 'go get github.com/hanzo-go/sdk',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/go'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/typescript',
+    status: 'soon'
   },
   {
     language: 'rust',
     name: 'Hanzo Rust SDK',
     package: 'hanzo',
     registry: 'crates.io',
-    url: 'https://crates.io/crates/hanzo',
+    url: 'https://github.com/hanzo-rs/sdk',
     installCommand: 'cargo add hanzo',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/rust'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/rust',
+    status: 'soon'
   },
   {
     language: 'cpp',
@@ -371,25 +381,28 @@ export const hanzoSDKs: ProductSDK[] = [
     registry: 'CMake',
     url: 'https://github.com/hanzo-cpp/sdk',
     installCommand: 'find_package(hanzo)',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/cpp'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/cpp',
+    status: 'soon'
   },
   {
     language: 'swift',
     name: 'Hanzo Swift SDK',
     package: 'hanzo-swift/sdk',
     registry: 'SwiftPM',
-    url: 'https://github.com/hanzo-swift/sdk',
+    url: 'https://github.com/hanzo-swift',
     installCommand: '.package(url: "https://github.com/hanzo-swift/sdk")',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/swift'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/swift',
+    status: 'soon'
   },
   {
     language: 'kotlin',
     name: 'Hanzo Kotlin SDK',
     package: 'ai.hanzo:sdk',
     registry: 'Maven',
-    url: 'https://github.com/hanzo-kt/sdk',
+    url: 'https://github.com/hanzo-kt',
     installCommand: 'implementation("ai.hanzo:sdk")',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/kotlin'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/kotlin',
+    status: 'soon'
   }
 ];
 

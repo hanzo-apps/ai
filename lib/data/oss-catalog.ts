@@ -547,7 +547,6 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/sdks/typescript',
       githubUrl: 'https://github.com/hanzo-js/sdk',
-      npmUrl: 'https://npmjs.com/package/@hanzo/sdk',
     },
     signals: {
       updatedAt: '2026-01-09',
@@ -634,16 +633,16 @@ export const ossCatalog: OSSRepo[] = [
     id: 'swift-sdk',
     name: 'Swift SDK',
     slug: 'hanzo-swift/sdk',
-    description: 'Full cloud SDK for Swift. SwiftPM package for iOS, macOS, and server-side Swift.',
+    description: 'Full cloud SDK for Swift. SwiftPM package for iOS, macOS, and server-side Swift. Rolling out.',
     type: 'sdk',
     categories: ['Developer Tools'],
     languages: ['TypeScript'],
     useCases: ['Inference Gateway'],
-    maturity: 'active',
+    maturity: 'experimental',
     deployment: ['library'],
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/sdks/swift',
-      githubUrl: 'https://github.com/hanzo-swift/sdk',
+      githubUrl: 'https://github.com/hanzo-swift',
     },
     signals: {
       updatedAt: '2026-01-05',
@@ -658,16 +657,16 @@ export const ossCatalog: OSSRepo[] = [
     id: 'kotlin-sdk',
     name: 'Kotlin SDK',
     slug: 'hanzo-kt/sdk',
-    description: 'Full cloud SDK for Kotlin. Coroutine-native client for JVM and Android — ai.hanzo:sdk.',
+    description: 'Full cloud SDK for Kotlin. Coroutine-native client for JVM and Android — ai.hanzo:sdk. Rolling out.',
     type: 'sdk',
     categories: ['Developer Tools'],
     languages: ['Java'],
     useCases: ['Inference Gateway'],
-    maturity: 'active',
+    maturity: 'experimental',
     deployment: ['library'],
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/sdks/kotlin',
-      githubUrl: 'https://github.com/hanzo-kt/sdk',
+      githubUrl: 'https://github.com/hanzo-kt',
     },
     signals: {
       updatedAt: '2026-01-04',

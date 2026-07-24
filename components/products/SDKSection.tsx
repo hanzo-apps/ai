@@ -12,6 +12,7 @@ interface SDK {
   url: string;
   installCommand: string;
   docsUrl?: string;
+  status?: 'ga' | 'soon';
 }
 
 interface SDKSectionProps {
@@ -79,7 +80,9 @@ export function SDKSection({ productName, sdks }: SDKSectionProps) {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {sdks.map((sdk, index) => (
+          {sdks.map((sdk, index) => {
+            const soon = sdk.status === 'soon';
+            return (
             <motion.div
               key={sdk.language}
               initial={{ opacity: 0, y: 10 }}
@@ -100,9 +103,20 @@ export function SDKSection({ productName, sdks }: SDKSectionProps) {
                     </span>
                   </div>
                 </div>
+                {soon && (
+                  <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border bg-neutral-800 text-muted-foreground">
+                    Coming soon
+                  </span>
+                )}
               </div>
 
-              <div className="bg-background rounded-lg p-3 mb-4 font-mono text-sm text-foreground/80 overflow-x-auto">
+              {soon && (
+                <div className="text-[11px] text-muted-foreground mb-1.5">Canonical install (rolling out)</div>
+              )}
+              <div
+                className={`bg-background rounded-lg p-3 mb-4 font-mono text-sm overflow-x-auto ${soon ? "text-muted-foreground/60 select-none" : "text-foreground/80"}`}
+                aria-disabled={soon || undefined}
+              >
                 {sdk.installCommand}
               </div>
 
@@ -130,7 +144,8 @@ export function SDKSection({ productName, sdks }: SDKSectionProps) {
                 )}
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </motion.section>
