@@ -3,6 +3,9 @@ import Script from 'next/script'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Providers } from './providers'
+// Canonical Hanzo brand tokens (monochrome). Imported before globals.css so the
+// site's own semantic tokens win in the cascade while the brand vars stay the base.
+import '@hanzo/brand/styles/variables.css'
 import './globals.css'
 
 const geist = Geist({
