@@ -13,7 +13,7 @@ import SmartRoutingSection from "@/components/landing/SmartRoutingSection"
 import OpenSourceSection from "@/components/landing/OpenSourceSection"
 import HanzoNetworkSection from "@/components/landing/HanzoNetworkSection"
 import PricingPreviewSection from "@/components/landing/PricingPreviewSection"
-import FinalCTASection from "@/components/landing/FinalCTASection"
+import { HanzoPreFooterCTA } from "@hanzogui/shell"
 
 export default function HomePage() {
   return (
@@ -32,7 +32,7 @@ export default function HomePage() {
         <OpenSourceSection />
         <HanzoNetworkSection />
         <PricingPreviewSection />
-        <FinalCTASection />
+        <HanzoPreFooterCTA surface="hanzo.ai" />
       </main>
     </div>
   )
