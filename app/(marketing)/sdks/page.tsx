@@ -28,28 +28,31 @@ type LangOrg = {
   org: string // per-language GitHub org (real code)
   realRepo: string // hanzo-<lang>/sdk — generated cloud SDK
   wrapper: string // hanzoai/<lang>-sdk — docs/landing
-  install: string
-  ai?: string // AI + agents package for this language
+  status: "ga" | "soon"
+  install: string // GA: runnable command · soon: canonical target
+  workingInstall?: string // a command that resolves today even while status=soon
+  ai?: string // AI + agents package for this language (only shown when it resolves today)
   flagship?: boolean
 }
 
 // Per-language orgs — "we genuinely adopt + love each language." The card links
 // the org (always live); the generated SDK + wrapper repos are its canonical homes.
+// install strings verified against PyPI / npm / Go modules / crates / GitHub.
 const perLanguageOrgs: LangOrg[] = [
-  { lang: "TypeScript", org: "hanzo-js", realRepo: "hanzo-js/sdk", wrapper: "hanzoai/js-sdk", install: "npm install @hanzo/sdk", ai: "@hanzo/ai" },
-  { lang: "Python", org: "hanzo-py", realRepo: "hanzo-py/sdk", wrapper: "hanzoai/python-sdk", install: "pip install hanzo", ai: "hanzo", flagship: true },
-  { lang: "Go", org: "hanzo-go", realRepo: "hanzo-go/sdk", wrapper: "hanzoai/go-sdk", install: "go get github.com/hanzo-go/sdk" },
-  { lang: "Rust", org: "hanzo-rs", realRepo: "hanzo-rs/sdk", wrapper: "hanzoai/rust-sdk", install: "cargo add hanzo", ai: "hanzo" },
-  { lang: "C++", org: "hanzo-cpp", realRepo: "hanzo-cpp/sdk", wrapper: "hanzoai/cpp-sdk", install: "find_package(hanzo)" },
-  { lang: "Swift", org: "hanzo-swift", realRepo: "hanzo-swift/sdk", wrapper: "hanzoai/swift-sdk", install: "SwiftPM: hanzo-swift/sdk" },
-  { lang: "Kotlin", org: "hanzo-kt", realRepo: "hanzo-kt/sdk", wrapper: "hanzoai/kotlin-sdk", install: 'implementation("ai.hanzo:sdk")' },
+  { lang: "Python", org: "hanzo-py", realRepo: "hanzo-py/sdk", wrapper: "hanzoai/python-sdk", status: "ga", install: "pip install hanzoai", ai: "hanzo", flagship: true },
+  { lang: "Go", org: "hanzo-go", realRepo: "hanzo-go/sdk", wrapper: "hanzoai/go-sdk", status: "ga", install: "go get github.com/hanzoai/go-sdk" },
+  { lang: "TypeScript", org: "hanzo-js", realRepo: "hanzo-js/sdk", wrapper: "hanzoai/js-sdk", status: "soon", install: "npm install @hanzo/sdk", ai: "@hanzo/ai" },
+  { lang: "Rust", org: "hanzo-rs", realRepo: "hanzo-rs/sdk", wrapper: "hanzoai/rust-sdk", status: "soon", install: "cargo add hanzo", workingInstall: 'hanzo = { git = "https://github.com/hanzo-rs/sdk" }' },
+  { lang: "C++", org: "hanzo-cpp", realRepo: "hanzo-cpp/sdk", wrapper: "hanzoai/cpp-sdk", status: "soon", install: "find_package(hanzo)" },
+  { lang: "Swift", org: "hanzo-swift", realRepo: "hanzo-swift/sdk", wrapper: "hanzoai/swift-sdk", status: "soon", install: ".package(url: \"https://github.com/hanzo-swift/sdk\")" },
+  { lang: "Kotlin", org: "hanzo-kt", realRepo: "hanzo-kt/sdk", wrapper: "hanzoai/kotlin-sdk", status: "soon", install: 'implementation("ai.hanzo:sdk")' },
 ]
 
 // The AI + agents flagship line — distinct from the generated cloud SDK.
-const aiFlagship = [
-  { lang: "Python", package: "hanzo", install: "pip install hanzo", home: "hanzoai/python-sdk", note: "Flagship — the most complete AI + agents library." },
-  { lang: "Node", package: "@hanzo/ai", install: "npm install @hanzo/ai", home: "hanzo-js/ai", note: "Models, agents, tools, memory, and MCP for TypeScript." },
-  { lang: "Rust", package: "hanzo", install: "cargo add hanzo", home: "hanzo-rs/ai", note: "The AI + agents crate for Rust." },
+const aiFlagship: { lang: string; package: string; install: string; home: string; note: string; status: "ga" | "soon" }[] = [
+  { lang: "Python", package: "hanzo", install: "pip install hanzo", home: "hanzoai/python-sdk", note: "Flagship — the most complete AI + agents library.", status: "ga" },
+  { lang: "Node", package: "@hanzo/ai", install: "npm install @hanzo/ai", home: "hanzo-js/ai", note: "Models, agents, tools, memory, and MCP for TypeScript.", status: "ga" },
+  { lang: "Rust", package: "hanzo", install: "cargo add hanzo", home: "hanzo-rs/ai", note: "The AI + agents crate for Rust.", status: "soon" },
 ]
 
 export default function SdksPage() {
@@ -162,13 +165,20 @@ export default function SdksPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
             A home for every ecosystem
           </h2>
-          <p className="text-muted-foreground mb-8 max-w-2xl">
+          <p className="text-muted-foreground mb-4 max-w-2xl">
             Each language has its own org with the generated cloud SDK, an AI + agents library, and
             split-out packages — so the SDK is native, not an afterthought.
           </p>
+          <p className="text-sm text-muted-foreground/80 mb-8 max-w-2xl">
+            <span className="text-foreground">Python and Node are generally available.</span> Other
+            languages are rolling out — commands shown for those are the canonical targets, not yet
+            copy-paste installs.
+          </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {perLanguageOrgs.map((l, i) => (
+            {perLanguageOrgs.map((l, i) => {
+              const soon = l.status === "soon"
+              return (
               <motion.a
                 key={l.lang}
                 href={`https://github.com/${l.org}`}
@@ -188,12 +198,35 @@ export default function SdksPage() {
                         Flagship
                       </span>
                     )}
+                    {soon ? (
+                      <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border bg-neutral-800 text-muted-foreground">
+                        Coming soon
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border bg-background text-foreground/70">
+                        GA
+                      </span>
+                    )}
                   </div>
                   <span className="font-mono text-xs text-muted-foreground">{l.org}</span>
                 </div>
-                <div className="bg-background rounded-lg p-3 mb-4 font-mono text-sm text-foreground/80 overflow-x-auto">
+                {soon && (
+                  <div className="text-[11px] text-muted-foreground mb-1.5">Canonical install (rolling out)</div>
+                )}
+                <div
+                  className={`bg-background rounded-lg p-3 font-mono text-sm overflow-x-auto ${soon ? "text-muted-foreground/60 select-none" : "text-foreground/80"} ${l.workingInstall ? "mb-2" : "mb-4"}`}
+                  aria-disabled={soon || undefined}
+                >
                   {l.install}
                 </div>
+                {l.workingInstall && (
+                  <div className="mb-4">
+                    <div className="text-[11px] text-muted-foreground mb-1.5">Works today (git dependency)</div>
+                    <div className="bg-background rounded-lg p-3 font-mono text-xs text-foreground/80 overflow-x-auto">
+                      {l.workingInstall}
+                    </div>
+                  </div>
+                )}
                 <div className="flex flex-wrap gap-2">
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border font-mono text-xs text-foreground/80">
                     <span className="text-foreground/40">sdk</span>
@@ -211,7 +244,8 @@ export default function SdksPage() {
                   )}
                 </div>
               </motion.a>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
@@ -234,7 +268,9 @@ export default function SdksPage() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {aiFlagship.map((a, i) => (
+            {aiFlagship.map((a, i) => {
+              const soon = a.status === "soon"
+              return (
               <motion.div
                 key={a.lang}
                 initial={{ opacity: 0, y: 10 }}
@@ -244,15 +280,30 @@ export default function SdksPage() {
                 className="bg-secondary/40 border border-border rounded-xl p-5"
               >
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-semibold text-foreground">{a.lang}</h3>
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-semibold text-foreground">{a.lang}</h3>
+                    {soon ? (
+                      <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border bg-neutral-800 text-muted-foreground">
+                        Coming soon
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border bg-background text-foreground/70">
+                        GA
+                      </span>
+                    )}
+                  </div>
                   <span className="font-mono text-xs text-muted-foreground">{a.home}</span>
                 </div>
-                <div className="bg-background rounded-lg p-3 mb-4 font-mono text-sm text-foreground/80 overflow-x-auto">
+                {soon && (
+                  <div className="text-[11px] text-muted-foreground mb-1.5">Canonical install (rolling out)</div>
+                )}
+                <div className={`bg-background rounded-lg p-3 mb-4 font-mono text-sm overflow-x-auto ${soon ? "text-muted-foreground/60 select-none" : "text-foreground/80"}`} aria-disabled={soon || undefined}>
                   {a.install}
                 </div>
                 <p className="text-sm text-muted-foreground">{a.note}</p>
               </motion.div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
