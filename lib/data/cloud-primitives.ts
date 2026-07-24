@@ -290,8 +290,8 @@ const rawCategories: CloudCategory[] = [
       stub({
         slug: 'sdks', title: 'SDKs', icon: Braces, status: 'ga',
         tagline: 'Typed clients, every language.',
-        description: 'Idiomatic SDKs for TypeScript, Python, Go, and Rust covering the whole cloud — models, data, compute, chain. Generated from one OpenAPI spec.',
-        features: ['TypeScript, Python, Go, Rust', 'One spec, many clients', 'Auth + retries built in', 'Open source'],
+        description: 'Idiomatic SDKs for TypeScript, Python, Go, Rust, C++, Swift, and Kotlin covering the whole cloud — models, data, compute, chain. Generated from one OpenAPI spec.',
+        features: ['TS, Python, Go, Rust, C++, Swift, Kotlin', 'One spec, many clients', 'Auth + retries built in', 'Open source'],
       }),
       stub({
         slug: 'api', title: 'API', icon: Webhook, status: 'ga',

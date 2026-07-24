@@ -52,7 +52,7 @@ const TIER1_FUNDS = [
 ]
 
 const USE_CASES = [
-  { id: 'ai', label: 'AI & inference', description: 'Models, agents, RAG, the LLM gateway' },
+  { id: 'ai', label: 'AI & inference', description: 'Models, agents, RAG, one API for every model' },
   { id: 'deploy', label: 'Deploy', description: 'Apps, functions, edge, machines' },
   { id: 'data', label: 'Data', description: 'Vector, SQL, KV, object storage' },
   { id: 'compute', label: 'Compute', description: 'GPUs, training, batch jobs' },

@@ -18,7 +18,7 @@ const ZapArchitecture = () => {
             Architecture
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            ZAP acts as a unified gateway, federating multiple tool servers behind a single endpoint.
+            ZAP federates multiple tool servers behind a single endpoint.
           </p>
         </motion.div>
 

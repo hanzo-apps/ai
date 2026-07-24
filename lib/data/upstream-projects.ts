@@ -52,19 +52,6 @@ export interface CodeExample {
 
 export const upstreamProjects: Record<string, UpstreamProject> = {
   // AI & ML
-  litellm: {
-    name: 'LiteLLM',
-    description: 'Call 100+ LLMs with a unified interface. The most popular LLM proxy with 18k+ GitHub stars.',
-    url: 'https://litellm.ai',
-    github: 'https://github.com/BerriAI/litellm',
-    license: 'MIT',
-    stars: '18k+',
-    creator: 'BerriAI / Ishaan & Krrish',
-    creatorUrl: 'https://github.com/BerriAI',
-    gratitude: 'LiteLLM is the backbone of our AI Gateway — Ishaan and Krrish built the most elegant LLM proxy we\'ve ever seen.',
-    sbomPackages: ['litellm'],
-    revenueShareEligible: true,
-  },
   librechat: {
     name: 'LibreChat',
     description: 'Enhanced ChatGPT Clone with multi-model support, plugins, and advanced features.',
@@ -304,7 +291,6 @@ export const upstreamProjects: Record<string, UpstreamProject> = {
 
 export const productUpstreamMap: Record<string, string> = {
   // Core AI products
-  'gateway': 'litellm',
   'chat': 'librechat',
   'flow': 'console',
   'auto': 'activepieces',
@@ -337,42 +323,73 @@ export const productUpstreamMap: Record<string, string> = {
 // SDK CONFIGURATIONS
 // =============================================================================
 
+// Full Cloud SDK — one per language, generated from the Hanzo OpenAPI spec.
+// Real code lives in the per-language org (hanzo-<lang>/sdk); the umbrella meta
+// package is hanzoai/sdk. AI + agents flagship is a separate line (pip install
+// hanzo / @hanzo/ai) — see /sdks for the full two-line story.
 export const hanzoSDKs: ProductSDK[] = [
   {
     language: 'python',
     name: 'Hanzo Python SDK',
-    package: 'hanzoai',
+    package: 'hanzo',
     registry: 'PyPI',
-    url: 'https://pypi.org/project/hanzoai/',
-    installCommand: 'pip install hanzoai',
+    url: 'https://pypi.org/project/hanzo/',
+    installCommand: 'pip install hanzo',
     docsUrl: 'https://docs.hanzo.ai/docs/sdks/python'
   },
   {
     language: 'typescript',
     name: 'Hanzo TypeScript SDK',
-    package: 'hanzoai',
+    package: '@hanzo/sdk',
     registry: 'npm',
-    url: 'https://www.npmjs.com/package/hanzoai',
-    installCommand: 'npm install hanzoai',
+    url: 'https://www.npmjs.com/package/@hanzo/sdk',
+    installCommand: 'npm install @hanzo/sdk',
     docsUrl: 'https://docs.hanzo.ai/docs/sdks/typescript'
   },
   {
     language: 'go',
     name: 'Hanzo Go SDK',
-    package: 'github.com/hanzoai/go-sdk',
+    package: 'github.com/hanzo-go/sdk',
     registry: 'Go Modules',
-    url: 'https://pkg.go.dev/github.com/hanzoai/go-sdk',
-    installCommand: 'go get github.com/hanzoai/go-sdk',
+    url: 'https://pkg.go.dev/github.com/hanzo-go/sdk',
+    installCommand: 'go get github.com/hanzo-go/sdk',
     docsUrl: 'https://docs.hanzo.ai/docs/sdks/go'
   },
   {
     language: 'rust',
     name: 'Hanzo Rust SDK',
-    package: 'hanzoai',
+    package: 'hanzo',
     registry: 'crates.io',
-    url: 'https://crates.io/crates/hanzoai',
-    installCommand: 'cargo add hanzoai',
+    url: 'https://crates.io/crates/hanzo',
+    installCommand: 'cargo add hanzo',
     docsUrl: 'https://docs.hanzo.ai/docs/sdks/rust'
+  },
+  {
+    language: 'cpp',
+    name: 'Hanzo C++ SDK',
+    package: 'hanzo-cpp/sdk',
+    registry: 'CMake',
+    url: 'https://github.com/hanzo-cpp/sdk',
+    installCommand: 'find_package(hanzo)',
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/cpp'
+  },
+  {
+    language: 'swift',
+    name: 'Hanzo Swift SDK',
+    package: 'hanzo-swift/sdk',
+    registry: 'SwiftPM',
+    url: 'https://github.com/hanzo-swift/sdk',
+    installCommand: '.package(url: "https://github.com/hanzo-swift/sdk")',
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/swift'
+  },
+  {
+    language: 'kotlin',
+    name: 'Hanzo Kotlin SDK',
+    package: 'ai.hanzo:sdk',
+    registry: 'Maven',
+    url: 'https://github.com/hanzo-kt/sdk',
+    installCommand: 'implementation("ai.hanzo:sdk")',
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/kotlin'
   }
 ];
 

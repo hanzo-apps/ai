@@ -370,7 +370,7 @@ export default function Chat() {
   {
     slug: 'huggingface',
     name: 'Hugging Face',
-    description: 'Access Hugging Face models and use the HF Inference API through Hanzo\'s unified gateway. Also use Hanzo AI models with HuggingFace Hub tooling.',
+    description: 'Access Hugging Face models and use the HF Inference API through the Hanzo AI API. Also use Hanzo AI models with HuggingFace Hub tooling.',
     category: 'sdk',
     icon: '🤗',
     upstream: 'https://github.com/huggingface/transformers',
@@ -619,7 +619,7 @@ dspy.configure(lm=lm)`,
     answer: str = dspy.OutputField(desc="often 1-3 sentences")
 
 qa = dspy.Predict(QA)
-response = qa(question="What is the Hanzo AI LLM gateway?")
+response = qa(question="What is the Hanzo AI cloud?")
 print(response.answer)`,
       },
       {

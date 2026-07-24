@@ -14,17 +14,17 @@ export default function LlmPage() {
           </div>
           <div className="max-w-4xl mx-auto relative z-10 text-center">
             <h1 className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] mb-6 text-foreground">
-              Hanzo LLM Gateway
+              Hanzo AI — one API for every model
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              Unified proxy for 100+ LLM providers. OpenAI-compatible API, observability, cost controls, and rate limits in one place.
+              The AI cloud: 100+ models behind a single API. OpenAI- and Anthropic-compatible, with observability, cost controls, and rate limits built in.
             </p>
           </div>
         </section>
 
         <section className="py-16 border-t border-neutral-800">
           <div className="max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-2xl font-bold mb-4">Get started with LLM</h2>
+            <h2 className="text-2xl font-bold mb-4">Get started with Hanzo AI</h2>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="https://docs.hanzo.ai/llm" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
                 Read the docs <ArrowRight className="h-4 w-4" />
@@ -35,7 +35,7 @@ export default function LlmPage() {
             </div>
           </div>
         </section>
-              <ProductFooter slug="llm" name="LLM Gateway" />
+              <ProductFooter slug="llm" name="Hanzo AI" />
 </main>
     </div>
   )

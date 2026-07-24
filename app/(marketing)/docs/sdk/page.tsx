@@ -377,13 +377,19 @@ export default function SdkPage() {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-4 text-sm">
+            <Link
+              href="/sdks"
+              className="inline-flex items-center gap-1.5 text-foreground hover:text-foreground/80 transition-colors"
+            >
+              Explore SDKs for every language <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
             <a
-              href="https://github.com/hanzoai"
+              href="https://github.com/hanzoai/sdk"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-foreground hover:text-foreground/80 transition-colors"
             >
-              <Github className="w-4 h-4" /> All Hanzo SDKs on GitHub
+              <Github className="w-4 h-4" /> hanzoai/sdk — every service, every language
               <ExternalLink className="w-3 h-3" />
             </a>
             <a

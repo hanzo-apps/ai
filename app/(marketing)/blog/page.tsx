@@ -70,7 +70,7 @@ const posts = [
   {
     slug: 'vertically-integrated-ai-cloud',
     title: 'The Vertically Integrated AI Cloud',
-    description: 'What every agentic harness actually needs — and why owning the full stack from LLM gateway to compute tiers changes everything.',
+    description: 'What every agentic harness actually needs — and why owning the full stack from the model API to compute tiers changes everything.',
     date: 'February 24, 2026',
     tag: 'Architecture',
   },
@@ -160,8 +160,8 @@ const posts = [
   },
   {
     slug: 'llm-gateway-100-models-one-api',
-    title: 'LLM Gateway: 391 Models, One API',
-    description: 'Why we built a unified LLM gateway that routes to 391 models — 47 Zen and 344 third-party — through one API. Automatic fallback, cost tracking, and budget controls built in.',
+    title: 'One API, 391 Models',
+    description: 'Why we built one API that routes to 391 models — 47 Zen and 344 third-party. Automatic fallback, cost tracking, and budget controls built in.',
     date: 'August 1, 2023',
     tag: 'Architecture',
   },

@@ -80,7 +80,8 @@ export const resourcesNav: NavSection[] = [
       { title: "Docs", href: "/docs", description: "Product documentation", icon: FileText },
       { title: "API Reference", href: "/docs/api", description: "REST API documentation", icon: Code },
       { title: "CLI", href: "/docs/cli", description: "Command line reference", icon: Terminal },
-      { title: "SDK", href: "/docs/sdk", description: "Client libraries", icon: Code },
+      { title: "SDK", href: "/docs/sdk", description: "API reference & examples", icon: Code },
+      { title: "SDKs", href: "/sdks", description: "Every language — install & repos", icon: Code },
     ],
   },
   {

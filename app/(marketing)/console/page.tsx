@@ -225,7 +225,7 @@ export default function ConsolePage() {
               Integrate in Minutes
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Drop-in SDK for Python, TypeScript, and any OpenAI-compatible client
+              One SDK for Python, TypeScript, and any OpenAI- or Anthropic-compatible client
             </p>
           </motion.div>
 

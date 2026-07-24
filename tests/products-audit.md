@@ -25,7 +25,7 @@ _None._
 | AI & Agents | AI Studio | `ai-studio` | YES | YES | YES |
 | AI & Agents | MCP | `mcp` | YES | YES | YES |
 | AI & Agents | ZAP | `zap` | YES | YES | YES |
-| AI & Agents | LLM Gateway | `llm` | YES | YES | YES |
+| AI & Agents | Hanzo AI | `llm` | YES | YES | YES |
 | AI & Agents | Engine | `engine` | YES | YES | YES |
 | AI & Agents | Jin | `jin` | YES | YES | YES |
 | AI & Agents | Guard | `guard` | YES | YES | YES |
