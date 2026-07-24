@@ -1,16 +1,10 @@
 'use client'
 
-
-import React, { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@hanzo/ui";
-import { Terminal, ArrowRight, Package, Cpu, Bot, Code } from "lucide-react";
-
-const installCommands = [
-  { label: "Full Stack", cmd: "curl -fsSL hanzo.sh | bash", desc: "CLI, MCP, Agents" },
-  { label: "Dev Only", cmd: "curl -fsSL hanzo.sh/dev | bash", desc: "AI coding agent" },
-  { label: "MCP Only", cmd: "curl -fsSL hanzo.sh/mcp | bash", desc: "MCP server" },
-];
+import { Terminal, ArrowRight, Cpu, Bot, Code } from "lucide-react";
+import { CTA_PRIMARY, CTA_OUTLINE } from "./cta";
 
 const shortcuts = [
   { path: "/dev", name: "hanzo-dev", desc: "AI coding agent", icon: Bot },
@@ -19,37 +13,19 @@ const shortcuts = [
   { path: "/agents", name: "hanzo-agents", desc: "Multi-agent SDK", icon: Code },
 ];
 
+const INSTALL = "curl -fsSL hanzo.sh | bash";
+
 const HanzoDev = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
-  const containerRef = useRef<HTMLElement>(null);
+  const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
-  const copyCommand = (cmd: string, idx: number) => {
-    navigator.clipboard.writeText(cmd);
-    setCopiedIdx(idx);
-    setTimeout(() => setCopiedIdx(null), 2000);
+  const copyCommand = () => {
+    navigator.clipboard.writeText(INSTALL);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <section ref={containerRef} className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-30"></div>
+    <section className="pt-20 pb-12 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
       <div className="max-w-5xl mx-auto relative z-10">
         <motion.div
           className="text-center"
@@ -58,12 +34,7 @@ const HanzoDev = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2
-            className="text-3xl md:text-5xl font-bold mb-6 text-gradient-steel"
-            style={{
-              backgroundPosition: `${(mousePosition.x / (containerRef.current?.offsetWidth || 1)) * 100}% ${(mousePosition.y / (containerRef.current?.offsetHeight || 1)) * 100}%`,
-            }}
-          >
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient-steel">
             For Developers
           </h2>
 
@@ -73,16 +44,16 @@ const HanzoDev = () => {
 
           {/* Main install command */}
           <div className="flex justify-center mb-8">
-            <div className="bg-neutral-900 border border-neutral-800 rounded-lg px-6 py-4 flex items-center">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-xl px-6 py-4 flex items-center">
               <Terminal className="h-5 w-5 text-foreground mr-3 flex-shrink-0" />
-              <code className="text-foreground/80 font-mono text-lg">curl -fsSL hanzo.sh | bash</code>
+              <code className="text-foreground/80 font-mono text-lg">{INSTALL}</code>
               <Button
                 variant="ghost"
                 size="sm"
-                className="ml-4 text-muted-foreground hover:text-[var(--white)]"
-                onClick={() => copyCommand('curl -fsSL hanzo.sh | bash', -1)}
+                className="ml-4 text-muted-foreground hover:text-white"
+                onClick={copyCommand}
               >
-                {copiedIdx === -1 ? 'Copied!' : 'Copy'}
+                {copied ? 'Copied!' : 'Copy'}
               </Button>
             </div>
           </div>
@@ -97,7 +68,7 @@ const HanzoDev = () => {
                   href={`https://hanzo.sh${s.path}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4 hover:border-white/30/50 transition-colors text-left"
+                  className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 hover:border-neutral-600 hover:bg-neutral-800/50 transition-colors text-left"
                 >
                   <Icon className="h-5 w-5 text-foreground mb-2" />
                   <div className="font-mono text-sm text-foreground/80">{s.name}</div>
@@ -109,19 +80,11 @@ const HanzoDev = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a
-              href="https://hanzo.sh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center bg-gradient-to-r from-white to-white/10 hover:from-[#cccccc] hover:to-white text-[var(--white)] px-8 py-4 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all"
-            >
+            <a href="https://hanzo.sh" target="_blank" rel="noopener noreferrer" className={CTA_PRIMARY}>
               Visit hanzo.sh
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="h-5 w-5" />
             </a>
-            <a
-              href="/dev"
-              className="inline-flex items-center justify-center border border-border bg-transparent hover:bg-secondary text-[var(--white)] px-8 py-4 rounded-lg text-lg font-medium transition-all"
-            >
+            <a href="/dev" className={CTA_OUTLINE}>
               Learn More
             </a>
           </div>
@@ -142,9 +105,8 @@ const HanzoDev = () => {
           -webkit-background-clip: text;
           color: transparent;
           animation: shimmer 6s ease infinite;
-          transition: background-position 0.3s ease;
         }
-        
+
         @keyframes shimmer {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
