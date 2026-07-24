@@ -16,7 +16,7 @@ interface CoreProject {
 const CORE_PROJECTS: CoreProject[] = [
   { org: "hanzoai", name: "hanzo",  description: "The complete AI platform for agents, tools, models, and deployment." },
   { org: "hanzoai", name: "mcp",    description: "260+ Model Context Protocol tools and servers." },
-  { org: "hanzoai", name: "llm",    description: "Unified gateway for model routing through an OpenAI-compatible API." },
+  { org: "hanzoai", name: "llm",    description: "One API for every model — OpenAI- and Anthropic-compatible." },
   { org: "hanzoai", name: "dev",    description: "AI coding agent for terminal and IDE workflows." },
   { org: "hanzoai", name: "agent",  description: "Multi-agent orchestration framework." },
   { org: "hanzoai", name: "evals",  description: "Evaluation harness for models, agents, and workflows." },

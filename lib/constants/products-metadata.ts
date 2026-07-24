@@ -85,7 +85,7 @@ export const productsMetadata: Record<string, ProductMetadata> = {
   kms:          { slug: 'kms',        tagline: 'Secrets + key management', license: 'Apache-2.0', github_repo: `${G}/kms` },
   kv:           { slug: 'kv',         tagline: 'Distributed key-value store', license: 'BSD-3-Clause', github_repo: `${G}/kv`, upstream_fork: 'Valkey', upstream_license: 'BSD-3-Clause', upstream_url: 'https://valkey.io' },
   ledger:       { slug: 'ledger',     tagline: 'Double-entry accounting ledger', license: 'Apache-2.0', github_repo: `${G}/ledger` },
-  llm:          { slug: 'llm',        tagline: 'LLM gateway for 100+ providers', license: 'Apache-2.0', github_repo: G },
+  llm:          { slug: 'llm',        tagline: 'One API for every model', license: 'Apache-2.0', github_repo: G },
   machines:     { slug: 'machines',   tagline: 'Long-running compute machines', license: 'Apache-2.0', github_repo: G },
   mcp:          { slug: 'mcp',        tagline: 'Model Context Protocol — 260+ tools', license: 'Apache-2.0', github_repo: `${G}/mcp` },
   metrics:      { slug: 'metrics',    tagline: 'Time-series metrics', license: 'Apache-2.0', github_repo: `${G}/metrics` },

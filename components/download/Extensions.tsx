@@ -234,7 +234,7 @@ const Extensions = () => {
             </div>
             <div>
               <h3 className="text-xl font-bold text-[var(--white)]">100+ AI Models Supported</h3>
-              <p className="text-sm text-foreground">All major AI providers through unified gateway</p>
+              <p className="text-sm text-foreground">All major AI providers through one API</p>
             </div>
           </div>
 
