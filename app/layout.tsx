@@ -33,6 +33,8 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   manifest: '/site.webmanifest',
+  // Hanzo Edit widget reads this to know which repo backs the page (fork→edit→PR).
+  other: { 'hanzo:repo': 'hanzoai/hanzo.ai' },
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
@@ -76,6 +78,8 @@ export default function RootLayout({
             output:'export', so the tag would otherwise never ship). It streams to
             analytics.hanzo.ai/v1/event, the store the dashboard reads. */}
         <script async src="https://analytics.hanzo.ai/hz.js" data-site="hanzo.ai" />
+        {/* Hanzo Edit — ever-present "improve this page" widget (repo in metadata.other). */}
+        <script async src="https://hanzo.app/edit.js" />
       </body>
     </html>
   )
