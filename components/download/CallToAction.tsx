@@ -1,116 +1,61 @@
 'use client'
 
-
-import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@hanzo/ui";
-import { ArrowDown, Apple, Chrome, Terminal } from "lucide-react";
+import { Apple, Monitor, Chrome } from "lucide-react";
+import { CTA_PRIMARY, CTA_OUTLINE } from "./cta";
+
+// Canonical Hanzo desktop download targets (same GitHub Releases source the
+// desktop banner uses — one place for the URLs, no fabricated asset names).
+const RELEASES = "https://github.com/hanzoai/dev/releases";
+const desktopDownloads = [
+  { label: "Download for Mac (Apple Silicon)", href: `${RELEASES}/latest/download/Hanzo-Dev-darwin-arm64.dmg`, Icon: Apple },
+  { label: "Download for Mac (Intel)", href: RELEASES, Icon: Apple },
+  { label: "Download for Windows", href: RELEASES, Icon: Monitor },
+];
+
+const extensions = ["Chrome Extension", "Safari Extension", "Firefox Add-on", "Edge Extension"];
 
 const CallToAction = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const containerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
   return (
-    <section ref={containerRef} className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-30"></div>
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
-      
+    <section className="pt-12 pb-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
+      {/* Subtle corner glows — no flat white wash over the whole section. */}
+      <div className="pointer-events-none absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl" />
+
       <div className="max-w-5xl mx-auto relative z-10">
-        <motion.div 
+        <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 
-            className="text-3xl md:text-5xl font-bold mb-6 text-gradient-steel"
-            style={{
-              backgroundPosition: `${(mousePosition.x / (containerRef.current?.offsetWidth || 1)) * 100}% ${(mousePosition.y / (containerRef.current?.offsetHeight || 1)) * 100}%`,
-            }}
-          >
-            Do everything 100x faster
+          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient-steel">
+            Hanzo, everywhere you work
           </h2>
-          
+
           <p className="text-xl text-foreground/80 mb-12 max-w-2xl mx-auto">
-            Hanzo AI lets models understand your desktop activity. Build faster.
+            The native desktop app for macOS and Windows — plus browser extensions for
+            Chrome, Safari, Firefox, and Edge — give Hanzo the context of what you&apos;re
+            working on, so its models can help right where you already work.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-            <Button 
-              size="sm"
-              className="bg-gradient-to-r from-white to-white/10 hover:from-[#cccccc] hover:to-white text-[var(--white)] shadow-lg hover:shadow-xl transition-all flex items-center"
-            >
-              <Apple className="mr-2 h-4 w-4" />
-              Download (Apple Silicon)
-            </Button>
-            <Button 
-              size="sm"
-              className="bg-gradient-to-r from-white to-white/10 hover:from-[#cccccc] hover:to-white text-[var(--white)] shadow-lg hover:shadow-xl transition-all flex items-center"
-            >
-              <Apple className="mr-2 h-4 w-4" />
-              Download (Intel Mac)
-            </Button>
-            <Button 
-              size="sm"
-              className="bg-gradient-to-r from-neutral-600 to-neutral-500 hover:from-neutral-500 hover:to-neutral-400 text-[var(--white)] shadow-lg hover:shadow-xl transition-all flex items-center"
-            >
-              <ArrowDown className="mr-2 h-4 w-4" />
-              Download for Windows
-            </Button>
+            {desktopDownloads.map(({ label, href, Icon }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" className={CTA_PRIMARY}>
+                <Icon className="h-4 w-4" />
+                {label}
+              </a>
+            ))}
           </div>
-          
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Button 
-              size="sm"
-              variant="outline"
-              className="border-neutral-700 text-[var(--white)] hover:bg-neutral-800"
-            >
-              <Chrome className="mr-2 h-4 w-4" />
-              Chrome Extension
-            </Button>
-            <Button 
-              size="sm"
-              variant="outline"
-              className="border-neutral-700 text-[var(--white)] hover:bg-neutral-800"
-            >
-              <Chrome className="mr-2 h-4 w-4" />
-              Safari Extension
-            </Button>
-            <Button 
-              size="sm"
-              variant="outline"
-              className="border-neutral-700 text-[var(--white)] hover:bg-neutral-800"
-            >
-              <Chrome className="mr-2 h-4 w-4" />
-              Firefox Add-on
-            </Button>
-            <Button 
-              size="sm"
-              variant="outline"
-              className="border-neutral-700 text-[var(--white)] hover:bg-neutral-800"
-            >
-              <Chrome className="mr-2 h-4 w-4" />
-              Edge Extension
-            </Button>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            {extensions.map((label) => (
+              <a key={label} href="https://hanzo.sh" target="_blank" rel="noopener noreferrer" className={CTA_OUTLINE}>
+                <Chrome className="h-4 w-4" />
+                {label}
+              </a>
+            ))}
           </div>
         </motion.div>
       </div>
@@ -129,9 +74,8 @@ const CallToAction = () => {
           -webkit-background-clip: text;
           color: transparent;
           animation: shimmer 6s ease infinite;
-          transition: background-position 0.3s ease;
         }
-        
+
         @keyframes shimmer {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
