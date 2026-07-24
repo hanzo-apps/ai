@@ -20,7 +20,7 @@
     "@hanzo/observe": "^0.1.0",
     "@hanzo/ui": "^5.3.34",
     "@hanzo/usage": "0.1.1",
-    "@hanzogui/shell": "^7.5.0",
+    "@hanzogui/shell": "^7.5.1",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-slot": "^1.2.4",
     "@tanstack/react-query": "^5.56.2",

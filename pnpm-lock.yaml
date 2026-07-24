@@ -27,8 +27,8 @@ importers:
         specifier: 0.1.1
         version: 0.1.1(react@19.2.4)
       '@hanzogui/shell':
-        specifier: ^7.5.0
-        version: 7.5.0(@hanzo/iam@0.13.1(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        specifier: ^7.5.1
+        version: 7.5.1(@hanzo/iam@0.13.1(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.10.0(react-hook-form@7.55.0(react@19.2.4))
@@ -356,8 +356,8 @@ packages:
       react:
         optional: true
 
-  '@hanzogui/shell@7.5.0':
-    resolution: {integrity: sha512-lW8Le5ejRvK/emJ/VsTiZ6QPIqY0RShRREQCzqBjFVifCj1H+VPHL06w0CKy7OK2X8NTpatB0sgdlCscnSGK9g==}
+  '@hanzogui/shell@7.5.1':
+    resolution: {integrity: sha512-+5rvOb2jJQ++H2scgA4Cah+vMUahz8eDznTfDy2wpwQrs82P8A0og+1+1BpxHr3WYYVnjzrb4BD4Bvvmnb6Kmg==}
     peerDependencies:
       '@hanzo/iam': ^0.13.1
       react: '*'
@@ -3624,7 +3624,7 @@ snapshots:
     optionalDependencies:
       react: 19.2.4
 
-  '@hanzogui/shell@7.5.0(@hanzo/iam@0.13.1(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@hanzogui/shell@7.5.1(@hanzo/iam@0.13.1(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@hanzo/iam': 0.13.1(react@19.2.4)
       react: 19.2.4
