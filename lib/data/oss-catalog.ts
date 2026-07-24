@@ -547,6 +547,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/sdks/typescript',
       githubUrl: 'https://github.com/hanzo-js/sdk',
+      npmUrl: 'https://npmjs.com/package/@hanzo/sdk',
     },
     signals: {
       updatedAt: '2026-01-09',

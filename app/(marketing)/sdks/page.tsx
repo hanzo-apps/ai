@@ -41,7 +41,7 @@ type LangOrg = {
 const perLanguageOrgs: LangOrg[] = [
   { lang: "Python", org: "hanzo-py", realRepo: "hanzo-py/sdk", wrapper: "hanzoai/python-sdk", status: "ga", install: "pip install hanzoai", ai: "hanzo", flagship: true },
   { lang: "Go", org: "hanzo-go", realRepo: "hanzo-go/sdk", wrapper: "hanzoai/go-sdk", status: "ga", install: "go get github.com/hanzoai/go-sdk" },
-  { lang: "TypeScript", org: "hanzo-js", realRepo: "hanzo-js/sdk", wrapper: "hanzoai/js-sdk", status: "soon", install: "npm install @hanzo/sdk", ai: "@hanzo/ai" },
+  { lang: "TypeScript", org: "hanzo-js", realRepo: "hanzo-js/sdk", wrapper: "hanzoai/js-sdk", status: "ga", install: "npm install @hanzo/sdk", ai: "@hanzo/ai" },
   { lang: "Rust", org: "hanzo-rs", realRepo: "hanzo-rs/sdk", wrapper: "hanzoai/rust-sdk", status: "soon", install: "cargo add hanzo", workingInstall: 'hanzo = { git = "https://github.com/hanzo-rs/sdk" }' },
   { lang: "C++", org: "hanzo-cpp", realRepo: "hanzo-cpp/sdk", wrapper: "hanzoai/cpp-sdk", status: "soon", install: "find_package(hanzo)" },
   { lang: "Swift", org: "hanzo-swift", realRepo: "hanzo-swift/sdk", wrapper: "hanzoai/swift-sdk", status: "soon", install: ".package(url: \"https://github.com/hanzo-swift/sdk\")" },
@@ -170,9 +170,9 @@ export default function SdksPage() {
             split-out packages — so the SDK is native, not an afterthought.
           </p>
           <p className="text-sm text-muted-foreground/80 mb-8 max-w-2xl">
-            <span className="text-foreground">Python and Node are generally available.</span> Other
-            languages are rolling out — commands shown for those are the canonical targets, not yet
-            copy-paste installs.
+            <span className="text-foreground">Python, Go, and TypeScript are generally available</span>{" "}
+            (plus the AI flagship in Python and Node). Other languages are rolling out — commands shown
+            for those are the canonical targets, not yet copy-paste installs.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
