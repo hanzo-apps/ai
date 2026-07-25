@@ -76,7 +76,7 @@ export default function HexagramExplorer() {
               tabIndex={active ? 0 : -1}
               onClick={() => setView(v.key)}
               onKeyDown={(e) => onTabKey(e, i)}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+              className={`inline-flex min-h-11 items-center rounded-full px-4 text-sm font-medium transition-colors ${
                 active
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"

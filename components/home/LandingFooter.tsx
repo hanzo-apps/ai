@@ -24,10 +24,16 @@ export default function LandingFooter() {
               <div className="mb-3 text-xs font-medium uppercase tracking-wide text-neutral-500">
                 {col.title}
               </div>
-              <ul className="space-y-2">
+              {/* Each link is a full 44px row: an 18px inline <a> is an unhittable
+                  target on a phone. The row height IS the rhythm, so there is no
+                  separate spacing to keep in sync. */}
+              <ul>
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href} className="text-sm text-neutral-400 transition-colors hover:text-white">
+                    <a
+                      href={link.href}
+                      className="flex min-h-11 items-center text-sm text-neutral-400 transition-colors hover:text-white"
+                    >
                       {link.label}
                     </a>
                   </li>
