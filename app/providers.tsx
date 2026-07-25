@@ -16,9 +16,9 @@ import { useEffect, type ReactNode } from 'react'
 //     with 400 "expected array, received object".
 //
 // This app previously pointed the SDK at the second one, so every pageview and
-// error it emitted was rejected 400 at the edge. Web analytics on this site is
-// unaffected by that and stays where it already works: the `analytics.hanzo.ai/hz.js`
-// tag in app/layout.tsx, which speaks the bare-array wire natively.
+// error it emitted was rejected 400 at the edge. There is no longer a second
+// tag: the hz.js script was removed from app/layout.tsx because it could only
+// double-count the pageviews this client already posts. ONE client, ONE door.
 const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.ai'
 
 /** Hanzo-minted Sentry DSN for the `hanzo-ai` project — the ERROR plane.
@@ -141,8 +141,8 @@ function memoryStorage(): Storage {
 /**
  * Client providers. Telemetry is ONE client, `@hanzo/event`, over TWO planes:
  * the event stream (POST api.hanzo.ai/v1/event) and the error plane (a Sentry
- * envelope to the DSN host, sentry.hanzo.ai). Web analytics is the third plane and
- * is NOT this client — it is the `analytics.hanzo.ai/hz.js` tag in layout.tsx.
+ * envelope to the DSN host, sentry.hanzo.ai). Web analytics is a LENS on the
+ * event stream, resolved server-side — not a separate client and not a tag.
  * `AnalyticsProvider` auto-fires the first pageview and wires auto error capture;
  * `<Pageview/>` counts route changes; the `ErrorBoundary` catches React render
  * errors (which never reach window.onerror).
