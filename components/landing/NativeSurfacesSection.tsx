@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Blocks, ArrowRight, BookOpen, Download } from "lucide-react";
+import { Mark } from "@/components/Mark";
 import {
   SURFACES,
   SURFACE_CATEGORIES,
@@ -49,9 +50,7 @@ function SurfaceCard({ surface, index }: { surface: Surface; index: number }) {
         className="group flex h-full flex-col p-5 rounded-xl border border-border/60 bg-secondary/30 hover:bg-secondary/60 hover:border-border transition-all"
       >
         <div className="flex items-center gap-3 mb-3">
-          <span className="text-2xl leading-none" aria-hidden="true">
-            {surface.icon}
-          </span>
+          <Mark src={surface.mark ? `/marks/${surface.mark}.svg` : null} name={surface.name} />
           <span className="font-semibold text-foreground">{surface.name}</span>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed mb-4">{surface.blurb}</p>
