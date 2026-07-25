@@ -233,7 +233,7 @@ export default function StartupsPage() {
                 variant="outline"
                 className="border-border text-foreground hover:bg-secondary"
               >
-                <a href="https://console.hanzo.ai">Start free &mdash; $5 credit</a>
+                <a href="https://console.hanzo.ai">Start building free</a>
               </Button>
             </motion.div>
           </div>
@@ -246,10 +246,10 @@ export default function StartupsPage() {
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Coins className="w-5 h-5 text-foreground/80" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Everyone starts free</h3>
+              <h3 className="text-lg font-semibold mb-2">Start in minutes</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                $5 in credit the moment you sign up. No card required. Pay as you
-                go only when you outgrow it.
+                Creating an account is free. Add funds when you are ready and pay
+                only for what you use &mdash; no subscription, no minimums.
               </p>
             </div>
             <div className="rounded-xl border border-border bg-secondary/20 p-6">
@@ -319,8 +319,8 @@ export default function StartupsPage() {
                   by email.
                 </p>
                 <p className="text-muted-foreground text-sm mb-8">
-                  Want to start building today? Everyone gets $5 in free credit,
-                  no card required.
+                  Want to start building today? Create an account and pay only
+                  for what you use &mdash; no subscription required.
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <Button asChild className="bg-primary text-primary-foreground hover:bg-accent">
@@ -779,9 +779,8 @@ export default function StartupsPage() {
               Not venture-backed yet?
             </h2>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-              You do not need to qualify to build. Every account starts with $5 in
-              free credit and no card &mdash; ship first, apply for credits when you
-              raise.
+              You do not need to qualify to build. Create an account, pay only for
+              what you use, and apply for credits when you raise.
             </p>
             <Button asChild className="bg-primary text-primary-foreground hover:bg-accent">
               <a href="https://console.hanzo.ai">

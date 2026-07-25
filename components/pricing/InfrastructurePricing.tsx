@@ -56,7 +56,7 @@ interface CloudData {
 // pricing API is slow or unreachable. Mirrors pricing.hanzo.ai/v1/cloud.
 const STATIC_CLOUD_DATA: CloudData = {
   plans: [
-    { id: "starter", name: "Starter", description: "Get started for free. Perfect for side projects, bots, and learning.", vcpus: 1, memoryGB: 1, diskGB: 20, cpuType: "shared", maxVMs: 1, priceMonthly: 5, priceHourly: 0.0069, features: ["1 VM", "1 vCPU", "1 GB RAM", "20 GB SSD", "500 GB transfer", "Free $5 credit"], freeTier: true },
+    { id: "starter", name: "Starter", description: "Get started for free. Perfect for side projects, bots, and learning.", vcpus: 1, memoryGB: 1, diskGB: 20, cpuType: "shared", maxVMs: 1, priceMonthly: 5, priceHourly: 0.0069, features: ["1 VM", "1 vCPU", "1 GB RAM", "20 GB SSD", "500 GB transfer", "Hourly or monthly billing"], freeTier: true },
     { id: "builder", name: "Builder", description: "For developers shipping real products. Run bots, APIs, and automation.", vcpus: 2, memoryGB: 2, diskGB: 40, cpuType: "shared", maxVMs: 5, priceMonthly: 10, priceHourly: 0.0139, features: ["Up to 5 VMs", "2 vCPU", "2 GB RAM", "40 GB SSD", "1 TB transfer"] },
     { id: "dev", name: "Dev", description: "The sweet spot. Full dev environment with room to grow.", vcpus: 2, memoryGB: 8, diskGB: 25, cpuType: "shared", maxVMs: 25, priceMonthly: 15, priceHourly: 0.0208, features: ["Up to 25 VMs", "2 vCPU", "8 GB RAM", "25 GB SSD", "3 TB transfer"], popular: true },
     { id: "pro", name: "Pro", description: "Dedicated CPU. Zero noisy neighbors. Consistent performance, always.", vcpus: 2, memoryGB: 8, diskGB: 80, cpuType: "dedicated", maxVMs: 25, priceMonthly: 25, priceHourly: 0.0347, features: ["Up to 25 VMs", "2 dedicated vCPU", "8 GB RAM", "80 GB SSD", "2 TB transfer"] },

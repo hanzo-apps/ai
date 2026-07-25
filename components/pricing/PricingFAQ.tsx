@@ -55,7 +55,7 @@ const PricingFAQ = () => {
     },
     {
       question: "Is there a free trial available?",
-      answer: "Yes — every new account gets a $5 free credit to start, no card required. After your credit, you pay as you go for what you use."
+      answer: "Creating an account is free. You add funds when you are ready and pay only for what you use — no subscription and no monthly minimum."
     },
     {
       question: "What happens if I exceed my plan's resource limits?",

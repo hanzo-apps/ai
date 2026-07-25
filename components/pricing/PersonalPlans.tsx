@@ -58,7 +58,7 @@ const STATIC_PLANS: SubscriptionPlan[] = [
     priceAnnual: 0,
     category: 'personal',
     features: [
-      '$5 free credit',
+      'No monthly minimum',
       '$5/mo included usage',
       '60 requests/min',
       '100K tokens/min',
