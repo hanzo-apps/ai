@@ -151,14 +151,31 @@ SPA routing works via the static export's automatic 404.html fallback.
 ## Telemetry (one client, one door)
 
 All telemetry is the ONE `@hanzo/event` client, wired once in `app/providers.tsx`:
-`<AnalyticsProvider config={{ product: 'site', host: analytics.hanzo.ai, ingestKey,
-getToken, enabled }}>` → `POST https://analytics.hanzo.ai/v1/event`. The host is the
-first-party **analytics.hanzo.ai** property (Umami fork) — the SAME dashboard the
-two static sites (hanzo.app, hanzo.chat) feed via the `analytics.hanzo.ai/hz.js`
-tag, so every Hanzo surface streams to one door. `ANALYTICS_HOST` is its own env
-(`NEXT_PUBLIC_ANALYTICS_URL`), decoupled from the API base. No per-lens client tags
-on this Next app for ANALYTICS (the old direct `script.js` and inline PostHog
-snippets were removed, `components/HanzoAnalytics.tsx` deleted).
+`<AnalyticsProvider config={{ product: 'site', host: EVENT_HOST, ingestKey,
+getToken, enabled }}>` → `POST https://api.hanzo.ai/v1/event`.
+
+**The door is `api.hanzo.ai`, and only `api.hanzo.ai`.** Every endpoint request
+goes there; there is no second API host. Both `api.hanzo.ai` and
+`analytics.hanzo.ai` expose a path spelled `/v1/event`, but they are DIFFERENT
+protocols and pointing the SDK at the wrong one fails silently in the browser:
+
+- `api.hanzo.ai/v1/event` — the cloud front door. Body `{ batch: [Event…] }`.
+  Cloud fans the one stream out to the web (analytics), product (insights) and
+  error (sentry) lenses server-side.
+- `analytics.hanzo.ai/v1/event` — the Umami tracker door. Body is a BARE ARRAY of
+  `hz.js` envelopes and rejects anything else with
+  `400 "Invalid input: expected array, received object"`.
+
+That 400 was live on hanzo.ai on every page load. No client tag on ANY Hanzo
+surface: `analytics.hanzo.ai/hz.js` is gone from hanzo.app and hanzo.chat too —
+each mounts its own `@hanzo/event` client, so a tag could only double-count the
+pageviews that client already posts. (The older direct `script.js` and inline
+PostHog snippets were removed earlier, `components/HanzoAnalytics.tsx` deleted.)
+
+Anonymous/logged-out views need the publishable `pk-` ingest key
+(`NEXT_PUBLIC_HANZO_INGEST_KEY`) — without it `api.hanzo.ai/v1/event` correctly
+answers `403 "valid bearer or a resolvable ingest key required"` and anonymous
+telemetry fails closed.
 
 ### THREE telemetry planes — orthogonal, never collapsed
 Analytics is NOT error capture. Each plane has its own first-party host:

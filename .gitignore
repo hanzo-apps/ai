@@ -48,3 +48,7 @@ QWEN.md
 
 # Agent scratchpad / build caches must never be committed.
 tmp/
+
+# Stray local IAM SQLite DB — never commit a database into the marketing site.
+iam.db
+*.db

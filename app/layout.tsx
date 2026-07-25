@@ -33,12 +33,8 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   manifest: '/site.webmanifest',
-  // No `hanzo:repo` here on purpose. That meta is what opts a page into the Hanzo
-  // Edit widget (hanzo.app/edit.js) — an AUTHORING affordance. hanzo.ai is the
-  // anonymous front door: the widget put a second floating button in the same
-  // corner as the Zen assistant (covering ~45% of it) and, being Shadow-DOM
-  // isolated with `all:initial`, rendered in system-ui instead of Geist. Editing
-  // belongs on surfaces whose visitors are editors; opting in is one line.
+  // Hanzo Edit widget reads this to know which repo backs the page (fork→edit→PR).
+  other: { 'hanzo:repo': 'hanzoai/hanzo.ai' },
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
@@ -75,13 +71,12 @@ export default function RootLayout({
         >
           <Providers>{children}</Providers>
         </ThemeProvider>
-        {/* Product events + errors ride the @hanzo/event client (in <Providers>).
-            The web-analytics dashboard at analytics.hanzo.ai reads its OWN store, so
-            its pageviews + autocapture come from the ONE Hanzo tag below — a RAW
-            async <script> (next/script's afterInteractive is dropped by
-            output:'export', so the tag would otherwise never ship). It streams to
-            analytics.hanzo.ai/v1/event, the store the dashboard reads. */}
-        <script async src="https://analytics.hanzo.ai/hz.js" data-site="hanzo.ai" />
+        {/* No analytics tag here: pageviews AND interaction autocapture already ride
+            the ONE @hanzo/event client in <Providers> (host + ingest key + consent
+            gate in one place). A second hz.js tag posted to the same /v1/event door
+            and double-counted every pageview. */}
+        {/* Hanzo Edit — ever-present "improve this page" widget (repo in metadata.other). */}
+        <script async src="https://hanzo.app/edit.js" />
       </body>
     </html>
   )
