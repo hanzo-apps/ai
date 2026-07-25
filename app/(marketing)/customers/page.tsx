@@ -1,7 +1,7 @@
 'use client'
 
 import { Users, ArrowUpRight } from 'lucide-react'
-import { Page, PageHero, Section, Prose } from '@/components/marketing/page-kit'
+import { Page, PageHero, Section, Prose, Cta } from '@/components/marketing/page-kit'
 import { testimonials } from '@/lib/data/testimonials'
 
 export default function CustomersPage() {
@@ -42,12 +42,9 @@ export default function CustomersPage() {
           </p>
         </Prose>
         <div className="mt-6">
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:border-foreground/30"
-          >
-            Talk to us <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
+          <Cta href="/contact" icon={ArrowUpRight}>
+            Talk to us
+          </Cta>
         </div>
       </Section>
     </Page>
