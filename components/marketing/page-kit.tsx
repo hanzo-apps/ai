@@ -152,6 +152,35 @@ export function CardGrid({ items, columns = 2 }: { items: CardItem[]; columns?: 
   )
 }
 
+/* ── call to action ────────────────────────────────────────────────────────── */
+
+/**
+ * A standalone action. `min-h-11` is 44px — the minimum comfortable touch
+ * target — which padding alone does not reach at this font size. Inline links
+ * inside `Prose` are deliberately not this; they belong in the text flow.
+ */
+export function Cta({
+  href,
+  children,
+  icon: Icon,
+}: {
+  href: string
+  children: React.ReactNode
+  icon?: LucideIcon
+}) {
+  const external = href.startsWith('http')
+  return (
+    <Link
+      href={href}
+      className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border px-5 text-sm font-medium text-foreground transition-colors hover:border-foreground/30"
+      {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : null)}
+    >
+      {children}
+      {Icon ? <Icon className="h-3.5 w-3.5" /> : null}
+    </Link>
+  )
+}
+
 /* ── prose ─────────────────────────────────────────────────────────────────── */
 
 /** Long-form body copy (policies, explanations). Headings come from `Section`. */
