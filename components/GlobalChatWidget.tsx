@@ -256,9 +256,10 @@ const GlobalChatWidget = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(true)}
+            aria-label="Open the Zen AI assistant"
             className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center bg-background border border-border"
           >
-            <img src="/zen-logo.png" alt="Zen AI" className="w-8 h-8" />
+            <img src="/zen-logo.png" alt="" aria-hidden className="w-8 h-8" />
             {/* Pulse animation */}
             <span className="absolute inset-0 rounded-full animate-ping opacity-20" />
           </motion.button>

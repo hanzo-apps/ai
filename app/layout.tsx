@@ -33,8 +33,12 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   manifest: '/site.webmanifest',
-  // Hanzo Edit widget reads this to know which repo backs the page (fork→edit→PR).
-  other: { 'hanzo:repo': 'hanzoai/hanzo.ai' },
+  // No `hanzo:repo` here on purpose. That meta is what opts a page into the Hanzo
+  // Edit widget (hanzo.app/edit.js) — an AUTHORING affordance. hanzo.ai is the
+  // anonymous front door: the widget put a second floating button in the same
+  // corner as the Zen assistant (covering ~45% of it) and, being Shadow-DOM
+  // isolated with `all:initial`, rendered in system-ui instead of Geist. Editing
+  // belongs on surfaces whose visitors are editors; opting in is one line.
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
@@ -78,8 +82,6 @@ export default function RootLayout({
             output:'export', so the tag would otherwise never ship). It streams to
             analytics.hanzo.ai/v1/event, the store the dashboard reads. */}
         <script async src="https://analytics.hanzo.ai/hz.js" data-site="hanzo.ai" />
-        {/* Hanzo Edit — ever-present "improve this page" widget (repo in metadata.other). */}
-        <script async src="https://hanzo.app/edit.js" />
       </body>
     </html>
   )
