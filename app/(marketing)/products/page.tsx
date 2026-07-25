@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, Check, Copy, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { PartnerLogoRow } from '@/components/shared'
-import { partnerLogos } from '@/lib/constants/partner-logos'
+import { infrastructureLogos } from '@/lib/constants/partner-logos'
 import {
   POSITIONING,
   categorySlug,
@@ -82,8 +82,8 @@ export default function Products() {
       {/* Partners */}
       <section className="border-t border-border px-4 py-12">
         <div className="mx-auto max-w-6xl text-center">
-          <p className="mb-6 text-xs uppercase tracking-widest text-muted-foreground">Built with technology partners</p>
-          <PartnerLogoRow logos={partnerLogos} invert className="opacity-70" />
+          <p className="mb-6 text-xs uppercase tracking-widest text-muted-foreground">Runs on the infrastructure you already trust</p>
+          <PartnerLogoRow logos={infrastructureLogos} invert className="opacity-70" />
         </div>
       </section>
 

@@ -5,9 +5,15 @@ export type PartnerLogo = {
   href?: string;
 };
 
-// Canonical trust band order:
-// Amazon · DigitalOcean · Google · Microsoft · NVIDIA · Techstars · Lux · Zoo Labs Foundation
-export const partnerLogos: PartnerLogo[] = [
+// These are THREE different claims and must never be rendered under one banner:
+//   who backs us · whose infrastructure we run on · who our customers are
+// A single mixed list previously sat under "Hanzo is backed by leading technology
+// partners" and under "Trusted by engineers at" — both of which asserted things
+// about Amazon/Google/Microsoft/NVIDIA that are not true. Keep them separate so a
+// caller has to pick the claim it actually means.
+
+/** Cloud + silicon vendors Hanzo deploys on. NOT backers, NOT customers. */
+export const infrastructureLogos: PartnerLogo[] = [
   {
     name: "Amazon",
     src: "/logos/partners/amazon.svg",
@@ -38,6 +44,10 @@ export const partnerLogos: PartnerLogo[] = [
     className: "h-6",
     href: "https://www.nvidia.com",
   },
+];
+
+/** Who actually backs / is affiliated with Hanzo. Hanzo AI is Techstars '17. */
+export const backerLogos: PartnerLogo[] = [
   {
     name: "Techstars",
     src: "/logos/partners/techstars.svg",
