@@ -21,7 +21,6 @@ const HanzoTransfers = () => {
       tagline="Track token & NFT transfers in real-time"
       description="Monitor and query all token transfers across chains. Get transfer history, pending transactions, and real-time notifications for any address or contract."
       icon={ArrowLeftRight}
-      accentColor="#06b6d4"
       features={[
         {
           icon: ArrowLeftRight,

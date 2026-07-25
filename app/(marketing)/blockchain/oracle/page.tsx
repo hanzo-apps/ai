@@ -21,7 +21,6 @@ const HanzoOracle = () => {
       tagline="Bring real-world data on-chain"
       description="A comprehensive oracle service providing price feeds, randomness, weather data, and custom attestations for smart contracts. Built on Lux's OracleVM with Chainlink integration."
       icon={Radio}
-      accentColor="#a855f7"
       features={[
         {
           icon: TrendingUp,

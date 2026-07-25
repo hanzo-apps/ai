@@ -9,6 +9,7 @@ import {
   Check,
 } from "lucide-react";
 import { capabilityCount } from "@/lib/data/cloud-primitives";
+import { BRAND } from "@/lib/constants/brand";
 
 // The one CLI proof-point shown inside the product preview. One demo, no
 // rotation, no step-typing — the same install line the copy button yields.
@@ -33,10 +34,12 @@ const STAT_BAND: ReadonlyArray<{ label: string; href: string; dynamic?: "models"
 // Rows rendered inside the animated console preview — a stylized, on-brand
 // snapshot of console.hanzo.ai (NOT a screenshot, so it never goes stale). Each
 // metric animates in on mount, restoring the motion the static terminal dropped.
+// Monochrome: three steps down the brand's neutral ramp give subtle variety
+// without introducing hue (white → neutral-300 → neutral-400).
 const CONSOLE_METRICS = [
-  { label: "Agents running", value: "12", accent: "#a78bfa" },
-  { label: "Requests / min", value: "48.2k", accent: "#e879f9" },
-  { label: "Models served", value: "390+", accent: "#c4b5fd" },
+  { label: "Agents running", value: "12", accent: BRAND.primary },
+  { label: "Requests / min", value: "48.2k", accent: BRAND.secondary },
+  { label: "Models served", value: "390+", accent: BRAND.hover },
 ];
 const CONSOLE_NAV = ["Agents", "Models", "Vector", "Gateway", "IAM", "Audit"];
 
@@ -91,7 +94,7 @@ const HeroSection = () => {
             transition={{ opacity: { duration: 1.5 }, x: { duration: 18, repeat: Infinity, ease: "easeInOut" }, y: { duration: 22, repeat: Infinity, ease: "easeInOut" } }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
-              background: `radial-gradient(circle, #a78bfa 0%, transparent 70%)`,
+              background: `radial-gradient(circle, ${BRAND.primary} 0%, transparent 70%)`,
               filter: "blur(100px)",
             }}
           />
@@ -101,7 +104,7 @@ const HeroSection = () => {
             transition={{ opacity: { duration: 1.5, delay: 0.2 }, x: { duration: 20, repeat: Infinity, ease: "easeInOut" }, y: { duration: 16, repeat: Infinity, ease: "easeInOut" } }}
             className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full"
             style={{
-              background: `radial-gradient(circle, #e879f9 0%, transparent 70%)`,
+              background: `radial-gradient(circle, ${BRAND.secondary} 0%, transparent 70%)`,
               filter: "blur(80px)",
             }}
           />
@@ -148,10 +151,9 @@ const HeroSection = () => {
               >
                 <Link
                   href="/network"
-                  className="group inline-flex items-center gap-2 text-xs font-medium rounded-full px-4 py-2 border w-fit mb-6 transition-colors hover:bg-white/5"
-                  style={{ color: "#c4b5fd", borderColor: "rgba(167, 139, 250, 0.3)" }}
+                  className="group inline-flex items-center gap-2 text-xs font-medium rounded-full px-4 py-2 border border-white/25 w-fit mb-6 text-white/80 transition-colors hover:bg-white/5"
                 >
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#a78bfa] animate-pulse" />
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                   V8 · Open Edition — the decentralized AI cloud
                   <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                 </Link>
@@ -331,7 +333,7 @@ const HeroSection = () => {
                               animate={{ height: `${h}%` }}
                               transition={{ duration: 0.6, delay: 0.8 + i * 0.04, ease: "easeOut" }}
                               className="flex-1 rounded-sm"
-                              style={{ background: "linear-gradient(to top, #a78bfa, #e879f9)" }}
+                              style={{ background: `linear-gradient(to top, ${BRAND.hover}, ${BRAND.primary})` }}
                             />
                           ))}
                         </div>
@@ -339,7 +341,7 @@ const HeroSection = () => {
 
                       {/* CLI strip — the dev proof-point, kept compact */}
                       <div className="rounded-lg border border-border/60 bg-black/60 px-3 py-2 font-mono text-[11px] text-foreground/85 overflow-x-auto whitespace-pre">
-                        <span className="text-[#a78bfa]">{DEV_CMD}</span>
+                        <span className="text-white/70">{DEV_CMD}</span>
                         <span className="inline-block w-1.5 h-3.5 ml-1 align-middle bg-foreground/70 animate-pulse" />
                       </div>
                     </div>

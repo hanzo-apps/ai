@@ -12,6 +12,7 @@ import {
 
 import { Button } from "@hanzo/ui";
 import { ProductFooter } from "@/components/products/ProductFooter";
+import { BRAND } from "@/lib/constants/brand";
 
 export interface CodeExample {
   language: string;
@@ -24,7 +25,6 @@ export interface BlockchainProductProps {
   tagline: string;
   description: string;
   icon: LucideIcon;
-  accentColor: string;
   features: Array<{
     icon: LucideIcon;
     title: string;
@@ -50,7 +50,6 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
   tagline,
   description,
   icon: ProductIcon,
-  accentColor,
   features,
   useCases,
   chains,
@@ -58,6 +57,9 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
   codeExamples,
   slug,
 }) => {
+  // Monochrome: one white accent for every blockchain product page. The glow,
+  // badges, and icons are tinted via alpha suffixes on this single token.
+  const accentColor = BRAND.primary;
   const [activeTab, setActiveTab] = useState(0);
   // Derive slug from product name when caller didn't supply one (e.g. "Hanzo Chains" → "chains").
   const resolvedSlug = slug ?? name.replace(/^[Hh]anzo\s+/, '').trim().toLowerCase().split(/\s+/).pop() ?? '';
@@ -171,7 +173,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
               {/* CTA Buttons */}
               <div className="space-y-3">
                 <Button
-                  className="w-full py-3 rounded-lg font-medium"
+                  className="w-full py-3 rounded-lg font-medium text-black"
                   style={{ backgroundColor: accentColor }}
                   onClick={() => window.open('https://console.hanzo.ai', '_blank')}
                 >
@@ -435,7 +437,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
                 onClick={() => window.open('https://console.hanzo.ai', '_blank')}
-                className="px-6 py-3 rounded-lg font-medium"
+                className="px-6 py-3 rounded-lg font-medium text-black"
                 style={{ backgroundColor: accentColor }}
               >
                 Get Your API Key

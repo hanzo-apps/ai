@@ -21,7 +21,6 @@ const HanzoNFT = () => {
       tagline="NFT metadata, ownership & marketplace data"
       description="Complete NFT data API for ERC-721 and ERC-1155 tokens. Get metadata, ownership history, floor prices, rarity scores, and collection stats across all major chains."
       icon={Image}
-      accentColor="#ec4899"
       features={[
         {
           icon: Image,

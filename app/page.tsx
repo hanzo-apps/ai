@@ -4,8 +4,8 @@ import HomeLanding from '@/components/home/HomeLanding'
 // Apex hanzo.ai — the clean, chat-centric landing. Lives at the app root (outside
 // the (marketing) route group) so it is wrapped only by the root layout and
 // ships its own openai-style nav + footer. The DETAILED product/marketing pages
-// live on cloud.hanzo.ai (the cloud-site image serves cloud-site.html at root and
-// the full export beneath it); the nav here deep-links to cloud.hanzo.ai.
+// live on cloud.hanzo.ai (the cloud-www image serves the /overview homepage at
+// root and the full export beneath it); the nav here deep-links to cloud.hanzo.ai.
 
 const TITLE = 'Hanzo — Chat, models, and the open-source AI cloud'
 const DESCRIPTION =

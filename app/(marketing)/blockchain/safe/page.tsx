@@ -21,7 +21,6 @@ const HanzoSafe = () => {
       tagline="Multi-signature custody with quantum-safe security"
       description="Enterprise-grade multi-sig and threshold-signature wallets built on quantum-resistant cryptography. Secure your treasury with customizable policies, recovery mechanisms, and comprehensive audit trails."
       icon={Shield}
-      accentColor="#ffffff"
       features={[
         {
           icon: Users,

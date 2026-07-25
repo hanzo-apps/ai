@@ -19,8 +19,7 @@ const CoreFeatures = () => {
         "Fully portable and extensible relational database",
         "Built-in row-level security (RLS) and custom database triggers",
         "Real-time and asynchronous data handling"
-      ],
-      color: "blue"
+      ]
     },
     {
       icon: Server,
@@ -30,8 +29,7 @@ const CoreFeatures = () => {
         "Lightweight, embedded SQLite for rapid local development and testing",
         "Instant real-time synchronization on the user side",
         "Scales directly to Hanzo's planetary-scale Datastore"
-      ],
-      color: "green"
+      ]
     },
     {
       icon: Lock,
@@ -41,8 +39,7 @@ const CoreFeatures = () => {
         "Email/password, OAuth providers, and magic link authentication",
         "Customizable user roles, permissions, and multi-factor authentication",
         "Integrated email verification and password recovery"
-      ],
-      color: "purple"
+      ]
     },
     {
       icon: Code,
@@ -52,8 +49,7 @@ const CoreFeatures = () => {
         "Deploy globally distributed serverless functions without server management",
         "Easy integration with external APIs and third-party services",
         "Secure, scalable, and minimal latency"
-      ],
-      color: "amber"
+      ]
     },
     {
       icon: Workflow,
@@ -63,8 +59,7 @@ const CoreFeatures = () => {
         "WebSocket-based data synchronization for live collaboration",
         "Built-in event broadcasting and subscription management",
         "Real-time notifications and updates"
-      ],
-      color: "indigo"
+      ]
     },
     {
       icon: HardDrive,
@@ -74,8 +69,7 @@ const CoreFeatures = () => {
         "Efficient storage and management of files, images, and videos",
         "Support for file versioning, access controls, and secure URLs",
         "Global CDN for fast content delivery"
-      ],
-      color: "cyan"
+      ]
     },
     {
       icon: Brain,
@@ -85,8 +79,7 @@ const CoreFeatures = () => {
         "Built-in integration with ML frameworks like OpenAI and Hugging Face",
         "Optimized for semantic search, recommendations, and AI use cases",
         "Efficient storage and querying of high-dimensional vectors"
-      ],
-      color: "rose"
+      ]
     },
     {
       icon: File,
@@ -96,8 +89,7 @@ const CoreFeatures = () => {
         "RESTful and GraphQL API generation for data access and manipulation",
         "Automatic Swagger documentation and API versioning support",
         "Customizable endpoints and middleware support"
-      ],
-      color: "blue"
+      ]
     }
   ];
 
@@ -126,7 +118,6 @@ const CoreFeatures = () => {
               description={feature.description}
               features={feature.features}
               delay={index}
-              color={feature.color}
             />
           ))}
         </div>

@@ -162,30 +162,30 @@ const ROADMAP = [
 // Product pages - Core APIs
 const PRODUCTS = [
   // Core Infrastructure
-  { id: "chains", name: "Hanzo Chains", description: "Multi-chain RPC endpoints & infrastructure", icon: Server, color: "#f97316", href: "/blockchain/chains" },
-  { id: "indexer", name: "Indexer", description: "Query blockchain data with GraphQL", icon: Search, color: "#10b981", href: "/blockchain/indexer" },
-  { id: "wallets", name: "Smart Wallets", description: "ERC-4337 account abstraction wallets", icon: Wallet, color: "#f59e0b", href: "/blockchain/wallets" },
-  { id: "rollups", name: "Rollups", description: "L2 scaling & rollup infrastructure", icon: Blocks, color: "#ffffff", href: "/blockchain/rollups" },
+  { id: "chains", name: "Hanzo Chains", description: "Multi-chain RPC endpoints & infrastructure", icon: Server, href: "/blockchain/chains" },
+  { id: "indexer", name: "Indexer", description: "Query blockchain data with GraphQL", icon: Search, href: "/blockchain/indexer" },
+  { id: "wallets", name: "Smart Wallets", description: "ERC-4337 account abstraction wallets", icon: Wallet, href: "/blockchain/wallets" },
+  { id: "rollups", name: "Rollups", description: "L2 scaling & rollup infrastructure", icon: Blocks, href: "/blockchain/rollups" },
   // Data APIs
-  { id: "tokens", name: "Token API", description: "ERC-20 balances, prices & metadata", icon: Database, color: "#22c55e", href: "/blockchain/tokens" },
-  { id: "nft", name: "NFT API", description: "NFT metadata, ownership & transfers", icon: Blocks, color: "#ec4899", href: "/blockchain/nft" },
-  { id: "transfers", name: "Transfers API", description: "Track token & NFT transfers", icon: ArrowLeftRight, color: "#06b6d4", href: "/blockchain/transfers" },
+  { id: "tokens", name: "Token API", description: "ERC-20 balances, prices & metadata", icon: Database, href: "/blockchain/tokens" },
+  { id: "nft", name: "NFT API", description: "NFT metadata, ownership & transfers", icon: Blocks, href: "/blockchain/nft" },
+  { id: "transfers", name: "Transfers API", description: "Track token & NFT transfers", icon: ArrowLeftRight, href: "/blockchain/transfers" },
   // Trading & DeFi APIs
-  { id: "prices", name: "Prices API", description: "Real-time & historical price feeds", icon: Database, color: "#22c55e", href: "/blockchain/tokens" },
-  { id: "dex", name: "DEX API", description: "Swap routing & liquidity aggregation", icon: ArrowLeftRight, color: "#f59e0b", href: "/blockchain/exchange" },
-  { id: "oracle", name: "Oracle API", description: "On-chain price oracles & data feeds", icon: Radio, color: "#ffffff", href: "/blockchain/oracle" },
+  { id: "prices", name: "Prices API", description: "Real-time & historical price feeds", icon: Database, href: "/blockchain/tokens" },
+  { id: "dex", name: "DEX API", description: "Swap routing & liquidity aggregation", icon: ArrowLeftRight, href: "/blockchain/exchange" },
+  { id: "oracle", name: "Oracle API", description: "On-chain price oracles & data feeds", icon: Radio, href: "/blockchain/oracle" },
   // Realtime & Events
-  { id: "webhooks", name: "Webhooks", description: "Real-time blockchain event notifications", icon: Radio, color: "#f97316", href: "/blockchain/webhooks" },
-  { id: "websockets", name: "Websockets", description: "Live blockchain data streaming", icon: Radio, color: "#a855f7", href: "/blockchain/websockets" },
+  { id: "webhooks", name: "Webhooks", description: "Real-time blockchain event notifications", icon: Radio, href: "/blockchain/webhooks" },
+  { id: "websockets", name: "Websockets", description: "Live blockchain data streaming", icon: Radio, href: "/blockchain/websockets" },
   // Account Abstraction
-  { id: "bundler", name: "Bundler API", description: "ERC-4337 UserOp bundling service", icon: Blocks, color: "#14b8a6", href: "/blockchain/bundler" },
-  { id: "gas", name: "Gas Manager", description: "Sponsor gas for your users", icon: Zap, color: "#eab308", href: "/blockchain/gas" },
-  { id: "simulation", name: "Simulation API", description: "UserOp & transaction simulation", icon: Code, color: "#06b6d4", href: "/blockchain/bundler" },
+  { id: "bundler", name: "Bundler API", description: "ERC-4337 UserOp bundling service", icon: Blocks, href: "/blockchain/bundler" },
+  { id: "gas", name: "Gas Manager", description: "Sponsor gas for your users", icon: Zap, href: "/blockchain/gas" },
+  { id: "simulation", name: "Simulation API", description: "UserOp & transaction simulation", icon: Code, href: "/blockchain/bundler" },
   // Debug & Development
-  { id: "debug", name: "Debug API", description: "Transaction tracing & debugging", icon: Code, color: "#64748b", href: "/blockchain/explorer" },
-  { id: "trace", name: "Trace API", description: "Internal transaction traces", icon: Search, color: "#94a3b8", href: "/blockchain/explorer" },
+  { id: "debug", name: "Debug API", description: "Transaction tracing & debugging", icon: Code, href: "/blockchain/explorer" },
+  { id: "trace", name: "Trace API", description: "Internal transaction traces", icon: Search, href: "/blockchain/explorer" },
   // Payments
-  { id: "pay", name: "Payments", description: "Crypto payments gateway", icon: CreditCard, color: "#f97316", href: "/blockchain/pay" },
+  { id: "pay", name: "Payments", description: "Crypto payments gateway", icon: CreditCard, href: "/blockchain/pay" },
 ];
 
 const Blockchain = () => {
@@ -360,11 +360,8 @@ const Blockchain = () => {
                     href={product.href || "#"}
                     className="block p-5 rounded-xl border border-border bg-secondary/50 hover:bg-accent/50 hover:border-border transition-all group"
                   >
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center mb-3"
-                      style={{ backgroundColor: `${product.color}1a` }}
-                    >
-                      <Icon className="w-5 h-5" style={{ color: product.color }} />
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 bg-white/10">
+                      <Icon className="w-5 h-5 text-white/70" />
                     </div>
                     <h3 className="font-semibold text-foreground mb-1 group-hover:text-foreground transition-colors">
                       {product.name}

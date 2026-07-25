@@ -21,7 +21,6 @@ const HanzoIndexer = () => {
       tagline="Query blockchain data with GraphQL"
       description="Index and query on-chain data at scale. Deploy custom subgraphs, access real-time indexed data, and build powerful blockchain analytics—all through a simple GraphQL API."
       icon={Search}
-      accentColor="#10b981"
       features={[
         {
           icon: Code,

@@ -21,7 +21,6 @@ const HanzoTokens = () => {
       tagline="ERC-20 token data, balances & prices"
       description="Comprehensive token data API for all EVM chains. Get real-time balances, historical prices, token metadata, and ownership across 100+ networks with a single API call."
       icon={Coins}
-      accentColor="#22c55e"
       features={[
         {
           icon: Coins,

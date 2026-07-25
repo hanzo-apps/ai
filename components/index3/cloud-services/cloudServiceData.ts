@@ -12,7 +12,6 @@ export interface CloudServiceItem {
   description: string;
   icon: LucideIcon;
   features: string[];
-  color: string;
 }
 
 export const cloudServiceData: CloudServiceItem[] = [
@@ -26,8 +25,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Autonomous workflows that continuously learn and improve",
       "Accessible via the intuitive @hanzo/ai SDK",
       "Fine-tuning and custom model deployment capabilities"
-    ],
-    color: "red"
+    ]
   },
   {
     id: "chat",
@@ -39,8 +37,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Memory management and context preservation",
       "Multi-modal support for images, audio, and video",
       "Easy integration with your existing applications"
-    ],
-    color: "indigo"
+    ]
   },
   {
     id: "datastore",
@@ -52,8 +49,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Optimized for AI workloads with built-in caching",
       "Real-time synchronization across clients",
       "Native integration with Hanzo AI services"
-    ],
-    color: "blue"
+    ]
   },
   {
     id: "edge",
@@ -65,8 +61,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Built-in CDN and content optimization",
       "Serverless edge functions with zero cold starts",
       "Integrated with Hanzo AI for edge intelligence"
-    ],
-    color: "cyan"
+    ]
   },
   {
     id: "functions",
@@ -78,8 +73,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Automatic scaling based on demand",
       "Support for multiple languages and runtimes",
       "Integrated monitoring and logging"
-    ],
-    color: "emerald"
+    ]
   },
   {
     id: "identity",
@@ -91,8 +85,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Single sign-on (SSO) and user permission management",
       "Compliance with global identity regulations",
       "Social login integrations and custom flows"
-    ],
-    color: "red"
+    ]
   },
   {
     id: "machines",
@@ -104,8 +97,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Scalable AI inference and training infrastructure",
       "Low-latency deployments across global data centers",
       "Optimized containers for popular ML frameworks"
-    ],
-    color: "green"
+    ]
   },
   {
     id: "balancer",
@@ -117,8 +109,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Built-in caching for faster responses and reduced costs",
       "Advanced security features and DDoS protection",
       "Comprehensive monitoring and analytics dashboard"
-    ],
-    color: "blue"
+    ]
   },
   {
     id: "commerce",
@@ -130,8 +121,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Dynamic pricing, subscription management, and analytics",
       "Unified Web2 and Web3 payment integrations",
       "AI-powered recommendation engines and inventory forecasting"
-    ],
-    color: "amber"
+    ]
   },
   {
     id: "payments",
@@ -143,8 +133,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Fraud detection and prevention with AI monitoring",
       "Subscription management and recurring billing automation",
       "Real-time financial reporting and analytics"
-    ],
-    color: "rose"
+    ]
   },
   {
     id: "pubsub",
@@ -156,8 +145,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "JetStream for durable, exactly-once delivery",
       "Wildcard subjects and queue groups",
       "Clustered with automatic failover"
-    ],
-    color: "purple"
+    ]
   },
   {
     id: "stream",
@@ -169,8 +157,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Stateless: all storage in PubSub",
       "Consumer groups, topics, and offset tracking",
       "Scales horizontally behind a load balancer"
-    ],
-    color: "indigo"
+    ]
   },
   {
     id: "storage",
@@ -182,8 +169,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "S3-compatible API for easy migration",
       "End-to-end encryption and access controls",
       "Automatic backup and disaster recovery"
-    ],
-    color: "yellow"
+    ]
   },
   {
     id: "vector",
@@ -195,8 +181,7 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Scales to billions of vectors with sub-millisecond query times",
       "Built-in integration with popular embedding models",
       "Sophisticated RAG capabilities for enhanced AI responses"
-    ],
-    color: "blue"
+    ]
   },
   {
     id: "more",
@@ -208,7 +193,6 @@ export const cloudServiceData: CloudServiceItem[] = [
       "Security and compliance solutions",
       "Edge computing and IoT infrastructure",
       "Developer tools and productivity enhancers"
-    ],
-    color: "gray"
+    ]
   }
 ];

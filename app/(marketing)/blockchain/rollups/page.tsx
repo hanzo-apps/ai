@@ -21,7 +21,6 @@ const HanzoRollups = () => {
       tagline="L2 scaling infrastructure & rollup services"
       description="Deploy and manage rollup infrastructure. From optimistic to ZK rollups, we handle sequencers, provers, and data availability so you can focus on your application."
       icon={Layers}
-      accentColor="#ffffff"
       features={[
         {
           icon: Layers,

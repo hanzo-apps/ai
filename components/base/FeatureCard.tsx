@@ -11,57 +11,23 @@ interface FeatureCardProps {
   description: string;
   features: string[];
   delay?: number;
-  color?: string;
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ 
-  icon: Icon, 
-  title, 
-  description, 
+// Monochrome: every card shares one neutral treatment (true-black + white),
+// distinguished by its icon and copy, never by hue.
+const classes = {
+  bg: "bg-primary/10",
+  text: "text-foreground",
+  border: "border-white/30",
+} as const;
+
+const FeatureCard: React.FC<FeatureCardProps> = ({
+  icon: Icon,
+  title,
+  description,
   features,
   delay = 0,
-  color = "blue"
 }) => {
-  const colorClasses: Record<string, { bg: string, text: string, border: string }> = {
-    blue: {
-      bg: "bg-primary/10",
-      text: "text-foreground",
-      border: "border-white/30"
-    },
-    purple: {
-      bg: "bg-primary/10",
-      text: "text-foreground",
-      border: "border-white/30"
-    },
-    green: {
-      bg: "bg-primary/10",
-      text: "text-foreground/70",
-      border: "border-border"
-    },
-    amber: {
-      bg: "bg-primary/10",
-      text: "text-foreground/60",
-      border: "border-border"
-    },
-    indigo: {
-      bg: "bg-primary/10",
-      text: "text-foreground",
-      border: "border-white/30"
-    },
-    cyan: {
-      bg: "bg-primary/10",
-      text: "text-foreground/70",
-      border: "border-white/30"
-    },
-    rose: {
-      bg: "bg-primary/10",
-      text: "text-foreground/70",
-      border: "border-border"
-    },
-  };
-
-  const classes = colorClasses[color] || colorClasses.blue;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
