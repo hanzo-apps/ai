@@ -1,7 +1,8 @@
 # Hanzo Cloud marketing site (cloud.hanzo.ai) — image ghcr.io/hanzoai/cloud-www.
-# Builds the @hanzo/site static export and promotes the detailed /overview
-# homepage to the site root, served via ghcr.io/hanzoai/static. CTAs point to
-# console.hanzo.ai; /signin & /signup are handled by the hanzo.id routers.
+# Builds the @hanzo/site static export and promotes the monochrome marketing
+# CloudLanding (/cloud) to the site root, served via ghcr.io/hanzoai/static.
+# CTAs point to console.hanzo.ai; /signin & /signup are handled by the hanzo.id
+# routers.
 #
 # Build (BuildKit, on-cluster — no GHA):
 #   --opt=filename=Dockerfile.production
@@ -26,15 +27,15 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 RUN NODE_OPTIONS=--max-old-space-size=8192 pnpm build
 
-# Promote the FULL detailed homepage (/overview — the big components/landing/*
-# story: hero, platform, use-cases, multi-agent, DX, provider grid, routing,
-# open-source, network, pricing) to cloud.hanzo.ai's web root. This is the old
-# apex homepage that moved off the (now slim, chat-centric) hanzo.ai apex; it
-# belongs on the detailed cloud site and is wrapped by the (marketing)
-# Navbar/Footer. With trailingSlash:false Next emits out/overview.html (flat
-# file); _next assets are absolute so they resolve from / unchanged. (The
-# umbrella "Explore Cloud" landing is the same CloudLanding, reachable at /cloud.)
-RUN cp out/overview.html out/index.html
+# Promote the monochrome marketing CloudLanding (/cloud — Hanzo-Cloud branding:
+# the products mega-menu, the "Open-weight model garden" / "On-demand GPU
+# compute" primitive grid, the WebGL point-globe hero, and the "Open Console"
+# CTA that deep-links to console.hanzo.ai) to cloud.hanzo.ai's web root. This is
+# app/(marketing)/cloud/page.tsx wrapped by the (marketing) Navbar/Footer. With
+# trailingSlash:false Next emits out/cloud.html (flat file); _next assets are
+# absolute so they resolve from / unchanged. (The old detailed /overview
+# homepage stays served at its own /overview route on the same export.)
+RUN cp out/cloud.html out/index.html
 
 # Clean URLs on hanzoai/static. The Next export is FLAT (trailingSlash:false →
 # out/pricing.html, out/enso.html, …). hanzoai/static serves a *directory's*
