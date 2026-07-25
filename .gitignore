@@ -45,3 +45,6 @@ QWEN.md
 .next-verify/
 .next-dev/
 .claude/
+
+# Agent scratchpad / build caches must never be committed.
+tmp/
