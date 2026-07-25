@@ -331,9 +331,11 @@ export const productUpstreamMap: Record<string, string> = {
 // hanzo / @hanzo/ai) — see /sdks for the full two-line story.
 //
 // status reflects what actually resolves TODAY (verified against PyPI / npm /
-// Go modules): Python (hanzoai), Go, and TypeScript (@hanzo/sdk 2.0.0) are GA;
-// Rust/C++/Swift/Kotlin show their canonical target command and are marked
-// 'soon' until published.
+// Go modules / crates.io / SwiftPM): Python (hanzoai), Go, TypeScript
+// (@hanzo/sdk), Rust (`cargo add hanzo` → crates.io), and Swift (SwiftPM git
+// `hanzo-swift/sdk` @ 8.0.0) are GA. C++ and Kotlin show their canonical target
+// command and are marked 'soon' until the registry publish lands (Kotlin has a
+// working JitPack install today).
 export const hanzoSDKs: ProductSDK[] = [
   {
     language: 'python',
@@ -373,7 +375,7 @@ export const hanzoSDKs: ProductSDK[] = [
     url: 'https://github.com/hanzo-rs/sdk',
     installCommand: 'cargo add hanzo',
     docsUrl: 'https://docs.hanzo.ai/docs/sdks/rust',
-    status: 'soon'
+    status: 'ga'
   },
   {
     language: 'cpp',
@@ -393,7 +395,7 @@ export const hanzoSDKs: ProductSDK[] = [
     url: 'https://github.com/hanzo-swift',
     installCommand: '.package(url: "https://github.com/hanzo-swift/sdk")',
     docsUrl: 'https://docs.hanzo.ai/docs/sdks/swift',
-    status: 'soon'
+    status: 'ga'
   },
   {
     language: 'kotlin',

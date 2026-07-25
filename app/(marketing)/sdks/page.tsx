@@ -42,17 +42,17 @@ const perLanguageOrgs: LangOrg[] = [
   { lang: "Python", org: "hanzo-py", realRepo: "hanzo-py/sdk", wrapper: "hanzoai/python-sdk", status: "ga", install: "pip install hanzoai", ai: "hanzo", flagship: true },
   { lang: "Go", org: "hanzo-go", realRepo: "hanzo-go/sdk", wrapper: "hanzoai/go-sdk", status: "ga", install: "go get github.com/hanzoai/go-sdk" },
   { lang: "TypeScript", org: "hanzo-js", realRepo: "hanzo-js/sdk", wrapper: "hanzoai/js-sdk", status: "ga", install: "npm install @hanzo/sdk", ai: "@hanzo/ai" },
-  { lang: "Rust", org: "hanzo-rs", realRepo: "hanzo-rs/sdk", wrapper: "hanzoai/rust-sdk", status: "soon", install: "cargo add hanzo", workingInstall: 'hanzo = { git = "https://github.com/hanzo-rs/sdk" }' },
+  { lang: "Rust", org: "hanzo-rs", realRepo: "hanzo-rs/sdk", wrapper: "hanzoai/rust-sdk", status: "ga", install: "cargo add hanzo", ai: "hanzo" },
   { lang: "C++", org: "hanzo-cpp", realRepo: "hanzo-cpp/sdk", wrapper: "hanzoai/cpp-sdk", status: "soon", install: "find_package(hanzo)" },
-  { lang: "Swift", org: "hanzo-swift", realRepo: "hanzo-swift/sdk", wrapper: "hanzoai/swift-sdk", status: "soon", install: ".package(url: \"https://github.com/hanzo-swift/sdk\")" },
-  { lang: "Kotlin", org: "hanzo-kt", realRepo: "hanzo-kt/sdk", wrapper: "hanzoai/kotlin-sdk", status: "soon", install: 'implementation("ai.hanzo:sdk")' },
+  { lang: "Swift", org: "hanzo-swift", realRepo: "hanzo-swift/sdk", wrapper: "hanzoai/swift-sdk", status: "ga", install: ".package(url: \"https://github.com/hanzo-swift/sdk\")" },
+  { lang: "Kotlin", org: "hanzo-kt", realRepo: "hanzo-kt/sdk", wrapper: "hanzoai/kotlin-sdk", status: "soon", install: 'implementation("ai.hanzo:sdk")', workingInstall: 'implementation("com.github.hanzo-kt:sdk:v8.0.0") // JitPack' },
 ]
 
 // The AI + agents flagship line — distinct from the generated cloud SDK.
 const aiFlagship: { lang: string; package: string; install: string; home: string; note: string; status: "ga" | "soon" }[] = [
   { lang: "Python", package: "hanzo", install: "pip install hanzo", home: "hanzoai/python-sdk", note: "Flagship — the most complete AI + agents library.", status: "ga" },
   { lang: "Node", package: "@hanzo/ai", install: "npm install @hanzo/ai", home: "hanzo-js/ai", note: "Models, agents, tools, memory, and MCP for TypeScript.", status: "ga" },
-  { lang: "Rust", package: "hanzo", install: "cargo add hanzo", home: "hanzo-rs/ai", note: "The AI + agents crate for Rust.", status: "soon" },
+  { lang: "Rust", package: "hanzo", install: "cargo add hanzo", home: "hanzo-rs/sdk", note: "The AI + agents crate for Rust — crypto, DID, MCP, agents, embeddings, feature-gated.", status: "ga" },
 ]
 
 export default function SdksPage() {
