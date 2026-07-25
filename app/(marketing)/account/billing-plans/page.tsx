@@ -30,9 +30,9 @@ const BillingPlans = () => {
       name: 'Developer',
       price: 0,
       interval: 'month',
-      description: 'Get started for free with included credits',
+      description: 'Pay only for what you use — no subscription',
       features: [
-        '$5 free credit',
+        'No monthly minimum',
         '60 requests/min',
         '100K tokens/min',
         'API access',

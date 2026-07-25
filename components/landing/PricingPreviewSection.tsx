@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Check, ArrowRight, Sparkles, Building2 } from "lucide-react";
 
 const FREE_FEATURES = [
-  "$5 free credit — no card required",
+  "Free to start — pay only for what you use",
   "60 requests/min, 100K tokens/min",
   "OpenAI-compatible API",
   "Chat, agents, and MCP tools",
