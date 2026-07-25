@@ -4,7 +4,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { PartnerLogoRow } from "@/components/shared";
-import { partnerLogos } from "@/lib/constants/partner-logos";
+import { infrastructureLogos } from "@/lib/constants/partner-logos";
 
 const HanzoCodeCompanies = () => {
 
@@ -18,7 +18,7 @@ const HanzoCodeCompanies = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-8"
         >
-          <p className="text-xl text-muted-foreground">Trusted by engineers at</p>
+          <p className="text-xl text-muted-foreground">Ships to the clouds your team already uses</p>
         </motion.div>
         
         <motion.div
@@ -27,7 +27,7 @@ const HanzoCodeCompanies = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <PartnerLogoRow logos={partnerLogos} invert className="opacity-70" />
+          <PartnerLogoRow logos={infrastructureLogos} invert className="opacity-70" />
         </motion.div>
       </div>
     </section>

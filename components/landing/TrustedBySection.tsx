@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { partnerLogos } from "@/lib/constants/partner-logos";
+import { backerLogos, infrastructureLogos } from "@/lib/constants/partner-logos";
 import { PartnerLogoRow } from "@/components/shared";
 
 const TrustedBySection = () => {
@@ -17,10 +17,10 @@ const TrustedBySection = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-3">
-            Backed by builders. Used by teams shipping AI.
+            Backed by builders. Runs where you already run.
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Hanzo is backed by leading technology partners and used across AI, commerce, media, infrastructure, and developer tooling.
+            Hanzo AI is a Techstars company. The platform deploys on the clouds and silicon you already trust.
           </p>
         </motion.div>
 
@@ -29,12 +29,16 @@ const TrustedBySection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
+          className="space-y-10"
         >
-          <PartnerLogoRow
-            logos={partnerLogos}
-            invert
-            className="gap-x-10 gap-y-6"
-          />
+          <div>
+            <p className="mb-5 text-xs uppercase tracking-widest text-muted-foreground">Backed by</p>
+            <PartnerLogoRow logos={backerLogos} invert className="gap-x-10 gap-y-6" />
+          </div>
+          <div>
+            <p className="mb-5 text-xs uppercase tracking-widest text-muted-foreground">Runs on</p>
+            <PartnerLogoRow logos={infrastructureLogos} invert className="gap-x-10 gap-y-6" />
+          </div>
         </motion.div>
       </div>
     </section>
