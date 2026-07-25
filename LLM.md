@@ -157,13 +157,26 @@ first-party **analytics.hanzo.ai** property (Umami fork) — the SAME dashboard 
 two static sites (hanzo.app, hanzo.chat) feed via the `analytics.hanzo.ai/hz.js`
 tag, so every Hanzo surface streams to one door. `ANALYTICS_HOST` is its own env
 (`NEXT_PUBLIC_ANALYTICS_URL`), decoupled from the API base. No per-lens client tags
-on this Next app — the @hanzo/event client IS the pageview/error capture (the old
-direct `script.js`, inline PostHog, and Sentry CDN snippets were removed,
-`components/HanzoAnalytics.tsx` deleted).
+on this Next app for ANALYTICS (the old direct `script.js` and inline PostHog
+snippets were removed, `components/HanzoAnalytics.tsx` deleted).
+
+### THREE telemetry planes — orthogonal, never collapsed
+Analytics is NOT error capture. Each plane has its own first-party host:
+
+| Plane | Host | What it holds |
+|---|---|---|
+| **Errors** | **`sentry.hanzo.ai`** | error capture, **full AST**, **session replay**, the detailed error dashboard. Self-hosted Sentry — WE STILL USE IT. |
+| **Web analytics** | `analytics.hanzo.ai` | "boring web analytics" — pageviews, referrers, sessions (Umami fork). |
+| **Product insights** | `insights.hanzo.ai` | product analytics — funnels, retention, feature usage, flags. |
+
+All three must be **live and wired ZERO-CONFIG** for every template site and every
+`@hanzo/ui` / `@hanzo/gui` based app — shipped in the shared UI layer, never
+copy-pasted per repo. A new site gets errors + analytics + insights with no setup.
 
 - **Auto pageview** on load + route change (`usePageview(usePathname())`).
-- **Auto error capture** (SDK default) + `<ErrorBoundary>` for React render errors
-  — the @sentry replacement; no browser Sentry SDK.
+- **Errors go to `sentry.hanzo.ai`** (AST + session replay), with `<ErrorBoundary>`
+  for React render errors. Do NOT describe analytics as "the Sentry replacement" —
+  an earlier revision of this file said that and it was wrong.
 - **Logged-out marketing** ingests via a publishable key
   `NEXT_PUBLIC_HANZO_INGEST_KEY` (pk_, write-only, safe in the bundle) when the
   analytics.hanzo.ai ingest requires one; otherwise anonymous events fail closed.
