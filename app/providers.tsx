@@ -6,11 +6,29 @@ import { ObserveProvider } from '@hanzo/observe/react'
 import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 
-// First-party web-analytics ingest host: the analytics.hanzo.ai property (Umami
-// fork) the live dashboard reads — the SAME door hanzo.app / hanzo.chat feed via
-// analytics.hanzo.ai/hz.js. Its OWN host (decoupled from the API base); the
-// @hanzo/event client POSTs pageviews/errors to `${ANALYTICS_HOST}/v1/event`.
-const ANALYTICS_HOST = process.env.NEXT_PUBLIC_ANALYTICS_URL || 'https://analytics.hanzo.ai'
+// Event-stream door for the @hanzo/event client. This is api.hanzo.ai, NOT
+// analytics.hanzo.ai. Both hosts expose a path spelled `/v1/event`, but they are
+// DIFFERENT protocols:
+//
+//   • api.hanzo.ai/v1/event      — the cloud front door; body { batch: [Event…] }.
+//   • analytics.hanzo.ai/v1/event — the Umami tracker door; body is a BARE ARRAY
+//     of hz.js envelopes ({site, ts, type, path, …}) and rejects anything else
+//     with 400 "expected array, received object".
+//
+// This app previously pointed the SDK at the second one, so every pageview and
+// error it emitted was rejected 400 at the edge. Web analytics on this site is
+// unaffected by that and stays where it already works: the `analytics.hanzo.ai/hz.js`
+// tag in app/layout.tsx, which speaks the bare-array wire natively.
+const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.ai'
+
+/** Hanzo-minted Sentry DSN for the `hanzo-ai` project — the ERROR plane.
+ *  "https://<version>:<hmac>@<host>/v1/sentry/<projectId>". Publishable and
+ *  write-only (it can create an event and read nothing), so it is safe in the
+ *  bundle, exactly like the pk_ ingest key below. Without it @hanzo/event's error
+ *  plane is inert and NOTHING reaches sentry.hanzo.ai — which is precisely why
+ *  this site reported zero errors. Set in the build env; never committed.
+ *  Mint/rotate: POST /v1/sentry/projects · POST /v1/sentry/projects/{id}/keys/rotate */
+const EVENT_DSN = process.env.NEXT_PUBLIC_HANZO_EVENT_DSN
 
 /** Publishable ingest key (pk_…) — write-only, safe to ship in the bundle. It lets
  *  logged-out marketing traffic reach the ONE front door (POST /v1/event) so
@@ -52,7 +70,9 @@ function Pageview() {
 }
 
 /** Minimal on-brand fallback when a render error is caught. The boundary already
- *  reported it to /v1/event (the sentry lens); this just keeps the page usable. */
+ *  reported it on both planes — a Sentry envelope to sentry.hanzo.ai (the error
+ *  dashboard) and a type:'error' row on the event stream (product signal) — so
+ *  this just keeps the page usable. */
 function Crashed(_error: Error, reset: () => void) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-black px-6 text-center text-white">
@@ -93,11 +113,13 @@ function memoryStorage(): Storage {
 }
 
 /**
- * Client providers. Telemetry is ONE client: `@hanzo/event` → analytics.hanzo.ai
- * (POST /v1/event) — the first-party analytics dashboard, the SAME door the static
- * sites feed via analytics.hanzo.ai/hz.js. `AnalyticsProvider` auto-fires the first
- * pageview and wires auto error capture; `<Pageview/>` counts route changes; the
- * `ErrorBoundary` catches React render errors (which never reach window.onerror).
+ * Client providers. Telemetry is ONE client, `@hanzo/event`, over TWO planes:
+ * the event stream (POST api.hanzo.ai/v1/event) and the error plane (a Sentry
+ * envelope to the DSN host, sentry.hanzo.ai). Web analytics is the third plane and
+ * is NOT this client — it is the `analytics.hanzo.ai/hz.js` tag in layout.tsx.
+ * `AnalyticsProvider` auto-fires the first pageview and wires auto error capture;
+ * `<Pageview/>` counts route changes; the `ErrorBoundary` catches React render
+ * errors (which never reach window.onerror).
  * `<ObserveProvider>` rides the SAME client (via context) and adds default-on
  * interaction autocapture ($click/$input/$change/$submit) with a semantic DOM
  * hierarchy — input values redacted by default (PII-free). `nav={false}`: the
@@ -111,10 +133,13 @@ export function Providers({ children }: { children: ReactNode }) {
     <AnalyticsProvider
       config={{
         product: 'site',
-        host: ANALYTICS_HOST,
+        host: EVENT_HOST,
         ingestKey: INGEST_KEY,
         getToken,
         enabled,
+        // Error plane -> sentry.hanzo.ai. Inert (fail-safe) when the DSN is unset.
+        dsn: EVENT_DSN,
+        environment: 'production',
       }}
     >
       <ObserveProvider nav={false} enabled={enabled}>
