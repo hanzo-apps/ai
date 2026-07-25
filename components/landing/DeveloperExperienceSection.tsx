@@ -1,6 +1,7 @@
 'use client'
 
 import React from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import {
   Terminal,
@@ -21,6 +22,9 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { CodeTabs } from "@/components/ui/code-tabs";
+
+// Restrained monochrome "layered depth" motif — Canvas2D, client-only + code-split.
+const DepthField = dynamic(() => import("@/components/webgl/DepthField"), { ssr: false });
 
 // Developer workflow — works where developers already work.
 const WORKFLOW_CARDS = [
@@ -313,8 +317,10 @@ const DeveloperExperienceSection = () => {
       </div>
 
       {/* Unified platform */}
-      <div className="py-24 px-4 md:px-8 border-t border-border/40">
-        <div className="max-w-6xl mx-auto">
+      <div className="relative overflow-hidden py-24 px-4 md:px-8 border-t border-border/40">
+        {/* Restrained "layers of one shared context" depth field, faint and behind. */}
+        <DepthField className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-50" />
+        <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

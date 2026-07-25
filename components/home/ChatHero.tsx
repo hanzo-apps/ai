@@ -1,11 +1,17 @@
 'use client'
 
 import { useState, useRef, type FormEvent } from 'react'
+import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { useAnalytics } from '@hanzo/event/react'
 import { EVENTS } from '@hanzo/event'
 import { ArrowUp, MessageSquare, Boxes, Cloud } from 'lucide-react'
 import { CHAT, APP, CLOUD } from './nav-data'
+
+// WebGL point-globe backdrop — client-only + code-split so it never runs at
+// build/SSR and stays out of the main bundle. Falls back to the static radial
+// (below) when WebGL is unavailable.
+const PointGlobe = dynamic(() => import('@/components/webgl/PointGlobe'), { ssr: false })
 
 /** The composer is the front door to hanzo.chat: submit forwards the prompt. */
 function goToChat(prompt: string) {
@@ -61,11 +67,20 @@ export default function ChatHero() {
 
   return (
     <section className="relative flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
-      {/* Ambient glow (matches the site's radial-gradient hero). */}
+      {/* Decorative backdrop (behind content, z-0). Order matters:
+          1) static radial — instant paint + the no-WebGL / reduced-motion fallback.
+          2) the WebGL point-globe glows on top of it.
+          3) a radial mask darkens the centre so the composer stays crisp — leaving
+             a luminous ring of globe around the question. */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
-          className="absolute left-1/2 top-[38%] h-[640px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.16]"
+          className="absolute left-1/2 top-[44%] h-[680px] w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.13]"
           style={{ background: 'radial-gradient(circle, #ffffff 0%, transparent 70%)', filter: 'blur(120px)' }}
+        />
+        <PointGlobe variant="ambient" arcs={3} className="absolute inset-0 h-full w-full" />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(ellipse 46% 40% at 50% 47%, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 42%, transparent 78%)' }}
         />
       </div>
 
