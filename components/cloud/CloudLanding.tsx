@@ -1,8 +1,13 @@
 'use client'
 
 import React, { useState } from "react"
+import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
 import { HanzoLogo } from "@hanzo/logo/react"
+
+// WebGL point-globe backdrop — client-only + code-split (never SSR/build);
+// static radial below is the no-WebGL / reduced-motion fallback.
+const PointGlobe = dynamic(() => import("@/components/webgl/PointGlobe"), { ssr: false })
 import {
   ArrowRight,
   Bot,
@@ -74,8 +79,13 @@ function Hero() {
     <section className="relative overflow-hidden px-4 pb-20 pt-36 sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
-          className="absolute left-1/2 top-1/3 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.18]"
+          className="absolute left-1/2 top-1/3 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.14]"
           style={{ background: "radial-gradient(circle, #ffffff 0%, transparent 70%)", filter: "blur(120px)" }}
+        />
+        <PointGlobe variant="ambient" arcs={3} className="absolute inset-0 h-full w-full" />
+        <div
+          className="absolute inset-0"
+          style={{ background: "radial-gradient(ellipse 52% 44% at 50% 40%, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.38) 44%, transparent 80%)" }}
         />
       </div>
 
