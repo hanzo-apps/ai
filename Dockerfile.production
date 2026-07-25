@@ -1,11 +1,11 @@
-# Hanzo Cloud marketing site (cloud.hanzo.ai)
-# Builds the @hanzo/site static export and serves ONLY the /cloud landing
-# page as the site root via ghcr.io/hanzoai/static. CTAs point to
+# Hanzo Cloud marketing site (cloud.hanzo.ai) — image ghcr.io/hanzoai/cloud-www.
+# Builds the @hanzo/site static export and promotes the detailed /overview
+# homepage to the site root, served via ghcr.io/hanzoai/static. CTAs point to
 # console.hanzo.ai; /signin & /signup are handled by the hanzo.id routers.
 #
 # Build (BuildKit, on-cluster — no GHA):
 #   --opt=filename=Dockerfile.production
-#   --output=type=image,name=ghcr.io/hanzoai/cloud-site:<tag>,push=true
+#   --output=type=image,name=ghcr.io/hanzoai/cloud-www:<tag>,push=true
 
 # ---- build stage: Next.js static export ----------------------------------
 FROM node:20-bookworm-slim AS build
@@ -33,7 +33,7 @@ RUN NODE_OPTIONS=--max-old-space-size=8192 pnpm build
 # belongs on the detailed cloud site and is wrapped by the (marketing)
 # Navbar/Footer. With trailingSlash:false Next emits out/overview.html (flat
 # file); _next assets are absolute so they resolve from / unchanged. (The
-# chrome-free cloud-site landing remains reachable at /cloud-site.)
+# umbrella "Explore Cloud" landing is the same CloudLanding, reachable at /cloud.)
 RUN cp out/overview.html out/index.html
 
 # Clean URLs on hanzoai/static. The Next export is FLAT (trailingSlash:false →

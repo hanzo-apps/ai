@@ -1,13 +1,14 @@
-name: Cloud Site
+name: Cloud
 
-# Builds ghcr.io/hanzoai/cloud-site — the cloud.hanzo.ai landing image the
-# universe Deployment `www` (infra/k8s/cloud/cloud-site.yaml) pins. Static
-# export via Dockerfile.production, served by ghcr.io/hanzoai/static.
-# Tag convention matches the live universe pin (X.Y.Z, e.g. 0.1.1 — next
-# patch over the pinned tag). NO GitHub-hosted builders — this repo lives in
-# the hanzo-apps org, so it targets that org's arcd DinD scale set (same
-# runner deploy.yml uses). GHCR push crosses into the hanzoai namespace,
-# which the org GITHUB_TOKEN cannot do — login uses GH_PAT (hanzo-dev,
+# Builds ghcr.io/hanzoai/cloud-www — the cloud.hanzo.ai marketing-site image the
+# universe App CR `www` (infra/k8s/operator/crs/www.yaml) pins. Named cloud-www
+# (matching the Deployment `www`) so it can NEVER collide with the backend Go
+# binary image ghcr.io/hanzoai/cloud. Static export via Dockerfile.production,
+# served by ghcr.io/hanzoai/static. Tag convention matches the live universe pin
+# (X.Y.Z, e.g. 0.1.4 — next patch over the pinned tag). NO GitHub-hosted builders
+# — this repo lives in the hanzo-apps org, so it targets that org's arcd DinD
+# scale set (same runner deploy.yml uses). GHCR push crosses into the hanzoai
+# namespace, which the org GITHUB_TOKEN cannot do — login uses GH_PAT (hanzo-dev,
 # write:packages), mirroring hanzoai/app release.yml.
 
 permissions:
@@ -64,6 +65,6 @@ jobs:
           context: .
           file: ./Dockerfile.production
           platforms: linux/amd64
-          tags: ghcr.io/hanzoai/cloud-site:${{ inputs.tag }}
+          tags: ghcr.io/hanzoai/cloud-www:${{ inputs.tag }}
           provenance: false
           push: true

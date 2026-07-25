@@ -253,14 +253,9 @@ const SolutionIndustries: React.FC = () => {
     };
 
     const industry = industryData[activeIndustry] || industryData["Financial Services"];
-    const colorClasses = {
-      brand: "from-white/20 to-white/10 border-border",
-      blue: "from-white/20 to-white/10 border-border",
-      pink: "from-white/20 to-white/10 border-border",
-      green: "from-white/20 to-white/10 border-border",
-      indigo: "from-white/20 to-white/10 border-border"
-    };
-    
+    // Monochrome: one neutral card treatment for every industry (true-black + white).
+    const industryCardClass = "from-white/20 to-white/10 border-border";
+
     return (
       <motion.div
         key={activeIndustry}
@@ -269,7 +264,7 @@ const SolutionIndustries: React.FC = () => {
         transition={{ duration: 0.3 }}
         className="mb-20"
       >
-        <div className={`bg-gradient-to-br ${colorClasses[industry.color as keyof typeof colorClasses]} rounded-xl p-8 mb-10`}>
+        <div className={`bg-gradient-to-br ${industryCardClass} rounded-xl p-8 mb-10`}>
           <div className="flex flex-col md:flex-row md:items-center gap-8">
             <div className="bg-[var(--white)]/10 rounded-full p-6 inline-flex">
               {industry.icon}

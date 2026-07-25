@@ -215,12 +215,15 @@ export function orgLogoPath(org: string): string | null {
   return logoMap[org] ?? null
 }
 
+// Monochrome: modality badges are distinguished by their label, not by hue.
+// One shared neutral style keeps the model grid on-brand (true-black + white).
+const MODALITY_STYLE = { bg: 'bg-white/10', text: 'text-white/70' } as const
 export const MODALITY_STYLES: Record<string, { bg: string; text: string }> = {
-  text:   { bg: 'bg-blue-500/15',   text: 'text-blue-400' },
-  vision: { bg: 'bg-purple-500/15', text: 'text-purple-400' },
-  code:   { bg: 'bg-green-500/15',  text: 'text-green-400' },
-  audio:  { bg: 'bg-yellow-500/15', text: 'text-yellow-400' },
-  math:   { bg: 'bg-orange-500/15', text: 'text-orange-400' },
-  image:  { bg: 'bg-pink-500/15',   text: 'text-pink-400' },
-  video:  { bg: 'bg-cyan-500/15',   text: 'text-cyan-400' },
+  text:   MODALITY_STYLE,
+  vision: MODALITY_STYLE,
+  code:   MODALITY_STYLE,
+  audio:  MODALITY_STYLE,
+  math:   MODALITY_STYLE,
+  image:  MODALITY_STYLE,
+  video:  MODALITY_STYLE,
 }

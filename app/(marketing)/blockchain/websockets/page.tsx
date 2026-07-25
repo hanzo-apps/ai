@@ -21,7 +21,6 @@ const HanzoWebsockets = () => {
       tagline="Live blockchain data streaming"
       description="Real-time bidirectional communication with blockchain networks. Subscribe to blocks, transactions, logs, and pending transactions with persistent WebSocket connections."
       icon={Radio}
-      accentColor="#a855f7"
       features={[
         {
           icon: Radio,

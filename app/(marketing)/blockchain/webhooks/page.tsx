@@ -21,7 +21,6 @@ const HanzoWebhooks = () => {
       tagline="Real-time blockchain event notifications"
       description="Get instant notifications for on-chain events. Subscribe to transfers, contract events, address activity, and more with reliable webhook delivery."
       icon={Bell}
-      accentColor="#f97316"
       features={[
         {
           icon: Bell,

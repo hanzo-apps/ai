@@ -21,7 +21,6 @@ const HanzoBundler = () => {
       tagline="ERC-4337 UserOperation bundling service"
       description="Production-grade bundler for account abstraction. Submit, simulate, and track UserOperations across all ERC-4337 compatible chains with reliable transaction inclusion."
       icon={Layers}
-      accentColor="#14b8a6"
       features={[
         {
           icon: Layers,

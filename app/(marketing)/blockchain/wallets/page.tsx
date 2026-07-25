@@ -21,7 +21,6 @@ const HanzoSmartWallets = () => {
       tagline="ERC-4337 account abstraction wallets"
       description="Next-generation smart contract wallets with account abstraction. Social recovery, session keys, batch transactions, and gasless experiences out of the box."
       icon={Wallet}
-      accentColor="#f59e0b"
       features={[
         {
           icon: Wallet,
