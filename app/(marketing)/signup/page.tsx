@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useIam } from '@hanzo/iam/react'
 import { useAnalytics } from '@hanzo/event/react'
 import { EVENTS } from '@hanzo/event'
+import { markSignupIntent } from '@/lib/analytics/signup-intent'
 import { Loader2 } from 'lucide-react'
 
 /**
@@ -18,7 +19,10 @@ const SignUpPage = () => {
     analytics.capture(EVENTS.SIGNUP_VIEWED)
     const refCode = new URLSearchParams(window.location.search).get('ref')
     if (refCode) analytics.capture(EVENTS.REFERRAL_USED, { refCode })
+    // signup_submitted = the redirect INTO IAM (IAM owns the form). The intent
+    // mark is what lets /auth/callback tell a new account from a returning login.
     analytics.capture(EVENTS.SIGNUP_SUBMITTED)
+    markSignupIntent()
     login({ additionalParams: { signup: 'true' } })
   }, [login, analytics])
 

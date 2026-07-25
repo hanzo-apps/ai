@@ -1,10 +1,10 @@
 'use client'
 
-import { IamProvider } from '@hanzo/iam/react'
-import { AnalyticsProvider, ErrorBoundary, usePageview } from '@hanzo/event/react'
+import { IamProvider, useIam } from '@hanzo/iam/react'
+import { AnalyticsProvider, ErrorBoundary, useAnalytics, usePageview } from '@hanzo/event/react'
 import { ObserveProvider } from '@hanzo/observe/react'
 import { usePathname } from 'next/navigation'
-import type { ReactNode } from 'react'
+import { useEffect, type ReactNode } from 'react'
 
 // Event-stream door for the @hanzo/event client. This is api.hanzo.ai, NOT
 // analytics.hanzo.ai. Both hosts expose a path spelled `/v1/event`, but they are
@@ -66,6 +66,32 @@ function telemetryEnabled(): boolean {
 /** Route-change pageviews. Browser-only; safe under `output: export`. */
 function Pageview() {
   usePageview(usePathname())
+  return null
+}
+
+/**
+ * The ONE place this site binds telemetry identity — mounted inside IamProvider
+ * so it sees the resolved session on every route, not just /auth/callback.
+ *
+ *  • identify(user.id) — the stable IAM subject. NEVER email/name: the client is
+ *    PII-free by construction, and the id is what joins a person's events across
+ *    hanzo.ai and Hanzo Cloud (which stamps the same subject server-side).
+ *  • group(user.owner) — the org. Cloud already resolves the tenant for billing;
+ *    group() is what makes ORG-level funnels/cohorts queryable in insights, so a
+ *    B2B question ("which orgs stalled before their first API call?") is
+ *    answerable at all.
+ */
+function Identity() {
+  const { user, isAuthenticated } = useIam()
+  const analytics = useAnalytics()
+  const id = isAuthenticated ? user?.id : undefined
+  const org = isAuthenticated ? user?.owner : undefined
+  useEffect(() => {
+    if (id) analytics.identify(id)
+  }, [analytics, id])
+  useEffect(() => {
+    if (org) analytics.group(org)
+  }, [analytics, org])
   return null
 }
 
@@ -155,6 +181,7 @@ export function Providers({ children }: { children: ReactNode }) {
               storage: typeof window !== 'undefined' ? window.sessionStorage : memoryStorage(),
             }}
           >
+            <Identity />
             {children}
           </IamProvider>
         </ErrorBoundary>
