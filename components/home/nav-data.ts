@@ -197,7 +197,7 @@ export const TRY_LINKS: NavLink[] = [
   { label: 'Enso', href: '/enso', desc: 'One model to command them all' },
   { label: 'Hanzo App', href: APP, desc: 'Build & ship AI apps' },
   { label: 'Hanzo Studio', href: STUDIO, desc: 'The creative AI studio' },
-  { label: 'Hanzo Cloud', href: CLOUD, desc: 'The full open-source AI cloud' },
+  { label: 'Hanzo Cloud', href: CLOUD, desc: 'The full AI cloud' },
 ]
 
 /** Minimal footer columns. */

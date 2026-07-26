@@ -59,7 +59,7 @@ export const ProductsMenu = () => {
           {/* Positioning — the cloud-console identity line */}
           <div className="mb-3">
             <p className="text-[11px] text-muted-foreground">
-              The open-source AI cloud — <span className="text-foreground/80">one API for every capability. Open source. On-chain.</span>
+              The AI cloud — <span className="text-foreground/80">one API for every capability. Open models. On-chain.</span>
             </p>
           </div>
 

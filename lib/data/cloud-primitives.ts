@@ -5,7 +5,7 @@
  * cloud primitives. Every primitive has an open-source runtime, a cryptographic
  * identity, usage metering, and on-chain settlement underneath.
  *
- *   Positioning: The open-source AI cloud — one API for every capability.
+ *   Positioning: The AI cloud — one API for every capability.
  *
  * Mega-menu layout (two rows of five):
  *
@@ -138,7 +138,7 @@ export interface CloudCategory {
   items: Primitive[]
 }
 
-export const POSITIONING = 'The open-source AI cloud — one API for every capability. Open source. On-chain.'
+export const POSITIONING = 'The AI cloud — one API for every capability. Open models. On-chain.'
 
 const ORG = 'https://github.com/hanzoai'
 const DOCS = 'https://docs.hanzo.ai'

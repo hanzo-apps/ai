@@ -17,7 +17,7 @@ const PAPERS: CardItem[] = [
   {
     icon: Cloud,
     title: 'An OSS Cloud Built to Pass the Audit',
-    description: 'Designing an open-source cloud so that compliance falls out of the architecture instead of being bolted on.',
+    description: 'Designing the cloud so that compliance falls out of the architecture instead of being bolted on.',
     href: 'https://papers.hanzo.ai/',
   },
   {

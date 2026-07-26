@@ -47,7 +47,7 @@ const STEPS: Step[] = [
     n: '03',
     mark: <HanzoLogo variant="white" size={22} />,
     title: 'Run it on Hanzo Cloud',
-    body: 'Ship on the open-source AI cloud — Zen open models, Base backends, IAM, KMS, and vector search behind one API. Pay-as-you-go or self-host.',
+    body: 'Ship on the AI cloud — Zen open models, Base backends, IAM, KMS, and vector search behind one API. Pay-as-you-go or self-host.',
     cta: 'Explore Cloud',
     href: CLOUD,
     external: true,

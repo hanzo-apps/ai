@@ -7,9 +7,9 @@ import HomeLanding from '@/components/home/HomeLanding'
 // live on cloud.hanzo.ai (the cloud-www image serves the /overview homepage at
 // root and the full export beneath it); the nav here deep-links to cloud.hanzo.ai.
 
-const TITLE = 'Hanzo — Chat, models, and the open-source AI cloud'
+const TITLE = 'Hanzo — Chat, models, and the AI cloud'
 const DESCRIPTION =
-  'Ask Hanzo anything. Chat with open frontier models, build agents, and ship on the open-source AI cloud — models, Base backends, IAM, KMS, and vector search behind one API.'
+  'Ask Hanzo anything. Chat with open frontier models, build agents, and ship on the AI cloud — models, Base backends, IAM, KMS, and vector search behind one API.'
 
 export const metadata: Metadata = {
   title: TITLE,
