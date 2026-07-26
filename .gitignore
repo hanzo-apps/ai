@@ -52,3 +52,6 @@ tmp/
 # Stray local IAM SQLite DB — never commit a database into the marketing site.
 iam.db
 *.db
+
+# scratch next build output
+.next-uidefect/
