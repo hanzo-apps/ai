@@ -38,8 +38,12 @@ jobs:
           NODE_OPTIONS: '--max-old-space-size=8192'
         timeout-minutes: 30
 
-      - name: Create 404.html for SPA routing
-        run: cp out/index.html out/404.html
+      # No SPA fallback: every dynamic segment here ships generateStaticParams,
+      # so `output: export` emits real HTML for every route and an unmatched URL
+      # is genuinely not found. This step used to `cp out/index.html
+      # out/404.html`, which clobbered the export's real 404 (app/not-found.tsx)
+      # with the homepage — so every broken inbound link answered 404 while
+      # rendering "What can I help with?", indistinguishable from a good visit.
 
       - name: Smoke test static build
         run: |

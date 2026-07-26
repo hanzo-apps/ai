@@ -107,4 +107,12 @@
     color: var(--foreground);
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
   }
+
+  /* Tailwind v4's preflight dropped v3's `cursor: pointer` on buttons, so every
+     <button> on the site fell back to the UA default arrow — indistinguishable
+     from dead text. Restore it once, here, rather than per component. */
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
 }
