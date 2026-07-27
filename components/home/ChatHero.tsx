@@ -6,27 +6,12 @@ import { motion } from 'framer-motion'
 import { useAnalytics } from '@hanzo/event/react'
 import { EVENTS } from '@hanzo/event'
 import { ArrowUp, MessageSquare, Boxes, Cloud } from 'lucide-react'
-import { CHAT, APP, CLOUD } from './nav-data'
+import { CHAT, APP, CLOUD, goToChat } from './nav-data'
 
 // WebGL point-globe backdrop — client-only + code-split so it never runs at
 // build/SSR and stays out of the main bundle. Falls back to the static radial
 // (below) when WebGL is unavailable.
 const PointGlobe = dynamic(() => import('@/components/webgl/PointGlobe'), { ssr: false })
-
-/** The composer is the front door to hanzo.chat: submit forwards the prompt.
- *
- *  `hz_ref=site` is the funnel join. hanzo.ai and hanzo.chat are separate
- *  origins, so a logged-out visitor has a DIFFERENT anonymousId on each — no
- *  per-person funnel can span them. Carrying the source surface in the URL lets
- *  hanzo.chat stamp `referrerProduct:'site'` on its own chat_started, which makes
- *  the handoff drop-off measurable in aggregate without any cross-domain
- *  identity (see FUNNELS.siteToChat in @hanzo/event). */
-function goToChat(prompt: string) {
-  const q = prompt.trim()
-  const params = new URLSearchParams({ hz_ref: 'site' })
-  if (q) params.set('q', q)
-  window.location.href = `${CHAT}/?${params.toString()}`
-}
 
 interface Pill {
   label: string

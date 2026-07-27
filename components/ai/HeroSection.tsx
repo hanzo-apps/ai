@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Button } from "@hanzo/ui";
 import Link from "next/link";
+import { goToChat } from "@/components/home/nav-data";
 
 // Quick action presets
 const chatPresets = [
@@ -24,21 +25,24 @@ const chatPresets = [
   { icon: Code, label: "Code" },
 ];
 
+// What each preset opens the chat composer with.
+const PRESET_PROMPTS: Record<string, string> = {
+  Write: "Help me write ",
+  Learn: "Explain how ",
+  Code: "Help me write code for ",
+};
+
 const HeroSection = () => {
   const [chatInput, setChatInput] = useState("");
   const [showMacOSPromo, setShowMacOSPromo] = useState(true);
 
   const handleChatSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (chatInput.trim()) {
-      // Open global chat with this message
-      window.dispatchEvent(new CustomEvent('openGlobalChat', { detail: { message: chatInput } }));
-      setChatInput("");
-    }
+    if (chatInput.trim()) goToChat(chatInput);
   };
 
   const handlePresetClick = (label: string) => {
-    window.dispatchEvent(new CustomEvent('openGlobalChat', { detail: { action: label } }));
+    goToChat(PRESET_PROMPTS[label] ?? "");
   };
 
   return (

@@ -10,6 +10,7 @@ import {
   Globe,
   ChevronDown,
 } from "lucide-react";
+import { goToChat } from "@/components/home/nav-data";
 
 // Footer navigation data matching the design
 const footerLinks = {
@@ -92,11 +93,11 @@ const footerLinks = {
   },
 };
 
-// Chat widget action buttons - matching design order
+// Chat action buttons — each opens the hanzo.chat composer with its prompt.
 const chatActions = [
-  { icon: PenLine, label: "Write" },
-  { icon: BookOpen, label: "Learn" },
-  { icon: Code, label: "Code" },
+  { icon: PenLine, label: "Write", prompt: "Help me write " },
+  { icon: BookOpen, label: "Learn", prompt: "Explain how " },
+  { icon: Code, label: "Code", prompt: "Help me write code for " },
 ];
 
 // Social links with SVG icons
@@ -210,10 +211,7 @@ const Footer = () => {
 
   const handleChatSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (chatInput.trim()) {
-      window.dispatchEvent(new CustomEvent('openGlobalChat', { detail: { message: chatInput } }));
-      setChatInput("");
-    }
+    if (chatInput.trim()) goToChat(chatInput);
   };
 
   return (
@@ -257,9 +255,7 @@ const Footer = () => {
                     <button
                       key={action.label}
                       type="button"
-                      onClick={() => {
-                        window.dispatchEvent(new CustomEvent('openGlobalChat', { detail: { action: action.label } }));
-                      }}
+                      onClick={() => goToChat(action.prompt)}
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-secondary border border-border text-muted-foreground text-xs font-medium hover:bg-accent hover:text-foreground transition-colors"
                     >
                       <Icon className="w-3 h-3" />
