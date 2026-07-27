@@ -35,19 +35,14 @@ const PartnerCard: React.FC<PartnerCardProps> = ({
     ? "bg-gradient-to-br from-white/30 to-white/10 rounded-xl border border-border hover:border-white/40"
     : "bg-gradient-to-br from-white/20 to-white/10 rounded-xl border border-border hover:border-white/40";
 
-  const iconWrapperClass = isPrimary
-    ? "p-3 rounded-lg bg-primary/20"
-    : "p-3 rounded-lg bg-primary/20";
-
   const iconClass = isPrimary ? "text-foreground" : "text-foreground/70";
 
-  const primaryBtnClass = isPrimary
-    ? "bg-primary hover:bg-[#cccccc]"
-    : "bg-primary/10 hover:bg-primary";
-
-  const outlineBtnClass = isPrimary
-    ? "border border-white/40 hover:border-white/30 text-foreground hover:text-foreground/70"
-    : "border border-white/40 hover:border-border text-foreground/70 hover:text-foreground";
+  // Both actions read the same on every card: the primary is the filled button
+  // (foreground colour comes WITH the fill, or the label vanishes into it), the
+  // secondary is the outline. `color` tints the card and its icon, never the
+  // contrast of a label against its own background.
+  const primaryBtnClass = "bg-primary text-primary-foreground hover:bg-primary/90";
+  const outlineBtnClass = "border border-white/40 text-foreground hover:bg-white/10";
 
   const getSecondaryIcon = () => {
     switch (secondaryAction?.type) {
@@ -62,7 +57,7 @@ const PartnerCard: React.FC<PartnerCardProps> = ({
 
   return (
     <div className={`p-6 ${cardClass} transition-colors h-full`}>
-      <div className={`${iconWrapperClass} self-start inline-block mb-4`}>
+      <div className="p-3 rounded-lg bg-primary/20 self-start inline-block mb-4">
         <Icon className={`h-6 w-6 ${iconClass}`} strokeWidth={1.5} />
       </div>
       <h3 className="text-2xl font-bold text-foreground mb-3">{name}</h3>
@@ -73,7 +68,7 @@ const PartnerCard: React.FC<PartnerCardProps> = ({
             href={primaryAction.href || "#"}
             target={primaryAction.external ? "_blank" : undefined}
             rel={primaryAction.external ? "noopener noreferrer" : undefined}
-            className={`flex items-center gap-2 px-5 py-2.5 ${primaryBtnClass} rounded-md text-foreground transition-colors`}
+            className={`flex items-center gap-2 px-5 py-2.5 ${primaryBtnClass} rounded-md transition-colors`}
           >
             <span>{primaryAction.label}</span>
             {primaryAction.external && <ExternalLink size={14} />}

@@ -43,7 +43,7 @@ const MainCards: React.FC = () => {
               Digital Experiences
             </span>
           </div>
-          <Button asChild className="w-full bg-primary hover:bg-[#cccccc]">
+          <Button asChild className="w-full">
             <Link href="/solutions/capabilities">
               Explore Our Capabilities <ChevronRight className="ml-2 h-5 w-5" />
             </Link>
@@ -84,7 +84,7 @@ const MainCards: React.FC = () => {
               Technology
             </span>
           </div>
-          <Button asChild className="w-full bg-primary/10 hover:bg-primary">
+          <Button asChild className="w-full">
             <Link href="/solutions/industries">
               Explore Our Industry Solutions <ChevronRight className="ml-2 h-5 w-5" />
             </Link>
