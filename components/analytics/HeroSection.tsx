@@ -60,7 +60,7 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row gap-4 justify-center mt-10"
         >
-          <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary/90 border-none">
+          <Button size="lg" className="text-lg px-8 bg-primary hover:bg-primary/90 border-none text-primary-foreground">
             <a href="#start-free-trial">Start Free Trial</a>
           </Button>
           <Button size="lg" variant="outline" className="text-lg px-8">

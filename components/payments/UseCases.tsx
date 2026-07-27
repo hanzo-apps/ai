@@ -93,7 +93,7 @@ const UseCases = () => {
             No-code solutions available, with setup completed in minutes. Scalable from startup to enterprise-level with consistent reliability.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <button className="px-6 py-3 bg-primary hover:bg-primary/90 rounded-md transition duration-200">
+            <button className="px-6 py-3 bg-primary hover:bg-primary/90 rounded-md transition duration-200 text-primary-foreground">
               Get Started
             </button>
             <button className="px-6 py-3 bg-transparent border border-neutral-600 hover:border-neutral-400 rounded-md transition duration-200">

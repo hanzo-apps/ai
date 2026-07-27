@@ -148,9 +148,7 @@ const Features = () => {
               Paid support packages include a team of actual engineers (not chatbots) who themselves ship code on our platform. Emergency support and guaranteed response times available.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button
-                className="bg-gradient-to-r from-white to-white/10 hover:from-[#cccccc] hover:to-white text-[var(--white)]"
-              >
+              <Button>
                 Contact Sales
               </Button>
               

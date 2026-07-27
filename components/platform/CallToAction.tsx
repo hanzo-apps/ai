@@ -33,7 +33,7 @@ const CallToAction = () => {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-white to-white/10 hover:from-[#cccccc] hover:to-white text-[var(--white)] px-8 py-6 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all flex items-center"
+              className="shadow-lg hover:shadow-xl transition-all flex items-center"
             >
               <Github className="mr-2 h-5 w-5" />
               <a href="https://github.com/hanzo/platform">Get on GitHub</a>

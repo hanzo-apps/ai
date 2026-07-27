@@ -60,10 +60,7 @@ const GetStartedSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.2 }}
           >
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-white/20 to-white/10 hover:from-white/20 hover:to-white/10 text-[var(--white)] px-8 py-6 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all"
-            >
+            <Button size="lg" className="shadow-lg hover:shadow-xl transition-all">
               Deploy Now <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </motion.div>

@@ -36,10 +36,7 @@ const HeroSection = () => {
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Button 
-              size="lg"
-              className="bg-gradient-to-r from-white to-white/10 hover:from-[#cccccc] hover:to-white text-[var(--white)] rounded-lg"
-            >
+            <Button size="lg">
               Get Started
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>

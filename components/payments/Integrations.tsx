@@ -93,7 +93,7 @@ const { paymentIntent, error } = await stripe.confirmCardPayment(
               <span className="text-sm text-muted-foreground">API Reference</span>
               <div className="flex space-x-2">
                 <button className="px-3 py-1 bg-neutral-800 rounded text-sm">Copy</button>
-                <button className="px-3 py-1 bg-primary rounded text-sm">Try it</button>
+                <button className="px-3 py-1 bg-primary rounded text-sm text-primary-foreground">Try it</button>
               </div>
             </div>
           </motion.div>
@@ -145,7 +145,7 @@ const { paymentIntent, error } = await stripe.confirmCardPayment(
                 Get started with quickstart guides, examples, and developer tools.
               </p>
             </div>
-            <button className="w-full py-2 bg-primary hover:bg-primary/90 rounded-md transition duration-200">
+            <button className="w-full py-2 bg-primary hover:bg-primary/90 rounded-md transition duration-200 text-primary-foreground">
               API Reference
             </button>
           </motion.div>

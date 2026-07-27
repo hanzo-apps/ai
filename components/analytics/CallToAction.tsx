@@ -32,7 +32,7 @@ const CallToAction = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
-              <Button size="lg" className="text-lg px-10 py-6 bg-primary hover:bg-primary/90 border-none">
+              <Button size="lg" className="text-lg px-10 py-6 bg-primary hover:bg-primary/90 border-none text-primary-foreground">
                 Start Free Trial
               </Button>
             </motion.div>

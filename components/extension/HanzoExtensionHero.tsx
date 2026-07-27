@@ -31,10 +31,7 @@ const HanzoExtensionHero = () => {
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <Button 
-              size="lg"
-              className="bg-gradient-to-r from-white to-white/10 hover:from-[#cccccc] hover:to-white text-[var(--white)] px-8 py-6 rounded-lg text-lg font-medium"
-            >
+            <Button size="lg">
               <a href="#browsers" className="flex items-center">
                 <Chrome className="mr-2 h-5 w-5" />
                 Add to Chrome

@@ -55,10 +55,7 @@ const HanzoCodeCTA = () => {
             <p className="text-foreground/80 mb-6">
               Install Hanzo Code alongside your current editor and supercharge it with our agentic capabilities. No need to switch or change your workflow.
             </p>
-            <Button 
-              size="sm"
-              className="bg-gradient-to-r from-white to-white/10 hover:from-[#cccccc] hover:to-white text-[var(--white)]"
-            >
+            <Button size="sm">
               One-Click Integration
             </Button>
           </div>
