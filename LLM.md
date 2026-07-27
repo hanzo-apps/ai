@@ -172,10 +172,25 @@ each mounts its own `@hanzo/event` client, so a tag could only double-count the
 pageviews that client already posts. (The older direct `script.js` and inline
 PostHog snippets were removed earlier, `components/HanzoAnalytics.tsx` deleted.)
 
-Anonymous/logged-out views need the publishable `pk-` ingest key
-(`NEXT_PUBLIC_HANZO_INGEST_KEY`) — without it `api.hanzo.ai/v1/event` correctly
-answers `403 "valid bearer or a resolvable ingest key required"` and anonymous
-telemetry fails closed.
+Anonymous/logged-out views need NO key. `api.hanzo.ai/v1/event` is the ONE door for
+every auth context, anonymous included: a request with no bearer and no key is
+admitted and attributed SERVER-SIDE to a reserved public tenant (`$public`), never
+to a real org and never to anything the request names. Do not add a publishable
+`pk-` key for this.
+
+The anonymous lane is deliberately narrow. Only `type:"pageview"` and
+`type:"error"` are stored — `identify`, `group`, and custom events are dropped and
+counted in the `{accepted,dropped}` receipt. The stored event name is server-chosen
+(`$pageview` / `$error`), and only allowlisted fields are kept: the client property
+bag, `personId`, `groupId`, and every commerce field are dropped, so an anonymous
+caller can neither name a tenant nor persist a key it chose. Anonymous ingest is
+per-IP rate-limited and bounded (≤50 events, ≤64 KiB — over either is rejected, not
+truncated), and `DNT: 1` / `Sec-GPC: 1` store nothing.
+
+A PRESENTED-but-unresolvable key still fails closed with
+`403 "valid bearer or a resolvable ingest key required"` — that 403 now means a
+broken credential, not a logged-out visitor. Events sent WITH a valid bearer are
+unchanged: real org, full capability.
 
 ### THREE telemetry planes — orthogonal, never collapsed
 Analytics is NOT error capture. Each plane has its own first-party host:
@@ -194,9 +209,9 @@ copy-pasted per repo. A new site gets errors + analytics + insights with no setu
 - **Errors go to `sentry.hanzo.ai`** (AST + session replay), with `<ErrorBoundary>`
   for React render errors. Do NOT describe analytics as "the Sentry replacement" —
   an earlier revision of this file said that and it was wrong.
-- **Logged-out marketing** ingests via a publishable key
-  `NEXT_PUBLIC_HANZO_INGEST_KEY` (pk_, write-only, safe in the bundle) when the
-  analytics.hanzo.ai ingest requires one; otherwise anonymous events fail closed.
+- **Logged-out marketing** needs NO credential: it posts to the unified
+  `api.hanzo.ai/v1/event`, which lands anonymous pageviews and errors under the
+  reserved `$public` tenant (see above). No `NEXT_PUBLIC_HANZO_INGEST_KEY`.
 - **Consent**: honors Do Not Track / Global Privacy Control (via `enabled`).
 - **Product moments**: `EVENTS.CHAT_STARTED` (apex composer + nav "Try Hanzo"),
   `EVENTS.FEATURE_USED` (home pills); the funnel events
