@@ -18,9 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # No `version:` input: package.json pins packageManager: pnpm@9.15.0 and
+      # action-setup errors if a version is specified in both places.
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - uses: actions/setup-node@v4
         with:

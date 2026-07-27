@@ -28,9 +28,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # No `version:` input on purpose. package.json pins
+      # packageManager: pnpm@9.15.0, and action-setup ERRORS OUT if a version is
+      # given in both places ("Multiple versions of pnpm specified"). One source
+      # of truth — package.json — so local, this pipeline and the GitHub one can
+      # never resolve different pnpm binaries.
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - uses: actions/setup-node@v4
         with:
