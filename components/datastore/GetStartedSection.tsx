@@ -35,10 +35,7 @@ const GetStartedSection = () => {
             </div>
 
             <div className="flex flex-wrap justify-center gap-6">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-white/20 to-white/10 hover:from-white/20 hover:to-white/10 text-[var(--white)] px-8 py-6 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all flex items-center"
-              >
+              <Button size="lg" className="shadow-lg hover:shadow-xl transition-all">
                 <Download className="mr-2 h-5 w-5" />
                 Download
               </Button>
