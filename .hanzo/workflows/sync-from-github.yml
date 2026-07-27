@@ -1,0 +1,55 @@
+name: Sync from GitHub
+# git.hanzo.ai is canonical; development also lands on
+# github.com/hanzoai/hanzo.ai. ONE deterministic direction: an in-cluster PULL.
+# The runner reaches both ends, so the sync has no ingress dependency.
+#
+# Fast-forward ONLY: a divergence fails loudly here instead of force-pushing
+# either side.
+#
+# This replaces the forge's built-in pull mirror. A mirrored repo has
+# has_actions=false — measured on this repo: mirror=true, has_actions=false,
+# total_count=0 runs — so as long as it is a mirror, NOTHING in .hanzo/workflows
+# can ever fire. Converting the repo to regular is what switches Actions on, and
+# this job is what keeps it current afterwards.
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+
+concurrency:
+  group: sync-from-github
+  cancel-in-progress: false
+
+jobs:
+  ff-main:
+    runs-on: [hanzo-build-linux-amd64]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Fast-forward main from github.com/hanzoai/hanzo.ai
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          set -euo pipefail
+          git fetch --quiet "https://x-access-token:${GH_PAT}@github.com/hanzoai/hanzo.ai.git" main
+          LOCAL="$(git rev-parse HEAD)"; REMOTE="$(git rev-parse FETCH_HEAD)"
+          if [ "$LOCAL" = "$REMOTE" ]; then echo "in sync at $LOCAL"; exit 0; fi
+          if git merge-base --is-ancestor "$LOCAL" "$REMOTE"; then
+            echo "fast-forwarding $LOCAL -> $REMOTE"
+            git push origin "$REMOTE:refs/heads/main"
+            # A push made with the workflow token does NOT trigger workflows, so
+            # synced commits would never deploy. Dispatch explicitly.
+            curl -fsS --max-time 20 -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              "${{ github.server_url }}/v1/repos/${{ github.repository }}/actions/workflows/deploy.yml/dispatches" \
+              -d '{"ref":"main"}' \
+              && echo "deploy dispatched" || echo "dispatch failed (non-fatal — next direct push deploys)"
+          elif git merge-base --is-ancestor "$REMOTE" "$LOCAL"; then
+            echo "canonical is AHEAD of GitHub — nothing to pull (never force from here)."
+          else
+            echo "::error::main DIVERGED between GitHub ($REMOTE) and canonical ($LOCAL) — refusing to force. Reconcile manually."
+            exit 1
+          fi

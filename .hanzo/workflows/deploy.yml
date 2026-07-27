@@ -1,0 +1,124 @@
+name: Deploy
+# Native port of .github/workflows/deploy.yml.
+#
+# WHY THIS EXISTS: GitHub Actions is disabled for the `hanzo-dev` ACCOUNT, so a
+# push by that account creates ZERO runs — no queued job, no failed run, no
+# notification. The repo's own Actions setting is `enabled: true` and the
+# hanzo-apps pool does serve it, which is why this looks healthy while nothing
+# ships. Eleven commits sat undeployed for a day and hanzo.ai kept serving
+# "the open-source AI cloud" after that claim was deliberately removed in
+# e31324eb. This pipeline runs on git.hanzo.ai instead, which the block does
+# not touch.
+#
+# Kept byte-for-byte faithful to the GitHub job apart from `runs-on` and the
+# secret source — the smoke test below has caught real breakage before and is
+# not decoration.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: [hanzo-build-linux-amd64]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Large static export (hundreds of pages); the default heap OOMs it.
+      - name: Build
+        run: pnpm build
+        env:
+          NODE_OPTIONS: '--max-old-space-size=8192'
+        timeout-minutes: 30
+
+      # No SPA fallback: every dynamic segment ships generateStaticParams, so
+      # `output: export` emits real HTML per route. Do NOT reintroduce
+      # `cp out/index.html out/404.html` — that clobbered the export's real 404
+      # with the homepage, so every broken inbound link answered 404 while
+      # rendering "What can I help with?", indistinguishable from a good visit.
+      - name: Smoke test static build
+        run: |
+          pnpm dlx serve out -l 3333 &
+          SERVER_PID=$!
+          for i in $(seq 1 30); do
+            if curl -s -o /dev/null http://localhost:3333 2>/dev/null; then
+              echo "Server ready after ${i}s"; break
+            fi
+            sleep 1
+          done
+          BODY=$(curl -s http://localhost:3333)
+          if echo "$BODY" | grep -q "Application error"; then
+            echo "FATAL: Homepage contains 'Application error'"; kill $SERVER_PID 2>/dev/null; exit 1
+          fi
+          FAILED=0
+          for page in index about pricing contact enterprise zen; do
+            if [ ! -f "out/${page}.html" ] && [ ! -f "out/${page}/index.html" ]; then
+              echo "FATAL: Missing page: ${page}"; FAILED=1
+            fi
+          done
+          kill $SERVER_PID 2>/dev/null
+          if [ "$FAILED" = "1" ]; then exit 1; fi
+          echo "All smoke tests passed"
+
+      # CF credentials live in KMS, never in forge secrets. The only things held
+      # here are the machine identity that reads them — seeded as hanzoai org
+      # secrets from the in-cluster hanzo-kms-iam-creds.
+      #
+      # The `deploy/` path segment is load-bearing: querying the org secret root
+      # returns {"names":[]} and looks empty, which reads as "the creds are gone".
+      - name: Fetch CF credentials from KMS
+        id: kms
+        env:
+          KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
+          KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}
+          KMS_ENDPOINT: ${{ vars.KMS_ENDPOINT || 'https://kms.hanzo.ai' }}
+          KMS_ORG: ${{ vars.KMS_ORG || 'hanzo' }}
+          KMS_SECRET_ENV: ${{ vars.KMS_SECRET_ENV || 'prod' }}
+        run: |
+          token=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/auth/login" \
+            -H 'Content-Type: application/json' \
+            -d "{\"clientId\":\"${KMS_CLIENT_ID}\",\"clientSecret\":\"${KMS_CLIENT_SECRET}\"}" \
+            | jq -r '.accessToken // empty')
+          if [ -z "${token}" ]; then
+            echo "::error::KMS login failed at ${KMS_ENDPOINT}/v1/kms/auth/login (check KMS_CLIENT_ID/KMS_CLIENT_SECRET)."
+            exit 1
+          fi
+          kms_get() {
+            curl -fsS "${KMS_ENDPOINT}/v1/kms/orgs/${KMS_ORG}/secrets/deploy/$1?env=${KMS_SECRET_ENV}" \
+              -H "Authorization: Bearer ${token}" | jq -r '.secret.value // empty'
+          }
+          cf_token=$(kms_get CLOUDFLARE_API_TOKEN)
+          cf_account=$(kms_get CLOUDFLARE_ACCOUNT_ID)
+          if [ -z "${cf_token}" ] || [ -z "${cf_account}" ]; then
+            echo "::error::CF credentials missing in KMS at ${KMS_ORG}/deploy (env ${KMS_SECRET_ENV})."
+            exit 1
+          fi
+          echo "::add-mask::${cf_token}"
+          echo "::add-mask::${cf_account}"
+          echo "cf_token=${cf_token}" >> "$GITHUB_OUTPUT"
+          echo "cf_account=${cf_account}" >> "$GITHUB_OUTPUT"
+
+      # On main, wrangler publishes to PRODUCTION (the apex), not a preview.
+      # Scope is the apex only: cloud.hanzo.ai is k8s hanzoai/static and a Pages
+      # deploy cannot reach it.
+      - name: Deploy to Cloudflare Pages
+        run: pnpm dlx wrangler pages deploy out --project-name=hanzo-ai --commit-dirty=true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ steps.kms.outputs.cf_token }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ steps.kms.outputs.cf_account }}
