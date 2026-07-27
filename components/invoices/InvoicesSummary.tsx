@@ -31,7 +31,7 @@ const InvoicesSummary = () => {
         </div>
         
         <Button 
-          className="bg-primary hover:bg-[#cccccc] text-[var(--white)] w-full"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground w-full"
         >
           View Plan Details
         </Button>

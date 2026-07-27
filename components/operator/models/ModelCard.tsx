@@ -25,7 +25,7 @@ const ModelCard = ({ model, index }: ModelCardProps) => {
       `}
     >
       {model.recommended && (
-        <span className="absolute top-0 right-6 -translate-y-1/2 px-3 py-1 bg-primary text-[var(--white)] text-xs font-semibold rounded-full">
+        <span className="absolute top-0 right-6 -translate-y-1/2 px-3 py-1 bg-primary text-primary-foreground text-xs font-semibold rounded-full">
           Recommended
         </span>
       )}

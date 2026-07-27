@@ -51,7 +51,7 @@ const CallToAction = () => {
         >
           <Button
             size="lg"
-            className="bg-primary hover:bg-[#cccccc] text-[var(--white)] px-8 py-6 text-lg w-full sm:w-auto"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg w-full sm:w-auto"
           >
             Start Building <ArrowRight className="ml-2 h-5 w-5" />
           </Button>

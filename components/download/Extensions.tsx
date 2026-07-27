@@ -100,7 +100,7 @@ const Extensions = () => {
               ))}
             </div>
 
-            <Button className="w-full bg-primary hover:bg-[#cccccc] text-[var(--white)]">
+            <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
               <Code className="mr-2 h-4 w-4" />
               Install VS Code Extension
             </Button>
@@ -132,7 +132,7 @@ const Extensions = () => {
               ))}
             </div>
 
-            <Button className="w-full bg-primary/10 hover:bg-primary text-[var(--white)]">
+            <Button variant="secondary" className="w-full">
               <Code className="mr-2 h-4 w-4" />
               Install JetBrains Plugin
             </Button>
@@ -213,7 +213,7 @@ const Extensions = () => {
               </span>
             </div>
 
-            <Button className="w-full bg-primary hover:bg-[#cccccc] text-[var(--white)]">
+            <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
               <Laptop className="mr-2 h-4 w-4" />
               Download Desktop App
             </Button>
@@ -256,7 +256,7 @@ const Extensions = () => {
                 Unified API for all providers. Switch models without changing code.
               </p>
             </div>
-            <Button className="bg-primary hover:bg-[#cccccc] text-[var(--white)] whitespace-nowrap">
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground whitespace-nowrap">
               <Brain className="mr-2 h-4 w-4" />
               View All Models
             </Button>

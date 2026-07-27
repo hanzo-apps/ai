@@ -70,7 +70,7 @@ const UnifiedAICloud: React.FC = () => {
       </div>
       
       <div className="text-center">
-        <Button asChild size="lg" className="bg-primary hover:bg-[#cccccc]">
+        <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
           <Link href="/cloud">
             Explore Our AI Cloud Platform <ChevronRight className="ml-2 h-5 w-5" />
           </Link>

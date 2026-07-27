@@ -178,7 +178,7 @@ const DigitalAssets = () => {
           >
             <a
               href="https://console.hanzo.ai"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/20 text-foreground font-medium rounded-full transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-full transition-colors"
             >
               Start Building
               <ArrowRight className="w-4 h-4" />
@@ -331,7 +331,7 @@ const DigitalAssets = () => {
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="https://console.hanzo.ai"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/20 text-foreground font-medium rounded-full transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-full transition-colors"
               >
                 Get Started Free
                 <ArrowRight className="w-4 h-4" />

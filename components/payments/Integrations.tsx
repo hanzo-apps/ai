@@ -145,7 +145,7 @@ const { paymentIntent, error } = await stripe.confirmCardPayment(
                 Get started with quickstart guides, examples, and developer tools.
               </p>
             </div>
-            <button className="w-full py-2 bg-primary hover:bg-[#cccccc] rounded-md transition duration-200">
+            <button className="w-full py-2 bg-primary hover:bg-primary/90 rounded-md transition duration-200">
               API Reference
             </button>
           </motion.div>

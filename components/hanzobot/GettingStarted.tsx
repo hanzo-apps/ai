@@ -98,7 +98,7 @@ const GettingStarted = () => {
                   
                   <Button 
                     size="lg"
-                    className="bg-primary hover:bg-[#cccccc] text-[var(--white)] px-8 w-full"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 w-full"
                   >
                     View Quickstart Guide
                   </Button>

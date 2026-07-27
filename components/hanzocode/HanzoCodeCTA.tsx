@@ -25,7 +25,7 @@ const HanzoCodeCTA = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-16">
             <Button 
               size="sm"
-              className="bg-primary hover:bg-[#cccccc] text-[var(--white)] w-full sm:w-auto"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground w-full sm:w-auto"
             >
               <Download className="mr-2 h-4 w-4" />
               Download Hanzo Code

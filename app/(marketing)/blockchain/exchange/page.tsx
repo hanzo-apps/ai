@@ -176,7 +176,7 @@ const HanzoExchange = () => {
           >
             <a
               href="https://docs.hanzo.ai/exchange"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/20 text-foreground font-medium rounded-full transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-full transition-colors"
             >
               Get Started
               <ArrowRight className="w-4 h-4" />
@@ -361,7 +361,7 @@ await exchange.orderbook.placeLimitOrder({
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href="https://docs.hanzo.ai/exchange"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/20 text-foreground font-medium rounded-full transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-full transition-colors"
               >
                 Read the Docs
                 <ArrowRight className="w-4 h-4" />

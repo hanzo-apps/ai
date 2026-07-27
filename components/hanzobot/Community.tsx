@@ -68,7 +68,7 @@ const Community = () => {
               <div className="flex flex-col space-y-4">
                 <Button 
                   size="sm"
-                  className="bg-primary hover:bg-[#cccccc] text-[var(--white)]"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground"
                 >
                   <Github className="mr-2 h-5 w-5" />
                   <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer">

@@ -133,7 +133,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
         {/* Actions */}
         <div className="flex items-center gap-2">
           {primaryAction && (
-            <Button size="sm" className="bg-primary hover:bg-primary/90 text-foreground" asChild>
+            <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
               <a href={primaryAction.url || "#"} target="_blank" rel="noopener noreferrer">
                 {primaryAction.label}
               </a>
@@ -221,7 +221,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
       {/* Actions */}
       <div className="mt-auto p-4 pt-3 border-t border-border flex items-center gap-2">
         {primaryAction ? (
-          <Button size="sm" className="flex-1 bg-primary hover:bg-primary/90 text-foreground" asChild>
+          <Button size="sm" className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
             <a href={primaryAction.url || "#"} target="_blank" rel="noopener noreferrer">
               <primaryAction.icon className="w-3.5 h-3.5 mr-1.5" />
               {primaryAction.label}

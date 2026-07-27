@@ -55,7 +55,7 @@ const HeroSection = () => {
             >
               <Button
                 size="lg"
-                className="bg-primary hover:bg-[#cccccc] text-[var(--white)] px-6"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-6"
               >
                 Start Building <ArrowRight className="ml-2 h-4 w-4" />
               </Button>

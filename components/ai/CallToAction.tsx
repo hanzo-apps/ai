@@ -39,7 +39,7 @@ const CallToAction = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Button size="lg" className="bg-primary hover:bg-[#cccccc]">
+            <Button size="lg" className="bg-primary hover:bg-primary/90">
               Get Started Free
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
@@ -112,7 +112,7 @@ const CallToAction = () => {
               <p className="text-foreground/80">Sign up for free and start building with Hanzo AI today.</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary hover:bg-[#cccccc]">
+              <Button size="lg" className="bg-primary hover:bg-primary/90">
                 Create Free Account
               </Button>
               <Button size="lg" variant="outline" className="text-[var(--white)]">

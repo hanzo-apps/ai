@@ -302,7 +302,7 @@ const BlockchainPricing = () => {
           Start free and scale as you grow. No credit card required.
         </p>
         <div className="flex justify-center gap-4">
-          <Button size="lg" className="bg-primary hover:bg-[#cccccc] text-primary-foreground px-8">
+          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8">
             Start Building Free
           </Button>
           <Button size="lg" variant="outline" className="border-border hover:border-neutral-600">

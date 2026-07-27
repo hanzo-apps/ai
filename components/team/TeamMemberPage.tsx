@@ -96,7 +96,7 @@ const TeamMemberPage = ({ memberId }: TeamMemberPageProps) => {
                 <div className="flex flex-wrap gap-4">
                   <Button
                     onClick={handleContactAgency}
-                    className="bg-primary hover:bg-[#cccccc] text-[var(--white)]"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground"
                   >
                     Work with Hanzo Agency
                     <ExternalLink className="ml-2 h-4 w-4" />

@@ -91,7 +91,7 @@ const TeamDev = () => {
             </p>
             <Button 
               onClick={handleContactSensei}
-              className="bg-primary hover:bg-primary/20"
+              className="bg-primary hover:bg-primary/90"
             >
               Contact Sensei Group
             </Button>

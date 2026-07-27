@@ -8,7 +8,6 @@ import {
   FileText,
   ExternalLink,
   Mail,
-  Phone,
   Users,
   BookOpen,
   Link as LinkIcon,
@@ -25,8 +24,9 @@ import {
 import { getIcon } from "@/lib/constants/iconMappings";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Button } from "@hanzo/ui";
+import { Button, buttonVariants } from "@/components/ui/button";
 import SectionHeader from "@/components/zen/SectionHeader";
+import PartnerCard from "@/components/shared/PartnerCard";
 import ChromeText from "@/components/ui/chrome-text";
 
 const SolutionIndustries: React.FC = () => {
@@ -408,7 +408,7 @@ const SolutionIndustries: React.FC = () => {
             </a>
           </div>
           <div className="mt-6 text-center">
-            <Button variant="outline" className="border-white/40 text-foreground hover:bg-primary/10">
+            <Button variant="outline">
               View all case studies <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -443,7 +443,7 @@ const SolutionIndustries: React.FC = () => {
             </a>
           </div>
           <div className="mt-6 text-center">
-            <Button variant="outline" className="border-white/40 text-foreground/70 hover:bg-primary/10">
+            <Button variant="outline">
               View all white papers <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -460,62 +460,24 @@ const SolutionIndustries: React.FC = () => {
       />
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <div className="p-6 bg-gradient-to-br from-white/30 to-white/10 rounded-xl border border-border hover:border-white/40 transition-colors">
-          <div className="p-3 rounded-lg bg-primary/20 self-start inline-block mb-4">
-            <Users className="h-6 w-6 text-foreground" strokeWidth={1.5} />
-          </div>
-          <h3 className="text-2xl font-bold text-[var(--white)] mb-3">Hanzo Agency</h3>
-          <p className="text-foreground/80 mb-5">
-            Our AI-powered creative agency helps brands transform their digital presence with cutting-edge design,
-            content, and marketing strategies powered by artificial intelligence.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="https://hanzo.agency"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary/20 rounded-md text-[var(--white)] transition-colors"
-            >
-              <span>Visit Hanzo Agency</span>
-              <ExternalLink size={14} />
-            </a>
-            <a
-              href="/contact"
-              className="flex items-center gap-2 px-5 py-2.5 border border-white/40 hover:border-white/30 rounded-md text-foreground hover:text-foreground/70 transition-colors"
-            >
-              <span>Contact us</span>
-              <Mail size={14} />
-            </a>
-          </div>
-        </div>
-        <div className="p-6 bg-gradient-to-br from-white/20 to-white/10 rounded-xl border border-border hover:border-white/40 transition-colors">
-          <div className="p-3 rounded-lg bg-primary/20 self-start inline-block mb-4">
-            <Shield className="h-6 w-6 text-foreground/70" strokeWidth={1.5} />
-          </div>
-          <h3 className="text-2xl font-bold text-[var(--white)] mb-3">Sensei Group</h3>
-          <p className="text-foreground/80 mb-5">
-            Our collective of fractional CXOs and industry experts help enterprises implement transformative
-            technology solutions and drive strategic growth initiatives.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <a
-              href="https://sensei.group"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-5 py-2.5 bg-primary/10 hover:bg-primary rounded-md text-[var(--white)] transition-colors"
-            >
-              <span>Visit Sensei Group</span>
-              <ExternalLink size={14} />
-            </a>
-            <a
-              href="tel:+1234567890"
-              className="flex items-center gap-2 px-5 py-2.5 border border-white/40 hover:border-border rounded-md text-foreground/70 hover:text-foreground transition-colors"
-            >
-              <span>Schedule a call</span>
-              <Phone size={14} />
-            </a>
-          </div>
-        </div>
+        <PartnerCard
+          name="Hanzo Agency"
+          description="Our AI-powered creative agency helps brands transform their digital presence with cutting-edge design, content, and marketing strategies powered by artificial intelligence."
+          url="https://hanzo.agency"
+          icon={Users}
+          color="primary"
+          primaryAction={{ label: "Visit Hanzo Agency", href: "https://hanzo.agency", external: true }}
+          secondaryAction={{ label: "Contact us", href: "/contact", type: "email" }}
+        />
+        <PartnerCard
+          name="Sensei Group"
+          description="Our collective of fractional CXOs and industry experts help enterprises implement transformative technology solutions and drive strategic growth initiatives."
+          url="https://sensei.group"
+          icon={Shield}
+          color="secondary"
+          primaryAction={{ label: "Visit Sensei Group", href: "https://sensei.group", external: true }}
+          secondaryAction={{ label: "Schedule a call", href: "tel:+1234567890", type: "phone" }}
+        />
       </div>
     </div>
   );
@@ -547,9 +509,9 @@ const SolutionIndustries: React.FC = () => {
                 <button
                   key={industry}
                   onClick={() => setActiveIndustry(industry)}
-                  className={`px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
+                  className={`px-4 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-colors ${
                     activeIndustry === industry
-                      ? "bg-primary text-[var(--white)]"
+                      ? "bg-primary text-primary-foreground"
                       : "bg-neutral-900 text-foreground/80 hover:bg-neutral-800"
                   }`}
                 >
@@ -587,17 +549,17 @@ const SolutionIndustries: React.FC = () => {
               <div className="flex flex-wrap justify-center gap-4">
                 <a
                   href="/contact"
-                  className="inline-flex items-center px-6 py-3 rounded-lg bg-primary hover:bg-primary/20 text-[var(--white)] font-medium transition-colors"
+                  className={buttonVariants({ variant: "default", size: "lg" })}
                 >
                   Get Started
-                  <ChevronRight className="ml-2 h-5 w-5" />
+                  <ChevronRight />
                 </a>
                 <a
                   href="mailto:solutions@hanzo.ai"
-                  className="inline-flex items-center px-6 py-3 rounded-lg border border-white text-foreground hover:bg-primary/10 transition-colors"
+                  className={buttonVariants({ variant: "outline", size: "lg" })}
                 >
                   Email Us
-                  <Mail className="ml-2 h-5 w-5" />
+                  <Mail />
                 </a>
               </div>
             </div>

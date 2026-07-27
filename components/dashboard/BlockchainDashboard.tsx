@@ -84,7 +84,7 @@ const BlockchainDashboard = () => {
           <h2 className="text-xl font-semibold">Blockchain Infrastructure</h2>
           <p className="text-muted-foreground text-sm">RPC, APIs, and Web3 services</p>
         </div>
-        <Button className="bg-primary hover:bg-[#cccccc] text-primary-foreground">
+        <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
           <Key className="w-4 h-4 mr-2" />
           Create API Key
         </Button>

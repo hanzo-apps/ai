@@ -22,7 +22,7 @@ const BrowserCard = ({ icon: Icon, title, description, buttonText }) => {
       </div>
       
       <div className="mt-auto">
-        <Button className="w-full bg-primary hover:bg-[#cccccc]">
+        <Button className="w-full bg-primary hover:bg-primary/90">
           {buttonText}
         </Button>
       </div>

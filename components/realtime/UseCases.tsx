@@ -106,7 +106,7 @@ const UseCases = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="text-center"
         >
-          <Button className="bg-primary hover:bg-[#cccccc]">
+          <Button className="bg-primary hover:bg-primary/90">
             Explore All Use Cases <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </motion.div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { ExternalLink, Mail, Phone, Users, Shield, LucideIcon } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
 import { BrandColor } from "@/lib/constants/brand";
 
 interface PartnerCardProps {
@@ -40,10 +41,8 @@ const PartnerCard: React.FC<PartnerCardProps> = ({
   // Both actions read the same on every card: the primary is the filled button
   // (foreground colour comes WITH the fill, or the label vanishes into it), the
   // secondary is the outline. `color` tints the card and its icon, never the
-  // contrast of a label against its own background.
-  const primaryBtnClass = "bg-primary text-primary-foreground hover:bg-primary/90";
-  const outlineBtnClass = "border border-white/40 text-foreground hover:bg-white/10";
-
+  // contrast of a label against its own background. Both come from
+  // buttonVariants so the label also inherits the one interface type scale.
   const getSecondaryIcon = () => {
     switch (secondaryAction?.type) {
       case "email":
@@ -62,13 +61,13 @@ const PartnerCard: React.FC<PartnerCardProps> = ({
       </div>
       <h3 className="text-2xl font-bold text-foreground mb-3">{name}</h3>
       <p className="text-foreground/80 mb-5">{description}</p>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap gap-3">
         {primaryAction && (
           <a
             href={primaryAction.href || "#"}
             target={primaryAction.external ? "_blank" : undefined}
             rel={primaryAction.external ? "noopener noreferrer" : undefined}
-            className={`flex items-center gap-2 px-5 py-2.5 ${primaryBtnClass} rounded-md transition-colors`}
+            className={buttonVariants({ variant: "default" })}
           >
             <span>{primaryAction.label}</span>
             {primaryAction.external && <ExternalLink size={14} />}
@@ -77,7 +76,7 @@ const PartnerCard: React.FC<PartnerCardProps> = ({
         {secondaryAction && (
           <a
             href={secondaryAction.href || "#"}
-            className={`flex items-center gap-2 px-5 py-2.5 ${outlineBtnClass} rounded-md transition-colors`}
+            className={buttonVariants({ variant: "outline" })}
           >
             <span>{secondaryAction.label}</span>
             {getSecondaryIcon()}

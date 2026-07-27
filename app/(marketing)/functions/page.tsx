@@ -28,7 +28,7 @@ const Functions = () => {
               Serverless function execution for any workload. Deploy code in seconds without managing infrastructure.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-primary hover:bg-primary/20 text-[var(--white)] px-8 py-6 text-lg">
+              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
                 Get Started
               </Button>
               <Button variant="outline" className="border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-6 text-lg">
@@ -278,7 +278,7 @@ const Functions = () => {
                 Get started with Hanzo Functions today and deploy your first serverless function in minutes.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button className="bg-primary hover:bg-primary/20 text-[var(--white)] px-8 py-6 text-lg">
+                <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
                   Sign Up Free
                 </Button>
                 <Button variant="outline" className="border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-6 text-lg">

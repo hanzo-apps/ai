@@ -49,7 +49,7 @@ const AdditionalFeatures = () => {
       </div>
 
       <div className="mt-8 text-center">
-        <Button className="bg-primary hover:bg-[#cccccc] text-[var(--white)] px-6 py-2 text-lg">
+        <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2 text-lg">
           Explore the API
         </Button>
       </div>

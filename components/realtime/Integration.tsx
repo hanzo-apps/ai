@@ -80,7 +80,7 @@ const Integration = () => {
               </div>
             </div>
             
-            <Button className="bg-primary hover:bg-[#cccccc]">
+            <Button className="bg-primary hover:bg-primary/90">
               View Documentation <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </motion.div>

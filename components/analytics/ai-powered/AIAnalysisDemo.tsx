@@ -118,7 +118,7 @@ const AIAnalysisDemo = () => {
               <p className="text-sm text-foreground/80">
                 Based on the traffic pattern analysis, we recommend scaling your infrastructure in the US-West region for the next 3 hours.
               </p>
-              <button className="mt-3 text-sm bg-primary hover:bg-[#cccccc] text-[var(--white)] px-3 py-1 rounded">
+              <button className="mt-3 text-sm bg-primary hover:bg-primary/90 text-primary-foreground px-3 py-1 rounded">
                 Apply Recommendation
               </button>
             </motion.div>
