@@ -1,6 +1,6 @@
 # Hanzo AI Website
 
-A modern, responsive website for Hanzo AI built with React, TypeScript, and Tailwind CSS.
+The Hanzo AI marketing site — Next.js 15, React 19, TypeScript, and `@hanzo/ui` on the `@hanzo/gui` substrate with `@hanzo/design` tokens. Tailwind is still present but is being retired: the utility classNames are converted to gui style props file by file, and the build drops it once the last one is gone.
 
 ## Project Structure
 
@@ -161,15 +161,26 @@ All components must be fully responsive:
 3. Stack elements vertically on mobile, horizontally on desktop
 4. Ensure sufficient spacing on all device sizes
 5. Test all changes across multiple viewport sizes
-6. Use Tailwind's responsive prefixes consistently (sm, md, lg, xl)
+6. Use gui's media props consistently (`$gtSm`, `$gtMd`, `$gtLg`) — the same breakpoints, expressed where the styling lives
 
 ## UI Component Library
 
-Most UI components use the shadcn/ui library found in `src/components/ui/`. When creating new UI elements:
-1. Check if a shadcn component already exists for your need
-2. Follow the established patterns and styling
-3. Extend existing components rather than creating new ones
-4. Maintain accessibility across all interactive elements
+Components come from **`@hanzo/ui` (8.x) on the `@hanzo/gui` substrate** — the
+same library every Hanzo surface renders. `src/components/ui/` is NOT a local
+component library to copy into; there is no shadcn here. When building UI:
+
+1. Look in `@hanzo/ui` first (the component surface), then `@hanzo/ui/product`
+   (DataTable, PageHeader, StatusTag, SiteNav, MetricCard, …), then
+   `@hanzo/gui` for the primitives (`YStack`/`XStack`/`Text`/`View`).
+2. Style with gui props against the tokens, never with utility classes:
+   `<YStack padding="$4" gap="$2" backgroundColor="$card">`. The token names
+   come from `@hanzo/design` and are bound in `gui.config.ts`.
+3. Reach for `components/marketing/page-kit.tsx` for page shapes (hero,
+   section, card grid, CTA, prose) rather than re-laying them out.
+4. `render="h2"` — NOT `tag=` — is how a gui component picks its host element;
+   `tag` leaks through as a DOM attribute and you silently ship a page with no
+   headings.
+5. Maintain accessibility: 44px minimum touch targets, real heading levels.
 
 ## Typography Scale
 
