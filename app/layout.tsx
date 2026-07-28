@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { GuiProvider } from '@/components/GuiProvider'
 import { Providers } from './providers'
 import './globals.css'
 
@@ -69,7 +70,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Providers>{children}</Providers>
+          <GuiProvider>
+            <Providers>{children}</Providers>
+          </GuiProvider>
         </ThemeProvider>
         {/* No analytics tag here: pageviews AND interaction autocapture already ride
             the ONE @hanzo/event client in <Providers> (host + ingest key + consent

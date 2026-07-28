@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Server, CircuitBoard, HardDrive, Globe } from "lucide-react";
-import { Progress } from "@hanzo/ui/progress";
+import { Progress } from "@hanzo/ui";
 import { ProjectResources } from "./models/project";
 
 interface ResourceUsageSectionProps {

@@ -1,60 +1,51 @@
+'use client'
 
-import React from 'react';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "@hanzo/ui";
-import type { ReferralRecord } from "@/components/referrals/types";
+import React from 'react'
+import { YStack, Text } from '@hanzo/gui'
+import { DataTable, StatusTag } from '@hanzo/ui/product'
+import type { ReferralRecord } from '@/components/referrals/types'
 
 interface ReferralHistoryProps {
-  referralHistory: ReferralRecord[];
+  referralHistory: ReferralRecord[]
 }
 
-const ReferralHistory = ({ referralHistory }: ReferralHistoryProps) => {
-  return (
-    <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
-      <h2 className="text-xl font-medium mb-4">Referral History</h2>
-      
-      <div className="rounded-lg border border-neutral-800 overflow-hidden">
-        <Table>
-          <TableHeader className="bg-neutral-900">
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right">Credits</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {referralHistory.map((referral) => (
-              <TableRow key={referral.id} className="border-neutral-800">
-                <TableCell className="font-medium">{referral.name}</TableCell>
-                <TableCell>{referral.email}</TableCell>
-                <TableCell>{referral.date}</TableCell>
-                <TableCell>
-                  <span className={`px-2 py-1 rounded-full text-xs ${
-                    referral.status === 'Completed' 
-                      ? 'bg-primary/10 text-foreground/70' 
-                      : 'bg-primary/10 text-foreground/60'
-                  }`}>
-                    {referral.status}
-                  </span>
-                </TableCell>
-                <TableCell className="text-right">
-                  {referral.credits > 0 ? `$${referral.credits}` : '-'}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-    </div>
-  );
-};
+const columns = [
+  { key: 'name', header: 'Name' },
+  { key: 'email', header: 'Email' },
+  { key: 'date', header: 'Date' },
+  {
+    key: 'status',
+    header: 'Status',
+    render: (r: ReferralRecord) => <StatusTag status={r.status} />,
+  },
+  {
+    key: 'credits',
+    header: 'Credits',
+    align: 'right' as const,
+    mono: true,
+    render: (r: ReferralRecord) => (r.credits > 0 ? `$${r.credits}` : '—'),
+  },
+]
 
-export default ReferralHistory;
+const ReferralHistory = ({ referralHistory }: ReferralHistoryProps) => (
+  <YStack
+    gap="$4"
+    padding="$6"
+    borderWidth={1}
+    borderColor="$border"
+    borderRadius="$3"
+    backgroundColor="$card"
+  >
+    <Text fontSize="$7" fontWeight="500" color="$foreground">
+      Referral History
+    </Text>
+    <DataTable
+      columns={columns}
+      rows={referralHistory}
+      rowKey={(r) => String(r.id)}
+      empty="No referrals yet."
+    />
+  </YStack>
+)
+
+export default ReferralHistory

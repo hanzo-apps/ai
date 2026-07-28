@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Button } from "@hanzo/ui";
 import { Bot, Activity, Database, Settings, PlayCircle, StopCircle, Brain, Zap, PlusCircle, Search, List, LayoutGrid } from "lucide-react";
 import { Input } from "@hanzo/ui";
-import { Progress } from "@hanzo/ui/progress";
+import { Progress } from "@hanzo/ui";
 import { DummyAgentData, Agent } from "./data";
 import { cn } from "@/lib/utils";
 import AgentDetail from "./AgentDetail";

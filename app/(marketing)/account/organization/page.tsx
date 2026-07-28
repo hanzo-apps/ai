@@ -3,27 +3,23 @@
 import Link from 'next/link'
 
 import React, { useState, useEffect } from 'react';
+
+type TeamMember = { id: string; name: string; email: string; role: string; avatar?: string }
 import { useAccount } from '@/contexts/AccountContext';
 import { Button } from "@/components/ui/button";
 import { Input } from "@hanzo/ui";
 import { Label } from "@hanzo/ui";
 import { Textarea } from "@hanzo/ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@hanzo/ui";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "@hanzo/ui";
+import { DataTable, StatusTag } from "@hanzo/ui/product";
+import { XStack, YStack, Text } from "@hanzo/gui";
 import { Building, User, UserPlus, MoreVertical, Upload, MapPin, Globe, Link as LinkIcon } from 'lucide-react';
 import { 
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@hanzo/ui/dropdown-menu";
+} from "@hanzo/ui";
 import { toast } from 'sonner';
 import AnimatedSection, { AnimatedHeading } from "@/components/ui/animated-section";
 
@@ -165,76 +161,55 @@ const Organization = () => {
             </Button>
           </div>
           
-          <div className="rounded-lg overflow-hidden">
-            <Table>
-              <TableHeader className="bg-neutral-900/30">
-                <TableRow className="border-0">
-                  <TableHead>User</TableHead>
-                  <TableHead>Role</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {teamMembers.length === 0 ? (
-                  <TableRow>
-                    <TableCell colSpan={3} className="text-center py-8 text-muted-foreground">
-                      No team members yet. Invite someone to get started.
-                    </TableCell>
-                  </TableRow>
-                ) : (
-                  teamMembers.map((member: { id: string; name: string; email: string; role: string; avatar?: string }) => (
-                    <TableRow key={member.id} className="border-neutral-800/10">
-                      <TableCell>
-                        <div className="flex items-center space-x-3">
-                          <Avatar className="h-8 w-8">
-                            {member.avatar ? <AvatarImage src={member.avatar} /> : null}
-                            <AvatarFallback className="bg-neutral-900/50">
-                              {member.name.split(" ").map((part: string) => part[0]).slice(0, 2).join("")}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <div className="font-medium">{member.name}</div>
-                            <div className="text-sm text-muted-foreground">{member.email}</div>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <span className={`px-2 py-1 rounded-full text-xs ${
-                          member.role === 'Owner'
-                            ? 'bg-primary/10 text-foreground'
-                            : member.role === 'Admin'
-                              ? 'bg-primary/10 text-foreground/70'
-                              : 'bg-neutral-900/20 text-foreground/80'
-                        }`}>
-                          {member.role}
-                        </span>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                              <MoreVertical className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end" className="bg-[var(--black)] border-neutral-800/30">
-                            <DropdownMenuItem className="text-[var(--white)] hover:bg-neutral-900/30">
-                              View Profile
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="text-[var(--white)] hover:bg-neutral-900/30">
-                              Change Role
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="text-foreground/70 hover:bg-primary/5 hover:text-foreground/70">
-                              Remove
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                )}
-              </TableBody>
-            </Table>
-          </div>
+          <DataTable
+            columns={[
+              {
+                key: 'user',
+                header: 'User',
+                render: (member: TeamMember) => (
+                  <XStack alignItems="center" gap="$3">
+                    <Avatar className="h-8 w-8">
+                      {member.avatar ? <AvatarImage src={member.avatar} /> : null}
+                      <AvatarFallback>
+                        {member.name.split(" ").map((part: string) => part[0]).slice(0, 2).join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <YStack>
+                      <Text fontWeight="500" color="$foreground">{member.name}</Text>
+                      <Text fontSize="$3" color="$mutedForeground">{member.email}</Text>
+                    </YStack>
+                  </XStack>
+                ),
+              },
+              {
+                key: 'role',
+                header: 'Role',
+                render: (member: TeamMember) => <StatusTag status={member.role} />,
+              },
+              {
+                key: 'actions',
+                header: 'Actions',
+                align: 'right' as const,
+                render: () => (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm" aria-label="Member actions">
+                        <MoreVertical className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem>View Profile</DropdownMenuItem>
+                      <DropdownMenuItem>Change Role</DropdownMenuItem>
+                      <DropdownMenuItem>Remove</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ),
+              },
+            ]}
+            rows={teamMembers as TeamMember[]}
+            rowKey={(m: TeamMember) => m.id}
+            empty="No team members yet. Invite someone to get started."
+          />
         </div>
       </div>
     </AnimatedSection>

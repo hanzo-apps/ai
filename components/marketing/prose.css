@@ -1,0 +1,21 @@
+/* Long-form body copy — the one prose rule for the marketing pages.
+   Values are @hanzo/design tokens; nothing is authored here. */
+.hz-prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--muted-foreground);
+}
+
+.hz-prose a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.hz-prose strong {
+  font-weight: var(--weight-medium);
+  color: var(--foreground);
+}

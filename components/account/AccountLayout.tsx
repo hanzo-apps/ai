@@ -18,7 +18,7 @@ import {
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from "@hanzo/ui/select";
+} from "@hanzo/ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@hanzo/ui";
 import { Button } from "@hanzo/ui";
 import AnimatedSection, { AnimatedHeading } from "@/components/ui/animated-section";

@@ -14,7 +14,7 @@ import {
 import { Button } from "@hanzo/ui";
 import { Input } from "@hanzo/ui";
 import { Textarea } from "@hanzo/ui";
-import { Progress } from "@hanzo/ui/progress";
+import { Progress } from "@hanzo/ui";
 import { Agent } from "./data";
 
 interface AgentDetailProps {

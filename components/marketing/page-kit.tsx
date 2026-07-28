@@ -3,33 +3,42 @@
 /**
  * page-kit — the shared shapes every simple marketing page is made of.
  *
- * Seventeen pages in `app/(marketing)` open with a byte-identical hero block,
- * each with its own copy of the same badge/title/subtitle markup and motion
- * config. This module is that block, once. A page supplies content; the kit
- * owns layout, spacing, type scale and motion.
+ * Pages in `app/(marketing)` used to open with a byte-identical hero block, each
+ * with its own copy of the same badge/title/subtitle markup and motion config.
+ * This module is that block, once. A page supplies content; the kit owns layout,
+ * spacing, type scale and motion.
  *
- * It is also the seam for the gui migration: when these shapes move to
- * `@hanzogui/*` primitives, the change lands here rather than in every page
- * that renders one. Pages therefore MUST NOT reach around the kit with their
- * own utility classes for layout — pass content, not styling.
+ * It is built on `@hanzo/gui` — the same substrate as @hanzo/ui's product layer,
+ * so these shapes render from the SAME tokens as the rest of the ecosystem
+ * (`gui.config.ts` binds gui's token namespace to @hanzo/design). Pages
+ * therefore MUST NOT reach around the kit with their own styling: pass content,
+ * not styling.
  */
 
 import React from 'react'
 import Link from 'next/link'
-import { motion, useReducedMotion } from 'framer-motion'
+import { YStack, XStack, Text, View } from '@hanzo/gui'
+import { useReducedMotion } from 'framer-motion'
 import type { LucideIcon } from 'lucide-react'
+import './prose.css'
 
 /** Fade-and-rise, honouring the OS reduced-motion setting. */
 function useRise(delay = 0) {
   const still = useReducedMotion()
   return still
     ? {}
-    : {
-        initial: { opacity: 0, y: 16 },
-        animate: { opacity: 1, y: 0 },
-        transition: { duration: 0.4, delay },
-      }
+    : ({
+        animation: 'medium',
+        enterStyle: { opacity: 0, y: 16 },
+        opacity: 1,
+        y: 0,
+        style: { animationDelay: `${delay}s` },
+      } as const)
 }
+
+/** The page gutter + centred measure every block shares. */
+const GUTTER = { paddingHorizontal: '$4', $gtSm: { paddingHorizontal: '$8' } } as const
+const MEASURE = { width: '100%', maxWidth: 896, marginHorizontal: 'auto' } as const
 
 /* ── hero ──────────────────────────────────────────────────────────────────── */
 
@@ -47,33 +56,52 @@ export function PageHero({
   children?: React.ReactNode
 }) {
   return (
-    <section className="px-4 pt-24 pb-12 md:px-8 lg:px-12">
-      <div className="mx-auto max-w-4xl">
-        <motion.div
+    <YStack render="section" paddingTop="$24" paddingBottom="$12" {...GUTTER}>
+      <YStack {...MEASURE}>
+        <XStack
           {...useRise()}
-          className="mb-6 inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium"
-          style={{
-            backgroundColor: 'color-mix(in srgb, var(--primary) 15%, transparent)',
-            color: 'var(--primary)',
-          }}
+          alignSelf="flex-start"
+          alignItems="center"
+          gap="$2"
+          marginBottom="$6"
+          paddingHorizontal="$3"
+          paddingVertical="$1"
+          borderRadius="$9"
+          backgroundColor="color-mix(in srgb, var(--primary) 15%, transparent)"
         >
-          {Icon ? <Icon className="h-3.5 w-3.5" /> : null}
-          {eyebrow}
-        </motion.div>
-        <motion.h1
+          {Icon ? <Icon size={14} color="var(--primary)" /> : null}
+          <Text fontSize="$1" fontWeight="500" color="var(--primary)">
+            {eyebrow}
+          </Text>
+        </XStack>
+        <Text
+          render="h1"
           {...useRise(0.05)}
-          className="mb-4 text-3xl font-medium leading-[1.1] tracking-tight text-foreground sm:text-4xl lg:text-5xl"
+          marginBottom="$4"
+          fontSize="$9"
+          $gtSm={{ fontSize: '$10' }}
+          fontWeight="500"
+          lineHeight={1.1}
+          letterSpacing="var(--tracking-tight)"
+          color="$foreground"
         >
           {title}
-        </motion.h1>
+        </Text>
         {lede ? (
-          <motion.p {...useRise(0.1)} className="max-w-2xl text-base text-muted-foreground sm:text-lg">
+          <Text
+            render="p"
+            {...useRise(0.1)}
+            maxWidth={672}
+            fontSize="$5"
+            lineHeight="var(--leading-relaxed)"
+            color="$mutedForeground"
+          >
             {lede}
-          </motion.p>
+          </Text>
         ) : null}
-        {children ? <div className="mt-8">{children}</div> : null}
-      </div>
-    </section>
+        {children ? <YStack marginTop="$8">{children}</YStack> : null}
+      </YStack>
+    </YStack>
   )
 }
 
@@ -89,15 +117,28 @@ export function Section({
   children: React.ReactNode
 }) {
   return (
-    <section className="px-4 py-10 md:px-8 lg:px-12">
-      <div className="mx-auto max-w-4xl">
+    <YStack render="section" paddingVertical="$10" {...GUTTER}>
+      <YStack {...MEASURE}>
         {title ? (
-          <h2 className="mb-2 text-xl font-medium tracking-tight text-foreground sm:text-2xl">{title}</h2>
+          <Text
+            render="h2"
+            marginBottom="$2"
+            fontSize="$7"
+            fontWeight="500"
+            letterSpacing="var(--tracking-tight)"
+            color="$foreground"
+          >
+            {title}
+          </Text>
         ) : null}
-        {lede ? <p className="mb-6 max-w-2xl text-sm text-muted-foreground sm:text-base">{lede}</p> : null}
+        {lede ? (
+          <Text render="p" marginBottom="$6" maxWidth={672} fontSize="$3" color="$mutedForeground">
+            {lede}
+          </Text>
+        ) : null}
         {children}
-      </div>
-    </section>
+      </YStack>
+    </YStack>
   )
 }
 
@@ -116,48 +157,74 @@ function CardBody({ item }: { item: CardItem }) {
   const { title, description, icon: Icon, meta } = item
   return (
     <>
-      <div className="mb-2 flex items-center gap-2">
-        {Icon ? <Icon className="h-4 w-4 shrink-0 text-muted-foreground" /> : null}
-        <span className="text-sm font-medium text-foreground">{title}</span>
-        {meta ? <span className="ml-auto shrink-0 text-xs text-muted-foreground">{meta}</span> : null}
-      </div>
-      <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
+      <XStack marginBottom="$2" alignItems="center" gap="$2">
+        {Icon ? <Icon size={16} color="var(--muted-foreground)" /> : null}
+        <Text fontSize="$3" fontWeight="500" color="$foreground">
+          {title}
+        </Text>
+        {meta ? (
+          <Text marginLeft="auto" flexShrink={0} fontSize="$1" color="$mutedForeground">
+            {meta}
+          </Text>
+        ) : null}
+      </XStack>
+      <Text fontSize="$3" lineHeight="var(--leading-relaxed)" color="$mutedForeground">
+        {description}
+      </Text>
     </>
   )
 }
 
-/** One-, two- or three-up card grid. Single column on small screens. */
+/**
+ * One-, two- or three-up card grid. Single column on small screens — a real
+ * grid, so tiles in a row share a height rather than each sizing to its own copy.
+ */
 export function CardGrid({ items, columns = 2 }: { items: CardItem[]; columns?: 1 | 2 | 3 }) {
-  const cols = columns === 1 ? '' : columns === 3 ? 'sm:grid-cols-2 lg:grid-cols-3' : 'sm:grid-cols-2'
+  const wide =
+    columns === 3 ? 'repeat(3, minmax(0, 1fr))' : columns === 1 ? '1fr' : 'repeat(2, minmax(0, 1fr))'
   return (
-    <div className={`grid grid-cols-1 gap-4 ${cols}`}>
+    <View
+      display="grid"
+      gap="$4"
+      gridTemplateColumns="1fr"
+      $gtSm={{ gridTemplateColumns: columns === 1 ? '1fr' : 'repeat(2, minmax(0, 1fr))' }}
+      $gtLg={{ gridTemplateColumns: wide }}
+    >
       {items.map((item) => {
-        const shared = 'block rounded-xl border border-border p-5 transition-colors'
+        const frame = {
+          padding: '$5',
+          borderWidth: 1,
+          borderColor: '$border',
+          borderRadius: '$4',
+          hoverStyle: { borderColor: '$borderStrong' },
+        } as const
         return item.href ? (
           <Link
             key={item.title}
             href={item.href}
-            className={`${shared} hover:border-foreground/30`}
+            style={{ textDecoration: 'none', display: 'flex' }}
             {...(item.href.startsWith('http') ? { target: '_blank', rel: 'noreferrer noopener' } : null)}
           >
-            <CardBody item={item} />
+            <YStack {...frame} flex={1}>
+              <CardBody item={item} />
+            </YStack>
           </Link>
         ) : (
-          <div key={item.title} className={shared}>
+          <YStack key={item.title} {...frame}>
             <CardBody item={item} />
-          </div>
+          </YStack>
         )
       })}
-    </div>
+    </View>
   )
 }
 
 /* ── call to action ────────────────────────────────────────────────────────── */
 
 /**
- * A standalone action. `min-h-11` is 44px — the minimum comfortable touch
- * target — which padding alone does not reach at this font size. Inline links
- * inside `Prose` are deliberately not this; they belong in the text flow.
+ * A standalone action. `minHeight={44}` is the minimum comfortable touch target,
+ * which padding alone does not reach at this font size. Inline links inside
+ * `Prose` are deliberately not this; they belong in the text flow.
  */
 export function Cta({
   href,
@@ -172,24 +239,41 @@ export function Cta({
   return (
     <Link
       href={href}
-      className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border px-5 text-sm font-medium text-foreground transition-colors hover:border-foreground/30"
+      style={{ textDecoration: 'none', alignSelf: 'flex-start' }}
       {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : null)}
     >
-      {children}
-      {Icon ? <Icon className="h-3.5 w-3.5" /> : null}
+      <XStack
+        minHeight={44}
+        alignItems="center"
+        gap="$2"
+        paddingHorizontal="$5"
+        borderWidth={1}
+        borderColor="$border"
+        borderRadius="$9"
+        hoverStyle={{ borderColor: '$borderStrong' }}
+      >
+        <Text fontSize="$3" fontWeight="500" color="$foreground">
+          {children}
+        </Text>
+        {Icon ? <Icon size={14} color="var(--foreground)" /> : null}
+      </XStack>
     </Link>
   )
 }
 
 /* ── prose ─────────────────────────────────────────────────────────────────── */
 
-/** Long-form body copy (policies, explanations). Headings come from `Section`. */
+/**
+ * Long-form body copy (policies, explanations). Headings come from `Section`.
+ *
+ * This one shape stays a plain element tree with a stylesheet rule rather than
+ * gui props: gui's `Text` is `white-space: pre-wrap`, which is right for a label
+ * and wrong for a paragraph authored across several source lines — and prose is
+ * exactly where that shows. The rule lives in `prose.css` beside this file, so
+ * it is still one definition in one place.
+ */
 export function Prose({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base [&_a]:text-foreground [&_a]:underline [&_a]:underline-offset-4 [&_strong]:font-medium [&_strong]:text-foreground">
-      {children}
-    </div>
-  )
+  return <div className="hz-prose">{children}</div>
 }
 
 /* ── page wrapper ──────────────────────────────────────────────────────────── */
@@ -197,8 +281,10 @@ export function Prose({ children }: { children: React.ReactNode }) {
 /** The outer frame; the marketing layout already supplies nav + footer. */
 export function Page({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <main className="pb-16">{children}</main>
-    </div>
+    <YStack minHeight="100vh" backgroundColor="$background">
+      <YStack render="main" paddingBottom="$16">
+        {children}
+      </YStack>
+    </YStack>
   )
 }

@@ -24,8 +24,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
-} from "@hanzo/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@hanzo/ui/sheet";
+} from "@hanzo/ui";
+import { Sheet, YStack, Text } from "@hanzo/gui";
 import { Badge } from "@hanzo/ui";
 import { cn } from '@/lib/utils';
 import {
@@ -395,6 +395,7 @@ const OSSCatalog: React.FC = () => {
   const [selectedMaturity, setSelectedMaturity] = useState<string[]>([]);
   const [selectedDeployment, setSelectedDeployment] = useState<string[]>([]);
   const [selectedCollection, setSelectedCollection] = useState<string[] | null>(null);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Filter and sort repos
   const filteredRepos = useMemo(() => {
@@ -640,27 +641,42 @@ const OSSCatalog: React.FC = () => {
             </div>
 
             {/* Mobile Filter Button */}
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline" size="sm" className="lg:hidden border-border">
-                  <Filter className="w-4 h-4 mr-2" />
-                  Filters
-                  {hasActiveFilters && (
-                    <span className="ml-2 w-5 h-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
-                      {selectedTypes.length + selectedCategories.length + selectedLanguages.length}
-                    </span>
-                  )}
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="bottom" className="h-[80vh] bg-secondary border-border">
-                <SheetHeader>
-                  <SheetTitle className="text-foreground">Filters</SheetTitle>
-                </SheetHeader>
-                <div className="mt-6 overflow-y-auto h-full pb-20">
-                  <FacetRail />
-                </div>
-              </SheetContent>
-            </Sheet>
+            <>
+              <Button
+                variant="outline"
+                size="sm"
+                className="lg:hidden border-border"
+                onClick={() => setFiltersOpen(true)}
+              >
+                <Filter className="w-4 h-4 mr-2" />
+                Filters
+                {hasActiveFilters && (
+                  <span className="ml-2 w-5 h-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
+                    {selectedTypes.length + selectedCategories.length + selectedLanguages.length}
+                  </span>
+                )}
+              </Button>
+              <Sheet
+                modal
+                open={filtersOpen}
+                onOpenChange={setFiltersOpen}
+                snapPoints={[80]}
+                dismissOnSnapToBottom
+              >
+                <Sheet.Overlay backgroundColor="rgb(0 0 0 / 0.6)" />
+                <Sheet.Handle />
+                <Sheet.Frame backgroundColor="$secondary" padding="$4" gap="$4">
+                  <Text fontSize="$6" fontWeight="500" color="$foreground">
+                    Filters
+                  </Text>
+                  <Sheet.ScrollView>
+                    <YStack paddingBottom="$20">
+                      <FacetRail />
+                    </YStack>
+                  </Sheet.ScrollView>
+                </Sheet.Frame>
+              </Sheet>
+            </>
           </div>
         </div>
 

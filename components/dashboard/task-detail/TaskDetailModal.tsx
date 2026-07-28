@@ -7,7 +7,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle
-} from "@hanzo/ui/dialog";
+} from "@hanzo/ui";
 import { Button } from "@hanzo/ui";
 import { Input } from "@hanzo/ui";
 import TaskDetailContent, { type TaskFieldValue } from "./TaskDetailContent";

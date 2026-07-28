@@ -20,6 +20,9 @@ dist
 dist-ssr
 *.local
 .next
+# NEXT_DIST_DIR lets parallel builds pick their own dir (next.config.ts); every
+# one of them is a build artifact.
+.next-*
 out
 *.tsbuildinfo
 next-env.d.ts
