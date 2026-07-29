@@ -77,7 +77,7 @@ export const productsMetadata: Record<string, ProductMetadata> = {
   guard:        { slug: 'guard',      tagline: 'AI guardrails', license: 'Apache-2.0', github_repo: `${G}/guard` },
   gui:          { slug: 'gui',        tagline: 'React UI library', license: 'Apache-2.0', github_repo: `${G}/gui` },
   hsm:          { slug: 'hsm',        tagline: 'Hardware security module', license: 'Apache-2.0', github_repo: `${G}/hsm` },
-  iam:          { slug: 'iam',        tagline: 'Identity + access (hanzo.id)', license: 'Apache-2.0', github_repo: `${G}/iam`, upstream_fork: 'Casdoor', upstream_license: 'Apache-2.0', upstream_url: 'https://casdoor.org' },
+  iam:          { slug: 'iam',        tagline: 'Identity + access (hanzo.id)', license: 'Apache-2.0', github_repo: `${G}/iam` },
   idv:          { slug: 'idv',        tagline: 'Identity verification', license: 'Apache-2.0', github_repo: `${G}/idv` },
   ingress:      { slug: 'ingress',    tagline: 'K8s ingress + static plugin', license: 'Apache-2.0', github_repo: `${G}/ingress` },
   insights:     { slug: 'insights',   tagline: 'Product insights + experiments', license: 'MIT', github_repo: `${G}/insights`, upstream_fork: 'PostHog', upstream_license: 'MIT', upstream_url: 'https://posthog.com' },
