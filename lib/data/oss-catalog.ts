@@ -1187,7 +1187,7 @@ export const ossCatalog: OSSRepo[] = [
     id: 'hanzo-iam',
     name: 'Hanzo IAM',
     slug: 'hanzoai/iam',
-    description: 'Identity and access management (Casdoor-based).',
+    description: 'Identity and access management.',
     type: 'core',
     categories: ['Security & Governance'],
     languages: ['Go'],

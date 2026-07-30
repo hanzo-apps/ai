@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Image from 'next/image'
+import { ProviderMark } from '@/components/models/ProviderMark'
 import {
   fetchModels,
   getOrgAndSlug,
@@ -25,16 +25,7 @@ function ProviderInitials({ org }: { org: string }) {
 function ProviderLogo({ org }: { org: string }) {
   const logo = orgLogoPath(org)
   if (logo) {
-    return (
-      <Image
-        src={logo}
-        alt={orgDisplayName(org)}
-        width={32}
-        height={32}
-        className="w-8 h-8 object-contain rounded-lg"
-        unoptimized
-      />
-    )
+    return <ProviderMark src={logo} label={orgDisplayName(org)} />
   }
   return <ProviderInitials org={org} />
 }

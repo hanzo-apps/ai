@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
+import { ProviderMark } from '@/components/models/ProviderMark'
 import {
   fetchModels,
   getOrgAndSlug,
@@ -108,14 +108,7 @@ export default async function OrgPage({ params }: Props) {
 
           <div className="flex items-center gap-4 mb-6">
             {logo ? (
-              <Image
-                src={logo}
-                alt={providerName}
-                width={48}
-                height={48}
-                className="w-12 h-12 object-contain rounded-xl"
-                unoptimized
-              />
+              <ProviderMark src={logo} label={providerName} className="h-12 w-12 rounded-xl" />
             ) : (
               <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-lg font-bold">
                 {providerName.slice(0, 2).toUpperCase()}
