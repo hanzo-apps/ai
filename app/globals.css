@@ -1,3 +1,34 @@
+/* The design tokens are NOT authored here. `@hanzo/design` is the one place the
+   Hanzo colour ladder, type scale, spacing ramp, radii, elevation and motion are
+   defined, and every Hanzo surface — console, chat, app, this site — reads that
+   same file. This site used to carry its own copy of the semantic block
+   (`:root` + `.dark`, ~60 declarations), which is how hanzo.ai and the rest of
+   the ecosystem could drift a shade apart without anyone editing anything.
+
+   @hanzo/design is DARK-FIRST: `:root` is the dark palette and `.light` retunes
+   it, which matches this site (ThemeProvider defaultTheme="dark"). next-themes
+   writes the theme name as a class on <html>, so `.light` lands exactly where
+   the stylesheet expects it. */
+/* The groups are listed one by one rather than pulling `@hanzo/design/styles.css`:
+   that entry point chains `@import url("tokens/…")` relative to itself, and
+   Next's CSS pipeline resolves a bare specifier as a module, not as a sibling
+   file. Each group is a published subpath, so naming them is the resolvable
+   form of the same import. */
+@import '@hanzo/design/tokens/fonts.css';
+@import '@hanzo/design/tokens/colors.css';
+@import '@hanzo/design/tokens/typography.css';
+@import '@hanzo/design/tokens/spacing.css';
+@import '@hanzo/design/tokens/radius.css';
+@import '@hanzo/design/tokens/elevation.css';
+@import '@hanzo/design/tokens/motion.css';
+@import '@hanzo/design/tokens/z.css';
+/* base.css is the only group with ELEMENT selectors (`a`, `h1`, `body`, …)
+   rather than custom properties. Unlayered rules beat every layered rule
+   regardless of specificity, so importing it bare put `a{color:var(--text-primary)}`
+   above the utility layer and every `text-*` on a link stopped applying — the
+   header's "Try Hanzo" CTA rendered white-on-white. Into the base layer it goes,
+   where element defaults belong. */
+@import '@hanzo/design/tokens/base.css' layer(base);
 @import 'tailwindcss';
 
 @theme {
@@ -22,75 +53,17 @@
   --color-ring: var(--ring);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
-  --radius: 0.5rem;
-
-  /* Fonts — single source of truth (Tailwind v4 is CSS-first; without an
-     @config directive the legacy tailwind.config.ts fontFamily is not loaded,
-     so the Geist tokens must live here). These map next/font's CSS variables
-     (set on <body> in app/layout.tsx) onto Tailwind's font utilities AND the
-     base font: v4 derives --default-font-family from --font-sans, so unclassed
-     text renders in Geist Sans too. */
-  --font-sans: var(--font-geist), "Geist Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-geist), "Geist Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, monospace;
-  --font-serif: Georgia, serif;
 }
 
+/* next/font mints a per-build family name and exposes it as --font-geist /
+   --font-geist-mono on <html>. @hanzo/design's fonts.css declares --font-sans /
+   --font-display / --font-mono in terms of Geist by NAME; binding them to the
+   next/font variables here is what makes the loaded, subsetted, self-hosted
+   files the ones that actually render. One binding, one place. */
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  --card: #f5f5f5;
-  --card-foreground: #0a0a0a;
-  --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
-  --primary: #0a0a0a;
-  --primary-foreground: #ffffff;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #0a0a0a;
-  --muted: #f5f5f5;
-  --muted-foreground: #525252;
-  --accent: #f5f5f5;
-  --accent-foreground: #0a0a0a;
-  --destructive: #999999;
-  --destructive-foreground: #ffffff;
-  --border: #e5e5e5;
-  --input: #e5e5e5;
-  --ring: #d4d4d4;
-  --brand: #e4e4e7;
-  --brand-foreground: #09090b;
-  --black: #0a0a0a;
-  --white: #ffffff;
-  --radius: 0.5rem;
-  --header-height: 4rem;
-  --font-scale: 100%;
-  --line-height-scale: 100%;
-  --letter-spacing-scale: 0em;
-}
-
-.dark {
-  --background: #000000;
-  --foreground: #ededed;
-  --card: #0a0a0a;
-  --card-foreground: #f5f5f5;
-  --popover: #0a0a0a;
-  --popover-foreground: #f5f5f5;
-  --primary: #ffffff;
-  --primary-foreground: #000000;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #f5f5f5;
-  --muted: #101010;
-  --muted-foreground: #888888;
-  --accent: #1a1a1a;
-  --accent-foreground: #f5f5f5;
-  --destructive: #666666;
-  --destructive-foreground: #f5f5f5;
-  --border: #1f1f1f;
-  --input: #1f1f1f;
-  --ring: #333333;
-  --brand: #e4e4e7;
-  --brand-foreground: #09090b;
-  --black: #000000;
-  --white: #f5f5f5;
+  --font-sans: var(--font-geist), 'Geist Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono: var(--font-geist-mono), 'Geist Mono', ui-monospace, monospace;
 }
 
 @layer base {
@@ -100,12 +73,23 @@
 
   html {
     scroll-behavior: smooth;
+    /* The horizontal-scroll floor lives on the root box, not only on <body>:
+       the scrollport is the documentElement, so clipping body alone still let a
+       4px sideways scroll through on /about. */
+    overflow-x: clip;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    font-family: var(--font-sans);
+    font-feature-settings: 'ss01', 'ss02', 'cv01', 'cv02', 'cv03';
+    /* The page does not scroll sideways. Sections enter with a 20px horizontal
+       offset (`whileInView` x:20), which on a phone is 20px wider than the
+       viewport for the duration of the animation — enough to hand the visitor a
+       real horizontal scrollbar mid-scroll. `clip` rather than `hidden` so this
+       does not become a scroll container and break `position: sticky`. */
+    overflow-x: clip;
   }
 
   /* Tailwind v4's preflight dropped v3's `cursor: pointer` on buttons, so every
@@ -114,5 +98,29 @@
   button:not(:disabled),
   [role='button']:not([aria-disabled='true']) {
     cursor: pointer;
+  }
+
+  /* A control has to be reachable with a thumb. 44px is the documented floor
+     (WCAG 2.5.8, Apple HIG) and it is a POLICY, not a per-button decision — the
+     footer stated it as a `min-h-11` utility on each link, which is exactly the
+     kind of rule that gets forgotten: the wordmark measured 24px, the search
+     button 36px and the GitHub icon 20px on the same page. Stated once, for the
+     chrome that appears on every route. */
+  :is(header, footer) :is(a[href], button),
+  /* Every <button> on a marketing site is an action, and @hanzo/ui's own size
+     ramp tops out at h-10 (40px) — so the floor has to be stated by the host
+     rather than assumed from the library. */
+  button,
+  [role='button'] {
+    min-height: 44px;
+  }
+
+  /* An icon-only control is `display: inline` by default, where a min-height has
+     no effect at all — it needs a box before it can have a size. */
+  :is(header, footer) :is(a[href], button):has(> svg:only-child) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
   }
 }

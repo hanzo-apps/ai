@@ -45,7 +45,7 @@ export function DeployBlock({ slug, name, className = '' }: Props) {
             href={deploy}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 transition-all"
+            className="inline-flex min-h-11 items-center justify-center gap-2 px-6 rounded-full font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 transition-all"
           >
             <Rocket className="w-4 h-4" />
             Deploy to Cloud
@@ -56,7 +56,7 @@ export function DeployBlock({ slug, name, className = '' }: Props) {
             href={docs}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium text-sm border border-border bg-transparent hover:bg-secondary text-foreground transition-colors"
+            className="inline-flex min-h-11 items-center justify-center gap-2 px-6 rounded-full font-medium text-sm border border-border bg-transparent hover:bg-secondary text-foreground transition-colors"
           >
             <BookOpen className="w-4 h-4" />
             Self-host

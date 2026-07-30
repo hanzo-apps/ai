@@ -113,7 +113,7 @@ export default function ChatHero() {
             <button
               type="submit"
               aria-label="Send"
-              className="inline-flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white text-black transition-opacity hover:opacity-90"
+              className="inline-flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-white text-black transition-opacity hover:opacity-90"
             >
               <ArrowUp className="h-5 w-5" />
             </button>
@@ -133,7 +133,7 @@ export default function ChatHero() {
               <button
                 key={pill.label}
                 onClick={() => onPill(pill)}
-                className="inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/50 px-4 py-2 text-sm text-neutral-300 transition-colors hover:border-neutral-700 hover:text-white"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/50 px-4 text-sm text-neutral-300 transition-colors hover:border-neutral-700 hover:text-white"
               >
                 <Icon className="h-4 w-4 text-neutral-400" />
                 {pill.label}

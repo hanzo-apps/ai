@@ -28,7 +28,7 @@ export default function PricingCallouts() {
             </p>
             <a
               href="/referral"
-              className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-white transition-colors"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-foreground hover:text-white transition-colors"
             >
               Learn More
               <ArrowRight className="w-4 h-4" />
@@ -57,7 +57,7 @@ export default function PricingCallouts() {
             </p>
             <a
               href="/open-source-fund"
-              className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-white transition-colors"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-foreground hover:text-white transition-colors"
             >
               Learn More
               <ArrowRight className="w-4 h-4" />

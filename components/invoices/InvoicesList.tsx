@@ -1,152 +1,93 @@
 'use client'
 
-
-import React, { useState } from "react";
-import { Button } from "@hanzo/ui";
-import { Download, Filter, Calendar, FileText } from "lucide-react";
-import { motion } from "framer-motion";
-import { createAnimationVariant, curves } from "@/components/ui/animation-variants";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow
-} from "@hanzo/ui";
-
-const cardAnimation = createAnimationVariant("fadeInBlur", {
-  duration: 0.4,
-  curve: curves.snappy,
-  distance: 15
-});
+import React, { useState } from 'react'
+import { XStack, YStack, Text, Button } from '@hanzo/gui'
+import { Calendar, Download, Filter } from '@hanzogui/lucide-icons-2'
+import { DataTable, StatusTag } from '@hanzo/ui/product'
 
 interface Invoice {
-  id: string;
-  date: string;
-  dueDate: string;
-  amount: string;
-  status: "Paid" | "Due" | "Overdue" | "Processing";
+  id: string
+  date: string
+  dueDate: string
+  amount: string
+  status: 'Paid' | 'Due' | 'Overdue' | 'Processing'
 }
 
+// Mock data for invoices
+const invoices: Invoice[] = [
+  { id: 'INV-20230301', date: 'Mar 1, 2023', dueDate: 'Mar 15, 2023', amount: '$20.00', status: 'Paid' },
+  { id: 'INV-20230401', date: 'Apr 1, 2023', dueDate: 'Apr 15, 2023', amount: '$20.00', status: 'Paid' },
+  { id: 'INV-20230501', date: 'May 1, 2023', dueDate: 'May 15, 2023', amount: '$25.00', status: 'Paid' },
+]
+
+const columns = [
+  { key: 'id', header: 'Invoice', mono: true },
+  { key: 'date', header: 'Date' },
+  { key: 'dueDate', header: 'Due Date' },
+  { key: 'amount', header: 'Amount', align: 'right' as const, mono: true },
+  { key: 'status', header: 'Status', render: (r: Invoice) => <StatusTag status={r.status} /> },
+  {
+    key: 'actions',
+    header: 'Actions',
+    align: 'right' as const,
+    render: () => (
+      <Button size="$2" chromeless icon={<Download size={16} />} minHeight={44}>
+        Download
+      </Button>
+    ),
+  },
+]
+
 const InvoicesList = () => {
-  const [filter, setFilter] = useState("all");
-  
-  // Mock data for invoices
-  const invoices: Invoice[] = [
-    {
-      id: "INV-20230301",
-      date: "Mar 1, 2023",
-      dueDate: "Mar 15, 2023",
-      amount: "$20.00",
-      status: "Paid"
-    },
-    {
-      id: "INV-20230401",
-      date: "Apr 1, 2023",
-      dueDate: "Apr 15, 2023",
-      amount: "$20.00",
-      status: "Paid"
-    },
-    {
-      id: "INV-20230501",
-      date: "May 1, 2023",
-      dueDate: "May 15, 2023",
-      amount: "$25.00",
-      status: "Paid"
-    }
-  ];
-
-  const filteredInvoices = invoices.filter(invoice => {
-    if (filter === "all") return true;
-    return invoice.status.toLowerCase() === filter;
-  });
-
-  const statusColors = {
-    Paid: "bg-primary/30 text-foreground/70",
-    Due: "bg-primary/20 text-foreground/50",
-    Overdue: "bg-primary/10 text-foreground/40",
-    Processing: "bg-primary/15 text-foreground/60"
-  };
+  const [filter] = useState('all')
+  const rows = invoices.filter((i) => filter === 'all' || i.status.toLowerCase() === filter)
 
   return (
-    <motion.div 
-      variants={cardAnimation}
-      className="rounded-xl border border-neutral-800 bg-[var(--black)]/60 overflow-hidden"
+    <YStack
+      borderWidth={1}
+      borderColor="$border"
+      borderRadius="$4"
+      backgroundColor="$card"
+      overflow="hidden"
     >
-      <div className="p-6 border-b border-neutral-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div className="flex items-center gap-3">
-          <Calendar className="h-5 w-5 text-muted-foreground" />
-          <div className="space-y-1">
-            <h3 className="text-xl font-medium">Invoice History</h3>
-            <p className="text-sm text-muted-foreground">View and download past invoices</p>
-          </div>
-        </div>
-        
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm" className="border-neutral-700 bg-[var(--black)] hover:bg-neutral-900">
-            <Filter className="h-4 w-4 mr-2" />
+      <XStack
+        padding="$6"
+        borderBottomWidth={1}
+        borderColor="$border"
+        justifyContent="space-between"
+        alignItems="center"
+        flexWrap="wrap"
+        gap="$4"
+      >
+        <XStack alignItems="center" gap="$3">
+          <Calendar size={20} color="var(--muted-foreground)" />
+          <YStack gap="$1">
+            <Text fontSize="$7" fontWeight="500" color="$foreground">
+              Invoice History
+            </Text>
+            <Text fontSize="$3" color="$mutedForeground">
+              View and download past invoices
+            </Text>
+          </YStack>
+        </XStack>
+        <XStack alignItems="center" gap="$2">
+          <Button size="$3" minHeight={44} icon={<Filter size={16} />}>
             Filter
           </Button>
-          
-          <Button className="bg-[var(--white)] hover:bg-neutral-200 text-primary-foreground">
-            <Download className="h-4 w-4 mr-2" />
+          <Button size="$3" minHeight={44} theme="active" icon={<Download size={16} />}>
             Export All
           </Button>
-        </div>
-      </div>
-      
-      {filteredInvoices.length > 0 ? (
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader className="bg-[var(--black)]">
-              <TableRow className="border-b border-neutral-800 hover:bg-transparent">
-                <TableHead className="text-muted-foreground font-medium py-3 px-6">Invoice</TableHead>
-                <TableHead className="text-muted-foreground font-medium py-3 px-6">Date</TableHead>
-                <TableHead className="text-muted-foreground font-medium py-3 px-6">Due Date</TableHead>
-                <TableHead className="text-muted-foreground font-medium py-3 px-6">Amount</TableHead>
-                <TableHead className="text-muted-foreground font-medium py-3 px-6">Status</TableHead>
-                <TableHead className="text-right text-muted-foreground font-medium py-3 px-6">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredInvoices.map((invoice) => (
-                <TableRow key={invoice.id} className="border-t border-neutral-800 hover:bg-neutral-900/30">
-                  <TableCell className="py-4 px-6">{invoice.id}</TableCell>
-                  <TableCell className="py-4 px-6">{invoice.date}</TableCell>
-                  <TableCell className="py-4 px-6">{invoice.dueDate}</TableCell>
-                  <TableCell className="py-4 px-6">{invoice.amount}</TableCell>
-                  <TableCell className="py-4 px-6">
-                    <span className={`inline-block px-2 py-1 rounded-full text-xs ${statusColors[invoice.status]}`}>
-                      {invoice.status}
-                    </span>
-                  </TableCell>
-                  <TableCell className="py-4 px-6 text-right">
-                    <Button 
-                      variant="ghost" 
-                      size="sm"
-                      className="text-muted-foreground hover:text-[var(--white)] hover:bg-neutral-800"
-                    >
-                      <Download className="h-4 w-4 mr-2" />
-                      Download
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      ) : (
-        <div className="py-16 text-center">
-          <FileText className="h-12 w-12 mx-auto mb-4 text-muted-foreground/60" />
-          <h3 className="text-xl font-medium mb-2">No Invoices Found</h3>
-          <p className="text-muted-foreground max-w-md mx-auto">
-            Once you start using our services, your invoices will appear here.
-          </p>
-        </div>
-      )}
-    </motion.div>
-  );
-};
+        </XStack>
+      </XStack>
 
-export default InvoicesList;
+      <DataTable
+        columns={columns}
+        rows={rows}
+        rowKey={(r) => r.id}
+        empty="Once you start using our services, your invoices will appear here."
+      />
+    </YStack>
+  )
+}
+
+export default InvoicesList

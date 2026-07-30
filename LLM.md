@@ -5,7 +5,9 @@
 Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
 
 - URL: https://hanzo.ai
-- Stack: Next.js 15 + React 19 + TypeScript + Tailwind v4 + Framer Motion
+- Stack: Next.js 15 + React 19 + TypeScript + `@hanzo/ui` 8.x on `@hanzo/gui`
+  + `@hanzo/design` tokens + Framer Motion. Tailwind v4 is still in the build
+  and is being retired — see "UI substrate" below.
 - Node: v20+ (`.nvmrc`)
 - Dev: `pnpm dev`
 - Build: `pnpm build`
@@ -38,13 +40,53 @@ This ONE static export (`out/`) serves TWO sites — split by host, not by build
   — kept on the detailed site, wrapped by the `(marketing)` Navbar/Footer.
   Surfaced in the landing nav under Research → Overview.
 
+## UI substrate — @hanzo/ui 8.x on @hanzo/gui
+
+ONE component library, ONE token source, ONE way to style.
+
+- **Components**: `@hanzo/ui` (root export) for the component surface;
+  `@hanzo/ui/product` for the gui-backed product layer (`DataTable`,
+  `StatusTag`, `PageHeader`, `SiteNav`, `MetricCard`, …); `@hanzo/gui` for the
+  primitives (`YStack` / `XStack` / `Text` / `View` / `Sheet` / `Accordion`).
+- **v5 → v8 map**: every `@hanzo/ui/<component>` subpath is gone. `tabs`,
+  `progress`, `select`, `dropdown-menu`, `dialog` → the package ROOT.
+  `accordion` and `sheet` have no v8 equivalent → gui's own. `Table*` has none
+  → `DataTable` from `@hanzo/ui/product`.
+- **Config**: `gui.config.ts` binds gui's token namespace to @hanzo/design's
+  CSS custom properties, so `$4` and `var(--space-4)` are one value.
+  The semantic colours are gui TOKENS, not a gui THEME: gui republishes every
+  theme key as a bare `--<key>` at `:root`, and for `background` that would
+  make the property reference itself (CSS drops both sides of a cycle).
+  `background` is therefore the ONE value mirrored from @hanzo/design's
+  exported literals; everything else is a live `var()` reference.
+- **`render=`, not `tag=`** — that is how a gui component picks its host
+  element. `tag` is not a gui prop: it leaks through as a DOM attribute and the
+  page silently ships with zero `<h1>`/`<section>`.
+- **Provider**: `components/GuiProvider.tsx` hands gui's generated CSS to the
+  prerender via `useServerInsertedHTML`. Without it a statically exported page
+  ships markup whose classes have no rules until hydration.
+- **Tailwind is NOT gone**: 62,085 utility class tokens across 486 files still
+  need converting to gui props. `tailwind.config.ts` (dead — v4 is CSS-first
+  and never read it), `tailwindcss-animate` and `components.json` ARE gone.
+  Convert files to gui props; do not add new utility classes.
+
 ## Brand Colors (Monochrome)
+
+The values live in **`@hanzo/design`** (`tokens/colors.css`), imported by
+`app/globals.css`. This site does NOT define them — a local `:root`/`.dark`
+copy is how hanzo.ai drifted from console/chat/app.
 
 - Primary: `#ffffff` (white)
 - Secondary: `#d4d4d4` (neutral-300)
 - Hover: `#a3a3a3` (neutral-400)
 - Brand CSS var: `--brand: #e4e4e7`
-- Centralized in `lib/constants/brand.ts`
+- @hanzo/design is DARK-FIRST: `:root` is dark, `.light` retunes. next-themes
+  writes the theme name as a class on `<html>`, so `.light` lands where the
+  stylesheet expects it.
+- `tokens/base.css` is imported into `layer(base)`. Bare, its element
+  selectors (`a { color: … }`) outrank EVERY layered utility — unlayered wins
+  regardless of specificity — and the header CTA rendered white-on-white.
+- Naming: `lib/constants/brand.ts` still carries the JS-side constants.
 
 ## Key Files
 
@@ -137,11 +179,29 @@ positioned "Open AI Cloud — GCP-compatible. Open source. On-chain.":
 
 ## Design System
 
+- Page shapes: `components/marketing/page-kit.tsx` (gui-native) — `PageHero`,
+  `Section`, `CardGrid`, `Cta`, `Prose`, `Page`. Pages pass CONTENT, not
+  styling. `Prose` deliberately stays an element tree + `prose.css`: gui's
+  `Text` is `white-space: pre-wrap`, right for a label and wrong for a
+  paragraph authored across several source lines.
 - Hero: radial gradient bg (800px, blur 100px, 15% opacity)
-- Cards: `bg-neutral-900/50 border border-neutral-800 rounded-xl`
 - Animation: framer-motion, 0.4s base, 0.05s stagger
-- Buttons: rounded-full, brand primary + neutral-700 border secondary
-- Font: Geist Sans (`next/font/google`)
+- Font: Geist Sans (`next/font/google`), bound to @hanzo/design's
+  `--font-sans` in `app/globals.css` — one binding, one place.
+
+### Mobile invariants (stated once, in `app/globals.css`)
+
+- **The page never scrolls sideways.** `overflow-x: clip` on `html` AND
+  `body` — the scrollport is the documentElement, so clipping body alone still
+  let a 4px sideways scroll through on /about (a `whileInView` x:20 enter is
+  20px wider than a 390px viewport for the length of the animation).
+- **44px is the touch floor**, for `button`, `[role=button]` and every control
+  in the header/footer. It is a POLICY, not a per-button decision: it had been
+  written as a `min-h-11` utility per footer link and consequently forgotten on
+  the wordmark (24px), the search button (36px) and the GitHub icon (20px) of
+  the same page. @hanzo/ui's own size ramp tops out at `h-10` (40px), so the
+  floor has to be stated by the host.
+- Verify at 390px with Playwright before claiming mobile works.
 
 ## Static Export
 

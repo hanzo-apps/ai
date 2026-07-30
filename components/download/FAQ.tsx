@@ -3,12 +3,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@hanzo/ui/accordion";
+import { Faq } from "@/components/ui/faq";
 
 const FAQ = () => {
   const faqs = [
@@ -63,22 +58,7 @@ const FAQ = () => {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem 
-                key={index} 
-                value={`item-${index}`}
-                className="border border-neutral-800 rounded-lg overflow-hidden bg-neutral-900/50"
-              >
-                <AccordionTrigger className="px-6 py-4 text-left text-lg font-medium text-[var(--white)] hover:no-underline">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-4 text-foreground/80">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <Faq items={faqs} />
         </motion.div>
       </div>
     </section>

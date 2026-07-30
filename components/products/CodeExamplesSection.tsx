@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, Copy, Terminal } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@hanzo/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@hanzo/ui";
 
 interface CodeExample {
   language: string;

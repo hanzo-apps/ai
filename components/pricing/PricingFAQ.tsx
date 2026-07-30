@@ -1,11 +1,6 @@
 
 import React from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@hanzo/ui/accordion";
+import { Faq } from "@/components/ui/faq";
 
 const PricingFAQ = () => {
   const faqs = [
@@ -71,22 +66,7 @@ const PricingFAQ = () => {
     <div className="max-w-3xl mx-auto my-16 px-4">
       <h2 className="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
       
-      <Accordion type="single" collapsible className="border-neutral-800">
-        {faqs.map((faq, index) => (
-          <AccordionItem 
-            key={index} 
-            value={`item-${index}`}
-            className="border-b border-neutral-800"
-          >
-            <AccordionTrigger className="py-4 text-left text-neutral-200 hover:text-[var(--white)]">
-              {faq.question}
-            </AccordionTrigger>
-            <AccordionContent className="text-muted-foreground pb-4">
-              {faq.answer}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      <Faq items={faqs} />
     </div>
   );
 };

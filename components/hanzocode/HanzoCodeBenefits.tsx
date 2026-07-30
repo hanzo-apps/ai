@@ -3,7 +3,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { TabsContent, TabsList, TabsTrigger, Tabs } from "@hanzo/ui/tabs";
+import { TabsContent, TabsList, TabsTrigger, Tabs } from "@hanzo/ui";
 
 const HanzoCodeBenefits = () => {
   return (

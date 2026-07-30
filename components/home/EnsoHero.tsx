@@ -32,7 +32,7 @@ export default function EnsoHero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 transition-colors hover:border-neutral-600"
+          className="mb-8 inline-flex min-h-11 items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 transition-colors hover:border-neutral-600"
         >
           <EnsoLogo size={16} className="text-white" />
           <span className="text-sm font-medium text-neutral-200">Introducing Enso · Hanzo Cloud</span>
@@ -77,13 +77,13 @@ export default function EnsoHero() {
         >
           <a
             href="/enso"
-            className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black transition-opacity hover:opacity-90"
           >
             Explore Enso <ArrowRight className="h-4 w-4" />
           </a>
           <a
             href={CHAT}
-            className="inline-flex items-center gap-2 rounded-full border border-neutral-700 px-7 py-3 text-sm font-medium text-white transition-colors hover:border-neutral-400"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-neutral-700 px-7 text-sm font-medium text-white transition-colors hover:border-neutral-400"
           >
             <MessageSquare className="h-4 w-4" /> Try in Hanzo Chat
           </a>
