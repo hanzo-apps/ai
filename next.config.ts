@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
   // @hanzo/gui and its primitives ship untranspiled ESM with react-native module
   // resolution; Next has to compile them and resolve `react-native` to the web
   // implementation. This is the whole browser story for the gui substrate.
-  transpilePackages: ['@hanzo/gui', '@hanzo/ui', 'react-native-web'],
+  transpilePackages: ['@hanzo/gui', '@hanzo/ui', '@hanzo/data', 'react-native-web'],
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,

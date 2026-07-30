@@ -23,9 +23,9 @@
     "@hanzo/observe": "^0.1.0",
     "@hanzo/ui": "^8.0.33",
     "@hanzo/usage": "0.1.1",
-    "@hanzogui/config": "7.3.0",
-    "@hanzogui/lucide-icons-2": "7.3.0",
-    "@hanzogui/next-theme": "7.3.0",
+    "@hanzogui/config": "7.3.1",
+    "@hanzogui/lucide-icons-2": "7.3.1",
+    "@hanzogui/next-theme": "7.3.1",
     "@hanzogui/shell": "^7.6.3",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-slot": "^1.2.4",
@@ -78,6 +78,12 @@
   },
   "packageManager": "pnpm@9.15.0",
   "pnpm": {
+    "overrides": {
+      "@hanzogui/web": "7.3.1",
+      "@hanzogui/core": "7.3.1",
+      "@hanzogui/config": "7.3.1",
+      "@hanzogui/next-theme": "7.3.1"
+    },
     "onlyBuiltDependencies": [
       "sharp",
       "unrs-resolver"
