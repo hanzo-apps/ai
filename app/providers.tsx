@@ -1,41 +1,9 @@
 'use client'
 
 import { IamProvider, useIam } from '@hanzo/iam/react'
-import { AnalyticsProvider, ErrorBoundary, useAnalytics, usePageview } from '@hanzo/event/react'
-import { ObserveProvider } from '@hanzo/observe/react'
+import { TelemetryProvider, useTelemetry } from '@hanzogui/telemetry'
 import { usePathname } from 'next/navigation'
 import { useEffect, type ReactNode } from 'react'
-
-// Event-stream door for the @hanzo/event client. This is api.hanzo.ai, NOT
-// analytics.hanzo.ai. Both hosts expose a path spelled `/v1/event`, but they are
-// DIFFERENT protocols:
-//
-//   • api.hanzo.ai/v1/event      — the cloud front door; body { batch: [Event…] }.
-//   • analytics.hanzo.ai/v1/event — the Umami tracker door; body is a BARE ARRAY
-//     of hz.js envelopes ({site, ts, type, path, …}) and rejects anything else
-//     with 400 "expected array, received object".
-//
-// This app previously pointed the SDK at the second one, so every pageview and
-// error it emitted was rejected 400 at the edge. There is no longer a second
-// tag: the hz.js script was removed from app/layout.tsx because it could only
-// double-count the pageviews this client already posts. ONE client, ONE door.
-const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.ai'
-
-/** Hanzo-minted Sentry DSN for the `hanzo-ai` project — the ERROR plane.
- *  "https://<version>:<hmac>@<host>/v1/sentry/<projectId>". Publishable and
- *  write-only (it can create an event and read nothing), so it is safe in the
- *  bundle, exactly like the pk_ ingest key below. Without it @hanzo/event's error
- *  plane is inert and NOTHING reaches sentry.hanzo.ai — which is precisely why
- *  this site reported zero errors. Set in the build env; never committed.
- *  Mint/rotate: POST /v1/sentry/projects · POST /v1/sentry/projects/{id}/keys/rotate */
-const EVENT_DSN = process.env.NEXT_PUBLIC_HANZO_EVENT_DSN
-
-/** Publishable ingest key (pk_…) — write-only, safe to ship in the bundle. It lets
- *  logged-out marketing traffic reach the ONE front door (POST /v1/event) so
- *  pageviews + errors land server-side (Cloud stamps the org from the key). When
- *  unset, signed-in visitors still report via their bearer; anonymous events
- *  fail closed. Provision one per org via POST /v1/ingest/keys. */
-const INGEST_KEY = process.env.NEXT_PUBLIC_HANZO_INGEST_KEY
 
 /** Anonymous marketing traffic; forward a stored bearer when one exists. */
 function getToken(): string | undefined {
@@ -43,35 +11,11 @@ function getToken(): string | undefined {
   return window.localStorage.getItem('hanzo_access_token') ?? undefined
 }
 
-/** Consent gate — honor Do Not Track and Global Privacy Control as opt-out. The
- *  client sends no PII (never an org or email), so respecting the browser's
- *  standard privacy signals is the whole consent surface a marketing site needs. */
-function telemetryEnabled(): boolean {
-  // Guard on `window`, not `navigator`: Node 20+ defines a global `navigator`, so
-  // a navigator check would pass during the static-export prerender and then
-  // touch `window` (undefined on the server). `window` is the reliable SSR gate.
-  if (typeof window === 'undefined') return true
-  const w = window as unknown as { doNotTrack?: string }
-  const n = navigator as unknown as {
-    doNotTrack?: string
-    msDoNotTrack?: string
-    globalPrivacyControl?: boolean
-  }
-  const dnt = n.doNotTrack ?? w.doNotTrack ?? n.msDoNotTrack
-  if (dnt === '1' || dnt === 'yes') return false
-  if (n.globalPrivacyControl) return false
-  return true
-}
-
-/** Route-change pageviews. Browser-only; safe under `output: export`. */
-function Pageview() {
-  usePageview(usePathname())
-  return null
-}
-
 /**
  * The ONE place this site binds telemetry identity — mounted inside IamProvider
  * so it sees the resolved session on every route, not just /auth/callback.
+ * Identity is the only part of the telemetry story an app still owns, because
+ * only the app knows who is signed in.
  *
  *  • identify(user.id) — the stable IAM subject. NEVER email/name: the client is
  *    PII-free by construction, and the id is what joins a person's events across
@@ -83,15 +27,15 @@ function Pageview() {
  */
 function Identity() {
   const { user, isAuthenticated } = useIam()
-  const analytics = useAnalytics()
+  const telemetry = useTelemetry()
   const id = isAuthenticated ? user?.id : undefined
   const org = isAuthenticated ? user?.owner : undefined
   useEffect(() => {
-    if (id) analytics.identify(id)
-  }, [analytics, id])
+    if (id) telemetry.identify(id)
+  }, [telemetry, id])
   useEffect(() => {
-    if (org) analytics.group(org)
-  }, [analytics, org])
+    if (org) telemetry.group(org)
+  }, [telemetry, org])
   return null
 }
 
@@ -139,53 +83,50 @@ function memoryStorage(): Storage {
 }
 
 /**
- * Client providers. Telemetry is ONE client, `@hanzo/event`, over TWO planes:
- * the event stream (POST api.hanzo.ai/v1/event) and the error plane (a Sentry
- * envelope to the DSN host, sentry.hanzo.ai). Web analytics is a LENS on the
- * event stream, resolved server-side — not a separate client and not a tag.
- * `AnalyticsProvider` auto-fires the first pageview and wires auto error capture;
- * `<Pageview/>` counts route changes; the `ErrorBoundary` catches React render
- * errors (which never reach window.onerror).
- * `<ObserveProvider>` rides the SAME client (via context) and adds default-on
- * interaction autocapture ($click/$input/$change/$submit) with a semantic DOM
- * hierarchy — input values redacted by default (PII-free). `nav={false}`: the
- * event layer already counts pageviews exactly once, so observe does not also
- * patch history (no double-count); `enabled` mirrors the same DNT/GPC consent gate.
- * We mount the canonical @hanzo/iam provider directly — components call `useIam()`.
+ * Client providers. Telemetry is ONE surface, `@hanzogui/telemetry` — the shared
+ * policy layer every Hanzo app mounts, never a per-repo copy. It composes the
+ * mechanism packages (`@hanzo/event` = the client and the wire, `@hanzo/observe`
+ * = the capture engine, imported lazily in an idle callback so it cannot cost
+ * LCP) and it is the ONLY thing this app configures.
+ *
+ * Everything below is resolved, not passed:
+ *
+ *  • The door. POST https://api.hanzo.ai/v1/event, from `NEXT_PUBLIC_HANZO_API_URL`
+ *    or that default. Cloud lenses the one stream into sentry.hanzo.ai (errors +
+ *    session capture), analytics.hanzo.ai (pageviews) and insights.hanzo.ai
+ *    (product events). Three dashboards, one stream, one thing to configure.
+ *  • The error plane. `product="site"` IS the configuration: @hanzo/event maps it
+ *    to the `hanzo-ai` Sentry project's publishable DSN. There is no DSN prop and
+ *    no DSN env var to forget — forgetting one is exactly why this site reported
+ *    zero errors for months.
+ *  • The ingest key. Read from `NEXT_PUBLIC_HANZO_INGEST_KEY`. Optional: the door
+ *    admits anonymous pageviews and errors under the reserved `$public` tenant.
+ *  • Consent. Do Not Track and Global Privacy Control are honored by default, and
+ *    an explicit stored choice outranks the browser in both directions.
+ *
+ * We pass only what the package cannot know: the route (`usePathname()` — Next's
+ * router is the clock for pageviews), the bearer, and the crash UI. `fallback`
+ * makes the provider's own boundary render `Crashed`; React render errors are the
+ * one class `window.onerror` never sees, so the boundary is how they get reported.
+ *
+ * IamProvider stays mounted here so <Identity/> can read the resolved session.
  */
 export function Providers({ children }: { children: ReactNode }) {
-  const enabled = telemetryEnabled()
   return (
-    <AnalyticsProvider
-      config={{
-        product: 'site',
-        host: EVENT_HOST,
-        ingestKey: INGEST_KEY,
-        getToken,
-        enabled,
-        // Error plane -> sentry.hanzo.ai. Inert (fail-safe) when the DSN is unset.
-        dsn: EVENT_DSN,
-        environment: 'production',
-      }}
-    >
-      <ObserveProvider nav={false} enabled={enabled}>
-        <Pageview />
-        <ErrorBoundary fallback={Crashed}>
-          <IamProvider
-            config={{
-              serverUrl: process.env.NEXT_PUBLIC_HANZO_IAM_URL || 'https://hanzo.id',
-              clientId: process.env.NEXT_PUBLIC_HANZO_CLIENT_ID || 'hanzo-app',
-              redirectUri:
-                (typeof window !== 'undefined' ? window.location.origin : 'https://hanzo.ai') +
-                '/auth/callback',
-              storage: typeof window !== 'undefined' ? window.sessionStorage : memoryStorage(),
-            }}
-          >
-            <Identity />
-            {children}
-          </IamProvider>
-        </ErrorBoundary>
-      </ObserveProvider>
-    </AnalyticsProvider>
+    <TelemetryProvider product="site" path={usePathname()} getToken={getToken} fallback={Crashed}>
+      <IamProvider
+        config={{
+          serverUrl: process.env.NEXT_PUBLIC_HANZO_IAM_URL || 'https://hanzo.id',
+          clientId: process.env.NEXT_PUBLIC_HANZO_CLIENT_ID || 'hanzo-app',
+          redirectUri:
+            (typeof window !== 'undefined' ? window.location.origin : 'https://hanzo.ai') +
+            '/auth/callback',
+          storage: typeof window !== 'undefined' ? window.sessionStorage : memoryStorage(),
+        }}
+      >
+        <Identity />
+        {children}
+      </IamProvider>
+    </TelemetryProvider>
   )
 }

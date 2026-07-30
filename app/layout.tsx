@@ -75,9 +75,9 @@ export default function RootLayout({
           </GuiProvider>
         </ThemeProvider>
         {/* No analytics tag here: pageviews AND interaction autocapture already ride
-            the ONE @hanzo/event client in <Providers> (host + ingest key + consent
-            gate in one place). A second hz.js tag posted to the same /v1/event door
-            and double-counted every pageview. */}
+            the ONE <TelemetryProvider> in <Providers> (host, error plane, ingest key
+            and consent gate all resolved in one place). A second hz.js tag posted to
+            the same /v1/event door and double-counted every pageview. */}
         {/* Hanzo Edit — ever-present "improve this page" widget (repo in metadata.other). */}
         <script async src="https://hanzo.app/edit.js" />
       </body>
