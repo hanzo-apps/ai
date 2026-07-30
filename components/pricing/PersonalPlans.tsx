@@ -4,7 +4,66 @@ import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Github, Code, Zap, Users, Rocket } from "lucide-react";
 
-const PLANS_API = "https://api.hanzo.ai/v1/plans";
+/**
+ * The catalog BILLING CHARGES FROM. There are two plan endpoints and only this one
+ * is the money:
+ *
+ *   /v1/billing/plans  20 plans, category "personal", `price` in CENTS
+ *                      (pro = 2000 = $20), 7-13 features each.  <- billing
+ *   /v1/plans          11 plans, category "pro"/"starter"/…, pro = $25,
+ *                      features: null on every one.              <- NOT billing
+ *
+ * This page called /v1/plans and filtered `category === "personal"`, which NO plan
+ * there carries — so the filter always yielded zero, setPlans never ran, and the
+ * page could never leave STATIC_PLANS no matter how the catalog changed. It LOOKED
+ * API-driven and was permanently frozen: it fetched the wrong catalog on every load
+ * and threw all of it away.
+ *
+ * That also means the two surfaces disagreed on price for the same plan — $20 here
+ * against $25 from /v1/plans — on a page a customer reads before paying. The $20 is
+ * the correct one; it is what /v1/billing/plans says and what commerce bills.
+ */
+const PLANS_API = "https://api.hanzo.ai/v1/billing/plans";
+
+/** A row as /v1/billing/plans returns it: bare array, `slug`, `price` in cents. */
+interface BillingPlan {
+  slug: string;
+  name: string;
+  description: string;
+  price: number | null;
+  priceAnnual?: number | null;
+  category: string;
+  features?: string[];
+  limits?: Record<string, number | null>;
+  popular?: boolean;
+  contactSales?: boolean;
+  pricePerUser?: boolean;
+  checkoutUrl?: string;
+  checkoutId?: string;
+}
+
+/**
+ * Billing speaks CENTS; this page renders dollars. Converting here, once, at the
+ * boundary — a price that is 100x wrong on a checkout page is the worst possible
+ * rounding bug, so it converts in exactly one place and nowhere else.
+ */
+function fromBillingPlan(p: BillingPlan): SubscriptionPlan {
+  return {
+    id: p.slug,
+    name: p.name,
+    description: p.description,
+    priceMonthly: p.price == null ? null : p.price / 100,
+    priceAnnual: p.priceAnnual == null ? null : p.priceAnnual / 100,
+    category: p.category,
+    popular: p.popular,
+    contactSales: p.contactSales,
+    pricePerUser: p.pricePerUser,
+    features: p.features ?? [],
+    limits: p.limits,
+    checkoutUrl: p.checkoutUrl,
+    checkoutId: p.checkoutId,
+  };
+}
 
 interface SubscriptionPlan {
   id: string;
@@ -147,10 +206,13 @@ const PersonalPlans = () => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
       })
-      .then((d) => {
-        const personal = (d.plans || []).filter(
-          (p: SubscriptionPlan) => p.category === "personal"
-        );
+      .then((d: BillingPlan[] | { plans?: BillingPlan[] }) => {
+        // A BARE ARRAY, not { plans: [...] } — reading `d.plans` off an array is
+        // undefined, which is the other half of why nothing ever rendered.
+        const rows = Array.isArray(d) ? d : (d.plans ?? []);
+        const personal = rows
+          .filter((p) => p.category === "personal")
+          .map(fromBillingPlan);
         if (personal.length) setPlans(personal);
       })
       .catch(() => {
