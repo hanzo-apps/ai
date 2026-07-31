@@ -50,29 +50,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Every secret this job needs, read once, BEFORE the build. The ordering is
-      # load-bearing for the two telemetry values: they are NEXT_PUBLIC_*, so Next
-      # inlines them into the bundle at build time and nothing set afterwards can
-      # reach it. Fetching them after the build — where the CF read used to sit —
-      # cannot wire them no matter what KMS holds.
+      # Runs before the build because NEXT_PUBLIC_HANZO_INGEST_KEY is inlined into
+      # the bundle at build time.
       #
-      # Two secret roots, two failure policies:
-      #   deploy/  CF credentials. REQUIRED — without them there is no deploy.
-      #   site/    the ingest key. FAIL-SOFT — anonymous traffic is still admitted
-      #            without it, so an absent secret degrades telemetry rather than
-      #            blocking the site. It warns, so "never provisioned" cannot read
-      #            as "working".
+      #   deploy/  CF credentials. Required; no credentials, no deploy.
+      #   site/    the ingest key. Absent, cloud still admits the traffic under
+      #            $public, so the step warns and the build ships.
       #
-      # ONE credential, because there is one door. @hanzo/event also accepts a
-      # Sentry `dsn` for a second, independently authenticated send to
-      # /v1/sentry/<projectId> — but sentry.hanzo.ai does not read that store. Its
-      # shell reads GET /v1/errors, i.e. the type:'error' events in hanzo.events
-      # that this key already writes through /v1/event (universe
-      # infra/k8s/ingress/routes.yaml). A DSN here would provision a second
-      # publishable credential to fill a store the dashboard never opens.
-      #
-      # The path segment is load-bearing: querying the org secret root returns
-      # {"names":[]} and looks empty, which reads as "the creds are gone".
+      # The path segment is required: the org secret root returns {"names":[]}.
       - name: Fetch secrets from KMS
         id: kms
         env:
@@ -106,14 +91,13 @@ jobs:
           echo "cf_token=${cf_token}" >> "$GITHUB_OUTPUT"
           echo "cf_account=${cf_account}" >> "$GITHUB_OUTPUT"
 
-          # Refuse a wrong prefix rather than ship it: cloud matches `pk-`, and a
-          # `pk_` value is not recognized as publishable and is not "presented"
-          # either, so it does not 403 — it misfiles to $public silently.
+          # cloud matches `pk-`; another prefix is not read as a key and misfiles
+          # to $public without a 403, so refuse it here.
           key=$(kms_get site HANZO_INGEST_KEY)
           case "${key}" in
-            '')   echo "::warning::site/HANZO_INGEST_KEY absent — logged-out traffic lands under \$public, which our org cannot read, and the anonymous allowlist drops every @hanzo/observe interaction. Mint: POST /v1/ingest/keys" ;;
+            '')   echo "::warning::site/HANZO_INGEST_KEY absent — traffic lands under \$public, which our org cannot read, and observe interactions are dropped. Mint: POST /v1/ingest/keys" ;;
             pk-*) echo "::add-mask::${key}"; echo "key=${key}" >> "$GITHUB_OUTPUT" ;;
-            *)    echo "::warning::site/HANZO_INGEST_KEY does not begin with 'pk-'; ignoring it, because a wrong prefix misfiles to \$public silently." ;;
+            *)    echo "::warning::site/HANZO_INGEST_KEY does not begin with 'pk-'; ignoring it." ;;
           esac
 
       # Large static export (hundreds of pages); the default heap OOMs it.

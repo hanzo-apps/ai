@@ -21,19 +21,13 @@ RUN corepack enable && corepack prepare pnpm@10.33.4 --activate
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
-# Telemetry config (@hanzo/event, app/providers.tsx). NEXT_PUBLIC_* is inlined by
-# Next at BUILD time, so these have to arrive as build args — an env var on the
-# serve stage is far too late and silently does nothing. Pass from the on-cluster
-# BuildKit invocation, sourced from KMS (site/HANZO_EVENT_DSN, site/HANZO_INGEST_KEY):
-#   --opt build-arg:NEXT_PUBLIC_HANZO_EVENT_DSN=…
+# NEXT_PUBLIC_* is inlined by Next at build time, so the key arrives as a build
+# arg; an env var on the serve stage is too late. Sourced from KMS
+# (site/HANZO_INGEST_KEY) by the BuildKit invocation:
 #   --opt build-arg:NEXT_PUBLIC_HANZO_INGEST_KEY=pk-…
-# Both are publishable, write-only values (they ship in the client bundle by
-# design), so they are build args and not secret mounts.
-# Omitting them is FAIL-SAFE, not fatal: with no DSN the error plane is inert
-# (sentry.hanzo.ai gets nothing) and with no pk- key anonymous traffic files under
-# the $public tenant, where our org cannot read it and every @hanzo/observe
-# interaction is dropped by the anonymous kind allowlist.
-ARG NEXT_PUBLIC_HANZO_EVENT_DSN
+# It is publishable and write-only — it ships in the client bundle — so it is a
+# build arg rather than a secret mount. Omitted, cloud files the traffic under
+# $public instead of this org.
 ARG NEXT_PUBLIC_HANZO_INGEST_KEY
 
 # Build the static export (next.config.ts: output: 'export' -> ./out).

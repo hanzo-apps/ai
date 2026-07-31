@@ -6,55 +6,15 @@ import { ObserveProvider } from '@hanzo/observe/react'
 import { usePathname } from 'next/navigation'
 import { useEffect, type ReactNode } from 'react'
 
-// Event-stream door for the @hanzo/event client. This is api.hanzo.ai, NOT
-// analytics.hanzo.ai. Both hosts expose a path spelled `/v1/event`, but they are
-// DIFFERENT protocols:
-//
-//   • api.hanzo.ai/v1/event      — the cloud front door; body { batch: [Event…] }.
-//   • analytics.hanzo.ai/v1/event — the Umami tracker door; body is a BARE ARRAY
-//     of hz.js envelopes ({site, ts, type, path, …}) and rejects anything else
-//     with 400 "expected array, received object".
-//
-// This app previously pointed the SDK at the second one, so every pageview and
-// error it emitted was rejected 400 at the edge. There is no longer a second
-// tag: the hz.js script was removed from app/layout.tsx because it could only
-// double-count the pageviews this client already posts. ONE client, ONE door.
+/** Cloud front door: POST /v1/event, body { batch: [Event…] }. */
 const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.ai'
 
-// NO SENTRY DSN, deliberately. @hanzo/event accepts one, and it authenticates a
-// SECOND send — a Sentry envelope to /v1/sentry/<projectId>, independent of the
-// event stream. That store is not the one sentry.hanzo.ai reads: its shell reads
-// GET /v1/errors, the type:'error' events in hanzo.events, which this client
-// already writes through /v1/event under the ingest key below (universe
-// infra/k8s/ingress/routes.yaml, the sentry.hanzo.ai routers). Adding a DSN would
-// mean a second publishable credential to mint, rotate and leak, filling a store
-// the dashboard never opens — and double-reporting every error that does matter.
-// ONE client, ONE door, ONE credential.
-
-/** Publishable ingest key (`pk-…`) — write-only, safe to ship in the bundle, and on
- *  a logged-out marketing site the difference between having interaction analytics
- *  and having none.
- *
- *  Anonymous ingest is NOT rejected: cloud admits a credential-less request and
- *  files it under the reserved `$public` tenant (apps/analytics/event.go →
- *  publicIngest). But that lane is deliberately narrow, and the narrowness is the
- *  whole point of this key:
- *
- *    • `publicKinds` allows ONLY `pageview` and `error`. Every interaction
- *      @hanzo/observe emits ($click/$input/$change/$submit/$view) is a
- *      `type:'event'` and is DROPPED — silently, counted in the {accepted,dropped}
- *      receipt nobody reads. Mounting ObserveProvider without this key on an
- *      all-anonymous surface captures exactly nothing.
- *    • `$public` is a partition Hanzo's own org CANNOT READ, so even the pageviews
- *      that do land are stranded outside our funnels.
- *
- *  With the key, the same traffic resolves to the real org at full capability.
- *  Provision per org via POST /v1/ingest/keys.
- *
- *  MIND THE PREFIX: cloud matches `pk-` (cloud.PublishablePrefix, hyphen). A value
- *  shaped `pk_…` is not recognized as a publishable key, so it is not "presented"
- *  either — it falls through to the anonymous lane and misfiles to `$public`
- *  instead of returning 403. Wrong prefix fails SILENTLY; get it right. */
+/** Publishable ingest key, write-only and safe in the bundle. It resolves the
+ *  request to this org; without it cloud files the traffic under the reserved
+ *  `$public` tenant, which stores only pageview and error and which our org
+ *  cannot read. Prefix is `pk-` (cloud.PublishablePrefix); other prefixes are
+ *  not recognized as a key and fall through to `$public`.
+ *  Mint: POST /v1/ingest/keys */
 const INGEST_KEY = process.env.NEXT_PUBLIC_HANZO_INGEST_KEY
 
 /** Anonymous marketing traffic; forward a stored bearer when one exists. */
@@ -63,13 +23,11 @@ function getToken(): string | undefined {
   return window.localStorage.getItem('hanzo_access_token') ?? undefined
 }
 
-/** Consent gate — honor Do Not Track and Global Privacy Control as opt-out. The
- *  client sends no PII (never an org or email), so respecting the browser's
- *  standard privacy signals is the whole consent surface a marketing site needs. */
+/** Consent gate: Do Not Track and Global Privacy Control are opt-out. The SDK
+ *  reads neither, so every surface passes `enabled` itself. */
 function telemetryEnabled(): boolean {
-  // Guard on `window`, not `navigator`: Node 20+ defines a global `navigator`, so
-  // a navigator check would pass during the static-export prerender and then
-  // touch `window` (undefined on the server). `window` is the reliable SSR gate.
+  // `window`, not `navigator`: Node defines a global navigator, so a navigator
+  // check passes during the static-export prerender and then touches window.
   if (typeof window === 'undefined') return true
   const w = window as unknown as { doNotTrack?: string }
   const n = navigator as unknown as {
@@ -163,19 +121,15 @@ function memoryStorage(): Storage {
 }
 
 /**
- * Client providers. Telemetry is ONE client, `@hanzo/event`, over TWO planes:
- * the event stream (POST api.hanzo.ai/v1/event) and the error plane (a Sentry
- * envelope to the DSN host, sentry.hanzo.ai). Web analytics is a LENS on the
- * event stream, resolved server-side — not a separate client and not a tag.
- * `AnalyticsProvider` auto-fires the first pageview and wires auto error capture;
- * `<Pageview/>` counts route changes; the `ErrorBoundary` catches React render
- * errors (which never reach window.onerror).
- * `<ObserveProvider>` rides the SAME client (via context) and adds default-on
- * interaction autocapture ($click/$input/$change/$submit) with a semantic DOM
- * hierarchy — input values redacted by default (PII-free). `nav={false}`: the
- * event layer already counts pageviews exactly once, so observe does not also
- * patch history (no double-count); `enabled` mirrors the same DNT/GPC consent gate.
- * We mount the canonical @hanzo/iam provider directly — components call `useIam()`.
+ * Client providers. All telemetry is `@hanzo/event` posting to /v1/event; the
+ * analytics, insights and error dashboards are lenses cloud resolves over that
+ * one stream. `AnalyticsProvider` fires the first pageview and captures errors,
+ * `<Pageview/>` counts route changes, `ErrorBoundary` catches React render
+ * errors, which never reach window.onerror.
+ *
+ * `<ObserveProvider>` rides the same client through context and adds interaction
+ * capture ($click/$input/$change/$submit) with input values redacted.
+ * `nav={false}` leaves history alone, since `<Pageview/>` already counts routes.
  */
 export function Providers({ children }: { children: ReactNode }) {
   const enabled = telemetryEnabled()
@@ -187,11 +141,8 @@ export function Providers({ children }: { children: ReactNode }) {
         ingestKey: INGEST_KEY,
         getToken,
         enabled,
-        // `environment` is deliberately absent: the SDK defaults it to NODE_ENV
-        // (core.ts `this.cfg.environment ?? readEnv('NODE_ENV')`), which is exactly
-        // right for both lanes — `next build` stamps production, `next dev` stamps
-        // development. Hardcoding 'production' here labelled every local crash a
-        // production incident in the Sentry dashboard.
+        // `environment` is omitted so the SDK takes it from NODE_ENV: `next build`
+        // stamps production, `next dev` stamps development.
       }}
     >
       <ObserveProvider nav={false} enabled={enabled}>

@@ -208,110 +208,64 @@ positioned "Open AI Cloud — GCP-compatible. Open source. On-chain.":
 `next.config.ts` uses `output: 'export'` for static deploy to GitHub Pages.
 SPA routing works via the static export's automatic 404.html fallback.
 
-## Telemetry (one client, one door)
+## Telemetry
 
-All telemetry is the ONE `@hanzo/event` client, wired once in `app/providers.tsx`:
-`<AnalyticsProvider config={{ product: 'site', host: EVENT_HOST, ingestKey,
-getToken, enabled }}>` → `POST https://api.hanzo.ai/v1/event`.
+All telemetry is one client, `@hanzo/event`, wired once in `app/providers.tsx`:
 
-**The door is `api.hanzo.ai`, and only `api.hanzo.ai`.** Every endpoint request
-goes there; there is no second API host. Both `api.hanzo.ai` and
-`analytics.hanzo.ai` expose a path spelled `/v1/event`, but they are DIFFERENT
-protocols and pointing the SDK at the wrong one fails silently in the browser:
+    <AnalyticsProvider config={{ product: 'site', host: EVENT_HOST,
+                                 ingestKey, getToken, enabled }}>
+      -> POST https://api.hanzo.ai/v1/event   body { batch: [Event...] }
 
-- `api.hanzo.ai/v1/event` — the cloud front door. Body `{ batch: [Event…] }`.
-  Cloud fans the one stream out to the web (analytics), product (insights) and
-  error (sentry) lenses server-side.
-- `analytics.hanzo.ai/v1/event` — the Umami tracker door. Body is a BARE ARRAY of
-  `hz.js` envelopes and rejects anything else with
-  `400 "Invalid input: expected array, received object"`.
+Cloud resolves every dashboard as a lens over that one stream, so there is no
+second client and no tag on any Hanzo surface:
 
-That 400 was live on hanzo.ai on every page load. No client tag on ANY Hanzo
-surface: `analytics.hanzo.ai/hz.js` is gone from hanzo.app and hanzo.chat too —
-each mounts its own `@hanzo/event` client, so a tag could only double-count the
-pageviews that client already posts. (The older direct `script.js` and inline
-PostHog snippets were removed earlier, `components/HanzoAnalytics.tsx` deleted.)
-
-Anonymous/logged-out views are ADMITTED without a key. `api.hanzo.ai/v1/event` is
-the ONE door for every auth context, anonymous included: a request with no bearer
-and no key is admitted and attributed SERVER-SIDE to a reserved public tenant
-(`$public`), never to a real org and never to anything the request names.
-
-**But admitted is not the same as useful, so this site DOES want a `pk-` key.** An
-earlier revision of this file said "do not add a publishable `pk-` key for this."
-That was defensible while pageviews were the only signal; it is wrong now that
-`@hanzo/observe` is mounted, for two reasons that both follow from the narrowness
-documented just below:
-
-- `$public` is a partition **our own org cannot read**, so anonymous pageviews land
-  somewhere our funnels can't see.
-- The anonymous allowlist stores ONLY `pageview` and `error`. Every interaction
-  observe emits (`$click`/`$input`/`$change`/`$submit`/`$view`) is a `type:"event"`
-  and is **dropped**. hanzo.ai is almost entirely logged-out traffic, so with no key
-  the interaction capture we just mounted collects essentially nothing.
-
-Provision `site/HANZO_INGEST_KEY` in KMS (read at build time by
-`.github/workflows/deploy.yml`; `POST /v1/ingest/keys` to mint). **The prefix is
-`pk-`** (hyphen — `cloud.PublishablePrefix`). A `pk_…` value is not recognized as a
-publishable key and is not "presented" either, so it does not 403 — it falls through
-to the anonymous lane and misfiles to `$public`. Wrong prefix fails silently.
-
-The anonymous lane is deliberately narrow. Only `type:"pageview"` and
-`type:"error"` are stored — `identify`, `group`, and custom events are dropped and
-counted in the `{accepted,dropped}` receipt. The stored event name is server-chosen
-(`$pageview` / `$error`), and only allowlisted fields are kept: the client property
-bag, `personId`, `groupId`, and every commerce field are dropped, so an anonymous
-caller can neither name a tenant nor persist a key it chose. Anonymous ingest is
-per-IP rate-limited and bounded (≤50 events, ≤64 KiB — over either is rejected, not
-truncated), and `DNT: 1` / `Sec-GPC: 1` store nothing.
-
-A PRESENTED-but-unresolvable key still fails closed with
-`403 "valid bearer or a resolvable ingest key required"` — that 403 now means a
-broken credential, not a logged-out visitor. Events sent WITH a valid bearer are
-unchanged: real org, full capability.
-
-### THREE telemetry planes — orthogonal, never collapsed
-Analytics is NOT error capture. Each plane has its own first-party host:
-
-| Plane | Host | What it holds |
+| Lens | Host | Reads |
 |---|---|---|
-| **Errors** | **`sentry.hanzo.ai`** | error capture, **full AST**, **session replay**, the detailed error dashboard. Self-hosted Sentry — WE STILL USE IT. |
-| **Web analytics** | `analytics.hanzo.ai` | "boring web analytics" — pageviews, referrers, sessions (Umami fork). |
-| **Product insights** | `insights.hanzo.ai` | product analytics — funnels, retention, feature usage, flags. |
+| Errors | `sentry.hanzo.ai` | `GET /v1/errors` — the `type:'error'` events in `hanzo.events` |
+| Web analytics | `analytics.hanzo.ai` | pageviews, referrers, sessions |
+| Product insights | `insights.hanzo.ai` | funnels, retention, feature usage |
 
-All three must be **live and wired ZERO-CONFIG** for every template site and every
-`@hanzo/ui` / `@hanzo/gui` based app — shipped in the shared UI layer, never
-copy-pasted per repo. A new site gets errors + analytics + insights with no setup.
+`analytics.hanzo.ai/v1/event` is a different protocol — the Umami tracker door,
+whose body is a bare array of `hz.js` envelopes. Pointing the SDK there answers
+`400 "expected array, received object"`. The door is `api.hanzo.ai`.
 
-- **Auto pageview** on load + route change (`usePageview(usePathname())`).
-- **Errors go to `sentry.hanzo.ai`** (AST + session replay), with `<ErrorBoundary>`
-  for React render errors. Do NOT describe analytics as "the Sentry replacement" —
-  an earlier revision of this file said that and it was wrong. Nor is there any
-  server-side fan-out from `/v1/event` into Sentry: the error plane is a SECOND,
-  independent send (a Sentry envelope to the DSN host) and it requires
-  `NEXT_PUBLIC_HANZO_EVENT_DSN`. **With no DSN the plane is inert and the dashboard
-  gets nothing** — the site read that var for a while with nothing setting it, which
-  is precisely how it reported zero errors. Provisioned as `site/HANZO_EVENT_DSN` in
-  KMS, fetched pre-build by `.github/workflows/deploy.yml`.
-- **Logged-out marketing** is ADMITTED without a credential (anonymous pageviews and
-  errors land under `$public`), but wants the `pk-` ingest key anyway — `$public` is
-  unreadable by our org and the anonymous allowlist drops every observe interaction.
-  See the ingest-key section above.
-- **Interaction autocapture**: `<ObserveProvider>` (`@hanzo/observe`) rides the SAME
-  client via context, inside `AnalyticsProvider`. `nav={false}` here on purpose —
-  `<Pageview/>` already counts route changes, and letting observe patch history too
-  would double-count every navigation. Input values are redacted by default.
-- **Consent**: honors Do Not Track / Global Privacy Control (via `enabled`), gating
-  BOTH planes and the observe engine. Note this is implemented HERE
-  (`telemetryEnabled()` in `app/providers.tsx`), not in the SDK: neither
-  `@hanzo/event` nor `@hanzo/observe` reads `navigator.globalPrivacyControl` /
-  `doNotTrack`, so every surface must pass `enabled` itself. Do not delete it
-  assuming the library covers it.
-- **The client never sends the org.** No `group()` call: cloud stamps the tenant from
-  the validated bearer. `identify(user.id)` is the only identity sent, never an email.
-- **Product moments**: `EVENTS.CHAT_STARTED` (apex composer + nav "Try Hanzo"),
-  `EVENTS.FEATURE_USED` (home pills); the funnel events
-  (pricing/signup/waitlist/referral) live in their own pages.
+**There is no Sentry DSN.** `@hanzo/event` accepts one, and it authenticates a
+separate send to `/v1/sentry/<projectId>`. `sentry.hanzo.ai` does not read that
+store — it reads `GET /v1/errors`, which the event stream already writes
+(universe `infra/k8s/ingress/routes.yaml`). One credential covers every lens.
+
+### The ingest key
+
+Anonymous traffic is admitted without a credential and filed under the reserved
+`$public` tenant. That lane stores only `pageview` and `error`, drops `identify`
+/ `group` / custom events, keeps only allowlisted fields, is per-IP rate limited
+(<=50 events, <=64 KiB), and stores nothing under `DNT: 1` / `Sec-GPC: 1`. Our
+own org cannot read `$public`.
+
+The `pk-` key resolves the same traffic to the real org at full capability, which
+on a logged-out marketing site is the difference between having interaction
+analytics and having none. The prefix is `pk-` (`cloud.PublishablePrefix`);
+another prefix is not read as a key and misfiles to `$public` without a 403. A
+presented-but-unresolvable key fails closed with 403.
+
+Mint with `POST /v1/ingest/keys`, store as `site/HANZO_INGEST_KEY` in KMS.
+`.hanzo/workflows/deploy.yml` reads it before the build, because `NEXT_PUBLIC_*`
+is inlined into the bundle at build time.
+
+### Capture
+
+- `AnalyticsProvider` fires the first pageview and captures errors;
+  `<Pageview/>` counts route changes; `ErrorBoundary` catches React render
+  errors, which never reach `window.onerror`.
+- `<ObserveProvider>` rides the same client through context for interaction
+  capture (`$click`/`$input`/`$change`/`$submit`/`$view`), input values redacted.
+  `nav={false}` leaves history alone, since `<Pageview/>` already counts routes.
+- Consent honors Do Not Track and Global Privacy Control. Neither `@hanzo/event`
+  nor `@hanzo/observe` reads those signals, so `telemetryEnabled()` in
+  `app/providers.tsx` passes `enabled` and every surface must do the same.
+- The client never sends the org; cloud stamps the tenant from the bearer.
+  `identify(user.id)` is the only identity sent, never an email.
+
 
 ## Certification Claims (Honest)
 
