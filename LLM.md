@@ -250,9 +250,16 @@ analytics and having none. The prefix is `pk-` (`cloud.PublishablePrefix`);
 another prefix is not read as a key and misfiles to `$public` without a 403. A
 presented-but-unresolvable key fails closed with 403.
 
-Mint with `POST /v1/keys` `{"type":"publishable"}`, store as `site/HANZO_INGEST_KEY`
+Mint with `POST /v1/keys` `{"type":"publishable"}`, store as `deploy/EVENT_INGEST_KEY`
 in KMS. `/v1/keys` is the one key surface: one noun, the method carries the
 operation, and the class is a field.
+
+ONE name and ONE location, shared with hanzo.chat and hanzo.app, matching the
+default path of the shared `hanzoai/ci` reusable's `build_secrets`. The key is
+per-ORG, not per-property — one `pk-` resolves the org for every property, and the
+SDK's `product` field (`site` here) is what separates them in the warehouse. The
+env var carries only the prefix its bundler requires: `NEXT_PUBLIC_` for Next here,
+`VITE_` for Vite in hanzo.chat, over the same `EVENT_INGEST_KEY` suffix.
 `.hanzo/workflows/deploy.yml` reads it before the build, because `NEXT_PUBLIC_*`
 is inlined into the bundle at build time.
 

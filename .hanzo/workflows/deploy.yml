@@ -50,12 +50,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # Runs before the build because NEXT_PUBLIC_HANZO_INGEST_KEY is inlined into
+      # Runs before the build because NEXT_PUBLIC_EVENT_INGEST_KEY is inlined into
       # the bundle at build time.
       #
       #   deploy/  CF credentials. Required; no credentials, no deploy.
-      #   site/    the ingest key. Absent, cloud still admits the traffic under
-      #            $public, so the step warns and the build ships.
+      #   deploy/  the ingest key. Absent, cloud still admits pageviews under
+      #            $public — but drops every track/identify/group and answers 200
+      #            anyway, so the step shouts and the build ships.
       #
       # The path segment is required: the org secret root returns {"names":[]}.
       - name: Fetch secrets from KMS
@@ -93,11 +94,17 @@ jobs:
 
           # cloud matches `pk-`; another prefix is not read as a key and misfiles
           # to $public without a 403, so refuse it here.
-          key=$(kms_get site HANZO_INGEST_KEY)
+          #
+          # deploy/EVENT_INGEST_KEY is the ONE name and the ONE location, shared with
+          # hanzo.chat and hanzo.app and with the `build_secrets` default path of the
+          # shared hanzoai/ci reusable. It was site/HANZO_INGEST_KEY, a per-property
+          # name for a key that is per-ORG: one pk- resolves the org for every
+          # property, and the SDK's `product` field is what separates them in the data.
+          key=$(kms_get deploy EVENT_INGEST_KEY)
           case "${key}" in
-            '')   echo "::warning::site/HANZO_INGEST_KEY absent — traffic lands under \$public, which our org cannot read, and observe interactions are dropped. Mint: POST /v1/keys {\"type\":\"publishable\"}" ;;
+            '')   echo "::error::deploy/EVENT_INGEST_KEY absent — traffic lands under \$public, which admits only pageview and error: every track/identify/group is dropped and still answered 200. Mint: POST /v1/keys {\"type\":\"publishable\"}" ;;
             pk-*) echo "::add-mask::${key}"; echo "key=${key}" >> "$GITHUB_OUTPUT" ;;
-            *)    echo "::warning::site/HANZO_INGEST_KEY does not begin with 'pk-'; ignoring it." ;;
+            *)    echo "::error::deploy/EVENT_INGEST_KEY does not begin with 'pk-'; ignoring it." ;;
           esac
 
       # Large static export (hundreds of pages); the default heap OOMs it.
@@ -105,7 +112,7 @@ jobs:
         run: pnpm build
         env:
           NODE_OPTIONS: '--max-old-space-size=8192'
-          NEXT_PUBLIC_HANZO_INGEST_KEY: ${{ steps.kms.outputs.key }}
+          NEXT_PUBLIC_EVENT_INGEST_KEY: ${{ steps.kms.outputs.key }}
         timeout-minutes: 30
 
       # No SPA fallback: every dynamic segment ships generateStaticParams, so

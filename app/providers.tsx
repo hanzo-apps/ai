@@ -15,7 +15,7 @@ const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.a
  *  cannot read. Prefix is `pk-` (cloud.PublishablePrefix); other prefixes are
  *  not recognized as a key and fall through to `$public`.
  *  Mint: POST /v1/keys {"type":"publishable"} */
-const INGEST_KEY = process.env.NEXT_PUBLIC_HANZO_INGEST_KEY
+const INGEST_KEY = process.env.NEXT_PUBLIC_EVENT_INGEST_KEY
 
 /** Anonymous marketing traffic; forward a stored bearer when one exists. */
 function getToken(): string | undefined {

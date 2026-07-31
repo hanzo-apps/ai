@@ -23,12 +23,19 @@ RUN pnpm install --frozen-lockfile
 
 # NEXT_PUBLIC_* is inlined by Next at build time, so the key arrives as a build
 # arg; an env var on the serve stage is too late. Sourced from KMS
-# (site/HANZO_INGEST_KEY) by the BuildKit invocation:
-#   --opt build-arg:NEXT_PUBLIC_HANZO_INGEST_KEY=pk-…
+# (deploy/EVENT_INGEST_KEY) by the BuildKit invocation:
+#   --opt build-arg:EVENT_INGEST_KEY=pk-…
 # It is publishable and write-only — it ships in the client bundle — so it is a
-# build arg rather than a secret mount. Omitted, cloud files the traffic under
-# $public instead of this org.
-ARG NEXT_PUBLIC_HANZO_INGEST_KEY
+# build arg rather than a secret mount.
+#
+# Omitted, cloud files the traffic under $public, whose allowlist admits only
+# pageview and error: every track/identify/group is dropped and still answered
+# 200, so the loss is silent.
+#
+# EVENT_INGEST_KEY is the name in KMS and on the --build-arg; NEXT_PUBLIC_ is
+# added here because that prefix is what makes Next inline a var.
+ARG EVENT_INGEST_KEY
+ENV NEXT_PUBLIC_EVENT_INGEST_KEY=$EVENT_INGEST_KEY
 
 # Build the static export (next.config.ts: output: 'export' -> ./out).
 # Large export (hundreds of pages): the default Node heap OOMs it — same
