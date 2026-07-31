@@ -30,11 +30,30 @@ const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.a
  *  Mint/rotate: POST /v1/sentry/projects · POST /v1/sentry/projects/{id}/keys/rotate */
 const EVENT_DSN = process.env.NEXT_PUBLIC_HANZO_EVENT_DSN
 
-/** Publishable ingest key (pk_…) — write-only, safe to ship in the bundle. It lets
- *  logged-out marketing traffic reach the ONE front door (POST /v1/event) so
- *  pageviews + errors land server-side (Cloud stamps the org from the key). When
- *  unset, signed-in visitors still report via their bearer; anonymous events
- *  fail closed. Provision one per org via POST /v1/ingest/keys. */
+/** Publishable ingest key (`pk-…`) — write-only, safe to ship in the bundle, and on
+ *  a logged-out marketing site the difference between having interaction analytics
+ *  and having none.
+ *
+ *  Anonymous ingest is NOT rejected: cloud admits a credential-less request and
+ *  files it under the reserved `$public` tenant (apps/analytics/event.go →
+ *  publicIngest). But that lane is deliberately narrow, and the narrowness is the
+ *  whole point of this key:
+ *
+ *    • `publicKinds` allows ONLY `pageview` and `error`. Every interaction
+ *      @hanzo/observe emits ($click/$input/$change/$submit/$view) is a
+ *      `type:'event'` and is DROPPED — silently, counted in the {accepted,dropped}
+ *      receipt nobody reads. Mounting ObserveProvider without this key on an
+ *      all-anonymous surface captures exactly nothing.
+ *    • `$public` is a partition Hanzo's own org CANNOT READ, so even the pageviews
+ *      that do land are stranded outside our funnels.
+ *
+ *  With the key, the same traffic resolves to the real org at full capability.
+ *  Provision per org via POST /v1/ingest/keys.
+ *
+ *  MIND THE PREFIX: cloud matches `pk-` (cloud.PublishablePrefix, hyphen). A value
+ *  shaped `pk_…` is not recognized as a publishable key, so it is not "presented"
+ *  either — it falls through to the anonymous lane and misfiles to `$public`
+ *  instead of returning 403. Wrong prefix fails SILENTLY; get it right. */
 const INGEST_KEY = process.env.NEXT_PUBLIC_HANZO_INGEST_KEY
 
 /** Anonymous marketing traffic; forward a stored bearer when one exists. */
@@ -73,25 +92,29 @@ function Pageview() {
  * The ONE place this site binds telemetry identity — mounted inside IamProvider
  * so it sees the resolved session on every route, not just /auth/callback.
  *
- *  • identify(user.id) — the stable IAM subject. NEVER email/name: the client is
- *    PII-free by construction, and the id is what joins a person's events across
- *    hanzo.ai and Hanzo Cloud (which stamps the same subject server-side).
- *  • group(user.owner) — the org. Cloud already resolves the tenant for billing;
- *    group() is what makes ORG-level funnels/cohorts queryable in insights, so a
- *    B2B question ("which orgs stalled before their first API call?") is
- *    answerable at all.
+ * identify(user.id) — the stable IAM subject, and the ONLY identity this client
+ * sends. NEVER email/name: the client is PII-free by construction, and the id is
+ * what joins a person's events across hanzo.ai and Hanzo Cloud (which stamps the
+ * same subject server-side).
+ *
+ * THE CLIENT DOES NOT SEND THE ORG. There is deliberately no group() call here.
+ * The tenant is stamped SERVER-SIDE from the validated bearer, so org-level
+ * funnels and cohorts are already queryable without the browser naming a tenant
+ * — and a tenant a client can name is a tenant a client can get wrong. An
+ * earlier revision called group(user.owner) to "make ORG-level funnels
+ * queryable"; it bought nothing (the server had already stamped that very org
+ * from the same session) and it put an org name in a caller-controlled field.
+ * Cloud agrees on both counts: it strips groupId from every reduced principal
+ * and drops `group` outright on the anonymous lane, so the call was discarded
+ * in exactly the cases where trusting it would have mattered.
  */
 function Identity() {
   const { user, isAuthenticated } = useIam()
   const analytics = useAnalytics()
   const id = isAuthenticated ? user?.id : undefined
-  const org = isAuthenticated ? user?.owner : undefined
   useEffect(() => {
     if (id) analytics.identify(id)
   }, [analytics, id])
-  useEffect(() => {
-    if (org) analytics.group(org)
-  }, [analytics, org])
   return null
 }
 
@@ -165,7 +188,11 @@ export function Providers({ children }: { children: ReactNode }) {
         enabled,
         // Error plane -> sentry.hanzo.ai. Inert (fail-safe) when the DSN is unset.
         dsn: EVENT_DSN,
-        environment: 'production',
+        // `environment` is deliberately absent: the SDK defaults it to NODE_ENV
+        // (core.ts `this.cfg.environment ?? readEnv('NODE_ENV')`), which is exactly
+        // right for both lanes — `next build` stamps production, `next dev` stamps
+        // development. Hardcoding 'production' here labelled every local crash a
+        // production incident in the Sentry dashboard.
       }}
     >
       <ObserveProvider nav={false} enabled={enabled}>

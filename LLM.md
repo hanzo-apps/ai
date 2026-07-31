@@ -25,7 +25,7 @@ This ONE static export (`out/`) serves TWO sites — split by host, not by build
    help with?" composer forwards to `hanzo.chat/?q=…`; nav deep-links to
    cloud.hanzo.ai; **Foundation → zoo.ngo** (Zoo Labs governs Hanzo).
 2. **cloud.hanzo.ai** (k8s `cloud-site` image, `ghcr.io/hanzoai/cloud-site`,
-   `hanzoai/static`) — the **detailed product/marketing site**. `Dockerfile.production`
+   `hanzoai/static`) — the **detailed product/marketing site**. `Dockerfile`
    does `cp out/cloud-site.html out/index.html`, so this host's ROOT is
    `app/cloud-site/page.tsx` (`components/cloud/CloudLanding`) while every deep
    `(marketing)/*` page (docdb, vector, kv, iam, …) serves beneath it. The apex
@@ -232,11 +232,29 @@ each mounts its own `@hanzo/event` client, so a tag could only double-count the
 pageviews that client already posts. (The older direct `script.js` and inline
 PostHog snippets were removed earlier, `components/HanzoAnalytics.tsx` deleted.)
 
-Anonymous/logged-out views need NO key. `api.hanzo.ai/v1/event` is the ONE door for
-every auth context, anonymous included: a request with no bearer and no key is
-admitted and attributed SERVER-SIDE to a reserved public tenant (`$public`), never
-to a real org and never to anything the request names. Do not add a publishable
-`pk-` key for this.
+Anonymous/logged-out views are ADMITTED without a key. `api.hanzo.ai/v1/event` is
+the ONE door for every auth context, anonymous included: a request with no bearer
+and no key is admitted and attributed SERVER-SIDE to a reserved public tenant
+(`$public`), never to a real org and never to anything the request names.
+
+**But admitted is not the same as useful, so this site DOES want a `pk-` key.** An
+earlier revision of this file said "do not add a publishable `pk-` key for this."
+That was defensible while pageviews were the only signal; it is wrong now that
+`@hanzo/observe` is mounted, for two reasons that both follow from the narrowness
+documented just below:
+
+- `$public` is a partition **our own org cannot read**, so anonymous pageviews land
+  somewhere our funnels can't see.
+- The anonymous allowlist stores ONLY `pageview` and `error`. Every interaction
+  observe emits (`$click`/`$input`/`$change`/`$submit`/`$view`) is a `type:"event"`
+  and is **dropped**. hanzo.ai is almost entirely logged-out traffic, so with no key
+  the interaction capture we just mounted collects essentially nothing.
+
+Provision `site/HANZO_INGEST_KEY` in KMS (read at build time by
+`.github/workflows/deploy.yml`; `POST /v1/ingest/keys` to mint). **The prefix is
+`pk-`** (hyphen — `cloud.PublishablePrefix`). A `pk_…` value is not recognized as a
+publishable key and is not "presented" either, so it does not 403 — it falls through
+to the anonymous lane and misfiles to `$public`. Wrong prefix fails silently.
 
 The anonymous lane is deliberately narrow. Only `type:"pageview"` and
 `type:"error"` are stored — `identify`, `group`, and custom events are dropped and
@@ -268,11 +286,29 @@ copy-pasted per repo. A new site gets errors + analytics + insights with no setu
 - **Auto pageview** on load + route change (`usePageview(usePathname())`).
 - **Errors go to `sentry.hanzo.ai`** (AST + session replay), with `<ErrorBoundary>`
   for React render errors. Do NOT describe analytics as "the Sentry replacement" —
-  an earlier revision of this file said that and it was wrong.
-- **Logged-out marketing** needs NO credential: it posts to the unified
-  `api.hanzo.ai/v1/event`, which lands anonymous pageviews and errors under the
-  reserved `$public` tenant (see above). No `NEXT_PUBLIC_HANZO_INGEST_KEY`.
-- **Consent**: honors Do Not Track / Global Privacy Control (via `enabled`).
+  an earlier revision of this file said that and it was wrong. Nor is there any
+  server-side fan-out from `/v1/event` into Sentry: the error plane is a SECOND,
+  independent send (a Sentry envelope to the DSN host) and it requires
+  `NEXT_PUBLIC_HANZO_EVENT_DSN`. **With no DSN the plane is inert and the dashboard
+  gets nothing** — the site read that var for a while with nothing setting it, which
+  is precisely how it reported zero errors. Provisioned as `site/HANZO_EVENT_DSN` in
+  KMS, fetched pre-build by `.github/workflows/deploy.yml`.
+- **Logged-out marketing** is ADMITTED without a credential (anonymous pageviews and
+  errors land under `$public`), but wants the `pk-` ingest key anyway — `$public` is
+  unreadable by our org and the anonymous allowlist drops every observe interaction.
+  See the ingest-key section above.
+- **Interaction autocapture**: `<ObserveProvider>` (`@hanzo/observe`) rides the SAME
+  client via context, inside `AnalyticsProvider`. `nav={false}` here on purpose —
+  `<Pageview/>` already counts route changes, and letting observe patch history too
+  would double-count every navigation. Input values are redacted by default.
+- **Consent**: honors Do Not Track / Global Privacy Control (via `enabled`), gating
+  BOTH planes and the observe engine. Note this is implemented HERE
+  (`telemetryEnabled()` in `app/providers.tsx`), not in the SDK: neither
+  `@hanzo/event` nor `@hanzo/observe` reads `navigator.globalPrivacyControl` /
+  `doNotTrack`, so every surface must pass `enabled` itself. Do not delete it
+  assuming the library covers it.
+- **The client never sends the org.** No `group()` call: cloud stamps the tenant from
+  the validated bearer. `identify(user.id)` is the only identity sent, never an email.
 - **Product moments**: `EVENTS.CHAT_STARTED` (apex composer + nav "Try Hanzo"),
   `EVENTS.FEATURE_USED` (home pills); the funnel events
   (pricing/signup/waitlist/referral) live in their own pages.
