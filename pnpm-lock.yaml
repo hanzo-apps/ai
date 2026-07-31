@@ -18,8 +18,8 @@ importers:
         specifier: ^1.4.5
         version: 1.4.5(react@19.2.4)
       '@hanzo/design':
-        specifier: ^0.3.1
-        version: 0.3.1
+        specifier: ^0.3.2
+        version: 0.3.2
       '@hanzo/event':
         specifier: ^0.3.4
         version: 0.3.4(react@19.2.4)
@@ -826,8 +826,8 @@ packages:
       '@hanzo/gui': '>=7.2.2'
       react: '>=19'
 
-  '@hanzo/design@0.3.1':
-    resolution: {integrity: sha512-f9296DuuNvtvckVxYe64+T8ODhTtS5AJF8rgTZBGmrQtGDitQdkUVHDBQci0INzLx2kSbmIeoroZUToDRNCq3g==}
+  '@hanzo/design@0.3.2':
+    resolution: {integrity: sha512-THU97df66NLQP7aZaA5X9nQFnjsxLb8UNoVPXoO/zxYSpyPRX73qjq9FFSTQuFHClT2KNUetMssNsQNYyhKe4Q==}
     hasBin: true
 
   '@hanzo/event@0.3.4':
@@ -6554,7 +6554,7 @@ snapshots:
       '@hanzo/gui': 7.3.1(expo@57.0.8)(react-dom@19.2.4(react@19.2.4))(react-native@0.86.2(@babel/core@7.29.7)(@react-native/metro-config@0.86.2(@babel/core@7.29.7))(@types/react@19.2.14)(react@19.2.4))(react@19.2.4)(sf-symbols-typescript@2.2.0)
       react: 19.2.4
 
-  '@hanzo/design@0.3.1': {}
+  '@hanzo/design@0.3.2': {}
 
   '@hanzo/event@0.3.4(react@19.2.4)':
     optionalDependencies:
