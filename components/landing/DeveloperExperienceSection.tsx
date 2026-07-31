@@ -242,9 +242,9 @@ const DeveloperExperienceSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="grid lg:grid-cols-2 gap-12 items-center"
+            className="grid lg:grid-cols-2 gap-12 items-center min-w-0"
           >
-            <div className="order-2 lg:order-1">
+            <div className="order-2 lg:order-1 min-w-0">
               {/*
                 Static demo block — no animation. This intentionally replaces
                 the prior typed-step terminal so there is exactly ONE animated
@@ -280,7 +280,7 @@ const DeveloperExperienceSection = () => {
               </div>
             </div>
 
-            <div className="order-1 lg:order-2">
+            <div className="order-1 lg:order-2 min-w-0">
               <p
                 className="inline-flex items-center text-xs font-medium rounded-full px-4 py-2 border mb-6"
                 style={{ color: "var(--primary)", borderColor: "color-mix(in srgb, var(--primary) 30%, transparent)" }}

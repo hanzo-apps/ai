@@ -163,3 +163,20 @@
     }
   }
 }
+
+/* ── Focus ring ───────────────────────────────────────────────────────────────
+   Unlayered and doubly-rooted on purpose. @hanzo/design's ring is
+   `2px solid var(--ring)`, and --ring is caught in the same self-reference as
+   --primary: gui.css redeclares it as var(--c-color-ring), which is itself
+   var(--ring). The color is then invalid, the outline falls back to
+   currentColor, and on a dark control that is a black ring on a black page —
+   which is why all 60 tab stops measured NO visible focus indicator.
+
+   It has to sit outside @layer base (unlayered CSS always beats layered) and
+   carry more specificity than gui.css's `:root.t_dark` (0,2,0), because
+   globals.css is imported BEFORE gui.css and would otherwise lose the tie.
+   White at 72%, offset clear of the control, so it reads on every surface. */
+:root:root :focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.72);
+  outline-offset: 2px;
+}

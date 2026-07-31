@@ -41,10 +41,17 @@ const PricingPlan = ({
 }: PricingPlanProps) => {
   const analytics = useAnalytics();
   const track = (cta: string) => analytics.capture(EVENTS.PLAN_CLICKED, { plan: name, cta });
-  const openCta = (cta: string, url: string) => {
-    track(cta);
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
+  // A CTA that NAVIGATES is an anchor, not a click handler. Button renders a
+  // div[role=button], which never fires on Enter or Space — so a `window.open`
+  // handler made these plans unstartable by keyboard or screen reader, and took
+  // cmd-click, middle-click and "copy link" with it. `asChild` keeps the styling
+  // and hands the behaviour back to a real <a>.
+  const ctaProps = (cta: string, url: string) => ({
+    href: url,
+    target: '_blank',
+    rel: 'noopener noreferrer',
+    onClick: () => track(cta),
+  });
   const primaryLabel = ctaLabel || "Get Started";
 
   // Use monochrome design
@@ -65,11 +72,8 @@ const PricingPlan = ({
     // Contact-sales tiers (Enterprise / Custom) → book a call.
     if (contactSalesUrl) {
       return (
-        <Button
-          className={`w-full mb-8 ${buttonClass}`}
-          onClick={() => openCta('Contact Sales', contactSalesUrl)}
-        >
-          Contact Sales
+        <Button asChild className={`w-full mb-8 ${buttonClass}`}>
+          <a {...ctaProps('Contact Sales', contactSalesUrl)}>Contact Sales</a>
         </Button>
       );
     }
@@ -110,22 +114,16 @@ const PricingPlan = ({
     // Real checkout — starts the subscription against the live billing stack.
     if (checkoutUrl) {
       return (
-        <Button
-          className={`w-full mb-8 ${buttonClass}`}
-          onClick={() => openCta(primaryLabel, checkoutUrl)}
-        >
-          {primaryLabel}
+        <Button asChild className={`w-full mb-8 ${buttonClass}`}>
+          <a {...ctaProps(primaryLabel, checkoutUrl)}>{primaryLabel}</a>
         </Button>
       );
     }
     // Legacy fallback (open-source repos) only if no checkout is wired.
     if (githubLink || name === "Dev") {
       return (
-        <Button
-          className={`w-full mb-8 ${buttonClass}`}
-          onClick={() => openCta('Get on GitHub', 'https://github.com/hanzoai/')}
-        >
-          Get on GitHub
+        <Button asChild className={`w-full mb-8 ${buttonClass}`}>
+          <a {...ctaProps('Get on GitHub', 'https://github.com/hanzoai/')}>Get on GitHub</a>
         </Button>
       );
     }
