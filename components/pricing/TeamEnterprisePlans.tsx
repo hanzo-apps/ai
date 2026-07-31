@@ -4,26 +4,7 @@ import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Users, Shield, Building2 } from "lucide-react";
 import TeamPlanDetails from "./TeamPlanDetails";
-
-const PLANS_API = "https://api.hanzo.ai/v1/plans";
-
-interface SubscriptionPlan {
-  id: string;
-  name: string;
-  description: string;
-  priceMonthly: number | null;
-  priceAnnual?: number | null;
-  category: string;
-  popular?: boolean;
-  contactSales?: boolean;
-  pricePerUser?: boolean;
-  features: string[];
-  limits?: Record<string, number | null>;
-  payouts?: { idleResalePercent: number; description: string };
-  /** Optional backend-supplied checkout deep link / id (honored if present). */
-  checkoutUrl?: string;
-  checkoutId?: string;
-}
+import { loadPlans, type SubscriptionPlan } from "@/lib/plans";
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
   team: <Users className="h-6 w-6 text-muted-foreground" />,
@@ -152,20 +133,14 @@ const TeamEnterprisePlans = () => {
   }, []);
 
   useEffect(() => {
-    fetch(PLANS_API)
-      .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.json();
-      })
-      .then((d) => {
-        const teamEnterprise = (d.plans || []).filter(
-          (p: SubscriptionPlan) => p.category === "team" || p.category === "enterprise"
-        );
-        if (teamEnterprise.length) setPlans(teamEnterprise);
-      })
-      .catch(() => {
-        // keep STATIC_PLANS already set
-      });
+    // Two categories, one catalog. Ordered team-before-enterprise so the live
+    // list keeps the same reading order as the static fallback it replaces.
+    Promise.all([loadPlans("team"), loadPlans("enterprise")]).then(
+      ([team, enterprise]) => {
+        const live = [...team, ...enterprise];
+        if (live.length) setPlans(live);
+      }
+    );
   }, []);
 
   function formatPrice(plan: SubscriptionPlan) {

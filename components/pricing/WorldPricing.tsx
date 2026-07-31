@@ -3,22 +3,7 @@
 import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Globe, Zap, Users, Building2 } from "lucide-react";
-
-const PLANS_API = "https://api.hanzo.ai/v1/plans";
-
-interface SubscriptionPlan {
-  id: string;
-  name: string;
-  description: string;
-  priceMonthly: number | null;
-  priceAnnual?: number | null;
-  category: string;
-  popular?: boolean;
-  contactSales?: boolean;
-  features: string[];
-  limits?: Record<string, number | null>;
-  payouts?: { idleResalePercent: number; description: string };
-}
+import { loadPlans, type SubscriptionPlan } from "@/lib/plans";
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
   "world-free": <Globe className="h-6 w-6 text-muted-foreground" />,
@@ -27,7 +12,7 @@ const PLAN_ICONS: Record<string, React.ReactNode> = {
   "world-enterprise": <Building2 className="h-6 w-6 text-muted-foreground" />,
 };
 
-// Static fallback mirrors https://api.hanzo.ai/v1/plans (category: world).
+// Static fallback mirrors /v1/billing/plans (category: world) — see lib/plans.
 // The live response replaces these on load — keep the two in lockstep.
 const STATIC_PLANS: SubscriptionPlan[] = [
   {
@@ -116,20 +101,9 @@ const WorldPricing = () => {
   const [plans, setPlans] = useState<SubscriptionPlan[]>(STATIC_PLANS);
 
   useEffect(() => {
-    fetch(PLANS_API)
-      .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.json();
-      })
-      .then((d) => {
-        const world = (d.plans || []).filter(
-          (p: SubscriptionPlan) => p.category === "world"
-        );
-        if (world.length) setPlans(world);
-      })
-      .catch(() => {
-        // keep STATIC_PLANS already set
-      });
+    loadPlans("world").then((live) => {
+      if (live.length) setPlans(live);
+    });
   }, []);
 
   function formatPrice(plan: SubscriptionPlan) {
