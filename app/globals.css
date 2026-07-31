@@ -100,27 +100,58 @@
     cursor: pointer;
   }
 
-  /* A control has to be reachable with a thumb. 44px is the documented floor
-     (WCAG 2.5.8, Apple HIG) and it is a POLICY, not a per-button decision — the
-     footer stated it as a `min-h-11` utility on each link, which is exactly the
-     kind of rule that gets forgotten: the wordmark measured 24px, the search
-     button 36px and the GitHub icon 20px on the same page. Stated once, for the
-     chrome that appears on every route. */
-  :is(header, footer) :is(a[href], button),
-  /* Every <button> on a marketing site is an action, and @hanzo/ui's own size
-     ramp tops out at h-10 (40px) — so the floor has to be stated by the host
-     rather than assumed from the library. */
+  /* A control has to be reachable, and what counts as reachable depends on what
+     is doing the pointing. This is still a POLICY stated once — the footer had
+     it as a `min-h-11` utility per link, which is exactly the kind of rule that
+     gets forgotten (the wordmark measured 24px, the search button 36px and the
+     GitHub icon 20px on the same page) — but ONE floor for every pointer was
+     the wrong policy. 44px is Apple HIG / WCAG 2.5.5 AAA, a THUMB target;
+     applied to a mouse it is not accessibility, it is damage. It stretched ten
+     of the eleven controls on the homepage: the nav items from 35px, and the
+     "Chat with Enso" pills from a natural 21px to 44px — slabs where the design
+     wanted inline text.
+
+     So: the always-on floor is WCAG 2.5.8 AA's 24px, which mouse and stylus
+     genuinely need and which no control here was violating anyway; the 44px
+     thumb floor applies where a finger is pointing. */
   button,
-  [role='button'] {
-    min-height: 44px;
+  [role='button'],
+  :is(header, footer) a[href] {
+    min-height: 24px;
+  }
+
+  /* A min-height cannot size an INLINE box, so the floor was inert on precisely
+     the controls that needed it. Measured on production: all 36 header menu
+     links — "Hanzo Chat", "Hanzo Cloud", "Models", "Enso", … — render 15px tall
+     while each computes min-height:44px and obeys none of it. The old blanket
+     rule looked like a touch-target policy and was decoration.
+
+     The BOX is unconditional; only its minimum size tracks the pointer. */
+  :is(header, footer) a[href] {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  @media (pointer: coarse) {
+    button,
+    [role='button'],
+    :is(header, footer) a[href] {
+      min-height: 44px;
+    }
   }
 
   /* An icon-only control is `display: inline` by default, where a min-height has
-     no effect at all — it needs a box before it can have a size. */
+     no effect at all — it needs a box before it can have a size. The box is
+     unconditional; only the thumb-sized minimum tracks the pointer. */
   :is(header, footer) :is(a[href], button):has(> svg:only-child) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 44px;
+  }
+
+  @media (pointer: coarse) {
+    :is(header, footer) :is(a[href], button):has(> svg:only-child) {
+      min-width: 44px;
+    }
   }
 }

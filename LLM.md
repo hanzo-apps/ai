@@ -195,12 +195,14 @@ positioned "Open AI Cloud — GCP-compatible. Open source. On-chain.":
   `body` — the scrollport is the documentElement, so clipping body alone still
   let a 4px sideways scroll through on /about (a `whileInView` x:20 enter is
   20px wider than a 390px viewport for the length of the animation).
-- **44px is the touch floor**, for `button`, `[role=button]` and every control
-  in the header/footer. It is a POLICY, not a per-button decision: it had been
-  written as a `min-h-11` utility per footer link and consequently forgotten on
-  the wordmark (24px), the search button (36px) and the GitHub icon (20px) of
-  the same page. @hanzo/ui's own size ramp tops out at `h-10` (40px), so the
-  floor has to be stated by the host.
+- **The touch floor is pointer-conditional**: 24px always (WCAG 2.5.8 AA), 44px
+  under `@media (pointer: coarse)` (Apple HIG / WCAG 2.5.5 AAA — a thumb target).
+  Still a POLICY, not a per-button decision: it had been written as a `min-h-11`
+  utility per footer link and consequently forgotten on the wordmark (24px), the
+  search button (36px) and the GitHub icon (20px) of the same page. But stating
+  44px for EVERY pointer was the wrong policy — it stretched ten of the eleven
+  controls on the homepage, turning the 21px "Chat with Enso" pills into 44px
+  slabs. A mouse does not need a thumb target.
 - Verify at 390px with Playwright before claiming mobile works.
 
 ## Static Export
