@@ -2,7 +2,7 @@
 
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, type Variants } from 'framer-motion';
 import { LineChart, Users, Filter, Layers, Activity } from "lucide-react";
 
 const features = [
@@ -60,7 +60,7 @@ const WebAnalytics = () => {
     };
   }, [controls, animationTriggered]);
 
-  const lineVariants = {
+  const lineVariants: Variants = {
     initial: {
       pathLength: 0
     },

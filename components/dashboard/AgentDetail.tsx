@@ -37,12 +37,12 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
 
   if (!editedAgent) return null;
 
+  const setField = (name: string, value: string) => {
+    setEditedAgent(prev => (prev ? { ...prev, [name]: value } : null));
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setEditedAgent(prev => {
-      if (!prev) return null;
-      return { ...prev, [name]: value };
-    });
+    setField(e.target.name, e.target.value);
   };
 
   const handleSave = () => {
@@ -139,10 +139,11 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-muted-foreground mb-1">Description</label>
+                {/* gui's TextArea emits the VALUE, not a DOM change event — the
+                    DOM spelling never matched the runtime, so it routed nothing. */}
                 <Textarea 
-                  name="description"
                   value={editedAgent.description || ""}
-                  onChange={handleInputChange}
+                  onChangeText={(value) => setField("description", value)}
                   placeholder="Agent description..."
                   className="min-h-24 bg-neutral-900 border-neutral-800"
                 />

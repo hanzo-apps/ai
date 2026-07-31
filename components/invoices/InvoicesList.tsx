@@ -74,7 +74,17 @@ const InvoicesList = () => {
           <Button size="$3" minHeight={44} icon={<Filter size={16} />}>
             Filter
           </Button>
-          <Button size="$3" minHeight={44} theme="active" icon={<Download size={16} />}>
+          {/* Emphasis from the tokens. `theme="active"` names a gui sub-theme this
+              config does not declare — it has `dark` and `light` — so it resolved
+              to nothing and the primary action looked identical to Filter. */}
+          <Button
+            size="$3"
+            minHeight={44}
+            backgroundColor="$primary"
+            color="$primaryForeground"
+            hoverStyle={{ backgroundColor: '$primary', opacity: 0.9 }}
+            icon={<Download size={16} />}
+          >
             Export All
           </Button>
         </XStack>

@@ -4,17 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { MessageSquare, Check, Loader2 } from "lucide-react";
-
-// Canonical A2P consent copy. This EXACT disclosure is reused at every point
-// where Hanzo collects a phone number for messaging — the public opt-in form
-// here, and the phone-login / 2FA step in IAM (iam.hanzo.ai) and hanzo.id.
-// Keep the three surfaces in sync; carriers/Twilio review the wording.
-export const SMS_CONSENT_TEXT =
-  "I agree to receive text messages (SMS) from Hanzo AI at the number provided, " +
-  "including one-time passcodes and two-factor authentication, account and security " +
-  "alerts, and transactional notifications. Message frequency varies. Message and data " +
-  "rates may apply. Reply STOP to opt out at any time, or HELP for help. Consent is not " +
-  "a condition of any purchase.";
+import { SMS_CONSENT_TEXT } from "@/lib/constants/sms-consent";
 
 // The endpoint that records consent (notify service, behind the gateway).
 const CONSENT_ENDPOINT = "https://api.hanzo.ai/v1/notify/consent";

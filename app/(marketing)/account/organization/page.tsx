@@ -191,13 +191,13 @@ const Organization = () => {
                 header: 'Actions',
                 align: 'right' as const,
                 render: () => (
-                  <DropdownMenu>
+                  <DropdownMenu placement="bottom-end">
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="sm" aria-label="Member actions">
                         <MoreVertical className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
+                    <DropdownMenuContent>
                       <DropdownMenuItem>View Profile</DropdownMenuItem>
                       <DropdownMenuItem>Change Role</DropdownMenuItem>
                       <DropdownMenuItem>Remove</DropdownMenuItem>

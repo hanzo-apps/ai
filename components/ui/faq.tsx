@@ -7,6 +7,10 @@
  * pricing page) differing only in their question list. This is that markup, in
  * one place, on the `@hanzo/gui` Accordion: a page supplies questions, the
  * component owns disclosure behaviour, spacing and type.
+ *
+ * The named motion prop is `transition`, not `animation` — gui 8 renamed it, and
+ * the old name was silently inert, so the chevron and the disclosure both moved
+ * with no easing at all.
  */
 
 import { Accordion, YStack, XStack, Text } from '@hanzo/gui'
@@ -49,14 +53,14 @@ export function Faq({ items }: { items: FaqItem[] }) {
                 >
                   {item.question}
                 </Text>
-                <XStack rotate={open ? '180deg' : '0deg'} animation="quick">
+                <XStack rotate={open ? '180deg' : '0deg'} transition="quick">
                   <ChevronDown size={16} color="var(--muted-foreground)" />
                 </XStack>
               </>
             )}
           </Accordion.Trigger>
-          <Accordion.HeightAnimator animation="medium">
-            <Accordion.Content animation="medium" exitStyle={{ opacity: 0 }} unstyled>
+          <Accordion.HeightAnimator transition="medium">
+            <Accordion.Content transition="medium" exitStyle={{ opacity: 0 }} unstyled>
               <YStack paddingHorizontal="$1" paddingBottom="$5">
                 <Text fontSize="$4" lineHeight={22} color="$mutedForeground">
                   {item.answer}

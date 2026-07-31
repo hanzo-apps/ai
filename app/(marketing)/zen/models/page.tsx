@@ -76,7 +76,13 @@ interface HanzoModel {
   pricing: { input: number | null; output: number | null; cacheRead: number | null; cacheWrite: number | null; perUnit?: number } | null;
   pricingUnit?: string;
   endpoint?: string;
-  contactSales?: boolean;
+  /**
+   * Served via the API only — no public weights. Distinct from "no retail
+   * price", which is `pricing == null`; `contactSales` used to braid the two
+   * into one flag derived from a `contact-sales` status @zenlm/models does not
+   * have, so it was always false and the badge never rendered.
+   */
+  cloudOnly?: boolean;
 }
 
 interface ModelGroup {
@@ -204,7 +210,7 @@ const ModelRow = ({ model, pricingMode }: { model: HanzoModel; pricingMode?: str
   const isUltraMax = model.tier === "ultra max";
 
   const renderPricing = () => {
-    if (model.contactSales || model.pricing == null) {
+    if (model.pricing == null) {
       return <span className="text-muted-foreground text-xs italic">Contact Sales</span>;
     }
     if (pricingMode === "unit" && model.pricing.perUnit != null) {
@@ -238,8 +244,8 @@ const ModelRow = ({ model, pricingMode }: { model: HanzoModel; pricingMode?: str
               {model.fullName?.split(" — ")[0] || model.fullName?.split(" -- ")[0] || model.name}
             </span>
             <TierBadge tier={model.tier} />
-            {model.contactSales && (
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary font-medium">Research Preview</span>
+            {model.cloudOnly && (
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary font-medium">Cloud API</span>
             )}
           </div>
           <p className="text-xs text-muted-foreground mt-1 hidden md:block">
@@ -301,7 +307,7 @@ const ModelRow = ({ model, pricingMode }: { model: HanzoModel; pricingMode?: str
                 <h4 className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">
                   Pricing
                 </h4>
-                {model.contactSales || model.pricing == null ? (
+                {model.pricing == null ? (
                   <p className="text-muted-foreground italic">Contact sales for pricing</p>
                 ) : pricingMode === "unit" && model.pricing.perUnit != null ? (
                   <div className="p-2 bg-secondary rounded border border-border">
@@ -396,7 +402,7 @@ function zenToHanzo(m: ZenModel): HanzoModel {
     tier: m.tier,
     specs: { params, arch: m.spec.arch || '' },
     pricing: m.pricing,
-    contactSales: m.status === 'contact-sales',
+    cloudOnly: m.status === 'cloud-only',
     endpoint: m.id.includes('embedding') ? '/v1/embeddings'
             : m.id.includes('reranker') ? '/v1/rerank'
             : m.id.includes('image') ? '/v1/images/generations'

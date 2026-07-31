@@ -19,8 +19,9 @@ interface TaskDetailContentProps {
 }
 
 const TaskDetailContent: React.FC<TaskDetailContentProps> = ({ task, onTaskChange }) => {
-  const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    onTaskChange("description", e.target.value);
+  // gui's TextArea emits the VALUE, not a DOM change event.
+  const handleDescriptionChange = (value: string) => {
+    onTaskChange("description", value);
   };
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +35,7 @@ const TaskDetailContent: React.FC<TaskDetailContentProps> = ({ task, onTaskChang
           <label className="block text-sm font-medium text-muted-foreground mb-1">Description</label>
           <Textarea 
             value={task.description || ""}
-            onChange={handleDescriptionChange}
+            onChangeText={handleDescriptionChange}
             placeholder="Add a description..."
             className="min-h-32 bg-neutral-900 border-neutral-800"
           />

@@ -598,14 +598,17 @@ const OSSCatalog: React.FC = () => {
 
           {/* Sort & View */}
           <div className="flex gap-2">
-            <DropdownMenu>
+            {/* v8: the popper lives on the menu ROOT, and `placement` replaces
+                Radix's side/align pair. Content is the portal + focus scope and
+                takes no styling — its chrome comes from the gui tokens. */}
+            <DropdownMenu placement="bottom-end">
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className="border-border hover:bg-accent">
                   {sortOptions.find(s => s.value === sortBy)?.label || 'Sort'}
                   <ChevronDown className="ml-2 w-4 h-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-secondary border-border">
+              <DropdownMenuContent>
                 {sortOptions.map(option => (
                   <DropdownMenuItem
                     key={option.value}

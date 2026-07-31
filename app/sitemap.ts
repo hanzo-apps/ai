@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { readdirSync } from 'node:fs'
+import { readdirSync, type Dirent } from 'node:fs'
 import { join } from 'node:path'
 
 // Static export: emits /sitemap.xml at build by walking the App Router tree.
@@ -12,9 +12,12 @@ const EXCLUDE = ['/auth', '/account', '/login']
 
 function walk(dir: string, seg: string[] = []): string[] {
   const routes: string[] = []
-  let entries: ReturnType<typeof readdirSync>
+  // Encoding is explicit on BOTH reads. Without it @types/node resolves the Buffer
+  // overloads — Dirent<NonSharedBuffer> and Buffer[] — and every `.name.startsWith`
+  // below stops type-checking against a string.
+  let entries: Dirent[]
   try {
-    entries = readdirSync(dir, { withFileTypes: true })
+    entries = readdirSync(dir, { withFileTypes: true, encoding: 'utf8' })
   } catch {
     return routes
   }
@@ -28,7 +31,7 @@ function walk(dir: string, seg: string[] = []): string[] {
     const child = join(dir, name)
     let files: string[] = []
     try {
-      files = readdirSync(child)
+      files = readdirSync(child, { encoding: 'utf8' })
     } catch {}
     if (files.some((f) => PAGE.test(f))) routes.push('/' + nextSeg.join('/'))
     routes.push(...walk(child, nextSeg))

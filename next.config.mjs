@@ -45,12 +45,6 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: false,
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   async headers() {
     return [{ source: '/(.*)', headers: securityHeaders }]
   },

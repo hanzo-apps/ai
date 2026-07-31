@@ -10,8 +10,12 @@ export const timing = {
   slow: 0.8
 };
 
-// Animation curves
-export const curves = {
+// Animation curves. The tuple type is load-bearing: framer-motion's `Easing` is a
+// named easing OR a four-point cubic-bezier TUPLE, and a bare array literal infers
+// as number[], which satisfies neither.
+type Curve = [number, number, number, number]
+
+export const curves: Record<'snappy' | 'bouncy' | 'smooth' | 'precise', Curve> = {
   snappy: [0.2, 0.8, 0.2, 1],
   bouncy: [0.22, 1.28, 0, 1],
   smooth: [0.4, 0, 0.2, 1],
@@ -25,7 +29,7 @@ export const createAnimationVariant = (
     duration?: number;
     delay?: number;
     staggerChildren?: number;
-    curve?: number[];
+    curve?: Curve;
     distance?: number;
     blur?: number;
   }

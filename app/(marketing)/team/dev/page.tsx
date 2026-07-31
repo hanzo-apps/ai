@@ -4,14 +4,12 @@
 import { motion } from "framer-motion";
 import { Code2, MessagesSquare, Bot, Globe, Server, Lock } from "lucide-react";
 import TeamSlack from "@/components/TeamSlack";
-import { Button } from "@hanzo/ui";
-import { toast } from "@/hooks/use-toast";
+import { Button, toast } from "@hanzo/ui";
 
 const TeamDev = () => {
   const handleContactSensei = () => {
     window.location.href = "https://sensei.group";
-    toast({
-      title: "Redirecting to Sensei Group",
+    toast("Redirecting to Sensei Group", {
       description: "Connecting you with human assistance..."
     });
   };

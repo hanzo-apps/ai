@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from 'framer-motion';
 
 interface TaijiProps {
   size?: number;
@@ -15,7 +15,7 @@ const TaijiSymbol: React.FC<TaijiProps> = ({
   className = "",
   animate = false
 }) => {
-  const draw = {
+  const draw: Variants = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: {
       pathLength: 1,

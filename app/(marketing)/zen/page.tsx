@@ -60,7 +60,9 @@ interface ZenModel {
   ctx?: string
   tier: "edge" | "pro" | "max" | "ultra" | "vision" | "multimodal"
   tag?: string
-  hf: string
+  /** Served via the API only — no public weights, so nothing to link on HF. */
+  cloudOnly: boolean
+  hf?: string
 }
 
 function fmtCtx(context: number): string {
@@ -86,12 +88,15 @@ const ZEN_MODELS: ZenModel[] = allModels.map(m => ({
   active: m.spec.activeParams ?? undefined,
   ctx: fmtCtx(m.spec.context),
   tier: mapTier(m.tier, m.modalities),
-  tag: m.status === 'coming-soon' || m.status === 'contact-sales'
-    ? 'research preview'
-    : m.features[0]?.toLowerCase().slice(0, 20) ?? undefined,
-  hf: m.huggingface
-    ? m.huggingface.replace('https://huggingface.co/', '')
-    : `zenlm/${m.id}`,
+  tag: m.features[0]?.toLowerCase().slice(0, 20) ?? undefined,
+  // `cloud-only` is @zenlm/models' word for "served via the API, no public
+  // weights", and it is exactly the set whose `huggingface` is null. This card
+  // used to test `coming-soon`/`contact-sales`, which the status union does not
+  // contain, so the branch was dead in both directions: no badge ever rendered
+  // and all 8 weightless models linked to a fabricated huggingface.co/zenlm/<id>
+  // that 404s. The link now only exists when there is something to link to.
+  cloudOnly: m.status === 'cloud-only',
+  hf: m.huggingface?.replace('https://huggingface.co/', ''),
 }))
 
 // Monochrome tier badges — opacity carries the rank, not hue.
@@ -242,13 +247,13 @@ const Zen = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {ZEN_MODELS.map((m, i) => {
-                const isPreview = m.tag === "research preview";
+                const { cloudOnly } = m;
                 return (
                 <motion.a
                   key={m.id}
-                  href={isPreview ? "/research-access" : `https://huggingface.co/${m.hf}`}
-                  target={isPreview ? undefined : "_blank"}
-                  rel={isPreview ? undefined : "noopener noreferrer"}
+                  href={cloudOnly ? "/zen/models" : `https://huggingface.co/${m.hf}`}
+                  target={cloudOnly ? undefined : "_blank"}
+                  rel={cloudOnly ? undefined : "noopener noreferrer"}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -257,8 +262,8 @@ const Zen = () => {
                 >
                   <div className="flex items-start justify-between gap-2 mb-2">
                     <span className="font-mono text-sm font-semibold text-foreground">{m.label}</span>
-                    {isPreview ? (
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary font-medium flex-shrink-0">Research Preview</span>
+                    {cloudOnly ? (
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary font-medium flex-shrink-0">Cloud API</span>
                     ) : (
                       <ExternalLink className="w-3 h-3 text-muted-foreground/40 group-hover:text-muted-foreground flex-shrink-0 transition-colors mt-0.5" />
                     )}
@@ -270,7 +275,7 @@ const Zen = () => {
                     <span className="text-xs text-muted-foreground font-mono">{m.params}</span>
                     {m.active && <span className="text-[10px] text-muted-foreground/60">{m.active} active</span>}
                     {m.ctx && <span className="text-[10px] text-muted-foreground/60">{m.ctx} ctx</span>}
-                    {m.tag && !isPreview && <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-muted-foreground">{m.tag}</span>}
+                    {m.tag && <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-muted-foreground">{m.tag}</span>}
                   </div>
                 </motion.a>
                 );

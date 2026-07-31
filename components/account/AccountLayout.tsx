@@ -80,7 +80,10 @@ const AccountLayout = ({ children }: { children?: React.ReactNode }) => {
                       </div>
                     </SelectValue>
                   </SelectTrigger>
-                  <SelectContent className="bg-[var(--black)] border-border/30">
+                  {/* v8's Select.Content is the focus scope, not the surface: it
+                      has no style props, and the popover chrome it used to be
+                      given here now comes from the gui tokens. */}
+                  <SelectContent>
                     {organizations.map((org) => (
                       <SelectItem key={org.id} value={org.id} className="text-[var(--white)] hover:bg-secondary/30">
                         <div className="flex items-center">

@@ -22,23 +22,57 @@ import { useReducedMotion } from 'framer-motion'
 import type { LucideIcon } from 'lucide-react'
 import './prose.css'
 
-/** Fade-and-rise, honouring the OS reduced-motion setting. */
-function useRise(delay = 0) {
+/**
+ * Fade-and-rise, honouring the OS reduced-motion setting.
+ *
+ * `css` is merged rather than left to the caller because this hook owns the
+ * `style` prop (it carries the stagger delay), and a second `style=` on the
+ * same element would silently replace it.
+ */
+function useRise(delay = 0, css?: React.CSSProperties) {
   const still = useReducedMotion()
   return still
-    ? {}
-    : ({
-        animation: 'medium',
+    ? { style: css }
+    : {
+        // `transition`, not `animation`: gui 8 renamed the prop, and the old name
+        // is not rejected in a JSX spread, so the rise silently had no easing.
+        transition: 'medium' as const,
         enterStyle: { opacity: 0, y: 16 },
         opacity: 1,
         y: 0,
-        style: { animationDelay: `${delay}s` },
-      } as const)
+        style: { animationDelay: `${delay}s`, ...css },
+      }
 }
 
-/** The page gutter + centred measure every block shares. */
-const GUTTER = { paddingHorizontal: '$4', $gtSm: { paddingHorizontal: '$8' } } as const
+/**
+ * The page gutter + centred measure every block shares.
+ *
+ * `$sm`, not `$gtSm`: the v4 media set is mobile-first, so a bare breakpoint
+ * name IS the min-width query and the `gt`-prefixed v3 names no longer exist.
+ * They are not rejected inside a spread, so the wider gutter simply never
+ * applied — the page ran at the 16px mobile gutter on every viewport.
+ */
+const GUTTER = { paddingHorizontal: '$4', $sm: { paddingHorizontal: '$8' } } as const
 const MEASURE = { width: '100%', maxWidth: 896, marginHorizontal: 'auto' } as const
+
+/**
+ * Values with no gui token behind them.
+ *
+ * gui types its style PROPS against its own token namespace (`gui.config.ts`),
+ * so a literal `var(--tracking-tight)` is not a legal `letterSpacing` prop even
+ * though gui emits it correctly. These are not tokens and must not be faked as
+ * tokens: a named font key in `gui.config.ts` breaks `createGui`'s constraint,
+ * which degrades EVERY gui component's props to `undefined` (measured: 726
+ * errors). They ride the `style` prop instead — gui's escape hatch for exactly
+ * this — and land in the same generated rule. Named here so the intent reads.
+ */
+const TIGHT: React.CSSProperties = { letterSpacing: 'var(--tracking-tight)' }
+const RELAXED: React.CSSProperties = { lineHeight: 'var(--leading-relaxed)' }
+const PRIMARY_TINT: React.CSSProperties = {
+  backgroundColor: 'color-mix(in srgb, var(--primary) 15%, transparent)',
+}
+/** CSS grid — gui's `display` union is React-Native-derived and stops at flex. */
+const GRID: React.CSSProperties = { display: 'grid' }
 
 /* ── hero ──────────────────────────────────────────────────────────────────── */
 
@@ -59,7 +93,7 @@ export function PageHero({
     <YStack render="section" paddingTop="$24" paddingBottom="$12" {...GUTTER}>
       <YStack {...MEASURE}>
         <XStack
-          {...useRise()}
+          {...useRise(0, PRIMARY_TINT)}
           alignSelf="flex-start"
           alignItems="center"
           gap="$2"
@@ -67,7 +101,6 @@ export function PageHero({
           paddingHorizontal="$3"
           paddingVertical="$1"
           borderRadius="$9"
-          backgroundColor="color-mix(in srgb, var(--primary) 15%, transparent)"
         >
           {Icon ? <Icon size={14} color="var(--primary)" /> : null}
           <Text fontSize="$1" fontWeight="500" color="var(--primary)">
@@ -76,13 +109,12 @@ export function PageHero({
         </XStack>
         <Text
           render="h1"
-          {...useRise(0.05)}
+          {...useRise(0.05, TIGHT)}
           marginBottom="$4"
           fontSize="$9"
-          $gtSm={{ fontSize: '$10' }}
+          $sm={{ fontSize: '$10' }}
           fontWeight="500"
           lineHeight={1.1}
-          letterSpacing="var(--tracking-tight)"
           color="$foreground"
         >
           {title}
@@ -90,10 +122,9 @@ export function PageHero({
         {lede ? (
           <Text
             render="p"
-            {...useRise(0.1)}
+            {...useRise(0.1, RELAXED)}
             maxWidth={672}
             fontSize="$5"
-            lineHeight="var(--leading-relaxed)"
             color="$mutedForeground"
           >
             {lede}
@@ -125,7 +156,7 @@ export function Section({
             marginBottom="$2"
             fontSize="$7"
             fontWeight="500"
-            letterSpacing="var(--tracking-tight)"
+            style={TIGHT}
             color="$foreground"
           >
             {title}
@@ -168,7 +199,7 @@ function CardBody({ item }: { item: CardItem }) {
           </Text>
         ) : null}
       </XStack>
-      <Text fontSize="$3" lineHeight="var(--leading-relaxed)" color="$mutedForeground">
+      <Text fontSize="$3" style={RELAXED} color="$mutedForeground">
         {description}
       </Text>
     </>
@@ -184,11 +215,11 @@ export function CardGrid({ items, columns = 2 }: { items: CardItem[]; columns?: 
     columns === 3 ? 'repeat(3, minmax(0, 1fr))' : columns === 1 ? '1fr' : 'repeat(2, minmax(0, 1fr))'
   return (
     <View
-      display="grid"
+      style={GRID}
       gap="$4"
       gridTemplateColumns="1fr"
-      $gtSm={{ gridTemplateColumns: columns === 1 ? '1fr' : 'repeat(2, minmax(0, 1fr))' }}
-      $gtLg={{ gridTemplateColumns: wide }}
+      $sm={{ gridTemplateColumns: columns === 1 ? '1fr' : 'repeat(2, minmax(0, 1fr))' }}
+      $lg={{ gridTemplateColumns: wide }}
     >
       {items.map((item) => {
         const frame = {
