@@ -1,18 +1,25 @@
 name: Deploy
-# Native port of .github/workflows/deploy.yml.
+# THE pipeline that ships hanzo.ai to Cloudflare Pages. There is no longer a
+# second one: .github/workflows/deploy.yml is deleted, not neutralized.
 #
 # WHY THIS EXISTS: GitHub Actions is disabled for the `hanzo-dev` ACCOUNT, so a
-# push by that account creates ZERO runs — no queued job, no failed run, no
-# notification. The repo's own Actions setting is `enabled: true` and the
-# hanzo-apps pool does serve it, which is why this looks healthy while nothing
-# ships. Eleven commits sat undeployed for a day and hanzo.ai kept serving
-# "the open-source AI cloud" after that claim was deliberately removed in
-# e31324eb. This pipeline runs on git.hanzo.ai instead, which the block does
-# not touch.
+# push by that account creates ZERO runs there — no queued job, no failed run,
+# no notification. The repo's own Actions setting is `enabled: true`, which is
+# why that looked healthy while nothing shipped. Eleven commits sat undeployed
+# for a day and hanzo.ai kept serving "the open-source AI cloud" after that
+# claim was deliberately removed in e31324eb.
 #
-# Kept byte-for-byte faithful to the GitHub job apart from `runs-on` and the
-# secret source — the smoke test below has caught real breakage before and is
-# not decoration.
+# WHY THE OTHER COPY IS GONE rather than kept as a fallback: it could not be
+# one. Gitea collects workflows from the FIRST of WORKFLOW_DIRS that exists in
+# the pushed commit and ignores the rest (modules/actions/workflows.go,
+# listWorkflowsInDirs breaks on the first hit), so from the moment this file
+# existed the entire .github/workflows directory was dark on this forge. Its
+# deploy.yml also ran on `hanzo-apps-build-linux-amd64`, an ARC scale set
+# decommissioned on 2026-07-27; its last runs are queued and cancelled, never
+# completed. Two copies of a deploy where only one can run is how a fix gets
+# written into the half that cannot ship it.
+#
+# The smoke test below has caught real breakage before and is not decoration.
 on:
   workflow_dispatch:
   push:

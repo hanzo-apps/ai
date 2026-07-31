@@ -1,0 +1,93 @@
+name: Cloud
+
+# Builds ghcr.io/hanzoai/cloud-www — the cloud.hanzo.ai marketing-site image the
+# universe App CR `www` (infra/k8s/operator/crs/www.yaml) pins. Static export via
+# Dockerfile.production, served by ghcr.io/hanzoai/static.
+#
+# Named cloud-www (matching the Deployment `www`) so it can NEVER collide with
+# the backend Go binary image ghcr.io/hanzoai/cloud. Tag convention matches the
+# live universe pin (X.Y.Z, e.g. 0.1.4 — next patch over the pinned tag).
+#
+# This replaces .github/workflows/cloud.yml. It last cut an image on 2026-07-25
+# and could not have cut one since: it ran on `hanzo-apps-build-linux-amd64`, an
+# ARC scale set decommissioned on 2026-07-27, and .github/workflows as a whole
+# went dark on this forge once .hanzo/workflows existed. Same build, same
+# registry, same credentials — only the runner label changed.
+#
+# GHCR push crosses into the hanzoai namespace, so login uses GH_PAT (hanzo-dev,
+# write:packages), which exists as a hanzoai org secret on this forge.
+
+permissions:
+  contents: read
+  packages: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Image tag (X.Y.Z, next patch after the live universe pin)'
+        required: true
+        type: string
+
+# Publishing an image is not cancellable work: a superseded run may already have
+# pushed a layer under the tag it was given.
+concurrency:
+  group: cloud-${{ inputs.tag }}
+  cancel-in-progress: false
+
+env:
+  # Build-record/summary artifact uploads can wedge on a full Actions
+  # artifact quota and fail the push step; the image is what matters.
+  DOCKER_BUILD_SUMMARY: "false"
+  DOCKER_BUILD_RECORD_UPLOAD: "false"
+
+jobs:
+  build:
+    runs-on: [hanzo-build-linux-amd64]
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver: docker-container
+          driver-opts: |
+            network=host
+
+      - name: Reset Docker credential store (runner hygiene)
+        run: |
+          mkdir -p "$HOME/.docker"
+          printf '{}' > "$HOME/.docker/config.json"
+
+      - name: Login to GHCR (GH_PAT — push into the hanzoai namespace)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: hanzo-dev
+          password: ${{ secrets.GH_PAT }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile.production
+          platforms: linux/amd64
+          tags: ghcr.io/hanzoai/cloud-www:${{ inputs.tag }}
+          provenance: false
+          push: true
+
+      # build-push-action can exit 0 before the manifest resolves, so a green run
+      # could still leave the CR pinned to a tag that ImagePullBackOffs. Prove it
+      # pulls before the job is green.
+      - name: Verify the pushed image resolves
+        run: |
+          set -euo pipefail
+          img="ghcr.io/hanzoai/cloud-www:${{ inputs.tag }}"
+          for i in 1 2 3 4 5 6; do
+            if docker buildx imagetools inspect "$img" >/dev/null 2>&1; then
+              echo "resolved $img"; exit 0
+            fi
+            echo "manifest not visible yet (attempt ${i}/6) — retrying"; sleep 5
+          done
+          echo "::error::pushed image never resolved: $img"; exit 1

@@ -23,7 +23,7 @@ RUN pnpm install --frozen-lockfile
 
 # Build the static export (next.config.ts: output: 'export' -> ./out).
 # Large export (hundreds of pages): the default Node heap OOMs it — same
-# headroom the CF-Pages deploy lane uses (.github/workflows/deploy.yml).
+# headroom the CF-Pages deploy lane uses (.hanzo/workflows/deploy.yml).
 COPY . .
 RUN NODE_OPTIONS=--max-old-space-size=8192 pnpm build
 

@@ -1,8 +1,8 @@
 # Canonical CI/CD config for hanzo-apps/hanzo.ai — read by the shared
-# hanzoai/ci reusable workflow (.github/workflows/cicd.yml).
+# hanzoai/ci reusable workflow (.hanzo/workflows/cicd.yml).
 #
 # hanzo.ai is a STATIC site (Next.js `output: export`). It ships to
-# https://hanzo.ai via Cloudflare Pages in its OWN workflow (.github/workflows/
+# https://hanzo.ai via Cloudflare Pages in its OWN workflow (.hanzo/workflows/
 # deploy.yml, CF creds from KMS) — NOT a container image. So there is no
 # `images:` build and no operator `deploy:` here: the prior
 # `ghcr.io/hanzoai/cloud-site` image was vestigial (unused by the live site) and,

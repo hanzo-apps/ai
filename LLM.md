@@ -12,7 +12,7 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
 - Dev: `pnpm dev`
 - Build: `pnpm build`
 - Deploy: Static export (`output: export` in `next.config.ts`) → Cloudflare Pages
-  (`.github/workflows/deploy.yml`, project `hanzo-ai`, CF creds from KMS)
+  (`.hanzo/workflows/deploy.yml`, project `hanzo-ai`, CF creds from KMS)
 
 ## Two faces, one export
 

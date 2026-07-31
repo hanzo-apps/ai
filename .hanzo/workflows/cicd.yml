@@ -1,0 +1,50 @@
+name: CI/CD
+
+# The lint gate for hanzo.ai, on the native runners (git.hanzo.ai → git-runner).
+# The ~7-line caller shape: triggers plus the import. All real config is the
+# repo-root hanzo.yml, which platform.hanzo.ai reads too.
+#
+# This replaces .github/workflows/cicd.yml, which had not gated anything in some
+# time and could not. Two independent reasons:
+#
+#   * It ran on `hanzo-apps-build-linux-amd64`, an ARC autoscaling scale set.
+#     actions-runner-controller was decommissioned on 2026-07-27, so that label
+#     is advertised by nothing. An unclaimable job does not fail — it waits out
+#     the 24h timeout while the next push queues another behind it.
+#   * .hanzo/workflows already existed in this repo (deploy.yml), and Gitea
+#     collects workflows from the FIRST of WORKFLOW_DIRS that exists in the
+#     pushed commit and ignores the rest (modules/actions/workflows.go,
+#     listWorkflowsInDirs breaks on the first hit). So on this forge the whole
+#     of .github/workflows was already dark, this file included.
+#
+# The `runner:` input is gone with the pool it named: hanzoai/ci defaults to
+# ["hanzo-build-linux-amd64"], which the git-runners actually advertise.
+#
+# The `uses:` path points at .hanzo/workflows because reusables resolve through
+# services/actions.ResolveUses, which enforces the WORKFLOW_DIRS allowlist on
+# the referenced path too — the .github path stops resolving the moment that
+# list narrows. hanzoai/ci publishes build.yml at both paths from the same tag,
+# byte-identical apart from its header, so this is the same pipeline at the same
+# @v1.
+#
+# No `permissions:` block. The old one existed to satisfy GitHub, whose reusable
+# calls fail at compile time if the caller grants less than the callee requests
+# and whose default token here is read-only. That is a GitHub constraint; the
+# reusable carries its own permissions on this forge, and hanzoai/ci's own
+# caller has no block either.
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: cicd-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cicd:
+    uses: hanzoai/ci/.hanzo/workflows/build.yml@v1
+    secrets: inherit
