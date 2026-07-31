@@ -16,7 +16,7 @@ import {
   Facebook,
   Instagram,
 } from "lucide-react"
-import { Button } from "@/components/ui/button";
+import { Button } from "@hanzo/ui";
 
 const socialLinks = [
   {

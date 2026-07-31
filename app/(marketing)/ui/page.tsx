@@ -223,7 +223,7 @@ npx @hanzo/ui init
 npx @hanzo/ui add button dialog dropdown-menu
 
 # Use them
-import { Button } from "@/components/ui/button"
+import { Button } from "@hanzo/ui"
 
 export function Hello() {
   return <Button>Ship it</Button>

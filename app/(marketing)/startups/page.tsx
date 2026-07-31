@@ -20,7 +20,7 @@ import {
   Boxes,
   Send,
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@hanzo/ui'
 
 // Canonical cloud intake endpoint (public startup-program application).
 const APPLY_ENDPOINT =

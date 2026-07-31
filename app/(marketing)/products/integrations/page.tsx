@@ -1,9 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from "react";
-import { Input } from "@hanzo/ui";
-import { Badge } from "@hanzo/ui";
-import { Button } from "@/components/ui/button";
+import { Badge, Button, Input } from "@hanzo/ui";
 import { Search, ExternalLink, Github, Plug } from "lucide-react";
 
 // Sample integrations data - in production, this would come from an API

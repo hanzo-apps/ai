@@ -4,7 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, Check, Copy, ExternalLink } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@hanzo/ui'
 import { PartnerLogoRow } from '@/components/shared'
 import { infrastructureLogos } from '@/lib/constants/partner-logos'
 import {

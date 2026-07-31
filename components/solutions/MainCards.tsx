@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@hanzo/ui";
 import ChromeText from "@/components/ui/chrome-text";
 
 const MainCards: React.FC = () => {

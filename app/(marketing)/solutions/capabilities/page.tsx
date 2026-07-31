@@ -20,7 +20,7 @@ import {
 import { getIcon } from "@/lib/constants/iconMappings";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@hanzo/ui";
 import SectionHeader from "@/components/zen/SectionHeader";
 import PartnerCard from "@/components/shared/PartnerCard";
 import { cloudServiceData } from "@/components/index3/cloud-services/cloudServiceData";
@@ -428,20 +428,18 @@ const SolutionCapabilities: React.FC = () => {
                 Connect with our team to learn how our capabilities can help you achieve your goals.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="/contact"
-                  className={buttonVariants({ variant: "default", size: "lg" })}
-                >
-                  Get Started
-                  <ChevronRight />
-                </a>
-                <a
-                  href="tel:+1234567890"
-                  className={buttonVariants({ variant: "outline", size: "lg" })}
-                >
-                  Schedule a Call
-                  <Phone />
-                </a>
+                <Button asChild size="lg">
+                  <a href="/contact">
+                    Get Started
+                    <ChevronRight />
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <a href="tel:+1234567890">
+                    Schedule a Call
+                    <Phone />
+                  </a>
+                </Button>
               </div>
             </div>
           </div>

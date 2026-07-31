@@ -24,7 +24,7 @@ import {
 import { getIcon } from "@/lib/constants/iconMappings";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@hanzo/ui";
 import SectionHeader from "@/components/zen/SectionHeader";
 import PartnerCard from "@/components/shared/PartnerCard";
 import ChromeText from "@/components/ui/chrome-text";
@@ -547,20 +547,18 @@ const SolutionIndustries: React.FC = () => {
                 Discover how our tailored industry solutions can address your specific challenges and opportunities.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <a
-                  href="/contact"
-                  className={buttonVariants({ variant: "default", size: "lg" })}
-                >
-                  Get Started
-                  <ChevronRight />
-                </a>
-                <a
-                  href="mailto:solutions@hanzo.ai"
-                  className={buttonVariants({ variant: "outline", size: "lg" })}
-                >
-                  Email Us
-                  <Mail />
-                </a>
+                <Button asChild size="lg">
+                  <a href="/contact">
+                    Get Started
+                    <ChevronRight />
+                  </a>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <a href="mailto:solutions@hanzo.ai">
+                    Email Us
+                    <Mail />
+                  </a>
+                </Button>
               </div>
             </div>
           </div>

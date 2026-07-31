@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 
 import { getSolutionBySlug, solutionsData } from '@/lib/constants/solutions-data'
 import ChromeText from '@/components/ui/chrome-text'
-import { Button } from '@/components/ui/button'
+import { Button } from '@hanzo/ui'
 
 interface PageProps {
   params: Promise<{ slug: string[] }>

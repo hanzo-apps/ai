@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, BookOpen, ExternalLink, Github } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@hanzo/ui'
 import {
   POSITIONING,
   categorySlug,

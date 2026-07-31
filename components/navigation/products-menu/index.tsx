@@ -5,7 +5,7 @@ import { categorySlug } from "@/lib/data/cloud-primitives";
 import Link from "next/link";
 import NavMenu from "../NavMenu";
 import { Bot, Terminal, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@hanzo/ui";
 
 // Cap each category to 6 items inside the mega-menu — anything past
 // that falls behind a "View all in <category>" link so columns stay short.

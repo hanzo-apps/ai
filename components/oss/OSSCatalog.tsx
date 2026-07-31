@@ -17,16 +17,16 @@ import {
   Package,
   Check
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@hanzo/ui";
 import {
+  Badge,
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
+  Input,
 } from "@hanzo/ui";
 import { Sheet, YStack, Text } from "@hanzo/gui";
-import { Badge } from "@hanzo/ui";
 import { cn } from '@/lib/utils';
 import {
   ossCatalog,

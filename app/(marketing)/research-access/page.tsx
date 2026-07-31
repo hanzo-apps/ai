@@ -11,7 +11,7 @@ import {
   Share2,
   Server,
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@hanzo/ui'
 import { useAnalytics } from '@hanzo/event/react'
 import { EVENTS } from '@hanzo/event'
 

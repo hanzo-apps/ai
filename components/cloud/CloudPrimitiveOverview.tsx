@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, BookOpen, Check, Github } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@hanzo/ui'
 import { POSITIONING, type CloudCategory, type Primitive } from '@/lib/data/cloud-primitives'
 
 const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {

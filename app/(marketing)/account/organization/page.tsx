@@ -6,20 +6,22 @@ import React, { useState, useEffect } from 'react';
 
 type TeamMember = { id: string; name: string; email: string; role: string; avatar?: string }
 import { useAccount } from '@/contexts/AccountContext';
-import { Button } from "@/components/ui/button";
-import { Input } from "@hanzo/ui";
-import { Label } from "@hanzo/ui";
-import { Textarea } from "@hanzo/ui";
-import { Avatar, AvatarFallback, AvatarImage } from "@hanzo/ui";
-import { DataTable, StatusTag } from "@hanzo/ui/product";
-import { XStack, YStack, Text } from "@hanzo/gui";
-import { Building, User, UserPlus, MoreVertical, Upload, MapPin, Globe, Link as LinkIcon } from 'lucide-react';
-import { 
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  Input,
+  Label,
+  Textarea,
 } from "@hanzo/ui";
+import { DataTable, StatusTag } from "@hanzo/ui/product";
+import { XStack, YStack, Text } from "@hanzo/gui";
+import { Building, User, UserPlus, MoreVertical, Upload, MapPin, Globe, Link as LinkIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import AnimatedSection, { AnimatedHeading } from "@/components/ui/animated-section";
 
