@@ -14,7 +14,7 @@ const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.a
  *  `$public` tenant, which stores only pageview and error and which our org
  *  cannot read. Prefix is `pk-` (cloud.PublishablePrefix); other prefixes are
  *  not recognized as a key and fall through to `$public`.
- *  Mint: POST /v1/ingest/keys */
+ *  Mint: POST /v1/keys {"type":"publishable"} */
 const INGEST_KEY = process.env.NEXT_PUBLIC_HANZO_INGEST_KEY
 
 /** Anonymous marketing traffic; forward a stored bearer when one exists. */
@@ -78,8 +78,7 @@ function Identity() {
 }
 
 /** Minimal on-brand fallback when a render error is caught. The boundary already
- *  reported it on both planes — a Sentry envelope to sentry.hanzo.ai (the error
- *  dashboard) and a type:'error' row on the event stream (product signal) — so
+ *  posted it as a type:'error' event, which is what sentry.hanzo.ai reads, so
  *  this just keeps the page usable. */
 function Crashed(_error: Error, reset: () => void) {
   return (

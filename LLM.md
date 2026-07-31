@@ -248,7 +248,9 @@ analytics and having none. The prefix is `pk-` (`cloud.PublishablePrefix`);
 another prefix is not read as a key and misfiles to `$public` without a 403. A
 presented-but-unresolvable key fails closed with 403.
 
-Mint with `POST /v1/ingest/keys`, store as `site/HANZO_INGEST_KEY` in KMS.
+Mint with `POST /v1/keys` `{"type":"publishable"}`, store as `site/HANZO_INGEST_KEY`
+in KMS. `/v1/keys` is the one key surface: one noun, the method carries the
+operation, and the class is a field.
 `.hanzo/workflows/deploy.yml` reads it before the build, because `NEXT_PUBLIC_*`
 is inlined into the bundle at build time.
 

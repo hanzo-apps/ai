@@ -95,7 +95,7 @@ jobs:
           # to $public without a 403, so refuse it here.
           key=$(kms_get site HANZO_INGEST_KEY)
           case "${key}" in
-            '')   echo "::warning::site/HANZO_INGEST_KEY absent — traffic lands under \$public, which our org cannot read, and observe interactions are dropped. Mint: POST /v1/ingest/keys" ;;
+            '')   echo "::warning::site/HANZO_INGEST_KEY absent — traffic lands under \$public, which our org cannot read, and observe interactions are dropped. Mint: POST /v1/keys {\"type\":\"publishable\"}" ;;
             pk-*) echo "::add-mask::${key}"; echo "key=${key}" >> "$GITHUB_OUTPUT" ;;
             *)    echo "::warning::site/HANZO_INGEST_KEY does not begin with 'pk-'; ignoring it." ;;
           esac
