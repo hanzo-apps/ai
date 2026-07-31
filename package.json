@@ -4,8 +4,8 @@
   "version": "0.2.5",
   "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint",
     "test": "playwright test",
@@ -18,6 +18,10 @@
   },
   "dependencies": {
     "@hanzo/brand": "^1.4.5",
+    "@hanzo/canvas": "0.2.1",
+    "@hanzo/cd": "0.1.1",
+    "@hanzo/dashboard": "0.2.0",
+    "@hanzo/data": "1.2.2",
     "@hanzo/design": "^0.3.3",
     "@hanzo/event": "^0.3.4",
     "@hanzo/gui": "8.0.0",
@@ -30,6 +34,7 @@
     "@hanzogui/lucide-icons-2": "8.0.0",
     "@hanzogui/next-theme": "8.0.0",
     "@hanzogui/shell": "^8.0.0",
+    "@hanzogui/web": "8.0.0",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-slot": "^1.2.4",
     "@tanstack/react-query": "^5.56.2",
@@ -42,7 +47,7 @@
     "dompurify": "^3.3.1",
     "framer-motion": "^12.4.2",
     "lucide-react": "^0.462.0",
-    "next": "^15.0.0",
+    "next": "16.2.12",
     "next-themes": "^0.3.0",
     "react": "^19.0.0",
     "react-day-picker": "^8.10.1",
@@ -78,17 +83,11 @@
     "postcss": "^8.4.47",
     "simple-icons": "^16.27.0",
     "tailwindcss": "^4.0.17",
-    "typescript": "^5.9.3",
+    "typescript": "7.0.2",
     "typescript-eslint": "^8.0.0"
   },
   "packageManager": "pnpm@9.15.0",
   "pnpm": {
-    "overrides": {
-      "@hanzogui/web": "7.3.1",
-      "@hanzogui/core": "7.3.1",
-      "@hanzogui/config": "7.3.1",
-      "@hanzogui/next-theme": "7.3.1"
-    },
     "onlyBuiltDependencies": [
       "sharp",
       "unrs-resolver"
