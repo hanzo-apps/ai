@@ -50,11 +50,78 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Every secret this job needs, read once, BEFORE the build. The ordering is
+      # load-bearing for the two telemetry values: they are NEXT_PUBLIC_*, so Next
+      # inlines them into the bundle at build time and nothing set afterwards can
+      # reach it. Fetching them after the build — where the CF read used to sit —
+      # cannot wire them no matter what KMS holds.
+      #
+      # Two secret roots, two failure policies:
+      #   deploy/  CF credentials. REQUIRED — without them there is no deploy.
+      #   site/    the ingest key. FAIL-SOFT — anonymous traffic is still admitted
+      #            without it, so an absent secret degrades telemetry rather than
+      #            blocking the site. It warns, so "never provisioned" cannot read
+      #            as "working".
+      #
+      # ONE credential, because there is one door. @hanzo/event also accepts a
+      # Sentry `dsn` for a second, independently authenticated send to
+      # /v1/sentry/<projectId> — but sentry.hanzo.ai does not read that store. Its
+      # shell reads GET /v1/errors, i.e. the type:'error' events in hanzo.events
+      # that this key already writes through /v1/event (universe
+      # infra/k8s/ingress/routes.yaml). A DSN here would provision a second
+      # publishable credential to fill a store the dashboard never opens.
+      #
+      # The path segment is load-bearing: querying the org secret root returns
+      # {"names":[]} and looks empty, which reads as "the creds are gone".
+      - name: Fetch secrets from KMS
+        id: kms
+        env:
+          KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
+          KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}
+          KMS_ENDPOINT: ${{ vars.KMS_ENDPOINT || 'https://kms.hanzo.ai' }}
+          KMS_ORG: ${{ vars.KMS_ORG || 'hanzo' }}
+          KMS_SECRET_ENV: ${{ vars.KMS_SECRET_ENV || 'prod' }}
+        run: |
+          token=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/auth/login" \
+            -H 'Content-Type: application/json' \
+            -d "{\"clientId\":\"${KMS_CLIENT_ID}\",\"clientSecret\":\"${KMS_CLIENT_SECRET}\"}" \
+            | jq -r '.accessToken // empty')
+          if [ -z "${token}" ]; then
+            echo "::error::KMS login failed at ${KMS_ENDPOINT}/v1/kms/auth/login (check KMS_CLIENT_ID/KMS_CLIENT_SECRET)."
+            exit 1
+          fi
+          kms_get() {
+            curl -fsS "${KMS_ENDPOINT}/v1/kms/orgs/${KMS_ORG}/secrets/$1/$2?env=${KMS_SECRET_ENV}" \
+              -H "Authorization: Bearer ${token}" | jq -r '.secret.value // empty' || true
+          }
+
+          cf_token=$(kms_get deploy CLOUDFLARE_API_TOKEN)
+          cf_account=$(kms_get deploy CLOUDFLARE_ACCOUNT_ID)
+          if [ -z "${cf_token}" ] || [ -z "${cf_account}" ]; then
+            echo "::error::CF credentials missing in KMS at ${KMS_ORG}/deploy (env ${KMS_SECRET_ENV})."
+            exit 1
+          fi
+          echo "::add-mask::${cf_token}"
+          echo "::add-mask::${cf_account}"
+          echo "cf_token=${cf_token}" >> "$GITHUB_OUTPUT"
+          echo "cf_account=${cf_account}" >> "$GITHUB_OUTPUT"
+
+          # Refuse a wrong prefix rather than ship it: cloud matches `pk-`, and a
+          # `pk_` value is not recognized as publishable and is not "presented"
+          # either, so it does not 403 — it misfiles to $public silently.
+          key=$(kms_get site HANZO_INGEST_KEY)
+          case "${key}" in
+            '')   echo "::warning::site/HANZO_INGEST_KEY absent — logged-out traffic lands under \$public, which our org cannot read, and the anonymous allowlist drops every @hanzo/observe interaction. Mint: POST /v1/ingest/keys" ;;
+            pk-*) echo "::add-mask::${key}"; echo "key=${key}" >> "$GITHUB_OUTPUT" ;;
+            *)    echo "::warning::site/HANZO_INGEST_KEY does not begin with 'pk-'; ignoring it, because a wrong prefix misfiles to \$public silently." ;;
+          esac
+
       # Large static export (hundreds of pages); the default heap OOMs it.
       - name: Build
         run: pnpm build
         env:
           NODE_OPTIONS: '--max-old-space-size=8192'
+          NEXT_PUBLIC_HANZO_INGEST_KEY: ${{ steps.kms.outputs.key }}
         timeout-minutes: 30
 
       # No SPA fallback: every dynamic segment ships generateStaticParams, so
@@ -85,44 +152,6 @@ jobs:
           kill $SERVER_PID 2>/dev/null
           if [ "$FAILED" = "1" ]; then exit 1; fi
           echo "All smoke tests passed"
-
-      # CF credentials live in KMS, never in forge secrets. The only things held
-      # here are the machine identity that reads them — seeded as hanzoai org
-      # secrets from the in-cluster hanzo-kms-iam-creds.
-      #
-      # The `deploy/` path segment is load-bearing: querying the org secret root
-      # returns {"names":[]} and looks empty, which reads as "the creds are gone".
-      - name: Fetch CF credentials from KMS
-        id: kms
-        env:
-          KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
-          KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}
-          KMS_ENDPOINT: ${{ vars.KMS_ENDPOINT || 'https://kms.hanzo.ai' }}
-          KMS_ORG: ${{ vars.KMS_ORG || 'hanzo' }}
-          KMS_SECRET_ENV: ${{ vars.KMS_SECRET_ENV || 'prod' }}
-        run: |
-          token=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/auth/login" \
-            -H 'Content-Type: application/json' \
-            -d "{\"clientId\":\"${KMS_CLIENT_ID}\",\"clientSecret\":\"${KMS_CLIENT_SECRET}\"}" \
-            | jq -r '.accessToken // empty')
-          if [ -z "${token}" ]; then
-            echo "::error::KMS login failed at ${KMS_ENDPOINT}/v1/kms/auth/login (check KMS_CLIENT_ID/KMS_CLIENT_SECRET)."
-            exit 1
-          fi
-          kms_get() {
-            curl -fsS "${KMS_ENDPOINT}/v1/kms/orgs/${KMS_ORG}/secrets/deploy/$1?env=${KMS_SECRET_ENV}" \
-              -H "Authorization: Bearer ${token}" | jq -r '.secret.value // empty'
-          }
-          cf_token=$(kms_get CLOUDFLARE_API_TOKEN)
-          cf_account=$(kms_get CLOUDFLARE_ACCOUNT_ID)
-          if [ -z "${cf_token}" ] || [ -z "${cf_account}" ]; then
-            echo "::error::CF credentials missing in KMS at ${KMS_ORG}/deploy (env ${KMS_SECRET_ENV})."
-            exit 1
-          fi
-          echo "::add-mask::${cf_token}"
-          echo "::add-mask::${cf_account}"
-          echo "cf_token=${cf_token}" >> "$GITHUB_OUTPUT"
-          echo "cf_account=${cf_account}" >> "$GITHUB_OUTPUT"
 
       # On main, wrangler publishes to PRODUCTION (the apex), not a preview.
       # Scope is the apex only: cloud.hanzo.ai is k8s hanzoai/static and a Pages

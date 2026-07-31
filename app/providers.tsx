@@ -21,14 +21,15 @@ import { useEffect, type ReactNode } from 'react'
 // double-count the pageviews this client already posts. ONE client, ONE door.
 const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.ai'
 
-/** Hanzo-minted Sentry DSN for the `hanzo-ai` project — the ERROR plane.
- *  "https://<version>:<hmac>@<host>/v1/sentry/<projectId>". Publishable and
- *  write-only (it can create an event and read nothing), so it is safe in the
- *  bundle, exactly like the pk_ ingest key below. Without it @hanzo/event's error
- *  plane is inert and NOTHING reaches sentry.hanzo.ai — which is precisely why
- *  this site reported zero errors. Set in the build env; never committed.
- *  Mint/rotate: POST /v1/sentry/projects · POST /v1/sentry/projects/{id}/keys/rotate */
-const EVENT_DSN = process.env.NEXT_PUBLIC_HANZO_EVENT_DSN
+// NO SENTRY DSN, deliberately. @hanzo/event accepts one, and it authenticates a
+// SECOND send — a Sentry envelope to /v1/sentry/<projectId>, independent of the
+// event stream. That store is not the one sentry.hanzo.ai reads: its shell reads
+// GET /v1/errors, the type:'error' events in hanzo.events, which this client
+// already writes through /v1/event under the ingest key below (universe
+// infra/k8s/ingress/routes.yaml, the sentry.hanzo.ai routers). Adding a DSN would
+// mean a second publishable credential to mint, rotate and leak, filling a store
+// the dashboard never opens — and double-reporting every error that does matter.
+// ONE client, ONE door, ONE credential.
 
 /** Publishable ingest key (`pk-…`) — write-only, safe to ship in the bundle, and on
  *  a logged-out marketing site the difference between having interaction analytics
@@ -186,8 +187,6 @@ export function Providers({ children }: { children: ReactNode }) {
         ingestKey: INGEST_KEY,
         getToken,
         enabled,
-        // Error plane -> sentry.hanzo.ai. Inert (fail-safe) when the DSN is unset.
-        dsn: EVENT_DSN,
         // `environment` is deliberately absent: the SDK defaults it to NODE_ENV
         // (core.ts `this.cfg.environment ?? readEnv('NODE_ENV')`), which is exactly
         // right for both lanes — `next build` stamps production, `next dev` stamps
