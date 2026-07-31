@@ -4,6 +4,10 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 import { GuiProvider } from '@/components/GuiProvider'
 import { Providers } from './providers'
 import './globals.css'
+// The @hanzo/gui atomic sheet, as a real stylesheet Next can fingerprint and the
+// browser can cache. Generated from gui.config.ts by `prebuild`; see
+// scripts/gen-gui-css.mjs for why it is not injected at render time.
+import './gui.css'
 
 const geist = Geist({
   variable: '--font-geist',

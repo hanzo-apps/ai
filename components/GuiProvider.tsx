@@ -3,16 +3,22 @@
 /**
  * The gui runtime, mounted once.
  *
- * `@hanzo/gui` generates atomic CSS as components are constructed. On a
- * statically exported site the prerender happens on the server, so those rules
- * have to be handed to the document during that render — `useServerInsertedHTML`
- * is the App Router hook that does it. Without this the first paint of every
- * page ships markup whose classes have no rules, and the styling only appears
- * after hydration.
+ * gui's atomic CSS does NOT come from here. It is generated from `gui.config.ts`
+ * into `app/gui.css` by `prebuild` (scripts/gen-gui-css.mjs) and imported by the
+ * root layout, so Next fingerprints it and the browser caches it once.
+ *
+ * This used to hand `config.getCSS()` to `useServerInsertedHTML`, which Next runs
+ * on EVERY streaming flush — and since getCSS() returns the whole accumulated
+ * sheet each time, the homepage shipped thirteen byte-identical copies: 591,305
+ * of its 638,443 bytes, uncacheable, re-sent on every navigation. `href` +
+ * `precedence` do not fix it either, because useServerInsertedHTML injects into
+ * the stream outside the React tree, where hoisting never reconciles.
+ *
+ * `disableInjectCSS` is what keeps that from coming back: with the sheet supplied
+ * statically, a second copy from the runtime would be pure duplication.
  */
 
 import * as React from 'react'
-import { useServerInsertedHTML } from 'next/navigation'
 import { GuiProvider as Gui } from '@hanzo/gui'
 import { useTheme } from 'next-themes'
 import config from '@/gui.config'
@@ -20,15 +26,13 @@ import config from '@/gui.config'
 export function GuiProvider({ children }: { children: React.ReactNode }) {
   const { resolvedTheme } = useTheme()
 
-  useServerInsertedHTML(() => (
-    <style
-      // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: config.getCSS() }}
-    />
-  ))
-
   return (
-    <Gui config={config} defaultTheme={resolvedTheme === 'light' ? 'light' : 'dark'} disableRootThemeClass>
+    <Gui
+      config={config}
+      defaultTheme={resolvedTheme === 'light' ? 'light' : 'dark'}
+      disableRootThemeClass
+      disableInjectCSS
+    >
       {children}
     </Gui>
   )

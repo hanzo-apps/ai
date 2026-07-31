@@ -11,7 +11,10 @@
     "test": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "gen:gui-css": "node scripts/gen-gui-css.mjs",
+    "prebuild": "node scripts/gen-gui-css.mjs",
+    "predev": "node scripts/gen-gui-css.mjs"
   },
   "dependencies": {
     "@hanzo/brand": "^1.4.5",
@@ -74,7 +77,8 @@
     "simple-icons": "^16.27.0",
     "tailwindcss": "^4.0.17",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.0.0"
+    "typescript-eslint": "^8.0.0",
+    "esbuild": "^0.25.10"
   },
   "packageManager": "pnpm@9.15.0",
   "pnpm": {
