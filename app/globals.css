@@ -38,7 +38,15 @@
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
+  /* --pure-white, not --primary. gui.css (generated) redeclares `--primary:
+     var(--c-color-primary)` in :root, and --c-color-primary is itself
+     `var(--primary)` — a self-reference, so BOTH resolve to nothing and every
+     `bg-primary` painted transparent. --primary-foreground escapes the cycle
+     only because gui emits it camelCased (--primaryForeground), which is why
+     these buttons rendered black text on black. --pure-white is a raw palette
+     token gui never redeclares, and it is exactly what @hanzo/design sets
+     --primary to (#ffffff). Same collision still poisons --foreground/--brand. */
+  --color-primary: var(--pure-white);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
