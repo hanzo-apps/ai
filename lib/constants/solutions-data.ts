@@ -39,7 +39,7 @@ export const solutionsData: SolutionData[] = [
       'Code repository search and assistant',
     ],
     cta: 'Start building',
-    ctaHref: 'https://docs.hanzo.ai/guides/rag',
+    ctaHref: 'https://docs.hanzo.ai/docs/vector',
   },
   {
     slug: ['agents'],
@@ -63,7 +63,7 @@ export const solutionsData: SolutionData[] = [
       'Complex enterprise workflow automation',
     ],
     cta: 'Explore agent SDK',
-    ctaHref: 'https://docs.hanzo.ai/guides/agents',
+    ctaHref: 'https://docs.hanzo.ai/docs/agents',
   },
   {
     slug: ['realtime'],
@@ -87,7 +87,7 @@ export const solutionsData: SolutionData[] = [
       'Real-time moderation at scale',
     ],
     cta: 'View streaming docs',
-    ctaHref: 'https://docs.hanzo.ai/guides/streaming',
+    ctaHref: 'https://docs.hanzo.ai/docs/llm',
   },
   {
     slug: ['fine-tuning'],
@@ -111,7 +111,7 @@ export const solutionsData: SolutionData[] = [
       'Multilingual localization and translation',
     ],
     cta: 'Start fine-tuning',
-    ctaHref: 'https://docs.hanzo.ai/guides/fine-tuning',
+    ctaHref: 'https://docs.hanzo.ai/docs/services/ml',
   },
   {
     slug: ['vision'],

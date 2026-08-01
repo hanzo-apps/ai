@@ -19,7 +19,7 @@ import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
 
 const BOT = 'https://hanzo.bot'
-const DOCS = 'https://docs.hanzo.ai/bot'
+const DOCS = 'https://docs.hanzo.ai/docs/services/bot'
 const GITHUB = 'https://github.com/hanzoai/bot'
 
 export default function BotLanding() {

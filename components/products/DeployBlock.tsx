@@ -4,7 +4,10 @@
  * Deploy block.
  *
  * Primary CTA → console.hanzo.ai/deploy/<slug> (managed cloud deploy).
- * Secondary CTA → docs.hanzo.ai/<slug> (self-host docs).
+ * Secondary CTA → docs.hanzo.ai/docs/<docs_slug> (self-host docs), shown only
+ * when docs actually publishes a page for the product — `docsUrl` returns null
+ * otherwise, and a Self-host button that lands on a 404 is worse than no
+ * button.
  *
  * Both URLs derive from products-metadata so there is exactly one mapping
  * from slug to deploy URL and one from slug to docs URL.
@@ -51,16 +54,18 @@ export function DeployBlock({ slug, name, className = '' }: Props) {
             Deploy to Cloud
             <ArrowRight className="w-4 h-4" />
           </a>
-          <a
-            data-testid="self-host-cta"
-            href={docs}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center justify-center gap-2 px-6 rounded-full font-medium text-sm border border-border bg-transparent hover:bg-secondary text-foreground transition-colors"
-          >
-            <BookOpen className="w-4 h-4" />
-            Self-host
-          </a>
+          {docs && (
+            <a
+              data-testid="self-host-cta"
+              href={docs}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center justify-center gap-2 px-6 rounded-full font-medium text-sm border border-border bg-transparent hover:bg-secondary text-foreground transition-colors"
+            >
+              <BookOpen className="w-4 h-4" />
+              Self-host
+            </a>
+          )}
         </div>
       </div>
     </section>

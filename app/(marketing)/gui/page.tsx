@@ -147,18 +147,15 @@ export default function GuiPage() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-wrap justify-center gap-4"
           >
-            <a
-              href="https://docs.hanzo.ai/gui"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
-            >
-              Read the docs
-              <ArrowRight className="w-4 h-4" />
-            </a>
+            {/* No docs page for @hanzo/gui yet — the source is the reference.
+                Do not point this at /docs/projects/hanzoai/ui: that documents
+                @hanzo/ui, a different package. */}
             <a
               href="https://github.com/hanzoai/gui"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
             >
               GitHub
+              <ArrowRight className="w-4 h-4" />
             </a>
           </motion.div>
         </div>
@@ -285,17 +282,11 @@ export function Welcome() {
 
               <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href="https://docs.hanzo.ai/gui"
+                  href="https://github.com/hanzoai/gui"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
                 >
-                  Read the docs
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-                <a
-                  href="https://github.com/hanzoai/gui"
-                  className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors"
-                >
                   View on GitHub
+                  <ArrowRight className="w-4 h-4" />
                 </a>
               </div>
             </div>
@@ -308,11 +299,8 @@ export function Welcome() {
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Get started with GUI</h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="https://docs.hanzo.ai/gui" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
-              Read the docs <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="https://github.com/hanzoai/gui" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
-              View on GitHub
+            <a href="https://github.com/hanzoai/gui" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
+              View on GitHub <ArrowRight className="h-4 w-4" />
             </a>
           </div>
                 <ProductFooter slug="gui" name="GUI" />

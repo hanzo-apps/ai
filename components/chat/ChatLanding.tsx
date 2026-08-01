@@ -17,7 +17,7 @@ import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
 
 const CHAT = 'https://hanzo.chat'
-const DOCS = 'https://docs.hanzo.ai/chat'
+const DOCS = 'https://docs.hanzo.ai/docs/chat'
 const GITHUB = 'https://github.com/hanzoai/chat'
 
 export function ChatLanding() {

@@ -274,7 +274,7 @@ const PaaSCapabilities = () => {
         >
           <div className="flex flex-wrap justify-center gap-4">
             <a
-              href="https://docs.hanzo.ai/platform/quickstart"
+              href="https://docs.hanzo.ai/docs/services/platform"
               target="_blank"
               rel="noreferrer noopener"
               className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"

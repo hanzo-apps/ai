@@ -175,7 +175,7 @@ const HanzoExchange = () => {
             className="flex flex-wrap justify-center gap-4"
           >
             <a
-              href="https://docs.hanzo.ai/exchange"
+              href="https://docs.hanzo.ai/docs/blockchain"
               className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-full transition-colors"
             >
               Get Started
@@ -360,7 +360,7 @@ await exchange.orderbook.placeLimitOrder({
 
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href="https://docs.hanzo.ai/exchange"
+                href="https://docs.hanzo.ai/docs/blockchain"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-full transition-colors"
               >
                 Read the Docs

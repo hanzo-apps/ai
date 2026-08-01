@@ -406,36 +406,38 @@ const rawCategories: CloudCategory[] = [
   },
 ]
 
-// Verified-live docs target per primitive, keyed by marketing href. Every
-// value is a 200 page on docs.hanzo.ai today — where a primitive has no
-// dedicated page yet (or its page is temporarily unhealthy), it points at the
-// nearest real one so a leaf is NEVER a 404. (`/docs/services` is the catalog
-// fallback for anything not listed.)
+// Docs target per primitive, keyed by marketing href. Each value is the page
+// docs.hanzo.ai publishes for THAT product — not a synonym that happens to
+// resolve. A primitive with no page of its own points at the page that covers
+// it (Fine-tuning lives inside the ML guide); it never points at an unrelated
+// product to avoid a 404. (`/docs/services` is the catalog fallback for
+// anything not listed.) Every value is checked against the docs content tree —
+// see the cross-site link check in the docs repo.
 const DOCS_PATH: Record<string, string> = {
   // AI
-  '/models': 'services/ml', '/agents': 'services/bot', '/engine': 'services/engine',
-  '/cloud/fine-tuning': 'services/ml', '/cloud/embeddings': 'services/vector', '/cloud/evals': 'services/o11y',
+  '/models': 'services/models', '/agents': 'agents', '/engine': 'services/engine',
+  '/cloud/fine-tuning': 'services/ml', '/cloud/embeddings': 'embeddings', '/cloud/evals': 'experiments',
   // Compute
-  '/cloud/gpus': 'services/engine', '/machines': 'services/paas', '/cloud/containers': 'services/functions',
-  '/functions': 'services/functions', '/edge': 'services/edge', '/cloud/jobs': 'services/tasks',
+  '/cloud/gpus': 'gpus', '/machines': 'machines', '/cloud/containers': 'services/functions',
+  '/functions': 'functions', '/edge': 'edge', '/cloud/jobs': 'tasks',
   // Data
-  '/vector': 'services/vector', '/sql': 'services/db', '/kv': 'services/kv',
-  '/storage': 'services/s3', '/datastore': 'services/db', '/docdb': 'services/db',
+  '/vector': 'vector', '/sql': 'sql', '/kv': 'kv',
+  '/storage': 'storage', '/datastore': 'datastore', '/docdb': 'docdb',
   // Network
-  '/gateway': 'services/gateway', '/network': 'services/ingress', '/dns': 'services/dns',
-  '/cloud/cdn': 'services/edge', '/ingress': 'services/ingress', '/cloud/service-mesh': 'services/gateway',
-  // Security  (iam/kms/platform service pages are origin-flaky → nearest healthy synonym)
-  '/iam': 'services/identity', '/authz': 'services/zt', '/kms': 'services/sign',
-  '/hsm': 'services/mpc', '/cloud/secrets': 'services/zt', '/cloud/audit': 'services/guard',
+  '/gateway': 'gateway', '/network': 'network', '/dns': 'services/dns',
+  '/cloud/cdn': 'edge', '/ingress': 'services/ingress', '/cloud/service-mesh': 'services/gateway',
+  // Security
+  '/iam': 'iam', '/authz': 'authz', '/kms': 'kms',
+  '/hsm': 'mpc', '/cloud/secrets': 'services/kms', '/cloud/audit': 'services/guard',
   // Dev
-  '/cli': 'sdks', '/cloud/sdks': 'sdks', '/cloud/api': 'services/nexus',
-  '/playground': 'services/studio', '/code': 'services/studio', '/desktop': 'sdks',
+  '/cli': 'cli', '/cloud/sdks': 'sdks', '/cloud/api': 'openapi',
+  '/playground': 'skills/hanzo-playground', '/code': 'dev', '/desktop': 'apps/desktop',
   // Deploy
-  '/platform': 'services/paas', '/cloud/environments': 'services/paas', '/cloud/builds': 'services/registry',
-  '/registry': 'services/registry', '/cloud/releases': 'services/operative', '/cloud/pipelines': 'services/flow',
+  '/platform': 'services/platform', '/cloud/environments': 'services/platform', '/cloud/builds': 'registry',
+  '/registry': 'registry', '/cloud/releases': 'deploy', '/cloud/pipelines': 'pipelines',
   // Observe
-  '/cloud/logs': 'services/o11y', '/metrics': 'services/insights', '/telemetry': 'services/o11y',
-  '/dashboards': 'services/insights', '/sentry': 'services/guard', '/cloud/cost': 'services/pricing',
+  '/cloud/logs': 'logs', '/metrics': 'metrics', '/telemetry': 'traces',
+  '/dashboards': 'dashboards', '/sentry': 'skills/hanzo-sentry', '/cloud/cost': 'billing',
   // Web3
   '/blockchain/settlement': 'services/web3', '/blockchain/wallets': 'services/web3', '/blockchain/tokens': 'services/web3',
   '/blockchain/indexer': 'services/web3', '/blockchain/oracle': 'services/web3', '/blockchain/attestations': 'services/web3',

@@ -168,13 +168,13 @@ export const resources = [
     items: [
       {
         name: "Documentation",
-        url: "https://docs.hanzo.ai",
+        url: "https://docs.hanzo.ai/docs",
         description: "Comprehensive guides and tutorials"
       },
       {
         name: "API Reference",
-        url: "https://docs.hanzo.ai/docs",
-        description: "Detailed API documentation"
+        url: "https://docs.hanzo.ai/docs/openapi",
+        description: "Every REST endpoint, generated from the OpenAPI document"
       },
       {
         name: "Examples",

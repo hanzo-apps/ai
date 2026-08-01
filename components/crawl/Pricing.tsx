@@ -62,7 +62,7 @@ const plans: PlanProps[] = [
       "REST API access",
     ],
     ctaLabel: "Get Started",
-    ctaHref: "https://docs.hanzo.ai/crawl",
+    ctaHref: "https://docs.hanzo.ai/docs/crawl",
   },
   {
     name: "Scale",
@@ -77,7 +77,7 @@ const plans: PlanProps[] = [
       "Direct Search + Vector integration",
     ],
     ctaLabel: "Get Started",
-    ctaHref: "https://docs.hanzo.ai/crawl",
+    ctaHref: "https://docs.hanzo.ai/docs/crawl",
   },
   {
     name: "Enterprise",

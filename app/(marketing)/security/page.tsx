@@ -160,7 +160,7 @@ const Security = () => {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
                 <a
-                  href="https://docs.hanzo.ai/security"
+                  href="https://docs.hanzo.ai/docs/zero-trust"
                   target="_blank"
                   rel="noreferrer noopener"
                   className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"
@@ -475,7 +475,7 @@ const Security = () => {
               className="mt-8"
             >
               <a
-                href="https://docs.hanzo.ai/security"
+                href="https://docs.hanzo.ai/docs/zero-trust"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"

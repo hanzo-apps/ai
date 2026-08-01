@@ -16,7 +16,7 @@ import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
 import { OSSRevenueBanner } from '@/components/oss/OSSRevenueBanner'
 
-const DOCS = 'https://docs.hanzo.ai/mcp'
+const DOCS = 'https://docs.hanzo.ai/docs/mcp'
 const GITHUB = 'https://github.com/hanzoai/mcp'
 const CONSOLE = 'https://console.hanzo.ai'
 

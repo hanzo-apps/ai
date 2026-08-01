@@ -23,7 +23,6 @@ import {
   Bug,
   Brain,
   Keyboard,
-  ArrowRight,
   ExternalLink
 } from "lucide-react";
 
@@ -33,14 +32,14 @@ const RECENTLY_SHIPPED = [
     title: "Cloud Agents",
     description:
       "Run AI agents in the cloud without consuming local resources. Execute long-running tasks, complex workflows, and resource-intensive operations while your machine stays free for other work.",
-    link: "https://docs.hanzo.ai/cloud-agents",
+    link: "https://docs.hanzo.ai/docs/dev/usage/agents",
   },
   {
     icon: GitPullRequest,
     title: "Code Reviews",
     description:
       "Automated code review agents that analyze pull requests, suggest improvements, catch bugs, and ensure code quality standards. Get instant feedback before merging.",
-    link: "https://docs.hanzo.ai/code-reviews",
+    link: "https://docs.hanzo.ai/docs/dev",
   },
   {
     icon: Rocket,
@@ -54,7 +53,7 @@ const RECENTLY_SHIPPED = [
     title: "Parallel Agents (CLI)",
     description:
       "Run multiple AI agents simultaneously using git worktrees in the Hanzo Dev CLI. Coordinate complex tasks across different parts of your codebase and review results as pull requests.",
-    link: "https://docs.hanzo.ai/parallel-agents",
+    link: "https://docs.hanzo.ai/docs/dev/reference/cli",
   },
 ];
 
@@ -273,23 +272,6 @@ const Features = () => {
           })}
         </div>
 
-        {/* See upcoming features link */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <a
-            href="https://docs.hanzo.ai/roadmap"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            See upcoming features
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </motion.div>
       </div>
     </section>
   );

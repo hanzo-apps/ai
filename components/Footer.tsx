@@ -64,9 +64,12 @@ const footerLinks = {
   learn: {
     title: "Learn",
     items: [
-      { title: "Docs", href: "https://docs.hanzo.ai", external: true },
+      { title: "Docs", href: "https://docs.hanzo.ai/docs", external: true },
       { title: "Blog", href: "/blog" },
-      { title: "Tutorials", href: "https://docs.hanzo.ai/docs", external: true },
+      // Docs publishes no "tutorials" section; /docs/start is the guided tour
+      // (the same journey as CLI, SDK, HTTP and MCP).
+      { title: "Get started", href: "https://docs.hanzo.ai/docs/start", external: true },
+      { title: "API reference", href: "https://docs.hanzo.ai/docs/openapi", external: true },
     ],
   },
   helpSecurity: {

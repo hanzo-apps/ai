@@ -63,7 +63,7 @@ const OperativeDemo = () => {
         
         <div className="mt-12 text-center">
           <a 
-            href="https://docs.hanzo.ai/operative/examples"
+            href="https://docs.hanzo.ai/docs/services/operative"
             className="text-foreground hover:text-foreground/70 transition-colors"
           >
             View more examples →

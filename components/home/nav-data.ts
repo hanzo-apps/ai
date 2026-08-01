@@ -166,9 +166,18 @@ export const NAV: NavItem[] = [
         ],
       },
       {
-        title: 'Resources',
+        // The four dev surfaces docs.hanzo.ai puts in ITS top nav — API, CLI,
+        // MCP, SDKs. Naming them the same on both sites, one click apart, is
+        // the point: a reader who knows the word from one site finds it on the
+        // other. Deep links, because docs.hanzo.ai/ is the docs marketing home
+        // and the tree lives under /docs.
+        title: 'Documentation',
         links: [
-          { label: 'Docs', href: DOCS },
+          { label: 'Docs home', href: `${DOCS}/docs` },
+          { label: 'API reference', href: `${DOCS}/docs/openapi` },
+          { label: 'CLI', href: `${DOCS}/docs/cli` },
+          { label: 'MCP', href: `${DOCS}/docs/mcp` },
+          { label: 'SDKs', href: `${DOCS}/docs/sdks` },
           { label: 'GitHub', href: GITHUB },
           { label: 'Blog', href: BLOG },
         ],
@@ -234,7 +243,8 @@ export const FOOTER: NavColumn[] = [
     title: 'Developers',
     links: [
       { label: 'hanzo.sh', href: SH },
-      { label: 'Docs', href: DOCS },
+      { label: 'Docs', href: `${DOCS}/docs` },
+      { label: 'API reference', href: `${DOCS}/docs/openapi` },
       { label: 'CLI', href: '/cli' },
       { label: 'GitHub', href: GITHUB },
     ],

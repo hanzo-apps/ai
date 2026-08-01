@@ -41,7 +41,7 @@ import EnsoSavings from './EnsoSavings'
 
 const CONSOLE = 'https://console.hanzo.ai'
 const CLOUD = 'https://cloud.hanzo.ai'
-const DOCS = 'https://docs.hanzo.ai/enso'
+const DOCS = 'https://docs.hanzo.ai/docs/services/models'
 const CONTACT = 'https://cloud.hanzo.ai/contact/sales'
 
 const fade = {

@@ -32,8 +32,19 @@ export type ProductMetadata = {
   upstream_url?: string;
   /** Deploy slug for console.hanzo.ai/deploy/<slug> — defaults to slug */
   deploy_slug?: string;
-  /** Optional override for docs.hanzo.ai/<slug> */
-  docs_slug?: string;
+  /**
+   * Path under docs.hanzo.ai/docs/ — defaults to the product slug. Set it
+   * whenever the docs page is not at /docs/<slug>: docs groups most pages
+   * under `services/`, `skills/`, `apps/` or `projects/hanzoai/`, and only a
+   * minority sit at the top level. Every value must be a real page in
+   * hanzo-docs/docs `apps/docs/content/docs/` — a directory without an
+   * index.mdx is a 404, not a page.
+   *
+   * `null` means docs publishes nothing for this product yet. Say that rather
+   * than aiming at a near-miss page: `docsUrl` then returns null and the caller
+   * drops the link, which beats sending a reader to the wrong product.
+   */
+  docs_slug?: string | null;
 };
 
 const G = 'https://github.com/hanzoai';
@@ -43,99 +54,99 @@ export const productsMetadata: Record<string, ProductMetadata> = {
   agents:       { slug: 'agents',     tagline: 'Multi-agent SDK + runtime + tool harness', license: 'Apache-2.0', github_repo: `${G}/agent` },
   'ai-studio':  { slug: 'ai-studio',  tagline: 'Build AI apps visually', license: 'Apache-2.0', github_repo: G },
   analytics:    { slug: 'analytics',  tagline: 'Product analytics on your data', license: 'Apache-2.0', github_repo: `${G}/analytics`, upstream_fork: 'Umami', upstream_license: 'MIT', upstream_url: 'https://umami.is' },
-  app:          { slug: 'app',        tagline: 'Mobile + desktop client', license: 'Apache-2.0', github_repo: `${G}/app` },
+  app:          { slug: 'app',        tagline: 'Mobile + desktop client', license: 'Apache-2.0', github_repo: `${G}/app`, docs_slug: 'apps' },
   authz:        { slug: 'authz',      tagline: 'Fine-grained authorization', license: 'Apache-2.0', github_repo: `${G}/authz` },
-  auto:         { slug: 'auto',       tagline: 'Workflow automations', license: 'Apache-2.0', github_repo: `${G}/auto`, upstream_fork: 'Activepieces', upstream_license: 'MIT', upstream_url: 'https://www.activepieces.com' },
+  auto:         { slug: 'auto',       tagline: 'Workflow automations', license: 'Apache-2.0', github_repo: `${G}/auto`, upstream_fork: 'Activepieces', upstream_license: 'MIT', upstream_url: 'https://www.activepieces.com', docs_slug: 'services/auto' },
   base:         { slug: 'base',       tagline: 'Embedded data backend with IAM-native auth', license: 'MIT', github_repo: `${G}/base`, upstream_fork: 'PocketBase', upstream_license: 'MIT', upstream_url: 'https://pocketbase.io' },
   billing:      { slug: 'billing',    tagline: 'Metered billing engine', license: 'Apache-2.0', github_repo: `${G}/billing` },
-  bot:          { slug: 'bot',        tagline: 'Connect your AI agents to every messaging channel', license: 'MIT', github_repo: `${G}/bot` },
-  captable:     { slug: 'captable',   tagline: 'Cap table + equity management', license: 'Apache-2.0', github_repo: `${G}/captable` },
+  bot:          { slug: 'bot',        tagline: 'Connect your AI agents to every messaging channel', license: 'MIT', github_repo: `${G}/bot`, docs_slug: 'services/bot' },
+  captable:     { slug: 'captable',   tagline: 'Cap table + equity management', license: 'Apache-2.0', github_repo: `${G}/captable`, docs_slug: 'services/captable' },
   chat:         { slug: 'chat',       tagline: 'AI chat with MCP tools', license: 'Apache-2.0', github_repo: `${G}/chat`, upstream_fork: 'LibreChat', upstream_license: 'MIT', upstream_url: 'https://librechat.ai' },
   cli:          { slug: 'cli',        tagline: 'One CLI for the whole stack', license: 'Apache-2.0', github_repo: `${G}/cli` },
-  cloud:        { slug: 'cloud',      tagline: 'AI cloud infrastructure', license: 'Apache-2.0', github_repo: `${G}/cloud` },
-  code:         { slug: 'code',       tagline: 'Open source AI code editor', license: 'Apache-2.0', github_repo: `${G}/code` },
+  cloud:        { slug: 'cloud',      tagline: 'AI cloud infrastructure', license: 'Apache-2.0', github_repo: `${G}/cloud`, docs_slug: 'services/cloud' },
+  code:         { slug: 'code',       tagline: 'Open source AI code editor', license: 'Apache-2.0', github_repo: `${G}/code`, docs_slug: 'skills/hanzo-code' },
   commerce:     { slug: 'commerce',   tagline: 'Headless commerce + AI recommendations', license: 'Apache-2.0', github_repo: `${G}/commerce` },
-  computer:     { slug: 'computer',   tagline: 'Computer-use for AI', license: 'Apache-2.0', github_repo: `${G}/computer` },
+  computer:     { slug: 'computer',   tagline: 'Computer-use for AI', license: 'Apache-2.0', github_repo: `${G}/computer`, docs_slug: 'skills/hanzo-computer' },
   console:      { slug: 'console',    tagline: 'Operator console for the cloud', license: 'Apache-2.0', github_repo: `${G}/console` },
   crawl:        { slug: 'crawl',      tagline: 'Crawl, scrape, and embed', license: 'Apache-2.0', github_repo: G },
   dashboards:   { slug: 'dashboards', tagline: 'Composable dashboards', license: 'Apache-2.0', github_repo: `${G}/dashboards` },
-  database:     { slug: 'database',   tagline: 'Unified database', license: 'Apache-2.0', github_repo: `${G}/database` },
-  dataroom:     { slug: 'dataroom',   tagline: 'Secure data room', license: 'AGPL-3.0', github_repo: `${G}/dataroom`, upstream_fork: 'Papermark', upstream_license: 'AGPL-3.0', upstream_url: 'https://www.papermark.com' },
+  database:     { slug: 'database',   tagline: 'Unified database', license: 'Apache-2.0', github_repo: `${G}/database`, docs_slug: 'sql' },
+  dataroom:     { slug: 'dataroom',   tagline: 'Secure data room', license: 'AGPL-3.0', github_repo: `${G}/dataroom`, upstream_fork: 'Papermark', upstream_license: 'AGPL-3.0', upstream_url: 'https://www.papermark.com', docs_slug: 'services/dataroom' },
   datastore:    { slug: 'datastore',  tagline: 'Document datastore', license: 'Apache-2.0', github_repo: `${G}/datastore` },
-  desktop:      { slug: 'desktop',    tagline: 'Desktop client', license: 'Apache-2.0', github_repo: `${G}/desktop` },
+  desktop:      { slug: 'desktop',    tagline: 'Desktop client', license: 'Apache-2.0', github_repo: `${G}/desktop`, docs_slug: 'apps/desktop' },
   dev:          { slug: 'dev',        tagline: 'AI engineer that ships PRs from a sentence', license: 'Apache-2.0', github_repo: `${G}/dev` },
-  dns:          { slug: 'dns',        tagline: 'DNS as code', license: 'Apache-2.0', github_repo: `${G}/dns` },
+  dns:          { slug: 'dns',        tagline: 'DNS as code', license: 'Apache-2.0', github_repo: `${G}/dns`, docs_slug: 'services/dns' },
   docdb:        { slug: 'docdb',      tagline: 'Document DB over PostgreSQL', license: 'Apache-2.0', github_repo: `${G}/docdb`, upstream_fork: 'FerretDB', upstream_license: 'Apache-2.0', upstream_url: 'https://www.ferretdb.com' },
   edge:         { slug: 'edge',       tagline: 'Edge compute', license: 'Apache-2.0', github_repo: `${G}/edge` },
-  engine:       { slug: 'engine',     tagline: 'AI inference engine', license: 'Apache-2.0', github_repo: `${G}/engine` },
-  enso:         { slug: 'enso',       tagline: 'Composable infinite canvas', license: 'Apache-2.0', github_repo: `${G}/enso` },
-  extension:    { slug: 'extension',  tagline: 'Browser extension + MCP bridge', license: 'Apache-2.0', github_repo: `${G}/extension` },
-  flow:         { slug: 'flow',       tagline: 'Visual workflow builder', license: 'Apache-2.0', github_repo: `${G}/flow`, upstream_fork: 'Langflow', upstream_license: 'MIT', upstream_url: 'https://langflow.org' },
+  engine:       { slug: 'engine',     tagline: 'AI inference engine', license: 'Apache-2.0', github_repo: `${G}/engine`, docs_slug: 'services/engine' },
+  enso:         { slug: 'enso',       tagline: 'Flagship model orchestration — Flash, Pro, Ultra', license: 'Apache-2.0', github_repo: `${G}/enso`, docs_slug: 'services/models' },
+  extension:    { slug: 'extension',  tagline: 'Browser extension + MCP bridge', license: 'Apache-2.0', github_repo: `${G}/extension`, docs_slug: 'projects/hanzoai/extension' },
+  flow:         { slug: 'flow',       tagline: 'Visual workflow builder', license: 'Apache-2.0', github_repo: `${G}/flow`, upstream_fork: 'Langflow', upstream_license: 'MIT', upstream_url: 'https://langflow.org', docs_slug: 'services/flow' },
   functions:    { slug: 'functions',  tagline: 'Serverless functions', license: 'Apache-2.0', github_repo: `${G}/functions` },
-  gallery:      { slug: 'gallery',    tagline: 'Image + video gallery', license: 'Apache-2.0', github_repo: `${G}/gallery` },
+  gallery:      { slug: 'gallery',    tagline: 'Image + video gallery', license: 'Apache-2.0', github_repo: `${G}/gallery`, docs_slug: 'ai-studio' },
   gateway:      { slug: 'gateway',    tagline: 'API gateway', license: 'Apache-2.0', github_repo: `${G}/gateway`, upstream_fork: 'KrakenD', upstream_license: 'Apache-2.0', upstream_url: 'https://www.krakend.io' },
-  guard:        { slug: 'guard',      tagline: 'AI guardrails', license: 'Apache-2.0', github_repo: `${G}/guard` },
-  gui:          { slug: 'gui',        tagline: 'React UI library', license: 'Apache-2.0', github_repo: `${G}/gui` },
-  hsm:          { slug: 'hsm',        tagline: 'Hardware security module', license: 'Apache-2.0', github_repo: `${G}/hsm` },
+  guard:        { slug: 'guard',      tagline: 'AI guardrails', license: 'Apache-2.0', github_repo: `${G}/guard`, docs_slug: 'services/guard' },
+  gui:          { slug: 'gui',        tagline: 'React UI library', license: 'Apache-2.0', github_repo: `${G}/gui`, docs_slug: null },
+  hsm:          { slug: 'hsm',        tagline: 'Hardware security module', license: 'Apache-2.0', github_repo: `${G}/hsm`, docs_slug: 'mpc' },
   iam:          { slug: 'iam',        tagline: 'Identity + access (hanzo.id)', license: 'Apache-2.0', github_repo: `${G}/iam` },
-  idv:          { slug: 'idv',        tagline: 'Identity verification', license: 'Apache-2.0', github_repo: `${G}/idv` },
-  ingress:      { slug: 'ingress',    tagline: 'K8s ingress + static plugin', license: 'Apache-2.0', github_repo: `${G}/ingress` },
+  idv:          { slug: 'idv',        tagline: 'Identity verification', license: 'Apache-2.0', github_repo: `${G}/idv`, docs_slug: 'services/iam/provider/idv/overview' },
+  ingress:      { slug: 'ingress',    tagline: 'K8s ingress + static plugin', license: 'Apache-2.0', github_repo: `${G}/ingress`, docs_slug: 'services/ingress' },
   insights:     { slug: 'insights',   tagline: 'Product insights + experiments', license: 'MIT', github_repo: `${G}/insights`, upstream_fork: 'PostHog', upstream_license: 'MIT', upstream_url: 'https://posthog.com' },
-  jin:          { slug: 'jin',        tagline: 'Multimodal foundation model', license: 'Apache-2.0', github_repo: `${G}/jin` },
+  jin:          { slug: 'jin',        tagline: 'Multimodal foundation model', license: 'Apache-2.0', github_repo: `${G}/jin`, docs_slug: 'skills/hanzo-jin' },
   kms:          { slug: 'kms',        tagline: 'Secrets + key management', license: 'Apache-2.0', github_repo: `${G}/kms` },
   kv:           { slug: 'kv',         tagline: 'Distributed key-value store', license: 'BSD-3-Clause', github_repo: `${G}/kv`, upstream_fork: 'Valkey', upstream_license: 'BSD-3-Clause', upstream_url: 'https://valkey.io' },
-  ledger:       { slug: 'ledger',     tagline: 'Double-entry accounting ledger', license: 'Apache-2.0', github_repo: `${G}/ledger` },
+  ledger:       { slug: 'ledger',     tagline: 'Double-entry accounting ledger', license: 'Apache-2.0', github_repo: `${G}/ledger`, docs_slug: 'skills/hanzo-ledger' },
   llm:          { slug: 'llm',        tagline: 'One API for every model', license: 'Apache-2.0', github_repo: G },
   machines:     { slug: 'machines',   tagline: 'Long-running compute machines', license: 'Apache-2.0', github_repo: G },
   mcp:          { slug: 'mcp',        tagline: 'Model Context Protocol — 260+ tools', license: 'Apache-2.0', github_repo: `${G}/mcp` },
   metrics:      { slug: 'metrics',    tagline: 'Time-series metrics', license: 'Apache-2.0', github_repo: `${G}/metrics` },
-  mq:           { slug: 'mq',         tagline: 'Message queue', license: 'Apache-2.0', github_repo: `${G}/mq` },
+  mq:           { slug: 'mq',         tagline: 'Message queue', license: 'Apache-2.0', github_repo: `${G}/mq`, docs_slug: 'services/mq' },
   network:      { slug: 'network',    tagline: 'Decentralized compute network', license: 'Apache-2.0', github_repo: G },
-  node:         { slug: 'node',       tagline: 'Standalone Hanzo node', license: 'Apache-2.0', github_repo: `${G}/node` },
+  node:         { slug: 'node',       tagline: 'Standalone Hanzo node', license: 'Apache-2.0', github_repo: `${G}/node`, docs_slug: 'proof-of-ai/node-operator' },
   o11y:         { slug: 'o11y',       tagline: 'Observability suite', license: 'Apache-2.0', github_repo: `${G}/o11y` },
-  operative:    { slug: 'operative',  tagline: 'Computer-use harness', license: 'Apache-2.0', github_repo: `${G}/operative`, upstream_fork: 'Anthropic Computer Use', upstream_license: 'MIT', upstream_url: 'https://github.com/anthropics/anthropic-quickstarts' },
-  operator:     { slug: 'operator',   tagline: 'K8s operator', license: 'Apache-2.0', github_repo: `${G}/operator` },
-  payments:     { slug: 'payments',   tagline: 'Payments processor', license: 'Apache-2.0', github_repo: `${G}/payments` },
-  platform:     { slug: 'platform',   tagline: 'PaaS — deploy from git', license: 'Apache-2.0', github_repo: `${G}/platform`, upstream_fork: 'Dokploy', upstream_license: 'Apache-2.0', upstream_url: 'https://dokploy.com' },
-  playground:   { slug: 'playground', tagline: 'Hands-on sandbox for every product', license: 'Apache-2.0', github_repo: G },
+  operative:    { slug: 'operative',  tagline: 'Computer-use harness', license: 'Apache-2.0', github_repo: `${G}/operative`, upstream_fork: 'Anthropic Computer Use', upstream_license: 'MIT', upstream_url: 'https://github.com/anthropics/anthropic-quickstarts', docs_slug: 'services/operative' },
+  operator:     { slug: 'operator',   tagline: 'K8s operator', license: 'Apache-2.0', github_repo: `${G}/operator`, docs_slug: 'projects/hanzoai/operator' },
+  payments:     { slug: 'payments',   tagline: 'Payments processor', license: 'Apache-2.0', github_repo: `${G}/payments`, docs_slug: 'services/commerce' },
+  platform:     { slug: 'platform',   tagline: 'PaaS — deploy from git', license: 'Apache-2.0', github_repo: `${G}/platform`, upstream_fork: 'Dokploy', upstream_license: 'Apache-2.0', upstream_url: 'https://dokploy.com', docs_slug: 'services/platform' },
+  playground:   { slug: 'playground', tagline: 'Hands-on sandbox for every product', license: 'Apache-2.0', github_repo: G, docs_slug: 'skills/hanzo-playground' },
   pubsub:       { slug: 'pubsub',     tagline: 'Pub/sub messaging', license: 'Apache-2.0', github_repo: `${G}/pubsub` },
-  realtime:     { slug: 'realtime',   tagline: 'Realtime channels + presence', license: 'Apache-2.0', github_repo: G },
+  realtime:     { slug: 'realtime',   tagline: 'Realtime channels + presence', license: 'Apache-2.0', github_repo: G, docs_slug: 'pubsub' },
   registry:     { slug: 'registry',   tagline: 'OCI image registry', license: 'Apache-2.0', github_repo: `${G}/registry` },
   search:       { slug: 'search',     tagline: 'AI-powered search', license: 'Apache-2.0', github_repo: `${G}/search`, upstream_fork: 'Meilisearch', upstream_license: 'MIT', upstream_url: 'https://www.meilisearch.com' },
-  sentry:       { slug: 'sentry',     tagline: 'Error tracking', license: 'BSL-1.1', github_repo: `${G}/sentry`, upstream_fork: 'Sentry', upstream_license: 'BSL-1.1', upstream_url: 'https://sentry.io' },
-  sign:         { slug: 'sign',       tagline: 'E-signature', license: 'AGPL-3.0', github_repo: `${G}/sign`, upstream_fork: 'Documenso', upstream_license: 'AGPL-3.0', upstream_url: 'https://documenso.com' },
+  sentry:       { slug: 'sentry',     tagline: 'Error tracking', license: 'BSL-1.1', github_repo: `${G}/sentry`, upstream_fork: 'Sentry', upstream_license: 'BSL-1.1', upstream_url: 'https://sentry.io', docs_slug: 'skills/hanzo-sentry' },
+  sign:         { slug: 'sign',       tagline: 'E-signature', license: 'AGPL-3.0', github_repo: `${G}/sign`, upstream_fork: 'Documenso', upstream_license: 'AGPL-3.0', upstream_url: 'https://documenso.com', docs_slug: 'services/sign' },
   skills:       { slug: 'skills',     tagline: 'Reusable agent skills', license: 'Apache-2.0', github_repo: `${G}/skills` },
   sql:          { slug: 'sql',        tagline: 'Managed PostgreSQL', license: 'PostgreSQL', github_repo: `${G}/sql` },
-  status:       { slug: 'status',     tagline: 'Status pages', license: 'Apache-2.0', github_repo: `${G}/status` },
+  status:       { slug: 'status',     tagline: 'Status pages', license: 'Apache-2.0', github_repo: `${G}/status`, docs_slug: null },
   storage:      { slug: 'storage',    tagline: 'S3-compatible object storage', license: 'Apache-2.0', github_repo: `${G}/s3`, upstream_fork: 'SeaweedFS', upstream_license: 'Apache-2.0', upstream_url: 'https://github.com/seaweedfs/seaweedfs' },
-  stream:       { slug: 'stream',     tagline: 'Event stream', license: 'Apache-2.0', github_repo: `${G}/stream` },
-  studio:       { slug: 'studio',     tagline: 'Visual builder studio', license: 'GPL-3.0', github_repo: `${G}/studio`, upstream_fork: 'ComfyUI', upstream_license: 'GPL-3.0', upstream_url: 'https://www.comfy.org' },
+  stream:       { slug: 'stream',     tagline: 'Event stream', license: 'Apache-2.0', github_repo: `${G}/stream`, docs_slug: 'services/stream' },
+  studio:       { slug: 'studio',     tagline: 'Visual builder studio', license: 'GPL-3.0', github_repo: `${G}/studio`, upstream_fork: 'ComfyUI', upstream_license: 'GPL-3.0', upstream_url: 'https://www.comfy.org', docs_slug: 'services/studio' },
   tasks:        { slug: 'tasks',      tagline: 'Durable workflows + scheduling', license: 'MIT', github_repo: `${G}/tasks` },
-  team:         { slug: 'team',       tagline: 'Team workspace — channels, projects, tasks, docs, HR', license: 'EPL-2.0', github_repo: `${G}/team`, upstream_fork: 'Huly', upstream_license: 'EPL-2.0', upstream_url: 'https://huly.io' },
-  telemetry:    { slug: 'telemetry',  tagline: 'OpenTelemetry ingest', license: 'Apache-2.0', github_repo: `${G}/telemetry` },
-  treasury:     { slug: 'treasury',   tagline: 'Treasury management', license: 'Apache-2.0', github_repo: `${G}/treasury` },
-  tunnel:       { slug: 'tunnel',     tagline: 'Secure tunnels', license: 'Apache-2.0', github_repo: `${G}/tunnel` },
-  ui:           { slug: 'ui',         tagline: 'Headless UI primitives', license: 'MIT', github_repo: `${G}/ui` },
+  team:         { slug: 'team',       tagline: 'Team workspace — channels, projects, tasks, docs, HR', license: 'EPL-2.0', github_repo: `${G}/team`, upstream_fork: 'Huly', upstream_license: 'EPL-2.0', upstream_url: 'https://huly.io', docs_slug: null },
+  telemetry:    { slug: 'telemetry',  tagline: 'OpenTelemetry ingest', license: 'Apache-2.0', github_repo: `${G}/telemetry`, docs_slug: 'projects/hanzoai/telemetry' },
+  treasury:     { slug: 'treasury',   tagline: 'Treasury management', license: 'Apache-2.0', github_repo: `${G}/treasury`, docs_slug: 'skills/hanzo-treasury' },
+  tunnel:       { slug: 'tunnel',     tagline: 'Secure tunnels', license: 'Apache-2.0', github_repo: `${G}/tunnel`, docs_slug: 'skills/hanzo-tunnel' },
+  ui:           { slug: 'ui',         tagline: 'Headless UI primitives', license: 'MIT', github_repo: `${G}/ui`, docs_slug: 'projects/hanzoai/ui' },
   vector:       { slug: 'vector',     tagline: 'Vector database', license: 'Apache-2.0', github_repo: `${G}/vector`, upstream_fork: 'Qdrant', upstream_license: 'Apache-2.0', upstream_url: 'https://qdrant.tech' },
-  visor:        { slug: 'visor',      tagline: 'Cluster visualizer', license: 'Apache-2.0', github_repo: `${G}/visor` },
-  world:        { slug: 'world',      tagline: '3D world building', license: 'Apache-2.0', github_repo: `${G}/world` },
+  visor:        { slug: 'visor',      tagline: 'Cluster visualizer', license: 'Apache-2.0', github_repo: `${G}/visor`, docs_slug: 'services/visor' },
+  world:        { slug: 'world',      tagline: '3D world building', license: 'Apache-2.0', github_repo: `${G}/world`, docs_slug: 'projects/hanzoai/world' },
   zap:          { slug: 'zap',        tagline: 'Zero-config app deploy', license: 'Apache-2.0', github_repo: `${G}/zap` },
-  zen:          { slug: 'zen',        tagline: 'Open-weight frontier models', license: 'Apache-2.0', github_repo: 'https://github.com/zenlm/zen', docs_slug: 'zen' },
+  zen:          { slug: 'zen',        tagline: 'Open-weight frontier models', license: 'Apache-2.0', github_repo: 'https://github.com/zenlm/zen', docs_slug: 'services/models' },
 
   // Web3 — these live under /blockchain/<slug>
-  bridge:       { slug: 'bridge',     tagline: 'Cross-chain bridge', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/bridge', deploy_slug: 'bridge', docs_slug: 'blockchain/bridge' },
-  chains:       { slug: 'chains',     tagline: 'Multi-chain platform', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/node', deploy_slug: 'chains', docs_slug: 'blockchain/chains' },
-  exchange:     { slug: 'exchange',   tagline: 'DEX exchange surface', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/exchange', deploy_slug: 'exchange', docs_slug: 'blockchain/exchange' },
-  indexer:      { slug: 'indexer',    tagline: 'Blockchain indexer', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/indexer', deploy_slug: 'indexer', docs_slug: 'blockchain/indexer' },
-  nft:          { slug: 'nft',        tagline: 'NFT marketplace', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/nft', deploy_slug: 'nft', docs_slug: 'blockchain/nft' },
-  pay:          { slug: 'pay',        tagline: 'Crypto payments', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/pay', deploy_slug: 'pay', docs_slug: 'blockchain/pay' },
-  tokens:       { slug: 'tokens',     tagline: 'Token launchpad', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/tokens', deploy_slug: 'tokens', docs_slug: 'blockchain/tokens' },
-  wallets:      { slug: 'wallets',    tagline: 'Multi-chain wallets', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/wallet', deploy_slug: 'wallets', docs_slug: 'blockchain/wallets' },
+  bridge:       { slug: 'bridge',     tagline: 'Cross-chain bridge', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/bridge', deploy_slug: 'bridge', docs_slug: 'blockchain' },
+  chains:       { slug: 'chains',     tagline: 'Multi-chain platform', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/node', deploy_slug: 'chains', docs_slug: 'blockchain' },
+  exchange:     { slug: 'exchange',   tagline: 'DEX exchange surface', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/exchange', deploy_slug: 'exchange', docs_slug: 'blockchain' },
+  indexer:      { slug: 'indexer',    tagline: 'Blockchain indexer', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/indexer', deploy_slug: 'indexer', docs_slug: 'blockchain' },
+  nft:          { slug: 'nft',        tagline: 'NFT marketplace', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/nft', deploy_slug: 'nft', docs_slug: 'blockchain' },
+  pay:          { slug: 'pay',        tagline: 'Crypto payments', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/pay', deploy_slug: 'pay', docs_slug: 'blockchain' },
+  tokens:       { slug: 'tokens',     tagline: 'Token launchpad', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/tokens', deploy_slug: 'tokens', docs_slug: 'blockchain' },
+  wallets:      { slug: 'wallets',    tagline: 'Multi-chain wallets', license: 'Apache-2.0', github_repo: 'https://github.com/luxfi/wallet', deploy_slug: 'wallets', docs_slug: 'services/web3' },
 
   // identity is an alias for IAM under /identity (legacy slug)
-  identity:     { slug: 'identity',   tagline: 'Identity surface', license: 'Apache-2.0', github_repo: `${G}/iam`, docs_slug: 'iam' },
+  identity:     { slug: 'identity',   tagline: 'Identity surface', license: 'Apache-2.0', github_repo: `${G}/iam`, docs_slug: 'services/identity' },
   // S3-compatible storage is an alias under /s3
-  s3:           { slug: 's3',         tagline: 'S3-compatible object storage', license: 'Apache-2.0', github_repo: `${G}/s3`, upstream_fork: 'SeaweedFS', upstream_license: 'Apache-2.0', upstream_url: 'https://github.com/seaweedfs/seaweedfs', docs_slug: 'storage' },
+  s3:           { slug: 's3',         tagline: 'S3-compatible object storage', license: 'Apache-2.0', github_repo: `${G}/s3`, upstream_fork: 'SeaweedFS', upstream_license: 'Apache-2.0', upstream_url: 'https://github.com/seaweedfs/seaweedfs', docs_slug: 'services/s3' },
 };
 
 export function getProductMetadata(slug: string): ProductMetadata | undefined {
@@ -148,8 +159,13 @@ export function deployUrl(slug: string): string {
   return `https://console.hanzo.ai/deploy/${target}`;
 }
 
-export function docsUrl(slug: string): string {
+export function docsUrl(slug: string): string | null {
   const meta = productsMetadata[slug];
+  if (meta?.docs_slug === null) return null;
   const target = meta?.docs_slug ?? slug;
-  return `https://docs.hanzo.ai/${target}`;
+  // docs.hanzo.ai serves its content tree under /docs. The bare form
+  // (docs.hanzo.ai/<slug>) 404s: the vanity aliases that once covered it live
+  // in the docs repo's public/_redirects, a Cloudflare Pages file, and the site
+  // is served by hanzoai/static now — which does not read it.
+  return `https://docs.hanzo.ai/docs/${target}`;
 }

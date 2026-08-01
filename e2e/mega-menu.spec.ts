@@ -80,7 +80,7 @@ test('every leaf deep-links into the console (quick-launch) and the docs', async
     'Vector console quick-launch',
   ).toHaveCount(1)
   expect(
-    await nav.locator('a[href="https://docs.hanzo.ai/docs/services/vector"]').count(),
+    await nav.locator('a[href="https://docs.hanzo.ai/docs/vector"]').count(),
     'Vector docs deep link',
   ).toBeGreaterThanOrEqual(1)
 

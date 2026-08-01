@@ -159,7 +159,7 @@ const Registry = () => {
                 Replace dockerconfigjson secrets with IAM-issued tokens. Audit every push, expire every credential.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://docs.hanzo.ai/registry/quickstart" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
+                <a href="https://docs.hanzo.ai/docs/registry" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
                   Quickstart <ArrowRight className="h-5 w-5" />
                 </a>
                 <a href="/iam" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">

@@ -294,7 +294,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'active',
     deployment: ['npm'],
     actions: {
-      docsUrl: 'https://docs.hanzo.ai/mcp',
+      docsUrl: 'https://docs.hanzo.ai/docs/mcp',
       githubUrl: 'https://github.com/hanzoai/mcp',
       learnUrl: '/products/apps/mcp',
       npmUrl: 'https://npmjs.com/package/@hanzo/mcp',
@@ -373,7 +373,7 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['one-click', 'docker'],
     actions: {
       deployUrl: 'https://cloud.hanzo.ai/deploy/functions',
-      docsUrl: 'https://docs.hanzo.ai/functions',
+      docsUrl: 'https://docs.hanzo.ai/docs/functions',
       githubUrl: 'https://github.com/hanzoai/functions',
       learnUrl: '/products/compute/functions',
     },
@@ -399,7 +399,7 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['docker', 'one-click'],
     actions: {
       deployUrl: 'https://cloud.hanzo.ai/deploy/chat',
-      docsUrl: 'https://docs.hanzo.ai/chat',
+      docsUrl: 'https://docs.hanzo.ai/docs/chat',
       githubUrl: 'https://github.com/hanzoai/chat',
       learnUrl: '/products/apps/chat',
     },
@@ -717,7 +717,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'active',
     deployment: ['docker', 'library'],
     actions: {
-      docsUrl: 'https://docs.hanzo.ai/policy',
+      docsUrl: 'https://docs.hanzo.ai/docs/authz',
       githubUrl: 'https://github.com/hanzoai/policy',
       learnUrl: '/products/platform/guard',
     },
@@ -742,7 +742,6 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'experimental',
     deployment: ['docker'],
     actions: {
-      docsUrl: 'https://docs.hanzo.ai/approvals',
       githubUrl: 'https://github.com/hanzoai/approvals',
     },
     signals: {
@@ -904,7 +903,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['k8s'],
     actions: {
-      docsUrl: 'https://docs.hanzo.ai/hke',
+      docsUrl: 'https://docs.hanzo.ai/docs/skills/hanzo-hke',
       githubUrl: 'https://github.com/hanzoai/hke',
       learnUrl: '/products/platform/hke',
     },
@@ -931,7 +930,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['npm'],
     actions: {
-      docsUrl: 'https://docs.hanzo.ai/connectors/github',
+      docsUrl: 'https://docs.hanzo.ai/docs/integrations',
       githubUrl: 'https://github.com/hanzoai/github-connector',
     },
     signals: {
@@ -955,7 +954,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['npm'],
     actions: {
-      docsUrl: 'https://docs.hanzo.ai/connectors/slack',
+      docsUrl: 'https://docs.hanzo.ai/docs/integrations',
       githubUrl: 'https://github.com/hanzoai/slack-connector',
     },
     signals: {
