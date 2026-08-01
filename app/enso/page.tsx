@@ -6,9 +6,9 @@ import EnsoLanding from '@/components/enso/EnsoLanding'
 // the apex full-width hovering header (LandingNav) + LandingFooter, like the apex
 // home and the apex root. Served at /enso on both hanzo.ai and cloud.hanzo.ai.
 
-const TITLE = 'Hanzo Enso — one model to command them all'
+const TITLE = 'Hanzo Enso — the agentic language model'
 const DESCRIPTION =
-  'Enso orchestrates the world’s best models into one OpenAI-compatible API — Flash, Pro, and Ultra presets. A multi-agent system delivered as one model. Proprietary, available only on Hanzo Cloud; the open-weights Zen family stays free to self-host.'
+  'Never compromise on performance. Or price. Enso reads every request and puts the right models on it — frontier accuracy when the work is hard, a fraction of the cost when it isn’t. One OpenAI- and Anthropic-compatible API, in Flash, Pro and Ultra. Proprietary, on Hanzo Cloud; the open-weights Zen family stays free to self-host.'
 
 export const metadata: Metadata = {
   title: TITLE,

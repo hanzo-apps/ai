@@ -173,12 +173,20 @@ export default function EnsoLanding() {
             </motion.div>
 
             <motion.h1 {...fade} transition={{ duration: 0.5, delay: 0.1 }} className="text-balance text-5xl font-bold leading-[1.05] md:text-7xl">
-              <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">One Model to Command Them All</span>
+              {/* The old headline was a Tolkien joke, and the paragraph under it spent
+                  three clauses on mechanism ("dynamically orchestrates", "collective
+                  intelligence") before ever naming a benefit. State the benefit; the
+                  mechanism is the next line down and the whole page after it. */}
+              <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
+                Never compromise on performance.
+                <br className="hidden sm:block" /> Or price.
+              </span>
             </motion.h1>
 
-            <motion.p {...fade} transition={{ duration: 0.5, delay: 0.15 }} className="mx-auto mt-6 max-w-3xl text-xl text-neutral-300 md:text-2xl">
-              Frontier-level performance without single-vendor lock-in. Enso dynamically orchestrates the world’s best models to
-              tackle complex, multi-step tasks — plug collective intelligence into your workflows through a single API.
+            <motion.p {...fade} transition={{ duration: 0.5, delay: 0.15 }} className="mx-auto mt-6 max-w-2xl text-xl text-neutral-300 md:text-2xl">
+              Enso is the agentic language model. It reads every request and puts the
+              right models on it — the frontier when the work is hard, the fast ones
+              when it isn’t.
             </motion.p>
 
             <motion.div {...fade} transition={{ duration: 0.5, delay: 0.22 }} className="mt-10 flex flex-wrap justify-center gap-4">
