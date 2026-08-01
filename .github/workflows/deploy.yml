@@ -51,9 +51,13 @@ jobs:
       # (ERR_PNPM_BAD_PM_VERSION) rather than picking one.
       - uses: pnpm/action-setup@v4
 
+      # 22, not the .nvmrc's 20: wrangler 4.x refuses to start below Node 22
+      # ("Wrangler requires at least Node.js v22.0.0"), which failed the deploy
+      # step after a green build. Safe for the build too — this project already
+      # compiles on Node 26 locally.
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
