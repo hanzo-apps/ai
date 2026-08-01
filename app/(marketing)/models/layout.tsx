@@ -1,21 +1,23 @@
 import type { Metadata } from 'next'
 
+const DESCRIPTION =
+  'enso is our frontier model family; Zen is our open-weight family. Both run on api.hanzo.ai, and models from other labs answer on the same endpoint with the same key.'
+
 export const metadata: Metadata = {
-  title: 'AI Models — Hanzo AI',
-  description:
-    'Access 400+ AI models through one OpenAI-compatible API. GPT-5.3, Claude Sonnet 4.6, Gemini 3.1 Pro, Llama 4, Grok 4.1, DeepSeek V3, Zen, and more. Start free.',
+  title: 'Models — Hanzo AI',
+  description: DESCRIPTION,
   openGraph: {
-    title: 'AI Models — Hanzo AI',
-    description: 'Access 400+ AI models through one OpenAI-compatible API.',
+    title: 'Models — Hanzo AI',
+    description: DESCRIPTION,
     url: 'https://hanzo.ai/models',
     siteName: 'Hanzo AI',
     type: 'website',
-    images: [{ url: '/models/opengraph-image', width: 1200, height: 630, alt: '400+ AI Models on Hanzo AI' }],
+    images: [{ url: '/models/opengraph-image', width: 1200, height: 630, alt: 'enso and Zen models on Hanzo AI' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Models — Hanzo AI',
-    description: 'Access 400+ AI models through one OpenAI-compatible API.',
+    title: 'Models — Hanzo AI',
+    description: DESCRIPTION,
     images: ['/models/opengraph-image'],
   },
 }

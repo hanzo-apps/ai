@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ProviderMark } from '@/components/models/ProviderMark'
+import type { ModelData } from '@/lib/models'
 import {
   fetchModels,
   getOrgAndSlug,
@@ -12,6 +13,22 @@ import {
 } from '@/lib/models'
 
 export const revalidate = 3600
+
+// enso is the frontier family; Zen is the open-weight family. Both are trained
+// and served here, so both lead. Anything not in this list groups by the lab
+// that trained it, further down.
+const OURS = [
+  'enso',
+  'enso-flash',
+  'enso-ultra',
+  'zen5',
+  'zen5-pro',
+  'zen5-coder',
+  'zen5-flash',
+  'zen-vl',
+  'zen-image',
+  'zen-embedding',
+]
 
 function ProviderInitials({ org }: { org: string }) {
   const name = orgDisplayName(org)
@@ -41,9 +58,44 @@ function ModalityBadge({ modality }: { modality: string }) {
   )
 }
 
+function ModelCard({ model }: { model: ModelData }) {
+  const { org } = getOrgAndSlug(model.id)
+  const ctx = getModelContext(model)
+  return (
+    <Link
+      href={modelPagePath(model.id)}
+      className="p-4 rounded-xl border border-border bg-secondary/30 hover:bg-secondary/50 transition-all group flex flex-col gap-3"
+    >
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex items-center gap-2 min-w-0">
+          <ProviderLogo org={org} />
+          <div className="min-w-0">
+            <div className="font-medium text-sm truncate">{model.name}</div>
+            <div className="text-xs text-muted-foreground font-mono">{model.id}</div>
+          </div>
+        </div>
+        {ctx && (
+          <span className="shrink-0 text-xs text-muted-foreground bg-secondary rounded px-1.5 py-0.5">
+            {formatContext(ctx)}
+          </span>
+        )}
+      </div>
+      {model.description && <p className="text-xs text-muted-foreground line-clamp-2">{model.description}</p>}
+      {model.modalities && model.modalities.length > 0 && (
+        <div className="flex flex-wrap gap-1">
+          {model.modalities.slice(0, 3).map((m) => (
+            <ModalityBadge key={m} modality={m} />
+          ))}
+        </div>
+      )}
+    </Link>
+  )
+}
+
 export default async function ModelsPage() {
   const data = await fetchModels()
   const available = data.models.filter((m) => m.status !== 'coming-soon')
+  const byId = new Map(available.map((m) => [m.id, m]))
 
   // Group by org
   const byOrg: Record<string, typeof available> = {}
@@ -60,22 +112,25 @@ export default async function ModelsPage() {
     return bc.length - ac.length
   })
 
-  // Featured models: Hanzo flagships + top third-party
-  const featured = available
-    .filter((m) => m.category === 'flagship' || ['openai', 'anthropic', 'google', 'x-ai'].includes(getOrgAndSlug(m.id).org))
-    .slice(0, 12)
+  // Our own families, in the order we would recommend them. Ids are looked up
+  // in the live catalogue rather than copied out of it, so a model we stop
+  // serving drops off this page instead of 404-ing from it. The previous
+  // selector asked for `category === 'flagship'`, which no model in the
+  // catalogue has ever carried — so every slot fell through to the
+  // third-party clause and our own models never appeared.
+  const ours = OURS.flatMap((id) => byId.get(id) ?? [])
+  const oursIds = new Set(ours.map((m) => m.id))
+  const elsewhere = available
+    .filter((m) => getOrgAndSlug(m.id).org !== 'hanzo' && !oursIds.has(m.id))
+    .slice(0, 9)
 
-  const codeExample = `import OpenAI from 'openai'
-
-const client = new OpenAI({
-  apiKey: process.env.HANZO_API_KEY,
-  baseURL: 'https://api.hanzo.ai/v1'
-})
-
-const response = await client.chat.completions.create({
-  model: 'anthropic/claude-sonnet-4.6',
-  messages: [{ role: 'user', content: 'Hello!' }]
-})`
+  const codeExample = `curl https://api.hanzo.ai/v1/chat/completions \\
+  -H "Authorization: Bearer $HANZO_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "model": "zen5",
+    "messages": [{ "role": "user", "content": "Hello" }]
+  }'`
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -88,16 +143,16 @@ const response = await client.chat.completions.create({
         <div className="relative z-10 mx-auto max-w-4xl">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 text-xs text-neutral-300">
             <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
-            {data.total} models available · Updated live
+            Live from api.hanzo.ai
           </div>
           <h1 className="mb-6 text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl">
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
-              {data.total}+ models, one API
+              enso and Zen, on one endpoint
             </span>
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-xl text-neutral-300">
-            Access GPT-5.3, Claude Sonnet 4.6, Gemini 3.1 Pro, Zen, Llama 4, Grok, DeepSeek and{' '}
-            {data.total - 10}+ more through one OpenAI-compatible API.
+            enso is our frontier family. Zen is our open-weight family — call it here or run the weights
+            yourself. Models from other labs answer on the same endpoint when you need one.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -116,11 +171,28 @@ const response = await client.chat.completions.create({
         </div>
       </section>
 
-      {/* Provider grid */}
+      {/* Our models */}
       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold mb-2">Browse by Provider</h2>
-          <p className="text-muted-foreground mb-8">{sortedOrgs.length} providers · All accessible via one API key</p>
+          <h2 className="text-2xl font-bold mb-2">Our models</h2>
+          <p className="text-muted-foreground mb-8">
+            <span className="text-foreground font-medium">enso</span> is our frontier family;{' '}
+            <span className="text-foreground font-medium">Zen</span> is our open-weight family, with the weights
+            published. Both are trained here and served here.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {ours.map((model) => (
+              <ModelCard key={model.id} model={model} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Provider grid */}
+      <section className="py-16 px-4 border-t border-border">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl font-bold mb-2">Browse by lab</h2>
+          <p className="text-muted-foreground mb-8">Every model on the endpoint, grouped by who trained it.</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {sortedOrgs.map(([org, models]) => (
               <Link
@@ -141,53 +213,17 @@ const response = await client.chat.completions.create({
         </div>
       </section>
 
-      {/* Featured models */}
+      {/* Models from other labs */}
       <section className="py-16 px-4 border-t border-border bg-secondary/10">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold mb-2">Featured Models</h2>
-          <p className="text-muted-foreground mb-8">Flagship and most-used models across providers</p>
+          <h2 className="text-2xl font-bold mb-2">Models from other labs</h2>
+          <p className="text-muted-foreground mb-8">
+            Routed on the same endpoint, with the same key, when a workflow needs a specific one.
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featured.map((model) => {
-              const { org } = getOrgAndSlug(model.id)
-              const ctx = getModelContext(model)
-              return (
-                <Link
-                  key={model.id}
-                  href={modelPagePath(model.id)}
-                  className="p-4 rounded-xl border border-border bg-secondary/30 hover:bg-secondary/50 transition-all group flex flex-col gap-3"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <ProviderLogo org={org} />
-                      <div className="min-w-0">
-                        <div className="font-medium text-sm truncate">{model.name}</div>
-                        <div className="text-xs text-muted-foreground">{orgDisplayName(org)}</div>
-                      </div>
-                    </div>
-                    {ctx && (
-                      <span className="shrink-0 text-xs text-muted-foreground bg-secondary rounded px-1.5 py-0.5">
-                        {formatContext(ctx)}
-                      </span>
-                    )}
-                  </div>
-                  {model.description && (
-                    <p className="text-xs text-muted-foreground line-clamp-2">{model.description}</p>
-                  )}
-                  {model.modalities && model.modalities.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
-                      {model.modalities.slice(0, 3).map((m) => (
-                        <ModalityBadge key={m} modality={m} />
-                      ))}
-                    </div>
-                  )}
-                </Link>
-              )
-            })}
-          </div>
-          <div className="mt-8 text-center">
-            <p className="text-muted-foreground text-sm mb-4">
-              Showing 12 of {available.length} available models
-            </p>
+            {elsewhere.map((model) => (
+              <ModelCard key={model.id} model={model} />
+            ))}
           </div>
         </div>
       </section>
@@ -197,9 +233,11 @@ const response = await client.chat.completions.create({
         <div className="max-w-4xl mx-auto">
           <div className="rounded-2xl border border-border bg-secondary/20 p-8 md:p-12">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-3">One API key. {data.total}+ models.</h2>
+              <h2 className="text-3xl font-bold mb-3">One key, one host</h2>
               <p className="text-muted-foreground">
-                Drop-in replacement for OpenAI. Works with every SDK and framework.
+                Changing model is changing one string. The endpoint takes and returns the chat-completions
+                JSON shape, so an HTTP client already written against that shape works once its base URL
+                points at api.hanzo.ai/v1.
               </p>
             </div>
             <div className="rounded-xl bg-background border border-border overflow-hidden mb-8">
@@ -241,12 +279,12 @@ const response = await client.chat.completions.create({
       <section className="py-12 px-4 border-t border-border bg-secondary/10">
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div>
-            <div className="text-3xl font-bold">{data.total}+</div>
-            <div className="text-sm text-muted-foreground mt-1">AI Models</div>
+            <div className="text-3xl font-bold">2</div>
+            <div className="text-sm text-muted-foreground mt-1">Model families of our own</div>
           </div>
           <div>
-            <div className="text-3xl font-bold">{sortedOrgs.length}+</div>
-            <div className="text-sm text-muted-foreground mt-1">Providers</div>
+            <div className="text-3xl font-bold">1</div>
+            <div className="text-sm text-muted-foreground mt-1">Host</div>
           </div>
           <div>
             <div className="text-3xl font-bold">1</div>

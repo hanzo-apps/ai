@@ -1,36 +1,48 @@
 # Hanzo AI
 
-> Frontier AI company building LLMs, AI cloud infrastructure, and agent frameworks.
+> Hanzo builds frontier AI models and the cloud that runs them.
 
 ## About
-Hanzo AI (Techstars '17) builds frontier AI models, cloud infrastructure, and developer tools for AI-native applications. The platform provides foundation models (30+ Zen open-source models), an AI cloud platform, Model Context Protocol (MCP) infrastructure, agent frameworks, and blockchain infrastructure APIs supporting 100+ chains. Products include Hanzo Dev (AI coding assistant), AI Studio, and a comprehensive Cloud Platform.
+Hanzo AI (Techstars '17) trains its own models and operates the infrastructure
+that serves them. Two model families are ours — enso and Zen — and they run on
+Hanzo Cloud alongside the rest of the platform: inference, agents, embeddings,
+vector search, GPU compute, storage, and identity, on one host behind one key.
 
-## Key Features
-- 30+ Zen open-source foundation models (qwen3+ architecture)
-- Hanzo Dev: AI-powered coding assistant with MCP integration
-- AI Studio: Train, fine-tune, and deploy models
-- Cloud Platform: Managed AI infrastructure with GPU clusters
-- Model Context Protocol (MCP): Open protocol for AI context management
-- Agent frameworks for building autonomous AI systems
-- Blockchain infrastructure APIs: nodes, wallets, webhooks, data APIs
-- Support for 100+ blockchain networks
-- Enterprise-grade security and compliance
+## Models
+- enso — our frontier family. Three tiers: `enso-flash`, `enso`, `enso-ultra`.
+- Zen — our open-weight family. `zen5`, `zen5-pro`, `zen5-coder`, `zen5-flash`
+  for text and code; `zen-vl` for vision; `zen-image`, `zen-voice`, `zen-music`,
+  `zen-video` for other modalities; `zen-embedding` and `zen-rerank` for
+  retrieval; `zen-guard` for safety classification. Weights are published.
+- Models from other labs are reachable on the same endpoint, with the same key,
+  when a workflow needs a specific one.
+
+## Products
+- AI API — chat, embeddings, images, and reranking at api.hanzo.ai/v1
+- Hanzo Dev — coding agent
+- AI Studio — train, fine-tune, and deploy models
+- Cloud Platform — managed AI infrastructure with GPU clusters
+- Model Context Protocol (MCP) — open protocol for AI context management
+- Agent frameworks for building autonomous systems
 
 ## Links
 - [Website](https://hanzo.ai)
 - [Documentation](https://docs.hanzo.ai)
+- [Models](https://hanzo.ai/models)
 - [AI Studio](https://studio.hanzo.ai)
 - [Cloud Platform](https://app.hanzo.ai)
-- [Hanzo Dev](https://dev.hanzo.ai)
+- [Console](https://console.hanzo.ai)
+- [Hanzo Dev](https://hanzo.ai/dev)
+- [Zen models](https://zenlm.org)
 - [GitHub](https://github.com/hanzoai)
 - [Status](https://status.hanzo.ai)
 
 ## API
-- Base URL: https://api.hanzo.ai
+- Base URL: https://api.hanzo.ai/v1
 - Authentication: API key via Bearer token
-- Docs: https://docs.hanzo.ai/api
+- Docs: https://docs.hanzo.ai/docs/api
 
 ## Contact
 - Support: support@hanzo.ai
 - Sales: sales@hanzo.ai
-- Twitter: @hanaboroshi
+- X: @hanzoai
