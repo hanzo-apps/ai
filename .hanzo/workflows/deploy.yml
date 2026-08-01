@@ -1,6 +1,9 @@
 name: Deploy
-# THE pipeline that ships hanzo.ai to Cloudflare Pages. There is no longer a
-# second one: .github/workflows/deploy.yml is deleted, not neutralized.
+# THE pipeline that ships hanzo.ai. It publishes ghcr.io/hanzoai/hanzo-ai-www,
+# served by ghcr.io/hanzoai/static behind hanzoai/ingress — the same mechanism as
+# cloud.hanzo.ai, ui.hanzo.ai and papers.hanzo.ai. Cloudflare Pages is gone.
+# There is no second pipeline: .github/workflows/deploy.yml is deleted, not
+# neutralized.
 #
 # WHY THIS EXISTS: GitHub Actions is disabled for the `hanzo-dev` ACCOUNT, so a
 # push by that account creates ZERO runs there — no queued job, no failed run,
@@ -81,16 +84,11 @@ jobs:
               -H "Authorization: Bearer ${token}" | jq -r '.secret.value // empty' || true
           }
 
-          cf_token=$(kms_get deploy CLOUDFLARE_API_TOKEN)
-          cf_account=$(kms_get deploy CLOUDFLARE_ACCOUNT_ID)
-          if [ -z "${cf_token}" ] || [ -z "${cf_account}" ]; then
-            echo "::error::CF credentials missing in KMS at ${KMS_ORG}/deploy (env ${KMS_SECRET_ENV})."
-            exit 1
-          fi
-          echo "::add-mask::${cf_token}"
-          echo "::add-mask::${cf_account}"
-          echo "cf_token=${cf_token}" >> "$GITHUB_OUTPUT"
-          echo "cf_account=${cf_account}" >> "$GITHUB_OUTPUT"
+          # No Cloudflare credentials are read any more. This job used to fetch
+          # CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID and hard-fail without
+          # them; the apex now publishes an image to GHCR, so the only credential
+          # it needs is GH_PAT. Those two KMS entries can be retired once no other
+          # property reads them.
 
           # cloud matches `pk-`; another prefix is not read as a key and misfiles
           # to $public without a 403, so refuse it here.
@@ -144,11 +142,46 @@ jobs:
           if [ "$FAILED" = "1" ]; then exit 1; fi
           echo "All smoke tests passed"
 
-      # On main, wrangler publishes to PRODUCTION (the apex), not a preview.
-      # Scope is the apex only: cloud.hanzo.ai is k8s hanzoai/static and a Pages
-      # deploy cannot reach it.
-      - name: Deploy to Cloudflare Pages
-        run: pnpm dlx wrangler pages deploy out --project-name=hanzo-ai --commit-dirty=true
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ steps.kms.outputs.cf_token }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ steps.kms.outputs.cf_account }}
+      # The apex ships as an IMAGE, like every other Hanzo static surface.
+      #
+      # This replaced `wrangler pages deploy out --project-name=hanzo-ai`. hanzo.ai
+      # was the last site on Cloudflare Pages while its own siblings — cloud.hanzo.ai
+      # (ghcr.io/hanzoai/cloud-www), ui.hanzo.ai, papers.hanzo.ai — already served
+      # from ghcr.io/hanzoai/static behind hanzoai/ingress. Two serving mechanisms
+      # for one static export meant two failure modes, two credentials, and a host
+      # whose rollback story was a third party's dashboard.
+      #
+      # A build never deploys itself: this publishes the image and stops. A human
+      # sets spec.image.tag on the App CR in hanzoai/universe, which is the one live
+      # thing that says which build serves.
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to GHCR (GH_PAT — the instance token is not valid at ghcr.io)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: hanzo-dev
+          password: ${{ secrets.GH_PAT }}
+
+      - name: Build and push the apex image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile.apex
+          platforms: linux/amd64
+          tags: ghcr.io/hanzoai/hanzo-ai-www:sha-${{ github.sha }}
+          provenance: false
+          push: true
+          build-args: |
+            NEXT_PUBLIC_EVENT_INGEST_KEY=${{ steps.kms.outputs.event_ingest_key }}
+
+      # build-push-action can exit 0 before the manifest resolves, so a green run
+      # could still leave a CR pinned to a tag that ImagePullBackOffs. Prove it
+      # pulls before the job goes green — same gate cloud.yml carries.
+      - name: Verify the pushed image resolves
+        run: |
+          set -euo pipefail
+          img="ghcr.io/hanzoai/hanzo-ai-www:sha-${{ github.sha }}"
+          docker buildx imagetools inspect "$img" >/dev/null
+          echo "resolves: $img"
