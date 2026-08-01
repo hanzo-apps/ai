@@ -11,8 +11,24 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
 - Node: v20+ (`.nvmrc`)
 - Dev: `pnpm dev`
 - Build: `pnpm build`
-- Deploy: Static export (`output: export` in `next.config.ts`) → Cloudflare Pages
-  (`.hanzo/workflows/deploy.yml`, project `hanzo-ai`, CF creds from KMS)
+- Deploy: Static export (`output: export`) → Cloudflare Pages, project `hanzo-ai`,
+  via **`.github/workflows/deploy.yml`** — a STOPGAP that exists because the native
+  path cannot run. `.hanzo/workflows/deploy.yml` is only read by the forge, and
+  `hanzoai/hanzo.ai` there is `"mirror": true` — read-only, its Actions never fire,
+  and there is no writable `hanzo/hanzo.ai` tenant repo (404). So for weeks every
+  commit landed where nothing built; that is why the white-border defect and the
+  centred nav each survived several fixes. Delete the `.github` file the day a
+  writable forge repo exists.
+- **The GitHub repo is `hanzo-apps/ai`.** `hanzoai/hanzo.ai` only redirects there.
+  Push to the real name — a redirect is why `gh` reports runs under one repo while
+  you push to another.
+- CF creds are NOT from KMS on this path. The KMS scoped token is DEAD (`code:
+  9109`), and `hanzo-apps` carries an org-level `CLOUDFLARE_API_TOKEN` that is the
+  same dead value and SHADOWS the repo. A Pages-scoped token is set at repo level,
+  which overrides it. Two traps worth keeping: an absent GitHub secret still
+  DEFINES the env var as `""`, and wrangler prefers `CLOUDFLARE_API_TOKEN` whenever
+  defined — so it will authenticate with nothing rather than fall back; and
+  wrangler 4 refuses to start below Node 22 while `.nvmrc` says 20.
 
 ## Two faces, one export
 
