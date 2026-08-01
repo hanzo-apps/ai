@@ -28,10 +28,10 @@ export const PRIVATE: readonly string[] = ['/auth', '/account', '/login']
  * Routes whose copy no owner has approved. They build, they answer on their own
  * URL, and they are published nowhere.
  *
- * Adding a route here withholds it; deleting it is the approval. There is no
- * second switch, and no page can approve itself.
+ * Deleting a route from this list is the approval — there is no second switch,
+ * and no page can approve itself.
  */
-export const UNAPPROVED: readonly string[] = []
+export const UNAPPROVED: readonly string[] = ['/risk']
 
 /** A route is "under" a prefix when it is the prefix or a descendant of it. */
 const under = (route: string, prefix: string) => route === prefix || route.startsWith(prefix + '/')
