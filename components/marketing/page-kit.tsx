@@ -68,6 +68,20 @@ const MEASURE = { width: '100%', maxWidth: 896, marginHorizontal: 'auto' } as co
  */
 const TIGHT: React.CSSProperties = { letterSpacing: 'var(--tracking-tight)' }
 const RELAXED: React.CSSProperties = { lineHeight: 'var(--leading-relaxed)' }
+/**
+ * The page title's line height, which is a RATIO and not a length.
+ *
+ * It rode gui's `lineHeight` prop as a bare `1.1`, and gui reads a bare number as
+ * pixels — so every page-kit page shipped `line-height: 1.1px` and drew each line
+ * of a wrapped title on the same baseline. A one-line title hides it entirely,
+ * which is how it survived: invisible at 1280px, unreadable at 390px, and the
+ * longer the title the worse it gets.
+ *
+ * Moving it to `style` is not on its own the fix — gui appends px to a bare
+ * number THERE TOO, prop or style alike. The ratio has to be spelled as a string
+ * so it reaches CSS as the unitless value it is.
+ */
+const DISPLAY: React.CSSProperties = { ...TIGHT, lineHeight: '1.1' }
 const PRIMARY_TINT: React.CSSProperties = {
   backgroundColor: 'color-mix(in srgb, var(--primary) 15%, transparent)',
 }
@@ -109,12 +123,11 @@ export function PageHero({
         </XStack>
         <Text
           render="h1"
-          {...useRise(0.05, TIGHT)}
+          {...useRise(0.05, DISPLAY)}
           marginBottom="$4"
           fontSize="$9"
           $sm={{ fontSize: '$10' }}
           fontWeight="500"
-          lineHeight={1.1}
           color="$foreground"
         >
           {title}
