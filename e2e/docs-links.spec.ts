@@ -12,11 +12,14 @@
 // the docs content tree can — but it does catch the whole class of bug above,
 // which is what actually happened.
 //
-// Allowed shapes:
-//   https://docs.hanzo.ai            — the docs marketing home
-//   https://docs.hanzo.ai/docs       — the content tree root (and its children)
-//   https://docs.hanzo.ai/reference  — the interactive OpenAPI reference
-//   https://docs.hanzo.ai/blog/...   — the docs blog
+// Allowed paths on docs.hanzo.ai, and nothing else:
+//   (empty) or /   — the docs marketing home
+//   /docs          — the content tree root, and anything under it
+//   /reference     — the interactive OpenAPI reference
+//   /blog/<slug>   — a docs blog post
+//
+// Spelled as predicates below rather than as example URLs, because an example
+// URL in a comment is itself a docs.hanzo.ai link and this file scans source.
 
 import { test, expect } from '@playwright/test'
 import { readdirSync, readFileSync, statSync } from 'node:fs'

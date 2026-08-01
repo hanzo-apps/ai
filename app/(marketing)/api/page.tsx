@@ -98,7 +98,7 @@ export default function ApiPage() {
               icon: Code2,
               title: 'CLI',
               description: 'The same API from your terminal.',
-              href: 'https://docs.hanzo.ai/docs/cli',
+              href: 'https://docs.hanzo.ai/docs/services/platform/getting-started/cli',
             },
           ]}
         />

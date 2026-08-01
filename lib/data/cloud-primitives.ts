@@ -430,7 +430,7 @@ const DOCS_PATH: Record<string, string> = {
   '/iam': 'iam', '/authz': 'authz', '/kms': 'kms',
   '/hsm': 'mpc', '/cloud/secrets': 'services/kms', '/cloud/audit': 'services/guard',
   // Dev
-  '/cli': 'cli', '/cloud/sdks': 'sdks', '/cloud/api': 'openapi',
+  '/cli': 'services/platform/getting-started/cli', '/cloud/sdks': 'sdks', '/cloud/api': 'openapi',
   '/playground': 'skills/hanzo-playground', '/code': 'dev', '/desktop': 'apps/desktop',
   // Deploy
   '/platform': 'services/platform', '/cloud/environments': 'services/platform', '/cloud/builds': 'registry',

@@ -14,7 +14,7 @@ const START: CardItem[] = [
     icon: Terminal,
     title: 'CLI',
     description: 'Drive the platform from your terminal — projects, deploys, keys and logs.',
-    href: 'https://docs.hanzo.ai/docs/cli',
+    href: 'https://docs.hanzo.ai/docs/services/platform/getting-started/cli',
   },
   {
     icon: Code2,

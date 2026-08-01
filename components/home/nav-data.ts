@@ -175,7 +175,7 @@ export const NAV: NavItem[] = [
         links: [
           { label: 'Docs home', href: `${DOCS}/docs` },
           { label: 'API reference', href: `${DOCS}/docs/openapi` },
-          { label: 'CLI', href: `${DOCS}/docs/cli` },
+          { label: 'CLI', href: `${DOCS}/docs/services/platform/getting-started/cli` },
           { label: 'MCP', href: `${DOCS}/docs/mcp` },
           { label: 'SDKs', href: `${DOCS}/docs/sdks` },
           { label: 'GitHub', href: GITHUB },
