@@ -28,15 +28,26 @@
 # pool — every runner carrying `hanzo-build-linux-amd64` is registered to
 # git.hanzo.ai, not to github.com, so a job asking for that label here queues
 # until it is cancelled.
+# This file also runs the GATES, because it is the only thing here that runs at
+# all. `hanzo.yml` declares them for the native plane and that declaration is the
+# canonical one — but the forge repo is a read-only mirror, so nothing in
+# `.hanzo/workflows` fires, and a gate that never executes is not a gate. The two
+# stay in step until the mirror is replaced, and then this file goes and the
+# declaration in `hanzo.yml` is all that is left.
 name: Deploy (stopgap)
 
 on:
   push:
     branches: [main]
+  # The gates have to run BEFORE a merge, not after it. `pull_request` is what
+  # makes this a gate rather than a report; the deploy step below is guarded so a
+  # pull request builds and is checked and publishes nothing.
+  pull_request:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-hanzo-ai
+  # Per ref, so a pull request's gate run cannot cancel main's deploy.
+  group: deploy-hanzo-ai-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -80,12 +91,27 @@ jobs:
           [ "$n" -ge 100 ] || { echo "::error::only $n html files exported; expected ~130"; exit 1; }
           echo "exported $n pages"
 
+      # The gates read `out/`, so they run here rather than in a job of their
+      # own: one build, gated once, and the bytes checked are the bytes that
+      # publish. Both defects they catch were invisible in the source that
+      # produced them — `lineHeight={1.1}` reads as a ratio and compiles to
+      # `line-height: 1.1px`, and a page nothing links to is still written into
+      # sitemap.xml — so the export is the only honest subject.
+      - name: Install the browser the gates measure in
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Gates
+        run: pnpm gates
+
       # The token is exported only when it is NON-EMPTY. An absent secret still
       # yields a DEFINED env var set to the empty string, and wrangler prefers
       # CLOUDFLARE_API_TOKEN whenever it is defined — so declaring it in `env:`
       # made every run authenticate with an empty token and never fall back to
       # the email+key pair. That is what failed the first green build.
       - name: Deploy to Cloudflare Pages
+        # main only. A pull request runs everything above this line and stops,
+        # which is the whole point of it being one job.
+        if: github.event_name != 'pull_request'
         run: |
           set -euo pipefail
           if [ -n "${CF_TOKEN:-}" ]; then
