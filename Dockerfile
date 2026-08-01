@@ -51,7 +51,14 @@ RUN NODE_OPTIONS=--max-old-space-size=8192 pnpm build
 # trailingSlash:false Next emits out/cloud.html (flat file); _next assets are
 # absolute so they resolve from / unchanged. (The old detailed /overview
 # homepage stays served at its own /overview route on the same export.)
-RUN cp out/cloud.html out/index.html
+# Which exported page is `/`. cloud.hanzo.ai=cloud, apex=index (already the root).
+ARG SITE_ROOT=index
+RUN set -eu; \
+    if [ "${SITE_ROOT}" != "index" ]; then \
+      [ -f "out/${SITE_ROOT}.html" ] || { echo "FATAL: out/${SITE_ROOT}.html not exported"; exit 1; }; \
+      cp "out/${SITE_ROOT}.html" out/index.html; \
+    fi; \
+    [ -f out/index.html ] || { echo "FATAL: no out/index.html"; exit 1; }
 
 # Clean URLs on hanzoai/static. The Next export is FLAT (trailingSlash:false →
 # out/pricing.html, out/enso.html, …). hanzoai/static serves a *directory's*

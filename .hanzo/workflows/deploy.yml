@@ -168,7 +168,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Dockerfile.apex
+          file: ./Dockerfile
           platforms: linux/amd64
           tags: ghcr.io/hanzoai/hanzo-ai-www:sha-${{ github.sha }}
           provenance: false

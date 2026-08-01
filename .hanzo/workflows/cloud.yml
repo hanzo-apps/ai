@@ -71,11 +71,13 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Dockerfile.production
+          file: ./Dockerfile
           platforms: linux/amd64
           tags: ghcr.io/hanzoai/cloud-www:${{ inputs.tag }}
           provenance: false
           push: true
+          build-args: |
+            SITE_ROOT=cloud
 
       # build-push-action can exit 0 before the manifest resolves, so a green run
       # could still leave the CR pinned to a tag that ImagePullBackOffs. Prove it
