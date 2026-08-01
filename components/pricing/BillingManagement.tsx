@@ -14,24 +14,42 @@ const BillingManagement = () => {
       <p className="text-foreground/80 mb-6 leading-relaxed">
         Manage your subscription easily. Need assistance? Join our Discord server for immediate support.
       </p>
+      {/* Both of these are navigations, so both are anchors.
+
+          They were `<Button onClick={…}>`, and @hanzo/ui's Button with no child
+          anchor renders a div[role=button][tabindex=0] — focusable, but a div
+          does not synthesize a click from Enter or Space the way a real button
+          does, and React's onClick is only a DOM click listener. Measured on the
+          live page: Tab reached both, focus was visible, and Enter and Space did
+          NOTHING on either, while a mouse click on the same element navigated
+          fine. That is WCAG 2.1.1 (Keyboard, Level A) — the two controls on this
+          page a keyboard-only user could not operate.
+
+          `asChild` keeps the styling and hands behaviour back to the <a>, which
+          also restores cmd-click, middle-click and "copy link address". The plan
+          CTAs in PricingPlan already do exactly this; these were the stragglers.
+
+          The console is first-party so it navigates in place; Discord is
+          external so it opens a tab. */}
       <div className="flex flex-wrap gap-4">
-        {/* The console is where a subscription is actually managed, and it is
-            first-party, so this navigates in place rather than opening a tab the
-            way the external Discord link beside it does. This control carried no
-            href and no onClick — it rendered as a button, next to one that
-            works, and did nothing when clicked. */}
         <Button
+          asChild
           className="bg-[var(--black)] hover:bg-secondary text-[var(--white)] border border-border px-6 py-6"
-          onClick={() => { window.location.href = 'https://cloud.hanzo.ai/billing' }}
         >
-          Manage Subscription
+          <a href="https://cloud.hanzo.ai/billing">Manage Subscription</a>
         </Button>
-        <Button 
-          variant="outline" 
+        <Button
+          asChild
+          variant="outline"
           className="border-border hover:bg-[var(--white)]/5 px-6 py-6"
-          onClick={() => window.open('https://discord.com/invite/XthHQQj', '_blank')}
         >
-          Join Discord
+          <a
+            href="https://discord.com/invite/XthHQQj"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Join Discord
+          </a>
         </Button>
       </div>
     </div>

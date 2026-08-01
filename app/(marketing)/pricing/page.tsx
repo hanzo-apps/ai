@@ -5,25 +5,32 @@ import { useAnalytics } from "@hanzo/event/react"
 import { EVENTS } from "@hanzo/event"
 import PricingHeader from "@/components/pricing/PricingHeader"
 import PersonalPlans from "@/components/pricing/PersonalPlans"
-import TeamEnterprisePlans from "@/components/pricing/TeamEnterprisePlans"
+import TeamEnterpriseStrip from "@/components/pricing/TeamEnterpriseStrip"
 import WorldPricing from "@/components/pricing/WorldPricing"
 import APIPricing from "@/components/pricing/APIPricing"
 import SearchDataPricing from "@/components/pricing/SearchDataPricing"
 import BlockchainPricing from "@/components/pricing/BlockchainPricing"
 import InfrastructurePricing from "@/components/pricing/InfrastructurePricing"
-import FeatureComparison from "@/components/pricing/FeatureComparison"
 import PricingFAQ from "@/components/pricing/PricingFAQ"
 import BillingManagement from "@/components/pricing/BillingManagement"
 import PricingCallouts from "@/components/pricing/PricingCallouts"
 
+// "Team & Enterprise" is gone as a tab. It was eight comparison cards for a
+// choice that is two sentences, and it made the page's first question "which of
+// seven audiences am I" instead of "which plan". Team and Enterprise now sit
+// under the plans as a two-item strip, so the page opens on the one decision a
+// visitor is actually here to make.
+//
+// "API" is now "API & Models" because that tab already carries the live
+// per-model rate table (input / output / cache-write, fetched from
+// api.hanzo.ai/v1/models) and the old label hid it.
 const tabs = [
-  { id: "personal", label: "Personal" },
-  { id: "team", label: "Team & Enterprise" },
-  { id: "world", label: "World" },
-  { id: "api", label: "API" },
+  { id: "personal", label: "Plans" },
+  { id: "api", label: "API & Models" },
   { id: "search", label: "Search & Data" },
   { id: "infrastructure", label: "Infrastructure" },
   { id: "blockchain", label: "Blockchain" },
+  { id: "world", label: "World" },
 ]
 
 export default function PricingPage() {
@@ -40,16 +47,7 @@ export default function PricingPage() {
         return (
           <>
             <PersonalPlans />
-            <FeatureComparison />
-            <PricingFAQ />
-            <BillingManagement />
-          </>
-        )
-      case "team":
-        return (
-          <>
-            <TeamEnterprisePlans />
-            <FeatureComparison />
+            <TeamEnterpriseStrip />
             <PricingFAQ />
             <BillingManagement />
           </>
@@ -71,7 +69,7 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <main className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+      <div className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
         <PricingHeader />
 
         {/* Tab Navigation */}
@@ -100,7 +98,7 @@ export default function PricingPage() {
 
         {/* Callouts */}
         <PricingCallouts />
-      </main>
+      </div>
     </div>
   )
 }

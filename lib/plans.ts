@@ -15,7 +15,7 @@
  * They collide on the words "pro" and "enterprise" and on nothing else: `pro`
  * the subscription is $20/mo, `pro` the VM tier is $25/mo for 2 vCPU. Reading
  * the VM catalog to render subscriptions is not a wrong number, it is a wrong
- * product — and it crashed this page. TeamEnterprisePlans filtered /v1/plans
+ * product — and it crashed this page. The team/enterprise view filtered /v1/plans
  * for `category === "enterprise"`, matched the $429 VM row, replaced the real
  * Team/Enterprise cards with it, and handed a card `features: undefined`. The
  * `.map()` over it took the whole pricing page down to "Something went wrong."

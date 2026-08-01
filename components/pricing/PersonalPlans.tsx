@@ -24,30 +24,27 @@ function planCheckoutUrl(plan: SubscriptionPlan): string {
   return `${BILLING_URL}/?plan=${encodeURIComponent(id)}#pricing`;
 }
 
-function planCtaLabel(plan: SubscriptionPlan): string {
-  return plan.priceMonthly === 0 ? "Start free" : "Get started";
+function planCtaLabel(): string {
+  return "Get started";
 }
+
+// There is NO free plan. The free path is the open source: every OSS release and
+// OSS model is downloadable and self-hostable at no cost, which is a different
+// offer from a $0 tier of the hosted product and should not be dressed up as
+// one. A "Free" card sitting in the paid lineup read as the entry tier and
+// buried the actual entry tier at $20.
+//
+// So a plan priced at 0 is DROPPED here rather than removed from the catalog:
+// /v1/billing/plans still serves `developer`, and the live response replaces
+// this array wholesale on load. Filtering only the static list would be
+// cosmetic — the fetched list has to be filtered too, which is why the filter
+// lives in one function both paths run through.
+const isSellable = (p: SubscriptionPlan) =>
+  p.priceMonthly != null && p.priceMonthly > 0;
 
 // Static fallback mirrors /v1/billing/plans (category: personal) — see lib/plans.
 // The live response replaces these on load — keep the two in lockstep.
 const STATIC_PLANS: SubscriptionPlan[] = [
-  {
-    id: 'developer',
-    name: 'Developer',
-    description: 'Get started for free. Explore the API with generous included credits.',
-    priceMonthly: 0,
-    priceAnnual: 0,
-    category: 'personal',
-    features: [
-      'No monthly minimum',
-      '$5/mo included usage',
-      '60 requests/min',
-      '100K tokens/min',
-      'Community support',
-      'API access',
-      'Earn up to 20% on idle compute & LLM resale',
-    ],
-  },
   {
     id: 'pro',
     name: 'Pro',
@@ -119,32 +116,33 @@ const STATIC_PLANS: SubscriptionPlan[] = [
 ];
 
 const PersonalPlans = () => {
-  // Initialize with static plans immediately — no loading flash
-  const [plans, setPlans] = useState<SubscriptionPlan[]>(STATIC_PLANS);
+  // Commerce is the price authority — /v1/billing/plans, fetched on load. The
+  // static array is a first-paint fallback so the page never flashes empty, not
+  // a second source of truth: whatever commerce returns replaces it wholesale.
+  const [plans, setPlans] = useState<SubscriptionPlan[]>(STATIC_PLANS.filter(isSellable));
 
   useEffect(() => {
     loadPlans("personal").then((live) => {
-      if (live.length) setPlans(live);
+      const sellable = live.filter(isSellable);
+      if (sellable.length) setPlans(sellable);
     });
   }, []);
 
   function formatPrice(plan: SubscriptionPlan) {
     if (plan.contactSales || plan.priceMonthly == null) return "Custom";
-    if (plan.priceMonthly === 0) return "Free";
     return `$${plan.priceMonthly}`;
   }
 
   function billingPeriod(plan: SubscriptionPlan) {
     if (plan.contactSales || plan.priceMonthly == null) return "";
-    if (plan.priceMonthly === 0) return " to start";
     return "/month";
   }
 
   const iconFallback = <Rocket className="h-6 w-6 text-muted-foreground" />;
 
   return (
-    <div className="max-w-7xl mx-auto mb-16">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-8">
+    <div className="max-w-6xl mx-auto mb-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
         {plans.map((plan) => (
           <PricingPlan
             key={plan.id}
@@ -156,10 +154,28 @@ const PersonalPlans = () => {
             features={plan.features}
             popular={plan.popular}
             checkoutUrl={planCheckoutUrl(plan)}
-            ctaLabel={planCtaLabel(plan)}
+            ctaLabel={planCtaLabel()}
           />
         ))}
       </div>
+
+      {/* The free path, stated as what it is. Not a plan — there is no $0 tier
+          of the hosted product — but the OSS releases and OSS models are free to
+          download and run yourself, and that is the honest answer to "is there a
+          free option". Kept as one line under the plans so it cannot be mistaken
+          for a fourth card. */}
+      <p className="text-center text-sm text-muted-foreground">
+        No free tier — but everything open source is free.{" "}
+        <a
+          href="https://github.com/hanzoai"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-foreground underline underline-offset-4 hover:no-underline"
+        >
+          Download the OSS releases and models
+        </a>{" "}
+        and run them yourself.
+      </p>
     </div>
   );
 };
