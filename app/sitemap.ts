@@ -1,14 +1,13 @@
 import type { MetadataRoute } from 'next'
 import { readdirSync, type Dirent } from 'node:fs'
 import { join } from 'node:path'
+import { indexable } from '@/lib/publish'
 
 // Static export: emits /sitemap.xml at build by walking the App Router tree.
 export const dynamic = 'force-static'
 
 const BASE = 'https://hanzo.ai'
 const PAGE = /^page\.(tsx|ts|jsx|js|mdx)$/
-// Don't index private/auth surfaces.
-const EXCLUDE = ['/auth', '/account', '/login']
 
 function walk(dir: string, seg: string[] = []): string[] {
   const routes: string[] = []
@@ -44,7 +43,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = new Set<string>(['/'])
   for (const r of walk(appDir)) {
     const route = r === '' ? '/' : r
-    if (EXCLUDE.some((p) => route === p || route.startsWith(p + '/'))) continue
+    // The walk finds every page in the tree, including the ones nothing links
+    // to. Whether a route is PUBLISHED is a separate question, answered in one
+    // place: lib/publish.
+    if (!indexable(route)) continue
     routes.add(route)
   }
   return [...routes].sort().map((route) => ({
