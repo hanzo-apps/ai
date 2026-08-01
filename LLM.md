@@ -274,8 +274,19 @@ is inlined into the bundle at build time.
 - Consent honors Do Not Track and Global Privacy Control. Neither `@hanzo/event`
   nor `@hanzo/observe` reads those signals, so `telemetryEnabled()` in
   `app/providers.tsx` passes `enabled` and every surface must do the same.
-- The client never sends the org; cloud stamps the tenant from the bearer.
-  `identify(user.id)` is the only identity sent, never an email.
+- The client never sends the org; cloud stamps the tenant from the bearer. That
+  is the one identity rule that still holds: a tenant a client can name is a
+  tenant a client can get wrong.
+- `identify(sub, {email, name})` — the subject joins the person across
+  properties, and the traits are what make that subject legible. This reverses
+  an earlier "never an email, PII-free by construction" rule, which was the
+  wrong goal for first-party data about our own users: it wrote a warehouse of
+  opaque subjects where every funnel could count people and none could say
+  which person. Both traits come from the same hanzo.id userinfo response the
+  subject is read from, so nothing new is collected. Traits ride an
+  AUTHENTICATED session only — the anonymous `$public` lane drops `identify`
+  outright — and consent still gates everything through `telemetryEnabled()`.
+  Secret redaction in the SDK is unconditional and is not affected.
 
 
 ## Certification Claims (Honest)

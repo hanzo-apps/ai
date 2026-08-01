@@ -51,10 +51,22 @@ function Pageview() {
  * The ONE place this site binds telemetry identity — mounted inside IamProvider
  * so it sees the resolved session on every route, not just /auth/callback.
  *
- * identify(user.id) — the stable IAM subject, and the ONLY identity this client
- * sends. NEVER email/name: the client is PII-free by construction, and the id is
- * what joins a person's events across hanzo.ai and Hanzo Cloud (which stamps the
- * same subject server-side).
+ * identify(sub, traits) — the stable IAM subject, which is what joins a person's
+ * events across hanzo.ai and Hanzo Cloud (which stamps the same subject
+ * server-side), plus the attributes that make that subject legible.
+ *
+ * THE TRAITS ARE NEW, AND THEY REVERSE A STATED RULE. This said "NEVER
+ * email/name: the client is PII-free by construction". PII-free was the wrong
+ * goal for first-party data about our own users: it produced a warehouse of
+ * opaque subjects where every funnel could count people and none could say which
+ * person, so no user attribute was visible on any Hanzo property. Email and name
+ * arrive in the same hanzo.id userinfo response this file already reads to get
+ * `sub`, and were discarded on the way past. They are exactly as sensitive as
+ * they were in that response, and only ever describe the signed-in user to
+ * ourselves — traits ride an authenticated session, never the anonymous lane.
+ *
+ * Consent still governs the whole client: telemetryEnabled() suppresses every
+ * signal under DNT / GPC, so a visitor who opted out sends no traits either.
  *
  * THE CLIENT DOES NOT SEND THE ORG. There is deliberately no group() call here.
  * The tenant is stamped SERVER-SIDE from the validated bearer, so org-level
@@ -71,8 +83,13 @@ function Identity() {
   const { user, isAuthenticated } = useIam()
   const analytics = useAnalytics()
   const subject = isAuthenticated ? iamSubject(user) : undefined
+  const traits = isAuthenticated ? iamTraits(user) : undefined
   useEffect(() => {
-    if (subject) analytics.identify(subject)
+    if (subject) analytics.identify(subject, traits)
+    // `traits` is read off the same userinfo response as `subject`, so the
+    // subject changing is what marks a new person. Adding the freshly-built
+    // object to the deps would re-identify on every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [analytics, subject])
   return null
 }
@@ -100,6 +117,34 @@ function iamSubject(user: unknown): string | undefined {
   if (!user || typeof user !== 'object') return undefined
   const sub = (user as { sub?: unknown }).sub
   return typeof sub === 'string' && sub ? sub : undefined
+}
+
+/**
+ * The user attributes that ride the subject, off the same userinfo response.
+ *
+ * hanzo.id returns `{owner, organization, email, iss, aud, preferred_username,
+ * name, displayName, picture, sub}`, so the name is read in descending order of
+ * how human it is: `displayName`, then `name`, then `preferred_username`. Read
+ * as defensively as `iamSubject` — the provider's declared type does not include
+ * these and the value is a network response.
+ *
+ * A key is OMITTED rather than sent undefined: a trait sent as undefined is a
+ * trait written, and it would blank a value an earlier identify established.
+ * Returns undefined when nothing resolved, so identify falls back to sending the
+ * subject alone rather than an empty object.
+ */
+export function iamTraits(user: unknown): Record<string, unknown> | undefined {
+  if (!user || typeof user !== 'object') return undefined
+  const claim = (k: string): string | undefined => {
+    const v = (user as Record<string, unknown>)[k]
+    return typeof v === 'string' && v ? v : undefined
+  }
+  const traits: Record<string, unknown> = {}
+  const email = claim('email')
+  if (email) traits.email = email
+  const name = claim('displayName') ?? claim('name') ?? claim('preferred_username')
+  if (name) traits.name = name
+  return Object.keys(traits).length ? traits : undefined
 }
 
 /** Minimal on-brand fallback when a render error is caught. The boundary already
