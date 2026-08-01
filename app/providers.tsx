@@ -70,11 +70,36 @@ function Pageview() {
 function Identity() {
   const { user, isAuthenticated } = useIam()
   const analytics = useAnalytics()
-  const id = isAuthenticated ? user?.id : undefined
+  const subject = isAuthenticated ? iamSubject(user) : undefined
   useEffect(() => {
-    if (id) analytics.identify(id)
-  }, [analytics, id])
+    if (subject) analytics.identify(subject)
+  }, [analytics, subject])
   return null
+}
+
+/**
+ * The IAM subject (`sub`) off the SDK's user object.
+ *
+ * This reads `sub` and not `id` because `id` DOES NOT EXIST at runtime, which made
+ * the identify above a silent no-op for as long as it has been here — hanzo.ai
+ * recorded thousands of pageviews and not one identified person. `IamProvider` sets
+ * `user` to the raw OIDC userinfo response (`sdk.getUserInfo()` returns
+ * `res.json()` verbatim), and hanzo.id's userinfo returns
+ * `{owner, organization, email, iss, aud, preferred_username, name, displayName,
+ * picture, sub}` — no `id` anywhere. The SDK's `User` type merely declares `id?`
+ * as optional, so reading it type-checks and yields undefined forever; nothing
+ * fails, the call just never happens. (`IAM#getUser()` — a DIFFERENT method this
+ * provider does not use — is the one that maps userinfo onto a `sub`-bearing
+ * shape.)
+ *
+ * `sub` is the stable IAM user UUID, the same value hanzo.app, hanzo.chat and
+ * cloud.hanzo.ai identify this human by. Read defensively: the provider's declared
+ * type does not include `sub`, and the value is a network response.
+ */
+function iamSubject(user: unknown): string | undefined {
+  if (!user || typeof user !== 'object') return undefined
+  const sub = (user as { sub?: unknown }).sub
+  return typeof sub === 'string' && sub ? sub : undefined
 }
 
 /** Minimal on-brand fallback when a render error is caught. The boundary already
