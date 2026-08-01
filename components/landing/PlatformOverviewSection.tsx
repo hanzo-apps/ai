@@ -2,16 +2,23 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { capabilityCount, categoryCount, cloudCategories } from "@/lib/data/cloud-primitives";
+import { capabilityCount, categoryCount, categorySlug, cloudCategories } from "@/lib/data/cloud-primitives";
 
 // Category overview cards — derived from the ONE cloud-primitive taxonomy
 // (lib/data/cloud-primitives.ts), the same source the mega-menu and the
 // generated overview pages read, so the count and the categories can never
 // drift. One capability = one name = one /v1/<name>. Breadth without overwhelm.
+//
+// `href` comes from the same `categorySlug` the mega-menu headers and the
+// `/products/[categoryId]` route use, so a card cannot point at a page that
+// does not exist. Without it these ten cards were the only place the taxonomy
+// surfaced near the top of the site AND a dead end — the categories were
+// visible and unreachable.
 const CATEGORY_CARDS = cloudCategories.map((c) => ({
   icon: c.icon,
   title: c.title,
   desc: c.tagline,
+  href: `/products/${categorySlug(c.title)}`,
 }));
 
 const PlatformOverviewSection = () => {
@@ -37,8 +44,9 @@ const PlatformOverviewSection = () => {
           {CATEGORY_CARDS.map((card, index) => {
             const Icon = card.icon;
             return (
-              <motion.div
+              <motion.a
                 key={card.title}
+                href={card.href}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -50,7 +58,7 @@ const PlatformOverviewSection = () => {
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{card.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
-              </motion.div>
+              </motion.a>
             );
           })}
         </div>

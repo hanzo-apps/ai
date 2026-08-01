@@ -19,8 +19,18 @@ import React from 'react'
 import Link from 'next/link'
 import { YStack, XStack, Text, View } from '@hanzo/gui'
 import { useReducedMotion } from 'framer-motion'
-import type { LucideIcon } from 'lucide-react'
 import './prose.css'
+
+/**
+ * Any icon the kit can render.
+ *
+ * Typed by what the kit USES — it only ever sets `size` and `color` — not by the
+ * icon vendor. `LucideIcon` was the wrong shape for the slot: it is lucide's own
+ * `ForwardRefExoticComponent`, so a structurally identical icon from anywhere
+ * else (the `CloudIcon` in `lib/data/cloud-primitives.ts`, say) failed on
+ * `$$typeof` despite rendering perfectly. Every lucide icon still satisfies this.
+ */
+export type KitIcon = React.ComponentType<{ size?: number | string; color?: string }>
 
 /**
  * Fade-and-rise, honouring the OS reduced-motion setting.
@@ -84,7 +94,7 @@ export function PageHero({
   children,
 }: {
   eyebrow: string
-  icon?: LucideIcon
+  icon?: KitIcon
   title: string
   lede?: string
   children?: React.ReactNode
@@ -179,7 +189,7 @@ export interface CardItem {
   title: string
   description: string
   href?: string
-  icon?: LucideIcon
+  icon?: KitIcon
   /** Shown right-aligned in the title row — e.g. a date or an endpoint verb. */
   meta?: string
 }
@@ -264,7 +274,7 @@ export function Cta({
 }: {
   href: string
   children: React.ReactNode
-  icon?: LucideIcon
+  icon?: KitIcon
 }) {
   const external = href.startsWith('http')
   return (
