@@ -76,8 +76,23 @@ jobs:
           [ "$n" -ge 100 ] || { echo "::error::only $n html files exported; expected ~130"; exit 1; }
           echo "exported $n pages"
 
+      # The token is exported only when it is NON-EMPTY. An absent secret still
+      # yields a DEFINED env var set to the empty string, and wrangler prefers
+      # CLOUDFLARE_API_TOKEN whenever it is defined — so declaring it in `env:`
+      # made every run authenticate with an empty token and never fall back to
+      # the email+key pair. That is what failed the first green build.
       - name: Deploy to Cloudflare Pages
-        run: pnpm dlx wrangler pages deploy out --project-name=hanzo-ai --branch=main --commit-dirty=true
+        run: |
+          set -euo pipefail
+          if [ -n "${CF_TOKEN:-}" ]; then
+            export CLOUDFLARE_API_TOKEN="$CF_TOKEN"
+            echo "auth: scoped API token"
+          else
+            export CLOUDFLARE_EMAIL="$CF_EMAIL"
+            export CLOUDFLARE_API_KEY="$CF_KEY"
+            echo "auth: email + global key (mint a scoped token and set CLOUDFLARE_API_TOKEN to retire this)"
+          fi
+          pnpm dlx wrangler pages deploy out --project-name=hanzo-ai --branch=main --commit-dirty=true
         env:
           # wrangler prefers CLOUDFLARE_API_TOKEN and falls back to the
           # EMAIL + API_KEY pair. Both are wired so the scoped token can be
@@ -89,7 +104,7 @@ jobs:
           # first hand-deploy had to fall back to the global key. Mint a
           # Pages-scoped token, set CLOUDFLARE_API_TOKEN, then delete
           # CLOUDFLARE_EMAIL/CLOUDFLARE_API_KEY from this repo's secrets.
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          CF_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
