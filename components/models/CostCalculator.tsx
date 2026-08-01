@@ -3,28 +3,31 @@
 /**
  * Monthly-bill estimator: always calling a top model vs Enso routing the easy
  * majority to a cheap model and escalating only the hard fraction. Costs are
- * modeled from published upstream token prices for a typical short-answer
- * request — the caller's mix sets the exact number, so this is illustrative.
+ * modeled at the one reference request (1K in / 1K out) from our billed tier
+ * rates and the top model's published rate — the caller's mix sets the exact
+ * number, so this is illustrative.
  */
 import { useState } from 'react'
+import { HARD_FRACTION, TOP_RATE, ensoSavings, ensoTier, fmtReqCost, reqCost } from '@/lib/leaderboard'
 
-// Retail per-request cost at ~1K-in/1K-out. Every Enso tier is priced at or below the
-// top model, so Enso is cheaper at ANY hard fraction — easy requests route to Flash,
-// hard requests escalate to Ultra, and Ultra ($5/$25) still sits under GPT-5.6 ($5/$30).
-const TOP_REQ = 0.035 // GPT-5.6 $5/$30 on every request
-const FLASH_REQ = 0.006 // Enso Flash $2/$4 (easy requests)
-const ULTRA_REQ = 0.030 // Enso Ultra $5/$25 (hard requests) — still < top
+// Per-request cost at the one reference mix (1K in / 1K out), derived from the billed
+// tier rates. Every Enso tier is priced at or below the top model, so Enso is cheaper at
+// ANY hard fraction — easy requests route to Flash, hard requests escalate to Ultra, and
+// Ultra ($5/$25) still sits under GPT-5.6 ($5/$30).
+const TOP_REQ = reqCost(TOP_RATE) // $0.035 on every request
+const FLASH_REQ = reqCost(ensoTier('enso-flash')) // easy requests
+const ULTRA_REQ = reqCost(ensoTier('enso-ultra')) // hard requests — still < top
 
 const money = (x: number) => `$${Math.round(x).toLocaleString()}`
 
 export default function CostCalculator() {
   const [reqs, setReqs] = useState(1_000_000)
-  const [hard, setHard] = useState(20)
+  const [hard, setHard] = useState(HARD_FRACTION * 100)
 
   const hardFrac = hard / 100
   const top = reqs * TOP_REQ
   const enso = reqs * ((1 - hardFrac) * FLASH_REQ + hardFrac * ULTRA_REQ)
-  const savePct = top > 0 ? Math.round((1 - enso / top) * 100) : 0
+  const savePct = Math.round(ensoSavings(hardFrac) * 100)
 
   return (
     <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6 md:p-8">
@@ -80,9 +83,9 @@ export default function CostCalculator() {
       </div>
 
       <p className="mt-5 border-l-2 border-neutral-700 pl-3 text-xs leading-relaxed text-neutral-500">
-        Model: a top model bills the premium rate on every request; Enso serves the easy majority cheaply
-        (~$0.002/req) and only the hard fraction costs more (~$0.43/req). Illustrative at
-        published token prices for a typical short-answer request — your mix sets the exact number.
+        Model: a top model bills the premium rate on every request ({fmtReqCost(TOP_REQ)}/req); Enso serves the
+        easy majority on Flash ({fmtReqCost(FLASH_REQ)}/req) and only the hard fraction escalates to Ultra
+        ({fmtReqCost(ULTRA_REQ)}/req). Billed token rates at a 1K-in/1K-out request — your mix sets the exact number.
       </p>
     </div>
   )

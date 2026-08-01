@@ -90,18 +90,23 @@ const STATS = [
 
 /**
  * The three presets as differentiated cost/quality contracts — monotonic in
- * quality: Ultra (98.0) > Pro (96.0) > Flash (92.9) GPQA-Diamond. Measured;
- * price bands are published retail input→output $/MTok.
+ * quality: Ultra (98.0) > Pro (96.0) > Flash (92.9) GPQA-Diamond. Measured.
+ *
+ * Price bands are input→output $/MTok and MUST equal what the billing engine
+ * actually charges — the `retail` values in the Enso catalog, reconciled against
+ * real usage rows. They are not a marketing band. Quoting a number below the
+ * billed rate means charging customers above the advertised price, so if these
+ * disagree with the catalog, the catalog is right and this is the bug.
  */
 const TIERS = [
   {
     name: 'Enso Ultra',
     id: 'enso-ultra',
     gpqa: '98.0%',
-    priceBand: '$5 → $20',
+    priceBand: '$5 → $25',
     tag: 'Maximum quality',
     icon: Layers,
-    body: 'Top-tier accuracy for hard, high-stakes problems — research reproduction, security analysis, and long-running autonomous work. Reaches 98.0% GPQA-Diamond at a price below premium single models like Opus and fable-5, which score far lower.',
+    body: 'Top-tier accuracy for hard, high-stakes problems — research reproduction, security analysis, and long-running autonomous work. Reaches 98.0% GPQA-Diamond: 5.5× cheaper per output token than gpt-5.2-pro, which scores 93.2%, and well under fable-5 at 81.3%. Against opus-4.8 it costs a few dollars more per MTok and scores 10.6 points higher.',
     points: ['Research & paper reproduction', 'Security assessment', 'Deep, long-running tasks'],
     flagship: true,
   },
@@ -109,7 +114,7 @@ const TIERS = [
     name: 'Enso Pro',
     id: 'enso · the default',
     gpqa: '96.0%',
-    priceBand: '$3 → $12',
+    priceBand: '$4 → $20',
     tag: 'Balanced — the everyday default',
     icon: Workflow,
     body: 'Strong 96.0% GPQA-Diamond with sensible latency — the ideal default for real work: coding, code review, and responsive agents. Priced for everyday scale. Opt out of specific providers to meet data and compliance constraints.',
@@ -120,7 +125,7 @@ const TIERS = [
     name: 'Enso Flash',
     id: 'enso-flash',
     gpqa: '92.9%',
-    priceBand: '$2 → $6',
+    priceBand: '$2 → $4',
     tag: 'Fastest, most economical',
     icon: Zap,
     body: 'The high-volume default — lowest latency and cost for everyday chat, classification, extraction, and simple agent steps, at a strong 92.9% GPQA-Diamond.',

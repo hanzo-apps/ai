@@ -70,7 +70,7 @@ export default function EnsoModelsPage() {
       <section className="px-4 py-16">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold">Three tiers, monotonic in quality</h2>
-          <p className="mb-8 text-neutral-400">Ultra &gt; Pro &gt; Flash — a cost/quality contract, not a model alias. GPQA is Hanzo-measured; price bands are published input→output $/MTok.</p>
+          <p className="mb-8 text-neutral-400">Ultra &gt; Pro &gt; Flash — a cost/quality contract, not a model alias. GPQA is Hanzo-measured; price bands are the billed input→output $/MTok.</p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {ENSO_TIERS.map((t) => (
               <div
@@ -100,9 +100,9 @@ export default function EnsoModelsPage() {
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold">Accuracy at cost</h2>
           <p className="mb-6 max-w-3xl text-neutral-400">
-            enso-ultra reaches 98.0% GPQA-Diamond — top-left is the goal (high accuracy, low cost), and it sits there
-            at a price below premium single models that score far lower. Solid dots are Hanzo-measured; hollow
-            dots are vendor-reported. Every dot is labelled; hover for the exact figure.
+            enso-ultra reaches 98.0% GPQA-Diamond, the best in the field — top-left is the goal (high accuracy, low
+            cost), and it sits there at a fraction of what the priciest frontier models charge to score lower. Solid
+            dots are Hanzo-measured; hollow dots are vendor-reported. Every dot is labelled; hover for the exact figure.
           </p>
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 md:p-6">
             <AccuracyCostScatter points={SCATTER} />

@@ -5,16 +5,17 @@
  * frontier-competitive accuracy by orchestrating cheap models and bills a
  * fraction of what always calling the best model costs.
  *
- * Data-driven parts (scatter, prices) read the leaderboard snapshot so they stay
- * honest and traceable: the three tiers are Ultra 98.0 > Pro 96.0 > Flash 92.9
- * GPQA-Diamond, priced below premium single models that score far lower. Modeled
- * parts (per-request cost, calculator) are labeled as modeled from published token
- * prices. Present results and savings; the routing mechanism is not described here.
+ * Data-driven parts (scatter, prices, per-request costs) read the leaderboard
+ * snapshot so they stay honest and traceable: the three tiers are Ultra 98.0 >
+ * Pro 96.0 > Flash 92.9 GPQA-Diamond, and every price claim names the model it
+ * is measured against so it can be checked on the chart. Per-request figures are
+ * derived from the billed tier rates at one stated mix (1K in / 1K out), never
+ * typed in. Present results and savings; the routing mechanism is not described here.
  */
 import { motion } from 'framer-motion'
 import AccuracyCostScatter, { type ScatterPoint } from '@/components/models/AccuracyCostScatter'
 import CostCalculator from '@/components/models/CostCalculator'
-import { MODELS, scatterRows, fmtPrice } from '@/lib/leaderboard'
+import { MODELS, scatterRows, fmtPrice, ensoSavings, ensoTier, fmtReqCost, reqCost, HARD_FRACTION, TOP_RATE } from '@/lib/leaderboard'
 
 const fade = {
   initial: { opacity: 0, y: 20 },
@@ -41,17 +42,30 @@ const COORD = COORD_MODELS
 const COORD_MAX = Math.max(...COORD.map((c) => c.price))
 const COORD_RATIO = Math.round(COORD_MAX / Math.min(...COORD.map((c) => c.price)))
 
+// ── Price headline: read off the snapshot, never typed in ────────────────────
+// enso-ultra tops the field on GPQA; the honest price claim is against the
+// priciest model in that same field, so both halves stay checkable on the chart
+// above. Hard-coding "< Opus" went stale the moment a rate moved.
+const ULTRA = MODELS.find((m) => m.model === 'enso-ultra')!
+const DEAREST = scatterRows().reduce((a, b) => ((b.price as number) > (a.price as number) ? b : a))
+const ULTRA_RATIO = ((DEAREST.price as number) / (ULTRA.price as number)).toFixed(1)
+// Same formula the calculator below runs, at the same default mix — so the headline
+// KPI and the calculator can never disagree.
+const SAVED = Math.round(ensoSavings() * 100)
+
 const KPIS = [
-  { v: '98.0%', k: 'GPQA-Diamond · enso-ultra' },
-  { v: '< Opus', k: 'enso-ultra price, higher accuracy' },
-  { v: '89%', k: 'saved vs always calling a top model' },
+  { v: '98.0%', k: 'GPQA-Diamond · enso-ultra — best in the field' },
+  { v: `${ULTRA_RATIO}× cheaper`, k: `than ${DEAREST.model}, which scores ${DEAREST.value}%` },
+  { v: `${SAVED}%`, k: `saved vs always calling a top model, at ${HARD_FRACTION * 100}% hard` },
   { v: '3 tiers', k: 'Flash 92.9 · Pro 96.0 · Ultra 98.0 GPQA' },
 ]
 
+// Per-request costs at the one reference mix (1K in / 1K out), derived from the
+// billed tier rates so they move when a rate moves.
 const ESCALATION = [
-  { t: 'simple request', c: '~$0.09', d: 'the common case' },
-  { t: 'harder request', c: '~$0.43', d: 'more compute, only when needed' },
-  { t: 'always-max baseline', c: '~$0.82', d: 'paying top rate every time', faint: true },
+  { t: 'simple request', c: fmtReqCost(reqCost(ensoTier('enso-flash'))), d: 'the common case, on Flash' },
+  { t: 'harder request', c: fmtReqCost(reqCost(ensoTier('enso-ultra'))), d: 'escalates to Ultra, only when needed' },
+  { t: 'always-max baseline', c: fmtReqCost(reqCost(TOP_RATE)), d: 'paying top rate every time', faint: true },
 ]
 
 function Head({ n, title, sub }: { n: string; title: string; sub: string }) {
@@ -75,7 +89,8 @@ export default function EnsoSavings() {
           <h2 className="text-3xl font-bold text-white md:text-4xl">The savings are the product</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-400">
             Enso delivers frontier accuracy and bills a fraction of what always calling a top model costs.
-            enso-ultra reaches 98.0% GPQA-Diamond at a price below premium single models that score far lower.
+            enso-ultra reaches the field&rsquo;s best 98.0% GPQA-Diamond for {fmtPrice(ULTRA.price)}/MTok — {ULTRA_RATIO}× under
+            the priciest frontier model, which scores {DEAREST.value}%.
           </p>
         </motion.div>
 
@@ -100,14 +115,14 @@ export default function EnsoSavings() {
           <Head
             n="01"
             title="Accuracy at cost"
-            sub="The goal is the top-left: high accuracy, low cost. enso-ultra sits there — 98.0% GPQA-Diamond at a price below premium single models like Opus and fable-5, which score far lower. Pro and Flash trade accuracy for even lower cost."
+            sub={`The goal is the top-left: high accuracy, low cost. enso-ultra sits there — 98.0% GPQA-Diamond, the best in the field, at ${fmtPrice(ULTRA.price)}/MTok against fable-5 at $42 and ${DEAREST.model} at ${fmtPrice(DEAREST.price)}, both of which score lower. Pro and Flash trade accuracy for even lower cost.`}
           />
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 md:p-6">
             <AccuracyCostScatter points={SCATTER} />
           </div>
           <p className="mt-4 border-l-2 border-neutral-700 pl-3 text-sm leading-relaxed text-neutral-500">
-            Solid dots are Hanzo-measured; hollow dots are vendor-reported. enso-ultra (98.0%) leads on accuracy
-            while pricing below premium single models — the win is accuracy-per-dollar across the three tiers.
+            Solid dots are Hanzo-measured; hollow dots are vendor-reported. enso-ultra (98.0%) leads the field on
+            accuracy at {fmtPrice(ULTRA.price)}/MTok — the win is accuracy-per-dollar across the three tiers.
           </p>
         </motion.div>
 
@@ -170,7 +185,7 @@ export default function EnsoSavings() {
           </div>
           <p className="mt-4 border-l-2 border-neutral-700 pl-3 text-sm leading-relaxed text-neutral-500">
             Everyday requests cost a fraction of always paying the top rate — extra spend goes only to the hard fraction that needs it. Quality and cost are a property of
-            the tier you choose, not a caller parameter. Per-request costs modeled from published token prices.
+            the tier you choose, not a caller parameter. Per-request costs at billed token rates, 1K in / 1K out.
           </p>
         </motion.div>
 

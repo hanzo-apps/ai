@@ -97,8 +97,9 @@ export function isOpenWeightVendor(vendor: string): boolean {
 /**
  * The three Enso presets as differentiated cost/quality contracts. GPQA values
  * are Hanzo-measured (cross-checked against the leaderboard snapshot); price
- * bands are published retail input→output $/MTok. Monotonic in quality:
- * Ultra (98.0) > Pro (96.0) > Flash (92.9).
+ * bands are the BILLED input→output $/MTok, reconciled against production
+ * billing rows — not the marketing bands, which never matched what we charged.
+ * Monotonic in quality: Ultra (98.0) > Pro (96.0) > Flash (92.9).
  */
 export interface EnsoTier {
   id: string
@@ -118,18 +119,18 @@ export const ENSO_TIERS: EnsoTier[] = [
     name: 'Enso Ultra',
     gpqa: 98.0,
     priceIn: 5,
-    priceOut: 20,
+    priceOut: 25,
     tag: 'Maximum quality',
     blurb:
-      'Top-tier accuracy for the hardest, highest-stakes work — reaching 98.0% GPQA-Diamond at a price below premium single models that score far lower.',
+      'Top-tier accuracy for the hardest, highest-stakes work — the field’s best 98.0% GPQA-Diamond at a fraction of what the priciest frontier models charge to score lower.',
     flagship: true,
   },
   {
     id: 'enso',
     name: 'Enso Pro',
     gpqa: 96.0,
-    priceIn: 3,
-    priceOut: 12,
+    priceIn: 4,
+    priceOut: 20,
     tag: 'Balanced — the everyday default',
     blurb:
       'The production default: strong 96.0% GPQA-Diamond for coding, review, research, and responsive agents — priced for everyday scale. 1M context.',
@@ -140,7 +141,7 @@ export const ENSO_TIERS: EnsoTier[] = [
     name: 'Enso Flash',
     gpqa: 92.9,
     priceIn: 2,
-    priceOut: 6,
+    priceOut: 4,
     tag: 'Fastest, most economical',
     blurb:
       'Fast answers at production scale — for chat, extraction, classification, and simple steps at a strong 92.9% GPQA-Diamond. Lowest cost per request.',
@@ -150,6 +151,52 @@ export const ENSO_TIERS: EnsoTier[] = [
 /** Enso rows straight from the leaderboard (all Hanzo-measured). */
 export function ensoModels(): LbModel[] {
   return MODELS.filter((m) => m.vendor === 'Hanzo')
+}
+
+export function ensoTier(id: string): EnsoTier {
+  const t = ENSO_TIERS.find((x) => x.id === id)
+  if (!t) throw new Error(`unknown Enso tier: ${id}`)
+  return t
+}
+
+// ── Per-request cost ──────────────────────────────────────────────────────
+/**
+ * Every per-request dollar figure on the site comes from here, at ONE stated
+ * basis: a short-answer request of 1K in / 1K out. Derived from the tier rates
+ * above rather than typed in, so a rate correction moves the per-request
+ * figures with it — hand-typed copies had already drifted off the rates twice.
+ */
+const REQ_MTOK = 0.001
+
+export interface Rate {
+  priceIn: number
+  priceOut: number
+}
+
+/** The always-max baseline Enso is measured against: GPT-5.6 retail $5 → $30. */
+export const TOP_RATE: Rate = { priceIn: 5, priceOut: 30 }
+
+export function reqCost(r: Rate): number {
+  return REQ_MTOK * (r.priceIn + r.priceOut)
+}
+
+export function fmtReqCost(c: number): string {
+  return `$${c.toFixed(3)}`
+}
+
+/** Share of requests that escalate past Flash — the default the savings model assumes. */
+export const HARD_FRACTION = 0.2
+
+/**
+ * Savings against paying the top rate on every request: the easy majority runs
+ * on Flash, `hard` of them escalate to Ultra. ONE formula — the headline KPI and
+ * the interactive calculator both call it, so the page cannot quote itself a
+ * saving its own calculator refuses to produce (a hard-coded 89% did exactly
+ * that; the model tops out at 83%, and 69% at the default mix).
+ */
+export function ensoSavings(hard: number = HARD_FRACTION): number {
+  const enso = (1 - hard) * reqCost(ensoTier('enso-flash')) + hard * reqCost(ensoTier('enso-ultra'))
+  return 1 - enso / reqCost(TOP_RATE)
 }
 
 // ── Per-benchmark rows (drives the reported-vs-measured browser) ───────────
