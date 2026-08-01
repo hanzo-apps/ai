@@ -154,6 +154,20 @@ const PricingPlan = ({
         <h3 className="text-xl font-semibold">{name}</h3>
       </div>
       
+      {/* The description reserves a fixed block so the CTA below it lands at the
+          same height in every card. Descriptions come from commerce and differ by
+          a line — Plus reads three lines where Pro and Max read four — which put
+          the middle card's button 24px above its neighbours' and made a row of
+          equal-height cards look misaligned.
+
+          The grid already stretches the cards to equal height, so the slack has
+          to be absorbed somewhere ABOVE the button; absorbing it below (a flex-1
+          feature list) cannot work, because the feature lists are different
+          lengths too. Reserving here is the only point where all three agree.
+
+          Only from `md` up, where the cards sit side by side and alignment is
+          something you can see. Stacked on a phone there is nothing to align and
+          a floor would just add dead space between each card and its button. */}
       <div className="mb-6">
         <div className="flex items-baseline gap-1 mb-2">
           <span className="text-4xl font-bold">{price}</span>
@@ -161,7 +175,7 @@ const PricingPlan = ({
             <span className="text-muted-foreground">{billingPeriod}</span>
           )}
         </div>
-        <p className="text-muted-foreground">{description}</p>
+        <p className="text-muted-foreground md:min-h-[7.5rem]">{description}</p>
       </div>
 
       {renderButton()}
