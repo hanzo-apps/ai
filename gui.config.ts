@@ -9,12 +9,12 @@
  * and a light/dark flip retunes gui components through the same cascade that
  * retunes everything else.
  *
- * The one exception is `background`. gui publishes each THEME key as a bare
- * `--<key>` custom property at `:root`, and `background` is the single name that
- * collides with a @hanzo/design token — pointing it at `var(--background)` would
- * make the property reference itself and CSS would drop both. So that one value
- * is mirrored from @hanzo/design's exported literals (`colors.background`)
- * rather than referenced. Every other colour is a live reference.
+ * The exception is every SINGLE-WORD colour name. gui publishes each token key
+ * as a bare `--<key>` custom property at `:root`, so any key spelled the same as
+ * a @hanzo/design token points at itself, and CSS drops both sides of a cycle —
+ * the property computes EMPTY. Those names are mirrored from @hanzo/design's
+ * exported literals rather than referenced. Hyphenated names never collide
+ * (`--cardForeground` vs `--card-foreground`) and stay live references.
  */
 import { defaultConfig } from '@hanzogui/config/v4'
 import { createGui, createVariable } from '@hanzo/gui'
@@ -92,25 +92,44 @@ const radius = {
  * `fontSize` above for what a failed constraint here costs.
  */
 const color = {
-  background: t('background'),
-  foreground: t('foreground'),
-  card: t('card'),
+  // ── The colliding names ────────────────────────────────────────────────────
+  // gui republishes every token key as a bare `--<key>` at :root. For any key
+  // whose name is IDENTICAL to a @hanzo/design token, `var(--<key>)` therefore
+  // resolves to itself — and CSS drops both sides of a cycle, leaving the
+  // property EMPTY rather than falling back to the stylesheet's value.
+  //
+  // The header above used to say `background` was "the single name that
+  // collides". It is not: every single-word key collides, and the cost was
+  // visible on hanzo.ai. Measured on the live pricing page: `--border` is
+  // declared `#1f1f1f` in :root and computes to EMPTY on <html>, so Tailwind's
+  // `border-border` had no colour and fell back to `currentColor` — a pure
+  // white 1px border on every card.
+  //
+  // So these are MIRRORED from @hanzo/design's exported literals, not
+  // referenced. A literal cannot cycle. The camelCase keys below stay
+  // references: gui publishes `--cardForeground` while design defines
+  // `--card-foreground`, so those names never meet.
+  background: colors.background,
+  foreground: colors.foreground,
+  card: colors.card,
+  popover: colors.popover,
+  primary: colors.primary,
+  secondary: colors.secondary,
+  muted: colors.muted,
+  accent: colors.accent,
+  destructive: colors.destructive,
+  border: colors.border,
+  input: colors.input,
+  ring: colors.ring,
+
+  // ── The non-colliding names — live references, as everything else is ───────
   cardForeground: t('card-foreground'),
-  popover: t('popover'),
   popoverForeground: t('popover-foreground'),
-  primary: t('primary'),
   primaryForeground: t('primary-foreground'),
-  secondary: t('secondary'),
   secondaryForeground: t('secondary-foreground'),
-  muted: t('muted'),
   mutedForeground: t('muted-foreground'),
-  accent: t('accent'),
   accentForeground: t('accent-foreground'),
-  destructive: t('destructive'),
   destructiveForeground: t('destructive-foreground'),
-  border: t('border'),
-  input: t('input'),
-  ring: t('ring'),
   brand: t('brand'),
   brandForeground: t('brand-foreground'),
   surfaceCard: t('surface-card'),
