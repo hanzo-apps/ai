@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Globe, Zap, Users, Building2 } from "lucide-react";
-import { loadPlans, type SubscriptionPlan } from "@/lib/plans";
+import { type SubscriptionPlan } from "@/lib/plans";
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
   "world-free": <Globe className="h-6 w-6 text-muted-foreground" />,
@@ -32,8 +32,9 @@ const STATIC_PLANS: SubscriptionPlan[] = [
   {
     id: "world-pro",
     name: "World Pro",
-    priceMonthly: 29,
-    priceAnnual: 290,
+    priceMonthly: null,
+    priceAnnual: null,
+    contactSales: true,
     category: "world",
     popular: true,
     description:
@@ -55,8 +56,9 @@ const STATIC_PLANS: SubscriptionPlan[] = [
   {
     id: "world-team",
     name: "World Team",
-    priceMonthly: 99,
-    priceAnnual: 990,
+    priceMonthly: null,
+    priceAnnual: null,
+    contactSales: true,
     category: "world",
     description:
       "Everything in Pro for up to 5 seats + shared workspace. Included free in Hanzo Team / Team Max / Enterprise.",
@@ -100,11 +102,13 @@ const WorldPricing = () => {
   // Initialize with static plans immediately — no loading flash
   const [plans, setPlans] = useState<SubscriptionPlan[]>(STATIC_PLANS);
 
-  useEffect(() => {
-    loadPlans("world").then((live) => {
-      if (live.length) setPlans(live);
-    });
-  }, []);
+  // NOT wired to loadPlans("world") on purpose. Commerce carries world-pro at
+  // $29 and world-team at $99, and reading them would republish prices the owner
+  // decision retires: Hanzo publishes personal 20/100/200 and team $25/seat, and
+  // nothing else. World is priced as a deal, so the paid tiers render through the
+  // component's existing contactSales path rather than a number. The rows stay in
+  // commerce because they still bill the accounts already on them — what changes
+  // is what this page advertises, not what anyone is charged.
 
   function formatPrice(plan: SubscriptionPlan) {
     if (plan.contactSales || plan.priceMonthly == null) return "Contact us";
