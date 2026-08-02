@@ -36,10 +36,19 @@
 
 import { execFileSync } from "child_process";
 import { readFileSync } from "fs";
-import { resolve, dirname } from "path";
+import { resolve, dirname, relative } from "path";
 import { fileURLToPath } from "url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+
+// This file, and the one file the scan must not read: the shapes a rate is
+// written in have to be WRITTEN DOWN somewhere, and the place they are written
+// down is here — in the doc comment above and in the patterns below. Scanning
+// itself, it found `input: 4` and `'$4 → $20'` in its own explanation of what
+// those mean and exited 1 on every run, so the step could never pass and said
+// nothing about the repo. Derived from `import.meta.url` rather than typed as a
+// path, so renaming the file cannot quietly re-break it.
+const SELF = relative(ROOT, fileURLToPath(import.meta.url));
 
 // A per-MTok rate as this codebase writes one: a rate field with a number, or a
 // rendered "$in → $out" band.
@@ -77,7 +86,7 @@ function tracked() {
 
 const offenders = [];
 for (const rel of tracked()) {
-  if (GENERATED.includes(rel) || ALLOWED[rel]) continue;
+  if (rel === SELF || GENERATED.includes(rel) || ALLOWED[rel]) continue;
   const lines = readFileSync(resolve(ROOT, rel), "utf8").split("\n");
   lines.forEach((line, i) => {
     if (PRICE.test(line)) offenders.push(`${rel}:${i + 1}: ${line.trim().slice(0, 100)}`);
