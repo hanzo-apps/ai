@@ -22,7 +22,7 @@ const RecentInvoices = () => {
             <Clock className="h-5 w-5 text-muted-foreground mr-3" />
             <div>
               <div className="font-medium">June 15, 2024</div>
-              <div className="text-sm text-muted-foreground">Pro Plan - $49.00</div>
+              <div className="text-sm text-muted-foreground">Pro Plan - $20.00</div>
             </div>
           </div>
           <Button variant="ghost" size="sm">
@@ -36,7 +36,7 @@ const RecentInvoices = () => {
             <Clock className="h-5 w-5 text-muted-foreground mr-3" />
             <div>
               <div className="font-medium">May 15, 2024</div>
-              <div className="text-sm text-muted-foreground">Pro Plan - $49.00</div>
+              <div className="text-sm text-muted-foreground">Pro Plan - $20.00</div>
             </div>
           </div>
           <Button variant="ghost" size="sm">

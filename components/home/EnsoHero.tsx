@@ -20,7 +20,11 @@ export default function EnsoHero() {
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <motion.div
           className="absolute left-1/2 top-[42%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 68%)', filter: 'blur(120px)' }}
+          style={{
+            background:
+              'radial-gradient(circle, color-mix(in srgb, var(--pure-white) 12%, transparent) 0%, transparent 68%)',
+            filter: 'blur(120px)',
+          }}
           animate={{ scale: [1, 1.08, 1], opacity: [0.45, 0.65, 0.45] }}
           transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -94,7 +98,7 @@ export default function EnsoHero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="group mt-8 inline-flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-sm text-neutral-500 transition-colors hover:text-neutral-300"
+          className="group mt-8 inline-flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-sm text-neutral-400 transition-colors hover:text-white"
         >
           <span className="text-neutral-300 group-hover:text-white">Flash</span>
           <span aria-hidden className="text-neutral-700">·</span>

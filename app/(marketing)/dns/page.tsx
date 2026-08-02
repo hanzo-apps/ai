@@ -79,25 +79,38 @@ const useCases = [
   },
 ]
 
+// PRICING IS CUSTOM HERE, deliberately.
+//
+// These tiers used to publish $20 Pro, $25 Team, $200 Enterprise and "$0.10 per
+// 10K queries". Commerce — GET /v1/billing/plans, category `dns`, the rows that
+// actually charge — carries three rows at $0 / $5 / $25, no Team row at any
+// price, and no per-query rate anywhere. So Pro was advertised at 4x what it
+// bills, Enterprise at 8x, and one tier did not exist.
+//
+// Rather than republish the charged numbers, the owner decision is that the only
+// prices Hanzo publishes are personal 20/100/200 and team $25/seat. Everything
+// else is a conversation, because an enterprise deal can be shaped many ways and
+// a number on a page forecloses that. The feature comparison stays — it is what
+// a reader is actually here for.
 const pricingTiers = [
   {
     name: "Starter",
-    price: "Pay-as-you-go",
+    price: "Custom",
     period: "",
     description: "Usage-based pricing for getting started",
     features: [
       "Up to 5 zones",
       "2 DNS providers",
       "CLI and API access",
-      "$0.10 per 10K queries",
+      "Volume-based query pricing",
     ],
-    cta: "Get Started",
-    ctaHref: "https://hanzo.id",
+    cta: "Talk to us",
+    ctaHref: "mailto:sales@hanzo.ai?subject=Hanzo%20DNS",
     highlight: false,
   },
   {
     name: "Pro",
-    price: "$20",
+    price: "Custom",
     period: "/month",
     description: "For teams managing production DNS",
     features: [
@@ -107,13 +120,13 @@ const pricingTiers = [
       "Audit logging",
       "Priority support",
     ],
-    cta: "Subscribe",
-    ctaHref: "https://hanzo.id",
+    cta: "Talk to us",
+    ctaHref: "mailto:sales@hanzo.ai?subject=Hanzo%20DNS",
     highlight: true,
   },
   {
     name: "Team",
-    price: "$25",
+    price: "Custom",
     period: "/month",
     description: "For teams with shared DNS management",
     features: [
@@ -123,13 +136,13 @@ const pricingTiers = [
       "Shared audit log",
       "Priority support",
     ],
-    cta: "Subscribe",
-    ctaHref: "https://hanzo.id",
+    cta: "Talk to us",
+    ctaHref: "mailto:sales@hanzo.ai?subject=Hanzo%20DNS",
     highlight: false,
   },
   {
     name: "Enterprise",
-    price: "$200",
+    price: "Custom",
     period: "/month",
     description: "For organizations with advanced needs",
     features: [

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Globe, Zap, Users, Building2 } from "lucide-react";
-import { loadPlans, type SubscriptionPlan } from "@/lib/plans";
+import { type SubscriptionPlan } from "@/lib/plans";
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
   "world-free": <Globe className="h-6 w-6 text-muted-foreground" />,
@@ -32,8 +32,9 @@ const STATIC_PLANS: SubscriptionPlan[] = [
   {
     id: "world-pro",
     name: "World Pro",
-    priceMonthly: 29,
-    priceAnnual: 290,
+    priceMonthly: null,
+    priceAnnual: null,
+    contactSales: true,
     category: "world",
     popular: true,
     description:
@@ -55,8 +56,9 @@ const STATIC_PLANS: SubscriptionPlan[] = [
   {
     id: "world-team",
     name: "World Team",
-    priceMonthly: 99,
-    priceAnnual: 990,
+    priceMonthly: null,
+    priceAnnual: null,
+    contactSales: true,
     category: "world",
     description:
       "Everything in Pro for up to 5 seats + shared workspace. Included free in Hanzo Team / Team Max / Enterprise.",
@@ -100,11 +102,17 @@ const WorldPricing = () => {
   // Initialize with static plans immediately — no loading flash
   const [plans, setPlans] = useState<SubscriptionPlan[]>(STATIC_PLANS);
 
-  useEffect(() => {
-    loadPlans("world").then((live) => {
-      if (live.length) setPlans(live);
-    });
-  }, []);
+  // NOT wired to loadPlans("world") on purpose, and it must STAY unwired.
+  //
+  // The published catalog is the Go/Dev/Pro/Max ladder plus team at $25/seat and
+  // one Enterprise priced by conversation. World is priced as a deal, so its paid
+  // tiers render through the component's contactSales path rather than a number.
+  //
+  // The world-* rows are no longer published, so commerce archives them on boot:
+  // they stop being offered and stop being purchasable, while the rows survive so
+  // anything already billing against them still resolves. loadPlans("world")
+  // therefore returns [] — which is why this reads from STATIC_PLANS and why
+  // wiring it up "for consistency" would empty the tab.
 
   function formatPrice(plan: SubscriptionPlan) {
     if (plan.contactSales || plan.priceMonthly == null) return "Contact us";

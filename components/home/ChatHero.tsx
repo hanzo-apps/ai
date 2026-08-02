@@ -69,12 +69,18 @@ export default function ChatHero() {
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
           className="absolute left-1/2 top-[44%] h-[680px] w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.13]"
-          style={{ background: 'radial-gradient(circle, #ffffff 0%, transparent 70%)', filter: 'blur(120px)' }}
+          style={{ background: 'radial-gradient(circle, var(--pure-white) 0%, transparent 70%)', filter: 'blur(120px)' }}
         />
         <PointGlobe variant="ambient" arcs={3} className="absolute inset-0 h-full w-full" />
         <div
           className="absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse 46% 40% at 50% 47%, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.4) 42%, transparent 78%)' }}
+          style={{
+            background:
+              'radial-gradient(ellipse 46% 40% at 50% 47%,' +
+              ' color-mix(in srgb, var(--pure-black) 82%, transparent) 0%,' +
+              ' color-mix(in srgb, var(--pure-black) 40%, transparent) 42%,' +
+              ' transparent 78%)',
+          }}
         />
       </div>
 
@@ -146,7 +152,7 @@ export default function ChatHero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="mt-6 text-center text-sm text-neutral-500"
+          className="mt-6 text-center text-sm text-neutral-400"
         >
           Hanzo Chat runs on open models. Free to start —{' '}
           <a href={CHAT} target="_blank" rel="noreferrer noopener" className="text-neutral-300 underline-offset-4 hover:underline">

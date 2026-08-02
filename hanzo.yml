@@ -47,3 +47,12 @@ test:
       pnpm build
       pnpm exec playwright install --with-deps chromium
       pnpm gates
+  # A model's per-token price has one owner (the commerce catalog, published at
+  # api.hanzo.ai/v1/pricing). This fails the build if a second copy is typed into
+  # source, which is how this site came to advertise Enso BELOW what it charged.
+  #
+  # Deliberately NOT folded into `lint` or `gates`: both of those install the
+  # workspace and build, and this needs neither — it only reads git-tracked
+  # files. Kept separate it still reports while `pnpm lint` is broken (see above).
+  - name: price literals
+    run: node scripts/audit-price-literals.mjs

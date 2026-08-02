@@ -18,7 +18,7 @@ const CurrentPlan = () => {
       <div className="flex items-center justify-between">
         <div>
           <div className="text-2xl font-bold">Pro Plan</div>
-          <div className="text-muted-foreground mt-1">$49/month, billed annually</div>
+          <div className="text-muted-foreground mt-1">$16/month, billed annually</div>
         </div>
         <Button onClick={handleUpgradePlan}>Upgrade Plan</Button>
       </div>
