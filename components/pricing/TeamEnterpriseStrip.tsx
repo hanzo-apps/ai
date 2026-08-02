@@ -33,21 +33,31 @@ const SALES_URL = "mailto:sales@hanzo.ai?subject=Hanzo%20Enterprise";
 // Enterprise deliberately has no number here and takes no live value. Its price
 // is the outcome of a conversation, and the catalog's enterprise rows exist to
 // be charged against after that conversation, not to be advertised before it.
-const TEAM_PRICE_FALLBACK = 25;
+const TEAM_FALLBACK = { price: 25, minSeats: 2 };
 
-function useTeamSeatPrice(): number {
-  const [price, setPrice] = useState(TEAM_PRICE_FALLBACK);
+/** The seat price and seat minimum, both from the row commerce charges. */
+function useTeamTerms() {
+  const [terms, setTerms] = useState(TEAM_FALLBACK);
   useEffect(() => {
     loadPlans("team").then((live) => {
-      const seat = live.find((p) => p.priceMonthly != null && p.priceMonthly > 0);
-      if (seat?.priceMonthly) setPrice(seat.priceMonthly);
+      // The cheapest sellable row is the entry seat — `team` today, but read
+      // rather than named so adding a cheaper tier does not silently keep
+      // advertising the old one.
+      const seat = live
+        .filter((p) => p.priceMonthly != null && p.priceMonthly > 0)
+        .sort((a, b) => (a.priceMonthly ?? 0) - (b.priceMonthly ?? 0))[0];
+      if (!seat?.priceMonthly) return;
+      setTerms({
+        price: seat.priceMonthly,
+        minSeats: Number(seat.limits?.minSeats) || TEAM_FALLBACK.minSeats,
+      });
     });
   }, []);
-  return price;
+  return terms;
 }
 
 const TeamEnterpriseStrip = () => {
-  const seat = useTeamSeatPrice();
+  const { price, minSeats } = useTeamTerms();
   return (
   <div className="max-w-6xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-6">
     <div className="p-6 rounded-xl border border-border bg-[var(--black)] flex flex-col">
@@ -56,8 +66,8 @@ const TeamEnterpriseStrip = () => {
         <h3 className="text-lg font-medium">Team</h3>
       </div>
       <p className="text-sm text-muted-foreground mb-6 leading-relaxed flex-1">
-        <span className="text-foreground font-medium">${seat}/user per month</span>,
-        minimum 2 seats. Org workspaces, SSO via Hanzo IAM, and one unified bill
+        <span className="text-foreground font-medium">${price}/user per month</span>,
+        minimum {minSeats} seats. Org workspaces, SSO via Hanzo IAM, and one unified bill
         for everyone — the difference from a personal plan is the org, not the
         model access.
       </p>
