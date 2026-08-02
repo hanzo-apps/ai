@@ -35,16 +35,24 @@ function MegaPanel({ item }: { item: NavItem }) {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-10 sm:px-6 md:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)] lg:px-8">
         {/* Explore — big links. */}
         <div>
-          <div className="mb-5 text-xs font-medium uppercase tracking-widest text-neutral-500">Explore {item.label}</div>
+          <div className="mb-5 text-xs font-medium uppercase tracking-widest text-neutral-400">Explore {item.label}</div>
           <ul className="space-y-0.5">
             {explore.map((l) => (
               <li key={l.label}>
+                {/* items-start + text-left + no-underline are load-bearing, not
+                    decoration. @hanzo/design's tokens/base.css carries BARE element
+                    selectors — `a:hover{text-decoration:underline}` — and an
+                    unlayered rule outranks every layered utility regardless of
+                    specificity, so a nav link picks up a body-copy underline on
+                    hover unless it says otherwise. The alignment is explicit for
+                    the same reason: `flex flex-col` sets no text-align, so the
+                    labels inherit whatever an ancestor happens to say. */}
                 <a
                   href={l.href}
-                  className="group flex flex-col rounded-lg px-2 py-1.5 -mx-2 transition-colors hover:bg-neutral-900"
+                  className="group flex flex-col items-start text-left rounded-lg px-2 py-1.5 -mx-2 no-underline transition-colors hover:bg-neutral-900 hover:no-underline"
                 >
                   <span className="text-2xl font-medium text-white">{l.label}</span>
-                  {l.desc && <span className="text-xs text-neutral-500">{l.desc}</span>}
+                  {l.desc && <span className="text-xs text-neutral-400">{l.desc}</span>}
                 </a>
               </li>
             ))}
@@ -56,13 +64,13 @@ function MegaPanel({ item }: { item: NavItem }) {
           <div className="grid gap-8" style={{ gridTemplateColumns: `repeat(${columns.length}, minmax(0,1fr))` }}>
             {columns.map((col) => (
               <div key={col.title}>
-                <div className="mb-3 text-xs font-medium uppercase tracking-widest text-neutral-500">{col.title}</div>
+                <div className="mb-3 text-xs font-medium uppercase tracking-widest text-neutral-400">{col.title}</div>
                 <ul className="space-y-1">
                   {col.links.map((link) => (
                     <li key={link.label}>
                       <a href={link.href} className="block rounded-lg px-2 py-1.5 -mx-2 transition-colors hover:bg-neutral-900">
                         <span className="text-sm font-medium text-neutral-100">{link.label}</span>
-                        {link.desc && <span className="mt-0.5 block text-xs text-neutral-500">{link.desc}</span>}
+                        {link.desc && <span className="mt-0.5 block text-xs text-neutral-400">{link.desc}</span>}
                       </a>
                     </li>
                   ))}
@@ -216,7 +224,7 @@ export default function LandingNav() {
                       {TRY_LINKS.map((l) => (
                         <a key={l.label} href={l.href} className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-neutral-900">
                           <span className="text-sm font-medium text-neutral-100">{l.label}</span>
-                          {l.desc && <span className="mt-0.5 block text-xs text-neutral-500">{l.desc}</span>}
+                          {l.desc && <span className="mt-0.5 block text-xs text-neutral-400">{l.desc}</span>}
                         </a>
                       ))}
                     </div>
@@ -262,7 +270,7 @@ export default function LandingNav() {
               ))}
 
               <div className="mt-6 border-t border-neutral-800 pt-6">
-                <div className="mb-2 text-xs font-medium uppercase tracking-wide text-neutral-500">Log in</div>
+                <div className="mb-2 text-xs font-medium uppercase tracking-wide text-neutral-400">Log in</div>
                 {LOGIN_LINKS.map((l) => (
                   <a key={l.label} href={l.href} className="block py-2 text-[15px] text-neutral-200">
                     {l.label}
@@ -306,7 +314,7 @@ function MobileSection({ item }: { item: NavItem }) {
               ))}
               {(item.columns ?? []).map((col) => (
                 <div key={col.title} className="mb-3 mt-3">
-                  <div className="mb-1 text-xs font-medium uppercase tracking-wide text-neutral-600">{col.title}</div>
+                  <div className="mb-1 text-xs font-medium uppercase tracking-wide text-neutral-400">{col.title}</div>
                   {col.links.map((link) => (
                     <a key={link.label} href={link.href} className="block py-1.5 pl-2 text-sm text-neutral-300">
                       {link.label}

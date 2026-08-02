@@ -65,7 +65,7 @@ export default function BuildStory() {
           transition={{ duration: 0.5 }}
           className="mx-auto mb-14 max-w-2xl text-center"
         >
-          <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">
+          <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-400">
             Enso → hanzo.app → Hanzo Cloud
           </div>
           <h2 className="text-3xl font-bold text-white md:text-4xl">From frontier model to shipped product</h2>
@@ -89,11 +89,14 @@ export default function BuildStory() {
               >
                 <div
                   className="pointer-events-none absolute inset-0 opacity-70"
-                  style={{ background: 'radial-gradient(120% 120% at 80% 0%, rgba(255,255,255,0.08) 0%, transparent 55%)' }}
+                  style={{
+                    background:
+                      'radial-gradient(120% 120% at 80% 0%, color-mix(in srgb, var(--pure-white) 8%, transparent) 0%, transparent 55%)',
+                  }}
                 />
                 <div className="relative z-10 mb-6 flex items-center justify-between">
                   <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10">{s.mark}</div>
-                  <span className="text-sm font-semibold text-neutral-600">{s.n}</span>
+                  <span className="text-sm font-semibold text-neutral-400">{s.n}</span>
                 </div>
                 <h3 className="relative z-10 text-xl font-semibold text-white">{s.title}</h3>
                 <p className="relative z-10 mt-2 text-[15px] leading-relaxed text-neutral-400">{s.body}</p>
