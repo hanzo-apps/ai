@@ -1,5 +1,5 @@
 import { createServer, type Server } from 'node:http'
-import { createReadStream, existsSync, readFileSync, statSync } from 'node:fs'
+import { createReadStream, existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { extname, join, normalize, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -39,6 +39,36 @@ export function read(relative: string): string {
   const path = join(requireExport(), relative)
   if (!existsSync(path)) throw new Error(`the export has no ${relative}`)
   return readFileSync(path, 'utf8')
+}
+
+/**
+ * Every route the export ships a page for, with the file that answers it.
+ *
+ * The subject of a gate over publication is the whole site, not one page a
+ * spec happened to name: an assertion pinned to `risk.html` says nothing about
+ * the next route added to a list. `/404` and `/_not-found` are Next's own
+ * pages rather than routes of ours — they carry a `noindex` the framework
+ * writes — and the App Router skips `_`-prefixed directories, so both are out.
+ */
+export function pages(): { route: string; file: string }[] {
+  const root = requireExport()
+  const found: { route: string; file: string }[] = []
+  const walk = (dir: string, seg: string[]) => {
+    for (const e of readdirSync(dir, { withFileTypes: true, encoding: 'utf8' })) {
+      const path = join(dir, e.name)
+      if (e.isDirectory()) {
+        if (!e.name.startsWith('_')) walk(path, [...seg, e.name])
+        continue
+      }
+      if (!e.name.endsWith('.html')) continue
+      const name = e.name.slice(0, -'.html'.length)
+      if (name.startsWith('_') || name === '404') continue
+      const route = name === 'index' ? '/' + seg.join('/') : '/' + [...seg, name].join('/')
+      found.push({ route: route === '/' ? '/' : route.replace(/\/$/, ''), file: path })
+    }
+  }
+  walk(root, [])
+  return found
 }
 
 const TYPES: Record<string, string> = {

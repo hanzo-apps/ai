@@ -37,6 +37,15 @@
 name: Deploy (stopgap)
 
 on:
+  # MERGE BY PULL REQUEST, NOT BY FAST-FORWARD. Measured 2026-08-01: seven
+  # commits landed on main that day and GitHub created ZERO push-event runs for
+  # any of them — every run on this repo is `pull_request` or a manual
+  # `workflow_dispatch`. Pushes made as the machine account this estate pushes
+  # with do not trigger workflows, so `push` below is inert for the pushes this
+  # box actually makes and a direct-to-main merge ships ungated. The
+  # `pull_request` half does fire, and is where the gates below really run.
+  # Fixing the push side is an estate-level credential change, not a change to
+  # this file.
   push:
     branches: [main]
   # The gates have to run BEFORE a merge, not after it. `pull_request` is what
