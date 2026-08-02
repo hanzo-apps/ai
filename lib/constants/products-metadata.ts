@@ -153,10 +153,28 @@ export function getProductMetadata(slug: string): ProductMetadata | undefined {
   return productsMetadata[slug];
 }
 
-export function deployUrl(slug: string): string {
-  const meta = productsMetadata[slug];
-  const target = meta?.deploy_slug ?? slug;
-  return `https://console.hanzo.ai/deploy/${target}`;
+/**
+ * The console's App Platform, which is where a deploy actually starts.
+ *
+ * This used to return `/deploy/<product>`, and every one of those 158 links
+ * resolved to the console's 404 view. Nothing could see it: console.hanzo.ai is
+ * a client-rendered SPA that answers 200 with byte-identical HTML for any path,
+ * so status-code and body checks are both blind. It is only visible by reading
+ * the console's own resolver:
+ *
+ *   `deploy` is an ALIAS for the `app-platform` module (its own test asserts
+ *   canonicalSlug(['deploy']) === ['app-platform']), so `/deploy/vector`
+ *   canonicalizes to ['app-platform','vector']. `app-platform` declares only
+ *   `path: ''` routes and no subpages, and `vector` is not one of the shared
+ *   base sub-pages (settings/status/logs/metrics) — so resolveProductView falls
+ *   through every branch to { kind: 'notfound' }.
+ *
+ * Bare `/deploy` resolves, so that is where these point until the console grows
+ * a per-product deploy route. `deploy_slug` stays in the type: it is still the
+ * right shape for that link, and it costs nothing to keep the curated values.
+ */
+export function deployUrl(_slug: string): string {
+  return 'https://console.hanzo.ai/deploy';
 }
 
 export function docsUrl(slug: string): string | null {

@@ -6,11 +6,21 @@ import { Button } from "@hanzo/ui";
 import { Terminal, ArrowRight, Cpu, Bot, Code } from "lucide-react";
 import { CTA_PRIMARY, CTA_OUTLINE } from "./cta";
 
-const shortcuts = [
-  { path: "/dev", name: "hanzo-dev", desc: "AI coding agent", icon: Bot },
-  { path: "/mcp", name: "hanzo-mcp", desc: "MCP server (260+ tools)", icon: Cpu },
-  { path: "/cli", name: "hanzo", desc: "Cloud CLI", icon: Terminal },
-  { path: "/agents", name: "hanzo-agents", desc: "Multi-agent SDK", icon: Code },
+// Each tool names where it actually installs from. `path` is the common case —
+// an install script on hanzo.sh — but it is not a law: hanzo.sh/agents 404ed
+// because the card assumed every tool shipped from the same host, and one does
+// not. `href` + `label` say so explicitly rather than deriving a location.
+const shortcuts: Array<{
+  href: string
+  label: string
+  name: string
+  desc: string
+  icon: typeof Bot
+}> = [
+  { href: "https://hanzo.sh/dev", label: "hanzo.sh/dev", name: "hanzo-dev", desc: "AI coding agent", icon: Bot },
+  { href: "https://hanzo.sh/mcp", label: "hanzo.sh/mcp", name: "hanzo-mcp", desc: "MCP server (260+ tools)", icon: Cpu },
+  { href: "https://hanzo.sh/cli", label: "hanzo.sh/cli", name: "hanzo", desc: "Cloud CLI", icon: Terminal },
+  { href: "https://pypi.org/project/hanzo-agents/", label: "pip install hanzo-agents", name: "hanzo-agents", desc: "Multi-agent SDK", icon: Code },
 ];
 
 const INSTALL = "curl -fsSL hanzo.sh | bash";
@@ -64,8 +74,8 @@ const HanzoDev = () => {
               const Icon = s.icon;
               return (
                 <a
-                  key={s.path}
-                  href={`https://hanzo.sh${s.path}`}
+                  key={s.href}
+                  href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 hover:border-neutral-600 hover:bg-neutral-800/50 transition-colors text-left"
@@ -73,7 +83,7 @@ const HanzoDev = () => {
                   <Icon className="h-5 w-5 text-foreground mb-2" />
                   <div className="font-mono text-sm text-foreground/80">{s.name}</div>
                   <div className="text-xs text-muted-foreground">{s.desc}</div>
-                  <div className="text-xs text-muted-foreground/60 mt-1">hanzo.sh{s.path}</div>
+                  <div className="text-xs text-muted-foreground/60 mt-1">{s.label}</div>
                 </a>
               );
             })}

@@ -280,7 +280,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'k8s', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/gateway',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/gateway',
       githubUrl: 'https://github.com/hanzoai/ai',
       learnUrl: '/zen',
@@ -358,7 +358,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'k8s', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/vector',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/vector',
       githubUrl: 'https://github.com/hanzoai/vector',
       learnUrl: '/vector',
@@ -384,7 +384,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['one-click', 'docker'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/functions',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/functions',
       githubUrl: 'https://github.com/hanzoai/functions',
       learnUrl: '/functions',
@@ -410,7 +410,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/chat',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/chat',
       githubUrl: 'https://github.com/hanzoai/chat',
       learnUrl: '/chat',
@@ -440,7 +440,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/console',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/console',
       githubUrl: 'https://github.com/hanzoai/console',
       learnUrl: '/console',
@@ -470,7 +470,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'active',
     deployment: ['docker', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/flow',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/services/flow',
       githubUrl: 'https://github.com/hanzoai/flow',
       learnUrl: '/flow',
@@ -500,7 +500,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/auto',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/services/auto',
       githubUrl: 'https://github.com/hanzoai/auto',
       learnUrl: '/auto',
@@ -780,7 +780,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['one-click', 'docker'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/sql',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/sql',
       githubUrl: 'https://github.com/hanzoai/sql',
       learnUrl: '/sql',
@@ -806,7 +806,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/kv',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/kv',
       githubUrl: 'https://github.com/hanzoai/kv',
       learnUrl: '/kv',
@@ -832,7 +832,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/search',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/search',
       githubUrl: 'https://github.com/hanzoai/search',
       learnUrl: '/search',
