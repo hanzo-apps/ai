@@ -15,6 +15,11 @@
  * the second spelling appearing, and two sources for one control is how the
  * first one drifted.
  */
+// It imports the TypeScript source directly, which Node strips types from on
+// its own from 22.18. That is the floor `.nvmrc` and `engines` both name, and
+// it is the same floor wrangler already forced on the deploy. The alternative
+// was a second copy of the list in JavaScript, which is the thing this file
+// exists to prevent.
 import { readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { EMPTY, NOINDEX, UNAPPROVED, policy } from '../lib/publish.ts'

@@ -44,6 +44,12 @@ test:
   # is stated, corepack reads it, and a second pin was BOTH wrong (it named
   # 10.33.4 against a 9.15.0 lockfile) and inert (corepack prefers the manifest).
   # `.github/workflows/deploy.yml` says the same thing by passing no `version:`.
+  #
+  # No Node version either, for the same reason: `.nvmrc` and `engines` name the
+  # floor (22.18 — wrangler needs 22, and `scripts/noindex.mjs` reads
+  # `lib/publish` directly, which needs the type stripping Node does for itself
+  # from 22.18). If the reusable provisions something older this step fails on
+  # the import, loudly, which is the right way for a floor to be wrong.
   - name: gates
     run: |
       corepack enable
