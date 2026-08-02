@@ -283,7 +283,7 @@ export const ossCatalog: OSSRepo[] = [
       deployUrl: 'https://cloud.hanzo.ai/deploy/gateway',
       docsUrl: 'https://docs.hanzo.ai/docs/gateway',
       githubUrl: 'https://github.com/hanzoai/ai',
-      learnUrl: '/products/ml/zen',
+      learnUrl: '/zen',
     },
     signals: {
       updatedAt: '2026-01-19',
@@ -308,7 +308,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/mcp',
       githubUrl: 'https://github.com/hanzoai/mcp',
-      learnUrl: '/products/apps/mcp',
+      learnUrl: '/mcp',
       npmUrl: 'https://npmjs.com/package/@hanzo/mcp',
     },
     signals: {
@@ -334,7 +334,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/agents',
       githubUrl: 'https://github.com/hanzoai/agent',
-      learnUrl: '/products/apps/agent',
+      learnUrl: '/agents',
       pypiUrl: 'https://pypi.org/project/hanzoai/',
     },
     signals: {
@@ -387,7 +387,7 @@ export const ossCatalog: OSSRepo[] = [
       deployUrl: 'https://cloud.hanzo.ai/deploy/functions',
       docsUrl: 'https://docs.hanzo.ai/docs/functions',
       githubUrl: 'https://github.com/hanzoai/functions',
-      learnUrl: '/products/compute/functions',
+      learnUrl: '/functions',
     },
     signals: {
       updatedAt: '2026-01-14',
@@ -413,7 +413,7 @@ export const ossCatalog: OSSRepo[] = [
       deployUrl: 'https://cloud.hanzo.ai/deploy/chat',
       docsUrl: 'https://docs.hanzo.ai/docs/chat',
       githubUrl: 'https://github.com/hanzoai/chat',
-      learnUrl: '/products/apps/chat',
+      learnUrl: '/chat',
     },
     signals: {
       updatedAt: '2026-01-16',
@@ -443,7 +443,7 @@ export const ossCatalog: OSSRepo[] = [
       deployUrl: 'https://cloud.hanzo.ai/deploy/console',
       docsUrl: 'https://docs.hanzo.ai/docs/console',
       githubUrl: 'https://github.com/hanzoai/console',
-      learnUrl: '/products/apps/console',
+      learnUrl: '/console',
     },
     signals: {
       updatedAt: '2026-01-13',
@@ -473,7 +473,7 @@ export const ossCatalog: OSSRepo[] = [
       deployUrl: 'https://cloud.hanzo.ai/deploy/flow',
       docsUrl: 'https://docs.hanzo.ai/docs/services/flow',
       githubUrl: 'https://github.com/hanzoai/flow',
-      learnUrl: '/products/async/flow',
+      learnUrl: '/flow',
     },
     signals: {
       updatedAt: '2026-01-12',
@@ -503,7 +503,7 @@ export const ossCatalog: OSSRepo[] = [
       deployUrl: 'https://cloud.hanzo.ai/deploy/auto',
       docsUrl: 'https://docs.hanzo.ai/docs/services/auto',
       githubUrl: 'https://github.com/hanzoai/auto',
-      learnUrl: '/products/async/auto',
+      learnUrl: '/auto',
     },
     signals: {
       updatedAt: '2026-01-11',
@@ -706,7 +706,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/iam',
       githubUrl: 'https://github.com/hanzoai/iam',
-      learnUrl: '/products/platform/iam',
+      learnUrl: '/iam',
     },
     signals: {
       updatedAt: '2026-01-10',
@@ -734,7 +734,7 @@ export const ossCatalog: OSSRepo[] = [
       // enforcement", which is this entry exactly. The docs link already said
       // authz; only the repo name was invented, and hanzoai/policy never existed.
       githubUrl: 'https://github.com/hanzoai/authz',
-      learnUrl: '/products/platform/guard',
+      learnUrl: '/guard',
     },
     signals: {
       updatedAt: '2026-01-09',
@@ -783,7 +783,7 @@ export const ossCatalog: OSSRepo[] = [
       deployUrl: 'https://cloud.hanzo.ai/deploy/sql',
       docsUrl: 'https://docs.hanzo.ai/docs/sql',
       githubUrl: 'https://github.com/hanzoai/sql',
-      learnUrl: '/products/data/sql',
+      learnUrl: '/sql',
     },
     signals: {
       updatedAt: '2026-01-08',
@@ -809,7 +809,7 @@ export const ossCatalog: OSSRepo[] = [
       deployUrl: 'https://cloud.hanzo.ai/deploy/kv',
       docsUrl: 'https://docs.hanzo.ai/docs/kv',
       githubUrl: 'https://github.com/hanzoai/kv',
-      learnUrl: '/products/data/kv',
+      learnUrl: '/kv',
     },
     signals: {
       updatedAt: '2026-01-06',
@@ -835,7 +835,7 @@ export const ossCatalog: OSSRepo[] = [
       deployUrl: 'https://cloud.hanzo.ai/deploy/search',
       docsUrl: 'https://docs.hanzo.ai/docs/search',
       githubUrl: 'https://github.com/hanzoai/search',
-      learnUrl: '/products/data/search',
+      learnUrl: '/search',
     },
     signals: {
       updatedAt: '2026-01-04',
@@ -866,7 +866,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/projects/hanzoai/telemetry',
       githubUrl: 'https://github.com/hanzoai/telemetry',
-      learnUrl: '/products/observability/telemetry',
+      learnUrl: '/telemetry',
     },
     signals: {
       updatedAt: '2026-01-03',
@@ -893,7 +893,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/edge',
       githubUrl: 'https://github.com/hanzoai/edge',
-      learnUrl: '/products/platform/edge',
+      learnUrl: '/edge',
     },
     signals: {
       updatedAt: '2026-01-02',
@@ -918,7 +918,6 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/skills/hanzo-hke',
       githubUrl: 'https://github.com/hanzoai/hke',
-      learnUrl: '/products/platform/hke',
     },
     signals: {
       updatedAt: '2026-01-01',
@@ -2526,7 +2525,7 @@ export const ossCatalog: OSSRepo[] = [
     id: 'zen-nano',
     name: 'Zen Nano',
     slug: 'zenlm/zen-nano',
-    description: '0.6B edge AI model — Qwen3-based, 40K context, optimized for edge deployment.',
+    description: '0.6B edge model — 40K context, optimized for on-device deployment.',
     type: 'core',
     categories: ['AI & Agents'],
     languages: ['Python'],
@@ -2559,7 +2558,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-mini',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-mini',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2574,7 +2572,7 @@ export const ossCatalog: OSSRepo[] = [
     id: 'zen4',
     name: 'Zen4',
     slug: 'zenlm/zen4',
-    description: '8B unbiased AI model — abliterated Qwen3.',
+    description: '8B dense model — abliterated open weights, refusal bias removed.',
     type: 'core',
     categories: ['AI & Agents'],
     languages: ['Python'],
@@ -2583,7 +2581,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4',
-      learnUrl: 'https://huggingface.co/zenlm/zen4',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2607,7 +2604,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-pro',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-pro',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2631,7 +2627,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-max',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-max',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2646,7 +2641,7 @@ export const ossCatalog: OSSRepo[] = [
     id: 'zen4-ultra',
     name: 'Zen4 Ultra',
     slug: 'zenlm/zen4-ultra',
-    description: '1.04T MoE frontier AI model — Kimi K2.5-based, 32B active, 256K context.',
+    description: '1.04T MoE frontier model — 32B active parameters, 256K context.',
     type: 'core',
     categories: ['AI & Agents'],
     languages: ['Python'],
@@ -2655,7 +2650,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-ultra',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-ultra',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2670,7 +2664,7 @@ export const ossCatalog: OSSRepo[] = [
     id: 'zen4-coder',
     name: 'Zen4 Coder',
     slug: 'zenlm/zen4-coder',
-    description: '80B MoE code model — abliterated Qwen3-Coder-Next.',
+    description: '80B MoE code model — abliterated open weights for generation, review and debugging.',
     type: 'core',
     categories: ['AI & Agents', 'Developer Tools'],
     languages: ['Python'],
@@ -2679,7 +2673,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-coder',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-coder',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2703,7 +2696,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-coder-flash',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-coder-flash',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2727,7 +2719,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen-coder',
-      learnUrl: 'https://huggingface.co/zenlm/zen-coder',
     },
     signals: {
       updatedAt: '2026-02-28',
