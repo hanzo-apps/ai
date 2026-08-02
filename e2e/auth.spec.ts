@@ -1,109 +1,71 @@
-import { test, expect } from '@playwright/test';
+// Sign-in on hanzo.ai is a HAND-OFF, not a form.
+//
+// This file used to drive a local login form — "Welcome Back", an email and a
+// password field, a signup flow with a terms checkbox. That UI was deliberately
+// removed: HIP-0111 makes Hanzo IAM the one canonical login surface, and
+// app/(marketing)/login/page.tsx now does nothing but call `login()` from
+// @hanzo/iam/react and render "Redirecting to sign in…". Every assertion in the
+// old file failed against production for that reason alone — the test outlived
+// the UI it described.
+//
+// What is worth testing is the contract that replaced it, and the most valuable
+// assertion is the NEGATIVE one: the marketing site must never grow its own
+// password field again. A local form would not fail loudly — it would look like
+// a feature, and quietly become a second place where credentials are typed.
+//
+// Verified against production while writing this: /login and /signup both land
+// on hanzo.id with response_type=code, scope=openid profile email,
+// code_challenge_method=S256 and redirect_uri=https://hanzo.ai/auth/callback.
+// The canonical `/v1/iam/oauth/authorize` that discovery advertises REDIRECTS to
+// `/login/oauth/authorize`, so arriving at the latter is the correct end state
+// of the former and not the legacy path it resembles.
 
-test.describe('Authentication Flow', () => {
-  test.beforeEach(async ({ page }) => {
-    // Clear localStorage before each test
-    await page.goto('/');
-    await page.evaluate(() => localStorage.clear());
-  });
+import { test, expect } from '@playwright/test'
 
-  test('should show login page', async ({ page }) => {
-    await page.goto('/login');
+for (const entry of ['/login', '/signup']) {
+  test(`${entry} hands off to IAM instead of rendering a form`, async ({ page }) => {
+    test.setTimeout(45000)
+    await page.goto(entry)
 
-    await expect(page.getByRole('heading', { name: 'Welcome Back' })).toBeVisible();
-    await expect(page.getByLabel('Email')).toBeVisible();
-    await expect(page.getByLabel('Password')).toBeVisible();
-    await expect(page.getByRole('button', { name: /sign in/i })).toBeVisible();
-  });
+    // Before the hand-off completes, the stub must not be collecting credentials.
+    expect(
+      await page.locator('input[type="password"]').count(),
+      `${entry} renders a password field on hanzo.ai — HIP-0111 makes IAM the ONE login UI`,
+    ).toBe(0)
 
-  test('should show signup page', async ({ page }) => {
-    await page.goto('/signup');
+    // The redirect is client-side (useEffect -> login()), so wait for the URL to
+    // leave rather than for text on a page that is in the middle of leaving.
+    await page
+      .waitForURL((url) => url.host.includes('hanzo.id'), { timeout: 20000 })
+      .catch(() => {})
 
-    await expect(page.getByRole('heading', { name: 'Create Account' })).toBeVisible();
-    await expect(page.getByLabel('Email')).toBeVisible();
-    await expect(page.locator('#password')).toBeVisible();
-    await expect(page.locator('#confirmPassword')).toBeVisible();
-  });
+    const landed = new URL(page.url())
+    expect(landed.host, `${entry} should hand off to IAM, landed on ${page.url()}`).toContain(
+      'hanzo.id',
+    )
 
-  test('should require email and password to login', async ({ page }) => {
-    await page.goto('/login');
+    // The parts of the request that carry the security properties. PKCE in
+    // particular: without code_challenge_method=S256 this is a bare code flow.
+    const q = landed.searchParams
+    expect(q.get('response_type'), 'response_type').toBe('code')
+    expect(q.get('code_challenge_method'), 'PKCE method must be S256').toBe('S256')
+    expect(q.get('code_challenge'), 'PKCE challenge present').toBeTruthy()
+    expect(q.get('state'), 'state present (CSRF)').toBeTruthy()
+    expect(q.get('scope') ?? '', 'scope').toContain('openid')
+    expect(q.get('redirect_uri') ?? '', 'callback must return to this site').toContain(
+      '/auth/callback',
+    )
+  })
+}
 
-    await page.getByRole('button', { name: /sign in/i }).click();
-
-    // Should show error toast (with extended timeout for toast animation)
-    await expect(page.getByText(/please enter both email and password/i)).toBeVisible({ timeout: 10000 });
-  });
-
-  test('should login successfully with valid credentials', async ({ page }) => {
-    await page.goto('/login');
-
-    await page.locator('#email').fill('test@example.com');
-    await page.locator('#password').fill('password123');
-    await page.getByRole('button', { name: /sign in/i }).click();
-
-    // Should show success toast (with extended timeout for toast animation)
-    await expect(page.getByText(/login successful/i)).toBeVisible({ timeout: 10000 });
-
-    // Should redirect to account page
-    await expect(page).toHaveURL(/\/account/);
-  });
-
-  test('should complete full signup flow', async ({ page }) => {
-    await page.goto('/signup');
-
-    // Step 1: Account details
-    await page.locator('#email').fill('newuser@example.com');
-    await page.locator('#password').fill('SecurePass123!');
-    await page.locator('#confirmPassword').fill('SecurePass123!');
-    await page.locator('#terms').click(); // Agree to terms
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // Step 2: Profile setup
-    await expect(page.getByText(/set up your profile/i)).toBeVisible({ timeout: 10000 });
-    await page.locator('#name').fill('Test User');
-    await page.locator('#organization').fill('Test Company');
-    await page.locator('#role').fill('Developer');
-    await page.getByRole('button', { name: /create account/i }).click();
-
-    // Should show success toast
-    await expect(page.getByText(/account created successfully/i)).toBeVisible({ timeout: 10000 });
-
-    // Should redirect to billing
-    await expect(page).toHaveURL(/\/billing/);
-  });
-
-  test('should validate password match during signup', async ({ page }) => {
-    await page.goto('/signup');
-
-    await page.locator('#email').fill('test@example.com');
-    await page.locator('#password').fill('password123');
-    await page.locator('#confirmPassword').fill('differentpassword');
-    await page.locator('#terms').click();
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // Should show error toast
-    await expect(page.getByText(/passwords do not match/i)).toBeVisible({ timeout: 10000 });
-  });
-
-  test('should require terms agreement during signup', async ({ page }) => {
-    await page.goto('/signup');
-
-    await page.locator('#email').fill('test@example.com');
-    await page.locator('#password').fill('password123');
-    await page.locator('#confirmPassword').fill('password123');
-    // Don't check terms
-    await page.getByRole('button', { name: /continue/i }).click();
-
-    // Should show error toast
-    await expect(page.getByText(/you must agree to the terms/i)).toBeVisible({ timeout: 10000 });
-  });
-
-  test('should navigate between login and signup', async ({ page }) => {
-    await page.goto('/login');
-    await page.getByRole('link', { name: /sign up/i }).click();
-    await expect(page).toHaveURL(/\/signup/);
-
-    await page.getByRole('link', { name: /sign in/i }).click();
-    await expect(page).toHaveURL(/\/login/);
-  });
-});
+test('no route on the marketing site collects a password', async ({ page }) => {
+  // The regression guard for the rule above, across the auth-adjacent routes
+  // that would be the tempting place to add a form back.
+  for (const route of ['/', '/account', '/pricing', '/contact']) {
+    await page.goto(route)
+    expect(
+      await page.locator('input[type="password"]').count(),
+      `${route} renders a password field — credentials belong to IAM only`,
+    ).toBe(0)
+  }
+})
