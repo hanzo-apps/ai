@@ -1,69 +1,161 @@
 #!/usr/bin/env node
 /**
- * Sync pricing from the Hanzo pricing service.
+ * Refresh the committed pricing snapshot from the catalog that owns it.
  *
- * Sources (tried in order):
- *   1. PRICING_API_URL env var
- *   2. https://api.hanzo.ai/v1/pricing (public endpoint)
- *   3. Local sibling repo: ../pricing/data/pricing.json (dev only)
+ * A per-token price has ONE owner — the catalog in commerce.hanzo.ai, published
+ * at api.hanzo.ai/v1/pricing (see scripts/audit-price-literals.mjs, which fails
+ * the build on any second copy). The page reads that catalog live, but a live
+ * read cannot be the only path: the API sets `access-control-allow-origin` to
+ * https://hanzo.ai exactly, so every preview deploy, every local run and every
+ * reader whose request fails renders the committed snapshot instead.
+ *
+ * That snapshot is therefore load-bearing, and it rotted precisely because
+ * nothing refreshed it: this script existed but was never invoked, so
+ * lib/data/pricing.json sat at a hand-run fetch while the catalog moved on.
+ * `prebuild` now runs it, which is the whole fix — the snapshot is re-fetched
+ * on every build or it is not shipped at all.
+ *
+ * Three rules make it safe to run unattended:
+ *
+ *   NEVER FAIL THE BUILD on an unreachable API. The committed snapshot is the
+ *   designed fallback; refusing to build without a network would make a
+ *   marketing page depend on an API being up to deploy.
+ *
+ *   NEVER REGRESS. The endpoint currently serves a snapshot OLDER than the one
+ *   committed here. Writing it would quietly delete four months of catalog. A
+ *   payload is only written when it is genuinely newer.
+ *
+ *   NEVER GO QUIET. Every run prints what it fetched, how old it is, and
+ *   whether Enso is in it — because the failure this repo actually had was not
+ *   a wrong number, it was an absent one that nothing announced.
  *
  * Usage:
- *   node scripts/sync-pricing.mjs              # update data/pricing.json + lib/data/pricing.json
- *   node scripts/sync-pricing.mjs --dry-run    # preview without writing
+ *   node scripts/sync-pricing.mjs
+ *   node scripts/sync-pricing.mjs --dry-run
  */
 
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_PATH = resolve(__dirname, "../data/pricing.json");
-const LIB_DATA_PATH = resolve(__dirname, "../lib/data/pricing.json");
-const LOCAL_PATH = resolve(__dirname, "../../pricing/data/pricing.json");
-const API_URL = process.env.PRICING_API_URL || "https://api.hanzo.ai/v1/pricing";
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+
+// ONE snapshot: the file the page actually imports. There used to be a second
+// copy at data/pricing.json that nothing read — a stale duplicate of a file
+// whose whole problem is duplicated prices.
+const SNAPSHOT = resolve(ROOT, "lib/data/pricing.json");
+const API = process.env.PRICING_API_URL || "https://api.hanzo.ai/v1/pricing";
 const DRY_RUN = process.argv.includes("--dry-run");
 
-async function fetchPricing() {
-  // Try API first
+// Enso is the flagship family and the reason this script now runs on every
+// build: the public price list showed no Enso at all, and nothing said so.
+const ENSO = /^enso(-|$)/;
+
+const read = (path) => {
   try {
-    console.log(`Fetching from API: ${API_URL}`);
-    const res = await fetch(API_URL);
-    if (res.ok) {
-      return res.json();
+    return JSON.parse(readFileSync(path, "utf8"));
+  } catch {
+    return null;
+  }
+};
+
+const stamp = (v) => {
+  const t = Date.parse(v ?? "");
+  return Number.isNaN(t) ? null : t;
+};
+
+const ensoIn = (doc) =>
+  (doc?.hanzoModels ?? []).filter((m) => ENSO.test(String(m?.name ?? ""))).map((m) => m.name);
+
+// `ok: false` is a reason to keep what we have, never a reason to stop the build.
+async function fetchCatalog() {
+  try {
+    const res = await fetch(API, { headers: { accept: "application/json" } });
+    if (!res.ok) return { error: `HTTP ${res.status}` };
+    const doc = await res.json();
+    if (!doc || typeof doc !== "object" || !Array.isArray(doc.hanzoModels)) {
+      return { error: "payload is not a catalog (no hanzoModels array)" };
     }
-    console.warn(`API returned ${res.status}, trying fallbacks...`);
-  } catch (err) {
-    console.warn(`API fetch failed: ${err.message}, trying fallbacks...`);
+    return { doc };
+  } catch (e) {
+    return { error: e.message };
   }
-
-  // Fall back to local sibling repo (for dev)
-  if (existsSync(LOCAL_PATH)) {
-    console.log(`Reading from local: ${LOCAL_PATH}`);
-    return JSON.parse(readFileSync(LOCAL_PATH, "utf8"));
-  }
-
-  throw new Error("No pricing source available (API unreachable and no local file)");
 }
+
+const keep = (why) => {
+  console.warn(`[pricing] keeping the committed snapshot — ${why}`);
+  return 0;
+};
 
 async function main() {
-  const pricing = await fetchPricing();
-  console.log(`  Updated: ${pricing.updated}`);
-  console.log(`  Hanzo models: ${pricing.hanzoModels?.length || 0}`);
-  console.log(`  Third-party: ${pricing.thirdPartyModels?.length || 0}`);
-
-  if (DRY_RUN) {
-    console.log("\n[DRY RUN] Would write to", DATA_PATH, "and", LIB_DATA_PATH);
-    return;
+  const current = read(SNAPSHOT);
+  if (!current) {
+    // No fallback on disk at all: the page would ship with nothing, so this is
+    // the one case where a failed fetch is fatal.
+    console.error(`[pricing] no snapshot at ${SNAPSHOT}`);
   }
 
-  const json = JSON.stringify(pricing, null, 2) + "\n";
-  writeFileSync(DATA_PATH, json);
-  writeFileSync(LIB_DATA_PATH, json);
-  console.log(`\nWritten to ${DATA_PATH}`);
-  console.log(`Written to ${LIB_DATA_PATH}`);
+  console.log(`[pricing] fetching ${API}`);
+  const { doc, error } = await fetchCatalog();
+
+  if (error) {
+    if (!current) throw new Error(`no snapshot on disk and the catalog is unreachable: ${error}`);
+    return keep(error);
+  }
+
+  const fresh = stamp(doc.updated);
+  const held = stamp(current?.updated);
+  const enso = ensoIn(doc);
+
+  console.log(
+    `[pricing] catalog says updated=${doc.updated ?? "(none)"} ` +
+      `hanzoModels=${doc.hanzoModels.length} thirdParty=${doc.thirdPartyModels?.length ?? 0} ` +
+      `enso=${enso.length ? enso.join(",") : "NONE"}`
+  );
+
+  if (current && fresh !== null && held !== null && fresh <= held) {
+    return keep(
+      `the catalog is serving ${doc.updated}, which is not newer than the committed ${current.updated}`
+    );
+  }
+  if (current && (fresh === null || held === null)) {
+    return keep("either the catalog or the snapshot has no usable `updated` stamp to compare");
+  }
+
+  // Provenance travels WITH the data: where it came from and when it was taken.
+  // A snapshot that cannot say how old it is rots invisibly, which is how this
+  // file reached four months stale without anyone noticing.
+  const next = { ...doc, source: API, fetched: new Date().toISOString() };
+
+  if (DRY_RUN) {
+    console.log(`[pricing] --dry-run: would write ${SNAPSHOT}`);
+    return 0;
+  }
+
+  writeFileSync(SNAPSHOT, JSON.stringify(next, null, 2) + "\n");
+  console.log(`[pricing] wrote ${SNAPSHOT}`);
+  return 0;
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+main()
+  .then((code) => {
+    const doc = read(SNAPSHOT);
+    const enso = ensoIn(doc);
+    if (enso.length) {
+      console.log(`[pricing] snapshot carries Enso: ${enso.join(", ")}`);
+    } else {
+      // Loud, and on every single build, until commerce publishes it. The cards
+      // render Enso first when the rows exist (components/pricing/APIPricing.tsx
+      // sorts on ENSO_ORDER) — there is nothing to fix here but the catalog.
+      console.warn(
+        `[pricing] NO ENSO in the snapshot (${doc?.updated ?? "unknown"}). The public\n` +
+          `          price list will not show the flagship family until commerce publishes\n` +
+          `          it to ${API}. Do not hand-type the rates — re-run this script once it lands.`
+      );
+    }
+    process.exit(code);
+  })
+  .catch((err) => {
+    console.error(`[pricing] ${err.message}`);
+    process.exit(1);
+  });

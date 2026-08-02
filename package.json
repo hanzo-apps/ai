@@ -14,8 +14,9 @@
     "test:headed": "playwright test --headed",
     "test:report": "playwright show-report",
     "gen:gui-css": "node scripts/gen-gui-css.mjs",
-    "prebuild": "node scripts/gen-gui-css.mjs",
-    "predev": "node scripts/gen-gui-css.mjs"
+    "prebuild": "node scripts/gen-gui-css.mjs && node scripts/sync-pricing.mjs",
+    "predev": "node scripts/gen-gui-css.mjs",
+    "sync:pricing": "node scripts/sync-pricing.mjs"
   },
   "dependencies": {
     "@hanzo/brand": "^1.4.5",
