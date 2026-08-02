@@ -3,88 +3,32 @@
 import React from "react"
 import { Button } from "@hanzo/ui"
 import { Check } from "lucide-react"
+import { useServiceCard, formatServicePrice, formatUsageRate } from "@/lib/plans"
 
-const tiers = [
-  {
-    name: "Free",
-    price: "$0",
-    period: "/mo",
-    description: "For prototyping and small-scale search",
-    features: [
-      "1M vectors",
-      "256 dimensions",
-      "1 GB RAM",
-      "1 collection",
-      "Community support",
-      "Shared cluster",
-    ],
-    highlighted: false,
-    cta: "Get Started",
-  },
-  {
-    name: "Pro",
-    price: "$25",
-    period: "/mo + usage",
-    description: "For production search and retrieval workloads",
-    features: [
-      "100M vectors",
-      "Up to 2,048 dimensions",
-      "8 GB RAM",
-      "Unlimited collections",
-      "Email support",
-      "Dedicated endpoints",
-      "HNSW + quantization",
-      "Snapshots & backups",
-    ],
-    highlighted: true,
-    cta: "Start Free Trial",
-  },
-  {
-    name: "Business",
-    price: "$99",
-    period: "/mo + usage",
-    description: "For large-scale AI applications",
-    features: [
-      "Unlimited vectors",
-      "Unlimited dimensions",
-      "32 GB RAM",
-      "Unlimited collections",
-      "Dedicated support",
-      "Private endpoints",
-      "Multi-tenant isolation",
-      "Custom sharding",
-      "Priority indexing",
-    ],
-    highlighted: false,
-    cta: "Start Free Trial",
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    description: "For mission-critical deployments",
-    features: [
-      "Dedicated cluster",
-      "Custom RAM & storage",
-      "SSO & SAML",
-      "Audit logs",
-      "Custom SLA",
-      "Named engineer",
-      "BYOC / on-premise",
-      "Volume discounts",
-    ],
-    highlighted: false,
-    cta: "Contact Sales",
-  },
-]
-
-const usageRates = [
-  { resource: "Vectors stored", rate: "$0.015", unit: "/1K vectors/mo", note: "Billed monthly on peak count" },
-  { resource: "Search queries", rate: "$0.10", unit: "/1M queries", note: "Includes filtering & hybrid search" },
-  { resource: "RAM overage", rate: "$0.25", unit: "/GB/hr", note: "Over plan allocation" },
-]
+// The tiers and usage rates come from the catalog (@hanzo/plans first paint,
+// GET /v1/pricing/services live). They used to be two arrays here, which is how
+// this product came to be advertised at two different prices: the Search & Data
+// tab carried its own Vector ladder — Starter $29 / Growth $299 — against this
+// one, and a visitor who opened both tabs saw us contradict ourselves. That tab
+// now points here instead of restating.
 
 export default function VectorPricing() {
+  const card = useServiceCard("vector");
+  const tiers = (card?.tiers ?? []).map((t) => ({
+    name: t.name,
+    price: formatServicePrice(t.priceMonthly),
+    period: t.priceMonthly == null ? "" : `/mo${t.periodNote ? " " + t.periodNote : ""}`,
+    description: t.description ?? "",
+    features: t.features ?? [],
+    highlighted: Boolean(t.popular),
+    cta: t.priceMonthly == null ? "Contact Sales" : "Get Started",
+  }));
+  const usageRates = (card?.usage ?? []).map((u) => ({
+    resource: u.resource,
+    rate: formatUsageRate(u.rate),
+    unit: u.unit,
+    note: u.note ?? "",
+  }));
   return (
     <div className="mb-20">
       <h2 className="text-3xl font-bold mb-2">Hanzo Vector</h2>

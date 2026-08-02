@@ -24,7 +24,8 @@
  * So the catalog is named once, mapped once, and guarded once, here.
  */
 
-import { subscriptionPlans, blockchainPlans } from "@hanzo/plans";
+import { useEffect, useState } from "react";
+import { subscriptionPlans, blockchainPlans, servicePricing } from "@hanzo/plans";
 
 /** A row exactly as GET /v1/billing/plans returns it. */
 interface BillingPlan {
@@ -257,4 +258,95 @@ export function formatCatalogPrice(v: number | null | undefined): string {
   if (v == null) return "Custom";
   if (v === 0) return "Free";
   return `$${v}`;
+}
+
+/* ── Managed services (Search, Crawl, Vector, Console, Managed) ─────────────
+ *
+ * Third catalog, same contract: @hanzo/plans paints first, GET
+ * /v1/pricing/services replaces it on load. These are DISPLAY rate cards — what
+ * a product costs — carrying no entitlement or limit fields, because nothing
+ * bills off them and a number here must never become a grant.
+ */
+
+export interface ServiceTier {
+  name: string;
+  /** null means the price is a conversation, not free. */
+  priceMonthly: number | null;
+  description?: string;
+  features?: string[];
+  popular?: boolean;
+  /** e.g. "+ usage" — rendered after the period. */
+  periodNote?: string;
+}
+
+export interface ServiceUsageRate {
+  resource: string;
+  rate: number;
+  unit: string;
+  note?: string;
+}
+
+/** A row of the Managed Services comparison table. */
+export interface ServiceTableRow {
+  name: string;
+  description: string;
+  freeTier: string;
+  price: string;
+  note: string;
+}
+
+export interface ServiceCard {
+  id: string;
+  name: string;
+  description: string;
+  tiers?: ServiceTier[];
+  usage?: ServiceUsageRate[];
+  table?: ServiceTableRow[];
+}
+
+const SERVICES_API = "https://api.hanzo.ai/v1/pricing/services";
+
+function servicesFrom(doc: unknown): ServiceCard[] {
+  const list = (doc as { services?: ServiceCard[] })?.services;
+  return Array.isArray(list) ? list : [];
+}
+
+/** The published service rate cards, for first paint. */
+export function fallbackServices(): ServiceCard[] {
+  return servicesFrom(servicePricing);
+}
+
+/** One service by catalog id, live-with-fallback, for a single-product tab. */
+export function useServiceCard(id: string): ServiceCard | undefined {
+  const [cards, setCards] = useState<ServiceCard[]>(fallbackServices);
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch(SERVICES_API);
+        if (!res.ok) return;
+        const live = servicesFrom(await res.json());
+        if (live.length) setCards(live);
+      } catch {
+        /* keep the fallback — an empty tab is worse than a last-published one */
+      }
+    })();
+  }, []);
+  return cards.find((c) => c.id === id);
+}
+
+/** Dollars as the service cards render them: $2,499, not $2499. */
+export function formatServicePrice(v: number | null | undefined): string {
+  if (v == null) return "Custom";
+  return `$${v.toLocaleString("en-US")}`;
+}
+
+/**
+ * A usage rate as money. A sub-dollar rate needs at least two decimals to read as
+ * a price at all — 0.1 is $0.10, not $0.1 — while keeping the precision the
+ * catalog states, so $0.015/1K vectors does not round away to a cent.
+ */
+export function formatUsageRate(v: number): string {
+  if (v >= 1) return `$${v.toLocaleString("en-US")}`;
+  const decimals = (String(v).split(".")[1] ?? "").length;
+  return `$${v.toFixed(Math.max(2, decimals))}`;
 }
