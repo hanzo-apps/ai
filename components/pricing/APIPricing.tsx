@@ -55,10 +55,17 @@ interface PricingResponse {
   providers?: Record<string, { total: number; free: number; paid: number }>;
 }
 
-// ── Live catalog (api.hanzo.ai/v1/models) ──────────────────────────────
+// ── Live catalog (api.hanzo.ai/v1/pricing/models) ──────────────────────
 // Backend-driven per-model retail. The static data built below is only a
 // fallback shown until this resolves — never fabricated once live loads.
-const MODELS_API = "https://api.hanzo.ai/v1/models";
+//
+// This reads the PUBLIC catalog, not /v1/models. /v1/models requires a Bearer
+// token and answers 401 to an anonymous visitor, so on a public marketing page
+// the fetch below always threw and every reader silently got the fallback — a
+// snapshot carrying no Enso at all. The price cards were not stale, they were
+// absent, and the failure was invisible because falling back is the catch arm's
+// normal behaviour. /v1/pricing/models is the same catalog, unauthenticated.
+const MODELS_API = "https://api.hanzo.ai/v1/pricing/models";
 
 interface ApiModel {
   id: string;
@@ -82,7 +89,9 @@ interface ApiModelsResponse {
   updated?: string;
   summary?: PricingSummary;
   families?: Array<{ id: string; name: string; models?: string[] }>;
-  data?: ApiModel[];
+  // The public catalog keys its list `models` and identifies each entry by
+  // `name`; the token-gated /v1/models used `data` and `id`.
+  models?: ApiModel[];
 }
 
 /** api.hanzo.ai/v1/models item → the Hanzo model card shape. */
@@ -249,7 +258,7 @@ const APIPricing = () => {
         return r.json();
       })
       .then((d: ApiModelsResponse) => {
-        const models = (d.data || []).filter((m) => !String(m.id).startsWith("router:"));
+        const models = (d.models || []).filter((m) => !String(m.name || m.id).startsWith("router:"));
         if (!models.length) return;
         const hanzo = models.filter((m) => (m.provider || "Hanzo") === "Hanzo");
         const third = models.filter((m) => m.provider && m.provider !== "Hanzo");
