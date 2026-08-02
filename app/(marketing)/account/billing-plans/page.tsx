@@ -23,7 +23,12 @@ const BillingPlans = () => {
   const { checkout, billingInfo } = useBilling();
   const [isUpgrading, setIsUpgrading] = useState(false);
 
-  // Mirrors https://api.hanzo.ai/v1/plans — keep in lockstep.
+  // Mirrors https://api.hanzo.ai/v1/billing/plans, category `personal` — the rows
+  // commerce CHARGES. It used to name /v1/plans, which is a different product
+  // (Cloud VM tiers: vcpus/memoryGB/diskGB, no features). That mix-up is exactly
+  // what lib/plans.ts was written to prevent, and it is how this page came to
+  // publish Pro at $49 while billing took $20. Live today: developer $0, pro $20,
+  // plus $100, max $200.
   const plans = [
     {
       id: 'developer',
@@ -44,7 +49,7 @@ const BillingPlans = () => {
     {
       id: 'pro',
       name: 'Pro',
-      price: 49,
+      price: 20,
       interval: 'month',
       description: 'For developers shipping real products',
       features: [

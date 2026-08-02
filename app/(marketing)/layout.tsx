@@ -35,8 +35,16 @@ export default function MarketingLayout({
     <AccountProvider>
       <BillingProvider>
         <div className="min-h-screen bg-black text-white">
+          {/* Keyboard users land on the nav first and would otherwise tab through
+              every menu on every page before reaching the content. */}
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:border focus:border-neutral-700 focus:bg-black focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+          >
+            Skip to content
+          </a>
           <LandingNav />
-          <main>{children}</main>
+          <main id="main">{children}</main>
           <LandingFooter />
         </div>
       </BillingProvider>

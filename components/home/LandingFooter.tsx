@@ -14,14 +14,14 @@ export default function LandingFooter() {
               <HanzoLogo variant="white" size={22} />
               <span className="text-[15px] font-semibold tracking-tight text-white">Hanzo</span>
             </a>
-            <p className="mt-3 max-w-[16rem] text-sm text-neutral-500">
+            <p className="mt-3 max-w-[16rem] text-sm text-neutral-400">
               The AI cloud for agents and apps.
             </p>
           </div>
 
           {FOOTER.map((col) => (
             <div key={col.title}>
-              <div className="mb-3 text-xs font-medium uppercase tracking-wide text-neutral-500">
+              <div className="mb-3 text-xs font-medium uppercase tracking-wide text-neutral-400">
                 {col.title}
               </div>
               {/* Each link is a full 44px row: an 18px inline <a> is an unhittable
@@ -44,7 +44,7 @@ export default function LandingFooter() {
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-neutral-900 pt-8 sm:flex-row">
-          <p className="text-sm text-neutral-500">
+          <p className="text-sm text-neutral-400">
             © {new Date().getFullYear()} Hanzo AI, Inc. All rights reserved.
           </p>
           <a
@@ -52,7 +52,7 @@ export default function LandingFooter() {
             target="_blank"
             rel="noreferrer noopener"
             aria-label="Hanzo on GitHub"
-            className="text-neutral-500 transition-colors hover:text-white"
+            className="text-neutral-400 transition-colors hover:text-white"
           >
             <Github className="h-5 w-5" />
           </a>

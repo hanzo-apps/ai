@@ -41,6 +41,9 @@ importers:
       '@hanzo/observe':
         specifier: ^0.1.0
         version: 0.1.1(react@19.2.8)
+      '@hanzo/plans':
+        specifier: ^1.4.8
+        version: 1.4.8
       '@hanzo/ui':
         specifier: ^8.0.36
         version: 8.0.38(obptvpjqtcsclbx7ws7xwkv3ri)
@@ -853,6 +856,9 @@ packages:
     peerDependenciesMeta:
       react:
         optional: true
+
+  '@hanzo/plans@1.4.8':
+    resolution: {integrity: sha512-16HHVPCokqnVeHgjzOE5ttILgtkWEM4Ftp0bxVIjzR62wZ1CQsTxZU0R7xDvZyPUhlG/03aI9+mOPK3WFAOICA==}
 
   '@hanzo/products@0.2.0':
     resolution: {integrity: sha512-SGVBJvJOyN5a7DXacwlRpLOoDjNXGx5ucWMkRAp/ZUP7DOqm9lZlypGG+uXvLmURIUr3SQ152jVgSugm0vXIjw==}
@@ -5526,6 +5532,8 @@ snapshots:
       '@hanzo/event': 0.3.8(react@19.2.8)
     optionalDependencies:
       react: 19.2.8
+
+  '@hanzo/plans@1.4.8': {}
 
   '@hanzo/products@0.2.0(@hanzogui/lucide-icons-2@8.0.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)':
     optionalDependencies:

@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
-import { Github, Code, Zap, Users, Rocket } from "lucide-react";
-import { loadPlans, type SubscriptionPlan } from "@/lib/plans";
+import { Code, Zap, Users, Rocket } from "lucide-react";
+import { loadPlans, fallbackPlans, type SubscriptionPlan } from "@/lib/plans";
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
-  developer: <Github className="h-6 w-6 text-muted-foreground" />,
-  pro: <Code className="h-6 w-6 text-muted-foreground" />,
-  plus: <Zap className="h-6 w-6 text-muted-foreground" />,
+  go: <Rocket className="h-6 w-6 text-muted-foreground" />,
+  dev: <Code className="h-6 w-6 text-muted-foreground" />,
+  pro: <Zap className="h-6 w-6 text-muted-foreground" />,
   max: <Users className="h-6 w-6 text-muted-foreground" />,
 };
 
@@ -32,7 +32,7 @@ function planCtaLabel(): string {
 // OSS model is downloadable and self-hostable at no cost, which is a different
 // offer from a $0 tier of the hosted product and should not be dressed up as
 // one. A "Free" card sitting in the paid lineup read as the entry tier and
-// buried the actual entry tier at $20.
+// buried the actual entry tier.
 //
 // So a plan priced at 0 is DROPPED here rather than removed from the catalog:
 // /v1/billing/plans still serves `developer`, and the live response replaces
@@ -42,84 +42,17 @@ function planCtaLabel(): string {
 const isSellable = (p: SubscriptionPlan) =>
   p.priceMonthly != null && p.priceMonthly > 0;
 
-// Static fallback mirrors /v1/billing/plans (category: personal) — see lib/plans.
-// The live response replaces these on load — keep the two in lockstep.
-const STATIC_PLANS: SubscriptionPlan[] = [
-  {
-    id: 'pro',
-    name: 'Pro',
-    description: 'For developers shipping real products. One $20 subscription with unified AI usage across hanzo.ai, hanzo.app, and hanzo.team — Hanzo World Pro included.',
-    priceMonthly: 20,
-    priceAnnual: 16,
-    category: 'personal',
-    popular: true,
-    features: [
-      '$20/mo included usage',
-      'Unified AI usage across hanzo.ai, hanzo.app & hanzo.team',
-      'hanzo.team access — invite up to 3 guests',
-      '500 requests/min',
-      '1M tokens/min',
-      '$5/mo cloud credits included',
-      'Email support',
-      'Analytics dashboard',
-      'Priority inference',
-      'Hanzo World Pro — live OSINT, ZAP + MCP API, unlimited alerts (included)',
-      'Pay-as-you-go beyond included usage',
-      'Earn up to 20% on idle compute & LLM resale',
-    ],
-  },
-  {
-    id: 'plus',
-    name: 'Plus',
-    description: '5x Pro for power users. Unified AI usage across hanzo.ai, hanzo.app, and hanzo.team with max-tier models and priority support.',
-    priceMonthly: 100,
-    priceAnnual: 80,
-    category: 'personal',
-    features: [
-      'Everything in Pro, 5x the usage',
-      '$100/mo included usage',
-      'Unified AI usage across hanzo.ai, hanzo.app & hanzo.team',
-      'hanzo.team access — invite up to 3 guests',
-      '2500 requests/min',
-      '5M tokens/min',
-      '$25/mo cloud credits included',
-      'Max-tier model access',
-      'Priority support',
-      'Hanzo World Pro included',
-      'Earn up to 20% on idle compute & LLM resale',
-    ],
-  },
-  {
-    id: 'max',
-    name: 'Max',
-    description: 'Maximum AI power for individuals. 20x Pro usage, unlimited premium models, and unified AI usage across hanzo.ai, hanzo.app, and hanzo.team.',
-    priceMonthly: 200,
-    priceAnnual: 160,
-    pricePerUser: true,
-    category: 'personal',
-    features: [
-      'Everything in Plus',
-      'Unlimited premium model access (Zen, Claude, GPT-4o, etc.)',
-      'Unified AI usage across hanzo.ai, hanzo.app & hanzo.team',
-      'hanzo.team access — invite up to 3 guests',
-      'Priority inference across all models',
-      '5000 requests/min',
-      '10M tokens/min',
-      '$100/mo cloud credits included',
-      'Custom model fine-tuning',
-      'Dedicated support channel',
-      'Pay-as-you-go or prepay for additional cloud usage',
-      'Hanzo World Pro included',
-      'Earn up to 20% on idle compute & LLM resale',
-    ],
-  },
-];
+// There is no static ladder here any more. It used to be a hand-copied array of
+// plan rows, which is precisely how this page came to publish Pro at one price
+// while billing charged another: a copy cannot know its source moved. The
+// first-paint fallback now comes from @hanzo/plans — the same package commerce
+// seeds its catalog from — and the live catalog replaces it on load.
 
 const PersonalPlans = () => {
   // Commerce is the price authority — /v1/billing/plans, fetched on load. The
   // static array is a first-paint fallback so the page never flashes empty, not
   // a second source of truth: whatever commerce returns replaces it wholesale.
-  const [plans, setPlans] = useState<SubscriptionPlan[]>(STATIC_PLANS.filter(isSellable));
+  const [plans, setPlans] = useState<SubscriptionPlan[]>(fallbackPlans("personal").filter(isSellable));
 
   useEffect(() => {
     loadPlans("personal").then((live) => {
@@ -142,7 +75,7 @@ const PersonalPlans = () => {
 
   return (
     <div className="max-w-6xl mx-auto mb-12">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {plans.map((plan) => (
           <PricingPlan
             key={plan.id}
