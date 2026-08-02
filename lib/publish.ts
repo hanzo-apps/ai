@@ -41,8 +41,17 @@ export const UNAPPROVED: readonly string[] = []
 
 export type Policy = 'public' | 'private' | 'unapproved'
 
-/** A route is "under" a prefix when it is the prefix or a descendant of it. */
-const under = (route: string, prefix: string) => route === prefix || route.startsWith(prefix + '/')
+/**
+ * A route is "under" a prefix when it is the prefix or a descendant of it.
+ *
+ * The query is not part of the route. A static export serves the same bytes for
+ * `/login` and `/login?next=/account`, so they are one page and must have one
+ * policy — and a crawler that may fetch the second has fetched the first.
+ */
+const under = (route: string, prefix: string) => {
+  const path = route.split(/[?#]/)[0]
+  return path === prefix || path.startsWith(prefix + '/')
+}
 
 /** The one predicate. Everything else here is a projection of it. */
 export function policy(route: string): Policy {
@@ -63,14 +72,17 @@ export function indexable(route: string): boolean {
  * SEGMENT — two different rules, and writing the segment as if it were the
  * string is what put the live /authz product page behind `Disallow: /auth`.
  * RFC 9309 §2.2.2 gives the grammar to say what is meant: `$` ends the match.
- * So one prefix becomes two lines — the route itself, anchored, and everything
- * beneath it — and the pair covers exactly `under()`.
+ * So one prefix becomes the three URL FORMS that are the same route — itself
+ * anchored, everything beneath it, and itself with a query on it. The third is
+ * not decoration: `/login$` does not match `/login?next=/account`, and a login
+ * URL is exactly the one that gets linked with a query. Together they cover
+ * `under()` over URLs, not merely over paths.
  *
  * Unexported, and the only place a Disallow line is spelled. `app/robots.ts`
  * emits DISALLOW and cannot reach the prefixes, so a bare string prefix is not
  * a thing that surface can write.
  */
-const lines = (prefix: string) => [prefix + '$', prefix + '/']
+const lines = (prefix: string) => [prefix + '$', prefix + '/', prefix + '?']
 
 /** Control 2 — the robots.txt `Disallow` lines. Private routes only. */
 export const DISALLOW: readonly string[] = PRIVATE.flatMap(lines)

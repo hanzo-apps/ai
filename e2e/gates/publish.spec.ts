@@ -81,6 +81,16 @@ test('a Disallow line means the segment, under the crawler’s own matching rule
     '/risky',
     '/',
     '/api',
+    // The URL forms, not just the paths. A crawler asks for a URL, and
+    // `/login?next=/account` is the shape a login link actually has — matched
+    // by neither `/login$` nor `/login/`, so with two lines per prefix the
+    // whole auth surface stayed fetchable behind a query string.
+    '/auth/callback?code=x',
+    '/login?next=/account',
+    '/account?tab=billing',
+    '/authz?tab=scopes',
+    '/accountability?x=1',
+    '/risky?x=1',
   ]
   for (const route of probes) {
     expect(covered(route), `${route}: Disallow coverage must equal the private segment`).toBe(
@@ -91,10 +101,12 @@ test('a Disallow line means the segment, under the crawler’s own matching rule
 
 test('robots.txt disallows every private route and no unapproved one', () => {
   const txt = read('robots.txt')
+  // Read back as lines, not as a regex built from the line: a Disallow pattern
+  // is not a regular expression, and `/auth?` compiled as one makes the `h`
+  // optional and matches `Disallow: /aut`. Comparing the parsed lines is exact.
+  const emitted = disallowed()
   for (const line of DISALLOW) {
-    expect(txt, `${line} must be disallowed`).toMatch(
-      new RegExp(`^Disallow:\\s*${line.replace(/\$/g, '\\$')}\\s*$`, 'm'),
-    )
+    expect(emitted, `${line} must be disallowed`).toContain(line)
   }
   // The other half, and the one that matters: an unapproved route must NOT be
   // disallowed. A crawler forbidden to fetch it never reads the noindex it
