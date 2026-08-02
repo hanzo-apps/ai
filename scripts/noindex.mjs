@@ -26,7 +26,10 @@ import { EMPTY, NOINDEX, UNAPPROVED, policy } from '../lib/publish.ts'
 import { shipped } from '../lib/routes.ts'
 
 const OUT = join(import.meta.dirname, '..', 'out')
-const HEAD = /<head(\s[^>]*)?>/
+// At the END of the head, not the start: the character encoding declaration is
+// supposed to be the first thing in there, and a tag inserted ahead of it pushes
+// `<meta charSet>` down for no reason. Anywhere in the head is equally read.
+const HEAD = '</head>'
 const EXISTING = /<meta[^>]+name=["']robots["']/i
 
 const pages = shipped(OUT)
@@ -49,7 +52,7 @@ for (const { route, file } of pages) {
   if (EXISTING.test(html)) {
     throw new Error(`${route} already declares a robots tag: lib/publish is the one place that decides this`)
   }
-  if (!HEAD.test(html)) throw new Error(`${route} has no <head> to carry the tag`)
-  writeFileSync(file, html.replace(HEAD, (head) => head + NOINDEX))
+  if (!html.includes(HEAD)) throw new Error(`${route} has no <head> to carry the tag`)
+  writeFileSync(file, html.replace(HEAD, NOINDEX + HEAD))
 }
 console.log(`noindex: ${withheld.size} of ${pages.length} exported pages withheld from indexing`)
