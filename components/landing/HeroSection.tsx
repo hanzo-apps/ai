@@ -9,7 +9,6 @@ import {
   Check,
 } from "lucide-react";
 import { capabilityCount } from "@/lib/data/cloud-primitives";
-import { BRAND } from "@/lib/constants/brand";
 
 // The one CLI proof-point shown inside the product preview. One demo, no
 // rotation, no step-typing — the same install line the copy button yields.
@@ -34,14 +33,22 @@ const STAT_BAND: ReadonlyArray<{ label: string; href: string; dynamic?: "models"
 // Rows rendered inside the animated console preview — a stylized, on-brand
 // snapshot of console.hanzo.ai (NOT a screenshot, so it never goes stale). Each
 // metric animates in on mount, restoring the motion the static terminal dropped.
-// Monochrome: three steps down the brand's neutral ramp give subtle variety
-// without introducing hue (white → neutral-300 → neutral-400).
+// Monochrome: three steps down the TEXT RANK ladder give subtle variety without
+// introducing hue. These were three raw hexes off lib/constants/brand.ts
+// (#ffffff / #d4d4d4 / #a3a3a3); the ranks are what those hexes were
+// approximating, and they are the values that retune with the theme.
 const CONSOLE_METRICS = [
-  { label: "Agents running", value: "12", accent: BRAND.primary },
-  { label: "Requests / min", value: "48.2k", accent: BRAND.secondary },
-  { label: "Models served", value: "390+", accent: BRAND.hover },
+  { label: "Agents running", value: "12", accent: "var(--text-primary)" },
+  { label: "Requests / min", value: "48.2k", accent: "var(--text-secondary)" },
+  { label: "Models served", value: "390+", accent: "var(--text-tertiary)" },
 ];
 const CONSOLE_NAV = ["Agents", "Models", "Vector", "Gateway", "IAM", "Audit"];
+
+// The ruled backdrop. 50% white is not a rung on @hanzo/design's opacity ladder
+// (.05 .10 .15 .20 .30 .40 .60 .80), so it is mixed off --pure-white rather than
+// snapped — the wrapper already masks it to 2%, and changing the alpha would
+// change how the grid reads. One value, named once, used by both axes.
+const GRID_LINE = "color-mix(in srgb, var(--pure-white) 50%, transparent)";
 
 // useModelCount resolves the live number of models the gateway serves, so the
 // hero's "N+ open models" is a real figure, not a hardcoded one. Static export →
@@ -94,7 +101,7 @@ const HeroSection = () => {
             transition={{ opacity: { duration: 1.5 }, x: { duration: 18, repeat: Infinity, ease: "easeInOut" }, y: { duration: 22, repeat: Infinity, ease: "easeInOut" } }}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
-              background: `radial-gradient(circle, ${BRAND.primary} 0%, transparent 70%)`,
+              background: "radial-gradient(circle, var(--pure-white) 0%, transparent 70%)",
               filter: "blur(100px)",
             }}
           />
@@ -104,7 +111,7 @@ const HeroSection = () => {
             transition={{ opacity: { duration: 1.5, delay: 0.2 }, x: { duration: 20, repeat: Infinity, ease: "easeInOut" }, y: { duration: 16, repeat: Infinity, ease: "easeInOut" } }}
             className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full"
             style={{
-              background: `radial-gradient(circle, ${BRAND.secondary} 0%, transparent 70%)`,
+              background: "radial-gradient(circle, var(--neutral-300) 0%, transparent 70%)",
               filter: "blur(80px)",
             }}
           />
@@ -114,7 +121,7 @@ const HeroSection = () => {
             transition={{ duration: 1.5, delay: 0.3 }}
             className="absolute -bottom-48 -left-48 w-[600px] h-[600px] rounded-full"
             style={{
-              background: "radial-gradient(circle, #ffffff 0%, transparent 70%)",
+              background: "radial-gradient(circle, var(--pure-white) 0%, transparent 70%)",
               filter: "blur(100px)",
             }}
           />
@@ -124,8 +131,8 @@ const HeroSection = () => {
         <div
           className="absolute inset-0 opacity-[0.02] z-0"
           style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
-                             linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(${GRID_LINE} 1px, transparent 1px),
+                             linear-gradient(90deg, ${GRID_LINE} 1px, transparent 1px)`,
             backgroundSize: '60px 60px',
           }}
         />
@@ -265,9 +272,12 @@ const HeroSection = () => {
                 {/* Browser chrome */}
                 <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border bg-secondary">
                   <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]/70" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#febc2e]/70" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]/70" />
+                    {/* The only saturated colour on this hero. @hanzo/design owns
+                        these three exactly (--chrome-dot-*), alpha included, so the
+                        /70 modifier goes with the hex. */}
+                    <div className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-red)]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-yellow)]" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-green)]" />
                   </div>
                   <div className="ml-2 flex-1 flex items-center justify-center">
                     <span className="text-[11px] text-muted-foreground font-mono px-3 py-1 rounded-md bg-background/60 border border-border/60">
@@ -333,7 +343,7 @@ const HeroSection = () => {
                               animate={{ height: `${h}%` }}
                               transition={{ duration: 0.6, delay: 0.8 + i * 0.04, ease: "easeOut" }}
                               className="flex-1 rounded-sm"
-                              style={{ background: `linear-gradient(to top, ${BRAND.hover}, ${BRAND.primary})` }}
+                              style={{ background: "linear-gradient(to top, var(--neutral-400), var(--pure-white))" }}
                             />
                           ))}
                         </div>
