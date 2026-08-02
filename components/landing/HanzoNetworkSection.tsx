@@ -9,6 +9,11 @@ import { Github, Network, ArrowRight, Cpu, ShieldCheck, Globe } from "lucide-rea
 // The flagship WebGL point-globe — client-only + code-split (never SSR/build).
 const PointGlobe = dynamic(() => import("@/components/webgl/PointGlobe"), { ssr: false });
 
+// The ruled backdrop. 50% white is not a rung on @hanzo/design's opacity ladder,
+// so it is mixed off --pure-white rather than snapped — the wrapper masks it to
+// 2.5% and changing the alpha would change how the grid reads.
+const GRID_LINE = "color-mix(in srgb, var(--pure-white) 50%, transparent)";
+
 const NETWORK_CARDS = [
   {
     icon: Cpu,
@@ -63,13 +68,12 @@ const HanzoNetworkSection = () => {
           <div className="pointer-events-none absolute inset-0">
             <div
               className="absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.14]"
-              style={{ background: "radial-gradient(circle, #ffffff 0%, transparent 70%)", filter: "blur(120px)" }}
+              style={{ background: "radial-gradient(circle, var(--pure-white) 0%, transparent 70%)", filter: "blur(120px)" }}
             />
             <div
               className="absolute inset-0 opacity-[0.025]"
               style={{
-                backgroundImage:
-                  "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+                backgroundImage: `linear-gradient(${GRID_LINE} 1px, transparent 1px), linear-gradient(90deg, ${GRID_LINE} 1px, transparent 1px)`,
                 backgroundSize: "48px 48px",
               }}
             />
@@ -77,7 +81,7 @@ const HanzoNetworkSection = () => {
           <PointGlobe variant="hero" arcs={4} className="relative mx-auto block h-[360px] w-full sm:h-[460px]" />
           <div
             className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
-            style={{ background: "linear-gradient(to top, #000 0%, transparent 100%)" }}
+            style={{ background: "linear-gradient(to top, var(--pure-black) 0%, transparent 100%)" }}
           />
         </motion.div>
 
