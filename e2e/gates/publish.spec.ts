@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { DISALLOW, EMPTY, PRIVATE, UNAPPROVED, indexable, matches, policy } from '../../lib/publish'
+import { DISALLOW, EMPTY, NOINDEX, PRIVATE, UNAPPROVED, indexable, matches, policy } from '../../lib/publish'
 import { copy } from '../../lib/routes'
 import { OUT, ROOT, pages, read } from './export'
 
@@ -21,12 +21,16 @@ import { OUT, ROOT, pages, read } from './export'
  * and twenty of them shipped under a floor that counted routes.
  */
 
-const NOINDEX = /<meta name="robots" content="[^"]*noindex/
-
-/** Every route whose shipped page carries a noindex, read from the export. */
+/**
+ * Every route whose shipped page carries a noindex, read from the export.
+ *
+ * Matched against `lib/publish`'s own spelling rather than a pattern written
+ * here: the gate that says the tag has one spelling would be worth nothing if
+ * the gate itself held a second one.
+ */
 function noindexed(): string[] {
   return pages()
-    .filter(({ file }) => NOINDEX.test(readFileSync(file, 'utf8')))
+    .filter(({ file }) => readFileSync(file, 'utf8').includes(NOINDEX))
     .map(({ route }) => route)
     .sort()
 }
@@ -241,6 +245,7 @@ test('every route declared empty is empty, and grows out of the list', () => {
     expect(rendered.has(route), `${route} is withheld and ships no page at all`).toBe(true)
   }
   const published = offered()
+    .filter((route) => policy(route) === 'public')
     .map((route) => ({ route, chars: rendered.get(route)?.length ?? 0 }))
     .sort((a, b) => a.chars - b.chars)
   expect(published.length, 'the comparison is against the published pages, so there must be some').toBeGreaterThan(50)
@@ -257,8 +262,8 @@ test('every route declared empty is empty, and grows out of the list', () => {
 test('an approved page ships no noindex', () => {
   // The inverse case. Without it, a change that noindexed the whole site would
   // pass every assertion above.
-  expect(read('api.html')).not.toMatch(NOINDEX)
-  expect(read('authz.html'), '/authz is a product page and stays indexable').not.toMatch(NOINDEX)
+  expect(read('api.html')).not.toContain(NOINDEX)
+  expect(read('authz.html'), '/authz is a product page and stays indexable').not.toContain(NOINDEX)
 })
 
 test('the auth surfaces stay private', () => {
@@ -289,8 +294,12 @@ test('the noindex tag is spelled once and written once', () => {
   // says nothing else in the tree does either. The build step is the other half:
   // it refuses to stamp a page that already carries a robots tag, so a second
   // author is a failed build rather than a quietly duplicated directive.
+  // Spelled: the tag itself, or Next's `robots:` metadata key, anywhere in the
+  // tree. Written: whoever imports the one spelling.
   const SPELLED = /<meta[^>]*name=["']robots["']|robots:\s*(\{|robots\()/
-  const found: string[] = []
+  const WRITES = /\bNOINDEX\b/
+  const spells: string[] = []
+  const writes: string[] = []
   const walk = (dir: string) => {
     for (const e of readdirSync(dir, { withFileTypes: true, encoding: 'utf8' })) {
       const path = join(dir, e.name)
@@ -299,12 +308,16 @@ test('the noindex tag is spelled once and written once', () => {
         continue
       }
       if (!/\.(tsx|ts|mjs|js)$/.test(e.name)) continue
-      if (SPELLED.test(readFileSync(path, 'utf8'))) found.push(path.slice(ROOT.length + 1))
+      const source = readFileSync(path, 'utf8')
+      const name = path.slice(ROOT.length + 1)
+      if (SPELLED.test(source)) spells.push(name)
+      if (WRITES.test(source) && name !== 'lib/publish.ts') writes.push(name)
     }
   }
+  // The shipping tree only. A spec is not a page and cannot write into the
+  // export; what it may not do is spell the tag a second time, and it does not
+  // — it imports the one spelling and matches the shipped bytes against it.
   for (const dir of ['app', 'lib', 'scripts', 'components']) walk(join(ROOT, dir))
-  expect(found.sort(), 'lib/publish spells it; scripts/noindex writes it; no page states it').toEqual([
-    'lib/publish.ts',
-    'scripts/noindex.mjs',
-  ])
+  expect(spells.sort(), 'the tag is spelled in one place, and no page states it').toEqual(['lib/publish.ts'])
+  expect(writes.sort(), 'and one build step writes it into the export').toEqual(['scripts/noindex.mjs'])
 })
