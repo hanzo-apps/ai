@@ -92,7 +92,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
 
   const primaryAction = repo.signals.deployable && repo.actions.deployUrl
     ? { label: 'Deploy', url: repo.actions.deployUrl, icon: Rocket }
-    : repo.type === 'template'
+    : repo.type === 'template' && repo.actions.githubUrl
     ? { label: 'Use Template', url: repo.actions.githubUrl, icon: Package }
     : null;
 
@@ -139,11 +139,13 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
               </a>
             </Button>
           )}
-          <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-foreground" asChild>
-            <a href={repo.actions.githubUrl || "#"} target="_blank" rel="noopener noreferrer">
-              <Github className="w-4 h-4" />
-            </a>
-          </Button>
+          {repo.actions.githubUrl && (
+            <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-foreground" asChild>
+              <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer">
+                <Github className="w-4 h-4" />
+              </a>
+            </Button>
+          )}
         </div>
       </motion.div>
     );
@@ -227,14 +229,14 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
               {primaryAction.label}
             </a>
           </Button>
-        ) : (
+        ) : repo.actions.githubUrl ? (
           <Button size="sm" variant="outline" className="flex-1 border-border hover:bg-accent" asChild>
-            <a href={repo.actions.githubUrl || "#"} target="_blank" rel="noopener noreferrer">
+            <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer">
               <Github className="w-3.5 h-3.5 mr-1.5" />
               View Source
             </a>
           </Button>
-        )}
+        ) : null}
 
         <div className="flex gap-1">
           {repo.actions.docsUrl && (
@@ -251,9 +253,9 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
               </a>
             </Button>
           )}
-          {primaryAction && (
+          {primaryAction && repo.actions.githubUrl && (
             <Button size="sm" variant="ghost" className="px-2 text-muted-foreground hover:text-foreground" asChild title="GitHub">
-              <a href={repo.actions.githubUrl || "#"} target="_blank" rel="noopener noreferrer">
+              <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer">
                 <Github className="w-4 h-4" />
               </a>
             </Button>

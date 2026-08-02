@@ -45,7 +45,19 @@ export type DeploymentType = 'one-click' | 'docker' | 'k8s' | 'library' | 'npm' 
 export interface RepoActions {
   deployUrl?: string;
   docsUrl?: string;
-  githubUrl: string;
+  /**
+   * Optional, and that is the point: not everything we publish has a public
+   * repo. While this was required, an entry with no repo to cite could only be
+   * written by inventing one — which is exactly how nine addresses that have
+   * never existed (hanzo-js/next, hanzoai/approvals, the zen-vl mirrors, …)
+   * came to be shipped as evidence that we are open source. A field nobody can
+   * leave blank is a field somebody will fill with a guess.
+   *
+   * The renderer shows the GitHub control only when this is set. An entry whose
+   * source is not on GitHub says so by omission and points at where it does
+   * live (learnUrl for a model card, npmUrl for a package).
+   */
+  githubUrl?: string;
   learnUrl?: string;
   npmUrl?: string;
   pypiUrl?: string;
@@ -708,7 +720,7 @@ export const ossCatalog: OSSRepo[] = [
   {
     id: 'policy',
     name: 'Policy Engine',
-    slug: 'hanzoai/policy',
+    slug: 'hanzoai/authz',
     description: 'Policy-as-code for AI governance. Define rules for model access, data handling, and compliance.',
     type: 'core',
     categories: ['Security & Governance', 'AI & Agents'],
@@ -718,7 +730,10 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['docker', 'library'],
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/authz',
-      githubUrl: 'https://github.com/hanzoai/policy',
+      // hanzoai/authz — "access control library for Go: ACL, RBAC, ABAC policy
+      // enforcement", which is this entry exactly. The docs link already said
+      // authz; only the repo name was invented, and hanzoai/policy never existed.
+      githubUrl: 'https://github.com/hanzoai/authz',
       learnUrl: '/products/platform/guard',
     },
     signals: {
@@ -741,9 +756,7 @@ export const ossCatalog: OSSRepo[] = [
     useCases: ['CI/CD'],
     maturity: 'experimental',
     deployment: ['docker'],
-    actions: {
-      githubUrl: 'https://github.com/hanzoai/approvals',
-    },
+    actions: {},
     signals: {
       updatedAt: '2026-01-05',
       featured: false,
@@ -931,7 +944,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['npm'],
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/integrations',
-      githubUrl: 'https://github.com/hanzoai/github-connector',
     },
     signals: {
       updatedAt: '2026-01-10',
@@ -955,7 +967,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['npm'],
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/integrations',
-      githubUrl: 'https://github.com/hanzoai/slack-connector',
     },
     signals: {
       updatedAt: '2026-01-08',
@@ -2739,7 +2750,6 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['pip', 'library'],
     actions: {
-      githubUrl: 'https://github.com/zenlm/zen-vl-4b-instruct',
       learnUrl: 'https://huggingface.co/zenlm/zen-vl-4b-instruct',
     },
     signals: {
@@ -2763,7 +2773,6 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['pip', 'library'],
     actions: {
-      githubUrl: 'https://github.com/zenlm/zen-vl-8b-instruct',
       learnUrl: 'https://huggingface.co/zenlm/zen-vl-8b-instruct',
     },
     signals: {
@@ -2787,7 +2796,6 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['pip', 'library'],
     actions: {
-      githubUrl: 'https://github.com/zenlm/zen-vl-30b-instruct',
       learnUrl: 'https://huggingface.co/zenlm/zen-vl-30b-instruct',
     },
     signals: {
@@ -3175,7 +3183,7 @@ export const ossCatalog: OSSRepo[] = [
   {
     id: 'hanzo-react',
     name: 'Hanzo React',
-    slug: 'hanzo-js/react',
+    slug: '@hanzo/react',
     description: 'React primitives for Hanzo.',
     type: 'sdk',
     categories: ['App Platform', 'Developer Tools'],
@@ -3184,7 +3192,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['npm'],
     actions: {
-      githubUrl: 'https://github.com/hanzo-js/react',
+      npmUrl: 'https://npmjs.com/package/@hanzo/react',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -3206,9 +3214,7 @@ export const ossCatalog: OSSRepo[] = [
     useCases: [],
     maturity: 'stable',
     deployment: ['npm'],
-    actions: {
-      githubUrl: 'https://github.com/hanzo-js/next',
-    },
+    actions: {},
     signals: {
       updatedAt: '2026-02-28',
       featured: false,
