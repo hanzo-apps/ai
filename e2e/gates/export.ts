@@ -2,7 +2,7 @@ import { createServer, type Server } from 'node:http'
 import { createReadStream, existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { extname, join, normalize, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { routes, sources } from '../../lib/routes'
+import { routes, shipped, sources, type Page } from '../../lib/routes'
 
 /**
  * The real static export, as the tests' subject.
@@ -45,13 +45,13 @@ export function requireExport(): string {
   if (!existsSync(join(OUT, 'index.html'))) {
     throw new Error(`no static export at ${OUT}: run \`pnpm build\` before \`pnpm test\``)
   }
-  const shipped = new Set(exported().map(({ route }) => route))
+  const answered = new Set(shipped(OUT).map(({ route }) => route))
   const missing = routes(APP)
     .map(({ path }) => path)
-    .filter((route) => !shipped.has(route))
+    .filter((route) => !answered.has(route))
   if (missing.length > 0) {
     throw new Error(
-      `the export is short ${missing.length} of ${shipped.size + missing.length} routes, so every ` +
+      `the export is short ${missing.length} of ${answered.size + missing.length} routes, so every ` +
         `gate below it would measure a smaller site and pass: ${missing.slice(0, 10).join(', ')}`,
     )
   }
@@ -87,40 +87,17 @@ export function read(relative: string): string {
  *
  * The subject of a gate over publication is the whole site, not one page a
  * spec happened to name: an assertion pinned to `risk.html` says nothing about
- * the next route added to a list. `/404` and `/_not-found` are Next's own
- * pages rather than routes of ours — they carry a `noindex` the framework
- * writes — and the App Router skips `_`-prefixed directories, so both are out.
- */
-export function pages(): { route: string; file: string }[] {
-  requireExport()
-  return exported()
-}
-
-/**
- * The same walk, without the floor above it.
+ * the next route added to a list. The walk is `lib/routes`'s — the same one
+ * `scripts/noindex.mjs` stamps through, so what a gate measures and what the
+ * build writes cannot disagree about which file answers which route.
  *
- * `requireExport` measures the export against the tree and so has to read the
- * export — and a floor that called `pages()` would call itself. This is the
- * read; `pages()` is the read WITH the floor, and it is the one every spec uses.
+ * `pages()` is that walk WITH the floor above it, and it is the one every spec
+ * uses; the floor itself has to read the export to measure it, so it calls the
+ * walk directly rather than calling this and recursing.
  */
-function exported(): { route: string; file: string }[] {
-  const found: { route: string; file: string }[] = []
-  const walk = (dir: string, seg: string[]) => {
-    for (const e of readdirSync(dir, { withFileTypes: true, encoding: 'utf8' })) {
-      const path = join(dir, e.name)
-      if (e.isDirectory()) {
-        if (!e.name.startsWith('_')) walk(path, [...seg, e.name])
-        continue
-      }
-      if (!e.name.endsWith('.html')) continue
-      const name = e.name.slice(0, -'.html'.length)
-      if (name.startsWith('_') || name === '404') continue
-      const route = name === 'index' ? '/' + seg.join('/') : '/' + [...seg, name].join('/')
-      found.push({ route: route === '/' ? '/' : route.replace(/\/$/, ''), file: path })
-    }
-  }
-  walk(OUT, [])
-  return found
+export function pages(): Page[] {
+  requireExport()
+  return shipped(OUT)
 }
 
 const TYPES: Record<string, string> = {

@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test'
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { DISALLOW, PRIVATE, UNAPPROVED, indexable, matches, policy, robots } from '../../lib/publish'
-import { OUT, pages, read } from './export'
+import { DISALLOW, EMPTY, PRIVATE, UNAPPROVED, indexable, matches, policy } from '../../lib/publish'
+import { copy } from '../../lib/routes'
+import { OUT, ROOT, pages, read } from './export'
 
 /**
  * The publication gate, asserted on the bytes that ship.
@@ -12,9 +13,12 @@ import { OUT, pages, read } from './export'
  * list read by three controls — a `Disallow` and a `noindex` over the same
  * route cancel each other, and a path segment written as a robots.txt string
  * prefix takes the next route that starts with the same letters. Both of those
- * shipped. So these gates check the two policies AGAINST EACH OTHER over the
- * whole export, rather than checking each control against the list it came
- * from.
+ * shipped. So these gates check the policies AGAINST EACH OTHER over the whole
+ * export, rather than checking each control against the list it came from.
+ *
+ * And against the CONTENT of the export, not only its shape: a route offered
+ * for indexing that has nothing to index is a soft 404 the site advertises,
+ * and twenty of them shipped under a floor that counted routes.
  */
 
 const NOINDEX = /<meta name="robots" content="[^"]*noindex/
@@ -38,23 +42,49 @@ function disallowed(): string[] {
   return [...read('robots.txt').matchAll(/^Disallow:\s*(\S+)\s*$/gm)].map((m) => m[1])
 }
 
-test('a route has exactly one policy, and a prefix is a path segment', () => {
-  for (const prefix of PRIVATE) {
-    expect(policy(prefix), `${prefix} is private`).toBe('private')
-    expect(policy(prefix + '/sub'), `${prefix}/sub is private`).toBe('private')
+/** The rendered words of every shipped page, in one walk of the export. */
+function said(): Map<string, string> {
+  return new Map(pages().map(({ route, file }) => [route, copy(readFileSync(file, 'utf8'))]))
+}
+
+test('a route has exactly one policy, and a surface is a path segment', () => {
+  for (const surface of PRIVATE) {
+    expect(policy(surface), `${surface} is private`).toBe('private')
+    expect(policy(surface + '/sub'), `${surface}/sub is private`).toBe('private')
   }
-  for (const prefix of UNAPPROVED) {
-    expect(policy(prefix), `${prefix} is unapproved`).toBe('unapproved')
-    expect(policy(prefix + '/sub'), `${prefix}/sub is unapproved`).toBe('unapproved')
+  for (const surface of UNAPPROVED) {
+    expect(policy(surface), `${surface} is withheld from the index`).toBe('noindex')
+    expect(policy(surface + '/sub'), `${surface}/sub is withheld too`).toBe('noindex')
   }
-  // A prefix is a path segment, not a string prefix: /risky is a different page.
+  // A surface is a path segment, not a string prefix: /risky is a different page.
   for (const route of ['/', '/api', '/commerce', '/risky', '/accountability', '/logins', '/authz']) {
     expect(policy(route), `${route} is public`).toBe('public')
   }
-  // The projections agree with the predicate, in both directions.
-  for (const route of ['/', '/api', '/authz', ...PRIVATE, ...UNAPPROVED]) {
+  // An EMPTY entry is a PAGE and takes nothing beneath it: /docs forwards to
+  // docs.hanzo.ai and /docs/sdk is three thousand words of its own.
+  for (const page of EMPTY) {
+    expect(policy(page), `${page} is withheld from the index`).toBe('noindex')
+    expect(policy(page + '/sub'), `${page}/sub is its own page and its own decision`).toBe('public')
+  }
+  expect(policy('/docs/sdk'), '/docs/sdk is published under an unpublished /docs').toBe('public')
+  // The query is not part of the route: the same bytes answer both.
+  for (const route of [...PRIVATE, ...EMPTY]) {
+    expect(policy(route + '?x=1'), `${route}?x=1 is the same page`).toBe(policy(route))
+  }
+  // A route has one REASON as well as one policy: the list it is on says why it
+  // is withheld, and two lists claiming the same route makes that unanswerable.
+  const named = [...PRIVATE, ...UNAPPROVED, ...EMPTY]
+  const twice = named.filter((route, at) => named.indexOf(route) !== at)
+  expect(twice, `named by two lists, so the reason is ambiguous: ${twice.join(', ')}`).toEqual([])
+  const covered = (surfaces: readonly string[], page: string) =>
+    surfaces.filter((surface) => page === surface || page.startsWith(surface + '/'))
+  for (const page of EMPTY) {
+    const already = [...covered(PRIVATE, page), ...covered(UNAPPROVED, page)]
+    expect(already, `${page} is already withheld as a surface: ${already.join(', ')}`).toEqual([])
+  }
+  // The projection agrees with the predicate, in both directions.
+  for (const route of ['/', '/api', '/authz', ...PRIVATE, ...UNAPPROVED, ...EMPTY]) {
     expect(indexable(route)).toBe(policy(route) === 'public')
-    expect(robots(route) === undefined).toBe(policy(route) !== 'unapproved')
   }
 })
 
@@ -99,7 +129,7 @@ test('a Disallow line means the segment, under the crawler’s own matching rule
   }
 })
 
-test('robots.txt disallows every private route and no unapproved one', () => {
+test('robots.txt disallows every private route and nothing it needs fetched', () => {
   const txt = read('robots.txt')
   // Read back as lines, not as a regex built from the line: a Disallow pattern
   // is not a regular expression, and `/auth?` compiled as one makes the `h`
@@ -108,13 +138,13 @@ test('robots.txt disallows every private route and no unapproved one', () => {
   for (const line of DISALLOW) {
     expect(emitted, `${line} must be disallowed`).toContain(line)
   }
-  // The other half, and the one that matters: an unapproved route must NOT be
-  // disallowed. A crawler forbidden to fetch it never reads the noindex it
-  // carries, so the Disallow would disable the only control that removes a
-  // page already found.
-  for (const prefix of UNAPPROVED) {
-    const blocking = disallowed().filter((pattern) => matches(pattern, prefix))
-    expect(blocking, `${prefix} must stay fetchable so its noindex is read`).toEqual([])
+  // The other half, and the one that matters: a route withheld by `noindex`
+  // must NOT be disallowed. A crawler forbidden to fetch it never reads the
+  // noindex it carries, so the Disallow would disable the only control that
+  // removes a page already found.
+  for (const route of [...UNAPPROVED, ...EMPTY]) {
+    const blocking = disallowed().filter((pattern) => matches(pattern, route))
+    expect(blocking, `${route} must stay fetchable so its noindex is read`).toEqual([])
   }
   expect(txt).toContain('Sitemap: https://hanzo.ai/sitemap.xml')
 })
@@ -145,24 +175,83 @@ test('no route is both disallowed and noindexed', () => {
   expect(both, `disallowed AND noindexed, so the noindex can never be read: ${both.join(', ')}`).toEqual([])
 })
 
-test('every unapproved route ships a noindex, and nothing else does', () => {
-  // Generic over the list, not pinned to one file. The third control is the
-  // only one written in a page rather than derived from the tree, so a route
-  // added to UNAPPROVED whose author forgot the metadata line ships with no
+test('every withheld route ships a noindex, and nothing else does', () => {
+  // Generic over the policy, not pinned to one file. The third control is the
+  // only one that lives in a page rather than in a file derived from the tree,
+  // so a route added to a list whose author forgot the tag ships with no
   // noindex at all — and a gate that names `risk.html` stays green through it.
   const marked = noindexed()
   const shipped = pages().map(({ route }) => route)
-  const missing = shipped.filter((route) => policy(route) === 'unapproved' && !marked.includes(route))
-  expect(missing, `unapproved routes shipping no noindex: ${missing.join(', ')}`).toEqual([])
+  const missing = shipped.filter((route) => policy(route) === 'noindex' && !marked.includes(route))
+  expect(missing, `withheld routes shipping no noindex: ${missing.join(', ')}`).toEqual([])
   // And the inverse, so the list stays the one place publication is decided:
   // a page cannot quietly noindex itself outside it.
-  const unlisted = marked.filter((route) => policy(route) !== 'unapproved')
+  const unlisted = marked.filter((route) => policy(route) !== 'noindex')
   expect(unlisted, `noindex on routes no list withholds: ${unlisted.join(', ')}`).toEqual([])
+  // The floor: this whole assertion is "no route is missing a tag", which an
+  // export that withheld nothing satisfies perfectly.
+  expect(marked.length, 'the export must actually withhold something').toBeGreaterThan(0)
 })
 
-test('sitemap.xml offers no route that is private or unapproved', () => {
+test('sitemap.xml offers no route the policy withholds', () => {
   const leaked = offered().filter((route) => !indexable(route))
   expect(leaked, `withheld routes offered to crawlers: ${leaked.join(', ')}`).toEqual([])
+})
+
+test('every route offered for indexing has something to index', () => {
+  // The dimension that matters. `requireExport` bounds how MANY routes shipped,
+  // and every gate here is "no page in the export does X" — both are satisfied
+  // by an export of blank pages, so a page with nothing on it passes the floor
+  // and every assertion above it. Twenty did: fourteen client-side forwards
+  // (`/docs` -> docs.hanzo.ai, `/defi` -> /blockchain, `/status`, `/signup`)
+  // and six shells that render a session the crawler does not have
+  // (`/dashboard`, `/user-profile`, `/referral`). All were in the live
+  // sitemap. Google calls the first a redirect to keep out of a sitemap and the
+  // second a soft 404.
+  //
+  // The floor is DERIVED, not typed: the largest declared-empty page is what
+  // "nothing to read" measures, and nothing offered may read shorter than that.
+  // A constant here would be a number somebody has to remember to raise, which
+  // is the shape of the defect this replaces.
+  const rendered = said()
+  const size = (route: string) => rendered.get(route)?.length ?? 0
+  const empty = EMPTY.map((route) => ({ route, chars: size(route) })).sort((a, b) => b.chars - a.chars)
+  expect(empty.length, 'the floor is derived from these, so there must be some').toBeGreaterThan(0)
+  expect(offered().length, 'and there must be a site to measure against it').toBeGreaterThan(50)
+  const floor = empty[0]
+  const thin = offered()
+    .map((route) => ({ route, chars: size(route) }))
+    .filter(({ chars }) => chars <= floor.chars)
+    .sort((a, b) => a.chars - b.chars)
+  expect(
+    thin.map(({ route, chars }) => `${route} (${chars} chars, floor ${floor.route} ${floor.chars})`),
+    'offered to crawlers with no more to read than a page declared empty',
+  ).toEqual([])
+})
+
+test('every route declared empty is empty, and grows out of the list', () => {
+  // The other direction, and the one that keeps the list from rotting: a page
+  // that gains copy must be published rather than sit withheld because nobody
+  // revisited a literal. Empty is MEASURED, never asserted — and measured
+  // against the site's own shortest real page, so this too is derived and there
+  // is no threshold to maintain. The pair of gates says the two populations are
+  // separable, which is the honest claim: it is a floor, not an oracle.
+  const rendered = said()
+  for (const route of EMPTY) {
+    expect(rendered.has(route), `${route} is withheld and ships no page at all`).toBe(true)
+  }
+  const published = offered()
+    .map((route) => ({ route, chars: rendered.get(route)?.length ?? 0 }))
+    .sort((a, b) => a.chars - b.chars)
+  expect(published.length, 'the comparison is against the published pages, so there must be some').toBeGreaterThan(50)
+  const shortest = published[0]
+  const grown = EMPTY.map((route) => ({ route, chars: rendered.get(route)?.length ?? 0 })).filter(
+    ({ chars }) => chars >= shortest.chars,
+  )
+  expect(
+    grown.map(({ route, chars }) => `${route} (${chars} chars, published ${shortest.route} ${shortest.chars})`),
+    'declared to have nothing to read, and reads like a published page — publish it',
+  ).toEqual([])
 })
 
 test('an approved page ships no noindex', () => {
@@ -186,7 +275,36 @@ test('robots.txt is emitted from DISALLOW and cannot spell a bare prefix', () =>
   // rather than merely being absent today.
   const source = readFileSync(join(OUT, '..', 'app', 'robots.ts'), 'utf8')
   expect(source, 'app/robots.ts must emit DISALLOW').toContain('DISALLOW')
-  for (const banned of ['PRIVATE', 'UNAPPROVED', 'WITHHELD']) {
+  for (const banned of ['PRIVATE', 'UNAPPROVED', 'EMPTY', 'WITHHELD']) {
     expect(source, `app/robots.ts must not reach ${banned}: a prefix is not a Disallow line`).not.toContain(banned)
   }
+})
+
+test('the noindex tag is spelled once and written once', () => {
+  // The same pin over control 3. It used to be page `metadata` reading the
+  // list, which made the one control a page states about ITSELF the one control
+  // a page could forget — and nineteen of the twenty pages that need it are
+  // `'use client'`, where Next forbids a `metadata` export at all. Now
+  // `lib/publish` spells the tag and `scripts/noindex.mjs` writes it, and this
+  // says nothing else in the tree does either. The build step is the other half:
+  // it refuses to stamp a page that already carries a robots tag, so a second
+  // author is a failed build rather than a quietly duplicated directive.
+  const SPELLED = /<meta[^>]*name=["']robots["']|robots:\s*(\{|robots\()/
+  const found: string[] = []
+  const walk = (dir: string) => {
+    for (const e of readdirSync(dir, { withFileTypes: true, encoding: 'utf8' })) {
+      const path = join(dir, e.name)
+      if (e.isDirectory()) {
+        walk(path)
+        continue
+      }
+      if (!/\.(tsx|ts|mjs|js)$/.test(e.name)) continue
+      if (SPELLED.test(readFileSync(path, 'utf8'))) found.push(path.slice(ROOT.length + 1))
+    }
+  }
+  for (const dir of ['app', 'lib', 'scripts', 'components']) walk(join(ROOT, dir))
+  expect(found.sort(), 'lib/publish spells it; scripts/noindex writes it; no page states it').toEqual([
+    'lib/publish.ts',
+    'scripts/noindex.mjs',
+  ])
 })
