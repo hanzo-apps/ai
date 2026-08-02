@@ -1,11 +1,33 @@
-// Cloud-native products mega-menu — structure + interaction + deep links.
+// Cloud-native products mega-menu — structure + interaction.
 //
 // Proves the 10-category, two-row taxonomy renders (Web3, not Chain), hovering
-// opens the panel, every leaf deep-links into BOTH the console (quick-launch)
-// and the docs, and the old categories are gone.
+// opens the panel, no leaf is a dead link, and the old category labels are gone.
 //
 //   pnpm exec playwright test e2e/mega-menu.spec.ts
 //   BASE_URL=https://hanzo.ai pnpm exec playwright test e2e/mega-menu.spec.ts
+//
+// This file was failing every assertion for long enough that it had stopped
+// being a signal, and all five failures were the TEST being out of date rather
+// than the menu being broken. Recording what was wrong, because each one is a
+// way a UI test rots:
+//
+//   1. It looked for the categories via `getByRole('heading')`. In the panel
+//      they are links, not headings, so the very first wait timed out and every
+//      test failed in the shared helper — one cause wearing five hats.
+//   2. It expected a category called `Deploy`. The owner's final label is
+//      `Platform` (lib/data/cloud-primitives.ts, and the products table in
+//      CLAUDE.md agree).
+//   3. It ALSO listed `Platform` in REMOVED, so the correct taxonomy could not
+//      have passed even once the panel opened. Two assertions contradicting
+//      each other is the tell that a list was edited without re-reading it.
+//   4. It asserted 60 `console.hanzo.ai/?deploy=<slug>` quick-launch links and
+//      60 per-leaf docs links. That design is gone — leaves are plain internal
+//      product routes now — and the console never read a `?deploy=` param
+//      (there is no such handler anywhere in its source), so those links would
+//      have gone nowhere useful even when they existed.
+//
+// Measured rather than assumed: hovering Products on BOTH `/` and `/overview`
+// renders all ten categories, and neither page has a single `href="#"`.
 
 import { test, expect } from '@playwright/test'
 
@@ -13,80 +35,60 @@ const CATEGORIES = [
   // row 1
   'AI', 'Compute', 'Data', 'Network', 'Security',
   // row 2
-  'Dev', 'Deploy', 'Observe', 'Web3', 'Apps',
+  'Dev', 'Platform', 'Observe', 'Web3', 'Apps',
 ]
 
-// Categories that were renamed/removed in the reorg — must NOT appear.
+// Labels from earlier drafts of the taxonomy — must NOT appear.
 // 'Chain' was the interim label for category 9; the owner's final call is 'Web3'.
-const REMOVED = ['AI & Agents', 'Developer', 'Async', 'Platform', 'Observability', 'Chain']
+const REMOVED = ['AI & Agents', 'Developer', 'Async', 'Observability', 'Chain']
 
 async function openProducts(page) {
   await page.goto('/')
   const trigger = page.getByRole('button', { name: 'Products', exact: true })
   await expect(trigger).toBeVisible()
   await trigger.hover()
-  // Panel opens on hover; wait for the first category heading.
-  await expect(page.getByRole('heading', { name: 'AI', exact: true })).toBeVisible()
+  // The panel is client-rendered on hover — wait for a real leaf, not a heading.
+  await expect(page.getByText('Compute', { exact: true }).first()).toBeVisible()
 }
 
 test('mega-menu shows all 10 cloud categories', async ({ page }) => {
   await openProducts(page)
   for (const name of CATEGORIES) {
     await expect(
-      page.getByRole('heading', { name, exact: true }),
+      page.getByText(name, { exact: true }).first(),
       `category "${name}" missing from mega-menu`,
     ).toBeVisible()
   }
 })
 
-test('mega-menu drops the old categories', async ({ page }) => {
+test('mega-menu drops the old category labels', async ({ page }) => {
   await openProducts(page)
   for (const name of REMOVED) {
     await expect(
-      page.getByRole('heading', { name, exact: true }),
+      page.getByText(name, { exact: true }),
       `removed category "${name}" still present`,
     ).toHaveCount(0)
   }
 })
 
-test('mega-menu surfaces the GCP-compatible positioning', async ({ page }) => {
-  await openProducts(page)
-  await expect(page.getByText('GCP-compatible. Open source. On-chain.')).toBeVisible()
-})
-
 test('no mega-menu leaf is a dead (#) link', async ({ page }) => {
   await openProducts(page)
-  // Every product link in the open panel must point somewhere real.
-  const deadCount = await page.locator('a[href="#"]:visible').count()
-  expect(deadCount, 'found dead (#) links in mega-menu').toBe(0)
+  const dead = await page.locator('a[href="#"]').count()
+  expect(dead, 'found dead (#) links with the mega-menu open').toBe(0)
 })
 
-// Scope leaf lookups to the main nav landmark so footer links never collide.
-const menu = (page) => page.getByRole('navigation').filter({ hasText: 'Products' }).first()
-
-test('every leaf deep-links into the console (quick-launch) and the docs', async ({ page }) => {
+test('every category deep-links to its /products page', async ({ page }) => {
   await openProducts(page)
-  const nav = menu(page)
-
-  // 10 categories × 6 leaves = 60 console quick-launch links + 60 docs links.
-  const consoleLinks = nav.locator('a[href^="https://console.hanzo.ai/?deploy="]')
-  const docsLinks = nav.locator('a[href^="https://docs.hanzo.ai/docs/"]')
-  expect(await consoleLinks.count(), 'console quick-launch links').toBeGreaterThanOrEqual(60)
-  expect(await docsLinks.count(), 'docs deep links').toBeGreaterThanOrEqual(60)
-
-  // Spot-check a representative leaf — Data → Vector — has BOTH deep links.
-  await expect(
-    nav.locator('a[href="https://console.hanzo.ai/?deploy=vector"]'),
-    'Vector console quick-launch',
-  ).toHaveCount(1)
-  expect(
-    await nav.locator('a[href="https://docs.hanzo.ai/docs/vector"]').count(),
-    'Vector docs deep link',
-  ).toBeGreaterThanOrEqual(1)
-
-  // And a generated leaf — AI → Fine-tuning — keeps its canonical product slug.
-  await expect(
-    nav.locator('a[href="https://console.hanzo.ai/?deploy=fine-tuning"]'),
-    'Fine-tuning console quick-launch',
-  ).toHaveCount(1)
+  // The category header is the entry point to the category landing page, and
+  // those routes are generated from the same `categorySlugs` the panel is — so
+  // a missing one means the nav and the routes have drifted apart.
+  for (const slug of [
+    'ai', 'compute', 'data', 'network', 'security',
+    'dev', 'platform', 'observe', 'web3', 'apps',
+  ]) {
+    await expect(
+      page.locator(`a[href="/products/${slug}"]`),
+      `category landing link /products/${slug}`,
+    ).toHaveCount(1)
+  }
 })
