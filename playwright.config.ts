@@ -16,9 +16,24 @@ export default defineConfig({
     video: 'retain-on-failure',
   },
 
+  // Two suites, because they have two different subjects and only one of them
+  // can gate a merge.
+  //
+  //   gates    — assert against `out/`, the bytes that ship. They need `pnpm
+  //              build` and nothing else: they serve the export themselves, so
+  //              CI can run them and a failure is always the repo's fault.
+  //   chromium — the older specs. They drive a dev server on :8084 or the live
+  //              site, so they cannot gate a build and are run by hand.
   projects: [
     {
+      name: 'gates',
+      testDir: './e2e/gates',
+      use: { ...devices['Desktop Chrome'] },
+    },
+    {
       name: 'chromium',
+      testDir: './e2e',
+      testIgnore: '**/gates/**',
       use: { ...devices['Desktop Chrome'] },
     },
   ],

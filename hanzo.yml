@@ -15,9 +15,37 @@
 # JS test gate on the bare arc runner (hanzoai/ci#9), so this run is green with no
 # cross-org push attempt.
 test:
+  # MEASURED 2026-08-01 AND CURRENTLY BROKEN, left as-is because the repair is a
+  # dependency decision and not a copy change. `pnpm lint` is `next lint`, which
+  # Next REMOVED in 16 — on 16.2.12 it reads "lint" as a directory name and exits
+  # 1. Calling eslint directly does not rescue it either: typescript-eslint 8.65
+  # refuses to load against this repo's TypeScript 7.0.2. So this step has never
+  # been able to pass, which went unnoticed because nothing under
+  # `.hanzo/workflows` fires on a mirror repo.
+  #
+  # Types ARE checked: next.config.mjs sets neither `typescript.ignoreBuildErrors`
+  # nor `eslint.ignoreDuringBuilds`, so `pnpm build` in the gates step below type
+  # checks the whole tree and fails on an error.
   - name: lint
     run: |
       corepack enable
       corepack prepare pnpm@10.33.4 --activate
       pnpm install --frozen-lockfile
       pnpm lint
+  # The gates run against `out/` — the bytes that ship — because the two
+  # defects they exist to catch were both invisible in the source that
+  # produced them: `lineHeight={1.1}` reads as a ratio and compiles to
+  # `line-height: 1.1px`, and a page nothing links to is still written into
+  # sitemap.xml. A gate that read the source would have passed on both, so
+  # the build is part of the gate and not a step before it.
+  #
+  # `gates`, not `test`: the older e2e specs drive a dev server on :8084 or
+  # the live site, so they fail for reasons that are not the commit's.
+  - name: gates
+    run: |
+      corepack enable
+      corepack prepare pnpm@10.33.4 --activate
+      pnpm install --frozen-lockfile
+      pnpm build
+      pnpm exec playwright install --with-deps chromium
+      pnpm gates

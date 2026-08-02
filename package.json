@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "playwright test",
+    "gates": "playwright test --project=gates",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
     "test:report": "playwright show-report",
