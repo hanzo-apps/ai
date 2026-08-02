@@ -3,6 +3,7 @@
 import React from "react";
 import { Button } from "@hanzo/ui";
 import { Check, Search, Globe, Database, ArrowRight } from "lucide-react";
+import { useServiceCard, formatServicePrice, type ServiceCard } from "@/lib/plans"
 import Link from "next/link";
 
 interface PricingTier {
@@ -68,195 +69,11 @@ function TierCard({ tier }: { tier: PricingTier }) {
   );
 }
 
-const searchTiers: PricingTier[] = [
-  {
-    name: "Starter",
-    price: "$49",
-    period: "/mo",
-    description: "For small docs sites and blogs getting started with search.",
-    features: [
-      "Up to 10,000 documents",
-      "50,000 searches/mo",
-      "1,000 AI chat sessions/mo",
-      "Hybrid fulltext + vector search",
-      "Publishable key (pk-*) for browser use",
-      "Standard support",
-    ],
-    cta: "Start Free Trial",
-    ctaHref: "https://console.hanzo.ai",
-  },
-  {
-    name: "Growth",
-    price: "$499",
-    period: "/mo",
-    description: "For growing documentation platforms and SaaS products.",
-    popular: true,
-    features: [
-      "Up to 100,000 documents",
-      "500,000 searches/mo",
-      "10,000 AI chat sessions/mo",
-      "Hybrid fulltext + vector search",
-      "Custom branding and domains",
-      "Analytics dashboard",
-      "Priority support",
-    ],
-    cta: "Start Free Trial",
-    ctaHref: "https://console.hanzo.ai",
-  },
-  {
-    name: "Scale",
-    price: "$2,499",
-    period: "/mo",
-    description: "For large-scale deployments with high availability.",
-    features: [
-      "Up to 1,000,000 documents",
-      "Unlimited searches/mo",
-      "100,000 AI chat sessions/mo",
-      "Hybrid fulltext + vector search",
-      "Dedicated infrastructure",
-      "SSO / SAML authentication",
-      "Custom SLA",
-      "24/7 priority support",
-    ],
-    cta: "Start Free Trial",
-    ctaHref: "https://console.hanzo.ai",
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    description: "For organizations requiring unlimited scale and custom SLAs.",
-    contactSales: true,
-    features: [
-      "Unlimited documents",
-      "Unlimited searches/mo",
-      "Unlimited AI chat sessions/mo",
-      "Hybrid fulltext + vector search",
-      "Dedicated infrastructure",
-      "Custom model fine-tuning",
-      "On-premise / VPC deployment",
-      "Named account engineer",
-      "Custom SLA",
-    ],
-    cta: "Contact Sales",
-    ctaHref: "/contact",
-  },
-];
 
-const crawlTiers: PricingTier[] = [
-  {
-    name: "Starter",
-    price: "$49",
-    period: "/mo",
-    description: "For crawling and indexing small to medium websites.",
-    features: [
-      "Up to 10,000 pages/mo",
-      "Scheduled crawls (daily)",
-      "JavaScript rendering",
-      "Structured data extraction",
-      "Webhook notifications",
-      "Standard support",
-    ],
-    cta: "Start Free Trial",
-    ctaHref: "https://console.hanzo.ai",
-  },
-  {
-    name: "Growth",
-    price: "$499",
-    period: "/mo",
-    description: "For large-scale web crawling with advanced extraction.",
-    popular: true,
-    features: [
-      "Up to 500,000 pages/mo",
-      "Scheduled crawls (hourly)",
-      "JavaScript rendering",
-      "AI-powered content extraction",
-      "Custom extraction rules",
-      "Sitemap auto-discovery",
-      "Priority support",
-    ],
-    cta: "Start Free Trial",
-    ctaHref: "https://console.hanzo.ai",
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    description: "For unlimited crawling with custom infrastructure.",
-    contactSales: true,
-    features: [
-      "Unlimited pages/mo",
-      "Real-time crawling",
-      "JavaScript rendering",
-      "AI-powered content extraction",
-      "Custom extraction pipelines",
-      "Dedicated proxy infrastructure",
-      "On-premise deployment",
-      "Named account engineer",
-      "Custom SLA",
-    ],
-    cta: "Contact Sales",
-    ctaHref: "/contact",
-  },
-];
 
-const vectorTiers: PricingTier[] = [
-  {
-    name: "Starter",
-    price: "$29",
-    period: "/mo",
-    description: "For small-scale vector search and RAG applications.",
-    features: [
-      "Up to 1M vectors",
-      "10 collections",
-      "128 to 4096 dimensions",
-      "HNSW + quantization",
-      "REST and gRPC APIs",
-      "Standard support",
-    ],
-    cta: "Start Free Trial",
-    ctaHref: "https://console.hanzo.ai",
-  },
-  {
-    name: "Growth",
-    price: "$299",
-    period: "/mo",
-    description: "For production RAG pipelines and semantic search at scale.",
-    popular: true,
-    features: [
-      "Up to 100M vectors",
-      "Unlimited collections",
-      "128 to 4096 dimensions",
-      "HNSW + quantization",
-      "Hybrid sparse + dense search",
-      "Multi-tenancy with payload filtering",
-      "Snapshots and backups",
-      "Priority support",
-    ],
-    cta: "Start Free Trial",
-    ctaHref: "https://console.hanzo.ai",
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    description: "For mission-critical vector workloads at any scale.",
-    contactSales: true,
-    features: [
-      "Unlimited vectors",
-      "Unlimited collections",
-      "Distributed clusters",
-      "HNSW + quantization",
-      "Hybrid sparse + dense search",
-      "Sharding and replication",
-      "VPC / on-premise deployment",
-      "Named account engineer",
-      "Custom SLA",
-    ],
-    cta: "Contact Sales",
-    ctaHref: "/contact",
-  },
-];
+
+
+
 
 interface ProductSectionProps {
   title: string;
@@ -289,7 +106,26 @@ function ProductSection({ title, subtitle, icon, tiers }: ProductSectionProps) {
   );
 }
 
+// Search and Crawl tiers come from the catalog (@hanzo/plans first paint, GET
+// /v1/pricing/services live). Vector is deliberately absent — it is priced once,
+// on the Infrastructure tab; this file used to carry a second, contradictory
+// ladder for it.
+function toTiers(card: ServiceCard | undefined): PricingTier[] {
+  return (card?.tiers ?? []).map((t) => ({
+    name: t.name,
+    price: formatServicePrice(t.priceMonthly),
+    period: t.priceMonthly == null ? "" : "/mo",
+    description: t.description ?? "",
+    features: t.features ?? [],
+    popular: t.popular,
+    cta: t.priceMonthly == null ? "Contact Sales" : "Start Free Trial",
+    ctaHref: "https://console.hanzo.ai",
+  }));
+}
+
 export default function SearchDataPricing() {
+  const searchTiers = toTiers(useServiceCard("search"));
+  const crawlTiers = toTiers(useServiceCard("crawl"));
   return (
     <div className="max-w-7xl mx-auto mb-16">
       <ProductSection
@@ -306,12 +142,27 @@ export default function SearchDataPricing() {
         tiers={crawlTiers}
       />
 
-      <ProductSection
-        title="Hanzo Vector"
-        subtitle="Managed vector database for embeddings, semantic search, and RAG applications."
-        icon={<Database className="h-8 w-8 text-foreground" />}
-        tiers={vectorTiers}
-      />
+      {/* Hanzo Vector is priced ONCE, on the Infrastructure tab. This section used
+          to carry its own ladder — Starter $29 / Growth $299 / Enterprise — against
+          Infrastructure's Free $0 / Pro $25 / Business $99. Same product, same
+          description, two prices, both live: one tab said 1M vectors cost $29/mo
+          while the other said 1M vectors was free. A visitor who opened both tabs
+          saw us contradict ourselves about what we charge.
+
+          Pointing at the canonical section instead of restating it is the only
+          arrangement in which that cannot happen again. */}
+      <div className="mb-16 rounded-xl border border-neutral-800/50 bg-neutral-900/30 p-8">
+        <div className="flex items-center gap-3 mb-3">
+          <Database className="h-7 w-7 text-foreground" />
+          <h2 className="text-2xl font-bold">Hanzo Vector</h2>
+        </div>
+        <p className="text-muted-foreground text-sm">
+          Store the embeddings Crawl produces and Search queries. Vector is priced
+          with the rest of the managed infrastructure — see the{" "}
+          <span className="text-foreground font-medium">Infrastructure</span> tab
+          for its tiers and usage rates.
+        </p>
+      </div>
 
       {/* Integration note */}
       <div className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800/50 mb-12">

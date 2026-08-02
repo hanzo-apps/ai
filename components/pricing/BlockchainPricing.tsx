@@ -1,121 +1,55 @@
-import React from "react";
+'use client'
+
+import React, { useEffect, useState } from "react";
 import { Button } from "@hanzo/ui";
 import { Check, Server, Search, Wallet, Shield, Zap, Bell, Database, Layers } from "lucide-react";
+import { loadBlockchain, fallbackBlockchain, formatCatalogPrice, type BlockchainCatalog } from "@/lib/plans";
+
+// Icons are presentation, so they stay here — the catalog prices a product, it
+// does not choose a glyph. Keyed by catalog id so a renamed product keeps its icon
+// and a NEW one gets a sensible default rather than a blank.
+const API_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  "data-token": Database,
+  "data-nft": Layers,
+  "data-wallet": Wallet,
+  "data-indexer": Search,
+};
 
 const BlockchainPricing = () => {
-  const rpcPricing = [
-    {
-      name: "Free",
-      description: "For hobby projects and testing",
-      price: "Free",
-      period: "",
-      cuRate: "",
-      features: [
-        "300M compute units/month",
-        "All supported chains",
-        "Shared endpoints",
-        "Community support",
-        "Standard rate limits",
-      ],
-      highlighted: false,
-    },
-    {
-      name: "Growth",
-      description: "For production applications",
-      price: "$49",
-      period: "/mo",
-      cuRate: "$0.45/M CU overage",
-      features: [
-        "400M compute units/month",
-        "100+ supported chains",
-        "Dedicated endpoints",
-        "Priority support",
-        "Enhanced rate limits",
-        "Webhook notifications",
-        "Archive data access",
-      ],
-      highlighted: true,
-    },
-    {
-      name: "Scale",
-      description: "For high-volume applications",
-      price: "$199",
-      period: "/mo",
-      cuRate: "$0.45/M CU overage",
-      features: [
-        "1.5B compute units/month",
-        "100+ supported chains",
-        "Private clusters",
-        "24/7 dedicated support",
-        "Custom rate limits",
-        "Advanced analytics",
-        "Archive data (full)",
-        "Custom SLA",
-      ],
-      highlighted: false,
-    },
-    {
-      name: "Enterprise",
-      description: "For mission-critical infrastructure",
-      price: "Custom",
-      period: "",
-      cuRate: "Volume discounts",
-      features: [
-        "Unlimited compute units",
-        "All supported chains",
-        "Dedicated infrastructure",
-        "Solution architect",
-        "Custom SLA",
-        "On-premise option",
-        "White-glove onboarding",
-        "Committed use discounts",
-      ],
-      highlighted: false,
-    },
-  ];
+  // Same contract as the plans ladder: @hanzo/plans paints first, the live
+  // catalog replaces it. The tiers used to be a hand-typed array here, which is
+  // how a page comes to advertise a price nothing charges.
+  const [catalog, setCatalog] = useState<BlockchainCatalog>(fallbackBlockchain);
+  useEffect(() => {
+    loadBlockchain().then((live) => { if (live) setCatalog(live); });
+  }, []);
 
-  const apiPricing = [
-    {
-      name: "Token API",
-      icon: Database,
-      description: "ERC-20 balances, transfers, prices, metadata",
-      pricing: [
-        { tier: "Free", requests: "10K/mo", price: "$0" },
-        { tier: "Growth", requests: "500K/mo", price: "$29/mo" },
-        { tier: "Scale", requests: "5M/mo", price: "$149/mo" },
-      ],
-    },
-    {
-      name: "NFT API",
-      icon: Layers,
-      description: "ERC-721/1155 ownership, metadata, transfers",
-      pricing: [
-        { tier: "Free", requests: "10K/mo", price: "$0" },
-        { tier: "Growth", requests: "500K/mo", price: "$39/mo" },
-        { tier: "Scale", requests: "5M/mo", price: "$199/mo" },
-      ],
-    },
-    {
-      name: "Wallet API",
-      icon: Wallet,
-      description: "Portfolio, history, activity across chains",
-      pricing: [
-        { tier: "Free", requests: "5K/mo", price: "$0" },
-        { tier: "Growth", requests: "250K/mo", price: "$49/mo" },
-        { tier: "Scale", requests: "2.5M/mo", price: "$249/mo" },
-      ],
-    },
-    {
-      name: "Indexer API",
-      icon: Search,
-      description: "Events, logs, decoded data, custom indexes",
-      pricing: [
-        { tier: "Free", requests: "10K/mo", price: "$0" },
-        { tier: "Growth", requests: "1M/mo", price: "$79/mo" },
-        { tier: "Scale", requests: "10M/mo", price: "$399/mo" },
-      ],
-    },
-  ];
+  const rpcPricing = catalog.rpc.map((p) => ({
+    name: p.name,
+    description: p.description,
+    price: formatCatalogPrice(p.priceMonthly),
+    period: p.priceMonthly && p.priceMonthly > 0 ? "/mo" : "",
+    // Stated by the catalog when the plan meters overage. A plan priced by
+    // conversation says so instead of quoting a rate it has not agreed.
+    cuRate: p.overagePerMillion != null
+      ? `$${p.overagePerMillion}/M CU overage`
+      : p.priceMonthly == null ? "Volume discounts" : "",
+    features: p.features,
+    highlighted: p.id === "rpc-growth",
+  }));
+
+  const apiPricing = catalog.data.map((a) => ({
+    name: a.name,
+    icon: API_ICONS[a.id] ?? Database,
+    description: a.description,
+    pricing: a.tiers.map((t) => ({
+      tier: t.name,
+      requests: t.requestsMonthly >= 1_000_000
+        ? `${t.requestsMonthly / 1_000_000}M/mo`
+        : `${t.requestsMonthly / 1_000}K/mo`,
+      price: t.priceMonthly === 0 ? "$0" : `$${t.priceMonthly}/mo`,
+    })),
+  }));
 
   const premiumFeatures = [
     {

@@ -3,87 +3,29 @@
 import React from "react"
 import { Button } from "@hanzo/ui"
 import { Check } from "lucide-react"
+import { useServiceCard, formatServicePrice, formatUsageRate } from "@/lib/plans"
 
-const tiers = [
-  {
-    name: "Free",
-    price: "$0",
-    period: "/mo",
-    description: "For side projects and evaluation",
-    features: [
-      "10K events/mo",
-      "7-day retention",
-      "1 project",
-      "Basic dashboards",
-      "Community support",
-    ],
-    highlighted: false,
-    cta: "Get Started",
-  },
-  {
-    name: "Pro",
-    price: "$29",
-    period: "/mo",
-    description: "For production applications",
-    features: [
-      "1M events/mo",
-      "30-day retention",
-      "Unlimited projects",
-      "Alerting & webhooks",
-      "Custom dashboards",
-      "Email support",
-      "Trace & span analysis",
-      "LLM cost tracking",
-    ],
-    highlighted: true,
-    cta: "Start Free Trial",
-  },
-  {
-    name: "Team",
-    price: "$79",
-    period: "/mo",
-    description: "For growing teams with compliance needs",
-    features: [
-      "10M events/mo",
-      "90-day retention",
-      "Unlimited projects",
-      "SSO & SAML",
-      "Advanced dashboards",
-      "Dedicated support",
-      "Evaluation pipelines",
-      "Annotation queues",
-      "Role-based access",
-    ],
-    highlighted: false,
-    cta: "Start Free Trial",
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    description: "For mission-critical observability",
-    features: [
-      "Unlimited events",
-      "1-year retention",
-      "Custom SLA",
-      "Dedicated support engineer",
-      "Audit logs",
-      "BYOC / self-hosted",
-      "Custom integrations",
-      "Volume discounts",
-    ],
-    highlighted: false,
-    cta: "Contact Sales",
-  },
-]
-
-const overage = {
-  rate: "$2",
-  unit: "/100K events",
-  note: "Automatically billed when plan limit exceeded. No hard cutoff.",
-}
+// Tiers and the overage rate come from the catalog (@hanzo/plans first paint,
+// GET /v1/pricing/services live) rather than two arrays here. A price only this
+// component knows is a price nothing can charge against and nothing can check.
 
 export default function ObservabilityPricing() {
+  const card = useServiceCard("observability");
+  const tiers = (card?.tiers ?? []).map((t) => ({
+    name: t.name,
+    price: formatServicePrice(t.priceMonthly),
+    period: t.priceMonthly == null ? "" : "/mo",
+    description: t.description ?? "",
+    features: t.features ?? [],
+    highlighted: Boolean(t.popular),
+    cta: t.priceMonthly == null ? "Contact Sales" : "Get Started",
+  }));
+  const u = card?.usage?.[0];
+  const overage = {
+    rate: u ? formatUsageRate(u.rate) : "",
+    unit: u?.unit ?? "",
+    note: u?.note ?? "",
+  };
   return (
     <div className="mb-20">
       <h2 className="text-3xl font-bold mb-2">Hanzo Console</h2>
