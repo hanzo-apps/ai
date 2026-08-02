@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@hanzo/ui";
 import { Users, Building2 } from "lucide-react";
-import { loadPlans } from "@/lib/plans";
+import { loadPlans, fallbackPlans } from "@/lib/plans";
 
 // Team and Enterprise used to be four full plan cards sitting beside the
 // personal plans — Team, Team Max, Enterprise ($9999/mo) and Custom. That put
@@ -31,13 +31,26 @@ const SALES_URL = "mailto:sales@hanzo.ai?subject=Hanzo%20Enterprise";
 // number. Same contract PersonalPlans holds.
 //
 // Enterprise deliberately has no number here and takes no live value. Its price
-// is the outcome of a conversation, and the catalog's enterprise rows exist to
-// be charged against after that conversation, not to be advertised before it.
-const TEAM_FALLBACK = { price: 25, minSeats: 2 };
+// is the outcome of a conversation, and the catalog's enterprise row exists to be
+// charged against after that conversation, not to be advertised before it.
+//
+// The seat fallback is READ from @hanzo/plans rather than written here, for the
+// same reason the personal ladder is: a hand-typed 25 goes stale silently the
+// moment the catalog reprices, and a pricing page that is confidently wrong is
+// worse than one that is briefly blank.
+function teamFallback() {
+  const seat = fallbackPlans("team")
+    .filter((p) => p.priceMonthly != null && p.priceMonthly > 0)
+    .sort((a, b) => (a.priceMonthly ?? 0) - (b.priceMonthly ?? 0))[0];
+  return {
+    price: seat?.priceMonthly ?? 25,
+    minSeats: Number(seat?.limits?.minSeats) || 2,
+  };
+}
 
 /** The seat price and seat minimum, both from the row commerce charges. */
 function useTeamTerms() {
-  const [terms, setTerms] = useState(TEAM_FALLBACK);
+  const [terms, setTerms] = useState(teamFallback);
   useEffect(() => {
     loadPlans("team").then((live) => {
       // The cheapest sellable row is the entry seat — `team` today, but read
@@ -49,7 +62,7 @@ function useTeamTerms() {
       if (!seat?.priceMonthly) return;
       setTerms({
         price: seat.priceMonthly,
-        minSeats: Number(seat.limits?.minSeats) || TEAM_FALLBACK.minSeats,
+        minSeats: Number(seat.limits?.minSeats) || teamFallback().minSeats,
       });
     });
   }, []);

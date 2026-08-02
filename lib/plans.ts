@@ -24,6 +24,8 @@
  * So the catalog is named once, mapped once, and guarded once, here.
  */
 
+import { subscriptionPlans } from "@hanzo/plans";
+
 /** A row exactly as GET /v1/billing/plans returns it. */
 interface BillingPlan {
   slug: string;
@@ -105,4 +107,55 @@ export async function loadPlans(category: string): Promise<SubscriptionPlan[]> {
   } catch {
     return [];
   }
+}
+
+/**
+ * The first-paint fallback, read from @hanzo/plans — the SAME package commerce
+ * embeds and seeds its catalog from.
+ *
+ * This used to be an array hand-copied into each pricing component, which is how
+ * the page came to advertise a ladder the catalog no longer sold: the copy has no
+ * way to know the source moved. Reading the package makes the site and the biller
+ * wrong together or right together, never separately, and a `pnpm update` is the
+ * whole act of resyncing.
+ *
+ * It is still only a FALLBACK. Commerce is the authority — admin.hanzo.ai edits
+ * rows the package does not know about — so `loadPlans` replaces this wholesale on
+ * load. What it buys is that the pre-fetch paint is last-published rather than
+ * last-remembered.
+ */
+export function fallbackPlans(category: string): SubscriptionPlan[] {
+  return (subscriptionPlans as CatalogPlan[])
+    .filter((p) => p.category === category)
+    .map((p) => ({
+      id: p.id,
+      name: p.name,
+      description: p.description ?? "",
+      // The package publishes DOLLARS; the wire publishes CENTS. These pages
+      // render dollars, so this is the one conversion the package path needs and
+      // fromBillingPlan is the one the wire path needs. Both land on dollars.
+      priceMonthly: p.priceMonthly,
+      priceAnnual: p.priceAnnual ?? undefined,
+      category: p.category,
+      popular: p.popular,
+      contactSales: p.contactSales,
+      pricePerUser: Boolean(p.price_ref?.recurring?.per_seat),
+      features: p.features ?? [],
+      limits: p.limits as Record<string, number | null> | undefined,
+    }));
+}
+
+/** The published catalog row, as @hanzo/plans ships it. */
+interface CatalogPlan {
+  id: string;
+  name: string;
+  description?: string;
+  priceMonthly: number | null;
+  priceAnnual?: number | null;
+  category: string;
+  popular?: boolean;
+  contactSales?: boolean;
+  features?: string[];
+  limits?: Record<string, unknown>;
+  price_ref?: { recurring?: { per_seat?: boolean } };
 }
