@@ -102,13 +102,17 @@ const WorldPricing = () => {
   // Initialize with static plans immediately — no loading flash
   const [plans, setPlans] = useState<SubscriptionPlan[]>(STATIC_PLANS);
 
-  // NOT wired to loadPlans("world") on purpose. Commerce carries world-pro at
-  // $29 and world-team at $99, and reading them would republish prices the owner
-  // decision retires: Hanzo publishes personal 20/100/200 and team $25/seat, and
-  // nothing else. World is priced as a deal, so the paid tiers render through the
-  // component's existing contactSales path rather than a number. The rows stay in
-  // commerce because they still bill the accounts already on them — what changes
-  // is what this page advertises, not what anyone is charged.
+  // NOT wired to loadPlans("world") on purpose, and it must STAY unwired.
+  //
+  // The published catalog is the Go/Dev/Pro/Max ladder plus team at $25/seat and
+  // one Enterprise priced by conversation. World is priced as a deal, so its paid
+  // tiers render through the component's contactSales path rather than a number.
+  //
+  // The world-* rows are no longer published, so commerce archives them on boot:
+  // they stop being offered and stop being purchasable, while the rows survive so
+  // anything already billing against them still resolves. loadPlans("world")
+  // therefore returns [] — which is why this reads from STATIC_PLANS and why
+  // wiring it up "for consistency" would empty the tab.
 
   function formatPrice(plan: SubscriptionPlan) {
     if (plan.contactSales || plan.priceMonthly == null) return "Contact us";
