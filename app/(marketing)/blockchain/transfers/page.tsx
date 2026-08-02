@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoTransfers = () => {
   return (
     <BlockchainProductLayout
+      slug="transfers"
       name="Transfers API"
       tagline="Track token & NFT transfers in real-time"
       description="Monitor and query all token transfers across chains. Get transfer history, pending transactions, and real-time notifications for any address or contract."

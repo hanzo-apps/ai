@@ -18,6 +18,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoNodes = () => {
   return (
     <BlockchainProductLayout
+      slug="nodes"
       name="Hanzo Nodes"
       tagline="Managed RPC endpoints for every chain"
       description="Access blockchain data without running your own infrastructure. High-availability nodes for Lux, Ethereum, Polygon, Avalanche, Solana, and more—with realtime subscriptions and historical queries."

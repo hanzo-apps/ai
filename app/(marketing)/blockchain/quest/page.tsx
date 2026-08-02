@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoQuest = () => {
   return (
     <BlockchainProductLayout
+      slug="quest"
       name="Hanzo Quest"
       tagline="Gamified engagement and loyalty programs"
       description="Build engaging quest systems and loyalty programs. Users complete tasks, earn points, and claim rewards—NFTs, tokens, or real-world perks. Drive engagement and retention with gamification."

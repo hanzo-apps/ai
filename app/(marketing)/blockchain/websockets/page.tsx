@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoWebsockets = () => {
   return (
     <BlockchainProductLayout
+      slug="websockets"
       name="Websockets"
       tagline="Live blockchain data streaming"
       description="Real-time bidirectional communication with blockchain networks. Subscribe to blocks, transactions, logs, and pending transactions with persistent WebSocket connections."

@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoExplorer = () => {
   return (
     <BlockchainProductLayout
+      slug="explorer"
       name="Hanzo Explorer"
       tagline="Unified blockchain explorer and analytics"
       description="A comprehensive explorer for Lux and integrated chains. Search transactions, decode contract interactions, and analyze on-chain data with powerful analytics tools."

@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoID = () => {
   return (
     <BlockchainProductLayout
+      slug="id"
       name="Hanzo ID"
       tagline="Decentralized identity for Web3"
       description="Extend your IAM to support Web3 identities. DIDs, Verifiable Credentials, and on-chain attestations—with single sign-on across all Hanzo services and your own applications."

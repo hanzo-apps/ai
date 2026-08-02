@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoStorage = () => {
   return (
     <BlockchainProductLayout
+      slug="storage"
       name="Hanzo Storage"
       tagline="Decentralized storage, simple API"
       description="Store NFT metadata, user content, and application data on IPFS, Arweave, or Filecoin. A simple API abstracts the complexity of decentralized storage."

@@ -161,8 +161,19 @@ export function deployUrl(slug: string): string {
 
 export function docsUrl(slug: string): string | null {
   const meta = productsMetadata[slug];
-  if (meta?.docs_slug === null) return null;
-  const target = meta?.docs_slug ?? slug;
+  // An UNDECLARED product gets no link, rather than a guess. `?? slug` used to
+  // apply here too, which meant a product this map had never heard of still
+  // asserted that /docs/<its own slug> existed — and for eleven web3 pages it
+  // did not, so the "Self-host" button 404ed. The fallback below is still right
+  // for the 80 DECLARED products that genuinely sit at /docs/<slug>; the
+  // difference is that being in this map is a claim someone made, and not being
+  // in it is not a claim at all.
+  //
+  // Nothing is lost by staying silent: the button says "Self-host", and a
+  // product with no entry here has no repo to self-host from.
+  if (!meta) return null;
+  if (meta.docs_slug === null) return null;
+  const target = meta.docs_slug ?? slug;
   // docs.hanzo.ai serves its content tree under /docs. The bare form
   // (docs.hanzo.ai/<slug>) 404s: the vanity aliases that once covered it live
   // in the docs repo's public/_redirects, a Cloudflare Pages file, and the site

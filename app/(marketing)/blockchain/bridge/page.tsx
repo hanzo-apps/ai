@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoBridge = () => {
   return (
     <BlockchainProductLayout
+      slug="bridge"
       name="Hanzo Bridge"
       tagline="Cross-chain asset transfers, simplified"
       description="Bridge assets between Lux and major blockchain networks securely. Built-in compliance checks, optimized routes, and enterprise-grade reliability."

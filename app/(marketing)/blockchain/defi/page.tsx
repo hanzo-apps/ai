@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoDeFi = () => {
   return (
     <BlockchainProductLayout
+      slug="defi"
       name="Hanzo DeFi"
       tagline="DeFi building blocks for any application"
       description="Modular DeFi infrastructure for staking, lending, swapping, and yield aggregation. Gasless transactions, stablecoin APIs, and pre-built strategies—all on the Lux Network."

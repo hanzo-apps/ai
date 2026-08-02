@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoSmartWallets = () => {
   return (
     <BlockchainProductLayout
+      slug="wallets"
       name="Smart Wallets"
       tagline="ERC-4337 account abstraction wallets"
       description="Next-generation smart contract wallets with account abstraction. Social recovery, session keys, batch transactions, and gasless experiences out of the box."

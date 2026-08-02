@@ -40,9 +40,27 @@ export interface BlockchainProductProps {
     code: string;
   };
   codeExamples?: CodeExample[];
-  /** Product slug for the canonical OSS + Deploy footer.
-      Defaults to the lowercased final word of `name`. */
-  slug?: string;
+  /**
+   * Product slug for the canonical OSS + Deploy footer — the BARE slug, matching
+   * the key in products-metadata and this page's own directory (`nft`, not
+   * `blockchain/nft`; the page composes the prefix itself).
+   *
+   * REQUIRED, and it used to default to `name`'s last word lowercased. That
+   * derivation read a marketing headline as a product identity, and the two are
+   * different values that merely coincide most of the time:
+   *
+   *   "Hanzo DeFi"   -> defi        -> /docs/defi 404s, never written
+   *   "Gas Manager"  -> manager     -> /docs/manager 404s; there is no such product
+   *   "Hanzo NFT API"-> api         -> /docs/api EXISTS, so four products
+   *   "Hanzo Tokens API" -> api        (nft, tokens, bundler, transfers) all
+   *   ...                              silently addressed generic API docs
+   *
+   * The last case is the reason this is required rather than merely discouraged:
+   * `nft` and `tokens` were declared in products-metadata with the correct
+   * `docs_slug`, and the derivation routed around their own curated metadata.
+   * A wrong 200 reports nothing and outlives every link check.
+   */
+  slug: string;
 }
 
 const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
@@ -61,8 +79,6 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
   // badges, and icons are tinted via alpha suffixes on this single token.
   const accentColor = BRAND.primary;
   const [activeTab, setActiveTab] = useState(0);
-  // Derive slug from product name when caller didn't supply one (e.g. "Hanzo Chains" → "chains").
-  const resolvedSlug = slug ?? name.replace(/^[Hh]anzo\s+/, '').trim().toLowerCase().split(/\s+/).pop() ?? '';
 
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -455,7 +471,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
       </section>
 
       {/* Canonical OSS + Deploy footer — one block for every product page. */}
-      <ProductFooter slug={resolvedSlug} name={name} />
+      <ProductFooter slug={slug} name={name} />
     </div>
   );
 };
