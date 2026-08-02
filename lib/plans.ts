@@ -24,7 +24,8 @@
  * So the catalog is named once, mapped once, and guarded once, here.
  */
 
-import { subscriptionPlans } from "@hanzo/plans";
+import { useEffect, useState } from "react";
+import { subscriptionPlans, blockchainPlans, servicePricing } from "@hanzo/plans";
 
 /** A row exactly as GET /v1/billing/plans returns it. */
 interface BillingPlan {
@@ -158,4 +159,194 @@ interface CatalogPlan {
   features?: string[];
   limits?: Record<string, unknown>;
   price_ref?: { recurring?: { per_seat?: boolean } };
+}
+
+/* ── Blockchain (RPC + data APIs) ───────────────────────────────────────────
+ *
+ * A second catalog, same contract as the subscription one above: @hanzo/plans is
+ * the source, GET /v1/pricing/blockchain is the live read, and the package is the
+ * first-paint fallback. The rows are shaped differently — an RPC tier carries a
+ * monthly price and compute-unit limits, a data API carries its own request
+ * tiers — so they are normalized here rather than in each component.
+ */
+
+/** An RPC plan as the catalog publishes it. */
+export interface RpcPlan {
+  id: string;
+  name: string;
+  description: string;
+  /** null means the price is a conversation, not free. */
+  priceMonthly: number | null;
+  features: string[];
+  /** Overage in dollars per million compute units, when the plan meters it. */
+  overagePerMillion?: number;
+}
+
+/** A data API and its request tiers. */
+export interface DataApi {
+  id: string;
+  name: string;
+  description: string;
+  tiers: { name: string; priceMonthly: number; requestsMonthly: number }[];
+}
+
+export interface BlockchainCatalog {
+  rpc: RpcPlan[];
+  data: DataApi[];
+}
+
+const BLOCKCHAIN_API = "https://api.hanzo.ai/v1/pricing/blockchain";
+
+interface CatalogBlockchainRow {
+  id: string;
+  name: string;
+  type?: string;
+  description?: string;
+  priceMonthly?: number | null;
+  features?: string[];
+  limits?: { overagePerMillion?: number };
+  tiers?: { name: string; priceMonthly: number; requestsMonthly: number }[];
+}
+
+function normalizeBlockchain(rows: CatalogBlockchainRow[]): BlockchainCatalog {
+  return {
+    rpc: rows
+      .filter((r) => r.type === "rpc")
+      .map((r) => ({
+        id: r.id,
+        name: r.name,
+        description: r.description ?? "",
+        priceMonthly: r.priceMonthly ?? null,
+        features: r.features ?? [],
+        overagePerMillion: r.limits?.overagePerMillion,
+      })),
+    data: rows
+      .filter((r) => r.type === "data")
+      .map((r) => ({
+        id: r.id,
+        name: r.name,
+        description: r.description ?? "",
+        tiers: r.tiers ?? [],
+      })),
+  };
+}
+
+/** The published blockchain catalog, for first paint. */
+export function fallbackBlockchain(): BlockchainCatalog {
+  return normalizeBlockchain(blockchainPlans as unknown as CatalogBlockchainRow[]);
+}
+
+/**
+ * The live blockchain catalog. Resolves to null on any failure so the caller
+ * keeps its fallback — an empty tab is worse than a last-published one.
+ */
+export async function loadBlockchain(): Promise<BlockchainCatalog | null> {
+  try {
+    const res = await fetch(BLOCKCHAIN_API);
+    if (!res.ok) return null;
+    const body = await res.json();
+    const rows: CatalogBlockchainRow[] = Array.isArray(body) ? body : (body?.plans ?? []);
+    if (!rows.length) return null;
+    return normalizeBlockchain(rows);
+  } catch {
+    return null;
+  }
+}
+
+/** Dollars as the cards render them: 0 is Free, null is a conversation. */
+export function formatCatalogPrice(v: number | null | undefined): string {
+  if (v == null) return "Custom";
+  if (v === 0) return "Free";
+  return `$${v}`;
+}
+
+/* ── Managed services (Search, Crawl, Vector, Console, Managed) ─────────────
+ *
+ * Third catalog, same contract: @hanzo/plans paints first, GET
+ * /v1/pricing/services replaces it on load. These are DISPLAY rate cards — what
+ * a product costs — carrying no entitlement or limit fields, because nothing
+ * bills off them and a number here must never become a grant.
+ */
+
+export interface ServiceTier {
+  name: string;
+  /** null means the price is a conversation, not free. */
+  priceMonthly: number | null;
+  description?: string;
+  features?: string[];
+  popular?: boolean;
+  /** e.g. "+ usage" — rendered after the period. */
+  periodNote?: string;
+}
+
+export interface ServiceUsageRate {
+  resource: string;
+  rate: number;
+  unit: string;
+  note?: string;
+}
+
+/** A row of the Managed Services comparison table. */
+export interface ServiceTableRow {
+  name: string;
+  description: string;
+  freeTier: string;
+  price: string;
+  note: string;
+}
+
+export interface ServiceCard {
+  id: string;
+  name: string;
+  description: string;
+  tiers?: ServiceTier[];
+  usage?: ServiceUsageRate[];
+  table?: ServiceTableRow[];
+}
+
+const SERVICES_API = "https://api.hanzo.ai/v1/pricing/services";
+
+function servicesFrom(doc: unknown): ServiceCard[] {
+  const list = (doc as { services?: ServiceCard[] })?.services;
+  return Array.isArray(list) ? list : [];
+}
+
+/** The published service rate cards, for first paint. */
+export function fallbackServices(): ServiceCard[] {
+  return servicesFrom(servicePricing);
+}
+
+/** One service by catalog id, live-with-fallback, for a single-product tab. */
+export function useServiceCard(id: string): ServiceCard | undefined {
+  const [cards, setCards] = useState<ServiceCard[]>(fallbackServices);
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch(SERVICES_API);
+        if (!res.ok) return;
+        const live = servicesFrom(await res.json());
+        if (live.length) setCards(live);
+      } catch {
+        /* keep the fallback — an empty tab is worse than a last-published one */
+      }
+    })();
+  }, []);
+  return cards.find((c) => c.id === id);
+}
+
+/** Dollars as the service cards render them: $2,499, not $2499. */
+export function formatServicePrice(v: number | null | undefined): string {
+  if (v == null) return "Custom";
+  return `$${v.toLocaleString("en-US")}`;
+}
+
+/**
+ * A usage rate as money. A sub-dollar rate needs at least two decimals to read as
+ * a price at all — 0.1 is $0.10, not $0.1 — while keeping the precision the
+ * catalog states, so $0.015/1K vectors does not round away to a cent.
+ */
+export function formatUsageRate(v: number): string {
+  if (v >= 1) return `$${v.toLocaleString("en-US")}`;
+  const decimals = (String(v).split(".")[1] ?? "").length;
+  return `$${v.toFixed(Math.max(2, decimals))}`;
 }

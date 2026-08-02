@@ -20,13 +20,13 @@ export const products: NavGroup[] = [
     description: "Core persistence & retrieval primitives",
     href: "/products/data",
     items: [
-      { name: "SQL", href: "/products/data/sql", description: "Managed PostgreSQL" },
-      { name: "SQL Vector", href: "/products/data/sql-vector", description: "pgvector for AI/ML" },
-      { name: "DocumentDB", href: "/products/data/documentdb", description: "MongoDB-compatible" },
-      { name: "KV", href: "/products/data/kv", description: "Redis-compatible key-value" },
-      { name: "Datastore", href: "/products/data/datastore", description: "Real-time analytics warehouse" },
+      { name: "SQL", href: "/sql", description: "Managed PostgreSQL" },
+      { name: "SQL Vector", href: "/vector", description: "pgvector for AI/ML" },
+      { name: "DocumentDB", href: "/docdb", description: "MongoDB-compatible" },
+      { name: "KV", href: "/kv", description: "Redis-compatible key-value" },
+      { name: "Datastore", href: "/datastore", description: "Real-time analytics warehouse" },
       { name: "Vector", href: "/vector", description: "High-performance vector database" },
-      { name: "Storage", href: "/products/data/storage", description: "S3-compatible object storage" },
+      { name: "Storage", href: "/storage", description: "S3-compatible object storage" },
       { name: "Search", href: "/search", description: "Hybrid search + RAG chat" },
       { name: "Crawl", href: "/crawl", description: "AI-ready web crawler" }
     ]
@@ -36,46 +36,34 @@ export const products: NavGroup[] = [
     description: "Run code and host apps",
     href: "/products/compute",
     items: [
-      { name: "Functions", href: "/products/compute/functions", description: "Serverless compute platform" },
-      { name: "Runtime", href: "/products/compute/runtime", description: "Isolated execution sandbox" },
-      { name: "Machines", href: "/products/compute/machines", description: "Dedicated AI compute" }
+      { name: "Functions", href: "/functions", description: "Serverless compute platform" },
+      { name: "Machines", href: "/machines", description: "Dedicated AI compute" }
     ]
   },
   {
     title: "Async",
     description: "Background execution & messaging",
-    href: "/products/async",
+    href: "/products/compute",
     items: [
-      { name: "Tasks", href: "/products/async/tasks", description: "Durable workflow execution" },
-      { name: "Cron", href: "/products/async/cron", description: "Scheduled jobs" },
-      { name: "Queues", href: "/products/async/queues", description: "High-throughput work queues" },
-      { name: "PubSub", href: "/products/async/pubsub", description: "Event streaming & messaging" }
+      { name: "Tasks", href: "/tasks", description: "Durable workflow execution" },
+      { name: "PubSub", href: "/pubsub", description: "Event streaming & messaging" }
     ]
   },
   {
     title: "ML",
     description: "End-to-end MLOps",
-    href: "/products/ml",
+    href: "/products/ai",
     items: [
-      { name: "Notebooks", href: "/products/ml/notebooks", description: "Managed Jupyter workspaces" },
-      { name: "Pipelines", href: "/products/ml/pipelines", description: "ML workflow orchestration" },
-      { name: "Training", href: "/products/ml/training", description: "Distributed training jobs" },
-      { name: "Tuning", href: "/products/ml/tuning", description: "Hyperparameter optimization" },
-      { name: "Serving", href: "/products/ml/serving", description: "Production model inference" },
-      { name: "Model Registry", href: "/products/ml/registry", description: "Model versioning & governance" },
-      { name: "Feature Store", href: "/products/ml/feature-store", description: "Online/offline feature serving" },
-      { name: "Evaluation", href: "/products/ml/evaluation", description: "Model quality & drift detection" }
+      { name: "Model Registry", href: "/registry", description: "Model versioning & governance" },
     ]
   },
   {
     title: "Observability",
     description: "Signals & instrumentation",
-    href: "/products/observability",
+    href: "/products/observe",
     items: [
-      { name: "Metrics", href: "/products/observability/metrics", description: "Time-series metrics database" },
-      { name: "Logs", href: "/products/observability/logs", description: "Scalable log aggregation" },
-      { name: "Traces", href: "/products/observability/traces", description: "Distributed tracing" },
-      { name: "Telemetry", href: "/products/observability/telemetry", description: "OpenTelemetry collector" },
+      { name: "Metrics", href: "/metrics", description: "Time-series metrics database" },
+      { name: "Telemetry", href: "/telemetry", description: "OpenTelemetry collector" },
       { name: "Insights", href: "/insights", description: "Product analytics" }
     ]
   },
@@ -84,14 +72,13 @@ export const products: NavGroup[] = [
     description: "Infrastructure & security",
     href: "/products/platform",
     items: [
-      { name: "Platform", href: "/products/platform/platform", description: "PaaS framework & runtime" },
-      { name: "Edge", href: "/products/platform/edge", description: "High-performance API edge" },
-      { name: "HKE", href: "/products/platform/hke", description: "Managed Kubernetes clusters" },
-      { name: "IAM", href: "/products/platform/iam", description: "Identity & access management" },
-      { name: "KMS", href: "/products/platform/kms", description: "Secrets management" },
-      { name: "Networking", href: "/products/platform/networking", description: "Zero-trust virtual networks" },
-      { name: "Tunnel", href: "/products/platform/tunnel", description: "Secure local & service tunneling" },
-      { name: "DNS", href: "/products/platform/dns", description: "Programmable DNS infrastructure" }
+      { name: "Platform", href: "/platform", description: "PaaS framework & runtime" },
+      { name: "Edge", href: "/edge", description: "High-performance API edge" },
+      { name: "IAM", href: "/iam", description: "Identity & access management" },
+      { name: "KMS", href: "/kms", description: "Secrets management" },
+      { name: "Networking", href: "/network", description: "Zero-trust virtual networks" },
+      { name: "Tunnel", href: "/tunnel", description: "Secure local & service tunneling" },
+      { name: "DNS", href: "/dns", description: "Programmable DNS infrastructure" }
     ]
   },
   {
@@ -99,13 +86,13 @@ export const products: NavGroup[] = [
     description: "End-user applications",
     href: "/products/apps",
     items: [
-      { name: "Base", href: "/products/apps/base", description: "Backend-as-a-Service" },
-      { name: "Analytics", href: "/products/apps/analytics", description: "Privacy-focused web analytics" },
-      { name: "Commerce", href: "/products/apps/commerce", description: "AI-powered e-commerce" },
-      { name: "Chat", href: "/products/apps/chat", description: "AI chat interface" },
-      { name: "Flow", href: "/products/apps/flow", description: "Visual workflow builder" },
-      { name: "Console", href: "/products/apps/console", description: "Admin control plane" },
-      { name: "Cloud", href: "/products/apps/cloud", description: "AI infrastructure platform" }
+      { name: "Base", href: "/base", description: "Backend-as-a-Service" },
+      { name: "Analytics", href: "/analytics", description: "Privacy-focused web analytics" },
+      { name: "Commerce", href: "/commerce", description: "AI-powered e-commerce" },
+      { name: "Chat", href: "/chat", description: "AI chat interface" },
+      { name: "Flow", href: "/flow", description: "Visual workflow builder" },
+      { name: "Console", href: "/console", description: "Admin control plane" },
+      { name: "Cloud", href: "/cloud", description: "AI infrastructure platform" }
     ]
   }
 ];

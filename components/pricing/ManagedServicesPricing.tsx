@@ -2,53 +2,22 @@
 
 import React from "react"
 import { Button } from "@hanzo/ui"
+import { useServiceCard } from "@/lib/plans"
 
-const services = [
-  {
-    name: "KV (Valkey/Redis)",
-    description: "In-memory cache and message broker",
-    freeTier: "256 MB shared",
-    pro: "$15/mo per GB",
-    note: "Shared or dedicated. Persistence optional.",
-  },
-  {
-    name: "SQL (PostgreSQL)",
-    description: "Managed relational database with pgvector",
-    freeTier: "1 GB storage",
-    pro: "$25/mo starter",
-    note: "Connection pooling included. Daily backups.",
-  },
-  {
-    name: "Search (Meilisearch)",
-    description: "Instant full-text and faceted search",
-    freeTier: "100K documents",
-    pro: "$20/mo per index",
-    note: "Typo-tolerant. Sub-50ms p99.",
-  },
-  {
-    name: "MQ (Message Queue)",
-    description: "Durable job queues with priority scheduling",
-    freeTier: "10K jobs/mo",
-    pro: "$15/mo per 1M jobs",
-    note: "Priority queues. Dead-letter support.",
-  },
-  {
-    name: "S3 / Storage",
-    description: "S3-compatible object storage",
-    freeTier: "5 GB",
-    pro: "$0.02/GB/mo",
-    note: "S3 API. CDN edge caching available.",
-  },
-  {
-    name: "Stream (Kafka)",
-    description: "Event streaming with Kafka wire protocol",
-    freeTier: "1M messages/mo",
-    pro: "$25/mo per topic",
-    note: "NATS JetStream backend. Exactly-once delivery.",
-  },
-]
+// The service table comes from the catalog (@hanzo/plans first paint, GET
+// /v1/pricing/services live) rather than an array here — the same reason every
+// other pricing surface moved: a price stated only in a component is one nothing
+// else can read, check, or charge against.
 
 export default function ManagedServicesPricing() {
+  const card = useServiceCard("managed");
+  const services = (card?.table ?? []).map((r) => ({
+    name: r.name,
+    description: r.description,
+    freeTier: r.freeTier,
+    pro: r.price,
+    note: r.note,
+  }));
   return (
     <div className="mb-20">
       <h2 className="text-3xl font-bold mb-2">Managed Services</h2>
