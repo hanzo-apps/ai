@@ -167,8 +167,11 @@ const PlatformHero = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Column */}
-          <div>
+          {/* Left Column — min-w-0 so the grid item may shrink below its
+              content; without it a code sample inside forced 385px into a
+              358px column and 27px of text fell outside a viewport that
+              cannot scroll. */}
+          <div className="min-w-0">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -273,8 +276,13 @@ const PlatformHero = () => {
             </motion.div>
           </div>
 
-          {/* Right Column: Feature Demo */}
+          {/* Right Column: Feature Demo — min-w-0 for the same reason as the
+              left column: a grid item's default `min-width: auto` will not
+              shrink below its content, and the code sample inside forced 385px
+              into a 358px column, putting 27px of it outside a viewport that
+              cannot scroll. */}
           <motion.div
+            className="min-w-0"
             initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4, delay: 0.3 }}
