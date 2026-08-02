@@ -39,10 +39,14 @@ test:
   #
   # `gates`, not `test`: the older e2e specs drive a dev server on :8084 or
   # the live site, so they fail for reasons that are not the commit's.
+  #
+  # No pnpm version here. `packageManager` in package.json is the one place it
+  # is stated, corepack reads it, and a second pin was BOTH wrong (it named
+  # 10.33.4 against a 9.15.0 lockfile) and inert (corepack prefers the manifest).
+  # `.github/workflows/deploy.yml` says the same thing by passing no `version:`.
   - name: gates
     run: |
       corepack enable
-      corepack prepare pnpm@10.33.4 --activate
       pnpm install --frozen-lockfile
       pnpm build
       pnpm exec playwright install --with-deps chromium

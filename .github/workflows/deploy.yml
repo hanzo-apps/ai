@@ -90,16 +90,15 @@ jobs:
         env:
           NEXT_PUBLIC_EVENT_INGEST_KEY: ${{ secrets.EVENT_INGEST_KEY }}
 
-      # Fail before publishing rather than after: `output: export` writing an
-      # empty out/ is the failure mode that silently blanks the site.
-      - name: Refuse to publish an empty export
-        run: |
-          set -euo pipefail
-          test -f out/index.html || { echo "::error::out/index.html missing — the export produced nothing"; exit 1; }
-          n=$(find out -name '*.html' | wc -l)
-          [ "$n" -ge 100 ] || { echo "::error::only $n html files exported; expected ~130"; exit 1; }
-          echo "exported $n pages"
-
+      # "Refuse to publish a short export" used to be a shell step here, with a
+      # hand-kept page count in it. It is now `requireExport()` in
+      # e2e/gates/export.ts, stated ONCE and against the App Router tree rather
+      # than against a number somebody has to remember to raise: every route the
+      # tree answers must have shipped a page. It has to live there anyway —
+      # every gate in the suite asserts "no page does X", which an export with
+      # three pages in it satisfies trivially — and the gates run below, before
+      # the deploy step, so nothing publishes ahead of the check.
+      #
       # The gates read `out/`, so they run here rather than in a job of their
       # own: one build, gated once, and the bytes checked are the bytes that
       # publish. Both defects they catch were invisible in the source that
