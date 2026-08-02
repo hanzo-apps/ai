@@ -43,7 +43,7 @@ const COMPLIANCE: CardItem[] = [
     title: 'Transaction monitoring',
     meta: NOW,
     description:
-      'Transactions are scored against the rule library as they arrive. An alert carries the rule that fired and the primary text that rule comes from, so the reason travels with the alert.',
+      'Transactions are scored against the rule library as they arrive. An alert carries the rule that fired and the citation behind it — the authority, the document and the locator inside it — so a reviewer lands on the primary text instead of taking the alert on trust.',
   },
   {
     icon: ScrollText,
@@ -213,7 +213,7 @@ export default function RiskClient() {
         eyebrow="Risk"
         icon={ShieldAlert}
         title="One risk plane for accounts, payments and agents"
-        lede="Hanzo Risk scores an entity — an account, a transaction, a session, an agent — and returns a decision you can explain, from a model trained on your organization's own data rather than a pooled model of somebody else's traffic. The compliance half is live today; the decide plane is being built."
+        lede={`Two faces over one engine, at two different stages. ${NOW} — the compliance face, at api.hanzo.ai/v1/aml: monitoring, alerts, cases, rules, sanctions screening, relationship lookback and a retained-record clock. ${SOON} — the decide plane, which will score an account, a transaction, a session or an agent and return a decision you can explain, from a model trained on your organization's own data rather than a pooled model of somebody else's traffic.`}
       />
 
       <Section title="Where this is today">
@@ -353,11 +353,11 @@ export default function RiskClient() {
             When it has, the numbers here will be ours and measured.
           </p>
           <p>
-            The engine names the requirements it does <em>not</em> meet, and that is part of the product rather than a
-            footnote to it. Three of them decide whether this is enough on its own. There is no report workflow — no
-            drafting, no approval step, no filing. There is no filing clock, so no deadline is measured anywhere. And
-            there is no confidentiality marking on a case, so nothing in the engine keeps a case note away from a
-            customer-facing surface. What is here is the detection and the record; the filing is not.
+            Three unmet requirements decide whether this is enough on its own, and they are named here rather than left
+            to be found. There is no report workflow — no drafting, no approval step, no filing. There is no filing
+            clock, so no deadline is measured anywhere. And there is no confidentiality marking on a case, so nothing in
+            the engine keeps a case note away from a customer-facing surface. What is here is the detection and the
+            record; the filing is not.
           </p>
           <p>
             Anti-money-laundering compliance and fraud prevention are related jobs, not one job. <strong>/v1/aml</strong>{' '}

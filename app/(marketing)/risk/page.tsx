@@ -4,8 +4,11 @@ import RiskClient from './risk-client'
 
 /**
  * The copy on this page is unapproved, so the page is not published: `/risk` is
- * in `lib/publish`'s withheld list, which keeps it out of sitemap.xml, disallows
- * it in robots.txt, and puts the `noindex` below on the page itself.
+ * in `lib/publish`'s UNAPPROVED list, which keeps it out of sitemap.xml and puts
+ * the `noindex` below on the page itself. It is deliberately NOT disallowed in
+ * robots.txt — a crawler forbidden to fetch the page never reads the `noindex`,
+ * and the `noindex` is the only one of the three controls that removes a page
+ * somebody already linked to.
  *
  * The status is not asserted here — it is looked up. A page cannot approve
  * itself, and removing the route from that one list is the whole of the
