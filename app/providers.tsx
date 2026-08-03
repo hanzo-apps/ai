@@ -190,6 +190,29 @@ function memoryStorage(): Storage {
 }
 
 /**
+ * The OAuth client a visitor authenticates as is decided by the HOST they landed
+ * on — this ONE static export serves several (hanzo.ai and cloud.hanzo.ai from the
+ * same `out/`, split by the CloudLanding `cp` in the Dockerfile). It mirrors
+ * provision.yaml's app->host graph: cloud.hanzo.ai and console.hanzo.ai are the
+ * Cloud surfaces and authenticate as `hanzo-cloud` — the ONLY client whose IAM
+ * allowlist carries their `/auth/callback`; every other host is `hanzo-app`.
+ *
+ * This is why cloud.hanzo.ai login 400'd: the shared build sent `hanzo-app`, whose
+ * allowlist has `cloud.hanzo.ai/callback` but not `/auth/callback` (the path the
+ * SDK actually sends, since redirectUri is origin + /auth/callback), so authorize
+ * was rejected and login was impossible. Deriving the client from the SAME host
+ * redirectUri already uses is what keeps the two from drifting.
+ * NEXT_PUBLIC_HANZO_CLIENT_ID still overrides for a single-host build.
+ */
+const cloudHosts = new Set(['cloud.hanzo.ai', 'console.hanzo.ai'])
+
+function clientForHost(): string {
+  if (process.env.NEXT_PUBLIC_HANZO_CLIENT_ID) return process.env.NEXT_PUBLIC_HANZO_CLIENT_ID
+  if (typeof window !== 'undefined' && cloudHosts.has(window.location.hostname)) return 'hanzo-cloud'
+  return 'hanzo-app'
+}
+
+/**
  * Client providers. All telemetry is `@hanzo/event` posting to /v1/event; the
  * analytics, insights and error dashboards are lenses cloud resolves over that
  * one stream. `AnalyticsProvider` fires the first pageview and captures errors,
@@ -220,7 +243,7 @@ export function Providers({ children }: { children: ReactNode }) {
           <IamProvider
             config={{
               serverUrl: process.env.NEXT_PUBLIC_HANZO_IAM_URL || 'https://hanzo.id',
-              clientId: process.env.NEXT_PUBLIC_HANZO_CLIENT_ID || 'hanzo-app',
+              clientId: clientForHost(),
               redirectUri:
                 (typeof window !== 'undefined' ? window.location.origin : 'https://hanzo.ai') +
                 '/auth/callback',
