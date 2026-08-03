@@ -3,6 +3,7 @@
 import { ArrowRight } from "lucide-react"
 
 import { ProductFooter } from "@/components/products/ProductFooter"
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 export default function LlmPage() {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -17,7 +18,7 @@ export default function LlmPage() {
               Hanzo AI — one API for every model
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              The AI cloud: 100+ models behind a single API. OpenAI- and Anthropic-compatible, with observability, cost controls, and rate limits built in.
+              The AI cloud: {MODELS_PHRASE} behind a single API. OpenAI- and Anthropic-compatible, with observability, cost controls, and rate limits built in.
             </p>
           </div>
         </section>

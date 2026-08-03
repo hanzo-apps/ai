@@ -58,3 +58,11 @@ test:
   # files. Kept separate it still reports while `pnpm lint` is broken (see above).
   - name: price literals
     run: node scripts/audit-price-literals.mjs
+
+  # How many models we serve is the same class of fact as what they cost, and it
+  # had drifted further: eighteen statements on this site in three different
+  # numbers (100+, 130+, 400+), and 85+/200+/340 elsewhere in the estate. It now
+  # derives from the same snapshot the prices come from. Same shape of gate, same
+  # shrink-only ratchet, and it reads git-tracked files only.
+  - name: model counts
+    run: node scripts/audit-model-counts.mjs

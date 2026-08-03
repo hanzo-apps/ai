@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 
 const faqs = [
   {
@@ -24,7 +25,7 @@ const faqs = [
   },
   {
     question: "What models are supported?",
-    answer: "Cloud mode supports 50+ models including Zen, GPT-4o, Claude, Gemini, Mistral, and more. Local mode supports Zen (4B-480B), Llama 3, Mistral, and other open models that run on consumer hardware — fully private, no data leaves your machine.",
+    answer: `Cloud mode supports ${MODELS_PHRASE} including Zen, GPT-4o, Claude, Gemini, Mistral, and more. Local mode supports Zen (4B-480B), Llama 3, Mistral, and other open models that run on consumer hardware — fully private, no data leaves your machine.`,
   },
   {
     question: "Is my code private?",

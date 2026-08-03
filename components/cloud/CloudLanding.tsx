@@ -22,6 +22,7 @@ import {
   Copy,
   Github,
 } from "lucide-react"
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 
 const CONSOLE = "https://console.hanzo.ai"
 const SIGNIN = "https://hanzo.id"
@@ -115,7 +116,7 @@ function Hero() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400"
         >
-          One API for <span className="text-white">400+ models</span>, Base backends, identity,
+          One API for <span className="text-white">{MODELS_PHRASE}</span>, Base backends, identity,
           secrets, vector search, and full-text search. Pay-as-you-go, billed per organization.
           Run it on Hanzo Cloud or self-host the exact same stack on your own Kubernetes.
         </motion.p>
@@ -176,7 +177,7 @@ function Hero() {
 const FEATURES = [
   {
     icon: Bot,
-    title: "400+ models, one API",
+    title: `${MODELS_PHRASE}, one API`,
     body: "OpenAI, Anthropic, and open-weight models behind a single OpenAI-compatible endpoint. Switch providers without touching code; route, fall back, and cache automatically.",
   },
   {
@@ -285,7 +286,7 @@ function Billing() {
             $0<span className="text-xl font-normal text-neutral-500"> to start</span>
           </div>
           <p className="mt-3 text-sm text-neutral-400">
-            Create an organization, add a balance, and call any of 400+ models. Costs accrue per use
+            Create an organization, add a balance, and call any of {MODELS_PHRASE}. Costs accrue per use
             and are debited from your organization balance in real time.
           </p>
           <a

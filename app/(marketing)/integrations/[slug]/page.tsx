@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { INTEGRATIONS, getIntegration, INTEGRATION_CATEGORIES } from '@/lib/integrations'
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -123,7 +124,7 @@ export default async function IntegrationPage({ params }: Props) {
               <Link href="/signup" className="text-brand hover:underline">
                 hanzo.ai/signup
               </Link>{' '}
-              · Fully OpenAI-compatible · 50+ models available
+              · Fully OpenAI-compatible · {MODELS_PHRASE} available
             </p>
           </div>
 

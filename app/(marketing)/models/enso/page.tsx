@@ -3,10 +3,11 @@ import Link from 'next/link'
 import AccuracyCostScatter, { type ScatterPoint } from '@/components/models/AccuracyCostScatter'
 import BenchmarkBrowser from '@/components/models/BenchmarkBrowser'
 import { ENSO_TIERS, scatterRows, browserGroups, LEADERBOARD_META, fmtScore } from '@/lib/leaderboard'
+import { BENCHMARKED_PHRASE, MODELS_PHRASE } from '@/lib/data/model-count'
 
 const TITLE = 'Enso — Hanzo-measured benchmarks'
 const DESCRIPTION =
-  'The Enso family: three differentiated tiers (Ultra 98.0% > Pro 96.0% > Flash 92.9% GPQA-Diamond), frontier accuracy at a fraction of the cost, and a reported-vs-measured comparison across 130+ models. Honest by construction — every score keeps its source.'
+  `The Enso family: three differentiated tiers (Ultra 98.0% > Pro 96.0% > Flash 92.9% GPQA-Diamond), frontier accuracy at a fraction of the cost, and a reported-vs-measured comparison across ${BENCHMARKED_PHRASE}. Honest by construction — every score keeps its source.`
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -56,7 +57,7 @@ export default function EnsoModelsPage() {
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">Enso, measured</span>
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-neutral-400">
-            Enso orchestrates 400+ models behind one API. Here is how it scores when we run it — and the field —
+            Enso orchestrates {MODELS_PHRASE} behind one API. Here is how it scores when we run it — and the field —
             on a single harness: three differentiated tiers, accuracy-at-cost, and every number kept with its source.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
