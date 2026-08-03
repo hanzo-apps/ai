@@ -245,7 +245,7 @@ const HeroSection = () => {
                 aria-label="Hanzo AI is a Techstars 2017 company"
                 className="group mt-8 inline-flex items-center gap-2 w-fit text-xs text-muted-foreground hover:text-foreground transition-colors"
               >
-                <span className="uppercase tracking-wider text-[11px]">Backed by</span>
+                <span className="text-[11px]">Backed by</span>
                 <img
                   src="/logos/partners/techstars.svg"
                   alt="Techstars"
