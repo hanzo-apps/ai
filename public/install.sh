@@ -40,10 +40,22 @@
 </html>
 EOF
 
-# Hanzo Installer - Redirects to hanzo.sh
-# The canonical installer is now at hanzo.sh
+# Hanzo Installer - hands off to the canonical installer at hanzo.sh.
 #
-# Usage: curl -fsSL hanzo.ai/install.sh | sh
-#        (redirects to hanzo.sh)
-
-exec curl -fsSL https://hanzo.sh/install | sh -s -- "$@"
+#   curl -fsSL hanzo.ai/install.sh | sh
+#
+# A browser gets the HTML above (the heredoc swallows it for a shell); a shell
+# falls through to the exec below. One URL, both audiences.
+#
+# The path is install.sh, WITH the extension. It was /install, which hanzo.sh
+# does not serve — and `curl -f` answers a 404 by writing nothing and exiting 22,
+# so `sh` read an empty script and exited 0. The documented one-liner reported
+# success and installed nothing, silently, for every user who ran it.
+#
+# -f is what makes that failure silent, so the exit status is checked here rather
+# than trusted: a fetch that does not produce an installer must say so.
+if ! i_script=$(curl -fsSL https://hanzo.sh/install.sh); then
+    echo "hanzo: could not fetch the installer from https://hanzo.sh/install.sh" >&2
+    exit 1
+fi
+printf '%s' "$i_script" | sh -s -- "$@"
