@@ -9,12 +9,18 @@
 #   --output=type=image,name=ghcr.io/hanzoai/cloud-www:<tag>,push=true
 
 # ---- build stage: Next.js static export ----------------------------------
-FROM node:20-bookworm-slim AS build
+# Node 22, because `engines` says >=22.18 and this stage runs the same
+# `pnpm build` the floor was declared for: its second half, `scripts/noindex.mjs`,
+# imports `lib/routes.ts` directly and needs the type stripping Node does for
+# itself only from 22.18. On Node 20 that throws ERR_UNKNOWN_FILE_EXTENSION
+# AFTER every page has rendered, so the export looks complete right up until the
+# build exits non-zero. The floor was raised in `.nvmrc`, `engines`, `hanzo.yml`
+# and the CF-Pages workflow together; this file was the one lane that kept 20.
+FROM node:22-bookworm-slim AS build
 WORKDIR /app
 
-# Enable pnpm via corepack, pinned to the version that generated the lockfile
-# (pnpm 11+ requires Node 22; this image is Node 20). Avoids corepack pulling
-# an incompatible latest pnpm.
+# Enable pnpm via corepack, pinned to the version that generated the lockfile.
+# Avoids corepack pulling an incompatible latest pnpm.
 RUN corepack enable && corepack prepare pnpm@10.33.4 --activate
 
 # Install deps against the committed lockfile for reproducible builds.
