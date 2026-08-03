@@ -10,28 +10,26 @@
 # the hanzoai GHCR namespace — the push failed `denied: permission_denied` every
 # run. Dropped.
 #
-# What remains is the fast lint gate the reusable runs on every push + PR. The
-# reusable treats `images:` as optional (hanzoai/ci#8) and provisions Node for the
-# JS test gate on the bare arc runner (hanzoai/ci#9), so this run is green with no
+# What remains is the gate the reusable runs on every push + PR. The reusable
+# treats `images:` as optional (hanzoai/ci#8) and provisions Node for the JS test
+# gate on the bare arc runner (hanzoai/ci#9), so this run is green with no
 # cross-org push attempt.
+#
+# THERE IS NO `lint` STEP, and its absence is deliberate. `pnpm lint` is `next
+# lint`, which Next REMOVED in 16 — on 16.2.12 it reads "lint" as a directory
+# name and exits 1 — and calling eslint directly does not rescue it either,
+# because typescript-eslint 8.65 refuses to load against this repo's TypeScript
+# 7.0.2. Measured 2026-08-01, both spellings. Steps run in order, so a step that
+# cannot pass is not a weak gate: it is a wall in front of the real one, and it
+# was standing in front of `gates`. It contributed no signal and blocked all of
+# it. Restoring it is a dependency decision — move to eslint 9 flat config on a
+# typescript-eslint that accepts TS 7 — and it belongs in the commit that makes
+# it pass, not here.
+#
+# Types ARE checked meanwhile: next.config.mjs sets neither
+# `typescript.ignoreBuildErrors` nor `eslint.ignoreDuringBuilds`, so the `pnpm
+# build` inside `gates` type checks the whole tree and fails on an error.
 test:
-  # MEASURED 2026-08-01 AND CURRENTLY BROKEN, left as-is because the repair is a
-  # dependency decision and not a copy change. `pnpm lint` is `next lint`, which
-  # Next REMOVED in 16 — on 16.2.12 it reads "lint" as a directory name and exits
-  # 1. Calling eslint directly does not rescue it either: typescript-eslint 8.65
-  # refuses to load against this repo's TypeScript 7.0.2. So this step has never
-  # been able to pass, which went unnoticed because nothing under
-  # `.hanzo/workflows` fires on a mirror repo.
-  #
-  # Types ARE checked: next.config.mjs sets neither `typescript.ignoreBuildErrors`
-  # nor `eslint.ignoreDuringBuilds`, so `pnpm build` in the gates step below type
-  # checks the whole tree and fails on an error.
-  - name: lint
-    run: |
-      corepack enable
-      corepack prepare pnpm@10.33.4 --activate
-      pnpm install --frozen-lockfile
-      pnpm lint
   # The gates run against `out/` — the bytes that ship — because the two
   # defects they exist to catch were both invisible in the source that
   # produced them: `lineHeight={1.1}` reads as a ratio and compiles to
@@ -41,10 +39,20 @@ test:
   #
   # `gates`, not `test`: the older e2e specs drive a dev server on :8084 or
   # the live site, so they fail for reasons that are not the commit's.
+  #
+  # No pnpm version here. `packageManager` in package.json is the one place it
+  # is stated, corepack reads it, and a second pin was BOTH wrong (it named
+  # 10.33.4 against a 9.15.0 lockfile) and inert (corepack prefers the manifest).
+  # `.github/workflows/deploy.yml` says the same thing by passing no `version:`.
+  #
+  # No Node version either, for the same reason: `.nvmrc` and `engines` name the
+  # floor (22.18 — wrangler needs 22, and `scripts/noindex.mjs` reads
+  # `lib/publish` directly, which needs the type stripping Node does for itself
+  # from 22.18). If the reusable provisions something older this step fails on
+  # the import, loudly, which is the right way for a floor to be wrong.
   - name: gates
     run: |
       corepack enable
-      corepack prepare pnpm@10.33.4 --activate
       pnpm install --frozen-lockfile
       pnpm build
       pnpm exec playwright install --with-deps chromium

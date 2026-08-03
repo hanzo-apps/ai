@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { readdirSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { OUT, read, requireExport, serveExport } from './export'
+import { kit, OUT, read, requireExport, serveExport } from './export'
 
 /**
  * The page kit's title, in the export that ships.
@@ -19,8 +19,15 @@ import { OUT, read, requireExport, serveExport } from './export'
  * draws, which is what a reader loses.
  */
 
-/** The pages built on `components/marketing/page-kit`. */
-const KIT = ['/api', '/cookies', '/customers', '/learn', '/research']
+/**
+ * The pages built on the kit — DERIVED from the tree, never listed.
+ *
+ * It was a literal of five routes, and the page with the longest title on the
+ * site (the worst case for a collapsed line height, and the newest kit page)
+ * was not one of them. A gate that names its subjects measures the ones
+ * somebody remembered to add, which is the opposite of what a gate is for.
+ */
+const KIT = kit()
 
 /** Every `line-height:<value>` in a file, declaration by declaration. */
 function lineHeights(css: string): string[] {
@@ -42,6 +49,16 @@ function shipped(): { file: string; value: string }[] {
     lineHeights(readFileSync(f, 'utf8')).map((value) => ({ file: f.replace(OUT + '/', ''), value })),
   )
 }
+
+test('the kit pages are derived from the tree, and the derivation finds them', () => {
+  // The floor under every assertion below. Each one loops over KIT, and a loop
+  // over an empty list passes — so a derivation that silently finds nothing
+  // would not fail a gate, it would switch all four of them off and report
+  // green. The five that were the hand-written list are the pin.
+  for (const route of ['/api', '/cookies', '/customers', '/learn', '/research']) {
+    expect(KIT, `${route} is built on the kit and must be measured`).toContain(route)
+  }
+})
 
 test('no line-height in the export is a length shorter than a line', () => {
   // A ratio (`1.1`), a keyword (`normal`), a var() or a real length are all
