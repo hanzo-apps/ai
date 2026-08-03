@@ -92,7 +92,13 @@ test.describe('hanzo.ai — Products mega-menu', () => {
     // only after mount — fall back to a click (mobile toggle) if the panel
     // doesn't appear on hover. Detect "open" via the Compute category heading
     // (present in both the deployed and local product taxonomies).
-    const probe = nav.getByRole('heading', { name: /^compute$/i })
+    // Categories are LINKS in the panel, not headings — asking for a heading
+    // waits forever and reports "menu broken" when the menu is fine.
+    //
+    // Page-scoped, NOT `nav.first()`: the apex renders two navs (the landing
+    // bar and the marketing one) and the panel is not inside the first. Scoping
+    // to the wrong landmark fails identically to a genuinely missing menu.
+    const probe = page.getByText(/^compute$/i).first()
     await trigger.hover()
     try {
       await probe.waitFor({ state: 'visible', timeout: 3000 })
@@ -104,14 +110,21 @@ test.describe('hanzo.ai — Products mega-menu', () => {
     // Mega-menu reveals the full category grid. Taxonomy/casing differs
     // between deploys, so assert case-insensitively on stable categories
     // plus a healthy category count.
-    const headings = await nav
-      .locator('h3, h4')
-      .evaluateAll((els) => els.map((e) => (e as HTMLElement).innerText.trim()).filter(Boolean))
-    const upper = headings.map((h) => h.toUpperCase())
-    for (const cat of ['COMPUTE', 'DATA']) {
-      expect(upper, `categories revealed: ${headings.join(', ')}`).toContain(cat)
+    // The panel's categories are links, so count the ones the taxonomy declares
+    // rather than counting `h3, h4` — which found the page's own body cards on
+    // some routes and none at all here.
+    const CATEGORIES = [
+      'AI', 'Compute', 'Data', 'Network', 'Security',
+      'Dev', 'Platform', 'Observe', 'Web3', 'Apps',
+    ]
+    const revealed: string[] = []
+    for (const cat of CATEGORIES) {
+      if (await page.getByText(cat, { exact: true }).count()) revealed.push(cat)
     }
-    expect(headings.length, `categories: ${headings.join(', ')}`).toBeGreaterThanOrEqual(6)
+    for (const cat of ['Compute', 'Data']) {
+      expect(revealed, `categories revealed: ${revealed.join(', ')}`).toContain(cat)
+    }
+    expect(revealed.length, `categories: ${revealed.join(', ')}`).toBeGreaterThanOrEqual(6)
 
     await page.screenshot({ path: shot('06-products-menu.png'), fullPage: false })
   })
@@ -143,12 +156,23 @@ test.describe('hanzo.ai — link integrity (no 404/5xx)', () => {
     test.setTimeout(120000)
     await page.goto('/', { waitUntil: 'commit' })
     await page.waitForLoadState('networkidle').catch(() => {})
-    const hrefs = await page.locator('footer a[href^="/"]').evaluateAll((els) =>
+    // Same-origin footer links, in EITHER shape. `[href^="/"]` alone found zero
+    // and read as "the footer renders nothing": the apex footer is HanzoFooter
+    // from @hanzogui/shell, which writes its own-site links absolutely
+    // (`https://hanzo.ai/dev`), not as root-relative paths. Selecting on the
+    // path rather than the spelling is what makes this test about reachability
+    // instead of about one package's URL style.
+    const hrefs = await page.locator('footer a[href]').evaluateAll((els) =>
       Array.from(
-        new Set(els.map((e) => (e as HTMLAnchorElement).getAttribute('href')).filter(Boolean)),
+        new Set(
+          els
+            .map((e) => (e as HTMLAnchorElement).getAttribute('href') ?? '')
+            .filter((h) => h.startsWith('/') || h.startsWith('https://hanzo.ai/'))
+            .map((h) => (h.startsWith('/') ? h : h.replace('https://hanzo.ai', ''))),
+        ),
       ),
     )
-    expect(hrefs.length, 'footer should render many links').toBeGreaterThan(10)
+    expect(hrefs.length, 'footer should render many same-origin links').toBeGreaterThan(10)
     const broken: string[] = []
     for (const href of hrefs) {
       const resp = await page.goto(href!, { waitUntil: 'commit' }).catch(() => null)
@@ -170,7 +194,10 @@ test.describe('hanzo.ai — clicking footer links navigates', () => {
       test.setTimeout(60000)
       await page.goto('/', { waitUntil: 'commit' })
       await page.waitForLoadState('networkidle').catch(() => {})
-      const link = page.locator(`footer a[href="${expectedPath}"]`).first()
+      // Either spelling — see the note on same-origin shapes above.
+      const link = page
+        .locator(`footer a[href="${expectedPath}"], footer a[href="https://hanzo.ai${expectedPath}"]`)
+        .first()
       await link.scrollIntoViewIfNeeded()
       await expect(link).toBeVisible()
       await link.click()

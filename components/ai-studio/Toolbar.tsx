@@ -18,7 +18,11 @@ const Toolbar = ({
   setActiveTab 
 }: ToolbarProps) => {
   return (
-    <div className="bg-neutral-900/70 p-2 border-b border-neutral-800 flex items-center">
+    // `min-w-0` on a flex row: a flex item's default `min-width: auto` refuses
+    // to shrink below its content, so the tab strip below pushed this header
+    // 126px past a 390px viewport — and the page cannot scroll sideways
+    // (globals.css clips it), so those tabs were simply unreachable on a phone.
+    <div className="bg-neutral-900/70 p-2 border-b border-neutral-800 flex items-center min-w-0">
       <Button 
         variant="ghost" 
         size="icon"
@@ -28,7 +32,7 @@ const Toolbar = ({
         <PanelLeft className="h-5 w-5" />
       </Button>
       
-      <div className="flex space-x-1 mx-2">
+      <div className="flex space-x-1 mx-2 min-w-0 overflow-x-auto">
         <Button 
           variant={activeTab === "chat" ? "secondary" : "ghost"} 
           size="sm"

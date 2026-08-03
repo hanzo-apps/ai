@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoGas = () => {
   return (
     <BlockchainProductLayout
+      slug="gas"
       name="Gas Manager"
       tagline="Sponsor gas for your users"
       description="Paymaster-as-a-Service for account abstraction. Sponsor gas fees for your users, set spending policies, and create seamless gasless experiences across chains."

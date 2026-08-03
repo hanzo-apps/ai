@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoOracle = () => {
   return (
     <BlockchainProductLayout
+      slug="oracle"
       name="Hanzo Oracle"
       tagline="Bring real-world data on-chain"
       description="A comprehensive oracle service providing price feeds, randomness, weather data, and custom attestations for smart contracts. Built on Lux's OracleVM with Chainlink integration."

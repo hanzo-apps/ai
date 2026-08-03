@@ -62,10 +62,13 @@ const EXT = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".json", ".mdx", ".md
 // Snapshots a script fetches and stamps. These are NOT hand-typed copies — they
 // are the build-time materialisation the one owner publishes, which is why they
 // are allowed by kind rather than by name.
-const GENERATED = [
-  "data/pricing.json",
-  "lib/data/pricing.json",
-];
+const GENERATED = ["lib/data/pricing.json"];
+
+// The guard states the rule, so the examples in its own docstring are not a
+// fourth copy of anybody's price — they are the specification of what a copy
+// looks like. Scanning itself made it fail on its own prose from the moment it
+// was committed, which is the one failure mode a build gate cannot have.
+const SELF = "scripts/audit-price-literals.mjs";
 
 // The ratchet. Path → why it still holds a literal. SHRINK ONLY.
 const ALLOWED = {

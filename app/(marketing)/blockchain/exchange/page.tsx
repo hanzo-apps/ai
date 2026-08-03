@@ -378,7 +378,7 @@ await exchange.orderbook.placeLimitOrder({
       </section>
 
       
-            <ProductFooter slug="blockchain/exchange" name="Exchange" />
+            <ProductFooter slug="exchange" name="Exchange" />
 </div>
   );
 };

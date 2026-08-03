@@ -5,6 +5,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Chrome, Code, Sparkles, Check, Monitor, Globe, Laptop, Brain, Zap } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { AI_MODELS_PHRASE } from '@/lib/data/model-count'
 
 const aiProviders = [
   { name: "Zen", models: "zen4, zen4-max, zen4-coder" },
@@ -233,7 +234,7 @@ const Extensions = () => {
               <Brain className="h-5 w-5 text-foreground" />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-[var(--white)]">100+ AI Models Supported</h3>
+              <h3 className="text-xl font-bold text-[var(--white)]">{AI_MODELS_PHRASE} Supported</h3>
               <p className="text-sm text-foreground">All major AI providers through one API</p>
             </div>
           </div>

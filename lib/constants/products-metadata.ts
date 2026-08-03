@@ -153,16 +153,45 @@ export function getProductMetadata(slug: string): ProductMetadata | undefined {
   return productsMetadata[slug];
 }
 
-export function deployUrl(slug: string): string {
-  const meta = productsMetadata[slug];
-  const target = meta?.deploy_slug ?? slug;
-  return `https://console.hanzo.ai/deploy/${target}`;
+/**
+ * The console's App Platform, which is where a deploy actually starts.
+ *
+ * This used to return `/deploy/<product>`, and every one of those 158 links
+ * resolved to the console's 404 view. Nothing could see it: console.hanzo.ai is
+ * a client-rendered SPA that answers 200 with byte-identical HTML for any path,
+ * so status-code and body checks are both blind. It is only visible by reading
+ * the console's own resolver:
+ *
+ *   `deploy` is an ALIAS for the `app-platform` module (its own test asserts
+ *   canonicalSlug(['deploy']) === ['app-platform']), so `/deploy/vector`
+ *   canonicalizes to ['app-platform','vector']. `app-platform` declares only
+ *   `path: ''` routes and no subpages, and `vector` is not one of the shared
+ *   base sub-pages (settings/status/logs/metrics) — so resolveProductView falls
+ *   through every branch to { kind: 'notfound' }.
+ *
+ * Bare `/deploy` resolves, so that is where these point until the console grows
+ * a per-product deploy route. `deploy_slug` stays in the type: it is still the
+ * right shape for that link, and it costs nothing to keep the curated values.
+ */
+export function deployUrl(_slug: string): string {
+  return 'https://console.hanzo.ai/deploy';
 }
 
 export function docsUrl(slug: string): string | null {
   const meta = productsMetadata[slug];
-  if (meta?.docs_slug === null) return null;
-  const target = meta?.docs_slug ?? slug;
+  // An UNDECLARED product gets no link, rather than a guess. `?? slug` used to
+  // apply here too, which meant a product this map had never heard of still
+  // asserted that /docs/<its own slug> existed — and for eleven web3 pages it
+  // did not, so the "Self-host" button 404ed. The fallback below is still right
+  // for the 80 DECLARED products that genuinely sit at /docs/<slug>; the
+  // difference is that being in this map is a claim someone made, and not being
+  // in it is not a claim at all.
+  //
+  // Nothing is lost by staying silent: the button says "Self-host", and a
+  // product with no entry here has no repo to self-host from.
+  if (!meta) return null;
+  if (meta.docs_slug === null) return null;
+  const target = meta.docs_slug ?? slug;
   // docs.hanzo.ai serves its content tree under /docs. The bare form
   // (docs.hanzo.ai/<slug>) 404s: the vanity aliases that once covered it live
   // in the docs repo's public/_redirects, a Cloudflare Pages file, and the site

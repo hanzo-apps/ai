@@ -4,8 +4,6 @@ import React, { useState, useMemo, useEffect } from "react";
 import { Button } from "@hanzo/ui";
 import Link from "next/link";
 import { Search, ChevronDown, ChevronUp, Star, Filter } from "lucide-react";
-import { allModels } from "@zenlm/models";
-import type { ZenModel } from "@zenlm/models";
 import pricingData from "@/lib/data/pricing.json";
 
 interface HanzoModel {
@@ -203,41 +201,32 @@ const fmtUnit = (val: number | undefined, unit?: string) => {
 
 const MODELS_PER_PAGE = 50;
 
-function zenToHanzo(m: ZenModel): HanzoModel {
-  const params =
-    m.spec.params && !["N/A", "TBA", "TBD"].includes(m.spec.params)
-      ? m.spec.activeParams
-        ? `${m.spec.params} (${m.spec.activeParams} active)`
-        : m.spec.params
-      : m.spec.params || "TBA";
-  return {
-    name: m.id,
-    fullName: m.fullName,
-    description: m.description,
-    features: m.features,
-    tier: m.tier,
-    specs: { params, arch: m.spec.arch || "" },
-    pricing: m.pricing ?? { input: null, output: null, cacheRead: null, cacheWrite: null },
-    endpoint: m.id.includes("embedding")
-      ? "/v1/embeddings"
-      : m.id.includes("reranker")
-        ? "/v1/rerank"
-        : m.id.includes("image")
-          ? "/v1/images/generations"
-          : m.id.includes("audio") || m.id.includes("asr") || m.id.includes("tts")
-            ? "/v1/audio/transcriptions"
-            : "/v1/chat/completions",
-  };
-}
+// The fallback, at module level — zero fetch, zero loading state.
+//
+// EVERY field comes from the one snapshot, including hanzoModels. That last one
+// used to be built from @zenlm/models instead, which made this component read
+// two sources at once and quietly disagree with itself: the snapshot's 41 Hanzo
+// rows are exactly what /v1/pricing serves, while the package's 55 were a
+// separately-maintained copy carrying its own prices. So a reader whose live
+// fetch failed saw a different catalog from one whose fetch succeeded, and
+// refreshing the snapshot could not have fixed it — the rows it refreshed were
+// not the rows being rendered.
+//
+// This is not a stale-data fallback but the PRIMARY path for most readers: the
+// API pins access-control-allow-origin to https://hanzo.ai exactly, so every
+// preview deploy and local run renders this. scripts/sync-pricing.mjs refreshes
+// it on prebuild; `source`/`fetched` in the file say where it came from.
+const snapshot = pricingData as unknown as PricingResponse;
 
-// Build static data at module level — zero fetch, zero loading state
 const STATIC_DATA: PricingResponse = {
-  updated: (pricingData as { updated?: string }).updated ?? new Date().toISOString(),
-  summary: (pricingData as unknown as PricingResponse).summary,
-  hanzoModels: allModels.map(zenToHanzo),
-  thirdPartyModels: (pricingData as unknown as PricingResponse).thirdPartyModels ?? [],
-  tools: (pricingData as unknown as PricingResponse).tools ?? [],
-  providers: (pricingData as unknown as PricingResponse).providers,
+  // Never `?? new Date()`: fabricating "now" for a file that forgot to say how
+  // old it is renders a confident, wrong "Updated today" in the footer.
+  updated: snapshot.updated,
+  summary: snapshot.summary,
+  hanzoModels: snapshot.hanzoModels ?? [],
+  thirdPartyModels: snapshot.thirdPartyModels ?? [],
+  tools: snapshot.tools ?? [],
+  providers: snapshot.providers,
 };
 
 const APIPricing = () => {

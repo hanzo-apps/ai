@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoPay = () => {
   return (
     <BlockchainProductLayout
+      slug="pay"
       name="Hanzo Pay"
       tagline="Crypto payments made simple"
       description="A complete payment gateway bridging fiat and crypto. Accept stablecoins, process card payments, enable on/off-ramps, and handle compliance—all through a single API."

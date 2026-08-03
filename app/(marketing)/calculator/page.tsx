@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo, useState } from 'react'
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 
 // True Savings — an operating-cost model, not a TAM calculator. Every number on
 // this page is derived from a visible, editable control; nothing is hardcoded
@@ -262,7 +263,7 @@ export default function CalculatorPage() {
           <h1>Hanzo True Savings</h1>
           <p className="ts-lead">Price the assembly tax.</p>
           <p className="ts-banner">
-            100+ capabilities · 400+ models · one identity plane · one API · one operating platform.
+            100+ capabilities · {MODELS_PHRASE} · one identity plane · one API · one operating platform.
           </p>
           <p className="ts-sub">
             This is not a TAM calculator. It models operating expenses a company can eliminate, reduce,
@@ -481,7 +482,7 @@ export default function CalculatorPage() {
                       <p className="ts-note">
                         Hanzo&rsquo;s current deployment reports reductions approaching 90% for selected
                         workloads routed to lower-cost or self-hosted models. Enter your own eligible
-                        workload percentage rather than applying 90% to the entire AI bill. 400+ models,
+                        workload percentage rather than applying 90% to the entire AI bill. {MODELS_PHRASE},
                         but model count is not the economic claim — the control plane is.
                       </p>
                       <div className="ts-ctl">
@@ -596,7 +597,7 @@ export default function CalculatorPage() {
         <section className="ts-card ts-accent">
           <h2>Replace the stack, not the capability.</h2>
           <p className="ts-note">
-            100+ capabilities · 400+ models · one identity · one API · one platform · self-host or
+            100+ capabilities · {MODELS_PHRASE} · one identity · one API · one platform · self-host or
             managed.
           </p>
           <p className="ts-lead">Select your current stack and price the assembly tax.</p>

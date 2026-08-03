@@ -41,12 +41,36 @@ jobs:
             git push origin "$REMOTE:refs/heads/main"
             # A push made with the workflow token does NOT trigger workflows, so
             # synced commits would never deploy. Dispatch explicitly.
-            curl -fsS --max-time 20 -X POST \
+            #
+            # The path is /v1, NOT /api/v1: this forge mounts its API at /v1 —
+            # /v1/version answers 200 and /api/v1/version answers 404 — which is
+            # the same "no extraneous /api/ prefix" convention the rest of the
+            # estate follows. Measured before trusting; the obvious-looking Gitea
+            # default is wrong here.
+            #
+            # What WAS broken is the reporting. `-f` makes curl print nothing on
+            # an HTTP error and `|| echo` turned the non-zero exit into a line of
+            # output, so the step's worst case was the words "dispatch failed
+            # (non-fatal)" — no status, no body, no URL. And it does not
+            # self-heal: only the run that MOVES the ref reaches this line, since
+            # every later run exits at "in sync" above, so a lost dispatch is
+            # never retried.
+            #
+            # The status is captured and printed instead of swallowed. Still
+            # non-fatal — the sync itself succeeded and must not be marked failed
+            # — but the log now says what the server answered.
+            d_url="${{ github.server_url }}/v1/repos/${{ github.repository }}/actions/workflows/deploy.yml/dispatches"
+            d_code=$(curl -sS --max-time 20 -o /tmp/dispatch.out -w '%{http_code}' -X POST \
               -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               -H "Content-Type: application/json" \
-              "${{ github.server_url }}/v1/repos/${{ github.repository }}/actions/workflows/deploy.yml/dispatches" \
-              -d '{"ref":"main"}' \
-              && echo "deploy dispatched" || echo "dispatch failed (non-fatal — next direct push deploys)"
+              "$d_url" -d '{"ref":"main"}' || echo 000)
+            case "$d_code" in
+              2*) echo "deploy dispatched ($d_code)" ;;
+              *)  echo "DISPATCH FAILED: HTTP $d_code from $d_url" >&2
+                  head -c 400 /tmp/dispatch.out >&2 || true
+                  echo >&2
+                  echo "sync succeeded; this commit will NOT deploy until dispatched or pushed directly." >&2 ;;
+            esac
           elif git merge-base --is-ancestor "$REMOTE" "$LOCAL"; then
             echo "canonical is AHEAD of GitHub — nothing to pull (never force from here)."
           else

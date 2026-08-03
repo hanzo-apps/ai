@@ -20,6 +20,7 @@ import {
 import { CodeExamplesSection } from "@/components/products/CodeExamplesSection"
 import { SDKSection } from "@/components/products/SDKSection"
 import { hanzoSDKs } from "@/lib/data/upstream-projects"
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 
 // ---------------------------------------------------------------------------
 // One unified AI API, drop-in compatible with BOTH the OpenAI and Anthropic
@@ -239,7 +240,7 @@ export default function SdkPage() {
               The Hanzo API is drop-in compatible with both the{" "}
               <span className="text-foreground">OpenAI SDK</span> and the{" "}
               <span className="text-foreground">Anthropic SDK</span>. Keep the client you
-              already use — change one line, the base URL — and get one gateway to 50+ models
+              already use — change one line, the base URL — and get one gateway to {MODELS_PHRASE}
               plus every Hanzo product SDK.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">

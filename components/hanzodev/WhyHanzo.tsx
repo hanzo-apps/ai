@@ -16,6 +16,7 @@ import {
   CreditCard,
   Copy,
 } from "lucide-react";
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 
 const VALUE_PROPS = [
   {
@@ -76,7 +77,7 @@ const VALUE_PROPS = [
         icon: Settings,
         title: "Use the best model for the job",
         description:
-          "With 50+ models, you can control the right tradeoffs between latency, cost, context, and reasoning for each task.",
+          `With ${MODELS_PHRASE}, you can control the right tradeoffs between latency, cost, context, and reasoning for each task.`,
       },
     ],
   },

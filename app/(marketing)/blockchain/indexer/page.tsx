@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoIndexer = () => {
   return (
     <BlockchainProductLayout
+      slug="indexer"
       name="Hanzo Indexer"
       tagline="Query blockchain data with GraphQL"
       description="Index and query on-chain data at scale. Deploy custom subgraphs, access real-time indexed data, and build powerful blockchain analytics—all through a simple GraphQL API."

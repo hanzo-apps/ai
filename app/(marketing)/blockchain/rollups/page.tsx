@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoRollups = () => {
   return (
     <BlockchainProductLayout
+      slug="rollups"
       name="Hanzo Rollups"
       tagline="L2 scaling infrastructure & rollup services"
       description="Deploy and manage rollup infrastructure. From optimistic to ZK rollups, we handle sequencers, provers, and data availability so you can focus on your application."

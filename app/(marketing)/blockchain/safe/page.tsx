@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoSafe = () => {
   return (
     <BlockchainProductLayout
+      slug="safe"
       name="Hanzo Safe"
       tagline="Multi-signature custody with quantum-safe security"
       description="Enterprise-grade multi-sig and threshold-signature wallets built on quantum-resistant cryptography. Secure your treasury with customizable policies, recovery mechanisms, and comprehensive audit trails."

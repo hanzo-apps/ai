@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoWebhooks = () => {
   return (
     <BlockchainProductLayout
+      slug="webhooks"
       name="Webhooks"
       tagline="Real-time blockchain event notifications"
       description="Get instant notifications for on-chain events. Subscribe to transfers, contract events, address activity, and more with reliable webhook delivery."

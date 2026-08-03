@@ -17,6 +17,7 @@ import BlockchainProductLayout from "@/components/blockchain/BlockchainProductLa
 const HanzoBundler = () => {
   return (
     <BlockchainProductLayout
+      slug="bundler"
       name="Bundler API"
       tagline="ERC-4337 UserOperation bundling service"
       description="Production-grade bundler for account abstraction. Submit, simulate, and track UserOperations across all ERC-4337 compatible chains with reliable transaction inclusion."

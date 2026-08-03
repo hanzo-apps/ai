@@ -4,10 +4,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 
 const GATEWAY_FEATURES = [
   "Choose from more than 60 providers",
-  "Use more than 500 models",
+  `Use ${MODELS_PHRASE}`,
   "Pay the exact list price of Anthropic, OpenAI, and Google",
   "No commission or hidden fees, we make money on Teams/Enterprise",
   "Pay as you go, no subscriptions, no waste",

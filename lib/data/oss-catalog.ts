@@ -45,7 +45,19 @@ export type DeploymentType = 'one-click' | 'docker' | 'k8s' | 'library' | 'npm' 
 export interface RepoActions {
   deployUrl?: string;
   docsUrl?: string;
-  githubUrl: string;
+  /**
+   * Optional, and that is the point: not everything we publish has a public
+   * repo. While this was required, an entry with no repo to cite could only be
+   * written by inventing one — which is exactly how nine addresses that have
+   * never existed (hanzo-js/next, hanzoai/approvals, the zen-vl mirrors, …)
+   * came to be shipped as evidence that we are open source. A field nobody can
+   * leave blank is a field somebody will fill with a guess.
+   *
+   * The renderer shows the GitHub control only when this is set. An entry whose
+   * source is not on GitHub says so by omission and points at where it does
+   * live (learnUrl for a model card, npmUrl for a package).
+   */
+  githubUrl?: string;
   learnUrl?: string;
   npmUrl?: string;
   pypiUrl?: string;
@@ -268,10 +280,10 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'k8s', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/gateway',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/gateway',
       githubUrl: 'https://github.com/hanzoai/ai',
-      learnUrl: '/products/ml/zen',
+      learnUrl: '/zen',
     },
     signals: {
       updatedAt: '2026-01-19',
@@ -296,7 +308,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/mcp',
       githubUrl: 'https://github.com/hanzoai/mcp',
-      learnUrl: '/products/apps/mcp',
+      learnUrl: '/mcp',
       npmUrl: 'https://npmjs.com/package/@hanzo/mcp',
     },
     signals: {
@@ -322,7 +334,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/agents',
       githubUrl: 'https://github.com/hanzoai/agent',
-      learnUrl: '/products/apps/agent',
+      learnUrl: '/agents',
       pypiUrl: 'https://pypi.org/project/hanzoai/',
     },
     signals: {
@@ -346,7 +358,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'k8s', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/vector',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/vector',
       githubUrl: 'https://github.com/hanzoai/vector',
       learnUrl: '/vector',
@@ -372,10 +384,10 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['one-click', 'docker'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/functions',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/functions',
       githubUrl: 'https://github.com/hanzoai/functions',
-      learnUrl: '/products/compute/functions',
+      learnUrl: '/functions',
     },
     signals: {
       updatedAt: '2026-01-14',
@@ -398,10 +410,10 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/chat',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/chat',
       githubUrl: 'https://github.com/hanzoai/chat',
-      learnUrl: '/products/apps/chat',
+      learnUrl: '/chat',
     },
     signals: {
       updatedAt: '2026-01-16',
@@ -428,10 +440,10 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/console',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/console',
       githubUrl: 'https://github.com/hanzoai/console',
-      learnUrl: '/products/apps/console',
+      learnUrl: '/console',
     },
     signals: {
       updatedAt: '2026-01-13',
@@ -458,10 +470,10 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'active',
     deployment: ['docker', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/flow',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/services/flow',
       githubUrl: 'https://github.com/hanzoai/flow',
-      learnUrl: '/products/async/flow',
+      learnUrl: '/flow',
     },
     signals: {
       updatedAt: '2026-01-12',
@@ -488,10 +500,10 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/auto',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/services/auto',
       githubUrl: 'https://github.com/hanzoai/auto',
-      learnUrl: '/products/async/auto',
+      learnUrl: '/auto',
     },
     signals: {
       updatedAt: '2026-01-11',
@@ -694,7 +706,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/iam',
       githubUrl: 'https://github.com/hanzoai/iam',
-      learnUrl: '/products/platform/iam',
+      learnUrl: '/iam',
     },
     signals: {
       updatedAt: '2026-01-10',
@@ -708,7 +720,7 @@ export const ossCatalog: OSSRepo[] = [
   {
     id: 'policy',
     name: 'Policy Engine',
-    slug: 'hanzoai/policy',
+    slug: 'hanzoai/authz',
     description: 'Policy-as-code for AI governance. Define rules for model access, data handling, and compliance.',
     type: 'core',
     categories: ['Security & Governance', 'AI & Agents'],
@@ -718,8 +730,11 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['docker', 'library'],
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/authz',
-      githubUrl: 'https://github.com/hanzoai/policy',
-      learnUrl: '/products/platform/guard',
+      // hanzoai/authz — "access control library for Go: ACL, RBAC, ABAC policy
+      // enforcement", which is this entry exactly. The docs link already said
+      // authz; only the repo name was invented, and hanzoai/policy never existed.
+      githubUrl: 'https://github.com/hanzoai/authz',
+      learnUrl: '/guard',
     },
     signals: {
       updatedAt: '2026-01-09',
@@ -741,9 +756,7 @@ export const ossCatalog: OSSRepo[] = [
     useCases: ['CI/CD'],
     maturity: 'experimental',
     deployment: ['docker'],
-    actions: {
-      githubUrl: 'https://github.com/hanzoai/approvals',
-    },
+    actions: {},
     signals: {
       updatedAt: '2026-01-05',
       featured: false,
@@ -767,10 +780,10 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['one-click', 'docker'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/sql',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/sql',
       githubUrl: 'https://github.com/hanzoai/sql',
-      learnUrl: '/products/data/sql',
+      learnUrl: '/sql',
     },
     signals: {
       updatedAt: '2026-01-08',
@@ -793,10 +806,10 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/kv',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/kv',
       githubUrl: 'https://github.com/hanzoai/kv',
-      learnUrl: '/products/data/kv',
+      learnUrl: '/kv',
     },
     signals: {
       updatedAt: '2026-01-06',
@@ -819,10 +832,10 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['docker', 'one-click'],
     actions: {
-      deployUrl: 'https://cloud.hanzo.ai/deploy/search',
+      deployUrl: 'https://console.hanzo.ai/deploy',
       docsUrl: 'https://docs.hanzo.ai/docs/search',
       githubUrl: 'https://github.com/hanzoai/search',
-      learnUrl: '/products/data/search',
+      learnUrl: '/search',
     },
     signals: {
       updatedAt: '2026-01-04',
@@ -853,7 +866,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/projects/hanzoai/telemetry',
       githubUrl: 'https://github.com/hanzoai/telemetry',
-      learnUrl: '/products/observability/telemetry',
+      learnUrl: '/telemetry',
     },
     signals: {
       updatedAt: '2026-01-03',
@@ -880,7 +893,7 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/edge',
       githubUrl: 'https://github.com/hanzoai/edge',
-      learnUrl: '/products/platform/edge',
+      learnUrl: '/edge',
     },
     signals: {
       updatedAt: '2026-01-02',
@@ -905,7 +918,6 @@ export const ossCatalog: OSSRepo[] = [
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/skills/hanzo-hke',
       githubUrl: 'https://github.com/hanzoai/hke',
-      learnUrl: '/products/platform/hke',
     },
     signals: {
       updatedAt: '2026-01-01',
@@ -931,7 +943,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['npm'],
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/integrations',
-      githubUrl: 'https://github.com/hanzoai/github-connector',
     },
     signals: {
       updatedAt: '2026-01-10',
@@ -955,7 +966,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['npm'],
     actions: {
       docsUrl: 'https://docs.hanzo.ai/docs/integrations',
-      githubUrl: 'https://github.com/hanzoai/slack-connector',
     },
     signals: {
       updatedAt: '2026-01-08',
@@ -2515,7 +2525,7 @@ export const ossCatalog: OSSRepo[] = [
     id: 'zen-nano',
     name: 'Zen Nano',
     slug: 'zenlm/zen-nano',
-    description: '0.6B edge AI model — Qwen3-based, 40K context, optimized for edge deployment.',
+    description: '0.6B edge model — 40K context, optimized for on-device deployment.',
     type: 'core',
     categories: ['AI & Agents'],
     languages: ['Python'],
@@ -2548,7 +2558,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-mini',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-mini',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2563,7 +2572,7 @@ export const ossCatalog: OSSRepo[] = [
     id: 'zen4',
     name: 'Zen4',
     slug: 'zenlm/zen4',
-    description: '8B unbiased AI model — abliterated Qwen3.',
+    description: '8B dense model — abliterated open weights, refusal bias removed.',
     type: 'core',
     categories: ['AI & Agents'],
     languages: ['Python'],
@@ -2572,7 +2581,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4',
-      learnUrl: 'https://huggingface.co/zenlm/zen4',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2596,7 +2604,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-pro',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-pro',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2620,7 +2627,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-max',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-max',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2635,7 +2641,7 @@ export const ossCatalog: OSSRepo[] = [
     id: 'zen4-ultra',
     name: 'Zen4 Ultra',
     slug: 'zenlm/zen4-ultra',
-    description: '1.04T MoE frontier AI model — Kimi K2.5-based, 32B active, 256K context.',
+    description: '1.04T MoE frontier model — 32B active parameters, 256K context.',
     type: 'core',
     categories: ['AI & Agents'],
     languages: ['Python'],
@@ -2644,7 +2650,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-ultra',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-ultra',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2659,7 +2664,7 @@ export const ossCatalog: OSSRepo[] = [
     id: 'zen4-coder',
     name: 'Zen4 Coder',
     slug: 'zenlm/zen4-coder',
-    description: '80B MoE code model — abliterated Qwen3-Coder-Next.',
+    description: '80B MoE code model — abliterated open weights for generation, review and debugging.',
     type: 'core',
     categories: ['AI & Agents', 'Developer Tools'],
     languages: ['Python'],
@@ -2668,7 +2673,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-coder',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-coder',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2692,7 +2696,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen4-coder-flash',
-      learnUrl: 'https://huggingface.co/zenlm/zen4-coder-flash',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2716,7 +2719,6 @@ export const ossCatalog: OSSRepo[] = [
     deployment: ['pip', 'library'],
     actions: {
       githubUrl: 'https://github.com/zenlm/zen-coder',
-      learnUrl: 'https://huggingface.co/zenlm/zen-coder',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -2739,7 +2741,6 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['pip', 'library'],
     actions: {
-      githubUrl: 'https://github.com/zenlm/zen-vl-4b-instruct',
       learnUrl: 'https://huggingface.co/zenlm/zen-vl-4b-instruct',
     },
     signals: {
@@ -2763,7 +2764,6 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['pip', 'library'],
     actions: {
-      githubUrl: 'https://github.com/zenlm/zen-vl-8b-instruct',
       learnUrl: 'https://huggingface.co/zenlm/zen-vl-8b-instruct',
     },
     signals: {
@@ -2787,7 +2787,6 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['pip', 'library'],
     actions: {
-      githubUrl: 'https://github.com/zenlm/zen-vl-30b-instruct',
       learnUrl: 'https://huggingface.co/zenlm/zen-vl-30b-instruct',
     },
     signals: {
@@ -3175,7 +3174,7 @@ export const ossCatalog: OSSRepo[] = [
   {
     id: 'hanzo-react',
     name: 'Hanzo React',
-    slug: 'hanzo-js/react',
+    slug: '@hanzo/react',
     description: 'React primitives for Hanzo.',
     type: 'sdk',
     categories: ['App Platform', 'Developer Tools'],
@@ -3184,7 +3183,7 @@ export const ossCatalog: OSSRepo[] = [
     maturity: 'stable',
     deployment: ['npm'],
     actions: {
-      githubUrl: 'https://github.com/hanzo-js/react',
+      npmUrl: 'https://npmjs.com/package/@hanzo/react',
     },
     signals: {
       updatedAt: '2026-02-28',
@@ -3206,9 +3205,7 @@ export const ossCatalog: OSSRepo[] = [
     useCases: [],
     maturity: 'stable',
     deployment: ['npm'],
-    actions: {
-      githubUrl: 'https://github.com/hanzo-js/next',
-    },
+    actions: {},
     signals: {
       updatedAt: '2026-02-28',
       featured: false,

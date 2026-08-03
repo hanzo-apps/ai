@@ -311,3 +311,49 @@ is inlined into the bundle at build time.
 - HIPAA: "HIPAA Ready" / "BAA Available" (not "Compliant")
 - ISO 27001: removed (not yet certified)
 - No specific datacenter locations; use "Global High-Performance Edge"
+
+
+## Model prices have one owner, and the snapshot is not a copy of it
+
+A per-token rate is owned by the catalog in commerce.hanzo.ai and published at
+`api.hanzo.ai/v1/pricing`. `scripts/audit-price-literals.mjs` (run from
+`hanzo.yml`) fails the build on any second copy; its `ALLOWED` ratchet may only
+shrink. It skips its own file — it states the rule, so its docstring examples
+are the specification, not a violation, and scanning itself made it fail on its
+own prose from the moment it was committed.
+
+`components/pricing/APIPricing.tsx` reads `/v1/pricing/models` live, but that is
+NOT the path most readers take: the API pins `access-control-allow-origin` to
+`https://hanzo.ai` exactly, so every preview deploy and local run renders
+`lib/data/pricing.json` instead. That file is therefore load-bearing, and it
+rotted to four months stale because `scripts/sync-pricing.mjs` existed but was
+never invoked. `prebuild` now runs it. It:
+
+- **never fails the build** on an unreachable API — the committed snapshot is
+  the designed fallback, and a marketing page must not need an API to deploy;
+- **never regresses** — the endpoint currently serves an OLDER catalog
+  (2026-03-14) than the committed snapshot (2026-05-05), and writing it would
+  silently delete four months. Only a genuinely newer payload is written;
+- **stamps provenance** — `source` + `fetched` travel with the data, because a
+  snapshot that cannot say how old it is rots invisibly;
+- **says so on every build** when Enso is missing.
+
+**Enso is still absent from the public price list, and no code change fixes
+that.** The catalog itself carries zero Enso rows, so there is nothing to
+render. The cards already sort Enso first (`ENSO_ORDER`) and the pipeline is
+wired end-to-end — verified against a synthetic newer catalog, which wrote,
+stamped and reported all three rows. Re-run `pnpm sync:pricing` once commerce
+publishes; do NOT hand-type the rates. (`enso-vl` / `enso-vl-pro` are internal
+SKUs and must never appear here — the sync prints every Enso name it sees, so a
+leak shows up in the build log.)
+
+`STATIC_DATA` takes EVERY field from that one snapshot. `hanzoModels` used to
+come from `@zenlm/models` instead, which made the component disagree with
+itself — the package's 55 hand-maintained rows for a failed fetch, the API's 41
+for a successful one — and meant refreshing the snapshot could not have helped,
+because the rows it refreshed were not the rows being rendered.
+
+`lib/leaderboard.ts` and `components/enso/EnsoLanding.tsx` still hold correct
+literals on purpose. They are the only public surfaces stating the true
+4/20 · 2/4 · 5/25, so they convert to readers AFTER the catalog is authoritative
+— flipping them first replaces right numbers with an empty feed.
