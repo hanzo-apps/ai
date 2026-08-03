@@ -42,20 +42,24 @@ jobs:
             # A push made with the workflow token does NOT trigger workflows, so
             # synced commits would never deploy. Dispatch explicitly.
             #
-            # The path is /api/v1 — Gitea's API root. It was /v1, which is not an
-            # API path at all, so every dispatch 404'd. That was invisible twice
-            # over: `-f` makes curl silent on an HTTP error, and `|| echo` turned
-            # the non-zero exit into a success line. The step printed "dispatch
-            # failed (non-fatal)" at most, and only the run that MOVED the ref
-            # ever reaches this line — every later run exits at "in sync" above —
-            # so a missed dispatch is never retried. A commit that lost its one
-            # dispatch simply never deploys, which is how eleven of them once sat
-            # for a day.
+            # The path is /v1, NOT /api/v1: this forge mounts its API at /v1 —
+            # /v1/version answers 200 and /api/v1/version answers 404 — which is
+            # the same "no extraneous /api/ prefix" convention the rest of the
+            # estate follows. Measured before trusting; the obvious-looking Gitea
+            # default is wrong here.
+            #
+            # What WAS broken is the reporting. `-f` makes curl print nothing on
+            # an HTTP error and `|| echo` turned the non-zero exit into a line of
+            # output, so the step's worst case was the words "dispatch failed
+            # (non-fatal)" — no status, no body, no URL. And it does not
+            # self-heal: only the run that MOVES the ref reaches this line, since
+            # every later run exits at "in sync" above, so a lost dispatch is
+            # never retried.
             #
             # The status is captured and printed instead of swallowed. Still
             # non-fatal — the sync itself succeeded and must not be marked failed
             # — but the log now says what the server answered.
-            d_url="${{ github.server_url }}/api/v1/repos/${{ github.repository }}/actions/workflows/deploy.yml/dispatches"
+            d_url="${{ github.server_url }}/v1/repos/${{ github.repository }}/actions/workflows/deploy.yml/dispatches"
             d_code=$(curl -sS --max-time 20 -o /tmp/dispatch.out -w '%{http_code}' -X POST \
               -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               -H "Content-Type: application/json" \
