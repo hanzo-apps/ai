@@ -21,7 +21,7 @@ const GH = "https://github.com/hanzoai/cloud"
  * promoted to this host's web root by the Dockerfile's `SITE_ROOT=cloud`.
  *
  * It renders the PAGE only. The header and footer come from the shared
- * `(marketing)` layout (`components/home/LandingNav` + `LandingFooter`), which
+ * `(marketing)` layout (the shared `HanzoHeader` + `HanzoFooter`), which
  * is the same chrome hanzo.ai wears — so the two hosts are one product with one
  * nav, and this file cannot grow a second, divergent one. It used to carry
  * private `TopNav` / `Footer` copies whose "Sign in" pointed at a bare
@@ -41,7 +41,7 @@ function Hero() {
   }
 
   return (
-    <section className="relative overflow-hidden px-4 pb-20 pt-36 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden px-4 pb-24 pt-24 sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
           className="absolute left-1/2 top-1/3 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.14]"
@@ -68,10 +68,15 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05 }}
-          className="text-4xl font-semibold leading-[1.07] tracking-tight text-white sm:text-5xl lg:text-6xl"
+          className="text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
         >
-          The AI cloud for
-          <br className="hidden sm:block" /> agents and apps.
+          {/* The house headline treatment, borrowed verbatim from EnsoHero on
+              the apex: one weight, one tracking, one monochrome white→neutral
+              sheen. Coherence between the two faces is a shared type scale, not
+              a second look that merely resembles the first. */}
+          <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
+            The AI cloud for agents and apps.
+          </span>
         </motion.h1>
 
         <motion.p
@@ -93,13 +98,13 @@ function Hero() {
         >
           <a
             href={CONSOLE}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
           >
             Start building <ArrowRight className="h-4 w-4" />
           </a>
           <Link
             href="/products"
-            className="inline-flex items-center rounded-full border border-neutral-700 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-900"
+            className="inline-flex min-h-11 items-center rounded-full border border-neutral-700 px-7 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
           >
             Explore {capabilityCount} products
           </Link>
@@ -107,7 +112,7 @@ function Hero() {
             href={GH}
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-neutral-400 transition-colors hover:text-white"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-neutral-400 no-underline transition-colors hover:text-white hover:no-underline"
           >
             <Github className="h-4 w-4" /> View source
           </a>
@@ -154,7 +159,7 @@ function Primitives() {
       <section className="border-t border-neutral-900 px-4 pb-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               {capabilityCount} primitives. {categoryCount} categories. One cloud.
             </h2>
             <p className="mt-4 text-lg text-neutral-400">
@@ -184,7 +189,7 @@ function Billing() {
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs font-medium text-neutral-300">
             <CreditCard className="h-3.5 w-3.5" /> Usage-based pricing
           </div>
-          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Pay only for what you use.
           </h2>
           <p className="mt-4 max-w-lg text-lg leading-relaxed text-neutral-400">
@@ -221,7 +226,7 @@ function Billing() {
           </p>
           <a
             href={CONSOLE}
-            className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
+            className="mt-7 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
           >
             Open the console <ArrowRight className="h-4 w-4" />
           </a>
@@ -229,7 +234,7 @@ function Billing() {
             href={GH}
             target="_blank"
             rel="noreferrer noopener"
-            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-neutral-700 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-900"
+            className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-neutral-700 px-6 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
           >
             <Github className="h-4 w-4" /> Self-host it free
           </a>
@@ -251,7 +256,7 @@ function FinalCTA() {
         />
       </div>
       <div className="relative z-10 mx-auto max-w-3xl text-center">
-        <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-5xl">
+        <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
           Start building on Hanzo Cloud
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-neutral-400">
@@ -261,7 +266,7 @@ function FinalCTA() {
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
             href={CONSOLE}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-medium text-black transition-opacity hover:opacity-90"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
           >
             Start building <ArrowRight className="h-4 w-4" />
           </a>
@@ -269,7 +274,7 @@ function FinalCTA() {
             href={DOCS}
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center rounded-full border border-neutral-700 px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-neutral-900"
+            className="inline-flex min-h-11 items-center rounded-full border border-neutral-700 px-7 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
           >
             Read the docs
           </a>

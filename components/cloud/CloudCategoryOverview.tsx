@@ -81,7 +81,7 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="group h-full rounded-xl border border-neutral-800 bg-neutral-900/50 p-5 transition-all hover:border-neutral-600 hover:bg-neutral-900/80"
+                className="group h-full rounded-xl border border-transparent p-5 transition-colors duration-200 hover:border-white/15 motion-reduce:transition-none"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-primary/5">

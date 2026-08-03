@@ -3,7 +3,7 @@ import EnsoLanding from '@/components/enso/EnsoLanding'
 
 // Hanzo Enso — the proprietary model-orchestration product. Lives at the app ROOT
 // (outside the (marketing) route group) so only the root layout wraps it; it ships
-// the apex full-width hovering header (LandingNav) + LandingFooter, like the apex
+// the shared site chrome, like the apex
 // home and the apex root. Served at /enso on both hanzo.ai and cloud.hanzo.ai.
 
 const TITLE = 'Hanzo Enso — the agentic language model'

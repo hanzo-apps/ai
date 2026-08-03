@@ -2,8 +2,8 @@ import type { Metadata } from "next"
 import CloudLanding from "@/components/cloud/CloudLanding"
 
 // The umbrella "Explore Cloud" landing and the single canonical /cloud route —
-// the CloudLanding served under hanzo.ai's shared (marketing) LandingNav +
-// LandingFooter, and promoted to the cloud.hanzo.ai root via /overview in
+// the CloudLanding served under the shared (marketing) site header +
+// footer, and promoted to the cloud.hanzo.ai root via /overview in
 // Dockerfile. This is the cloud SITE door,
 // not a single product page, so it stays the umbrella rather than a
 // ProductLanding. This server component owns the per-page SEO below.

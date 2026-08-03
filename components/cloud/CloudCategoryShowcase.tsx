@@ -31,20 +31,20 @@ function PrimitiveCard({ item, index }: { item: Primitive; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.35, delay: (index % 6) * 0.04 }}
-      className="group h-full rounded-xl border border-neutral-800 bg-neutral-900/50 p-4 transition-all hover:border-neutral-600 hover:bg-neutral-900/80"
+      className="group h-full rounded-xl border border-transparent p-4 transition-colors duration-200 hover:border-white/15 motion-reduce:transition-none"
     >
       <div className="flex items-start gap-3">
-        <div className="rounded-lg border border-border bg-primary/5 p-2">
-          <Icon className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-foreground" />
+        <div className="grid h-8 w-8 flex-none place-items-center rounded-lg border border-white/10 transition-colors duration-200 group-hover:border-white/15 motion-reduce:transition-none">
+          <Icon className="h-4 w-4 text-neutral-400 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none" />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
-            <h3 className="truncate text-sm font-medium transition-colors group-hover:text-foreground">
+            <h3 className="truncate text-sm font-medium text-neutral-200 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none">
               {item.title}
             </h3>
             {external && <ArrowUpRight className="h-3 w-3 flex-shrink-0 text-muted-foreground/40" />}
           </div>
-          {item.desc && <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{item.desc}</p>}
+          {item.desc && <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-neutral-500">{item.desc}</p>}
         </div>
       </div>
     </motion.div>
@@ -74,18 +74,18 @@ export function CloudCategoryMap() {
             transition={{ duration: 0.4, delay: (index % 3) * 0.05 }}
           >
             <Link href={`/products/${categorySlug(category.title)}`}>
-              <div className="group h-full cursor-pointer rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 transition-all hover:border-neutral-600 hover:bg-neutral-900/80">
+              <div className="group h-full cursor-pointer rounded-xl border border-white/10 p-6 transition-colors duration-200 hover:border-white/25 motion-reduce:transition-none">
                 <div className="flex items-start justify-between">
-                  <h3 className="flex items-center gap-2 text-xl font-semibold transition-colors group-hover:text-foreground">
-                    <Icon className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-foreground" />
+                  <h3 className="flex items-center gap-2.5 text-xl font-semibold tracking-tight text-neutral-200 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none">
+                    <Icon className="h-5 w-5 text-neutral-400 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none" />
                     {category.title}
                     <ArrowRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
                   </h3>
                   <span className="text-sm text-muted-foreground">{category.items.length}</span>
                 </div>
-                <p className="mt-2 text-sm text-muted-foreground">{category.tagline}</p>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-500">{category.tagline}</p>
                 {category.brand === 'lux' && (
-                  <span className="mt-3 inline-flex rounded-full border border-border px-2 py-0.5 text-[11px] text-muted-foreground">
+                  <span className="mt-3 inline-flex rounded-full border border-white/10 px-2 py-0.5 text-[11px] text-neutral-500">
                     Lux Network
                   </span>
                 )}
@@ -106,15 +106,15 @@ function CategorySection({ category }: { category: CloudCategory }) {
       <div className="mx-auto max-w-6xl">
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-bold">{category.title}</h2>
-            <p className="text-sm text-muted-foreground">{category.tagline}</p>
+            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{category.title}</h2>
+            <p className="mt-1 text-sm text-neutral-500">{category.tagline}</p>
             {category.brand === 'lux' && (
-              <p className="mt-1 text-xs text-muted-foreground/70">Powered by Lux Network</p>
+              <p className="mt-1 text-xs text-neutral-600">Powered by Lux Network</p>
             )}
           </div>
           <Link
             href={`/products/${slug}`}
-            className="flex flex-shrink-0 items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="flex flex-shrink-0 items-center gap-1 text-sm text-neutral-400 no-underline transition-colors duration-200 hover:text-white hover:no-underline motion-reduce:transition-none"
           >
             View all
             <ArrowRight className="h-3.5 w-3.5" />
