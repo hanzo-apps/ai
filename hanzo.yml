@@ -58,3 +58,14 @@ test:
   # files. Kept separate it still reports while `pnpm lint` is broken (see above).
   - name: price literals
     run: node scripts/audit-price-literals.mjs
+  # An `apiPath` in the commerce catalog is a promise that a reader who follows
+  # the marketing page reaches a real operation. Nothing checked it, and 32 of
+  # 84 products broke it — every one marked "enabled", every one a live 404.
+  # e2e/catalog-agreement.spec.ts already ties this site to the catalog; this
+  # ties the catalog to the document cloud actually serves, which is the link
+  # that was missing. Same shape as the price gate: reads the network, never
+  # fails the build when the network is absent, and its exemption list may only
+  # shrink. Kept out of `gates` for the same reason as above — it needs no
+  # workspace and no build.
+  - name: catalog answers
+    run: node scripts/audit-catalog.mjs

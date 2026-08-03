@@ -16,7 +16,8 @@
     "gen:gui-css": "node scripts/gen-gui-css.mjs",
     "prebuild": "node scripts/gen-gui-css.mjs && node scripts/sync-pricing.mjs",
     "predev": "node scripts/gen-gui-css.mjs",
-    "sync:pricing": "node scripts/sync-pricing.mjs"
+    "sync:pricing": "node scripts/sync-pricing.mjs",
+    "audit:catalog": "node scripts/audit-catalog.mjs"
   },
   "dependencies": {
     "@hanzo/brand": "^1.4.5",

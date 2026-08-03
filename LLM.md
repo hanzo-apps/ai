@@ -140,7 +140,7 @@ positioned "Open AI Cloud — GCP-compatible. Open source. On-chain.":
 | Dev      | `/products/dev`      | CLI, SDKs, API, Playground, IDE, Desktop |
 | Platform | `/products/platform` | Projects, Environments, Builds, Registry, Releases, Pipelines |
 | Observe  | `/products/observe`  | Logs, Metrics, Traces, Dashboards, Alerts, Cost |
-| Web3     | `/products/web3`     | Settlement, Chains, Wallets, Tokens, Indexer, Oracles — **Lux** → lux.cloud |
+| Web3     | `/products/web3`     | Settlement, Chains, Wallets, Tokens, Indexer, Attestations — **Lux** → lux.cloud |
 | Apps     | `/products/apps`     | Chat, Bot, Search, Crawl, Studio, Console |
 
 - Each mega-menu **category header links to its `/products/<slug>` page**
@@ -155,6 +155,92 @@ positioned "Open AI Cloud — GCP-compatible. Open source. On-chain.":
 > `lib/data/product-taxonomy.ts` is a SEPARATE, legacy catalog still used by
 > `components/products/ProductPageTemplate` (the ~80 bespoke `/<slug>` product
 > pages) and the orphaned `solutions/` pages — it is NOT the products-nav source.
+
+## "60 capabilities" is a layout constant, and 32 of what we sell does not answer
+
+`capabilityCount` (`lib/data/cloud-primitives.ts:485`) is derived, not typed —
+but it derives from `rawCategories` (`:168`), which is 10 categories of exactly
+6. The interface says so out loud: `CloudCategory.items` is commented *"Exactly
+six primary primitives."* So 60 is the product of a mega-menu that wants two
+rows of five with six leaves each. It is a **layout constraint wearing the
+costume of a measurement**, and it is not the number of anything we serve.
+
+There are five lists, and no two agree:
+
+| List | Where | Count |
+|---|---|---|
+| Site taxonomy | `lib/data/cloud-primitives.ts` | 10 categories × 6 = **60** |
+| Legacy taxonomy | `lib/data/product-taxonomy.ts` | **9** categories |
+| Docs prose | `hanzo-docs/docs` (7 files) | **67** capabilities / 8 movements |
+| Curation manifest | `hanzoai/openapi` `capabilities.yaml` | 8 domains over **180** tags |
+| Commerce catalog | `GET /v1/commerce/catalog?brand=hanzo` | **84** products |
+| **The served document** | `GET /v1/openapi.json` | **1,679 paths · 2,307 operations · 179 tags** |
+
+Only the last one is authority: it is a projection of the routers cloud
+mounted, so a path in it exists by construction. Everything above it is
+editorial.
+
+Measured 2026-08-03, `node scripts/audit-catalog.mjs`:
+
+```
+84 products advertised · 52 answer (62%) · 32 do not
+  renamed 13 · client 7 · external 1 · absent 11
+```
+
+**Every one of those 32 is marked `"status": "enabled"` and every one is a live
+404.** Four different problems were hiding in one number:
+
+- **renamed (13)** — the capability is real, the `apiPath` is misspelt. `vpc`
+  vs `/v1/vpcs`, `wallet` vs `/v1/wallets`, `alerts` vs `/v1/o11y/alerts`,
+  `indexer` vs `/v1/indexers`, `zero-trust` vs `/v1/networks`. Pure catalog
+  bugs, cheapest thing on the list.
+- **client (7)** — `cli`, `sdks`, `ide`, `desktop`, `console`, `studio`, and
+  `api` itself. These CONSUME the API; no `apiPath` can ever be right. They
+  need a `kind` field, not a path. A category error, not a gap.
+- **external (1)** — `nodes` is `luxfi/node`, served by Lux, not api.hanzo.ai.
+- **absent (11)** — advertised, enabled, and nothing serves it. This is the
+  only bucket that is a commercial problem and the only one no code change in
+  this repo can fix: `edge`, `cdn`, `hsm`, `mpc`, `settlement`, `tokens`,
+  `attestations`, `datasets`, `scores`, `score-configs`, `annotation-queues`.
+
+Three of those have real repos that were simply never mounted into cloud —
+`hanzoai/edge` (Rust, 13 crates), `hanzoai/hsm` (a Go library that belongs
+*behind* `/v1/kms`, not beside it), `hanzoai/cdn` (our own asset bucket, never
+a tenant product). Shipping them is a mount, not a build.
+
+### The chain, and the link that was missing
+
+    site taxonomy  ->  commerce catalog  ->  served document
+    (cloud-primitives)   (/v1/commerce/catalog)   (/v1/openapi.json)
+    \___ e2e/catalog-agreement.spec.ts ___/
+                                     \___ scripts/audit-catalog.mjs ___/
+
+The first link was already asserted and passes. The second was asserted by
+nothing, which is exactly where the drift accumulated. `scripts/audit-catalog.mjs`
+closes it, wired as the `catalog answers` gate in `hanzo.yml`.
+
+Same two rules as `sync-pricing.mjs`, for the same reasons: it **never fails the
+build on an unreachable API** (a marketing page must not need the API up to
+deploy — no network, no verdict, exit 0), and its `KNOWN_UNSERVED` ratchet **may
+only shrink**. A product that fails and is not on the list fails the run; an
+entry that starts answering fails the run too, so a fix is forced to delete its
+own exemption. Do not add entries to make it pass.
+
+### Do not hydrate the menu from the catalog yet
+
+`cloud-primitives.ts:24-27` anticipates replacing `rawCategories` with a live
+read of `/v1/commerce/catalog`. **That swap would make the site worse today**:
+it renders 84 products of which 32 are 404s, against the current 60 that are at
+least hand-checked. Hydration is correct only once `audit-catalog.mjs` reports
+zero `renamed` and the `client` rows carry a `kind` instead of an `apiPath`.
+Clear the ratchet first, then hydrate — the gate is the precondition, not the
+sequel.
+
+Three-way drift is already visible in one row. The Web3 six: this file said
+*Oracles* where the code says *Attestations* (fixed above), while the catalog
+carries **eight** Web3 products including `referrals` and `networks`. That is
+the drift in miniature, and it is why the gate reads the document rather than
+any list a human keeps.
 
 ## Removed (2026-05-07 cleanup)
 
