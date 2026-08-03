@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
-import LandingNav from '@/components/home/LandingNav'
-import LandingFooter from '@/components/home/LandingFooter'
+import { SiteHeader, SiteFooter } from '@/components/home/shell'
 import { AccountProvider } from '@/contexts/AccountContext'
 import { BillingProvider } from '@/contexts/BillingContext'
 
@@ -43,9 +42,9 @@ export default function MarketingLayout({
           >
             Skip to content
           </a>
-          <LandingNav />
+          <SiteHeader surface="cloud" />
           <main id="main">{children}</main>
-          <LandingFooter />
+          <SiteFooter surface="cloud" />
         </div>
       </BillingProvider>
     </AccountProvider>
