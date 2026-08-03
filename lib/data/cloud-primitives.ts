@@ -153,7 +153,12 @@ const rawCategories: CloudCategory[] = [
         description: 'Open embedding models for text, code, and images behind one API, wired straight into Vector for retrieval. Batch or realtime, metered per token.',
         features: ['Text, code & image models', 'One API, many models', 'Pairs with Vector search', 'Token-metered billing'],
       }),
-      { title: 'Rerank', href: '/products/ai', icon: ArrowUpDown },
+      stub({
+        slug: 'rerank', title: 'Rerank', icon: ArrowUpDown, status: 'ga',
+        tagline: 'Put the right result first.',
+        description: 'Cross-encoder reranking that reorders candidate documents by true relevance to the query. Drop it in after Vector or any search step to sharpen retrieval before the model spends a token on the wrong context.',
+        features: ['Cross-encoder relevance scoring', 'Sharpens Vector & RAG retrieval', 'One API, open rerank models', 'Token-metered billing'],
+      }),
       stub({
         slug: 'finetune', title: 'Finetune', icon: SlidersHorizontal, status: 'beta',
         tagline: 'Adapt open models to your domain.',
