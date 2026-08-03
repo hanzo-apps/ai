@@ -1,17 +1,28 @@
 /**
- * Landing nav — single source of truth for the openai.com-style header and the
- * minimal footer on the apex hanzo.ai landing (`app/page.tsx`).
+ * Landing nav — the single source of truth for the header and footer of EVERY
+ * host this one static export serves: the apex hanzo.ai landing (`app/page.tsx`)
+ * and, through `app/(marketing)/layout.tsx`, cloud.hanzo.ai and every deep
+ * marketing page beneath it. One chrome, one IA, so the two hosts cannot drift.
  *
- * The apex is the clean, chat-centric front door. The DETAILED product /
- * marketing pages are part of THIS static export, so they resolve on hanzo.ai
- * itself — every deep link here is a same-origin relative path (`/vector`,
- * `/base`, `/cli`, …) that stays on hanzo.ai. The only absolute links are the
- * external product apps (hanzo.chat / hanzo.app / studio / team), the install
- * host (hanzo.sh), docs / blog / GitHub, the console you sign in to, the
- * Foundation that governs Hanzo (Zoo Labs, zoo.ngo), and the single
- * "Explore Cloud" umbrella door to the cloud-product site (cloud.hanzo.ai).
- * Every href resolves to a live surface — no dead links.
+ * Deep links are same-origin relative paths (`/vector`, `/base`, `/cli`, …), so
+ * they resolve on whichever host is serving the export. The only absolute links
+ * are the external product apps (hanzo.chat / hanzo.app / studio / team), the
+ * install host (hanzo.sh), docs / blog / GitHub, the Foundation that governs
+ * Hanzo (Zoo Labs, zoo.ngo), and the CONSOLE.
+ *
+ * Login is ONE action. This site is marketing only — it runs no OAuth of its
+ * own and owns no session. Every sign-in / log-in affordance goes to
+ * console.hanzo.ai, which owns auth; a bare hanzo.id link carries no client_id,
+ * redirect_uri or PKCE, so it can only strand the visitor at a portal with
+ * nowhere to return to. There is no second "log in to X" list, because there is
+ * only one place to log in.
+ *
+ * The Products menu is DERIVED from `lib/data/cloud-primitives.ts` — the same
+ * taxonomy behind the `/products/<slug>` category pages and the product
+ * showcase — so the menu, the pages, and the routes are one thing.
  */
+
+import { categorySlug, cloudCategories } from '@/lib/data/cloud-primitives'
 
 export const CHAT = 'https://hanzo.chat'
 export const APP = 'https://hanzo.app'
@@ -50,6 +61,10 @@ export interface NavLink {
 
 export interface NavColumn {
   title: string
+  /** Column header link — a product category header opens its `/products/<slug>` page. */
+  href?: string
+  /** One-line column subtitle (a category's tagline). */
+  desc?: string
   links: NavLink[]
 }
 
@@ -85,47 +100,16 @@ export const NAV: NavItem[] = [
     ],
   },
   {
+    // The ten cloud primitives, straight from the taxonomy — two rows of five,
+    // each header a door to its `/products/<slug>` page. Nothing is retyped
+    // here, so a leaf cannot go stale or become a dead link.
     label: 'Products',
-    explore: [
-      { label: 'Enso', href: '/enso', desc: 'Flagship model orchestration · Hanzo Cloud' },
-      { label: 'Hanzo Chat', href: CHAT, desc: 'Chat with frontier models' },
-      { label: 'Hanzo App', href: APP, desc: 'Build & ship AI apps' },
-      { label: 'Hanzo Studio', href: STUDIO, desc: 'The creative AI studio' },
-    ],
-    columns: [
-      {
-        title: 'AI Cloud',
-        links: [
-          { label: 'Enso', href: '/enso', desc: 'Proprietary · Cloud only' },
-          { label: 'Zen', href: '/zen', desc: 'Open weights' },
-          { label: 'Hanzo Base', href: '/base' },
-          { label: 'Vector search', href: '/vector' },
-          { label: 'Explore Cloud', href: CLOUD },
-        ],
-      },
-      {
-        title: 'Apps',
-        links: [
-          { label: 'Chat', href: CHAT },
-          { label: 'App', href: APP },
-          { label: 'Studio', href: STUDIO },
-          { label: 'Team', href: TEAM },
-          { label: 'Bot', href: '/bot' },
-          { label: 'Search', href: '/search' },
-        ],
-      },
-      {
-        title: 'Developers',
-        links: [
-          { label: 'hanzo.sh — install', href: SH },
-          { label: 'hanzo CLI', href: '/cli' },
-          { label: 'MCP', href: '/mcp' },
-          { label: 'ZAP', href: '/zap' },
-          { label: 'Dev', href: '/dev' },
-          { label: 'SDKs', href: '/cloud/sdks' },
-        ],
-      },
-    ],
+    columns: cloudCategories.map((category) => ({
+      title: category.title,
+      href: `/products/${categorySlug(category.title)}`,
+      desc: category.tagline,
+      links: category.items.map((item) => ({ label: item.title, href: item.href })),
+    })),
   },
   {
     label: 'Business',
@@ -210,32 +194,28 @@ export const NAV: NavItem[] = [
   },
 ]
 
-/** "Log in" dropdown — the surfaces you can sign in to. */
-export const LOGIN_LINKS: NavLink[] = [
-  { label: 'Hanzo Chat', href: CHAT },
-  { label: 'API Platform', href: CONSOLE },
-  { label: 'Cloud', href: CLOUD },
-]
-
-/** "Try Hanzo" dropdown — the ONE uniform primary CTA, shared by hanzo.ai + cloud.hanzo.ai. */
-export const TRY_LINKS: NavLink[] = [
-  { label: 'Hanzo Chat', href: CHAT, desc: 'Chat with frontier models' },
-  { label: 'Enso', href: '/enso', desc: 'One model to command them all' },
-  { label: 'Hanzo App', href: APP, desc: 'Build & ship AI apps' },
-  { label: 'Hanzo Studio', href: STUDIO, desc: 'The creative AI studio' },
-  { label: 'Hanzo Cloud', href: CLOUD, desc: 'The full AI cloud' },
-]
+/**
+ * The two header actions, in order. `Log in` and `Start building` are the same
+ * destination on purpose: console.hanzo.ai is both the sign-in door and the
+ * place you land to build, and stating it twice serves the returning user and
+ * the new one without asking either to choose from a menu.
+ */
+export const LOGIN = { label: 'Log in', href: CONSOLE }
+export const START = { label: 'Start building', href: CONSOLE }
 
 /** Minimal footer columns. */
 export const FOOTER: NavColumn[] = [
   {
     title: 'Product',
     links: [
+      // `/products` is the full catalog of the ten cloud primitives, and it
+      // resolves on whichever host is serving this export — so it is the one
+      // door to the cloud from either site, never a link back to where you are.
+      { label: 'Products', href: '/products' },
       { label: 'Enso', href: '/enso' },
       { label: 'Chat', href: CHAT },
       { label: 'App', href: APP },
       { label: 'Studio', href: STUDIO },
-      { label: 'Cloud', href: CLOUD },
       { label: 'Pricing', href: '/pricing' },
     ],
   },

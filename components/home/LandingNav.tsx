@@ -3,17 +3,26 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HanzoLogo } from '@hanzo/logo/react'
-import { useAnalytics } from '@hanzo/event/react'
-import { EVENTS } from '@hanzo/event'
 import { Search, ChevronDown, ArrowUpRight, Menu, X } from 'lucide-react'
-import { NAV, LOGIN_LINKS, TRY_LINKS, CHAT, type NavItem } from './nav-data'
+import { NAV, LOGIN, START, goToChat, type NavItem } from './nav-data'
 
-/** Focus the hero composer (openai's magnifying glass drops you into the ask box). */
-function focusComposer() {
+/**
+ * Ask Hanzo — ONE affordance with one meaning on every host. The apex landing
+ * has a composer in the hero, so the magnifying glass drops you into it; every
+ * other page (cloud.hanzo.ai included) has none, and there the same control
+ * hands the question to hanzo.chat, which is where a question gets answered.
+ * Previously it focused an `#ask` element that only the apex ever rendered, so
+ * on cloud.hanzo.ai the button did nothing at all.
+ */
+function askHanzo() {
   if (typeof document === 'undefined') return
-  window.scrollTo({ top: 0, behavior: 'smooth' })
   const el = document.getElementById('ask') as HTMLTextAreaElement | null
-  el?.focus()
+  if (!el) {
+    goToChat()
+    return
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+  el.focus()
 }
 
 /**
@@ -24,16 +33,27 @@ function focusComposer() {
 function MegaPanel({ item }: { item: NavItem }) {
   const explore = item.explore ?? []
   const columns = item.columns ?? []
+  // An item with no `explore` block is a pure category menu — Products, whose
+  // ten cloud primitives lay out as two rows of five across the full width.
+  // The shape falls out of the data; there is no flag to keep in sync.
+  const wide = explore.length === 0
   return (
     <motion.div
       initial={{ opacity: 0, y: -4 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -4 }}
       transition={{ duration: 0.15 }}
-      className="absolute inset-x-0 top-full border-b border-neutral-800 bg-black shadow-2xl"
+      className="absolute inset-x-0 top-full max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-neutral-800 bg-black shadow-2xl"
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-10 sm:px-6 md:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)] lg:px-8">
-        {/* Explore — big links. */}
+      <div
+        className={`mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-10 sm:px-6 lg:px-8 ${
+          wide ? '' : 'md:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)]'
+        }`}
+      >
+        {/* Explore — big links. Absent on a pure category menu, header and all:
+            an "Explore Products" label above nothing is a heading for an empty
+            column, and it pushes the grid down by the height of one. */}
+        {explore.length > 0 && (
         <div>
           <div className="mb-5 text-xs font-medium uppercase tracking-widest text-neutral-400">Explore {item.label}</div>
           <ul className="space-y-0.5">
@@ -58,13 +78,28 @@ function MegaPanel({ item }: { item: NavItem }) {
             ))}
           </ul>
         </div>
+        )}
 
-        {/* Secondary columns. */}
+        {/* Secondary columns — one per category when wide, else beside Explore. */}
         {columns.length > 0 && (
-          <div className="grid gap-8" style={{ gridTemplateColumns: `repeat(${columns.length}, minmax(0,1fr))` }}>
+          <div
+            className={wide ? 'grid gap-x-8 gap-y-9 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5' : 'grid gap-8'}
+            style={wide ? undefined : { gridTemplateColumns: `repeat(${columns.length}, minmax(0,1fr))` }}
+          >
             {columns.map((col) => (
               <div key={col.title}>
-                <div className="mb-3 text-xs font-medium uppercase tracking-widest text-neutral-400">{col.title}</div>
+                {/* A category header is a link to its own page, not a label. */}
+                {col.href ? (
+                  <a
+                    href={col.href}
+                    className="group -mx-2 mb-3 block rounded-lg px-2 py-1 no-underline transition-colors hover:bg-neutral-900 hover:no-underline"
+                  >
+                    <span className="text-sm font-semibold text-white">{col.title}</span>
+                    {col.desc && <span className="mt-0.5 block text-xs text-neutral-500">{col.desc}</span>}
+                  </a>
+                ) : (
+                  <div className="mb-3 text-xs font-medium uppercase tracking-widest text-neutral-400">{col.title}</div>
+                )}
                 <ul className="space-y-1">
                   {col.links.map((link) => (
                     <li key={link.label}>
@@ -87,15 +122,8 @@ function MegaPanel({ item }: { item: NavItem }) {
 export default function LandingNav() {
   const [open, setOpen] = useState<string | null>(null)
   const [mobile, setMobile] = useState(false)
-  const [login, setLogin] = useState(false)
-  const [tryOpen, setTryOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const analytics = useAnalytics()
-
-  // The primary CTA hands off to hanzo.chat; capture the intent before the
-  // cross-origin navigation the beacon-on-unload flush then delivers.
-  const onTry = () => analytics.capture(EVENTS.CHAT_STARTED, { source: 'nav' })
 
   // Lock body scroll while the mobile drawer is open.
   useEffect(() => {
@@ -175,63 +203,30 @@ export default function LandingNav() {
             )}
           </div>
 
-          {/* Right: search + login + Try Hanzo */}
+          {/* Right: ask + the two console actions. No dropdowns — there is one
+              place to log in, so a menu of places would be a menu of one. */}
           <div className="ml-auto flex items-center gap-1 sm:gap-2">
             <button
-              onClick={focusComposer}
-              aria-label="Search"
+              onClick={askHanzo}
+              aria-label="Ask Hanzo"
               className="hidden rounded-full p-2 text-neutral-300 transition-colors hover:bg-neutral-900 hover:text-white sm:inline-flex"
             >
               <Search className="h-4 w-4" />
             </button>
 
-            <div className="relative hidden sm:block" onMouseEnter={() => setLogin(true)} onMouseLeave={() => setLogin(false)}>
-              <button className="inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm text-neutral-300 transition-colors hover:text-white" aria-expanded={login}>
-                Log in
-                <ChevronDown className="h-3.5 w-3.5 text-neutral-500" />
-              </button>
-              <AnimatePresence>
-                {login && (
-                  <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }} transition={{ duration: 0.15 }} className="absolute right-0 top-full min-w-[12rem] pt-3">
-                    <div className="rounded-2xl border border-neutral-800 bg-neutral-950/95 p-2 shadow-2xl backdrop-blur-xl">
-                      {LOGIN_LINKS.map((l) => (
-                        <a key={l.label} href={l.href} className="block rounded-lg px-3 py-2 text-sm font-medium text-neutral-100 transition-colors hover:bg-neutral-900">
-                          {l.label}
-                        </a>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <a
+              href={LOGIN.href}
+              className="hidden rounded-full px-3 py-2 text-sm text-neutral-300 no-underline transition-colors hover:text-white hover:no-underline sm:inline-flex"
+            >
+              {LOGIN.label}
+            </a>
 
-            {/* Try Hanzo — the ONE uniform primary CTA, as a nice dropdown. */}
-            <div className="relative" onMouseEnter={() => setTryOpen(true)} onMouseLeave={() => setTryOpen(false)}>
-              <a
-                href={CHAT}
-                onClick={onTry}
-                className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition-opacity hover:opacity-90"
-                aria-haspopup="true"
-                aria-expanded={tryOpen}
-              >
-                Try Hanzo
-                <ChevronDown className="h-4 w-4" />
-              </a>
-              <AnimatePresence>
-                {tryOpen && (
-                  <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }} transition={{ duration: 0.15 }} className="absolute right-0 top-full min-w-[17rem] pt-3">
-                    <div className="rounded-2xl border border-neutral-800 bg-neutral-950/95 p-2 shadow-2xl backdrop-blur-xl">
-                      {TRY_LINKS.map((l) => (
-                        <a key={l.label} href={l.href} className="block rounded-lg px-3 py-2.5 transition-colors hover:bg-neutral-900">
-                          <span className="text-sm font-medium text-neutral-100">{l.label}</span>
-                          {l.desc && <span className="mt-0.5 block text-xs text-neutral-400">{l.desc}</span>}
-                        </a>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <a
+              href={START.href}
+              className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-2 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
+            >
+              {START.label}
+            </a>
 
             <button onClick={() => setMobile(true)} aria-label="Open menu" className="rounded-full p-2 text-neutral-200 transition-colors hover:bg-neutral-900 lg:hidden">
               <Menu className="h-5 w-5" />
@@ -261,8 +256,8 @@ export default function LandingNav() {
             </div>
 
             <div className="h-[calc(100dvh-4rem)] overflow-y-auto px-4 py-6">
-              <a href={CHAT} onClick={onTry} className="mb-6 inline-flex w-full items-center justify-center gap-1 rounded-full bg-white px-4 py-3 text-sm font-medium text-black">
-                Try Hanzo <ArrowUpRight className="h-4 w-4" />
+              <a href={START.href} className="mb-6 inline-flex w-full items-center justify-center gap-1 rounded-full bg-white px-4 py-3 text-sm font-medium text-black no-underline hover:no-underline">
+                {START.label} <ArrowUpRight className="h-4 w-4" />
               </a>
 
               {NAV.map((item) => (
@@ -270,12 +265,9 @@ export default function LandingNav() {
               ))}
 
               <div className="mt-6 border-t border-neutral-800 pt-6">
-                <div className="mb-2 text-xs font-medium uppercase tracking-wide text-neutral-400">Log in</div>
-                {LOGIN_LINKS.map((l) => (
-                  <a key={l.label} href={l.href} className="block py-2 text-[15px] text-neutral-200">
-                    {l.label}
-                  </a>
-                ))}
+                <a href={LOGIN.href} className="flex min-h-11 items-center text-[15px] font-medium text-neutral-100">
+                  {LOGIN.label}
+                </a>
               </div>
             </div>
           </motion.div>
@@ -314,7 +306,13 @@ function MobileSection({ item }: { item: NavItem }) {
               ))}
               {(item.columns ?? []).map((col) => (
                 <div key={col.title} className="mb-3 mt-3">
-                  <div className="mb-1 text-xs font-medium uppercase tracking-wide text-neutral-400">{col.title}</div>
+                  {col.href ? (
+                    <a href={col.href} className="mb-1 flex min-h-11 items-center text-[15px] font-medium text-neutral-100">
+                      {col.title}
+                    </a>
+                  ) : (
+                    <div className="mb-1 text-xs font-medium uppercase tracking-wide text-neutral-400">{col.title}</div>
+                  )}
                   {col.links.map((link) => (
                     <a key={link.label} href={link.href} className="block py-1.5 pl-2 text-sm text-neutral-300">
                       {link.label}
