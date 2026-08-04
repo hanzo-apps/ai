@@ -113,11 +113,20 @@ export function PageHero({
   lede?: string
   children?: React.ReactNode
 }) {
+  // Hoisted because `useRise` calls `useReducedMotion`, a real hook, and the
+  // lede's copy of it sat inside `{lede ? … : null}`. A PageHero without a lede
+  // therefore ran one hook fewer than one with it — the hook ORDER changed with
+  // a prop. It survived because a mounted hero's lede does not usually appear
+  // or vanish, which is exactly the kind of latent violation that only breaks
+  // once something makes the copy dynamic.
+  const badgeRise = useRise(0, PRIMARY_TINT)
+  const titleRise = useRise(0.05, DISPLAY)
+  const ledeRise = useRise(0.1, RELAXED)
   return (
     <YStack render="section" paddingTop="$24" paddingBottom="$12" {...GUTTER}>
       <YStack {...MEASURE}>
         <XStack
-          {...useRise(0, PRIMARY_TINT)}
+          {...badgeRise}
           alignSelf="flex-start"
           alignItems="center"
           gap="$2"
@@ -133,7 +142,7 @@ export function PageHero({
         </XStack>
         <Text
           render="h1"
-          {...useRise(0.05, DISPLAY)}
+          {...titleRise}
           marginBottom="$4"
           fontSize="$9"
           $sm={{ fontSize: '$10' }}
@@ -145,7 +154,7 @@ export function PageHero({
         {lede ? (
           <Text
             render="p"
-            {...useRise(0.1, RELAXED)}
+            {...ledeRise}
             maxWidth={672}
             fontSize="$5"
             color="$mutedForeground"
