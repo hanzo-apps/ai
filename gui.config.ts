@@ -187,7 +187,18 @@ const font = (family: string) => ({
 
 export const config = createGui({
   ...defaultConfig,
-  settings: { ...defaultConfig.settings, onlyAllowShorthands: false },
+  settings: {
+    ...defaultConfig.settings,
+    onlyAllowShorthands: false,
+    // No OS-preference theming. The default emits
+    // `@media(prefers-color-scheme:light){:root{--background:#fff…}}`, and that
+    // block outranks @hanzo/design's dark-first `:root` — so a visitor whose OS
+    // prefers light saw a WHITE body from first paint until hydration added
+    // `t_dark` (~600ms), and next-themes' pre-paint `dark` class could not stop
+    // it because no stylesheet binds `.dark`. This site is dark unless a CLASS
+    // says otherwise; the media query was the one rule saying otherwise.
+    shouldAddPrefersColorThemes: false,
+  },
   fonts: {
     ...defaultConfig.fonts,
     body: font('var(--font-sans)'),

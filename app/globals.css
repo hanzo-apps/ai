@@ -87,6 +87,17 @@
     overflow-x: clip;
   }
 
+  /* next-themes stamps `dark` on <html> before first paint; bind it. The class
+     used to match NO rule in any stylesheet — the pre-paint guarantee was a
+     no-op, and only React's later `t_dark` made the page dark under a light OS
+     preference (gui.css no longer emits that light media query; see
+     gui.config.ts). @hanzo/design's `:root` is already the dark palette, so
+     the class only has to say what the DEFAULT is: dark UA controls,
+     scrollbars and form widgets, independent of OS preference. */
+  :root.dark {
+    color-scheme: dark;
+  }
+
   body {
     background-color: var(--background);
     color: var(--foreground);
@@ -98,6 +109,18 @@
        real horizontal scrollbar mid-scroll. `clip` rather than `hidden` so this
        does not become a scroll container and break `position: sticky`. */
     overflow-x: clip;
+    /* The page draws under the notch and home indicator (viewport-fit=cover,
+       app/layout.tsx); these keep content out of the hardware. env() is 0 on a
+       flat screen, so nothing moves anywhere else. */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* The shared header is the one piece of chrome that sits at the very top of
+     every page, so it alone carries the top inset. */
+  header[data-hanzo-shell] {
+    padding-top: env(safe-area-inset-top);
   }
 
   /* Tailwind v4's preflight dropped v3's `cursor: pointer` on buttons, so every
@@ -267,4 +290,65 @@
   .t_unmounted header[data-hanzo-shell] > *:not(:first-child) {
     display: none !important;
   }
+}
+
+/* ── Text fields never compute under 16px where a thumb is pointing ───────────
+   iOS Safari zooms the whole page when a focused control's font-size is below
+   16px, and @hanzo/design's ramp is compact (--text-base is 14px, --text-sm
+   13px), so EVERY size utility under text-lg is under the threshold — the
+   contact form measured 13px, the composer 15px. Same shape as the 44px touch
+   floor above: a pointer-conditional POLICY stated once, not a per-field class.
+   Unlayered so it beats the utility layer; max() so an inherited larger size
+   survives; mouse and stylus keep the designed compact sizes. */
+@media (pointer: coarse) {
+  input:not([type='checkbox'], [type='radio'], [type='range'], [type='file'], [type='button'], [type='submit']),
+  textarea,
+  select {
+    font-size: max(1em, 16px);
+  }
+}
+
+/* ── Reduced motion means a STILL page, never a hidden one ────────────────────
+   Entry reveals put real content at inline `opacity:0` (framer-motion
+   `initial=`) and count on the animation to bring it back. Under
+   prefers-reduced-motion the rise never completes, and the whole
+   "Enso → hanzo.app → Hanzo Cloud" section measured permanently invisible.
+   Forcing the START state visible is safe for every reveal on the site: the
+   end state of each of these animations is opacity 1 anyway, so the only thing
+   removed is the motion itself — which is exactly what the visitor asked for.
+   The attribute match is anchored (`;` or end-of-value) so `opacity:0.13` and
+   friends stay untouched; `!important` because the style being defeated is
+   inline. */
+@media (prefers-reduced-motion: reduce) {
+  [style*='opacity:0;'],
+  [style$='opacity:0'],
+  [style*='opacity: 0;'],
+  [style$='opacity: 0'] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ── Content does not get to depend on JavaScript ─────────────────────────────
+   Entry reveals ship real content at SSR'd `opacity:0` — framer-motion
+   `initial=` writes it inline, gui's enterStyle rides the `t_unmounted` pass —
+   and with scripting off neither ever advances: the homepage h1, composer and
+   CTA row were simply absent (12 blocks measured invisible). app/layout.tsx
+   stamps `no-js` on <html> and removes it with a one-line script before any
+   content parses, so these rules exist precisely when no script will ever run.
+
+   The attribute match is anchored (`;` or end-of-value) so `opacity:0.13` and
+   friends stay untouched; `!important` because the style being defeated is
+   inline. */
+html.no-js [style*='opacity:0;'],
+html.no-js [style$='opacity:0'],
+html.no-js [style*='opacity: 0;'],
+html.no-js [style$='opacity: 0'] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+html.no-js .t_unmounted :is(.is_View, .is_Text) {
+  opacity: 1 !important;
+  transform: none !important;
 }

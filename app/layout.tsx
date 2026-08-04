@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { GuiProvider } from '@/components/GuiProvider'
@@ -18,6 +18,15 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
 })
+
+/* viewport-fit=cover: draw under the notch and home indicator instead of
+   letterboxing; app/globals.css pays the safe-area insets back where chrome
+   and content need them. */
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
 
 const SITE_TITLE = 'Hanzo — the AI cloud for agents and apps'
 const SITE_DESCRIPTION = 'Build, deploy, and govern AI agents with unified access to models, MCP tools, memory, vector search, secure sandboxes, IAM, KMS, and audit logs. Open-source. Self-host or use the cloud.'
@@ -66,8 +75,15 @@ export default function RootLayout({
   // at :root, so the vars must be defined there — on <body> they'd be out of
   // scope and the whole chain falls back to system fonts.
   return (
-    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`no-js ${geist.variable} ${geistMono.variable}`}>
       <body className="antialiased bg-background text-foreground">
+        {/* Content must not depend on scripting. Entry reveals ship SSR'd
+            `opacity:0` (framer-motion `initial=`) and gui marks the
+            pre-hydration pass `t_unmounted`; with JS off neither ever advances,
+            so the hero shipped invisible. This one line runs before any content
+            is parsed; when it never runs, globals.css's `html.no-js` rules
+            force every JS-gated reveal visible. */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('no-js')" }} />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

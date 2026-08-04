@@ -32,19 +32,19 @@ const features = [
     icon: Palette,
     title: "Themeable, Not Theme-locked",
     description:
-      "CSS variables and Tailwind tokens make every component re-skin in seconds. White-label per org, theme per route, dark by default.",
+      "@hanzo/design tokens — plain CSS variables — re-skin every component in seconds. White-label per org, theme per route, dark by default.",
   },
   {
     icon: Code2,
-    title: "Copy, Don't Install",
+    title: "One Package, Every Surface",
     description:
-      "Components live in your repo, not in node_modules. Tweak them, fork them, own them. No vendor escape velocity required.",
+      "pnpm add @hanzo/ui. The same components run chat, console, and cloud — upgrade once and every surface moves together.",
   },
   {
     icon: Zap,
-    title: "Zero Runtime",
+    title: "Zero Runtime CSS",
     description:
-      "Built on Tailwind and Radix primitives. No styled-components, no emotion, no runtime CSS-in-JS — just classes that ship.",
+      "Built on @hanzo/gui primitives. No styled-components, no emotion, no CSS-in-JS at render — one atomic stylesheet, generated at build.",
   },
   {
     icon: ShieldCheck,
@@ -112,8 +112,8 @@ export default function UiPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Open-source, accessible, themeable React components built on Tailwind
-            and Radix primitives. Copy into your repo, own them forever, ship faster.
+            Open-source, accessible, themeable React components built on @hanzo/gui
+            primitives and @hanzo/design tokens. Install them, theme them, ship faster.
           </motion.p>
 
           <motion.div
