@@ -6,12 +6,12 @@ import {
   Building2,
   Code2,
   CreditCard,
+  FileSearch,
   Gauge,
   Github,
   Landmark,
   Layers,
   ListChecks,
-  Network,
   Plug,
   Receipt,
   ScrollText,
@@ -67,11 +67,11 @@ const COMPLIANCE: CardItem[] = [
       'OFAC, UK OFSI, EU and UN designations, parsed from each authority’s own published export rather than a reseller’s copy of it. The freshness of every list is on the record.',
   },
   {
-    icon: Network,
-    title: 'Relationships',
+    icon: FileSearch,
+    title: 'Relationship lookback',
     meta: NOW,
     description:
-      'Look back across the relationships around a subject rather than one transaction at a time, which is where structuring across several accounts becomes visible.',
+      'Ask whether a business relationship with a named party is open now, or was open inside the last five years, and what its nature was. The answer is a lookup on that party in an index of relationship records, so what it reads does not grow with the ledger. It reads relationships and not transactions, which is a different question from the one the rules answer.',
   },
   {
     icon: Timer,
