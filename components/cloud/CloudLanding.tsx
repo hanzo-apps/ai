@@ -9,10 +9,12 @@ import { motion } from "framer-motion"
 // static radial below is the no-WebGL / reduced-motion fallback.
 const PointGlobe = dynamic(() => import("@/components/webgl/PointGlobe"), { ssr: false })
 import { ArrowRight, CreditCard, Cpu, Check, Copy, Github } from "lucide-react"
+import { ProductShot } from "@hanzogui/shell"
 import CloudCategoryShowcase, { CloudCategoryMap } from "@/components/cloud/CloudCategoryShowcase"
 import { CONSOLE } from "@/components/home/nav-data"
 import { capabilityCount, categoryCount } from "@/lib/data/cloud-primitives"
 import { MODELS_PHRASE } from '@/lib/data/model-count'
+import { heroShot } from "@/lib/data/product-shots"
 
 const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
 const GH = "https://github.com/hanzoai/cloud"
@@ -137,6 +139,38 @@ function Hero() {
             )}
           </button>
         </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------ console --- */
+
+/**
+ * The console, shown rather than described.
+ *
+ * The hero above makes a claim ("the AI cloud for agents and apps") and this is
+ * the evidence for it — so it sits directly under the claim, before the catalog
+ * that elaborates it. Frame, art direction and loading behaviour all come from
+ * `<ProductShot>` in the shared shell, so this shot and every category shot on
+ * `/products/<slug>` present identically; a screenshot styled per-page is how a
+ * product starts looking like three products.
+ *
+ * `priority` because this one is at the fold. Every OTHER shot on the site stays
+ * lazy — the shell defaults to it, so no other call site has to remember.
+ */
+function ConsoleShot() {
+  if (!heroShot) return null
+  return (
+    <section className="px-4 pb-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl">
+        <ProductShot
+          desktop={heroShot.desktop}
+          mobile={heroShot.mobile}
+          alt={heroShot.alt}
+          priority
+          href={CONSOLE}
+        />
       </div>
     </section>
   )
@@ -291,6 +325,7 @@ export default function CloudLanding() {
   return (
     <>
       <Hero />
+      <ConsoleShot />
       <Primitives />
       <Billing />
       <FinalCTA />

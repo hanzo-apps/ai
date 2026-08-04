@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, BookOpen, ExternalLink, Github } from 'lucide-react'
 import { Button } from '@hanzo/ui'
+import { ProductShot } from '@hanzogui/shell'
 import {
   POSITIONING,
   categorySlug,
@@ -11,6 +12,7 @@ import {
   getCategoryBySlug,
   type Primitive,
 } from '@/lib/data/cloud-primitives'
+import { shotForCategory } from '@/lib/data/product-shots'
 
 const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
   ga: 'GA',
@@ -34,6 +36,7 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
   if (!category) return null
 
   const isLux = category.brand === 'lux'
+  const shot = shotForCategory(slug)
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -69,6 +72,17 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
           </motion.div>
         </div>
       </section>
+
+      {/* The category, shown rather than described — when a shot was captured
+          for it. Between the tagline and the grid of leaves: the claim, the
+          evidence, then the parts. Lazy by default (the shell's default, not a
+          decision re-made here), and absent entirely for a category with no
+          shot rather than substituted with a stand-in. */}
+      {shot && (
+        <section className="mx-auto max-w-6xl px-6 pb-16">
+          <ProductShot desktop={shot.desktop} mobile={shot.mobile} alt={shot.alt} />
+        </section>
+      )}
 
       {/* Product grid — every leaf in the category, each a real link */}
       <section className="mx-auto max-w-6xl px-6 pb-20">

@@ -1,0 +1,172 @@
+{
+  "shots": [
+    {
+      "name": "cloud-catalog",
+      "file_1440": "cloud-catalog-1440.png",
+      "file_390": "cloud-catalog-390.png",
+      "url": "https://cloud.hanzo.ai/",
+      "category": "hero",
+      "primary": false,
+      "ship": false,
+      "alt": "Hanzo Cloud landing hero on black: an \"Open-source \u00b7 Self-host or managed\" pill above the headline \"The AI cloud for agents and apps.\", subcopy describing one API for 400+ models plus Base backends, identity, secrets, vector search and full-text search, and three calls to action \u2014 Start building, Explore 97 products, View source \u2014 over a copyable `npx @hanzo/cloud deploy` command. The section below begins \"97 primitives. 10 categories. One cloud.\"",
+      "notes": "Substitute landing hero. The authenticated console dashboard could NOT be reached (see console-overview entry in unreachable list), so this is the strongest real Hanzo surface available for the hero slot.",
+      "review": "RECURSIVE \u2014 this IS cloud.hanzo.ai's landing page; it cannot illustrate itself."
+    },
+    {
+      "name": "cloud-products",
+      "file_1440": "cloud-products-1440.png",
+      "file_390": "cloud-products-390.png",
+      "url": "https://cloud.hanzo.ai/",
+      "category": "platform",
+      "primary": false,
+      "ship": false,
+      "alt": "Hanzo Cloud product catalog: category cards with per-category product counts \u2014 Platform (9), Observe (9), Web3 (9, tagged Lux Network), Apps (15) \u2014 above an expanded AI section listing Models, Chat, Agents, Embeddings, Rerank, Finetune, Evals, Annotations, Scores, RAG, Memory, Judge, Audio, Images and Video, each with a one-line description.",
+      "notes": "Desktop is scrolled to y=1150, mobile to y=1500 so each viewport lands on the category grid. Mobile frame shows the Security / Payments / Platform / Observe / Web3 cards.",
+      "review": "RECURSIVE \u2014 the same cloud.hanzo.ai landing page, scrolled."
+    },
+    {
+      "name": "models-catalog",
+      "file_1440": "models-catalog-1440.png",
+      "file_390": "models-catalog-390.png",
+      "url": "https://hanzo.ai/models",
+      "category": "ai",
+      "primary": false,
+      "ship": false,
+      "alt": "Hanzo model catalog with a green \"Live from api.hanzo.ai\" status pill above the headline \"enso and Zen, on one endpoint\", explaining that enso is the frontier family and Zen the open-weight family served on the same endpoint, with Get free API key and View docs buttons, and an \"Our models\" row of model cards for enso, enso-flash and enso-ultra.",
+      "notes": "Live data \u2014 the page reads the real model list from api.hanzo.ai.",
+      "review": "Marketing page on hanzo.ai; would appear on hanzo.ai/products/ai. Circular."
+    },
+    {
+      "name": "zen-models",
+      "file_1440": "zen-models-1440.png",
+      "file_390": "zen-models-390.png",
+      "url": "https://hanzo.ai/zen/models",
+      "category": "ai",
+      "primary": false,
+      "ship": false,
+      "alt": "Hanzo Zen model catalog header: \"41 Models \u2014 Zen3, Zen4 & Zen5\" over the title \"Hanzo Zen Models Complete API Catalog\", with stat tiles for 41 models, 2M max context, $0.02/MTok starting price, MoE + Dense architectures and 7 modalities, plus family tabs for Zen5, Zen4, Zen4 Coder, Zen3, Zen3 Image, Zen3 Audio and Zen3 Retrieval.",
+      "notes": "",
+      "review": "Marketing page on hanzo.ai. Superseded by `chat` for the ai category."
+    },
+    {
+      "name": "zen-model-table",
+      "file_1440": "zen-model-table-1440.png",
+      "file_390": "zen-model-table-390.png",
+      "url": "https://hanzo.ai/zen/models",
+      "category": "ai",
+      "primary": false,
+      "ship": false,
+      "alt": "Zen4 flagship language-model specification table listing Zen4, Zen4 Ultra, Zen4 Pro, Zen4 Max, Zen4.1, Zen4 Mini and Zen4 Thinking in columns for params, context, architecture and input/output price per million tokens \u2014 for example Zen4 at 744B (40B active), 202K context, MoE, $1.5/$4.5 \u2014 with tier badges reading ULTRA MAX, ULTRA, STARTER and PRO MAX.",
+      "notes": "Scrolled to y=1250. The most data-dense of the model shots; good when a spec-table look is wanted.",
+      "review": "Marketing page on hanzo.ai. A spec table is not a product surface."
+    },
+    {
+      "name": "chat",
+      "file_1440": "chat-1440.png",
+      "file_390": "chat-390.png",
+      "url": "https://chat.hanzo.ai/",
+      "category": "ai",
+      "primary": true,
+      "ship": true,
+      "alt": "Hanzo Chat in its empty state: the prompt \"What can I help with?\" centred over a composer reading \"Ask anything\" with attach, Build an app, settings and microphone controls, Chat / Search / News mode tabs above it, and suggestion chips for Summarize, Write code, Explain, Brainstorm and Build an app.",
+      "notes": "Signed-out empty state \u2014 the login modal was dismissed via \"Stay logged out\". Deliberately contains NO assistant reply, so it cannot fall foul of the billing/credit-notice exclusion; there is no conversation shown at all.",
+      "review": "Real product surface: chat.hanzo.ai's composer, empty state, no data."
+    },
+    {
+      "name": "app-builder",
+      "file_1440": "app-builder-1440.png",
+      "file_390": "app-builder-390.png",
+      "url": "https://hanzo.app/",
+      "category": "apps",
+      "primary": true,
+      "ship": true,
+      "alt": "Hanzo App builder hero: a \"Sites, wired to real data & AI\" pill above the headline \"Describe your app. Hanzo builds and ships it.\", a large prompt box reading \"Ask Hanzo to build a customer portal with login and a dashboard\" with Build and Base mode selectors, example chips for Internal admin dashboard, AI support chatbot, SaaS app with billing, Marketplace with auth and Realtime chat app, and a template row showing Circle, Kinetic, Savor and Matrix.",
+      "notes": "The page also has a community showcase further down that lists real user/org handles; both viewport crops stop above it, so no user or org names appear in either file.",
+      "review": "Real product surface: hanzo.app's build composer, the product's core interaction."
+    },
+    {
+      "name": "bot",
+      "file_1440": "bot-1440.png",
+      "file_390": "bot-390.png",
+      "url": "https://hanzo.bot/",
+      "category": "apps",
+      "primary": false,
+      "ship": false,
+      "alt": "Hanzo Bot hero: \"Your AI Team. In a Box.\" with the strapline \"ONE BOT. EVERY ROLE. EVERY CHANNEL.\", copy describing a computer-using AI agent that runs locally or deploys to Hanzo Cloud, Get Started Free and \"Launch in Cloud \u2014 $5/mo\" buttons, and a \"Why Everyone Needs Their Own Bot\" row of three cards: Save $200K+/yr, Ship 10x Faster and Private by Default.",
+      "notes": "Scrolled to the hero (y=220/240) on purpose. Two hazards were avoided: at load a WHITE \"Enter to Win Up to $50,000 in AI Credits\" giveaway modal covers the page (dismissed here), and further down a \"What People Say\" carousel shows clearly fictional testimonials attributed to @Sun Tzu, @Oda Nobunaga, @Mitsurugi and @Chun-Li \u2014 do not re-crop this page lower.",
+      "review": "Marketing hero; the page also carries fictional testimonials. `app-builder` covers apps with a real surface."
+    },
+    {
+      "name": "docs-api",
+      "file_1440": "docs-api-1440.png",
+      "file_390": "docs-api-390.png",
+      "url": "https://docs.hanzo.ai/docs/api",
+      "category": "platform",
+      "primary": true,
+      "ship": true,
+      "alt": "Hanzo API reference page in dark mode: a left sidebar with an All Services picker, a page filter and nav entries for Start here, Introduction, Install, API Keys, API, AI API, Models, Pricing, Embeddings, Agents, Prompts, SDKs, MCP and API Reference; the main column headed \"API\" describes one base URL and one bearer key at api.hanzo.ai/v1 with Copy Markdown and Open controls, followed by \"Build Anything with Hanzo\" and three route cards \u2014 Build with App, Build with Dev and Build with API; an on-this-page rail sits at the right.",
+      "notes": "",
+      "review": "Real product surface: the docs.hanzo.ai API reference, a distinct host."
+    },
+    {
+      "name": "docs-home",
+      "file_1440": "docs-home-1440.png",
+      "file_390": "docs-home-390.png",
+      "url": "https://docs.hanzo.ai/",
+      "category": "integrations",
+      "primary": false,
+      "ship": false,
+      "alt": "Hanzo documentation home in dark mode: the same left service/nav sidebar beside a centred hero \u2014 a \"Meet Enso \u2014 our frontier model, default on every surface\" pill above the headline \"Build anything with Hanzo.\", the line \"Every model. Every tool. One key.\", a copyable `curl hanzo.sh | sh` install command, and three cards for Build with App, Build with Dev and Build with API.",
+      "notes": "",
+      "review": "Redundant with `docs-api`, which is the denser real surface."
+    },
+    {
+      "name": "pricing",
+      "file_1440": "pricing-1440.png",
+      "file_390": "pricing-390.png",
+      "url": "https://hanzo.ai/pricing",
+      "category": "payments",
+      "primary": false,
+      "ship": false,
+      "alt": "Hanzo pricing page: a \"Simple & Transparent\" pill above the heading \"Pricing\", a tab strip for Plans, API & Models, Search & Data, Infrastructure, Blockchain and World, and four plan cards \u2014 Go $9/month, Dev $19/month, Pro $49/month flagged \"Most Popular\", and Max $99/month \u2014 each with a Get started button and a checklist of included features.",
+      "notes": "List prices from Hanzo's own public pricing page \u2014 not a customer balance.",
+      "review": "Marketing page on hanzo.ai; would appear a click from itself. Circular."
+    },
+    {
+      "name": "calculator",
+      "file_1440": "calculator-1440.png",
+      "file_390": "calculator-390.png",
+      "url": "https://hanzo.ai/calculator",
+      "category": "payments",
+      "primary": false,
+      "ship": false,
+      "alt": "Hanzo True Savings calculator: four headline tiles for gross addressable savings $1.051M, annual run-rate savings $941k, a fully-adjusted figure marked \"Customer input required\", and three-year economic value $2.823M; secondary tiles for software replaced, infrastructure delta, glue engineering reclaimed, cost of operating Hanzo and per-employee run-rate; and a \"Click everything you pay for\" grid of selectable third-party vendor chips.",
+      "notes": "REVIEW BEFORE USE. Two caveats: (1) the vendor grid names roughly 80 third-party products (Okta, Auth0, Datadog, Stripe, Salesforce, Vercel, \u2026) in a replace-this framing \u2014 competitive-comparison material, not a neutral product shot; (2) the dollar figures are modeled estimates from the page's own editable assumptions, explicitly captioned \"not a quote, guarantee, audit, or promise\" \u2014 they are NOT a real account balance, but they read like money. Shipped as true because the page is public Hanzo-authored marketing, but a human should confirm the competitor-name wall is acceptable in context.",
+      "review": "Names ~80 third-party vendors in a replace-this framing \u2014 competitive-comparison material, not a product shot. Not a call to make silently."
+    },
+    {
+      "name": "explorer",
+      "file_1440": "explorer-1440.png",
+      "file_390": "explorer-390.png",
+      "url": "https://hanzo.ai/blockchain/explorer",
+      "category": "web3",
+      "primary": false,
+      "ship": false,
+      "alt": "Hanzo Explorer product page: an \"Available Now\" pill above the title \"Hanzo Explorer \u2014 Unified blockchain explorer and analytics\", feature blocks for Multi-Chain Support, Block & Transaction Search, Contract Verification and Transaction Decoding, and a right-hand \"Get Your API Key\" card showing HA failover, <50ms latency and 100+ chains with Start Building Free and View Documentation buttons.",
+      "notes": "",
+      "review": "Marketing page on hanzo.ai/blockchain/explorer. Circular."
+    },
+    {
+      "name": "base-dashboard",
+      "file_1440": "base-dashboard-1440.png",
+      "file_390": "base-dashboard-390.png",
+      "url": "https://base.hanzo.ai/dashboard/",
+      "category": "data",
+      "primary": false,
+      "ship": false,
+      "alt": "Hanzo Base sign-in screen: a \"Hanzo Base / Tenants\" breadcrumb header above a centred \"Sign in to Hanzo Base\" prompt, the line \"Use your Hanzo account to manage tenants.\" and a single \"Sign in with Hanzo IAM\" button on an otherwise empty black page.",
+      "notes": "ship:false \u2014 this is a bare login form, not a product surface, which the brief excludes. The Base tenants dashboard behind it needs an IAM session that could not be established. Captured and kept only as evidence of what this URL actually serves.",
+      "review": "Held by capture: a bare sign-in form, not a product surface."
+    }
+  ]
+}
