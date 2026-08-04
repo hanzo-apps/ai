@@ -11,6 +11,14 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
 - Node: v20+ (`.nvmrc`)
 - Dev: `pnpm dev`
 - Build: `pnpm build`
+- Typecheck: `pnpm typecheck` — `tsc` here IS TypeScript 7, the native Go
+  compiler, published under the stable `typescript` name with per-platform
+  binaries in `@typescript/typescript-<platform>-<arch>`. The whole tree in
+  ~1.4s at ~400% CPU. Do NOT add `@typescript/native-preview`: that is the
+  pre-release channel of this same binary (it names it `tsgo`), it is behind
+  stable, and installing it would mean two copies of one compiler.
+- Lint: `pnpm lint` — plain `eslint .`, parsed by `@babel/eslint-parser`
+  because typescript-eslint refuses TS 7 outright (typescript-eslint#10940).
 - Deploy: Static export (`output: export`) → Cloudflare Pages, project `hanzo-ai`,
   via **`.github/workflows/deploy.yml`** — a STOPGAP that exists because the native
   path cannot run. `.hanzo/workflows/deploy.yml` is only read by the forge, and
@@ -81,10 +89,38 @@ ONE component library, ONE token source, ONE way to style.
 - **Provider**: `components/GuiProvider.tsx` hands gui's generated CSS to the
   prerender via `useServerInsertedHTML`. Without it a statically exported page
   ships markup whose classes have no rules until hydration.
-- **Tailwind is NOT gone**: 62,085 utility class tokens across 486 files still
-  need converting to gui props. `tailwind.config.ts` (dead — v4 is CSS-first
-  and never read it), `tailwindcss-animate` and `components.json` ARE gone.
-  Convert files to gui props; do not add new utility classes.
+- **Tailwind is NOT gone**: 63,151 utility class tokens (1,560 distinct)
+  across 485 files still need converting to gui props. `tailwind.config.ts`
+  (dead — v4 is CSS-first and never read it), `tailwindcss-animate`,
+  `components.json`, `@tailwindcss/typography` and `autoprefixer` ARE gone, as
+  are shadcn and `@radix-ui/*` (0 lockfile references). Convert files to gui
+  props; do not add new utility classes.
+
+  **Why the remaining conversion is not a codemod.** gui silently ignores a
+  prop it does not know — in a JSX spread there is no error and no type
+  failure, just an element that is not styled. This file already records five
+  separate defects with that exact shape (`animation` vs `transition`, `$gtSm`
+  vs `$sm`, `tag` vs `render`, `lineHeight={1.1}` → `1.1px`, `letterSpacing`
+  as a prop). A mechanical className→prop pass would therefore produce a build
+  that is green and a site that is wrong, and this repo has **no visual
+  regression coverage** to catch it: `e2e/gates` asserts four specific
+  invariants over the export, and there is not one `toHaveScreenshot` in the
+  suite. Screenshot baselines are the precondition for the rest of the
+  migration, not an optional extra. Convert by route, verify by rendering.
+
+- **A Tailwind class that does not exist fails silently too**, which is its own
+  bug family — `bg-grid-white`, `scrollbar-hide`, `prose`,
+  `hover:border-white/30/50` all emitted nothing while looking like styling.
+  To find them: extract every class token from source, extract every class
+  selector from `out/_next/static/css/*.css`, subtract. Read the difference
+  rather than applying it — `ts-*` and `text-gradient-steel` are real, and
+  live in local `<style>` blocks.
+
+- **Plain CSS goes in the `hz-` namespace** (`.hz-prose`, `.hz-grid`,
+  `.hz-scrollbar-none`), parameterised by CSS custom properties. This is where
+  styling lands when it is neither a gui prop nor a token. Do NOT invent
+  utility classes — a utility vocabulary of our own is just Tailwind wearing
+  our name.
 
 ## Brand Colors (Monochrome)
 
