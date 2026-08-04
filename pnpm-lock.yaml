@@ -24,8 +24,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2(@hanzo/gui@8.0.1(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@hanzo/design':
-        specifier: ^0.3.3
-        version: 0.3.3
+        specifier: ^0.4.6
+        version: 0.4.6
       '@hanzo/event':
         specifier: ^0.3.8
         version: 0.3.8(react@19.2.8)
@@ -968,8 +968,8 @@ packages:
       '@hanzo/gui': '>=7.2.2'
       react: '>=19'
 
-  '@hanzo/design@0.3.3':
-    resolution: {integrity: sha512-/8sJ7rU1ngGGljv/nsn55GqQd4HvvJIBvtiXRoh5UyRfn4fCS3FTuBjff7gYQfcL6g/Wpvdk24ArfZm8tojbWA==}
+  '@hanzo/design@0.4.6':
+    resolution: {integrity: sha512-kRjnGKsGqMfGTg2kMUv+pPRDryarYk85rMOoblIqshFIZJp48pCKYcdv1DmfxbNyKm+7CqvqD1NjY3HhNPUQ/A==}
     hasBin: true
 
   '@hanzo/event@0.3.8':
@@ -3762,8 +3762,8 @@ packages:
     resolution: {integrity: sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==}
     engines: {node: '>=6'}
 
-  terser@5.49.0:
-    resolution: {integrity: sha512-SNiDnXyHSrxVcIOtVbULzcTmniUiwcV7Nwdyj1twVubeTmbjoa8p69KKDpfkdoOavuM4/GRm1+ykI8qqnavHoA==}
+  terser@5.49.1:
+    resolution: {integrity: sha512-7A2xlQ5EnGT8KPA92dUh6RbRYTVw8hEaEN9L1K68l4UOXFuV511NnAqObGoRqGOQofQcMypisu1s3xawCEHrvA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -4775,7 +4775,7 @@ snapshots:
       '@hanzo/gui': 8.0.1(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
       react: 19.2.8
 
-  '@hanzo/design@0.3.3': {}
+  '@hanzo/design@0.4.6': {}
 
   '@hanzo/event@0.3.8(react@19.2.8)':
     optionalDependencies:
@@ -7583,7 +7583,7 @@ snapshots:
   metro-minify-terser@0.84.4:
     dependencies:
       flow-enums-runtime: 0.0.6
-      terser: 5.49.0
+      terser: 5.49.1
 
   metro-resolver@0.84.4:
     dependencies:
@@ -8257,7 +8257,7 @@ snapshots:
 
   tapable@2.3.3: {}
 
-  terser@5.49.0:
+  terser@5.49.1:
     dependencies:
       '@jridgewell/source-map': 0.3.11
       acorn: 8.18.0
