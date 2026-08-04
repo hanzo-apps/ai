@@ -188,8 +188,26 @@ jobs:
           tags: ghcr.io/hanzoai/hanzo-ai-www:sha-${{ github.sha }}
           provenance: false
           push: true
+          # EVENT_INGEST_KEY, and `.outputs.key`. Both names were wrong and both
+          # failed silently, which is how the pair survived: Actions substitutes
+          # an unknown step output with the empty string, and BuildKit warns then
+          # ignores a build-arg the Dockerfile declares no ARG for. The step above
+          # fetched the key and shouts three different ways when it is absent —
+          # and then this line dropped it twice, so the image shipped with
+          # NEXT_PUBLIC_EVENT_INGEST_KEY="" and cloud filed the apex's traffic
+          # under $public, where every track/identify/group is discarded and still
+          # answered 200. A green deploy with no telemetry, and nothing to read
+          # that said so.
+          #
+          # The Dockerfile owns the NEXT_PUBLIC_ prefix (`ENV
+          # NEXT_PUBLIC_EVENT_INGEST_KEY=$EVENT_INGEST_KEY`), because that prefix
+          # is a property of the bundler and not of the secret.
+          # `deploy/EVENT_INGEST_KEY` is the name in KMS and it stays the name here.
+          #
+          # e2e/gates/deploy.spec.ts holds both halves: a step output no step
+          # writes, and a build-arg naming no ARG, are each a red gate now.
           build-args: |
-            NEXT_PUBLIC_EVENT_INGEST_KEY=${{ steps.kms.outputs.event_ingest_key }}
+            EVENT_INGEST_KEY=${{ steps.kms.outputs.key }}
 
       # build-push-action can exit 0 before the manifest resolves, so a green run
       # could still leave a CR pinned to a tag that ImagePullBackOffs. Prove it
