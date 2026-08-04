@@ -1,3 +1,4 @@
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 /**
  * Hanzo Product Taxonomy
  *
@@ -384,7 +385,7 @@ export const computeProducts: Product[] = [
     name: 'Hanzo Gateway',
     shortName: 'Gateway',
     tagline: 'One API for every model',
-    description: 'Route to 100+ models through a single API. Load balancing, fallbacks, caching, and cost optimization.',
+    description: `Route to ${MODELS_PHRASE} through a single API. Load balancing, fallbacks, caching, and cost optimization.`,
     category: 'compute',
     icon: 'Zap',
     href: '/products/compute/gateway',
@@ -1172,13 +1173,13 @@ export const appsProducts: Product[] = [
     name: 'Hanzo Cloud',
     shortName: 'Cloud',
     tagline: 'AI infrastructure platform',
-    description: 'Unified AI infrastructure and MCP management. Connect to 100+ models, manage context, deploy agents.',
+    description: `Unified AI infrastructure and MCP management. Connect to ${MODELS_PHRASE}, manage context, deploy agents.`,
     category: 'apps',
     icon: 'Cloud',
     href: '/products/apps/cloud',
     github: 'https://github.com/hanzoai/cloud',
     docs: 'https://docs.hanzo.ai/docs/services/cloud',
-    features: ['100+ models', 'MCP management', 'Agent deployment', 'Context windows', 'Usage analytics'],
+    features: [MODELS_PHRASE, 'MCP management', 'Agent deployment', 'Context windows', 'Usage analytics'],
     status: 'ga',
     openSource: true,
     pricing: 'freemium'

@@ -1,11 +1,14 @@
 {
   "name": "@hanzo/site",
   "private": true,
+  "engines": {
+    "node": ">=22.18"
+  },
   "version": "0.2.11",
   "type": "module",
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "build": "next build --webpack && node scripts/noindex.mjs",
     "typecheck": "tsc --noEmit",
     "start": "next start",
     "lint": "eslint .",

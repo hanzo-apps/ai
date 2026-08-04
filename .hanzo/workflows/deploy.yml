@@ -67,8 +67,10 @@ jobs:
         env:
           KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
           KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}
-          KMS_ENDPOINT: ${{ vars.KMS_ENDPOINT || 'https://kms.hanzo.ai' }}
-          KMS_ORG: ${{ vars.KMS_ORG || 'hanzo' }}
+          KMS_ENDPOINT: ${{ vars.KMS_ENDPOINT || 'https://api.hanzo.ai' }}
+          # No KMS_ORG: the embedded plane resolves the tenant from the token's
+          # own claim, so an org named in config could only ever disagree with
+          # the one that is actually served.
           KMS_SECRET_ENV: ${{ vars.KMS_SECRET_ENV || 'prod' }}
         run: |
           token=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/auth/login" \
@@ -79,9 +81,22 @@ jobs:
             echo "::error::KMS login failed at ${KMS_ENDPOINT}/v1/kms/auth/login (check KMS_CLIENT_ID/KMS_CLIENT_SECRET)."
             exit 1
           fi
+          # KMS is embedded in hanzoai/cloud now (HIP-0106, apps/kms), so the
+          # canonical surface is api.hanzo.ai/v1/kms and the contract changed in
+          # two ways that both fail SILENTLY against the old standalone shape:
+          #
+          #   url    /v1/kms/secrets/<path>/<name>   — the org comes from the
+          #          token, NOT the url. The old /v1/kms/orgs/<org>/secrets/...
+          #          form 404s here; a 404 through `|| true` reads as "absent".
+          #   body   {"name","env","value"}          — flat. The old
+          #          `.secret.value` selects nothing and yields "".
+          #
+          # Either mistake produces an empty key, and an empty key is exactly
+          # what the `''` case below treats as "never minted" — so a misparse is
+          # indistinguishable from a missing secret. Hence both are pinned here.
           kms_get() {
-            curl -fsS "${KMS_ENDPOINT}/v1/kms/orgs/${KMS_ORG}/secrets/$1/$2?env=${KMS_SECRET_ENV}" \
-              -H "Authorization: Bearer ${token}" | jq -r '.secret.value // empty' || true
+            curl -fsS "${KMS_ENDPOINT}/v1/kms/secrets/$1/$2?env=${KMS_SECRET_ENV}" \
+              -H "Authorization: Bearer ${token}" | jq -r '.value // empty' || true
           }
 
           # No Cloudflare credentials are read any more. This job used to fetch

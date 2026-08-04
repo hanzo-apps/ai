@@ -8,7 +8,12 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
 - Stack: Next.js 15 + React 19 + TypeScript + `@hanzo/ui` 8.x on `@hanzo/gui`
   + `@hanzo/design` tokens + Framer Motion. Tailwind v4 is still in the build
   and is being retired — see "UI substrate" below.
-- Node: v20+ (`.nvmrc`)
+- Node: **>=22.18**, stated in `.nvmrc` and `engines` and nowhere else. Two
+  things force it: wrangler 4 refuses to start below 22, and `pnpm build`'s
+  second half (`scripts/noindex.mjs`) imports `lib/publish.ts` directly, which
+  needs the type stripping Node does for itself from 22.18. The alternative was
+  a second copy of that list in JavaScript, which is the thing the script
+  exists to prevent.
 - Dev: `pnpm dev`
 - Build: `pnpm build`
 - Typecheck: `pnpm typecheck` — `tsc` here IS TypeScript 7, the native Go
@@ -36,7 +41,7 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
   which overrides it. Two traps worth keeping: an absent GitHub secret still
   DEFINES the env var as `""`, and wrangler prefers `CLOUDFLARE_API_TOKEN` whenever
   defined — so it will authenticate with nothing rather than fall back; and
-  wrangler 4 refuses to start below Node 22 while `.nvmrc` says 20.
+  wrangler 4 refuses to start below Node 22, which `.nvmrc` now names.
 
 ## Two faces, one export
 

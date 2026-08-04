@@ -36,10 +36,19 @@
 
 import { execFileSync } from "child_process";
 import { readFileSync } from "fs";
-import { resolve, dirname } from "path";
+import { resolve, dirname, relative } from "path";
 import { fileURLToPath } from "url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+
+// This file, and the one file the scan must not read: the shapes a rate is
+// written in have to be WRITTEN DOWN somewhere, and the place they are written
+// down is here — in the doc comment above and in the patterns below. Scanning
+// itself, it found `input: 4` and `'$4 → $20'` in its own explanation of what
+// those mean and exited 1 on every run, so the step could never pass and said
+// nothing about the repo. Derived from `import.meta.url` rather than typed as a
+// path, so renaming the file cannot quietly re-break it.
+const SELF = relative(ROOT, fileURLToPath(import.meta.url));
 
 // A per-MTok rate as this codebase writes one: a rate field with a number, or a
 // rendered "$in → $out" band.
@@ -54,12 +63,6 @@ const EXT = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".json", ".mdx", ".md
 // are the build-time materialisation the one owner publishes, which is why they
 // are allowed by kind rather than by name.
 const GENERATED = ["lib/data/pricing.json"];
-
-// The guard states the rule, so the examples in its own docstring are not a
-// fourth copy of anybody's price — they are the specification of what a copy
-// looks like. Scanning itself made it fail on its own prose from the moment it
-// was committed, which is the one failure mode a build gate cannot have.
-const SELF = "scripts/audit-price-literals.mjs";
 
 // The ratchet. Path → why it still holds a literal. SHRINK ONLY.
 const ALLOWED = {

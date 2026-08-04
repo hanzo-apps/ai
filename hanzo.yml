@@ -10,10 +10,16 @@
 # the hanzoai GHCR namespace — the push failed `denied: permission_denied` every
 # run. Dropped.
 #
-# What remains is the fast lint gate the reusable runs on every push + PR. The
-# reusable treats `images:` as optional (hanzoai/ci#8) and provisions Node for the
-# JS test gate on the bare arc runner (hanzoai/ci#9), so this run is green with no
+# What remains is the gate the reusable runs on every push + PR. The reusable
+# treats `images:` as optional (hanzoai/ci#8) and provisions Node for the JS test
+# gate on the bare arc runner (hanzoai/ci#9), so this run is green with no
 # cross-org push attempt.
+#
+# The `lint` step was DELETED for a while, and the reason it went is worth
+# keeping: steps run in order, so a step that cannot pass is not a weak gate, it
+# is a wall in front of the real one — and this one was standing in front of
+# `gates`, contributing no signal and blocking all of it. It came back in the
+# commit that made it pass, which is where it belonged. See its own note below.
 test:
   # REPAIRED. Both breakages were real and stacked: `pnpm lint` was `next lint`,
   # which Next REMOVED in 16 (16.2.12 reads "lint" as a directory name and exits
@@ -34,10 +40,12 @@ test:
   # next.config.mjs sets neither `typescript.ignoreBuildErrors` nor
   # `eslint.ignoreDuringBuilds`, so `pnpm build` in the gates step below type
   # checks the whole tree and fails on an error.
+  #
+  # No pnpm or Node pin here, for the reason spelled out on `gates` below: each
+  # is stated in exactly one place already, and a second copy is how they drift.
   - name: lint
     run: |
       corepack enable
-      corepack prepare pnpm@10.33.4 --activate
       pnpm install --frozen-lockfile
       pnpm lint
   # The gates run against `out/` — the bytes that ship — because the two
@@ -49,10 +57,20 @@ test:
   #
   # `gates`, not `test`: the older e2e specs drive a dev server on :8084 or
   # the live site, so they fail for reasons that are not the commit's.
+  #
+  # No pnpm version here. `packageManager` in package.json is the one place it
+  # is stated, corepack reads it, and a second pin was BOTH wrong (it named
+  # 10.33.4 against a 9.15.0 lockfile) and inert (corepack prefers the manifest).
+  # `.github/workflows/deploy.yml` says the same thing by passing no `version:`.
+  #
+  # No Node version either, for the same reason: `.nvmrc` and `engines` name the
+  # floor (22.18 — wrangler needs 22, and `scripts/noindex.mjs` reads
+  # `lib/publish` directly, which needs the type stripping Node does for itself
+  # from 22.18). If the reusable provisions something older this step fails on
+  # the import, loudly, which is the right way for a floor to be wrong.
   - name: gates
     run: |
       corepack enable
-      corepack prepare pnpm@10.33.4 --activate
       pnpm install --frozen-lockfile
       pnpm build
       pnpm exec playwright install --with-deps chromium
@@ -63,9 +81,10 @@ test:
   #
   # Deliberately NOT folded into `lint` or `gates`: both of those install the
   # workspace and build, and this needs neither — it only reads git-tracked
-  # files. Kept separate it still reports while `pnpm lint` is broken (see above).
+  # files. Kept separate, it reports even when an earlier step fails.
   - name: price literals
     run: node scripts/audit-price-literals.mjs
+
   # An `apiPath` in the commerce catalog is a promise that a reader who follows
   # the marketing page reaches a real operation. Nothing checked it, and 32 of
   # 84 products broke it — every one marked "enabled", every one a live 404.
@@ -77,3 +96,11 @@ test:
   # workspace and no build.
   - name: catalog answers
     run: node scripts/audit-catalog.mjs
+
+  # How many models we serve is the same class of fact as what they cost, and it
+  # had drifted further: eighteen statements on this site in three different
+  # numbers (100+, 130+, 400+), and 85+/200+/340 elsewhere in the estate. It now
+  # derives from the same snapshot the prices come from. Same shape of gate, same
+  # shrink-only ratchet, and it reads git-tracked files only.
+  - name: model counts
+    run: node scripts/audit-model-counts.mjs

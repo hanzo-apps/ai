@@ -3,13 +3,15 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Home, ArrowLeft, FileQuestion } from 'lucide-react'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+// The static export serves this as the SPA fallback for every unresolved path
+// on BOTH hosts, so it wears the same shared chrome as every other page —
+// otherwise a mistyped URL is where the two sites visibly become two products.
+import { SiteHeader, SiteFooter } from '@/components/home/shell'
 
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
-      <Navbar />
+      <SiteHeader surface="cloud" />
 
       <main className="flex-grow flex items-center justify-center px-4 py-24">
         <div className="max-w-2xl mx-auto text-center relative">
@@ -102,7 +104,7 @@ export default function NotFound() {
         </div>
       </main>
 
-      <Footer />
+      <SiteFooter surface="cloud" />
     </div>
   )
 }

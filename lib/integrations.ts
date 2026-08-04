@@ -1,3 +1,4 @@
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 export interface Integration {
   slug: string
   name: string
@@ -15,7 +16,7 @@ export const INTEGRATIONS: Integration[] = [
   {
     slug: 'openai-sdk',
     name: 'OpenAI Python SDK',
-    description: 'Use the official OpenAI Python SDK with Hanzo AI by pointing it to our OpenAI-compatible API endpoint. Access 50+ models with your existing OpenAI code — no refactor needed.',
+    description: `Use the official OpenAI Python SDK with Hanzo AI by pointing it to our OpenAI-compatible API endpoint. Access ${MODELS_PHRASE} with your existing OpenAI code — no refactor needed.`,
     category: 'sdk',
     icon: '🐍',
     upstream: 'https://github.com/openai/openai-python',
@@ -146,7 +147,7 @@ const message = await client.messages.create({
   {
     slug: 'langchain',
     name: 'LangChain',
-    description: 'Integrate LangChain with Hanzo AI to build chains, agents, and RAG pipelines using any of our 50+ models. Hanzo is OpenAI-compatible so ChatOpenAI just works.',
+    description: `Integrate LangChain with Hanzo AI to build chains, agents, and RAG pipelines using any of our ${MODELS_PHRASE}. Hanzo is OpenAI-compatible so ChatOpenAI just works.`,
     category: 'framework',
     icon: '⛓️',
     upstream: 'https://github.com/langchain-ai/langchain',
@@ -855,7 +856,7 @@ client = OpenAI(
     api_key="your-hanzo-api-key",
 )
 
-# Access 50+ models not in Copilot
+# Access ${MODELS_PHRASE} not in Copilot
 response = client.chat.completions.create(
     model="zen4-pro",
     messages=[{"role": "user", "content": "Review this code..."}],

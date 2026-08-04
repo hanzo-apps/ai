@@ -1,7 +1,8 @@
 import { createServer, type Server } from 'node:http'
-import { createReadStream, existsSync, readFileSync, statSync } from 'node:fs'
+import { createReadStream, existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { extname, join, normalize, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { routes, shipped, sources, type Page } from '../../lib/routes'
 
 /**
  * The real static export, as the tests' subject.
@@ -25,20 +26,78 @@ function root(): string {
   throw new Error('no package.json above the test file')
 }
 
-export const OUT = join(root(), 'out')
+export const ROOT = root()
+export const OUT = join(ROOT, 'out')
+export const APP = join(ROOT, 'app')
 
+/**
+ * The floor under every gate: the subject is the WHOLE site.
+ *
+ * `output: export` writing a short `out/` is the failure mode that silently
+ * blanks hanzo.ai, and it is worse than a blank page here — every assertion in
+ * this suite is of the form "no page in the export does X", and each of those
+ * is trivially true of an export with three pages in it. A truncated subject
+ * does not fail a gate; it disarms the whole suite and reports green. So the
+ * floor is stated once, loudly, and it is the export's own size against the
+ * tree that produced it: every addressable route must have shipped a page.
+ */
 export function requireExport(): string {
   if (!existsSync(join(OUT, 'index.html'))) {
     throw new Error(`no static export at ${OUT}: run \`pnpm build\` before \`pnpm test\``)
   }
+  const answered = new Set(shipped(OUT).map(({ route }) => route))
+  const missing = routes(APP)
+    .map(({ path }) => path)
+    .filter((route) => !answered.has(route))
+  if (missing.length > 0) {
+    throw new Error(
+      `the export is short ${missing.length} of ${answered.size + missing.length} routes, so every ` +
+        `gate below it would measure a smaller site and pass: ${missing.slice(0, 10).join(', ')}`,
+    )
+  }
   return OUT
 }
+
+/**
+ * The routes built on `components/marketing/page-kit`, read from the tree.
+ *
+ * Derived, never listed. A spec that names its pages measures the pages
+ * somebody remembered, and the page most worth measuring is always the newest
+ * one. A route counts when any source in its own directory reaches the kit —
+ * `/risk` renders it through `risk-client.tsx`, so scanning `page.tsx` alone
+ * would miss it.
+ */
+export function kit(): string[] {
+  return routes(APP)
+    .filter((route) => sources(route).some((file) => readFileSync(file, 'utf8').includes(KIT)))
+    .map(({ path }) => path)
+}
+
+const KIT = 'components/marketing/page-kit'
 
 /** Read one exported file, failing loudly rather than returning empty. */
 export function read(relative: string): string {
   const path = join(requireExport(), relative)
   if (!existsSync(path)) throw new Error(`the export has no ${relative}`)
   return readFileSync(path, 'utf8')
+}
+
+/**
+ * Every route the export ships a page for, with the file that answers it.
+ *
+ * The subject of a gate over publication is the whole site, not one page a
+ * spec happened to name: an assertion pinned to `risk.html` says nothing about
+ * the next route added to a list. The walk is `lib/routes`'s — the same one
+ * `scripts/noindex.mjs` stamps through, so what a gate measures and what the
+ * build writes cannot disagree about which file answers which route.
+ *
+ * `pages()` is that walk WITH the floor above it, and it is the one every spec
+ * uses; the floor itself has to read the export to measure it, so it calls the
+ * walk directly rather than calling this and recursing.
+ */
+export function pages(): Page[] {
+  requireExport()
+  return shipped(OUT)
 }
 
 const TYPES: Record<string, string> = {

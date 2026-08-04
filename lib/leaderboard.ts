@@ -3,7 +3,7 @@
  *
  * One source of truth for the model-family browsers (/models/enso, /models/zen)
  * and the Enso savings section. Reads the frozen leaderboard snapshot
- * (lib/data/leaderboard.json — 134 models, each score tagged with its `source`)
+ * (lib/data/leaderboard.json — every score tagged with its `source`)
  * and exposes pure, typed accessors. Honest by construction: every score keeps
  * its provenance, and `sourceKind` is the single predicate that separates what
  * Hanzo measured on one harness from what a vendor/third-party reported.

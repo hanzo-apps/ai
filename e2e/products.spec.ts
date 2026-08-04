@@ -20,7 +20,7 @@ import { test, expect } from '@playwright/test'
 
 const LEAF_PATHS = [
   // AI
-  '/models', '/agents', '/engine', '/cloud/fine-tuning', '/cloud/embeddings', '/cloud/evals',
+  '/models', '/agents', '/engine', '/cloud/fine-tuning', '/cloud/embeddings', '/cloud/rerank', '/cloud/evals',
   // Compute
   '/cloud/gpus', '/machines', '/cloud/containers', '/functions', '/edge', '/cloud/jobs',
   // Data

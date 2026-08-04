@@ -210,3 +210,28 @@
   outline: 2px solid rgba(255, 255, 255, 0.72);
   outline-offset: 2px;
 }
+
+/* ── The shared header, before hydration, on a phone ──────────────────────────
+   `@hanzogui/shell`'s HanzoHeader chooses its layout in JavaScript, from the
+   measured viewport — so it renders no media query, only inline styles, and the
+   server-rendered HTML is ALWAYS the desktop tree. On a 390px screen that tree
+   is 655px wide: "Sign in" alone sits 265px past the right edge, and every
+   exported page hid text off-screen until JS booted and swapped in the mobile
+   tree (logo + two icon buttons). This is the whole of the mobile gate's
+   failure, identical on all 769 pages because it is one piece of chrome.
+
+   gui already marks the pre-hydration pass — it puts `t_unmounted` on the
+   wrapper and removes it on mount — so scoping to it makes this rule describe
+   exactly one moment: first paint, before the shell can measure anything. Below
+   900px (the shell's own switch point, measured: 898 renders mobile, 900
+   desktop) the first paint is the logo alone, which is what hydration is about
+   to produce anyway. After mount the class is gone, the rule stops matching, and
+   the shell owns its header again at every width.
+
+   `!important` because the children carry inline `display:inline-flex`, and a
+   stylesheet beats an inline declaration on no other terms. */
+@media (max-width: 899px) {
+  .t_unmounted header[data-hanzo-shell] > *:not(:first-child) {
+    display: none !important;
+  }
+}

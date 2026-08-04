@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 
 const APP = 'https://hanzo.app'
 const DOCS = 'https://docs.hanzo.ai'
@@ -62,7 +63,7 @@ export default function AppLanding() {
             { icon: Cloud, title: 'Deploy to a live URL', body: 'One click ships your app to real infrastructure on Hanzo Cloud — your-app.hanzo.app — with no Dockerfile or pipeline to set up.' },
             { icon: Database, title: 'Database, built in', body: 'Every app gets Hanzo Base — an embedded datastore with realtime queries and a schema generated from your prompt.' },
             { icon: ShieldCheck, title: 'Auth, built in', body: 'Sign-in ships wired to Hanzo IAM — OIDC, sessions, and org-scoped access with zero config.' },
-            { icon: Bot, title: 'AI, built in', body: 'Call 400+ models — Zen alongside Anthropic, OpenAI, Google, and Mistral — from your app through one gateway.' },
+            { icon: Bot, title: 'AI, built in', body: `Call ${MODELS_PHRASE} — Zen alongside Anthropic, OpenAI, Google, and Mistral — from your app through one gateway.` },
             { icon: KeyRound, title: 'Secrets & storage', body: 'API keys land in Hanzo KMS, never in your code, and files go to S3-compatible object storage.' },
             { icon: Zap, title: 'Functions & edge', body: 'Server logic runs as serverless functions at the edge, scaled and routed by the platform automatically.' },
           ],

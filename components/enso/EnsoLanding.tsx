@@ -9,8 +9,7 @@
  * available ONLY via Hanzo Cloud; the open-weights Zen family stays free to self-host.
  *
  * This is the detailed product page (served at /enso on both hanzo.ai and
- * cloud.hanzo.ai). It ships the apex full-width hovering header (LandingNav) +
- * LandingFooter, so it lives at the app ROOT (outside the (marketing) route group),
+ * cloud.hanzo.ai). It ships the shared site chrome, so it lives at the app ROOT (outside the (marketing) route group),
  * like the apex home. Honest by construction: every figure is a real, measured Enso
  * number (GPQA-Diamond 92.9, enso-ultra complete run; microsecond CPU routing) or an honest capability — no
  * fabricated competitor tables, no invented testimonials.
@@ -34,8 +33,7 @@ import {
   Zap,
 } from 'lucide-react'
 import Link from 'next/link'
-import LandingNav from '@/components/home/LandingNav'
-import LandingFooter from '@/components/home/LandingFooter'
+import { SiteHeader, SiteFooter } from '@/components/home/shell'
 import { EnsoLogo } from './EnsoLogo'
 import EnsoSavings from './EnsoSavings'
 
@@ -153,7 +151,7 @@ const FAQ = [
 export default function EnsoLanding() {
   return (
     <>
-      <LandingNav />
+      <SiteHeader surface="ai" />
 
       <main className="bg-black pt-16 text-white">
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
@@ -501,7 +499,7 @@ export default function EnsoLanding() {
         </section>
       </main>
 
-      <LandingFooter />
+      <SiteFooter surface="ai" />
     </>
   )
 }

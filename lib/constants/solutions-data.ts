@@ -1,3 +1,4 @@
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 export interface SolutionFeature {
   title: string
   description: string
@@ -195,7 +196,7 @@ export const solutionsData: SolutionData[] = [
     features: [
       { title: 'Authentication', description: 'SSO, MFA, social login via Hanzo Identity. Enterprise SAML and SCIM provisioning included.' },
       { title: 'Billing & Metering', description: 'Stripe integration with usage-based metering. Credit systems, seat pricing, and enterprise contracts.' },
-      { title: 'AI Model API', description: 'Route to 100+ models through one API. Cost controls, rate limiting, and per-tenant quotas.' },
+      { title: 'AI Model API', description: `Route to ${MODELS_PHRASE} through one API. Cost controls, rate limiting, and per-tenant quotas.` },
       { title: 'Realtime Database', description: 'Hanzo Base for auth, database, storage, and realtime — one backend, zero ops.' },
       { title: 'Admin Dashboard', description: 'User management, usage analytics, and billing overview. White-label ready.' },
       { title: 'Marketing Site', description: 'Landing page, pricing page, and blog — all built in and ready to customize.' },

@@ -32,11 +32,11 @@ const TrustedBySection = () => {
           className="space-y-10"
         >
           <div>
-            <p className="mb-5 text-xs uppercase tracking-widest text-muted-foreground">Backed by</p>
+            <p className="mb-5 text-sm font-medium text-muted-foreground">Backed by</p>
             <PartnerLogoRow logos={backerLogos} invert className="gap-x-10 gap-y-6" />
           </div>
           <div>
-            <p className="mb-5 text-xs uppercase tracking-widest text-muted-foreground">Runs on</p>
+            <p className="mb-5 text-sm font-medium text-muted-foreground">Runs on</p>
             <PartnerLogoRow logos={infrastructureLogos} invert className="gap-x-10 gap-y-6" />
           </div>
         </motion.div>

@@ -2,68 +2,34 @@
 
 import React, { useState } from "react"
 import dynamic from "next/dynamic"
+import Link from "next/link"
 import { motion } from "framer-motion"
-import { HanzoLogo } from "@hanzo/logo/react"
 
 // WebGL point-globe backdrop — client-only + code-split (never SSR/build);
 // static radial below is the no-WebGL / reduced-motion fallback.
 const PointGlobe = dynamic(() => import("@/components/webgl/PointGlobe"), { ssr: false })
-import {
-  ArrowRight,
-  Bot,
-  Database,
-  KeyRound,
-  Search,
-  Boxes,
-  ShieldCheck,
-  CreditCard,
-  Cpu,
-  Check,
-  Copy,
-  Github,
-} from "lucide-react"
+import { ArrowRight, CreditCard, Cpu, Check, Copy, Github } from "lucide-react"
+import CloudCategoryShowcase, { CloudCategoryMap } from "@/components/cloud/CloudCategoryShowcase"
+import { CONSOLE } from "@/components/home/nav-data"
+import { capabilityCount, categoryCount } from "@/lib/data/cloud-primitives"
+import { MODELS_PHRASE } from '@/lib/data/model-count'
 
-const CONSOLE = "https://console.hanzo.ai"
-const SIGNIN = "https://hanzo.id"
 const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
 const GH = "https://github.com/hanzoai/cloud"
 
-/* ----------------------------------------------------------------- nav --- */
-
-function TopNav() {
-  return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-neutral-800/80 bg-black/70 backdrop-blur-md">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="https://hanzo.ai" className="flex items-center gap-2">
-          <HanzoLogo variant="white" size={22} />
-          <span className="text-sm font-semibold tracking-tight text-white">
-            Hanzo <span className="text-neutral-400">Cloud</span>
-          </span>
-        </a>
-        <div className="flex items-center gap-2 sm:gap-3">
-          <a
-            href={DOCS}
-            className="hidden rounded-full px-4 py-2 text-sm font-medium text-neutral-300 transition-colors hover:text-white sm:inline-flex"
-          >
-            Docs
-          </a>
-          <a
-            href={`${SIGNIN}/signin`}
-            className="rounded-full border border-neutral-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-900"
-          >
-            Sign in
-          </a>
-          <a
-            href={CONSOLE}
-            className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition-opacity hover:opacity-90"
-          >
-            Start building <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
-      </nav>
-    </header>
-  )
-}
+/**
+ * cloud.hanzo.ai's front door — the body of `app/(marketing)/cloud/page.tsx`,
+ * promoted to this host's web root by the Dockerfile's `SITE_ROOT=cloud`.
+ *
+ * It renders the PAGE only. The header and footer come from the shared
+ * `(marketing)` layout (the shared `HanzoHeader` + `HanzoFooter`), which
+ * is the same chrome hanzo.ai wears — so the two hosts are one product with one
+ * nav, and this file cannot grow a second, divergent one. It used to carry
+ * private `TopNav` / `Footer` copies whose "Sign in" pointed at a bare
+ * hanzo.id/signin with no OAuth parameters, which could only strand the visitor
+ * at a portal with nowhere to return to. Login is the shared header's single
+ * console action now, and nothing here re-states it.
+ */
 
 /* ---------------------------------------------------------------- hero --- */
 
@@ -76,7 +42,7 @@ function Hero() {
   }
 
   return (
-    <section className="relative overflow-hidden px-4 pb-20 pt-36 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden px-4 pb-24 pt-24 sm:px-6 lg:px-8">
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
           className="absolute left-1/2 top-1/3 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.14]"
@@ -103,10 +69,15 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05 }}
-          className="text-4xl font-semibold leading-[1.07] tracking-tight text-white sm:text-5xl lg:text-6xl"
+          className="text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
         >
-          The AI cloud for
-          <br className="hidden sm:block" /> agents and apps.
+          {/* The house headline treatment, borrowed verbatim from EnsoHero on
+              the apex: one weight, one tracking, one monochrome white→neutral
+              sheen. Coherence between the two faces is a shared type scale, not
+              a second look that merely resembles the first. */}
+          <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
+            The AI cloud for agents and apps.
+          </span>
         </motion.h1>
 
         <motion.p
@@ -115,7 +86,7 @@ function Hero() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400"
         >
-          One API for <span className="text-white">400+ models</span>, Base backends, identity,
+          One API for <span className="text-white">{MODELS_PHRASE}</span>, Base backends, identity,
           secrets, vector search, and full-text search. Pay-as-you-go, billed per organization.
           Run it on Hanzo Cloud or self-host the exact same stack on your own Kubernetes.
         </motion.p>
@@ -128,21 +99,21 @@ function Hero() {
         >
           <a
             href={CONSOLE}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
           >
             Start building <ArrowRight className="h-4 w-4" />
           </a>
-          <a
-            href={`${SIGNIN}/signin`}
-            className="inline-flex items-center rounded-full border border-neutral-700 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-900"
+          <Link
+            href="/products"
+            className="inline-flex min-h-11 items-center rounded-full border border-neutral-700 px-7 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
           >
-            Sign in
-          </a>
+            Explore {capabilityCount} products
+          </Link>
           <a
             href={GH}
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium text-neutral-400 transition-colors hover:text-white"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-neutral-400 no-underline transition-colors hover:text-white hover:no-underline"
           >
             <Github className="h-4 w-4" /> View source
           </a>
@@ -171,75 +142,41 @@ function Hero() {
   )
 }
 
-/* ------------------------------------------------------------ features --- */
+/* ---------------------------------------------------------- primitives --- */
 
-const FEATURES = [
-  {
-    icon: Bot,
-    title: "400+ models, one API",
-    body: "OpenAI, Anthropic, and open-weight models behind a single OpenAI-compatible endpoint. Switch providers without touching code; route, fall back, and cache automatically.",
-  },
-  {
-    icon: Boxes,
-    title: "Base backends",
-    body: "Per-organization and per-user SQLite-backed Base instances. An instant application backend with auth, records, and realtime — no database to provision.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "IAM",
-    body: "OIDC identity for every app: SSO, OAuth2, social and Web3 login, organizations, and fine-grained access — all white-labeled to your domain.",
-  },
-  {
-    icon: KeyRound,
-    title: "KMS",
-    body: "MPC-backed key management. Store secrets once, sync them into Kubernetes as native resources. Nothing lives in plaintext, ever.",
-  },
-  {
-    icon: Database,
-    title: "Vector search",
-    body: "Managed vector database for embeddings and RAG. Build semantic search and agent memory on infrastructure that scales with your index.",
-  },
-  {
-    icon: Search,
-    title: "Full-text search",
-    body: "Native full-text search over your data with per-user isolation built in. No separate search cluster to run or keep in sync.",
-  },
-]
-
-function Features() {
+/**
+ * The ten cloud primitives — the whole catalog, on the front door.
+ *
+ * This replaces a hand-written list of six feature blurbs that named a subset
+ * of the cloud and then went stale on its own. The section renders the SAME
+ * `CloudCategoryShowcase` the `/products` index does, from the same taxonomy
+ * the Products mega-menu reads, so what the menu promises and what this page
+ * shows are one thing by construction. Web3 renders under the Lux brand and
+ * hands off to lux.cloud — the showcase carries that rule, not this page.
+ */
+function Primitives() {
   return (
-    <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Everything an AI product needs
-          </h2>
-          <p className="mt-4 text-lg text-neutral-400">
-            Composable, open-source building blocks. Use one, use all — they work together out of the box.
-          </p>
-        </div>
+    <>
+      <section className="border-t border-neutral-900 px-4 pb-4 pt-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              {capabilityCount} primitives. {categoryCount} categories. One cloud.
+            </h2>
+            <p className="mt-4 text-lg text-neutral-400">
+              Composable, open-source building blocks with one identity, one bill, and one API.
+              Use one, use all — they work together out of the box.
+            </p>
+          </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {FEATURES.map((f, i) => {
-            const Icon = f.icon
-            return (
-              <motion.div
-                key={f.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.4, delay: (i % 3) * 0.06 }}
-                className="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-7 transition-colors hover:border-neutral-700"
-              >
-                <Icon className="mb-5 h-8 w-8 text-white" />
-                <h3 className="mb-2 text-lg font-semibold text-white">{f.title}</h3>
-                <p className="text-sm leading-relaxed text-neutral-400">{f.body}</p>
-              </motion.div>
-            )
-          })}
+          <div className="mt-14">
+            <CloudCategoryMap />
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <CloudCategoryShowcase />
+    </>
   )
 }
 
@@ -253,7 +190,7 @@ function Billing() {
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs font-medium text-neutral-300">
             <CreditCard className="h-3.5 w-3.5" /> Usage-based pricing
           </div>
-          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+          <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             Pay only for what you use.
           </h2>
           <p className="mt-4 max-w-lg text-lg leading-relaxed text-neutral-400">
@@ -285,12 +222,12 @@ function Billing() {
             $0<span className="text-xl font-normal text-neutral-500"> to start</span>
           </div>
           <p className="mt-3 text-sm text-neutral-400">
-            Create an organization, add a balance, and call any of 400+ models. Costs accrue per use
+            Create an organization, add a balance, and call any of {MODELS_PHRASE}. Costs accrue per use
             and are debited from your organization balance in real time.
           </p>
           <a
             href={CONSOLE}
-            className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
+            className="mt-7 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
           >
             Open the console <ArrowRight className="h-4 w-4" />
           </a>
@@ -298,7 +235,7 @@ function Billing() {
             href={GH}
             target="_blank"
             rel="noreferrer noopener"
-            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-neutral-700 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-neutral-900"
+            className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-neutral-700 px-6 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
           >
             <Github className="h-4 w-4" /> Self-host it free
           </a>
@@ -320,7 +257,7 @@ function FinalCTA() {
         />
       </div>
       <div className="relative z-10 mx-auto max-w-3xl text-center">
-        <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-5xl">
+        <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
           Start building on Hanzo Cloud
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-neutral-400">
@@ -330,7 +267,7 @@ function FinalCTA() {
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
             href={CONSOLE}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-medium text-black transition-opacity hover:opacity-90"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
           >
             Start building <ArrowRight className="h-4 w-4" />
           </a>
@@ -338,7 +275,7 @@ function FinalCTA() {
             href={DOCS}
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center rounded-full border border-neutral-700 px-7 py-3.5 text-sm font-medium text-white transition-colors hover:bg-neutral-900"
+            className="inline-flex min-h-11 items-center rounded-full border border-neutral-700 px-7 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
           >
             Read the docs
           </a>
@@ -348,34 +285,13 @@ function FinalCTA() {
   )
 }
 
-/* -------------------------------------------------------------- footer --- */
-
-function Footer() {
-  return (
-    <footer className="border-t border-neutral-900 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 sm:flex-row">
-        <div className="flex items-center gap-2">
-          <HanzoLogo variant="white" size={18} />
-          <span className="text-sm text-neutral-400">© Hanzo AI</span>
-        </div>
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-neutral-400">
-          <a href={CONSOLE} className="transition-colors hover:text-white">Console</a>
-          <a href={DOCS} className="transition-colors hover:text-white">Docs</a>
-          <a href={GH} className="transition-colors hover:text-white">GitHub</a>
-          <a href="https://hanzo.ai" className="transition-colors hover:text-white">hanzo.ai</a>
-        </div>
-      </div>
-    </footer>
-  )
-}
-
 /* --------------------------------------------------------------- page ---- */
 
 export default function CloudLanding() {
   return (
     <>
       <Hero />
-      <Features />
+      <Primitives />
       <Billing />
       <FinalCTA />
     </>
