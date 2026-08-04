@@ -17,7 +17,7 @@ import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
 
 const DOCS = 'https://docs.hanzo.ai/docs/agents'
-const GITHUB = 'https://github.com/hanzoai/agent'
+const GITHUB = 'https://github.com/hanzoai'
 const CONSOLE = 'https://console.hanzo.ai'
 
 export default function AgentsPage() {

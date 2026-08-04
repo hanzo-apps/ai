@@ -163,7 +163,7 @@ export const dataProducts: Product[] = [
     category: 'data',
     icon: 'Boxes',
     href: '/products/data/sql-vector',
-    github: 'https://github.com/hanzoai/sql-vector',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/projects/hanzoai/sql-vector',
     install: {
       cli: 'hanzo db create --type postgres --extensions pgvector'
@@ -182,7 +182,7 @@ export const dataProducts: Product[] = [
     category: 'data',
     icon: 'FileJson',
     href: '/products/data/documentdb',
-    github: 'https://github.com/hanzoai/documentdb',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/docdb',
     install: {
       cli: 'hanzo db create --type documentdb',
@@ -258,7 +258,7 @@ export const dataProducts: Product[] = [
     category: 'data',
     icon: 'Sparkles',
     href: '/vector',
-    github: 'https://github.com/hanzoai/vector',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/vector',
     install: {
       cli: 'hanzo db create --type vector',
@@ -266,7 +266,7 @@ export const dataProducts: Product[] = [
     },
     features: ['HNSW indexing', 'Filtered search', 'Payload storage', 'Quantization', 'Distributed mode'],
     status: 'ga',
-    openSource: true,
+    openSource: false,
     pricing: 'freemium'
   },
   {
@@ -297,7 +297,7 @@ export const dataProducts: Product[] = [
     category: 'data',
     icon: 'Search',
     href: '/products/data/search',
-    github: 'https://github.com/hanzoai/search',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/search',
     install: {
       cli: 'hanzo search create myindex',
@@ -305,7 +305,7 @@ export const dataProducts: Product[] = [
     },
     features: ['Typo tolerance', 'Faceted search', 'Filters', 'Synonyms', 'Instant results'],
     status: 'ga',
-    openSource: true,
+    openSource: false,
     pricing: 'freemium'
   }
 ]
@@ -324,7 +324,7 @@ export const computeProducts: Product[] = [
     category: 'compute',
     icon: 'Zap',
     href: '/products/compute/functions',
-    github: 'https://github.com/hanzoai/functions',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/functions',
     install: {
       cli: 'hanzo fn new --lang python my-function',
@@ -345,7 +345,7 @@ export const computeProducts: Product[] = [
       'GitOps deployment'
     ],
     status: 'ga',
-    openSource: true,
+    openSource: false,
     pricing: 'freemium'
   },
   {
@@ -373,7 +373,7 @@ export const computeProducts: Product[] = [
     category: 'compute',
     icon: 'Cpu',
     href: '/products/compute/machines',
-    github: 'https://github.com/hanzoai/machines',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/machines',
     features: ['GPU instances', 'Spot pricing', 'Auto-scaling', 'Persistent storage', 'SSH access'],
     status: 'ga',
@@ -389,11 +389,11 @@ export const computeProducts: Product[] = [
     category: 'compute',
     icon: 'Zap',
     href: '/products/compute/gateway',
-    github: 'https://github.com/hanzoai/gateway',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/gateway',
     features: ['100+ providers', 'Load balancing', 'Fallbacks', 'Response caching', 'Cost tracking', 'Rate limiting', 'Streaming', 'OpenAI compatible'],
     status: 'ga',
-    openSource: true,
+    openSource: false,
     pricing: 'freemium'
   }
 ]
@@ -412,7 +412,7 @@ export const asyncProducts: Product[] = [
     category: 'async',
     icon: 'PlayCircle',
     href: '/products/async/auto',
-    github: 'https://github.com/hanzoai/auto',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/auto',
     install: {
       cli: 'hanzo auto init',
@@ -433,7 +433,7 @@ export const asyncProducts: Product[] = [
     category: 'async',
     icon: 'Workflow',
     href: '/products/async/flow',
-    github: 'https://github.com/hanzoai/flow',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/flow',
     install: {
       cli: 'hanzo flow init',
@@ -453,7 +453,7 @@ export const asyncProducts: Product[] = [
     category: 'async',
     icon: 'Radio',
     href: '/products/async/mq',
-    github: 'https://github.com/hanzoai/mq',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/mq',
     install: {
       npm: 'npm install @hanzo/mq'
@@ -507,7 +507,7 @@ export const asyncProducts: Product[] = [
     category: 'async',
     icon: 'Clock',
     href: '/products/async/cron',
-    github: 'https://github.com/hanzoai/cron',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/tasks',
     install: {
       cli: 'hanzo cron create --schedule "0 * * * *" myjob'
@@ -526,7 +526,7 @@ export const asyncProducts: Product[] = [
     category: 'async',
     icon: 'ListOrdered',
     href: '/products/async/queues',
-    github: 'https://github.com/hanzoai/queues',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/projects/hanzoai/queues',
     install: {
       cli: 'hanzo queues create myqueue'
@@ -593,7 +593,7 @@ export const mlProducts: Product[] = [
     subcategory: 'Develop',
     icon: 'BookOpen',
     href: '/products/ml/notebooks',
-    github: 'https://github.com/hanzoai/notebooks',
+    github: 'https://github.com/hanzoai',
     features: ['JupyterLab', 'GPU support', 'Real-time collaboration', 'Git integration', 'Custom environments'],
     status: 'ga',
     openSource: true,
@@ -609,7 +609,7 @@ export const mlProducts: Product[] = [
     subcategory: 'Orchestrate',
     icon: 'GitBranch',
     href: '/products/ml/pipelines',
-    github: 'https://github.com/hanzoai/pipelines',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/pipelines',
     features: ['DAG workflows', 'Artifact tracking', 'Caching', 'Parameterization', 'Scheduling'],
     status: 'ga',
@@ -626,7 +626,7 @@ export const mlProducts: Product[] = [
     subcategory: 'Train',
     icon: 'Dumbbell',
     href: '/products/ml/training',
-    github: 'https://github.com/hanzoai/training',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/ml',
     features: ['PyTorch', 'TensorFlow', 'XGBoost', 'Distributed training', 'Checkpointing'],
     status: 'ga',
@@ -643,7 +643,7 @@ export const mlProducts: Product[] = [
     subcategory: 'Tune',
     icon: 'SlidersHorizontal',
     href: '/products/ml/tuning',
-    github: 'https://github.com/hanzoai/tuning',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/ml',
     features: ['Grid search', 'Random search', 'Bayesian optimization', 'Early stopping', 'Multi-objective'],
     status: 'beta',
@@ -660,7 +660,7 @@ export const mlProducts: Product[] = [
     subcategory: 'Serve',
     icon: 'Rocket',
     href: '/products/ml/serving',
-    github: 'https://github.com/hanzoai/serving',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/ml',
     features: ['Auto-scaling', 'Canary deployments', 'A/B testing', 'GPU inference', 'Batching'],
     status: 'ga',
@@ -694,7 +694,7 @@ export const mlProducts: Product[] = [
     subcategory: 'Models',
     icon: 'Sparkles',
     href: '/products/ml/enso',
-    github: 'https://github.com/hanzoai/enso',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/models',
     features: ['Multimodal diffusion', 'Text generation', 'Vision synthesis', 'Audio generation', 'Expert routing', 'High coherence'],
     status: 'beta',
@@ -711,7 +711,7 @@ export const mlProducts: Product[] = [
     subcategory: 'Models',
     icon: 'Image',
     href: '/products/ml/kensho',
-    github: 'https://github.com/hanzoai/kensho',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/skills/hanzo-kensho',
     features: ['17B parameters', 'High-quality images', 'Fast generation', 'Style control', 'Prompt following'],
     status: 'beta',
@@ -760,7 +760,7 @@ export const mlProducts: Product[] = [
     subcategory: 'Models',
     icon: 'Brain',
     href: '/products/ml/jin',
-    github: 'https://github.com/hanzoai/jin',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/skills/hanzo-jin',
     features: ['Multimodal', 'Joint embeddings', 'Diffusion transformer'],
     status: 'coming',
@@ -777,11 +777,11 @@ export const mlProducts: Product[] = [
     subcategory: 'Manage',
     icon: 'Archive',
     href: '/products/ml/registry',
-    github: 'https://github.com/hanzoai/registry',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/registry',
     features: ['Version control', 'Artifact storage', 'Lineage tracking', 'Approval workflows', 'Model cards'],
     status: 'ga',
-    openSource: true,
+    openSource: false,
     pricing: 'freemium'
   },
   {
@@ -794,7 +794,7 @@ export const mlProducts: Product[] = [
     subcategory: 'Features',
     icon: 'Layers',
     href: '/products/ml/feature-store',
-    github: 'https://github.com/hanzoai/feature-store',
+    github: 'https://github.com/hanzoai',
     features: ['Offline features', 'Online serving', 'Feature versioning', 'Point-in-time joins', 'Streaming'],
     status: 'beta',
     openSource: true,
@@ -810,7 +810,7 @@ export const mlProducts: Product[] = [
     subcategory: 'Evaluate',
     icon: 'CheckCircle',
     href: '/products/ml/evaluation',
-    github: 'https://github.com/hanzoai/evaluation',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/experiments',
     features: ['Benchmarks', 'Drift detection', 'Quality metrics', 'RAG evaluation', 'A/B analysis'],
     status: 'beta',
@@ -865,7 +865,7 @@ export const observabilityProducts: Product[] = [
     category: 'observability',
     icon: 'Route',
     href: '/products/observability/traces',
-    github: 'https://github.com/hanzoai/traces',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/traces',
     features: ['Distributed tracing', 'Span analytics', 'Service maps', 'Latency analysis', 'AI-aware'],
     status: 'ga',
@@ -881,11 +881,11 @@ export const observabilityProducts: Product[] = [
     category: 'observability',
     icon: 'Radio',
     href: '/products/observability/telemetry',
-    github: 'https://github.com/hanzoai/telemetry',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/projects/hanzoai/telemetry',
     features: ['OTel collector', 'Protocol conversion', 'Sampling', 'Filtering', 'Multi-destination'],
     status: 'ga',
-    openSource: true,
+    openSource: false,
     pricing: 'freemium'
   }
 ]
@@ -904,14 +904,14 @@ export const platformProducts: Product[] = [
     category: 'platform',
     icon: 'Layers',
     href: '/products/platform/platform',
-    github: 'https://github.com/hanzoai/platform',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/platform',
     install: {
       cli: 'curl -fsSL hanzo.sh | bash'
     },
     features: ['Git deploy', 'Auto TLS', 'Custom domains', 'Preview environments', 'Rollbacks'],
     status: 'ga',
-    openSource: true,
+    openSource: false,
     pricing: 'freemium'
   },
   {
@@ -923,7 +923,7 @@ export const platformProducts: Product[] = [
     category: 'platform',
     icon: 'Zap',
     href: '/products/platform/edge',
-    github: 'https://github.com/hanzoai/edge',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/edge',
     install: {
       cli: 'hanzo edge deploy',
@@ -931,7 +931,7 @@ export const platformProducts: Product[] = [
     },
     features: ['Sub-ms latency', 'Stateless design', 'Rate limiting', 'JWT validation', 'Response aggregation', 'Backend-for-frontend', 'GraphQL gateway', 'Plugin ecosystem'],
     status: 'ga',
-    openSource: true,
+    openSource: false,
     pricing: 'freemium'
   },
   {
@@ -943,7 +943,7 @@ export const platformProducts: Product[] = [
     category: 'platform',
     icon: 'Boxes',
     href: '/products/platform/hke',
-    github: 'https://github.com/hanzoai/hke',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/skills/hanzo-hke',
     install: {
       cli: 'hanzo hke create mycluster --nodes 3'
@@ -994,7 +994,7 @@ export const platformProducts: Product[] = [
     category: 'platform',
     icon: 'Network',
     href: '/products/platform/networking',
-    github: 'https://github.com/hanzoai/networking',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/networks',
     install: {
       cli: 'hanzo network create mynetwork',
@@ -1014,7 +1014,7 @@ export const platformProducts: Product[] = [
     category: 'platform',
     icon: 'Route',
     href: '/products/platform/tunnel',
-    github: 'https://github.com/hanzoai/tunnel',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/projects/hanzoai/tunnel',
     install: {
       cli: 'hanzo tunnel share localhost:3000',
@@ -1034,7 +1034,7 @@ export const platformProducts: Product[] = [
     category: 'platform',
     icon: 'Globe',
     href: '/products/platform/dns',
-    github: 'https://github.com/hanzoai/dns',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/dns',
     install: {
       cli: 'hanzo dns create mydomain.ai',
@@ -1042,7 +1042,7 @@ export const platformProducts: Product[] = [
     },
     features: ['Plugin architecture', 'Service discovery', 'Load balancing', 'DNSSEC', 'Private zones', 'Edge routing', 'Health checks', 'Geo-routing'],
     status: 'ga',
-    openSource: true,
+    openSource: false,
     pricing: 'freemium'
   },
   {
@@ -1054,7 +1054,7 @@ export const platformProducts: Product[] = [
     category: 'platform',
     icon: 'Shield',
     href: '/products/platform/guard',
-    github: 'https://github.com/hanzoai/guard',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/guard',
     install: {
       docker: 'docker run -d hanzo/guard',
@@ -1097,7 +1097,7 @@ export const appsProducts: Product[] = [
     category: 'apps',
     icon: 'BarChart',
     href: '/products/apps/analytics',
-    github: 'https://github.com/hanzoai/analytics',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/analytics',
     features: ['Privacy-first', 'No cookies', 'GDPR compliant', 'Lightweight', 'Real-time'],
     status: 'ga',
@@ -1113,7 +1113,7 @@ export const appsProducts: Product[] = [
     category: 'apps',
     icon: 'ShoppingCart',
     href: '/products/apps/commerce',
-    github: 'https://github.com/hanzoai/commerce',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/commerce',
     features: ['Payments', 'Subscriptions', 'Invoicing', 'AI recommendations', 'Entitlements'],
     status: 'ga',
@@ -1145,7 +1145,7 @@ export const appsProducts: Product[] = [
     category: 'apps',
     icon: 'Workflow',
     href: '/products/apps/flow',
-    github: 'https://github.com/hanzoai/flow',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/flow',
     features: ['Visual builder', 'AI nodes', 'API connectors', 'Triggers', 'Versioning'],
     status: 'beta',
@@ -1161,7 +1161,7 @@ export const appsProducts: Product[] = [
     category: 'apps',
     icon: 'LayoutDashboard',
     href: '/products/apps/console',
-    github: 'https://github.com/hanzoai/console',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/console',
     features: ['Resource management', 'User admin', 'Billing', 'Audit logs', 'Team management'],
     status: 'ga',
@@ -1177,11 +1177,11 @@ export const appsProducts: Product[] = [
     category: 'apps',
     icon: 'Cloud',
     href: '/products/apps/cloud',
-    github: 'https://github.com/hanzoai/cloud',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/cloud',
     features: [MODELS_PHRASE, 'MCP management', 'Agent deployment', 'Context windows', 'Usage analytics'],
     status: 'ga',
-    openSource: true,
+    openSource: false,
     pricing: 'freemium'
   },
   {
@@ -1193,7 +1193,7 @@ export const appsProducts: Product[] = [
     category: 'apps',
     icon: 'Bot',
     href: '/products/apps/agent',
-    github: 'https://github.com/hanzoai/agent',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/agents',
     install: {
       pip: 'pip install hanzo-agent',
@@ -1201,7 +1201,7 @@ export const appsProducts: Product[] = [
     },
     features: ['Multi-agent', 'Tool use', 'Memory systems', 'Planning', 'Handoffs', 'Tracing', 'OpenAI compatible', 'MCP support'],
     status: 'ga',
-    openSource: true,
+    openSource: false,
     pricing: 'freemium'
   },
   {
@@ -1233,7 +1233,7 @@ export const appsProducts: Product[] = [
     category: 'apps',
     icon: 'Monitor',
     href: '/products/apps/operative',
-    github: 'https://github.com/hanzoai/operative',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/services/operative',
     install: {
       pip: 'pip install hanzo-operative'
@@ -1336,7 +1336,7 @@ export const growthProducts: Product[] = [
     category: 'growth',
     icon: 'BarChart',
     href: '/products/growth/web-analytics',
-    github: 'https://github.com/hanzoai/web-analytics',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/analytics',
     install: {
       cli: 'hanzo analytics create mysite',
@@ -1356,7 +1356,7 @@ export const growthProducts: Product[] = [
     category: 'growth',
     icon: 'SlidersHorizontal',
     href: '/products/growth/experiments',
-    github: 'https://github.com/hanzoai/experiments',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/experiments',
     install: {
       cli: 'hanzo experiments init',
@@ -1376,7 +1376,7 @@ export const growthProducts: Product[] = [
     category: 'growth',
     icon: 'MessageSquare',
     href: '/products/growth/engage',
-    github: 'https://github.com/hanzoai/engage',
+    github: 'https://github.com/hanzoai',
     install: {
       cli: 'hanzo engage init',
       docker: 'docker run -d hanzo/engage'
@@ -1395,7 +1395,7 @@ export const growthProducts: Product[] = [
     category: 'growth',
     icon: 'Zap',
     href: '/products/growth/ads',
-    github: 'https://github.com/hanzoai/ads',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/openapi/ads',
     features: ['Multi-channel', 'Attribution', 'Conversion tracking', 'Budget optimization', 'Creative testing', 'Audience sync', 'ROAS reporting'],
     status: 'beta',
@@ -1418,7 +1418,7 @@ export const cxProducts: Product[] = [
     category: 'cx',
     icon: 'MessageSquare',
     href: '/products/cx/cx-suite',
-    github: 'https://github.com/hanzoai/cx',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/projects/hanzoai/cx',
     install: {
       cli: 'hanzo cx init',
@@ -1438,7 +1438,7 @@ export const cxProducts: Product[] = [
     category: 'cx',
     icon: 'UserCheck',
     href: '/products/cx/crm',
-    github: 'https://github.com/hanzoai/crm',
+    github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai/docs/openapi/crm',
     install: {
       cli: 'hanzo crm init',

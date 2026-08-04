@@ -27,7 +27,7 @@ const Node = () => {
               <a href="https://docs.hanzo.ai/docs/proof-of-ai/node-operator" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
                 Run a Node <ArrowRight className="h-5 w-5" />
               </a>
-              <a href="https://github.com/hanzoai/node" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
+              <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
                 View Source
               </a>
             </div>
@@ -164,7 +164,7 @@ const Node = () => {
             <a href="https://docs.hanzo.ai/docs/proof-of-ai/node-operator" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />
             </a>
-            <a href="https://github.com/hanzoai/node" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
+            <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
               View on GitHub
             </a>
           </div>

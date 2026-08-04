@@ -31,7 +31,7 @@ const FeatureDemo = ({ activeFeature }: { activeFeature: string }) => {
 curl -fsSL hanzo.sh | bash
 
 # Docker Compose setup
-git clone https://github.com/hanzoai/platform
+git clone https://github.com/hanzoai
 cd platform && docker compose up -d
 
 # Kubernetes deployment
@@ -211,7 +211,7 @@ const PlatformHero = () => {
               className="flex flex-wrap items-center gap-4 mb-6"
             >
               <a
-                href="https://github.com/hanzoai/platform"
+                href="https://github.com/hanzoai"
                 target="_blank"
                 rel="noreferrer noopener"
                 className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"

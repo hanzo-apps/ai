@@ -20,25 +20,23 @@ import { test, expect } from '@playwright/test'
 
 const LEAF_PATHS = [
   // AI
-  '/models', '/agents', '/engine', '/cloud/fine-tuning', '/cloud/embeddings', '/cloud/rerank', '/cloud/evals',
+  '/models', '/agents', '/engine', '/cloud/embeddings', '/cloud/rerank', '/cloud/evals',
   // Compute
-  '/cloud/gpus', '/machines', '/cloud/containers', '/functions', '/edge', '/cloud/jobs',
+  '/cloud/gpus', '/machines', '/functions', '/edge', '/cloud/jobs',
   // Data
   '/vector', '/sql', '/kv', '/storage', '/datastore', '/docdb',
   // Network
-  '/gateway', '/network', '/dns', '/cloud/cdn', '/ingress', '/cloud/service-mesh',
-  // Security
+  '/gateway', '/network', '/dns', '/ingress',   // Security
   '/iam', '/authz', '/kms', '/hsm', '/cloud/secrets', '/cloud/audit',
   // Dev
-  '/cli', '/cloud/sdks', '/cloud/api', '/playground', '/code', '/desktop',
+  '/cli', '/playground', '/code', '/desktop',
   // Deploy
   '/platform', '/cloud/environments', '/cloud/builds', '/registry', '/cloud/releases', '/cloud/pipelines',
   // Observe
   '/cloud/logs', '/metrics', '/telemetry', '/dashboards', '/sentry', '/cloud/cost',
   // Chain
-  '/blockchain/settlement', '/blockchain/wallets', '/blockchain/tokens', '/blockchain/indexer',
-  '/blockchain/oracle', '/blockchain/attestations',
-  // Apps
+  '/blockchain/wallets', '/blockchain/tokens', '/blockchain/indexer',
+  '/blockchain/oracle',   // Apps
   '/chat', '/bot', '/search', '/crawl', '/studio', '/console',
 ]
 

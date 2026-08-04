@@ -33,7 +33,7 @@ const OperativeCTA = () => {
             
             <div className="flex flex-col sm:flex-row justify-center">
               <Button size="sm" className="text-lg px-4 py-2">
-                <a href="https://github.com/hanzoai/operative" className="flex items-center gap-2">
+                <a href="https://github.com/hanzoai" className="flex items-center gap-2">
                   <Github className="h-5 w-5" />
                   Star on GitHub
                 </a>
@@ -61,7 +61,7 @@ const OperativeCTA = () => {
                 <span className="text-[var(--white)] font-medium">Follow Updates</span>
               </a>
               <a 
-                href="https://github.com/hanzoai/operative/contribute"
+                href="https://github.com/hanzoai"
                 className="flex flex-col items-center p-4 rounded-xl hover:bg-neutral-900/30 transition-colors"
               >
                 <Github className="h-6 w-6 text-foreground " />

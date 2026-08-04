@@ -17,7 +17,7 @@ import { MODELS_PHRASE } from '@/lib/data/model-count'
 import { heroShot } from "@/lib/data/product-shots"
 
 const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
-const GH = "https://github.com/hanzoai/cloud"
+const GH = "https://github.com/hanzoai"
 
 /**
  * cloud.hanzo.ai's front door — the body of `app/(marketing)/cloud/page.tsx`,

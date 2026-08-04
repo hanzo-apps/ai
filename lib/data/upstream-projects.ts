@@ -97,7 +97,7 @@ export const upstreamProjects: Record<string, UpstreamProject> = {
     name: 'Hanzo Console',
     description: 'Open source LLM engineering platform. Traces, evals, prompt management, and metrics.',
     url: 'https://console.hanzo.ai',
-    github: 'https://github.com/hanzoai/console',
+    github: 'https://github.com/hanzoai',
     license: 'MIT',
     stars: '8k+',
     creator: 'Hanzo AI',

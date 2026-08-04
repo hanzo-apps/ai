@@ -130,7 +130,7 @@ export default function DesktopPage() {
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
-              href="https://github.com/hanzoai/desktop"
+              href="https://github.com/hanzoai"
               className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors"
             >
               GitHub
@@ -249,7 +249,7 @@ export default function DesktopPage() {
                   <ArrowRight className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://github.com/hanzoai/desktop"
+                  href="https://github.com/hanzoai"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors"
                 >
                   View on GitHub
@@ -268,7 +268,7 @@ export default function DesktopPage() {
             <a href="https://docs.hanzo.ai/docs/projects/hanzoai/desktop" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />
             </a>
-            <a href="https://github.com/hanzoai/desktop" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
+            <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
               View on GitHub
             </a>
           </div>

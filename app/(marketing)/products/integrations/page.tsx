@@ -153,7 +153,7 @@ export default function IntegrationsPage() {
             </p>
             <div className="flex gap-4 justify-center">
               <Button asChild>
-                <a href="https://github.com/hanzoai/auto" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer">
                   <Github className="w-4 h-4 mr-2" />
                   View on GitHub
                 </a>

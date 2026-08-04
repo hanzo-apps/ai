@@ -183,7 +183,7 @@ const productSdks: ProductSdk[] = [
     purpose: "Multi-agent SDK — build, orchestrate, and hand off between agents.",
     icon: Bot,
     packages: [{ registry: "pip", name: "hanzo-agent" }],
-    github: "https://github.com/hanzoai/agent",
+    github: "https://github.com/hanzoai",
   },
   {
     name: "Tasks",
@@ -197,7 +197,7 @@ const productSdks: ProductSdk[] = [
     purpose: "Long-term memory — store, recall, and summarize across sessions.",
     icon: Brain,
     packages: [{ registry: "pip", name: "hanzo-memory" }],
-    github: "https://github.com/hanzoai/memory",
+    github: "https://github.com/hanzoai",
   },
   {
     name: "UI",

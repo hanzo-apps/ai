@@ -301,7 +301,7 @@ response = client.chat.completions.create(
                   <ArrowRight className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://github.com/hanzoai/console"
+                  href="https://github.com/hanzoai"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors"
                 >
                   View on GitHub

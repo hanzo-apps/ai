@@ -123,7 +123,7 @@ export default function MQPage() {
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
-              href="https://github.com/hanzoai/mq"
+              href="https://github.com/hanzoai"
               className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors"
             >
               GitHub
@@ -307,7 +307,7 @@ const worker = new Worker("emails", async (job) => {
                   <ArrowRight className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://github.com/hanzoai/mq"
+                  href="https://github.com/hanzoai"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors"
                 >
                   View on GitHub

@@ -150,7 +150,7 @@ const OpenSource = () => {
                   View on GitHub
                 </a>
                 <a
-                  href="https://github.com/hanzoai/hanzo"
+                  href="https://github.com/hanzoai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"
@@ -494,7 +494,7 @@ const OpenSource = () => {
               className="flex flex-wrap items-center justify-center gap-4"
             >
               <a
-                href="https://github.com/hanzoai/hanzo/blob/main/CONTRIBUTING.md"
+                href="https://github.com/hanzoai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-8 py-4 rounded-full font-medium transition-all hover:opacity-90 text-base bg-primary text-primary-foreground"

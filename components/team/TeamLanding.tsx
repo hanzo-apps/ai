@@ -19,7 +19,7 @@ import { ProductFooter } from '@/components/products/ProductFooter'
 
 const TEAM = 'https://hanzo.team'
 const DOCS = 'https://docs.hanzo.ai'
-const GITHUB = 'https://github.com/hanzoai/team'
+const GITHUB = 'https://github.com/hanzoai'
 
 export default function TeamLanding() {
   return (

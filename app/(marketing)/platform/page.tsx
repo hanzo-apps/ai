@@ -65,7 +65,7 @@ const DeploymentOptions = () => {
               </li>
             </ul>
             <a
-              href="https://github.com/hanzoai/platform"
+              href="https://github.com/hanzoai"
               target="_blank"
               rel="noreferrer noopener"
               className="inline-flex items-center mt-6 text-sm text-foreground hover:text-foreground/70"
@@ -202,7 +202,7 @@ const OpenSourceBenefits = () => {
 
           <div className="mt-8 pt-8 border-t border-border text-center">
             <a
-              href="https://github.com/hanzoai/platform"
+              href="https://github.com/hanzoai"
               target="_blank"
               rel="noreferrer noopener"
               className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-neutral-600 bg-transparent hover:bg-accent text-sm text-foreground"

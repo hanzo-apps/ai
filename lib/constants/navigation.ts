@@ -165,7 +165,7 @@ export const resources = [
       },
       {
         name: "Examples",
-        url: "https://github.com/hanzoai/examples",
+        url: "https://github.com/hanzoai",
         description: "Sample projects and code snippets"
       },
       {
@@ -190,7 +190,7 @@ export const resources = [
       },
       {
         name: "Forum",
-        url: "https://github.com/hanzoai/discussions",
+        url: "https://github.com/hanzoai",
         description: "Ask questions and share ideas"
       },
       {
