@@ -86,7 +86,10 @@ const UseCases = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/40 transition-colors group"
             >
-              <div className={`h-14 w-14 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300 ${useCase.color} group-hover:bg-opacity-30`}>
+              {/* `bg-opacity-*` is Tailwind v3 and was removed in v4 — the class
+                  emitted no rule, so the hover tint never once rendered. The
+                  colour already carries its own alpha (`bg-primary/20`). */}
+              <div className={`h-14 w-14 rounded-xl flex items-center justify-center mb-6 transition-colors duration-300 ${useCase.color}`}>
                 <useCase.icon className={`h-7 w-7 ${useCase.textColor}`} />
               </div>
               <h3 className="text-xl font-semibold text-[var(--white)] mb-3">{useCase.title}</h3>

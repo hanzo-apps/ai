@@ -194,6 +194,39 @@
   display: none;
 }
 
+/* ── The three classes @hanzo/ui stamps and expects the HOST to define ────────
+   `hz-mono`, `hz-tnum` and `hz-row` are not decoration the package forgot to
+   ship — they are its interface to the host, and the package says so:
+   gui-config.js, "Canonical face: Geist Sans for UI, Geist Mono for anything
+   numeric/code/id (`.hz-mono`). The host self-hosts both faces (its own
+   fonts.css) — this only names them." DataTable stamps `hz-tnum` on any column
+   marked `mono` and `hz-row` on every row it renders.
+
+   hanzo.ai self-hosts both faces and defined none of the three, so every
+   DataTable id and figure has been rendering in the proportional face with
+   proportional digits — columns of numbers that do not line up. */
+.hz-mono {
+  font-family: var(--font-mono);
+}
+
+/* Tabular figures: same advance width for every digit, so a column of numbers
+   aligns and does not reflow as it counts. */
+.hz-tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* A DataTable row. The visual treatment is gui props on the same element; this
+   is the host's hook, and what it carries is the hover affordance a table row
+   needs and a stack of gui props cannot express. */
+.hz-row {
+  transition: background-color 0.12s ease;
+}
+
+.hz-row:hover {
+  background-color: var(--surface-card-quiet, rgba(255, 255, 255, 0.03));
+}
+
 /* ── Focus ring ───────────────────────────────────────────────────────────────
    Unlayered and doubly-rooted on purpose. @hanzo/design's ring is
    `2px solid var(--ring)`, and --ring is caught in the same self-reference as

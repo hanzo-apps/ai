@@ -43,7 +43,7 @@ const TrustedBy = () => {
           className="text-center mb-20"
         >
           <h2 
-            className="text-3xl md:text-4xl font-medium mb-6 chrome-text"
+            className="text-3xl md:text-4xl font-medium mb-6"
             style={{
               backgroundPosition: `${(mousePosition.x / (containerRef.current?.offsetWidth || 1)) * 100}% ${(mousePosition.y / (containerRef.current?.offsetHeight || 1)) * 100}%`,
             }}
@@ -67,7 +67,7 @@ const TrustedBy = () => {
             >
               <div className="mb-4">
                 <h3 
-                  className="text-xl font-medium chrome-text"
+                  className="text-xl font-medium"
                   style={{
                     backgroundPosition: `${(mousePosition.x / (containerRef.current?.offsetWidth || 1)) * 100}% ${(mousePosition.y / (containerRef.current?.offsetHeight || 1)) * 100}%`,
                   }}
