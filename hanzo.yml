@@ -1,19 +1,37 @@
-# Canonical CI/CD config for hanzo-apps/hanzo.ai — read by the shared
-# hanzoai/ci reusable workflow (.hanzo/workflows/cicd.yml).
+# Canonical CI/CD config for hanzo.ai — the ONE file that says how this repo
+# builds, gates and ships. The only workflow is `.hanzo/workflows/cicd.yml`,
+# seven lines that import hanzoai/ci; everything real is here.
 #
-# hanzo.ai is a STATIC site (Next.js `output: export`). It ships to
-# https://hanzo.ai via Cloudflare Pages in its OWN workflow (.hanzo/workflows/
-# deploy.yml, CF creds from KMS) — NOT a container image. So there is no
-# `images:` build and no operator `deploy:` here: the prior
-# `ghcr.io/hanzoai/cloud-site` image was vestigial (unused by the live site) and,
-# because this repo lives in the hanzo-apps org, its GITHUB_TOKEN cannot push to
-# the hanzoai GHCR namespace — the push failed `denied: permission_denied` every
-# run. Dropped.
+# THREE workflows were deleted to get to that, and each was a copy of a job this
+# file now declares once:
 #
-# What remains is the gate the reusable runs on every push + PR. The reusable
-# treats `images:` as optional (hanzoai/ci#8) and provisions Node for the JS test
-# gate on the bare arc runner (hanzoai/ci#9), so this run is green with no
-# cross-org push attempt.
+#   .github/workflows/deploy.yml   Cloudflare Pages via wrangler, on ubuntu-latest.
+#                                  Inert TWICE OVER: GitHub Actions is disabled for
+#                                  the hanzo-dev ACCOUNT, so a push by it creates
+#                                  zero runs there; and Gitea collects workflows
+#                                  from the FIRST of WORKFLOW_DIRS present in the
+#                                  commit (modules/actions/workflows.go —
+#                                  listWorkflowsInDirs breaks on the first hit), so
+#                                  `.hanzo/workflows` existing made the whole of
+#                                  `.github/workflows` dark on the forge. A fix
+#                                  written in that file could never ship. It was
+#                                  also the last Cloudflare dependency in the repo.
+#   .hanzo/workflows/deploy.yml    Hand-rolled KMS login + buildx push of
+#                                  ghcr.io/hanzoai/hanzo-ai-www. Now `images.www`
+#                                  below: the reusable already does KMS, buildx,
+#                                  the dual-host mirror to registry.hanzo.ai, and
+#                                  the post-push manifest check that its own
+#                                  "Verify the pushed image resolves" step was a
+#                                  second copy of.
+#   .hanzo/workflows/cloud.yml     Same buildx job again for cloud.hanzo.ai, with
+#                                  SITE_ROOT=cloud and a hand-typed tag input. Now
+#                                  `images.cloud-www`, tagged by the same rule as
+#                                  every other image in the fleet.
+#
+# That third copy is the argument for this file in miniature: the ingest key was
+# fixed in one of them and stayed broken in the others, because a repo with three
+# build lanes has three places to be wrong and no way to notice. See `build_secrets`
+# below for the two-part defect the fold repaired.
 #
 # The `lint` step was DELETED for a while, and the reason it went is worth
 # keeping: steps run in order, so a step that cannot pass is not a weak gate, it
@@ -104,3 +122,95 @@ test:
   # shrink-only ratchet, and it reads git-tracked files only.
   - name: model counts
     run: node scripts/audit-model-counts.mjs
+
+  # Rescued from the deleted .hanzo/workflows/deploy.yml, which was the only
+  # place it lived. It asserts that the pages we actually route to came out of
+  # the export, which `gates` does not: gates measures the CONTENT of what was
+  # emitted, and this measures whether it was emitted at all. A route that stops
+  # exporting is invisible to every other gate here and is a 404 on the live
+  # site.
+  #
+  # `out/` is already built by `gates` above — steps share a workspace, so this
+  # re-uses that build instead of paying for a second one.
+  #
+  # Do NOT "fix" a miss by adding a 404.html fallback: `cp out/index.html
+  # out/404.html` was removed once already because it clobbered the export's real
+  # 404 with the homepage, so every broken inbound link answered 404 while
+  # rendering "What can I help with?" — indistinguishable from a good visit.
+  - name: pages
+    run: |
+      missing=
+      for p in index about pricing contact enterprise zen; do
+        [ -f "out/$p.html" ] || [ -f "out/$p/index.html" ] || missing="$missing $p"
+      done
+      [ -z "$missing" ] || { echo "::error::missing exported pages:$missing"; exit 1; }
+      echo "exported: $(find out -name '*.html' | wc -l) html pages"
+
+# ONE static export, TWO images — the split is by host, not by build, so the
+# second image is an `args:` difference and not a second pipeline.
+#
+# Both are built on every run so a promotable tag always exists; only the apex
+# rolls automatically (see `deploy:`). cloud.hanzo.ai is promoted deliberately,
+# which is what its old workflow_dispatch-with-a-typed-tag was really expressing
+# — the difference is that the tag it promotes now exists without anyone having
+# to remember to cut it.
+#
+# No `tag-suffix:` on either. That input disambiguates two images pushed to the
+# SAME repo; these push to different repos, so a suffix would only make
+# cloud-www's tags stop matching the `0.1.x` shape universe already pins.
+images:
+  - name: www
+    context: .
+    repo: ghcr.io/hanzoai/hanzo-ai-www
+    platforms: [linux/amd64]
+    # THE defect the three-lane split was hiding, and it was two bugs stacked in
+    # one line. The deleted deploy.yml fetched the key into `steps.kms.outputs.key`
+    # and then passed `--build-arg NEXT_PUBLIC_EVENT_INGEST_KEY=${{ steps.kms.outputs.event_ingest_key }}`:
+    #   1. `event_ingest_key` is not an output that step ever set — `key` is — so
+    #      the value was empty;
+    #   2. the Dockerfile's ARG is `EVENT_INGEST_KEY`, not the NEXT_PUBLIC_ form,
+    #      so even a correct value would not have been received.
+    # Both fail silently by design: cloud admits an unkeyed pageview under the
+    # reserved `$public` tenant and answers 200, dropping every track/identify/
+    # group. So the shipped image had no analytics and nothing said so.
+    #
+    # `build_secrets:` removes the class of bug rather than the instance — the
+    # name here IS the KMS name (deploy/EVENT_INGEST_KEY) and IS the `--build-arg`
+    # name the Dockerfile declares, so there is no second spelling to get wrong.
+    build_secrets: [EVENT_INGEST_KEY]
+  - name: cloud-www
+    context: .
+    repo: ghcr.io/hanzoai/cloud-www
+    platforms: [linux/amd64]
+    # Promotes out/cloud.html to the web root — this host's `/` is the monochrome
+    # CloudLanding while every deep (marketing)/* page serves beneath it. The
+    # apex image leaves SITE_ROOT at its `index` default.
+    args:
+      SITE_ROOT: cloud
+    build_secrets: [EVENT_INGEST_KEY]
+
+# The apex rolls itself; cloud.hanzo.ai does not (it is pinned to a semver in
+# universe, and the reusable's backward-clobber guard leaves a semver pin alone
+# on a branch build — declaring it here would only add a service that is skipped
+# every run, or worse, pin it to THIS repo's git tag on a release).
+#
+# TWO preconditions before this block moves anything, and neither is in this repo:
+#
+#   1. hanzoai/ci writes the desired tag to `$UNIVERSE/infra/k8s/operator/crs/
+#      $svc.yaml` and sets `.spec.image.tag`. That directory NO LONGER EXISTS —
+#      universe retired the App CRD for the `fleet` ApplicationSet, and the
+#      declaration is now `charts/app/values/hanzo/<svc>.yaml` with a top-level
+#      `image.tag`. So the GitOps record silently no-ops for the whole fleet and
+#      every `deploy:` degrades to a kubectl-only roll that git does not know
+#      about. That is a hanzoai/ci fix, not a hanzo.ai one.
+#   2. charts/app/values/hanzo/hanzo-ai-www.yaml still carries
+#      `tag: "REPLACE-WITH-FIRST-PUBLISHED-SHA"` and no `cd:` block, so its
+#      generated Application `hanzo-hanzo-ai-www` reports drift and moves
+#      nothing. The first green run of THIS file publishes the tag that
+#      placeholder is waiting for.
+deploy:
+  cluster: hanzo-k8s
+  namespace: hanzo
+  on: [main]
+  services:
+    - { name: hanzo-ai-www, image: www }

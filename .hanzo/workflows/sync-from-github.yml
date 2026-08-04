@@ -59,7 +59,11 @@ jobs:
             # The status is captured and printed instead of swallowed. Still
             # non-fatal — the sync itself succeeded and must not be marked failed
             # — but the log now says what the server answered.
-            d_url="${{ github.server_url }}/v1/repos/${{ github.repository }}/actions/workflows/deploy.yml/dispatches"
+            # cicd.yml, not deploy.yml: deploy.yml was deleted when the three
+            # build lanes folded into hanzo.yml, and dispatching a workflow that
+            # no longer exists answers 404 — which this step would have reported
+            # as "sync succeeded, nothing will deploy" on every synced commit.
+            d_url="${{ github.server_url }}/v1/repos/${{ github.repository }}/actions/workflows/cicd.yml/dispatches"
             d_code=$(curl -sS --max-time 20 -o /tmp/dispatch.out -w '%{http_code}' -X POST \
               -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               -H "Content-Type: application/json" \
