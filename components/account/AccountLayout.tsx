@@ -8,8 +8,10 @@ import {
   Building, Settings, ChevronRight, LogOut, 
   Gift, Link as LinkIcon
 } from 'lucide-react';
-import Navbar from '../Navbar';
-import Footer from '../Footer';
+// No header/footer imports here on purpose: these pages render inside the
+// (marketing) layout, which already mounts the ONE shared shell chrome
+// (SiteHeader/SiteFooter from '@/components/home/shell'). These were dead
+// imports that kept the deleted legacy nav tree alive in the module graph.
 import { useAccount } from '@/contexts/AccountContext';
 import { useIam } from '@hanzo/iam/react';
 import { 
