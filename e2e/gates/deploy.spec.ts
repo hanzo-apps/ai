@@ -85,3 +85,29 @@ test('every build-arg a workflow passes names an ARG its Dockerfile declares', (
     .map(({ where, key }) => `${where} passes --build-arg ${key}, which its Dockerfile declares no ARG for`)
   expect(undeclared, undeclared.join('\n')).toEqual([])
 })
+
+/**
+ * The image this repo's apex publishes. Named once, here, because it is the
+ * scope boundary: cloud.hanzo.ai ships a DIFFERENT image from the same export
+ * (cloud.yml, SITE_ROOT=cloud) and is not gated either — a real gap, and one
+ * that belongs to that host rather than to this fix.
+ */
+const APEX = 'ghcr.io/hanzoai/hanzo-ai-www'
+
+test('the workflow that publishes the apex runs the gates before it pushes', () => {
+  // Workflows on one trigger do not order themselves. cicd.yml (which runs
+  // `hanzo.yml`'s gates) and deploy.yml both fire on push to main, neither
+  // waits for the other, and there is no cross-workflow `needs:`. A red gate in
+  // one therefore does not stop the other publishing. So the check has to sit
+  // in the job that pushes, and this says it does — the ordering, not merely
+  // the presence, because a gate that runs after the push is a report.
+  const publishing = workflows().filter(({ text }) => text.includes(APEX))
+  expect(publishing.map(({ name }) => name), `no workflow publishes ${APEX}`).not.toEqual([])
+  for (const { name, text } of publishing) {
+    const gates = text.indexOf('pnpm gates')
+    const push = text.indexOf('push: true')
+    expect(gates, `${name} publishes ${APEX} and never runs the gates`).toBeGreaterThan(-1)
+    expect(push, `${name} must actually push`).toBeGreaterThan(-1)
+    expect(gates, `${name} runs the gates AFTER it pushes, which is a report`).toBeLessThan(push)
+  }
+})

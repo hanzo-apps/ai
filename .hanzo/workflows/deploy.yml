@@ -1,9 +1,19 @@
 name: Deploy
-# THE pipeline that ships hanzo.ai. It publishes ghcr.io/hanzoai/hanzo-ai-www,
+# The pipeline that will ship hanzo.ai. It publishes ghcr.io/hanzoai/hanzo-ai-www,
 # served by ghcr.io/hanzoai/static behind hanzoai/ingress — the same mechanism as
-# cloud.hanzo.ai, ui.hanzo.ai and papers.hanzo.ai. Cloudflare Pages is gone.
-# There is no second pipeline: .github/workflows/deploy.yml is deleted, not
-# neutralized.
+# cloud.hanzo.ai, ui.hanzo.ai and papers.hanzo.ai.
+#
+# IT HAS NEVER RUN. `hanzoai/hanzo.ai` on the forge is `"mirror": true`, and a
+# mirror reports `has_actions: false` — nothing in .hanzo/workflows fires until
+# the repo is converted (sync-from-github.yml in this directory is what keeps it
+# current afterwards). So the sentence that used to open this file — "Cloudflare
+# Pages is gone. There is no second pipeline: .github/workflows/deploy.yml is
+# deleted, not neutralized" — was true for two hours and twelve minutes on
+# 2026-08-01, between the commit that wrote it and 8a6da2b8, which put that file
+# back because the apex had no deploy path at all. It ships hanzo.ai today: the
+# live robots.txt, sitemap and /risk noindex all match this tree's HEAD, served
+# from Cloudflare Pages. Read .github/workflows/deploy.yml as the stopgap it says
+# it is, and delete it on the day this file first runs green — not before.
 #
 # WHY THIS EXISTS: GitHub Actions is disabled for the `hanzo-dev` ACCOUNT, so a
 # push by that account creates ZERO runs there — no queued job, no failed run,
@@ -12,17 +22,18 @@ name: Deploy
 # for a day and hanzo.ai kept serving "the open-source AI cloud" after that
 # claim was deliberately removed in e31324eb.
 #
-# WHY THE OTHER COPY IS GONE rather than kept as a fallback: it could not be
-# one. Gitea collects workflows from the FIRST of WORKFLOW_DIRS that exists in
-# the pushed commit and ignores the rest (modules/actions/workflows.go,
-# listWorkflowsInDirs breaks on the first hit), so from the moment this file
-# existed the entire .github/workflows directory was dark on this forge. Its
-# deploy.yml also ran on `hanzo-apps-build-linux-amd64`, an ARC scale set
-# decommissioned on 2026-07-27; its last runs are queued and cancelled, never
-# completed. Two copies of a deploy where only one can run is how a fix gets
-# written into the half that cannot ship it.
+# THE TWO COPIES DO NOT RACE, and that is the only reason keeping both is safe.
+# Gitea collects workflows from the FIRST of WORKFLOW_DIRS that exists in the
+# pushed commit and ignores the rest (modules/actions/workflows.go,
+# listWorkflowsInDirs breaks on the first hit), so on this forge the whole of
+# .github/workflows is dark; on github.com only .github/workflows is read. One
+# plane each, and today the forge plane is the dark one. What that costs is
+# real: a fix written here ships nothing, which is how the white-border defect
+# and the stale nav each survived several fixes.
 #
-# The smoke test below has caught real breakage before and is not decoration.
+# The gates below are the reason this file can be the survivor. Two copies of a
+# deploy is tolerable; two copies where only one checks what it publishes is
+# not.
 on:
   workflow_dispatch:
   push:
@@ -144,18 +155,38 @@ jobs:
             sleep 1
           done
           BODY=$(curl -s http://localhost:3333)
-          if echo "$BODY" | grep -q "Application error"; then
-            echo "FATAL: Homepage contains 'Application error'"; kill $SERVER_PID 2>/dev/null; exit 1
-          fi
-          FAILED=0
-          for page in index about pricing contact enterprise zen; do
-            if [ ! -f "out/${page}.html" ] && [ ! -f "out/${page}/index.html" ]; then
-              echo "FATAL: Missing page: ${page}"; FAILED=1
-            fi
-          done
           kill $SERVER_PID 2>/dev/null
-          if [ "$FAILED" = "1" ]; then exit 1; fi
-          echo "All smoke tests passed"
+          if echo "$BODY" | grep -q "Application error"; then
+            echo "FATAL: Homepage contains 'Application error'"; exit 1
+          fi
+          echo "The homepage renders"
+
+      # The gates run HERE, in the job that publishes, because there is nowhere
+      # else they can bind. `hanzo.yml` declares them too and that is the right
+      # place for the PR gate — but workflows on one trigger do not order
+      # themselves: cicd.yml and this file both fire on push to main, neither
+      # waits for the other, and a red gate over there publishes an image over
+      # here regardless. The only placement that makes "nothing publishes
+      # ungated" true is inside the job that pushes.
+      #
+      # This also retired the smoke test's second half, a list of six page names
+      # checked for existence. `requireExport()` in e2e/gates/export.ts is the
+      # same check DERIVED — every route the App Router tree answers must have
+      # shipped a page — so the hand-kept list was the weaker copy of a rule
+      # already stated once. What it caught that the gates do not is the
+      # homepage rendering an error boundary, which is why the curl above stays.
+      #
+      # HONEST BOUNDARY: these gates read the `out/` this job built, and the
+      # image is built by the Dockerfile's own `pnpm build`. Same command, same
+      # tree, same Node major — the one input that differed was the ingest key,
+      # and that is now the same expression on both sides. Gating the literal
+      # shipped bytes means extracting /srv from a loaded image before pushing
+      # it, which is a bigger change to a pipeline that cannot yet run.
+      - name: Install the browser the gates measure in
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Gates
+        run: pnpm gates
 
       # The apex ships as an IMAGE, like every other Hanzo static surface.
       #
