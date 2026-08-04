@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const Regions = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid-white/5 bg-[size:30px_30px] pointer-events-none" />
+      <div className="absolute inset-0 hz-grid pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div 

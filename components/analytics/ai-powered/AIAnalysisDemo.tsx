@@ -14,7 +14,7 @@ const AIAnalysisDemo = () => {
       transition={{ duration: 0.7 }}
       className="bg-gradient-to-r from-neutral-900 to-neutral-900/50 rounded-xl p-6 border border-neutral-800 shadow-xl overflow-hidden relative"
     >
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:24px_24px]"></div>
+      <div className="absolute inset-0 hz-grid" style={{ '--hz-grid-size': '24px', '--hz-grid-opacity': '0.02' } as React.CSSProperties}></div>
       
       <div className="relative z-10">
         <div className="flex items-center mb-6">

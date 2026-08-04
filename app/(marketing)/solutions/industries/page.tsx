@@ -504,7 +504,7 @@ const SolutionIndustries: React.FC = () => {
           </div>
 
           <div className="mb-12">
-            <div className="flex overflow-x-auto pb-4 scrollbar-hide gap-2 justify-center">
+            <div className="flex overflow-x-auto pb-4 hz-scrollbar-none gap-2 justify-center">
               {["Financial Services", "Healthcare", "Retail", "Technology"].map((industry) => (
                 <button
                   key={industry}

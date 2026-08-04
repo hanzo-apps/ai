@@ -39,7 +39,7 @@ const Edge = () => {
           
           {/* Hero Visual */}
           <div className="relative bg-primary/10 border border-border rounded-xl p-8 overflow-hidden">
-            <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
+            <div className="absolute inset-0 hz-grid [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="flex flex-col items-center p-4 bg-[var(--black)]/30 rounded-lg border border-border">
                 <Globe className="h-10 w-10 text-foreground/70 mb-4" />

@@ -74,7 +74,7 @@ const Community = () => {
 
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/30 relative overflow-hidden">
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:20px_20px]"></div>
+      <div className="absolute inset-0 hz-grid" style={{ '--hz-grid-size': '20px', '--hz-grid-opacity': '0.02' } as React.CSSProperties}></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div

@@ -216,7 +216,7 @@ const Features = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-secondary/80 border border-border rounded-xl p-6 hover:border-white/30/50 transition-all group"
+                  className="bg-secondary/80 border border-border rounded-xl p-6 hover:border-white/30 transition-all group"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div

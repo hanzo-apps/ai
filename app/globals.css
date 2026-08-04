@@ -164,6 +164,36 @@
   }
 }
 
+/* ── Decorative grid ──────────────────────────────────────────────────────────
+   Nine hero sections carried `bg-grid-white/5` (or `/[0.02]`) on an otherwise
+   empty absolutely-positioned div. `bg-grid-white` is not a Tailwind utility —
+   it comes from a template that defines it in a config this repo has never had
+   (v4 is CSS-first and there is no `@utility` for it either). It therefore
+   emitted NO rule, and all nine overlays have been painting nothing.
+
+   Plain CSS, in the `hz-` convention `.hz-prose` already established. The two
+   things that varied across those nine call sites are the two custom
+   properties, so a site that wants the default states nothing. */
+.hz-grid {
+  --hz-grid-size: 30px;
+  --hz-grid-opacity: 0.05;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, var(--hz-grid-opacity)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, var(--hz-grid-opacity)) 1px, transparent 1px);
+  background-size: var(--hz-grid-size) var(--hz-grid-size);
+}
+
+/* A horizontally-scrolling row that does not draw its scrollbar. Two chip rows
+   asked for this with `scrollbar-hide`, which is a plugin utility and this
+   build loads no plugins, so both have been drawing one. */
+.hz-scrollbar-none {
+  scrollbar-width: none;
+}
+
+.hz-scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
 /* ── Focus ring ───────────────────────────────────────────────────────────────
    Unlayered and doubly-rooted on purpose. @hanzo/design's ring is
    `2px solid var(--ring)`, and --ring is caught in the same self-reference as

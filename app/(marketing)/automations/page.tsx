@@ -241,7 +241,7 @@ const Automations = () => {
         {/* Category Filter */}
         <section className="py-8 px-4 md:px-8 border-y border-border bg-background sticky top-16 z-20">
           <div className="max-w-6xl mx-auto">
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            <div className="flex gap-2 overflow-x-auto pb-2 hz-scrollbar-none">
               {categories.map((category) => {
                 const Icon = category.icon;
                 const isActive = activeCategory === category.id;

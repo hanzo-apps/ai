@@ -231,17 +231,17 @@ const BlockchainDashboard = () => {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <a href="/blockchain/chains" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30/50 transition-colors group">
+        <a href="/blockchain/chains" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30 transition-colors group">
           <Server className="w-6 h-6 text-foreground mb-2" />
           <h4 className="font-medium mb-1">RPC Endpoints</h4>
           <p className="text-sm text-muted-foreground">Configure chain connections and endpoints</p>
         </a>
-        <a href="/blockchain/webhooks" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30/50 transition-colors group">
+        <a href="/blockchain/webhooks" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30 transition-colors group">
           <Webhook className="w-6 h-6 text-foreground mb-2" />
           <h4 className="font-medium mb-1">Webhooks</h4>
           <p className="text-sm text-muted-foreground">Set up event notifications</p>
         </a>
-        <a href="/blockchain/wallets" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30/50 transition-colors group">
+        <a href="/blockchain/wallets" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30 transition-colors group">
           <Shield className="w-6 h-6 text-foreground mb-2" />
           <h4 className="font-medium mb-1">Smart Wallets</h4>
           <p className="text-sm text-muted-foreground">ERC-4337 account abstraction</p>

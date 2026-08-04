@@ -203,7 +203,7 @@ const RelatedProductCard: React.FC<{ product: Product; index: number }> = ({ pro
       transition={{ duration: 0.3, delay: index * 0.1 }}
     >
       <Link href={product.href || "#"}>
-        <Card className="bg-secondary/50 border-border hover:border-white/30/50 transition-all duration-300 h-full group cursor-pointer hover:bg-secondary/80">
+        <Card className="bg-secondary/50 border-border hover:border-white/30 transition-all duration-300 h-full group cursor-pointer hover:bg-secondary/80">
           <CardHeader className="pb-3">
             <div className="flex items-start justify-between">
               <div className="p-2 rounded-lg bg-primary/5 border border-border group-hover:border-white/30 transition-colors">
@@ -556,7 +556,7 @@ export const ProductPageTemplate: React.FC<ProductPageTemplateProps> = ({ produc
                 rel="noopener noreferrer"
                 className="group"
               >
-                <Card className="bg-secondary/50 border-border hover:border-white/30/50 transition-all duration-300 h-full">
+                <Card className="bg-secondary/50 border-border hover:border-white/30 transition-all duration-300 h-full">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-lg">
                       <Github className="h-5 w-5" />
@@ -577,7 +577,7 @@ export const ProductPageTemplate: React.FC<ProductPageTemplateProps> = ({ produc
                   rel="noopener noreferrer"
                   className="group"
                 >
-                  <Card className="bg-secondary/50 border-border hover:border-white/30/50 transition-all duration-300 h-full">
+                  <Card className="bg-secondary/50 border-border hover:border-white/30 transition-all duration-300 h-full">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2 text-lg">
                         <BookOpen className="h-5 w-5" />
@@ -593,7 +593,7 @@ export const ProductPageTemplate: React.FC<ProductPageTemplateProps> = ({ produc
               )}
 
               <Link href="/pricing" className="group">
-                <Card className="bg-secondary/50 border-border hover:border-white/30/50 transition-all duration-300 h-full">
+                <Card className="bg-secondary/50 border-border hover:border-white/30 transition-all duration-300 h-full">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2 text-lg">
                       <Sparkles className="h-5 w-5" />

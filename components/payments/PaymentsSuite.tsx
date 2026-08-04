@@ -86,7 +86,7 @@ const PaymentsSuite = () => {
           transition={{ duration: 0.5 }}
           className="relative bg-gradient-to-br from-neutral-900/50 to-white/10 border border-neutral-800 rounded-xl p-8 overflow-hidden"
         >
-          <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
+          <div className="absolute inset-0 hz-grid [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
           <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
             <div className="md:w-2/3">
               <h3 className="text-2xl font-bold mb-4">Optimized for Growth</h3>

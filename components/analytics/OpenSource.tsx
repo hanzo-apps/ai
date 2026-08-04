@@ -35,7 +35,7 @@ const OpenSource = () => {
   
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20 relative">
-      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:30px_30px]"></div>
+      <div className="absolute inset-0 hz-grid" style={{ '--hz-grid-size': '30px', '--hz-grid-opacity': '0.02' } as React.CSSProperties}></div>
       
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">

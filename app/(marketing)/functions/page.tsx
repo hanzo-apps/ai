@@ -39,7 +39,7 @@ const Functions = () => {
 
           {/* Hero Visual */}
           <div className="relative bg-primary/10 border border-border rounded-xl p-8 overflow-hidden">
-            <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
+            <div className="absolute inset-0 hz-grid [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
             <pre className="text-sm sm:text-base overflow-x-auto bg-[var(--black)]/50 p-4 rounded-lg border border-white/30">
               <code className="text-foreground/80">
                 <span className="text-foreground">export</span> <span className="text-foreground/70">async function</span> <span className="text-foreground/70">handler</span><span className="text-[var(--white)]">(req, res) {'{'}</span>

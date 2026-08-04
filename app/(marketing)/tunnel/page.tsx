@@ -35,7 +35,7 @@ const Tunnel = () => {
 
           {/* Hero terminal */}
           <div className="relative bg-primary/10 border border-border rounded-xl p-8 overflow-hidden max-w-3xl mx-auto">
-            <div className="absolute inset-0 bg-grid-white/5 [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
+            <div className="absolute inset-0 hz-grid [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
             <pre className="text-sm sm:text-base overflow-x-auto bg-[var(--black)]/50 p-4 rounded-lg border border-white/30">
               <code className="text-foreground/80">
                 <span className="text-foreground/60">$</span> <span className="text-foreground">hanzo tunnel</span> <span className="text-[var(--white)]">3000</span>
