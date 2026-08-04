@@ -135,7 +135,7 @@ function Hero() {
             {copied ? (
               <Check className="h-4 w-4 text-emerald-400" />
             ) : (
-              <Copy className="h-4 w-4 text-neutral-500 transition-colors group-hover:text-white" />
+              <Copy className="h-4 w-4 text-neutral-400 transition-colors group-hover:text-white" />
             )}
           </button>
         </motion.div>
@@ -253,7 +253,7 @@ function Billing() {
             <span className="text-sm font-medium text-neutral-400">Pay-as-you-go</span>
           </div>
           <div className="mt-4 text-5xl font-semibold tracking-tight text-white">
-            $0<span className="text-xl font-normal text-neutral-500"> to start</span>
+            $0<span className="text-xl font-normal text-neutral-400"> to start</span>
           </div>
           <p className="mt-3 text-sm text-neutral-400">
             Create an organization, add a balance, and call any of {MODELS_PHRASE}. Costs accrue per use

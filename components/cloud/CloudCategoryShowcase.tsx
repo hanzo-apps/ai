@@ -44,7 +44,7 @@ function PrimitiveCard({ item, index }: { item: Primitive; index: number }) {
             </h3>
             {external && <ArrowUpRight className="h-3 w-3 flex-shrink-0 text-muted-foreground/40" />}
           </div>
-          {item.desc && <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-neutral-500">{item.desc}</p>}
+          {item.desc && <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-neutral-400">{item.desc}</p>}
         </div>
       </div>
     </motion.div>
@@ -83,9 +83,9 @@ export function CloudCategoryMap() {
                   </h3>
                   <span className="text-sm text-muted-foreground">{category.items.length}</span>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-500">{category.tagline}</p>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-400">{category.tagline}</p>
                 {category.brand === 'lux' && (
-                  <span className="mt-3 inline-flex rounded-full border border-white/10 px-2 py-0.5 text-[11px] text-neutral-500">
+                  <span className="mt-3 inline-flex rounded-full border border-white/10 px-2 py-0.5 text-[11px] text-neutral-400">
                     Lux Network
                   </span>
                 )}
@@ -107,14 +107,17 @@ function CategorySection({ category }: { category: CloudCategory }) {
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{category.title}</h2>
-            <p className="mt-1 text-sm text-neutral-500">{category.tagline}</p>
+            <p className="mt-1 text-sm text-neutral-400">{category.tagline}</p>
             {category.brand === 'lux' && (
-              <p className="mt-1 text-xs text-neutral-600">Powered by Lux Network</p>
+              <p className="mt-1 text-xs text-neutral-400">Powered by Lux Network</p>
             )}
           </div>
+          {/* hz-control: this is the section's navigation, and on a phone it is
+              the primary one. The touch floor is stated once in globals.css;
+              the marker is how a link outside the chrome opts into it. */}
           <Link
             href={`/products/${slug}`}
-            className="flex flex-shrink-0 items-center gap-1 text-sm text-neutral-400 no-underline transition-colors duration-200 hover:text-white hover:no-underline motion-reduce:transition-none"
+            className="hz-control flex-shrink-0 gap-1 text-sm text-neutral-400 no-underline transition-colors duration-200 hover:text-white hover:no-underline motion-reduce:transition-none"
           >
             View all
             <ArrowRight className="h-3.5 w-3.5" />
