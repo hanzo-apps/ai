@@ -40,7 +40,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, formatTimestamp }) =
         }`}
       >
         <div
-          className="prose prose-invert text-sm"
+          className="text-sm"
           dangerouslySetInnerHTML={{
             __html: sanitize(
               message.message.replace(/```(.+?)```/gs, '<pre><code>$1</code></pre>').replace(/\n/g, '<br>')

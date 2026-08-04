@@ -42,7 +42,7 @@ const Terms = () => {
 
         {/* Content */}
         <section className="pb-24 px-4 md:px-8 lg:px-12">
-          <div className="max-w-4xl mx-auto prose prose-invert prose-sm max-w-none">
+          <div className="max-w-4xl mx-auto">
             <div className="space-y-10 text-foreground/80">
 
               <div>

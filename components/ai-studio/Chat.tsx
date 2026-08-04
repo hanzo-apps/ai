@@ -39,7 +39,7 @@ const Chat = ({
               }`}
             >
               <div
-                className="prose prose-invert text-sm"
+                className="text-sm"
                 dangerouslySetInnerHTML={{
                   __html: sanitize(
                     message.content.replace(/```(.+?)```/gs, '<pre><code>$1</code></pre>')
