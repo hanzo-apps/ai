@@ -59,10 +59,21 @@ function PrimitiveCard({ item, index }: { item: Primitive; index: number }) {
   )
 }
 
-/** The ten categories as cards — the map of the cloud, each a door to its page. */
+/**
+ * The ten categories as cards — the map of the cloud, each a door to its page.
+ *
+ * FIVE ACROSS, TWO DOWN, because there are exactly ten of them. Three columns
+ * left the tenth card alone on a fourth row, and a lone card reads as an
+ * afterthought rather than a peer. The count is the layout: 2×5 closes the
+ * block, and the whole map is taken in at once instead of scrolled through.
+ *
+ * The cards are correspondingly quieter — a category is a signpost, not an
+ * argument, so it carries its name, its count and one line, at the size those
+ * need and no larger.
+ */
 export function CloudCategoryMap() {
   return (
-    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
       {cloudCategories.map((category, index) => {
         const Icon = category.icon
         return (
@@ -71,27 +82,20 @@ export function CloudCategoryMap() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.4, delay: (index % 3) * 0.05 }}
+            transition={{ duration: 0.4, delay: (index % 5) * 0.04 }}
           >
             <Link href={`/products/${categorySlug(category.title)}`}>
-              <div className="group h-full cursor-pointer rounded-xl border border-white/10 p-6 transition-colors duration-200 hover:border-white/25 motion-reduce:transition-none">
+              <div className="group h-full cursor-pointer rounded-xl border border-white/10 p-4 transition-colors duration-200 hover:border-white/25 motion-reduce:transition-none">
                 <div className="flex items-start justify-between">
-                  {/* A SPAN, not a heading. This grid and `CategorySection`
-                      below render the same ten categories on the same page, so
-                      every title was landing in the outline twice — an <h3>
-                      here and an <h2> there. The map is a set of doors; the
-                      section is the content behind them. Only one of those is a
-                      heading, and it is not this one. */}
-                  <span className="flex items-center gap-2.5 text-xl font-semibold tracking-tight text-neutral-200 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none">
-                    <Icon className="h-5 w-5 text-neutral-400 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none" />
+                  <h3 className="flex items-center gap-2 text-base font-semibold tracking-tight text-neutral-200 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none">
+                    <Icon className="h-4 w-4 shrink-0 text-neutral-400 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none" />
                     {category.title}
-                    <ArrowRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
-                  </span>
-                  <span className="text-sm text-muted-foreground">{category.items.length}</span>
+                  </h3>
+                  <span className="text-xs tabular-nums text-muted-foreground">{category.items.length}</span>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-neutral-500">{category.tagline}</p>
+                <p className="mt-1.5 text-xs leading-relaxed text-neutral-500">{category.tagline}</p>
                 {category.brand === 'lux' && (
-                  <span className="mt-3 inline-flex rounded-full border border-white/10 px-2 py-0.5 text-[11px] text-neutral-500">
+                  <span className="mt-2 inline-flex rounded-full border border-white/10 px-1.5 py-0.5 text-[10px] text-neutral-500">
                     Lux Network
                   </span>
                 )}
@@ -113,12 +117,7 @@ function CategorySection({ category }: { category: CloudCategory }) {
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{category.title}</h2>
-            {/* The tagline is stated once, on the map card above, which is this
-                page's summary layer. Repeating it here printed all ten
-                descriptions twice and was a large part of why this page runs to
-                roughly eighteen phone screens at 390px. The six primitive cards
-                below each carry their own description, so the section is not
-                left unexplained by dropping it. */}
+            <p className="mt-1 text-sm text-neutral-500">{category.tagline}</p>
             {category.brand === 'lux' && (
               <p className="mt-1 text-xs text-neutral-600">Powered by Lux Network</p>
             )}
