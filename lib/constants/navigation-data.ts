@@ -88,7 +88,7 @@ export const resourcesNav: NavSection[] = [
     title: "Community",
     items: [
       { title: "GitHub", href: ORG, description: "Open source", icon: Code },
-      { title: "Discord", href: "https://discord.gg/XthHQQj", description: "Chat with the community", icon: MessageSquare },
+      { title: "Discord", href: "https://discord.gg/CJCyAsm9Vr", description: "Chat with the community", icon: MessageSquare },
       { title: "Blog", href: "/blog", description: "Latest news", icon: FileText },
       { title: "Press", href: "/press", description: "Press kit", icon: ScrollText },
     ],

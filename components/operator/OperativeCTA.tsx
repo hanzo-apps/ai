@@ -39,7 +39,7 @@ const OperativeCTA = () => {
                 </a>
               </Button>
               <Button size="sm" variant="outline" className="text-lg px-4 py-2 text-[var(--white)] border-border bg-[var(--white)]/5 hover:bg-[var(--white)]/10">
-                <a href="https://discord.gg/XthHQQj" className="flex items-center gap-2">
+                <a href="https://discord.gg/CJCyAsm9Vr" className="flex items-center gap-2">
                   Join Discord Community
                 </a>
               </Button>

@@ -82,7 +82,7 @@ const Community = () => {
                   className="border-neutral-700 text-foreground/80 hover:bg-neutral-800"
                 >
                   <MessageSquare className="mr-2 h-5 w-5" />
-                  <a href="https://discord.gg/XthHQQj" target="_blank" rel="noopener noreferrer">
+                  <a href="https://discord.gg/CJCyAsm9Vr" target="_blank" rel="noopener noreferrer">
                     Join Discord Community
                   </a>
                 </Button>

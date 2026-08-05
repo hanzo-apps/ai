@@ -44,7 +44,7 @@ const BillingManagement = () => {
           className="border-border hover:bg-[var(--white)]/5 px-6 py-6"
         >
           <a
-            href="https://discord.gg/XthHQQj"
+            href="https://discord.gg/CJCyAsm9Vr"
             target="_blank"
             rel="noopener noreferrer"
           >

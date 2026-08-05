@@ -30,7 +30,7 @@ const Community = () => {
               <span className="text-[var(--white)]">GitHub</span>
             </a>
             <a 
-              href="https://discord.gg/XthHQQj" 
+              href="https://discord.gg/CJCyAsm9Vr" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="flex items-center bg-neutral-800 hover:bg-neutral-700 transition-colors px-4 py-2 rounded-lg"
