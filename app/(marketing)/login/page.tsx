@@ -9,7 +9,7 @@
 
 import { useEffect } from 'react';
 import { useIam } from '@hanzo/iam/react';
-import { Loader2 } from 'lucide-react';
+import { Spinner } from '@hanzo/gui';
 import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
@@ -28,7 +28,7 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background">
       <div className="text-center space-y-6">
-        <Loader2 className="w-12 h-12 animate-spin text-foreground mx-auto" />
+        <Spinner size="large" color="$foreground" alignItems="center" />
         <h1 className="text-xl font-medium text-foreground">Redirecting to sign in…</h1>
       </div>
     </div>
