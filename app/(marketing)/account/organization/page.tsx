@@ -24,6 +24,13 @@ import { XStack, YStack, Text } from "@hanzo/gui";
 import { Building, User, UserPlus, MoreVertical, Upload, MapPin, Globe, Link as LinkIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import AnimatedSection, { AnimatedHeading } from "@/components/ui/animated-section";
+import {
+  createInvitation,
+  inviteLink,
+  listInvitations,
+  withdrawInvitation,
+  type Invitation,
+} from '@/lib/hanzo/team';
 
 
 const Organization = () => {
@@ -58,9 +65,57 @@ const Organization = () => {
     toast.success('Organization settings updated');
   };
   
-  const handleInviteMember = () => {
-    // In a real app, this would open a modal for invitation
-    toast.success('Invitation link created and copied to clipboard');
+  // The real invitation flow, on the real IAM surface (lib/hanzo/team.ts).
+  // The toast only ever states what actually happened: a created invitation
+  // with its link on the clipboard, or the refusal's own reason.
+  const [inviteOpen, setInviteOpen] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteBusy, setInviteBusy] = useState(false);
+  const [pending, setPending] = useState<Invitation[]>([]);
+
+  const refreshInvitations = React.useCallback(async () => {
+    try {
+      const rows = await listInvitations();
+      setPending(rows.filter((r) => r.state === 'Active' && r.usedCount < r.quota));
+    } catch {
+      // The list is additive UI — a refusal here is not worth a toast on load.
+    }
+  }, []);
+
+  useEffect(() => {
+    refreshInvitations();
+  }, [refreshInvitations]);
+
+  const handleCreateInvitation = async () => {
+    if (!currentOrganization) return;
+    setInviteBusy(true);
+    try {
+      const inv = await createInvitation(currentOrganization.id, inviteEmail.trim() || undefined);
+      const link = inviteLink(inv.code);
+      await navigator.clipboard.writeText(link).catch(() => {});
+      toast.success(
+        inv.email
+          ? `Invitation for ${inv.email} created — link copied`
+          : 'Invitation created — link copied',
+      );
+      setInviteEmail('');
+      setInviteOpen(false);
+      refreshInvitations();
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : 'Invitation service refused');
+    } finally {
+      setInviteBusy(false);
+    }
+  };
+
+  const handleWithdraw = async (inv: Invitation) => {
+    try {
+      await withdrawInvitation(inv);
+      toast.success('Invitation withdrawn — its code no longer redeems');
+      refreshInvitations();
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : 'Invitation service refused');
+    }
   };
 
   if (!currentOrganization) {
@@ -157,12 +212,63 @@ const Organization = () => {
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-medium">Team Members</h3>
             
-            <Button onClick={handleInviteMember} className="space-x-2 bg-neutral-900 hover:bg-neutral-800 border-none">
+            <Button onClick={() => setInviteOpen((v) => !v)} className="space-x-2 bg-neutral-900 hover:bg-neutral-800 border-none">
               <UserPlus className="h-4 w-4" />
-              <span>Invite Member</span>
+              <span>Invite member</span>
             </Button>
           </div>
-          
+
+          {inviteOpen && (
+            <div className="flex items-center gap-3 mb-4">
+              <Input
+                type="email"
+                value={inviteEmail}
+                onChangeText={(t: string) => setInviteEmail(t)}
+                placeholder="Email to pin the invite to (optional)"
+                aria-label="Invite email"
+                className="max-w-sm"
+              />
+              <Button
+                onClick={handleCreateInvitation}
+                disabled={inviteBusy}
+                className="bg-neutral-900 hover:bg-neutral-800 border-none"
+              >
+                {inviteBusy ? 'Creating…' : 'Create invite link'}
+              </Button>
+            </div>
+          )}
+
+          {pending.length > 0 && (
+            <div className="mb-6">
+              <h4 className="text-sm font-medium text-neutral-400 mb-2">Pending invitations</h4>
+              <div className="space-y-2">
+                {pending.map((inv) => (
+                  <div key={`${inv.owner}/${inv.name}`} className="flex items-center justify-between rounded-lg border border-neutral-800 px-4 py-2">
+                    <div className="min-w-0">
+                      <div className="text-sm truncate">{inv.email || 'Anyone with the link'}</div>
+                      <div className="text-xs text-neutral-500 font-mono truncate">{inviteLink(inv.code)}</div>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={async () => {
+                          await navigator.clipboard.writeText(inviteLink(inv.code)).catch(() => {});
+                          toast.success('Invite link copied');
+                        }}
+                      >
+                        Copy link
+                      </Button>
+                      <Button variant="ghost" size="sm" onClick={() => handleWithdraw(inv)}>
+                        Withdraw
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <DataTable
             columns={[
               {
