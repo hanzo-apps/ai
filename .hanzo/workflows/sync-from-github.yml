@@ -17,8 +17,24 @@ on:
   workflow_dispatch: {}
 
 concurrency:
+  # cancel-in-progress MUST stay true, and the reason is in the database rather
+  # than in the docs. On this forge a job whose concurrency declares
+  # cancel-in-progress: false is written with is_concurrency_evaluated=false and
+  # created BLOCKED (action_run_job.status=7) pending an evaluation that a cron
+  # workflow never gets: ten minutes later the next scheduled run supersedes it
+  # and the blocked one is cancelled. Measured on this workflow over 24h —
+  # 145 cancelled, 1 blocked, 2 succeeded — while cicd.yml, the one workflow here
+  # that sets true, is written is_concurrency_evaluated=true and simply runs.
+  #
+  # deploy.yml and cloud.yml also set false and look healthy; they survive only
+  # because push and dispatch are sparse, so nothing arrives to supersede them.
+  # A */10 cron has no such luck, which is why the sync starved and the built-in
+  # pull mirror was the only thing keeping the two sides level.
+  #
+  # Cancelling a sync in flight is safe: the single mutation is one atomic
+  # fast-forward ref update, and a run that loses it is redone ten minutes later.
   group: sync-from-github
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   ff-main:
