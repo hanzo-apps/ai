@@ -68,8 +68,8 @@ jobs:
           password: ${{ secrets.GH_PAT }}
 
       # BEFORE the image build: NEXT_PUBLIC_* is inlined at build time, so the key
-      # travels as a build-arg (Dockerfile ARG EVENT_INGEST_KEY) or never reaches
-      # the bundle. deploy/EVENT_INGEST_KEY is the ONE name and ONE location in
+      # travels as a build-arg (Dockerfile ARG PUBLISHABLE_KEY) or never reaches
+      # the bundle. deploy/PUBLISHABLE_KEY is the ONE name and ONE location in
       # KMS, shared with hanzo.app, hanzo.chat and this repo's own apex lane
       # (deploy.yml). This step was MISSING: every cloud-www image was built
       # keyless, and cloud refuses credential-less ingest — the $public tenant
@@ -94,11 +94,11 @@ jobs:
           if [ -z "${token}" ]; then
             echo "::error::KMS login failed at ${KMS_ENDPOINT}/v1/kms/auth/login"; exit 1
           fi
-          key=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/secrets/deploy/EVENT_INGEST_KEY?env=${KMS_SECRET_ENV}" \
+          key=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/secrets/deploy/PUBLISHABLE_KEY?env=${KMS_SECRET_ENV}" \
             -H "Authorization: Bearer ${token}" | jq -r '.value // empty' || true)
           case "${key}" in
             pk-*) echo "::add-mask::${key}"; echo "key=${key}" >> "$GITHUB_OUTPUT" ;;
-            *)    echo "::error::deploy/EVENT_INGEST_KEY absent or not pk- — a keyless image 401s every anonymous event; refusing to build"; exit 1 ;;
+            *)    echo "::error::deploy/PUBLISHABLE_KEY absent or not pk- — a keyless image 401s every anonymous event; refusing to build"; exit 1 ;;
           esac
 
       - name: Build and push
@@ -112,7 +112,7 @@ jobs:
           push: true
           build-args: |
             SITE_ROOT=cloud
-            EVENT_INGEST_KEY=${{ steps.kms.outputs.key }}
+            PUBLISHABLE_KEY=${{ steps.kms.outputs.key }}
 
       # build-push-action can exit 0 before the manifest resolves, so a green run
       # could still leave the CR pinned to a tag that ImagePullBackOffs. Prove it

@@ -70,7 +70,7 @@ jobs:
       # BEFORE the build: NEXT_PUBLIC_* is inlined into the bundle at build time,
       # so a key fetched afterwards never reaches the artifact.
       #
-      # deploy/EVENT_INGEST_KEY is the ONE name and the ONE location, shared with
+      # deploy/PUBLISHABLE_KEY is the ONE name and the ONE location, shared with
       # hanzo.app and hanzo.chat. It is per-ORG, not per-property: one pk- resolves
       # the org for every surface, and the SDK's `product` field is what separates
       # them in the warehouse.
@@ -97,7 +97,7 @@ jobs:
           # the org comes from the TOKEN, not the URL. The old
           # /v1/kms/orgs/<org>/secrets/... shape 404s here, and a 404 read through
           # `|| true` is indistinguishable from an absent secret.
-          key=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/secrets/deploy/EVENT_INGEST_KEY?env=${KMS_SECRET_ENV}" \
+          key=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/secrets/deploy/PUBLISHABLE_KEY?env=${KMS_SECRET_ENV}" \
             -H "Authorization: Bearer ${token}" | jq -r '.value // empty' || true)
           # No key is NO SHIP. This used to warn and build anyway, on the premise
           # that keyless traffic still landed under a $public tenant with a 200.
@@ -108,9 +108,9 @@ jobs:
           # only; another prefix is not read as a key, so it is the same refusal.
           # hanzo.app's release lane already refuses the same way.
           case "${key}" in
-            '')   echo "::error::deploy/EVENT_INGEST_KEY absent from KMS — a keyless bundle 401s every anonymous event; refusing to ship"; exit 1 ;;
+            '')   echo "::error::deploy/PUBLISHABLE_KEY absent from KMS — a keyless bundle 401s every anonymous event; refusing to ship"; exit 1 ;;
             pk-*) echo "::add-mask::${key}"; echo "key=${key}" >> "$GITHUB_OUTPUT" ;;
-            *)    echo "::error::deploy/EVENT_INGEST_KEY does not begin with 'pk-' — cloud would not read it as a key; refusing to ship"; exit 1 ;;
+            *)    echo "::error::deploy/PUBLISHABLE_KEY does not begin with 'pk-' — cloud would not read it as a key; refusing to ship"; exit 1 ;;
           esac
 
       # 759 pages; the default heap OOMs it.
@@ -118,7 +118,7 @@ jobs:
         run: pnpm build
         env:
           NODE_OPTIONS: '--max-old-space-size=8192'
-          NEXT_PUBLIC_EVENT_INGEST_KEY: ${{ steps.kms.outputs.key }}
+          NEXT_PUBLIC_PUBLISHABLE_KEY: ${{ steps.kms.outputs.key }}
         timeout-minutes: 30
 
       # Prove the key was INLINED, not merely fetched — the same proof the
@@ -128,13 +128,13 @@ jobs:
       # every anonymous event 401s.
       - name: Prove the ingest key reached the bundle
         env:
-          NEXT_PUBLIC_EVENT_INGEST_KEY: ${{ steps.kms.outputs.key }}
+          NEXT_PUBLIC_PUBLISHABLE_KEY: ${{ steps.kms.outputs.key }}
         run: |
           set -euo pipefail
-          if [ -z "${NEXT_PUBLIC_EVENT_INGEST_KEY}" ]; then
+          if [ -z "${NEXT_PUBLIC_PUBLISHABLE_KEY}" ]; then
             echo "::error::the fetched key never left the KMS step — refusing to ship"; exit 1
           fi
-          if ! grep -rqF "${NEXT_PUBLIC_EVENT_INGEST_KEY}" out/_next/static; then
+          if ! grep -rqF "${NEXT_PUBLIC_PUBLISHABLE_KEY}" out/_next/static; then
             echo "::error::the ingest key is NOT in out/_next/static — the bundler did not inline it; refusing to ship"; exit 1
           fi
 

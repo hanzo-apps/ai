@@ -18,7 +18,7 @@ const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.a
  *  (deploy.yml and the Dockerfile) refuse to ship a bundle it did not reach.
  *  Prefix is `pk-` (cloud.PublishablePrefix); no other prefix is read as a key.
  *  Mint: POST /v1/keys {"type":"publishable"} */
-const INGEST_KEY = process.env.NEXT_PUBLIC_EVENT_INGEST_KEY
+const INGEST_KEY = process.env.NEXT_PUBLIC_PUBLISHABLE_KEY
 
 /** Anonymous marketing traffic; forward a stored bearer when one exists. */
 function getToken(): string | undefined {
