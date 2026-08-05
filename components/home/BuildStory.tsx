@@ -65,9 +65,12 @@ export default function BuildStory() {
           transition={{ duration: 0.5 }}
           className="mx-auto mb-14 max-w-2xl text-center"
         >
-          <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-400">
-            Enso → hanzo.app → Hanzo Cloud
-          </div>
+          {/* No eyebrow here. The one that stood in this slot read
+              "Enso → hanzo.app → Hanzo Cloud" under `uppercase`, which broke
+              the no-all-caps rule and said the same three things the cards
+              below already say — the third time the page stated that triad,
+              after the hero pills and these headings. A label that only
+              restates its own section is not a label. */}
           <h2 className="text-3xl font-bold text-white md:text-4xl">From frontier model to shipped product</h2>
           <p className="mt-4 text-lg text-neutral-400">
             Start with the model, build your app, and run it on the cloud — one continuous path.

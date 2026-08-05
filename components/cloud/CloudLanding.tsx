@@ -106,7 +106,13 @@ function Hero() {
         >
           One API for <span className="text-white">{MODELS_PHRASE}</span>, Base backends, identity,
           secrets, vector search, and full-text search. Pay-as-you-go, billed per organization.
-          Run it on Hanzo Cloud or self-host the exact same stack on your own Kubernetes.
+          {/* "your own Kubernetes" was the whole of the self-host story, and it
+              set the floor at a cluster. The smaller and more convincing claim
+              was missing: it also runs on the laptop you are reading this on.
+              Same API on localhost, same code, one binary. */}{' '}
+          Run it on Hanzo Cloud, self-host the same stack on your own Kubernetes, or run it on your
+          own machine — <span className="text-white">one binary</span>, same API on{' '}
+          <span className="text-white">localhost</span>.
         </motion.p>
 
         <motion.div
