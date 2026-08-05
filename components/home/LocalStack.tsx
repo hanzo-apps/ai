@@ -26,6 +26,17 @@ import { SH } from './nav-data'
  * `external-binaries/hanzo-node/hanzo-node` under `externalBin`), but the repo
  * is private, so a link would be a 404 for every logged-out visitor. Do not add
  * the link back until the repo is public — check, do not assume.
+ *
+ * The Desktop card said "ships the agent node AND the inference engine inside
+ * the bundle, so it answers on first launch". Half of that was false and it is
+ * worth recording why, because the mistake is easy to repeat: `externalBin`
+ * declares hanzo-node, deno and uv and NOTHING ELSE, the
+ * `external-binaries/hanzo-engine/` directory in the tree is EMPTY, and
+ * node's Cargo.toml has `hanzo_engine` commented out. The engine is a separate
+ * native service on :36900 (chat) and :36901 (embeddings), which the app finds
+ * — `src-tauri/src/commands/engines.rs` browses `_hanzo-engine._tcp.local.`
+ * over mDNS. A directory existing next to the bundled sidecars is not evidence
+ * that its contents ship. Read the bundle config, not the folder listing.
  */
 
 interface Piece {
@@ -38,7 +49,7 @@ const PIECES: Piece[] = [
   {
     name: 'Desktop',
     href: 'https://github.com/hanzoai/desktop',
-    body: 'The whole stack as an app. It ships the agent node and the inference engine inside the bundle, so it answers on first launch with no key and no account.',
+    body: 'The whole stack as an app. The agent node ships inside the bundle as a sidecar; inference comes from the engine, running locally or on your LAN.',
   },
   {
     name: 'CLI',
@@ -70,8 +81,12 @@ export default function LocalStack() {
         >
           <h2 className="text-3xl font-bold text-white md:text-4xl">Run it on your own machine</h2>
           <p className="mt-4 text-lg text-neutral-400">
-            Most AI platforms hand you an API key. We hand you the platform. Install one binary and
-            inference, agents, tools and storage are running locally — no account, no network call.
+            Most AI platforms hand you an API key. We hand you the platform. One binary, and{' '}
+            <code className="rounded bg-neutral-900 px-1.5 py-0.5 text-[15px] text-neutral-300">
+              hanzo serve
+            </code>{' '}
+            brings up the cloud itself — control plane, identity, secrets, gateway, storage,
+            pub/sub — on your own hardware.
           </p>
           <p className="mt-3 text-[15px] leading-relaxed text-neutral-500">
             It is the same code we run in our own cloud, under an open licence. Point a client at{' '}
