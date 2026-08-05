@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ogImages, twitterImages } from '@/lib/constants/og'
 
 export const metadata: Metadata = {
   title: 'Open Source — Hanzo AI | 723+ Repos',
@@ -9,13 +10,13 @@ export const metadata: Metadata = {
     url: 'https://hanzo.ai/open-source',
     siteName: 'Hanzo AI',
     type: 'website',
-    images: [{ url: '/open-source/opengraph-image', width: 1200, height: 630, alt: 'Hanzo AI Open Source' }],
+    images: ogImages('Hanzo AI Open Source'),
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Open Source — Hanzo AI | 723+ Repos',
     description: '723+ open-source repositories across AI infrastructure, frontier models, blockchain, and developer tools. MIT/Apache licensed. Fork, self-host, or contribute. OSS Compute Dividends: up to 25% of compute costs paid back to open source authors via SBOM-verified attribution.',
-    images: ['/open-source/opengraph-image'],
+    images: twitterImages,
   },
 }
 

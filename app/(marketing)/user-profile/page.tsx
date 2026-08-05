@@ -20,7 +20,7 @@ const UserProfile = () => {
 
   // This would come from a real profile model
   const userProfile = {
-    bio: "Senior Developer at Hanzo Industries with a passion for AI and web technologies.",
+    bio: "Senior Developer at Hanzo AI with a passion for AI and web technologies.",
     location: "San Francisco, CA",
     joinedDate: "January 2022",
     website: "https://alexjohnson.dev",

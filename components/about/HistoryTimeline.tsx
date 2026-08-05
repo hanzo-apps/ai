@@ -118,7 +118,7 @@ const HistoryTimeline = () => {
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             From crowd-powered marketing to AI innovation, explore the key milestones
-            that shaped Hanzo Industries.
+            that shaped Hanzo AI.
           </p>
         </motion.div>
 

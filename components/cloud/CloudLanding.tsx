@@ -201,8 +201,7 @@ function ConsoleShot() {
  * of the cloud and then went stale on its own. The section renders the SAME
  * `CloudCategoryShowcase` the `/products` index does, from the same taxonomy
  * the Products mega-menu reads, so what the menu promises and what this page
- * shows are one thing by construction. Web3 renders under the Lux brand and
- * hands off to lux.cloud — the showcase carries that rule, not this page.
+ * shows are one thing by construction.
  */
 function Primitives() {
   return (

@@ -81,7 +81,7 @@ export default function PressPage() {
               <span className="text-foreground">Press</span><br /><span className="text-muted-foreground">Resources.</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto">
-              Everything you need to write about Hanzo Industries Inc. Download our press kit, access brand assets, and find media contacts.
+              Everything you need to write about Hanzo AI, Inc. Download our press kit, access brand assets, and find media contacts.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.15 }} className="flex flex-wrap items-center justify-center gap-4">
               <button className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"><Download className="w-4 h-4 mr-2" />Download Press Kit</button>
@@ -96,9 +96,9 @@ export default function PressPage() {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-secondary/50 border border-border rounded-xl p-8">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-primary/10"><Building2 className="w-5 h-5 text-foreground" /></div>
-                <h2 className="text-2xl font-bold text-foreground">About Hanzo Industries Inc</h2>
+                <h2 className="text-2xl font-bold text-foreground">About Hanzo AI, Inc.</h2>
               </div>
-              <p className="text-foreground/80 text-lg leading-relaxed mb-8">Hanzo Industries Inc is an AI technology company building the infrastructure for the next generation of intelligent applications. Founded in 2016 and headquartered in Los Angeles, Hanzo provides enterprise-grade AI platforms, developer tools, and cloud services to companies worldwide. Our mission is to make AI accessible, safe, and beneficial for everyone.</p>
+              <p className="text-foreground/80 text-lg leading-relaxed mb-8">Hanzo AI, Inc. is an AI technology company building the infrastructure for the next generation of intelligent applications. Founded in 2016 and headquartered in Los Angeles, Hanzo provides enterprise-grade AI platforms, developer tools, and cloud services to companies worldwide. Our mission is to make AI accessible, safe, and beneficial for everyone.</p>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {companyFacts.map((fact) => (
                   <div key={fact.label} className="text-center bg-neutral-800/50 rounded-lg p-4">
@@ -129,7 +129,7 @@ export default function PressPage() {
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-secondary/50 border border-border rounded-xl p-6">
                 <h3 className="font-semibold text-foreground mb-4">Headquarters</h3>
                 <div className="space-y-1 text-muted-foreground">
-                  <p className="font-medium text-foreground">Hanzo Industries Inc</p>
+                  <p className="font-medium text-foreground">Hanzo AI, Inc.</p>
                   <p>Los Angeles, California</p>
                   <p>United States</p>
                 </div>

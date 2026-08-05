@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, ArrowUpRight, BookOpen, ExternalLink, Github } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, BookOpen, Github } from 'lucide-react'
 import { Button } from '@hanzo/ui'
 import { ProductShot } from '@hanzogui/shell'
 import {
@@ -20,7 +20,7 @@ const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
   coming: 'Soon',
 }
 
-const isExternal = (item: Primitive) => Boolean(item.external) || /^https?:\/\//.test(item.href)
+const isExternal = (item: Primitive) => /^https?:\/\//.test(item.href)
 
 /**
  * Category landing page for one of the ten cloud primitives. Data-driven from
@@ -28,14 +28,14 @@ const isExternal = (item: Primitive) => Boolean(item.external) || /^https?:\/\//
  * mega-menu reads, so the category header, this page, and every leaf can never
  * drift apart. One component renders all ten categories (DRY).
  *
- * Web3 is a Lux Network surface: when the category is Lux-branded every leaf
- * hands off to lux.cloud and the page shows the Lux brand, never the Hanzo mark.
+ * Every category renders the Hanzo brand, because this is a Hanzo host. A leaf
+ * may live on another Hanzo property (Web3 → web3.hanzo.ai) and opens in a new
+ * tab; no leaf ever carries another company's name.
  */
 export function CloudCategoryOverview({ slug }: { slug: string }) {
   const category = getCategoryBySlug(slug)
   if (!category) return null
 
-  const isLux = category.brand === 'lux'
   const shot = shotForCategory(slug)
 
   return (
@@ -59,16 +59,9 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            {isLux && (
-              <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-3 py-1 text-[11px] font-medium text-muted-foreground">
-                Powered by Lux Network
-              </span>
-            )}
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{category.title}</h1>
             <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{category.tagline}</p>
-            <p className="mt-3 text-sm text-muted-foreground/70">
-              {isLux ? 'Powered by Lux Network' : 'Open source · On-chain settlement'}
-            </p>
+            <p className="mt-3 text-sm text-muted-foreground/70">Open source · On-chain settlement</p>
           </motion.div>
         </div>
       </section>
@@ -136,43 +129,28 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
         {/* Positioning + CTAs */}
         <p className="mt-14 text-sm text-muted-foreground">{POSITIONING}</p>
         <div className="mt-6 flex flex-wrap gap-3">
-          {isLux ? (
-            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <a href="https://lux.cloud" target="_blank" rel="noopener noreferrer">
-                Explore lux.cloud
-                <ExternalLink className="ml-1.5 h-4 w-4" />
-              </a>
-            </Button>
-          ) : (
-            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-              <Link href="/signup">
-                Get started
-                <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Link>
-            </Button>
-          )}
+          <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Link href="/signup">
+              Get started
+              <ArrowRight className="ml-1.5 h-4 w-4" />
+            </Link>
+          </Button>
           <Button
             asChild
             variant="outline"
             className="border-border bg-transparent text-foreground/80 hover:bg-accent hover:text-foreground"
           >
-            <a
-              href={isLux ? 'https://docs.lux.cloud' : 'https://docs.hanzo.ai'}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://docs.hanzo.ai" target="_blank" rel="noopener noreferrer">
               <BookOpen className="mr-1.5 h-4 w-4" />
               Docs
             </a>
           </Button>
-          {!isLux && (
-            <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
-              <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer">
-                <Github className="mr-1.5 h-4 w-4" />
-                Source
-              </a>
-            </Button>
-          )}
+          <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
+            <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer">
+              <Github className="mr-1.5 h-4 w-4" />
+              Source
+            </a>
+          </Button>
         </div>
       </section>
 

@@ -37,8 +37,6 @@ const CATEGORIES: CardItem[] = cloudCategories.map((c) => ({
   icon: c.icon,
   description: c.items.map((i) => i.title).join(' · '),
   href: c.items[0]?.href ?? '/',
-  // Web3 is a Lux Network surface — the same white-label mark the mega-menu shows.
-  ...(c.brand === 'lux' ? { meta: 'Lux' } : null),
 }))
 
 export default function CloudCategories() {

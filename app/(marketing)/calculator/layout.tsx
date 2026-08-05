@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ogImages, twitterImages } from '@/lib/constants/og'
 
 const TITLE = 'True Savings — Hanzo'
 const DESCRIPTION =
@@ -13,13 +14,13 @@ export const metadata: Metadata = {
     url: 'https://hanzo.ai/calculator',
     siteName: 'Hanzo AI',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Hanzo True Savings' }],
+    images: ogImages('Hanzo True Savings'),
   },
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
-    images: ['/og-image.png'],
+    images: twitterImages,
   },
 }
 

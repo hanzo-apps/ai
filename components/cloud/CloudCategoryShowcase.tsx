@@ -14,12 +14,12 @@ import { categorySlug, cloudCategories, type CloudCategory, type Primitive } fro
  * the same source as the mega-menu and the `/products/<slug>` category pages,
  * so the nav, the index, and the cloud front door can never drift.
  *
- * Web3 is a Lux Network surface. Its leaves hand off to lux.cloud under the LUX
- * brand and carry no Hanzo console link — the white-label separation is
- * absolute, so the category is labelled as Lux wherever it renders.
+ * One brand renders here, and it is Hanzo's. A leaf on another Hanzo property
+ * (Web3 → web3.hanzo.ai) opens in a new tab; nothing on this host is badged
+ * with another company's name.
  */
 
-const isExternal = (item: Primitive) => Boolean(item.external) || /^https?:\/\//.test(item.href)
+const isExternal = (item: Primitive) => /^https?:\/\//.test(item.href)
 
 /** One primitive — icon, name, and its one-line descriptor. */
 function PrimitiveCard({ item, index }: { item: Primitive; index: number }) {
@@ -94,11 +94,6 @@ export function CloudCategoryMap() {
                   <span className="text-xs tabular-nums text-muted-foreground">{category.items.length}</span>
                 </div>
                 <p className="mt-1.5 text-xs leading-relaxed text-neutral-500">{category.tagline}</p>
-                {category.brand === 'lux' && (
-                  <span className="mt-2 inline-flex rounded-full border border-white/10 px-1.5 py-0.5 text-[10px] text-neutral-500">
-                    Lux Network
-                  </span>
-                )}
               </div>
             </Link>
           </motion.div>
@@ -118,9 +113,6 @@ function CategorySection({ category }: { category: CloudCategory }) {
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{category.title}</h2>
             <p className="mt-1 text-sm text-neutral-500">{category.tagline}</p>
-            {category.brand === 'lux' && (
-              <p className="mt-1 text-xs text-neutral-600">Powered by Lux Network</p>
-            )}
           </div>
           <Link
             href={`/products/${slug}`}

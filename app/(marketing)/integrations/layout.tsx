@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ogImages, twitterImages } from '@/lib/constants/og'
 
 export const metadata: Metadata = {
   title: 'Integrations — Hanzo AI',
@@ -11,13 +12,13 @@ export const metadata: Metadata = {
     url: 'https://hanzo.ai/integrations',
     siteName: 'Hanzo AI',
     type: 'website',
-    images: [{ url: '/integrations/opengraph-image', width: 1200, height: 630, alt: 'Hanzo AI Integrations' }],
+    images: ogImages('Hanzo AI Integrations'),
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Integrations — Hanzo AI',
     description: 'Use Hanzo AI with any SDK, framework, or language.',
-    images: ['/integrations/opengraph-image'],
+    images: twitterImages,
   },
 }
 

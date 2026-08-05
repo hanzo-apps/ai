@@ -52,7 +52,7 @@ const AboutHero = () => {
           >
             <span className="text-foreground">History of</span>
             <br />
-            <span className="text-muted-foreground">Hanzo Industries.</span>
+            <span className="text-muted-foreground">Hanzo AI.</span>
           </motion.h1>
 
           <motion.p

@@ -64,16 +64,22 @@ This ONE static export (`out/`) serves TWO sites — split by host, not by build
    wraps it; it ships its OWN nav + footer (`components/home/*`). "What can I
    help with?" composer forwards to `hanzo.chat/?q=…`; nav deep-links to
    cloud.hanzo.ai; **Foundation → zoo.ngo** (Zoo Labs governs Hanzo).
-2. **cloud.hanzo.ai** (k8s `cloud-site` image, `ghcr.io/hanzoai/cloud-site`,
-   `hanzoai/static`) — the **detailed product/marketing site**. `Dockerfile`
-   does `cp out/cloud-site.html out/index.html`, so this host's ROOT is
-   `app/cloud-site/page.tsx` (`components/cloud/CloudLanding`) while every deep
-   `(marketing)/*` page (docdb, vector, kv, iam, …) serves beneath it. The apex
-   `/` change never touches this host (its root is decoupled via that `cp`).
-   Traefik router `cloud-hanzo-ai` (universe `infra/k8s/ingress/routes.yaml`) →
-   Service `www` → the image; App CR `infra/k8s/operator/crs/www.yaml` pins the tag.
-   Deploy cloud.hanzo.ai = rebuild the image (on-cluster BuildKit, NOT local) +
-   bump the `www` CR tag.
+2. **cloud.hanzo.ai** (`ghcr.io/hanzoai/cloud-www` on `hanzoai/static`) — the
+   **detailed product/marketing site**. `Dockerfile` takes `ARG SITE_ROOT` and
+   `.hanzo/workflows/cloud.yml` passes `SITE_ROOT=cloud`, so it copies
+   `out/cloud.html` over `out/index.html` and this host's ROOT is
+   **`app/(marketing)/cloud/page.tsx`** (`components/cloud/CloudLanding`) while
+   every deep `(marketing)/*` page (docdb, vector, kv, iam, …) serves beneath
+   it. The apex `/` change never touches this host (its root is decoupled via
+   that `cp`). Traefik router `cloud-hanzo-ai` (universe
+   `infra/k8s/ingress/routes.yaml`) → Service `www` → the image.
+   Deploy cloud.hanzo.ai = **two hand steps, there is no push-to-deploy**:
+   run `cloud.yml` (`workflow_dispatch` only, hand-typed `tag` = next patch
+   over the live pin), then bump BOTH `image.tag` and `image.digest` in
+   `charts/app/values/hanzo/www.yaml` on the **forge** copy of universe
+   (git.hanzo.ai/hanzo/universe — the GitHub mirror is not what CD reads).
+   Hanzo CD rolls it from there. Miss the digest and nothing moves.
+   The old `infra/k8s/operator/crs/www.yaml` path is retired.
 
 - The old apex homepage (`app/(marketing)/page.tsx`, the `components/landing/*`
   sections) was relocated to **`/overview`** (`app/(marketing)/overview/page.tsx`)
@@ -251,15 +257,22 @@ positioned "Open AI Cloud — GCP-compatible. Open source. On-chain.":
 | Dev      | `/products/dev`      | CLI, SDKs, API, Playground, IDE, Desktop |
 | Platform | `/products/platform` | Projects, Environments, Builds, Registry, Releases, Pipelines |
 | Observe  | `/products/observe`  | Logs, Metrics, Traces, Dashboards, Alerts, Cost |
-| Web3     | `/products/web3`     | Settlement, Chains, Wallets, Tokens, Indexer, Attestations — **Lux** → lux.cloud |
+| Web3     | `/products/web3`     | Node, Data, Wallets, Explorer, MPC, Rollups, Webhooks, Chains → web3.hanzo.ai |
 | Apps     | `/products/apps`     | Chat, Bot, Search, Crawl, Studio, Console |
 
 - Each mega-menu **category header links to its `/products/<slug>` page**
   (`app/(marketing)/products/[categoryId]/page.tsx`, generated from
   `categorySlugs`); the page is `components/cloud/CloudCategoryOverview.tsx`.
-- **Web3 = Lux Network.** Those leaves hand off to **lux.cloud** under the
-  **Lux** brand (white-label: never the Hanzo mark on a Lux surface); no Hanzo
-  console link, docs → docs.lux.cloud.
+- **Web3 = web3.hanzo.ai**, and the leaves are the eight products that host
+  actually serves — each `href` a page measured live at 200, each blurb that
+  page's own sentence. It used to be nine Lux products behind a "Lux Network"
+  badge, all nine linking to `lux.cloud/services`: another company's name on a
+  Hanzo host, advertising nine capabilities Hanzo does not serve. White-label
+  runs BOTH ways — Lux sells the same stack as Lux at lux.cloud, and neither
+  host says the other's name. There is no `brand` field on the taxonomy any
+  more, and no `external` flag: a leaf being off-property is READ off its
+  absolute href (`offProperty()` in `lib/data/cloud-primitives.ts`), because a
+  flag saying what a URL already says is a second copy of one fact.
 - Product ↔ `/v1/<svc>` ↔ plan/usage mapping: **`docs/product-service-map.md`**
   (reconciled against `~/work/hanzo/cloud/subsystems/subsystems.go`).
 

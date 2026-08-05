@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { SiteHeader, SiteFooter } from '@/components/home/shell'
 import { AccountProvider } from '@/contexts/AccountContext'
 import { BillingProvider } from '@/contexts/BillingContext'
+import { ogImages, twitterImages } from '@/lib/constants/og'
 
 const SITE_TITLE = 'Hanzo — the AI cloud for agents and apps'
 const SITE_DESCRIPTION = 'Build, deploy, and govern AI agents with unified access to models, MCP tools, memory, vector search, secure sandboxes, IAM, KMS, and audit logs. Open-source. Self-host or use the cloud.'
@@ -15,13 +16,13 @@ export const metadata: Metadata = {
     url: 'https://hanzo.ai',
     siteName: 'Hanzo AI',
     type: 'website',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: SITE_TITLE }],
+    images: ogImages(SITE_TITLE),
   },
   twitter: {
     card: 'summary_large_image',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ['/opengraph-image'],
+    images: twitterImages,
   },
 }
 

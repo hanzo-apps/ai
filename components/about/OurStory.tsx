@@ -26,7 +26,7 @@ const OurStory = () => {
           className="bg-card backdrop-blur-sm border border-border rounded-lg p-8 mb-10"
         >
           <p className="text-muted-foreground md:text-lg leading-relaxed mb-6">
-            Hanzo Industries, Inc. – originally known as Crowdstart under Verus Media – has undergone several transformations since its inception.
+            Hanzo AI, Inc. – originally known as Crowdstart under Verus Media – has undergone several transformations since its inception.
             Founded by Zach Kelling (with David Tai as co-founder) in the mid-2010s, the company evolved from a crowd-powered marketing platform
             into a Techstars-backed artificial intelligence venture, and ultimately into a multifaceted AI technology provider.
           </p>
@@ -38,7 +38,7 @@ const OurStory = () => {
           </p>
 
           <p className="text-muted-foreground md:text-lg leading-relaxed">
-            Today, operating under the umbrella Hanzo Industries, Inc., we remain small but influential,
+            Today, operating as Hanzo AI, Inc., we remain small but influential,
             proving the mantra that a lean, mission-driven team can punch well above its weight. Our mission
             is to accelerate human entrepreneurship through intelligent technology and timeless wisdom.
           </p>

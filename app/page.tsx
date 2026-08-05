@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import HomeLanding from '@/components/home/HomeLanding'
+import { ogImages, twitterImages } from '@/lib/constants/og'
 
 // Apex hanzo.ai — the clean, chat-centric landing. Lives at the app root (outside
 // the (marketing) route group) so it is wrapped only by the root layout and
@@ -21,13 +22,13 @@ export const metadata: Metadata = {
     url: 'https://hanzo.ai',
     siteName: 'Hanzo',
     type: 'website',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: TITLE }],
+    images: ogImages(TITLE),
   },
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
-    images: ['/opengraph-image'],
+    images: twitterImages,
   },
 }
 

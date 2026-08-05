@@ -35,8 +35,8 @@
 import type { ComponentType } from 'react'
 import { policy } from '@/lib/publish'
 import {
-  Activity, ArrowLeftRight, ArrowUpDown, AudioLines, BadgeCheck, Bell, Blocks,
-  BookOpen, Bot, Boxes, Brain, Building2, Cloud, Coins, Container, Cpu,
+  Activity, ArrowUpDown, AudioLines, BadgeCheck, Bell, Blocks,
+  BookOpen, Bot, Boxes, Brain, Building2, Cloud, Container, Cpu,
   CreditCard, Database, FileClock, FileKey, FileSignature, FileSpreadsheet,
   FileText, FolderGit2, FolderLock, GitBranch, Globe, HardDrive, Image, Inbox,
   Key, KeyRound, Landmark, Layers, LayoutDashboard, LineChart, ListTodo, Lock,
@@ -74,14 +74,6 @@ export interface Primitive {
   console?: string
   /** Resolved menu descriptor: blurb ?? tagline (resolved at the bottom). */
   desc?: string
-  /**
-   * True for a leaf that links OUT to another surface (the Web3 leaves point at
-   * lux.cloud). External leaves get no Hanzo console deep-link and their docs
-   * resolve to the external brand's docs, not docs.hanzo.ai.
-   */
-  external?: boolean
-  /** White-label brand for a leaf that is NOT a Hanzo surface (e.g. 'lux'). */
-  brand?: 'lux'
 }
 
 export interface CloudCategory {
@@ -91,12 +83,6 @@ export interface CloudCategory {
   icon: CloudIcon
   /** One-line category positioning — also the mega-menu column subtitle. */
   tagline: string
-  /**
-   * White-label brand for the whole category. Web3 is a Lux Network surface —
-   * the category page + mega-menu render the Lux brand and hand off to
-   * lux.cloud, never showing the Hanzo mark on a Lux surface.
-   */
-  brand?: 'lux'
   /**
    * A short qualifier shown beside the category everywhere it appears — the
    * scope caveat a reader needs before clicking. "fiat only" on Payments is not
@@ -119,13 +105,10 @@ const DOCS = 'https://docs.hanzo.ai'
 const CONSOLE = 'https://console.hanzo.ai'
 const DOCS_BASE = 'https://docs.hanzo.ai/docs'
 
-// Lux Network surfaces (the Web3 category). These are NOT Hanzo products: they
-// live at lux.cloud under the Lux brand. White-label separation is absolute —
-// a Lux leaf never carries a Hanzo console link, Hanzo docs, or the Hanzo mark.
-const LUX = 'https://lux.cloud'
-const LUX_SERVICES = 'https://lux.cloud/services'
-const LUX_DOCS = 'https://docs.lux.cloud'
-const LUX_ORG = 'https://github.com/luxfi'
+// The Hanzo Web3 surface (the Web3 category). A Hanzo host, Hanzo brand, its
+// own product pages — off THIS export but not off the brand, which is why its
+// leaves carry absolute URLs and no console deep-link.
+const WEB3 = 'https://web3.hanzo.ai'
 
 // Shared defaults for generated overview pages: source is the org (always 200,
 // open source) and docs home (separate site). Keeps every link live.
@@ -343,19 +326,26 @@ const rawCategories: CloudCategory[] = [
   {
     title: 'Web3',
     icon: Landmark,
-    tagline: 'Nodes, wallets, and on-chain infrastructure — powered by Lux.',
-    note: 'powered by Lux',
-    brand: 'lux',
+    tagline: 'Nodes, wallets, and on-chain infrastructure.',
+    // Hanzo's Web3 surface is web3.hanzo.ai, and this category is the eight
+    // things it actually serves — each leaf a page measured live at 200, each
+    // blurb that page's own sentence.
+    //
+    // It used to be nine Lux products behind a "Lux Network" badge, all nine
+    // linking to lux.cloud/services. That was one defect wearing two masks:
+    // another brand's name on a Hanzo host, and a shelf of nine capabilities
+    // Hanzo does not serve. Naming what we serve fixes both, and the
+    // white-label rule keeps its shape — Lux sells the same stack under the
+    // Lux brand at lux.cloud, and neither host says the other's name.
     items: [
-      { title: 'Nodes', href: LUX_SERVICES, icon: Server, blurb: 'Run a chain node', external: true, brand: 'lux', github: LUX_ORG },
-      { title: 'Wallets', href: LUX_SERVICES, icon: Wallet, blurb: 'MPC custody & keys', external: true, brand: 'lux', github: LUX_ORG },
-      { title: 'Transfers', href: LUX_SERVICES, icon: ArrowLeftRight, blurb: 'Move value on-chain', external: true, brand: 'lux', github: LUX_ORG },
-      { title: 'Indexers', href: LUX_SERVICES, icon: Search, blurb: 'Explorer & chain data', external: true, brand: 'lux', github: LUX_ORG },
-      { title: 'Oracles', href: LUX_SERVICES, icon: Radio, blurb: 'Off-chain data feeds', external: true, brand: 'lux', github: LUX_ORG },
-      { title: 'Validators', href: LUX_SERVICES, icon: ShieldCheck, blurb: 'Secure the network', external: true, brand: 'lux', github: LUX_ORG },
-      { title: 'Staking', href: LUX_SERVICES, icon: Coins, blurb: 'Delegate & earn', external: true, brand: 'lux', github: LUX_ORG },
-      { title: 'DEX', href: LUX_SERVICES, icon: ArrowLeftRight, blurb: 'On-chain exchange', external: true, brand: 'lux', github: LUX_ORG },
-      { title: 'Marketplace', href: LUX_SERVICES, icon: ShoppingCart, blurb: 'Assets & collectibles', external: true, brand: 'lux', github: LUX_ORG },
+      { title: 'Node', href: `${WEB3}/products/node`, icon: Server, blurb: 'Multi-chain RPC, 99.999% uptime' },
+      { title: 'Data', href: `${WEB3}/products/data`, icon: Database, blurb: 'Tokens, NFTs and transfers, one API' },
+      { title: 'Wallets', href: `${WEB3}/products/wallets`, icon: Wallet, blurb: 'Smart wallets — no seed phrase, no gas' },
+      { title: 'Explorer', href: `${WEB3}/products/explorer`, icon: Search, blurb: 'Your own block explorer' },
+      { title: 'MPC', href: `${WEB3}/products/mpc`, icon: ShieldCheck, blurb: 'Threshold key management' },
+      { title: 'Rollups', href: `${WEB3}/products/rollups`, icon: Layers, blurb: 'Launch a custom rollup' },
+      { title: 'Webhooks', href: `${WEB3}/products/webhooks`, icon: Radio, blurb: 'Onchain events, HMAC-signed' },
+      { title: 'Chains', href: `${WEB3}/chains`, icon: Network, blurb: '100+ networks supported' },
     ],
   },
   {
@@ -435,11 +425,17 @@ const launchSlug = (href: string): string =>
 //    ships per-product /deploy/<slug> routes.
 //  - docs: a verified-live docs page (see DOCS_PATH).
 //  - desc: the short menu descriptor (blurb override, else the leaf tagline).
+//
+// A leaf whose href is absolute lives on another host and is therefore its own
+// front door: it carries its own docs and its own sign-in, so neither deep link
+// is ours to resolve. That is READ off the href rather than declared beside it
+// — a flag saying what a URL already says is a second copy of one fact, and the
+// two drifted apart the last time both existed.
+const offProperty = (href: string): boolean => /^https?:\/\//.test(href)
+
 const resolve = (p: Primitive): Primitive =>
-  p.external
-    ? // Lux (Web3) leaf: hand off to lux.cloud. No Hanzo console deep-link; docs
-      // resolve to the Lux docs, never docs.hanzo.ai (white-label separation).
-      { ...p, console: undefined, docs: p.docs ?? LUX_DOCS, desc: p.blurb ?? p.tagline }
+  offProperty(p.href)
+    ? { ...p, desc: p.blurb ?? p.tagline }
     : {
         ...p,
         console: `${CONSOLE}/?deploy=${launchSlug(p.href)}`,
@@ -456,8 +452,8 @@ const resolve = (p: Primitive): Primitive =>
  * source every surface reads: the mega-menu, the homepage category grid, the
  * `/products/<slug>` landings and the `/cloud/<slug>` overviews all derive
  * from this export, so withdrawing a surface in lib/publish empties it out of
- * all of them in the same commit. Off-property links (lux.cloud) have no
- * policy here and stay. A category whose every leaf is withdrawn vanishes
+ * all of them in the same commit. Off-property links (web3.hanzo.ai) have
+ * no policy here and stay. A category whose every leaf is withdrawn vanishes
  * whole — an empty tile is not a tile.
  */
 /** Every category with every leaf resolved — including withdrawn ones. The
@@ -475,8 +471,8 @@ const allCategories: CloudCategory[] = rawCategories.map((c) => ({
  * source every display surface reads: the mega-menu, the homepage category
  * grid, the `/products/<slug>` landings and the product showcases all derive
  * from this export, so withdrawing a surface in lib/publish empties it out of
- * all of them in the same commit. Off-property links (lux.cloud) have no
- * policy here and stay. A category whose every leaf is withdrawn vanishes
+ * all of them in the same commit. Off-property links (web3.hanzo.ai) have
+ * no policy here and stay. A category whose every leaf is withdrawn vanishes
  * whole — an empty tile is not a tile.
  */
 export const cloudCategories: CloudCategory[] = allCategories

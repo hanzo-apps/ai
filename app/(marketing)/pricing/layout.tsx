@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { ogImages, twitterImages } from '@/lib/constants/og'
 
 export const metadata: Metadata = {
   title: 'Pricing — Hanzo AI',
@@ -9,13 +10,13 @@ export const metadata: Metadata = {
     url: 'https://hanzo.ai/pricing',
     siteName: 'Hanzo AI',
     type: 'website',
-    images: [{ url: '/pricing/opengraph-image', width: 1200, height: 630, alt: 'Hanzo AI Pricing' }],
+    images: ogImages('Hanzo AI Pricing'),
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing — Hanzo AI',
     description: 'Pay only for what you use. Pro $20/mo, Plus $100/mo, Max $200/mo — one subscription, unified AI usage across hanzo.ai, hanzo.app & hanzo.team, 3 invited guests included. Team $25/user/mo, minimum 2 seats. Enterprise: custom SLAs and dedicated support.',
-    images: ['/pricing/opengraph-image'],
+    images: twitterImages,
   },
 }
 

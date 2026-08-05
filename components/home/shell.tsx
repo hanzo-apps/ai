@@ -64,8 +64,8 @@ export const PRODUCTS_TAXONOMY: ProductCategory[] = cloudCategories.map((categor
     href,
     // The note is the scope caveat ("fiat only") and belongs wherever the
     // category is named, so it rides the one line the menu gives us — unless
-    // the tagline already says it, as Web3's does about Lux. Appending it there
-    // said "powered by Lux" twice and overran the line into an ellipsis.
+    // the tagline already says it, in which case appending it says the same
+    // thing twice and overruns the line into an ellipsis.
     tagline:
       category.note && !category.tagline.toLowerCase().includes(category.note.toLowerCase())
         ? `${category.tagline} · ${category.note}`
@@ -76,9 +76,9 @@ export const PRODUCTS_TAXONOMY: ProductCategory[] = cloudCategories.map((categor
         label: item.title,
         href: item.href,
         hint: item.desc,
-        // Web3 leaves are Lux Network surfaces on lux.cloud — off-property, so
-        // they open in a new tab and never claim to be a Hanzo page.
-        external: Boolean(item.external),
+        // An absolute href is another host (Web3 → web3.hanzo.ai), so the leaf
+        // opens in a new tab. Read off the URL, never declared twice.
+        external: /^https?:\/\//.test(item.href),
       })),
       // Categories run 7-15 deep and the tiles must stay level across a 2x5
       // grid, so every tile shows the same five and then says how many more
