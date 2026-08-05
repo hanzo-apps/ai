@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import {
   Terminal,
-  Code,
+  Code as CodeIcon,
   Globe,
   Plug,
   Bot,
@@ -21,7 +21,8 @@ import {
   Zap,
   ExternalLink,
 } from "lucide-react";
-import { CodeTabs } from "@/components/ui/code-tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@hanzo/ui";
+import { Code } from "@hanzo/ui/chat";
 
 // Restrained monochrome "layered depth" motif — Canvas2D, client-only + code-split.
 const DepthField = dynamic(() => import("@/components/webgl/DepthField"), { ssr: false });
@@ -34,7 +35,7 @@ const WORKFLOW_CARDS = [
     desc: "Install with curl. Drive Hanzo Dev from the shell. Pipe agents into your build.",
   },
   {
-    icon: Code,
+    icon: CodeIcon,
     title: "VS Code & JetBrains",
     desc: "First-class extension surface for editing, refactoring, and reviewing agent diffs.",
   },
@@ -103,7 +104,7 @@ const REMOTE_CARDS = [
   },
 ];
 
-// API code examples — kept identical structure (CodeTabs) but updated copy block.
+// API code examples — one per SDK, rendered as `@hanzo/ui` Tabs over `Code`.
 const API_CODE_EXAMPLES = [
   {
     language: "typescript",
@@ -436,7 +437,24 @@ const DeveloperExperienceSection = () => {
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
               </div>
-              <CodeTabs tabs={API_CODE_EXAMPLES} />
+              <Tabs defaultValue={API_CODE_EXAMPLES[0]?.language} className="w-full">
+                <TabsList className="flex flex-wrap gap-2 bg-transparent border-b border-border pb-4 mb-6">
+                  {API_CODE_EXAMPLES.map((example) => (
+                    <TabsTrigger
+                      key={example.language}
+                      value={example.language}
+                      className="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground data-[state=active]:text-foreground data-[state=active]:bg-neutral-800 hover:text-foreground transition-colors"
+                    >
+                      {example.label}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+                {API_CODE_EXAMPLES.map((example) => (
+                  <TabsContent key={example.language} value={example.language}>
+                    <Code language={example.language}>{example.code}</Code>
+                  </TabsContent>
+                ))}
+              </Tabs>
             </div>
           </motion.div>
         </div>
