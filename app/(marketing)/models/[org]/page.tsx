@@ -5,7 +5,6 @@ import {
   fetchModels,
   getOrgAndSlug,
   orgDisplayName,
-  orgLogoPath,
   formatContext,
   getModelContext,
   MODALITY_STYLES,
@@ -77,7 +76,6 @@ export default async function OrgPage({ params }: Props) {
   })
 
   const providerName = orgDisplayName(org)
-  const logo = orgLogoPath(org)
 
   if (orgModels.length === 0) {
     return (
@@ -107,13 +105,7 @@ export default async function OrgPage({ params }: Props) {
           </nav>
 
           <div className="flex items-center gap-4 mb-6">
-            {logo ? (
-              <ProviderMark src={logo} label={providerName} className="h-12 w-12 rounded-xl" />
-            ) : (
-              <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-lg font-bold">
-                {providerName.slice(0, 2).toUpperCase()}
-              </div>
-            )}
+            <ProviderMark org={org} size={48} />
             <div>
               <h1 className="text-3xl md:text-4xl font-bold">{providerName} Models via Hanzo AI</h1>
               <p className="text-muted-foreground mt-1">{orgModels.length} models available</p>
