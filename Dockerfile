@@ -91,7 +91,21 @@ RUN cd out && for f in $(find . -type f -name '*.html' ! -name 'index.html' ! -n
     done
 
 # ---- serve stage: hanzoai/static (scratch + single Go binary) ------------
-FROM ghcr.io/hanzoai/static:v0.5.1
+#
+# v0.5.7 is what stops the ChunkLoadError, and both halves of it are needed here.
+#
+# `output: 'export'` means there is no Next server, so Next's own headers() never
+# runs and this image is the only thing setting cache policy. It was sending
+# /_next/static/* with max-age=86400 and no `immutable`, so clients revalidated a
+# content-hashed file every few hours — a request that can only learn "unchanged",
+# unless it lands after a deploy retired the hash, when it learns "gone".
+#
+# The second half is why that was fatal rather than wasteful: `--spa` answered
+# EVERY unmatched path with index.html, chunks included. A retired chunk came back
+# 200 with an HTML body, the browser fed HTML to a JavaScript parser, and the page
+# died there ("Loading chunk 8846 failed") instead of taking a retryable 404.
+# Assets now 404; routes still reach the shell, which is what --spa is for below.
+FROM ghcr.io/hanzoai/static:v0.5.7
 COPY --from=build /app/out /srv
 # static (>=0.4.0) is configured by FLAGS: --root, --port, --spa.
 ENTRYPOINT ["/static"]
