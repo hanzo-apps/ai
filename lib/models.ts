@@ -192,29 +192,6 @@ export function orgDisplayName(org: string): string {
   return ORG_DISPLAY_NAMES[org] ?? org
 }
 
-// Map org slug → logo path (relative to /public)
-export function orgLogoPath(org: string): string | null {
-  const logoMap: Record<string, string> = {
-    hanzo: '/favicon.svg',
-    openai: '/logos/openai.svg',
-    anthropic: '/logos/anthropic.svg',
-    google: '/logos/google.svg',
-    'x-ai': '/logos/xai.svg',
-    mistralai: '/logos/mistral.svg',
-    deepseek: '/logos/deepseek.svg',
-    qwen: '/logos/qwen.svg',
-    moonshotai: '/logos/moonshot.svg',
-    'meta-llama': null,
-    nvidia: null,
-    cohere: null,
-    perplexity: null,
-    amazon: null,
-    groq: '/logos/groq.svg',
-    together: '/logos/together.svg',
-  }
-  return logoMap[org] ?? null
-}
-
 // Monochrome: modality badges are distinguished by their label, not by hue.
 // One shared neutral style keeps the model grid on-brand (true-black + white).
 const MODALITY_STYLE = { bg: 'bg-white/10', text: 'text-white/70' } as const

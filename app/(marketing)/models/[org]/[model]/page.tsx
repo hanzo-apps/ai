@@ -5,7 +5,6 @@ import {
   fetchModels,
   getOrgAndSlug,
   orgDisplayName,
-  orgLogoPath,
   formatContext,
   getModelContext,
   MODALITY_STYLES,
@@ -200,7 +199,6 @@ export default async function ModelPage({ params }: Props) {
   }
 
   const ctx = getModelContext(model)
-  const logo = orgLogoPath(org)
   const providerName = orgDisplayName(org)
   const { ts, py, curl, go } = buildCodeExamples(model)
   const jsonLd = buildJsonLd(model)
@@ -249,13 +247,7 @@ export default async function ModelPage({ params }: Props) {
             </nav>
 
             <div className="flex items-start gap-4 mb-6">
-              {logo ? (
-                <ProviderMark src={logo} label={providerName} className="mt-1 h-12 w-12 rounded-xl" />
-              ) : (
-                <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-lg font-bold shrink-0 mt-1">
-                  {providerName.slice(0, 2).toUpperCase()}
-                </div>
-              )}
+              <ProviderMark org={org} model={model.id} size={48} className="mt-1" />
               <div>
                 <h1 className="text-3xl md:text-4xl font-bold leading-tight">{model.name}</h1>
                 <div className="flex items-center gap-2 mt-2 flex-wrap">

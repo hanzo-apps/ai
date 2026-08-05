@@ -5,7 +5,6 @@ import {
   fetchModels,
   getOrgAndSlug,
   orgDisplayName,
-  orgLogoPath,
   formatContext,
   getModelContext,
   MODALITY_STYLES,
@@ -30,23 +29,6 @@ const OURS = [
   'zen-embedding',
 ]
 
-function ProviderInitials({ org }: { org: string }) {
-  const name = orgDisplayName(org)
-  return (
-    <span className="w-8 h-8 rounded-lg bg-secondary flex items-center justify-center text-xs font-bold text-muted-foreground uppercase">
-      {name.slice(0, 2)}
-    </span>
-  )
-}
-
-function ProviderLogo({ org }: { org: string }) {
-  const logo = orgLogoPath(org)
-  if (logo) {
-    return <ProviderMark src={logo} label={orgDisplayName(org)} />
-  }
-  return <ProviderInitials org={org} />
-}
-
 function ModalityBadge({ modality }: { modality: string }) {
   const style = MODALITY_STYLES[modality] ?? { bg: 'bg-secondary', text: 'text-muted-foreground' }
   return (
@@ -68,7 +50,7 @@ function ModelCard({ model }: { model: ModelData }) {
     >
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-2 min-w-0">
-          <ProviderLogo org={org} />
+          <ProviderMark org={org} model={model.id} />
           <div className="min-w-0">
             <div className="font-medium text-sm truncate">{model.name}</div>
             <div className="text-xs text-muted-foreground font-mono">{model.id}</div>
@@ -201,7 +183,7 @@ export default async function ModelsPage() {
                 className="p-4 rounded-xl border border-border bg-secondary/20 hover:bg-secondary/50 transition-all group flex flex-col gap-3"
               >
                 <div className="flex items-center gap-2">
-                  <ProviderLogo org={org} />
+                  <ProviderMark org={org} />
                   <span className="font-medium text-sm truncate">{orgDisplayName(org)}</span>
                 </div>
                 <div className="text-xs text-muted-foreground">

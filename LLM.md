@@ -515,6 +515,41 @@ is inlined into the bundle at build time.
   Secret redaction in the SDK is unconditional and is not affected.
 
 
+## Brand marks: real logos only, and one place they come from
+
+`components/models/ProviderMark.tsx` is the ONE mark table. Bodies are copied
+UNMODIFIED from `hanzoai/icons` `packages/static-svg/icons/<slug>.svg` (our MIT
+lobe-icons fork) — mono `currentColor` on a 24-unit viewBox. The fork is not on
+npm and its barrel drags `antd` + `@lobehub/ui` in for a picture, so the subset
+is vendored, the same call `hanzo.app` and `hanzo-docs` made. **Never draw a
+logo.** A monogram is the documented last resort and only for a lab genuinely
+absent from the fork (14 of 59 today — community fine-tuners and brand-new
+labs); everything else has a real mark, so reach for the fork before inventing.
+
+Three rules the page cost us before they were written down:
+
+- **The model's family beats the lab that trained it.** Our gateway namespace
+  puts `gpt-5`, `claude-opus-4.8`, `zen5` and `enso` all under `hanzo`, so
+  reading the lab first drew the Hanzo H on every one of them. `markOf` takes
+  the leading run of letters in the id first and falls back to the lab.
+- **`enso` and `zen` are NOT the same glyph.** Zen is the ensō left OPEN (the
+  gap sits where a Q's tail would go); Enso is the router that completes the
+  circle, so its ring is CLOSED. Geometry is `hanzo.app`'s verified pair.
+- **No chip.** Marks render bare at the current text colour. The predecessor
+  painted a CSS mask inside a `rounded-lg` box, which clipped the corners off
+  every square mark — the H worst of all. Every source declares
+  `fill-rule="evenodd"` on its root, so the wrapper repeats it: without it
+  Mistral's inner square fills in and the mark is quietly wrong.
+
+`public/logos/*.svg` is a SECOND representation of eight of these, and it exists
+for exactly one reason: `AccuracyCostScatter` draws them through `<image href>`,
+which needs a URL. Same canonical source, regenerate from it, never redraw. An
+SVG behind `<image>` is its own document with no CSS context, so `currentColor`
+resolves to BLACK — fine on the light `measured` disc, near-invisible on the
+dark `reported` one. That is unfixed and unfixable from CSS; the fix is the disc
+colour, not the mark. `/logos/partners/` is a different set and unrelated.
+
+
 ## Certification Claims (Honest)
 
 - SOC 2: "Audit in Progress" (not "Certified")
