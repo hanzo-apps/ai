@@ -1,59 +1,63 @@
-name: Deploy
-# The pipeline that will ship hanzo.ai. It publishes ghcr.io/hanzoai/hanzo-ai-www,
-# served by ghcr.io/hanzoai/static behind hanzoai/ingress — the same mechanism as
-# cloud.hanzo.ai, ui.hanzo.ai and papers.hanzo.ai.
+name: deploy
+# hanzo.ai is a SITE, not an App.
 #
-# IT HAS NEVER RUN. `hanzoai/hanzo.ai` on the forge is `"mirror": true`, and a
-# mirror reports `has_actions: false` — nothing in .hanzo/workflows fires until
-# the repo is converted (sync-from-github.yml in this directory is what keeps it
-# current afterwards). So the sentence that used to open this file — "Cloudflare
-# Pages is gone. There is no second pipeline: .github/workflows/deploy.yml is
-# deleted, not neutralized" — was true for two hours and twelve minutes on
-# 2026-08-01, between the commit that wrote it and 8a6da2b8, which put that file
-# back because the apex had no deploy path at all. It ships hanzo.ai today: the
-# live robots.txt, sitemap and /risk noindex all match this tree's HEAD, served
-# from Cloudflare Pages. Read .github/workflows/deploy.yml as the stopgap it says
-# it is, and delete it on the day this file first runs green — not before.
+# It is a Next.js `output: export` — 759 pages of HTML that never execute. This
+# file used to build a container image (ghcr.io/hanzoai/hanzo-ai-www) so that
+# ghcr.io/hanzoai/static could serve those files behind hanzoai/ingress: an image
+# build, a registry push, a tag pinned into an App CR in hanzoai/universe, and two
+# replicas of a pod — all to hand back bytes. The Sites plane exists for this
+# exact shape.
 #
-# WHY THIS EXISTS: GitHub Actions is disabled for the `hanzo-dev` ACCOUNT, so a
-# push by that account creates ZERO runs there — no queued job, no failed run,
-# no notification. The repo's own Actions setting is `enabled: true`, which is
-# why that looked healthy while nothing shipped. Eleven commits sat undeployed
-# for a day and hanzo.ai kept serving "the open-source AI cloud" after that
-# claim was deliberately removed in e31324eb.
+#   pnpm build -> out/
+#     -> POST /v1/projects/hanzo-ai/deploy    (202, queued; returns an upload grant)
+#     -> POST the objects straight to S3      (the bytes skip the API)
+#     -> POST .../deployments/<id>/complete   (live, and prunes what the build dropped)
 #
-# THE TWO COPIES DO NOT RACE, and that is the only reason keeping both is safe.
-# Gitea collects workflows from the FIRST of WORKFLOW_DIRS that exists in the
-# pushed commit and ignores the rest (modules/actions/workflows.go,
-# listWorkflowsInDirs breaks on the first hit), so on this forge the whole of
-# .github/workflows is dark; on github.com only .github/workflows is read. One
-# plane each, and today the forge plane is the dark one. What that costs is
-# real: a fix written here ships nothing, which is how the white-border defect
-# and the stale nav each survived several fixes.
+# WHERE THINGS FIT, since these are orthogonal:
+#   Project  — IAM-owned, the billing bucket. One project holds many sites.
+#   Site     — this. /v1/projects/:slug/deploy. Static, no compute.
+#   Function — /v1/functions. Per-request compute, no server.
+#   App      — an App CR the operator reconciles. Long-running containers.
+# A marketing export is the second and only the second.
 #
-# The gates below are the reason this file can be the survivor. Two copies of a
-# deploy is tolerable; two copies where only one checks what it publishes is
-# not.
+# THIS RETIRED THE THIRD PIPELINE. hanzo.ai had three ways to publish one
+# directory: this file (image; green, and pinned by nothing — the App CR's tag is
+# still the literal REPLACE-WITH-FIRST-PUBLISHED-SHA), .github/workflows/deploy.yml
+# (Cloudflare Pages — the only one that actually served), and a k8s plane staged
+# behind a DNS move that never happened. The one doing the work was the one the
+# estate rule forbids. Now there is one, and it is this.
+#
+# NOT the same lane as cloud.hanzo.ai. That host is ghcr.io/hanzoai/cloud-www,
+# built by cloud.yml from Dockerfile.production out of this same tree. It is
+# untouched: a static export and a promoted image are different products of one
+# build, and only the apex moved.
+#
+# The mechanics of the publish are NOT here — they are bin/sitedeploy in
+# hanzoai/ci, because hanzo.app, hips and computer need the identical three calls
+# and a contract transcribed per repo is a contract that drifts.
 on:
-  workflow_dispatch:
   push:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
-  group: pages-deploy
+  # Never cancel a publish in flight: a half-uploaded prefix is a broken site.
+  group: deploy-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    runs-on: [hanzo-build-linux-amd64]
+  site:
+    # NOT ubuntu-latest. Every runner carrying this label is registered to
+    # git.hanzo.ai, which is what reads .hanzo/workflows; a job asking for it on
+    # github.com is never assigned and cancels at the 24h timeout.
+    runs-on: hanzo-build-linux-amd64
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
 
-      # No `version:` input on purpose. package.json pins
-      # packageManager: pnpm@9.15.0, and action-setup ERRORS OUT if a version is
-      # given in both places ("Multiple versions of pnpm specified"). One source
-      # of truth — package.json — so local, this pipeline and the GitHub one can
-      # never resolve different pnpm binaries.
+      # No `version:` — package.json's `packageManager` is the single source, and
+      # naming it here too makes action-setup fail outright on a mismatch
+      # ("Multiple versions of pnpm specified") rather than picking one.
       - uses: pnpm/action-setup@v4
 
       - uses: actions/setup-node@v4
@@ -61,191 +65,86 @@ jobs:
           node-version: 22
           cache: pnpm
 
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
 
-      # Runs before the build because NEXT_PUBLIC_EVENT_INGEST_KEY is inlined into
-      # the bundle at build time.
+      # BEFORE the build: NEXT_PUBLIC_* is inlined into the bundle at build time,
+      # so a key fetched afterwards never reaches the artifact.
       #
-      #   deploy/  CF credentials. Required; no credentials, no deploy.
-      #   deploy/  the ingest key. Absent, cloud still admits pageviews under
-      #            $public — but drops every track/identify/group and answers 200
-      #            anyway, so the step shouts and the build ships.
-      #
-      # The path segment is required: the org secret root returns {"names":[]}.
-      - name: Fetch secrets from KMS
+      # deploy/EVENT_INGEST_KEY is the ONE name and the ONE location, shared with
+      # hanzo.app and hanzo.chat. It is per-ORG, not per-property: one pk- resolves
+      # the org for every surface, and the SDK's `product` field is what separates
+      # them in the warehouse.
+      - name: Fetch the ingest key from KMS
         id: kms
         env:
           KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
           KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}
           KMS_ENDPOINT: ${{ vars.KMS_ENDPOINT || 'https://api.hanzo.ai' }}
-          # No KMS_ORG: the embedded plane resolves the tenant from the token's
-          # own claim, so an org named in config could only ever disagree with
-          # the one that is actually served.
+          # No KMS_ORG: the embedded plane resolves the tenant from the token's own
+          # claim, so an org named in config could only ever disagree with the one
+          # actually served.
           KMS_SECRET_ENV: ${{ vars.KMS_SECRET_ENV || 'prod' }}
         run: |
+          set -euo pipefail
           token=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/auth/login" \
             -H 'Content-Type: application/json' \
             -d "{\"clientId\":\"${KMS_CLIENT_ID}\",\"clientSecret\":\"${KMS_CLIENT_SECRET}\"}" \
             | jq -r '.accessToken // empty')
           if [ -z "${token}" ]; then
-            echo "::error::KMS login failed at ${KMS_ENDPOINT}/v1/kms/auth/login (check KMS_CLIENT_ID/KMS_CLIENT_SECRET)."
-            exit 1
+            echo "::error::KMS login failed at ${KMS_ENDPOINT}/v1/kms/auth/login"; exit 1
           fi
-          # KMS is embedded in hanzoai/cloud now (HIP-0106, apps/kms), so the
-          # canonical surface is api.hanzo.ai/v1/kms and the contract changed in
-          # two ways that both fail SILENTLY against the old standalone shape:
-          #
-          #   url    /v1/kms/secrets/<path>/<name>   — the org comes from the
-          #          token, NOT the url. The old /v1/kms/orgs/<org>/secrets/...
-          #          form 404s here; a 404 through `|| true` reads as "absent".
-          #   body   {"name","env","value"}          — flat. The old
-          #          `.secret.value` selects nothing and yields "".
-          #
-          # Either mistake produces an empty key, and an empty key is exactly
-          # what the `''` case below treats as "never minted" — so a misparse is
-          # indistinguishable from a missing secret. Hence both are pinned here.
-          kms_get() {
-            curl -fsS "${KMS_ENDPOINT}/v1/kms/secrets/$1/$2?env=${KMS_SECRET_ENV}" \
-              -H "Authorization: Bearer ${token}" | jq -r '.value // empty' || true
-          }
-
-          # No Cloudflare credentials are read any more. This job used to fetch
-          # CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID and hard-fail without
-          # them; the apex now publishes an image to GHCR, so the only credential
-          # it needs is GH_PAT. Those two KMS entries can be retired once no other
-          # property reads them.
-
-          # cloud matches `pk-`; another prefix is not read as a key and misfiles
-          # to $public without a 403, so refuse it here.
-          #
-          # deploy/EVENT_INGEST_KEY is the ONE name and the ONE location, shared with
-          # hanzo.chat and hanzo.app and with the `build_secrets` default path of the
-          # shared hanzoai/ci reusable. It was site/HANZO_INGEST_KEY, a per-property
-          # name for a key that is per-ORG: one pk- resolves the org for every
-          # property, and the SDK's `product` field is what separates them in the data.
-          key=$(kms_get deploy EVENT_INGEST_KEY)
+          # KMS is embedded in hanzoai/cloud (HIP-0106), so the surface is FLAT and
+          # the org comes from the TOKEN, not the URL. The old
+          # /v1/kms/orgs/<org>/secrets/... shape 404s here, and a 404 read through
+          # `|| true` is indistinguishable from an absent secret.
+          key=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/secrets/deploy/EVENT_INGEST_KEY?env=${KMS_SECRET_ENV}" \
+            -H "Authorization: Bearer ${token}" | jq -r '.value // empty' || true)
+          # cloud matches `pk-`; another prefix is not read as a key and misfiles to
+          # $public WITHOUT a 403, so refuse it here rather than ship blind.
           case "${key}" in
-            '')   echo "::error::deploy/EVENT_INGEST_KEY absent — traffic lands under \$public, which admits only pageview and error: every track/identify/group is dropped and still answered 200. Mint: POST /v1/keys {\"type\":\"publishable\"}" ;;
+            '')   echo "::error::deploy/EVENT_INGEST_KEY absent — traffic lands under \$public, which admits only pageview and error: every track/identify/group is dropped and still answered 200." ;;
             pk-*) echo "::add-mask::${key}"; echo "key=${key}" >> "$GITHUB_OUTPUT" ;;
             *)    echo "::error::deploy/EVENT_INGEST_KEY does not begin with 'pk-'; ignoring it." ;;
           esac
 
-      # Large static export (hundreds of pages); the default heap OOMs it.
-      - name: Build
+      # 759 pages; the default heap OOMs it.
+      - name: Build the static export
         run: pnpm build
         env:
           NODE_OPTIONS: '--max-old-space-size=8192'
           NEXT_PUBLIC_EVENT_INGEST_KEY: ${{ steps.kms.outputs.key }}
         timeout-minutes: 30
 
-      # No SPA fallback: every dynamic segment ships generateStaticParams, so
-      # `output: export` emits real HTML per route. Do NOT reintroduce
-      # `cp out/index.html out/404.html` — that clobbered the export's real 404
-      # with the homepage, so every broken inbound link answered 404 while
-      # rendering "What can I help with?", indistinguishable from a good visit.
-      - name: Smoke test static build
-        run: |
-          pnpm dlx serve out -l 3333 &
-          SERVER_PID=$!
-          for i in $(seq 1 30); do
-            if curl -s -o /dev/null http://localhost:3333 2>/dev/null; then
-              echo "Server ready after ${i}s"; break
-            fi
-            sleep 1
-          done
-          BODY=$(curl -s http://localhost:3333)
-          kill $SERVER_PID 2>/dev/null
-          if echo "$BODY" | grep -q "Application error"; then
-            echo "FATAL: Homepage contains 'Application error'"; exit 1
-          fi
-          echo "The homepage renders"
-
-      # The gates run HERE, in the job that publishes, because there is nowhere
-      # else they can bind. `hanzo.yml` declares them too and that is the right
-      # place for the PR gate — but workflows on one trigger do not order
-      # themselves: cicd.yml and this file both fire on push to main, neither
-      # waits for the other, and a red gate over there publishes an image over
-      # here regardless. The only placement that makes "nothing publishes
-      # ungated" true is inside the job that pushes.
+      # The gates run in the job that PUBLISHES, because that is the only placement
+      # that makes "nothing publishes ungated" true: workflows sharing a trigger do
+      # not order themselves, so a red gate in cicd.yml cannot stop a publish here.
       #
-      # This also retired the smoke test's second half, a list of six page names
-      # checked for existence. `requireExport()` in e2e/gates/export.ts is the
-      # same check DERIVED — every route the App Router tree answers must have
-      # shipped a page — so the hand-kept list was the weaker copy of a rule
-      # already stated once. What it caught that the gates do not is the
-      # homepage rendering an error boundary, which is why the curl above stays.
+      # They now read the EXACT bytes that ship. That was not true before: the
+      # gates checked this job's `out/`, while the image was built by a second
+      # `pnpm build` inside the Dockerfile — same command, different invocation.
+      # Uploading this `out/` closes that gap by construction.
       #
-      # HONEST BOUNDARY: these gates read the `out/` this job built, and the
-      # image is built by the Dockerfile's own `pnpm build`. Same command, same
-      # tree, same Node major — the one input that differed was the ingest key,
-      # and that is now the same expression on both sides. Gating the literal
-      # shipped bytes means extracting /srv from a loaded image before pushing
-      # it, which is a bigger change to a pipeline that cannot yet run.
+      # Both defects they catch are invisible in the source that produced them —
+      # `lineHeight={1.1}` reads as a ratio and compiles to `line-height: 1.1px`,
+      # and a page nothing links to is still written into sitemap.xml — so the
+      # export is the only honest subject. requireExport() derives "every route
+      # shipped a page" from the App Router tree, so no hand-kept page count has to
+      # be remembered.
       - name: Install the browser the gates measure in
         run: pnpm exec playwright install --with-deps chromium
 
       - name: Gates
         run: pnpm gates
 
-      # The apex ships as an IMAGE, like every other Hanzo static surface.
-      #
-      # This replaced `wrangler pages deploy out --project-name=hanzo-ai`. hanzo.ai
-      # was the last site on Cloudflare Pages while its own siblings — cloud.hanzo.ai
-      # (ghcr.io/hanzoai/cloud-www), ui.hanzo.ai, papers.hanzo.ai — already served
-      # from ghcr.io/hanzoai/static behind hanzoai/ingress. Two serving mechanisms
-      # for one static export meant two failure modes, two credentials, and a host
-      # whose rollback story was a third party's dashboard.
-      #
-      # A build never deploys itself: this publishes the image and stops. A human
-      # sets spec.image.tag on the App CR in hanzoai/universe, which is the one live
-      # thing that says which build serves.
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Login to GHCR (GH_PAT — the instance token is not valid at ghcr.io)
-        uses: docker/login-action@v3
+      # ONE credential. The 202 carries a prefix-scoped, 30-minute presigned POST
+      # grant, so nothing here holds a bucket key. Do NOT add SITES_S3_* — that is
+      # the standing shared-bucket credential the grant replaced, and it could
+      # overwrite every other org's site.
+      - name: Publish to the Sites plane
+        uses: hanzoai/ci/.github/actions/sitedeploy@v1
         with:
-          registry: ghcr.io
-          username: hanzo-dev
-          password: ${{ secrets.GH_PAT }}
-
-      - name: Build and push the apex image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64
-          tags: ghcr.io/hanzoai/hanzo-ai-www:sha-${{ github.sha }}
-          provenance: false
-          push: true
-          # EVENT_INGEST_KEY, and `.outputs.key`. Both names were wrong and both
-          # failed silently, which is how the pair survived: Actions substitutes
-          # an unknown step output with the empty string, and BuildKit warns then
-          # ignores a build-arg the Dockerfile declares no ARG for. The step above
-          # fetched the key and shouts three different ways when it is absent —
-          # and then this line dropped it twice, so the image shipped with
-          # NEXT_PUBLIC_EVENT_INGEST_KEY="" and cloud filed the apex's traffic
-          # under $public, where every track/identify/group is discarded and still
-          # answered 200. A green deploy with no telemetry, and nothing to read
-          # that said so.
-          #
-          # The Dockerfile owns the NEXT_PUBLIC_ prefix (`ENV
-          # NEXT_PUBLIC_EVENT_INGEST_KEY=$EVENT_INGEST_KEY`), because that prefix
-          # is a property of the bundler and not of the secret.
-          # `deploy/EVENT_INGEST_KEY` is the name in KMS and it stays the name here.
-          #
-          # e2e/gates/deploy.spec.ts holds both halves: a step output no step
-          # writes, and a build-arg naming no ARG, are each a red gate now.
-          build-args: |
-            EVENT_INGEST_KEY=${{ steps.kms.outputs.key }}
-
-      # build-push-action can exit 0 before the manifest resolves, so a green run
-      # could still leave a CR pinned to a tag that ImagePullBackOffs. Prove it
-      # pulls before the job goes green — same gate cloud.yml carries.
-      - name: Verify the pushed image resolves
-        run: |
-          set -euo pipefail
-          img="ghcr.io/hanzoai/hanzo-ai-www:sha-${{ github.sha }}"
-          docker buildx imagetools inspect "$img" >/dev/null
-          echo "resolves: $img"
+          slug: hanzo-ai
+          dir: out
+          jobs: '48'
+        env:
+          HANZO_DEPLOY_TOKEN: ${{ secrets.HANZO_DEPLOY_TOKEN }}

@@ -24,30 +24,41 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
   stable, and installing it would mean two copies of one compiler.
 - Lint: `pnpm lint` — plain `eslint .`, parsed by `@babel/eslint-parser`
   because typescript-eslint refuses TS 7 outright (typescript-eslint#10940).
-- Deploy: Static export (`output: export`) → Cloudflare Pages, project `hanzo-ai`,
-  via **`.github/workflows/deploy.yml`** — a STOPGAP that exists because the native
-  path cannot run. `.hanzo/workflows/deploy.yml` is only read by the forge, and
-  `hanzoai/hanzo.ai` there is `"mirror": true` — read-only, its Actions never fire,
-  and there is no writable `hanzo/hanzo.ai` tenant repo (404). So for weeks every
-  commit landed where nothing built; that is why the white-border defect and the
-  centred nav each survived several fixes. Delete the `.github` file the day a
-  writable forge repo exists.
+- Deploy: Static export (`output: export`) → the **PaaS Sites plane**, project slug
+  `hanzo-ai`, via **`.hanzo/workflows/deploy.yml`** on the forge. Cloudflare Pages
+  is GONE — the workflow, the wrangler call and the credentials with it.
+  `.github/workflows/` is empty and stays that way.
+
+  The claim that killed the native path for weeks — "`hanzoai/hanzo.ai` is a
+  mirror, read-only, its Actions never fire" — is FALSE, and it is why a
+  Cloudflare stopgap kept being re-added. Measured against the forge API: the repo
+  is `"mirror": true` AND `has_actions: true`, with **1325 runs**, `deploy.yml`
+  green on push 5/5. A pull mirror on this Gitea runs its Actions perfectly well.
+  Do not restore a second pipeline on the strength of that sentence.
+
+  The publish itself is `bin/sitedeploy` in **hanzoai/ci**, used through
+  `hanzoai/ci/.github/actions/sitedeploy@v1` — hanzo.app, hips and computer make
+  the identical three calls, so the contract lives in one place. ONE credential:
+  `HANZO_DEPLOY_TOKEN` (forge org secret, mirrored from KMS `deploy/`). The 202
+  hands back a prefix-scoped 30-minute presigned POST grant, so CI holds no bucket
+  key — never add `SITES_S3_*`.
 - **The GitHub repo is `hanzo-apps/ai`.** `hanzoai/hanzo.ai` only redirects there.
   Push to the real name — a redirect is why `gh` reports runs under one repo while
-  you push to another.
-- CF creds are NOT from KMS on this path. The KMS scoped token is DEAD (`code:
-  9109`), and `hanzo-apps` carries an org-level `CLOUDFLARE_API_TOKEN` that is the
-  same dead value and SHADOWS the repo. A Pages-scoped token is set at repo level,
-  which overrides it. Two traps worth keeping: an absent GitHub secret still
-  DEFINES the env var as `""`, and wrangler prefers `CLOUDFLARE_API_TOKEN` whenever
-  defined — so it will authenticate with nothing rather than fall back; and
-  wrangler 4 refuses to start below Node 22, which `.nvmrc` now names.
+  you push to another. Push to `hanzogit` too: that remote is what the forge
+  builds from.
+- **Not yet the live origin.** The apex still resolves to Cloudflare Pages, so the
+  Sites deploy publishes to `hanzo-ai.hanzo.app` and hanzo.ai keeps serving its
+  last Pages build until DNS moves. Two things gate the cutover, both outside this
+  repo: point `hanzo.ai` / `www.hanzo.ai` at the sites edge, and roll out the
+  cloud build carrying the `<rel>.html` candidate in `apps/sites` (without it the
+  edge finds `index.html` and 404s every other route, because `output: export`
+  writes `pricing.html`, not `pricing/index.html`).
 
 ## Two faces, one export
 
 This ONE static export (`out/`) serves TWO sites — split by host, not by build:
 
-1. **hanzo.ai apex** (Cloudflare Pages) — the clean, openai.com-style
+1. **hanzo.ai apex** (Sites plane, slug `hanzo-ai`) — the clean, openai.com-style
    **chat-centric landing**. Route: `app/page.tsx` → `components/home/HomeLanding`.
    It lives at the app ROOT (outside `(marketing)`) so only the root layout
    wraps it; it ships its OWN nav + footer (`components/home/*`). "What can I
@@ -350,8 +361,21 @@ any list a human keeps.
 
 ## Static Export
 
-`next.config.ts` uses `output: 'export'` for static deploy to GitHub Pages.
-SPA routing works via the static export's automatic 404.html fallback.
+`next.config.ts` uses `output: 'export'`. GitHub Pages has never been the target
+and is not a deploy surface on this estate — the export goes to the Sites plane.
+
+`output: export` without `trailingSlash` writes a route as the FLAT file
+`pricing.html`, not `pricing/index.html`. That is why `apps/sites` in hanzoai/cloud
+has to try `<rel>.html` as a resolution candidate, and why a Next export served
+only its homepage before it did. Do not "fix" that by setting `trailingSlash: true`
+here: it rewrites every canonical URL to work around a server that now handles both
+conventions.
+
+There is no SPA fallback and there must not be one. Every dynamic segment ships
+`generateStaticParams`, so the export emits real HTML per route. Do NOT reintroduce
+`cp out/index.html out/404.html` — that clobbers the export's real 404 with the
+homepage, so every broken inbound link answers 404 while rendering "What can I help
+with?", which is indistinguishable from a good visit.
 
 ## Telemetry
 
