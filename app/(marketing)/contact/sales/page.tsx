@@ -79,7 +79,7 @@ export default function ContactSalesPage() {
               className="overflow-hidden"
             >
               <iframe
-                src="https://cal.com/hanzo?embed=true&theme=dark&hideEventTypeDetails=false&layout=month_view"
+                src="https://cal.hanzo.ai/hanzo?embed=true&theme=dark&hideEventTypeDetails=false&layout=month_view"
                 width="100%"
                 height="700"
                 frameBorder="0"
