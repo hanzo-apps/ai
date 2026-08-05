@@ -69,29 +69,33 @@ export default function ContactSalesPage() {
           </div>
         </section>
 
-        {/* Cal.com Embed */}
-        <section className="pb-12 px-4 md:px-8 lg:px-12">
-          <div className="max-w-5xl mx-auto">
+        {/* Booking — a LINK, never a frame.
+            Our calendar refuses to be framed (frame-ancestors 'none' plus
+            X-Frame-Options: DENY at the ingress), and so did the third party
+            before it, so an <iframe> here has only ever rendered the browser's
+            grey blocked-content box where the calendar belongs — which meant
+            nobody could reach Sales from the website at all. A link always
+            works, on every browser and every policy. The in-page booking
+            component (@hanzo/cal, publishable key + api.hanzo.ai) replaces
+            this without an iframe. */}
+        <section className="pb-16 px-4 md:px-8 lg:px-12">
+          <div className="max-w-2xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="overflow-hidden"
             >
-              <iframe
-                src="https://cal.hanzo.ai/hanzo?embed=true&theme=dark&hideEventTypeDetails=false&layout=month_view"
-                width="100%"
-                height="700"
-                frameBorder="0"
-                className="w-full bg-transparent"
-                style={{
-                  minHeight: "700px",
-                  border: "none",
-                  background: "transparent",
-                }}
-                title="Schedule a call with Hanzo"
-                allow="payment"
-              />
+              <a
+                href="https://cal.hanzo.ai/hanzo"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-medium text-black transition-opacity hover:opacity-90"
+              >
+                Pick a time
+              </a>
+              <p className="mt-4 text-sm text-muted-foreground">
+                Opens the Hanzo calendar — pick any slot that suits you.
+              </p>
             </motion.div>
           </div>
         </section>
