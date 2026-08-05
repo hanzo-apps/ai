@@ -8,58 +8,31 @@ import AgentsList from "@/components/dashboard/AgentsList";
 import BlockchainDashboard from "@/components/dashboard/BlockchainDashboard";
 import { Button } from "@hanzo/ui";
 import { PlusCircle, LayoutGrid, Users, ChartBar, X, Plus, Database, Bot, Activity, Server, Blocks } from "lucide-react";
-import { OrgCommandPalette, type OrgCommandItem } from "@hanzogui/shell";
 
 import TabsManager, { TabType } from "@/components/dashboard/TabsManager";
 import { v4 as uuidv4 } from 'uuid';
 import { useRouter, useSearchParams } from "next/navigation";
 
 /**
- * ⌘K on the dashboard.
+ * ⌘K on the dashboard is the SAME palette as everywhere else on this site.
  *
- * The frame, the field, the filter, the roving selection and the chord itself
- * all belong to the shell's one palette (`@hanzogui/shell`), which the public
- * header already mounts everywhere else on this site. This page contributes
- * commands and nothing else — a second implementation of the frame is how two
- * palettes end up fighting over the same chord and looking like two products.
+ * This page sits under `(marketing)`, whose layout mounts `HanzoHeader`, and
+ * that header already carries the shell's palette. So the page must not mount
+ * one: `OrgCommandPalette` is the palette an ORG shell owns, and it binds the
+ * chord itself (`useCommandKey`), whose own docstring is the warning — "a page
+ * that mounted two would have them fight over the same chord". Mounted here it
+ * did exactly that. One ⌘K opened both, their scrims stacked to double the dim,
+ * and because Escape is handled on the focused palette's INPUT, closing the top
+ * one left the header's open with nothing focused — Escape then did nothing at
+ * all and only a click on the scrim got the page back.
  *
- * Only `view` is listed, because `view` is the only search param this page
- * reads. The fork also offered new-agent, new-task, refresh, settings,
- * data-sources, infrastructure and a row per dummy agent, none of which the
- * page handles — they navigated to a URL it ignores and nothing happened.
+ * Nothing is lost by dropping it. The three commands it contributed were
+ * `?view=board|agents|analytics`, which is the tab strip already on screen.
  */
-const COMMANDS: OrgCommandItem[] = [
-  {
-    id: 'view-board',
-    title: 'View Kanban Board',
-    href: '/dashboard?view=board',
-    category: 'Navigation',
-    icon: <LayoutGrid className="h-4 w-4" />,
-    keywords: ['kanban', 'board', 'tasks'],
-  },
-  {
-    id: 'view-agents',
-    title: 'View Agents',
-    href: '/dashboard?view=agents',
-    category: 'Navigation',
-    icon: <Bot className="h-4 w-4" />,
-    keywords: ['agents', 'ai', 'list'],
-  },
-  {
-    id: 'view-analytics',
-    title: 'View Analytics',
-    href: '/dashboard?view=analytics',
-    category: 'Navigation',
-    icon: <ChartBar className="h-4 w-4" />,
-    keywords: ['analytics', 'stats', 'metrics'],
-  },
-];
-
 const Dashboard = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const viewParam = searchParams.get('view');
-  const [searchOpen, setSearchOpen] = useState(false);
   const [view, setView] = useState<"board" | "agents" | "analytics">(
     (viewParam as "board" | "agents" | "analytics") || "board"
   );
@@ -192,7 +165,7 @@ const Dashboard = () => {
   };
 
   return (
-    <DashboardLayout onSearch={() => setSearchOpen(true)}>
+    <DashboardLayout>
       <div className="flex flex-col h-full">
         <div className="flex justify-between items-center mb-4">
           <div>
@@ -205,13 +178,6 @@ const Dashboard = () => {
           <TabsManager initialTabs={tabs} onAddTab={addNewTab} />
         </div>
       </div>
-      
-      <OrgCommandPalette
-        commands={COMMANDS}
-        open={searchOpen}
-        onOpenChange={setSearchOpen}
-        onNavigate={(href) => router.push(href)}
-      />
     </DashboardLayout>
   );
 };

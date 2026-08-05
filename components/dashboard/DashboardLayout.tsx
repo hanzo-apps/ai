@@ -26,11 +26,25 @@ import {
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  /** Opens the ⌘K palette. The sidebar advertises the chord, so it opens it. */
-  onSearch?: () => void;
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onSearch }) => {
+/**
+ * Open the site's ONE command palette — the shell's, mounted by the header the
+ * `(marketing)` layout wraps every page in.
+ *
+ * The shell binds the palette to ⌘K on `document` and exposes no imperative
+ * opener, so the chord IS the entry point. A row that prints "⌘K" therefore
+ * presses ⌘K: the label and the behaviour are the same fact, and the page never
+ * has to mount a second palette to give the row something to open — which is
+ * how one keypress used to open two of them.
+ */
+function openPalette() {
+  document.dispatchEvent(
+    new KeyboardEvent('keydown', { key: 'k', metaKey: true, ctrlKey: true, bubbles: true }),
+  );
+}
+
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const router = useRouter();
 
   return (
@@ -49,7 +63,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onSearch })
           <Button
             variant="outline"
             className="w-full justify-start text-muted-foreground bg-[var(--black)] border-neutral-800"
-            onClick={onSearch}
+            onClick={openPalette}
           >
             <Search className="w-4 h-4 mr-2" />
             <span>Search...</span>
