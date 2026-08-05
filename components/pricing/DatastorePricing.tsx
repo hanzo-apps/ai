@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@hanzo/ui";
-import { Loader2 } from "lucide-react";
+import { Spinner } from "@hanzo/gui";
 
 const DATASTORE_API = "https://api.hanzo.ai/v1/pricing/datastore";
 
@@ -126,7 +126,7 @@ export default function DatastorePricing() {
 
       {loading ? (
         <div className="flex items-center justify-center py-16">
-          <Loader2 className="w-6 h-6 animate-spin mr-2 text-muted-foreground" />
+          <Spinner size="small" color="$mutedForeground" marginRight={8} />
           <span className="text-muted-foreground">Loading pricing...</span>
         </div>
       ) : data ? (

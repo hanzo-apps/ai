@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { MessageSquare, Check, Loader2 } from "lucide-react";
+import { MessageSquare, Check } from "lucide-react";
+import { Spinner } from "@hanzo/gui";
 import { SMS_CONSENT_TEXT } from "@/lib/constants/sms-consent";
 
 // The endpoint that records consent (notify service, behind the gateway).
@@ -139,7 +140,9 @@ export default function SmsOptInPage() {
                   disabled={!valid || status === "submitting"}
                   className="w-full rounded-full bg-white text-black font-medium py-3 text-sm transition-opacity disabled:opacity-40 enabled:hover:opacity-90 flex items-center justify-center gap-2"
                 >
-                  {status === "submitting" && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {/* The button is a hardcoded white pill, so the glyph is black
+                      rather than a theme token — it inherited `text-black` before. */}
+                  {status === "submitting" && <Spinner size="small" color="black" />}
                   Yes, sign me up!
                 </button>
 

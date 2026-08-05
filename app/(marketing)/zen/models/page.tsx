@@ -5,7 +5,7 @@ import Link from 'next/link'
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-import { Loader2 } from "lucide-react";
+import { Spinner } from "@hanzo/gui";
 import { allModels } from "@zenlm/models";
 import type { ZenModel } from "@zenlm/models";
 
@@ -559,7 +559,7 @@ const ZenModels = () => {
           <div className="max-w-7xl mx-auto">
             {loading ? (
               <div className="flex items-center justify-center py-24">
-                <Loader2 className="w-6 h-6 animate-spin mr-2 text-muted-foreground" />
+                <Spinner size="small" color="$mutedForeground" marginRight={8} />
                 <span className="text-muted-foreground">Loading live pricing...</span>
               </div>
             ) : (

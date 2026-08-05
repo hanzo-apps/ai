@@ -14,7 +14,7 @@ import { useIam } from '@hanzo/iam/react';
 import { useAnalytics } from '@hanzo/event/react';
 import { EVENTS, isoWeek } from '@hanzo/event';
 import { takeSignupIntent } from '@/lib/analytics/signup-intent';
-import { Loader2 } from 'lucide-react';
+import { Spinner } from '@hanzo/gui';
 import { useRouter } from 'next/navigation';
 
 const AuthCallbackInner = () => {
@@ -66,7 +66,7 @@ const AuthCallbackInner = () => {
           </>
         ) : (
           <>
-            <Loader2 className="w-12 h-12 animate-spin text-foreground mx-auto" />
+            <Spinner size="large" color="$foreground" alignItems="center" />
             <h1 className="text-xl font-medium text-foreground">
               Completing authentication...
             </h1>
