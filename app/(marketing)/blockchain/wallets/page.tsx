@@ -230,7 +230,7 @@ wallet.execute_batch([
 import (
     "os"
     "time"
-    hanzo "github.com/hanzoai/blockchain-go"
+    hanzo "github.com/hanzoai/go-sdk"
 )
 
 func main() {

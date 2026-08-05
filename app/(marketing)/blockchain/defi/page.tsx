@@ -238,7 +238,7 @@ positions = defi.portfolio.get_positions(
 
 import (
     "os"
-    "github.com/hanzoai/blockchain-go/defi"
+    defi "github.com/hanzoai/go-sdk"
 )
 
 func main() {

@@ -224,7 +224,7 @@ print(status.state)  # "completed"`,
 
 import (
     "fmt"
-    "github.com/hanzoai/pay-go"
+    pay "github.com/hanzoai/go-sdk"
 )
 
 func main() {

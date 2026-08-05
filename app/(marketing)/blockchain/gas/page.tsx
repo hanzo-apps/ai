@@ -210,7 +210,7 @@ usage = gas_manager.get_usage(policy_id=policy.id)`,
 
 import (
     "os"
-    "github.com/hanzoai/blockchain-go/gas"
+    gas "github.com/hanzoai/go-sdk"
 )
 
 func main() {

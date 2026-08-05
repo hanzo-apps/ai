@@ -205,7 +205,7 @@ twap = sum(h.price for h in history) / len(history)`,
 import (
     "fmt"
     "time"
-    "github.com/hanzoai/oracle-go"
+    oracle "github.com/hanzoai/go-sdk"
 )
 
 func main() {

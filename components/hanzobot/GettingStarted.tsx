@@ -54,8 +54,8 @@ const GettingStarted = () => {
             <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
               <h3 className="text-xl font-semibold text-[var(--white)] mb-4">Automated Start</h3>
               <div className="bg-neutral-950 rounded-lg p-4 font-mono text-sm text-foreground/80 mb-4 overflow-x-auto">
-                <p>git clone https://github.com/hanzoai/bot-starter.git</p>
-                <p>cd bot-starter</p>
+                <p>git clone https://github.com/hanzoai/bot.git</p>
+                <p>cd bot</p>
                 <p>cp .env.example .env</p>
                 <p>pnpm i && pnpm build && pnpm start</p>
               </div>

@@ -267,7 +267,7 @@ import (
     "fmt"
     "os"
 
-    "github.com/hanzoai/storage-go"
+    storage "github.com/hanzoai/go-sdk"
 )
 
 func main() {

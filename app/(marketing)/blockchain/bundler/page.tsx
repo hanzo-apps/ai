@@ -227,7 +227,7 @@ status = bundler.get_user_operation_receipt(
 
 import (
     "os"
-    hanzo "github.com/hanzoai/blockchain-go"
+    hanzo "github.com/hanzoai/go-sdk"
 )
 
 func main() {

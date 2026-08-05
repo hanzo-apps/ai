@@ -212,7 +212,7 @@ async for swap in indexer.subscribe("swaps", pair="ETH/USDC"):
           filename: "indexer.go",
           code: `package main
 
-import "github.com/hanzoai/hanzo-go/blockchain"
+import blockchain "github.com/hanzoai/go-sdk"
 
 func main() {
     indexer := blockchain.NewIndexer(os.Getenv("HANZO_API_KEY"))

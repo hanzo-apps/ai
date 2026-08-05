@@ -270,7 +270,7 @@ balances = await nodes.multi_call([
 import (
     "fmt"
     "os"
-    "github.com/hanzoai/hanzo-go/blockchain"
+    blockchain "github.com/hanzoai/go-sdk"
 )
 
 func main() {

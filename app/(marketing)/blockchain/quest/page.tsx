@@ -290,7 +290,7 @@ progress = await quest.get_user_progress(
 
 import (
     "os"
-    "github.com/hanzoai/hanzo-go/blockchain"
+    blockchain "github.com/hanzoai/go-sdk"
 )
 
 func main() {

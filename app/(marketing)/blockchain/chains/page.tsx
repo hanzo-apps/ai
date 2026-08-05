@@ -208,7 +208,7 @@ balances = await chains.multi_call([
           filename: "chains.go",
           code: `package main
 
-import "github.com/hanzoai/hanzo-go/blockchain"
+import blockchain "github.com/hanzoai/go-sdk"
 
 func main() {
     chains := blockchain.NewClient(os.Getenv("HANZO_API_KEY"))

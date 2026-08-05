@@ -216,7 +216,7 @@ stats = await nft.get_collection_stats(
           filename: "nft.go",
           code: `package main
 
-import "github.com/hanzoai/hanzo-go/blockchain"
+import blockchain "github.com/hanzoai/go-sdk"
 
 func main() {
     nft := blockchain.NewNFTClient(os.Getenv("HANZO_API_KEY"))

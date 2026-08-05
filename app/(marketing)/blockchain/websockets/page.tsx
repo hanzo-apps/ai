@@ -228,7 +228,7 @@ import (
     "fmt"
     "os"
 
-    "github.com/hanzoai/blockchain-go"
+    blockchain "github.com/hanzoai/go-sdk"
 )
 
 func main() {

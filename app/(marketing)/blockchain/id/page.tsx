@@ -282,7 +282,7 @@ await HanzoID.attest(
 import (
     "fmt"
     "time"
-    "github.com/hanzoai/hanzo-go/blockchain"
+    blockchain "github.com/hanzoai/go-sdk"
 )
 
 func main() {

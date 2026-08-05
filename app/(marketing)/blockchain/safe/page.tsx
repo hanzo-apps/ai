@@ -212,7 +212,7 @@ await safe.execute_transaction(proposal.id)`,
           filename: "safe.go",
           code: `package main
 
-import "github.com/hanzoai/hanzo-go/blockchain"
+import blockchain "github.com/hanzoai/go-sdk"
 
 func main() {
     // Create a 2-of-3 multi-sig safe

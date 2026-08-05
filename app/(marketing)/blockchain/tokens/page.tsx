@@ -205,7 +205,7 @@ results = await tokens.search(
           filename: "tokens.go",
           code: `package main
 
-import "github.com/hanzoai/hanzo-go/blockchain"
+import blockchain "github.com/hanzoai/go-sdk"
 
 func main() {
     tokens := blockchain.NewTokensClient(os.Getenv("HANZO_API_KEY"))

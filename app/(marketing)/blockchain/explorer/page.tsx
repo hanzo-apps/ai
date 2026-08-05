@@ -237,7 +237,7 @@ await explorer.create_alert(
 import (
     "fmt"
     "os"
-    "github.com/hanzoai/hanzo-go/blockchain"
+    blockchain "github.com/hanzoai/go-sdk"
 )
 
 func main() {

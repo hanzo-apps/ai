@@ -169,7 +169,7 @@ const productSdks: ProductSdk[] = [
     purpose: "Secrets & key management — read, seal, and sync org secrets.",
     icon: KeyRound,
     packages: [{ registry: "pip", name: "hanzo-kms" }],
-    github: "https://github.com/hanzoai/kms",
+    github: "https://github.com/luxfi/kms",
   },
   {
     name: "S3",

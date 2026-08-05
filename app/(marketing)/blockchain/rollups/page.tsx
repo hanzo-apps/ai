@@ -196,7 +196,7 @@ print(f"Finality: {status['average_finality_time']}")`,
           filename: "rollups.go",
           code: `package main
 
-import "github.com/hanzoai/hanzo-go/blockchain"
+import blockchain "github.com/hanzoai/go-sdk"
 
 func main() {
     rollups := blockchain.NewRollups(os.Getenv("HANZO_API_KEY"))

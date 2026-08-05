@@ -235,7 +235,7 @@ pending = transfers.get_pending(address="0x...", chain="ethereum")`,
 import (
     "fmt"
     "os"
-    hanzo "github.com/hanzoai/blockchain-go"
+    hanzo "github.com/hanzoai/go-sdk"
 )
 
 func main() {

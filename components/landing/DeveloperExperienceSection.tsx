@@ -146,7 +146,7 @@ import (
     "fmt"
     "os"
 
-    "github.com/hanzoai/hanzo-go"
+    hanzo "github.com/hanzoai/go-sdk"
 )
 
 func main() {

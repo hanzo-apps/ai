@@ -36,7 +36,7 @@ const CallToAction = () => {
               className="shadow-lg hover:shadow-xl transition-all flex items-center"
             >
               <Github className="mr-2 h-5 w-5" />
-              <a href="https://github.com/hanzo/platform">Get on GitHub</a>
+              <a href="https://github.com/hanzoai/platform">Get on GitHub</a>
             </Button>
             
             <Button 

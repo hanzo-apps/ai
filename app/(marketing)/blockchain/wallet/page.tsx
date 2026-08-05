@@ -207,7 +207,7 @@ signature = await server_wallet.sign_message("Hello, Web3!")`,
           filename: "wallet.go",
           code: `package main
 
-import "github.com/hanzoai/hanzo-go/blockchain"
+import blockchain "github.com/hanzoai/go-sdk"
 
 func main() {
     // Create an embedded wallet for a user
