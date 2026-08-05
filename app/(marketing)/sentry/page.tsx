@@ -59,7 +59,7 @@ export default function SentryPage() {
           >
             <span className="text-foreground">Hanzo</span>{" "}
             <span className="bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">
-              Sentry
+              Sentinel
             </span>
           </motion.h1>
 
@@ -191,7 +191,7 @@ export default function SentryPage() {
       {/* Resources / Get Started */}
       <section className="py-16 border-t border-neutral-800">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Get started with Sentry</h2>
+          <h2 className="text-2xl font-bold mb-4">Get started with Hanzo Sentinel</h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="https://docs.hanzo.ai/docs/skills/hanzo-sentry"
@@ -210,7 +210,7 @@ export default function SentryPage() {
               View on GitHub
             </a>
           </div>
-                <ProductFooter slug="sentry" name="Sentry" />
+                <ProductFooter slug="sentry" name="Sentinel" />
 </div>
       </section>
     </>

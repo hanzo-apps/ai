@@ -328,7 +328,7 @@ const rawCategories: CloudCategory[] = [
       { title: 'Traces', href: '/telemetry', icon: Activity, blurb: 'Distributed tracing' },
       { title: 'Dashboards', href: '/dashboards', icon: LayoutDashboard, blurb: 'One pane per team' },
       { title: 'Alerts', href: '/products/observe', icon: Bell },
-      { title: 'Sentry', href: '/sentry', icon: Bell, blurb: 'Error tracking' },
+      { title: 'Sentinel', href: '/sentry', icon: Bell, blurb: 'Error tracking' },
       { title: 'Insights', href: '/insights', icon: Sparkles, blurb: 'Product analytics' },
       { title: 'Analytics', href: '/analytics', icon: LineChart, blurb: 'Web analytics' },
       stub({
