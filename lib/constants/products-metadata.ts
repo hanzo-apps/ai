@@ -113,7 +113,7 @@ export const productsMetadata: Record<string, ProductMetadata> = {
   realtime:     { slug: 'realtime',   tagline: 'Realtime channels + presence', license: 'Apache-2.0', github_repo: G, docs_slug: 'pubsub' },
   registry:     { slug: 'registry',   tagline: 'OCI image registry', license: 'Apache-2.0', github_repo: G },
   search:       { slug: 'search',     tagline: 'AI-powered search', license: 'Apache-2.0', github_repo: G, upstream_fork: 'Meilisearch', upstream_license: 'MIT', upstream_url: 'https://www.meilisearch.com' },
-  sentry:       { slug: 'sentry',     tagline: 'Error tracking', license: 'BSL-1.1', github_repo: G, upstream_fork: 'Sentry', upstream_license: 'BSL-1.1', upstream_url: 'https://sentry.io', docs_slug: 'skills/hanzo-sentry' },
+  sentinel:     { slug: 'sentinel',   tagline: 'Error tracking', license: 'BSL-1.1', github_repo: G, upstream_fork: 'Sentry', upstream_license: 'BSL-1.1', upstream_url: 'https://sentry.io', docs_slug: 'skills/hanzo-sentry' },
   sign:         { slug: 'sign',       tagline: 'E-signature', license: 'AGPL-3.0', github_repo: `${G}/sign`, upstream_fork: 'Documenso', upstream_license: 'AGPL-3.0', upstream_url: 'https://documenso.com', docs_slug: 'services/sign' },
   skills:       { slug: 'skills',     tagline: 'Reusable agent skills', license: 'Apache-2.0', github_repo: G },
   sql:          { slug: 'sql',        tagline: 'Managed PostgreSQL', license: 'PostgreSQL', github_repo: `${G}/sql` },

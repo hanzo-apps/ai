@@ -328,7 +328,7 @@ const rawCategories: CloudCategory[] = [
       { title: 'Traces', href: '/telemetry', icon: Activity, blurb: 'Distributed tracing' },
       { title: 'Dashboards', href: '/dashboards', icon: LayoutDashboard, blurb: 'One pane per team' },
       { title: 'Alerts', href: '/products/observe', icon: Bell },
-      { title: 'Sentinel', href: '/sentry', icon: Bell, blurb: 'Error tracking' },
+      { title: 'Sentinel', href: '/sentinel', icon: Bell, blurb: 'Error tracking' },
       { title: 'Insights', href: '/insights', icon: Sparkles, blurb: 'Product analytics' },
       { title: 'Analytics', href: '/analytics', icon: LineChart, blurb: 'Web analytics' },
       stub({
@@ -414,7 +414,7 @@ const DOCS_PATH: Record<string, string> = {
   '/registry': 'registry', '/code': 'dev',
   // Observe
   '/cloud/logs': 'logs', '/metrics': 'metrics', '/telemetry': 'traces', '/dashboards': 'dashboards',
-  '/sentry': 'skills/hanzo-sentry', '/insights': 'services/insights', '/analytics': 'services/analytics',
+  '/sentinel': 'skills/hanzo-sentry', '/insights': 'services/insights', '/analytics': 'services/analytics',
   '/cloud/cost': 'billing',
   // Apps
   '/bot': 'services/bot', '/crawl': 'services/search', '/dataroom': 'services/dataroom',
