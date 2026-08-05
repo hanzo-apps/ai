@@ -32,7 +32,7 @@ const CHANNELS = [
     icon: MessagesSquare,
     title: 'Community',
     body: 'Ask questions and share what you build with other developers on the Hanzo Discord.',
-    href: 'https://discord.gg/hanzoai',
+    href: 'https://discord.gg/XthHQQj',
     cta: 'Join the community',
   },
   {

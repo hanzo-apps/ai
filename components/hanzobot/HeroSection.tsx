@@ -54,13 +54,6 @@ const HeroSection = () => {
               </div>
             </Button>
           </div>
-          
-          <div className="text-muted-foreground text-sm">
-            As seen powering 
-            <a href="https://twitter.com/DegenSpartanAI" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-foreground/70 mx-1">@DegenSpartanAI</a> 
-            and 
-            <a href="https://twitter.com/aixvc_agent" target="_blank" rel="noopener noreferrer" className="text-foreground hover:text-foreground/70 mx-1">@aixvc_agent</a>
-          </div>
         </motion.div>
       </div>
     </section>

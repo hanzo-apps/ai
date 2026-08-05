@@ -19,9 +19,6 @@ const Architecture = () => {
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
             A modular system designed for flexibility and extensibility
           </p>
-          <div className="text-sm text-muted-foreground mt-2">
-            Source: <a href="https://x.com/0xCygaar/status/1874575841763770492" className="text-foreground hover:text-foreground/70">https://x.com/0xCygaar/status/1874575841763770492</a>
-          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
