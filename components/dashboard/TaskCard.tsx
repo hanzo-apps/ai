@@ -45,14 +45,20 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{task.description}</p>
       )}
       
-      {/* Labels */}
+      {/* Labels — a label's colour TINTS the chip; it never sets the text.
+          Colouring 11px text with the value made the chip's legibility a
+          property of the data: the ramp runs #d4d4d4 → #525252, its own fill is
+          that colour at 12.5% so it darkens in step, and the bottom two rungs
+          measured 4.06:1 and 2.53:1 against the card. Fixed foreground, tint
+          behind it — every rung reads, and a new colour cannot introduce an
+          unreadable chip. */}
       {task.labels && task.labels.length > 0 && (
         <div className="flex flex-wrap gap-1 mb-3">
           {task.labels.map(label => (
-            <span 
-              key={label.id} 
-              className="px-2 py-0.5 text-xs rounded-full" 
-              style={{ backgroundColor: `${label.color}20`, color: label.color }}
+            <span
+              key={label.id}
+              className="px-2 py-0.5 text-xs rounded-full border text-neutral-200"
+              style={{ backgroundColor: `${label.color}20`, borderColor: `${label.color}59` }}
             >
               {label.name}
             </span>
