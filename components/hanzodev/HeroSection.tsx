@@ -1,24 +1,14 @@
 'use client'
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  ArrowRight,
-  ExternalLink,
-  Copy,
-  Check,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { CopyButton } from "@hanzo/ui/product";
+
+const INSTALL = "npx hanzo-dev";
 
 const HeroSection = () => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText("npx hanzo-dev");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <section className="relative pt-24 pb-20 px-4 md:px-8 lg:px-12 overflow-hidden">
       {/* Background gradient */}
@@ -95,19 +85,8 @@ const HeroSection = () => {
             className="mb-12"
           >
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-secondary border border-border">
-              <code className="text-sm font-mono text-foreground/80">
-                npx hanzo-dev
-              </code>
-              <button
-                onClick={handleCopy}
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {copied ? (
-                  <Check className="h-3.5 w-3.5 text-foreground/70" />
-                ) : (
-                  <Copy className="h-3.5 w-3.5" />
-                )}
-              </button>
+              <code className="text-sm font-mono text-foreground/80">{INSTALL}</code>
+              <CopyButton value={INSTALL} label="Copy install command" size={20} id="install-cli" />
             </div>
           </motion.div>
 

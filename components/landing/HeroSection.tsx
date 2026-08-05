@@ -3,11 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Copy,
-  Check,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { CopyButton } from "@hanzo/ui/product";
 import { capabilityCount } from "@/lib/data/cloud-primitives";
 
 // The one CLI proof-point shown inside the product preview. One demo, no
@@ -74,19 +71,12 @@ function useModelCount(): string {
 }
 
 const HeroSection = () => {
-  const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
   const modelCount = useModelCount();
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(INSTALL_CMD);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <section className="pt-20 pb-8 px-4 md:px-8 lg:px-12">
@@ -284,17 +274,7 @@ const HeroSection = () => {
                       console.hanzo.ai
                     </span>
                   </div>
-                  <button
-                    onClick={handleCopy}
-                    aria-label="Copy install command"
-                    className="p-1 rounded hover:bg-accent transition-colors"
-                  >
-                    {copied ? (
-                      <Check className="h-3.5 w-3.5 text-foreground/70" />
-                    ) : (
-                      <Copy className="h-3.5 w-3.5 text-muted-foreground" />
-                    )}
-                  </button>
+                  <CopyButton value={INSTALL_CMD} label="Copy install command" size={20} id="install-cli" />
                 </div>
 
                 {/* Console body: sidebar + metric cards + activity + CLI strip */}

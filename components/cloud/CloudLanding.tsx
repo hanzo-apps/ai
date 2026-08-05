@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from "react"
+import React from "react"
 import dynamic from "next/dynamic"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -8,7 +8,8 @@ import { motion } from "framer-motion"
 // WebGL point-globe backdrop — client-only + code-split (never SSR/build);
 // static radial below is the no-WebGL / reduced-motion fallback.
 const PointGlobe = dynamic(() => import("@/components/webgl/PointGlobe"), { ssr: false })
-import { ArrowRight, CreditCard, Cpu, Check, Copy, Github } from "lucide-react"
+import { ArrowRight, CreditCard, Cpu, Check, Github } from "lucide-react"
+import { CopyButton } from "@hanzo/ui/product"
 import { ProductShot } from "@hanzogui/shell"
 import CloudCategoryShowcase, { CloudCategoryMap } from "@/components/cloud/CloudCategoryShowcase"
 import { CONSOLE } from "@/components/home/nav-data"
@@ -35,14 +36,9 @@ const GH = "https://github.com/hanzoai"
 
 /* ---------------------------------------------------------------- hero --- */
 
-function Hero() {
-  const [copied, setCopied] = useState(false)
-  const copy = () => {
-    navigator.clipboard?.writeText("npx @hanzo/cloud deploy")
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+const DEPLOY = "npx @hanzo/cloud deploy"
 
+function Hero() {
   return (
     <section className="relative overflow-hidden px-4 pb-24 pt-24 sm:px-6 lg:px-8">
       {/* The globe is the page's one picture, so it is lit as a centrepiece
@@ -147,17 +143,11 @@ function Hero() {
           transition={{ duration: 0.4, delay: 0.2 }}
           className="mt-8 flex justify-center"
         >
-          <button
-            onClick={copy}
-            className="group inline-flex items-center gap-3 rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-2.5"
-          >
-            <span className="font-mono text-sm text-neutral-300">$ npx @hanzo/cloud deploy</span>
-            {copied ? (
-              <Check className="h-4 w-4 text-emerald-400" />
-            ) : (
-              <Copy className="h-4 w-4 text-neutral-500 transition-colors group-hover:text-white" />
-            )}
-          </button>
+          {/* The `$` is a prompt glyph, so it is shown but never copied. */}
+          <div className="inline-flex items-center gap-3 rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-2.5">
+            <span className="font-mono text-sm text-neutral-300">$ {DEPLOY}</span>
+            <CopyButton value={DEPLOY} label="Copy deploy command" size={20} id="install-cli" />
+          </div>
         </motion.div>
       </div>
     </section>
