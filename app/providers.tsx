@@ -9,11 +9,14 @@ import { useEffect, type ReactNode } from 'react'
 /** Cloud front door: POST /v1/event, body { batch: [Event…] }. */
 const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.ai'
 
-/** Publishable ingest key, write-only and safe in the bundle. It resolves the
- *  request to this org; without it cloud files the traffic under the reserved
- *  `$public` tenant, which stores only pageview and error and which our org
- *  cannot read. Prefix is `pk-` (cloud.PublishablePrefix); other prefixes are
- *  not recognized as a key and fall through to `$public`.
+/** Publishable ingest key, write-only and safe in the bundle — and REQUIRED for
+ *  anonymous traffic. The reserved `$public` tenant that once caught keyless
+ *  beacons is retired server-side (cloud apps/analytics/public.go): an event
+ *  lands in the org a credential names, or is refused. Without this key every
+ *  logged-out pageview and error is answered 401 ingest_key_required, and that
+ *  refusal is a console error on every visit — which is why both build lanes
+ *  (deploy.yml and the Dockerfile) refuse to ship a bundle it did not reach.
+ *  Prefix is `pk-` (cloud.PublishablePrefix); no other prefix is read as a key.
  *  Mint: POST /v1/keys {"type":"publishable"} */
 const INGEST_KEY = process.env.NEXT_PUBLIC_EVENT_INGEST_KEY
 

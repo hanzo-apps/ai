@@ -464,17 +464,21 @@ store — it reads `GET /v1/errors`, which the event stream already writes
 
 ### The ingest key
 
-Anonymous traffic is admitted without a credential and filed under the reserved
-`$public` tenant. That lane stores only `pageview` and `error`, drops `identify`
-/ `group` / custom events, keeps only allowlisted fields, is per-IP rate limited
-(<=50 events, <=64 KiB), and stores nothing under `DNT: 1` / `Sec-GPC: 1`. Our
-own org cannot read `$public`.
+Anonymous traffic REQUIRES the key. The reserved `$public` tenant that once
+caught credential-less beacons is retired (cloud `apps/analytics/public.go`):
+an event lands in the org a credential names, or is refused. A keyless bundle
+has every logged-out pageview and error answered `401 ingest_key_required` — a
+console error on every visit, which is how the defect surfaced live — so BOTH
+build lanes refuse to ship without the key: `deploy.yml` exits before the build,
+and the Dockerfile refuses the empty ARG and then proves the key is actually in
+`out/_next/static` after the build.
 
-The `pk-` key resolves the same traffic to the real org at full capability, which
-on a logged-out marketing site is the difference between having interaction
-analytics and having none. The prefix is `pk-` (`cloud.PublishablePrefix`);
-another prefix is not read as a key and misfiles to `$public` without a 403. A
-presented-but-unresolvable key fails closed with 403.
+The `pk-` key resolves the traffic to the real org under the projected anonymous
+policy: `pageview`, `error` and the closed autocapture vocabulary land; `identify`
+/ `group` / custom events ride an authenticated bearer only; per-IP rate limits
+apply (<=50 events, <=64 KiB), and nothing is stored under `DNT: 1` /
+`Sec-GPC: 1`. The prefix is `pk-` (`cloud.PublishablePrefix`); no other prefix is
+read as a key. A presented-but-unresolvable key fails closed with 403.
 
 Mint with `POST /v1/keys` `{"type":"publishable"}`, store as `deploy/EVENT_INGEST_KEY`
 in KMS. `/v1/keys` is the one key surface: one noun, the method carries the
@@ -510,7 +514,7 @@ is inlined into the bundle at build time.
   opaque subjects where every funnel could count people and none could say
   which person. Both traits come from the same hanzo.id userinfo response the
   subject is read from, so nothing new is collected. Traits ride an
-  AUTHENTICATED session only — the anonymous `$public` lane drops `identify`
+  AUTHENTICATED session only — the projected anonymous lane drops `identify`
   outright — and consent still gates everything through `telemetryEnabled()`.
   Secret redaction in the SDK is unconditional and is not affected.
 

@@ -30,7 +30,7 @@
     "@hanzo/dashboard": "0.2.0",
     "@hanzo/data": "1.2.2",
     "@hanzo/design": "^0.4.7",
-    "@hanzo/event": "^0.3.8",
+    "@hanzo/event": "^0.3.15",
     "@hanzo/gui": "^8.1.0",
     "@hanzo/iam": ">=0.21.2",
     "@hanzo/logo": "^1.0.13",

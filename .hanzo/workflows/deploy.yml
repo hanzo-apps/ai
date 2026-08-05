@@ -99,12 +99,18 @@ jobs:
           # `|| true` is indistinguishable from an absent secret.
           key=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/secrets/deploy/EVENT_INGEST_KEY?env=${KMS_SECRET_ENV}" \
             -H "Authorization: Bearer ${token}" | jq -r '.value // empty' || true)
-          # cloud matches `pk-`; another prefix is not read as a key and misfiles to
-          # $public WITHOUT a 403, so refuse it here rather than ship blind.
+          # No key is NO SHIP. This used to warn and build anyway, on the premise
+          # that keyless traffic still landed under a $public tenant with a 200.
+          # That lane is retired (cloud apps/analytics/public.go): a credential-less
+          # POST /v1/event now answers 401 ingest_key_required, so a keyless bundle
+          # drops every anonymous pageview and error AND ships a console error to
+          # every visitor — the exact defect measured live. cloud matches `pk-`
+          # only; another prefix is not read as a key, so it is the same refusal.
+          # hanzo.app's release lane already refuses the same way.
           case "${key}" in
-            '')   echo "::error::deploy/EVENT_INGEST_KEY absent — traffic lands under \$public, which admits only pageview and error: every track/identify/group is dropped and still answered 200." ;;
+            '')   echo "::error::deploy/EVENT_INGEST_KEY absent from KMS — a keyless bundle 401s every anonymous event; refusing to ship"; exit 1 ;;
             pk-*) echo "::add-mask::${key}"; echo "key=${key}" >> "$GITHUB_OUTPUT" ;;
-            *)    echo "::error::deploy/EVENT_INGEST_KEY does not begin with 'pk-'; ignoring it." ;;
+            *)    echo "::error::deploy/EVENT_INGEST_KEY does not begin with 'pk-' — cloud would not read it as a key; refusing to ship"; exit 1 ;;
           esac
 
       # 759 pages; the default heap OOMs it.
@@ -114,6 +120,23 @@ jobs:
           NODE_OPTIONS: '--max-old-space-size=8192'
           NEXT_PUBLIC_EVENT_INGEST_KEY: ${{ steps.kms.outputs.key }}
         timeout-minutes: 30
+
+      # Prove the key was INLINED, not merely fetched — the same proof the
+      # Dockerfile lane runs. The step above can only fail loudly now, but the
+      # output plumbing between it and the build cannot: an empty
+      # `steps.kms.outputs.key` builds green and ships the keyless bundle whose
+      # every anonymous event 401s.
+      - name: Prove the ingest key reached the bundle
+        env:
+          NEXT_PUBLIC_EVENT_INGEST_KEY: ${{ steps.kms.outputs.key }}
+        run: |
+          set -euo pipefail
+          if [ -z "${NEXT_PUBLIC_EVENT_INGEST_KEY}" ]; then
+            echo "::error::the fetched key never left the KMS step — refusing to ship"; exit 1
+          fi
+          if ! grep -rqF "${NEXT_PUBLIC_EVENT_INGEST_KEY}" out/_next/static; then
+            echo "::error::the ingest key is NOT in out/_next/static — the bundler did not inline it; refusing to ship"; exit 1
+          fi
 
       # The gates run in the job that PUBLISHES, because that is the only placement
       # that makes "nothing publishes ungated" true: workflows sharing a trigger do
