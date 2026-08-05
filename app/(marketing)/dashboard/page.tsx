@@ -8,7 +8,7 @@ import AgentsList from "@/components/dashboard/AgentsList";
 import BlockchainDashboard from "@/components/dashboard/BlockchainDashboard";
 import { Button } from "@hanzo/ui";
 import { PlusCircle, LayoutGrid, Users, ChartBar, X, Plus, Database, Bot, Activity, Server, Blocks } from "lucide-react";
-import { TenantCommandPalette, type TenantCommandItem } from "@hanzogui/shell";
+import { OrgCommandPalette, type OrgCommandItem } from "@hanzogui/shell";
 
 import TabsManager, { TabType } from "@/components/dashboard/TabsManager";
 import { v4 as uuidv4 } from 'uuid';
@@ -28,7 +28,7 @@ import { useRouter, useSearchParams } from "next/navigation";
  * data-sources, infrastructure and a row per dummy agent, none of which the
  * page handles — they navigated to a URL it ignores and nothing happened.
  */
-const COMMANDS: TenantCommandItem[] = [
+const COMMANDS: OrgCommandItem[] = [
   {
     id: 'view-board',
     title: 'View Kanban Board',
@@ -206,7 +206,7 @@ const Dashboard = () => {
         </div>
       </div>
       
-      <TenantCommandPalette
+      <OrgCommandPalette
         commands={COMMANDS}
         open={searchOpen}
         onOpenChange={setSearchOpen}

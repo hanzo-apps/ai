@@ -4,7 +4,7 @@
   "engines": {
     "node": ">=22.18"
   },
-  "version": "0.2.11",
+  "version": "0.2.12",
   "type": "module",
   "scripts": {
     "dev": "next dev --webpack",
@@ -41,7 +41,7 @@
     "@hanzogui/config": "^8.1.0",
     "@hanzogui/lucide-icons-2": "^8.1.0",
     "@hanzogui/next-theme": "^8.1.0",
-    "@hanzogui/shell": "^8.1.0",
+    "@hanzogui/shell": "^8.1.3",
     "@hanzogui/web": "^8.1.0",
     "@hookform/resolvers": "^3.9.0",
     "@tanstack/react-query": "^5.56.2",
