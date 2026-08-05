@@ -54,7 +54,7 @@ export default function ContactSalesPage() {
               sales@hanzo.ai
             </a>
             <a
-              href="https://cal.com/hanzo/sales"
+              href="https://cal.hanzo.ai/hanzo/sales"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-sm border border-border hover:bg-secondary hover:border-neutral-600 transition-all"

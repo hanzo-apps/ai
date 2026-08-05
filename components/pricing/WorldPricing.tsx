@@ -150,7 +150,7 @@ const WorldPricing = () => {
             description={plan.description}
             features={plan.features}
             popular={plan.popular}
-            contactSalesUrl={plan.contactSales ? "https://cal.com/hanzo" : undefined}
+            contactSalesUrl={plan.contactSales ? "https://cal.hanzo.ai/hanzo" : undefined}
           />
         ))}
       </div>
