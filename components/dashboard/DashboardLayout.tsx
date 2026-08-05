@@ -26,9 +26,11 @@ import {
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
+  /** Opens the ⌘K palette. The sidebar advertises the chord, so it opens it. */
+  onSearch?: () => void;
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, onSearch }) => {
   const router = useRouter();
 
   return (
@@ -44,7 +46,11 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         
         {/* Search */}
         <div className="px-3 py-2 border-b border-neutral-900">
-          <Button variant="outline" className="w-full justify-start text-muted-foreground bg-[var(--black)] border-neutral-800">
+          <Button
+            variant="outline"
+            className="w-full justify-start text-muted-foreground bg-[var(--black)] border-neutral-800"
+            onClick={onSearch}
+          >
             <Search className="w-4 h-4 mr-2" />
             <span>Search...</span>
             <div className="ml-auto flex items-center text-xs text-muted-foreground">
