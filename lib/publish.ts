@@ -40,7 +40,95 @@ export const PRIVATE: readonly string[] = ['/auth', '/account', '/login']
  * Deleting a route from this list is the approval — there is no second switch,
  * and no page can approve itself.
  */
-export const UNAPPROVED: readonly string[] = ['/risk']
+export const UNAPPROVED: readonly string[] = [
+  // Three shelves withdrawn as sets (owner call, 2026-08-05): commerce +
+  // fintech, cloud + infrastructure, and company + content. The site leads
+  // with the AI platform; everything here still answers on its URL and
+  // appears nowhere — no nav, no sitemap, no index. Deleting a line is the
+  // re-approval. The legal pages (/privacy, /terms, /cookies, /sms-opt-in)
+  // are deliberately NOT here: OAuth consent and compliance checks resolve
+  // them, and a site whose privacy policy is hidden fails both.
+  // ── commerce + fintech ──
+  '/billing',
+  '/blockchain',
+  '/calculator',
+  '/captable',
+  '/commerce',
+  '/defi',
+  '/fintech',
+  '/ledger',
+  '/payments',
+  '/risk',
+  '/treasury',
+  // ── cloud + infrastructure ──
+  '/analytics',
+  '/authz',
+  '/base',
+  '/cloud',
+  '/console',
+  '/dashboards',
+  '/database',
+  '/dataroom',
+  '/datastore',
+  '/dns',
+  '/docdb',
+  '/edge',
+  '/engine',
+  '/flow',
+  '/functions',
+  '/guard',
+  '/hsm',
+  '/iam',
+  '/identity',
+  '/idv',
+  '/ingress',
+  '/kms',
+  '/kv',
+  '/machines',
+  '/metrics',
+  '/mq',
+  '/network',
+  '/node',
+  '/o11y',
+  '/operator',
+  '/platform',
+  '/pubsub',
+  '/realtime',
+  '/registry',
+  '/s3',
+  '/security',
+  '/sentinel',
+  '/sentry',
+  '/sign',
+  '/sql',
+  '/status',
+  '/storage',
+  '/stream',
+  '/telemetry',
+  '/tunnel',
+  '/visor',
+  // ── company + content ──
+  '/about',
+  '/blog',
+  '/brand',
+  '/careers',
+  '/contact',
+  '/contact-sales',
+  '/customers',
+  '/enterprise',
+  '/leadership',
+  '/learn',
+  '/philosophy',
+  '/press',
+  '/pricing',
+  '/products',
+  '/research',
+  '/research-access',
+  '/solutions',
+  '/startups',
+  '/support',
+  '/team',
+]
 
 /**
  * Routes with nothing to read: a redirect, or a shell that waits for a session.
@@ -64,9 +152,6 @@ export const UNAPPROVED: readonly string[] = ['/risk']
  */
 export const EMPTY: readonly string[] = [
   '/dashboard',
-  '/defi',
-  '/defi/exchange',
-  '/defi/staking',
   '/docs',
   '/docs/api',
   '/docs/audit',
@@ -76,12 +161,9 @@ export const EMPTY: readonly string[] = [
   '/docs/orgs',
   '/docs/templates',
   '/docs/webhooks',
-  '/fintech',
-  '/fintech/payments',
   '/organization-profile',
   '/referral',
   '/signup',
-  '/status',
   '/user-profile',
 ]
 

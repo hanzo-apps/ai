@@ -2,7 +2,21 @@
 
 import { HanzoHeader, HanzoFooter, resolveSurface, type ProductCategory } from '@hanzogui/shell'
 import { categorySlug, cloudCategories } from '@/lib/data/cloud-primitives'
+import { policy } from '@/lib/publish'
 import { CONSOLE, goToChat } from './nav-data'
+
+/**
+ * The chrome links a page iff it is PUBLISHED — the same `policy()` that
+ * writes the sitemap and the noindex tags, so lib/publish's lists are the ONE
+ * switch for menu, nav and footer alike. The registry spells this site's own
+ * routes as absolute hanzo.ai URLs; normalize those, and let every
+ * off-property link (docs.hanzo.ai, lux.cloud) through untouched.
+ */
+const shown = (href: string): boolean => {
+  const local = href.replace(/^https:\/\/(?:cloud\.)?hanzo\.ai(?=\/|$)/, '')
+  if (!local.startsWith('/')) return true
+  return policy(local) === 'public'
+}
 
 /**
  * The shared chrome — ONE header and ONE footer for every face this export
@@ -37,7 +51,13 @@ import { CONSOLE, goToChat } from './nav-data'
 const MENU_LEAVES = 5
 
 export const PRODUCTS_TAXONOMY: ProductCategory[] = cloudCategories.map((category) => {
-  const href = `/products/${categorySlug(category.title)}`
+  // `cloudCategories` is already the PUBLISHED projection (hidden leaves and
+  // emptied categories are gone at the source). What remains here is the
+  // landing: with /products withdrawn, a tile must not point into it, so the
+  // category href falls back to its first leaf and the "All N →" row only
+  // renders when the landing is a page we still publish.
+  const landing = `/products/${categorySlug(category.title)}`
+  const href = shown(landing) ? landing : (category.items[0]?.href ?? landing)
   return {
     id: categorySlug(category.title),
     label: category.title,
@@ -64,11 +84,17 @@ export const PRODUCTS_TAXONOMY: ProductCategory[] = cloudCategories.map((categor
       // grid, so every tile shows the same five and then says how many more
       // there are. The count is the honest part: it names what the link is for,
       // so nothing is dropped quietly — the category page lists all of them.
-      {
-        id: `${categorySlug(category.title)}-all`,
-        label: `All ${category.items.length} →`,
-        href,
-      },
+      // Only when that page is published: an "All N →" into a withdrawn
+      // landing is a link to a page we just unlisted.
+      ...(shown(landing)
+        ? [
+            {
+              id: `${categorySlug(category.title)}-all`,
+              label: `All ${category.items.length} →`,
+              href: landing,
+            },
+          ]
+        : []),
     ],
   }
 })
@@ -98,7 +124,7 @@ export function SiteHeader({
   // The cloud primary was "Open Console" and its secondary "Get API key", which
   // put THREE console.hanzo.ai actions in one header next to the sign-in. One
   // primary is enough: `Start building`, with `Sign in` beside it.
-  const localNav = base.localNav.filter((l) => !l.href.startsWith('https://docs.hanzo.ai'))
+  const localNav = base.localNav.filter((l) => !l.href.startsWith('https://docs.hanzo.ai') && shown(l.href))
 
   return (
     <HanzoHeader
@@ -120,5 +146,5 @@ export function SiteHeader({
 
 /** The footer, same on every face. `currentProductId` marks where you are. */
 export function SiteFooter({ surface }: { surface: 'ai' | 'cloud' }) {
-  return <HanzoFooter currentProductId={surface} />
+  return <HanzoFooter currentProductId={surface} visible={shown} />
 }

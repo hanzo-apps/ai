@@ -1,8 +1,6 @@
 'use client'
 
-import { ArrowRight } from 'lucide-react'
-import { View } from '@hanzo/gui'
-import { CardGrid, Cta, Section, type CardItem } from '@/components/marketing/page-kit'
+import { CardGrid, Section, type CardItem } from '@/components/marketing/page-kit'
 import {
   capabilityCount,
   categoryCount,
@@ -32,11 +30,13 @@ import {
  * section carries no styling of its own and stays in step with every other
  * marketing surface.
  */
+// The /products landings are withdrawn (lib/publish), so a card leads to the
+// category's first published leaf — cloudCategories is already that projection.
 const CATEGORIES: CardItem[] = cloudCategories.map((c) => ({
   title: c.title,
   icon: c.icon,
   description: c.items.map((i) => i.title).join(' · '),
-  href: `/products/${categorySlug(c.title)}`,
+  href: c.items[0]?.href ?? '/',
   // Web3 is a Lux Network surface — the same white-label mark the mega-menu shows.
   ...(c.brand === 'lux' ? { meta: 'Lux' } : null),
 }))
@@ -48,11 +48,6 @@ export default function CloudCategories() {
       lede={`Every capability is one route on api.hanzo.ai/v1 — ${capabilityCount} of them across ${categoryCount} categories. Open source, metered, and settled on-chain.`}
     >
       <CardGrid items={CATEGORIES} columns={2} />
-      <View marginTop="$6">
-        <Cta href="/products" icon={ArrowRight}>
-          Browse all {capabilityCount} capabilities
-        </Cta>
-      </View>
     </Section>
   )
 }

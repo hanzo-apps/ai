@@ -33,6 +33,7 @@
  */
 
 import type { ComponentType } from 'react'
+import { policy } from '@/lib/publish'
 import {
   Activity, ArrowLeftRight, ArrowUpDown, AudioLines, BadgeCheck, Bell, Blocks,
   BookOpen, Bot, Boxes, Brain, Building2, Cloud, Coins, Container, Cpu,
@@ -449,10 +450,41 @@ const resolve = (p: Primitive): Primitive =>
 // The ten cloud categories, with every leaf's console + docs deep links and
 // descriptor resolved. Single source of truth for the mega-menu, the generated
 // overview pages, and the route table — they can never drift apart.
-export const cloudCategories: CloudCategory[] = rawCategories.map((c) => ({
+/**
+ * The taxonomy shows a primitive iff its page is PUBLISHED — the same
+ * `policy()` that writes the sitemap and the noindex tags, applied at the one
+ * source every surface reads: the mega-menu, the homepage category grid, the
+ * `/products/<slug>` landings and the `/cloud/<slug>` overviews all derive
+ * from this export, so withdrawing a surface in lib/publish empties it out of
+ * all of them in the same commit. Off-property links (lux.cloud) have no
+ * policy here and stay. A category whose every leaf is withdrawn vanishes
+ * whole — an empty tile is not a tile.
+ */
+/** Every category with every leaf resolved — including withdrawn ones. The
+ * generated `/cloud/<slug>` + `/blockchain/<slug>` pages derive from THIS set,
+ * because a withdrawn page still builds and answers on its URL (lib/publish's
+ * own contract); only its links disappear. */
+const allCategories: CloudCategory[] = rawCategories.map((c) => ({
   ...c,
   items: c.items.map(resolve),
 }))
+
+/**
+ * The taxonomy SHOWS a primitive iff its page is PUBLISHED — the same
+ * `policy()` that writes the sitemap and the noindex tags, applied at the one
+ * source every display surface reads: the mega-menu, the homepage category
+ * grid, the `/products/<slug>` landings and the product showcases all derive
+ * from this export, so withdrawing a surface in lib/publish empties it out of
+ * all of them in the same commit. Off-property links (lux.cloud) have no
+ * policy here and stay. A category whose every leaf is withdrawn vanishes
+ * whole — an empty tile is not a tile.
+ */
+export const cloudCategories: CloudCategory[] = allCategories
+  .map((c) => ({
+    ...c,
+    items: c.items.filter((item) => !item.href.startsWith('/') || policy(item.href) === 'public'),
+  }))
+  .filter((c) => c.items.length > 0)
 
 /** Number of categories — the ONE count the homepage + hero read (never hard-coded). */
 export const categoryCount: number = cloudCategories.length
@@ -461,7 +493,7 @@ export const categoryCount: number = cloudCategories.length
 export const capabilityCount: number = cloudCategories.reduce((n, c) => n + c.items.length, 0)
 
 // All primitives that render a generated overview page, keyed by slug.
-const generated: Primitive[] = cloudCategories
+const generated: Primitive[] = allCategories
   .flatMap((c) => c.items)
   .filter((i) => Boolean(i.slug))
 
@@ -477,7 +509,7 @@ export function getPrimitive(slug: string): Primitive | undefined {
 
 /** Category a primitive belongs to (for the overview breadcrumb). */
 export function getPrimitiveCategory(slug: string): CloudCategory | undefined {
-  return cloudCategories.find((c) => c.items.some((i) => i.slug === slug))
+  return allCategories.find((c) => c.items.some((i) => i.slug === slug))
 }
 
 // Category slug — the ONE slugify used by both the mega-menu category headers
@@ -487,9 +519,10 @@ export const categorySlug = (title: string): string =>
   title.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
 /** Every category slug — the `generateStaticParams` set for `/products/[categoryId]`. */
-export const categorySlugs: string[] = cloudCategories.map((c) => categorySlug(c.title))
+// From ALL categories: a withdrawn landing still builds and answers.
+export const categorySlugs: string[] = allCategories.map((c) => categorySlug(c.title))
 
 /** Look up a category by its slug (the `/products/<slug>` landing page). */
 export function getCategoryBySlug(slug: string): CloudCategory | undefined {
-  return cloudCategories.find((c) => categorySlug(c.title) === slug)
+  return allCategories.find((c) => categorySlug(c.title) === slug)
 }

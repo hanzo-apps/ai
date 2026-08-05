@@ -18,7 +18,8 @@ const CATEGORY_CARDS = cloudCategories.map((c) => ({
   icon: c.icon,
   title: c.title,
   desc: c.tagline,
-  href: `/products/${categorySlug(c.title)}`,
+  // /products landings are withdrawn (lib/publish): lead with the first published leaf.
+  href: c.items[0]?.href ?? '/',
 }));
 
 const PlatformOverviewSection = () => {
