@@ -99,6 +99,34 @@ ONE component library, ONE token source, ONE way to style.
   make the property reference itself (CSS drops both sides of a cycle).
   `background` is therefore the ONE value mirrored from @hanzo/design's
   exported literals; everything else is a live `var()` reference.
+- **ONE `@hanzogui/web`, always.** `@hanzo/gui` and every `@hanzogui/*` are one
+  release train published in lockstep; they must resolve to ONE version, because
+  `@hanzogui/web` holds the config and theme singletons that `createGui` writes
+  at import. Two copies means the copy a component reads from was never
+  configured. Bumping `@hanzo/gui` alone is therefore never a bump — it is a
+  split, and it fails twice over:
+
+  - **At type level, disguised as an API change.** `defaultConfig` came from the
+    old copy, so its `AnimationDriver` was a different declaration than the one
+    the new `createGui` expects. `createGui<Conf extends CreateGuiProps>` then
+    falls back to its CONSTRAINT — the same degradation this file already
+    records under the font-size note — and the fallout reads like a library
+    rewrite: `AnimationsConfigObject` demands a `default` key, `GuiConfig`
+    circularly references itself, and `Accordion` "no longer accepts" `width` or
+    `children`. None of that was real. gui's own `apps/demos/src/AccordionDemo.tsx`
+    composes Accordion with exactly the props ours does. **Do not adapt call
+    sites to these errors** — they are one dependency defect wearing four masks,
+    and every "fix" would be damage.
+  - **At runtime, where the type gate cannot see it.** `Missing theme.` on
+    prerender — `@hanzo/ui` pulled its own old `@hanzogui/toast`/`telemetry`
+    island, so `/leadership` read a config singleton nobody set. A green
+    typecheck does not prove one copy; only the lockfile does.
+
+  `pnpm.overrides` pins `@hanzogui/{web,toast,telemetry}` for this reason:
+  `@hanzo/ui` still carries stale exact pins beneath caret ranges, and pnpm keeps
+  a satisfied lockfile entry rather than re-resolving it. Verify with
+  `grep -c "@hanzogui/web': 8\.0\.0" pnpm-lock.yaml` — the answer is 0, and
+  `node_modules/.pnpm` will still show an orphaned dir, which is not a copy.
 - **`render=`, not `tag=`** — that is how a gui component picks its host
   element. `tag` is not a gui prop: it leaks through as a DOM attribute and the
   page silently ships with zero `<h1>`/`<section>`.
