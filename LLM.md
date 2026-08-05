@@ -184,6 +184,37 @@ copy is how hanzo.ai drifted from console/chat/app.
   regardless of specificity — and the header CTA rendered white-on-white.
 - Naming: `lib/constants/brand.ts` still carries the JS-side constants.
 
+## The globe is the one place colour is allowed
+
+`components/webgl/PointGlobe.tsx` is the site's only WebGL motif — raw GL and
+inline GLSL, no dependency, code-split behind `next/dynamic({ ssr:false })`.
+Three consumers: the cloud hero, `ChatHero`, `HanzoNetworkSection`.
+
+The chrome stays monochrome. What carries hue is CONVERSATIONS — great-circle
+paths between agents, spawned and retired continuously, each with a travelling
+head — in blue → violet → pink → amber. That split is the rule: if a viewer
+sees colour on this site, something is talking.
+
+Two traps cost a full rebuild of this component, and neither announces itself:
+
+- **WebGL clamps `lineWidth` to one DEVICE pixel.** At DPR 2 that is half a CSS
+  pixel, so a coloured `LINE_STRIP` on black is invisible — which is exactly how
+  the previous globe's arcs and its nearest-neighbour mesh disappeared. Paths
+  are drawn as runs of POINTS, whose size we control. Never reach for a line.
+- **`WEBGL_lose_context` in an effect's cleanup is permanent for that canvas.**
+  React hands the SAME element back on a remount, so `getContext` returns the
+  dead one, every shader reports a compile failure, and the component's own
+  guard hides the canvas for good. Strict mode remounts everything once, so the
+  globe was invisible in `next dev` while prod was fine. The explicit
+  `deleteBuffer`/`deleteProgram` calls are what free the memory; the context
+  dies with the element.
+
+Sizing lives at the CALL SITE, and it is height, not width: the sphere's
+on-screen diameter is a fixed fraction of the canvas height (48° vertical FOV at
+a fixed camera distance) and owes nothing to how wide the canvas is. Fitting the
+canvas to a wide, short hero therefore yields a small globe adrift in black —
+overflow the section's height instead.
+
 ## Key Files
 
 ```

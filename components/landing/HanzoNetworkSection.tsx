@@ -78,7 +78,7 @@ const HanzoNetworkSection = () => {
               }}
             />
           </div>
-          <PointGlobe variant="hero" arcs={4} className="relative mx-auto block h-[360px] w-full sm:h-[460px]" />
+          <PointGlobe variant="hero" conversations={8} className="relative mx-auto block h-[360px] w-full sm:h-[460px]" />
           <div
             className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
             style={{ background: "linear-gradient(to top, var(--pure-black) 0%, transparent 100%)" }}

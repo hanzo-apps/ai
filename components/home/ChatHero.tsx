@@ -71,7 +71,7 @@ export default function ChatHero() {
           className="absolute left-1/2 top-[44%] h-[680px] w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.13]"
           style={{ background: 'radial-gradient(circle, var(--pure-white) 0%, transparent 70%)', filter: 'blur(120px)' }}
         />
-        <PointGlobe variant="ambient" arcs={3} className="absolute inset-0 h-full w-full" />
+        <PointGlobe variant="ambient" conversations={5} className="absolute inset-0 h-full w-full" />
         <div
           className="absolute inset-0"
           style={{

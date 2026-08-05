@@ -45,15 +45,35 @@ function Hero() {
 
   return (
     <section className="relative overflow-hidden px-4 pb-24 pt-24 sm:px-6 lg:px-8">
+      {/* The globe is the page's one picture, so it is lit as a centrepiece
+          (`hero`) rather than a backdrop, and the veil over it is cut to the
+          shape of the text rather than to the shape of the globe: a wide, flat
+          ellipse across the headline band that has fallen away by the time the
+          sphere's lit rim comes up. The previous veil was a tall 0.8-black
+          ellipse centred on the globe itself, which is why the motif read as an
+          empty starfield. The white bloom drops to 0.07 for the same reason —
+          at 0.14 it washed the conversation hues back to grey. */}
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
-          className="absolute left-1/2 top-1/3 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.14]"
+          className="absolute left-1/2 top-[38%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.07]"
           style={{ background: "radial-gradient(circle, #ffffff 0%, transparent 70%)", filter: "blur(120px)" }}
         />
-        <PointGlobe variant="ambient" arcs={3} className="absolute inset-0 h-full w-full" />
+        {/* Sized OFF the section on purpose. The sphere's on-screen diameter is
+            a fixed fraction of the canvas HEIGHT (the projection is 48° vertical
+            at a fixed camera distance) and owes nothing to its width, so filling
+            the hero box exactly gave a 447px globe adrift in 1440px of black.
+            118% of the section makes it a planet the headline sits on; at mobile
+            the same rule would drown a 390px column, so it drops to 62% and the
+            globe crowns the copy instead. Width is only elbow room — the canvas
+            is wider than the section so the sphere is never squeezed by it. */}
+        <PointGlobe
+          variant="hero"
+          conversations={18}
+          className="absolute left-1/2 top-[8%] h-[62%] w-[190%] max-w-none -translate-x-1/2 sm:top-[4%] sm:h-[118%] sm:w-[135%]"
+        />
         <div
           className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse 52% 44% at 50% 40%, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.38) 44%, transparent 80%)" }}
+          style={{ background: "radial-gradient(ellipse 60% 29% at 50% 33%, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.38) 55%, transparent 86%)" }}
         />
       </div>
 
