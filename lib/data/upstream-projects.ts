@@ -554,7 +554,7 @@ docker compose up -d`
 
 export const productCommunityLinks: Record<string, ProductCommunity> = {
   default: {
-    discord: 'https://discord.gg/XthHQQj',
+    discord: 'https://discord.gg/CJCyAsm9Vr',
     github: 'https://github.com/hanzoai',
     docs: 'https://docs.hanzo.ai',
     twitter: 'https://x.com/hanzoai'

@@ -50,7 +50,7 @@ const OpenSource = () => {
               Star on GitHub
             </a>
             <a
-              href="https://discord.gg/XthHQQj"
+              href="https://discord.gg/CJCyAsm9Vr"
               target="_blank"
               rel="noreferrer noopener"
               className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-accent text-sm text-foreground"
