@@ -61,9 +61,13 @@ test('a route has exactly one policy, and a surface is a path segment', () => {
     expect(policy(surface + '/sub'), `${surface}/sub is withheld too`).toBe('noindex')
   }
   // A surface is a path segment, not a string prefix: /risky is a different page.
-  for (const route of ['/', '/api', '/commerce', '/risky', '/accountability', '/logins', '/authz']) {
+  for (const route of ['/', '/api', '/computer', '/risky', '/accountability', '/logins', '/automations']) {
     expect(policy(route), `${route} is public`).toBe('public')
   }
+  // /authz was THE control for the /auth prefix bug and is now withdrawn
+  // itself. The segment rule still shows: withdrawn means noindex, and if
+  // PRIVATE's /auth matched it as a prefix this would read 'private'.
+  expect(policy('/authz'), '/authz is withdrawn, not swallowed by /auth').toBe('noindex')
   // An EMPTY entry is a PAGE and takes nothing beneath it: /docs forwards to
   // docs.hanzo.ai and /docs/sdk is three thousand words of its own.
   for (const page of EMPTY) {
@@ -261,9 +265,11 @@ test('every route declared empty is empty, and grows out of the list', () => {
 
 test('an approved page ships no noindex', () => {
   // The inverse case. Without it, a change that noindexed the whole site would
-  // pass every assertion above.
+  // pass every assertion above. (/authz held this seat until the cloud +
+  // infrastructure shelf was withdrawn; /models is the site's core and the
+  // page least likely to ever be.)
   expect(read('api.html')).not.toContain(NOINDEX)
-  expect(read('authz.html'), '/authz is a product page and stays indexable').not.toContain(NOINDEX)
+  expect(read('models.html'), '/models is the catalog and stays indexable').not.toContain(NOINDEX)
 })
 
 test('the auth surfaces stay private', () => {
