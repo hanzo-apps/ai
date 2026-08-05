@@ -87,27 +87,65 @@ test('every build-arg a workflow passes names an ARG its Dockerfile declares', (
 })
 
 /**
- * The image this repo's apex publishes. Named once, here, because it is the
- * scope boundary: cloud.hanzo.ai ships a DIFFERENT image from the same export
- * (cloud.yml, SITE_ROOT=cloud) and is not gated either — a real gap, and one
- * that belongs to that host rather than to this fix.
+ * How the apex PUBLISHES. It is a Sites-plane deploy, not an image push: the
+ * export goes to `POST /v1/projects/hanzo-ai/deploy` through hanzoai/ci's
+ * sitedeploy action, so there is no `push: true` in the apex lane any more.
+ *
+ * This is matched by the ACTION, not by a name in prose. The previous version
+ * looked for the string `ghcr.io/hanzoai/hanzo-ai-www` anywhere in a workflow,
+ * which kept matching after the image lane was gone — deploy.yml still NAMES that
+ * image, in the comment explaining what it replaced. A gate keyed on a word that
+ * can appear in a sentence fails whenever someone documents the history, which is
+ * exactly what it did. `uses:` is a line only a real step can carry.
+ *
+ * Scope boundary: cloud.hanzo.ai ships a DIFFERENT artifact from the same export
+ * (cloud.yml → ghcr.io/hanzoai/cloud-www) and is still an image, still ungated —
+ * a real gap, and one that belongs to that host rather than to this file.
  */
-const APEX = 'ghcr.io/hanzoai/hanzo-ai-www'
+const PUBLISH = 'hanzoai/ci/.github/actions/sitedeploy'
 
-test('the workflow that publishes the apex runs the gates before it pushes', () => {
+test('the workflow that publishes the apex runs the gates before it publishes', () => {
   // Workflows on one trigger do not order themselves. cicd.yml (which runs
-  // `hanzo.yml`'s gates) and deploy.yml both fire on push to main, neither
-  // waits for the other, and there is no cross-workflow `needs:`. A red gate in
-  // one therefore does not stop the other publishing. So the check has to sit
-  // in the job that pushes, and this says it does — the ordering, not merely
-  // the presence, because a gate that runs after the push is a report.
-  const publishing = workflows().filter(({ text }) => text.includes(APEX))
-  expect(publishing.map(({ name }) => name), `no workflow publishes ${APEX}`).not.toEqual([])
+  // `hanzo.yml`'s gates) and deploy.yml both fire on push to main, neither waits
+  // for the other, and there is no cross-workflow `needs:`. A red gate in one
+  // therefore does not stop the other publishing. So the check has to sit in the
+  // job that publishes, and this says it does — the ordering, not merely the
+  // presence, because a gate that runs after the publish is a report.
+  const publishing = workflows().filter(({ text }) =>
+    new RegExp(`^\\s*uses:\\s*${PUBLISH}@`, 'm').test(text),
+  )
+  expect(publishing.map(({ name }) => name), `no workflow publishes the apex via ${PUBLISH}`).not.toEqual([])
   for (const { name, text } of publishing) {
     const gates = text.indexOf('pnpm gates')
-    const push = text.indexOf('push: true')
-    expect(gates, `${name} publishes ${APEX} and never runs the gates`).toBeGreaterThan(-1)
-    expect(push, `${name} must actually push`).toBeGreaterThan(-1)
-    expect(gates, `${name} runs the gates AFTER it pushes, which is a report`).toBeLessThan(push)
+    const publish = text.search(new RegExp(`^\\s*uses:\\s*${PUBLISH}@`, 'm'))
+    expect(gates, `${name} publishes the apex and never runs the gates`).toBeGreaterThan(-1)
+    expect(gates, `${name} runs the gates AFTER it publishes, which is a report`).toBeLessThan(publish)
   }
+})
+
+test('the apex publish pins the action and carries the one credential it needs', () => {
+  const [apex] = workflows().filter(({ text }) =>
+    new RegExp(`^\\s*uses:\\s*${PUBLISH}@`, 'm').test(text),
+  )
+  // A floating action ref is the same defect as a floating image tag: the build
+  // that ships becomes unnameable. bin/sitedeploy resolves the action ref as its
+  // OWN script ref, so @v1 is what makes "which publisher ran" answerable.
+  expect(apex.text, `${apex.name} must pin the sitedeploy action to a ref`).toMatch(
+    new RegExp(`uses:\\s*${PUBLISH}@v\\d`),
+  )
+  // ONE credential. The 202 returns a prefix-scoped, short-lived presigned POST
+  // grant, so CI needs no bucket key — SITES_S3_* is the standing shared-bucket
+  // credential the grant replaced, and any repo holding it could overwrite every
+  // other org's site.
+  expect(apex.text, `${apex.name} publishes without HANZO_DEPLOY_TOKEN`).toMatch(
+    /\$\{\{\s*secrets\.HANZO_DEPLOY_TOKEN\s*\}\}/,
+  )
+  // `secrets.SITES_S3_`, not the bare name. The bare name is how the previous
+  // version of the test above went wrong: it keyed on a string that a COMMENT can
+  // legitimately contain — and this file's own workflow contains it, in the line
+  // telling the next reader not to add it. A gate must match the thing, not the
+  // word for the thing, or documenting a rule becomes a way to break it.
+  expect(apex.text, `${apex.name} reintroduces SITES_S3_* — the grant replaced it`).not.toMatch(
+    /\$\{\{\s*secrets\.SITES_S3_/,
+  )
 })
