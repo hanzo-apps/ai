@@ -76,11 +76,17 @@ export function CloudCategoryMap() {
             <Link href={`/products/${categorySlug(category.title)}`}>
               <div className="group h-full cursor-pointer rounded-xl border border-white/10 p-6 transition-colors duration-200 hover:border-white/25 motion-reduce:transition-none">
                 <div className="flex items-start justify-between">
-                  <h3 className="flex items-center gap-2.5 text-xl font-semibold tracking-tight text-neutral-200 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none">
+                  {/* A SPAN, not a heading. This grid and `CategorySection`
+                      below render the same ten categories on the same page, so
+                      every title was landing in the outline twice — an <h3>
+                      here and an <h2> there. The map is a set of doors; the
+                      section is the content behind them. Only one of those is a
+                      heading, and it is not this one. */}
+                  <span className="flex items-center gap-2.5 text-xl font-semibold tracking-tight text-neutral-200 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none">
                     <Icon className="h-5 w-5 text-neutral-400 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none" />
                     {category.title}
                     <ArrowRight className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
-                  </h3>
+                  </span>
                   <span className="text-sm text-muted-foreground">{category.items.length}</span>
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-neutral-500">{category.tagline}</p>
@@ -107,7 +113,12 @@ function CategorySection({ category }: { category: CloudCategory }) {
         <div className="mb-8 flex items-end justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{category.title}</h2>
-            <p className="mt-1 text-sm text-neutral-500">{category.tagline}</p>
+            {/* The tagline is stated once, on the map card above, which is this
+                page's summary layer. Repeating it here printed all ten
+                descriptions twice and was a large part of why this page runs to
+                roughly eighteen phone screens at 390px. The six primitive cards
+                below each carry their own description, so the section is not
+                left unexplained by dropping it. */}
             {category.brand === 'lux' && (
               <p className="mt-1 text-xs text-neutral-600">Powered by Lux Network</p>
             )}
