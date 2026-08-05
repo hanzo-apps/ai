@@ -34,20 +34,33 @@ RUN pnpm install --frozen-lockfile
 # It is publishable and write-only — it ships in the client bundle — so it is a
 # build arg rather than a secret mount.
 #
-# Omitted, cloud files the traffic under $public, whose allowlist admits only
-# pageview and error: every track/identify/group is dropped and still answered
-# 200, so the loss is silent.
+# Omitted is REFUSED, because omitted is how the live 401 shipped: cloud no
+# longer files credential-less traffic under a $public tenant (that lane is
+# retired — cloud apps/analytics/public.go), so a keyless bundle has every
+# anonymous POST /v1/event answered 401 ingest_key_required — all pageviews and
+# errors dropped, and the refusal is a console error on every visit.
 #
 # EVENT_INGEST_KEY is the name in KMS and on the --build-arg; NEXT_PUBLIC_ is
 # added here because that prefix is what makes Next inline a var.
 ARG EVENT_INGEST_KEY
 ENV NEXT_PUBLIC_EVENT_INGEST_KEY=$EVENT_INGEST_KEY
+RUN case "$EVENT_INGEST_KEY" in \
+      pk-*) : ;; \
+      '')   echo "EVENT_INGEST_KEY is empty - pass --opt build-arg:EVENT_INGEST_KEY=pk-... (KMS deploy/EVENT_INGEST_KEY, env prod)" >&2; exit 1 ;; \
+      *)    echo "EVENT_INGEST_KEY is not a publishable key (expected a pk- prefix)" >&2; exit 1 ;; \
+    esac
 
 # Build the static export (next.config.ts: output: 'export' -> ./out).
 # Large export (hundreds of pages): the default Node heap OOMs it — same
 # headroom the CF-Pages deploy lane uses (.hanzo/workflows/deploy.yml).
 COPY . .
 RUN NODE_OPTIONS=--max-old-space-size=8192 pnpm build
+
+# Prove the key was INLINED, not merely supplied: a bundler change that stopped
+# reading the env var would rebuild the exact keyless artifact the ARG check
+# above exists to prevent, while both it and the build stayed green.
+RUN grep -rqF "$NEXT_PUBLIC_EVENT_INGEST_KEY" out/_next/static || \
+    { echo "EVENT_INGEST_KEY was supplied but is NOT in out/_next/static" >&2; exit 1; }
 
 # Promote the monochrome marketing CloudLanding (/cloud — Hanzo-Cloud branding:
 # the products mega-menu, the "Open-weight model garden" / "On-demand GPU

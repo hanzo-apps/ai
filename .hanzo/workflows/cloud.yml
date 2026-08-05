@@ -67,6 +67,40 @@ jobs:
           username: hanzo-dev
           password: ${{ secrets.GH_PAT }}
 
+      # BEFORE the image build: NEXT_PUBLIC_* is inlined at build time, so the key
+      # travels as a build-arg (Dockerfile ARG EVENT_INGEST_KEY) or never reaches
+      # the bundle. deploy/EVENT_INGEST_KEY is the ONE name and ONE location in
+      # KMS, shared with hanzo.app, hanzo.chat and this repo's own apex lane
+      # (deploy.yml). This step was MISSING: every cloud-www image was built
+      # keyless, and cloud refuses credential-less ingest — the $public tenant
+      # that once caught keyless traffic is retired (cloud apps/analytics/
+      # public.go), so the live landing answered 401 ingest_key_required on
+      # every pageview and shipped a console error to every visitor.
+      #
+      # Absent is therefore a broken artifact, not a downgrade: no key, no image.
+      - name: Fetch the ingest key from KMS
+        id: kms
+        env:
+          KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
+          KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}
+          KMS_ENDPOINT: ${{ vars.KMS_ENDPOINT || 'https://api.hanzo.ai' }}
+          KMS_SECRET_ENV: ${{ vars.KMS_SECRET_ENV || 'prod' }}
+        run: |
+          set -euo pipefail
+          token=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/auth/login" \
+            -H 'Content-Type: application/json' \
+            -d "{\"clientId\":\"${KMS_CLIENT_ID}\",\"clientSecret\":\"${KMS_CLIENT_SECRET}\"}" \
+            | jq -r '.accessToken // empty')
+          if [ -z "${token}" ]; then
+            echo "::error::KMS login failed at ${KMS_ENDPOINT}/v1/kms/auth/login"; exit 1
+          fi
+          key=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/secrets/deploy/EVENT_INGEST_KEY?env=${KMS_SECRET_ENV}" \
+            -H "Authorization: Bearer ${token}" | jq -r '.value // empty' || true)
+          case "${key}" in
+            pk-*) echo "::add-mask::${key}"; echo "key=${key}" >> "$GITHUB_OUTPUT" ;;
+            *)    echo "::error::deploy/EVENT_INGEST_KEY absent or not pk- — a keyless image 401s every anonymous event; refusing to build"; exit 1 ;;
+          esac
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -78,6 +112,7 @@ jobs:
           push: true
           build-args: |
             SITE_ROOT=cloud
+            EVENT_INGEST_KEY=${{ steps.kms.outputs.key }}
 
       # build-push-action can exit 0 before the manifest resolves, so a green run
       # could still leave the CR pinned to a tag that ImagePullBackOffs. Prove it

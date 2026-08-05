@@ -32,8 +32,8 @@ importers:
         specifier: ^0.4.6
         version: 0.4.6
       '@hanzo/event':
-        specifier: ^0.3.8
-        version: 0.3.8(react@19.2.8)
+        specifier: ^0.3.15
+        version: 0.3.15(react@19.2.8)
       '@hanzo/gui':
         specifier: ^8.1.0
         version: 8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
@@ -977,8 +977,8 @@ packages:
     resolution: {integrity: sha512-kRjnGKsGqMfGTg2kMUv+pPRDryarYk85rMOoblIqshFIZJp48pCKYcdv1DmfxbNyKm+7CqvqD1NjY3HhNPUQ/A==}
     hasBin: true
 
-  '@hanzo/event@0.3.8':
-    resolution: {integrity: sha512-Mh7+CV2t23x/dircN1Y9Ulm7HE6QWMf9E0/oBrlsILZCS7oP4GY5sGFlO36ZSiUsnbEVJIT21/PZILLPi4JAhQ==}
+  '@hanzo/event@0.3.15':
+    resolution: {integrity: sha512-OYOKA6jNRRusxnZk2X+HA2ykDw02drXy5CWQqQMq2a6hxGwn3uGWbBlD9oOavGJI1+BK0Co6z7Ncy7kbzMgyaw==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
@@ -4752,7 +4752,7 @@ snapshots:
 
   '@hanzo/design@0.4.6': {}
 
-  '@hanzo/event@0.3.8(react@19.2.8)':
+  '@hanzo/event@0.3.15(react@19.2.8)':
     optionalDependencies:
       react: 19.2.8
 
@@ -4842,7 +4842,7 @@ snapshots:
 
   '@hanzo/observe@0.1.6(react@19.2.8)':
     dependencies:
-      '@hanzo/event': 0.3.8(react@19.2.8)
+      '@hanzo/event': 0.3.15(react@19.2.8)
     optionalDependencies:
       react: 19.2.8
 
@@ -5845,7 +5845,7 @@ snapshots:
 
   '@hanzogui/telemetry@8.1.0(react@19.2.8)':
     dependencies:
-      '@hanzo/event': 0.3.8(react@19.2.8)
+      '@hanzo/event': 0.3.15(react@19.2.8)
       '@hanzo/observe': 0.1.6(react@19.2.8)
       react: 19.2.8
 
@@ -6359,9 +6359,7 @@ snapshots:
       metro-runtime: 0.84.4
     transitivePeerDependencies:
       - '@babel/core'
-      - bufferutil
       - supports-color
-      - utf-8-validate
 
   '@react-native/normalize-color@2.1.0': {}
 
