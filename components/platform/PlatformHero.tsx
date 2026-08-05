@@ -11,9 +11,8 @@ import {
   Database,
   Lock,
   Zap,
-  Check,
-  Copy,
 } from "lucide-react";
+import { CopyButton } from "@hanzo/ui/product";
 
 const FEATURES = [
   { id: "self-host", label: "Self-Host", icon: Server },
@@ -142,15 +141,10 @@ hanzo deploy --prod`,
   );
 };
 
+const INSTALL = "npx @hanzo/cli create my-app";
+
 const PlatformHero = () => {
   const [activeFeature, setActiveFeature] = useState("self-host");
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText("npx @hanzo/cli create my-app");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
@@ -238,13 +232,8 @@ const PlatformHero = () => {
               className="mb-8"
             >
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-secondary border border-border">
-                <code className="text-sm font-mono text-foreground/80">npx @hanzo/cli create my-app</code>
-                <button
-                  onClick={handleCopy}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {copied ? <Check className="h-3.5 w-3.5 text-foreground/70" /> : <Copy className="h-3.5 w-3.5" />}
-                </button>
+                <code className="text-sm font-mono text-foreground/80">{INSTALL}</code>
+                <CopyButton value={INSTALL} label="Copy install command" size={20} id="install-cli" />
               </div>
             </motion.div>
 

@@ -1,12 +1,11 @@
 'use client'
 
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@hanzo/ui";
+import { CopyButton } from "@hanzo/ui/product";
 import {
   Activity,
   Key,
-  Copy,
-  Check,
   ExternalLink,
   Zap,
   Globe,
@@ -35,8 +34,6 @@ interface ApiKey {
 }
 
 const BlockchainDashboard = () => {
-  const [copiedKey, setCopiedKey] = useState<string | null>(null);
-
   // Mock data - would come from API
   const usage = {
     currentPeriod: {
@@ -63,11 +60,10 @@ const BlockchainDashboard = () => {
     { id: "3", name: "Staging", prefix: "hnz_stg_", created: "2026-01-20", lastUsed: "3 days ago", requests: 12_345 },
   ];
 
-  const copyToClipboard = (key: string) => {
-    navigator.clipboard.writeText(`${key}****************************`);
-    setCopiedKey(key);
-    setTimeout(() => setCopiedKey(null), 2000);
-  };
+  // The mask is written ONCE. Shown and copied used to be separate literals —
+  // four asterisks in the cell, twenty-eight on the clipboard — so the row
+  // handed you something it had never displayed.
+  const masked = (prefix: string) => `${prefix}****`;
 
   const formatNumber = (num: number) => {
     if (num >= 1_000_000_000) return `${(num / 1_000_000_000).toFixed(1)}B`;
@@ -203,24 +199,16 @@ const BlockchainDashboard = () => {
                   <td className="py-3 font-medium">{key.name}</td>
                   <td className="py-3">
                     <code className="bg-neutral-800 px-2 py-1 rounded text-xs">
-                      {key.prefix}****
+                      {masked(key.prefix)}
                     </code>
                   </td>
                   <td className="py-3 text-muted-foreground">{key.created}</td>
                   <td className="py-3 text-muted-foreground">{key.lastUsed}</td>
                   <td className="py-3 text-right">{formatNumber(key.requests)}</td>
-                  <td className="py-3 text-right">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => copyToClipboard(key.prefix)}
-                    >
-                      {copiedKey === key.prefix ? (
-                        <Check className="w-4 h-4 text-foreground/70" />
-                      ) : (
-                        <Copy className="w-4 h-4" />
-                      )}
-                    </Button>
+                  <td className="py-3">
+                    <div className="flex justify-end">
+                      <CopyButton value={masked(key.prefix)} label="Copy API key" id="api-key" />
+                    </div>
                   </td>
                 </tr>
               ))}

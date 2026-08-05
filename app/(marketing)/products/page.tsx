@@ -1,29 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import React from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Check, Copy, ExternalLink } from 'lucide-react'
+import { ArrowRight, ExternalLink } from 'lucide-react'
 import { Button } from '@hanzo/ui'
+import { CopyButton } from '@hanzo/ui/product'
 import { PartnerLogoRow } from '@/components/shared'
 import { infrastructureLogos } from '@/lib/constants/partner-logos'
 import CloudCategoryShowcase, { CloudCategoryMap } from '@/components/cloud/CloudCategoryShowcase'
 import { POSITIONING } from '@/lib/data/cloud-primitives'
 import { CONSOLE } from '@/components/home/nav-data'
-
-const CopyButton = ({ text }: { text: string }) => {
-  const [copied, setCopied] = React.useState(false)
-  const copy = async () => {
-    await navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-  return (
-    <button onClick={copy} className="rounded p-2 transition-colors hover:bg-primary/10" title="Copy to clipboard">
-      {copied ? <Check className="h-4 w-4 text-foreground/70" /> : <Copy className="h-4 w-4 text-muted-foreground" />}
-    </button>
-  )
-}
 
 // The products index — one source (lib/data/cloud-primitives.ts) drives the
 // mega-menu, the category landing pages, AND this overview, so nothing drifts.
@@ -47,7 +33,7 @@ export default function Products() {
               <p className="mb-3 text-sm text-muted-foreground">Get started in seconds</p>
               <div className="flex items-center justify-between rounded-xl bg-background p-4 font-mono">
                 <code className="text-foreground/70">curl -fsSL hanzo.sh | bash</code>
-                <CopyButton text="curl -fsSL hanzo.sh | bash" />
+                <CopyButton value="curl -fsSL hanzo.sh | bash" id="install-cli" />
               </div>
             </div>
 

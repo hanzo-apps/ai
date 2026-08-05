@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Copy, Terminal } from "lucide-react";
+import { Terminal } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@hanzo/ui";
+import { CopyButton } from "@hanzo/ui/product";
 
 interface CodeExample {
   language: string;
@@ -23,14 +23,6 @@ export function CodeExamplesSection({
   subtitle = "Get started in minutes with your language of choice",
   examples
 }: CodeExamplesSectionProps) {
-  const [copiedIndex, setCopiedIndex] = useState<string | null>(null);
-
-  const copyToClipboard = async (code: string, index: string) => {
-    await navigator.clipboard.writeText(code);
-    setCopiedIndex(index);
-    setTimeout(() => setCopiedIndex(null), 2000);
-  };
-
   const languageIcons: Record<string, string> = {
     python: "🐍",
     javascript: "📜",
@@ -90,25 +82,10 @@ export function CodeExamplesSection({
 
               <div className="relative group">
                 <div className="absolute top-3 right-3 z-10">
-                  <button
-                    onClick={() => copyToClipboard(example.code, example.language)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 border border-border rounded-md text-xs font-medium text-foreground/80 transition-colors"
-                  >
-                    {copiedIndex === example.language ? (
-                      <>
-                        <Check className="w-3 h-3 text-foreground/70" />
-                        Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3 h-3" />
-                        Copy
-                      </>
-                    )}
-                  </button>
+                  <CopyButton value={example.code} id="code-example" />
                 </div>
 
-                <pre className="bg-secondary border border-border rounded-xl p-4 pr-24 overflow-x-auto">
+                <pre className="bg-secondary border border-border rounded-xl p-4 pr-12 overflow-x-auto">
                   <code className="text-sm text-foreground/80 font-mono whitespace-pre">
                     {example.code}
                   </code>

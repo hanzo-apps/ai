@@ -15,13 +15,12 @@ import {
   TabsList,
   TabsTrigger,
 } from "@hanzo/ui";
+import { CopyButton } from "@hanzo/ui/product";
 import Link from "next/link";
 import {
   Github,
   BookOpen,
   Terminal,
-  Copy,
-  Check,
   ExternalLink,
   ArrowRight,
   Sparkles,
@@ -136,26 +135,6 @@ interface ProductPageTemplateProps {
   product: Product;
   children?: React.ReactNode;
 }
-
-const CopyButton = ({ text }: { text: string }) => {
-  const [copied, setCopied] = React.useState(false);
-
-  const copy = async () => {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  return (
-    <button
-      onClick={copy}
-      className="p-2 hover:bg-primary/10 rounded transition-colors"
-      title="Copy to clipboard"
-    >
-      {copied ? <Check className="h-4 w-4 text-foreground/70" /> : <Copy className="h-4 w-4 text-muted-foreground" />}
-    </button>
-  );
-};
 
 const StatusBadge = ({ status }: { status: Product['status'] }) => {
   const variants = {
@@ -412,7 +391,7 @@ export const ProductPageTemplate: React.FC<ProductPageTemplateProps> = ({ produc
                     <div className="bg-background rounded-xl border border-border overflow-hidden">
                       <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-secondary/50">
                         <span className="text-xs text-muted-foreground font-mono">terminal</span>
-                        <CopyButton text={product.install.cli} />
+                        <CopyButton value={product.install.cli} id="install-cli" />
                       </div>
                       <div className="p-4 font-mono text-sm overflow-x-auto">
                         <span className="text-muted-foreground">$</span>{" "}
@@ -427,7 +406,7 @@ export const ProductPageTemplate: React.FC<ProductPageTemplateProps> = ({ produc
                     <div className="bg-background rounded-xl border border-border overflow-hidden">
                       <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-secondary/50">
                         <span className="text-xs text-muted-foreground font-mono">docker</span>
-                        <CopyButton text={product.install.docker} />
+                        <CopyButton value={product.install.docker} id="install-docker" />
                       </div>
                       <div className="p-4 font-mono text-sm overflow-x-auto">
                         <span className="text-muted-foreground">$</span>{" "}
@@ -442,7 +421,7 @@ export const ProductPageTemplate: React.FC<ProductPageTemplateProps> = ({ produc
                     <div className="bg-background rounded-xl border border-border overflow-hidden">
                       <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-secondary/50">
                         <span className="text-xs text-muted-foreground font-mono">npm</span>
-                        <CopyButton text={product.install.npm} />
+                        <CopyButton value={product.install.npm} id="install-npm" />
                       </div>
                       <div className="p-4 font-mono text-sm overflow-x-auto">
                         <span className="text-muted-foreground">$</span>{" "}
@@ -457,7 +436,7 @@ export const ProductPageTemplate: React.FC<ProductPageTemplateProps> = ({ produc
                     <div className="bg-background rounded-xl border border-border overflow-hidden">
                       <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-secondary/50">
                         <span className="text-xs text-muted-foreground font-mono">pip</span>
-                        <CopyButton text={product.install.pip} />
+                        <CopyButton value={product.install.pip} id="install-pip" />
                       </div>
                       <div className="p-4 font-mono text-sm overflow-x-auto">
                         <span className="text-muted-foreground">$</span>{" "}

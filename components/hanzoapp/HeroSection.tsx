@@ -11,11 +11,11 @@ import {
   Cpu,
   Shield,
   Check,
-  Copy,
   ExternalLink,
   Apple,
   Chrome,
 } from "lucide-react";
+import { CopyButton } from "@hanzo/ui/product";
 
 const PLATFORMS = [
   { id: "web", label: "Web App", icon: Globe, description: "Build in browser" },
@@ -162,15 +162,10 @@ const AppDemo = ({ activeTab }: { activeTab: string }) => {
   );
 };
 
+const INSTALL = "curl -fsSL hanzo.sh | sh";
+
 const HeroSection = () => {
   const [activeTab, setActiveTab] = useState("web");
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText("curl -fsSL hanzo.sh | sh");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
@@ -243,15 +238,8 @@ const HeroSection = () => {
               className="mb-8"
             >
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-secondary border border-border">
-                <code className="text-sm font-mono text-foreground/80">
-                  curl -fsSL hanzo.sh | sh
-                </code>
-                <button
-                  onClick={handleCopy}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {copied ? <Check className="h-3.5 w-3.5 text-foreground/70" /> : <Copy className="h-3.5 w-3.5" />}
-                </button>
+                <code className="text-sm font-mono text-foreground/80">{INSTALL}</code>
+                <CopyButton value={INSTALL} label="Copy install command" size={20} id="install-cli" />
                 <a
                   href="https://docs.hanzo.ai"
                   target="_blank"

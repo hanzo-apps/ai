@@ -12,9 +12,8 @@ import {
   Shield,
   Zap,
   Cloud,
-  Check,
-  Copy,
 } from "lucide-react";
+import { CopyButton } from "@hanzo/ui/product";
 
 const SERVICES = [
   { id: "compute", label: "Compute", icon: Server },
@@ -143,15 +142,10 @@ hanzo access grant user@company.com \\
   );
 };
 
+const INSTALL = "npx hanzo deploy";
+
 const CloudHero = () => {
   const [activeService, setActiveService] = useState("compute");
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText("npx hanzo deploy");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
@@ -237,13 +231,8 @@ const CloudHero = () => {
               className="mb-8"
             >
               <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-secondary border border-border">
-                <code className="text-sm font-mono text-foreground/80">npx hanzo deploy</code>
-                <button
-                  onClick={handleCopy}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {copied ? <Check className="h-3.5 w-3.5 text-foreground/70" /> : <Copy className="h-3.5 w-3.5" />}
-                </button>
+                <code className="text-sm font-mono text-foreground/80">{INSTALL}</code>
+                <CopyButton value={INSTALL} label="Copy deploy command" size={20} id="install-cli" />
               </div>
             </motion.div>
 

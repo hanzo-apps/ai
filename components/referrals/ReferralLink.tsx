@@ -1,10 +1,11 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Copy, Check, Share2, Mail } from 'lucide-react'
+import { Share2, Mail } from 'lucide-react'
 import { Button } from '@hanzo/ui'
 import { Input } from '@hanzo/ui'
 import { Label } from '@hanzo/ui'
+import { CopyButton } from '@hanzo/ui/product'
 import { toast } from 'sonner'
 import { useAnalytics } from '@hanzo/event/react'
 import { EVENTS } from '@hanzo/event'
@@ -16,17 +17,17 @@ interface ReferralLinkProps {
 }
 
 const ReferralLink = ({ referralLink, referralCode }: ReferralLinkProps) => {
-  const [isCopied, setIsCopied] = useState(false)
   const [emailInput, setEmailInput] = useState('')
   const [sending, setSending] = useState(false)
   const analytics = useAnalytics()
 
-  const handleCopyLink = () => {
+  // "Share Link" is the deliberate share, so it is the one that reports
+  // WAITLIST_SHARED. The copy control inside the field is a convenience and
+  // reports itself, through CopyButton's own instrumentation.
+  const handleShare = () => {
     navigator.clipboard.writeText(referralLink)
-    setIsCopied(true)
     analytics.capture(EVENTS.WAITLIST_SHARED, { method: 'link', refCode: referralCode })
     toast.success('Referral link copied to clipboard!')
-    setTimeout(() => setIsCopied(false), 3000)
   }
 
   const handleSendInvites = async (e: React.FormEvent) => {
@@ -71,16 +72,11 @@ const ReferralLink = ({ referralLink, referralCode }: ReferralLinkProps) => {
             readOnly
             className="pr-12 bg-neutral-900 border-neutral-700"
           />
-          <Button
-            variant="ghost"
-            size="sm"
-            className="absolute right-0 top-0 h-full"
-            onClick={handleCopyLink}
-          >
-            {isCopied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-          </Button>
+          <div className="absolute right-2 top-1/2 -translate-y-1/2">
+            <CopyButton value={referralLink} label="Copy referral link" id="referral-link" />
+          </div>
         </div>
-        <Button className="flex items-center gap-2" onClick={handleCopyLink}>
+        <Button className="flex items-center gap-2" onClick={handleShare}>
           <Share2 className="h-4 w-4" />
           Share Link
         </Button>

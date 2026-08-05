@@ -1,24 +1,14 @@
 'use client'
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Copy,
-  Check,
-  ExternalLink,
-} from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
+import { CopyButton } from "@hanzo/ui/product";
+
+const INSTALL = "curl -fsSL hanzo.sh | bash";
 
 const FooterCTA = () => {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText("curl -fsSL hanzo.sh | bash");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-neutral-900/30 to-background">
       <div className="max-w-4xl mx-auto text-center">
@@ -78,19 +68,8 @@ const FooterCTA = () => {
           className="mb-6"
         >
           <div className="inline-flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary border border-border">
-            <code className="text-sm font-mono text-foreground/80">
-              curl -fsSL hanzo.sh | bash
-            </code>
-            <button
-              onClick={handleCopy}
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {copied ? (
-                <Check className="h-4 w-4 text-foreground/70" />
-              ) : (
-                <Copy className="h-4 w-4" />
-              )}
-            </button>
+            <code className="text-sm font-mono text-foreground/80">{INSTALL}</code>
+            <CopyButton value={INSTALL} label="Copy install command" id="install-cli" />
           </div>
         </motion.div>
 

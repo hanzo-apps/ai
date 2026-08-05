@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@hanzo/ui";
+import { CopyButton } from "@hanzo/ui/product";
 import { Terminal, ArrowRight, Cpu, Bot, Code } from "lucide-react";
 import { CTA_PRIMARY, CTA_OUTLINE } from "./cta";
 
@@ -26,13 +26,6 @@ const shortcuts: Array<{
 const INSTALL = "curl -fsSL hanzo.sh | bash";
 
 const HanzoDev = () => {
-  const [copied, setCopied] = useState(false);
-
-  const copyCommand = () => {
-    navigator.clipboard.writeText(INSTALL);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <section className="pt-20 pb-12 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
@@ -57,14 +50,9 @@ const HanzoDev = () => {
             <div className="bg-neutral-900 border border-neutral-800 rounded-xl px-6 py-4 flex items-center">
               <Terminal className="h-5 w-5 text-foreground mr-3 flex-shrink-0" />
               <code className="text-foreground/80 font-mono text-lg">{INSTALL}</code>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="ml-4 text-muted-foreground hover:text-white"
-                onClick={copyCommand}
-              >
-                {copied ? 'Copied!' : 'Copy'}
-              </Button>
+              <div className="ml-4">
+                <CopyButton value={INSTALL} label="Copy install command" id="install-cli" />
+              </div>
             </div>
           </div>
 

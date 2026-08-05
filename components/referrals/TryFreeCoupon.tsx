@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Copy, Check, Ticket, Bot, Cpu, ExternalLink } from 'lucide-react'
+import { Ticket, Bot, Cpu, ExternalLink } from 'lucide-react'
 import { Button } from '@hanzo/ui'
+import { CopyButton } from '@hanzo/ui/product'
 import { toast } from 'sonner'
 import { useAnalytics } from '@hanzo/event/react'
 import { EVENTS } from '@hanzo/event'
@@ -11,17 +12,9 @@ import { redeemCoupon } from '@/lib/hanzo/referrals'
 const COUPON_CODE = 'TRYFREE'
 
 const TryFreeCoupon = () => {
-  const [copied, setCopied] = useState(false)
   const [redeeming, setRedeeming] = useState(false)
   const [redeemed, setRedeemed] = useState(false)
   const analytics = useAnalytics()
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(COUPON_CODE)
-    setCopied(true)
-    toast.success('Coupon code copied!')
-    setTimeout(() => setCopied(false), 3000)
-  }
 
   const handleRedeem = async () => {
     try {
@@ -99,9 +92,7 @@ const TryFreeCoupon = () => {
         <div className="flex flex-col sm:flex-row items-center gap-3">
           <div className="flex items-center gap-2 bg-neutral-900 border border-neutral-700 rounded-lg px-4 py-2.5 font-mono text-lg tracking-wider">
             <span className="select-all">{COUPON_CODE}</span>
-            <button onClick={handleCopy} className="text-muted-foreground hover:text-white transition-colors">
-              {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-            </button>
+            <CopyButton value={COUPON_CODE} label="Copy coupon code" id="coupon" />
           </div>
 
           <Button
