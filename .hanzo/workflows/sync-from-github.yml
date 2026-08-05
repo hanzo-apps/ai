@@ -17,8 +17,23 @@ on:
   workflow_dispatch: {}
 
 concurrency:
+  # MUST be true. Workflow-level concurrency is evaluated onto the run ATTEMPT
+  # (action_run_attempt.concurrency_group / .concurrency_cancel), and with cancel
+  # false a run that finds the group occupied is set Blocked and left there. A
+  # blocked run still OCCUPIES the group, so the next */10 tick finds it occupied
+  # too, supersedes the blocked run, and inherits its place — the queue never
+  # drains. Measured: from 21:10 every run was blocked then cancelled without ever
+  # starting, and 0 of ~145 scheduled runs succeeded across the working day. The
+  # one run in that window that carried cancel=true is the one that ran.
+  #
+  # deploy.yml and cloud.yml keep false deliberately — never cancel a publish in
+  # flight — and get away with it because push and dispatch are sparse, so nothing
+  # arrives to block behind. A */10 cron has no such gap.
+  #
+  # Cancelling a sync in flight is safe: its single mutation is one atomic
+  # fast-forward ref update, and a run that loses it is redone ten minutes later.
   group: sync-from-github
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   ff-main:
