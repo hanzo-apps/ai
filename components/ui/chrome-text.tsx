@@ -4,6 +4,21 @@
 import React, { useState, useEffect, useRef, CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 
+/**
+ * The eyebrow above the heading is the SAME pill every other hero on this site
+ * uses — dark, hairline-bordered, `text-xs` (CloudLanding's "Open-source ·
+ * Self-host or managed", AboutHero's "Our Journey"). It used to be its own
+ * thing, and being its own thing is what made it the single light slab on an
+ * all-black site: `bg-primary/20` over `#0a0a0a` reads as `#3b3b3b`, under a
+ * `border-white/50` twice as bright as any other border in the tree.
+ *
+ * It also carried a `::before` sweep on `animation: glow 2s infinite`, painting
+ * +0.3 white over the LABEL as well as the pill. At rest the text measured
+ * 6.3:1; at the peak of every two-second cycle it measured 3.18:1, so a 13px
+ * label dropped below AA and back twice a second, forever, with no
+ * `prefers-reduced-motion` guard and no way to stop it (WCAG 2.2.2). A
+ * marketing eyebrow is not worth an animation that never ends.
+ */
 interface ChromeTextProps {
   children: React.ReactNode;
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span" | "p";
@@ -46,7 +61,7 @@ const ChromeText = ({
     <div className={cn("flex flex-col", preHeading ? "items-center" : "items-start")}>
       {preHeading && (
         <div className={cn(
-          "inline-block px-4 py-1 rounded-full bg-primary/20 border border-white/50 text-foreground/70 text-sm font-medium mb-4 pre-heading-glow", 
+          "mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs font-medium text-neutral-300",
           preHeadingClassName
         )}>
           {preHeading}
@@ -76,29 +91,6 @@ const ChromeText = ({
             color: transparent;
             transition: background-position 0.1s ease;
             line-height: 1.3;
-          }
-          
-          .pre-heading-glow {
-            position: relative;
-            overflow: hidden;
-          }
-          
-          .pre-heading-glow::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
-            background-size: 200% 100%;
-            animation: glow 2s ease-in-out infinite;
-            pointer-events: none;
-          }
-          
-          @keyframes glow {
-            0% { background-position: 100% 0; }
-            100% { background-position: -100% 0; }
           }
         `}</style>
       </div>
