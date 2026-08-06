@@ -18,7 +18,22 @@ const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.a
  *  (deploy.yml and the Dockerfile) refuse to ship a bundle it did not reach.
  *  Prefix is `pk-` (cloud.PublishablePrefix); no other prefix is read as a key.
  *  Mint: POST /v1/keys {"type":"publishable"} */
-const INGEST_KEY = process.env.NEXT_PUBLIC_PUBLISHABLE_KEY
+/** The hanzo-ai PROJECT key, not the org-wide one. A project key carries its
+ *  own attribution: cloud files its events with product=hanzo-ai, while the
+ *  org-wide pk-live-* key lands them with product empty (measured: an event
+ *  sent with each key differs in exactly that column). Attribution is the
+ *  reason to prefer it — both resolve at the door.
+ *
+ *  It is declared here rather than fetched because it is publishable: it ships
+ *  in the client bundle by construction, so it is site identity, not a secret,
+ *  and a value every visitor already holds has nothing to gain from a lookup.
+ *  Declaring it also makes it lane-proof. Six lanes can build this repo and a
+ *  build arg only reaches the ones that remember to pass it — that is how the
+ *  live bundle came to carry a key whose project had been deleted. An env var
+ *  still wins when one is set, so a lane can override without a code change. */
+const INGEST_KEY =
+  process.env.NEXT_PUBLIC_PUBLISHABLE_KEY ||
+  'pk-CmfLA2K6kvsPflrS9DSkt06H_kSoQB_21sjedt6VJdc'
 
 /** Anonymous marketing traffic; forward a stored bearer when one exists. */
 function getToken(): string | undefined {

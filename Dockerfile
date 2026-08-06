@@ -28,25 +28,32 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # NEXT_PUBLIC_* is inlined by Next at build time, so the key arrives as a build
-# arg; an env var on the serve stage is too late. Sourced from KMS
-# (deploy/PUBLISHABLE_KEY) by the BuildKit invocation:
-#   --opt build-arg:PUBLISHABLE_KEY=pk-…
-# It is publishable and write-only — it ships in the client bundle — so it is a
-# build arg rather than a secret mount.
+# arg; an env var on the serve stage is too late. NEXT_PUBLIC_ is added here
+# because that prefix is what makes Next inline a var.
 #
-# Omitted is REFUSED, because omitted is how the live 401 shipped: cloud no
-# longer files credential-less traffic under a $public tenant (that lane is
-# retired — cloud apps/analytics/public.go), so a keyless bundle has every
-# anonymous POST /v1/event answered 401 ingest_key_required — all pageviews and
-# errors dropped, and the refusal is a console error on every visit.
+# The DEFAULT is the hanzo-ai project key, matching app/providers.tsx. It is not
+# fetched, because it is publishable: it ships in the client bundle by
+# construction, so it is site identity rather than a secret. It defaults rather
+# than being required because six lanes build this repo and a build arg only
+# reaches the ones that remember to pass it — cloud.yml passed SITE_ROOT alone,
+# so the lane that cut the live image supplied no key at all. A default is what
+# makes every lane produce a keyed artifact, including lanes not edited here.
 #
-# PUBLISHABLE_KEY is the name in KMS and on the --build-arg; NEXT_PUBLIC_ is
-# added here because that prefix is what makes Next inline a var.
-ARG PUBLISHABLE_KEY
+# It is the PROJECT key, not the org-wide pk-live-* one: cloud files a project
+# key's events with product=hanzo-ai and the org key's with product empty, so
+# only this one arrives attributed.
+#
+# Omitted is still REFUSED below, because omitted is how the live 401 shipped:
+# cloud no longer files credential-less traffic under a $public tenant (that
+# lane is retired — cloud apps/analytics/public.go), so a keyless bundle has
+# every anonymous POST /v1/event answered 401 ingest_key_required — all
+# pageviews and errors dropped, and the refusal is a console error on every
+# visit. Passing PUBLISHABLE_KEY= explicitly empty still fails the build.
+ARG PUBLISHABLE_KEY=pk-CmfLA2K6kvsPflrS9DSkt06H_kSoQB_21sjedt6VJdc
 ENV NEXT_PUBLIC_PUBLISHABLE_KEY=$PUBLISHABLE_KEY
 RUN case "$PUBLISHABLE_KEY" in \
       pk-*) : ;; \
-      '')   echo "PUBLISHABLE_KEY is empty - pass --opt build-arg:PUBLISHABLE_KEY=pk-... (KMS deploy/PUBLISHABLE_KEY, env prod)" >&2; exit 1 ;; \
+      '')   echo "PUBLISHABLE_KEY was passed empty, overriding this ARG's default - pass a pk- key or pass nothing" >&2; exit 1 ;; \
       *)    echo "PUBLISHABLE_KEY is not a publishable key (expected a pk- prefix)" >&2; exit 1 ;; \
     esac
 

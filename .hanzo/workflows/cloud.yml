@@ -67,40 +67,18 @@ jobs:
           username: hanzo-dev
           password: ${{ secrets.GH_PAT }}
 
-      # BEFORE the image build: NEXT_PUBLIC_* is inlined at build time, so the key
-      # travels as a build-arg (Dockerfile ARG PUBLISHABLE_KEY) or never reaches
-      # the bundle. deploy/PUBLISHABLE_KEY is the ONE name and ONE location in
-      # KMS, shared with hanzo.app, hanzo.chat and this repo's own apex lane
-      # (deploy.yml). This step was MISSING: every cloud-www image was built
-      # keyless, and cloud refuses credential-less ingest — the $public tenant
-      # that once caught keyless traffic is retired (cloud apps/analytics/
-      # public.go), so the live landing answered 401 ingest_key_required on
-      # every pageview and shipped a console error to every visitor.
+      # No KMS step: the key is DECLARED, as the Dockerfile's ARG PUBLISHABLE_KEY
+      # default and in app/providers.tsx. A publishable key ships in the client
+      # bundle by construction, so it is site identity rather than a secret, and
+      # fetching a value every visitor already holds bought nothing.
       #
-      # Absent is therefore a broken artifact, not a downgrade: no key, no image.
-      - name: Fetch the ingest key from KMS
-        id: kms
-        env:
-          KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
-          KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}
-          KMS_ENDPOINT: ${{ vars.KMS_ENDPOINT || 'https://api.hanzo.ai' }}
-          KMS_SECRET_ENV: ${{ vars.KMS_SECRET_ENV || 'prod' }}
-        run: |
-          set -euo pipefail
-          token=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/auth/login" \
-            -H 'Content-Type: application/json' \
-            -d "{\"clientId\":\"${KMS_CLIENT_ID}\",\"clientSecret\":\"${KMS_CLIENT_SECRET}\"}" \
-            | jq -r '.accessToken // empty')
-          if [ -z "${token}" ]; then
-            echo "::error::KMS login failed at ${KMS_ENDPOINT}/v1/kms/auth/login"; exit 1
-          fi
-          key=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/secrets/deploy/PUBLISHABLE_KEY?env=${KMS_SECRET_ENV}" \
-            -H "Authorization: Bearer ${token}" | jq -r '.value // empty' || true)
-          case "${key}" in
-            pk-*) echo "::add-mask::${key}"; echo "key=${key}" >> "$GITHUB_OUTPUT" ;;
-            *)    echo "::error::deploy/PUBLISHABLE_KEY absent or not pk- — a keyless image 401s every anonymous event; refusing to build"; exit 1 ;;
-          esac
-
+      # It bought a failure mode instead. This lane once passed SITE_ROOT alone
+      # and cut keyless images for exactly that reason: a build arg only reaches
+      # the lanes that remember it. A default reaches every lane, this one
+      # included, and the Dockerfile still refuses an explicitly empty value.
+      #
+      # The fetched key was also the org-wide one, which cloud files with product
+      # empty; the declared project key arrives as product=hanzo-ai.
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -112,7 +90,6 @@ jobs:
           push: true
           build-args: |
             SITE_ROOT=cloud
-            PUBLISHABLE_KEY=${{ steps.kms.outputs.key }}
 
       # build-push-action can exit 0 before the manifest resolves, so a green run
       # could still leave the CR pinned to a tag that ImagePullBackOffs. Prove it

@@ -67,76 +67,71 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      # BEFORE the build: NEXT_PUBLIC_* is inlined into the bundle at build time,
-      # so a key fetched afterwards never reaches the artifact.
+      # No key is fetched here any more. It is DECLARED, in app/providers.tsx and
+      # as the Dockerfile's ARG default, because a publishable key ships in the
+      # client bundle by construction — it is site identity, not a secret, and a
+      # value every visitor already holds gains nothing from a lookup.
       #
-      # deploy/PUBLISHABLE_KEY is the ONE name and the ONE location, shared with
-      # hanzo.app and hanzo.chat. It is per-ORG, not per-property: one pk- resolves
-      # the org for every surface, and the SDK's `product` field is what separates
-      # them in the warehouse.
-      - name: Fetch the ingest key from KMS
-        id: kms
-        env:
-          KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
-          KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}
-          KMS_ENDPOINT: ${{ vars.KMS_ENDPOINT || 'https://api.hanzo.ai' }}
-          # No KMS_ORG: the embedded plane resolves the tenant from the token's own
-          # claim, so an org named in config could only ever disagree with the one
-          # actually served.
-          KMS_SECRET_ENV: ${{ vars.KMS_SECRET_ENV || 'prod' }}
-        run: |
-          set -euo pipefail
-          token=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/auth/login" \
-            -H 'Content-Type: application/json' \
-            -d "{\"clientId\":\"${KMS_CLIENT_ID}\",\"clientSecret\":\"${KMS_CLIENT_SECRET}\"}" \
-            | jq -r '.accessToken // empty')
-          if [ -z "${token}" ]; then
-            echo "::error::KMS login failed at ${KMS_ENDPOINT}/v1/kms/auth/login"; exit 1
-          fi
-          # KMS is embedded in hanzoai/cloud (HIP-0106), so the surface is FLAT and
-          # the org comes from the TOKEN, not the URL. The old
-          # /v1/kms/orgs/<org>/secrets/... shape 404s here, and a 404 read through
-          # `|| true` is indistinguishable from an absent secret.
-          key=$(curl -fsS "${KMS_ENDPOINT}/v1/kms/secrets/deploy/PUBLISHABLE_KEY?env=${KMS_SECRET_ENV}" \
-            -H "Authorization: Bearer ${token}" | jq -r '.value // empty' || true)
-          # No key is NO SHIP. This used to warn and build anyway, on the premise
-          # that keyless traffic still landed under a $public tenant with a 200.
-          # That lane is retired (cloud apps/analytics/public.go): a credential-less
-          # POST /v1/event now answers 401 ingest_key_required, so a keyless bundle
-          # drops every anonymous pageview and error AND ships a console error to
-          # every visitor — the exact defect measured live. cloud matches `pk-`
-          # only; another prefix is not read as a key, so it is the same refusal.
-          # hanzo.app's release lane already refuses the same way.
-          case "${key}" in
-            '')   echo "::error::deploy/PUBLISHABLE_KEY absent from KMS — a keyless bundle 401s every anonymous event; refusing to ship"; exit 1 ;;
-            pk-*) echo "::add-mask::${key}"; echo "key=${key}" >> "$GITHUB_OUTPUT" ;;
-            *)    echo "::error::deploy/PUBLISHABLE_KEY does not begin with 'pk-' — cloud would not read it as a key; refusing to ship"; exit 1 ;;
-          esac
+      # Fetching it was itself the defect. deploy/PUBLISHABLE_KEY is one shared
+      # ORG key, and only lanes that remember to read AND pass it produce a keyed
+      # artifact — cloud.yml passed SITE_ROOT alone. A declared key reaches all
+      # six lanes, including the ones nobody edits.
+      #
+      # It is also the wrong key to want: cloud files a PROJECT key's events with
+      # product=hanzo-ai and the org-wide pk-live-* key's with product empty, so
+      # the shared key costs attribution that the project key keeps.
 
       # 759 pages; the default heap OOMs it.
       - name: Build the static export
         run: pnpm build
         env:
           NODE_OPTIONS: '--max-old-space-size=8192'
-          NEXT_PUBLIC_PUBLISHABLE_KEY: ${{ steps.kms.outputs.key }}
         timeout-minutes: 30
 
-      # Prove the key was INLINED, not merely fetched — the same proof the
-      # Dockerfile lane runs. The step above can only fail loudly now, but the
-      # output plumbing between it and the build cannot: an empty
-      # `steps.kms.outputs.key` builds green and ships the keyless bundle whose
-      # every anonymous event 401s.
-      - name: Prove the ingest key reached the bundle
-        env:
-          NEXT_PUBLIC_PUBLISHABLE_KEY: ${{ steps.kms.outputs.key }}
+      # The gate that matters, and the only one that survives a lane nobody
+      # remembers: assert the SHIPPING BYTES carry a usable key. Checking a
+      # variable proves only that a value was in scope; this reads the export.
+      #
+      # Source-agnostic on purpose — declared default, env override or build arg
+      # all satisfy it, and none of them satisfies it by accident. What it
+      # refuses is the artifact that actually broke: a bundle with no pk- key,
+      # whose every anonymous POST /v1/event answers 401 ingest_key_required,
+      # dropping all pageviews and errors and logging a console error per visit.
+      #
+      # It does NOT prove the key resolves — a deleted project still answers 403,
+      # which is how the live 403 shipped. That is checked against the door after
+      # deploy, not here.
+      - name: Prove a publishable key reached the bundle
         run: |
           set -euo pipefail
-          if [ -z "${NEXT_PUBLIC_PUBLISHABLE_KEY}" ]; then
-            echo "::error::the fetched key never left the KMS step — refusing to ship"; exit 1
+          if ! grep -rqE 'pk-[A-Za-z0-9_-]{20,}' out/_next/static; then
+            echo "::error::no pk- publishable key is present in out/_next/static — the bundle would 401 every anonymous event; refusing to ship"; exit 1
           fi
-          if ! grep -rqF "${NEXT_PUBLIC_PUBLISHABLE_KEY}" out/_next/static; then
-            echo "::error::the ingest key is NOT in out/_next/static — the bundler did not inline it; refusing to ship"; exit 1
+          echo "publishable key present in the export"
+
+      # A shape check cannot catch the failure that actually shipped. The bundle
+      # carried pk-live-c886…, correctly formed and inlined — every gate above
+      # passes it — but its project had been deleted, so the door answered 403
+      # ingest_key_unknown and the site lost 100% of its events while looking
+      # healthy from inside the build.
+      #
+      # Only the door knows. Ask it, with the key the export actually carries
+      # rather than the one this job believes it used, and refuse to publish
+      # anything it will not accept. 401 means the key is unreadable, 403 means
+      # no project answers to it; both ship a site that measures nothing.
+      - name: Prove the key the bundle carries still resolves at the door
+        run: |
+          set -euo pipefail
+          key=$(grep -rhoE 'pk-[A-Za-z0-9_-]{20,}' out/_next/static | sort -u | head -1)
+          code=$(curl -s -o /tmp/door.json -w '%{http_code}' \
+            -X POST "https://api.hanzo.ai/v1/event?ingest_key=${key}" \
+            -H 'content-type: application/json' -d '{"batch":[]}')
+          if [ "${code}" != "200" ]; then
+            echo "::error::the key in this bundle does not resolve: the door answered ${code}. $(cat /tmp/door.json)"
+            echo "::error::publishing would ship a site that loses every event; refusing"
+            exit 1
           fi
+          echo "door accepted the bundle's key (200)"
 
       # The gates run in the job that PUBLISHES, because that is the only placement
       # that makes "nothing publishes ungated" true: workflows sharing a trigger do
