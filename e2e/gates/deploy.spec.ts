@@ -53,9 +53,19 @@ test('every step output a workflow reads is one some step writes', () => {
     }
   }
   expect(anonymous, anonymous.join('\n')).toEqual([])
-  // The floor. Every assertion below is "no reference is unresolved", which a
-  // workflow set that reads nothing satisfies perfectly.
-  expect(read.length, 'the workflows must actually read step outputs').toBeGreaterThan(0)
+  // The floor, scoped to when it can mean something. "No reference is
+  // unresolved" is satisfied perfectly by a workflow set that reads nothing, so
+  // a set that PASSES values between steps has to prove it still reads them.
+  // A set that passes none has nothing to lose track of: the publishable key is
+  // now declared rather than fetched, so no step writes an output at all, and
+  // demanding a read here would fail a pipeline whose wiring is simply gone.
+  // What replaced this control is stronger and runs in `deploy.yml` before
+  // publish: it greps the built `out/` for a `pk-` key and refuses to ship a
+  // bundle carrying none, then asks the ingest door whether that key still
+  // resolves. Both hold however the key reaches the build.
+  if (wrote.size > 0) {
+    expect(read.length, 'a workflow writes a step output that nothing reads').toBeGreaterThan(0)
+  }
   const unresolved = read
     .filter(({ where, ref }) => !wrote.get(where)?.has(ref))
     .map(({ where, ref }) => `${where}.outputs.${ref} — written by no step (Actions substitutes "")`)
