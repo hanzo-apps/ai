@@ -251,7 +251,7 @@ function Billing() {
             {[
               "Per-organization balances and usage records",
               "Transparent per-token and per-request metering",
-              "Free tier to start — upgrade when you grow",
+              "Plans from $9/mo, with gateway credits included",
               "Self-host for $0 and bring your own provider keys",
             ].map((t) => (
               <li key={t} className="flex items-start gap-3">
@@ -268,11 +268,11 @@ function Billing() {
             <span className="text-sm font-medium text-neutral-400">Pay-as-you-go</span>
           </div>
           <div className="mt-4 text-5xl font-semibold tracking-tight text-white">
-            $0<span className="text-xl font-normal text-neutral-500"> to start</span>
+            $9<span className="text-xl font-normal text-neutral-500">/mo to start</span>
           </div>
           <p className="mt-3 text-sm text-neutral-400">
-            Create an organization, add a balance, and call any of {MODELS_PHRASE}. Costs accrue per use
-            and are debited from your organization balance in real time.
+            Create an organization, pick a plan, and call any of {MODELS_PHRASE}. Usage accrues per
+            call and is debited from your organization balance in real time.
           </p>
           <a
             href={CONSOLE}
