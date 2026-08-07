@@ -248,8 +248,15 @@ export function Providers({ children }: { children: ReactNode }) {
       config={{
         product: 'site',
         host: EVENT_HOST,
-        ingestKey: INGEST_KEY,
-        getToken,
+        // Signed in -> the visitor's OWN IAM token, so cloud attributes the event
+        // to their org and user. Signed out -> the publishable key, which is
+        // admission for anonymous traffic and nothing more.
+        //
+        // Never as `ingestKey`: the SDK resolves the credential as
+        // `ingestKey ?? token`, so passing it there makes the key win even for a
+        // signed-in visitor and leaves getToken unreachable. Folding the key into
+        // the resolver inverts it to `token ?? key`.
+        getToken: () => getToken() ?? INGEST_KEY,
         enabled,
         // `environment` is omitted so the SDK takes it from NODE_ENV: `next build`
         // stamps production, `next dev` stamps development.
