@@ -17,7 +17,7 @@ export default function S3Page() {
               Hanzo S3
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              S3-compatible object storage. Drop-in replacement for AWS S3 with no egress fees on Hanzo Cloud.
+              S3-compatible object storage — your existing SDK just works, and you never pay to read your own data back.
             </p>
           </div>
         </section>

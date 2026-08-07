@@ -113,7 +113,7 @@ const TIER_LABEL: Record<string, string> = {
 }
 
 const BENEFITS = [
-  { icon: Clock,  title: "OpenAI-Compatible API",  description: "Drop-in replacement for GPT/Claude. Same SDK, same format, lower cost." },
+  { icon: Clock,  title: "OpenAI-Compatible API",  description: "Your existing SDK just works — same format, a fraction of the cost." },
   { icon: Globe,  title: "Open Weight",             description: "All Zen models are open-weight on HuggingFace. Run them yourself." },
   { icon: Layers, title: "Full Spectrum",           description: "82M edge to 1T+ frontier. Text, code, vision, audio, image — one API." },
   { icon: Cpu,    title: "MoE Efficiency",          description: "Mixture-of-Experts activates only a fraction of params per token." },

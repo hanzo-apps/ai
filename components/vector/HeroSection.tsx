@@ -66,7 +66,7 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
         >
-          Drop-in replacement for Pinecone, Weaviate, and ChromaDB.
+          Store millions of embeddings and search them in milliseconds — on infrastructure you own.
           Powered by Qdrant.
         </motion.p>
 

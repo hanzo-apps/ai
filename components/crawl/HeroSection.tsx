@@ -66,7 +66,7 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
         >
-          Drop-in replacement for Firecrawl, Apify, and Scrapy.
+          Give it a URL, get back Markdown an LLM can read — JavaScript rendered, boilerplate stripped.
           Powered by crawl4ai.
         </motion.p>
 

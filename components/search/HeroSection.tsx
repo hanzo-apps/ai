@@ -66,7 +66,7 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
         >
-          Drop-in replacement for Algolia, Orama, and Typesense.
+          Full-text and semantic results in one query — no reindexing, no per-search bill.
           Powered by Meilisearch + Qdrant.
         </motion.p>
 

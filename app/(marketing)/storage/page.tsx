@@ -79,9 +79,9 @@ export default function StoragePage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Drop-in replacement for Amazon S3. Store files, model weights,
-            backups, and media. Built on MinIO with SSO, encryption at rest, and
-            a web console.
+            Store files, model weights, backups, and media behind an
+            S3-compatible API your tools already speak. Built on MinIO with SSO,
+            encryption at rest, and a web console.
           </motion.p>
 
           <motion.div

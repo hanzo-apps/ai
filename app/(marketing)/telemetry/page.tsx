@@ -132,7 +132,7 @@ export default function TelemetryPage() {
                 icon: Cable,
                 title: "OTLP Native",
                 description:
-                  "First-class support for OTLP/gRPC and OTLP/HTTP. Drop-in replacement for any OpenTelemetry collector.",
+                  "First-class support for OTLP/gRPC and OTLP/HTTP — point your existing collectors at Hanzo and they just work.",
               },
               {
                 icon: Layers,

@@ -114,7 +114,7 @@ const Network = () => {
               <Zap className="h-10 w-10 text-foreground mb-4" />
               <h3 className="text-xl font-bold mb-2">OpenAI Compatible</h3>
               <p className="text-foreground/80">
-                Drop-in replacement for the Chat Completions API. Point your existing client at the network and ship.
+                Speaks the Chat Completions API your code already uses. Point your client at the network and ship.
               </p>
             </motion.div>
 
