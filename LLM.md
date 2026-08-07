@@ -484,6 +484,65 @@ is inlined into the bundle at build time.
   Secret redaction in the SDK is unconditional and is not affected.
 
 
+## Brand marks: real logos only, and one place they come from
+
+`components/models/ProviderMark.tsx` is the ONE mark table. Bodies are copied
+UNMODIFIED from `hanzoai/icons` `packages/static-svg/icons/<slug>.svg` (our MIT
+lobe-icons fork) — mono `currentColor` on a 24-unit viewBox. The fork is not on
+npm and its barrel drags `antd` + `@lobehub/ui` in for a picture, so the subset
+is vendored, the same call `hanzo.app` and `hanzo-docs` made. **Never draw a
+logo.** A monogram is the documented last resort and only for a lab genuinely
+absent from the fork (14 of 59 today — community fine-tuners and brand-new
+labs); everything else has a real mark, so reach for the fork before inventing.
+
+Three rules the page cost us before they were written down:
+
+- **The model's family beats the lab that trained it.** Our gateway namespace
+  puts `gpt-5`, `claude-opus-4.8`, `zen5` and `enso` all under `hanzo`, so
+  reading the lab first drew the Hanzo H on every one of them. `markOf` takes
+  the leading run of letters in the id first and falls back to the lab.
+- **`enso` and `zen` are NOT the same glyph.** Zen is the ensō left OPEN (the
+  gap sits where a Q's tail would go); Enso is the router that completes the
+  circle, so its ring is CLOSED. Geometry is `hanzo.app`'s verified pair.
+- **No chip.** Marks render bare at the current text colour. The predecessor
+  painted a CSS mask inside a `rounded-lg` box, which clipped the corners off
+  every square mark — the H worst of all. Every source declares
+  `fill-rule="evenodd"` on its root, so the wrapper repeats it: without it
+  Mistral's inner square fills in and the mark is quietly wrong.
+
+`public/logos/*.svg` is a SECOND representation of eight of these, and it exists
+for exactly one reason: `AccuracyCostScatter` draws them through `<image href>`,
+which needs a URL. Same canonical source, regenerate from it, never redraw.
+
+An SVG behind `<image>` is its own document with no CSS context, so
+`currentColor` resolves to BLACK and **the host page can never tint it** — the
+chart's marks rendered black-on-light or vanished on dark, and no CSS could
+reach them. `public/logos/color/*.svg` is the answer: the same canonical bodies
+with each lab's brand hex substituted for `currentColor` at generation time,
+because the one thing the host cannot supply is the one thing an `<image>` must
+carry itself. Regenerate them from the fork exactly like the mono set; never
+hand-edit either. The five labs with no mark in the fork (NVIDIA, Meta, Zhipu,
+Xiaomi, MiniMax) fall back to a monogram in their brand colour — the documented
+last resort — and drop a real file in and the monogram gives way to it.
+
+The disc is now ALWAYS light behind a mark, so **provenance rides the RING**:
+solid white for Hanzo-measured, dashed grey for vendor-reported. It used to ride
+the disc colour as well, and that dark `reported` disc is precisely what
+swallowed every near-black mark. One distinction, one carrier — and the ring has
+to be legible on its own, so measured is 2px and reported has real gaps.
+`/logos/partners/` is a different set and unrelated.
+
+**Label placement is ONE rule, not several.** Every obstacle a label can hit —
+the other discs AND the other labels — is a box in one list, tested by one
+rectangle overlap, in `settle()`. Splitting it produced two defects in a row:
+labels de-collided per side against other *labels* cleared a neighbour's label
+by the required gap and ran straight through that neighbour's *dot*; handling
+dots in a second, separate pass then let a right-anchored label meet a
+left-anchored one — a pair that belonged to neither pass. Verify by measuring
+boxes in the rendered DOM over ALL pairs: a check that filters by side
+reproduces the very blind spot that caused the bug, and will report clean.
+
+
 ## Certification Claims (Honest)
 
 - SOC 2: "Audit in Progress" (not "Certified")

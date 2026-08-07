@@ -102,8 +102,9 @@ export default function EnsoModelsPage() {
           <h2 className="mb-2 text-2xl font-bold">Accuracy at cost</h2>
           <p className="mb-6 max-w-3xl text-neutral-400">
             enso-ultra reaches 98.0% GPQA-Diamond, the best in the field — top-left is the goal (high accuracy, low
-            cost), and it sits there at a fraction of what the priciest frontier models charge to score lower. Solid
-            dots are Hanzo-measured; hollow dots are vendor-reported. Every dot is labelled; hover for the exact figure.
+            cost), and it sits there at a fraction of what the priciest frontier models charge to score lower. Each dot
+            carries its lab&rsquo;s mark; a solid ring is Hanzo-measured, a dashed ring vendor-reported. Every dot is
+            labelled; hover for the exact figure.
           </p>
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 md:p-6">
             <AccuracyCostScatter points={SCATTER} />

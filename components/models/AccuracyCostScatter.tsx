@@ -25,9 +25,32 @@ const ACC_MIN = 74
 const ACC_MAX = 100
 const LABEL_GAP = 14
 
-const LOGO: Record<string, string> = {
-  OpenAI: 'openai', Anthropic: 'anthropic', Google: 'gemini', DeepSeek: 'deepseek',
-  Moonshot: 'moonshot', Alibaba: 'qwen', xAI: 'xai', Mistral: 'mistral',
+// Every vendor in the snapshot gets a mark, and the mark is the vendor's own
+// colour. `file` is a generated colour variant under /logos/color/ — the canonical
+// monochrome files are fill="currentColor", and currentColor inside <image href>
+// resolves against the IMAGE's document, not this one, so the chart could never
+// tint them. That is why some dots read as grey smudges and others as nothing.
+//
+// A vendor with no logo asset gets its initial in its own colour rather than an
+// anonymous grey dot, so the chart is consistent whether or not we have the mark.
+// The five without files (NVIDIA, Meta, Zhipu, Xiaomi, MiniMax) are pending
+// assets from hanzoai/icons; drop the file in and the monogram gives way to it.
+type Mark = { file?: string; color: string; initial: string }
+const VENDOR: Record<string, Mark> = {
+  OpenAI:    { file: 'openai',    color: '#000000', initial: 'O' },
+  Anthropic: { file: 'anthropic', color: '#D4A27F', initial: 'A' },
+  Google:    { file: 'gemini',    color: '#4285F4', initial: 'G' },
+  DeepSeek:  { file: 'deepseek',  color: '#4D6BFE', initial: 'D' },
+  Moonshot:  { file: 'moonshot',  color: '#16191E', initial: 'K' },
+  Alibaba:   { file: 'qwen',      color: '#615CED', initial: 'Q' },
+  xAI:       { file: 'xai',       color: '#000000', initial: 'X' },
+  Mistral:   { file: 'mistral',   color: '#FA520F', initial: 'M' },
+  NVIDIA:    { color: '#76B900', initial: 'N' },
+  Meta:      { color: '#0064E0', initial: 'M' },
+  Zhipu:     { color: '#3859FF', initial: 'Z' },
+  Xiaomi:    { color: '#FF6900', initial: 'M' },
+  MiniMax:   { color: '#F23F5D', initial: 'M' },
+  Other:     { color: '#6B7280', initial: '·' },
 }
 
 function xOf(price: number): number {
@@ -49,6 +72,68 @@ interface Placed extends ScatterPoint {
   cy: number
   right: boolean
   labelY: number
+  text: string
+}
+
+// Everything a label can run into is a BOX, and there is ONE rule for all of them.
+// Splitting the problem is what produced two defects in a row here: labels were
+// de-collided against other LABELS, per side, by a fixed gap — so qwen3.5's label
+// cleared kimi-k2.6's label by exactly that gap and ran straight through kimi's
+// DOT; and when the dots were then handled by a second, separate pass, a
+// right-anchored label met a left-anchored one, a pair that belonged to neither
+// pass. Both are the same bug: an obstacle nobody was comparing against.
+//
+// So the obstacles are ONE list — every other disc, plus every label already
+// placed — tested by one rectangle overlap. Labels settle top-to-bottom and only
+// the label being placed moves, so everything above it is final: the pass
+// terminates by construction, with no two labels each dodging the other forever.
+//
+// The extents are the ones the renderer actually produces. Text hangs above its
+// own baseline, which is why "keep centres 12 apart" reads as sufficient and is
+// not: 12 below a dot centre still puts the caps inside a radius-8 disc.
+const AIR = 1.5 // daylight — separating to exactly tangent still reads as touching
+const BASE_DY = 3 // the renderer draws the baseline at labelY - 3
+
+interface Box { x0: number; x1: number; y0: number; y1: number }
+
+// Metrics follow the size each point is actually drawn at — the Enso tiers are
+// bold 12 on a wider disc, so measuring them at the 10.5 of everything else would
+// under-report exactly the labels that matter most.
+function metrics(p: Placed) {
+  return p.highlight
+    ? { r: 9.5, char: 7.2, rise: 8.6, drop: 2.9 }
+    : { r: 8, char: 6.3, rise: 7.5, drop: 2.5 }
+}
+
+function labelBox(p: Placed): Box {
+  const m = metrics(p)
+  const w = p.text.length * m.char
+  const base = p.labelY - BASE_DY
+  const x0 = p.right ? p.cx + 13 : p.cx - 13 - w
+  return { x0, x1: x0 + w, y0: base - m.rise, y1: base + m.drop }
+}
+
+function discBox(p: Placed): Box {
+  const { r } = metrics(p)
+  return { x0: p.cx - r, x1: p.cx + r, y0: p.cy - r, y1: p.cy + r }
+}
+
+const overlaps = (a: Box, b: Box) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1
+
+function settle(pts: Placed[]): void {
+  const order = [...pts].sort((a, b) => a.cy - b.cy)
+  const bot = H - PAD.b - 2
+  for (let i = 0; i < order.length; i++) {
+    const p = order[i]
+    const m = metrics(p)
+    const fixed = [...pts.filter((d) => d !== p).map(discBox), ...order.slice(0, i).map(labelBox)]
+    for (let guard = 0; guard < 12; guard++) {
+      const hit = fixed.find((o) => overlaps(labelBox(p), o))
+      if (!hit) break
+      const below = hit.y1 + m.rise + AIR
+      p.labelY = BASE_DY + (below <= bot ? below : hit.y0 - m.drop - AIR)
+    }
+  }
 }
 
 // spread de-collides labels: group by side, sort by dot y, push each down to clear the
@@ -70,12 +155,13 @@ function spread(pts: Placed[]): void {
 export default function AccuracyCostScatter({ points }: { points: ScatterPoint[] }) {
   const placed: Placed[] = points.map((pt) => {
     const cx = xOf(pt.price)
-    return { ...pt, cx, cy: yOf(pt.gpqa), right: cx < W * 0.6, labelY: yOf(pt.gpqa) }
+    return { ...pt, cx, cy: yOf(pt.gpqa), right: cx < W * 0.6, labelY: yOf(pt.gpqa), text: `${pt.label} ${pt.gpqa}%` }
   })
   // Enso ladder: cheapest tier labels left, priciest labels right, so tiers never self-collide.
   const hi = placed.filter((p) => p.highlight)
   if (hi.length) { const maxP = Math.max(...hi.map((p) => p.price)); hi.forEach((p) => { p.right = p.price >= maxP }) }
-  spread(placed)
+  spread(placed) // distributes them evenly; settle is what guarantees they clear
+  settle(placed)
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img"
@@ -94,7 +180,7 @@ export default function AccuracyCostScatter({ points }: { points: ScatterPoint[]
 
       {/* every model: logo chip + always-on de-collided name label. Non-Enso first so Enso draws on top. */}
       {[...placed].sort((a, b) => Number(!!a.highlight) - Number(!!b.highlight)).map((pt) => {
-        const logo = pt.vendor ? LOGO[pt.vendor] : undefined
+        const mark = pt.vendor ? VENDOR[pt.vendor] : undefined
         const labelX = pt.right ? pt.cx + 13 : pt.cx - 13
         const nudged = Math.abs(pt.labelY - pt.cy) > 6
         return (
@@ -102,16 +188,27 @@ export default function AccuracyCostScatter({ points }: { points: ScatterPoint[]
             <title>{`${pt.label} — ${pt.gpqa}% GPQA-Diamond · $${pt.price}/MTok${pt.kind === 'reported' ? ' (vendor-reported)' : ''}`}</title>
             {nudged && <line x1={pt.cx} y1={pt.cy} x2={labelX + (pt.right ? -2 : 2)} y2={pt.labelY - 3} stroke="rgba(255,255,255,0.14)" strokeWidth={1} />}
             {pt.highlight && <circle cx={pt.cx} cy={pt.cy} r={13} fill="rgba(255,255,255,0.16)" />}
+            {/* The disc is ALWAYS light behind a mark. It used to be #20242e for
+                vendor-reported rows, which swallowed every dark logo — OpenAI and
+                Moonshot are near-black — so provenance now rides the RING alone
+                and the disc's one job is contrast for the mark.
+                A ring carrying that on its own has to be seen: at r=8 a 1px grey
+                dash against a 1px white one is a difference you can measure and
+                not one you can read, so measured gets a bright 2px halo and
+                reported a broken edge with real gaps. */}
             <circle cx={pt.cx} cy={pt.cy} r={pt.highlight ? 9 : 8}
-              fill={pt.highlight ? '#ffffff' : pt.kind === 'measured' ? '#e8e8e8' : '#20242e'}
-              stroke={pt.highlight ? '#ffffff' : pt.kind === 'measured' ? '#ffffff' : '#4a5163'} strokeWidth={pt.highlight ? 2 : 1} />
-            {!pt.highlight && (logo
-              ? <image href={`/logos/${logo}.svg`} x={pt.cx - 5.5} y={pt.cy - 5.5} width={11} height={11} preserveAspectRatio="xMidYMid meet" />
-              : <circle cx={pt.cx} cy={pt.cy} r={2.5} fill={pt.kind === 'measured' ? '#111' : '#8a8a8a'} />)}
+              fill={pt.highlight ? '#ffffff' : '#f2f3f5'}
+              stroke={pt.highlight || pt.kind === 'measured' ? '#ffffff' : '#98a2b3'}
+              strokeWidth={pt.highlight || pt.kind === 'measured' ? 2 : 1.5}
+              strokeDasharray={!pt.highlight && pt.kind === 'reported' ? '2.5 2.2' : undefined} />
+            {!pt.highlight && (mark?.file
+              ? <image href={`/logos/color/${mark.file}.svg`} x={pt.cx - 5.5} y={pt.cy - 5.5} width={11} height={11} preserveAspectRatio="xMidYMid meet" />
+              : <text x={pt.cx} y={pt.cy + 3.4} textAnchor="middle" fontSize={9} fontWeight={700}
+                  fontFamily="ui-monospace, monospace" fill={mark?.color ?? '#6B7280'}>{mark?.initial ?? '·'}</text>)}
             <text x={labelX} y={pt.labelY - 3} textAnchor={pt.right ? 'start' : 'end'}
               fontSize={pt.highlight ? 12 : 10.5} fontFamily="ui-monospace, monospace"
               className={pt.highlight ? 'fill-white' : 'fill-neutral-400'} fontWeight={pt.highlight ? 700 : 400}>
-              {pt.label} {pt.gpqa}%
+              {pt.text}
             </text>
           </g>
         )
