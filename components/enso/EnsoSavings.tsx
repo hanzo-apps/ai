@@ -121,7 +121,7 @@ export default function EnsoSavings() {
             <AccuracyCostScatter points={SCATTER} />
           </div>
           <p className="mt-4 border-l-2 border-neutral-700 pl-3 text-sm leading-relaxed text-neutral-500">
-            Solid dots are Hanzo-measured; hollow dots are vendor-reported. enso-ultra (98.0%) leads the field on
+            A solid ring is Hanzo-measured; a dashed ring is vendor-reported. enso-ultra (98.0%) leads the field on
             accuracy at {fmtPrice(ULTRA.price)}/MTok — the win is accuracy-per-dollar across the three tiers.
           </p>
         </motion.div>

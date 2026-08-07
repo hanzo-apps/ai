@@ -560,11 +560,35 @@ Three rules the page cost us before they were written down:
 
 `public/logos/*.svg` is a SECOND representation of eight of these, and it exists
 for exactly one reason: `AccuracyCostScatter` draws them through `<image href>`,
-which needs a URL. Same canonical source, regenerate from it, never redraw. An
-SVG behind `<image>` is its own document with no CSS context, so `currentColor`
-resolves to BLACK — fine on the light `measured` disc, near-invisible on the
-dark `reported` one. That is unfixed and unfixable from CSS; the fix is the disc
-colour, not the mark. `/logos/partners/` is a different set and unrelated.
+which needs a URL. Same canonical source, regenerate from it, never redraw.
+
+An SVG behind `<image>` is its own document with no CSS context, so
+`currentColor` resolves to BLACK and **the host page can never tint it** — the
+chart's marks rendered black-on-light or vanished on dark, and no CSS could
+reach them. `public/logos/color/*.svg` is the answer: the same canonical bodies
+with each lab's brand hex substituted for `currentColor` at generation time,
+because the one thing the host cannot supply is the one thing an `<image>` must
+carry itself. Regenerate them from the fork exactly like the mono set; never
+hand-edit either. The five labs with no mark in the fork (NVIDIA, Meta, Zhipu,
+Xiaomi, MiniMax) fall back to a monogram in their brand colour — the documented
+last resort — and drop a real file in and the monogram gives way to it.
+
+The disc is now ALWAYS light behind a mark, so **provenance rides the RING**:
+solid white for Hanzo-measured, dashed grey for vendor-reported. It used to ride
+the disc colour as well, and that dark `reported` disc is precisely what
+swallowed every near-black mark. One distinction, one carrier — and the ring has
+to be legible on its own, so measured is 2px and reported has real gaps.
+`/logos/partners/` is a different set and unrelated.
+
+**Label placement is ONE rule, not several.** Every obstacle a label can hit —
+the other discs AND the other labels — is a box in one list, tested by one
+rectangle overlap, in `settle()`. Splitting it produced two defects in a row:
+labels de-collided per side against other *labels* cleared a neighbour's label
+by the required gap and ran straight through that neighbour's *dot*; handling
+dots in a second, separate pass then let a right-anchored label meet a
+left-anchored one — a pair that belonged to neither pass. Verify by measuring
+boxes in the rendered DOM over ALL pairs: a check that filters by side
+reproduces the very blind spot that caused the bug, and will report clean.
 
 
 ## Certification Claims (Honest)
