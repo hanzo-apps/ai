@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@hanzo/ai':
+        specifier: ^0.3.1
+        version: 0.3.1
       '@hanzo/brand':
         specifier: ^1.4.5
         version: 1.4.5(react@19.2.8)
@@ -17,6 +20,9 @@ importers:
       '@hanzo/cd':
         specifier: 0.1.1
         version: 0.1.1(@hanzo/canvas@0.2.1(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(@xyflow/react@12.11.2(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+      '@hanzo/chat':
+        specifier: ^1.0.3
+        version: 1.0.3(@hanzo/ai@0.3.1)(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@hanzo/dashboard':
         specifier: 0.2.0
         version: 0.2.0(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -925,6 +931,10 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
+  '@hanzo/ai@0.3.1':
+    resolution: {integrity: sha512-c6dOPc8z3tONUjh8VSurwu9+1qRFH6sMXkbUX/NEfqerSaLawr0MGo8J6CAFn7p6ZDv0xB/uxICb1t+mmnLVKg==}
+    engines: {node: '>=18'}
+
   '@hanzo/brand@1.4.5':
     resolution: {integrity: sha512-1LKhN0WTSJePoF5auPbOIGJjnFNRl2ozGE0yHlUfytEKgqae2XDkd3aFJJPPWnL3Fsl205R+ZI/UU/U/5nya9w==}
     hasBin: true
@@ -953,6 +963,14 @@ packages:
     peerDependenciesMeta:
       react:
         optional: true
+
+  '@hanzo/chat@1.0.3':
+    resolution: {integrity: sha512-8eLEyNOkS5pPQZjgVTRNP9TOkmwIxIT22GUKDoorv2PQBfErKOsYGhQ9bhlG5R2+Bz84LJ1G1GooXgLrxuzTMQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@hanzo/ai': ^0.3.0
+      '@hanzo/gui': ^8
+      react: '>=18'
 
   '@hanzo/dashboard@0.2.0':
     resolution: {integrity: sha512-OipHFO5Mkjt/ieKHFxzao5E/g+Nq4vSa+e8Urb3GZsTr1hCM/C2Y2N+bOKFfNINJor2LQ4njGELtnrpezcSFIw==}
@@ -4717,6 +4735,8 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
+  '@hanzo/ai@0.3.1': {}
+
   '@hanzo/brand@1.4.5(react@19.2.8)':
     dependencies:
       '@hanzo/logo': 1.0.14(react@19.2.8)
@@ -4735,6 +4755,12 @@ snapshots:
     dependencies:
       '@hanzo/canvas': 0.2.1(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(@xyflow/react@12.11.2(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     optionalDependencies:
+      react: 19.2.8
+
+  '@hanzo/chat@1.0.3(@hanzo/ai@0.3.1)(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@hanzo/ai': 0.3.1
+      '@hanzo/gui': 8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
       react: 19.2.8
 
   '@hanzo/dashboard@0.2.0(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
@@ -6358,7 +6384,9 @@ snapshots:
       metro-runtime: 0.84.4
     transitivePeerDependencies:
       - '@babel/core'
+      - bufferutil
       - supports-color
+      - utf-8-validate
 
   '@react-native/normalize-color@2.1.0': {}
 

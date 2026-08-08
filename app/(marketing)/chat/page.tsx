@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { ChatLanding } from '@/components/chat/ChatLanding'
+import { ChatSection } from '@/components/chat/ChatSection'
 
 const TITLE = 'Hanzo Chat — every model, agent, and tool in one chat'
 const DESCRIPTION =
@@ -19,5 +19,7 @@ export const metadata: Metadata = {
 }
 
 export default function ChatPage() {
-  return <ChatLanding />
+  // Signed-in Hanzo users get the real embedded chat; everyone else keeps the
+  // marketing landing + the free hanzo.chat handoff. See ChatSection.
+  return <ChatSection />
 }

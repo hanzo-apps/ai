@@ -24,9 +24,11 @@
     "audit:catalog": "node scripts/audit-catalog.mjs"
   },
   "dependencies": {
+    "@hanzo/ai": "^0.3.1",
     "@hanzo/brand": "^1.4.5",
     "@hanzo/canvas": "0.2.1",
     "@hanzo/cd": "0.1.1",
+    "@hanzo/chat": "^1.0.3",
     "@hanzo/dashboard": "0.2.0",
     "@hanzo/data": "1.2.2",
     "@hanzo/design": "^0.4.7",
