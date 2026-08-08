@@ -4,7 +4,7 @@ import { allModels } from '@zenlm/models'
 import BenchmarkBrowser from '@/components/models/BenchmarkBrowser'
 import { browserGroups, MODELS, isOpenWeightVendor } from '@/lib/leaderboard'
 
-const TITLE = 'Zen — open-weight model family'
+const TITLE = 'The Zen family — Hanzo AI'
 const DESCRIPTION =
   'The Zen family: open-weight frontier models you can self-host anywhere, co-designed by Hanzo AI and the Zoo Labs Foundation. Benchmarks shown are UPSTREAM-reported for the open ecosystem — only Enso is Hanzo-measured end-to-end.'
 

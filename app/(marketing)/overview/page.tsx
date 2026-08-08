@@ -18,7 +18,10 @@ import FinalCTASection from '@/components/landing/FinalCTASection'
 // `/` (now the chat-centric landing) to `/overview` so it stays part of the
 // detailed cloud.hanzo.ai site, wrapped by the (marketing) Navbar/Footer.
 
-const TITLE = 'Hanzo — the AI cloud for agents and apps'
+// The page's own <h1>, not the site's. This read `Hanzo — the AI cloud for
+// agents and apps` — SITE_TITLE verbatim — so /overview was the one page in
+// sitemap.xml indistinguishable from the 135 that merely inherit it.
+const TITLE = 'The AI cloud you can run yourself — Hanzo AI'
 const DESCRIPTION =
   'Build, deploy, and govern AI agents with unified access to models, MCP tools, memory, vector search, secure sandboxes, IAM, KMS, and audit logs. Open-source. Self-host or use the cloud.'
 
@@ -28,8 +31,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
-    url: 'https://cloud.hanzo.ai/overview',
-    siteName: 'Hanzo',
+    url: 'https://hanzo.ai/overview',
+    siteName: 'Hanzo AI',
     type: 'website',
   },
 }
