@@ -25,27 +25,16 @@
  * community fine-tuners and a handful of new labs reach it.
  */
 import { getOrgAndSlug, orgDisplayName } from '@/lib/models'
+import { ENSO_MARK, ZEN_MARK } from '@hanzo/logo/logos'
 
 /** Mono `currentColor` bodies, keyed by their `hanzoai/icons` slug. */
 const MARKS: Record<string, string> = {
-  // THE TWO HOUSE MARKS ARE NOT THE SAME MARK, and the difference is the whole
-  // point. Zen is the enso (円相): one brush arc left OPEN. Enso is the router
-  // that completes the circle by picking the right model, so its ring is CLOSED.
-  // Drawing the Hanzo H for both — which this page did — says the two families
-  // are one thing, and that they are the company rather than its models.
-  //
-  // Geometry is the canonical EnsoLogoIcon/ZenLogoIcon from hanzo.chat (itself
-  // zenlm/logo) scaled from their 100-unit viewBox onto this table's 24-unit
-  // one; x0.24 is exact at every coordinate, so this is the same mark and not a
-  // redrawing of it. Verbatim from `hanzo.app` components/model-icon.tsx.
-
-  // Enso - closed ring.
-  enso:
-    '<circle cx="12" cy="12" r="8.88" fill="none" stroke="currentColor" stroke-width="2.64" stroke-linecap="round"/>',
-  // Zen - the enso, open. The gap sits where a Q's tail would go: it runs from
-  // ~3.5 to ~5.1 o'clock, and the arc sweeps the long way round to leave it.
-  zen:
-    '<path d="M15.8928 19.9824 A8.88 8.88 0 1 1 20.5368 14.448" fill="none" stroke="currentColor" stroke-width="2.64" stroke-linecap="round"/>',
+  // The two house marks come from @hanzo/logo, the ONE canonical source: Enso is
+  // the CLOSED brush ring, Zen the same ring left OPEN — NOT the same glyph (the
+  // difference is the whole point) and NOT the Hanzo H (drawing the H for both,
+  // which this page once did, says the two families are one thing).
+  enso: ENSO_MARK,
+  zen: ZEN_MARK,
   // Hanzo - the house mark, from `@hanzo/logo`. Its canonical viewBox is 67 units
   // and there is no 24-unit cut of it, so it is scaled by 24/67 in a transform
   // rather than having its coordinates rewritten: exact, and still the same file.
