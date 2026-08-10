@@ -186,6 +186,12 @@ export const ORG_DISPLAY_NAMES: Record<string, string> = {
   mancer: 'Mancer',
   undi95: 'Undi95',
   gryphe: 'Gryphe',
+  meta: 'Meta',
+  inclusionai: 'inclusionAI',
+  thinkingmachines: 'Thinking Machines',
+  rekaai: 'Reka AI',
+  sakana: 'Sakana AI',
+  perceptron: 'Perceptron',
 }
 
 export function orgDisplayName(org: string): string {
