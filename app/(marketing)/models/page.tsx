@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ProviderMark } from '@/components/models/ProviderMark'
+import { TryChat } from '@/components/models/TryChat'
 import type { ModelData } from '@/lib/models'
 import {
   fetchModels,
@@ -235,6 +236,18 @@ export default async function ModelsPage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Try it — the shared chat, with the built-in model picker */}
+      <section className="border-t border-border bg-secondary/10 px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Try it</h2>
+          <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
+            Pick any model and start a thread — the same chat that runs at hanzo.chat, signed in with your
+            Hanzo account.
+          </p>
+          <TryChat />
         </div>
       </section>
 
