@@ -30,6 +30,39 @@ const OURS = [
   'zen-embedding',
 ]
 
+// "Top models" shows one flagship per major lab, in the order we would point a
+// visitor at. The labs are named; the model is resolved from the live catalogue,
+// so a version bump follows on its own and a lab we stop serving simply drops
+// out. This replaced "the first nine non-Hanzo ids in catalogue order", which
+// led with whatever happened to sit at the top — obscure fine-tunes and a
+// ~alias duplicate — while the names people know sat further down or never
+// appeared.
+const TOP_LABS = [
+  'anthropic',
+  'openai',
+  'google',
+  'deepseek',
+  'qwen',
+  'x-ai',
+  'meta',
+  'moonshotai',
+  'mistral',
+]
+
+// A lab's canonical model: the headline general-purpose one, not a corner of its
+// catalogue. Excludes alias namespaces (~lab), point variants (:free, :batch),
+// speed/size/preview cuts, date-stamped snapshots, and specialised modalities
+// (image, audio, embedding, …) — a "Top models" row wants the model a visitor
+// pictures when they hear the lab's name, not its image endpoint.
+function isCanonical(id: string): boolean {
+  const slug = id.split('/').pop() ?? id
+  if (id.startsWith('~') || id.includes(':')) return false
+  if (/(?:^|[-])(?:fast|flash|mini|nano|tiny|small|lite|air|preview|exp|latest|thinking|code|base|instruct|image|video|audio|voice|tts|embed|embedding|rerank|ocr|guard|moderation)(?:$|[-])/i.test(slug))
+    return false
+  if (/-\d{6,}$/.test(slug)) return false
+  return true
+}
+
 // The catalogue gives our own families the slug as their name ("enso"), while
 // every other model already carries a proper one ("Zen5 — Next Generation",
 // "Claude Opus"). When the name is just the id, title-case the slug so the card
@@ -127,9 +160,15 @@ export default async function ModelsPage() {
   // third-party clause and our own models never appeared.
   const ours = OURS.flatMap((id) => byId.get(id) ?? [])
   const oursIds = new Set(ours.map((m) => m.id))
-  const elsewhere = available
-    .filter((m) => getOrgAndSlug(m.id).org !== 'hanzo' && !oursIds.has(m.id))
-    .slice(0, 9)
+  // One canonical flagship per lab in TOP_LABS, in that order. `find` takes the
+  // first canonical model the catalogue lists for the lab, which is its newest;
+  // a lab with nothing canonical drops out rather than showing a variant.
+  const top = TOP_LABS.flatMap((lab) => {
+    const m = available.find(
+      (x) => getOrgAndSlug(x.id).org.replace(/^~/, '') === lab && !oursIds.has(x.id) && isCanonical(x.id),
+    )
+    return m ? [m] : []
+  })
 
   const codeExample = `curl https://api.hanzo.ai/v1/chat/completions \\
   -H "Authorization: Bearer $HANZO_API_KEY" \\
@@ -205,7 +244,7 @@ export default async function ModelsPage() {
             is changing one string.
           </p>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
-            {elsewhere.map((model) => (
+            {top.map((model) => (
               <ModelCard key={model.id} model={model} />
             ))}
           </div>
