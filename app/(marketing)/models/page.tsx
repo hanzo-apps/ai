@@ -13,7 +13,7 @@ import {
 
 export const revalidate = 3600
 
-// enso is the frontier family; Zen is the open-weight family. Both are trained
+// Enso is the frontier family; Zen is the open-weight family. Both are trained
 // and served here, so both lead. Anything not in this list groups by the lab
 // that trained it, further down.
 const OURS = [
@@ -29,6 +29,29 @@ const OURS = [
   'zen-embedding',
 ]
 
+// The catalogue gives our own families the slug as their name ("enso"), while
+// every other model already carries a proper one ("Zen5 — Next Generation",
+// "Claude Opus"). When the name is just the id, title-case the slug so the card
+// reads "Enso", "Enso Flash", "Zen5 Coder" — the mono line below still shows the
+// exact API id, so nothing is lost.
+function displayName(model: ModelData): string {
+  if (model.name && model.name !== model.id) return model.name
+  return model.id
+    .split('-')
+    .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
+    .join(' ')
+}
+
+// A missing description comes back as "Zen model: <id>" — noise that only
+// repeats the slug already shown, and wrong on the Enso cards (Enso is the
+// frontier family, not a Zen model). Show a description only when it says
+// something the id does not.
+function realDescription(model: ModelData): string | undefined {
+  const d = model.description?.trim()
+  if (!d || d.toLowerCase().startsWith('zen model:')) return undefined
+  return d
+}
+
 function ModalityBadge({ modality }: { modality: string }) {
   const style = MODALITY_STYLES[modality] ?? { bg: 'bg-secondary', text: 'text-muted-foreground' }
   return (
@@ -43,26 +66,27 @@ function ModalityBadge({ modality }: { modality: string }) {
 function ModelCard({ model }: { model: ModelData }) {
   const { org } = getOrgAndSlug(model.id)
   const ctx = getModelContext(model)
+  const desc = realDescription(model)
   return (
     <Link
       href={modelPagePath(model.id)}
-      className="p-4 rounded-xl border border-border bg-secondary/30 hover:bg-secondary/50 transition-all group flex flex-col gap-3"
+      className="flex flex-col gap-4 rounded-2xl border border-border bg-secondary/30 p-5 transition-all hover:bg-secondary/50 hover:border-neutral-700 md:p-6"
     >
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex items-center gap-2 min-w-0">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex min-w-0 items-center gap-3">
           <ProviderMark org={org} model={model.id} />
           <div className="min-w-0">
-            <div className="font-medium text-sm truncate">{model.name}</div>
-            <div className="text-xs text-muted-foreground font-mono">{model.id}</div>
+            <div className="truncate text-base font-medium tracking-tight">{displayName(model)}</div>
+            <div className="truncate font-mono text-xs text-muted-foreground">{model.id}</div>
           </div>
         </div>
         {ctx && (
-          <span className="shrink-0 text-xs text-muted-foreground bg-secondary rounded px-1.5 py-0.5">
+          <span className="shrink-0 rounded-full bg-secondary px-2 py-0.5 text-xs text-muted-foreground">
             {formatContext(ctx)}
           </span>
         )}
       </div>
-      {model.description && <p className="text-xs text-muted-foreground line-clamp-2">{model.description}</p>}
+      {desc && <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>}
       {model.modalities && model.modalities.length > 0 && (
         <div className="flex flex-wrap gap-1">
           {model.modalities.slice(0, 3).map((m) => (
@@ -117,23 +141,23 @@ export default async function ModelsPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-neutral-900 px-4 pb-20 pt-32 text-center">
+      <section className="relative overflow-hidden border-b border-neutral-900 px-6 pb-24 pt-32 text-center md:pb-28">
         <div
           className="pointer-events-none absolute left-1/2 top-0 z-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full opacity-60"
           style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 68%)', filter: 'blur(100px)' }}
         />
         <div className="relative z-10 mx-auto max-w-4xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 text-xs text-neutral-300">
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 text-xs text-neutral-300">
             <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
             Live from api.hanzo.ai
           </div>
-          <h1 className="mb-6 text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl">
+          <h1 className="mb-6 text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
-              enso and Zen, on one endpoint
+              Enso and Zen, on one endpoint
             </span>
           </h1>
-          <p className="mx-auto mb-8 max-w-2xl text-xl text-neutral-300">
-            enso is our frontier family. Zen is our open-weight family — call it here or run the weights
+          <p className="mx-auto mb-10 max-w-2xl text-lg text-neutral-300 md:text-xl">
+            Enso is our frontier family. Zen is our open-weight family — call it here or run the weights
             yourself. Models from other labs answer on the same endpoint when you need one.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -154,15 +178,15 @@ export default async function ModelsPage() {
       </section>
 
       {/* Our models */}
-      <section className="py-16 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold mb-2">Our models</h2>
-          <p className="text-muted-foreground mb-8">
-            <span className="text-foreground font-medium">enso</span> is our frontier family;{' '}
-            <span className="text-foreground font-medium">Zen</span> is our open-weight family, with the weights
+      <section className="px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Our models</h2>
+          <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
+            <span className="font-medium text-foreground">Enso</span> is our frontier family;{' '}
+            <span className="font-medium text-foreground">Zen</span> is our open-weight family, with the weights
             published. Both are trained here and served here.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
             {ours.map((model) => (
               <ModelCard key={model.id} model={model} />
             ))}
@@ -170,21 +194,40 @@ export default async function ModelsPage() {
         </div>
       </section>
 
-      {/* Provider grid */}
-      <section className="py-16 px-4 border-t border-border">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold mb-2">Browse by lab</h2>
-          <p className="text-muted-foreground mb-8">Every model on the endpoint, grouped by who trained it.</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+      {/* Top models — the most-reached-for models from other labs, surfaced
+          before the full lab index so a visitor sees names they know first. */}
+      <section className="border-t border-border bg-secondary/10 px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Top models</h2>
+          <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
+            Frontier models from other labs, routed on the same endpoint with the same key. Switching model
+            is changing one string.
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+            {elsewhere.map((model) => (
+              <ModelCard key={model.id} model={model} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Browse by lab */}
+      <section className="border-t border-border px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Browse by lab</h2>
+          <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
+            Every model on the endpoint, grouped by who trained it.
+          </p>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5">
             {sortedOrgs.map(([org, models]) => (
               <Link
                 key={org}
                 href={`/models/${org}`}
-                className="p-4 rounded-xl border border-border bg-secondary/20 hover:bg-secondary/50 transition-all group flex flex-col gap-3"
+                className="flex flex-col gap-3 rounded-2xl border border-border bg-secondary/20 p-5 transition-all hover:bg-secondary/50 hover:border-neutral-700"
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <ProviderMark org={org} />
-                  <span className="font-medium text-sm truncate">{orgDisplayName(org)}</span>
+                  <span className="truncate text-sm font-medium tracking-tight">{orgDisplayName(org)}</span>
                 </div>
                 <div className="text-xs text-muted-foreground">
                   {models.length} model{models.length !== 1 ? 's' : ''}
@@ -195,60 +238,45 @@ export default async function ModelsPage() {
         </div>
       </section>
 
-      {/* Models from other labs */}
-      <section className="py-16 px-4 border-t border-border bg-secondary/10">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-2xl font-bold mb-2">Models from other labs</h2>
-          <p className="text-muted-foreground mb-8">
-            Routed on the same endpoint, with the same key, when a workflow needs a specific one.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {elsewhere.map((model) => (
-              <ModelCard key={model.id} model={model} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Code CTA */}
-      <section className="py-16 px-4 border-t border-border">
-        <div className="max-w-4xl mx-auto">
+      <section className="border-t border-border px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-4xl">
           <div className="rounded-2xl border border-border bg-secondary/20 p-8 md:p-12">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-3">One key, one host</h2>
-              <p className="text-muted-foreground">
+            <div className="mb-8 text-center">
+              <h2 className="mb-3 text-3xl font-semibold tracking-tight">One key, one host</h2>
+              <p className="mx-auto max-w-2xl text-muted-foreground">
                 Changing model is changing one string. The endpoint takes and returns the chat-completions
                 JSON shape, so an HTTP client already written against that shape works once its base URL
                 points at api.hanzo.ai/v1.
               </p>
             </div>
-            <div className="rounded-xl bg-background border border-border overflow-hidden mb-8">
-              <div className="flex items-center gap-2 px-4 py-2 border-b border-border bg-secondary/30">
-                <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-                <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-                <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
-                <span className="ml-2 text-xs text-muted-foreground font-mono">typescript</span>
+            <div className="mb-8 overflow-hidden rounded-xl border border-border bg-background">
+              <div className="flex items-center gap-2 border-b border-border bg-secondary/30 px-4 py-2">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-500/60" />
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/60" />
+                <span className="h-2.5 w-2.5 rounded-full bg-green-500/60" />
+                <span className="ml-2 font-mono text-xs text-muted-foreground">typescript</span>
               </div>
-              <pre className="p-4 text-xs text-foreground/90 font-mono overflow-x-auto leading-relaxed">
+              <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-foreground/90">
                 <code>{codeExample}</code>
               </pre>
             </div>
             <div className="flex flex-wrap justify-center gap-3">
               <Link
                 href="/signup"
-                className="px-6 py-3 rounded-lg bg-foreground text-background font-medium text-sm hover:opacity-90 transition-opacity"
+                className="rounded-lg bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
               >
                 Get Free API Key
               </Link>
               <Link
                 href="https://docs.hanzo.ai"
-                className="px-6 py-3 rounded-lg border border-border text-sm font-medium hover:bg-secondary/50 transition-colors"
+                className="rounded-lg border border-border px-6 py-3 text-sm font-medium transition-colors hover:bg-secondary/50"
               >
                 Read the Docs
               </Link>
               <Link
                 href="/chat"
-                className="px-6 py-3 rounded-lg border border-border text-sm font-medium hover:bg-secondary/50 transition-colors"
+                className="rounded-lg border border-border px-6 py-3 text-sm font-medium transition-colors hover:bg-secondary/50"
               >
                 Try in Chat
               </Link>
@@ -258,23 +286,23 @@ export default async function ModelsPage() {
       </section>
 
       {/* Stats bar */}
-      <section className="py-12 px-4 border-t border-border bg-secondary/10">
-        <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <section className="border-t border-border bg-secondary/10 px-6 py-16">
+        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-6 text-center md:grid-cols-4">
           <div>
-            <div className="text-3xl font-bold">2</div>
-            <div className="text-sm text-muted-foreground mt-1">Model families of our own</div>
+            <div className="text-3xl font-semibold">2</div>
+            <div className="mt-1 text-sm text-muted-foreground">Model families of our own</div>
           </div>
           <div>
-            <div className="text-3xl font-bold">1</div>
-            <div className="text-sm text-muted-foreground mt-1">Host</div>
+            <div className="text-3xl font-semibold">1</div>
+            <div className="mt-1 text-sm text-muted-foreground">Host</div>
           </div>
           <div>
-            <div className="text-3xl font-bold">1</div>
-            <div className="text-sm text-muted-foreground mt-1">API Key</div>
+            <div className="text-3xl font-semibold">1</div>
+            <div className="mt-1 text-sm text-muted-foreground">API Key</div>
           </div>
           <div>
-            <div className="text-3xl font-bold">$0</div>
-            <div className="text-sm text-muted-foreground mt-1">To Start</div>
+            <div className="text-3xl font-semibold">$0</div>
+            <div className="mt-1 text-sm text-muted-foreground">To Start</div>
           </div>
         </div>
       </section>

@@ -25,7 +25,7 @@
  * community fine-tuners and a handful of new labs reach it.
  */
 import { getOrgAndSlug, orgDisplayName } from '@/lib/models'
-import { ENSO_MARK, ZEN_MARK } from '@hanzo/logo/logos'
+import { ENSO_MARK, ZEN_MARK, MARK_PATHS } from '@hanzo/logo/logos'
 
 /** Mono `currentColor` bodies, keyed by their `hanzoai/icons` slug. */
 const MARKS: Record<string, string> = {
@@ -35,11 +35,13 @@ const MARKS: Record<string, string> = {
   // which this page once did, says the two families are one thing).
   enso: ENSO_MARK,
   zen: ZEN_MARK,
-  // Hanzo - the house mark, from `@hanzo/logo`. Its canonical viewBox is 67 units
-  // and there is no 24-unit cut of it, so it is scaled by 24/67 in a transform
-  // rather than having its coordinates rewritten: exact, and still the same file.
-  hanzo:
-    '<g transform="scale(0.3582089552238806)"><path d="M22.21 67V44.6369H0V67H22.21Z"/><path d="M66.7038 22.3184H22.2534L0.0878906 44.6367H44.4634L66.7038 22.3184Z"/><path d="M22.21 0H0V22.3184H22.21V0Z"/></g>',
+  // Hanzo — the house mark, the canonical seven-path shaded H from `@hanzo/logo`
+  // (`MARK_PATHS`), the ONE source every Hanzo surface draws. Its viewBox is 67
+  // units and there is no 24-unit cut, so it is scaled by 24/67 in a transform
+  // rather than rewriting its coordinates: exact, and the same file. The
+  // hand-copied subset that used to sit here held only three of the seven paths,
+  // so it drew half an H with the whole right column missing.
+  hanzo: `<g transform="scale(0.3582089552238806)">${MARK_PATHS}</g>`,
 
   ai2:
     '<path d="M9.553 9.378H4.777V4.835H8.62c.513 0 .932-.42.932-.932V.058h4.544v4.777a4.542 4.542 0 01-4.544 4.543zm-4.776.467H0v4.543h3.845c.512 0 .932.42.932.932v3.845H9.32v-4.777a4.542 4.542 0 00-4.543-4.543zM20.05 9.61a.935.935 0 01-.932-.932V4.835h-4.543V9.61a4.542 4.542 0 004.543 4.544h4.777V9.612H20.05zM9.787 19.166v4.777h4.544v-3.845c0-.513.42-.932.932-.932h3.845V14.62H14.33a4.542 4.542 0 00-4.544 4.544z"></path>',
