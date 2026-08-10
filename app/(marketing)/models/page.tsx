@@ -137,10 +137,13 @@ export default async function ModelsPage() {
   const available = data.models.filter((m) => m.status !== 'coming-soon')
   const byId = new Map(available.map((m) => [m.id, m]))
 
-  // Group by org
+  // Group by lab. A leading `~` marks a latest-alias namespace of a lab that is
+  // already here (`~anthropic` is Anthropic's "…-latest" pointers), so it folds
+  // into the base — otherwise the grid carried a second, near-empty "~anthropic"
+  // card beside "Anthropic". This matches markOf, which already strips `~`.
   const byOrg: Record<string, typeof available> = {}
   for (const model of available) {
-    const { org } = getOrgAndSlug(model.id)
+    const org = getOrgAndSlug(model.id).org.replace(/^~/, '')
     if (!byOrg[org]) byOrg[org] = []
     byOrg[org].push(model)
   }
