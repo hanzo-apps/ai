@@ -5,6 +5,7 @@ import type { ModelData } from '@/lib/models'
 import {
   fetchModels,
   getOrgAndSlug,
+  canonicalOrg,
   orgDisplayName,
   formatContext,
   getModelContext,
@@ -69,7 +70,12 @@ function isCanonical(id: string): boolean {
 // reads "Enso", "Enso Flash", "Zen5 Coder" — the mono line below still shows the
 // exact API id, so nothing is lost.
 function displayName(model: ModelData): string {
-  if (model.name && model.name !== model.id) return model.name
+  if (model.name && model.name !== model.id) {
+    // Upstream names often carry a redundant "Lab: " prefix; the lab is already
+    // shown by the mark and the mono id beside it, so drop it. "DeepSeek:
+    // DeepSeek V4 Pro" → "DeepSeek V4 Pro", "SpaceXAI: Grok 4.5" → "Grok 4.5".
+    return model.name.replace(/^[A-Za-z0-9.\-() ]{1,18}:\s+/, '')
+  }
   return model.id
     .split('-')
     .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
@@ -143,7 +149,7 @@ export default async function ModelsPage() {
   // card beside "Anthropic". This matches markOf, which already strips `~`.
   const byOrg: Record<string, typeof available> = {}
   for (const model of available) {
-    const org = getOrgAndSlug(model.id).org.replace(/^~/, '')
+    const org = canonicalOrg(getOrgAndSlug(model.id).org)
     if (!byOrg[org]) byOrg[org] = []
     byOrg[org].push(model)
   }

@@ -4,6 +4,7 @@ import { ProviderMark } from '@/components/models/ProviderMark'
 import {
   fetchModels,
   getOrgAndSlug,
+  canonicalOrg,
   orgDisplayName,
   formatContext,
   getModelContext,
@@ -23,7 +24,7 @@ export async function generateStaticParams() {
   for (const model of data.models) {
     if (model.status === 'coming-soon') continue
     const { org } = getOrgAndSlug(model.id)
-    orgs.add(org)
+    orgs.add(canonicalOrg(org))
   }
   return Array.from(orgs).map((org) => ({ org }))
 }
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await fetchModels()
   const models = data.models.filter((m) => {
     const { org: mOrg } = getOrgAndSlug(m.id)
-    return mOrg === org && m.status !== 'coming-soon'
+    return canonicalOrg(mOrg) === org && m.status !== 'coming-soon'
   })
   const providerName = orgDisplayName(org)
   const count = models.length
@@ -72,7 +73,7 @@ export default async function OrgPage({ params }: Props) {
 
   const orgModels = data.models.filter((m) => {
     const { org: mOrg } = getOrgAndSlug(m.id)
-    return mOrg === org && m.status !== 'coming-soon'
+    return canonicalOrg(mOrg) === org && m.status !== 'coming-soon'
   })
 
   const providerName = orgDisplayName(org)
