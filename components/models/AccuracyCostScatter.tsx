@@ -10,11 +10,22 @@
  * the page — were the one thing on it drawn as a blank white disc while every
  * competitor wore a logo. Ours is `ENSO_MARK` from `@hanzo/logo`, the same closed
  * ring `ProviderMark` draws, so the two surfaces cannot disagree about our own mark.
+ * Its ink is the house black: the house mark is monochrome, which is not an
+ * exception to "each lab in its own colour" — it IS ours.
  *
- * Its ink is black because the house mark is monochrome — that is not an exception
- * to "each lab in its own colour", it IS ours, and it keeps the site's rule that
- * hue belongs to the globe intact on the one mark we control.
+ * TWO GEOMETRIES, ONE LAYOUT. SVG text scales with its viewBox, so the 720-unit
+ * plot squeezed into a phone's 324px card drew its labels at 4.7 CSS px — measured,
+ * not estimated. A phone gets the portrait plot instead, where the same code draws
+ * the same chart at ~1.0 scale. This is art direction in the sense `<picture>`
+ * means it, NOT a second chart: `settle()` below is the only placement code in the
+ * file and both geometries call it. `.hz-scatter-*` shows exactly one, so only one
+ * is ever painted or in the accessibility tree.
+ *
+ * NOTHING here is a bare design value. Type, colour and the mono face come from
+ * `@hanzo/design`; the plot extents have no token set to come from and are the two
+ * exported `Geom`s below, which are the one place to edit them.
  */
+import { colors, fonts, typography } from '@hanzo/design'
 import { ENSO_MARK } from '@hanzo/logo/logos'
 
 export interface ScatterPoint {
@@ -26,22 +37,71 @@ export interface ScatterPoint {
   highlight?: boolean
 }
 
-const W = 720
-const H = 420
-const PAD = { l: 44, r: 24, t: 30, b: 44 }
+/**
+ * A rem token as an SVG user unit, against the 16px root this site does not move.
+ *
+ * Worth stating rather than hiding: a viewBox has no rem, so unlike page text this
+ * plot does NOT follow a browser text-size preference. Making it do so means laying
+ * the plot out in CSS instead of in a viewBox, which is a different component.
+ */
+const unit = (rem: string) => parseFloat(rem) * 16
+
+/** Ink. One name per role, every value a @hanzo/design token. */
+const INK = {
+  label: colors['neutral-400'],
+  axis: colors['neutral-600'],
+  caption: colors['neutral-500'],
+  disc: colors['neutral-100'],
+  discOurs: colors['pure-white'],
+  ring: colors['neutral-400'],
+  house: colors['hanzo-black'],
+}
+
+/**
+ * The three translucent whites — gridline, leader, halo — have no token, because
+ * @hanzo/design carries opaque ramps and no overlay scale. They want an
+ * `overlay-{faint,quiet,soft}` set alongside `colors`; until that exists they are
+ * named here rather than spelt out at four call sites.
+ */
+const VEIL = { grid: 'rgba(255,255,255,0.06)', leader: 'rgba(255,255,255,0.14)', halo: 'rgba(255,255,255,0.16)' }
+
+/**
+ * The mono face, through the same custom property the rest of the site reads.
+ *
+ * Not cosmetic. `ui-monospace` resolves to SF Mono here and to whatever a Linux CI
+ * image ships there, so the advance ratio the label widths are computed from was a
+ * property of the machine. Bound to `--font-mono` it is Geist Mono everywhere, and
+ * ADVANCE below is then a measured constant rather than an assumption.
+ */
+const MONO = 'var(--font-mono)'
+
+/**
+ * Geist Mono's own metrics, measured in the browser against the shipped face
+ * rather than estimated: advance 0.5997em, and a rendered box 1.257em tall.
+ *
+ * The height is the one that bites. A label's box is what a reader sees it
+ * occupy, and the previous cap-height estimate (0.72 + 0.24 = 0.96em) modelled it
+ * a quarter short — so labels the layout believed were clear overlapped on screen
+ * by ~2.6 units. RISE and DROP sum to 1.4em, comfortably over the measured 1.257,
+ * because being generous here costs air and being mean costs a collision.
+ */
+const ADVANCE = 0.6
+const RISE = 1.05
+const DROP = 0.35
+
 const PRICE_MIN = 0.3
 const PRICE_MAX = 160
 const ACC_MIN = 74
 const ACC_MAX = 100
-
-/** Ours. The house mark is monochrome, and on the white Enso disc that is black. */
-const HOUSE_INK = '#111111'
 
 // Every vendor in the snapshot gets a mark, and the mark is the vendor's own
 // colour. `file` is a generated colour variant under /logos/color/ — the canonical
 // monochrome files are fill="currentColor", and currentColor inside <image href>
 // resolves against the IMAGE's document, not this one, so the chart could never
 // tint them. That is why some dots read as grey smudges and others as nothing.
+//
+// These hexes are a lab's BRAND, not our design system, so they are data and stay
+// data — no Hanzo token will ever own Anthropic's orange.
 //
 // A vendor with no logo asset gets its initial in its own colour rather than an
 // anonymous grey dot, so the chart is consistent whether or not we have the mark.
@@ -65,19 +125,60 @@ const VENDOR: Record<string, Mark> = {
   Other:     { color: '#6B7280', initial: '·' },
 }
 
-function xOf(price: number): number {
-  const lo = Math.log(PRICE_MIN)
-  const hi = Math.log(PRICE_MAX)
-  const t = (Math.log(Math.min(Math.max(price, PRICE_MIN), PRICE_MAX)) - lo) / (hi - lo)
-  return PAD.l + t * (W - PAD.l - PAD.r)
-}
-function yOf(acc: number): number {
-  const t = (Math.min(Math.max(acc, ACC_MIN), ACC_MAX) - ACC_MIN) / (ACC_MAX - ACC_MIN)
-  return H - PAD.b - t * (H - PAD.t - PAD.b)
+export interface Geom {
+  key: string
+  /** Plot extents, in user units. */
+  w: number
+  h: number
+  pad: { l: number; r: number; t: number; b: number }
+  /** Type sizes, from @hanzo/design. */
+  type: { label: number; ours: number; axis: number }
+  /** Radii: the vendor disc, our disc, our halo (the outer DRAWN edge), the mark. */
+  disc: { r: number; ours: number; halo: number; mark: number }
+  priceTicks: number[]
+  accTicks: number[]
 }
 
-const PRICE_TICKS = [0.5, 2, 8, 30, 120]
-const ACC_TICKS = [76, 80, 84, 88, 92, 96, 100]
+/**
+ * The two plots.
+ *
+ * There is no chart-geometry token set — @hanzo/design covers type, colour, space
+ * and breakpoints, not plot extents — so this is the one editable home for them.
+ * What it wants is a `chart-*` ramp alongside `spacing`; until that lands, edit
+ * here and nowhere else. Type and radii are already token-derived.
+ *
+ * The portrait width is chosen against a MEASURED constraint, not to taste: the
+ * card is the viewport less the page and card padding (324px at a 390px phone,
+ * ~296px at 360px), and `w: 320` is the widest viewBox that still renders the
+ * label token above 10 CSS px on the narrowest phone the site targets. 10px is not
+ * arbitrary either — it is the smallest type the rest of this page already uses.
+ */
+export const WIDE: Geom = {
+  key: 'wide',
+  w: 720, h: 430, pad: { l: 44, r: 24, t: 30, b: 44 },
+  type: { label: unit(typography['text-xs']), ours: unit(typography['text-sm']), axis: unit(typography['text-xs']) },
+  disc: { r: 8, ours: 9, halo: 13, mark: 11 },
+  priceTicks: [0.5, 2, 8, 30, 120],
+  accTicks: [76, 80, 84, 88, 92, 96, 100],
+}
+
+/**
+ * Portrait sets our own tier labels at the SAME size as everyone else's, where the
+ * landscape plot sets them a step larger. Not a compromise on emphasis — they stay
+ * bold and white, which is what actually separates them — but a consequence of the
+ * width: at `text-sm`, "enso-flash 92.9%" is 125 units of a 282-unit plot, so it
+ * cannot sit left of its dot at all, and the only seat left for it was seven lines
+ * below the point it names. A hero point pushed halfway down the chart behind a
+ * leader is a worse loss than one type step.
+ */
+export const PHONE: Geom = {
+  key: 'phone',
+  w: 320, h: 580, pad: { l: 28, r: 10, t: 26, b: 38 },
+  type: { label: unit(typography['text-xs']), ours: unit(typography['text-xs']), axis: unit(typography['text-xs']) },
+  disc: { r: 7, ours: 8, halo: 11, mark: 9.5 },
+  priceTicks: [0.5, 8, 120],
+  accTicks: [76, 82, 88, 94, 100],
+}
 
 interface Placed extends ScatterPoint {
   cx: number
@@ -87,48 +188,57 @@ interface Placed extends ScatterPoint {
   text: string
 }
 
-// Everything a label can run into is a BOX, and there is ONE rule for all of them.
-// Splitting the problem is what produced two defects in a row here: labels were
-// de-collided against other LABELS, per side, by a fixed gap — so qwen3.5's label
-// cleared kimi-k2.6's label by exactly that gap and ran straight through kimi's
-// DOT; and when the dots were then handled by a second, separate pass, a
-// right-anchored label met a left-anchored one, a pair that belonged to neither
-// pass. Both are the same bug: an obstacle nobody was comparing against.
-//
-// So the obstacles are ONE list — every other disc, plus every label already
-// placed — tested by one rectangle overlap. Labels settle top-to-bottom and only
-// the label being placed moves, so everything above it is final: the pass
-// terminates by construction, with no two labels each dodging the other forever.
-//
-// The extents are the ones the renderer actually produces. Text hangs above its
-// own baseline, which is why "keep centres 12 apart" reads as sufficient and is
-// not: 12 below a dot centre still puts the caps inside a radius-8 disc.
-const AIR = 1.5 // daylight — separating to exactly tangent still reads as touching
-const BASE_DY = 3 // the renderer draws the baseline at labelY - 3
-
 interface Box { x0: number; x1: number; y0: number; y1: number }
 
-// Metrics follow the size each point is actually drawn at — the Enso tiers are
-// bold 12 on a wider disc, so measuring them at the 10.5 of everything else would
-// under-report exactly the labels that matter most.
-function metrics(p: Placed) {
-  return p.highlight
-    ? { r: 9.5, char: 7.2, rise: 8.6, drop: 2.9 }
-    : { r: 8, char: 6.3, rise: 7.5, drop: 2.5 }
+/** Daylight — separating to exactly tangent still reads as touching. */
+const AIR = 1.5
+
+function xOf(price: number, g: Geom): number {
+  const lo = Math.log(PRICE_MIN)
+  const t = (Math.log(Math.min(Math.max(price, PRICE_MIN), PRICE_MAX)) - lo) / (Math.log(PRICE_MAX) - lo)
+  return g.pad.l + t * (g.w - g.pad.l - g.pad.r)
 }
+
+function yOf(acc: number, g: Geom): number {
+  const t = (Math.min(Math.max(acc, ACC_MIN), ACC_MAX) - ACC_MIN) / (ACC_MAX - ACC_MIN)
+  return g.h - g.pad.b - t * (g.h - g.pad.t - g.pad.b)
+}
+
+/**
+ * What a point is actually drawn at.
+ *
+ * `edge` is the DRAWN outer radius, which for our tiers is the halo and not the
+ * disc — and measuring the disc is exactly how the Enso labels came to rest
+ * tangent to the halo they sit beside. Zero clearance is not a rounding question
+ * you get to win: macOS rounded that contact under half a pixel and Linux rounded
+ * it over, so the same build passed here and failed the gate in CI. The gap below
+ * is derived from `edge`, so no label can be placed against an edge again.
+ */
+function metrics(p: Placed, g: Geom) {
+  const size = p.highlight ? g.type.ours : g.type.label
+  return {
+    size,
+    edge: p.highlight ? g.disc.halo : g.disc.r,
+    char: size * ADVANCE,
+    rise: size * RISE,
+    drop: size * DROP,
+  }
+}
+
+/** Clear air between a dot's drawn edge and the label beside it. */
+const gapOf = (m: { edge: number }) => m.edge + AIR * 2
 
 /** The label's extent, for a side and a baseline it has not been moved to yet. */
-function labelBox(p: Placed, right = p.right, labelY = p.labelY): Box {
-  const m = metrics(p)
+function labelBox(p: Placed, g: Geom, right = p.right, labelY = p.labelY): Box {
+  const m = metrics(p, g)
   const w = p.text.length * m.char
-  const base = labelY - BASE_DY
-  const x0 = right ? p.cx + 13 : p.cx - 13 - w
-  return { x0, x1: x0 + w, y0: base - m.rise, y1: base + m.drop }
+  const x0 = right ? p.cx + gapOf(m) : p.cx - gapOf(m) - w
+  return { x0, x1: x0 + w, y0: labelY - m.rise, y1: labelY + m.drop }
 }
 
-function discBox(p: Placed): Box {
-  const { r } = metrics(p)
-  return { x0: p.cx - r, x1: p.cx + r, y0: p.cy - r, y1: p.cy + r }
+function discBox(p: Placed, g: Geom): Box {
+  const { edge } = metrics(p, g)
+  return { x0: p.cx - edge, x1: p.cx + edge, y0: p.cy - edge, y1: p.cy + edge }
 }
 
 const overlaps = (a: Box, b: Box) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1
@@ -145,22 +255,34 @@ const overlaps = (a: Box, b: Box) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 &
  * why `qwen3.5-397b-a17b` still sat on `kimi-k2.6`'s disc and on `opus-4.8`'s label
  * after the pass claimed to be clean: a run that gave up looks exactly like a run
  * that succeeded. Scanning seats instead of chasing hits cannot give up.
+ *
+ * Every obstacle is in ONE list — the other discs AND the labels already placed —
+ * tested by one rectangle overlap. Splitting that is what produced the defect
+ * above; a pass that filters by side reproduces its own blind spot and reports clean.
  */
-function settle(pts: Placed[]): void {
+function settle(pts: Placed[], g: Geom): void {
   const order = [...pts].sort((a, b) => a.cy - b.cy)
-  const top = PAD.t - 8
-  const bot = H - PAD.b - 2
+  const top = g.pad.t - 8
+  const bot = g.h - g.pad.b - 2
   for (let i = 0; i < order.length; i++) {
     const p = order[i]
-    const m = metrics(p)
-    const fixed = [...pts.filter((d) => d !== p).map((d) => discBox(d)), ...order.slice(0, i).map((d) => labelBox(d))]
+    const m = metrics(p, g)
+    const fixed = [
+      ...pts.filter((d) => d !== p).map((d) => discBox(d, g)),
+      ...order.slice(0, i).map((d) => labelBox(d, g)),
+    ]
     const step = m.rise + m.drop + AIR // one line of this label's own type
     const fits = (right: boolean, y: number) => {
-      const b = labelBox(p, right, y)
-      return b.x0 >= PAD.l - 8 && b.x1 <= W - PAD.r + 8 && b.y0 >= top && b.y1 <= bot &&
+      const b = labelBox(p, g, right, y)
+      return b.x0 >= g.pad.l - 8 && b.x1 <= g.w - g.pad.r + 8 && b.y0 >= top && b.y1 <= bot &&
         !fixed.some((o) => overlaps(b, o))
     }
-    for (let k = 0; k <= 14; k++) {
+    // Search to the ends of the plot, so exhausting it means the plot is genuinely
+    // full rather than that the loop ran out of tries. A fixed cap is how the
+    // predecessor came to draw labels on top of things, and a cap is invisible in
+    // the output — the label just sits somewhere wrong and nothing says why.
+    const reach = Math.ceil((bot - top) / step)
+    for (let k = 0; k <= reach; k++) {
       const seat = (k === 0 ? [p.cy] : [p.cy + k * step, p.cy - k * step])
         .flatMap((y) => [{ right: p.right, y }, { right: !p.right, y }])
         .find((s) => fits(s.right, s.y))
@@ -169,7 +291,7 @@ function settle(pts: Placed[]): void {
   }
 }
 
-export default function AccuracyCostScatter({ points }: { points: ScatterPoint[] }) {
+function Plot({ points, g, className }: { points: ScatterPoint[]; g: Geom; className: string }) {
   // A label starts to the RIGHT of its dot and starts left only when it would run
   // off the plot — the side is a question about ROOM, asked of the label's own
   // width, and settle() answers the rest. What this replaces was a threshold on
@@ -177,36 +299,37 @@ export default function AccuracyCostScatter({ points }: { points: ScatterPoint[]
   // Enso tier left and the priciest right: two rules, neither visible on screen,
   // which is what reads as labels sitting on whichever side they feel like.
   const placed: Placed[] = points.map((pt) => {
-    const cx = xOf(pt.price)
     const text = `${pt.label} ${pt.gpqa.toFixed(1)}%`
-    const p: Placed = { ...pt, cx, cy: yOf(pt.gpqa), right: true, labelY: yOf(pt.gpqa), text }
-    p.right = cx + 13 + text.length * metrics(p).char <= W - PAD.r
+    const p: Placed = { ...pt, cx: xOf(pt.price, g), cy: yOf(pt.gpqa, g), right: true, labelY: yOf(pt.gpqa, g), text }
+    const m = metrics(p, g)
+    p.right = p.cx + gapOf(m) + text.length * m.char <= g.w - g.pad.r
     return p
   })
-  settle(placed)
+  settle(placed, g)
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img"
+    <svg viewBox={`0 0 ${g.w} ${g.h}`} className={className} role="img"
       aria-label="Accuracy versus output price; every model labelled, Enso tiers highlighted.">
-      {ACC_TICKS.map((a) => (
+      {g.accTicks.map((a) => (
         <g key={`a${a}`}>
-          <line x1={PAD.l} x2={W - PAD.r} y1={yOf(a)} y2={yOf(a)} stroke="rgba(255,255,255,0.06)" />
-          <text x={PAD.l - 8} y={yOf(a) + 3} textAnchor="end" className="fill-neutral-600" fontSize="11" fontFamily="ui-monospace, monospace">{a}</text>
+          <line x1={g.pad.l} x2={g.w - g.pad.r} y1={yOf(a, g)} y2={yOf(a, g)} stroke={VEIL.grid} />
+          <text x={g.pad.l - 8} y={yOf(a, g) + 3} textAnchor="end" fill={INK.axis} fontSize={g.type.axis} fontFamily={MONO}>{a}</text>
         </g>
       ))}
-      {PRICE_TICKS.map((p) => (
-        <text key={`p${p}`} x={xOf(p)} y={H - PAD.b + 16} textAnchor="middle" className="fill-neutral-600" fontSize="11" fontFamily="ui-monospace, monospace">${p}</text>
+      {g.priceTicks.map((p) => (
+        <text key={`p${p}`} x={xOf(p, g)} y={g.h - g.pad.b + 16} textAnchor="middle" fill={INK.axis} fontSize={g.type.axis} fontFamily={MONO}>${p}</text>
       ))}
-      <text x={PAD.l - 8} y={PAD.t - 14} textAnchor="start" className="fill-neutral-500" fontSize="11" fontFamily="ui-monospace, monospace">GPQA %</text>
-      <text x={W - PAD.r} y={H - 6} textAnchor="end" className="fill-neutral-500" fontSize="11" fontFamily="ui-monospace, monospace">cheap ← output $/MTok → expensive</text>
+      <text x={g.pad.l - 8} y={g.pad.t - 14} textAnchor="start" fill={INK.caption} fontSize={g.type.axis} fontFamily={MONO}>GPQA %</text>
+      <text x={g.w - g.pad.r} y={g.h - 6} textAnchor="end" fill={INK.caption} fontSize={g.type.axis} fontFamily={MONO}>cheap ← output $/MTok → expensive</text>
 
-      {/* every model: logo chip + always-on de-collided name label. Non-Enso first so Enso draws on top. */}
+      {/* every model: mark on a disc + always-on de-collided name label. Non-Enso first so Enso draws on top. */}
       {[...placed].sort((a, b) => Number(!!a.highlight) - Number(!!b.highlight)).map((pt) => {
         const mark = pt.vendor ? VENDOR[pt.vendor] : undefined
-        const labelX = pt.right ? pt.cx + 13 : pt.cx - 13
+        const m = metrics(pt, g)
+        const labelX = pt.right ? pt.cx + gapOf(m) : pt.cx - gapOf(m)
         const nudged = Math.abs(pt.labelY - pt.cy) > 6
-        const r = metrics(pt).r
-        const mid = pt.labelY - 6
+        const half = g.disc.mark / 2
+        const mid = pt.labelY - m.size * 0.3
         return (
           <g key={pt.label}>
             <title>{`${pt.label} — ${pt.gpqa.toFixed(1)}% GPQA-Diamond · $${pt.price}/MTok${pt.kind === 'reported' ? ' (vendor-reported)' : ''}`}</title>
@@ -215,39 +338,50 @@ export default function AccuracyCostScatter({ points }: { points: ScatterPoint[]
                 "92.9%" — read at size, that is a slash someone typed after the number.
                 A horizontal rule into a label cannot be mistaken for a glyph. */}
             {nudged && (
-              <polyline fill="none" stroke="rgba(255,255,255,0.14)" strokeWidth={1}
-                points={`${pt.cx},${pt.cy + (pt.labelY > pt.cy ? r + 2 : -r - 2)} ${pt.cx},${mid} ${labelX + (pt.right ? -3 : 3)},${mid}`} />
+              <polyline fill="none" stroke={VEIL.leader} strokeWidth={1}
+                points={`${pt.cx},${pt.cy + (pt.labelY > pt.cy ? m.edge : -m.edge)} ${pt.cx},${mid} ${pt.right ? labelX - 3 : labelX + 3},${mid}`} />
             )}
-            {pt.highlight && <circle cx={pt.cx} cy={pt.cy} r={13} fill="rgba(255,255,255,0.16)" />}
-            {/* The disc is ALWAYS light behind a mark. It used to be #20242e for
+            {pt.highlight && <circle cx={pt.cx} cy={pt.cy} r={g.disc.halo} fill={VEIL.halo} />}
+            {/* The disc is ALWAYS light behind a mark. It used to be dark for
                 vendor-reported rows, which swallowed every dark logo — OpenAI and
                 Moonshot are near-black — so provenance now rides the RING alone
                 and the disc's one job is contrast for the mark.
-                A ring carrying that on its own has to be seen: at r=8 a 1px grey
-                dash against a 1px white one is a difference you can measure and
-                not one you can read, so measured gets a bright 2px halo and
-                reported a broken edge with real gaps. */}
-            <circle cx={pt.cx} cy={pt.cy} r={pt.highlight ? 9 : 8}
-              fill={pt.highlight ? '#ffffff' : '#f2f3f5'}
-              stroke={pt.highlight || pt.kind === 'measured' ? '#ffffff' : '#98a2b3'}
+                A ring carrying that on its own has to be seen: a 1px grey dash
+                against a 1px white one is a difference you can measure and not one
+                you can read, so measured gets a bright 2px halo and reported a
+                broken edge with real gaps. */}
+            <circle cx={pt.cx} cy={pt.cy} r={pt.highlight ? g.disc.ours : g.disc.r}
+              fill={pt.highlight ? INK.discOurs : INK.disc}
+              stroke={pt.highlight || pt.kind === 'measured' ? INK.discOurs : INK.ring}
               strokeWidth={pt.highlight || pt.kind === 'measured' ? 2 : 1.5}
               strokeDasharray={!pt.highlight && pt.kind === 'reported' ? '2.5 2.2' : undefined} />
             {pt.highlight
-              ? <svg x={pt.cx - 6.5} y={pt.cy - 6.5} width={13} height={13} viewBox="0 0 24 24"
-                  fillRule="evenodd" style={{ color: HOUSE_INK }}
+              ? <svg x={pt.cx - half} y={pt.cy - half} width={g.disc.mark} height={g.disc.mark} viewBox="0 0 24 24"
+                  fillRule="evenodd" style={{ color: INK.house }}
                   dangerouslySetInnerHTML={{ __html: ENSO_MARK }} />
               : mark?.file
-                ? <image href={`/logos/color/${mark.file}.svg`} x={pt.cx - 5.5} y={pt.cy - 5.5} width={11} height={11} preserveAspectRatio="xMidYMid meet" />
-                : <text x={pt.cx} y={pt.cy + 3.4} textAnchor="middle" fontSize={9} fontWeight={700}
-                    fontFamily="ui-monospace, monospace" fill={mark?.color ?? '#6B7280'}>{mark?.initial ?? '·'}</text>}
-            <text x={labelX} y={pt.labelY - 3} textAnchor={pt.right ? 'start' : 'end'}
-              fontSize={pt.highlight ? 12 : 10.5} fontFamily="ui-monospace, monospace"
-              className={pt.highlight ? 'fill-white' : 'fill-neutral-400'} fontWeight={pt.highlight ? 700 : 400}>
+                ? <image href={`/logos/color/${mark.file}.svg`} x={pt.cx - half} y={pt.cy - half}
+                    width={g.disc.mark} height={g.disc.mark} preserveAspectRatio="xMidYMid meet" />
+                : <text x={pt.cx} y={pt.cy} textAnchor="middle" dominantBaseline="central"
+                    fontSize={g.disc.r * 1.15} fontWeight={700} fontFamily={MONO}
+                    fill={mark?.color ?? VENDOR.Other.color}>{mark?.initial ?? VENDOR.Other.initial}</text>}
+            <text x={labelX} y={pt.labelY} textAnchor={pt.right ? 'start' : 'end'}
+              fontSize={m.size} fontFamily={MONO}
+              fill={pt.highlight ? INK.discOurs : INK.label} fontWeight={pt.highlight ? 700 : 400}>
               {pt.text}
             </text>
           </g>
         )
       })}
     </svg>
+  )
+}
+
+export default function AccuracyCostScatter({ points }: { points: ScatterPoint[] }) {
+  return (
+    <>
+      <Plot points={points} g={PHONE} className="hz-scatter hz-scatter-phone" />
+      <Plot points={points} g={WIDE} className="hz-scatter hz-scatter-wide" />
+    </>
   )
 }

@@ -217,6 +217,41 @@
   display: none;
 }
 
+/* ── Accuracy-at-cost scatter: two geometries, one layout ─────────────────────
+   A plot's type is SVG text, so it scales with the viewBox rather than with the
+   reader. The 720-unit landscape plot inside a phone's 324px card drew its
+   labels at 4.7 CSS px — measured, not estimated. A phone gets the portrait
+   viewBox instead, where the same code draws the same chart at ~1.0 scale.
+
+   Art direction in the sense <picture> means it. `display: none` also takes the
+   unused one out of the accessibility tree, so the page never offers the same
+   twelve models twice.
+
+   The breakpoint is @hanzo/design's `grid.breakpoint-md`. It is spelt out
+   because a media query cannot read a custom property — that is a CSS
+   limitation, not a loose value — and it is the right one on the drawing's own
+   terms: at 48rem the card is 670px, where the landscape plot's label token
+   renders at 10.2 CSS px, just over the 10px floor the gate asserts. */
+.hz-scatter {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hz-scatter-wide {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .hz-scatter-phone {
+    display: none;
+  }
+
+  .hz-scatter-wide {
+    display: block;
+  }
+}
+
 /* ── The three classes @hanzo/ui stamps and expects the HOST to define ────────
    `hz-mono`, `hz-tnum` and `hz-row` are not decoration the package forgot to
    ship — they are its interface to the host, and the package says so:
