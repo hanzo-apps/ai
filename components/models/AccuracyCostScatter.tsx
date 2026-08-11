@@ -2,11 +2,21 @@
  * Accuracy-at-cost scatter — GPQA-Diamond vs published output $/MTok, log price axis.
  *
  * Pure presentational SVG (no client hooks) so both the server model pages and the
- * client Enso landing render it. Every model is a provider-logo chip on a disc with an
- * always-on name label; labels are de-collided vertically per side (with a leader line
- * when nudged) so nothing overlaps. The three Enso tiers render highlighted/bold as a
- * clean price/quality ladder. Accuracy axis spans to 100 so top-tier points aren't clipped.
+ * client Enso landing render it. Every model is a mark on a disc with an always-on
+ * name label. Accuracy axis spans to 100 so top-tier points aren't clipped.
+ *
+ * EVERY point carries a mark, ours included. The mark branch used to be guarded on
+ * NOT being highlighted, so the three Enso tiers — the only reason this chart is on
+ * the page — were the one thing on it drawn as a blank white disc while every
+ * competitor wore a logo. Ours is `ENSO_MARK` from `@hanzo/logo`, the same closed
+ * ring `ProviderMark` draws, so the two surfaces cannot disagree about our own mark.
+ *
+ * Its ink is black because the house mark is monochrome — that is not an exception
+ * to "each lab in its own colour", it IS ours, and it keeps the site's rule that
+ * hue belongs to the globe intact on the one mark we control.
  */
+import { ENSO_MARK } from '@hanzo/logo/logos'
+
 export interface ScatterPoint {
   label: string
   gpqa: number
@@ -23,7 +33,9 @@ const PRICE_MIN = 0.3
 const PRICE_MAX = 160
 const ACC_MIN = 74
 const ACC_MAX = 100
-const LABEL_GAP = 14
+
+/** Ours. The house mark is monochrome, and on the white Enso disc that is black. */
+const HOUSE_INK = '#111111'
 
 // Every vendor in the snapshot gets a mark, and the mark is the vendor's own
 // colour. `file` is a generated colour variant under /logos/color/ — the canonical
@@ -105,11 +117,12 @@ function metrics(p: Placed) {
     : { r: 8, char: 6.3, rise: 7.5, drop: 2.5 }
 }
 
-function labelBox(p: Placed): Box {
+/** The label's extent, for a side and a baseline it has not been moved to yet. */
+function labelBox(p: Placed, right = p.right, labelY = p.labelY): Box {
   const m = metrics(p)
   const w = p.text.length * m.char
-  const base = p.labelY - BASE_DY
-  const x0 = p.right ? p.cx + 13 : p.cx - 13 - w
+  const base = labelY - BASE_DY
+  const x0 = right ? p.cx + 13 : p.cx - 13 - w
   return { x0, x1: x0 + w, y0: base - m.rise, y1: base + m.drop }
 }
 
@@ -120,47 +133,56 @@ function discBox(p: Placed): Box {
 
 const overlaps = (a: Box, b: Box) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1
 
+/**
+ * Every label takes the free seat NEAREST its dot — down before up at equal
+ * distance, and the far side of the dot only once the near side is exhausted.
+ * One rule, no per-point offsets, and it terminates by construction.
+ *
+ * The predecessor moved a label just far enough to clear the FIRST obstacle it
+ * found, then looked again, inside a 12-iteration guard. Clearing one obstacle can
+ * land you on a second and clearing that one puts you back on the first, and when
+ * the guard ran out the label was drawn wherever the last attempt left it. That is
+ * why `qwen3.5-397b-a17b` still sat on `kimi-k2.6`'s disc and on `opus-4.8`'s label
+ * after the pass claimed to be clean: a run that gave up looks exactly like a run
+ * that succeeded. Scanning seats instead of chasing hits cannot give up.
+ */
 function settle(pts: Placed[]): void {
   const order = [...pts].sort((a, b) => a.cy - b.cy)
+  const top = PAD.t - 8
   const bot = H - PAD.b - 2
   for (let i = 0; i < order.length; i++) {
     const p = order[i]
     const m = metrics(p)
-    const fixed = [...pts.filter((d) => d !== p).map(discBox), ...order.slice(0, i).map(labelBox)]
-    for (let guard = 0; guard < 12; guard++) {
-      const hit = fixed.find((o) => overlaps(labelBox(p), o))
-      if (!hit) break
-      const below = hit.y1 + m.rise + AIR
-      p.labelY = BASE_DY + (below <= bot ? below : hit.y0 - m.drop - AIR)
+    const fixed = [...pts.filter((d) => d !== p).map((d) => discBox(d)), ...order.slice(0, i).map((d) => labelBox(d))]
+    const step = m.rise + m.drop + AIR // one line of this label's own type
+    const fits = (right: boolean, y: number) => {
+      const b = labelBox(p, right, y)
+      return b.x0 >= PAD.l - 8 && b.x1 <= W - PAD.r + 8 && b.y0 >= top && b.y1 <= bot &&
+        !fixed.some((o) => overlaps(b, o))
     }
-  }
-}
-
-// spread de-collides labels: group by side, sort by dot y, push each down to clear the
-// previous by LABEL_GAP, then pull any bottom overflow back up so all stay in the box.
-function spread(pts: Placed[]): void {
-  for (const right of [true, false]) {
-    const side = pts.filter((p) => p.right === right).sort((a, b) => a.cy - b.cy)
-    for (let i = 1; i < side.length; i++) {
-      if (side[i].labelY - side[i - 1].labelY < LABEL_GAP) side[i].labelY = side[i - 1].labelY + LABEL_GAP
-    }
-    const bot = H - PAD.b - 2
-    for (let i = side.length - 1; i > 0; i--) {
-      if (side[i].labelY > bot) side[i].labelY = bot - (side.length - 1 - i) * LABEL_GAP
-      if (side[i].labelY < side[i - 1].labelY + LABEL_GAP) side[i - 1].labelY = side[i].labelY - LABEL_GAP
+    for (let k = 0; k <= 14; k++) {
+      const seat = (k === 0 ? [p.cy] : [p.cy + k * step, p.cy - k * step])
+        .flatMap((y) => [{ right: p.right, y }, { right: !p.right, y }])
+        .find((s) => fits(s.right, s.y))
+      if (seat) { p.right = seat.right; p.labelY = seat.y; break }
     }
   }
 }
 
 export default function AccuracyCostScatter({ points }: { points: ScatterPoint[] }) {
+  // A label starts to the RIGHT of its dot and starts left only when it would run
+  // off the plot — the side is a question about ROOM, asked of the label's own
+  // width, and settle() answers the rest. What this replaces was a threshold on
+  // the dot's x (`cx < W * 0.6`) plus a hand-written override putting the cheapest
+  // Enso tier left and the priciest right: two rules, neither visible on screen,
+  // which is what reads as labels sitting on whichever side they feel like.
   const placed: Placed[] = points.map((pt) => {
     const cx = xOf(pt.price)
-    return { ...pt, cx, cy: yOf(pt.gpqa), right: cx < W * 0.6, labelY: yOf(pt.gpqa), text: `${pt.label} ${pt.gpqa}%` }
+    const text = `${pt.label} ${pt.gpqa.toFixed(1)}%`
+    const p: Placed = { ...pt, cx, cy: yOf(pt.gpqa), right: true, labelY: yOf(pt.gpqa), text }
+    p.right = cx + 13 + text.length * metrics(p).char <= W - PAD.r
+    return p
   })
-  // Enso ladder: cheapest tier labels left, priciest labels right, so tiers never self-collide.
-  const hi = placed.filter((p) => p.highlight)
-  if (hi.length) { const maxP = Math.max(...hi.map((p) => p.price)); hi.forEach((p) => { p.right = p.price >= maxP }) }
-  spread(placed) // distributes them evenly; settle is what guarantees they clear
   settle(placed)
 
   return (
@@ -183,10 +205,19 @@ export default function AccuracyCostScatter({ points }: { points: ScatterPoint[]
         const mark = pt.vendor ? VENDOR[pt.vendor] : undefined
         const labelX = pt.right ? pt.cx + 13 : pt.cx - 13
         const nudged = Math.abs(pt.labelY - pt.cy) > 6
+        const r = metrics(pt).r
+        const mid = pt.labelY - 6
         return (
           <g key={pt.label}>
             <title>{`${pt.label} — ${pt.gpqa}% GPQA-Diamond · $${pt.price}/MTok${pt.kind === 'reported' ? ' (vendor-reported)' : ''}`}</title>
-            {nudged && <line x1={pt.cx} y1={pt.cy} x2={labelX + (pt.right ? -2 : 2)} y2={pt.labelY - 3} stroke="rgba(255,255,255,0.14)" strokeWidth={1} />}
+            {/* An elbow, in two axis-aligned runs. The leader used to be a single
+                diagonal ending ON the text, and at gpt-5.6-sol it landed hard against
+                "92.9%" — read at size, that is a slash someone typed after the number.
+                A horizontal rule into a label cannot be mistaken for a glyph. */}
+            {nudged && (
+              <polyline fill="none" stroke="rgba(255,255,255,0.14)" strokeWidth={1}
+                points={`${pt.cx},${pt.cy + (pt.labelY > pt.cy ? r + 2 : -r - 2)} ${pt.cx},${mid} ${labelX + (pt.right ? -3 : 3)},${mid}`} />
+            )}
             {pt.highlight && <circle cx={pt.cx} cy={pt.cy} r={13} fill="rgba(255,255,255,0.16)" />}
             {/* The disc is ALWAYS light behind a mark. It used to be #20242e for
                 vendor-reported rows, which swallowed every dark logo — OpenAI and
@@ -201,10 +232,14 @@ export default function AccuracyCostScatter({ points }: { points: ScatterPoint[]
               stroke={pt.highlight || pt.kind === 'measured' ? '#ffffff' : '#98a2b3'}
               strokeWidth={pt.highlight || pt.kind === 'measured' ? 2 : 1.5}
               strokeDasharray={!pt.highlight && pt.kind === 'reported' ? '2.5 2.2' : undefined} />
-            {!pt.highlight && (mark?.file
-              ? <image href={`/logos/color/${mark.file}.svg`} x={pt.cx - 5.5} y={pt.cy - 5.5} width={11} height={11} preserveAspectRatio="xMidYMid meet" />
-              : <text x={pt.cx} y={pt.cy + 3.4} textAnchor="middle" fontSize={9} fontWeight={700}
-                  fontFamily="ui-monospace, monospace" fill={mark?.color ?? '#6B7280'}>{mark?.initial ?? '·'}</text>)}
+            {pt.highlight
+              ? <svg x={pt.cx - 6.5} y={pt.cy - 6.5} width={13} height={13} viewBox="0 0 24 24"
+                  fillRule="evenodd" style={{ color: HOUSE_INK }}
+                  dangerouslySetInnerHTML={{ __html: ENSO_MARK }} />
+              : mark?.file
+                ? <image href={`/logos/color/${mark.file}.svg`} x={pt.cx - 5.5} y={pt.cy - 5.5} width={11} height={11} preserveAspectRatio="xMidYMid meet" />
+                : <text x={pt.cx} y={pt.cy + 3.4} textAnchor="middle" fontSize={9} fontWeight={700}
+                    fontFamily="ui-monospace, monospace" fill={mark?.color ?? '#6B7280'}>{mark?.initial ?? '·'}</text>}
             <text x={labelX} y={pt.labelY - 3} textAnchor={pt.right ? 'start' : 'end'}
               fontSize={pt.highlight ? 12 : 10.5} fontFamily="ui-monospace, monospace"
               className={pt.highlight ? 'fill-white' : 'fill-neutral-400'} fontWeight={pt.highlight ? 700 : 400}>
