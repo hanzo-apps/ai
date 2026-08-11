@@ -85,6 +85,12 @@ export const UNAPPROVED: readonly string[] = [
   '/kms',
   '/kv',
   '/machines',
+  // Unlike the rest of this shelf, /mcp's page is not withdrawn — it ships with
+  // real copy. But the sites edge maps /mcp → the /v1/mcp API endpoint (308 →
+  // JSON), so the marketing page never answers at its own URL. Keep it out of
+  // sitemap.xml and noindex it rather than advertise a URL that redirects to
+  // JSON; the real fix is at the edge (stop shadowing /mcp), which is separate.
+  '/mcp',
   '/metrics',
   '/mq',
   '/network',
