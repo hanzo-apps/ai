@@ -209,7 +209,7 @@ export default function AccuracyCostScatter({ points }: { points: ScatterPoint[]
         const mid = pt.labelY - 6
         return (
           <g key={pt.label}>
-            <title>{`${pt.label} — ${pt.gpqa}% GPQA-Diamond · $${pt.price}/MTok${pt.kind === 'reported' ? ' (vendor-reported)' : ''}`}</title>
+            <title>{`${pt.label} — ${pt.gpqa.toFixed(1)}% GPQA-Diamond · $${pt.price}/MTok${pt.kind === 'reported' ? ' (vendor-reported)' : ''}`}</title>
             {/* An elbow, in two axis-aligned runs. The leader used to be a single
                 diagonal ending ON the text, and at gpt-5.6-sol it landed hard against
                 "92.9%" — read at size, that is a slash someone typed after the number.
