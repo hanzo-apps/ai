@@ -32,10 +32,10 @@ export default function AIStudioPage() {
   ])
 
   const models: ModelInterface[] = [
-    { id: "glm-5.2", name: "GLM 5.2", provider: "Hanzo" },
-    { id: "deepseek-v4-flash", name: "DeepSeek V4 Flash", provider: "Hanzo" },
-    { id: "deepseek-v4-pro", name: "DeepSeek V4 Pro", provider: "Hanzo" },
-    { id: "zen5-max", name: "Zen5 Max", provider: "Hanzo" },
+    { id: "glm-5.2", name: "GLM 5.2", provider: "Z.ai" },
+    { id: "deepseek-v4-flash", name: "DeepSeek V4 Flash", provider: "DeepSeek" },
+    { id: "deepseek-v4-pro", name: "DeepSeek V4 Pro", provider: "DeepSeek" },
+    { id: "zen5-max", name: "Zen5 Max", provider: "Zoo Labs Foundation" },
   ]
 
   const handleSubmit = (e: React.FormEvent) => {

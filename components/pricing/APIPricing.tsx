@@ -482,11 +482,11 @@ const APIPricing = () => {
         )}
       </div>
 
-      {/* Hanzo Zen Models Section */}
+      {/* Zen Models Section */}
       <div className="mb-16">
         <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
           <div>
-            <h2 className="text-3xl font-bold">Hanzo Zen Models</h2>
+            <h2 className="text-3xl font-bold">Zen Models</h2>
             <p className="text-muted-foreground text-lg mt-2">
               {rest.length} models across LLM, embedding, reranker, image, audio, and video
               {data.updated && (

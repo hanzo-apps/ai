@@ -1,8 +1,8 @@
-// Frontier AI model families from Hanzo
+// Frontier AI model families on the Hanzo API
 const modelCategories = [
   {
-    name: "Hanzo Zen Models",
-    description: "41 foundation models across language, code, vision, image, audio, speech, and retrieval",
+    name: "Zen Models",
+    description: "41 foundation models from Zoo Labs Foundation across language, code, vision, image, audio, speech, and retrieval",
     models: [
       // Zen5 — Next Generation
       { name: "Zen5", provider: "Hanzo", features: ["1M+ context window", "Agentic-trained", "MoDE + CoT", "Preview"], description: "Next-generation agentic frontier model with native chain-of-thought." },
