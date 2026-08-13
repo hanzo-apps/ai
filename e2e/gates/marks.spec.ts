@@ -72,8 +72,9 @@ test('Enso wears our ring, Zen wears Zoo’s venn, and neither is a letter', asy
     }
 
     // The two may not collapse into one another.
-    const of = (family: string) => new Set(drawn.filter((d) => d.family === family).map((d) => d.mark))
-    expect([...of('enso')].some((m) => of('zen').has(m)), 'Enso and Zen drew the same glyph').toBe(false)
+    const glyphs = (family: string) => new Set(drawn.filter((d) => d.family === family).map((d) => d.mark))
+    const zen = glyphs('zen')
+    expect([...glyphs('enso')].some((m) => zen.has(m)), 'Enso and Zen drew the same glyph').toBe(false)
   } finally {
     await server.close()
   }
