@@ -60,7 +60,7 @@ export default function ChatHero() {
   }
 
   return (
-    <section className="relative flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
+    <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 py-16 sm:px-6 lg:px-8">
       {/* Decorative backdrop (behind content, z-0). Order matters:
           1) static radial — instant paint + the no-WebGL / reduced-motion fallback.
           2) the WebGL point-globe glows on top of it.
@@ -71,7 +71,28 @@ export default function ChatHero() {
           className="absolute left-1/2 top-[44%] h-[680px] w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.13]"
           style={{ background: 'radial-gradient(circle, var(--pure-white) 0%, transparent 70%)', filter: 'blur(120px)' }}
         />
-        <PointGlobe variant="ambient" conversations={5} className="absolute inset-0 h-full w-full" />
+        {/* Sized OFF the section, exactly as the cloud hero is. The sphere's
+            on-screen diameter is a fixed fraction of the canvas HEIGHT (48°
+            vertical FOV at a fixed camera distance) and owes nothing to its
+            width, so fitting the canvas to the hero box — `inset-0 h-full` —
+            drew a globe that merely tracked the viewport instead of filling it.
+            118% of the section makes it a planet the question sits on; at mobile
+            that would drown a 390px column, so it drops to 62% and crowns the
+            copy instead. Width is only elbow room: the canvas runs wider than
+            the section so the sphere is never squeezed by it.
+
+            `hero`, not `ambient`, BECAUSE of that size. Point count is fixed per
+            canvas, so the same points spread over a sphere twice the diameter
+            are four times as sparse — at 2560 the ambient register drew exactly
+            the starfield this component was rebuilt to stop drawing. Density is
+            a function of how large the globe renders, and this one now renders
+            at the cloud hero's scale. The radial mask below is what keeps the
+            composer crisp; dimming the whole globe was never what did it. */}
+        <PointGlobe
+          variant="hero"
+          conversations={5}
+          className="absolute left-1/2 top-[8%] h-[62%] w-[190%] max-w-none -translate-x-1/2 sm:top-[4%] sm:h-[118%] sm:w-[135%]"
+        />
         <div
           className="absolute inset-0"
           style={{
