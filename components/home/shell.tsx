@@ -148,17 +148,44 @@ export function SiteHeader({
   currentCategoryId?: string
 }) {
   const base = resolveSurface(surface)
+
+  // The header names the FOUR ways in: what we sell, what it is for, what to
+  // read, and what to build with. Products is the mega-menu (taxonomy below);
+  // these three are the rest.
+  //
+  // Every href is a page this site actually serves — measured, not assumed.
+  // `/resources` and `/developers` DO NOT EXIST (both 404 live), so the labels
+  // point at the hubs that do: Learn and Dev. That is deliberate and it is the
+  // honest half of a compromise — the labels are the words the menu needs and
+  // the URLs are the pages we have. Giving them their own `/resources` and
+  // `/developers` hubs is the finish, and until someone writes those pages a
+  // matching URL would be a 404 wearing the right name.
+  //
+  // Documentation is NOT here and is not a top-level action either. It used to
+  // be the far-right secondary CTA, which put a link to another host in the
+  // most valuable slot on the page, competing with the one thing we want a
+  // reader to do. It belongs under Developers, where someone looking for it is
+  // already standing.
+  //
+  // It is HIDDEN IN CSS rather than dropped, and that is not a preference:
+  // `HanzoHeader` renders a CTA through a component that reads `link.href`
+  // UNGUARDED, so passing `undefined` throws `Cannot read properties of
+  // undefined (reading 'href')` and takes the whole page down with it — measured,
+  // a blank render with no header and no <h1>. hanzo.app hit the identical trap
+  // on `primaryCTA` and settled it the same way. The object stays valid; the
+  // rule in app/globals.css takes it off the page.
   const DOCS = { id: 'docs', label: 'Documentation', href: 'https://docs.hanzo.ai' }
 
-  // Both registry surfaces carry docs.hanzo.ai TWICE in the header — once as a
-  // "Developers" nav item and again as "Docs" (cloud) or the secondary CTA
-  // (ai) — so the same destination competed with itself in two places. Docs is
-  // the secondary action; the nav keeps the pages only this site serves.
-  //
-  // The cloud primary was "Open Console" and its secondary "Get API key", which
-  // put THREE console.hanzo.ai actions in one header next to the sign-in. One
-  // primary is enough: `Start building`, with `Sign in` beside it.
-  const localNav = base.localNav.filter((l) => !l.href.startsWith('https://docs.hanzo.ai') && shown(l.href))
+  const localNav = [
+    { id: 'solutions', label: 'Solutions', href: '/solutions' },
+    { id: 'resources', label: 'Resources', href: '/learn' },
+    { id: 'developers', label: 'Developers', href: '/dev' },
+  ].filter((l) => shown(l.href))
+
+  // One action, far right: try the thing. The cloud face said "Start building"
+  // and the ai face inherited a second console link beside it; both are the
+  // same door, so there is one label for it.
+  const TRY = { ...base.primaryCTA, label: 'Try Hanzo', href: CONSOLE }
 
   return (
     <div style={MENU_COLUMNS}>
@@ -167,9 +194,7 @@ export function SiteHeader({
           ...base,
           localNav,
           secondaryCTA: DOCS,
-          ...(surface === 'cloud'
-            ? { primaryCTA: { ...base.primaryCTA, label: 'Start building', href: CONSOLE } }
-            : null),
+          primaryCTA: TRY,
         }}
         productsTaxonomy={PRODUCTS_TAXONOMY}
         currentCategoryId={currentCategoryId}
