@@ -469,7 +469,7 @@ const ZenModels = () => {
               transition={{ duration: 0.4, delay: 0.05 }}
               className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6 text-center"
             >
-              <span className="text-foreground">Hanzo Zen Models</span>
+              <span className="text-foreground">Zen Models</span>
               <br />
               <span className="text-muted-foreground">Complete API Catalog</span>
             </motion.h1>
@@ -480,7 +480,10 @@ const ZenModels = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8 max-w-3xl mx-auto text-center"
             >
-              {totalModels} foundation models across language, code, vision, image, audio, and retrieval.
+              {totalModels} foundation models from{' '}
+              <a href="https://zoo.industries" target="_blank" rel="noopener noreferrer"
+                className="underline hover:no-underline text-foreground">Zoo Labs Foundation</a>{' '}
+              across language, code, vision, image, audio, and retrieval.
               Zen MoDE (Mixture of Diverse Experts) architecture. From ${minPrice}/MTok.
             </motion.p>
 

@@ -44,7 +44,7 @@
       "category": "ai",
       "primary": false,
       "ship": false,
-      "alt": "Hanzo Zen model catalog header: \"41 Models \u2014 Zen3, Zen4 & Zen5\" over the title \"Hanzo Zen Models Complete API Catalog\", with stat tiles for 41 models, 2M max context, $0.02/MTok starting price, MoE + Dense architectures and 7 modalities, plus family tabs for Zen5, Zen4, Zen4 Coder, Zen3, Zen3 Image, Zen3 Audio and Zen3 Retrieval.",
+      "alt": "Zen model catalog header: \"41 Models \u2014 Zen3, Zen4 & Zen5\" over the title \"Zen Models Complete API Catalog\", with stat tiles for 41 models, 2M max context, $0.02/MTok starting price, MoE + Dense architectures and 7 modalities, plus family tabs for Zen5, Zen4, Zen4 Coder, Zen3, Zen3 Image, Zen3 Audio and Zen3 Retrieval.",
       "notes": "",
       "review": "Marketing page on hanzo.ai. Superseded by `chat` for the ai category."
     },

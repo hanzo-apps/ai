@@ -168,7 +168,7 @@ const look = (key: string): string | undefined =>
 /**
  * The model's own family wins over the lab that trained it, because our gateway
  * namespace holds every family under one lab: `gpt-5`, `claude-opus-4.8` and
- * `zen5` are all `hanzo` models, and reading the lab first drew the Hanzo H on
+ * `zen5` all answer under `hanzo`, and reading the lab first drew the Hanzo H on
  * all three. A family is the leading run of letters in the id, so `zen5-pro` is
  * `zen` and `o3` is `o`.
  */

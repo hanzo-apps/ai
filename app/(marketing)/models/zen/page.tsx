@@ -6,7 +6,7 @@ import { browserGroups, MODELS, isOpenWeightVendor } from '@/lib/leaderboard'
 
 const TITLE = 'The Zen family — Hanzo AI'
 const DESCRIPTION =
-  'The Zen family: open-weight frontier models you can self-host anywhere, co-designed by Hanzo AI and the Zoo Labs Foundation. Benchmarks shown are UPSTREAM-reported for the open ecosystem — only Enso is Hanzo-measured end-to-end.'
+  'The Zen family: open-weight frontier models you can self-host anywhere, built by Zoo Labs Foundation and served on the Hanzo API. Benchmarks shown are UPSTREAM-reported for the open ecosystem — only Enso is Hanzo-measured end-to-end.'
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -63,8 +63,9 @@ export default function ZenModelsPage() {
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">The Zen family</span>
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-neutral-400">
-            {ZEN_COUNT} open-weight models across language, code, vision, image, audio, and retrieval — co-designed by
-            Hanzo AI and the Zoo Labs Foundation. Free to self-host, or managed on Hanzo Cloud. Benchmarks here are
+            {ZEN_COUNT} open-weight models across language, code, vision, image, audio, and retrieval — built by{' '}
+            <a href="https://zoo.industries" target="_blank" rel="noopener noreferrer" className="underline hover:no-underline text-neutral-200">Zoo Labs Foundation</a>.
+            Free to self-host, or managed on Hanzo Cloud. Benchmarks here are
             UPSTREAM-reported for the open ecosystem Zen builds on; only Enso is Hanzo-measured end-to-end.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
