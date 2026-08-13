@@ -28,13 +28,18 @@ import { serveExport } from './export'
  * squares off into a scribble exactly where it is smallest and most used.
  */
 
+/** Zoo's venn: the cut, its three petals and the ring around them. */
+const VENN = 1 + 3 + 1
+
 /** The lab each family belongs to, and the shape that lab's mark must have. */
 const MAKER = {
+  /** One closed ring, drawn by nothing else here, and never cut. */
   enso: (mark: string) => /^<circle [^>]*r="8\.88"/.test(mark) && !mark.includes('clipPath'),
+  /** The venn, cut in user units — an SVG clipPath the group actually points at. */
   zen: (mark: string) =>
     mark.includes('<clipPath') &&
     mark.includes('clip-path="url(#zoo-cut)"') &&
-    (mark.match(/<circle/g) ?? []).length === 5,
+    (mark.match(/<circle/g) ?? []).length === VENN,
 } as const
 
 test('Enso wears our ring, Zen wears Zoo’s venn, and neither is a letter', async ({ page }) => {
