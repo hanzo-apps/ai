@@ -64,10 +64,12 @@ test('a route has exactly one policy, and a surface is a path segment', () => {
   for (const route of ['/', '/api', '/computer', '/risky', '/accountability', '/logins', '/automations']) {
     expect(policy(route), `${route} is public`).toBe('public')
   }
-  // /authz was THE control for the /auth prefix bug and is now withdrawn
-  // itself. The segment rule still shows: withdrawn means noindex, and if
-  // PRIVATE's /auth matched it as a prefix this would read 'private'.
-  expect(policy('/authz'), '/authz is withdrawn, not swallowed by /auth').toBe('noindex')
+  // /authz is THE control for the /auth prefix bug, and it is published now, so
+  // the contrast is sharper than it was: if PRIVATE's /auth matched as a string
+  // prefix rather than a path segment this would read 'private'. The assertion
+  // moved from 'noindex' to 'public' when UNAPPROVED was emptied — the route's
+  // POLICY changed, the rule it proves did not.
+  expect(policy('/authz'), '/authz is its own page, not swallowed by /auth').toBe('public')
   // An EMPTY entry is a PAGE and takes nothing beneath it: /docs forwards to
   // docs.hanzo.ai and /docs/sdk is three thousand words of its own.
   for (const page of EMPTY) {

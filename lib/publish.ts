@@ -41,99 +41,19 @@ export const PRIVATE: readonly string[] = ['/auth', '/account', '/login']
  * and no page can approve itself.
  */
 export const UNAPPROVED: readonly string[] = [
-  // Three shelves withdrawn as sets (owner call, 2026-08-05): commerce +
-  // fintech, cloud + infrastructure, and company + content. The site leads
-  // with the AI platform; everything here still answers on its URL and
-  // appears nowhere — no nav, no sitemap, no index. Deleting a line is the
-  // re-approval. The legal pages (/privacy, /terms, /cookies, /sms-opt-in)
-  // are deliberately NOT here: OAuth consent and compliance checks resolve
-  // them, and a site whose privacy policy is hidden fails both.
-  // ── commerce + fintech ──
-  '/billing',
-  '/blockchain',
-  '/calculator',
-  '/captable',
-  '/commerce',
-  '/defi',
-  '/fintech',
-  '/ledger',
-  '/payments',
-  '/risk',
-  '/treasury',
-  // ── cloud + infrastructure ──
-  '/analytics',
-  '/authz',
-  '/base',
-  '/cloud',
-  '/console',
-  '/dashboards',
-  '/database',
-  '/dataroom',
-  '/datastore',
-  '/dns',
-  '/docdb',
-  '/edge',
-  '/engine',
-  '/flow',
-  '/functions',
-  '/guard',
-  '/hsm',
-  '/iam',
-  '/identity',
-  '/idv',
-  '/ingress',
-  '/kms',
-  '/kv',
-  '/machines',
-  // Unlike the rest of this shelf, /mcp's page is not withdrawn — it ships with
-  // real copy. But the sites edge maps /mcp → the /v1/mcp API endpoint (308 →
-  // JSON), so the marketing page never answers at its own URL. Keep it out of
-  // sitemap.xml and noindex it rather than advertise a URL that redirects to
-  // JSON; the real fix is at the edge (stop shadowing /mcp), which is separate.
-  '/mcp',
-  '/metrics',
-  '/mq',
-  '/network',
-  '/node',
-  '/o11y',
-  '/operator',
-  '/platform',
-  '/pubsub',
-  '/realtime',
-  '/registry',
-  '/s3',
-  '/security',
-  '/sentinel',
-  '/sentry',
-  '/sign',
-  '/sql',
-  '/status',
-  '/storage',
-  '/stream',
-  '/telemetry',
-  '/tunnel',
-  '/visor',
-  // ── company + content ──
-  '/about',
-  '/blog',
-  '/brand',
-  '/careers',
-  '/contact',
-  '/contact-sales',
-  '/customers',
-  '/enterprise',
-  '/leadership',
-  '/learn',
-  '/philosophy',
-  '/press',
-  '/pricing',
-  '/products',
-  '/research',
-  '/research-access',
-  '/solutions',
-  '/startups',
-  '/support',
-  '/team',
+  // EMPTIED — owner approval, 2026-08-13. All 78 routes that were
+  // withheld here are now published: they answer on their own URL, they are in
+  // sitemap.xml, they carry no `noindex`, and the chrome links them.
+  //
+  // The list is kept rather than deleted because it is the MECHANISM, not the
+  // decision. It is how a route is withheld while its copy is written, and the
+  // gate below still holds whatever is in it in both directions — so the next
+  // unwritten page has somewhere to go, and does not need this file rebuilt.
+  //
+  // Withholding a route from the index also withholds it from the MENU: the
+  // header calls `policy()` through `shown()`, so Solutions, Pricing, Learn,
+  // Research and Support were absent from the nav for exactly this reason, not
+  // because nobody had added them.
 ]
 
 /**
