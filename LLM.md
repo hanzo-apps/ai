@@ -549,9 +549,15 @@ Three rules the page cost us before they were written down:
   puts `gpt-5`, `claude-opus-4.8`, `zen5` and `enso` all under `hanzo`, so
   reading the lab first drew the Hanzo H on every one of them. `markOf` takes
   the leading run of letters in the id first and falls back to the lab.
-- **`enso` and `zen` are NOT the same glyph.** Zen is the ensō left OPEN (the
-  gap sits where a Q's tail would go); Enso is the router that completes the
-  circle, so its ring is CLOSED. Geometry is `hanzo.app`'s verified pair.
+- **A family wears the mark of the lab that MAKES it.** Enso is ours, the ensō
+  CLOSED because the router completes the circle. Zen is Zoo Labs Foundation's,
+  which the hero copy already says, so it wears Zoo's venn like every other
+  maker here — `zen -> zoo` in OF. `@hanzo/logo` carries Hanzo's marks and
+  nobody else's; it once shipped a `ZEN_MARK` beside `ENSO_MARK`, which drew our
+  house glyph on someone else's models. The venn's disc is cut by an SVG
+  `<clipPath>` in USER units: a CSS `clip-path: circle(11.5px …)` measures the
+  rendered box, so it cuts at 96px and not at all at 18px.
+  `e2e/gates/marks.spec.ts` holds all of it.
 - **No chip.** Marks render bare at the current text colour. The predecessor
   painted a CSS mask inside a `rounded-lg` box, which clipped the corners off
   every square mark — the H worst of all. Every source declares
