@@ -69,8 +69,8 @@ export default function EnsoHero() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mx-auto mt-6 max-w-2xl text-lg text-neutral-300 sm:text-xl"
         >
-          Hanzo’s flagship AI — one model that orchestrates the world’s best models into a single
-          API to tackle complex, multi-step work. Available on Hanzo Cloud.
+          One model that reads the request and puts the right models on it — the frontier ones when
+          the work is hard, the fast ones when it isn’t. On Hanzo Cloud.
         </motion.p>
 
         <motion.div

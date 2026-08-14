@@ -30,15 +30,15 @@ const STEPS: Step[] = [
     n: '01',
     mark: <EnsoLogo size={22} className="text-white" />,
     title: 'Start with Enso',
-    body: 'Build on Hanzo’s frontier model — one OpenAI-compatible API to the world’s best models, orchestrated per task. Flash, Pro, and Ultra presets.',
+    body: 'Hanzo’s frontier model. It reads each request and puts the right models on it, through one OpenAI-compatible API. Three presets: Flash, Pro, and Ultra.',
     cta: 'Explore Enso',
     href: '/enso',
   },
   {
     n: '02',
     mark: <Blocks className="h-[22px] w-[22px] text-white" />,
-    title: 'Build & ship your app',
-    body: 'Go from idea to production in Hanzo App — the AI app builder. Wire up agents, data, and UI, then launch your agentic company.',
+    title: 'Build the app around it',
+    body: 'Describe what you want in Hanzo App and it writes the UI, the schema, the auth, and the API. Keep chatting to change it, or edit the code directly.',
     cta: 'Open hanzo.app',
     href: APP,
     external: true,
@@ -47,7 +47,7 @@ const STEPS: Step[] = [
     n: '03',
     mark: <HanzoLogo variant="white" size={22} />,
     title: 'Run it on Hanzo Cloud',
-    body: 'Ship on the AI cloud — Zen open models, Base backends, IAM, KMS, and vector search behind one API. Pay-as-you-go or self-host.',
+    body: 'Zen open models, Base backends, IAM, KMS, and vector search, behind one API. Pay for what you use, or run the same code on your own hardware.',
     cta: 'Explore Cloud',
     href: CLOUD,
     external: true,
@@ -71,9 +71,9 @@ export default function BuildStory() {
               below already say — the third time the page stated that triad,
               after the hero pills and these headings. A label that only
               restates its own section is not a label. */}
-          <h2 className="text-3xl font-bold text-white md:text-4xl">From frontier model to shipped product</h2>
+          <h2 className="text-3xl font-bold text-white md:text-4xl">The model, the app, and the cloud it runs on</h2>
           <p className="mt-4 text-lg text-neutral-400">
-            Start with the model, build your app, and run it on the cloud — one continuous path.
+            One login covers all three, and the API is the same one you build against locally.
           </p>
         </motion.div>
 

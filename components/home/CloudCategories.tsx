@@ -42,8 +42,8 @@ const CATEGORIES: CardItem[] = cloudCategories.map((c) => ({
 export default function CloudCategories() {
   return (
     <Section
-      title={`${capabilityCount} capabilities. One API.`}
-      lede={`Every capability is one route on api.hanzo.ai/v1 — ${capabilityCount} of them across ${categoryCount} categories. Open source, metered, and settled on-chain.`}
+      title="Everything else an app needs"
+      lede={`Databases, storage, identity, secrets, agents, payments. Each one is a route on api.hanzo.ai/v1 — ${capabilityCount} of them across ${categoryCount} categories, same key, same base URL. Open source, metered, and settled on-chain.`}
     >
       <CardGrid items={CATEGORIES} columns={2} />
     </Section>

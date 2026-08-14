@@ -8,9 +8,9 @@ import { ogImages, twitterImages } from '@/lib/constants/og'
 // live on cloud.hanzo.ai (the cloud-www image serves the /overview homepage at
 // root and the full export beneath it); the nav here deep-links to cloud.hanzo.ai.
 
-const TITLE = 'Hanzo — Chat, models, and the AI cloud'
+const TITLE = 'Hanzo — the open AI cloud'
 const DESCRIPTION =
-  'Ask Hanzo anything. Chat with open frontier models, build agents, and ship on the AI cloud — models, Base backends, IAM, KMS, and vector search behind one API.'
+  'Chat with frontier models, build agents, and run the services an app needs — models, Base backends, IAM, KMS, and vector search behind one API. The same code runs on your own machine.'
 
 export const metadata: Metadata = {
   title: TITLE,
