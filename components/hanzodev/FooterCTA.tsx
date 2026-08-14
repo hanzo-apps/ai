@@ -49,7 +49,7 @@ const FooterCTA = () => {
             <ArrowRight className="ml-2 h-5 w-5" />
           </Link>
           <a
-            href="https://marketplace.visualstudio.com/items?itemName=hanzo.hanzo-dev"
+            href="https://hanzo.sh"
             target="_blank"
             rel="noreferrer noopener"
             className="inline-flex items-center px-8 py-4 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-base text-foreground"

@@ -15,24 +15,12 @@ import {
 } from 'lucide-react'
 import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
+import { GetStarted } from '@/components/dev/GetStarted'
 
 const SH = 'https://hanzo.sh'
 const DOCS = 'https://docs.hanzo.ai/docs/dev'
 const GITHUB = 'https://github.com/hanzoai/dev'
 const CONSOLE = 'https://console.hanzo.ai'
-
-const INSTALL = `# Install Hanzo Dev
-curl -fsSL hanzo.sh | bash
-
-# ...or from your package manager
-npm install -g @hanzo/dev      # or: npx -y @hanzo/dev
-cargo install hanzo-dev
-
-# Open an AI coding session in the current repo
-hanzo dev
-
-# ...or hand it a task and let Auto Drive run it
-hanzo dev "add rate limiting to the /v1/chat endpoint"`
 
 export default function DevLanding() {
   return (
@@ -71,15 +59,11 @@ export default function DevLanding() {
             },
           ],
         }}
-        code={{
-          head: { eyebrow: 'Get started', title: 'Open a terminal' },
-          lang: 'bash',
-          source: INSTALL,
-          ctas: [
-            { label: 'Read the docs', href: DOCS, icon: Rocket },
-            { label: 'View on GitHub', href: GITHUB },
-          ],
-        }}
+        /* No `code` block. There is ONE place this page says how to install,
+           and it is <GetStarted/> below — which knows the reader's platform,
+           where a static snippet listing curl AND npm AND cargo asks every
+           reader to work out which line is theirs and is wrong for four of the
+           five machines that read it. */
         features={{
           eyebrow: 'Capabilities',
           title: 'What you get',
@@ -102,7 +86,9 @@ export default function DevLanding() {
             { label: 'GitHub', href: GITHUB },
           ],
         }}
-      />
+      >
+        <GetStarted />
+      </ProductLanding>
       <ProductFooter slug="dev" name="Dev" />
     </>
   )

@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Monitor, Download, ExternalLink } from "lucide-react";
+import { X, Monitor, Download } from "lucide-react";
+import { current, INSTALL, type Platform } from "@/lib/platform";
 
 const STORAGE_KEY = "hanzo-desktop-banner-dismissed";
 
@@ -12,15 +13,13 @@ interface DesktopAppBannerProps {
 
 const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isMac, setIsMac] = useState(false);
+  const [platform, setPlatform] = useState<Platform | null>(null);
 
   useEffect(() => {
     const dismissed = localStorage.getItem(STORAGE_KEY);
     if (dismissed) return;
 
-    const platform = navigator.platform.toLowerCase();
-    const isMacOS = platform.includes("mac");
-    setIsMac(isMacOS);
+    setPlatform(current());
 
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -34,9 +33,11 @@ const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
     localStorage.setItem(STORAGE_KEY, "true");
   };
 
-  const downloadUrl = isMac
-    ? "https://github.com/hanzoai/dev/releases/latest/download/Hanzo-Dev-darwin-arm64.dmg"
-    : "https://github.com/hanzoai/dev/releases";
+  // ONE detector, ONE table of what each platform actually gets. This read
+  // `navigator.platform` (deprecated), knew only Mac-versus-everything, and
+  // pointed at a `.dmg` no release has ever carried — measured 404.
+  const install = platform ? INSTALL[platform] : null;
+  const downloadUrl = install?.href ?? "https://github.com/hanzoai/dev/releases/latest";
 
   if (variant === "inline") {
     return (
@@ -70,7 +71,7 @@ const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:bg-accent transition-colors"
                 >
                   <Download className="w-4 h-4" />
-                  {isMac ? "Download for Mac" : "Download"}
+                  {install?.action ?? "Download"}
                 </a>
                 <button
                   onClick={handleDismiss}
@@ -128,7 +129,7 @@ const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
                   className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-accent transition-colors"
                 >
                   <Download className="w-4 h-4" />
-                  {isMac ? "Download for Mac" : "Download"}
+                  {install?.action ?? "Download"}
                 </a>
                 <a
                   href="/dev"
@@ -139,14 +140,7 @@ const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
               </div>
 
               <p className="mt-3 text-xs text-muted-foreground flex items-center gap-1">
-                {isMac ? (
-                  <>Apple Silicon & Intel supported</>
-                ) : (
-                  <>
-                    <ExternalLink className="w-3 h-3" />
-                    Also available for Windows & Linux
-                  </>
-                )}
+                {install?.note ?? "macOS, Windows and Linux builds in every release."}
               </p>
             </div>
           </div>
