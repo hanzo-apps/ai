@@ -1,4 +1,4 @@
-// Product-page integrity tests for the 10-category cloud taxonomy.
+// Product-page integrity tests for the cloud taxonomy.
 //
 //   - Every leaf in the products mega-menu must serve a real page
 //     (200 + non-empty body) — bespoke product pages AND generated
@@ -13,31 +13,25 @@
 //
 // CI / live smoke: BASE_URL=https://hanzo.ai pnpm exec playwright test
 //
-// LEAF_PATHS mirrors lib/data/cloud-primitives.ts (the single source of truth).
-// Keep them in lockstep.
+// The paths are READ from the taxonomy, not mirrored beside it. They used to be
+// a hand-kept copy told to stay "in lockstep", and it had drifted to four pages
+// that no longer exist (/cloud/rerank, /cloud/jobs, /cloud/cost, /engine) and a
+// /blockchain section the taxonomy dropped — so the suite was testing a site
+// nobody was shipping while the real leaves went unchecked. A list that has to
+// be kept in lockstep by hand is a list that will not be.
 
 import { test, expect } from '@playwright/test'
+import { cloudCategories } from '../lib/data/cloud-primitives'
 
+// Off-property leaves are another host's to keep alive, and probing them here
+// would make this suite red on somebody else's outage.
 const LEAF_PATHS = [
-  // AI
-  '/models', '/agents', '/engine', '/cloud/embeddings', '/cloud/rerank', '/cloud/evals',
-  // Compute
-  '/cloud/gpus', '/machines', '/functions', '/edge', '/cloud/jobs',
-  // Data
-  '/vector', '/sql', '/kv', '/storage', '/datastore', '/docdb',
-  // Network
-  '/gateway', '/network', '/dns', '/ingress',   // Security
-  '/iam', '/authz', '/kms', '/hsm', '/cloud/secrets', '/cloud/audit',
-  // Dev
-  '/cli', '/playground', '/code', '/desktop',
-  // Deploy
-  '/platform', '/cloud/environments', '/cloud/builds', '/registry', '/cloud/releases', '/cloud/pipelines',
-  // Observe
-  '/cloud/logs', '/metrics', '/telemetry', '/dashboards', '/sentry', '/cloud/cost',
-  // Chain
-  '/blockchain/wallets', '/blockchain/tokens', '/blockchain/indexer',
-  '/blockchain/oracle',   // Apps
-  '/chat', '/bot', '/search', '/crawl', '/studio', '/console',
+  ...new Set(
+    cloudCategories
+      .flatMap((c) => c.items)
+      .map((i) => i.href)
+      .filter((h) => h.startsWith('/')),
+  ),
 ]
 
 test.describe('every mega-menu leaf serves a real page', () => {
@@ -53,7 +47,7 @@ test.describe('every mega-menu leaf serves a real page', () => {
 
 test.describe('leaf pages have unique hero content', () => {
   test('every leaf page has a unique h1 + body signature', async ({ page }) => {
-    test.setTimeout(180000) // 60 pages × ~1.5s
+    test.setTimeout(LEAF_PATHS.length * 3000) // ~1.5s a page, doubled for a cold cache
     const seenH1 = new Map<string, string>()
     const seenSig = new Map<string, string>()
     const conflicts: string[] = []

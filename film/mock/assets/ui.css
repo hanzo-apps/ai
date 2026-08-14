@@ -1,0 +1,411 @@
+/* Shared surface for every product mockup.
+   Geometry only: no prose, no product names, no headlines.
+   Per-product delta arrives as CSS custom properties from composition variables. */
+
+/* The house mono, vendored so the render never reaches the network and the
+   three glyphs this film draws are the same shape the product uses. */
+@font-face {
+  font-family: "Geist Mono";
+  src: url("assets/geist-mono.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: block;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: #06070a;
+  font-family: system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  --ink: #e7ebf3;
+  --dim: #7c8698;
+  --line: #1d2330;
+  --panel: #0e1117;
+  --panel-2: #131822;
+  --radius: 20px;
+}
+
+/* ---- backdrop -------------------------------------------------------- */
+
+.stage {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 50% -10%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%),
+    radial-gradient(90% 70% at 12% 110%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 62%),
+    #06070a;
+}
+
+.grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* ---- app window ------------------------------------------------------ */
+
+.app {
+  position: absolute;
+  left: 140px;
+  top: 96px;
+  width: 1640px;
+  height: 888px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 40px 120px -20px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+    0 -1px 60px -30px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+/* title bar — traffic lights are drawn, never typed */
+.bar {
+  position: relative;
+  height: 52px;
+  flex: 0 0 52px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel-2);
+  display: flex;
+  align-items: center;
+  padding: 0 22px;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #2b3243;
+}
+
+.dot.a {
+  background: color-mix(in srgb, var(--accent) 78%, #4b5468);
+}
+
+/* an address/segment pill: geometry, not words */
+.pill {
+  margin-left: 20px;
+  height: 24px;
+  border-radius: 7px;
+  background: #171d29;
+  border: 1px solid #222a39;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.side {
+  flex: 0 0 232px;
+  border-right: 1px solid var(--line);
+  background: var(--panel-2);
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- skeleton primitives --------------------------------------------- */
+
+/* .s is a sized block so transforms are never a no-op */
+.s {
+  display: block;
+  height: 10px;
+  border-radius: 5px;
+  background: #2b3446;
+}
+
+.s.hi {
+  background: #38445c;
+}
+
+.s.lo {
+  background: #222a39;
+}
+
+.s.on {
+  background: color-mix(in srgb, var(--accent) 78%, #333d52);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 8px;
+}
+
+.nav.sel {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.ico {
+  flex: 0 0 14px;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: #313a4d;
+}
+
+.nav.sel .ico {
+  background: var(--accent);
+}
+
+/* status chip — colour carries the meaning, no label */
+.chip {
+  display: block;
+  width: 54px;
+  height: 18px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.chip.ok {
+  background: rgba(34, 197, 94, 0.16);
+  border-color: rgba(34, 197, 94, 0.45);
+}
+
+.chip.warn {
+  background: rgba(245, 158, 11, 0.16);
+  border-color: rgba(245, 158, 11, 0.45);
+}
+
+.head {
+  height: 46px;
+  flex: 0 0 46px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 0 26px;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+/* ---- terminal --------------------------------------------------------- */
+
+.term {
+  flex: 1;
+  padding: 26px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: "Geist Mono", ui-monospace, monospace;
+  min-height: 0;
+}
+
+.ln {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  height: 24px;
+}
+
+.sig {
+  display: block;
+  width: 15px;
+  flex: 0 0 15px;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--accent);
+}
+
+.sig.ok { color: #22c55e; }
+.sig.mut { color: #47536e; }
+
+.caret {
+  display: block;
+  width: 10px;
+  height: 19px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* ---- dashboard -------------------------------------------------------- */
+
+.tiles {
+  display: flex;
+  gap: 20px;
+  padding: 26px 28px 8px;
+}
+
+.tile {
+  flex: 1;
+  height: 132px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel-2);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.meter {
+  display: block;
+  height: 8px;
+  width: 100%;
+  border-radius: 4px;
+  background: #1c2331;
+  overflow: hidden;
+}
+
+.meter > i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+  transform-origin: left center;
+}
+
+.plot {
+  flex: 1;
+  margin: 12px 28px 26px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel-2);
+  position: relative;
+  overflow: hidden;
+}
+
+.plot svg { display: block; width: 100%; height: 100%; }
+
+/* ---- table ------------------------------------------------------------ */
+
+.rows { flex: 1; padding: 6px 26px; display: flex; flex-direction: column; }
+
+.tr {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  height: 46px;
+  border-bottom: 1px solid #161c27;
+}
+
+.tr > .s { flex: 0 0 auto; }
+.tr > .grow { flex: 1; }
+
+/* ---- chat ------------------------------------------------------------- */
+
+.thread {
+  flex: 1;
+  padding: 26px 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+.bub {
+  max-width: 62%;
+  border-radius: 16px;
+  padding: 15px 18px;
+  background: #182031;
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.bub .s { background: #3a465e; }
+.bub.me .s { background: rgba(255, 255, 255, 0.38); }
+
+.bub.me {
+  align-self: flex-end;
+  background: color-mix(in srgb, var(--accent) 20%, #182031);
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+/* ---- editor ----------------------------------------------------------- */
+
+.code {
+  flex: 1;
+  padding: 24px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  font-family: "Geist Mono", ui-monospace, monospace;
+}
+
+.cl { display: flex; align-items: center; gap: 12px; height: 22px; }
+
+.gut {
+  display: block;
+  width: 26px;
+  flex: 0 0 26px;
+  height: 8px;
+  border-radius: 4px;
+  background: #1e2635;
+}
+
+/* ---- graph ------------------------------------------------------------ */
+
+.canvas { flex: 1; position: relative; }
+.canvas svg { display: block; width: 100%; height: 100%; }
+
+/* ---- grid ------------------------------------------------------------- */
+
+.cards {
+  flex: 1;
+  padding: 26px 28px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  align-content: start;
+}
+
+.card {
+  height: 176px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel-2);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.thumb {
+  height: 78px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 34%, #1b2231), #1b2231);
+}

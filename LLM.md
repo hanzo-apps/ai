@@ -42,17 +42,40 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
   `HANZO_DEPLOY_TOKEN` (forge org secret, mirrored from KMS `deploy/`). The 202
   hands back a prefix-scoped 30-minute presigned POST grant, so CI holds no bucket
   key — never add `SITES_S3_*`.
+
+  **The gates run BEFORE the upload, so a red gate freezes the SITE.** They are
+  steps in the publishing job, which is the placement that makes "nothing ships
+  ungated" true — and the cost is that a failing gate is indistinguishable from a
+  broken deploy unless you look. It happened: four gates went red (111 pages
+  inheriting the root layout's title, six redirect shells offered for indexing)
+  and hanzo.ai published nothing for a day while pushes kept succeeding.
+
+  Read the STEPS, never hunt for the log — logs live in object storage, not on
+  the git pod:
+
+      SELECT s."index", s.name,
+             CASE s.status WHEN 1 THEN 'success' WHEN 2 THEN 'failure'
+                           WHEN 4 THEN 'skipped' ELSE s.status::text END,
+             (s.stopped - s.started) AS secs
+        FROM action_task_step s
+       WHERE s.task_id = (SELECT t.id FROM action_task t WHERE t.job_id = <job>)
+       ORDER BY s."index";
+
+  A step's DURATION is the diagnosis. `Publish to the Sites plane | failure | 1s`
+  cannot be an upload of 850 pages; `Gates | failure | 92s` is a real run that
+  found something. And a later step reading `skipped` HIDES its own failure —
+  fixing the gates is what revealed that the publish had been broken all along.
 - **The GitHub repo is `hanzo-apps/ai`.** `hanzoai/hanzo.ai` only redirects there.
   Push to the real name — a redirect is why `gh` reports runs under one repo while
   you push to another. Push to `hanzogit` too: that remote is what the forge
   builds from.
-- **Not yet the live origin.** The apex still resolves to Cloudflare Pages, so the
-  Sites deploy publishes to `hanzo-ai.hanzo.app` and hanzo.ai keeps serving its
-  last Pages build until DNS moves. Two things gate the cutover, both outside this
-  repo: point `hanzo.ai` / `www.hanzo.ai` at the sites edge, and roll out the
-  cloud build carrying the `<rel>.html` candidate in `apps/sites` (without it the
-  edge finds `index.html` and 404s every other route, because `output: export`
-  writes `pricing.html`, not `pricing/index.html`).
+- **The apex IS the live origin.** `hanzo.ai` and `hanzo-ai.hanzo.app` serve the
+  same Sites-plane build; the DNS cutover this file used to gate on has happened.
+  Measured: a green `deploy.yml` run, and both hosts immediately serving a header
+  menu that existed only in that commit — which is the only honest check, because
+  a route that predates the build proves nothing. Do NOT read `server: cloudflare`
+  as evidence otherwise: Cloudflare fronts the sites edge too, so that header is
+  byte-identical on both hosts and distinguishes nothing.
 
 ## Two faces, one export
 
@@ -194,7 +217,8 @@ copy is how hanzo.ai drifted from console/chat/app.
 
 `components/webgl/PointGlobe.tsx` is the site's only WebGL motif — raw GL and
 inline GLSL, no dependency, code-split behind `next/dynamic({ ssr:false })`.
-Three consumers: the cloud hero, `ChatHero`, `HanzoNetworkSection`.
+Two consumers: `ChatHero` and `HanzoNetworkSection`. It was three — the cloud
+hero is a film now (below), and a page gets ONE picture, not two.
 
 The chrome stays monochrome. What carries hue is CONVERSATIONS — great-circle
 paths between agents, spawned and retired continuously, each with a travelling
@@ -221,150 +245,286 @@ a fixed camera distance) and owes nothing to how wide the canvas is. Fitting the
 canvas to a wide, short hero therefore yields a small globe adrift in black —
 overflow the section's height instead.
 
+## A hero film is assets, not code
+
+`cloud.hanzo.ai`'s fold is a film of the console — the real chrome, the real
+categories, the model count read from `lib/data/pricing.json`, the Playground
+answering a prompt — and it ends on that console running, not on a wordmark the
+visitor already sees in the header. The badge, headline, paragraph and the
+separate `ProductShot` still it replaced are GONE rather than laid over it: the
+film says all four, and what stays beside it is only what a film cannot do —
+the three actions and a command to copy.
+
+Two homes, and they do not mix:
+
+| | |
+|---|---|
+| **`hanzoai/frames`** | the renderer — our fork of the OSS local HTML→mp4 renderer. Headless Chrome, no keys, no service. |
+| **`@hanzo/frame`** | the player — the ONE `<Frame>` primitive every Hanzo surface embeds. `hanzoai/frame`. |
+
+`<Frame src="/cloud-hero" alt="…" />` is the whole call site. Two props, no
+options: `src` is the shared PREFIX of six rendered files and the names are the
+contract — `-tall.mp4` / `-wide.mp4` and a `-first` + `-last` still for each.
+The component picks the master by ORIENTATION (a 768×1024 tablet is portrait,
+and the wide master would lose 555px off each side), serves the still from
+`<picture>` so it is right in SSR with no JavaScript, gives a reduced-motion
+viewer the FINAL frame — the finished product — and creates no `<video>` at all
+for them, and never loops.
+
+**To give another page a film:** copy `film/cloud`, edit the copy's `film.mjs`,
+`make`, then add one `<Frame>`. There is no per-page component and nothing to
+register. `film/cloud/film.mjs` writes BOTH masters from one source, because a
+phone is 0.56 wide-to-tall and a laptop 1.78 and hand-keeping two HTML files
+drifts the first time a line of copy changes; `make` composes, renders, cuts the
+stills with ffmpeg and publishes all six into `public/`. `tall/` and `wide/` are
+generated and gitignored — the generator and `assets/` are the source.
+
+House rules, learned the expensive way:
+
+- **Film the real product.** Real chrome, real copy, real numbers. The film
+  reads its model count from the same snapshot every price on this site comes
+  from, so it cannot disagree with the page around it — and
+  `scripts/audit-model-counts.mjs` already fails the build on a hand-typed one.
+  No invented metric: the Playground rail shows CONTROLS (model, temperature,
+  max tokens, stream), never a throughput or a cost this film made up.
+- **Geist and Geist Mono only** — `@hanzo/design` allows no third face. True
+  black. The dimmest grey that passes `hyperframes check`'s WCAG AA pass is
+  `#777`; `#6e6e6e` fails at 4:1.
+- **Mind the cover crop.** A 1080-wide master on a 390×844 phone loses ~96px
+  off EACH side, so nothing that matters may sit outside the middle 862px.
+- **End on the product**, held still for the last few seconds. That final frame
+  is what every reduced-motion viewer is served, so it has to look used.
+- **Give the `<h1>` a new home in the same commit.** Taking the copy off the
+  fold takes the heading with it, and a film cannot hold one — its message is
+  the `alt`. cloud.hanzo.ai shipped a live page with ZERO `<h1>` this way. The
+  heading moves to the first section that has words, and stays VISIBLE: a
+  heading only a screen reader can reach is the message said twice, once badly.
+  Nothing catches this — the export is valid, the build is green, and `<h1>`
+  count is not one of the four things `e2e/gates` asserts. Check it by hand:
+  `grep -c '<h1' out/<page>.html` must be exactly 1.
+
+**Still to film.** Each of these takes its own `film/<name>` and one `<Frame>`:
+the ten category pages `/products/{ai,compute,data,network,security,dev,platform,observe,web3,apps}`,
+and the 25 generated `/cloud/<slug>` primitive pages. None of them has a film
+yet, and none needs new code to get one.
+
 ## Key Files
 
 ```
 app/(marketing)/<slug>/page.tsx   # Flat product pages — /dev, /chat, /vector, etc.
-app/(marketing)/blockchain/<x>/   # Web3 pages
-lib/constants/
-  navigation-data.ts              # Single source of truth for header + footer menus
-  brand.ts                        # Brand tokens
-components/navigation/
-  DesktopNav.tsx                  # Header layout (Meet Hanzo / Products / Learn / Docs / Pricing)
-  products-menu/index.tsx         # Reads productsNav from navigation-data
-  resources-menu/                 # Reads resourcesNav from navigation-data
+app/(marketing)/cloud/[slug]/     # Generated primitive overviews, from cloudPrimitiveSlugs
+app/(marketing)/products/[categoryId]/   # Category landings, from categorySlugs
+lib/data/
+  catalog.json                    # The committed product snapshot (written by prebuild)
+  cloud-primitives.ts             # Reads it; owns the prose and nothing else
+scripts/
+  catalog.mjs                     # The ONE probe — catalog + served document
+  sync-catalog.mjs                # prebuild: fetch, gate on reachability, write the snapshot
+  audit-catalog.mjs               # hanzo.yml gate: the drift ratchet
+components/home/shell.tsx         # The header/footer chrome; PRODUCTS_TAXONOMY for the mega-menu
+lib/constants/brand.ts            # Brand tokens
 ```
 
-## Header Menu (canonical)
+`lib/constants/navigation-data.ts` still derives `productsNav` from the taxonomy
+but nothing imports it — the chrome is `@hanzogui/shell` driven by
+`components/home/shell.tsx`. `components/navigation/` does not exist.
 
-Single source: **`lib/data/cloud-primitives.ts`** → `cloudCategories`. It drives
-`lib/constants/navigation-data.ts` (`productsNav`), the mega-menu, the
-`/products/<slug>` category landing pages, and the generated `/cloud/[slug]`
-overview pages — so the nav, the pages, and the routes can never drift.
+## Header Menu (canonical) — hydrated from the commerce catalog
+
+**WHICH products exist is commerce's answer, not this repo's.** The chain runs:
+
+    commerce catalog          scripts/sync-catalog.mjs        lib/data/catalog.json
+    /v1/commerce/catalog  ->  reachability + href resolve  ->  the committed snapshot
+                                        |                              |
+                              /v1/openapi.json (the gate)     lib/data/cloud-primitives.ts
+                                                                       |
+                                              mega-menu · /products/<id> · /cloud/<slug> · showcases
+
+`prebuild` runs the sync, so the snapshot is re-fetched on every build or it is
+not shipped at all. It CANNOT be a browser fetch: `output: 'export'` ships static
+HTML and the API pins `access-control-allow-origin` to `https://hanzo.ai`
+exactly, so a preview deploy or a local render would get nothing and the menu
+would be empty.
+
+**Reachability is the inclusion gate.** A product is written to the snapshot iff
+`/v1/openapi.json` carries its `apiPath` — exactly, or any path beneath it —
+which is what "this product exists" means, since the document is a projection of
+the routers cloud mounted. A product marked `kind: "client"` (the CLI, the SDKs,
+the API reference) is judged instead by whether this repo has a page for it,
+because it consumes the API and no `apiPath` can ever be right for it. So the
+menu is dynamic AND structurally unable to advertise a 404.
+
+Measured 2026-08-13: **84 advertised · 53 rendered · 31 excluded**
+(13 renamed · 7 client · 1 external · 10 absent — see the audit below).
+
+**The href is resolved against the filesystem by the same sync**: a bespoke page
+where this repo publishes one (28 of the 53), `/cloud/<slug>` otherwise (25),
+and `cloudPrimitiveSlugs` builds a page for every one of the latter — so a leaf
+cannot be a dead link in either branch. Read off `app/` rather than declared
+beside the product, because a table of "which routes have a page" is a second
+copy of what `app/` already says, and the copy is what goes stale.
+
+**The split is by kind of fact.** The catalog owns membership, name, slug,
+order, icon, docs and repo. `cloud-primitives.ts` owns the PROSE — a category's
+tagline, a leaf's blurb, and the long-form copy a generated overview renders.
+A product with no prose still renders (as its name plus the facts the catalog
+states); prose for a product the catalog dropped renders nowhere. Neither can
+resurrect a product or bury one, which is what makes `COPY` a copy deck rather
+than a second taxonomy.
 
 **Top level**: Meet Hanzo · Products · Learn · Docs · Pricing
 
-**Products dropdown** — 10 cloud-primitive categories (two rows of five),
-positioned "Open AI Cloud — GCP-compatible. Open source. On-chain.":
+**Products dropdown** — the catalog's ten categories, two rows of five. Their
+membership is measured per build and is NOT listed here: a table of leaves in a
+markdown file is exactly the hand list this change deleted. Run
+`pnpm sync:catalog` and read `lib/data/catalog.json`.
 
-| Category | `/products/<slug>` | Items |
-|---|---|---|
-| AI       | `/products/ai`       | Models, Agents, Inference, Fine-tuning, Embeddings, Evals |
-| Compute  | `/products/compute`  | GPUs, Machines, Containers, Functions, Edge, Jobs |
-| Data     | `/products/data`     | Vector, SQL, KV, Object Storage, Datastore, DocDB |
-| Network  | `/products/network`  | Gateway, VPC, DNS, CDN, Load Balancer, Service Mesh |
-| Security | `/products/security` | IAM, Authz, KMS, HSM, Secrets, Audit |
-| Dev      | `/products/dev`      | CLI, SDKs, API, Playground, IDE, Desktop |
-| Platform | `/products/platform` | Projects, Environments, Builds, Registry, Releases, Pipelines |
-| Observe  | `/products/observe`  | Logs, Metrics, Traces, Dashboards, Alerts, Cost |
-| Web3     | `/products/web3`     | Node, Data, Wallets, Explorer, MPC, Rollups, Webhooks, Chains → web3.hanzo.ai |
-| Apps     | `/products/apps`     | Chat, Bot, Search, Crawl, Studio, Console |
+| Category | `/products/<id>` |
+|---|---|
+| AI · Compute · Data · Network · Security | `/products/{ai,compute,data,network,security}` |
+| Dev · Platform · Observe · Web3 · Apps | `/products/{dev,platform,observe,web3,apps}` |
 
-- Each mega-menu **category header links to its `/products/<slug>` page**
+- Each mega-menu **category header links to its `/products/<id>` page**
   (`app/(marketing)/products/[categoryId]/page.tsx`, generated from
   `categorySlugs`); the page is `components/cloud/CloudCategoryOverview.tsx`.
-- **Web3 = web3.hanzo.ai**, and the leaves are the eight products that host
-  actually serves — each `href` a page measured live at 200, each blurb that
-  page's own sentence. It used to be nine Lux products behind a "Lux Network"
-  badge, all nine linking to `lux.cloud/services`: another company's name on a
-  Hanzo host, advertising nine capabilities Hanzo does not serve. White-label
-  runs BOTH ways — Lux sells the same stack as Lux at lux.cloud, and neither
-  host says the other's name. There is no `brand` field on the taxonomy any
-  more, and no `external` flag: a leaf being off-property is READ off its
-  absolute href (`offProperty()` in `lib/data/cloud-primitives.ts`), because a
-  flag saying what a URL already says is a second copy of one fact.
+- The category id is a VALUE the catalog states, not a slugify of the label.
+  `categorySlug()` is gone: computing `'ai'` from `'AI'` was deriving something
+  we are already told.
+- **Counts appear nowhere in copy.** `capabilityCount` and `categoryCount` are
+  deleted (they had no call sites left), the mega-menu's handoff reads
+  "All Observe →" rather than "All 10 →", and the category cards dropped their
+  leaf-count badge. Membership is now whatever answered at build time, so a
+  number on the page is a fact about the API's morning.
 - Product ↔ `/v1/<svc>` ↔ plan/usage mapping: **`docs/product-service-map.md`**
   (reconciled against `~/work/hanzo/cloud/subsystems/subsystems.go`).
 
-> `lib/data/product-taxonomy.ts` is a SEPARATE, legacy catalog still used by
-> `components/products/ProductPageTemplate` (the ~80 bespoke `/<slug>` product
-> pages) and the orphaned `solutions/` pages — it is NOT the products-nav source.
+> There is no second catalog. `lib/data/product-taxonomy.ts` held a nine-id
+> taxonomy (`data`, `compute`, `async`, `ml`, `observability`, `platform`,
+> `apps`, `growth`, `cx`) that no page rendered — it, and the three components
+> that read it, are deleted. The bespoke `/<slug>` product pages import
+> `components/products/ProductFooter`, not a template built on that list.
 
-## "60 capabilities" is a layout constant, and 32 of what we sell does not answer
+### What hydration cost, and who fixes it
 
-`capabilityCount` (`lib/data/cloud-primitives.ts:485`) is derived, not typed —
-but it derives from `rawCategories` (`:168`), which is 10 categories of exactly
-6. The interface says so out loud: `CloudCategory.items` is commented *"Exactly
-six primary primitives."* So 60 is the product of a mega-menu that wants two
-rows of five with six leaves each. It is a **layout constraint wearing the
-costume of a measurement**, and it is not the number of anything we serve.
+The hand list and the catalog had drifted far enough that reconciling them is a
+visible content change, not a refactor. **28 destinations left the products nav
+and 19 arrived.** Four of the departures (`/cloud/{cost,finetune,jobs,rerank}`)
+were the known orphans the old agreement test allowlisted — they described
+products commerce does not sell, and they are gone for that reason.
+
+The rest leave because **commerce's catalog does not carry them**: `/analytics`,
+`/automations`, `/captable`, `/code`, `/commerce`, `/dataroom`, `/guard`,
+`/ingress`, `/insights`, `/ledger`, `/mq`, `/payments`, `/pricing`, `/pubsub`,
+`/sentinel`, `/sign`, `/solutions/rag`, `/team`, `/telemetry`, `/tunnel`, and
+the eight `web3.hanzo.ai` leaves. **Every one of those pages still builds,
+answers on its URL and sits in sitemap.xml** — only the products menu stopped
+advertising them. Whole "Payments" category included: commerce files `billing`
+under Observe and has no payments category at all, which is why the agreement
+test was red in both directions before this.
+
+**None of that is fixable here.** A product belongs in the menu when commerce
+carries it; the repair is a row in the catalog, and this site will pick it up on
+the next build. The reverse also holds — `/dashboards`, `/hsm`, `vpc` and the
+other 12 renamed/absent rows come back the moment the catalog is corrected, with
+no change to this repo.
+
+## The audit: 31 of what we advertise does not answer
+
+`scripts/audit-catalog.mjs` gates the build on the catalog drifting FURTHER from
+what is served. It no longer stands between a reader and a 404 — the sync
+already drops the unreachable — so what it now protects is the MENU: every entry
+on its ratchet is a product the site would otherwise be selling.
 
 There are five lists, and no two agree:
 
 | List | Where | Count |
 |---|---|---|
-| Site taxonomy | `lib/data/cloud-primitives.ts` | 10 categories × 6 = **60** |
-| Legacy taxonomy | `lib/data/product-taxonomy.ts` | **9** categories |
+| Site taxonomy | `lib/data/catalog.json` | **53** — the catalog, filtered to what answers |
 | Docs prose | `hanzo-docs/docs` (7 files) | **67** capabilities / 8 movements |
 | Curation manifest | `hanzoai/openapi` `capabilities.yaml` | 8 domains over **180** tags |
 | Commerce catalog | `GET /v1/commerce/catalog?brand=hanzo` | **84** products |
-| **The served document** | `GET /v1/openapi.json` | **1,679 paths · 2,307 operations · 179 tags** |
+| **The served document** | `GET /v1/openapi.json` | **1,809 paths** |
 
-Only the last one is authority: it is a projection of the routers cloud
-mounted, so a path in it exists by construction. Everything above it is
-editorial.
+Only the last one is authority: a path in it exists by construction. Everything
+above it is editorial — including the catalog, which is why the site reads the
+two together rather than either alone.
 
-Measured 2026-08-03, `node scripts/audit-catalog.mjs`:
+Measured 2026-08-13, `node scripts/audit-catalog.mjs`:
 
 ```
-84 products advertised · 52 answer (62%) · 32 do not
-  renamed 13 · client 7 · external 1 · absent 11
+84 products advertised · 53 answer (63%) · 31 do not
+  renamed 13 · client 7 · external 1 · absent 10
 ```
 
-**Every one of those 32 is marked `"status": "enabled"` and every one is a live
+**Every one of those 31 is marked `"status": "enabled"` and every one is a live
 404.** Four different problems were hiding in one number:
 
 - **renamed (13)** — the capability is real, the `apiPath` is misspelt. `vpc`
   vs `/v1/vpcs`, `wallet` vs `/v1/wallets`, `alerts` vs `/v1/o11y/alerts`,
   `indexer` vs `/v1/indexers`, `zero-trust` vs `/v1/networks`. Pure catalog
-  bugs, cheapest thing on the list.
+  bugs, cheapest thing on the list, and each one is a menu leaf we are not
+  selling until it lands.
 - **client (7)** — `cli`, `sdks`, `ide`, `desktop`, `console`, `studio`, and
   `api` itself. These CONSUME the API; no `apiPath` can ever be right. They
-  need a `kind` field, not a path. A category error, not a gap.
+  need a `kind` field, not a path. A category error, not a gap. The sync
+  already honours `kind: "client"`: six of the seven have a page here and light
+  up the day commerce sets the field — `ide` does not, and stays out.
 - **external (1)** — `nodes` is `luxfi/node`, served by Lux, not api.hanzo.ai.
-- **absent (11)** — advertised, enabled, and nothing serves it. This is the
+- **absent (10)** — advertised, enabled, and nothing serves it. This is the
   only bucket that is a commercial problem and the only one no code change in
-  this repo can fix: `edge`, `cdn`, `hsm`, `mpc`, `settlement`, `tokens`,
+  this repo can fix: `edge`, `cdn`, `hsm`, `mpc`, `settlement`,
   `attestations`, `datasets`, `scores`, `score-configs`, `annotation-queues`.
+  (`tokens` left this list — cloud serves `/v1/tokens/{chain}/{address}` now,
+  and the ratchet demanded its own line back, which is the whole point of it.)
 
 Three of those have real repos that were simply never mounted into cloud —
 `hanzoai/edge` (Rust, 13 crates), `hanzoai/hsm` (a Go library that belongs
 *behind* `/v1/kms`, not beside it), `hanzoai/cdn` (our own asset bucket, never
 a tenant product). Shipping them is a mount, not a build.
 
-### The chain, and the link that was missing
+### The chain, and where each link is held
 
     site taxonomy  ->  commerce catalog  ->  served document
-    (cloud-primitives)   (/v1/commerce/catalog)   (/v1/openapi.json)
-    \___ e2e/catalog-agreement.spec.ts ___/
+    (catalog.json)     (/v1/commerce/catalog)   (/v1/openapi.json)
+    \___ built BY sync-catalog.mjs ___/
+    \___________ e2e/catalog-agreement.spec.ts ___________/
                                      \___ scripts/audit-catalog.mjs ___/
 
-The first link was already asserted and passes. The second was asserted by
-nothing, which is exactly where the drift accumulated. `scripts/audit-catalog.mjs`
-closes it, wired as the `catalog answers` gate in `hanzo.yml`.
+The first link is no longer an agreement between two hand lists — it is a
+derivation, so it cannot be got wrong. What replaced that question is the one a
+build-time snapshot actually raises: **is the snapshot still true?** A committed
+file goes stale silently, and the whole point of it is that the site deploys
+without the API — exactly the condition under which nobody would notice. So
+`e2e/catalog-agreement.spec.ts` reads the LIVE catalog and the LIVE document and
+holds the snapshot to both, re-measuring the inclusion gate rather than trusting
+it from build time.
 
-Same two rules as `sync-pricing.mjs`, for the same reasons: it **never fails the
-build on an unreachable API** (a marketing page must not need the API up to
-deploy — no network, no verdict, exit 0), and its `KNOWN_UNSERVED` ratchet **may
-only shrink**. A product that fails and is not on the list fails the run; an
-entry that starts answering fails the run too, so a fix is forced to delete its
-own exemption. Do not add entries to make it pass.
+`scripts/catalog.mjs` is the ONE probe, imported by the sync and the audit. The
+predicate — does the document carry this apiPath — is written once, because a
+second copy is how the gate comes to say a product is missing while the menu
+still advertises it.
 
-### Do not hydrate the menu from the catalog yet
+Three rules make the sync safe to run unattended, the same three as
+`sync-pricing.mjs`, and all four refusal paths are measured rather than
+reasoned about:
 
-`cloud-primitives.ts:24-27` anticipates replacing `rawCategories` with a live
-read of `/v1/commerce/catalog`. **That swap would make the site worse today**:
-it renders 84 products of which 32 are 404s, against the current 60 that are at
-least hand-checked. Hydration is correct only once `audit-catalog.mjs` reports
-zero `renamed` and the `client` rows carry a `kind` instead of an `apiPath`.
-Clear the ratchet first, then hydrate — the gate is the precondition, not the
-sequel.
+- **Never fail the build on an unreachable API.** No network → keep the
+  committed snapshot, exit 0. A marketing site must not need the API up to
+  deploy. (The one fatal case is no snapshot on disk AND no API, which can only
+  happen before the first sync — the taxonomy imports that file.)
+- **Never regress.** A payload that is not a catalog, a document with no paths,
+  or a catalog rendering FEWER products than the committed snapshot is far more
+  likely to be a degraded response than a product line being retired, and
+  writing it would silently empty the menu. It is refused, and what it would
+  have dropped is printed. A genuine retirement is accepted by deleting those
+  rows from `lib/data/catalog.json` — the next run then sees no shrink.
+- **Never go quiet.** Every run prints advertised/rendered/excluded and the
+  exclusions grouped by reason.
 
-Three-way drift is already visible in one row. The Web3 six: this file said
-*Oracles* where the code says *Attestations* (fixed above), while the catalog
-carries **eight** Web3 products including `referrals` and `networks`. That is
-the drift in miniature, and it is why the gate reads the document rather than
-any list a human keeps.
+The audit keeps its own two rules: never fail on an unreachable API, and its
+`KNOWN_UNSERVED` ratchet **may only shrink**. A product that fails and is not on
+the list fails the run; an entry that starts answering fails the run too, so a
+fix is forced to delete its own exemption. Do not add entries to make it pass.
 
 ## Removed (2026-05-07 cleanup)
 
@@ -549,9 +709,15 @@ Three rules the page cost us before they were written down:
   puts `gpt-5`, `claude-opus-4.8`, `zen5` and `enso` all under `hanzo`, so
   reading the lab first drew the Hanzo H on every one of them. `markOf` takes
   the leading run of letters in the id first and falls back to the lab.
-- **`enso` and `zen` are NOT the same glyph.** Zen is the ensō left OPEN (the
-  gap sits where a Q's tail would go); Enso is the router that completes the
-  circle, so its ring is CLOSED. Geometry is `hanzo.app`'s verified pair.
+- **A family wears the mark of the lab that MAKES it.** Enso is ours, the ensō
+  CLOSED because the router completes the circle. Zen is Zoo Labs Foundation's,
+  which the hero copy already says, so it wears Zoo's venn like every other
+  maker here — `zen -> zoo` in OF. `@hanzo/logo` carries Hanzo's marks and
+  nobody else's; it once shipped a `ZEN_MARK` beside `ENSO_MARK`, which drew our
+  house glyph on someone else's models. The venn's disc is cut by an SVG
+  `<clipPath>` in USER units: a CSS `clip-path: circle(11.5px …)` measures the
+  rendered box, so it cuts at 96px and not at all at 18px.
+  `e2e/gates/marks.spec.ts` holds all of it.
 - **No chip.** Marks render bare at the current text colour. The predecessor
   painted a CSS mask inside a `rounded-lg` box, which clipped the corners off
   every square mark — the H worst of all. Every source declares

@@ -19,6 +19,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { code, isCode } from "./source.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const EXT = new Set([".ts", ".tsx", ".js", ".jsx", ".mdx"]);
@@ -50,11 +51,16 @@ function tracked() {
     .filter((p) => p && EXT.has(p.slice(p.lastIndexOf("."))));
 }
 
+/** The lines as a reader of the site sees them: comments are not copy. */
+const copy = (rel) => {
+  const text = readFileSync(resolve(ROOT, rel), "utf8");
+  return (isCode(rel) ? code(text) : text).split("\n");
+};
+
 const offenders = [];
 for (const rel of tracked()) {
   if (rel === SELF || GENERATED.includes(rel) || ALLOWED[rel]) continue;
-  const lines = readFileSync(resolve(ROOT, rel), "utf8").split("\n");
-  lines.forEach((line, i) => {
+  copy(rel).forEach((line, i) => {
     if (COUNT.test(line)) offenders.push(`${rel}:${i + 1}: ${line.trim().slice(0, 100)}`);
   });
 }
@@ -74,7 +80,7 @@ if (offenders.length) {
 // An entry that no longer holds a literal is a rule protecting nothing.
 const stale = Object.keys(ALLOWED).filter((p) => {
   try {
-    return !readFileSync(resolve(ROOT, p), "utf8").split("\n").some((l) => COUNT.test(l));
+    return !copy(p).some((l) => COUNT.test(l));
   } catch {
     return true;
   }

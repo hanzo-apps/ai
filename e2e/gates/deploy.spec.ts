@@ -147,8 +147,31 @@ test('the apex publish pins the action and carries the one credential it needs',
   // grant, so CI needs no bucket key — SITES_S3_* is the standing shared-bucket
   // credential the grant replaced, and any repo holding it could overwrite every
   // other org's site.
-  expect(apex.text, `${apex.name} publishes without HANZO_DEPLOY_TOKEN`).toMatch(
+  //
+  // What this file passes is the KMS CLIENT IDENTITY, and the key itself is the
+  // action's to fetch. The gate has now demanded three different things, each
+  // time following the credential to where it actually lives:
+  // `secrets.HANZO_DEPLOY_TOKEN` pinned it to a forge secret that cannot say
+  // whether the key inside it is alive — it resolved to no principal and cloud
+  // answered 403 under every green gate including this one; a KMS read in THIS
+  // file fixed the apex and left hips, hanzo.app and agency on the dead secret.
+  // The read belongs with the publish it serves, so one reseal rotates them all.
+  expect(apex.text, `${apex.name} publishes without the KMS client identity`).toMatch(
+    /KMS_CLIENT_ID:\s*\$\{\{\s*secrets\.KMS_CLIENT_ID\s*\}\}/,
+  )
+  expect(apex.text, `${apex.name} passes no KMS client secret, so the key cannot be read`).toMatch(
+    /KMS_CLIENT_SECRET:\s*\$\{\{\s*secrets\.KMS_CLIENT_SECRET\s*\}\}/,
+  )
+  // The interpolation form, not the bare name — for the reason spelled out below
+  // about SITES_S3_*. This workflow's comments carry the bare name, in the lines
+  // that explain where the key moved and why.
+  expect(apex.text, `${apex.name} takes the deploy key from a forge secret again`).not.toMatch(
     /\$\{\{\s*secrets\.HANZO_DEPLOY_TOKEN\s*\}\}/,
+  )
+  // Nor does it hand the action a token of its own. A second way to supply the
+  // credential is a second place it can be stale.
+  expect(apex.text, `${apex.name} passes its own deploy token to the action`).not.toMatch(
+    /HANZO_DEPLOY_TOKEN:\s*\$\{\{/,
   )
   // `secrets.SITES_S3_`, not the bare name. The bare name is how the previous
   // version of the test above went wrong: it keyed on a string that a COMMENT can

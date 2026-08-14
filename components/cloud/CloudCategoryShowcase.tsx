@@ -3,20 +3,22 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
-import { categorySlug, cloudCategories, type CloudCategory, type Primitive } from '@/lib/data/cloud-primitives'
+import { cloudCategories, type CloudCategory, type Primitive } from '@/lib/data/cloud-primitives'
 
 /**
- * The ten cloud primitives, shown in full — the ONE product showcase.
+ * The cloud primitives, shown in full — the ONE product showcase.
  *
  * Both surfaces that exist to say "here is everything Hanzo Cloud is" render
  * THIS component: the products index (`/products`) and the cloud.hanzo.ai root
  * (`components/cloud/CloudLanding`). It reads `lib/data/cloud-primitives.ts`,
- * the same source as the mega-menu and the `/products/<slug>` category pages,
- * so the nav, the index, and the cloud front door can never drift.
+ * the same source as the mega-menu and the `/products/<id>` category pages, so
+ * the nav, the index, and the cloud front door can never drift — and since that
+ * source is the commerce catalog filtered to what answers, none of them can
+ * show a product that does not.
  *
  * One brand renders here, and it is Hanzo's. A leaf on another Hanzo property
- * (Web3 → web3.hanzo.ai) opens in a new tab; nothing on this host is badged
- * with another company's name.
+ * opens in a new tab; nothing on this host is badged with another company's
+ * name.
  */
 
 const isExternal = (item: Primitive) => /^https?:\/\//.test(item.href)
@@ -60,20 +62,26 @@ function PrimitiveCard({ item, index }: { item: Primitive; index: number }) {
 }
 
 /**
- * The ten categories as cards — the map of the cloud, each a door to its page.
+ * The categories as cards — the map of the cloud, each a door to its page.
  *
- * FIVE ACROSS, TWO DOWN, because there are exactly ten of them. Three columns
- * left the tenth card alone on a fourth row, and a lone card reads as an
- * afterthought rather than a peer. The count is the layout: 2×5 closes the
- * block, and the whole map is taken in at once instead of scrolled through.
+ * FIVE ACROSS, because the catalog carries ten categories and 2×5 closes the
+ * block: the whole map is taken in at once instead of scrolled through.
+ *
+ * Every track count here DIVIDES ten, and that is the whole rule. The middle
+ * step used to be three, which is the one number between two and five that does
+ * not — so a tablet drew 3·3·3 and then a single orphan card on a fourth row,
+ * reading as an afterthought rather than a peer. Two and five are the only
+ * widths this block takes.
  *
  * The cards are correspondingly quieter — a category is a signpost, not an
- * argument, so it carries its name, its count and one line, at the size those
- * need and no larger.
+ * argument, so it carries its name and one line, at the size those need and no
+ * larger. It used to carry a count of its leaves as well; that number is now
+ * whatever answered at build time, which is a fact about the API's morning
+ * rather than anything a reader can use.
  */
 export function CloudCategoryMap() {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+    <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
       {cloudCategories.map((category, index) => {
         const Icon = category.icon
         return (
@@ -84,15 +92,12 @@ export function CloudCategoryMap() {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.4, delay: (index % 5) * 0.04 }}
           >
-            <Link href={`/products/${categorySlug(category.title)}`}>
+            <Link href={`/products/${category.id}`}>
               <div className="group h-full cursor-pointer rounded-xl border border-white/10 p-4 transition-colors duration-200 hover:border-white/25 motion-reduce:transition-none">
-                <div className="flex items-start justify-between">
-                  <h3 className="flex items-center gap-2 text-base font-semibold tracking-tight text-neutral-200 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none">
-                    <Icon className="h-4 w-4 shrink-0 text-neutral-400 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none" />
-                    {category.title}
-                  </h3>
-                  <span className="text-xs tabular-nums text-muted-foreground">{category.items.length}</span>
-                </div>
+                <h3 className="flex items-center gap-2 text-base font-semibold tracking-tight text-neutral-200 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none">
+                  <Icon className="h-4 w-4 shrink-0 text-neutral-400 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none" />
+                  {category.title}
+                </h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-neutral-500">{category.tagline}</p>
               </div>
             </Link>
@@ -103,9 +108,9 @@ export function CloudCategoryMap() {
   )
 }
 
-/** One category section — heading, tagline, and all six primitives. */
+/** One category section — heading, tagline, and every primitive in it. */
 function CategorySection({ category }: { category: CloudCategory }) {
-  const slug = categorySlug(category.title)
+  const slug = category.id
   return (
     <section id={slug} className="border-t border-border px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">

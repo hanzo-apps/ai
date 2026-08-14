@@ -2,20 +2,21 @@ import type { Metadata } from 'next'
 import { ogImages, twitterImages } from '@/lib/constants/og'
 
 export const metadata: Metadata = {
-  title: 'Zen Models — the family Hanzo trains',
-  description: 'Language, code, vision, audio and video models from 0.6B up to frontier, most with published weights. The large ones are Zen MoDE — Mixture of Diverse Experts — holding many parameters and using few per token. From $0.15/MTok.',
+  title: 'Zen Models by Zoo Labs Foundation — Hanzo AI',
+  description: 'Zen from Zoo Labs Foundation: frontier AI models from 0.6B to 1T+ parameters. Zen MoDE (Mixture of Diverse Experts). OpenAI-compatible API. Vision, audio, code, math. From $0.15/MTok.',
   openGraph: {
-    title: 'Zen Models — the family Hanzo trains',
-    description: 'Language, code, vision, audio and video models from 0.6B up to frontier, most with published weights. The large ones are Zen MoDE — Mixture of Diverse Experts — holding many parameters and using few per token. From $0.15/MTok.',
+    title: 'Zen Models by Zoo Labs Foundation — Hanzo AI',
+    description: 'Zen from Zoo Labs Foundation: frontier AI models from 0.6B to 1T+ parameters. Zen MoDE (Mixture of Diverse Experts). OpenAI-compatible API. Vision, audio, code, math. From $0.15/MTok.',
     url: 'https://hanzo.ai/zen',
     siteName: 'Hanzo AI',
     type: 'website',
-    images: ogImages('Zen Models by Hanzo'),
+    images: ogImages('Zen Models by Zoo Labs Foundation'),
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Zen Models — the family Hanzo trains',
-    description: 'Language, code, vision, audio and video models from 0.6B up to frontier, most with published weights. The large ones are Zen MoDE — Mixture of Diverse Experts — holding many parameters and using few per token. From $0.15/MTok.',
+    title: 'Zen Models by Zoo Labs Foundation — Hanzo AI',
+    description: 'Zen from Zoo Labs Foundation: frontier AI models from 0.6B to 1T+ parameters. Zen MoDE (Mixture of Diverse Experts). OpenAI-compatible API. Vision, audio, code, math. From $0.15/MTok.',
+
     images: twitterImages,
   },
 }

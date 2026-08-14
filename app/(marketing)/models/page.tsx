@@ -5,6 +5,7 @@ import type { ModelData } from '@/lib/models'
 import {
   fetchModels,
   getOrgAndSlug,
+  canonicalOrg,
   orgDisplayName,
   formatContext,
   getModelContext,
@@ -14,10 +15,11 @@ import {
 
 export const revalidate = 3600
 
-// Enso is the frontier family; Zen is the open-weight family. Both are trained
-// and served here, so both lead. Anything not in this list groups by the lab
-// that trained it, further down.
-const OURS = [
+// The two families this endpoint leads with: Enso, which we train, and Zen,
+// which Zoo Labs Foundation trains and we serve first-party. Membership is about
+// what the page leads with, not about who trained it — anything not in this list
+// groups by the lab that trained it, further down.
+const FEATURED = [
   'enso',
   'enso-flash',
   'enso-ultra',
@@ -63,13 +65,18 @@ function isCanonical(id: string): boolean {
   return true
 }
 
-// The catalogue gives our own families the slug as their name ("enso"), while
+// The catalogue gives the featured families the slug as their name ("enso"), while
 // every other model already carries a proper one ("Zen5 — Next Generation",
 // "Claude Opus"). When the name is just the id, title-case the slug so the card
 // reads "Enso", "Enso Flash", "Zen5 Coder" — the mono line below still shows the
 // exact API id, so nothing is lost.
 function displayName(model: ModelData): string {
-  if (model.name && model.name !== model.id) return model.name
+  if (model.name && model.name !== model.id) {
+    // Upstream names often carry a redundant "Lab: " prefix; the lab is already
+    // shown by the mark and the mono id beside it, so drop it. "DeepSeek:
+    // DeepSeek V4 Pro" → "DeepSeek V4 Pro", "SpaceXAI: Grok 4.5" → "Grok 4.5".
+    return model.name.replace(/^[A-Za-z0-9.\-() ]{1,18}:\s+/, '')
+  }
   return model.id
     .split('-')
     .map((w) => (w ? w[0].toUpperCase() + w.slice(1) : w))
@@ -143,7 +150,7 @@ export default async function ModelsPage() {
   // card beside "Anthropic". This matches markOf, which already strips `~`.
   const byOrg: Record<string, typeof available> = {}
   for (const model of available) {
-    const org = getOrgAndSlug(model.id).org.replace(/^~/, '')
+    const org = canonicalOrg(getOrgAndSlug(model.id).org)
     if (!byOrg[org]) byOrg[org] = []
     byOrg[org].push(model)
   }
@@ -155,20 +162,20 @@ export default async function ModelsPage() {
     return bc.length - ac.length
   })
 
-  // Our own families, in the order we would recommend them. Ids are looked up
-  // in the live catalogue rather than copied out of it, so a model we stop
+  // The featured families, in the order we would recommend them. Ids are looked
+  // up in the live catalogue rather than copied out of it, so a model we stop
   // serving drops off this page instead of 404-ing from it. The previous
   // selector asked for `category === 'flagship'`, which no model in the
   // catalogue has ever carried — so every slot fell through to the
-  // third-party clause and our own models never appeared.
-  const ours = OURS.flatMap((id) => byId.get(id) ?? [])
-  const oursIds = new Set(ours.map((m) => m.id))
+  // third-party clause and the featured models never appeared.
+  const featured = FEATURED.flatMap((id) => byId.get(id) ?? [])
+  const featuredIds = new Set(featured.map((m) => m.id))
   // One canonical flagship per lab in TOP_LABS, in that order. `find` takes the
   // first canonical model the catalogue lists for the lab, which is its newest;
   // a lab with nothing canonical drops out rather than showing a variant.
   const top = TOP_LABS.flatMap((lab) => {
     const m = available.find(
-      (x) => getOrgAndSlug(x.id).org.replace(/^~/, '') === lab && !oursIds.has(x.id) && isCanonical(x.id),
+      (x) => getOrgAndSlug(x.id).org.replace(/^~/, '') === lab && !featuredIds.has(x.id) && isCanonical(x.id),
     )
     return m ? [m] : []
   })
@@ -200,9 +207,9 @@ export default async function ModelsPage() {
             </span>
           </h1>
           <p className="mx-auto mb-10 max-w-2xl text-lg text-neutral-300 md:text-xl">
-            Enso is our frontier family, and the router that picks for you when you ask for auto. Zen is the
-            family whose weights we publish — call it here, or serve it yourself. Models from other labs answer
-            at the same address with the same key, so choosing one is not a migration.
+            Enso is our frontier family. Zen is Zoo Labs Foundation&rsquo;s open-weight family — call it here or
+            run the weights yourself. Models from other labs answer on the same endpoint when you need one.
+
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -224,15 +231,16 @@ export default async function ModelsPage() {
       {/* Our models */}
       <section className="px-6 py-20 md:py-28">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Our models</h2>
+          <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Featured models</h2>
           <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
-            <span className="font-medium text-foreground">Enso</span> is our frontier family, and it leads several
-            public benchmarks.{' '}
-            <span className="font-medium text-foreground">Zen</span> is the family we publish the weights for, from
-            0.6B up. Both are trained here and served here.
+            <span className="font-medium text-foreground">Enso</span> is our frontier family.{' '}
+            <span className="font-medium text-foreground">Zen</span> is the open-weight family from{' '}
+            <Link href="https://zoo.industries" className="underline hover:no-underline">Zoo Labs Foundation</Link>,
+            with the weights published. Both are served here.
+
           </p>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
-            {ours.map((model) => (
+            {featured.map((model) => (
               <ModelCard key={model.id} model={model} />
             ))}
           </div>
@@ -348,7 +356,7 @@ export default async function ModelsPage() {
         <div className="mx-auto grid max-w-4xl grid-cols-2 gap-6 text-center md:grid-cols-4">
           <div>
             <div className="text-3xl font-semibold">2</div>
-            <div className="mt-1 text-sm text-muted-foreground">Model families of our own</div>
+            <div className="mt-1 text-sm text-muted-foreground">Featured model families</div>
           </div>
           <div>
             <div className="text-3xl font-semibold">1</div>

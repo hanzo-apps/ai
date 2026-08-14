@@ -1,0 +1,5 @@
+# `node film.mjs` writes these — the generator and the assets it copies from are
+# the source. A rendered master is 800 KB and lands in public/ anyway; a second
+# copy in git is the same bytes twice.
+tall/
+wide/

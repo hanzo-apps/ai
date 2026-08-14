@@ -1,0 +1,162 @@
+{
+  "source": "https://papers.hanzo.ai",
+  "fetched": "2026-08-14",
+  "papers": [
+    {
+      "slug": "hanzo-cloud-economics",
+      "title": "Cloud Economics of a Sovereign OSS Stack",
+      "subtitle": "A Regulated Capital-Markets Migration Case Study",
+      "date": "Jun 2026",
+      "tags": [
+        "Sovereign AI",
+        "Cloud Economics",
+        "Sovereign Stack",
+        "OSS"
+      ],
+      "pdf": "/pdfs/hanzo-cloud-economics.pdf"
+    },
+    {
+      "slug": "hanzo-native-stack-thesis",
+      "title": "One Native Stack for Private, Continuously-Learning AI",
+      "subtitle": "Inference at the Bandwidth Wall, On-Device QLoRA, One Engine",
+      "date": "Jun 2026",
+      "tags": [
+        "Engine",
+        "Inference",
+        "On-Device",
+        "Privacy"
+      ],
+      "pdf": "/pdfs/hanzo-native-stack-thesis.pdf"
+    },
+    {
+      "slug": "hanzo-rocm-inference",
+      "title": "Native ROCm Inference on a Consumer RDNA3.5 APU",
+      "subtitle": "Reaching llama.cpp Decode Parity via a Unified 1-bit-to-Full Quant Core",
+      "date": "Jun 2026",
+      "tags": [
+        "Engine",
+        "ROCm",
+        "Inference",
+        "Benchmarks"
+      ],
+      "pdf": "/pdfs/hanzo-rocm-inference.pdf"
+    },
+    {
+      "slug": "hanzo-cross-backend-inference",
+      "title": "Edge LLM Inference Across Commodity Accelerators",
+      "subtitle": "Measured AMD, NVIDIA, and Apple Performance",
+      "date": "Jun 2026",
+      "tags": [
+        "Engine",
+        "Inference",
+        "Edge",
+        "Benchmarks"
+      ],
+      "pdf": "/pdfs/hanzo-cross-backend-inference.pdf"
+    },
+    {
+      "slug": "hanzo-native-training",
+      "title": "Native Training in the Hanzo Engine",
+      "subtitle": "One Engine, One Quant Format, One Backend",
+      "date": "Jun 2026",
+      "tags": [
+        "Engine",
+        "Training",
+        "QLoRA",
+        "On-Device"
+      ],
+      "pdf": "/pdfs/hanzo-native-training.pdf"
+    },
+    {
+      "slug": "hanzo-continuous-learning-privacy",
+      "title": "Continuously-Learning Private AI",
+      "subtitle": "Self-Improvement and Privacy in the Hanzo Native Stack",
+      "date": "Jun 2026",
+      "tags": [
+        "Engine",
+        "Privacy",
+        "Continual Learning",
+        "On-Device"
+      ],
+      "pdf": "/pdfs/hanzo-continuous-learning-privacy.pdf"
+    },
+    {
+      "slug": "hanzo-platform-infra-desktop",
+      "title": "Economical Serving and the hanzo.ai Platform",
+      "subtitle": "A Bandwidth-Optimal Unified Train-and-Serve Runtime",
+      "date": "Jun 2026",
+      "tags": [
+        "Engine",
+        "Economics",
+        "Platform",
+        "On-Device"
+      ],
+      "pdf": "/pdfs/hanzo-platform-infra-desktop.pdf"
+    },
+    {
+      "slug": "hanzo-unified-tenant-cloud",
+      "title": "The Unified Sovereign-Tenant Cloud",
+      "subtitle": "Linear Shared-Nothing Scaling via Per-Tenant SQLite and In-Process Composition",
+      "date": "Jul 2026",
+      "tags": [
+        "Cloud",
+        "Multi-Tenancy",
+        "SQLite",
+        "Benchmarks"
+      ],
+      "pdf": "/pdfs/hanzo-unified-tenant-cloud.pdf"
+    },
+    {
+      "slug": "refutation-driven-perf",
+      "title": "Refutation-Driven Performance Engineering",
+      "subtitle": "An Empirical Study of a Multi-Week GPU Kernel Campaign",
+      "date": "Jul 2026",
+      "tags": [
+        "Engine",
+        "GPU Kernels",
+        "Benchmarks",
+        "Methodology"
+      ],
+      "pdf": "/pdfs/refutation-driven-perf.pdf"
+    },
+    {
+      "slug": "evolutionary-schedule-search",
+      "title": "Evolutionary Schedule Search in a One-Source Kernel DSL",
+      "subtitle": "And the Continual-Improvement Loop It Anchors",
+      "date": "Jul 2026",
+      "tags": [
+        "Engine",
+        "Autotuning",
+        "Evolutionary Search",
+        "Kernels"
+      ],
+      "pdf": "/pdfs/evolutionary-schedule-search.pdf"
+    },
+    {
+      "slug": "hanzo-router",
+      "title": "Hanzo Router",
+      "subtitle": "Memory-Aware, Local-First LLM Routing with a Learned SLO-Constrained Policy",
+      "date": "Jul 2026",
+      "tags": [
+        "Router",
+        "Routing",
+        "Economics",
+        "On-Device"
+      ],
+      "pdf": "/pdfs/hanzo-router.pdf"
+    },
+    {
+      "slug": "network-whitepaper",
+      "title": "Hanzo Network Whitepaper",
+      "subtitle": "L1 Blockchain for Decentralized AI Compute",
+      "date": "Oct 2024",
+      "tags": [
+        "Blockchain",
+        "Infrastructure",
+        "Network",
+        "Architecture"
+      ],
+      "pdf": ""
+    }
+  ]
+}

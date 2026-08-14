@@ -1,0 +1,65 @@
+{
+  "story": "One org, one afternoon: a spaceship shop that did not exist this morning.",
+  "beats": [
+    {
+      "line": "Start with the models.",
+      "method": "GET",
+      "path": "/v1/models"
+    },
+    {
+      "line": "Blend them behind one route.",
+      "method": "POST",
+      "path": "/v1/ai/routes"
+    },
+    {
+      "line": "Ask it something.",
+      "method": "POST",
+      "path": "/v1/chat/completions"
+    },
+    {
+      "line": "Hand it your own tools.",
+      "method": "POST",
+      "path": "/v1/agent"
+    },
+    {
+      "line": "Let it run code somewhere safe.",
+      "method": "POST",
+      "path": "/v1/sandboxes"
+    },
+    {
+      "line": "Give it a memory.",
+      "method": "POST",
+      "path": "/v1/vector"
+    },
+    {
+      "line": "Put it in a channel.",
+      "method": "GET",
+      "path": "/v1/bot/connect"
+    },
+    {
+      "line": "Build the shop a site.",
+      "method": "POST",
+      "path": "/v1/sites/deploy"
+    },
+    {
+      "line": "Put it live.",
+      "method": "POST",
+      "path": "/v1/sites/{slug}/publish"
+    },
+    {
+      "line": "Open the store.",
+      "method": "POST",
+      "path": "/v1/commerce/product/"
+    },
+    {
+      "line": "Sell a spaceship.",
+      "method": "POST",
+      "path": "/v1/store/{storeid}/checkout/authorize"
+    },
+    {
+      "line": "Watch what it cost.",
+      "method": "GET",
+      "path": "/v1/billing/usage"
+    }
+  ]
+}

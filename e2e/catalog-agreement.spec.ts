@@ -1,27 +1,31 @@
 // The site's product taxonomy must agree with commerce's catalog.
 //
-// Everything else about the taxonomy is already covered: mega-menu.spec proves it
-// RENDERS, products.spec proves every leaf serves a real page, products-audit
-// proves each page has a hero and a deploy CTA. All three ask whether the site is
-// coherent WITH ITSELF. None asks whether it still agrees with the system that
-// actually sells these products.
+// It used to be TWO hand-kept lists, and this file asked whether they matched.
+// They did not: the site sold a "Payments" category commerce does not carry and
+// had no column for the "Dev" one it does, so the categories test was red in
+// both directions at once.
 //
-// That gap is not hypothetical. Every other place this site stated a price or a
-// product independently had drifted by the time anyone looked: the pricing page
-// published Pro at $49 while billing charged $20, the Blockchain tab carried a
-// Wallet API ladder the catalog contradicted, and Hanzo Vector was advertised at
-// two different prices on two tabs of the same page.
+// The taxonomy is now DERIVED from the catalog — `scripts/sync-catalog.mjs`
+// fetches it at build time and writes `lib/data/catalog.json`, which
+// `lib/data/cloud-primitives.ts` reads — so "do the two lists match" is no
+// longer a question anyone can answer wrongly. The question that replaced it is
+// the one a build-time snapshot actually raises: IS THE SNAPSHOT STILL TRUE?
+// A committed file goes stale silently, and the whole point of the snapshot is
+// that the site can deploy without the API, which is exactly the condition
+// under which nobody would notice.
 //
-// The CATEGORIES are the part that must match exactly. They are the taxonomy's
-// spine — they name the mega-menu's columns, generate the /products/<id> routes,
-// and are what commerce groups its own products by. A category commerce adds and
-// the site does not know about is a product family with no route.
+// So this reads the LIVE catalog and the LIVE served document, and holds the
+// committed snapshot to both:
 //
-// The PRODUCTS deliberately do NOT have to match. The mega-menu shows a curated
-// handful per category (six, for a two-row layout) out of the ~84 commerce
-// carries; that is an editorial decision about a menu, not drift. What IS checked
-// is the direction that can only be a mistake: a product the SITE routes to that
-// commerce does not carry at all.
+//   1. the categories the site renders are the categories commerce carries
+//   2. every product the site renders is still in the catalog
+//   3. every product the site renders still ANSWERS — the inclusion gate is
+//      re-measured here rather than trusted from build time
+//   4. the catalog files nothing under a category the site has no column for
+//
+// (3) is the load-bearing one. The snapshot's promise is that nothing on this
+// site advertises a capability that 404s; a promise kept only at build time is
+// kept only until the API changes.
 //
 //   pnpm exec playwright test e2e/catalog-agreement.spec.ts
 //   CATALOG_API=https://api.hanzo.ai pnpm exec playwright test e2e/catalog-agreement.spec.ts
@@ -31,88 +35,80 @@ import { cloudCategories, categorySlugs } from "../lib/data/cloud-primitives";
 
 const CATALOG_API = process.env.CATALOG_API ?? "https://api.hanzo.ai";
 const CATALOG_URL = `${CATALOG_API}/v1/commerce/catalog?brand=hanzo`;
+const DOCUMENT_URL = `${CATALOG_API}/v1/openapi.json`;
 
 interface Catalog {
   brand: string;
   categories: { id: string; label: string; order: number }[];
-  products: { id: string; slug: string; name: string; category: string }[];
+  products: { id: string; slug: string; name: string; category: string; apiPath?: string; kind?: string }[];
 }
 
-async function fetchCatalog(): Promise<Catalog> {
-  const res = await fetch(CATALOG_URL);
-  // Deliberately NOT skipped on failure. This endpoint is public and unauthenticated
-  // — the site itself would read it — so an unreachable catalog is a finding, not a
-  // reason to pass quietly.
-  expect(res.ok, `${CATALOG_URL} answered ${res.status}`).toBe(true);
-  return (await res.json()) as Catalog;
+async function json<T>(url: string): Promise<T> {
+  const res = await fetch(url);
+  // Deliberately NOT skipped on failure. These endpoints are public and
+  // unauthenticated — the build itself reads them — so an unreachable API is a
+  // finding, not a reason to pass quietly.
+  expect(res.ok, `${url} answered ${res.status}`).toBe(true);
+  return (await res.json()) as T;
 }
+
+/** Every product the site renders, flattened out of the derived taxonomy. */
+const rendered = cloudCategories.flatMap((c) => c.items);
 
 test.describe("site taxonomy vs commerce catalog", () => {
   test("categories match exactly", async () => {
-    const catalog = await fetchCatalog();
+    const catalog = await json<Catalog>(CATALOG_URL);
     const live = [...new Set(catalog.categories.map((c) => c.id))].sort();
     const site = [...new Set(categorySlugs)].sort();
 
     // Reported as two directions, because they mean different things: a category
     // commerce added is a family the site has no route for; one only the site has
-    // is a menu column selling nothing.
+    // is a menu column selling nothing. Both now mean the same CAUSE — a stale
+    // lib/data/catalog.json — and the fix is `pnpm sync:catalog`.
     expect(
       live.filter((c) => !site.includes(c)),
-      "commerce has categories the site does not route",
+      "commerce has categories the site does not route — the snapshot is stale",
     ).toEqual([]);
     expect(
       site.filter((c) => !live.includes(c)),
-      "the site routes categories commerce does not carry",
+      "the site routes categories commerce does not carry — the snapshot is stale",
     ).toEqual([]);
   });
 
-  test("every product the site routes to exists in the catalog", async () => {
-    const catalog = await fetchCatalog();
+  test("every product the site renders is still in the catalog", async () => {
+    const catalog = await json<Catalog>(CATALOG_URL);
     const live = new Set(catalog.products.map((p) => p.slug));
 
-    // Only the leaves that resolve to a GENERATED overview page. A bespoke page
-    // may legitimately describe something the catalog does not sell as a product
-    // (a concept page, a comparison); a generated one is rendered FROM the
-    // product, so it has to have one.
-    const routed = cloudCategories
-      .flatMap((c) => c.items)
-      .filter((i) => i.slug && i.href?.startsWith("/cloud/"))
-      .map((i) => i.slug as string);
-
-    // KNOWN ORPHANS, pinned rather than ignored. Each is a page this site
-    // generates for something commerce's catalog does not carry, and each is an
-    // open product question rather than a bug to silently paper over:
-    //
-    //   jobs  — commerce carries `tasks` in the same category. Almost certainly
-    //           the same capability renamed on one side only.
-    //   cost  — commerce carries `billing` under Observe. Same shape of rename.
-    //   fine-tuning — commerce's AI category has no counterpart at all
-    //           (agents, embeddings, inference, models, playground, prompts,
-    //           providers). Either it is a product the catalog is missing, or a
-    //           page for something we do not sell as one.
-    //
-    // Listing them keeps this test honest AND useful: it goes green on the drift
-    // that already exists and red the moment a FOURTH appears. Resolving one means
-    // deleting its line here — which is the point, because an allowlist nobody has
-    // to shrink is an allowlist that grows.
-    const KNOWN_ORPHANS = new Set(["jobs", "cost", "fine-tuning"]);
-
-    const orphans = [...new Set(routed)].filter((s) => !live.has(s));
     expect(
-      orphans.filter((s) => !KNOWN_ORPHANS.has(s)),
-      "the site generates overview pages for products commerce does not carry",
+      rendered.map((i) => i.slug).filter((s) => !live.has(s)),
+      "the site renders products commerce no longer carries — re-run `pnpm sync:catalog`",
     ).toEqual([]);
+  });
 
-    // And the allowlist must not outlive its entries: if commerce starts carrying
-    // one, the line goes stale and this says so rather than quietly protecting it.
+  test("every product the site renders still answers", async () => {
+    const document = await json<{ paths: Record<string, unknown> }>(DOCUMENT_URL);
+    const paths = Object.keys(document.paths ?? {});
+    expect(paths.length, "the served document carries no paths").toBeGreaterThan(0);
+
+    // The same predicate scripts/catalog.mjs applies at build time: the exact
+    // path, or any path beneath it. Stated once there and once here because a
+    // test that imports the thing it is checking proves only that the thing
+    // agrees with itself.
+    const serves = (api: string) =>
+      paths.includes(api) || paths.some((p) => p.startsWith(api.replace(/\/$/, "") + "/"));
+
+    // A leaf with no `api` is a CLIENT — a CLI, an SDK, the API reference.
+    // Those consume the API and are judged by having a page, which
+    // e2e/products.spec.ts measures; there is no operation to probe.
+    const dead = rendered.filter((i) => i.api && !serves(i.api));
     expect(
-      [...KNOWN_ORPHANS].filter((s) => live.has(s)),
-      "these are no longer orphans — remove them from KNOWN_ORPHANS",
+      dead.map((i) => `${i.slug} -> ${i.api}`),
+      "the site advertises capabilities api.hanzo.ai no longer serves",
     ).toEqual([]);
   });
 
   test("the catalog is grouped by categories the site renders", async () => {
-    const catalog = await fetchCatalog();
+    const catalog = await json<Catalog>(CATALOG_URL);
     // products[].category carries the LABEL ("AI"), categories[].id the slug
     // ("ai"). Comparing one to the other reports every category as missing — a
     // false alarm about field NAMES rather than a real disagreement about values.

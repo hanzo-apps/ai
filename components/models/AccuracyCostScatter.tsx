@@ -105,8 +105,9 @@ const ACC_MAX = 100
 //
 // A vendor with no logo asset gets its initial in its own colour rather than an
 // anonymous grey dot, so the chart is consistent whether or not we have the mark.
-// The five without files (NVIDIA, Meta, Zhipu, Xiaomi, MiniMax) are pending
-// assets from hanzoai/icons; drop the file in and the monogram gives way to it.
+// Every vendor plotted here now carries a real mark; the initial is the fallback
+// for a vendor genuinely absent from hanzoai/icons — drop its file in and the
+// monogram gives way to it.
 type Mark = { file?: string; color: string; initial: string }
 const VENDOR: Record<string, Mark> = {
   OpenAI:    { file: 'openai',    color: '#000000', initial: 'O' },
@@ -117,11 +118,11 @@ const VENDOR: Record<string, Mark> = {
   Alibaba:   { file: 'qwen',      color: '#615CED', initial: 'Q' },
   xAI:       { file: 'xai',       color: '#000000', initial: 'X' },
   Mistral:   { file: 'mistral',   color: '#FA520F', initial: 'M' },
-  NVIDIA:    { color: '#76B900', initial: 'N' },
-  Meta:      { color: '#0064E0', initial: 'M' },
-  Zhipu:     { color: '#3859FF', initial: 'Z' },
-  Xiaomi:    { color: '#FF6900', initial: 'M' },
-  MiniMax:   { color: '#F23F5D', initial: 'M' },
+  NVIDIA:    { file: 'nvidia',    color: '#76B900', initial: 'N' },
+  Meta:      { file: 'meta',      color: '#0064E0', initial: 'M' },
+  Zhipu:     { file: 'zhipu',     color: '#3859FF', initial: 'Z' },
+  Xiaomi:    { file: 'xiaomi',    color: '#FF6900', initial: 'M' },
+  MiniMax:   { file: 'minimax',   color: '#F23F5D', initial: 'M' },
   Other:     { color: '#6B7280', initial: '·' },
 }
 

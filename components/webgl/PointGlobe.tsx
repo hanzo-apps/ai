@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { SPECTRUM } from '@/lib/spectrum'
 
 /**
  * PointGlobe — the flagship WebGL hero motif: a sphere of white points on true
@@ -42,14 +43,6 @@ export interface PointGlobeProps {
 }
 
 /* ------------------------------------------------------------------ palette */
-
-/** The conversation spectrum, in the order a run of them cycles through it. */
-const SPECTRUM: ReadonlyArray<readonly [number, number, number]> = [
-  [0.31, 0.55, 1.0], // blue
-  [0.6, 0.42, 1.0],  // violet
-  [1.0, 0.44, 0.71], // pink
-  [1.0, 0.71, 0.33], // amber
-]
 
 const WHITE: readonly [number, number, number] = [1, 1, 1]
 
@@ -307,7 +300,25 @@ export default function PointGlobe({
     // is what this hero was. Nothing here is quadratic, so density is cheap.
     const small = coarse || minSide < 640
     const scale = variant === 'ambient' ? 0.72 : 1
-    let N = Math.round((small ? 2200 : minSide < 1024 ? 4000 : 6400) * scale)
+    // HOW LARGE THE GLOBE RENDERS SETS ITS DENSITY — not how large the window
+    // is, which is what this budget used to read. The sphere's diameter is a
+    // fixed fraction of the CANVAS height and owes nothing to the viewport, so a
+    // call site that overflows its section to make a planet (the documented way
+    // to size a hero globe) spreads exactly these points over a far larger
+    // silhouette. That is not a hypothetical: the fold's canvas runs to 124% of
+    // a fold that is itself the viewport, and the sphere came back as the
+    // starfield the line above says is the failure.
+    //
+    // Apparent density is N over the silhouette's AREA, and the silhouette is a
+    // disc whose diameter tracks the canvas height — so holding density constant
+    // means N tracks that ratio SQUARED. Bounded at both ends: a canvas smaller
+    // than the viewport keeps a floor of points so it never thins out, and the
+    // ceiling keeps a very tall canvas from asking for a budget nothing needs.
+    // Read once, at mount, beside every other buffer decision; `clientHeight` is
+    // valid here because the element is in the tree with its classes on it.
+    const drawn = canvas.clientHeight || minSide
+    const spread = Math.min(2.2, Math.max(0.8, (drawn / minSide) ** 2))
+    let N = Math.round((small ? 2200 : minSide < 1024 ? 4000 : 6400) * scale * spread)
     N = Math.max(600, N)
     const agentCount = small ? 20 : minSide < 1024 ? 32 : 46
     const talk = small ? Math.min(conversations, 5) : conversations

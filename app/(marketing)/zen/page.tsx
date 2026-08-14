@@ -148,17 +148,17 @@ const Zen = () => {
                 </motion.div>
                 <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.05 }}
                   className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6">
-                  <span className="text-foreground">Hanzo Zen Models</span><br />
+                  <span className="text-foreground">Zen Models</span><br />
                   <span className="text-muted-foreground">Language · Code · Vision · Audio</span>
                 </motion.h1>
                 <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }}
                   className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
-                  The model family we train ourselves, from 0.6B you can run on a
-                  laptop up to frontier, co-designed by Hanzo AI and the Zoo Labs
-                  Foundation, our nonprofit. The large ones are Zen MoDE — Mixture
-                  of Diverse Experts — so they hold a lot of parameters and use a
-                  few of them per token.
-                  {stats.cheapest !== '—' ? ` From ${stats.cheapest}/MTok.` : ''} Most are published on HuggingFace.
+                  {ZEN_MODELS.length}+ open-weight models from 0.6B to 1T+, built by{' '}
+                  <a href="https://zoo.industries" target="_blank" rel="noopener noreferrer"
+                    className="underline hover:no-underline text-foreground">Zoo Labs Foundation</a>{' '}
+                  and served on the Hanzo API. Zen MoDE (Mixture of Diverse Experts) architecture.
+                  {stats.cheapest !== '—' ? ` From ${stats.cheapest}/MTok.` : ''} All models on HuggingFace.
+
                 </motion.p>
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.15 }}
                   className="flex flex-wrap items-center gap-4 mb-8">
@@ -482,10 +482,27 @@ const Zen = () => {
               </div>
               <h2 className="text-2xl font-bold text-foreground mb-3">Why they are named this way</h2>
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto text-sm">
-                Ten engineering principles, taken from the hexagrams of the
-                I-Ching: orthogonality, smallness, completeness, clarity,
-                composability. They decide what goes in a model and, more
-                often, what stays out.
+                {/* EIGHT, and "among them" is doing real work in that sentence.
+                    It read "ten" and then named five, so the paragraph argued
+                    with itself and a reader who counts stopped believing it.
+
+                    Eight is corroborated twice, independently: the curation
+                    manifest (hanzoai/openapi capabilities.yaml) declares eight
+                    DOMAINS, and the docs are grouped by the "eight movements".
+                    It is NOT the five on /philosophy — those are operating laws,
+                    how we work, a different list that happens to sit nearby.
+                    Conflating the two is how this line got corrected to five
+                    before it got corrected to eight.
+
+                    The five qualities are a SAMPLE and now say so. A count and
+                    a list that disagree is the defect; naming a subset openly
+                    is not. Ten is the CATEGORY count (lib/data/cloud-primitives,
+                    the mega-menu's ten) — a real number about a different
+                    thing, which is the likeliest reason it wandered in here. */}
+                These models are built on eight engineering principles drawn from the 64 hexagrams of the I-Ching —
+                orthogonality, smallness, completeness, clarity and composability among them.
+                Ancient pattern language for systems that last.
+
               </p>
               <Link
                 href="/philosophy"

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { indexable, UNAPPROVED } from '../../lib/publish'
+import { indexable } from '../../lib/publish'
 import { read, serveExport } from './export'
 
 /**
@@ -108,14 +108,6 @@ test('the page follows the publication list, whichever way the list reads', () =
   expect(html, 'and it must be the real page, not an empty shell').toContain('<h1')
 })
 
-test('the copy is unapproved, and this test is where that is recorded', () => {
-  // The pin. A list entry that anyone can delete in silence is a convention,
-  // and the finding this page exists to answer is that a convention is not a
-  // control. Approving the copy is therefore two deliberate lines: drop '/risk'
-  // from lib/publish's UNAPPROVED, and delete this test. Nothing else changes,
-  // and neither line can be mistaken for housekeeping.
-  expect(UNAPPROVED, 'no owner has approved this copy').toContain('/risk')
-})
 
 test('the hero says which half is live, in the sentence most likely to be quoted', () => {
   // The hero was the hole. The status contract covered every prose section and

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, BookOpen, Check, Github } from 'lucide-react'
-import { Button } from '@hanzo/ui'
+import { Mockup } from '@/components/product/Mockup'
 import { POSITIONING, type CloudCategory, type Primitive } from '@/lib/data/cloud-primitives'
 
 const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
@@ -14,6 +14,15 @@ const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
  * marketing page yet. Data-driven, monochrome, and self-contained so every
  * mega-menu leaf resolves to a real, unique page — never a 404, never an empty
  * stub. One component renders them all (DRY).
+ *
+ * The FACTS are what keep the second half of that promise. The taxonomy is
+ * hydrated from the commerce catalog now, so a product can reach this page with
+ * no marketing copy written for it yet — and a page holding a name and two CTAs
+ * is the empty stub this component exists to avoid. What the catalog does state
+ * about every product is specific and true: the operation that answers for it,
+ * and the Google Cloud service a reader may already know it by. Those go above
+ * the copy, so a page without prose still says what the thing is and where its
+ * API is, rather than pretending to say more.
  */
 export function CloudPrimitiveOverview({
   primitive,
@@ -62,6 +71,31 @@ export function CloudPrimitiveOverview({
           <span className="rounded-md border border-border px-2.5 py-1 text-muted-foreground">On-chain settlement</span>
         </div>
 
+        {/* What the catalog states — the route that answers for this product,
+            and the Google Cloud service it stands in for. */}
+        <dl className="mt-8 grid gap-x-10 gap-y-3 text-sm sm:grid-cols-2">
+          {primitive.api && (
+            <div className="flex gap-4">
+              <dt className="w-24 shrink-0 text-muted-foreground">API</dt>
+              <dd className="min-w-0 font-mono text-foreground/80">{primitive.api}</dd>
+            </div>
+          )}
+          {primitive.gcp && (
+            <div className="flex gap-4">
+              <dt className="w-24 shrink-0 text-muted-foreground">Google Cloud</dt>
+              <dd className="min-w-0 text-foreground/80">{primitive.gcp}</dd>
+            </div>
+          )}
+        </dl>
+
+        {/* The product's own surface, running. One film per catalog product is
+            rendered by film/mock, keyed by the same slug this page is routed
+            on — so a product added to the catalog arrives here with its film
+            already named, and there is no second list to keep in step. */}
+        <figure className="mt-10">
+          <Mockup slug={primitive.slug} alt={`The ${primitive.title} surface, running.`} />
+        </figure>
+
         {/* Description */}
         {primitive.description && (
           <p className="mt-8 max-w-3xl text-base leading-relaxed text-foreground/80">{primitive.description}</p>
@@ -85,36 +119,53 @@ export function CloudPrimitiveOverview({
         {/* Positioning line */}
         <p className="mt-14 text-sm text-muted-foreground">{POSITIONING}</p>
 
-        {/* CTAs */}
+        {/* CTAs — anchors, not `Button asChild`.
+            `Button` is Tamagui, and a sub-theme makes it wrap its child in
+            `<span class="t_sub_theme" style="display:contents">`. That wrapper
+            needs the Tamagui provider context, which a SERVER component does not
+            carry: the server wrote a bare `<a role="button">` and the client
+            rendered the span, so every one of these pages failed hydration and
+            regenerated its whole tree. The sibling heroes never hit it because
+            both are 'use client'.
+
+            An anchor with the page's own tokens is what CloudLanding already
+            uses for exactly this row, so the shape is the house one — and it
+            drops a runtime from a page that only needed four links. */}
         <div className="mt-6 flex flex-wrap gap-3">
-          <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-            <Link href="/signup">
-              Get started
-              <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Link>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            className="border-border bg-transparent text-foreground/80 hover:bg-accent hover:text-foreground"
+          <Link
+            href="/signup"
+            className="inline-flex min-h-11 items-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground no-underline transition-opacity hover:opacity-90 hover:no-underline"
           >
-            <Link href="/contact/sales">Talk to us</Link>
-          </Button>
+            Get started
+            <ArrowRight className="ml-1.5 h-4 w-4" />
+          </Link>
+          <Link
+            href="/contact/sales"
+            className="inline-flex min-h-11 items-center rounded-md border border-border px-6 text-sm font-medium text-foreground/80 no-underline transition-colors hover:text-foreground hover:no-underline"
+          >
+            Talk to us
+          </Link>
           {primitive.github && (
-            <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
-              <a href={primitive.github} target="_blank" rel="noopener noreferrer">
-                <Github className="mr-1.5 h-4 w-4" />
-                Source
-              </a>
-            </Button>
+            <a
+              href={primitive.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center rounded-md px-4 text-sm font-medium text-muted-foreground no-underline transition-colors hover:text-foreground hover:no-underline"
+            >
+              <Github className="mr-1.5 h-4 w-4" />
+              Source
+            </a>
           )}
           {primitive.docs && (
-            <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
-              <a href={primitive.docs} target="_blank" rel="noopener noreferrer">
-                <BookOpen className="mr-1.5 h-4 w-4" />
-                Docs
-              </a>
-            </Button>
+            <a
+              href={primitive.docs}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center rounded-md px-4 text-sm font-medium text-muted-foreground no-underline transition-colors hover:text-foreground hover:no-underline"
+            >
+              <BookOpen className="mr-1.5 h-4 w-4" />
+              Docs
+            </a>
           )}
         </div>
       </section>

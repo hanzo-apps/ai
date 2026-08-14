@@ -54,6 +54,10 @@ export default function AgentsPage() {
           { label: 'View on GitHub', href: GITHUB },
         ]}
         note={{ icon: Cloud, text: 'Open source, MIT. pip install hanzo-agent. Works against any endpoint that speaks the Chat Completions format, so it runs on Hanzo or on your own serving stack.' }}
+        mockup={{
+          slug: 'agents',
+          alt: 'A node graph: agents, the tools they reach for, and the edges between them.',
+        }}
         availableThrough={['Python', 'MCP tools', 'Hanzo Cloud']}
         what={{
           eyebrow: 'What is Hanzo Agents',

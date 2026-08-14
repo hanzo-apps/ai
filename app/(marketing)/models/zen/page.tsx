@@ -6,7 +6,8 @@ import { browserGroups, MODELS, isOpenWeightVendor } from '@/lib/leaderboard'
 
 const TITLE = 'The Zen family — Hanzo AI'
 const DESCRIPTION =
-  'The Zen family: the models Hanzo trains, most with weights published so you can serve them yourself. Co-designed with the Zoo Labs Foundation. The open-weight landscape below shows vendor-reported figures; only Enso is measured here end to end.'
+  'The Zen family: open-weight frontier models you can self-host anywhere, built by Zoo Labs Foundation and served on the Hanzo API. Benchmarks shown are UPSTREAM-reported for the open ecosystem — only Enso is Hanzo-measured end-to-end.'
+
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -63,10 +64,11 @@ export default function ZenModelsPage() {
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">The Zen family</span>
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-neutral-400">
-            {ZEN_COUNT} models across language, code, vision, image, audio, video and retrieval, co-designed
-            by Hanzo AI and the Zoo Labs Foundation, our nonprofit. Most have their weights published, so you
-            can call them here or serve them on your own hardware and never talk to us again. A handful are
-            API-only; the catalog marks which.
+            {ZEN_COUNT} open-weight models across language, code, vision, image, audio, and retrieval — built by{' '}
+            <a href="https://zoo.industries" target="_blank" rel="noopener noreferrer" className="underline hover:no-underline text-neutral-200">Zoo Labs Foundation</a>.
+            Free to self-host, or managed on Hanzo Cloud. Benchmarks here are
+            UPSTREAM-reported for the open ecosystem Zen builds on; only Enso is Hanzo-measured end-to-end.
+
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/zen/models" className="rounded-full bg-white px-7 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90">Full Zen catalog</Link>

@@ -41,93 +41,19 @@ export const PRIVATE: readonly string[] = ['/auth', '/account', '/login']
  * and no page can approve itself.
  */
 export const UNAPPROVED: readonly string[] = [
-  // Three shelves withdrawn as sets (owner call, 2026-08-05): commerce +
-  // fintech, cloud + infrastructure, and company + content. The site leads
-  // with the AI platform; everything here still answers on its URL and
-  // appears nowhere — no nav, no sitemap, no index. Deleting a line is the
-  // re-approval. The legal pages (/privacy, /terms, /cookies, /sms-opt-in)
-  // are deliberately NOT here: OAuth consent and compliance checks resolve
-  // them, and a site whose privacy policy is hidden fails both.
-  // ── commerce + fintech ──
-  '/billing',
-  '/blockchain',
-  '/calculator',
-  '/captable',
-  '/commerce',
-  '/defi',
-  '/fintech',
-  '/ledger',
-  '/payments',
-  '/risk',
-  '/treasury',
-  // ── cloud + infrastructure ──
-  '/analytics',
-  '/authz',
-  '/base',
-  '/cloud',
-  '/console',
-  '/dashboards',
-  '/database',
-  '/dataroom',
-  '/datastore',
-  '/dns',
-  '/docdb',
-  '/edge',
-  '/engine',
-  '/flow',
-  '/functions',
-  '/guard',
-  '/hsm',
-  '/iam',
-  '/identity',
-  '/idv',
-  '/ingress',
-  '/kms',
-  '/kv',
-  '/machines',
-  '/metrics',
-  '/mq',
-  '/network',
-  '/node',
-  '/o11y',
-  '/operator',
-  '/platform',
-  '/pubsub',
-  '/realtime',
-  '/registry',
-  '/s3',
-  '/security',
-  '/sentinel',
-  '/sentry',
-  '/sign',
-  '/sql',
-  '/status',
-  '/storage',
-  '/stream',
-  '/telemetry',
-  '/tunnel',
-  '/visor',
-  // ── company + content ──
-  '/about',
-  '/blog',
-  '/brand',
-  '/careers',
-  '/contact',
-  '/contact-sales',
-  '/customers',
-  '/enterprise',
-  '/leadership',
-  '/learn',
-  '/philosophy',
-  '/press',
-  '/pricing',
-  '/products',
-  '/research',
-  '/research-access',
-  '/solutions',
-  '/startups',
-  '/support',
-  '/team',
+  // EMPTIED — owner approval, 2026-08-13. All 78 routes that were
+  // withheld here are now published: they answer on their own URL, they are in
+  // sitemap.xml, they carry no `noindex`, and the chrome links them.
+  //
+  // The list is kept rather than deleted because it is the MECHANISM, not the
+  // decision. It is how a route is withheld while its copy is written, and the
+  // gate below still holds whatever is in it in both directions — so the next
+  // unwritten page has somewhere to go, and does not need this file rebuilt.
+  //
+  // Withholding a route from the index also withholds it from the MENU: the
+  // header calls `policy()` through `shown()`, so Solutions, Pricing, Learn,
+  // Research and Support were absent from the nav for exactly this reason, not
+  // because nobody had added them.
 ]
 
 /**
@@ -151,6 +77,36 @@ export const UNAPPROVED: readonly string[] = [
  * shorter than these, and none of these may grow copy without being published.
  */
 export const EMPTY: readonly string[] = [
+  // Redirect shells. Each exists so links minted under an old name keep
+  // working, and each renders one sentence and a forwarding link — `/defi` and
+  // `/fintech` to the products that absorbed them, `/sentry` to Sentinel (the
+  // rename is a trademark matter, see that page). They are pages only because
+  // this is a STATIC EXPORT: Next's `redirects()` needs a server and is
+  // silently absent from an export, so a configured rewrite would 404 every
+  // inbound link.
+  //
+  // Offering them for indexing put six results in front of readers that carry
+  // nothing to read, and it dragged the thin-page floor down onto the whole
+  // `/docs/*` shelf — one cause, two red gates, which is why they arrive
+  // together.
+  '/defi',
+  '/defi/exchange',
+  '/defi/staking',
+  '/fintech',
+  '/fintech/payments',
+  '/sentry',
+  // Same shape: this one forwards to status.hanzo.ai, which owns live status.
+  '/status',
+  // `/integrations` is the page about what Hanzo works with, and it is a
+  // product of the Dev category — the catalog's own `href` points there. This
+  // was a second copy of that subject built by hand from sample data, under a
+  // `/products/<slug>` name no category answers to. Nothing ever linked it.
+  '/products/integrations',
+  // The category the catalog used to call Platform. It is Infrastructure now,
+  // because the section it sits in is called Platform and a category cannot
+  // nest inside a section of its own name. The slug follows the label, so the
+  // old URL forwards rather than dying.
+  '/products/platform',
   '/dashboard',
   '/docs',
   '/docs/api',

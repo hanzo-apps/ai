@@ -38,6 +38,7 @@ import { execFileSync } from "child_process";
 import { readFileSync } from "fs";
 import { resolve, dirname, relative } from "path";
 import { fileURLToPath } from "url";
+import { code, isCode } from "./source.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -81,11 +82,16 @@ function tracked() {
     .filter((p) => p && EXT.has(p.slice(p.lastIndexOf("."))));
 }
 
+/** The lines as a reader of the site sees them: comments are not copy. */
+const copy = (rel) => {
+  const text = readFileSync(resolve(ROOT, rel), "utf8");
+  return (isCode(rel) ? code(text) : text).split("\n");
+};
+
 const offenders = [];
 for (const rel of tracked()) {
   if (rel === SELF || GENERATED.includes(rel) || ALLOWED[rel]) continue;
-  const lines = readFileSync(resolve(ROOT, rel), "utf8").split("\n");
-  lines.forEach((line, i) => {
+  copy(rel).forEach((line, i) => {
     if (PRICE.test(line)) offenders.push(`${rel}:${i + 1}: ${line.trim().slice(0, 100)}`);
   });
 }
@@ -104,7 +110,7 @@ if (offenders.length) {
 
 const stale = Object.keys(ALLOWED).filter((p) => {
   try {
-    return !PRICE.test(readFileSync(resolve(ROOT, p), "utf8"));
+    return !copy(p).some((l) => PRICE.test(l));
   } catch {
     return true;
   }

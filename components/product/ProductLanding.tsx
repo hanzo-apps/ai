@@ -18,6 +18,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, Check } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { Mockup } from '@/components/product/Mockup'
 
 const fade = {
   initial: { opacity: 0, y: 20 },
@@ -72,6 +73,9 @@ export interface ProductLandingProps {
   ctas: CTA[]
   note?: { icon?: LucideIcon; text: string }
   availableThrough?: string[]
+  /** Catalog slug of the product's mockup film, plus the sentence it says.
+      The film carries no words; this alt is what it means. */
+  mockup?: { slug: string; alt: string }
   /** What-it-is — numbered pillar grid. */
   what: SectionCopy & { pillars: Pillar[] }
   /** Feature grid. */
@@ -84,6 +88,22 @@ export interface ProductLandingProps {
   code?: { head?: SectionCopy; lang: string; source: string; ctas?: CTA[] }
   /** Final CTA card. */
   finalCta: { title: string; sub: string; buttons: CTA[]; icon?: LucideIcon }
+  /**
+   * Sections only one product has, rendered after the shared ones and before
+   * the final CTA.
+   *
+   * The kit describes what every product page shares; it is not a ceiling. A
+   * product with more to say than the shared shape holds — Team has an AI
+   * coworker gallery, the people who lead it, and a compliance surface — used
+   * to have to stop using the kit to say it, which is how a page ends up
+   * looking like it belongs to a different site. Handing those sections in
+   * here keeps one standard for the parts that ARE shared.
+   *
+   * It goes before the final CTA rather than after because a call to action
+   * that is not last is not final: anything following it reads as content the
+   * reader was asked to leave for.
+   */
+  children?: ReactNode
 }
 
 function SectionHead({ eyebrow, title, sub }: SectionCopy) {
@@ -202,6 +222,15 @@ export function ProductLanding(p: ProductLandingProps) {
           )}
         </div>
       </section>
+
+      {/* ── The product, running ───────────────────────────────────────────── */}
+      {p.mockup && (
+        <section className="border-t border-neutral-900 px-4 pt-16 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <Mockup slug={p.mockup.slug} alt={p.mockup.alt} />
+          </div>
+        </section>
+      )}
 
       {/* ── What it is ─────────────────────────────────────────────────────── */}
       <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
@@ -334,6 +363,8 @@ export function ProductLanding(p: ProductLandingProps) {
           </div>
         </section>
       )}
+
+      {p.children}
 
       {/* ── Final CTA ──────────────────────────────────────────────────────── */}
       <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">

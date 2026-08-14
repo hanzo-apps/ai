@@ -1,6 +1,5 @@
 /**
- * A lab's brand mark, or one of our two house marks, painted in the current text
- * colour.
+ * A lab's brand mark, or one of ours, painted in the current text colour.
  *
  * CANONICAL SOURCE: `hanzoai/icons` (our MIT fork of lobe-icons),
  * `packages/static-svg/icons/<slug>.svg` — mono `currentColor` bodies on a
@@ -25,16 +24,14 @@
  * community fine-tuners and a handful of new labs reach it.
  */
 import { getOrgAndSlug, orgDisplayName } from '@/lib/models'
-import { ENSO_MARK, ZEN_MARK, MARK_PATHS } from '@hanzo/logo/logos'
+import { ENSO_MARK, MARK_PATHS } from '@hanzo/logo/logos'
 
 /** Mono `currentColor` bodies, keyed by their `hanzoai/icons` slug. */
 const MARKS: Record<string, string> = {
-  // The two house marks come from @hanzo/logo, the ONE canonical source: Enso is
-  // the CLOSED brush ring, Zen the same ring left OPEN — NOT the same glyph (the
-  // difference is the whole point) and NOT the Hanzo H (drawing the H for both,
-  // which this page once did, says the two families are one thing).
+  // Enso is ours, and comes from @hanzo/logo, the ONE canonical source: the
+  // CLOSED brush ring, and NOT the Hanzo H (drawing the H for it, which this
+  // page once did, says a family and the lab serving it are one thing).
   enso: ENSO_MARK,
-  zen: ZEN_MARK,
   // Hanzo — the house mark, the canonical seven-path shaded H from `@hanzo/logo`
   // (`MARK_PATHS`), the ONE source every Hanzo surface draws. Its viewBox is 67
   // units and there is no 24-unit cut, so it is scaled by 24/67 in a transform
@@ -125,6 +122,14 @@ const MARKS: Record<string, string> = {
     '<path d="M.958 15.936a.459.459 0 01.459.44v2.729a.46.46 0 01-.918 0v-2.729a.459.459 0 01.459-.44zm4.814-2.035a.46.46 0 01.553.45v4.754a.458.458 0 11-.918 0V15.48L3.74 17.202a.462.462 0 01-.655.016.462.462 0 01-.065-.082L.628 14.67a.459.459 0 01.658-.637l2.124 2.187 2.127-2.188a.46.46 0 01.235-.13zm2.068.004a.46.46 0 01.458.445v4.755a.46.46 0 01-.458.458.459.459 0 01-.458-.458V14.35a.459.459 0 01.458-.445zm1.973 2.014a.46.46 0 01.46.457v2.729a.46.46 0 01-.784.324.46.46 0 01-.134-.324v-2.729a.46.46 0 01.458-.458zm.002-2.045a.458.458 0 01.328.157l2.127 2.19 2.125-2.19a.459.459 0 01.784.318v4.756a.46.46 0 01-.455.458.46.46 0 01-.458-.458V15.48l-1.667 1.723a.46.46 0 01-.65.008l-.005-.005c0-.002-.002-.002-.004-.003l-2.455-2.534a.46.46 0 01-.008-.667.461.461 0 01.338-.128zm6.797 1.206a.46.46 0 01.53.651A1.966 1.966 0 0019.81 18.4a.462.462 0 01.623.18.46.46 0 01-.181.624 2.863 2.863 0 01-1.38.353l-.142-.004a2.88 2.88 0 01-2.393-4.263.461.461 0 01.274-.21zm.864-.931a2.884 2.884 0 013.915 3.914.46.46 0 01-.402.24l-.057-.004a.458.458 0 01-.164-.055.46.46 0 01-.182-.622 1.967 1.967 0 00-2.669-2.67.459.459 0 11-.441-.803zM9.59 6.368c1.481 0 1.696 1.202 1.696 1.654v2.648h-.917v-.432c-.26.346-.792.535-1.36.535-.133 0-1.289-.03-1.384-1.136-.082-.932.675-1.61 2.053-1.61h.691c0-.563-.367-.886-.983-.886-.44.013-.864.174-1.2.458l-.36-.664c.484-.379 1.012-.567 1.764-.567zm4.427.1c1.263 0 2.082.97 2.083 2.15 0 1.181-.824 2.154-2.083 2.154-1.26 0-2.084-.972-2.084-2.152 0-1.18.82-2.153 2.084-2.153zm6.801.015c.68 0 1.202.465 1.197 1.548v2.642H21.1V8.29c0-.312-.002-.98-.63-.98s-.628.667-.628.838v2.524h-.89V8.148c0-.17-.001-.838-.63-.838-.628 0-.628.668-.628.98v2.383h-.917v-4.03h.917V7a1.22 1.22 0 01.947-.516c.398 0 .76.193.982.686a1.321 1.321 0 011.195-.686zm-18.093.872l1.457-1.772H5.32L3.311 8.07l2.14 2.602H4.24L2.725 8.796 1.21 10.672H0L2.138 8.07.13 5.583h1.138l1.458 1.772zm4.149 3.317h-.916V6.644h.916v4.028zm16.99 0h-.916V6.644h.916v4.028zM9.925 8.71c-1.055 0-1.359.412-1.326.742.032.329.324.537.757.537a1.013 1.013 0 001.014-.968l.002-.31h-.447zM14.018 7.3c-.663 0-1.184.487-1.184 1.32 0 .832.52 1.32 1.184 1.32.662 0 1.182-.49 1.182-1.32 0-.832-.52-1.32-1.182-1.32zM6.417 5.001a.568.568 0 01.587.582.588.588 0 01-1.175 0A.57.57 0 016.417 5zm16.991 0a.57.57 0 01.592.582.588.588 0 01-1.174 0 .57.57 0 01.357-.542.572.572 0 01.225-.04z"></path>',
   zai:
     '<path d="M12.105 2L9.927 4.953H.653L2.83 2h9.276zM23.254 19.048L21.078 22h-9.242l2.174-2.952h9.244zM24 2L9.264 22H0L14.736 2H24z"></path>',
+  // Zoo Labs, who make the Zen models. Their venn of three rings, cut to a disc.
+  // Not in the fork — Zoo's own mark, mapped into the 24-unit space.
+  //
+  // The cut MUST be an SVG `<clipPath>`, in USER units. A CSS
+  // `clip-path: circle(11.5px …)` resolves against the RENDERED box instead, so
+  // at an 18px icon it cuts nothing and the venn squares off into a scribble.
+  zoo:
+    '<defs><clipPath id="zoo-cut"><circle cx="12" cy="12" r="11.5"></circle></clipPath></defs><g clip-path="url(#zoo-cut)" fill="none" stroke="currentColor"><circle cx="12.203" cy="6.27" r="9.509" stroke-width="1.341"></circle><circle cx="6.189" cy="15.454" r="9.509" stroke-width="1.341"></circle><circle cx="17.486" cy="15.454" r="9.509" stroke-width="1.341"></circle><circle cx="12" cy="12" r="10.769" stroke-width="1.463"></circle></g>',
 }
 
 /**
@@ -160,6 +165,7 @@ const OF: Record<string, string> = {
   'x-ai': 'xai',
   xiaomi: 'xiaomimimo',
   'z-ai': 'zai',
+  zen: 'zoo',
 }
 
 const look = (key: string): string | undefined =>
@@ -168,7 +174,7 @@ const look = (key: string): string | undefined =>
 /**
  * The model's own family wins over the lab that trained it, because our gateway
  * namespace holds every family under one lab: `gpt-5`, `claude-opus-4.8` and
- * `zen5` are all `hanzo` models, and reading the lab first drew the Hanzo H on
+ * `zen5` all answer under `hanzo`, and reading the lab first drew the Hanzo H on
  * all three. A family is the leading run of letters in the id, so `zen5-pro` is
  * `zen` and `o3` is `o`.
  */

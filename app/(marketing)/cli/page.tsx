@@ -48,6 +48,10 @@ export default function CliPage() {
           { label: 'View on GitHub', href: GITHUB },
         ]}
         note={{ icon: Cloud, text: 'Open source (MIT). One static Rust binary — macOS and Linux on amd64 and arm64, Windows on amd64. No runtime, no daemon.' }}
+        mockup={{
+          slug: 'cli',
+          alt: 'A shell session: commands run against Hanzo Cloud and their output streams back.',
+        }}
         what={{
           eyebrow: 'What is Hanzo CLI',
           title: 'A resource tree, not a pile of flags',

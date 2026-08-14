@@ -118,7 +118,14 @@
   }
 
   /* The shared header is the one piece of chrome that sits at the very top of
-     every page, so it alone carries the top inset. */
+     every page, so it alone carries the top inset.
+
+     And it draws NO bottom edge. `@hanzogui/shell` ships a 9%-white hairline
+     there, which was right when the bar was opaque and wrong now that it is
+     glass: a hard 1px rule under a band whose whole job is to be soft reads as
+     a seam, and on the fold it ran straight across the globe. The blur is the
+     boundary. Same decision as the dock's, made in the same place so the two
+     bands cannot answer it differently — see `.hz-dock` below. */
   header[data-hanzo-shell] {
     padding-top: env(safe-area-inset-top);
   }
@@ -314,6 +321,16 @@
    Nothing loses a focus indicator: the two rules are one ring, moved. */
 :root:root :is(input, textarea).bg-transparent:focus-visible {
   outline: none;
+  /* The ring is drawn TWICE, by two different properties, and moving the
+     outline alone leaves the other one in place. @hanzo/design's base layer
+     draws focus as a SHADOW — `:where(input,select,textarea):focus-visible
+     { border-color: var(--border-focus); box-shadow: var(--ring-focus) }` —
+     while the rule above draws an OUTLINE. Measured on the chat bar after the
+     outline moved: still `0 0 0 3px rgba(255,255,255,.1)`, a soft white
+     rectangle inside the pill where the hard one had been. Both belong to the
+     wrapper now, so both are cleared here. */
+  box-shadow: none;
+  border-color: transparent;
 }
 
 :root:root :has(> input.bg-transparent:focus-visible),
@@ -406,4 +423,455 @@ html.no-js [style$='opacity: 0'] {
 html.no-js .t_unmounted :is(.is_View, .is_Text) {
   opacity: 1 !important;
   transform: none !important;
+}
+
+/* The products mega-menu lays its categories in EQUAL rows.
+
+   `@hanzogui/shell` 8.1.5 states `repeat(5, minmax(0,1fr))` INLINE. Five only
+   ever divided ten, so the seven categories `lib/publish` currently publishes
+   rendered as a 5x2 grid with three dead cells; and because the panel is a
+   full-bleed drape, at 2560 those five tracks were 507px wide apiece.
+
+   The counts come from `components/home/shell.tsx`, which is where the taxonomy
+   is and so is the only place that can count it; these rules choose between them
+   by width, which is the half no inline style can express. `!important` because
+   the declaration being defeated is inline — the same reason the `no-js` rules
+   above carry it.
+
+   This belongs IN the package, and the fix is written for it. It cannot be
+   published yet: `@hanzogui/shell` 8.1.5 was published from `hanzoai/gui` on
+   GitHub, which is now ARCHIVED and read-only, while the live forge copy is an
+   earlier generation of the package (no `shellStyles`, no `rove`, 7.6.5). Which
+   lineage owns the package is the owner's call, not this repo's. Delete this
+   block and the carrier in shell.tsx together the day it lands upstream. */
+[data-hanzo-shell][aria-label='Products'] > div {
+  max-width: 1800px;
+  margin-inline: auto;
+}
+
+[data-hanzo-shell][aria-label='Products'] > div > div {
+  grid-template-columns: repeat(var(--hanzo-products-cols-base, 4), minmax(0, 1fr)) !important;
+}
+
+@media (min-width: 1100px) {
+  [data-hanzo-shell][aria-label='Products'] > div > div {
+    grid-template-columns: repeat(var(--hanzo-products-cols-mid, 5), minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  [data-hanzo-shell][aria-label='Products'] > div > div {
+    grid-template-columns: repeat(var(--hanzo-products-cols-wide, 7), minmax(0, 1fr)) !important;
+  }
+}
+
+/* Documentation is not a header action.
+ *
+ * It sat far right as the shell's secondary CTA — a link to ANOTHER HOST in the
+ * most valuable slot on the page, next to the one thing we want a reader to do.
+ * It belongs under Developers, where someone looking for it is already standing.
+ *
+ * Hidden rather than dropped, and that is forced: `HanzoHeader` renders a CTA
+ * through a component that reads `link.href` UNGUARDED, so passing `undefined`
+ * throws `Cannot read properties of undefined (reading 'href')` and the whole
+ * page renders blank — no header, no <h1>. Measured, not guessed. hanzo.app hit
+ * the identical trap on `primaryCTA` and settled it exactly this way.
+ *
+ * Anchored on the HREF, not on a position or a label: the slot moves and the
+ * word is translatable, but the destination is the thing that does not belong.
+ *
+ * `>` IS THE RULE. Written as a descendant selector it also matched every
+ * docs link the shell renders ANYWHERE, because the mega-menu drape, the
+ * command palette and the footer each carry `data-hanzo-shell` too — so it
+ * silently deleted "Documentation" AND "Quickstarts" (both live under
+ * docs.hanzo.ai) from the Meet Hanzo menu, and the footer's docs links with
+ * them. The intent was to move Documentation OUT of the bar and INTO the menu;
+ * unscoped, it took the word off the site. Measured: the Resources column
+ * rendered four of its six rows and nothing said so. */
+[data-hanzo-shell] > a[href^="https://docs.hanzo.ai"] {
+  display: none !important;
+}
+
+/* ── The composer, docked ─────────────────────────────────────────────────────
+   The front door rides the bottom of the viewport the whole way down the page
+   and comes to rest at the end of it. `position: sticky`, not `fixed`: fixed
+   would hover over the footer forever, and the point of the ride is that it
+   ARRIVES somewhere.
+
+   Two placement rules the sticky depends on, both easy to undo by accident. The
+   dock must be the LAST child of the stack it rides — a sticky box is held
+   inside its containing block and pins only while its own flow position is
+   below the viewport — and it must sit OUTSIDE any transformed ancestor, since
+   a transform makes its subject the containing block for everything positioned
+   inside it. `<main>` is that stack here, so the composer rests just above the
+   footer.
+
+   This vocabulary is hanzo.app's, ported rather than reinvented: the same two
+   class names carry the same two jobs there (assets/globals.css), so the two
+   front doors are one design in two places instead of two designs that have to
+   be kept agreeing.
+
+   The inset lives INSIDE as padding. Written as `bottom:` it leaves a strip
+   under the box where the page shows through, and as padding it does double
+   duty — breathing room while pinned, bottom margin at rest. */
+/* THE TWO BARS ARE ONE MATERIAL. `@hanzogui/shell`'s header is glass — it
+   composites `rgba(9,9,11,0.72)` over `blur(20px) saturate(1.8)` with a 9%-white
+   hairline — and the dock is the same kind of object at the other edge of the
+   viewport: chrome the page passes behind. Painting it opaque made it a shelf
+   instead, and the difference was legible, because the two are on screen at the
+   same time.
+   Stated once, here, as the value both the band and the bar inside it read.
+   Blur wants something to blur, so the fill has to stay translucent: raise the
+   alpha and it stops being glass and goes back to being a shelf. */
+:root {
+  --hz-chrome: rgba(9, 9, 11, 0.72);
+  --hz-chrome-blur: blur(20px) saturate(1.8);
+  /* The header's height, stated once. The fold subtracts it (components/home/
+     Fold.tsx) so a full-height section is the viewport MINUS the chrome above
+     it rather than the whole viewport pushed down by it. Measured on the live
+     header: 60px. */
+  --hz-header: 60px;
+}
+
+.hz-dock {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  /* COMPACT. The band measured 59px around a 36px composer — 23px of it was
+     nothing, on the fold, where every pixel the bar takes is a pixel of the
+     picture. 6px above and 8px below wraps the pill closely and still clears
+     the focus ring's 2px offset. */
+  padding-top: 4px;
+  padding-bottom: max(6px, env(safe-area-inset-bottom));
+  background: var(--hz-chrome);
+  backdrop-filter: var(--hz-chrome-blur);
+  -webkit-backdrop-filter: var(--hz-chrome-blur);
+}
+
+/* The header draws no bottom edge, and `!important` is the only thing that can
+   say so. `@hanzogui/shell` writes the hairline as an INLINE style
+   (`border-bottom:1px solid rgba(255,255,255,0.09)` on the element), and an
+   inline declaration beats every selector at every specificity — the only
+   thing above it is `!important`. Two weaker attempts were measured first and
+   both computed as if unwritten: inside `@layer base` (any unlayered rule wins)
+   and unlayered at `:root:root` (still a selector). This is the same reason the
+   touch-target floor and the `.t_group_true` reset in this file carry it.
+
+   Glass needs no edge: the band blurs what passes behind it, so the boundary is
+   already soft, and a hard 1px rule across it reads as a seam — on the fold it
+   ran straight through the globe. */
+:root:root header[data-hanzo-shell] {
+  border-bottom-color: transparent !important;
+}
+
+/* The bar keeps clear of the corner launcher on a phone.
+   `hanzo.app/edit.js` (loaded in app/layout.tsx) pins a 44px "improve this page"
+   button in the BOTTOM-RIGHT corner, inside a shadow root, at z-index
+   2147483000 — the top of the stacking order. Nothing here can outrank it and
+   nothing here should try: it is another product's widget and hiding it under
+   our own chrome is not ours to do.
+   On a wide viewport the composer is a centred 672px column and the two never
+   meet. On a phone the bar runs the full width and the launcher lands exactly on
+   the send button. Sitting the bar ABOVE it is the one arrangement where both
+   stay reachable — measured: the launcher occupies 12-56px up from the bottom
+   edge, so 64px clears it with room to spare. */
+@media (max-width: 560px) {
+  .hz-dock {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+}
+
+/* NO hairline on either band, and that is the glass being glass.
+   The line existed to mirror the header's, from when both were opaque and an
+   edge was the only thing saying "chrome starts here". Glass says it already —
+   the band blurs what passes behind it, and the boundary is soft by
+   construction. Drawing a hard 1px rule across a soft edge is the one mark that
+   makes a translucent bar read as a pasted-on strip: on the fold it cut a line
+   straight through the globe, which is the whole picture. Both are gone (the
+   header's is neutralized below), so the page runs behind the chrome and the
+   only thing separating them is the blur. */
+
+/* The composer's ring — the ONE place this site draws a spectrum on chrome.
+   `@property` lets the conic angle animate; where it is unsupported the ring is
+   simply static, which is a ring either way.
+
+   LUMINANCE, NOT HUE, and the stops are hanzo.app's and hanzo.chat's exactly.
+   Four saturated stops swept around a rounded box do not distribute evenly —
+   the long edges take a wide angular slice and the short sides almost none — so
+   one edge wears a bright arc and the opposite a dim one, which reads as a ring
+   that is slightly off. White at two close alphas removes the arc and keeps the
+   drift as a sheen. Colour on this site means something is TALKING (the globe's
+   conversations); chrome does not get to borrow that. */
+@property --hz-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes hzComposerSpin {
+  to {
+    --hz-angle: 360deg;
+  }
+}
+
+:root {
+  --hz-spectrum: rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.1);
+}
+
+.hz-composer {
+  position: relative;
+  isolation: isolate;
+  padding: 1.5px;
+  border-radius: 9999px;
+}
+
+/* The ring itself: a conic fill masked down to the 1.5px padding band, so what
+   shows is an outline and not a disc. */
+.hz-composer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--hz-angle), var(--hz-spectrum));
+  animation: hzComposerSpin 10s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  /* After the standard shorthand: WebKit aliases `mask` onto `-webkit-mask`, so
+     declaring this second lets the shorthand reset it to `source-over` — the
+     filled disc again — on exactly the browsers too old to have
+     `mask-composite` at all. */
+  -webkit-mask-composite: xor;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* The halo, 6px outside the box. */
+.hz-composer::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  padding: 6px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--hz-angle), var(--hz-spectrum));
+  filter: blur(16px);
+  opacity: 0.22;
+  animation: hzComposerSpin 10s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* The panel covers the middle, so only the band shows. */
+.hz-composer > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hz-composer::before,
+  .hz-composer::after {
+    animation: none;
+  }
+}
+
+/* The composer's three controls are circles, and they are 30px — smaller than
+   the 36px hanzo.app gives its two, because that composer is a paragraph box
+   with a control row under it and this one is a single line, where the buttons
+   have to fit INSIDE the line's height rather than beneath it.
+
+   THE FLOOR DOES NOT APPLY HERE, and this is the one exemption on the site.
+   The mobile floor above states 44px under `@media (pointer: coarse)` because a
+   thumb needs a thumb-sized target — but it is stated over `button`, and the
+   tap target in a composer is the FIELD: the whole bar focuses the input, at 45
+   px tall and the width of the column. These three are its secondary chrome,
+   and stretching them to 44px would make a "single line" three lines tall on
+   the one device where that matters most. 30px still clears WCAG 2.5.8 AA (24
+   px), which is the floor that holds for every pointer.
+
+   Scoped to `.hz-composer`, so the exemption cannot leak: it is an exemption
+   for this bar, not a second opinion about touch targets. */
+.hz-composer :is(button, a).hz-round {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* The mega-menu drapes are GLASS, and their contents are centred.
+ *
+ * Both faces this export serves — hanzo.ai and cloud.hanzo.ai — wear the same
+ * chrome as hanzo.app, and these are the two rules that were missing from it.
+ *
+ * DENSE, not opaque, and not the 0.72 the shell ships either. The shell's own
+ * ground is `rgba(9,9,11,0.72)` behind a 20px blur, which is correct wherever
+ * the blur composites and unreadable where it does not: WebKit accepts both
+ * spellings of `backdrop-filter` and still declines to paint it, so the page's
+ * own headings read straight THROUGH the panel. 88% is the density at which a
+ * white heading behind resolves to 12% over black — a wash you sense rather
+ * than read — so the surface is legible with no blur at all and still lets the
+ * light through in the engines that do composite.
+ *
+ * `!important` is load-bearing: the shell writes these backgrounds INLINE, and
+ * an inline declaration beats any selector at any specificity. Without it the
+ * rule is a silent no-op that looks right in the file.
+ *
+ * CENTRED: the drape is full-bleed on purpose — it is the header's own surface
+ * continuing down the page — but its CONTENTS were stretched edge to edge with
+ * it, so at 1600 the link columns ran 1332px wide holding ~500px of links and
+ * the right two-thirds was empty black. The content now sits on the same 1152
+ * column the page uses, so the menu lines up with the page beneath it rather
+ * than with the viewport edge. */
+html:root #hanzo-meet-menu,
+html:root #hanzo-products-menu {
+  background-color: color-mix(in srgb, var(--popover) 88%, transparent) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  backdrop-filter: blur(20px) saturate(1.8);
+}
+html:root #hanzo-meet-menu > div,
+html:root #hanzo-products-menu > div {
+  width: 100%;
+  max-width: 1152px;
+  margin-inline: auto;
+}
+
+/* The hero orbit's ambient life (components/cloud/Orbit.tsx).
+
+   IT DOES NOT SPIN. Ten labels carried around a circle are ten labels a reader
+   has to track to finish reading, which is a lava lamp wearing a diagram's
+   clothes. What moves instead is the thing with no words on it: a dash travels
+   down each spoke toward the centre, so the ambient motion says the one thing
+   the picture is for — every category's traffic arrives at one API — and the
+   type never leaves its pixel. The ring breathes by 1.2%, under the threshold
+   where an eye reads it as movement rather than as being alive.
+
+   Both are CSS, not script: a decoration that runs forever should not hold a
+   JavaScript timer forever. The arrival choreography IS script, because it runs
+   once and has to know whether motion is wanted at all.
+
+   Only at 640px and up. Below that the ring is a grid, and a grid that breathes
+   is just a grid that will not sit still. */
+@media (min-width: 640px) {
+  .hz-orbit {
+    animation: hzOrbitBreathe 9s ease-in-out infinite;
+  }
+
+  .hz-spoke {
+    animation: hzSpoke 3.6s linear infinite;
+  }
+}
+
+@keyframes hzOrbitBreathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.012);
+  }
+}
+
+/* 5 on, 13 off — one full period is 18, so the dash arrives where the next one
+   left and the loop has no seam. Increasing the offset walks the pattern back
+   along the line, which is from the node toward the centre. */
+@keyframes hzSpoke {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 18;
+  }
+}
+
+/* The fold's ARRIVAL — headline, body, actions, command, then the ring.
+
+   CSS, not script, and the reason is not tidiness. An entrance written as
+   `initial={{ opacity: 0 }}` is rendered into the HTML as `opacity: 0`, so the
+   headline is INVISIBLE until React has shipped, parsed and hydrated — on a
+   slow phone that is the largest element on the page painting nothing for a
+   second, and for a reader with JavaScript off it never arrives at all. A
+   keyframe starts at first paint, needs nothing to have loaded, and cannot
+   strand the copy in its own initial state.
+
+   `both` holds the opening frame through the delay, so the stagger is a stagger
+   and not four things sliding at once. Nothing overshoots: the curve is a
+   quintic ease-out, which is fast off the mark and flat at the end.
+
+   The ring's nodes fade only — they are CENTRED on their coordinate with a
+   transform, and a keyframe that animated transform would throw that away for
+   the length of the animation and snap it back at the end. Their travel comes
+   from the ring scaling up underneath them, which is one transform on one
+   element that owns no other. */
+.hz-rise {
+  animation: hzRise 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hz-arrive {
+  animation: hzArrive 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hz-node {
+  animation: hzFade 0.34s ease-out both;
+}
+
+@keyframes hzRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hzArrive {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hzFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* One place decides that none of it runs. */
+@media (prefers-reduced-motion: reduce) {
+  .hz-orbit,
+  .hz-spoke,
+  .hz-rise,
+  .hz-arrive,
+  .hz-node {
+    animation: none;
+  }
 }

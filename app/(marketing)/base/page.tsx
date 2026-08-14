@@ -33,6 +33,10 @@ export default function BasePage() {
           { label: 'View on GitHub', href: GITHUB },
         ]}
         note={{ icon: Cloud, text: 'Open source (MIT). Runs as one binary — self-host or deploy managed on Hanzo Cloud.' }}
+        mockup={{
+          slug: 'base',
+          alt: 'A table of records, the shape a collection takes once it is stored.',
+        }}
         what={{
           eyebrow: 'What is Hanzo Base',
           title: 'Declare a collection, get an API',

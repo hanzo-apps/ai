@@ -16,9 +16,33 @@ import {
 } from 'lucide-react'
 import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
+// The sections only Team has. They were written for this page and then stopped
+// being rendered when the product pages were unified on the shared kit — the
+// kit had nowhere to put them, so unifying the page meant dropping them. They
+// are handed to it as children now, which is the missing half of that move.
+//
+// AgentGallery earns its place twice: it is the page's most product-specific
+// section, and it is the ONLY thing that links the sixteen agent profiles under
+// /team. Without it those pages are live and reachable from nothing.
+import AgentGallery from '@/components/team/AgentGallery'
+import HumanLeadership from '@/components/team/HumanLeadership'
+import HumanAIIntegration from '@/components/team/HumanAIIntegration'
+import WorkspaceIntegration from '@/components/team/WorkspaceIntegration'
+import AuditFeatures from '@/components/team/AuditFeatures'
+import EnterpriseReadiness from '@/components/team/EnterpriseReadiness'
 
-const TEAM = 'https://hanzo.team'
-const DOCS = 'https://docs.hanzo.ai'
+// This page is the front door of hanzo.team itself, as well as /team here, so
+// "open the app" cannot be a link to hanzo.team — on that host it is a link to
+// the page you are already reading. It names the app directly instead.
+//
+// tracker.hanzo.ai is that app: the workspace board on Hanzo IAM as its only
+// sign-in, which is where hanzo.team's apex already sent every visitor before
+// this page existed. Naming it here keeps that destination one click away
+// rather than making it the whole experience.
+const APP = 'https://tracker.hanzo.ai'
+// The Team product manual, not the platform-wide docs — this page is about one
+// product and docs.hanzo.team is that product's own book.
+const DOCS = 'https://docs.hanzo.team'
 const GITHUB = 'https://github.com/hanzoai'
 
 export default function TeamLanding() {
@@ -30,11 +54,11 @@ export default function TeamLanding() {
         title="One workspace for people and AI"
         lede="Channels, projects and tasks, documents, and people — everything your team shares, in one workspace instead of a dozen disconnected tabs. Hanzo Team unifies messaging, an issue tracker, docs, HR, recruiting, and CRM, and treats AI as a coworker: agents join the same channels, pick up the same issues, and draft alongside the people they work with."
         ctas={[
-          { label: 'Open Team', href: TEAM, icon: Rocket },
+          { label: 'Open Team', href: APP, icon: Rocket },
           { label: 'Read the docs', href: DOCS },
           { label: 'View on GitHub', href: GITHUB },
         ]}
-        note={{ icon: Cloud, text: 'Open source (EPL-2.0). Self-host the full platform, or create a managed workspace at hanzo.team.' }}
+        note={{ icon: Cloud, text: 'Open source (EPL-2.0). Self-host the full platform, or use the managed workspace.' }}
         what={{
           eyebrow: 'What is Hanzo Team',
           title: 'Everything your team shares, in one place',
@@ -72,14 +96,25 @@ export default function TeamLanding() {
         finalCta={{
           icon: Users,
           title: 'Get your team working in one place',
-          sub: 'Create a workspace at hanzo.team, or self-host the open-source platform anywhere you like.',
+          sub: 'Open the managed workspace, or self-host the open-source platform anywhere you like.',
           buttons: [
-            { label: 'Open Team', href: TEAM, icon: Rocket },
+            { label: 'Open Team', href: APP, icon: Rocket },
             { label: 'Read the docs', href: DOCS },
             { label: 'GitHub', href: GITHUB },
           ],
         }}
-      />
+      >
+        {/* Who works in the workspace — the coworkers first, then the people
+            who lead them, then how the two actually share the work. */}
+        <AgentGallery />
+        <HumanLeadership />
+        <HumanAIIntegration />
+        {/* What the workspace looks like, then what makes it safe to put a
+            company inside it. */}
+        <WorkspaceIntegration />
+        <AuditFeatures />
+        <EnterpriseReadiness />
+      </ProductLanding>
       <ProductFooter slug="team" name="Team" />
     </>
   )

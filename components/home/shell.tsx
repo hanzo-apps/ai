@@ -1,7 +1,7 @@
 'use client'
 
 import { HanzoHeader, HanzoFooter, resolveSurface, type ProductCategory } from '@hanzogui/shell'
-import { categorySlug, cloudCategories } from '@/lib/data/cloud-primitives'
+import { cloudCategories } from '@/lib/data/cloud-primitives'
 import { policy } from '@/lib/publish'
 import { CONSOLE, goToChat } from './nav-data'
 
@@ -56,48 +56,70 @@ export const PRODUCTS_TAXONOMY: ProductCategory[] = cloudCategories.map((categor
   // landing: with /products withdrawn, a tile must not point into it, so the
   // category href falls back to its first leaf and the "All N →" row only
   // renders when the landing is a page we still publish.
-  const landing = `/products/${categorySlug(category.title)}`
+  const landing = `/products/${category.id}`
   const href = shown(landing) ? landing : (category.items[0]?.href ?? landing)
   return {
-    id: categorySlug(category.title),
+    id: category.id,
     label: category.title,
     href,
-    // The note is the scope caveat ("fiat only") and belongs wherever the
-    // category is named, so it rides the one line the menu gives us — unless
-    // the tagline already says it, in which case appending it says the same
-    // thing twice and overruns the line into an ellipsis.
-    tagline:
-      category.note && !category.tagline.toLowerCase().includes(category.note.toLowerCase())
-        ? `${category.tagline} · ${category.note}`
-        : category.tagline,
+    tagline: category.tagline,
     items: [
       ...category.items.slice(0, MENU_LEAVES).map((item) => ({
-        id: item.slug ?? categorySlug(item.title),
+        id: item.slug,
         label: item.title,
         href: item.href,
         hint: item.desc,
-        // An absolute href is another host (Web3 → web3.hanzo.ai), so the leaf
-        // opens in a new tab. Read off the URL, never declared twice.
+        // An absolute href is another host, so the leaf opens in a new tab.
+        // Read off the URL, never declared twice.
         external: /^https?:\/\//.test(item.href),
       })),
-      // Categories run 7-15 deep and the tiles must stay level across a 2x5
-      // grid, so every tile shows the same five and then says how many more
-      // there are. The count is the honest part: it names what the link is for,
-      // so nothing is dropped quietly — the category page lists all of them.
-      // Only when that page is published: an "All N →" into a withdrawn
-      // landing is a link to a page we just unlisted.
+      // Categories run uneven and the tiles must stay level across the grid, so
+      // every tile shows the same five and then hands off to the page that
+      // lists the rest. It names the CATEGORY rather than a remainder: the
+      // membership is measured per build now, so a number here would be a count
+      // of what happened to answer this morning.
+      // Only when that page is published: an "All … →" into a withdrawn landing
+      // is a link to a page we just unlisted.
       ...(shown(landing)
-        ? [
-            {
-              id: `${categorySlug(category.title)}-all`,
-              label: `All ${category.items.length} →`,
-              href: landing,
-            },
-          ]
+        ? [{ id: `${category.id}-all`, label: `All ${category.title} →`, href: landing }]
         : []),
     ],
   }
 })
+
+/**
+ * The column count that splits the taxonomy into EQUAL rows, no wider than `max`.
+ *
+ * Seven categories give one row of seven; ten give two rows of five — the shape
+ * the shelves were written for. `@hanzogui/shell` 8.1.5 states a FIXED five
+ * instead, which only ever divided ten: with seven published it laid a 5x2 grid
+ * and left THREE dead cells in the second row, and at 2560 those five tracks
+ * were 507px wide apiece, so a one-word leaf sat marooned in the middle of a
+ * column. Deriving the count means the grid cannot hold a hole again whatever
+ * `lib/publish` withdraws or restores.
+ */
+const columnsFor = (n: number, max: number): number =>
+  n < 1 ? 1 : Math.ceil(n / Math.ceil(n / Math.min(max, n)))
+
+/**
+ * The three counts the menu picks between, as custom properties.
+ *
+ * The COUNT is computed here, where the taxonomy is; the WIDTHS that choose
+ * between them are three media queries in `app/globals.css`, because a media
+ * query is the one thing an inline style cannot say. Neither half repeats the
+ * other, and both are deleted together the day the fix lands in the package.
+ *
+ * `display: contents` on the carrier: the properties inherit down the DOM to
+ * the panel, which is a descendant of the header, while no box is generated —
+ * a real wrapper would become the sticky header's containing block and the
+ * header would stop sticking the moment it scrolled.
+ */
+const MENU_COLUMNS = {
+  display: 'contents',
+  '--hanzo-products-cols-base': columnsFor(PRODUCTS_TAXONOMY.length, 4),
+  '--hanzo-products-cols-mid': columnsFor(PRODUCTS_TAXONOMY.length, 5),
+  '--hanzo-products-cols-wide': columnsFor(PRODUCTS_TAXONOMY.length, 7),
+} as React.CSSProperties
 
 /**
  * The header, bound to this site's IA.
@@ -114,33 +136,83 @@ export function SiteHeader({
   currentCategoryId?: string
 }) {
   const base = resolveSurface(surface)
+
+  // The header names the FOUR ways in: what we sell, what it is for, what to
+  // read, and what to build with. Products is the mega-menu (taxonomy below);
+  // these three are the rest.
+  //
+  // Every href is a page this site actually serves — measured, not assumed.
+  // `/resources` and `/developers` DO NOT EXIST (both 404 live), so the labels
+  // point at the hubs that do: Learn and Dev. That is deliberate and it is the
+  // honest half of a compromise — the labels are the words the menu needs and
+  // the URLs are the pages we have. Giving them their own `/resources` and
+  // `/developers` hubs is the finish, and until someone writes those pages a
+  // matching URL would be a 404 wearing the right name.
+  //
+  // Documentation is NOT here and is not a top-level action either. It used to
+  // be the far-right secondary CTA, which put a link to another host in the
+  // most valuable slot on the page, competing with the one thing we want a
+  // reader to do. It belongs under Developers, where someone looking for it is
+  // already standing.
+  //
+  // It is HIDDEN IN CSS rather than dropped, and that is not a preference:
+  // `HanzoHeader` renders a CTA through a component that reads `link.href`
+  // UNGUARDED, so passing `undefined` throws `Cannot read properties of
+  // undefined (reading 'href')` and takes the whole page down with it — measured,
+  // a blank render with no header and no <h1>. hanzo.app hit the identical trap
+  // on `primaryCTA` and settled it the same way. The object stays valid; the
+  // rule in app/globals.css takes it off the page.
   const DOCS = { id: 'docs', label: 'Documentation', href: 'https://docs.hanzo.ai' }
 
-  // Both registry surfaces carry docs.hanzo.ai TWICE in the header — once as a
-  // "Developers" nav item and again as "Docs" (cloud) or the secondary CTA
-  // (ai) — so the same destination competed with itself in two places. Docs is
-  // the secondary action; the nav keeps the pages only this site serves.
+  const localNav = [
+    { id: 'solutions', label: 'Solutions', href: '/solutions' },
+    { id: 'resources', label: 'Resources', href: '/learn' },
+    { id: 'developers', label: 'Developers', href: '/dev' },
+  ].filter((l) => shown(l.href))
+
+  // ONE action, far right: try the thing.
   //
-  // The cloud primary was "Open Console" and its secondary "Get API key", which
-  // put THREE console.hanzo.ai actions in one header next to the sign-in. One
-  // primary is enough: `Start building`, with `Sign in` beside it.
-  const localNav = base.localNav.filter((l) => !l.href.startsWith('https://docs.hanzo.ai') && shown(l.href))
+  // There were two, and they were the SAME URL. `signInHref` renders the
+  // shell's default "Sign in", and it pointed at console.hanzo.ai; so did this
+  // CTA. A visitor read two controls, weighed them, and arrived at one page
+  // either way — the header spending its most valuable inches offering a choice
+  // that does not exist. The prop's own contract already says this: supplying
+  // it is what makes the affordance exist, and a surface "whose primary CTA IS
+  // the sign-in" is told to omit it. This is that surface.
+  //
+  // Dropping it also retires a CSS rule. The primary used to need `order: 1` to
+  // get past Sign in, which the shell emits last; with nothing to get past, the
+  // DOM order is already the right order and the override is gone rather than
+  // kept as decoration.
+  //
+  // The pill OPENS THE DOORS rather than taking one. "Try Hanzo" as a single
+  // href answers a question nobody asked: a visitor arrives wanting to build an
+  // app, or to keep data somewhere, or to chat, or to code from a terminal, and
+  // any one destination is wrong for most of them. `tryMenu` opens the canonical
+  // TRY_HANZO_GROUPS — Chat · App · Team · Studio · Bot · Cloud · Base · Dev,
+  // and the installs beside them — while `href` stays the fallback the pill
+  // still carries, so it is a real link before hydration and without JS.
+  //
+  // It arrives WITH its pin, in one commit. The prop landed here once ahead of
+  // the package that declares it and turned main red: this site has no
+  // `ignoreBuildErrors`, so an unknown prop is a failed BUILD, not a warning.
+  const TRY = { ...base.primaryCTA, label: 'Try Hanzo', href: CONSOLE }
 
   return (
-    <HanzoHeader
-      surface={{
-        ...base,
-        localNav,
-        secondaryCTA: DOCS,
-        ...(surface === 'cloud'
-          ? { primaryCTA: { ...base.primaryCTA, label: 'Start building', href: CONSOLE } }
-          : null),
-      }}
-      productsTaxonomy={PRODUCTS_TAXONOMY}
-      currentCategoryId={currentCategoryId}
-      signInHref={CONSOLE}
-      onAskHanzo={goToChat}
-    />
+    <div style={MENU_COLUMNS}>
+      <HanzoHeader
+        surface={{
+          ...base,
+          localNav,
+          secondaryCTA: DOCS,
+          primaryCTA: TRY,
+        }}
+        productsTaxonomy={PRODUCTS_TAXONOMY}
+        currentCategoryId={currentCategoryId}
+        onAskHanzo={goToChat}
+        tryMenu
+      />
+    </div>
   )
 }
 
