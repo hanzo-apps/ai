@@ -70,7 +70,7 @@ export default function ConsolePage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            LLM observability and tracing
+            One admin for everything you run
           </motion.p>
 
           <motion.p
@@ -79,9 +79,10 @@ export default function ConsolePage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Track every LLM call across your stack. Monitor costs, latency,
-            quality, and token usage. Debug production issues with full trace
-            visibility.
+            Every product on Hanzo Cloud has a module here — providers and
+            models, keys, applications, stores, agents, clusters, domains,
+            billing. Sign in once and the sidebar is whatever your organization
+            actually uses.
           </motion.p>
 
           <motion.div
@@ -91,20 +92,20 @@ export default function ConsolePage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">100%</div>
-              <div className="text-sm text-muted-foreground">Trace coverage</div>
+              <div className="text-2xl font-bold text-foreground">/v1</div>
+              <div className="text-sm text-muted-foreground">One API behind it</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">&lt;1ms</div>
-              <div className="text-sm text-muted-foreground">Overhead</div>
+              <div className="text-2xl font-bold text-foreground">OIDC</div>
+              <div className="text-sm text-muted-foreground">Sign in with Hanzo IAM</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Real-time</div>
-              <div className="text-sm text-muted-foreground">Dashboards</div>
+              <div className="text-2xl font-bold text-foreground">Per-org</div>
+              <div className="text-sm text-muted-foreground">Data scoped to your org</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">OSS</div>
-              <div className="text-sm text-muted-foreground">Self-hostable</div>
+              <div className="text-sm text-muted-foreground">MIT or Apache-2.0</div>
             </div>
           </motion.div>
 
@@ -142,10 +143,10 @@ export default function ConsolePage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Full Visibility Into Your LLM Stack
+              A module per product, one shell around them
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Debug, optimize, and monitor every AI interaction in production
+              Add what you use. Hide what you don't. The shell stays the same.
             </p>
           </motion.div>
 
@@ -153,39 +154,39 @@ export default function ConsolePage() {
             {[
               {
                 icon: Eye,
-                title: "Trace Explorer",
+                title: "Providers and models",
                 description:
-                  "Drill into any LLM call. See prompts, completions, token counts, and latencies with full nested span trees.",
+                  "Every model your organization can call, and which provider serves it. Connect an account of your own and its models appear beside the ones we run.",
               },
               {
                 icon: DollarSign,
-                title: "Cost Tracking",
+                title: "Usage and balance",
                 description:
-                  "Real-time cost monitoring by model, user, feature, and environment. Set budgets and alerts.",
+                  "A usage record per call and one balance per organization, so spend is attributed where it happened instead of totalled at the end of the month.",
               },
               {
                 icon: Clock,
-                title: "Latency Analysis",
+                title: "Keys",
                 description:
-                  "P50, P95, P99 latency breakdowns. Identify slow calls, timeouts, and retry storms.",
+                  "Issue an API key, scope it, revoke it. The key you paste into a client is minted here, and revoking it here is what stops it working.",
               },
               {
                 icon: BarChart3,
-                title: "Quality Scores",
+                title: "Applications and stores",
                 description:
-                  "Automated evaluation with custom scoring functions. Track hallucination rates and relevance.",
+                  "Register an app, hand it an identity, give it a store. The console writes the same resources the CLI does, because both are clients of the same API.",
               },
               {
                 icon: GitBranch,
-                title: "Prompt Management",
+                title: "Find it by typing it",
                 description:
-                  "Version control prompts. A/B test variations. Roll back to previous versions instantly.",
+                  "A command palette reaches every module and every record without learning where anything lives. The sidebar is yours to reorder and prune.",
               },
               {
                 icon: Shield,
-                title: "Multi-Tenant",
+                title: "Scoped to the org on your token",
                 description:
-                  "Organization-scoped data isolation. SSO via Hanzo IAM. Role-based access controls.",
+                  "Sign-in is OIDC against Hanzo IAM. What you see is what your organization owns, and switching organization switches the whole page — there is no global view to fall into by accident.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -222,10 +223,10 @@ export default function ConsolePage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Integrate in Minutes
+              The console is a client. So is your code.
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              One SDK for Python, TypeScript, and any OpenAI- or Anthropic-compatible client
+              Everything on these screens is a call to api.hanzo.ai/v1, and the typed clients are generated from the same document.
             </p>
           </motion.div>
 
@@ -247,21 +248,19 @@ export default function ConsolePage() {
               </span>
             </div>
             <pre className="p-4 overflow-x-auto text-sm">
-              <code className="text-foreground/80">{`from hanzo import Hanzo
+              <code className="text-foreground/80">{`from hanzoai.cloud import ApiClient, Configuration, ChatApi
 
-client = Hanzo()
-
-# Every call is automatically traced
-response = client.chat.completions.create(
-    model="zen-480b-instruct",
-    messages=[{"role": "user", "content": "Hello"}],
-    metadata={
-        "user_id": "usr_123",
-        "session_id": "sess_abc",
-    }
+# The key you issued in the console
+config = Configuration(
+    host="https://api.hanzo.ai",
+    access_token="sk-...",
 )
 
-# View traces at console.hanzo.ai`}</code>
+with ApiClient(config) as client:
+    print(ChatApi(client).post_v1_chat_completions())
+
+# The call, and what it cost, are on your
+# organization's usage before it returns.`}</code>
             </pre>
           </motion.div>
         </div>
@@ -286,10 +285,10 @@ response = client.chat.completions.create(
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                See What Your LLMs Are Doing
+                Open the console
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
-                Start tracing in under 5 minutes. Free tier includes 50K traces/month.
+                Sign in with your Hanzo identity. The organization you land in is the one that gets billed, and everything on these screens belongs to it.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">

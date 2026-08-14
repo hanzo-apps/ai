@@ -26,10 +26,11 @@ const DeploymentOptions = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">
-            Deploy Your Way
+            Where it runs is your call
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Same codebase, same APIs, your choice of infrastructure.
+            Same platform, same console, same API. What changes is whose machines
+            it lands on.
           </p>
         </motion.div>
 
@@ -50,17 +51,17 @@ const DeploymentOptions = () => {
             </div>
             <h3 className="text-xl font-bold text-foreground mb-2">Self-Hosted</h3>
             <p className="text-muted-foreground text-sm mb-4">
-              Run on your own servers, VMs, or containers. Full control, complete data sovereignty.
+              One command on a VPS you already pay for. Everything the managed one does, on hardware you can walk up to.
             </p>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
-                <span className="text-foreground">✓</span> Docker & Kubernetes ready
+                <span className="text-foreground">✓</span> Runs anywhere Docker runs
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-foreground">✓</span> Air-gapped deployments
+                <span className="text-foreground">✓</span> Scales out across a Swarm cluster
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-foreground">✓</span> No external dependencies
+                <span className="text-foreground">✓</span> Or drives a Kubernetes cluster you own
               </li>
             </ul>
             <a
@@ -90,17 +91,17 @@ const DeploymentOptions = () => {
             </div>
             <h3 className="text-xl font-bold text-foreground mb-2">Hanzo Cloud</h3>
             <p className="text-muted-foreground text-sm mb-4">
-              Fully managed platform with global edge deployment and automatic scaling.
+              The same platform, run for you. Sign in and deploy — there is no server to stand up first.
             </p>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
-                <span className="text-foreground">✓</span> 35+ global regions
+                <span className="text-foreground">✓</span> Nothing to provision
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-foreground">✓</span> Zero-config deployments
+                <span className="text-foreground">✓</span> Deploy on push, or only on a tag
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-foreground">✓</span> Enterprise SLA available
+                <span className="text-foreground">✓</span> Metered and billed per organization
               </li>
             </ul>
             <Link
@@ -128,17 +129,17 @@ const DeploymentOptions = () => {
             </div>
             <h3 className="text-xl font-bold text-foreground mb-2">Hybrid</h3>
             <p className="text-muted-foreground text-sm mb-4">
-              Keep sensitive data on-premise while leveraging cloud for global reach.
+              Run the control plane on your own server and let it deploy out to remote servers and clusters you already have.
             </p>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
-                <span className="text-foreground">✓</span> Data residency compliance
+                <span className="text-foreground">✓</span> Servers stay where they are
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-foreground">✓</span> Edge + origin architecture
+                <span className="text-foreground">✓</span> One console over all of them
               </li>
               <li className="flex items-center gap-2">
-                <span className="text-foreground">✓</span> Unified management
+                <span className="text-foreground">✓</span> Per-app target: this host, Swarm, or Kubernetes
               </li>
             </ul>
             <Link
@@ -168,33 +169,33 @@ const OpenSourceBenefits = () => {
           <div className="flex items-center gap-4 mb-8">
             <Github className="w-8 h-8 text-foreground" />
             <div>
-              <h3 className="text-2xl font-bold text-foreground">100% Open Source</h3>
-              <p className="text-muted-foreground">MIT Licensed. Fork, modify, contribute.</p>
+              <h3 className="text-2xl font-bold text-foreground">Open source, all of it</h3>
+              <p className="text-muted-foreground">Apache-2.0. Forked from Dokploy, and it says so in the NOTICE.</p>
             </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="space-y-4">
               <Code2 className="h-10 w-10 text-foreground" />
-              <h4 className="text-lg font-bold text-foreground">MIT Licensed</h4>
+              <h4 className="text-lg font-bold text-foreground">Apache-2.0</h4>
               <p className="text-muted-foreground text-sm">
-                Use it commercially, modify it freely. No vendor lock-in, no surprise licensing changes.
+                Use it commercially. Change it. The upstream attribution travels with it, because a fork that hides its parent is one you cannot audit.
               </p>
             </div>
 
             <div className="space-y-4">
               <Lock className="h-10 w-10 text-foreground" />
-              <h4 className="text-lg font-bold text-foreground">Data Sovereignty</h4>
+              <h4 className="text-lg font-bold text-foreground">It is your server</h4>
               <p className="text-muted-foreground text-sm">
-                Your code, your data, your infrastructure. Complete control over your stack.
+                Builds, images, databases and backups sit on machines you chose, in a region you picked, under credentials you hold.
               </p>
             </div>
 
             <div className="space-y-4">
               <Terminal className="h-10 w-10 text-foreground" />
-              <h4 className="text-lg font-bold text-foreground">Developer First</h4>
+              <h4 className="text-lg font-bold text-foreground">Read the part that surprised you</h4>
               <p className="text-muted-foreground text-sm">
-                Built by developers, for developers. Extensive docs, active community, responsive maintainers.
+                When a deploy does something you did not expect, the code that did it is right there, and so is the OpenAPI document the console itself calls.
               </p>
             </div>
           </div>

@@ -15,89 +15,87 @@ import {
 import { CopyButton } from "@hanzo/ui/product";
 
 const FEATURES = [
-  { id: "self-host", label: "Self-Host", icon: Server },
-  { id: "auth", label: "Auth", icon: Lock },
-  { id: "database", label: "Database", icon: Database },
-  { id: "functions", label: "Functions", icon: Zap },
+  { id: "self-host", label: "Install", icon: Server },
+  { id: "apps", label: "Apps", icon: Lock },
+  { id: "databases", label: "Databases", icon: Database },
+  { id: "compose", label: "Compose", icon: Zap },
   { id: "cli", label: "CLI", icon: Terminal },
 ];
 
 const FeatureDemo = ({ activeFeature }: { activeFeature: string }) => {
   const demos: Record<string, { title: string; code: string }> = {
     "self-host": {
-      title: "Self-Hosting",
-      code: `# One-line install
-curl -fsSL hanzo.sh | bash
+      title: "Install",
+      code: `# Any VPS, one command. It installs the
+# platform and prints the console URL.
+curl -sSL https://hanzo.ai/install.sh | sh
 
-# Docker Compose setup
-git clone https://github.com/hanzoai
-cd platform && docker compose up -d
+# Or skip the server entirely and use the
+# managed one at app.hanzo.ai.
 
-# Kubernetes deployment
-helm repo add hanzo https://charts.hanzo.ai
-helm install hanzo hanzo/platform \\
-  --set domain=platform.yourcompany.com`,
+# Develop it locally — pnpm monorepo:
+pnpm install
+pnpm platform:setup
+pnpm platform:dev`,
     },
-    auth: {
-      title: "Authentication",
-      code: `// OAuth, Email, Phone, SSO
-const { user } = await hanzo.auth.signUp({
-  email: 'user@example.com',
-  password: 'secure-password'
-})
+    apps: {
+      title: "Applications",
+      code: `# Source: GitHub, GitLab, Bitbucket, Gitea,
+# any git remote, a Docker image, or a
+# folder you drop on it.
 
-// Enterprise SSO
-await hanzo.auth.signInWithSSO({
-  provider: 'okta',
-  domain: 'yourcompany.okta.com'
-})
+# Build: it detects the stack with Nixpacks
+# by default. Or pick a Dockerfile, Railpack,
+# Heroku or Paketo buildpacks, or static.
 
-// JWT + RBAC built-in`,
+# Deploy on push, or only on a tag.
+# Auto-deploy is on unless you turn it off.
+
+# Target: this server, a Swarm cluster, or
+# a Kubernetes cluster you own.`,
     },
-    database: {
-      title: "PostgreSQL Database",
-      code: `// Type-safe queries
-const products = await hanzo
-  .from('products')
-  .select('id, name, price')
-  .eq('category', 'electronics')
-  .order('price', { ascending: true })
+    databases: {
+      title: "Databases",
+      code: `# Provision one beside the app:
+#   PostgreSQL   MySQL      MariaDB
+#   MongoDB      Redis      libSQL
 
-// Real-time subscriptions
-hanzo.channel('products')
-  .on('postgres_changes', { event: '*' },
-    (payload) => updateUI(payload))
-  .subscribe()`,
+# Each gets its own credentials, its own
+# volume, and a backup schedule that writes
+# to object storage you control — S3, or
+# anything that speaks it.
+
+# Restore is the same screen, in reverse.`,
     },
-    functions: {
-      title: "Edge Functions",
-      code: `// TypeScript/Deno powered
-Deno.serve(async (req) => {
-  const { email } = await req.json()
+    compose: {
+      title: "Compose",
+      code: `# A compose.yml is a first-class app, not a
+# special case. Paste it, and every service
+# in it comes up on the same network.
 
-  // Send welcome email
-  await hanzo.from('emails').insert({
-    to: email,
-    template: 'welcome'
-  })
+services:
+  web:
+    build: .
+    ports: ["3000:3000"]
+  worker:
+    build: .
+    command: node worker.js
 
-  return Response.json({ sent: true })
-})`,
+# Domains, TLS and routing are attached per
+# service afterwards.`,
     },
     cli: {
-      title: "Developer CLI",
-      code: `# Initialize project
-hanzo init my-app
+      title: "CLI and API",
+      code: `# Everything the console does, the API does.
+# It is documented as OpenAPI and served
+# under /v1 — generated, not hand-written.
 
-# Local development
-hanzo dev
+# Deploys, logs, domains, databases, backups
+# and servers are all resources you can
+# script against from CI.
 
-# Database migrations
-hanzo db migrate create add_users
-hanzo db migrate up
-
-# Deploy to production
-hanzo deploy --prod`,
+# Notifications go where your team already
+# is: Slack, Discord, Telegram, or email.`,
     },
   };
 
@@ -141,7 +139,7 @@ hanzo deploy --prod`,
   );
 };
 
-const INSTALL = "npx @hanzo/cli create my-app";
+const INSTALL = "curl -sSL https://hanzo.ai/install.sh | sh";
 
 const PlatformHero = () => {
   const [activeFeature, setActiveFeature] = useState("self-host");
@@ -173,7 +171,7 @@ const PlatformHero = () => {
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
             >
-              Open Source • MIT Licensed • Self-Hostable
+              Open source • Apache-2.0 • Self-hostable
             </motion.div>
 
             <motion.h1
@@ -182,9 +180,9 @@ const PlatformHero = () => {
               transition={{ duration: 0.4, delay: 0.05 }}
               className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6"
             >
-              <span className="text-foreground">Own your</span>
+              <span className="text-foreground">Point it at</span>
               <br />
-              <span className="text-muted-foreground">entire stack.</span>
+              <span className="text-muted-foreground">a repository.</span>
             </motion.h1>
 
             <motion.p
@@ -193,8 +191,9 @@ const PlatformHero = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl"
             >
-              Open source Backend-as-a-Service with Auth, Database, Storage, and Functions.
-              Self-host on your infrastructure or deploy to Hanzo Cloud. No vendor lock-in.
+              Platform builds it, runs it, gives it a domain with a certificate, and
+              shows you the logs. It is the deploy plane of the Open AI Cloud, and it
+              runs on one VPS as happily as on a cluster you already own.
             </motion.p>
 
             {/* CTAs */}

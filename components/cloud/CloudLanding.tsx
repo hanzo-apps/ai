@@ -36,7 +36,7 @@ const GH = "https://github.com/hanzoai"
 
 /* ---------------------------------------------------------------- hero --- */
 
-const DEPLOY = "npx @hanzo/cloud deploy"
+const DEPLOY = "docker run -p 8080:8080 ghcr.io/hanzoai/cloud"
 
 function Hero() {
   return (
@@ -213,8 +213,9 @@ function Primitives() {
               {capabilityCount} primitives. {categoryCount} categories. One cloud.
             </h2>
             <p className="mt-4 text-lg text-neutral-400">
-              Composable, open-source building blocks with one identity, one bill, and one API.
-              Use one, use all — they work together out of the box.
+              Open-source building blocks behind one origin and one /v1. They share an
+              identity, a bill, and a key, so reaching for a second one costs you a line
+              of code rather than an account.
             </p>
           </div>
 
@@ -244,8 +245,8 @@ function Billing() {
           </h2>
           <p className="mt-4 max-w-lg text-lg leading-relaxed text-neutral-400">
             Every model call, every byte, every key — metered and billed per organization.
-            No seats, no minimums, no surprise invoices. Add a balance and start shipping; share it
-            across your whole team under one organization.
+            No seats, no minimums. Add a balance and start; the whole team draws down the
+            same one, and usage records say which call spent what.
           </p>
           <ul className="mt-8 space-y-3">
             {[
@@ -310,8 +311,9 @@ function FinalCTA() {
           Start building on Hanzo Cloud
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-neutral-400">
-          Ship your AI agent or app today. Open the console to provision models, Base, IAM, KMS, and
-          search in minutes — or self-host the whole stack.
+          Open the console and provision models, Base, IAM, KMS and search against one
+          organization. Or pull the image and run the same stack yourself — it is the
+          same artifact either way.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a

@@ -116,11 +116,12 @@ const PaaSCapabilities = () => {
             Platform-as-a-Service
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Backend Services, Ready to Deploy
+            The services an app needs anyway
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to build production applications. Self-host on your infrastructure,
-            or deploy to Hanzo Cloud with zero changes.
+            Platform ships your code. These are the pieces it lands next to — each
+            one a service you can deploy beside your app, or reach on Hanzo Cloud
+            without deploying anything.
           </p>
         </motion.div>
 
