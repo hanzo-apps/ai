@@ -113,10 +113,10 @@ const TIER_LABEL: Record<string, string> = {
 }
 
 const BENEFITS = [
-  { icon: Clock,  title: "OpenAI-Compatible API",  description: "Your existing SDK just works — same format, a fraction of the cost." },
-  { icon: Globe,  title: "Open Weight",             description: "All Zen models are open-weight on HuggingFace. Run them yourself." },
-  { icon: Layers, title: "Full Spectrum",           description: "82M edge to 1T+ frontier. Text, code, vision, audio, image — one API." },
-  { icon: Cpu,    title: "MoE Efficiency",          description: "Mixture-of-Experts activates only a fraction of params per token." },
+  { icon: Clock,  title: "Same request shape",  description: "Change the model name in a call you already wrote. Nothing else about the request changes." },
+  { icon: Globe,  title: "Weights you can take", description: "Most Zen models are published on HuggingFace, so you can serve them yourself. A few are API-only; the catalog above marks which." },
+  { icon: Layers, title: "0.6B to frontier",    description: "Small enough to run on a laptop, or large enough to reason. Text, code, vision, audio, image and video, one API." },
+  { icon: Cpu,    title: "Sparse where it counts", description: "The Mixture-of-Diverse-Experts models hold a large parameter count but activate a small slice of it per token, so capacity is not what you pay for." },
 ]
 
 const Zen = () => {
@@ -153,8 +153,12 @@ const Zen = () => {
                 </motion.h1>
                 <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }}
                   className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
-                  {ZEN_MODELS.length}+ open-weight models from 0.6B to 1T+, co-designed by Hanzo AI and the Zoo Labs Foundation (our nonprofit). Zen MoDE (Mixture of Diverse Experts) architecture.
-                  {stats.cheapest !== '—' ? ` From ${stats.cheapest}/MTok.` : ''} All models on HuggingFace.
+                  The model family we train ourselves, from 0.6B you can run on a
+                  laptop up to frontier, co-designed by Hanzo AI and the Zoo Labs
+                  Foundation, our nonprofit. The large ones are Zen MoDE — Mixture
+                  of Diverse Experts — so they hold a lot of parameters and use a
+                  few of them per token.
+                  {stats.cheapest !== '—' ? ` From ${stats.cheapest}/MTok.` : ''} Most are published on HuggingFace.
                 </motion.p>
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.15 }}
                   className="flex flex-wrap items-center gap-4 mb-8">
@@ -204,10 +208,10 @@ const Zen = () => {
                     </div>
                     <div className="space-y-2.5">
                       {[
-                        { icon: Brain,    label: "Language + Code + Vision + Audio" },
+                        { icon: Brain,    label: "Language, code, vision, audio, video" },
                         { icon: Code2,    label: "Zen MoDE — Mixture of Diverse Experts" },
-                        { icon: Shield,   label: "OpenAI-compatible API" },
-                        { icon: Github,   label: "Open-weight on HuggingFace" },
+                        { icon: Shield,   label: "One endpoint, one key" },
+                        { icon: Github,   label: "Weights published for most of them" },
                       ].map(({ icon: Icon, label }) => (
                         <div key={label} className="flex items-center gap-2 text-sm">
                           <Icon className="w-4 h-4 text-foreground/70 flex-shrink-0" />
@@ -328,7 +332,7 @@ const Zen = () => {
         <section className="py-16 px-4 md:px-8">
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground">Why Zen Models?</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground">What you get by using ours</h2>
             </motion.div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
               {BENEFITS.map((b, idx) => {
@@ -353,15 +357,15 @@ const Zen = () => {
         <section className="py-16 px-4 md:px-8 bg-background/30 border-y border-border/30">
           <div className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">Every Modality</h2>
-              <p className="text-muted-foreground">Text, vision, code, speech — all through a single unified API</p>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">Pick by what you are doing</h2>
+              <p className="text-muted-foreground">Different models, one endpoint. The name in the request is the only thing that changes</p>
             </motion.div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { icon: Brain,    label: "Language",    desc: "Chat, reasoning, RAG",      models: ["zen4-max","zen4-ultra","zen4-pro"] },
-                { icon: FileCode, label: "Code",        desc: "Generation, review, debug", models: ["zen4-coder-flash","zen4-coder","zen4-mini"] },
-                { icon: Eye,      label: "Vision",      desc: "Image, video, OCR",         models: ["zen-vl-4b","zen-vl-8b","zen-vl-30b"] },
-                { icon: Mic,      label: "Audio",       desc: "Speech-to-speech <300ms",   models: ["zen-omni"] },
+                { icon: Brain,    label: "Language",    desc: "Chat, reasoning, retrieval", models: ["zen5","zen5-pro","zen5-max"] },
+                { icon: FileCode, label: "Code",        desc: "A million tokens of it",     models: ["zen5-coder","zen5-mini","zen-sql"] },
+                { icon: Eye,      label: "Vision",      desc: "Read a screen, draw a thing", models: ["zen3-vl","zen3-omni","zen3-image"] },
+                { icon: Mic,      label: "Audio",       desc: "Listen, speak, compose",     models: ["zen3-asr","zen3-tts","zen-music"] },
               ].map((mod, i) => {
                 const Icon = mod.icon;
                 return (
@@ -397,10 +401,13 @@ const Zen = () => {
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Zen 5 Ultra</h2>
               <p className="text-lg text-muted-foreground mb-6 max-w-2xl">
-                2T+ parameter MoDE. Trained on-chain via NVIDIA TEE confidential compute on{" "}
+                A 2T-parameter MoDE, training now inside NVIDIA TEE
+                confidential compute on{" "}
                 <a href="https://hanzo.network" target="_blank" rel="noopener noreferrer"
                   className="underline hover:no-underline text-foreground">hanzo.network</a>.
-                The largest open-weight model in history.
+                The point of doing it that way is that the run attests to
+                itself: what data went in and what came out is checkable
+                afterwards rather than taken on our word.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                 {[
@@ -440,9 +447,9 @@ const Zen = () => {
             </motion.div>
             <div className="grid md:grid-cols-3 gap-5">
               {[
-                { href: "/zen/models", icon: Brain,   title: "Model Catalog",    desc: `All ${ZEN_MODELS.length}+ models with specs, tiers, and pricing`, internal: true },
-                { href: "/pricing",   icon: Layers,  title: "API Pricing",      desc: "Transparent per-token pricing for all tiers", internal: true },
-                { href: "https://console.hanzo.ai", icon: Globe, title: "API Access", desc: "Get your API key and start building", internal: false },
+                { href: "/zen/models", icon: Brain,   title: "The catalog",  desc: "Every model, with its parameters, context window and what it is for", internal: true },
+                { href: "/pricing",   icon: Layers,  title: "What it costs", desc: "Price per million tokens, per model, with nothing rounded in our favour", internal: true },
+                { href: "https://console.hanzo.ai", icon: Globe, title: "A key", desc: "Sign in, take a key, send the first request", internal: false },
               ].map((card, i) => {
                 const Icon = card.icon;
                 const inner = (
@@ -473,11 +480,12 @@ const Zen = () => {
               <div className="text-4xl tracking-widest text-foreground/20 mb-6 select-none">
                 ䷀ ䷸ ䷹ ䷺ ䷻ ䷼ ䷽ ䷾ ䷿ ䷡
               </div>
-              <h2 className="text-2xl font-bold text-foreground mb-3">The Philosophy Behind the Models</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-3">Why they are named this way</h2>
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto text-sm">
-                These models are built on ten engineering principles drawn from the 64 hexagrams of the I-Ching.
-                Orthogonality. Smallness. Completeness. Clarity. Composability.
-                Ancient pattern language for systems that last.
+                Ten engineering principles, taken from the hexagrams of the
+                I-Ching: orthogonality, smallness, completeness, clarity,
+                composability. They decide what goes in a model and, more
+                often, what stays out.
               </p>
               <Link
                 href="/philosophy"
@@ -493,9 +501,10 @@ const Zen = () => {
         <section className="py-16 px-4 md:px-8 border-t border-border">
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
-              <h2 className="text-3xl font-bold text-foreground mb-3">Ready to build with Zen?</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-3">Call one and see</h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-                {ZEN_MODELS.length}+ models, full spectrum of modalities, one API. Start building today.
+                Start with zen5-mini because it is fast and cheap, and move up
+                only where a harder question needs it.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link href="/zen/models"
@@ -517,7 +526,7 @@ const Zen = () => {
 
         <section className="py-16 border-t border-neutral-800">
           <div className="max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-2xl font-bold mb-4">Get started with Zen</h2>
+            <h2 className="text-2xl font-bold mb-4">Read the specs, or read the code</h2>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="https://docs.hanzo.ai/docs/services/models" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
                 Read the docs <ArrowRight className="h-4 w-4" />

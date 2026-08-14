@@ -6,7 +6,7 @@ import { browserGroups, MODELS, isOpenWeightVendor } from '@/lib/leaderboard'
 
 const TITLE = 'The Zen family — Hanzo AI'
 const DESCRIPTION =
-  'The Zen family: open-weight frontier models you can self-host anywhere, co-designed by Hanzo AI and the Zoo Labs Foundation. Benchmarks shown are UPSTREAM-reported for the open ecosystem — only Enso is Hanzo-measured end-to-end.'
+  'The Zen family: the models Hanzo trains, most with weights published so you can serve them yourself. Co-designed with the Zoo Labs Foundation. The open-weight landscape below shows vendor-reported figures; only Enso is measured here end to end.'
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -57,15 +57,16 @@ export default function ZenModelsPage() {
           </nav>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 text-xs text-neutral-300">
             <span className="h-1.5 w-1.5 rounded-full bg-white" />
-            Open weights · run anywhere · upstream-reported benchmarks
+            Weights published · run them anywhere
           </div>
           <h1 className="mb-5 text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">The Zen family</span>
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-neutral-400">
-            {ZEN_COUNT} open-weight models across language, code, vision, image, audio, and retrieval — co-designed by
-            Hanzo AI and the Zoo Labs Foundation. Free to self-host, or managed on Hanzo Cloud. Benchmarks here are
-            UPSTREAM-reported for the open ecosystem Zen builds on; only Enso is Hanzo-measured end-to-end.
+            {ZEN_COUNT} models across language, code, vision, image, audio, video and retrieval, co-designed
+            by Hanzo AI and the Zoo Labs Foundation, our nonprofit. Most have their weights published, so you
+            can call them here or serve them on your own hardware and never talk to us again. A handful are
+            API-only; the catalog marks which.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/zen/models" className="rounded-full bg-white px-7 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90">Full Zen catalog</Link>
@@ -77,8 +78,8 @@ export default function ZenModelsPage() {
       {/* Generations */}
       <section className="px-4 py-16">
         <div className="mx-auto max-w-5xl">
-          <h2 className="mb-2 text-2xl font-bold">Four generations, one API</h2>
-          <p className="mb-8 text-neutral-400">MoDE (Mixture of Diverse Experts) architecture. Explore the full catalog with specs and pricing.</p>
+          <h2 className="mb-2 text-2xl font-bold">Generations, and what each one is for</h2>
+          <p className="mb-8 text-neutral-400">A generation is a training run, not a marketing tier: newer does not mean the older ones stop working, and a small model from an older generation is often the right call. The large ones are Zen MoDE — Mixture of Diverse Experts. Open any generation for specs and prices.</p>
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {GENS.map((g) => (
               <Link
@@ -99,11 +100,12 @@ export default function ZenModelsPage() {
       {/* Open-weight landscape — upstream reported */}
       <section className="border-t border-neutral-900 px-4 py-16">
         <div className="mx-auto max-w-5xl">
-          <h2 className="mb-2 text-2xl font-bold">The open-weight landscape — upstream reported</h2>
+          <h2 className="mb-2 text-2xl font-bold">Where open weights stand</h2>
           <p className="mb-6 max-w-3xl text-neutral-400">
-            Where the open ecosystem Zen builds on stands, by benchmark. {OPEN_COUNT} open-weight models; numbers
-            are upstream-reported unless tagged Hanzo — we only relabel a score as ours when we ran it. Toggle the
-            provenance to see which is which.
+            {OPEN_COUNT} open-weight models across the field, by benchmark, so you can see what running your
+            own hardware costs you in capability before you commit to it. A figure is what its vendor
+            published unless it is tagged Hanzo, which means we ran it ourselves. Toggle the provenance to
+            see which is which.
           </p>
           <BenchmarkBrowser groups={OPEN_GROUPS} defaultBench="gpqa_diamond" />
         </div>
@@ -114,10 +116,11 @@ export default function ZenModelsPage() {
         <div className="mx-auto max-w-3xl">
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6 text-sm leading-relaxed text-neutral-400">
             <p>
-              <span className="font-semibold text-white">Why upstream-reported?</span> Zen is the open-weight family;
-              its results follow the reported numbers of the open bases it is built on, on the vendors&rsquo; own
-              harnesses. Enso — the proprietary orchestration layer — is the one thing we measure end-to-end on a
-              single common harness. That is the honest line between what we ran and what we cite.
+              <span className="font-semibold text-white">Why the two labels.</span> A score is only comparable
+              to another score run the same way, and most published figures were not. So the table keeps the
+              distinction rather than averaging it away: a figure we ran on our own harness says Hanzo, and a
+              figure a vendor published says so too. Enso is the family we measure end to end on one common
+              harness — see it on the Enso page. Everything else on this page is cited, not claimed.
             </p>
           </div>
           <div className="mt-8 flex flex-wrap justify-center gap-3">

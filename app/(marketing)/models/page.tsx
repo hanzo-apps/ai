@@ -200,8 +200,9 @@ export default async function ModelsPage() {
             </span>
           </h1>
           <p className="mx-auto mb-10 max-w-2xl text-lg text-neutral-300 md:text-xl">
-            Enso is our frontier family. Zen is our open-weight family — call it here or run the weights
-            yourself. Models from other labs answer on the same endpoint when you need one.
+            Enso is our frontier family, and the router that picks for you when you ask for auto. Zen is the
+            family whose weights we publish — call it here, or serve it yourself. Models from other labs answer
+            at the same address with the same key, so choosing one is not a migration.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -225,9 +226,10 @@ export default async function ModelsPage() {
         <div className="mx-auto max-w-6xl">
           <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Our models</h2>
           <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
-            <span className="font-medium text-foreground">Enso</span> is our frontier family;{' '}
-            <span className="font-medium text-foreground">Zen</span> is our open-weight family, with the weights
-            published. Both are trained here and served here.
+            <span className="font-medium text-foreground">Enso</span> is our frontier family, and it leads several
+            public benchmarks.{' '}
+            <span className="font-medium text-foreground">Zen</span> is the family we publish the weights for, from
+            0.6B up. Both are trained here and served here.
           </p>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
             {ours.map((model) => (
@@ -243,8 +245,8 @@ export default async function ModelsPage() {
         <div className="mx-auto max-w-6xl">
           <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Top models</h2>
           <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
-            Frontier models from other labs, routed on the same endpoint with the same key. Switching model
-            is changing one string.
+            One flagship per lab, so you can find the name you already know. They answer at the same address
+            with the same key, and switching to one is changing a string.
           </p>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
             {top.map((model) => (
@@ -259,7 +261,8 @@ export default async function ModelsPage() {
         <div className="mx-auto max-w-6xl">
           <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Browse by lab</h2>
           <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
-            Every model on the endpoint, grouped by who trained it.
+            Every model on the endpoint, grouped by who trained it. Prices and context windows come from the
+            live catalog, so what you read here is what you will be billed.
           </p>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5">
             {sortedOrgs.map(([org, models]) => (

@@ -7,7 +7,7 @@ import { BENCHMARKED_PHRASE, MODELS_PHRASE } from '@/lib/data/model-count'
 
 const TITLE = 'Enso — Hanzo-measured benchmarks'
 const DESCRIPTION =
-  `The Enso family: three differentiated tiers (Ultra 98.0% > Pro 96.0% > Flash 92.9% GPQA-Diamond), frontier accuracy at a fraction of the cost, and a reported-vs-measured comparison across ${BENCHMARKED_PHRASE}. Honest by construction — every score keeps its source.`
+  `The Enso family measured on one harness: three tiers that separate cleanly on quality, accuracy plotted against what it costs, and a reported-versus-measured comparison across ${BENCHMARKED_PHRASE}. Every score keeps its source.`
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -57,8 +57,10 @@ export default function EnsoModelsPage() {
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">Enso, measured</span>
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-neutral-400">
-            Enso orchestrates {MODELS_PHRASE} behind one API. Here is how it scores when we run it — and the field —
-            on a single harness: three differentiated tiers, accuracy-at-cost, and every number kept with its source.
+            Enso is our frontier family, and the router that picks among {MODELS_PHRASE} when you
+            ask for auto. A vendor&rsquo;s published score and your own are rarely the same number, so
+            everything below was run here, on one harness, ours and theirs alike — and every figure
+            still says which it is.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <a href="https://console.hanzo.ai" className="rounded-full bg-white px-7 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90">Start using Enso</a>
@@ -70,8 +72,8 @@ export default function EnsoModelsPage() {
       {/* Tiers */}
       <section className="px-4 py-16">
         <div className="mx-auto max-w-5xl">
-          <h2 className="mb-2 text-2xl font-bold">Three tiers, monotonic in quality</h2>
-          <p className="mb-8 text-neutral-400">Ultra &gt; Pro &gt; Flash — a cost/quality contract, not a model alias. GPQA is Hanzo-measured; price bands are the billed input→output $/MTok.</p>
+          <h2 className="mb-2 text-2xl font-bold">Three tiers that stay in order</h2>
+          <p className="mb-8 text-neutral-400">Ultra above Pro above Flash, on quality and on price, and it stays that way when the underlying models change. A tier is a contract about cost and quality, not another name for one model. GPQA is measured here; the price band is what you are billed, input then output, per million tokens.</p>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {ENSO_TIERS.map((t) => (
               <div
@@ -101,10 +103,10 @@ export default function EnsoModelsPage() {
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold">Accuracy at cost</h2>
           <p className="mb-6 max-w-3xl text-neutral-400">
-            enso-ultra reaches 98.0% GPQA-Diamond, the best in the field — top-left is the goal (high accuracy, low
-            cost), and it sits there at a fraction of what the priciest frontier models charge to score lower. Each dot
-            carries its lab&rsquo;s mark; a solid ring is Hanzo-measured, a dashed ring vendor-reported. Every dot is
-            labelled; hover for the exact figure.
+            Accuracy alone picks the most expensive model every time, so both axes are here at once.
+            Top-left is where you want to be: right answers, cheap. Each dot carries its lab&rsquo;s
+            mark; a solid ring means we measured it, a dashed ring means the vendor reported it. Every
+            dot is labelled, and hovering gives the exact figure.
           </p>
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 md:p-6">
             <AccuracyCostScatter points={SCATTER} />
@@ -129,7 +131,7 @@ export default function EnsoModelsPage() {
       <section className="border-t border-neutral-900 px-4 py-16">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="mb-3 text-2xl font-bold">Build on the tier that fits</h2>
-          <p className="mb-6 text-neutral-400">Flash, Pro, and Ultra behind one OpenAI-compatible API. Switch by changing the model id.</p>
+          <p className="mb-6 text-neutral-400">Start on Flash. Move a request up to Pro or Ultra when it earns the cost, by changing the model id and nothing else.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <a href="https://console.hanzo.ai" className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90">Get API access</a>
             <Link href="/models/zen" className="rounded-full border border-neutral-700 px-6 py-3 text-sm font-medium text-white transition-colors hover:border-neutral-400">Explore Zen (open weights)</Link>
