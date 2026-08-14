@@ -46,10 +46,12 @@ export function Mockup({ slug, alt }: { slug: string; alt: string }) {
   }, [])
 
   return (
-    <div
-      ref={ref}
-      className="overflow-hidden rounded-2xl border border-border bg-neutral-950"
-    >
+    // No frame. The film already draws a window — its own titlebar, its own
+    // chrome — so a bordered box around it is a second window drawn around the
+    // first, which reads as a thumbnail of the product rather than the product.
+    // The div stays because the observer needs something to watch; it paints
+    // nothing.
+    <div ref={ref}>
       {film ? (
         <video
           className="block aspect-video w-full"
