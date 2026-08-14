@@ -68,7 +68,7 @@ export default function SupportPage() {
           <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">How can we help?</span>
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg text-neutral-300 md:text-xl">
-          Answers, docs, live status, and a direct line to the team — everything you need to get unblocked with Hanzo.
+          Answers, docs, live status, and a direct line to the team.
         </p>
       </section>
 

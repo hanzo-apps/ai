@@ -81,7 +81,7 @@ export default function PressPage() {
               <span className="text-foreground">Press</span><br /><span className="text-muted-foreground">Resources.</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto">
-              Everything you need to write about Hanzo AI, Inc. Download our press kit, access brand assets, and find media contacts.
+              Press kit, brand assets, and who to email — for anyone writing about Hanzo AI, Inc.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.15 }} className="flex flex-wrap items-center justify-center gap-4">
               <button className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"><Download className="w-4 h-4 mr-2" />Download Press Kit</button>

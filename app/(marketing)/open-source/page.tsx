@@ -130,8 +130,8 @@ const OpenSource = () => {
                 transition={{ duration: 0.4, delay: 0.1 }}
                 className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto"
               >
-                Open source isn&apos;t a strategy for us &mdash; it&apos;s how we work. We publish everything we build,
-                contribute upstream, and stand on the shoulders of the incredible engineers who came before us.
+                We publish what we build, fix the bugs we find upstream instead of patching them in private,
+                and pay the projects we depend on. The commitments below are specific enough to hold us to.
               </motion.p>
 
               <motion.div
@@ -196,10 +196,10 @@ const OpenSource = () => {
               className="text-center mb-12"
             >
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
-                Standing on the Shoulders of Giants
+                What Hanzo is built on
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Hanzo is built on top of extraordinary open-source work. We owe a debt to every one of these projects and their maintainers.
+                The projects our platform actually runs on, each with its licence and the people who maintain it.
               </p>
             </motion.div>
 

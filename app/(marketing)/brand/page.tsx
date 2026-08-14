@@ -116,7 +116,7 @@ const Brand = () => {
                 transition={{ duration: 0.4, delay: 0.1 }}
                 className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto"
               >
-                A comprehensive guide for creating consistent, elegant, and minimal interfaces
+                How to build interfaces that look like the rest of Hanzo
                 across our platform and products.
               </motion.p>
 
