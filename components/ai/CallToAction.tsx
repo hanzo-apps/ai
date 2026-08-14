@@ -24,11 +24,11 @@ const CallToAction = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-5xl font-bold text-[var(--white)] mb-6">
-              Start Building the Future of AI
+              Make the first call
             </h2>
             <p className="text-xl text-foreground/80 mb-8">
-              Join thousands of developers and companies who are building intelligent, 
-              scalable applications with Hanzo's AI Engineering Platform
+              Create an account, take a key, and send one request. Everything
+              on this page answers at the same endpoint with that key
             </p>
           </motion.div>
 
@@ -62,7 +62,7 @@ const CallToAction = () => {
             </div>
             <h3 className="text-xl font-semibold text-[var(--white)] mb-3">Documentation</h3>
             <p className="text-muted-foreground mb-6">
-              Comprehensive guides, tutorials, and API references to help you build with Hanzo AI.
+              Every endpoint, every parameter, and the SDK method that calls it, in four languages.
             </p>
             <a href="#" className="flex items-center text-foreground hover:text-foreground/70 group">
               Explore Docs
@@ -76,7 +76,7 @@ const CallToAction = () => {
             </div>
             <h3 className="text-xl font-semibold text-[var(--white)] mb-3">Quickstart</h3>
             <p className="text-muted-foreground mb-6">
-              Get up and running quickly with our step-by-step quickstart guides and example projects.
+              A key, a curl, and a response — then the same thing again from a real project you can clone.
             </p>
             <a href="#" className="flex items-center text-foreground hover:text-foreground/70 group">
               Try Quickstart
@@ -90,7 +90,7 @@ const CallToAction = () => {
             </div>
             <h3 className="text-xl font-semibold text-[var(--white)] mb-3">Community</h3>
             <p className="text-muted-foreground mb-6">
-              Join our growing community of AI engineers, get support, and share your experiences.
+              Most of this is open source. Read the code, file the issue, send the patch.
             </p>
             <a href="#" className="flex items-center text-foreground hover:text-foreground/70 group">
               Join Community
@@ -108,8 +108,8 @@ const CallToAction = () => {
         >
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-6 md:mb-0">
-              <h3 className="text-2xl font-bold text-[var(--white)] mb-2">Ready to get started?</h3>
-              <p className="text-foreground/80">Sign up for free and start building with Hanzo AI today.</p>
+              <h3 className="text-2xl font-bold text-[var(--white)] mb-2">Still deciding?</h3>
+              <p className="text-foreground/80">An account is free, and some models cost nothing to call. Try it before you talk to anyone.</p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="bg-primary hover:bg-primary/90">

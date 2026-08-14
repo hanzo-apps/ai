@@ -9,43 +9,43 @@ const UseCases = () => {
   const useCases = [
     {
       icon: MessageSquare,
-      title: 'Conversational AI',
-      description: 'Build intelligent chatbots, virtual assistants, and customer support agents with natural language understanding.',
+      title: 'Support that reads your docs',
+      description: 'An assistant grounded in your own content, answering from what you published rather than from what it half-remembers.',
       color: 'bg-primary/20',
       textColor: 'text-foreground'
     },
     {
       icon: Brain,
-      title: 'Generative Content',
-      description: 'Create text, images, code, and other content with AI-powered generation and customization.',
+      title: 'Text, images, audio, video',
+      description: 'zen-image draws, zen-voice speaks, zen-music composes, zen-video moves. Same key, same billing, one request each.',
       color: 'bg-primary/20',
       textColor: 'text-foreground/70'
     },
     {
       icon: Search,
-      title: 'Knowledge Retrieval',
-      description: 'Implement semantic search, question answering, and information extraction from your data.',
+      title: 'Search over your own data',
+      description: 'Index what you have, then answer questions from it with the passages that support the answer attached.',
       color: 'bg-primary/10',
       textColor: 'text-foreground/70'
     },
     {
       icon: Bot,
-      title: 'Autonomous Agents',
-      description: 'Deploy AI agents that can perform complex tasks, make decisions, and execute workflows autonomously.',
+      title: 'Work that runs without you',
+      description: 'An agent with tools, a trigger, and a place to write the result. Triage a queue, reconcile a ledger, file the report.',
       color: 'bg-primary/10',
       textColor: 'text-foreground/70'
     },
     {
       icon: FileCode,
-      title: 'Developer Tooling',
-      description: 'Enhance your development workflow with AI-powered code generation, debugging, and documentation.',
+      title: 'Coding agents',
+      description: 'Hanzo Dev in the terminal, the MCP tool surface underneath it, and a code model that fits the whole repository in context.',
       color: 'bg-primary/10',
       textColor: 'text-foreground/60'
     },
     {
       icon: Headphones,
-      title: 'Voice & Speech',
-      description: 'Convert speech to text, text to speech, and analyze voice interactions with advanced AI models.',
+      title: 'Speech both directions',
+      description: 'zen3-asr transcribes thirty languages and can stream while someone is still talking. zen3-tts speaks back.',
       color: 'bg-primary/10',
       textColor: 'text-foreground/70'
     }
@@ -68,10 +68,10 @@ const UseCases = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--white)] mb-6">
-              Versatile AI Use Cases
+              What people build with it
             </h2>
             <p className="text-xl text-foreground/80">
-              Hanzo's AI platform supports a wide range of intelligent applications across industries
+              Six shapes that keep coming back, and the models each one reaches for
             </p>
           </motion.div>
         </div>
@@ -108,9 +108,9 @@ const UseCases = () => {
         >
           <div className="flex flex-col lg:flex-row">
             <div className="lg:w-1/2 p-8 flex flex-col justify-center">
-              <h3 className="text-2xl font-bold text-[var(--white)] mb-4">Simple Implementation</h3>
+              <h3 className="text-2xl font-bold text-[var(--white)] mb-4">What it looks like</h3>
               <p className="text-muted-foreground mb-6">
-                Build powerful AI applications with just a few lines of code using our intuitive SDK
+                A client, a model name, and a message. The vector store and the agent below use the same client and the same key
               </p>
               <div className="bg-neutral-950 rounded-lg p-4 font-mono text-sm text-foreground/80 overflow-x-auto">
                 <pre>
@@ -123,7 +123,7 @@ const hanzo = new Hanzo({
 
 // Create a conversation with memory
 const conversation = hanzo.conversation({
-  model: 'glm-5.2',
+  model: 'zen5',
   memory: true,
   system: 'You are a helpful assistant'
 });

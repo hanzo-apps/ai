@@ -9,58 +9,58 @@ const Features = () => {
   const featuresList = [
     {
       icon: Brain,
-      title: 'AI Model Hub',
-      description: 'Access a catalog of production-grade foundation models from leading providers and Hanzo\'s specialized models.'
+      title: 'The model catalog',
+      description: 'The Zen family we train ourselves, and frontier models from elsewhere. Change the model name in the request; nothing else changes.'
     },
     {
       icon: Bot,
-      title: 'AI Agents',
-      description: 'Create autonomous agents that can reason, plan, and execute complex tasks with minimal human intervention.'
+      title: 'Agents',
+      description: 'A Python SDK where an agent is a model, instructions and tools. Put several behind a router when one prompt stops being enough.'
     },
     {
       icon: Cpu,
-      title: 'Optimized Runtime',
-      description: 'High-performance inference with automatic batching, caching, and efficient resource utilization.'
+      title: 'Inference',
+      description: 'Batching and caching happen on our side. You send a request and read a stream back; the throughput work is not yours to do.'
     },
     {
       icon: Database,
-      title: 'Vector Database',
-      description: 'Built-in vector storage for embeddings with automatic indexing and retrieval optimization.'
+      title: 'Vectors',
+      description: 'Embeddings stored and indexed where the rest of your data already is, so retrieval is a query rather than a second service to run.'
     },
     {
       icon: Microscope,
-      title: 'Evaluation Suite',
-      description: 'Comprehensive tools for testing, evaluating, and benchmarking AI models and applications.'
+      title: 'Evals',
+      description: 'Run a set of cases against a model, keep the results, and compare them after you change the prompt — the only way to know a change helped.'
     },
     {
       icon: Activity,
-      title: 'AI Observability',
-      description: 'Full visibility into AI system behavior with detailed metrics, logging, and performance analytics.'
+      title: 'What every call did',
+      description: 'Model, latency, tokens and cost per request, per key. A bill that surprises you is a bill you could not see coming.'
     },
     {
       icon: Shield,
-      title: 'AI Safety & Guardrails',
-      description: 'Advanced content filtering, privacy controls, and ethical guardrails for responsible AI deployment.'
+      title: 'Guardrails',
+      description: 'zen3-guard classifies content before or after a turn. Scope which tools an agent may reach, and keep code execution inside a sandbox.'
     },
     {
       icon: Scale,
-      title: 'Enterprise Scale',
-      description: 'Built for high-scale production workloads with auto-scaling, high availability, and global distribution.'
+      title: 'Load',
+      description: 'The same endpoint answers one request a day and a sustained burst. Set a rate limit per key so one client cannot spend another one\'s headroom.'
     },
     {
       icon: Code,
-      title: 'Developer SDK',
-      description: 'Intuitive libraries for Python, TypeScript, and other languages with comprehensive documentation.'
+      title: 'SDKs',
+      description: 'Python, TypeScript, Go and Rust clients, plus a plain HTTP API for everything else. Same endpoints, same request shape.'
     },
     {
       icon: Server,
-      title: 'Model Serving',
-      description: 'Simplified deployment and management of custom models with automatic versioning and A/B testing.'
+      title: 'Your own weights',
+      description: 'Bring a model you trained and serve it behind the same API, with the same keys, limits and cost reporting as everything else in the catalog.'
     },
     {
       icon: Sparkles,
       title: 'Fine-tuning',
-      description: 'User-friendly tools for customizing foundation models to your specific use cases and data.'
+      description: 'Start from an open-weight Zen model, train on your data, and get back a model name you can call like any other.'
     }
   ];
 
@@ -78,10 +78,10 @@ const Features = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--white)] mb-6">
-              Complete AI Engineering Toolkit
+              What is in the cloud
             </h2>
             <p className="text-xl text-foreground/80">
-              Everything you need to build, deploy, and manage production-grade AI applications
+              The pieces an AI application needs, already wired to each other and reached with the same key
             </p>
           </motion.div>
         </div>

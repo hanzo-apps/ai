@@ -11,13 +11,13 @@ import { ProductFooter } from "@/components/products/ProductFooter"
 export default function AIStudioPage() {
   const [activeTab, setActiveTab] = useState("chat")
   const [promptText, setPromptText] = useState("")
-  const [modelSelection, setModelSelection] = useState("glm-5.2")
+  const [modelSelection, setModelSelection] = useState("zen5")
   const [showSidebar, setShowSidebar] = useState(true)
 
   const [conversation, setConversation] = useState<MessageInterface[]>([
     {
       role: "assistant",
-      content: "Welcome to Hanzo AI Studio. How can I help you today?",
+      content: "This is a live session on zen5. Change the model in the sidebar and ask the same thing again to compare.",
     },
     {
       role: "user",
@@ -32,10 +32,10 @@ export default function AIStudioPage() {
   ])
 
   const models: ModelInterface[] = [
-    { id: "glm-5.2", name: "GLM 5.2", provider: "Hanzo" },
-    { id: "deepseek-v4-flash", name: "DeepSeek V4 Flash", provider: "Hanzo" },
-    { id: "deepseek-v4-pro", name: "DeepSeek V4 Pro", provider: "Hanzo" },
-    { id: "zen5-max", name: "Zen5 Max", provider: "Hanzo" },
+    { id: "zen5", name: "zen5", provider: "1M context · MoE" },
+    { id: "zen5-mini", name: "zen5-mini", provider: "1M context · fastest" },
+    { id: "zen5-coder", name: "zen5-coder", provider: "1M context · code" },
+    { id: "zen5-max", name: "zen5-max", provider: "1M context · deepest" },
   ]
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -52,7 +52,7 @@ export default function AIStudioPage() {
         ...prev,
         {
           role: "assistant",
-          content: `AI Studio demo — connect your API key to get started.`,
+          content: `This preview does not call a model. Add your Hanzo API key to send the prompt for real.`,
         },
       ])
     }, 1000)
@@ -79,7 +79,7 @@ export default function AIStudioPage() {
       <OSSRevenueBanner upstreamName="ComfyUI" compact />
       <section className="py-16 border-t border-neutral-800">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Get started with AI Studio</h2>
+          <h2 className="text-2xl font-bold mb-4">Open a real session</h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="https://docs.hanzo.ai/docs/ai-studio" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />

@@ -15,17 +15,22 @@ export default function LlmPage() {
           </div>
           <div className="max-w-4xl mx-auto relative z-10 text-center">
             <h1 className="text-4xl md:text-6xl font-medium tracking-tight leading-[1.1] mb-6 text-foreground">
-              Hanzo AI — one API for every model
+              One API, {MODELS_PHRASE}
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              The AI cloud: {MODELS_PHRASE} behind a single API. OpenAI- and Anthropic-compatible, with observability, cost controls, and rate limits built in.
+              Send a request to api.hanzo.ai and name a model. Change the name
+              and the same request reaches a different one — our own Zen
+              family, or a frontier model from someone else. One key, one
+              bill, one place to see what every call cost and how long it took.
+              Set a spend ceiling and a rate limit per key, so a runaway loop
+              stops at a number you chose instead of at the end of the month.
             </p>
           </div>
         </section>
 
         <section className="py-16 border-t border-neutral-800">
           <div className="max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-2xl font-bold mb-4">Get started with Hanzo AI</h2>
+            <h2 className="text-2xl font-bold mb-4">Get a key and make a call</h2>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="https://docs.hanzo.ai/docs/llm" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
                 Read the docs <ArrowRight className="h-4 w-4" />

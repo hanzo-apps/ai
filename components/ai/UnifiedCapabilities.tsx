@@ -12,63 +12,63 @@ import ChromeText from "@/components/ui/chrome-text";
 const capabilities = [
   {
     icon: Brain,
-    title: "Model Hub Access",
-    description: "One API for thousands of models from top providers and the open-source community"
+    title: "Models",
+    description: "The Zen family and frontier models from elsewhere, all reached by name at the same endpoint"
   },
   {
     icon: Database,
-    title: "Vector Database",
-    description: "Built-in vector storage with automatic indexing for semantic search and RAG applications"
+    title: "Vectors",
+    description: "Embedding storage and indexing, so retrieval sits next to your data instead of in a service beside it"
   },
   {
     icon: FileText,
-    title: "Document Processing",
-    description: "Process, chunk, and index documents in 30+ formats with automatic metadata extraction"
+    title: "Documents",
+    description: "Upload a PDF or a folder of text, get it chunked and indexed, and ask questions across all of it"
   },
   {
     icon: Search,
-    title: "Semantic Search",
-    description: "Natural language search across your knowledge base with advanced relevance tuning"
+    title: "Search",
+    description: "Keyword and meaning in one query, merged by rank, so an exact product code and a vague description both land"
   },
   {
     icon: Bot,
-    title: "Agent Framework",
-    description: "Build autonomous AI agents with reasoning, planning and tool-use capabilities"
+    title: "Agents",
+    description: "A model, instructions, and tools it may call — one agent, or several behind a router that picks"
   },
   {
     icon: Code,
-    title: "Code Generation",
-    description: "Specialized models for code completion, refactoring, and documentation"
+    title: "Code models",
+    description: "zen5-coder reads a million tokens of context, which is most repositories, so it answers about the code as it is"
   },
   {
     icon: Workflow,
-    title: "Workflow Orchestration",
-    description: "Chain AI operations with built-in caching, observability, and error handling"
+    title: "Workflows",
+    description: "Steps that branch, run in parallel, or loop — for work whose order matters and that a prompt cannot express"
   },
   {
     icon: BarChart3,
-    title: "Usage Analytics",
-    description: "Comprehensive analytics and cost tracking across all AI operations"
+    title: "Cost and latency",
+    description: "Per call, per key, per model. Where the money went, and which request was slow"
   },
   {
     icon: Lock,
-    title: "Security & Compliance",
-    description: "Enterprise-grade security with data residency options and compliance features"
+    title: "Keys and secrets",
+    description: "Sign in through Hanzo IAM, keep credentials in Hanzo KMS, and scope every key to what it is allowed to reach"
   },
   {
     icon: MessageSquare,
-    title: "Chat Interfaces",
-    description: "Pre-built chat components with memory management and streaming responses"
+    title: "Chat",
+    description: "A chat surface you can open, embed, or self-host — with threads, streaming, and tools already attached"
   },
   {
     icon: Layers,
-    title: "Prompt Management",
-    description: "Version, test, and optimize prompts across different models and environments"
+    title: "Prompts",
+    description: "Keep versions, run them against cases, and see which one you actually shipped"
   },
   {
     icon: Zap,
-    title: "Optimized Edge Serving",
-    description: "Global edge deployment for ultra-low latency AI inference and responses"
+    title: "Where it runs",
+    description: "Our regions, your cluster, or your laptop. Open weights mean the third option is real"
   }
 ];
 
@@ -86,11 +86,12 @@ const UnifiedCapabilities = () => {
             transition={{ duration: 0.6 }}
           >
             <ChromeText as="h2" className="text-3xl md:text-4xl font-bold mb-6">
-              Unified AI Platform
+              One API, one key
             </ChromeText>
             <p className="text-xl text-foreground/80">
-              A complete suite of AI capabilities accessible through a single, 
-              consistent API with everything you need to build powerful AI applications
+              These are separate products elsewhere, each with its own account,
+              its own key and its own bill. Here they are one endpoint that
+              already knows who you are
             </p>
           </motion.div>
         </div>

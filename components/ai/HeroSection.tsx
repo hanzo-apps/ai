@@ -63,9 +63,9 @@ const HeroSection = () => {
             className="text-center mb-8"
           >
             <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-4 tracking-tight">
-              Meet your
+              The AI cloud
               <br />
-              <span>thinking partner.</span>
+              <span>you build on.</span>
             </h1>
           </motion.div>
 
@@ -76,7 +76,9 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-xl text-muted-foreground text-center mb-10 max-w-xl mx-auto"
           >
-            Tackle any big, bold, bewildering challenge with Hanzo AI.
+            Every model behind one key. Agents that call real tools. The
+            search, storage and serving underneath. Type below to open a
+            chat with it.
           </motion.p>
 
           {/* Chat input */}
@@ -159,10 +161,10 @@ const HeroSection = () => {
                 {/* Text content */}
                 <div className="flex-1">
                   <h3 className="text-foreground font-semibold text-lg mb-2">
-                    Some tasks just work better on macOS
+                    Some work needs your actual files
                   </h3>
                   <p className="text-muted-foreground text-sm mb-4">
-                    With Hanzo Dev, AI can now work directly with your local files and tools. Available in the macOS app.
+                    Hanzo Dev opens the repo you are in, makes the change, and runs the tests. It is in the macOS app.
                   </p>
 
                   {/* Action buttons */}
