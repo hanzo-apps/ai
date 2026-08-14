@@ -441,23 +441,16 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
  * the identical trap on `primaryCTA` and settled it exactly this way.
  *
  * Anchored on the HREF, not on a position or a label: the slot moves and the
- * word is translatable, but the destination is the thing that does not belong. */
-[data-hanzo-shell] a[href^="https://docs.hanzo.ai"] {
+ * word is translatable, but the destination is the thing that does not belong.
+ *
+ * `>` IS THE RULE. Written as a descendant selector it also matched every
+ * docs link the shell renders ANYWHERE, because the mega-menu drape, the
+ * command palette and the footer each carry `data-hanzo-shell` too — so it
+ * silently deleted "Documentation" AND "Quickstarts" (both live under
+ * docs.hanzo.ai) from the Meet Hanzo menu, and the footer's docs links with
+ * them. The intent was to move Documentation OUT of the bar and INTO the menu;
+ * unscoped, it took the word off the site. Measured: the Resources column
+ * rendered four of its six rows and nothing said so. */
+[data-hanzo-shell] > a[href^="https://docs.hanzo.ai"] {
   display: none !important;
-}
-
-/* The primary action sits FAR RIGHT — after Sign in, not before it.
- *
- * The shell emits search, secondary, primary, sign-in in that DOM order, so the
- * one thing we want a reader to do landed second-to-last with an account link
- * to its right. `order` moves it without touching the package or the markup.
- *
- * Anchored on POSITION and not on the href, because it cannot be: the primary
- * CTA and Sign in are BOTH `https://console.hanzo.ai` — measured — so an
- * href selector catches the pair and reorders nothing. `nth-last-child(2)` is
- * the primary precisely because sign-in is last, which is the fact this rule
- * exists to change; if the shell ever stops emitting sign-in last, this stops
- * matching rather than moving the wrong control, which is the right way round. */
-[data-hanzo-shell] > a:nth-last-child(2) {
-  order: 1;
 }

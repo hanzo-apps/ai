@@ -185,12 +185,12 @@ export function SiteHeader({
   // DOM order is already the right order and the override is gone rather than
   // kept as decoration.
   //
-  // `tryMenu` (below) makes this pill OPEN THE DOORS rather than take one.
-  // "Try Hanzo" pointing at the console answered a question nobody asked: a
-  // visitor arrives wanting to build an app, or to keep data somewhere, or to
-  // chat, or to code from a terminal, and the console is one of those. The href
-  // stays and stays the console — it is the fallback the pill carries before
-  // hydration and for anyone without JavaScript, so the control is never dead.
+  // Making this pill OPEN THE DOORS — Chat / App / Base / Cloud / Dev, plus the
+  // downloads — rather than take one is the finish, and it needs
+  // `@hanzogui/shell` >= 8.1.6 (`tryMenu`). Landing the prop here before the
+  // package that declares it turned main red: Next has no
+  // `ignoreBuildErrors`, so an unknown prop is a failed BUILD, not a warning.
+  // Re-add it with the pin, in one commit.
   const TRY = { ...base.primaryCTA, label: 'Try Hanzo', href: CONSOLE }
 
   return (
@@ -204,7 +204,6 @@ export function SiteHeader({
         }}
         productsTaxonomy={PRODUCTS_TAXONOMY}
         currentCategoryId={currentCategoryId}
-        tryMenu
         onAskHanzo={goToChat}
       />
     </div>
