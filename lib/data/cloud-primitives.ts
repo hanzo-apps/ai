@@ -141,7 +141,7 @@ const CATEGORY: Record<string, { icon: CloudIcon; tagline: string }> = {
   platform: { icon: Layers, tagline: 'Source to production as declared state.' },
   observe: { icon: Activity, tagline: 'Logs, metrics, traces, and cost in one pane.' },
   web3: { icon: Landmark, tagline: 'On-chain infrastructure for the cloud.' },
-  apps: { icon: LayoutDashboard, tagline: 'Production apps built on the primitives.' },
+  apps: { icon: LayoutDashboard, tagline: 'Production apps built on the cloud.' },
 }
 
 interface Copy {

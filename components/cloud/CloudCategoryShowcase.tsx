@@ -65,9 +65,13 @@ function PrimitiveCard({ item, index }: { item: Primitive; index: number }) {
  * The categories as cards — the map of the cloud, each a door to its page.
  *
  * FIVE ACROSS, because the catalog carries ten categories and 2×5 closes the
- * block: the whole map is taken in at once instead of scrolled through. Three
- * columns left the tenth card alone on a fourth row, and a lone card reads as
- * an afterthought rather than a peer.
+ * block: the whole map is taken in at once instead of scrolled through.
+ *
+ * Every track count here DIVIDES ten, and that is the whole rule. The middle
+ * step used to be three, which is the one number between two and five that does
+ * not — so a tablet drew 3·3·3 and then a single orphan card on a fourth row,
+ * reading as an afterthought rather than a peer. Two and five are the only
+ * widths this block takes.
  *
  * The cards are correspondingly quieter — a category is a signpost, not an
  * argument, so it carries its name and one line, at the size those need and no
@@ -77,7 +81,7 @@ function PrimitiveCard({ item, index }: { item: Primitive; index: number }) {
  */
 export function CloudCategoryMap() {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+    <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
       {cloudCategories.map((category, index) => {
         const Icon = category.icon
         return (
