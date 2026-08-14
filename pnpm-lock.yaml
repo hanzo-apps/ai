@@ -35,6 +35,9 @@ importers:
       '@hanzo/event':
         specifier: ^0.3.15
         version: 0.3.15(react@19.2.8)
+      '@hanzo/frame':
+        specifier: ^0.1.0
+        version: 0.1.0(react@19.2.8)
       '@hanzo/gui':
         specifier: ^8.1.0
         version: 8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
@@ -997,6 +1000,11 @@ packages:
     peerDependenciesMeta:
       react:
         optional: true
+
+  '@hanzo/frame@0.1.0':
+    resolution: {integrity: sha512-sp2F9higVms4Gqcg43AcsO4iBBaN3+ok7uKMopLoCPPFy+Yr+aKzm1qNtXYdDVxFuByD/atR+L/RLVOyIYJvBQ==}
+    peerDependencies:
+      react: '>=18'
 
   '@hanzo/gui@8.1.0':
     resolution: {integrity: sha512-QjFDsF0HCK74tteKTr1VCGK6WDN9bk8PCVnyQh4iewFitxDN/si7iO5KqiVwMevjoJs2AU5+APyNqOWwpzrxDA==}
@@ -4778,6 +4786,10 @@ snapshots:
 
   '@hanzo/event@0.3.15(react@19.2.8)':
     optionalDependencies:
+      react: 19.2.8
+
+  '@hanzo/frame@0.1.0(react@19.2.8)':
+    dependencies:
       react: 19.2.8
 
   '@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)':
