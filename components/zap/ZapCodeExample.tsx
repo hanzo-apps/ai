@@ -27,10 +27,10 @@ const ZapCodeExample = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Simple to Use
+            Four lines and it is running
           </h2>
           <p className="text-xl text-muted-foreground">
-            One daemon, multiple backends. Agents maintain a single long-lived connection.
+            One daemon in front of the servers you already have. Agents hold a single connection to it.
           </p>
         </motion.div>
 
@@ -82,8 +82,8 @@ const ZapCodeExample = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center mt-8 text-muted-foreground"
         >
-          <span className="text-foreground/70 font-mono">zapd</span> multiplexes tools/resources
-          across MCP servers (or ZAP-native servers).
+          <span className="text-foreground/70 font-mono">zapd</span> presents the tools and resources of every
+          backend as one schema, whether the backend speaks MCP or ZAP.
         </motion.p>
       </div>
     </section>

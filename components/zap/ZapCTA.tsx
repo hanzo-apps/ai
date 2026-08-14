@@ -20,17 +20,17 @@ const ZapCTA = () => {
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-border mb-8">
             <Zap className="w-4 h-4 text-foreground/70" />
-            <span className="text-sm font-medium text-foreground/70">v0.2.1</span>
+            <span className="text-sm font-medium text-foreground/70">Go · Rust · TypeScript</span>
           </div>
 
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-            Ready to scale your agent swarm?
+            Point one agent at it
           </h2>
 
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Join the next generation of agent infrastructure.
+            Start the daemon, add the MCP servers you already run, change one address in your agent.
             <br />
-            <span className="text-foreground/70">Welcome to Hanzo AI. All aboard for a greener agentic future.</span>
+            <span className="text-foreground/70">Nothing else about your setup has to move.</span>
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
@@ -52,9 +52,10 @@ const ZapCTA = () => {
           </div>
 
           <p className="mt-12 text-xs text-muted-foreground max-w-xl mx-auto">
-            Performance claims depend on workload, payload size, and topology.
-            "40–50×" refers to measured reductions in process duplication + parsing overhead
-            in representative swarm benchmarks.
+            What ZAP saves depends on your workload, your payload size and your topology. The claim here is
+            about mechanism, not about a number: a reader that walks the buffer in place does no parsing and no
+            allocation, and shared backends run one process where per-agent sidecars run many. Measure it on
+            your own traffic — we have not published a benchmark and will not quote one we cannot show you.
           </p>
         </motion.div>
       </div>

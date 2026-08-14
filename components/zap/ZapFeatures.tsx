@@ -16,51 +16,51 @@ import {
 const features = [
   {
     icon: Layers,
-    title: "Collapse the Server Explosion",
+    title: "One tool server, not one per agent",
     description:
-      "MCP sidecars per agent → duplicated processes, schemas, idle RAM. ZAP → shared tool backends behind a single endpoint.",
+      "Running an MCP server beside every agent duplicates the process, the schema and the idle memory as many times as you have agents. Put the servers behind one endpoint and the agents share them.",
   },
   {
     icon: Gauge,
-    title: "Lower Latency at Swarm Scale",
+    title: "The work you removed cannot be slow",
     description:
-      "Fewer processes, fewer context switches, fewer parsers → better p95/p99 under load.",
+      "Fewer processes to schedule and no text to turn into objects on either side of a call. That is where the time goes at scale, and the way to get it back is not to do it.",
   },
   {
     icon: Network,
-    title: "Carries every agent protocol",
+    title: "It carries the protocol you already use",
     description:
-      "MCP, A2A, and ACP all layer natively on ZAP. Keep the protocol your stack already speaks — ZAP is the zero-copy transport underneath.",
+      "MCP, A2A and ACP layer on ZAP without changing what your code says. ZAP is underneath them, not instead of them.",
   },
   {
     icon: Blocks,
-    title: "Zero-Copy Native",
+    title: "The message is already the object",
     description:
-      "ZAP's zero-copy serialization means no parsing overhead. Data stays in wire format, accessed directly in memory.",
+      "Structs, lists, text and bytes are laid out on the wire in the shape a reader wants them, eight-byte aligned. Reading a field is a pointer and an offset into the buffer that arrived.",
   },
   {
     icon: Cpu,
-    title: "Zero Allocation Hot Path",
+    title: "Nothing to collect afterwards",
     description:
-      "Pre-allocated buffers and arena allocation eliminate GC pressure during request handling.",
+      "A reader that walks the buffer in place allocates nothing per message, so there is no garbage to collect and no pause to tune away later.",
   },
   {
     icon: GitMerge,
-    title: "MCP Gateway Mode",
+    title: "Existing MCP servers, wrapped",
     description:
-      "Wrap existing MCP servers transparently. One ZAP endpoint can proxy 12+ MCP servers with automatic schema federation.",
+      "Point the daemon at the MCP servers you already run — over stdio, over HTTP, over a Unix socket — and it presents their tools as one federated schema. Agents connect once and see everything.",
   },
   {
     icon: Shield,
-    title: "Capability-Based Security",
+    title: "Keys arrive instead of being fetched",
     description:
-      "Fine-grained permissions at the tool level. Delegate only what agents need, nothing more.",
+      "ZAP carries its own key distribution: a service subscribes once and receives the snapshot, then rotations and revocations as they happen. Nothing polls a JWKS endpoint, and a revoked key stops working when it is revoked rather than when a cache expires.",
   },
   {
     icon: Workflow,
-    title: "Lux Consensus Ready",
+    title: "Three implementations, one wire",
     description:
-      "Optional coordination layer using Lux metastable consensus for distributed agent swarms.",
+      "Go, Rust and TypeScript, held wire-compatible against a single schema file. The schema is the contract, and an incompatible change bumps its identifier rather than hoping nobody notices.",
   },
 ];
 
@@ -76,11 +76,11 @@ const ZapFeatures = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Why ZAP?
+            Why bother
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Purpose-built for agent swarms. Every design decision optimizes for
-            low latency and minimal resource consumption.
+            JSON over HTTP is fine until a hundred agents are calling the same tools. Then the cost is the
+            copies, and the fix is to stop making them.
           </p>
         </motion.div>
 

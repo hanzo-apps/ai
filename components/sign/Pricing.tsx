@@ -9,9 +9,9 @@ const Pricing = () => {
     <section className="py-16 bg-gradient-to-b from-background to-neutral-900/40">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Simple, Transparent Pricing</h2>
+          <h2 className="text-3xl font-bold mb-4">What it costs</h2>
           <p className="text-foreground/80 text-lg max-w-2xl mx-auto">
-            Start free and scale as you grow. Self-host for free forever or let us handle the infrastructure.
+            Run it yourself and pay nothing but your own hosting. Pay us and we run it, on the same code.
           </p>
         </div>
 

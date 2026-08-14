@@ -14,7 +14,7 @@ const HeroSection = () => {
         <div className="text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center px-3 py-1 mb-4 border border-border rounded-full bg-primary/5 text-foreground/60 text-sm">
             <PenLine className="mr-2 h-4 w-4" />
-            Document Signing Platform
+            Document signing
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
@@ -23,8 +23,9 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-foreground/80 text-lg md:text-xl mb-8 max-w-3xl mx-auto">
-            Secure, legally binding electronic signatures for teams. Create reusable templates,
-            add signing fields, and manage the entire signing workflow.
+            Upload a PDF, drop the fields where people need to sign, and send it. Each signer gets a link,
+            signs in their browser, and the finished document comes back with a record of who signed it, when,
+            and from where. Nobody installs anything and nobody prints anything.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">

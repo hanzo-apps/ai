@@ -9,9 +9,9 @@ import {
 } from "@/components/zap"
 
 export const metadata = {
-  title: "Hanzo ZAP - Zero-Copy Agent Protocol",
+  title: "Hanzo ZAP — the Zero-copy Application Protocol",
   description:
-    "Zero-copy serialization, 40-50x lower overhead. Built for agent swarms at scale.",
+    "A binary RPC protocol whose readers walk the wire format in place, with no parse step and no allocation. Wire-compatible implementations in Go, Rust and TypeScript. MCP, A2A and ACP ride on it unchanged.",
 }
 
 export default function ZapPage() {
@@ -24,7 +24,7 @@ export default function ZapPage() {
       <ZapCTA />
       <section className="py-16 border-t border-neutral-800">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Get started with ZAP</h2>
+          <h2 className="text-2xl font-bold mb-4">Read the protocol</h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="https://docs.hanzo.ai/docs/zap" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />

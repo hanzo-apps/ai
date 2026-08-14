@@ -57,7 +57,7 @@ const ZapHero = () => {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="text-2xl md:text-3xl font-medium text-foreground mb-4"
         >
-          One endpoint to rule all MCP servers
+          The wire format is the data structure
         </motion.p>
 
         <motion.p
@@ -66,9 +66,10 @@ const ZapHero = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
         >
-          MCP made tool integration easy — but JSON everywhere doesn&apos;t scale.
-          ZAP is the zero-copy transport underneath: low allocation, low memory,
-          built for agent swarms. MCP, A2A, and ACP all run natively on ZAP.
+          ZAP is the Zero-copy Application Protocol — binary RPC between services, with a sixteen-byte header
+          and a data segment laid out so a reader walks it where it landed. There is no parse step to skip,
+          because there is nothing to parse. MCP, A2A and ACP all ride on it unchanged, so you keep the
+          protocol your stack already speaks.
         </motion.p>
 
         {/* Stats */}
@@ -79,16 +80,16 @@ const ZapHero = () => {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
         >
           <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">40–50×</div>
-            <div className="text-sm text-muted-foreground">Lower overhead</div>
+            <div className="text-2xl font-bold text-foreground/70">No parse</div>
+            <div className="text-sm text-muted-foreground">Read it where it landed</div>
           </div>
           <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">↓ Infra</div>
-            <div className="text-sm text-muted-foreground">RAM + CPU</div>
+            <div className="text-2xl font-bold text-foreground/70">16 bytes</div>
+            <div className="text-sm text-muted-foreground">The whole header</div>
           </div>
           <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">&lt; 1 μs</div>
-            <div className="text-sm text-muted-foreground">Local hop</div>
+            <div className="text-2xl font-bold text-foreground/70">Go · Rust · TS</div>
+            <div className="text-sm text-muted-foreground">One wire, three readers</div>
           </div>
           <div className="bg-secondary/50 border border-border rounded-xl p-4">
             <div className="text-2xl font-bold text-foreground/70">MCP · A2A · ACP</div>

@@ -15,10 +15,10 @@ const ZapArchitecture = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Architecture
+            How it is put together
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            ZAP federates multiple tool servers behind a single endpoint.
+            Many agents on one side, many tool servers on the other, one address in the middle.
           </p>
         </motion.div>
 
@@ -68,15 +68,15 @@ const ZapArchitecture = () => {
         >
           <div className="text-center">
             <div className="text-3xl font-bold text-foreground/70 mb-2">N:1</div>
-            <div className="text-muted-foreground">Agents share one connection</div>
+            <div className="text-muted-foreground">Every agent, one address</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-foreground/70 mb-2">1:M</div>
-            <div className="text-muted-foreground">Gateway fans out to backends</div>
+            <div className="text-muted-foreground">One schema over every backend</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-foreground/70 mb-2">0</div>
-            <div className="text-muted-foreground">Duplicate tool processes</div>
+            <div className="text-muted-foreground">Copies of the same tool server</div>
           </div>
         </motion.div>
       </div>

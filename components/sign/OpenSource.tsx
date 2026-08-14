@@ -19,8 +19,10 @@ const OpenSource = () => {
               <a href="https://documenso.com" target="_blank" rel="noopener noreferrer" className="text-[var(--white)] underline underline-offset-4 hover:text-white/70 transition-colors">
                 Documenso
               </a>
-              , the leading open-source document signing platform. We contribute back to the community
-              and extend it with Hanzo IAM integration, multi-tenant workspaces, and enterprise features.
+              , an open-source document signing platform, under the AGPL. The upstream project is named here and
+              in the licence, because naming what you forked is required and is a different act from branding
+              yourself with it. Run our build, or run your own — the whole thing is a TypeScript application
+              over Postgres, and you can read every line that touches a document before you trust it with one.
             </p>
             <div className="flex flex-wrap gap-3">
               <Button
