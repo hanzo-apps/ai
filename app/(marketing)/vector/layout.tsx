@@ -2,7 +2,7 @@ import { pageMeta } from '@/lib/page-meta'
 export { default } from '@/lib/meta-layout'
 
 export const metadata = pageMeta({
-  title: 'Vector search, production-ready',
-  description: 'Store and search high-dimensional embeddings for semantic search, RAG, and recommendations — a managed, horizontally-scalable vector database with a clean…',
+  title: 'Hanzo Vector — a database for embeddings',
+  description: 'Store embeddings and get back the ones nearest a query. Payload filters are applied inside the search, so a filtered query still returns a full page of results. Dense and sparse together, three quantization modes, shards and snapshots.',
   path: '/vector',
 })

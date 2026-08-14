@@ -70,7 +70,7 @@ export default function StoragePage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            S3-compatible object storage
+            Buckets for files, weights and backups
           </motion.p>
 
           <motion.p
@@ -79,9 +79,13 @@ export default function StoragePage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Store files, model weights, backups, and media behind an
-            S3-compatible API your tools already speak. Built on MinIO with SSO,
-            encryption at rest, and a web console.
+            Anything that is a file — uploads, model weights, datasets,
+            database backups, rendered media — kept in buckets addressed over
+            HTTP. Send a large one in parts and resume the part that failed.
+            Hand out a link that expires. Keep the old version of an object so
+            an overwrite is recoverable, and let a lifecycle rule retire what
+            has aged. Objects are erasure-coded across ten data shards and four
+            parity shards, so four can be lost and the object still reads.
           </motion.p>
 
           <motion.div
@@ -91,16 +95,16 @@ export default function StoragePage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">S3</div>
-              <div className="text-sm text-muted-foreground">Compatible</div>
+              <div className="text-2xl font-bold text-foreground">Buckets</div>
+              <div className="text-sm text-muted-foreground">Over HTTP</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">AES-256</div>
-              <div className="text-sm text-muted-foreground">Encryption</div>
+              <div className="text-sm text-muted-foreground">At rest</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">HA</div>
-              <div className="text-sm text-muted-foreground">Failover</div>
+              <div className="text-2xl font-bold text-foreground">10 + 4</div>
+              <div className="text-sm text-muted-foreground">Erasure coding</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">OIDC</div>
@@ -142,10 +146,10 @@ export default function StoragePage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Enterprise Object Storage
+              What a bucket gives you
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Use any S3 client or SDK. Works with existing tools and workflows.
+              The pieces you would otherwise build around a filesystem, already built.
             </p>
           </motion.div>
 
@@ -153,39 +157,39 @@ export default function StoragePage() {
             {[
               {
                 icon: Layers,
-                title: "S3 API Compatible",
+                title: "One HTTP API for objects",
                 description:
-                  "Works with AWS SDKs, boto3, mc CLI, rclone, and any S3-compatible tool. Zero migration effort.",
+                  "Buckets, objects, prefixes and listings over HTTP. Presigned URLs hand someone a link that stops working on a schedule. Multipart upload covers the file too big to send in one request.",
               },
               {
                 icon: Lock,
-                title: "Encryption at Rest",
+                title: "Keys from KMS, not a config file",
                 description:
-                  "Server-side encryption with AES-256. Client-side encryption support. Key rotation.",
+                  "Each object gets a fresh data key, sealed under a key derived from your master, the key id and that request's own context. The master itself never lands on disk. Supply your own per-object key instead if you would rather hold it.",
               },
               {
                 icon: Zap,
-                title: "High Throughput",
+                title: "Large objects, handled as large",
                 description:
-                  "Optimized for large file uploads and AI workloads. Multi-part uploads, parallel downloads.",
+                  "An upload splits into parts that travel in parallel, and a part that fails retries on its own rather than restarting the file — which is the whole difference between a resumable upload and an unresumable one at the sizes weights and datasets reach.",
               },
               {
                 icon: Globe,
-                title: "Web Console",
+                title: "A console you sign into",
                 description:
-                  "Browse buckets, upload files, manage permissions, and monitor usage from a clean web UI.",
+                  "Browse buckets, upload, set permissions and watch usage in the browser — behind your Hanzo account rather than a second password nobody remembers.",
               },
               {
                 icon: FileUp,
-                title: "Versioning & Lifecycle",
+                title: "Versions, locks and expiry",
                 description:
-                  "Object versioning, lifecycle rules, and automatic tier management for cost optimization.",
+                  "Keep old versions so an overwrite is recoverable. Put a retention period or a legal hold on an object and it cannot be deleted before its time. Write a lifecycle rule and the rest ages out on its own.",
               },
               {
                 icon: Shield,
-                title: "IAM Integration",
+                title: "Sessions instead of standing keys",
                 description:
-                  "SSO via Hanzo IAM. Bucket policies, access keys, and fine-grained permission management.",
+                  "Sign in through OIDC and take a short-lived session rather than pasting a long-lived access key into a deployment. Bucket policies and per-user rules decide what that session can reach.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -222,7 +226,7 @@ export default function StoragePage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Works With Your Existing Tools
+              Three lines of setup
             </h2>
           </motion.div>
 
@@ -247,7 +251,7 @@ export default function StoragePage() {
               <code className="text-foreground/80">{`import boto3
 
 s3 = boto3.client("s3",
-    endpoint_url="https://s3.s3.hanzo.ai",
+    endpoint_url="https://s3.hanzo.ai",
     aws_access_key_id="your-access-key",
     aws_secret_access_key="your-secret-key",
 )
@@ -284,7 +288,7 @@ url = s3.generate_presigned_url("get_object",
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Store Everything. Scale Infinitely.
+                Make a bucket
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
                 Get started with 10 GB free. No egress fees on Hanzo Cloud.

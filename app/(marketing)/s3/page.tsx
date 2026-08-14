@@ -17,14 +17,14 @@ export default function S3Page() {
               Hanzo S3
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              S3-compatible object storage — your existing SDK just works, and you never pay to read your own data back.
+              Object storage that runs as one binary wearing four hats: a master that tracks where everything is, volume servers holding the bytes, a filer for the namespace, and the HTTP gateway your code talks to. Buckets and objects, presigned links, multipart uploads, versioning and object lock, with server-side encryption whose keys are minted by Hanzo KMS rather than read out of a config file. Objects are erasure-coded across ten data shards and four parity shards, so four can be lost and the object still reads. Every call between the pieces speaks one binary protocol — there is no gRPC anywhere in the tree — which leaves one transport to secure and one to debug. And you never pay to read your own data back.
             </p>
           </div>
         </section>
 
         <section className="py-16 border-t border-neutral-800">
           <div className="max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-2xl font-bold mb-4">Get started with S3</h2>
+            <h2 className="text-2xl font-bold mb-4">Point an SDK at it</h2>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="https://docs.hanzo.ai/docs/services/s3" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
                 Read the docs <ArrowRight className="h-4 w-4" />
