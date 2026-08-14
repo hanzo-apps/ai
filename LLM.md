@@ -194,7 +194,8 @@ copy is how hanzo.ai drifted from console/chat/app.
 
 `components/webgl/PointGlobe.tsx` is the site's only WebGL motif — raw GL and
 inline GLSL, no dependency, code-split behind `next/dynamic({ ssr:false })`.
-Three consumers: the cloud hero, `ChatHero`, `HanzoNetworkSection`.
+Two consumers: `ChatHero` and `HanzoNetworkSection`. It was three — the cloud
+hero is a film now (below), and a page gets ONE picture, not two.
 
 The chrome stays monochrome. What carries hue is CONVERSATIONS — great-circle
 paths between agents, spawned and retired continuously, each with a travelling
@@ -220,6 +221,61 @@ on-screen diameter is a fixed fraction of the canvas height (48° vertical FOV a
 a fixed camera distance) and owes nothing to how wide the canvas is. Fitting the
 canvas to a wide, short hero therefore yields a small globe adrift in black —
 overflow the section's height instead.
+
+## A hero film is assets, not code
+
+`cloud.hanzo.ai`'s fold is a film of the console — the real chrome, the real
+categories, the model count read from `lib/data/pricing.json`, the Playground
+answering a prompt — and it ends on that console running, not on a wordmark the
+visitor already sees in the header. The badge, headline, paragraph and the
+separate `ProductShot` still it replaced are GONE rather than laid over it: the
+film says all four, and what stays beside it is only what a film cannot do —
+the three actions and a command to copy.
+
+Two homes, and they do not mix:
+
+| | |
+|---|---|
+| **`hanzoai/frames`** | the renderer — our fork of the OSS local HTML→mp4 renderer. Headless Chrome, no keys, no service. |
+| **`@hanzo/frame`** | the player — the ONE `<Frame>` primitive every Hanzo surface embeds. `hanzoai/frame`. |
+
+`<Frame src="/cloud-hero" alt="…" />` is the whole call site. Two props, no
+options: `src` is the shared PREFIX of six rendered files and the names are the
+contract — `-tall.mp4` / `-wide.mp4` and a `-first` + `-last` still for each.
+The component picks the master by ORIENTATION (a 768×1024 tablet is portrait,
+and the wide master would lose 555px off each side), serves the still from
+`<picture>` so it is right in SSR with no JavaScript, gives a reduced-motion
+viewer the FINAL frame — the finished product — and creates no `<video>` at all
+for them, and never loops.
+
+**To give another page a film:** copy `film/cloud`, edit the copy's `film.mjs`,
+`make`, then add one `<Frame>`. There is no per-page component and nothing to
+register. `film/cloud/film.mjs` writes BOTH masters from one source, because a
+phone is 0.56 wide-to-tall and a laptop 1.78 and hand-keeping two HTML files
+drifts the first time a line of copy changes; `make` composes, renders, cuts the
+stills with ffmpeg and publishes all six into `public/`. `tall/` and `wide/` are
+generated and gitignored — the generator and `assets/` are the source.
+
+House rules, learned the expensive way:
+
+- **Film the real product.** Real chrome, real copy, real numbers. The film
+  reads its model count from the same snapshot every price on this site comes
+  from, so it cannot disagree with the page around it — and
+  `scripts/audit-model-counts.mjs` already fails the build on a hand-typed one.
+  No invented metric: the Playground rail shows CONTROLS (model, temperature,
+  max tokens, stream), never a throughput or a cost this film made up.
+- **Geist and Geist Mono only** — `@hanzo/design` allows no third face. True
+  black. The dimmest grey that passes `hyperframes check`'s WCAG AA pass is
+  `#777`; `#6e6e6e` fails at 4:1.
+- **Mind the cover crop.** A 1080-wide master on a 390×844 phone loses ~96px
+  off EACH side, so nothing that matters may sit outside the middle 862px.
+- **End on the product**, held still for the last few seconds. That final frame
+  is what every reduced-motion viewer is served, so it has to look used.
+
+**Still to film.** Each of these takes its own `film/<name>` and one `<Frame>`:
+the ten category pages `/products/{ai,compute,data,network,security,payments,platform,observe,web3,apps}`,
+and the 22 published `/cloud/<slug>` primitive pages. None of them has a film
+yet, and none needs new code to get one.
 
 ## Key Files
 
