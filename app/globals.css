@@ -118,7 +118,14 @@
   }
 
   /* The shared header is the one piece of chrome that sits at the very top of
-     every page, so it alone carries the top inset. */
+     every page, so it alone carries the top inset.
+
+     And it draws NO bottom edge. `@hanzogui/shell` ships a 9%-white hairline
+     there, which was right when the bar was opaque and wrong now that it is
+     glass: a hard 1px rule under a band whose whole job is to be soft reads as
+     a seam, and on the fold it ran straight across the globe. The blur is the
+     boundary. Same decision as the dock's, made in the same place so the two
+     bands cannot answer it differently — see `.hz-dock` below. */
   header[data-hanzo-shell] {
     padding-top: env(safe-area-inset-top);
   }
@@ -314,6 +321,16 @@
    Nothing loses a focus indicator: the two rules are one ring, moved. */
 :root:root :is(input, textarea).bg-transparent:focus-visible {
   outline: none;
+  /* The ring is drawn TWICE, by two different properties, and moving the
+     outline alone leaves the other one in place. @hanzo/design's base layer
+     draws focus as a SHADOW — `:where(input,select,textarea):focus-visible
+     { border-color: var(--border-focus); box-shadow: var(--ring-focus) }` —
+     while the rule above draws an OUTLINE. Measured on the chat bar after the
+     outline moved: still `0 0 0 3px rgba(255,255,255,.1)`, a soft white
+     rectangle inside the pill where the hard one had been. Both belong to the
+     wrapper now, so both are cleared here. */
+  box-shadow: none;
+  border-color: transparent;
 }
 
 :root:root :has(> input.bg-transparent:focus-visible),
@@ -509,16 +526,42 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
 :root {
   --hz-chrome: rgba(9, 9, 11, 0.72);
   --hz-chrome-blur: blur(20px) saturate(1.8);
+  /* The header's height, stated once. The fold subtracts it (components/home/
+     Fold.tsx) so a full-height section is the viewport MINUS the chrome above
+     it rather than the whole viewport pushed down by it. Measured on the live
+     header: 60px. */
+  --hz-header: 60px;
 }
 
 .hz-dock {
   position: sticky;
   bottom: 0;
   z-index: 20;
-  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  /* COMPACT. The band measured 59px around a 36px composer — 23px of it was
+     nothing, on the fold, where every pixel the bar takes is a pixel of the
+     picture. 6px above and 8px below wraps the pill closely and still clears
+     the focus ring's 2px offset. */
+  padding-top: 4px;
+  padding-bottom: max(6px, env(safe-area-inset-bottom));
   background: var(--hz-chrome);
   backdrop-filter: var(--hz-chrome-blur);
   -webkit-backdrop-filter: var(--hz-chrome-blur);
+}
+
+/* The header draws no bottom edge, and `!important` is the only thing that can
+   say so. `@hanzogui/shell` writes the hairline as an INLINE style
+   (`border-bottom:1px solid rgba(255,255,255,0.09)` on the element), and an
+   inline declaration beats every selector at every specificity — the only
+   thing above it is `!important`. Two weaker attempts were measured first and
+   both computed as if unwritten: inside `@layer base` (any unlayered rule wins)
+   and unlayered at `:root:root` (still a selector). This is the same reason the
+   touch-target floor and the `.t_group_true` reset in this file carry it.
+
+   Glass needs no edge: the band blurs what passes behind it, so the boundary is
+   already soft, and a hard 1px rule across it reads as a seam — on the fold it
+   ran straight through the globe. */
+:root:root header[data-hanzo-shell] {
+  border-bottom-color: transparent !important;
 }
 
 /* The bar keeps clear of the corner launcher on a phone.
@@ -538,24 +581,15 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
   }
 }
 
-/* A hairline, not a dissolve. The opaque version of this bar needed 40px of
-   gradient above it to keep a hard edge from cutting a heading in half as it
-   scrolled under; glass does not, because there is no hard edge — the band
-   blurs what passes behind it and the boundary is already soft. What is left to
-   draw is the edge itself, and it is the header's, mirrored: the same 9% white
-   hairline on the side the content comes from. A gradient to an opaque ground
-   would also have been WRONG here rather than merely unnecessary — it would sit
-   above a translucent band while being more opaque than it. */
-.hz-dock::before {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 100%;
-  left: 0;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.09);
-  pointer-events: none;
-}
+/* NO hairline on either band, and that is the glass being glass.
+   The line existed to mirror the header's, from when both were opaque and an
+   edge was the only thing saying "chrome starts here". Glass says it already —
+   the band blurs what passes behind it, and the boundary is soft by
+   construction. Drawing a hard 1px rule across a soft edge is the one mark that
+   makes a translucent bar read as a pasted-on strip: on the fold it cut a line
+   straight through the globe, which is the whole picture. Both are gone (the
+   header's is neutralized below), so the page runs behind the chrome and the
+   only thing separating them is the blur. */
 
 /* The composer's ring — the ONE place this site draws a spectrum on chrome.
    `@property` lets the conic angle animate; where it is unsupported the ring is
