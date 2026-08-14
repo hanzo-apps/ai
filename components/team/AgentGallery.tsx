@@ -119,7 +119,13 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ agent, isOpen, onCl
 
             <div className="flex justify-center">
               <Link
-                href={`/team/${agent.name.toLowerCase()}`}
+                // Absolute, because this gallery renders on two hosts from one
+                // build: hanzo.ai/team and the root of hanzo.team. The profile
+                // pages live under /team on hanzo.ai only, so a root-relative
+                // href resolves to hanzo.team/team/<agent> — a path that host
+                // does not serve, and the miss falls through to the workspace's
+                // catch-all rather than 404ing where anyone would notice.
+                href={`https://hanzo.ai/team/${agent.name.toLowerCase()}`}
                 className="inline-flex items-center px-4 py-2 rounded-xl text-primary-foreground"
 
               >
