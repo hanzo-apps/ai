@@ -21,7 +21,7 @@ const HeroSection = () => {
               className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-white/30 mb-6"
             >
               <Activity className="h-4 w-4 text-foreground mr-2" />
-              <span className="text-sm text-foreground/70">Real-time Data Synchronization</span>
+              <span className="text-sm text-foreground/70">Live record updates</span>
             </motion.div>
 
             <motion.h1
@@ -30,9 +30,9 @@ const HeroSection = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[var(--white)]"
             >
-              Instant data sync <br/>
+              Your screen updates <br/>
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-white/10">
-                across all clients
+                when the data does
               </span>
             </motion.h1>
             
@@ -42,9 +42,7 @@ const HeroSection = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg md:text-xl text-foreground/80 mb-8 max-w-xl"
             >
-              Build collaborative, interactive experiences with Hanzo Realtime. 
-              Synchronize data across clients in milliseconds with our reliable 
-              WebSocket and pub/sub messaging infrastructure.
+              Open one stream and records reach the browser as they change — created, updated, deleted — with no polling loop and no timer deciding how stale a page is allowed to get. A subscription is a collection, or a single record inside it, and the access rule already guarding that collection decides what any given subscriber is allowed to receive.
             </motion.p>
             
             <motion.div 
@@ -83,14 +81,14 @@ const HeroSection = () => {
                 </div>
                 <div className="flex items-center">
                   <Radio className="h-4 w-4 text-foreground mr-2" />
-                  <span className="text-foreground/80 text-sm">10ms latency</span>
+                  <span className="text-foreground/80 text-sm">One open stream</span>
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div className="h-14 bg-gradient-to-r from-white/20 to-white/10 rounded-lg border border-white/30 p-4 flex items-center">
                   <Zap className="h-5 w-5 text-foreground mr-3" />
-                  <span className="text-neutral-200">Client data synchronized in real-time</span>
+                  <span className="text-neutral-200">Records arrive as they change</span>
                 </div>
                 
                 <div className="grid grid-cols-3 gap-4">
@@ -107,14 +105,14 @@ const HeroSection = () => {
                 </div>
                 
                 <div className="h-36 bg-neutral-900 rounded-lg border border-neutral-800 p-3 overflow-hidden font-mono text-xs">
-                  <div className="text-foreground/70">// Subscribe to real-time updates</div>
-                  <div className="text-foreground/80">const channel = await hanzo.realtime.subscribe(</div>
-                  <div className="text-foreground/80 pl-4">'room-updates',</div>
-                  <div className="text-foreground/80 pl-4">(message) =&gt; {`{`}</div>
-                  <div className="text-foreground/80 pl-8">console.log('New message:', message);</div>
-                  <div className="text-foreground/80 pl-8">updateUIWithData(message.data);</div>
-                  <div className="text-foreground/80 pl-4">{`}`}</div>
-                  <div className="text-foreground/80">);</div>
+                  <div className="text-foreground/70">// Watch a collection</div>
+                  <div className="text-foreground/80">const stop = await base</div>
+                  <div className="text-foreground/80 pl-4">.collection('messages')</div>
+                  <div className="text-foreground/80 pl-4">.subscribe('*', (e) =&gt; {`{`}</div>
+                  <div className="text-foreground/80 pl-8">console.log(e.action, e.record.id);</div>
+                  <div className="text-foreground/80 pl-8">render(e.record);</div>
+                  <div className="text-foreground/80 pl-4">{`}`});</div>
+                  <div className="text-foreground/80">// create | update | delete</div>
                 </div>
               </div>
             </motion.div>

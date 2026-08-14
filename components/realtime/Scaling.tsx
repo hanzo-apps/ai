@@ -17,10 +17,10 @@ const Scaling = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--white)] mb-4">
-            Scale to Millions of Connections
+            What happens as it grows
           </h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Built for massive scale from day one, with no infrastructure management required
+            The parts that scale, and the parts that are simply not in the way
           </p>
         </motion.div>
 
@@ -33,16 +33,17 @@ const Scaling = () => {
             className="bg-gradient-to-br from-white/20 to-transparent rounded-xl border border-border p-6"
           >
             <Activity className="h-8 w-8 text-foreground mb-4" />
-            <h3 className="text-xl font-semibold text-[var(--white)] mb-2">High Throughput</h3>
+            <h3 className="text-xl font-semibold text-[var(--white)] mb-2">A change costs its audience</h3>
             <p className="text-foreground/80">
-              Process millions of messages per second with sub-millisecond latency.
-              Perfect for high-frequency data updates and time-sensitive applications.
+              A record is written once and handed to the subscribers already
+              attached to it. The work is the number of people watching, not the
+              size of the collection they are watching.
             </p>
 
             <div className="mt-6 pt-6 border-t border-neutral-800">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-muted-foreground text-sm">Message throughput</span>
-                <span className="text-[var(--white)] font-medium">Unlimited</span>
+                <span className="text-muted-foreground text-sm">Cost of a write</span>
+                <span className="text-[var(--white)] font-medium">Per subscriber</span>
               </div>
               <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
                 <div className="bg-primary h-full rounded-full" style={{ width: "100%" }}></div>
@@ -58,16 +59,17 @@ const Scaling = () => {
             className="bg-gradient-to-br from-white/20 to-transparent rounded-xl border border-border p-6"
           >
             <Users className="h-8 w-8 text-foreground mb-4" />
-            <h3 className="text-xl font-semibold text-[var(--white)] mb-2">Concurrent Connections</h3>
+            <h3 className="text-xl font-semibold text-[var(--white)] mb-2">A stream is a response</h3>
             <p className="text-foreground/80">
-              Support millions of simultaneous client connections with automatic
-              scaling. No connection limits or throttling to worry about.
+              Not a process, not a socket server beside the API — an HTTP
+              response left open. They are cheap to hold, and one that goes away
+              releases what it held without anything needing to be told.
             </p>
 
             <div className="mt-6 pt-6 border-t border-neutral-800">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-muted-foreground text-sm">Connection capacity</span>
-                <span className="text-[var(--white)] font-medium">Millions+</span>
+                <span className="text-muted-foreground text-sm">Per subscriber</span>
+                <span className="text-[var(--white)] font-medium">One open response</span>
               </div>
               <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
                 <div className="bg-primary h-full rounded-full" style={{ width: "95%" }}></div>
@@ -83,16 +85,17 @@ const Scaling = () => {
             className="bg-gradient-to-br from-white/20 to-transparent rounded-xl border border-border p-6"
           >
             <Network className="h-8 w-8 text-foreground mb-4" />
-            <h3 className="text-xl font-semibold text-[var(--white)] mb-2">Global Edge Network</h3>
+            <h3 className="text-xl font-semibold text-[var(--white)] mb-2">Isolated by tenant</h3>
             <p className="text-foreground/80">
-              Deployed at the edge across 200+ locations worldwide, ensuring
-              low-latency connections for users anywhere on the planet.
+              Every org's subscribers sit on that org's own broker, over that
+              org's own data. Adding a tenant adds a broker rather than widening
+              a shared one, so nobody's growth is anybody else's problem.
             </p>
 
             <div className="mt-6 pt-6 border-t border-neutral-800">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-muted-foreground text-sm">Global coverage</span>
-                <span className="text-[var(--white)] font-medium">200+ regions</span>
+                <span className="text-muted-foreground text-sm">Blast radius</span>
+                <span className="text-[var(--white)] font-medium">One tenant</span>
               </div>
               <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
                 <div className="bg-primary h-full rounded-full" style={{ width: "90%" }}></div>
@@ -111,24 +114,24 @@ const Scaling = () => {
           <div className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
             <Zap className="h-8 w-8 text-foreground mr-4" />
             <div>
-              <h4 className="text-[var(--white)] font-medium">Auto-scaling</h4>
-              <p className="text-muted-foreground text-sm">Scales automatically based on demand</p>
+              <h4 className="text-[var(--white)] font-medium">No polling</h4>
+              <p className="text-muted-foreground text-sm">The client asks once, not every second</p>
             </div>
           </div>
 
           <div className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
             <Cpu className="h-8 w-8 text-foreground mr-4" />
             <div>
-              <h4 className="text-[var(--white)] font-medium">High Availability</h4>
-              <p className="text-muted-foreground text-sm">Automatic failover and redundancy</p>
+              <h4 className="text-[var(--white)] font-medium">Reconnects itself</h4>
+              <p className="text-muted-foreground text-sm">A dropped stream reopens with a fresh grant</p>
             </div>
           </div>
 
           <div className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
             <Server className="h-8 w-8 text-foreground mr-4" />
             <div>
-              <h4 className="text-[var(--white)] font-medium">Zero Management</h4>
-              <p className="text-muted-foreground text-sm">No servers or infrastructure to manage</p>
+              <h4 className="text-[var(--white)] font-medium">Nothing extra to run</h4>
+              <p className="text-muted-foreground text-sm">The same binary that serves the API serves the stream</p>
             </div>
           </div>
         </motion.div>

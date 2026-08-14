@@ -34,43 +34,43 @@ const Features = () => {
   const features = [
     {
       icon: Activity,
-      title: "WebSocket Messaging",
-      description: "Reliable, low-latency WebSocket connections with automatic reconnection and health monitoring."
+      title: "One stream, server-sent",
+      description: "A single long-lived HTTP response carries every update, so nothing special has to sit in front of it. The browser notices a dropped network and reconnects on its own."
     },
     {
       icon: Workflow,
-      title: "Pub/Sub Channels",
-      description: "Create and manage channels for organized communication between clients and services."
+      title: "A collection, or one record",
+      description: "Watch a whole collection and hear about everything that lands in it, or watch one record and hear only about that one. Change what you are watching without dropping the stream."
     },
     {
       icon: Globe,
-      title: "Global Distribution",
-      description: "Deploy to 200+ edge locations worldwide for single-digit millisecond latency."
+      title: "One broker per tenant",
+      description: "An org's subscribers attach to that org's own broker, reading that org's own data. Two tenants using the same collection name are not sharing a topic, so there is no cross-tenant fan-out to get wrong."
     },
     {
       icon: Users,
-      title: "Presence Detection",
-      description: "Track user online status and activity with built-in presence management."
+      title: "Deletes are checked too",
+      description: "A delete is announced only to the subscribers whose rule would have let them read the record. Something you were never allowed to see does not reveal itself on the way out."
     },
     {
       icon: Clock,
-      title: "Event History",
-      description: "Configurable event history allows clients to catch up on missed updates."
+      title: "The same data, not a copy of it",
+      description: "The stream reads from the store the API reads. There is no separate event bus to keep in step, and nothing that can be current in one place and stale in the other."
     },
     {
       icon: Zap,
-      title: "Message Filtering",
-      description: "Advanced filtering to ensure clients only receive relevant data updates."
+      title: "The rule is the filter",
+      description: "What reaches a subscriber is decided by the collection's access rule, evaluated against the identity that opened the stream. It is the same predicate that guards the API, not a second one written for the stream."
     },
     {
       icon: Lock,
-      title: "Authentication",
-      description: "Secure communication with JWT authentication and channel-level access control."
+      title: "A grant, not your token",
+      description: "A browser cannot put a header on the request that opens a stream. So you mint a short-lived grant on an ordinary authenticated call and spend it once, within thirty seconds — rather than putting a token that opens every service into a URL that every proxy and access log will keep."
     },
     {
       icon: Shield,
-      title: "Rate Limiting",
-      description: "Protect your services with configurable rate limiting and abuse prevention."
+      title: "Limits belong to the deployment",
+      description: "How many streams and how many requests are settings on the deployment and counted once for the process, not copied onto each tenant — so a limit of two means two."
     }
   ];
 
@@ -85,10 +85,10 @@ const Features = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--white)] mb-4">
-            Key Features
+            What the stream gives you
           </h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Everything you need to build scalable real-time applications
+            One connection, and the rules you already wrote deciding what goes down it
           </p>
         </motion.div>
 

@@ -46,7 +46,7 @@ const UseCases = () => {
     {
       icon: Edit,
       title: "Collaborative Editing",
-      description: "Implement Google Docs-like collaborative document editing with conflict resolution."
+      description: "Several people editing one document, each of them seeing the others' changes land as they happen."
     },
     {
       icon: GamepadIcon,

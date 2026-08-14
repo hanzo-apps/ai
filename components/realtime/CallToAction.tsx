@@ -18,7 +18,7 @@ const CallToAction = () => {
           className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-white/30 mb-6"
         >
           <Activity className="h-4 w-4 text-foreground mr-2" />
-          <span className="text-sm text-foreground/70">Get Started Today</span>
+          <span className="text-sm text-foreground/70">Open a stream</span>
         </motion.div>
         
         <motion.h2
@@ -28,7 +28,7 @@ const CallToAction = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-3xl md:text-4xl font-bold text-[var(--white)] mb-6"
         >
-          Build Real-time Experiences in Minutes
+          Two calls and the page keeps itself current
         </motion.h2>
         
         <motion.p
@@ -38,8 +38,7 @@ const CallToAction = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-xl text-foreground/80 mb-8"
         >
-          Join thousands of developers building with Hanzo Realtime.
-          No credit card required to get started.
+          Mint a grant, open the stream, name a collection. No credit card to start.
         </motion.p>
         
         <motion.div

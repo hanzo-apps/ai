@@ -27,10 +27,10 @@ const Integration = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--white)] mb-4">
-            Simple Integration
+            Three calls, then it is live
           </h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Add real-time capabilities to your application with just a few lines of code
+            Mint a grant, spend it to open the stream, say what you want to hear about
           </p>
         </motion.div>
 
@@ -41,11 +41,13 @@ const Integration = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h3 className="text-2xl font-semibold text-[var(--white)] mb-4">Easy to Implement</h3>
+            <h3 className="text-2xl font-semibold text-[var(--white)] mb-4">The handshake, in full</h3>
             <p className="text-foreground/80 mb-6">
-              Hanzo Realtime provides a clean, intuitive API that makes it simple to add 
-              real-time functionality to any application. With support for multiple platforms 
-              and frameworks, you can get started in minutes.
+              There is no hidden protocol here. A grant is minted on a normal
+              authenticated request, the stream spends it once, and the client
+              id that comes back is how you tell the server which collections
+              and records you want. The SDK does all three for you; the raw
+              calls are there if you would rather do it yourself.
             </p>
             
             <div className="space-y-4 mb-8">
@@ -54,8 +56,8 @@ const Integration = () => {
                   <span className="text-foreground text-sm font-bold">1</span>
                 </div>
                 <div>
-                  <h4 className="text-[var(--white)] font-medium mb-1">Initialize the client</h4>
-                  <p className="text-muted-foreground text-sm">Connect to the Hanzo Realtime service with your API key</p>
+                  <h4 className="text-[var(--white)] font-medium mb-1">Mint a grant</h4>
+                  <p className="text-muted-foreground text-sm">One authenticated request returns a string good for thirty seconds and exactly one stream</p>
                 </div>
               </div>
 
@@ -64,8 +66,8 @@ const Integration = () => {
                   <span className="text-foreground text-sm font-bold">2</span>
                 </div>
                 <div>
-                  <h4 className="text-[var(--white)] font-medium mb-1">Subscribe to channels</h4>
-                  <p className="text-muted-foreground text-sm">Listen for updates on specific channels or topics</p>
+                  <h4 className="text-[var(--white)] font-medium mb-1">Open the stream, name your topics</h4>
+                  <p className="text-muted-foreground text-sm">Spend the grant, take the client id it hands back, then post the collections and records you care about</p>
                 </div>
               </div>
 
@@ -74,8 +76,8 @@ const Integration = () => {
                   <span className="text-foreground text-sm font-bold">3</span>
                 </div>
                 <div>
-                  <h4 className="text-[var(--white)] font-medium mb-1">Publish messages</h4>
-                  <p className="text-muted-foreground text-sm">Send updates to all connected clients instantly</p>
+                  <h4 className="text-[var(--white)] font-medium mb-1">Write a record</h4>
+                  <p className="text-muted-foreground text-sm">Any create, update or delete reaches everyone watching whose rule lets them see it</p>
                 </div>
               </div>
             </div>
@@ -94,44 +96,44 @@ const Integration = () => {
           >
             <div className="flex items-center mb-4">
               <Code className="h-5 w-5 text-foreground mr-2" />
-              <span className="text-foreground/80">JavaScript Example</span>
+              <span className="text-foreground/80">The wire, without the SDK</span>
             </div>
             
             <div className="bg-neutral-900 rounded-lg p-4 font-mono text-sm overflow-auto max-h-[400px]">
-              <div className="text-foreground/70">// Initialize the Hanzo Realtime client</div>
-              <div className="text-foreground/80">import {`{ Realtime }`} from '@hanzo/cloud';</div>
-              <div className="text-foreground/80 mb-4">const realtime = new Realtime('YOUR_API_KEY');</div>
-              
-              <div className="text-foreground/70">// Subscribe to a channel</div>
-              <div className="text-foreground/80">const channel = await realtime.subscribe('chat-room', {`{`}</div>
-              <div className="text-foreground/80 pl-4">onMessage: (message) {`=>`} {`{`}</div>
-              <div className="text-foreground/80 pl-8">console.log('New message received:', message);</div>
-              <div className="text-foreground/80 pl-8">// Update your UI with the message</div>
-              <div className="text-foreground/80 pl-8">appendMessageToChat(message);</div>
-              <div className="text-foreground/80 pl-4">{`}`},</div>
-              <div className="text-foreground/80 pl-4">onPresence: (event: PresenceEvent) {`=>`} {`{`}</div>
-              <div className="text-foreground/80 pl-8">if (event.action === 'join') {`{`}</div>
-              <div className="text-foreground/80 pl-12">{`console.log(\`\${event.userData.name} joined the chat\`);`}</div>
-              <div className="text-foreground/80 pl-8">{`}`} else {`{`}</div>
-              <div className="text-foreground/80 pl-12">{`console.log(\`\${event.userData.name} left the chat\`);`}</div>
-              <div className="text-foreground/80 pl-8">{`}`}</div>
-              <div className="text-foreground/80 pl-4">{`}`}</div>
-              <div className="text-foreground/80">{`}`});</div>
+              <div className="text-foreground/70">// 1. mint a grant on an ordinary authenticated request</div>
+              <div className="text-foreground/80">const &#123; token &#125; = await post('/v1/realtime/token');</div>
               <div className="text-foreground/80 mb-4"></div>
               
-              <div className="text-foreground/70">// Publish a message to the channel</div>
-              <div className="text-foreground/80">await realtime.publish('chat-room', {`{`}</div>
-              <div className="text-foreground/80 pl-4">user: {`{`}</div>
-              <div className="text-foreground/80 pl-8">id: 'user-123',</div>
-              <div className="text-foreground/80 pl-8">name: 'Alice'</div>
-              <div className="text-foreground/80 pl-4">{`}`},</div>
-              <div className="text-foreground/80 pl-4">text: 'Hello, world!',</div>
-              <div className="text-foreground/80 pl-4">timestamp: new Date().toISOString()</div>
-              <div className="text-foreground/80">{`}`});</div>
+              <div className="text-foreground/70">// 2. spend it — once, and within thirty seconds</div>
+              <div className="text-foreground/80">const es = new EventSource('/v1/realtime?token=' + token);</div>
+              <div className="text-foreground/80 pl-4">es.addEventListener('CONNECT', (ev) =&gt; &#123;</div>
+              <div className="text-foreground/80 pl-8">const &#123; clientId &#125; = JSON.parse(ev.data);</div>
+              <div className="text-foreground/80 pl-8">// 3. name the collections and records you want</div>
+              <div className="text-foreground/80 pl-8">post('/v1/realtime', &#123;</div>
+              <div className="text-foreground/80 pl-4">clientId,</div>
+              <div className="text-foreground/80 pl-4">subscriptions: [</div>
+              <div className="text-foreground/80 pl-8">'messages',        // the whole collection</div>
+              <div className="text-foreground/80 pl-12">'orders/ord_42',   // one record</div>
+              <div className="text-foreground/80 pl-8">],</div>
+              <div className="text-foreground/80 pl-12"></div>
+              <div className="text-foreground/80 pl-8">&#125;);</div>
+              <div className="text-foreground/80 pl-4">&#125;);</div>
+              <div className="text-foreground/80"></div>
               <div className="text-foreground/80 mb-4"></div>
               
-              <div className="text-foreground/70">// Clean up when done</div>
-              <div className="text-foreground/80">await channel.unsubscribe();</div>
+              <div className="text-foreground/70">// records arrive as events named for the topic</div>
+              <div className="text-foreground/80">es.addEventListener('messages', (ev) =&gt; &#123;</div>
+              <div className="text-foreground/80 pl-4">const &#123; action, record &#125; = JSON.parse(ev.data);</div>
+              <div className="text-foreground/80 pl-8"></div>
+              <div className="text-foreground/80 pl-8"></div>
+              <div className="text-foreground/80 pl-4">if (action === 'delete') remove(record.id);</div>
+              <div className="text-foreground/80 pl-4">else render(record);</div>
+              <div className="text-foreground/80 pl-4"></div>
+              <div className="text-foreground/80">&#125;);</div>
+              <div className="text-foreground/80 mb-4"></div>
+              
+              <div className="text-foreground/70">// a grant is spent; a dropped stream reopens with a new one</div>
+              <div className="text-foreground/80">es.onerror = () =&gt; reconnect();</div>
             </div>
           </motion.div>
         </div>
