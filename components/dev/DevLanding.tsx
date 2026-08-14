@@ -40,39 +40,39 @@ export default function DevLanding() {
       <ProductLanding
         badge="Hanzo Dev · Coding agent"
         badgeIcon={Code2}
-        title="Build software with Hanzo"
-        lede="The open-source coding agent that runs where you already work — your terminal and your editor. Describe a change in plain language and Dev grounds itself in your repository, plans the work, writes and edits across files, then reviews its own diffs before you merge. It defaults to the Hanzo gateway, so any model, cloud agents, and deploys are one login away."
+        title="A coding agent in your terminal"
+        lede="It works on the files you already have, in the repo you're already in. Tell it what you want. It opens the files, makes the change, runs the tests, and reads what came back."
         ctas={[
           { label: 'Get Hanzo Dev', href: SH, icon: Rocket },
           { label: 'Read the docs', href: DOCS },
           { label: 'View on GitHub', href: GITHUB },
         ]}
-        note={{ icon: Cloud, text: 'Open source (Apache-2.0). Install in one command from hanzo.sh — runs on macOS, Linux, and in CI.' }}
+        note={{ icon: Cloud, text: 'Open source, Apache-2.0. Works with the tools you already use — Claude Code, Codex, Gemini, and Qwen run through the same command.' }}
         availableThrough={['Terminal', 'VS Code', 'JetBrains', 'CI']}
         what={{
           eyebrow: 'What is Hanzo Dev',
-          title: 'An AI engineer in your editor and terminal',
-          sub: 'Describe the outcome; Dev does the engineering. It reads your code and conventions, plans the change, edits across files, runs commands to verify, and reviews the result — all in the tools you already use.',
+          title: 'It writes the code and runs it',
+          sub: 'Say what you want in plain words. Dev reads the repo, makes the change across files, runs commands to check its work, and shows you the diff.',
           pillars: [
             {
               icon: Terminal,
-              title: 'Terminal-native',
-              body: 'A fast, local coding agent that lives in your shell. Run hanzo dev to open a session in the current repo, then hand it a task and it plans, edits, and verifies on its own.',
+              title: 'Runs in your shell',
+              body: 'Type hanzo dev in any repo. Give it a task and it works on its own — or hand it the task up front and let it run headless.',
             },
             {
               icon: Workflow,
-              title: 'Auto Drive',
-              body: 'Multi-agent orchestration that breaks a goal into steps and coordinates specialists with /plan, /code, and /solve — self-healing until the task is actually done.',
+              title: 'Splits the work',
+              body: 'Big jobs go to several agents at once. Auto Drive breaks the goal into steps and keeps going until the work is done.',
             },
             {
               icon: Cloud,
-              title: 'Backed by Hanzo Cloud',
-              body: 'One login connects Dev to any model through the Hanzo gateway, cloud agents for long-running work, and a direct line to deploy — the same identity across every Hanzo surface.',
+              title: 'Our best model, or any model',
+              body: 'Enso is our frontier model, and it leads several public benchmarks. One login also gets you every other model on the gateway, cloud agents for long jobs, and a way to deploy.',
             },
           ],
         }}
         code={{
-          head: { eyebrow: 'Get started', title: 'Install once, then talk to your repo' },
+          head: { eyebrow: 'Get started', title: 'Open a terminal' },
           lang: 'bash',
           source: INSTALL,
           ctas: [
@@ -82,20 +82,20 @@ export default function DevLanding() {
         }}
         features={{
           eyebrow: 'Capabilities',
-          title: 'Built for real developer work',
+          title: 'What you get',
           items: [
-            { icon: GitPullRequest, title: 'Auto Review', body: 'A background watcher reviews every change in a separate worktree, flags issues, and hands you ready-to-apply fixes — without blocking the session.' },
-            { icon: Eye, title: 'Nothing hidden', body: 'No silent auto-model and no quiet context compression. You see the model, the full prompt, and the context window on every request.' },
-            { icon: Globe, title: 'Browser built in', body: 'Native browser control over CDP — headless navigation and inline screenshots — so the agent can exercise and verify what it builds.' },
-            { icon: Plug, title: 'MCP tools', body: 'Extend Dev with Model Context Protocol tools: filesystem, databases, APIs, or your own — every tool the Hanzo MCP exposes.' },
-            { icon: ShieldCheck, title: 'Safety modes', body: 'Read-only, approval, and workspace-sandboxed modes keep the agent inside the lines on the code you care about.' },
-            { icon: Gauge, title: 'Reasoning control', body: 'Dial reasoning effort per task — medium, high, or xhigh — trading latency for depth exactly when it matters.' },
+            { icon: ShieldCheck, title: 'Commands run in a sandbox', body: 'Opening a repo means running its scripts, so it runs them in a sandbox every time. Drop it for one run with --no-sandbox. It never gets saved.' },
+            { icon: GitPullRequest, title: 'It reviews its own work', body: 'A watcher checks every change in a separate worktree and hands you fixes you can apply. It never blocks the session.' },
+            { icon: Eye, title: 'Nothing hidden', body: 'You see the model, the whole prompt, and the context window on every request. No silent model swaps. No quiet compression.' },
+            { icon: Globe, title: 'It can use a browser', body: 'Native browser control over CDP, with screenshots inline — so it can check the change that only shows up on a page.' },
+            { icon: Plug, title: 'Your tools', body: 'Add MCP tools for files, databases, APIs, or anything you write yourself. The repo’s own tools stay off until you ask for them.' },
+            { icon: Gauge, title: 'Think harder when it matters', body: 'Set how hard it thinks per task — medium, high, or xhigh. Trade speed for depth only when the work needs it.' },
           ],
         }}
         finalCta={{
           icon: Code2,
-          title: 'Start building in one command',
-          sub: 'Install Dev from hanzo.sh and open a coding session in your repo — or sign in to Hanzo Cloud to run agents and deploy.',
+          title: 'Open a terminal',
+          sub: 'Install it, sign in, and type hanzo dev in any repo.',
           buttons: [
             { label: 'Install from hanzo.sh', href: SH, icon: Rocket },
             { label: 'Sign in to Hanzo Cloud', href: CONSOLE },
