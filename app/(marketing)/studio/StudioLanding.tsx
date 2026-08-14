@@ -34,6 +34,10 @@ export default function StudioLanding() {
           { label: 'View on GitHub', href: GITHUB },
         ]}
         note={{ icon: Cloud, text: 'Open source (GPL-3.0). Run it on your own GPU, or use the managed studio on Hanzo Cloud.' }}
+        mockup={{
+          slug: 'studio',
+          alt: 'A grid of generated frames, filling in as the graph runs.',
+        }}
         what={{
           eyebrow: 'What is Hanzo Studio',
           title: 'A node graph for generative AI',

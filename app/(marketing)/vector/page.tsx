@@ -34,6 +34,10 @@ export default function VectorPage() {
           { label: 'View on GitHub', href: GITHUB },
         ]}
         note={{ icon: Cloud, text: 'Open source (Apache-2.0), built on Qdrant. Self-host anywhere or run managed on Hanzo Cloud.' }}
+        mockup={{
+          slug: 'vector',
+          alt: 'A result table: neighbours returned for a query, ordered by score.',
+        }}
         what={{
           eyebrow: 'What is Hanzo Vector',
           title: 'Embeddings in, relevant results out',

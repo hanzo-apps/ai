@@ -33,6 +33,10 @@ export default function AgentsPage() {
           { label: 'View on GitHub', href: GITHUB },
         ]}
         note={{ icon: Cloud, text: 'Open source (Apache-2.0). Run it locally, self-host, or deploy on Hanzo Cloud.' }}
+        mockup={{
+          slug: 'agents',
+          alt: 'A node graph: agents, the tools they reach for, and the edges between them.',
+        }}
         availableThrough={['Python SDK', 'TypeScript SDK', 'OpenAI-compatible API', 'MCP']}
         what={{
           eyebrow: 'What is Hanzo Agents',
