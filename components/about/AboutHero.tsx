@@ -41,7 +41,7 @@ const AboutHero = () => {
             style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
           >
             <Sparkles className="w-3.5 h-3.5" />
-            Our Journey
+            Company history
           </motion.div>
 
           <motion.h1
@@ -61,7 +61,8 @@ const AboutHero = () => {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto"
           >
-            From startup to AI powerhouse, our journey of transformation, innovation, and purpose.
+            Hanzo began as Crowdstart, a marketing platform. It incorporated as Hanzo AI in 2016,
+            went through Techstars the next year, and now builds the AI cloud.
           </motion.p>
 
           <motion.div
@@ -75,7 +76,7 @@ const AboutHero = () => {
               className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
 
             >
-              Explore Our Timeline
+              Read the timeline
               <ArrowRight className="ml-2 h-4 w-4" />
             </a>
             <Link

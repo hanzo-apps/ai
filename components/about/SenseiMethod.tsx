@@ -23,8 +23,8 @@ const SenseiMethod = () => {
               The Sensei Method
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
-              A practical framework for applying AI and data to achieve exponential growth for businesses.
-              If the "Zen of Hanzo" is the theory, the Sensei Method is the practice.
+              The Zen of Hanzo is what we believe. The Sensei Method is what an engagement looks like —
+              Sensei Group sits with your team and works the problem alongside them.
             </p>
 
             <div className="space-y-6 mb-8">
@@ -98,8 +98,8 @@ const SenseiMethod = () => {
                 <div className="p-8">
                   <h3 className="text-2xl font-bold text-foreground mb-4">The Impact of Sensei</h3>
                   <p className="text-muted-foreground mb-6">
-                    Through the Sensei Method and Sensei Group, we've helped clients generate over $1 billion in revenue,
-                    launch groundbreaking products, and build scalable businesses.
+                    Through the Sensei Method and Sensei Group, we've helped clients generate over $1 billion in
+                    revenue and take more than a hundred products to market.
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <div className="bg-primary/10 px-4 py-2 rounded-lg">

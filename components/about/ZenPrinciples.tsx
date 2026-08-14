@@ -55,7 +55,7 @@ const ZenPrinciples = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">The Zen of Hanzo</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Our guiding philosophy - a set of first principles and laws that act as our north star.
+            The principles the company argues from when a decision is close.
           </p>
         </motion.div>
 

@@ -10,7 +10,7 @@ const timelineEvents = [
   {
     year: "2014-2016",
     title: "Origins: Verus Media & Crowdstart",
-    description: "Zach Kelling founded Verus Media and launched Crowdstart, a platform to harness crowd-driven data and AI to help businesses grow.",
+    description: "Zach Kelling founded Verus Media and launched Crowdstart, which used crowd data and AI to run product launches and crowdfunding campaigns.",
     icon: <Rocket className="text-foreground" />,
     highlight: "Record-breaking product launches and significant crowdfunding success.",
     link: { text: "Learn about our platform", url: "/platform" }
@@ -42,7 +42,7 @@ const timelineEvents = [
   {
     year: "2021-2023",
     title: "Product Innovation",
-    description: "Launched Hanzo Dev, an AI-powered code editor and app builder translating natural language to live software.",
+    description: "Launched Hanzo Dev, a code editor and app builder that turns a plain-language task into running software.",
     icon: <Code className="text-foreground" />,
     highlight: "Open-sourced Hanzo Base, a powerful backend framework.",
     link: { text: "Try Hanzo Dev", url: "/dev" }
@@ -50,7 +50,7 @@ const timelineEvents = [
   {
     year: "2024-Present",
     title: "Strategic Partnerships",
-    description: "Formed key alliances like Personas Social Inc. partnership to expand Keek's user base using Hanzo's AI.",
+    description: "Partnered with Personas Social Inc. to grow Keek's user base with Hanzo's AI.",
     icon: <User2 className="text-foreground" />,
     highlight: "Driven over $1B in revenues to clients using AI-powered marketing.",
     link: { text: "Meet Hanzo Bot", url: "/bot" }
@@ -114,11 +114,11 @@ const HistoryTimeline = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Journey Through Time</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">The timeline</h2>
           <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From crowd-powered marketing to AI innovation, explore the key milestones
-            that shaped Hanzo AI.
+            Every pivot, and what came out of it. The through-line is building the tools we
+            needed ourselves, then giving them away.
           </p>
         </motion.div>
 
