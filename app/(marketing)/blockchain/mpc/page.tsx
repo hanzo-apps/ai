@@ -38,7 +38,7 @@ const features = [
   {
     icon: Cpu,
     title: "Hardware Security",
-    description: "HSM integration for key shares. FIPS 140-2 Level 3 certified infrastructure available.",
+    description: "Key shares can be held in an HSM — AWS KMS, Azure Key Vault, Google Cloud KMS, or a Zymbit module over PKCS#11.",
   },
   {
     icon: Globe,

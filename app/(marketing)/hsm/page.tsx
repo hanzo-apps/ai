@@ -6,8 +6,14 @@ import { ProductFooter } from "@/components/products/ProductFooter"
 const features = [
   {
     icon: ShieldCheck,
-    title: "FIPS 140-3 Level 3",
-    description: "Hardware-backed key storage in tamper-evident HSM modules with certified cryptographic boundaries.",
+    // No certification claim here. The only FIPS reference in hanzoai/hsm is
+    // FIPS 204, the ML-DSA algorithm standard -- and implementing a standard is
+    // not holding a certificate. This repo is an interface over AWS KMS, Azure
+    // Key Vault and Zymbit; a 140-3 validation would belong to their modules,
+    // not to us, and it is the first thing a security buyer asks to see in
+    // writing.
+    title: "Keys never leave the hardware",
+    description: "Signing and unwrapping happen inside AWS KMS, Azure Key Vault, or a Zymbit secure module. Hanzo holds a handle, never the key.",
   },
   {
     icon: Cpu,
@@ -50,7 +56,7 @@ export default function HsmPage() {
               Hanzo HSM
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              Cloud HSM. FIPS 140-3 hardware-backed key management for production workloads. Generate, store, and use cryptographic keys without exposing private material.
+              One interface to the key hardware you already trust — AWS KMS, Azure Key Vault, Google Cloud KMS, or a Zymbit module over PKCS#11. Generate keys, sign with them, and unwrap with them, without the private material ever reaching your process.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="https://docs.hanzo.ai/docs/mpc" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
