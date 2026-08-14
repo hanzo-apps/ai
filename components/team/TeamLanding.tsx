@@ -32,14 +32,17 @@ import AuditFeatures from '@/components/team/AuditFeatures'
 import EnterpriseReadiness from '@/components/team/EnterpriseReadiness'
 
 // This page is the front door of hanzo.team itself, as well as /team here, so
-// "open the app" cannot be a link to hanzo.team — on that host it is a link to
-// the page you are already reading. It names the app directly instead.
+// "open the app" cannot be a link to the bare host — on hanzo.team that is a
+// link to the page you are already reading.
 //
-// tracker.hanzo.ai is that app: the workspace board on Hanzo IAM as its only
-// sign-in, which is where hanzo.team's apex already sent every visitor before
-// this page existed. Naming it here keeps that destination one click away
-// rather than making it the whole experience.
-const APP = 'https://tracker.hanzo.ai'
+// It names the workspace's sign-in directly. The apex serves this page to a
+// signed-out reader and the workspace to a signed-in one, and /login is the
+// door in both cases: a signed-in reader is carried straight through it.
+//
+// It used to name tracker.hanzo.ai, which was right when that board was the
+// only app behind this page. It is not anymore — that host is Hanzo Todo, a
+// different product, and Hanzo Team is the workspace served here.
+const APP = 'https://hanzo.team/login'
 // The Team product manual, not the platform-wide docs — this page is about one
 // product and docs.hanzo.team is that product's own book.
 const DOCS = 'https://docs.hanzo.team'
