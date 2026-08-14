@@ -128,10 +128,8 @@ jobs:
               -X POST "https://api.hanzo.ai/v1/event?ingest_key=${key}" \
               -H 'content-type: application/json' -d '{"batch":[]}'
           }
-          # A 5xx is the door being down, which says NOTHING about the key — the
-          # step read one as the other and reported "the key does not resolve"
-          # three times running while api.hanzo.ai was 503 on every path. Ask
-          # again before believing it; an unreachable door is usually brief.
+          # A 5xx is the door being unreachable, which says nothing about the
+          # key. Ask again before believing it.
           for wait in 0 10 30 60; do
             [ "$wait" = 0 ] || sleep "$wait"
             code=$(ask)
