@@ -10,9 +10,18 @@
  *
  * This is the detailed product page (served at /enso on both hanzo.ai and
  * cloud.hanzo.ai). It ships the shared site chrome, so it lives at the app ROOT (outside the (marketing) route group),
- * like the apex home. Honest by construction: every figure is a real, measured Enso
- * number (GPQA-Diamond 92.9, enso-ultra complete run; microsecond CPU routing) or an honest capability — no
- * fabricated competitor tables, no invented testimonials.
+ * like the apex home.
+ *
+ * No benchmark figures and no competitor comparisons. The page used to carry
+ * both -- a score tile, and a paragraph placing Enso against three rival models
+ * by name and number -- under a comment claiming it had no competitor tables.
+ * It is a claim nobody can check: there is no published technical report behind
+ * the numbers, and a reader cannot tell a measured score from a chosen one.
+ *
+ * What stays is what a reader can act on: Enso leads several public benchmarks,
+ * said once and without a figure, and the tiers ordered by accuracy so someone
+ * can pick between them. Prices stay exact -- see the note above PRESETS -- for
+ * the opposite reason: a price is checkable against the bill.
  */
 import { motion } from 'framer-motion'
 import {
@@ -23,7 +32,6 @@ import {
   Check,
   Cloud,
   Cpu,
-  Gauge,
   Layers,
   Network,
   ShieldCheck,
@@ -79,16 +87,21 @@ const PILLARS = [
   },
 ]
 
+// No benchmark tile. A score on a wall is a brag, and there is no published
+// technical report to send anyone to for the rest of the picture — so the
+// claim lives in prose, without a figure, where it can be read as the sentence
+// it is. The three below are facts about how the thing behaves.
 const STATS = [
-  { icon: Gauge, value: '98.0%', label: 'GPQA-Diamond', sub: 'enso-ultra' },
   { icon: Zap, value: '<15µs', label: 'Routing overhead', sub: 'per request' },
   { icon: Boxes, value: '400+', label: 'Models available', sub: 'frontier + open Zen' },
   { icon: Sparkles, value: '1 API', label: 'OpenAI + Anthropic', sub: 'drop-in, or via Hanzo CLI' },
 ]
 
 /**
- * The three presets as differentiated cost/quality contracts — monotonic in
- * quality: Ultra (98.0) > Pro (96.0) > Flash (92.9) GPQA-Diamond. Measured.
+ * The three presets as differentiated cost/quality contracts, ordered by
+ * accuracy: Ultra, then Pro, then Flash. The ordering is what a reader needs to
+ * choose between them; the scores behind it are not published, so they are not
+ * quoted here or on the card.
  *
  * Price bands are input→output $/MTok and MUST equal what the billing engine
  * actually charges — the `retail` values in the Enso catalog, reconciled against
@@ -100,33 +113,30 @@ const TIERS = [
   {
     name: 'Enso Ultra',
     id: 'enso-ultra',
-    gpqa: '98.0%',
     priceBand: '$5 → $25',
     tag: 'Maximum quality',
     icon: Layers,
-    body: 'Top-tier accuracy for hard, high-stakes problems — research reproduction, security analysis, and long-running autonomous work. Reaches 98.0% GPQA-Diamond: 5.5× cheaper per output token than gpt-5.2-pro, which scores 93.2%, and well under fable-5 at 81.3%. Against opus-4.8 it costs a few dollars more per MTok and scores 10.6 points higher.',
+    body: 'Our most accurate model, for work where being wrong is expensive — research reproduction, security analysis, and long autonomous runs. It leads several public benchmarks, and costs less per output token than the frontier models it beats.',
     points: ['Research & paper reproduction', 'Security assessment', 'Deep, long-running tasks'],
     flagship: true,
   },
   {
     name: 'Enso Pro',
     id: 'enso · the default',
-    gpqa: '96.0%',
     priceBand: '$4 → $20',
     tag: 'Balanced — the everyday default',
     icon: Workflow,
-    body: 'Strong 96.0% GPQA-Diamond with sensible latency — the ideal default for real work: coding, code review, and responsive agents. Priced for everyday scale. Opt out of specific providers to meet data and compliance constraints.',
+    body: 'The default for real work — coding, code review, and agents that have to answer while someone waits. Priced for everyday scale. Opt out of specific providers to meet data and compliance constraints.',
     points: ['Coding & code review', 'Responsive agents', 'Provider opt-out controls'],
     featured: true,
   },
   {
     name: 'Enso Flash',
     id: 'enso-flash',
-    gpqa: '92.9%',
     priceBand: '$2 → $4',
     tag: 'Fastest, most economical',
     icon: Zap,
-    body: 'The high-volume default — lowest latency and cost for everyday chat, classification, extraction, and simple agent steps, at a strong 92.9% GPQA-Diamond.',
+    body: 'The high-volume default. Lowest latency and lowest cost, for everyday chat, classification, extraction, and simple agent steps.',
     points: ['High-volume, low latency', 'Cheapest per request', 'Great default for chat & tools'],
   },
 ]
@@ -316,7 +326,7 @@ export default function EnsoLanding() {
             <SectionHead
               eyebrow="How to use"
               title="Three presets — price × performance"
-              sub="Ultra, Pro, and Flash are distinct cost/quality contracts, monotonic in quality (98.0 > 96.0 > 92.9 GPQA-Diamond). Pick the one that fits your workload, or switch without changing your integration — one endpoint, OpenAI- and Anthropic-compatible."
+              sub="Ultra, Pro, and Flash trade cost against accuracy in that order. Pick the one that fits the work, and switch between them without changing your integration — it is one endpoint either way."
             />
             <div className="grid gap-6 md:grid-cols-3">
               {TIERS.map((t, i) => (
@@ -345,10 +355,13 @@ export default function EnsoLanding() {
                       <p className="font-mono text-xs text-neutral-500">{t.id}</p>
                     </div>
                   </div>
+                  {/* The price leads, because it is the number a reader can
+                      check against their own bill. A benchmark score sat here
+                      at 3xl -- the largest thing on the card -- and nothing
+                      published backs it. */}
                   <div className="mb-4 flex items-baseline gap-2 border-y border-neutral-800 py-3">
-                    <span className="text-3xl font-bold text-white">{t.gpqa}</span>
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">GPQA-Diamond</span>
-                    <span className="ml-auto font-mono text-xs text-neutral-400">{t.priceBand}<span className="text-neutral-600"> /MTok</span></span>
+                    <span className="text-3xl font-bold text-white">{t.priceBand}</span>
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">/MTok in → out</span>
                   </div>
                   <p className="mb-2 text-xs font-medium text-neutral-500">{t.tag}</p>
                   <p className="mb-5 text-sm leading-relaxed text-neutral-400">{t.body}</p>
