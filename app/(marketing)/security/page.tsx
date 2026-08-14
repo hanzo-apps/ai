@@ -36,57 +36,57 @@ const COMPLIANCE_BADGES = [
 const SECURITY_FEATURES = [
   {
     icon: Lock,
-    title: "Encryption at Rest & in Transit",
+    title: "Encryption at Rest and in Transit",
     description:
-      "Data is encrypted at rest with per-tenant AES-256-GCM keys and post-quantum age, and in transit with TLS 1.3 — including hybrid ML-KEM-768 key exchange at the edge.",
+      "At rest, every tenant's data sits under a key derived for that tenant alone and sealed with AES-256-GCM, and backups are encrypted with age, which carries a post-quantum option. In transit it is TLS 1.3, and the edge offers hybrid ML-KEM-768 key exchange, so traffic captured today is not readable by a quantum computer later.",
   },
   {
     icon: Fingerprint,
-    title: "Multi-Factor Authentication",
+    title: "Second Factors",
     description:
-      "Multi-factor authentication with TOTP, WebAuthn hardware keys, push, and SMS. Organization admins can require MFA for their members.",
+      "An authenticator app, a code by SMS or email, or a passkey. Enrolment hands out the material and demands it back before it writes anything, and adding or dropping a factor signs the account out of every other browser — a stolen session that outlives the change is the same as not having the factor.",
   },
   {
     icon: Key,
-    title: "API Key Management",
+    title: "Keys and Tokens",
     description:
-      "Fine-grained API key permissions with automatic rotation, usage tracking, and instant revocation capabilities.",
+      "A key is told apart from a token by its prefix, so nothing has to guess what it was handed. Tokens are refused outright if they carry an HMAC signature or no algorithm at all, and a refresh token is single-use — presenting a spent one revokes its whole family rather than the one token.",
   },
   {
     icon: Users,
-    title: "Role-Based Access Control",
+    title: "Who May Reach What",
     description:
-      "Granular permissions with predefined roles and custom access policies. Audit trails for all access events.",
+      "Access is a grant at a place: an organization, a workspace under it, a project under that. A check asks whether some grant the caller holds covers the path and admits the verb. One rule, no special cases, and the decision is a function call rather than a service that can be down.",
   },
   {
     icon: Network,
-    title: "Private Networking",
+    title: "The Edge Throws Identity Away",
     description:
-      "VPC peering, private endpoints, and IP allowlisting. Keep your infrastructure isolated and secure.",
+      "Anything that arrives claiming to be an org, a user or an email is deleted at the gateway before a single handler reads it. Identity is written back only from a verified token. Inside the cluster, services reach each other over a binary protocol rather than the public internet.",
   },
   {
     icon: Database,
-    title: "Data Residency",
+    title: "Where It Sits",
     description:
-      "Dedicated and self-hosted deployments can pin data to specific regions to meet sovereignty requirements.",
+      "An organization is a tenancy boundary, and on Hanzo Base it is a physical one — a different organization is a different database file, opened under a different key, so no query can reach across two. Dedicated and self-hosted deployments pin that file to a region you choose.",
   },
 ];
 
 const ENTERPRISE_FEATURES = [
-  "Single Sign-On (SAML, OIDC)",
-  "Custom security policies",
-  "Dedicated security engineer",
+  "Single sign-on through Hanzo IAM",
+  "Federation to your own OpenID Connect issuer",
+  "SCIM 2.0 provisioning from your directory",
+  "A named engineer who knows your deployment",
   "Priority incident response",
-  "Custom data retention",
-  "Advanced audit logging",
-  "Penetration testing reports",
+  "Retention set by you, not by us",
+  "Audit records exported where you want them",
   "Security questionnaire support",
 ];
 
 const EDGE_FEATURES = [
-  { name: "Global Edge Network", description: "15+ regions worldwide" },
-  { name: "Auto-scaling", description: "Scale to zero or millions" },
-  { name: "Data Residency", description: "Choose your data location" },
+  { name: "Run it where you like", description: "Our cloud, your cluster, your rack" },
+  { name: "Scales to nothing", description: "Idle should cost what idle is worth" },
+  { name: "Your region", description: "Pin the data and keep it there" },
 ];
 
 const Security = () => {
@@ -129,9 +129,9 @@ const Security = () => {
                 transition={{ duration: 0.4, delay: 0.05 }}
                 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6"
               >
-                <span className="text-foreground">Security without</span>
+                <span className="text-foreground">What protects your data,</span>
                 <br />
-                <span className="text-muted-foreground">compromise.</span>
+                <span className="text-muted-foreground">and how.</span>
               </motion.h1>
 
               <motion.p
@@ -140,8 +140,9 @@ const Security = () => {
                 transition={{ duration: 0.4, delay: 0.1 }}
                 className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto"
               >
-                Enterprise-grade security built into every layer. Your data is encrypted,
-                access is controlled, and compliance is maintained by default.
+                Security copy usually describes a feeling. This page describes mechanisms: which key encrypts
+                what, who holds it, where the tenancy boundary is enforced, and which claims we have not earned
+                yet. If something here is vague, assume we could not verify it and ask us.
               </motion.p>
 
               {/* CTAs */}
@@ -201,10 +202,10 @@ const Security = () => {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Defense in Depth
+                The Controls, Named
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Multiple layers of security controls protect your applications and data
+                Each of these is a decision in code you can point at, not a posture.
               </p>
             </motion.div>
 
@@ -254,20 +255,21 @@ const Security = () => {
                   Infrastructure
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                  Built on secure foundations
+                  What runs underneath
                 </h2>
                 <p className="text-muted-foreground mb-8">
-                  Our infrastructure runs on enterprise-grade data centers with 24/7 physical
-                  security, redundant power, and isolated network architecture. Every component
-                  is designed with security as the primary requirement.
+                  Workloads sit in hardware-virtualised machines on managed Kubernetes, in data centres with
+                  physical access control and redundant power. Secrets never reach a manifest — they are fetched
+                  from Hanzo KMS at boot, and outside development a service refuses to start without a verified
+                  issuer, audience and key set rather than falling back to running open.
                 </p>
 
                 <div className="space-y-4">
                   {[
-                    { icon: Server, text: "KVM hardware-isolated virtual machines" },
-                    { icon: Eye, text: "24/7 security monitoring and alerting" },
-                    { icon: Clock, text: "High availability with automatic failover" },
-                    { icon: FileCheck, text: "Automated security patching and updates" },
+                    { icon: Server, text: "Hardware-virtualised machines, one tenant to a boundary" },
+                    { icon: Eye, text: "Errors, traces and release health watched around the clock" },
+                    { icon: Clock, text: "Replicated, with failover that does not need a person" },
+                    { icon: FileCheck, text: "Every image pinned to a version, every deploy reconciled" },
                   ].map((item, index) => {
                     const Icon = item.icon;
                     return (
@@ -288,10 +290,10 @@ const Security = () => {
                 className="bg-gradient-to-br from-neutral-900 to-neutral-900/50 rounded-xl p-8 border border-border"
               >
                 <Globe className="w-10 h-10 text-muted-foreground mb-6" />
-                <h3 className="text-xl font-bold text-foreground mb-4">Global High-Performance Edge</h3>
+                <h3 className="text-xl font-bold text-foreground mb-4">Or none of our infrastructure at all</h3>
                 <p className="text-muted-foreground mb-6">
-                  Deploy globally with automatic scaling and data residency controls
-                  to meet compliance requirements.
+                  Every piece named on this page is a binary you can run yourself. The strongest answer to a
+                  question about our infrastructure is that you do not have to use it.
                 </p>
 
                 <div className="space-y-4">
@@ -326,11 +328,11 @@ const Security = () => {
                 <div className="bg-gradient-to-br from-white/10 to-transparent rounded-xl p-8 border border-border">
                   <Shield className="w-10 h-10 mb-6" />
                   <h3 className="text-xl font-bold text-foreground mb-4">
-                    Enterprise Security Program
+                    What comes with Enterprise
                   </h3>
                   <p className="text-muted-foreground mb-6">
-                    For organizations with advanced security requirements, our Enterprise plan
-                    includes dedicated security support and custom configurations.
+                    An engineer who has read your deployment, retention you set rather than inherit, and
+                    somebody to answer the questionnaire your procurement team is about to send.
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -367,15 +369,17 @@ const Security = () => {
                   Enterprise
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                  Security for the most demanding organizations
+                  If you are the one who has to sign off
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  Whether you're in healthcare, finance, or government, Hanzo meets the
-                  security and compliance requirements of regulated industries.
+                  Bring the control you are required to demonstrate and we will show you the code that
+                  implements it, or tell you plainly that it does not exist yet. A control we cannot point at is
+                  one you should not put your name to.
                 </p>
                 <p className="text-muted-foreground">
-                  Our security team works directly with enterprise customers to understand
-                  their unique requirements and implement appropriate controls.
+                  Where a requirement is not met, the honest options are usually self-hosting, a dedicated
+                  deployment, or waiting. Our engineers will say which one applies rather than selling you the
+                  gap.
                 </p>
               </motion.div>
             </div>
@@ -398,12 +402,11 @@ const Security = () => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-foreground mb-2">
-                    Responsible Disclosure
+                    Found something
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    We take security vulnerabilities seriously and appreciate the work of
-                    security researchers. If you discover a vulnerability, please report it
-                    responsibly.
+                    Email us rather than opening a public issue, and include a reproduction if you have one. A
+                    real report from a stranger is worth more than an internal review, and we answer quickly.
                   </p>
                   <a
                     href="mailto:security@hanzo.ai"
@@ -430,7 +433,7 @@ const Security = () => {
               viewport={{ once: true }}
               className="text-3xl md:text-5xl font-bold text-foreground mb-4"
             >
-              Ready to secure your AI infrastructure?
+              Ask us the hard question
             </motion.h2>
 
             <motion.p
@@ -440,8 +443,8 @@ const Security = () => {
               transition={{ delay: 0.1 }}
               className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto"
             >
-              Start building with enterprise-grade security today. Our team is ready to help
-              you meet your compliance requirements.
+              Bring the requirement you cannot get past, and we will show you the code or tell you it is not
+              built. Both answers are more useful than a brochure.
             </motion.p>
 
             <motion.div

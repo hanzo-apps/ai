@@ -101,7 +101,7 @@ const Identity = () => {
               <p className="text-foreground/80">
                 An authenticator app, a code by SMS or email, or a passkey. Enrolment sends the material and then
                 demands it back before it writes anything, and the destination is never taken from the request —
-                an enrolment that let the caller name the phone would enrol the attacker's.
+                an enrolment that let the caller name the phone would enrol the attacker&apos;s.
               </p>
             </motion.div>
             
