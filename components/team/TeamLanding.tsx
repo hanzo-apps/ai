@@ -16,6 +16,20 @@ import {
 } from 'lucide-react'
 import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
+// The sections only Team has. They were written for this page and then stopped
+// being rendered when the product pages were unified on the shared kit — the
+// kit had nowhere to put them, so unifying the page meant dropping them. They
+// are handed to it as children now, which is the missing half of that move.
+//
+// AgentGallery earns its place twice: it is the page's most product-specific
+// section, and it is the ONLY thing that links the sixteen agent profiles under
+// /team. Without it those pages are live and reachable from nothing.
+import AgentGallery from '@/components/team/AgentGallery'
+import HumanLeadership from '@/components/team/HumanLeadership'
+import HumanAIIntegration from '@/components/team/HumanAIIntegration'
+import WorkspaceIntegration from '@/components/team/WorkspaceIntegration'
+import AuditFeatures from '@/components/team/AuditFeatures'
+import EnterpriseReadiness from '@/components/team/EnterpriseReadiness'
 
 // This page is the front door of hanzo.team itself, as well as /team here, so
 // "open the app" cannot be a link to hanzo.team — on that host it is a link to
@@ -89,7 +103,18 @@ export default function TeamLanding() {
             { label: 'GitHub', href: GITHUB },
           ],
         }}
-      />
+      >
+        {/* Who works in the workspace — the coworkers first, then the people
+            who lead them, then how the two actually share the work. */}
+        <AgentGallery />
+        <HumanLeadership />
+        <HumanAIIntegration />
+        {/* What the workspace looks like, then what makes it safe to put a
+            company inside it. */}
+        <WorkspaceIntegration />
+        <AuditFeatures />
+        <EnterpriseReadiness />
+      </ProductLanding>
       <ProductFooter slug="team" name="Team" />
     </>
   )
