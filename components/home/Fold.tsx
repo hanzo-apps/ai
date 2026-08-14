@@ -57,8 +57,22 @@ export default function Fold() {
   // `justify-center`, with the composer's slot reserved below it (`pb-44`), puts
   // the sentence where the sphere is densest and closes that band — without
   // moving the composer off the bottom edge, which is where it belongs.
+  // The fold is the viewport MINUS the header, not the whole viewport.
+  // `100svh` is right when a fold starts at the top of the screen, and this one
+  // starts at 60px — under the sticky header — so it ran 60px past the bottom
+  // and the composer's band covered another 51 on top of that. The globe was cut
+  // off by chrome at both ends, which is what "the chat stops the hero" is:
+  // nothing overlapped wrongly, the section was simply a header taller than the
+  // room it had.
+  //
+  // `--hz-header` is declared in globals.css beside the header rules, so the two
+  // cannot disagree about how tall it is. `pb` shrinks to match — the picture
+  // needs the room more than the padding does.
+  //
+  // A JSX comment cannot sit here: it is a second child beside the root element
+  // and the build fails on it. (Twice now.)
   return (
-    <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pb-44 pt-28 sm:px-6 sm:pt-32 lg:px-8">
+    <section className="relative flex min-h-[calc(100svh-var(--hz-header))] flex-col items-center justify-center overflow-hidden px-4 pb-28 pt-24 sm:px-6 sm:pt-28 lg:px-8">
       <div className="pointer-events-none absolute inset-0 z-0">
         {/* Static radial — instant paint, and the no-WebGL fallback. */}
         <div
