@@ -68,7 +68,7 @@ export default function SkillsPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Agent skill registry, packager, installer
+            Development knowledge your coding agent loads only when it needs it
           </motion.p>
 
           <motion.p
@@ -77,9 +77,10 @@ export default function SkillsPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Package agent capabilities once. Reuse them everywhere. Skills
-            gives your agents a versioned, signed, distributable plugin
-            format with a registry to match.
+            A skill is a markdown file about one thing — Postgres query
+            plans, Zig comptime, TLS certificate chains. Install the plugin
+            and your agent reads the right one when the work calls for it,
+            instead of carrying all of them into every session.
           </motion.p>
 
           <motion.div
@@ -116,12 +117,14 @@ export default function SkillsPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Package once, run anywhere
+              Coverage costs context. This is the trade.
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              A skill is a self-contained capability — code, prompts,
-              schemas, and metadata — installable into any compatible agent
-              runtime.
+              Load every guide at boot and the context window is spent
+              before the first file is opened. Load none and the agent
+              guesses at things that have known answers. Skills splits the
+              difference: small files, and a discovery layer that fetches
+              them on the keywords in what you asked for.
             </p>
           </motion.div>
 
@@ -129,39 +132,39 @@ export default function SkillsPage() {
             {[
               {
                 icon: Package,
-                title: "Standard format",
+                title: "A skill is a markdown file",
                 description:
-                  "Manifest, prompts, tool schemas, and runtime code in one bundle. Same shape for every skill.",
+                  "Frontmatter carries a name and a description. Below it is prose, code, and links to related skills. Nothing to compile, nothing to run — you can read one before you trust it.",
               },
               {
                 icon: Search,
-                title: "Public registry",
+                title: "Gateway skills do the finding",
                 description:
-                  "Discover skills by capability, model compatibility, license, and trust level. Pull with one command.",
+                  "A gateway is a small skill whose whole job is to notice. Say Postgres and discover-database wakes up; say comptime and discover-zig does. It pulls the specific files and gets out of the way.",
               },
               {
                 icon: Download,
-                title: "One-line install",
+                title: "Install it as a plugin",
                 description:
-                  "Install a skill into your agent with a single CLI invocation. Resolution and dependencies handled.",
+                  "/plugin install https://github.com/hanzoai/skills in Claude Code, or add hanzoai/skills as a marketplace and pick what you want.",
               },
               {
                 icon: GitBranch,
-                title: "Semver everywhere",
+                title: "Written small on purpose",
                 description:
-                  "Pin to exact versions, ranges, or git refs. Lockfiles keep production builds reproducible.",
+                  "One topic per file, a few hundred lines each. Five focused reads cost less than one monolithic guide, and you get the five that matter instead of the one that covers everything badly.",
               },
               {
                 icon: Lock,
-                title: "Signed releases",
+                title: "Cross-referenced, not duplicated",
                 description:
-                  "Every published skill is signed. Verify provenance and integrity before installation.",
+                  "Skills link to the skills next to them, so an agent following a thread from API design into rate limiting into Redis reads three files and never the same paragraph twice.",
               },
               {
                 icon: Wrench,
-                title: "Author SDK",
+                title: "Add your own",
                 description:
-                  "Write a skill in TypeScript or Python. Local test harness, schema validation, and publish in one step.",
+                  "Drop a markdown file in a category, give it a name and a description, and it joins discovery. Your house conventions load the same way the public ones do.",
               },
             ].map((feature, index) => (
               <motion.div

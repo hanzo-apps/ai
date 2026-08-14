@@ -20,54 +20,59 @@ const DOCS = 'https://docs.hanzo.ai/docs/mcp'
 const GITHUB = 'https://github.com/hanzoai/mcp'
 const CONSOLE = 'https://console.hanzo.ai'
 
-const CONFIG = `// Add Hanzo MCP to any MCP client (Claude, Cursor, VS Code…)
+const CONFIG = `// .mcp.json — add Hanzo MCP to any MCP client
 {
   "mcpServers": {
     "hanzo": {
-      "command": "uvx",
-      "args": ["hanzo-mcp"]
+      "command": "npx",
+      "args": ["-y", "--package=@hanzo/mcp", "hanzo-mcp", "serve"]
     }
   }
-}`
+}
+
+// Or install it and run the server yourself:
+//   npm install -g @hanzo/mcp && hanzo-mcp serve
+//   hanzo-mcp list-tools
+//   hanzo-mcp install-desktop`
 
 export default function MCPPage() {
   return (
     <>
       <ProductLanding
-        badge="Hanzo MCP · 260+ tools"
+        badge="Hanzo MCP · Tool server"
         badgeIcon={Plug}
-        title="The Model Context Protocol, hosted"
-        lede="One MCP server that gives any agent 260+ real tools — shell, files, code intelligence, browser, memory, and integrations — with managed hosting, secure sandboxes, and edge deployment on Hanzo Cloud."
+        title="An MCP server with thirteen tools"
+        lede="It gives a model a shell, a filesystem, a code index, git, HTTP, and your project's own context, over stdio or streamable HTTP. Point any MCP client at it and the tools show up."
         ctas={[
           { label: 'Read the docs', href: DOCS, icon: Rocket },
           { label: 'View on GitHub', href: GITHUB },
         ]}
-        note={{ icon: Cloud, text: 'Open source (Apache-2.0). Run the server locally, or host it managed on Hanzo Cloud.' }}
-        availableThrough={['Claude', 'Cursor', 'VS Code', 'Any MCP client']}
+        note={{ icon: Cloud, text: 'Open source, MIT. Same tool names and schemas in TypeScript, Python, and Rust — one surface, three runtimes.' }}
+        availableThrough={['Claude Desktop', 'Claude Code', 'Cursor', 'Any MCP client']}
         what={{
           eyebrow: 'What is Hanzo MCP',
-          title: 'Tools your agents can actually use',
-          sub: 'MCP is the open standard for connecting models to the outside world. Hanzo MCP implements it with a large, batteries-included tool set behind one server.',
+          title: 'A catalog of 260 collapsed into 13',
+          sub: 'A tool list is a prompt. Two hundred entries crowd out the work, and a model picks badly among near-duplicates. So each tool here is one noun with a set of verbs: you call fs with read, or exec with run, and the schema tells the model what the verb needs.',
           pillars: [
             {
               icon: Plug,
-              title: 'A universal tool layer',
-              body: 'The open protocol for connecting models to tools, implemented with 260+ tools behind a single server your agents can call.',
+              title: 'Seven nouns, always on',
+              body: 'fs for bytes and paths. exec for processes. code for symbols. git for history. fetch for HTTP. workspace for the project you are in. ui for components. Six more — think, memory, plan, tasks, mode, and the Hanzo platform itself — are there when you want them.',
             },
             {
               icon: Shield,
-              title: 'Secure sandboxing',
-              body: 'Every shell command, code run, and file operation executes in an isolated sandbox with resource limits.',
+              title: 'Nothing runs that you did not enable',
+              body: 'Community tools shell out to binaries someone else wrote, so they are off until you name them: hanzo-mcp serve --enable-community-cryptuon. Drop tools you do not want with --disable-tools. The default surface is the thirteen and nothing else.',
             },
             {
               icon: Cloud,
-              title: 'Managed hosting',
-              body: 'Run it yourself, or let Hanzo host and auto-scale your MCP server at the edge — persistent state included.',
+              title: 'The same surface everywhere',
+              body: 'npm, PyPI, and a Rust crate carry the identical tool names and action schemas, so an agent written against one runtime moves to another without relearning its tools.',
             },
           ],
         }}
         code={{
-          head: { eyebrow: 'Get started', title: 'One config block, every tool' },
+          head: { eyebrow: 'Get started', title: 'One config block', sub: 'Use the --package= form. Without it npx resolves "serve" as a separate package and runs an unrelated static-file server instead — on every platform.' },
           lang: 'json',
           source: CONFIG,
           ctas: [
@@ -76,21 +81,22 @@ export default function MCPPage() {
           ],
         }}
         features={{
-          eyebrow: 'The tool set',
-          title: 'Far more than filesystem and git',
+          eyebrow: 'The tools',
+          title: 'What each one does',
+          sub: 'Every tool takes an action and the arguments that action needs. These are the verbs.',
           items: [
-            { icon: Terminal, title: 'Shell & code execution', body: 'Run commands and packages (zsh, npx, uvx) in a sandbox, with logs and process control.' },
-            { icon: Code2, title: 'Code intelligence', body: 'LSP and AST-aware search, refactoring, and diagnostics across Go, Python, TypeScript, Rust, and more.' },
-            { icon: Globe, title: 'Browser & computer', body: 'Playwright browser automation and native OS control for real end-to-end tasks.' },
-            { icon: BrainCircuit, title: 'Memory & knowledge', body: 'Persistent memory and knowledge bases that survive across sessions.' },
-            { icon: Layers, title: 'Integrations', body: 'Git, GitHub, PostgreSQL, Redis, Slack, Notion, Google Drive, AWS, Kubernetes — federated behind one interface.' },
-            { icon: Sparkles, title: 'Reasoning tools', body: 'Structured think, critic, and review tools for planning and self-checking.' },
+            { icon: Layers, title: 'fs', body: 'read, write, stat, list, mkdir, rm, mv, apply_patch, search_text. Bytes and paths, including the patch verb an agent needs to edit a file it did not write whole.' },
+            { icon: Terminal, title: 'exec', body: 'run, background, ps, kill, logs. A command that outlives the call goes to background and you read it back through logs, so a dev server does not hold the turn open.' },
+            { icon: Code2, title: 'code', body: 'parse, search, transform, summarize. Search by symbol rather than by string, so renaming a function finds the callers and not the comments that mention it.' },
+            { icon: Globe, title: 'git and fetch', body: 'git does status, diff, log, commit, branch, stash. fetch does get, post, put, delete, download — the ordinary HTTP verbs, plus the one that writes the body to a file.' },
+            { icon: BrainCircuit, title: 'workspace, think, memory', body: 'workspace answers info, config, env, dependencies about the project you are actually in. think records structured reasoning. memory persists past the session.' },
+            { icon: Sparkles, title: 'ui, plan, tasks, mode, hanzo', body: 'ui lists, searches, fetches and installs components. plan and tasks hold the work. mode switches presets. hanzo reaches IAM, KMS, PaaS, and Commerce.' },
           ],
         }}
         finalCta={{
           icon: Plug,
-          title: 'Give your agents real tools',
-          sub: 'Add Hanzo MCP to your client in one config block, or host it on Hanzo Cloud.',
+          title: 'Add it to your client',
+          sub: 'One block in .mcp.json, or install the binary and run hanzo-mcp serve yourself.',
           buttons: [
             { label: 'Read the docs', href: DOCS, icon: Rocket },
             { label: 'GitHub', href: GITHUB },
