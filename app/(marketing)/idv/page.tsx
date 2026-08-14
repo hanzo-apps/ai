@@ -6,33 +6,33 @@ import { ProductFooter } from "@/components/products/ProductFooter"
 const features = [
   {
     icon: UserCheck,
-    title: "KYC for individuals",
-    description: "Document verification, biometric liveness, and identity matching across 200+ countries with sub-minute decisioning.",
+    title: "Four calls, whichever vendor",
+    description: "Start a verification, check its status, parse a webhook, name yourself. Every provider implements the same four, so swapping one for another is configuration and not a rewrite of your onboarding.",
   },
   {
     icon: Building2,
-    title: "KYB for businesses",
-    description: "Beneficial ownership lookup, corporate registry checks, and UBO resolution for entities worldwide.",
+    title: "A verdict, or nothing",
+    description: "A provider whose response we do not parse refuses rather than answering. Two of them used to return approved without reading the reply — one for any response that was not an error, the other including a rejected document. Anything gating on that would have admitted an unverified person, so both now refuse until the parsing is written.",
   },
   {
     icon: ShieldCheck,
-    title: "AML screening",
-    description: "Real-time sanctions, PEP, and adverse media screening against global watchlists with continuous monitoring.",
+    title: "A webhook has to prove it is one",
+    description: "Signatures are HMAC-SHA256 over the raw body, compared in constant time, with the header matched case-insensitively because the wire spelling and the canonical spelling differ. An empty signing secret is a refusal, never a skip — an HMAC under a key everybody knows is one anybody can compute.",
   },
   {
     icon: FileText,
-    title: "Document AI",
-    description: "Passport, driver license, utility bill, and bank statement extraction with template-free OCR.",
+    title: "Polling where a callback cannot be trusted",
+    description: "Where a provider's signing scheme is not implemented, the webhook is refused and the result is polled instead. That loses a notification. It never loses a decision, and it never accepts a stranger's claim as a verdict.",
   },
   {
     icon: Activity,
-    title: "Risk scoring",
-    description: "Composite risk signals across device, behavior, document, and watchlist dimensions. Tunable thresholds per use case.",
+    title: "Credentials come from KMS",
+    description: "The API token bills per check and the webhook token is what separates a provider's verdict from a forgery, so neither is a literal in the code and neither falls back to an environment variable. A missing secret fails at construction rather than producing a provider that quietly runs without one.",
   },
   {
     icon: Globe,
-    title: "Audit-ready records",
-    description: "Immutable verification trails with timestamps, evidence, and reviewer notes for regulator-ready exports.",
+    title: "Verification is not screening",
+    description: "Proving somebody is who they say is a different job from watching what they do afterwards. Sanctions lists, transaction monitoring, cases and the five-year record clock live in Hanzo Risk, and this does not duplicate them.",
   },
 ]
 
@@ -50,7 +50,12 @@ export default function IdvPage() {
               Hanzo IDV
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              Identity verification for regulated workflows. KYC, KYB, and AML in a single API. Onboard customers in under a minute, satisfy auditors with one record.
+              Hanzo IDV is one interface in front of the identity-verification vendors, so which vendor you use
+              is a line of configuration rather than a rewrite of your onboarding. It does not verify anybody
+              itself. It starts a check with the provider you chose, reads the verdict back, and proves that a
+              callback came from them and not from someone who guessed the URL. Jumio and Onfido work end to end
+              today; Plaid works by polling; the rest refuse until their response parsing is written, which is
+              stated here because a verification service that guesses is worse than one that says it cannot tell.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="https://docs.hanzo.ai/docs/services/iam/provider/idv/overview" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
