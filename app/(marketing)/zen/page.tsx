@@ -478,7 +478,17 @@ const Zen = () => {
               </div>
               <h2 className="text-2xl font-bold text-foreground mb-3">The Philosophy Behind the Models</h2>
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto text-sm">
-                These models are built on ten engineering principles drawn from the 64 hexagrams of the I-Ching.
+                {/* FIVE, and the number is not a choice made here — /philosophy
+                    defines the operating laws and there are five of them, which
+                    is also exactly how many this sentence goes on to name. It
+                    read "ten", and the likeliest source is the row of ten
+                    hexagram glyphs directly above: a decorative count borrowed
+                    as a measurement, the same mistake this site already made
+                    once with "60 capabilities", where a two-rows-of-five
+                    mega-menu became a claim about how much we sell. A reader
+                    who counts the list finds five and stops believing the
+                    paragraph. */}
+                These models are built on five engineering principles drawn from the 64 hexagrams of the I-Ching.
                 Orthogonality. Smallness. Completeness. Clarity. Composability.
                 Ancient pattern language for systems that last.
               </p>
