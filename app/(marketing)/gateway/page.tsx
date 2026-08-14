@@ -69,7 +69,7 @@ export default function GatewayPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Unified API gateway
+            The trust boundary in front of the API
           </motion.p>
 
           <motion.p
@@ -78,9 +78,10 @@ export default function GatewayPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            One front door for every Hanzo service. Authentication, rate
-            limiting, intelligent routing, and full observability — built into a
-            single high-performance edge.
+            Every request to api.hanzo.ai passes through it. It decides who the
+            caller is: check the token against Hanzo IAM, throw away every
+            identity header the client sent, write the canonical ones back from
+            the verified claims, then hand the request on.
           </motion.p>
 
           <motion.div
@@ -117,10 +118,11 @@ export default function GatewayPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Everything Routes Through Gateway
+              Nothing downstream has to ask who is calling
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Auth, rate limit, route, and observe — one gateway, every service.
+              Gateway answers that once, at the edge, so every service behind it
+              can read an org id and believe it.
             </p>
           </motion.div>
 
@@ -128,39 +130,39 @@ export default function GatewayPage() {
             {[
               {
                 icon: Shield,
-                title: "Native IAM Auth",
+                title: "The token is checked here",
                 description:
-                  "JWT validation at the edge. Identity headers injected into every upstream. Client-supplied identity headers stripped.",
-              },
-              {
-                icon: Gauge,
-                title: "Rate Limiting",
-                description:
-                  "Per-org, per-user, per-route token bucket limits. Burst tolerant. Backed by Valkey for cluster-wide consistency.",
-              },
-              {
-                icon: Route,
-                title: "Smart Routing",
-                description:
-                  "Path-based, header-based, and weighted routing. Canary deploys, A/B traffic splits, and zero-downtime cutovers.",
-              },
-              {
-                icon: Eye,
-                title: "Observability",
-                description:
-                  "Structured logs, metrics, and distributed traces for every request. OTLP export to your collector of choice.",
-              },
-              {
-                icon: Plug,
-                title: "Extensible",
-                description:
-                  "Plugin architecture for custom auth, transforms, and policies. Write in Go or use the embedded Lua VM.",
+                  "A JWT is validated against Hanzo IAM's JWKS before anything else reads the request. Opaque API keys aren't JWTs, so they go on to the service that issued them and it decides.",
               },
               {
                 icon: Lock,
-                title: "TLS Everywhere",
+                title: "Identity headers are written, not trusted",
                 description:
-                  "Automatic certificate provisioning via ACME. mTLS for service-to-service. HTTP/2 and HTTP/3 ready.",
+                  "X-User-Id, X-Org-Id, X-Roles and every X-IAM-* variant are stripped from every inbound request, then written back from the verified claims — sub, owner, roles. A curl flag can't set them.",
+              },
+              {
+                icon: Route,
+                title: "No route map, deliberately",
+                description:
+                  "For api.hanzo.ai it forwards /* straight to Hanzo Cloud, which owns the /v1 mount table. A second table here would be a second thing to keep in sync, and the first one to go stale.",
+              },
+              {
+                icon: Gauge,
+                title: "Rate limits per caller and overall",
+                description:
+                  "Token-bucket limits by client IP and across the edge as a whole, with per-endpoint overrides in config. A rejected request gets a 429 and a Retry-After, not a dropped connection.",
+              },
+              {
+                icon: Eye,
+                title: "Liveness that consults nothing",
+                description:
+                  "The health check answers whether the process is up and asks no backend. A probe that fails when a dependency blinks restarts a healthy process and turns one outage into two — so backends are dialed lazily and degrade per request instead.",
+              },
+              {
+                icon: Plug,
+                title: "A hop, or no hop at all",
+                description:
+                  "Run it as its own service in front of the API, or mount it inside the cloud binary with one call. Same checks either way — one less network hop when you don't want one.",
               },
             ].map((feature, index) => (
               <motion.div

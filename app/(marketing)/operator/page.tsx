@@ -69,7 +69,7 @@ export default function OperatorPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Declarative orchestration for every Hanzo service
+            One binary that runs the stack on Kubernetes
           </motion.p>
 
           <motion.p
@@ -78,9 +78,10 @@ export default function OperatorPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            One Kubernetes operator that knows IAM, KMS, Base, Gateway, Ingress,
-            and the rest of the stack. Apply a CRD, get a fully wired,
-            promotion-gated, audit-ready deployment.
+            Declare a Service, a Datastore, a Gateway or an Ingress. The
+            Deployment, StatefulSet, PVC, autoscaler, disruption budget, network
+            policy and KMS-synced secret behind it get created — and stay that
+            way, because one loop keeps checking.
           </motion.p>
 
           <motion.div
@@ -117,11 +118,11 @@ export default function OperatorPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              The Stack, Reconciled
+              Declare the thing, not the thirty objects
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              A single control loop owns the full lifecycle of every Hanzo
-              service.
+              One reconcile loop, an API group you choose at install, and Kinds
+              that already know what a service in this stack needs.
             </p>
           </motion.div>
 
@@ -129,39 +130,39 @@ export default function OperatorPage() {
             {[
               {
                 icon: Layers,
-                title: "Service-Aware CRDs",
+                title: "Kinds that know the stack",
                 description:
-                  "First-class types for IAM apps, KMS projects, Base instances, and the rest. No raw YAML for every config knob.",
+                  "Service covers most workloads. Datastore covers the stateful ones and dispatches on its type, with SQL, KV, DocDB and S3 as thin facades over it. Gateway, Ingress, DNS, Base, IAM, KMS and MPC are their own Kinds, because each one wires up differently.",
               },
               {
                 icon: ShieldCheck,
-                title: "KMS-First Secrets",
+                title: "Secrets come from KMS",
                 description:
-                  "KMSSecret resources sync from kms.hanzo.ai into the cluster. No plaintext secrets in git, ever.",
-              },
-              {
-                icon: GitBranch,
-                title: "Promotion Gates",
-                description:
-                  "Dev auto-promotes. Testnet/main require explicit approval. Soak time and health checks enforced before cutover.",
+                  "A KMSSecret is materialized beside the workload and synced from kms.hanzo.ai. What lives in git is the path to a secret, never the secret.",
               },
               {
                 icon: RefreshCw,
-                title: "Reconcile Loop",
+                title: "Drift is reverted, and said out loud",
                 description:
-                  "Continuous drift detection. Cluster state always converges back to the declared spec. Self-healing by design.",
+                  "Every sweep reads each object before it applies, then logs what it did to it: created, reverted, or already in sync. The resync interval is per-resource and clamped into a safe band, so a bad number can't turn the loop into a hot loop.",
+              },
+              {
+                icon: GitBranch,
+                title: "Git is a source, and it never deletes",
+                description:
+                  "Point it at a repo and it applies what's there, on a tight poll a push webhook can interrupt for an instant sweep. A file removed from git is left alone — the plan type has no delete case, so pruning isn't something a bug can cause.",
               },
               {
                 icon: Workflow,
-                title: "Cross-Service Wiring",
+                title: "Every write is attributable",
                 description:
-                  "Operator wires app to IAM client, KMS project, ingress route, and observability sink in one apply.",
+                  "Server-side apply under its own field manager, so a git-driven apply never fights a per-Kind reconcile. Turn on autoscaling and the Deployment ships with no replica count at all — the autoscaler owns that field, alone.",
               },
               {
                 icon: FileCode,
-                title: "GitOps Native",
+                title: "Install is one command",
                 description:
-                  "kustomize-friendly. Works with Argo CD and Flux. Manifests are the source of truth.",
+                  "operator install lays down the CRDs, namespace, RBAC and Deployment. operator up does that and applies your resources behind it. Both are server-side apply, so running either again changes nothing.",
               },
             ].map((feature, index) => (
               <motion.div

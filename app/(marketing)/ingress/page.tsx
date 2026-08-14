@@ -69,7 +69,7 @@ export default function IngressPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            K8s-native L7 load balancer
+            The front door of a Kubernetes cluster
           </motion.p>
 
           <motion.p
@@ -78,9 +78,9 @@ export default function IngressPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            High-performance HTTP/HTTPS reverse proxy purpose-built for
-            Kubernetes. Reads Ingress and Gateway API resources directly. No
-            sidecars, no nginx, no caddy — just one binary.
+            It terminates TLS, matches the hostname, and forwards to the service
+            behind it. It reads the Ingress resources you already write, so there
+            is nothing new to declare and nothing to inject beside your pods.
           </motion.p>
 
           <motion.div
@@ -117,10 +117,11 @@ export default function IngressPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              The Edge Your Cluster Deserves
+              What happens at the door
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              One binary. Zero sidecars. First-class Kubernetes integration.
+              One static binary in front of every hostname the cluster answers
+              for.
             </p>
           </motion.div>
 
@@ -128,39 +129,39 @@ export default function IngressPage() {
             {[
               {
                 icon: Layers,
-                title: "Ingress + Gateway API",
+                title: "It reads what you already wrote",
                 description:
-                  "Reconciles standard Ingress, Gateway, HTTPRoute, and TLSRoute resources. No custom CRDs to learn.",
+                  "Standard networking.k8s.io/v1 Ingress is the primary source, alongside IngressRoute for the things a plain Ingress can't say, Gateway API, and TOML or YAML from disk. It registers as the cluster's default IngressClass, so an Ingress that names none is still picked up.",
               },
               {
                 icon: Shield,
-                title: "Automatic TLS",
+                title: "Certificates it fetches itself",
                 description:
-                  "ACME-based certificate provisioning. Wildcard certs via DNS-01. mTLS upstream support out of the box.",
-              },
-              {
-                icon: Zap,
-                title: "Wire-Speed Performance",
-                description:
-                  "Written in Go with epoll-tuned hot path. Handles 100k+ rps per pod with sub-millisecond p99 latency.",
+                  "Let's Encrypt provisioning and renewal, wildcards included. A new hostname gets a certificate without anyone filing a ticket for one.",
               },
               {
                 icon: GitBranch,
-                title: "Canary & Traffic Splits",
+                title: "Middleware you compose by annotation",
                 description:
-                  "Header, weight, and cookie-based routing. Promote releases without downtime. Roll back in seconds.",
+                  "Rate limiting, retry with exponential backoff, circuit breaking, compression, header rewriting, IP allowlists, redirects, prefix stripping. Name one in an annotation, or chain several into a named pipeline and name that.",
+              },
+              {
+                icon: Zap,
+                title: "Routes change without a restart",
+                description:
+                  "Edit an Ingress and the routing table follows — no reload, no dropped connection. A backend that stops answering health checks is taken out of rotation and put back when it recovers.",
               },
               {
                 icon: Globe,
-                title: "Static Plugin",
+                title: "It can serve the files itself",
                 description:
-                  "Built-in static file server with content-addressable caching. Serve SPAs and assets from the ingress itself.",
+                  "The static middleware serves a site export straight from disk or from object storage — pricing.html, docs/index.html, hashed asset chunks, a 404 page. A SPA or a docs bundle needs no pod of its own.",
               },
               {
                 icon: Server,
-                title: "Single Binary",
+                title: "One binary, on the port",
                 description:
-                  "No external dependencies. Boots in milliseconds. Hot-reloads config without dropping connections.",
+                  "No runtime dependencies. It runs in host-network mode and binds 80 and 443 directly, with every Linux capability dropped except the one that lets it.",
               },
             ].map((feature, index) => (
               <motion.div

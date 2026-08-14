@@ -15,13 +15,13 @@ const Tunnel = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="bg-primary/10 border border-border rounded-full px-4 py-1 inline-block mb-4">
-              <span className="text-foreground text-sm font-medium">Localhost Tunnels</span>
+              <span className="text-foreground text-sm font-medium">hanzo share</span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/10">
               Hanzo Tunnel
             </h1>
             <p className="text-xl text-foreground/80 mb-8">
-              Secure localhost tunnels for development and demos. Expose any local port to a public URL with end-to-end TLS in one command.
+              A public HTTPS URL for something running on your laptop. The port stays bound to localhost and the Hanzo fabric carries the traffic to it, so nothing is listening on whatever network the machine is sitting on.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://docs.hanzo.ai/docs/projects/hanzoai/tunnel" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
@@ -38,11 +38,11 @@ const Tunnel = () => {
             <div className="absolute inset-0 hz-grid [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
             <pre className="text-sm sm:text-base overflow-x-auto bg-[var(--black)]/50 p-4 rounded-lg border border-white/30">
               <code className="text-foreground/80">
-                <span className="text-foreground/60">$</span> <span className="text-foreground">hanzo tunnel</span> <span className="text-[var(--white)]">3000</span>
+                <span className="text-foreground/60">$</span> <span className="text-foreground">hanzo share</span> <span className="text-[var(--white)]">3000</span>
                 <br/>
-                <span className="text-foreground/60"># Tunnel ready</span>
+                <span className="text-foreground/60">→ sharing 3000</span>
                 <br/>
-                <span className="text-[var(--white)]">https://wispy-fox-7421.tunnel.hanzo.ai</span> <span className="text-foreground/60">→</span> <span className="text-[var(--white)]">localhost:3000</span>
+                <span className="text-[var(--white)]">https://wispyfox7421.share.hanzo.ai</span> <span className="text-foreground/60">→</span> <span className="text-[var(--white)]">localhost:3000</span>
               </code>
             </pre>
           </div>
@@ -54,10 +54,10 @@ const Tunnel = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <ChromeText as="h2" className="text-3xl font-bold mb-4">
-              Built for Real Development
+              For the things that need a real URL
             </ChromeText>
             <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-              Webhooks, mobile QA, customer demos, OAuth callbacks — without firewall fights
+              A webhook you have to receive. A build a client wants to click through. An OAuth callback that will not accept localhost.
             </p>
           </div>
 
@@ -70,9 +70,9 @@ const Tunnel = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Lock className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">End-to-End TLS</h3>
+              <h3 className="text-xl font-bold mb-2">The port stays on localhost</h3>
               <p className="text-foreground/80">
-                Every tunnel is encrypted edge-to-localhost with automatic certificates. No mixed-content warnings, no manual setup.
+                Your service keeps listening on 127.0.0.1. The fabric reaches in and carries the traffic, so a café, a client's office, or a conference floor sees nothing.
               </p>
             </motion.div>
 
@@ -84,9 +84,9 @@ const Tunnel = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Globe className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Custom Domains</h3>
+              <h3 className="text-xl font-bold mb-2">A name you can keep</h3>
               <p className="text-foreground/80">
-                Bring your own domain or use a memorable hanzo.ai subdomain. Reserved subdomains for paid users.
+                You get a random token by default. Pass --name and the subdomain is yours to reuse, so the callback URL you registered last week still works today.
               </p>
             </motion.div>
 
@@ -98,9 +98,9 @@ const Tunnel = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Terminal className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Request Inspector</h3>
+              <h3 className="text-xl font-bold mb-2">Your login is the account</h3>
               <p className="text-foreground/80">
-                Replay webhooks, inspect headers, retry failed requests from the local CLI. No more printf debugging.
+                No second signup, no config file to fill in. The first share provisions the account from the identity you already signed in with, then prints the URL.
               </p>
             </motion.div>
 
@@ -112,9 +112,9 @@ const Tunnel = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Shield className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Auth-Gated Tunnels</h3>
+              <h3 className="text-xl font-bold mb-2">A shell is never open by hostname</h3>
               <p className="text-foreground/80">
-                Lock any tunnel behind Hanzo IAM, basic auth, or an allowlist. Share dev URLs without exposing them publicly.
+                hanzo link publishes the terminal you are in so the console can watch it, or drive it. That one is gated behind your org's identity provider — knowing the URL is not enough, and if the gate cannot be applied the command refuses to publish.
               </p>
             </motion.div>
 
@@ -126,9 +126,9 @@ const Tunnel = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Zap className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Edge-Anchored</h3>
+              <h3 className="text-xl font-bold mb-2">It ends when you do</h3>
               <p className="text-foreground/80">
-                Tunnels terminate at the nearest Hanzo edge POP. Sub-50ms latency from anywhere on the planet.
+                The tunnel belongs to the command that started it. Close the terminal and the URL stops answering — a share cannot outlive the session that meant to make it.
               </p>
             </motion.div>
 
@@ -140,9 +140,9 @@ const Tunnel = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <NetworkIcon className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">TCP and HTTP</h3>
+              <h3 className="text-xl font-bold mb-2">Four things to put behind it</h3>
               <p className="text-foreground/80">
-                Tunnel HTTP, raw TCP, SSH, or Postgres. Anything that speaks a port speaks tunnel.
+                proxy passes traffic through to a local port. web and static serve a directory as a site. drive hands over files. One flag picks which, and a port, a host:port, or a full URL all work as the target.
               </p>
             </motion.div>
           </div>
@@ -154,9 +154,9 @@ const Tunnel = () => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 md:p-12 border border-white/30">
             <div className="text-center">
-              <h2 className="text-3xl font-bold mb-4">One Command, Public URL</h2>
+              <h2 className="text-3xl font-bold mb-4">One command, one URL</h2>
               <p className="text-xl text-foreground/80 mb-8 max-w-3xl mx-auto">
-                Install the CLI, run a single command, get a public URL. Stop wrestling with ngrok limits and rotating subdomains.
+                Install the CLI, sign in once, and name a port. It is the same sign-in that runs your agents and bills your usage, so there is nothing else to set up.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="https://docs.hanzo.ai/docs/skills/hanzo-tunnel" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
