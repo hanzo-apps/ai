@@ -1,7 +1,7 @@
 'use client'
 
 import { HanzoHeader, HanzoFooter, resolveSurface, type ProductCategory } from '@hanzogui/shell'
-import { categorySlug, cloudCategories } from '@/lib/data/cloud-primitives'
+import { cloudCategories } from '@/lib/data/cloud-primitives'
 import { policy } from '@/lib/publish'
 import { CONSOLE, goToChat } from './nav-data'
 
@@ -56,44 +56,32 @@ export const PRODUCTS_TAXONOMY: ProductCategory[] = cloudCategories.map((categor
   // landing: with /products withdrawn, a tile must not point into it, so the
   // category href falls back to its first leaf and the "All N →" row only
   // renders when the landing is a page we still publish.
-  const landing = `/products/${categorySlug(category.title)}`
+  const landing = `/products/${category.id}`
   const href = shown(landing) ? landing : (category.items[0]?.href ?? landing)
   return {
-    id: categorySlug(category.title),
+    id: category.id,
     label: category.title,
     href,
-    // The note is the scope caveat ("fiat only") and belongs wherever the
-    // category is named, so it rides the one line the menu gives us — unless
-    // the tagline already says it, in which case appending it says the same
-    // thing twice and overruns the line into an ellipsis.
-    tagline:
-      category.note && !category.tagline.toLowerCase().includes(category.note.toLowerCase())
-        ? `${category.tagline} · ${category.note}`
-        : category.tagline,
+    tagline: category.tagline,
     items: [
       ...category.items.slice(0, MENU_LEAVES).map((item) => ({
-        id: item.slug ?? categorySlug(item.title),
+        id: item.slug,
         label: item.title,
         href: item.href,
         hint: item.desc,
-        // An absolute href is another host (Web3 → web3.hanzo.ai), so the leaf
-        // opens in a new tab. Read off the URL, never declared twice.
+        // An absolute href is another host, so the leaf opens in a new tab.
+        // Read off the URL, never declared twice.
         external: /^https?:\/\//.test(item.href),
       })),
-      // Categories run 7-15 deep and the tiles must stay level across a 2x5
-      // grid, so every tile shows the same five and then says how many more
-      // there are. The count is the honest part: it names what the link is for,
-      // so nothing is dropped quietly — the category page lists all of them.
-      // Only when that page is published: an "All N →" into a withdrawn
-      // landing is a link to a page we just unlisted.
+      // Categories run uneven and the tiles must stay level across the grid, so
+      // every tile shows the same five and then hands off to the page that
+      // lists the rest. It names the CATEGORY rather than a remainder: the
+      // membership is measured per build now, so a number here would be a count
+      // of what happened to answer this morning.
+      // Only when that page is published: an "All … →" into a withdrawn landing
+      // is a link to a page we just unlisted.
       ...(shown(landing)
-        ? [
-            {
-              id: `${categorySlug(category.title)}-all`,
-              label: `All ${category.items.length} →`,
-              href: landing,
-            },
-          ]
+        ? [{ id: `${category.id}-all`, label: `All ${category.title} →`, href: landing }]
         : []),
     ],
   }
@@ -182,9 +170,27 @@ export function SiteHeader({
     { id: 'developers', label: 'Developers', href: '/dev' },
   ].filter((l) => shown(l.href))
 
-  // One action, far right: try the thing. The cloud face said "Start building"
-  // and the ai face inherited a second console link beside it; both are the
-  // same door, so there is one label for it.
+  // ONE action, far right: try the thing.
+  //
+  // There were two, and they were the SAME URL. `signInHref` renders the
+  // shell's default "Sign in", and it pointed at console.hanzo.ai; so did this
+  // CTA. A visitor read two controls, weighed them, and arrived at one page
+  // either way — the header spending its most valuable inches offering a choice
+  // that does not exist. The prop's own contract already says this: supplying
+  // it is what makes the affordance exist, and a surface "whose primary CTA IS
+  // the sign-in" is told to omit it. This is that surface.
+  //
+  // Dropping it also retires a CSS rule. The primary used to need `order: 1` to
+  // get past Sign in, which the shell emits last; with nothing to get past, the
+  // DOM order is already the right order and the override is gone rather than
+  // kept as decoration.
+  //
+  // `tryMenu` (below) makes this pill OPEN THE DOORS rather than take one.
+  // "Try Hanzo" pointing at the console answered a question nobody asked: a
+  // visitor arrives wanting to build an app, or to keep data somewhere, or to
+  // chat, or to code from a terminal, and the console is one of those. The href
+  // stays and stays the console — it is the fallback the pill carries before
+  // hydration and for anyone without JavaScript, so the control is never dead.
   const TRY = { ...base.primaryCTA, label: 'Try Hanzo', href: CONSOLE }
 
   return (
@@ -198,7 +204,7 @@ export function SiteHeader({
         }}
         productsTaxonomy={PRODUCTS_TAXONOMY}
         currentCategoryId={currentCategoryId}
-        signInHref={CONSOLE}
+        tryMenu
         onAskHanzo={goToChat}
       />
     </div>

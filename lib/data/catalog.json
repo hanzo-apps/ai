@@ -1,0 +1,936 @@
+{
+  "source": "https://api.hanzo.ai/v1/commerce/catalog?brand=hanzo",
+  "document": "https://api.hanzo.ai/v1/openapi.json",
+  "fetched": "2026-08-14T00:47:55.497Z",
+  "categories": [
+    {
+      "id": "ai",
+      "label": "AI",
+      "order": 0
+    },
+    {
+      "id": "compute",
+      "label": "Compute",
+      "order": 1
+    },
+    {
+      "id": "data",
+      "label": "Data",
+      "order": 2
+    },
+    {
+      "id": "network",
+      "label": "Network",
+      "order": 3
+    },
+    {
+      "id": "security",
+      "label": "Security",
+      "order": 4
+    },
+    {
+      "id": "dev",
+      "label": "Dev",
+      "order": 5
+    },
+    {
+      "id": "platform",
+      "label": "Platform",
+      "order": 6
+    },
+    {
+      "id": "observe",
+      "label": "Observe",
+      "order": 7
+    },
+    {
+      "id": "web3",
+      "label": "Web3",
+      "order": 8
+    },
+    {
+      "id": "apps",
+      "label": "Apps",
+      "order": 9
+    }
+  ],
+  "products": [
+    {
+      "id": "models",
+      "name": "Models",
+      "category": "ai",
+      "slug": "models",
+      "href": "/models",
+      "icon": "Brain",
+      "api": "/v1/models",
+      "docs": "https://docs.hanzo.ai/docs/services/models",
+      "repo": "hanzoai/ai",
+      "gcp": "Model Garden",
+      "order": 1
+    },
+    {
+      "id": "agents",
+      "name": "Agents",
+      "category": "ai",
+      "slug": "agents",
+      "href": "/agents",
+      "icon": "Bot",
+      "api": "/v1/agents",
+      "docs": "https://docs.hanzo.ai/docs/services/agents",
+      "repo": "hanzoai/agent",
+      "gcp": "Agent Builder",
+      "order": 3
+    },
+    {
+      "id": "inference",
+      "name": "Inference",
+      "category": "ai",
+      "slug": "inference",
+      "href": "/cloud/inference",
+      "icon": "Zap",
+      "api": "/v1/chat/completions",
+      "docs": "https://docs.hanzo.ai/docs/services/inference",
+      "repo": null,
+      "gcp": "Vertex AI Prediction",
+      "order": 4
+    },
+    {
+      "id": "embeddings",
+      "name": "Embeddings",
+      "category": "ai",
+      "slug": "embeddings",
+      "href": "/cloud/embeddings",
+      "icon": "Boxes",
+      "api": "/v1/embeddings",
+      "docs": "https://docs.hanzo.ai/docs/services/embeddings",
+      "repo": "hanzoai/ai",
+      "gcp": "Vertex AI Vector Search",
+      "order": 7
+    },
+    {
+      "id": "playground",
+      "name": "Playground",
+      "category": "ai",
+      "slug": "playground",
+      "href": "/playground",
+      "icon": "Play",
+      "api": "/v1/chat/completions",
+      "docs": "https://docs.hanzo.ai/docs/services/playground",
+      "repo": "hanzoai/ai",
+      "gcp": null,
+      "order": 41
+    },
+    {
+      "id": "prompts",
+      "name": "Prompts",
+      "category": "ai",
+      "slug": "prompts",
+      "href": "/cloud/prompts",
+      "icon": "FileText",
+      "api": "/v1/prompts",
+      "docs": "https://docs.hanzo.ai/docs/services/prompts",
+      "repo": "hanzoai/o11y",
+      "gcp": null,
+      "order": 84
+    },
+    {
+      "id": "chat",
+      "name": "Chat",
+      "category": "apps",
+      "slug": "chat",
+      "href": "/chat",
+      "icon": "MessageSquare",
+      "api": "/v1/chat",
+      "docs": "https://docs.hanzo.ai/docs/services/chat",
+      "repo": "hanzoai/chat",
+      "gcp": null,
+      "order": 69
+    },
+    {
+      "id": "bot",
+      "name": "Bot",
+      "category": "apps",
+      "slug": "bot",
+      "href": "/bot",
+      "icon": "Bot",
+      "api": "/v1/bot",
+      "docs": "https://docs.hanzo.ai/docs/services/bot",
+      "repo": "hanzoai/bot",
+      "gcp": null,
+      "order": 70
+    },
+    {
+      "id": "marketplace",
+      "name": "Marketplace",
+      "category": "apps",
+      "slug": "marketplace",
+      "href": "/cloud/marketplace",
+      "icon": "Store",
+      "api": "/v1/pricing/models",
+      "docs": "https://docs.hanzo.ai/docs/services/marketplace",
+      "repo": "hanzoai/console",
+      "gcp": "Marketplace",
+      "order": 71
+    },
+    {
+      "id": "search",
+      "name": "Search",
+      "category": "apps",
+      "slug": "search",
+      "href": "/search",
+      "icon": "Search",
+      "api": "/v1/search",
+      "docs": "https://docs.hanzo.ai/docs/services/search",
+      "repo": "hanzoai/search",
+      "gcp": null,
+      "order": 72
+    },
+    {
+      "id": "crawl",
+      "name": "Crawl",
+      "category": "apps",
+      "slug": "crawl",
+      "href": "/crawl",
+      "icon": "Globe",
+      "api": "/v1/crawl",
+      "docs": "https://docs.hanzo.ai/docs/services/crawl",
+      "repo": null,
+      "gcp": null,
+      "order": 73
+    },
+    {
+      "id": "gpus",
+      "name": "GPUs",
+      "category": "compute",
+      "slug": "gpus",
+      "href": "/cloud/gpus",
+      "icon": "Cpu",
+      "api": "/v1/gpus",
+      "docs": "https://docs.hanzo.ai/docs/services/gpus",
+      "repo": "hanzoai/operator",
+      "gcp": "Compute Engine GPUs",
+      "order": 9
+    },
+    {
+      "id": "machines",
+      "name": "Machines",
+      "category": "compute",
+      "slug": "machines",
+      "href": "/machines",
+      "icon": "Server",
+      "api": "/v1/machines",
+      "docs": "https://docs.hanzo.ai/docs/services/machines",
+      "repo": null,
+      "gcp": null,
+      "order": 10
+    },
+    {
+      "id": "functions",
+      "name": "Functions",
+      "category": "compute",
+      "slug": "functions",
+      "href": "/functions",
+      "icon": "FunctionSquare",
+      "api": "/v1/functions",
+      "docs": "https://docs.hanzo.ai/docs/services/functions",
+      "repo": "hanzoai/functions",
+      "gcp": null,
+      "order": 12
+    },
+    {
+      "id": "clusters",
+      "name": "Clusters",
+      "category": "compute",
+      "slug": "clusters",
+      "href": "/cloud/clusters",
+      "icon": "Network",
+      "api": "/v1/clusters",
+      "docs": "https://docs.hanzo.ai/docs/services/clusters",
+      "repo": "hanzoai/operator",
+      "gcp": null,
+      "order": 50
+    },
+    {
+      "id": "tasks",
+      "name": "Tasks",
+      "category": "compute",
+      "slug": "tasks",
+      "href": "/tasks",
+      "icon": "Workflow",
+      "api": "/v1/tasks",
+      "docs": "https://docs.hanzo.ai/docs/services/tasks",
+      "repo": "hanzoai/tasks",
+      "gcp": "Cloud Tasks",
+      "order": 92
+    },
+    {
+      "id": "vector",
+      "name": "Vector",
+      "category": "data",
+      "slug": "vector",
+      "href": "/vector",
+      "icon": "Boxes",
+      "api": "/v1/vector",
+      "docs": "https://docs.hanzo.ai/docs/services/vector",
+      "repo": "hanzoai/vector",
+      "gcp": null,
+      "order": 15
+    },
+    {
+      "id": "sql",
+      "name": "SQL",
+      "category": "data",
+      "slug": "sql",
+      "href": "/sql",
+      "icon": "Database",
+      "api": "/v1/sql",
+      "docs": "https://docs.hanzo.ai/docs/services/sql",
+      "repo": "hanzoai/sql",
+      "gcp": null,
+      "order": 16
+    },
+    {
+      "id": "kv",
+      "name": "KV",
+      "category": "data",
+      "slug": "kv",
+      "href": "/kv",
+      "icon": "Key",
+      "api": "/v1/kv",
+      "docs": "https://docs.hanzo.ai/docs/services/kv",
+      "repo": "hanzoai/kv",
+      "gcp": "Memorystore",
+      "order": 17
+    },
+    {
+      "id": "s3",
+      "name": "Object Storage",
+      "category": "data",
+      "slug": "s3",
+      "href": "/s3",
+      "icon": "HardDrive",
+      "api": "/v1/s3",
+      "docs": "https://docs.hanzo.ai/docs/services/s3",
+      "repo": "hanzoai/s3",
+      "gcp": "Cloud Storage",
+      "order": 18
+    },
+    {
+      "id": "datastore",
+      "name": "Datastore",
+      "category": "data",
+      "slug": "datastore",
+      "href": "/datastore",
+      "icon": "Server",
+      "api": "/v1/datastore",
+      "docs": "https://docs.hanzo.ai/docs/services/datastore",
+      "repo": "hanzoai/datastore",
+      "gcp": "Bigtable",
+      "order": 19
+    },
+    {
+      "id": "base",
+      "name": "Base",
+      "category": "data",
+      "slug": "base",
+      "href": "/base",
+      "icon": "Boxes",
+      "api": "/v1/base",
+      "docs": "https://docs.hanzo.ai/docs/services/base",
+      "repo": "hanzoai/superbase",
+      "gcp": "Firebase",
+      "order": 20
+    },
+    {
+      "id": "docdb",
+      "name": "DocDB",
+      "category": "data",
+      "slug": "docdb",
+      "href": "/docdb",
+      "icon": "FileText",
+      "api": "/v1/docdb",
+      "docs": "https://docs.hanzo.ai/docs/services/docdb",
+      "repo": "hanzoai/docdb",
+      "gcp": "Firestore",
+      "order": 21
+    },
+    {
+      "id": "memory",
+      "name": "Memory",
+      "category": "data",
+      "slug": "memory",
+      "href": "/cloud/memory",
+      "icon": "NotebookPen",
+      "api": "/v1/memory",
+      "docs": "https://docs.hanzo.ai/docs/services/memory",
+      "repo": "hanzoai/ai",
+      "gcp": null,
+      "order": 91
+    },
+    {
+      "id": "integrations",
+      "name": "Integrations",
+      "category": "dev",
+      "slug": "integrations",
+      "href": "/integrations",
+      "icon": "Cable",
+      "api": "/v1/integrations",
+      "docs": "https://docs.hanzo.ai/docs/services/integrations",
+      "repo": "hanzoai/console",
+      "gcp": null,
+      "order": 40
+    },
+    {
+      "id": "api-keys",
+      "name": "API Keys",
+      "category": "dev",
+      "slug": "api-keys",
+      "href": "/cloud/api-keys",
+      "icon": "KeySquare",
+      "api": "/v1/iam",
+      "docs": "https://docs.hanzo.ai/docs/services/api-keys",
+      "repo": "hanzoai/iam",
+      "gcp": null,
+      "order": 82
+    },
+    {
+      "id": "gateway",
+      "name": "Gateway",
+      "category": "network",
+      "slug": "gateway",
+      "href": "/gateway",
+      "icon": "Network",
+      "api": "/v1/gateway",
+      "docs": "https://docs.hanzo.ai/docs/services/gateway",
+      "repo": "hanzoai/gateway",
+      "gcp": "API Gateway",
+      "order": 22
+    },
+    {
+      "id": "dns",
+      "name": "DNS",
+      "category": "network",
+      "slug": "dns",
+      "href": "/dns",
+      "icon": "Globe",
+      "api": "/v1/dns",
+      "docs": "https://docs.hanzo.ai/docs/services/dns",
+      "repo": "hanzoai/dns",
+      "gcp": "Cloud DNS",
+      "order": 25
+    },
+    {
+      "id": "overview",
+      "name": "Overview",
+      "category": "observe",
+      "slug": "overview",
+      "href": "/overview",
+      "icon": "Gauge",
+      "api": "/v1/admin/overview",
+      "docs": "https://docs.hanzo.ai/docs/services/overview",
+      "repo": "hanzoai/console2",
+      "gcp": "Cloud overview",
+      "order": 0
+    },
+    {
+      "id": "evals",
+      "name": "Evals",
+      "category": "observe",
+      "slug": "evals",
+      "href": "/cloud/evals",
+      "icon": "ListChecks",
+      "api": "/v1/evals",
+      "docs": "https://docs.hanzo.ai/docs/services/evals",
+      "repo": "hanzoai/o11y",
+      "gcp": null,
+      "order": 8
+    },
+    {
+      "id": "logs",
+      "name": "Logs",
+      "category": "observe",
+      "slug": "logs",
+      "href": "/cloud/logs",
+      "icon": "ScrollText",
+      "api": "/v1/logs",
+      "docs": "https://docs.hanzo.ai/docs/services/logs",
+      "repo": "hanzoai/o11y",
+      "gcp": null,
+      "order": 52
+    },
+    {
+      "id": "metrics",
+      "name": "Metrics",
+      "category": "observe",
+      "slug": "metrics",
+      "href": "/metrics",
+      "icon": "BarChart3",
+      "api": "/v1/insights",
+      "docs": "https://docs.hanzo.ai/docs/services/metrics",
+      "repo": "hanzoai/insights",
+      "gcp": null,
+      "order": 53
+    },
+    {
+      "id": "o11y",
+      "name": "Traces",
+      "category": "observe",
+      "slug": "o11y",
+      "href": "/o11y",
+      "icon": "Activity",
+      "api": "/v1/o11y",
+      "docs": "https://docs.hanzo.ai/docs/services/o11y",
+      "repo": "hanzoai/o11y",
+      "gcp": null,
+      "order": 54
+    },
+    {
+      "id": "ai-metrics",
+      "name": "AI Metrics",
+      "category": "observe",
+      "slug": "ai-metrics",
+      "href": "/cloud/ai-metrics",
+      "icon": "BarChart3",
+      "api": "/v1/billing/usage",
+      "docs": "https://docs.hanzo.ai/docs/services/ai-metrics",
+      "repo": "hanzoai/commerce",
+      "gcp": null,
+      "order": 55
+    },
+    {
+      "id": "billing",
+      "name": "Billing",
+      "category": "observe",
+      "slug": "billing",
+      "href": "/billing",
+      "icon": "CreditCard",
+      "api": "/v1/billing",
+      "docs": "https://docs.hanzo.ai/docs/services/billing",
+      "repo": "hanzoai/commerce",
+      "gcp": "Cloud Billing",
+      "order": 58
+    },
+    {
+      "id": "plans",
+      "name": "Plans & Pricing",
+      "category": "observe",
+      "slug": "plans",
+      "href": "/cloud/plans",
+      "icon": "Tag",
+      "api": "/v1/pricing",
+      "docs": "https://docs.hanzo.ai/docs/services/pricing",
+      "repo": "hanzoai/billing",
+      "gcp": null,
+      "order": 60
+    },
+    {
+      "id": "experiments",
+      "name": "Experiments",
+      "category": "observe",
+      "slug": "experiments",
+      "href": "/cloud/experiments",
+      "icon": "Workflow",
+      "api": "/v1/experiments",
+      "docs": "https://docs.hanzo.ai/docs/services/experiments",
+      "repo": "hanzoai/o11y",
+      "gcp": null,
+      "order": 86
+    },
+    {
+      "id": "sessions",
+      "name": "Sessions",
+      "category": "observe",
+      "slug": "sessions",
+      "href": "/cloud/sessions",
+      "icon": "MessageSquare",
+      "api": "/v1/o11y/sessions",
+      "docs": "https://docs.hanzo.ai/docs/services/sessions",
+      "repo": "hanzoai/o11y",
+      "gcp": null,
+      "order": 87
+    },
+    {
+      "id": "projects",
+      "name": "Projects",
+      "category": "platform",
+      "slug": "projects",
+      "href": "/cloud/projects",
+      "icon": "FolderGit2",
+      "api": "/v1/projects",
+      "docs": "https://docs.hanzo.ai/docs/services/projects",
+      "repo": "hanzoai/console2",
+      "gcp": "Resource Manager",
+      "order": 44
+    },
+    {
+      "id": "environments",
+      "name": "Environments",
+      "category": "platform",
+      "slug": "environments",
+      "href": "/cloud/environments",
+      "icon": "Layers",
+      "api": "/v1/environments",
+      "docs": "https://docs.hanzo.ai/docs/services/environments",
+      "repo": null,
+      "gcp": null,
+      "order": 45
+    },
+    {
+      "id": "builds",
+      "name": "Builds",
+      "category": "platform",
+      "slug": "builds",
+      "href": "/cloud/builds",
+      "icon": "Hammer",
+      "api": "/v1/builds",
+      "docs": "https://docs.hanzo.ai/docs/services/builds",
+      "repo": null,
+      "gcp": null,
+      "order": 46
+    },
+    {
+      "id": "registry",
+      "name": "Registry",
+      "category": "platform",
+      "slug": "registry",
+      "href": "/registry",
+      "icon": "Package",
+      "api": "/v1/registry",
+      "docs": "https://docs.hanzo.ai/docs/services/registry",
+      "repo": "hanzoai/registry",
+      "gcp": "Artifact Registry",
+      "order": 47
+    },
+    {
+      "id": "releases",
+      "name": "Releases",
+      "category": "platform",
+      "slug": "releases",
+      "href": "/cloud/releases",
+      "icon": "Rocket",
+      "api": "/v1/releases",
+      "docs": "https://docs.hanzo.ai/docs/services/releases",
+      "repo": null,
+      "gcp": null,
+      "order": 48
+    },
+    {
+      "id": "pipelines",
+      "name": "Pipelines",
+      "category": "platform",
+      "slug": "pipelines",
+      "href": "/cloud/pipelines",
+      "icon": "GitBranch",
+      "api": "/v1/pipelines",
+      "docs": "https://docs.hanzo.ai/docs/services/pipelines",
+      "repo": null,
+      "gcp": null,
+      "order": 49
+    },
+    {
+      "id": "iam",
+      "name": "IAM",
+      "category": "security",
+      "slug": "iam",
+      "href": "/iam",
+      "icon": "Shield",
+      "api": "/v1/iam",
+      "docs": "https://docs.hanzo.ai/docs/services/iam",
+      "repo": "hanzoai/iam",
+      "gcp": null,
+      "order": 29
+    },
+    {
+      "id": "authz",
+      "name": "Authz",
+      "category": "security",
+      "slug": "authz",
+      "href": "/authz",
+      "icon": "ShieldCheck",
+      "api": "/v1/authz",
+      "docs": "https://docs.hanzo.ai/docs/services/authz",
+      "repo": "hanzoai/authz",
+      "gcp": null,
+      "order": 30
+    },
+    {
+      "id": "kms",
+      "name": "KMS",
+      "category": "security",
+      "slug": "kms",
+      "href": "/kms",
+      "icon": "KeyRound",
+      "api": "/v1/kms",
+      "docs": "https://docs.hanzo.ai/docs/services/kms",
+      "repo": "hanzoai/kms",
+      "gcp": null,
+      "order": 31
+    },
+    {
+      "id": "secrets",
+      "name": "Secrets",
+      "category": "security",
+      "slug": "secrets",
+      "href": "/cloud/secrets",
+      "icon": "Lock",
+      "api": "/v1/kms",
+      "docs": "https://docs.hanzo.ai/docs/services/secrets",
+      "repo": "hanzoai/kms",
+      "gcp": "Secret Manager",
+      "order": 33
+    },
+    {
+      "id": "audit",
+      "name": "Audit",
+      "category": "security",
+      "slug": "audit",
+      "href": "/cloud/audit",
+      "icon": "ScrollText",
+      "api": "/v1/iam",
+      "docs": "https://docs.hanzo.ai/docs/services/audit",
+      "repo": "hanzoai/iam",
+      "gcp": null,
+      "order": 35
+    },
+    {
+      "id": "referrals",
+      "name": "Referrals",
+      "category": "web3",
+      "slug": "referrals",
+      "href": "/cloud/referrals",
+      "icon": "Coins",
+      "api": "/v1/referrals",
+      "docs": "https://docs.hanzo.ai/docs/services/referral",
+      "repo": "hanzoai/billing",
+      "gcp": null,
+      "order": 63
+    },
+    {
+      "id": "tokens",
+      "name": "Tokens",
+      "category": "web3",
+      "slug": "tokens",
+      "href": "/cloud/tokens",
+      "icon": "Coins",
+      "api": "/v1/tokens",
+      "docs": "https://docs.hanzo.ai/docs/services/tokens",
+      "repo": "hanzoai/treasury",
+      "gcp": null,
+      "order": 64
+    },
+    {
+      "id": "networks",
+      "name": "Networks",
+      "category": "web3",
+      "slug": "networks",
+      "href": "/cloud/networks",
+      "icon": "Blocks",
+      "api": "/v1/networks",
+      "docs": "https://docs.hanzo.ai/docs/services/networks",
+      "repo": "hanzoai/bootnode",
+      "gcp": null,
+      "order": 65
+    },
+    {
+      "id": "oracles",
+      "name": "Oracles",
+      "category": "web3",
+      "slug": "oracles",
+      "href": "/cloud/oracles",
+      "icon": "Radio",
+      "api": "/v1/oracles",
+      "docs": "https://docs.hanzo.ai/docs/services/oracles",
+      "repo": null,
+      "gcp": null,
+      "order": 67
+    }
+  ],
+  "excluded": [
+    {
+      "id": "alerts",
+      "category": "Observe",
+      "api": "/v1/alerts",
+      "why": "renamed"
+    },
+    {
+      "id": "annotation-queues",
+      "category": "Observe",
+      "api": "/v1/o11y/annotation-queues",
+      "why": "absent"
+    },
+    {
+      "id": "api",
+      "category": "Dev",
+      "api": "/v1/api",
+      "why": "client"
+    },
+    {
+      "id": "applications",
+      "category": "Compute",
+      "api": "/v1/apps",
+      "why": "renamed"
+    },
+    {
+      "id": "attestations",
+      "category": "Web3",
+      "api": "/v1/attestations",
+      "why": "absent"
+    },
+    {
+      "id": "cdn",
+      "category": "Network",
+      "api": "/v1/cdn",
+      "why": "absent"
+    },
+    {
+      "id": "cli",
+      "category": "Dev",
+      "api": "/v1/cli",
+      "why": "client"
+    },
+    {
+      "id": "console",
+      "category": "Apps",
+      "api": "/v1/console",
+      "why": "client"
+    },
+    {
+      "id": "containers",
+      "category": "Compute",
+      "api": "/v1/containers",
+      "why": "renamed"
+    },
+    {
+      "id": "dashboards",
+      "category": "Observe",
+      "api": "/v1/dashboards",
+      "why": "renamed"
+    },
+    {
+      "id": "datasets",
+      "category": "Observe",
+      "api": "/v1/datasets",
+      "why": "absent"
+    },
+    {
+      "id": "desktop",
+      "category": "Dev",
+      "api": "/v1/desktop",
+      "why": "client"
+    },
+    {
+      "id": "edge",
+      "category": "Compute",
+      "api": "/v1/edge",
+      "why": "absent"
+    },
+    {
+      "id": "hsm",
+      "category": "Security",
+      "api": "/v1/hsm",
+      "why": "absent"
+    },
+    {
+      "id": "ide",
+      "category": "Dev",
+      "api": "/v1/ide",
+      "why": "client"
+    },
+    {
+      "id": "indexer",
+      "category": "Web3",
+      "api": "/v1/indexer",
+      "why": "renamed"
+    },
+    {
+      "id": "kubernetes",
+      "category": "Compute",
+      "api": "/v1/apps",
+      "why": "renamed"
+    },
+    {
+      "id": "load-balancer",
+      "category": "Network",
+      "api": "/v1/load-balancer",
+      "why": "renamed"
+    },
+    {
+      "id": "mpc",
+      "category": "Security",
+      "api": "/v1/mpc",
+      "why": "absent"
+    },
+    {
+      "id": "nodes",
+      "category": "Network",
+      "api": "/v1/nodes",
+      "why": "external"
+    },
+    {
+      "id": "providers",
+      "category": "AI",
+      "api": "/v1/providers",
+      "why": "renamed"
+    },
+    {
+      "id": "score-configs",
+      "category": "Observe",
+      "api": "/v1/o11y/score-configs",
+      "why": "absent"
+    },
+    {
+      "id": "scores",
+      "category": "Observe",
+      "api": "/v1/o11y/scores",
+      "why": "absent"
+    },
+    {
+      "id": "sdks",
+      "category": "Dev",
+      "api": "/v1/sdks",
+      "why": "client"
+    },
+    {
+      "id": "service-mesh",
+      "category": "Network",
+      "api": "/v1/service-mesh",
+      "why": "renamed"
+    },
+    {
+      "id": "settlement",
+      "category": "Web3",
+      "api": "/v1/settlement",
+      "why": "absent"
+    },
+    {
+      "id": "status",
+      "category": "Observe",
+      "api": "/v1/apps",
+      "why": "renamed"
+    },
+    {
+      "id": "studio",
+      "category": "Apps",
+      "api": "/v1/studio",
+      "why": "client"
+    },
+    {
+      "id": "vpc",
+      "category": "Network",
+      "api": "/v1/vpc",
+      "why": "renamed"
+    },
+    {
+      "id": "wallet",
+      "category": "Web3",
+      "api": "/v1/wallet",
+      "why": "renamed"
+    },
+    {
+      "id": "zero-trust",
+      "category": "Security",
+      "api": "/v1/zt",
+      "why": "renamed"
+    }
+  ]
+}

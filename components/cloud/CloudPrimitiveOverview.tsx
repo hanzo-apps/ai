@@ -14,6 +14,15 @@ const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
  * marketing page yet. Data-driven, monochrome, and self-contained so every
  * mega-menu leaf resolves to a real, unique page — never a 404, never an empty
  * stub. One component renders them all (DRY).
+ *
+ * The FACTS are what keep the second half of that promise. The taxonomy is
+ * hydrated from the commerce catalog now, so a product can reach this page with
+ * no marketing copy written for it yet — and a page holding a name and two CTAs
+ * is the empty stub this component exists to avoid. What the catalog does state
+ * about every product is specific and true: the operation that answers for it,
+ * and the Google Cloud service a reader may already know it by. Those go above
+ * the copy, so a page without prose still says what the thing is and where its
+ * API is, rather than pretending to say more.
  */
 export function CloudPrimitiveOverview({
   primitive,
@@ -61,6 +70,23 @@ export function CloudPrimitiveOverview({
           <span className="rounded-md border border-border px-2.5 py-1 text-muted-foreground">Open source</span>
           <span className="rounded-md border border-border px-2.5 py-1 text-muted-foreground">On-chain settlement</span>
         </div>
+
+        {/* What the catalog states — the route that answers for this product,
+            and the Google Cloud service it stands in for. */}
+        <dl className="mt-8 grid gap-x-10 gap-y-3 text-sm sm:grid-cols-2">
+          {primitive.api && (
+            <div className="flex gap-4">
+              <dt className="w-24 shrink-0 text-muted-foreground">API</dt>
+              <dd className="min-w-0 font-mono text-foreground/80">{primitive.api}</dd>
+            </div>
+          )}
+          {primitive.gcp && (
+            <div className="flex gap-4">
+              <dt className="w-24 shrink-0 text-muted-foreground">Google Cloud</dt>
+              <dd className="min-w-0 text-foreground/80">{primitive.gcp}</dd>
+            </div>
+          )}
+        </dl>
 
         {/* Description */}
         {primitive.description && (

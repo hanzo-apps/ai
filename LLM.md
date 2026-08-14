@@ -281,62 +281,97 @@ House rules, learned the expensive way:
   `grep -c '<h1' out/<page>.html` must be exactly 1.
 
 **Still to film.** Each of these takes its own `film/<name>` and one `<Frame>`:
-the ten category pages `/products/{ai,compute,data,network,security,payments,platform,observe,web3,apps}`,
-and the 22 published `/cloud/<slug>` primitive pages. None of them has a film
+the ten category pages `/products/{ai,compute,data,network,security,dev,platform,observe,web3,apps}`,
+and the 25 generated `/cloud/<slug>` primitive pages. None of them has a film
 yet, and none needs new code to get one.
 
 ## Key Files
 
 ```
 app/(marketing)/<slug>/page.tsx   # Flat product pages — /dev, /chat, /vector, etc.
-app/(marketing)/blockchain/<x>/   # Web3 pages
-lib/constants/
-  navigation-data.ts              # Single source of truth for header + footer menus
-  brand.ts                        # Brand tokens
-components/navigation/
-  DesktopNav.tsx                  # Header layout (Meet Hanzo / Products / Learn / Docs / Pricing)
-  products-menu/index.tsx         # Reads productsNav from navigation-data
-  resources-menu/                 # Reads resourcesNav from navigation-data
+app/(marketing)/cloud/[slug]/     # Generated primitive overviews, from cloudPrimitiveSlugs
+app/(marketing)/products/[categoryId]/   # Category landings, from categorySlugs
+lib/data/
+  catalog.json                    # The committed product snapshot (written by prebuild)
+  cloud-primitives.ts             # Reads it; owns the prose and nothing else
+scripts/
+  catalog.mjs                     # The ONE probe — catalog + served document
+  sync-catalog.mjs                # prebuild: fetch, gate on reachability, write the snapshot
+  audit-catalog.mjs               # hanzo.yml gate: the drift ratchet
+components/home/shell.tsx         # The header/footer chrome; PRODUCTS_TAXONOMY for the mega-menu
+lib/constants/brand.ts            # Brand tokens
 ```
 
-## Header Menu (canonical)
+`lib/constants/navigation-data.ts` still derives `productsNav` from the taxonomy
+but nothing imports it — the chrome is `@hanzogui/shell` driven by
+`components/home/shell.tsx`. `components/navigation/` does not exist.
 
-Single source: **`lib/data/cloud-primitives.ts`** → `cloudCategories`. It drives
-`lib/constants/navigation-data.ts` (`productsNav`), the mega-menu, the
-`/products/<slug>` category landing pages, and the generated `/cloud/[slug]`
-overview pages — so the nav, the pages, and the routes can never drift.
+## Header Menu (canonical) — hydrated from the commerce catalog
+
+**WHICH products exist is commerce's answer, not this repo's.** The chain runs:
+
+    commerce catalog          scripts/sync-catalog.mjs        lib/data/catalog.json
+    /v1/commerce/catalog  ->  reachability + href resolve  ->  the committed snapshot
+                                        |                              |
+                              /v1/openapi.json (the gate)     lib/data/cloud-primitives.ts
+                                                                       |
+                                              mega-menu · /products/<id> · /cloud/<slug> · showcases
+
+`prebuild` runs the sync, so the snapshot is re-fetched on every build or it is
+not shipped at all. It CANNOT be a browser fetch: `output: 'export'` ships static
+HTML and the API pins `access-control-allow-origin` to `https://hanzo.ai`
+exactly, so a preview deploy or a local render would get nothing and the menu
+would be empty.
+
+**Reachability is the inclusion gate.** A product is written to the snapshot iff
+`/v1/openapi.json` carries its `apiPath` — exactly, or any path beneath it —
+which is what "this product exists" means, since the document is a projection of
+the routers cloud mounted. A product marked `kind: "client"` (the CLI, the SDKs,
+the API reference) is judged instead by whether this repo has a page for it,
+because it consumes the API and no `apiPath` can ever be right for it. So the
+menu is dynamic AND structurally unable to advertise a 404.
+
+Measured 2026-08-13: **84 advertised · 53 rendered · 31 excluded**
+(13 renamed · 7 client · 1 external · 10 absent — see the audit below).
+
+**The href is resolved against the filesystem by the same sync**: a bespoke page
+where this repo publishes one (28 of the 53), `/cloud/<slug>` otherwise (25),
+and `cloudPrimitiveSlugs` builds a page for every one of the latter — so a leaf
+cannot be a dead link in either branch. Read off `app/` rather than declared
+beside the product, because a table of "which routes have a page" is a second
+copy of what `app/` already says, and the copy is what goes stale.
+
+**The split is by kind of fact.** The catalog owns membership, name, slug,
+order, icon, docs and repo. `cloud-primitives.ts` owns the PROSE — a category's
+tagline, a leaf's blurb, and the long-form copy a generated overview renders.
+A product with no prose still renders (as its name plus the facts the catalog
+states); prose for a product the catalog dropped renders nowhere. Neither can
+resurrect a product or bury one, which is what makes `COPY` a copy deck rather
+than a second taxonomy.
 
 **Top level**: Meet Hanzo · Products · Learn · Docs · Pricing
 
-**Products dropdown** — 10 cloud-primitive categories (two rows of five),
-positioned "Open AI Cloud — GCP-compatible. Open source. On-chain.":
+**Products dropdown** — the catalog's ten categories, two rows of five. Their
+membership is measured per build and is NOT listed here: a table of leaves in a
+markdown file is exactly the hand list this change deleted. Run
+`pnpm sync:catalog` and read `lib/data/catalog.json`.
 
-| Category | `/products/<slug>` | Items |
-|---|---|---|
-| AI       | `/products/ai`       | Models, Agents, Inference, Fine-tuning, Embeddings, Evals |
-| Compute  | `/products/compute`  | GPUs, Machines, Containers, Functions, Edge, Jobs |
-| Data     | `/products/data`     | Vector, SQL, KV, Object Storage, Datastore, DocDB |
-| Network  | `/products/network`  | Gateway, VPC, DNS, CDN, Load Balancer, Service Mesh |
-| Security | `/products/security` | IAM, Authz, KMS, HSM, Secrets, Audit |
-| Dev      | `/products/dev`      | CLI, SDKs, API, Playground, IDE, Desktop |
-| Platform | `/products/platform` | Projects, Environments, Builds, Registry, Releases, Pipelines |
-| Observe  | `/products/observe`  | Logs, Metrics, Traces, Dashboards, Alerts, Cost |
-| Web3     | `/products/web3`     | Node, Data, Wallets, Explorer, MPC, Rollups, Webhooks, Chains → web3.hanzo.ai |
-| Apps     | `/products/apps`     | Chat, Bot, Search, Crawl, Studio, Console |
+| Category | `/products/<id>` |
+|---|---|
+| AI · Compute · Data · Network · Security | `/products/{ai,compute,data,network,security}` |
+| Dev · Platform · Observe · Web3 · Apps | `/products/{dev,platform,observe,web3,apps}` |
 
-- Each mega-menu **category header links to its `/products/<slug>` page**
+- Each mega-menu **category header links to its `/products/<id>` page**
   (`app/(marketing)/products/[categoryId]/page.tsx`, generated from
   `categorySlugs`); the page is `components/cloud/CloudCategoryOverview.tsx`.
-- **Web3 = web3.hanzo.ai**, and the leaves are the eight products that host
-  actually serves — each `href` a page measured live at 200, each blurb that
-  page's own sentence. It used to be nine Lux products behind a "Lux Network"
-  badge, all nine linking to `lux.cloud/services`: another company's name on a
-  Hanzo host, advertising nine capabilities Hanzo does not serve. White-label
-  runs BOTH ways — Lux sells the same stack as Lux at lux.cloud, and neither
-  host says the other's name. There is no `brand` field on the taxonomy any
-  more, and no `external` flag: a leaf being off-property is READ off its
-  absolute href (`offProperty()` in `lib/data/cloud-primitives.ts`), because a
-  flag saying what a URL already says is a second copy of one fact.
+- The category id is a VALUE the catalog states, not a slugify of the label.
+  `categorySlug()` is gone: computing `'ai'` from `'AI'` was deriving something
+  we are already told.
+- **Counts appear nowhere in copy.** `capabilityCount` and `categoryCount` are
+  deleted (they had no call sites left), the mega-menu's handoff reads
+  "All Observe →" rather than "All 10 →", and the category cards dropped their
+  leaf-count badge. Membership is now whatever answered at build time, so a
+  number on the page is a fact about the API's morning.
 - Product ↔ `/v1/<svc>` ↔ plan/usage mapping: **`docs/product-service-map.md`**
   (reconciled against `~/work/hanzo/cloud/subsystems/subsystems.go`).
 
@@ -344,91 +379,128 @@ positioned "Open AI Cloud — GCP-compatible. Open source. On-chain.":
 > `components/products/ProductPageTemplate` (the ~80 bespoke `/<slug>` product
 > pages) and the orphaned `solutions/` pages — it is NOT the products-nav source.
 
-## "60 capabilities" is a layout constant, and 32 of what we sell does not answer
+### What hydration cost, and who fixes it
 
-`capabilityCount` (`lib/data/cloud-primitives.ts:485`) is derived, not typed —
-but it derives from `rawCategories` (`:168`), which is 10 categories of exactly
-6. The interface says so out loud: `CloudCategory.items` is commented *"Exactly
-six primary primitives."* So 60 is the product of a mega-menu that wants two
-rows of five with six leaves each. It is a **layout constraint wearing the
-costume of a measurement**, and it is not the number of anything we serve.
+The hand list and the catalog had drifted far enough that reconciling them is a
+visible content change, not a refactor. **28 destinations left the products nav
+and 19 arrived.** Four of the departures (`/cloud/{cost,finetune,jobs,rerank}`)
+were the known orphans the old agreement test allowlisted — they described
+products commerce does not sell, and they are gone for that reason.
+
+The rest leave because **commerce's catalog does not carry them**: `/analytics`,
+`/automations`, `/captable`, `/code`, `/commerce`, `/dataroom`, `/guard`,
+`/ingress`, `/insights`, `/ledger`, `/mq`, `/payments`, `/pricing`, `/pubsub`,
+`/sentinel`, `/sign`, `/solutions/rag`, `/team`, `/telemetry`, `/tunnel`, and
+the eight `web3.hanzo.ai` leaves. **Every one of those pages still builds,
+answers on its URL and sits in sitemap.xml** — only the products menu stopped
+advertising them. Whole "Payments" category included: commerce files `billing`
+under Observe and has no payments category at all, which is why the agreement
+test was red in both directions before this.
+
+**None of that is fixable here.** A product belongs in the menu when commerce
+carries it; the repair is a row in the catalog, and this site will pick it up on
+the next build. The reverse also holds — `/dashboards`, `/hsm`, `vpc` and the
+other 12 renamed/absent rows come back the moment the catalog is corrected, with
+no change to this repo.
+
+## The audit: 31 of what we advertise does not answer
+
+`scripts/audit-catalog.mjs` gates the build on the catalog drifting FURTHER from
+what is served. It no longer stands between a reader and a 404 — the sync
+already drops the unreachable — so what it now protects is the MENU: every entry
+on its ratchet is a product the site would otherwise be selling.
 
 There are five lists, and no two agree:
 
 | List | Where | Count |
 |---|---|---|
-| Site taxonomy | `lib/data/cloud-primitives.ts` | 10 categories × 6 = **60** |
+| Site taxonomy | `lib/data/catalog.json` | **53** — the catalog, filtered to what answers |
 | Legacy taxonomy | `lib/data/product-taxonomy.ts` | **9** categories |
 | Docs prose | `hanzo-docs/docs` (7 files) | **67** capabilities / 8 movements |
 | Curation manifest | `hanzoai/openapi` `capabilities.yaml` | 8 domains over **180** tags |
 | Commerce catalog | `GET /v1/commerce/catalog?brand=hanzo` | **84** products |
-| **The served document** | `GET /v1/openapi.json` | **1,679 paths · 2,307 operations · 179 tags** |
+| **The served document** | `GET /v1/openapi.json` | **1,809 paths** |
 
-Only the last one is authority: it is a projection of the routers cloud
-mounted, so a path in it exists by construction. Everything above it is
-editorial.
+Only the last one is authority: a path in it exists by construction. Everything
+above it is editorial — including the catalog, which is why the site reads the
+two together rather than either alone.
 
-Measured 2026-08-03, `node scripts/audit-catalog.mjs`:
+Measured 2026-08-13, `node scripts/audit-catalog.mjs`:
 
 ```
-84 products advertised · 52 answer (62%) · 32 do not
-  renamed 13 · client 7 · external 1 · absent 11
+84 products advertised · 53 answer (63%) · 31 do not
+  renamed 13 · client 7 · external 1 · absent 10
 ```
 
-**Every one of those 32 is marked `"status": "enabled"` and every one is a live
+**Every one of those 31 is marked `"status": "enabled"` and every one is a live
 404.** Four different problems were hiding in one number:
 
 - **renamed (13)** — the capability is real, the `apiPath` is misspelt. `vpc`
   vs `/v1/vpcs`, `wallet` vs `/v1/wallets`, `alerts` vs `/v1/o11y/alerts`,
   `indexer` vs `/v1/indexers`, `zero-trust` vs `/v1/networks`. Pure catalog
-  bugs, cheapest thing on the list.
+  bugs, cheapest thing on the list, and each one is a menu leaf we are not
+  selling until it lands.
 - **client (7)** — `cli`, `sdks`, `ide`, `desktop`, `console`, `studio`, and
   `api` itself. These CONSUME the API; no `apiPath` can ever be right. They
-  need a `kind` field, not a path. A category error, not a gap.
+  need a `kind` field, not a path. A category error, not a gap. The sync
+  already honours `kind: "client"`: six of the seven have a page here and light
+  up the day commerce sets the field — `ide` does not, and stays out.
 - **external (1)** — `nodes` is `luxfi/node`, served by Lux, not api.hanzo.ai.
-- **absent (11)** — advertised, enabled, and nothing serves it. This is the
+- **absent (10)** — advertised, enabled, and nothing serves it. This is the
   only bucket that is a commercial problem and the only one no code change in
-  this repo can fix: `edge`, `cdn`, `hsm`, `mpc`, `settlement`, `tokens`,
+  this repo can fix: `edge`, `cdn`, `hsm`, `mpc`, `settlement`,
   `attestations`, `datasets`, `scores`, `score-configs`, `annotation-queues`.
+  (`tokens` left this list — cloud serves `/v1/tokens/{chain}/{address}` now,
+  and the ratchet demanded its own line back, which is the whole point of it.)
 
 Three of those have real repos that were simply never mounted into cloud —
 `hanzoai/edge` (Rust, 13 crates), `hanzoai/hsm` (a Go library that belongs
 *behind* `/v1/kms`, not beside it), `hanzoai/cdn` (our own asset bucket, never
 a tenant product). Shipping them is a mount, not a build.
 
-### The chain, and the link that was missing
+### The chain, and where each link is held
 
     site taxonomy  ->  commerce catalog  ->  served document
-    (cloud-primitives)   (/v1/commerce/catalog)   (/v1/openapi.json)
-    \___ e2e/catalog-agreement.spec.ts ___/
+    (catalog.json)     (/v1/commerce/catalog)   (/v1/openapi.json)
+    \___ built BY sync-catalog.mjs ___/
+    \___________ e2e/catalog-agreement.spec.ts ___________/
                                      \___ scripts/audit-catalog.mjs ___/
 
-The first link was already asserted and passes. The second was asserted by
-nothing, which is exactly where the drift accumulated. `scripts/audit-catalog.mjs`
-closes it, wired as the `catalog answers` gate in `hanzo.yml`.
+The first link is no longer an agreement between two hand lists — it is a
+derivation, so it cannot be got wrong. What replaced that question is the one a
+build-time snapshot actually raises: **is the snapshot still true?** A committed
+file goes stale silently, and the whole point of it is that the site deploys
+without the API — exactly the condition under which nobody would notice. So
+`e2e/catalog-agreement.spec.ts` reads the LIVE catalog and the LIVE document and
+holds the snapshot to both, re-measuring the inclusion gate rather than trusting
+it from build time.
 
-Same two rules as `sync-pricing.mjs`, for the same reasons: it **never fails the
-build on an unreachable API** (a marketing page must not need the API up to
-deploy — no network, no verdict, exit 0), and its `KNOWN_UNSERVED` ratchet **may
-only shrink**. A product that fails and is not on the list fails the run; an
-entry that starts answering fails the run too, so a fix is forced to delete its
-own exemption. Do not add entries to make it pass.
+`scripts/catalog.mjs` is the ONE probe, imported by the sync and the audit. The
+predicate — does the document carry this apiPath — is written once, because a
+second copy is how the gate comes to say a product is missing while the menu
+still advertises it.
 
-### Do not hydrate the menu from the catalog yet
+Three rules make the sync safe to run unattended, the same three as
+`sync-pricing.mjs`, and all four refusal paths are measured rather than
+reasoned about:
 
-`cloud-primitives.ts:24-27` anticipates replacing `rawCategories` with a live
-read of `/v1/commerce/catalog`. **That swap would make the site worse today**:
-it renders 84 products of which 32 are 404s, against the current 60 that are at
-least hand-checked. Hydration is correct only once `audit-catalog.mjs` reports
-zero `renamed` and the `client` rows carry a `kind` instead of an `apiPath`.
-Clear the ratchet first, then hydrate — the gate is the precondition, not the
-sequel.
+- **Never fail the build on an unreachable API.** No network → keep the
+  committed snapshot, exit 0. A marketing site must not need the API up to
+  deploy. (The one fatal case is no snapshot on disk AND no API, which can only
+  happen before the first sync — the taxonomy imports that file.)
+- **Never regress.** A payload that is not a catalog, a document with no paths,
+  or a catalog rendering FEWER products than the committed snapshot is far more
+  likely to be a degraded response than a product line being retired, and
+  writing it would silently empty the menu. It is refused, and what it would
+  have dropped is printed. A genuine retirement is accepted by deleting those
+  rows from `lib/data/catalog.json` — the next run then sees no shrink.
+- **Never go quiet.** Every run prints advertised/rendered/excluded and the
+  exclusions grouped by reason.
 
-Three-way drift is already visible in one row. The Web3 six: this file said
-*Oracles* where the code says *Attestations* (fixed above), while the catalog
-carries **eight** Web3 products including `referrals` and `networks`. That is
-the drift in miniature, and it is why the gate reads the document rather than
-any list a human keeps.
+The audit keeps its own two rules: never fail on an unreachable API, and its
+`KNOWN_UNSERVED` ratchet **may only shrink**. A product that fails and is not on
+the list fails the run; an entry that starts answering fails the run too, so a
+fix is forced to delete its own exemption. Do not add entries to make it pass.
 
 ## Removed (2026-05-07 cleanup)
 

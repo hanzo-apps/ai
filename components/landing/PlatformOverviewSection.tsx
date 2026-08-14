@@ -2,24 +2,22 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { categorySlug, cloudCategories } from "@/lib/data/cloud-primitives";
+import { cloudCategories } from "@/lib/data/cloud-primitives";
 
 // Category overview cards — derived from the ONE cloud-primitive taxonomy
 // (lib/data/cloud-primitives.ts), the same source the mega-menu and the
-// generated overview pages read, so the count and the categories can never
-// drift. One capability = one name = one /v1/<name>. Breadth without overwhelm.
+// generated overview pages read, so the categories here cannot drift from the
+// ones we sell. One capability = one name = one /v1/<name>.
 //
-// `href` comes from the same `categorySlug` the mega-menu headers and the
-// `/products/[categoryId]` route use, so a card cannot point at a page that
-// does not exist. Without it these ten cards were the only place the taxonomy
-// surfaced near the top of the site AND a dead end — the categories were
-// visible and unreachable.
+// `href` is the category id the `/products/[categoryId]` route generates from,
+// so a card cannot point at a page that does not exist. Without it these cards
+// were the only place the taxonomy surfaced near the top of the site AND a dead
+// end — the categories were visible and unreachable.
 const CATEGORY_CARDS = cloudCategories.map((c) => ({
   icon: c.icon,
   title: c.title,
   desc: c.tagline,
-  // /products landings are withdrawn (lib/publish): lead with the first published leaf.
-  href: c.items[0]?.href ?? '/',
+  href: `/products/${c.id}`,
 }));
 
 const PlatformOverviewSection = () => {

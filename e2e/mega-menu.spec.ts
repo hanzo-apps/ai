@@ -82,13 +82,20 @@ test('every category deep-links to its /products page', async ({ page }) => {
   // The category header is the entry point to the category landing page, and
   // those routes are generated from the same `categorySlugs` the panel is — so
   // a missing one means the nav and the routes have drifted apart.
-  for (const slug of [
-    'ai', 'compute', 'data', 'network', 'security',
-    'dev', 'platform', 'observe', 'web3', 'apps',
-  ]) {
-    await expect(
-      page.locator(`a[href="/products/${slug}"]`),
-      `category landing link /products/${slug}`,
-    ).toHaveCount(1)
-  }
+  //
+  // Asserted as a SET, not as a count per category. A category is linked three
+  // times on this page — the panel header, the panel's "All <Category> →"
+  // handoff, and the homepage category grid — and the grid is below the fold,
+  // so a per-category `toHaveCount(1)` passed or failed on whether framer's
+  // whileInView had fired yet. It went green alone and red in a full run, which
+  // is a test measuring the scheduler.
+  //
+  // The set is the stronger reading anyway: it catches a landing the menu links
+  // that is not a category as well as a category the menu forgot.
+  const linked = await page.$$eval('a[href^="/products/"]', (els) =>
+    [...new Set(els.map((el) => el.getAttribute('href')!.slice('/products/'.length)))].sort(),
+  )
+  expect(linked, 'the /products landings the menu links').toEqual([
+    'ai', 'apps', 'compute', 'data', 'dev', 'network', 'observe', 'platform', 'security', 'web3',
+  ])
 })

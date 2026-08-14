@@ -7,7 +7,6 @@ import { Button } from '@hanzo/ui'
 import { ProductShot } from '@hanzogui/shell'
 import {
   POSITIONING,
-  categorySlug,
   cloudCategories,
   getCategoryBySlug,
   type Primitive,
@@ -23,14 +22,14 @@ const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
 const isExternal = (item: Primitive) => /^https?:\/\//.test(item.href)
 
 /**
- * Category landing page for one of the ten cloud primitives. Data-driven from
- * the single nav taxonomy (lib/data/cloud-primitives.ts) — the SAME source the
- * mega-menu reads, so the category header, this page, and every leaf can never
- * drift apart. One component renders all ten categories (DRY).
+ * Category landing page for one cloud category. Data-driven from the single nav
+ * taxonomy (lib/data/cloud-primitives.ts) — the SAME source the mega-menu
+ * reads, so the category header, this page, and every leaf can never drift
+ * apart. One component renders every category (DRY).
  *
  * Every category renders the Hanzo brand, because this is a Hanzo host. A leaf
- * may live on another Hanzo property (Web3 → web3.hanzo.ai) and opens in a new
- * tab; no leaf ever carries another company's name.
+ * may live on another Hanzo property and opens in a new tab; no leaf ever
+ * carries another company's name.
  */
 export function CloudCategoryOverview({ slug }: { slug: string }) {
   const category = getCategoryBySlug(slug)
@@ -163,8 +162,8 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
               .filter((c) => c.title !== category.title)
               .map((c) => (
                 <Link
-                  key={c.title}
-                  href={`/products/${categorySlug(c.title)}`}
+                  key={c.id}
+                  href={`/products/${c.id}`}
                   className="rounded-full border border-border px-4 py-1.5 text-sm text-muted-foreground transition-colors hover:border-neutral-600 hover:text-foreground"
                 >
                   {c.title}

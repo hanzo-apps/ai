@@ -27,8 +27,6 @@ export type NavItem = {
   icon?: React.ComponentType<{ className?: string; size?: number | string }>;
   github?: string;
   docs?: string;
-  /** Console quick-launch deep link (mega-menu primary click). */
-  console?: string;
   /** Short menu descriptor shown under the leaf title. */
   desc?: string;
   featured?: boolean;
@@ -46,7 +44,7 @@ const DOCS = 'https://docs.hanzo.ai';
 
 // Products mega-menu — derived from the single cloud-primitive taxonomy
 // (lib/data/cloud-primitives.ts) so the nav, the generated overview pages, and
-// the route table can never drift apart. Ten categories, two rows of five.
+// the route table can never drift apart.
 export const productsNav: NavSection[] = cloudCategories.map((category) => ({
   title: category.title,
   subtitle: category.tagline,
@@ -56,7 +54,6 @@ export const productsNav: NavSection[] = cloudCategories.map((category) => ({
     icon: item.icon,
     github: item.github,
     docs: item.docs,
-    console: item.console,
     desc: item.desc,
   })),
 }));
