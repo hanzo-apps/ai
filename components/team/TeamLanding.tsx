@@ -17,8 +17,18 @@ import {
 import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
 
-const TEAM = 'https://hanzo.team'
-const DOCS = 'https://docs.hanzo.ai'
+// This page is the front door of hanzo.team itself, as well as /team here, so
+// "open the app" cannot be a link to hanzo.team — on that host it is a link to
+// the page you are already reading. It names the app directly instead.
+//
+// tracker.hanzo.ai is that app: the workspace board on Hanzo IAM as its only
+// sign-in, which is where hanzo.team's apex already sent every visitor before
+// this page existed. Naming it here keeps that destination one click away
+// rather than making it the whole experience.
+const APP = 'https://tracker.hanzo.ai'
+// The Team product manual, not the platform-wide docs — this page is about one
+// product and docs.hanzo.team is that product's own book.
+const DOCS = 'https://docs.hanzo.team'
 const GITHUB = 'https://github.com/hanzoai'
 
 export default function TeamLanding() {
@@ -30,11 +40,11 @@ export default function TeamLanding() {
         title="One workspace for people and AI"
         lede="Channels, projects and tasks, documents, and people — everything your team shares, in one workspace instead of a dozen disconnected tabs. Hanzo Team unifies messaging, an issue tracker, docs, HR, recruiting, and CRM, and treats AI as a coworker: agents join the same channels, pick up the same issues, and draft alongside the people they work with."
         ctas={[
-          { label: 'Open Team', href: TEAM, icon: Rocket },
+          { label: 'Open Team', href: APP, icon: Rocket },
           { label: 'Read the docs', href: DOCS },
           { label: 'View on GitHub', href: GITHUB },
         ]}
-        note={{ icon: Cloud, text: 'Open source (EPL-2.0). Self-host the full platform, or create a managed workspace at hanzo.team.' }}
+        note={{ icon: Cloud, text: 'Open source (EPL-2.0). Self-host the full platform, or use the managed workspace.' }}
         what={{
           eyebrow: 'What is Hanzo Team',
           title: 'Everything your team shares, in one place',
@@ -72,9 +82,9 @@ export default function TeamLanding() {
         finalCta={{
           icon: Users,
           title: 'Get your team working in one place',
-          sub: 'Create a workspace at hanzo.team, or self-host the open-source platform anywhere you like.',
+          sub: 'Open the managed workspace, or self-host the open-source platform anywhere you like.',
           buttons: [
-            { label: 'Open Team', href: TEAM, icon: Rocket },
+            { label: 'Open Team', href: APP, icon: Rocket },
             { label: 'Read the docs', href: DOCS },
             { label: 'GitHub', href: GITHUB },
           ],
