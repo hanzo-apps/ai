@@ -5,7 +5,7 @@ const modelCategories = [
     description: "Language, code, vision, image, audio, speech and retrieval. Most have their weights published, so you can serve them yourself",
     models: [
       // Zen5 — Next Generation
-      { name: "Zen5", provider: "Hanzo", features: ["1M+ context window", "Agentic-trained", "MoDE + CoT", "Preview"], description: "Next-generation agentic frontier model with native chain-of-thought." },
+      { name: "Zen5", provider: "Hanzo", features: ["1M+ context window", "Agentic-trained", "MoDE + CoT", "Preview"], description: "Our current frontier model, trained for agent work, reasoning step by step by default." },
       { name: "Zen5 Pro", provider: "Hanzo", features: ["512K context window", "Agentic-trained", "Production optimized", "Preview"], description: "High-throughput agentic model for demanding production workloads." },
       { name: "Zen5 Max", provider: "Hanzo", features: ["2M context window", "Extended CoT", "Document-scale", "Preview"], description: "Maximum context agentic model for document-scale analysis." },
       { name: "Zen5 Ultra", provider: "Hanzo", features: ["1M context window", "Deep CoT", "Self-verification", "Preview"], description: "Deepest reasoning model with multi-pass chain-of-thought." },
@@ -58,7 +58,7 @@ const modelCategories = [
     name: "Models from other labs",
     description: "Same endpoint, same key, same request shape. Reaching for one of these is changing a string, not a migration",
     models: [
-      { name: "Claude Opus 4.6", provider: "Anthropic", features: ["1M context window", "Most capable model", "Complex reasoning", "Extended thinking"], description: "Anthropic's most powerful model for the hardest tasks." },
+      { name: "Claude Opus 4.6", provider: "Anthropic", features: ["1M context window", "Complex reasoning", "Extended thinking"], description: "Anthropic's top tier, for the questions where depth beats speed." },
       { name: "Claude Sonnet 4.6", provider: "Anthropic", features: ["1M context window", "Best balance of speed and intelligence", "Strong coding", "Fast inference"], description: "Ideal balance of capability and speed for production workloads." },
       { name: "Claude Haiku 4.5", provider: "Anthropic", features: ["200K context window", "Fastest Anthropic model", "Cost efficient", "Low latency"], description: "Fastest and most affordable Claude model for high-throughput tasks." },
       { name: "GPT-4o", provider: "OpenAI", features: ["128K context window", "Multimodal", "Advanced reasoning", "Tool use"], description: "OpenAI's flagship model with advanced reasoning capabilities." },

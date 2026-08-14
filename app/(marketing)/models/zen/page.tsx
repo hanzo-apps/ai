@@ -24,10 +24,10 @@ export const metadata: Metadata = {
 
 // Zen catalog, grouped by generation (specs/pricing live in @zenlm/models).
 const GEN = [
-  { id: 'zen5', label: 'Zen5', desc: 'Next-generation agentic frontier' },
-  { id: 'zen4', label: 'Zen4', desc: 'Flagship language & code' },
-  { id: 'zen3', label: 'Zen3', desc: 'Multimodal & specialized' },
-  { id: 'foundation', label: 'Foundation', desc: 'Base checkpoints' },
+  { id: 'zen5', label: 'Zen5', desc: 'The current frontier run' },
+  { id: 'zen4', label: 'Zen4', desc: 'Language and code' },
+  { id: 'zen3', label: 'Zen3', desc: 'Vision, audio, and the specialists' },
+  { id: 'foundation', label: 'Foundation', desc: 'Checkpoints to fine-tune from' },
 ]
 const GENS = GEN.map((g) => ({
   ...g,
