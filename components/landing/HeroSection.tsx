@@ -175,7 +175,7 @@ const HeroSection = () => {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className="text-base xl:text-lg text-muted-foreground leading-relaxed mb-8 max-w-[560px]"
               >
-                Not another AI API. Hanzo is a decentralized cloud powered by hanzo.network — <code className="font-mono text-foreground/90 text-[0.9em]">hanzod</code> nodes spawn the same unified <code className="font-mono text-foreground/90 text-[0.9em]">cloud</code> binary we run in production. {capabilityCount} capabilities behind one API. Open source, one binary. Bring your own GPU or Kubernetes, or run it all on your laptop. Connect any provider, watch usage and cost in one place, and let the native router serve the most optimal model — <span className="text-foreground font-medium">saving up to 90% on compute</span>.
+                Hanzo is a cloud you can run yourself. On hanzo.network, <code className="font-mono text-foreground/90 text-[0.9em]">hanzod</code> nodes start the same <code className="font-mono text-foreground/90 text-[0.9em]">cloud</code> binary we run in production — {capabilityCount} capabilities behind one API, open source. Bring your own GPU or Kubernetes, or run all of it on your laptop. Connect any provider, watch usage and cost in one place, and let the router pick the model — <span className="text-foreground font-medium">saving up to 90% on compute</span>.
               </motion.p>
 
               <motion.div

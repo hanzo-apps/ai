@@ -34,10 +34,10 @@ const PlatformOverviewSection = () => {
           className="text-left mb-12"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mb-4">
-            {capabilityCount} capabilities. One API.
+            One API for all of it.
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Everything the cloud does is one route — <code className="font-mono text-foreground/90 text-[0.95em]">api.hanzo.ai/v1/&lt;capability&gt;</code>. {capabilityCount} capabilities across {categoryCount} categories. Breadth without the overwhelm.
+            Everything the cloud does is one route — <code className="font-mono text-foreground/90 text-[0.95em]">api.hanzo.ai/v1/&lt;capability&gt;</code>. {capabilityCount} capabilities across {categoryCount} categories, same key and same base URL for every one of them.
           </p>
         </motion.div>
 

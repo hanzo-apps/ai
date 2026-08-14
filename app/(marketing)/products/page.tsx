@@ -83,7 +83,7 @@ export default function Products() {
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="mb-6 text-3xl font-bold md:text-4xl">Ready to build?</h2>
           <p className="mb-10 text-lg text-muted-foreground">
-            Free tier for every product. No credit card required. Scale as you grow.
+            Free tier for every product. No credit card required.
           </p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Button size="lg" className="rounded-full bg-white text-black hover:opacity-90" asChild>
