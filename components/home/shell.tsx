@@ -185,12 +185,17 @@ export function SiteHeader({
   // DOM order is already the right order and the override is gone rather than
   // kept as decoration.
   //
-  // Making this pill OPEN THE DOORS — Chat / App / Base / Cloud / Dev, plus the
-  // downloads — rather than take one is the finish, and it needs
-  // `@hanzogui/shell` >= 8.1.6 (`tryMenu`). Landing the prop here before the
-  // package that declares it turned main red: Next has no
+  // The pill OPENS THE DOORS rather than taking one. "Try Hanzo" as a single
+  // href answers a question nobody asked: a visitor arrives wanting to build an
+  // app, or to keep data somewhere, or to chat, or to code from a terminal, and
+  // any one destination is wrong for most of them. `tryMenu` opens the canonical
+  // TRY_HANZO_GROUPS — Chat · App · Team · Studio · Bot · Cloud · Base · Dev,
+  // and the installs beside them — while `href` stays the fallback the pill
+  // still carries, so it is a real link before hydration and without JS.
+  //
+  // It arrives WITH its pin, in one commit. The prop landed here once ahead of
+  // the package that declares it and turned main red: this site has no
   // `ignoreBuildErrors`, so an unknown prop is a failed BUILD, not a warning.
-  // Re-add it with the pin, in one commit.
   const TRY = { ...base.primaryCTA, label: 'Try Hanzo', href: CONSOLE }
 
   return (
@@ -205,6 +210,7 @@ export function SiteHeader({
         productsTaxonomy={PRODUCTS_TAXONOMY}
         currentCategoryId={currentCategoryId}
         onAskHanzo={goToChat}
+        tryMenu
       />
     </div>
   )
