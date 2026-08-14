@@ -25,23 +25,23 @@ import { Button } from "@hanzo/ui";
 const features = [
   {
     icon: Shield,
-    title: "Enterprise Security",
-    description: "Enterprise-grade security with GDPR controls, encryption, and comprehensive audit logging."
+    title: "Security",
+    description: "Secrets live in KMS, never in your code or your config. Data is encrypted at rest per organization, and every privileged action is logged."
   },
   {
     icon: Users,
     title: "User Management",
-    description: "SCIM provisioning, SSO integration, and granular role-based access control."
+    description: "Sign in through your own identity provider over OIDC. SCIM provisioning, org-scoped roles, and one account across every Hanzo product."
   },
   {
     icon: Globe,
     title: "Global Infrastructure",
-    description: "Multi-region deployment with automatic failover and dedicated support channels."
+    description: "Multi-region deployment with automatic failover, and a support channel that reaches our engineers instead of a queue."
   },
   {
     icon: Zap,
     title: "Custom AI Resources",
-    description: "Tailored AI credits, custom models, and dedicated compute infrastructure."
+    description: "Dedicated compute, your own fine-tuned models, and a credit balance sized to what you actually run."
   }
 ];
 
@@ -56,14 +56,14 @@ const benefits = [
   {
     icon: Server,
     title: "Custom Integrations",
-    description: "Seamlessly integrate with your existing infrastructure, identity providers, and business systems.",
+    description: "We connect Hanzo to what you already run — your identity provider, your existing services, and the systems your teams work in every day.",
     gradient: "from-white/15 to-white/10",
     border: "border-white/30"
   },
   {
     icon: Lock,
     title: "Flexible Deployment",
-    description: "Deploy on our cloud, your cloud, or on-premises. We support hybrid deployments for security and compliance.",
+    description: "Our cloud, your cloud, or your own hardware. It is the same open-source software either way, so moving between them is a deployment decision rather than a migration.",
     gradient: "from-white/15 to-white/10",
     border: "border-white/30"
   }
@@ -121,9 +121,9 @@ const Enterprise = () => {
                 transition={{ duration: 0.4, delay: 0.05 }}
                 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6"
               >
-                <span className="text-foreground">AI at</span>
+                <span className="text-foreground">Run it in our cloud.</span>
                 <br />
-                <span className="text-muted-foreground">enterprise scale.</span>
+                <span className="text-muted-foreground">Or run it in yours.</span>
               </motion.h1>
 
               <motion.p
@@ -132,8 +132,10 @@ const Enterprise = () => {
                 transition={{ duration: 0.4, delay: 0.1 }}
                 className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8 max-w-3xl mx-auto"
               >
-                Scale your business with enterprise-grade AI solutions. Get dedicated support,
-                custom integrations, and advanced security features designed for large organizations.
+                Hanzo Cloud is open source, so an enterprise deployment isn&apos;t a different product —
+                it&apos;s the same binaries, in your cluster or ours. Identity, secrets, audit logging and
+                per-organization data isolation come with it. What you add is a contract: an SLA, a named
+                team, and pricing that fits your volume.
               </motion.p>
 
               <motion.div
@@ -190,7 +192,7 @@ const Enterprise = () => {
             >
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Enterprise Features</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Everything you need to deploy AI at scale with confidence.
+                The parts of the platform that start mattering once other people depend on you.
               </p>
             </motion.div>
 
@@ -230,9 +232,9 @@ const Enterprise = () => {
               viewport={{ once: true }}
               className="text-center mb-12"
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Why Choose Hanzo Enterprise?</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">What else comes with it</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Built for organizations that demand the highest standards.
+                Support, integration, and where the software actually runs.
               </p>
             </motion.div>
 
@@ -278,7 +280,7 @@ const Enterprise = () => {
               <Sparkles className="w-8 h-8 mx-auto mb-4" />
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Security & Compliance</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-                Enterprise-grade security with industry-leading compliance standards.
+                Where we stand today. An audit in progress is listed as an audit in progress.
               </p>
 
               <div className="flex flex-wrap justify-center gap-3">
@@ -308,7 +310,7 @@ const Enterprise = () => {
               viewport={{ once: true }}
               className="text-3xl md:text-4xl font-bold text-foreground mb-4"
             >
-              Ready to get started?
+              Talk to us about your deployment
             </motion.h2>
 
             <motion.p
@@ -318,8 +320,8 @@ const Enterprise = () => {
               transition={{ delay: 0.1 }}
               className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto"
             >
-              Contact our enterprise sales team for a personalized demo and custom pricing
-              that meets your organization's unique needs.
+              Tell us what you&apos;re running and where it has to run. We&apos;ll come back with a
+              deployment plan, an SLA, and a price.
             </motion.p>
 
             <motion.div
@@ -334,7 +336,7 @@ const Enterprise = () => {
                 className="inline-flex items-center px-8 py-4 rounded-full font-medium transition-all hover:opacity-90 text-base bg-primary text-primary-foreground"
 
               >
-                Schedule Demo
+                Schedule a demo
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
               <a
