@@ -271,6 +271,14 @@ House rules, learned the expensive way:
   off EACH side, so nothing that matters may sit outside the middle 862px.
 - **End on the product**, held still for the last few seconds. That final frame
   is what every reduced-motion viewer is served, so it has to look used.
+- **Give the `<h1>` a new home in the same commit.** Taking the copy off the
+  fold takes the heading with it, and a film cannot hold one — its message is
+  the `alt`. cloud.hanzo.ai shipped a live page with ZERO `<h1>` this way. The
+  heading moves to the first section that has words, and stays VISIBLE: a
+  heading only a screen reader can reach is the message said twice, once badly.
+  Nothing catches this — the export is valid, the build is green, and `<h1>`
+  count is not one of the four things `e2e/gates` asserts. Check it by hand:
+  `grep -c '<h1' out/<page>.html` must be exactly 1.
 
 **Still to film.** Each of these takes its own `film/<name>` and one `<Frame>`:
 the ten category pages `/products/{ai,compute,data,network,security,payments,platform,observe,web3,apps}`,
