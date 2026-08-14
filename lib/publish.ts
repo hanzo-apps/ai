@@ -97,6 +97,11 @@ export const EMPTY: readonly string[] = [
   '/sentry',
   // Same shape: this one forwards to status.hanzo.ai, which owns live status.
   '/status',
+  // `/integrations` is the page about what Hanzo works with, and it is a
+  // product of the Dev category — the catalog's own `href` points there. This
+  // was a second copy of that subject built by hand from sample data, under a
+  // `/products/<slug>` name no category answers to. Nothing ever linked it.
+  '/products/integrations',
   '/dashboard',
   '/docs',
   '/docs/api',
