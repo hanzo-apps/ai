@@ -47,8 +47,18 @@ const PointGlobe = dynamic(() => import('@/components/webgl/PointGlobe'), { ssr:
  * sparse, and at this scale the ambient register draws a starfield.
  */
 export default function Fold() {
+  // The copy sits in the fold's OPTICAL CENTRE, not at its top.
+  //
+  // Top-aligned under a 100svh fold, the headline finished around 337px and the
+  // docked composer began near 1180 — measured on the live page — so the middle
+  // of the first screen was ~500px of unlit globe with nothing to read in it,
+  // which the eye takes as the page having ended.
+  //
+  // `justify-center`, with the composer's slot reserved below it (`pb-44`), puts
+  // the sentence where the sphere is densest and closes that band — without
+  // moving the composer off the bottom edge, which is where it belongs.
   return (
-    <section className="relative flex min-h-[100svh] flex-col items-center overflow-hidden px-4 pt-28 sm:px-6 sm:pt-32 lg:px-8">
+    <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pb-44 pt-28 sm:px-6 sm:pt-32 lg:px-8">
       <div className="pointer-events-none absolute inset-0 z-0">
         {/* Static radial — instant paint, and the no-WebGL fallback. */}
         <div
@@ -65,19 +75,24 @@ export default function Fold() {
         <PointGlobe
           variant="hero"
           conversations={7}
-          className="absolute left-1/2 top-[41%] h-[48%] w-[140%] max-w-none -translate-x-1/2 sm:top-[25%] sm:h-[82%] sm:w-[110%]"
+          className="absolute left-1/2 top-1/2 h-[62%] w-[140%] max-w-none -translate-x-1/2 -translate-y-1/2 sm:h-[92%] sm:w-[110%]"
         />
-        {/* The heading's ground, and nothing more. A band down the top of the
-            fold rather than a hole in the middle of it — the sphere keeps its
-            own contrast, and the words keep theirs. */}
+        {/* The heading's ground, under the heading.
+            It used to be a band down the TOP of the fold, which is where the
+            copy used to be. With the sentence at the optical centre that band
+            darkened empty sky and left the words on bare dots — the subline in
+            particular, which is the smallest, dimmest type on the screen.
+            A soft ellipse centred on the copy instead: dense where the words
+            are, gone by the sphere's edge, so the globe keeps its silhouette
+            and the sentence keeps its contrast. */}
         <div
-          className="absolute inset-x-0 top-0 h-[52%]"
+          className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(to bottom,' +
-              ' color-mix(in srgb, var(--pure-black) 88%, transparent) 0%,' +
+              'radial-gradient(ellipse 60% 34% at 50% 46%,' +
+              ' color-mix(in srgb, var(--pure-black) 86%, transparent) 0%,' +
               ' color-mix(in srgb, var(--pure-black) 55%, transparent) 45%,' +
-              ' transparent 100%)',
+              ' transparent 78%)',
           }}
         />
       </div>
