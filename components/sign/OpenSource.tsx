@@ -28,10 +28,10 @@ const OpenSource = () => {
               <Button
                 variant="outline"
                 className="border-neutral-700 text-foreground/80 hover:bg-neutral-800"
-                onClick={() => window.open('https://github.com/hanzoai/sign', '_blank')}
+                onClick={() => window.open('https://github.com/hanzoai/esign', '_blank')}
               >
                 <Github className="mr-2 h-4 w-4" />
-                hanzoai/sign
+                hanzoai/esign
               </Button>
               <Button
                 variant="outline"

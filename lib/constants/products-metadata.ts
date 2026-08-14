@@ -128,9 +128,9 @@ export const productsMetadata: Record<string, ProductMetadata> = {
   tunnel:       { slug: 'tunnel',     tagline: 'Secure tunnels', license: 'Apache-2.0', github_repo: G, docs_slug: 'skills/hanzo-tunnel' },
   ui:           { slug: 'ui',         tagline: 'Headless UI primitives', license: 'MIT', github_repo: `${G}/ui`, docs_slug: 'projects/hanzoai/ui' },
   vector:       { slug: 'vector',     tagline: 'Vector database', license: 'Apache-2.0', github_repo: G, upstream_fork: 'Qdrant', upstream_license: 'Apache-2.0', upstream_url: 'https://qdrant.tech' },
-  visor:        { slug: 'visor',      tagline: 'Cluster visualizer', license: 'Apache-2.0', github_repo: G, docs_slug: 'services/visor' },
+  visor:        { slug: 'visor',      tagline: 'Machines, volumes, and clusters', license: 'Apache-2.0', github_repo: G, docs_slug: 'services/visor' },
   world:        { slug: 'world',      tagline: '3D world building', license: 'Apache-2.0', github_repo: `${G}/world`, docs_slug: 'projects/hanzoai/world' },
-  zap:          { slug: 'zap',        tagline: 'Zero-config app deploy', license: 'Apache-2.0', github_repo: G },
+  zap:          { slug: 'zap',        tagline: 'Zero-copy application protocol', license: 'Apache-2.0', github_repo: G },
   zen:          { slug: 'zen',        tagline: 'Open-weight frontier models', license: 'Apache-2.0', github_repo: 'https://github.com/zenlm/zen', docs_slug: 'services/models' },
 
   // Web3 — these live under /blockchain/<slug>

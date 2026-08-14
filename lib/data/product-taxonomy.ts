@@ -1252,10 +1252,10 @@ export const appsProducts: Product[] = [
     category: 'apps',
     icon: 'PenLine',
     href: '/sign',
-    github: 'https://github.com/hanzoai/sign',
+    github: 'https://github.com/hanzoai/esign',
     docs: 'https://docs.hanzo.ai/docs/services/sign',
     install: {
-      docker: 'docker pull ghcr.io/hanzoai/sign:latest'
+      docker: 'docker pull ghcr.io/hanzoai/esign:latest'
     },
     features: ['E-signatures', 'Templates', 'Signing fields', 'Webhooks', 'Teams', 'Custom branding', 'API', 'SSO'],
     status: 'ga',

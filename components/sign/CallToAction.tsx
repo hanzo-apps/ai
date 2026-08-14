@@ -45,7 +45,7 @@ const CallToAction = () => {
               <p className="text-muted-foreground mb-4 text-center">Read it before you trust a contract to it</p>
               <Button
                 className="mt-auto bg-primary/10 hover:bg-primary/10 text-primary-foreground"
-                onClick={() => window.open('https://github.com/hanzoai/sign', '_blank')}
+                onClick={() => window.open('https://github.com/hanzoai/esign', '_blank')}
               >
                 View on GitHub <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
