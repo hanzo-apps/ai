@@ -37,7 +37,7 @@ export default function AppLanding() {
         what={{
           eyebrow: 'What is Hanzo App',
           title: 'Describe it, refine it, ship it',
-          sub: 'Hanzo turns a plain-language prompt into a real, running web app — then hands you a live editor to shape it and a one-click deploy to put it online. From a sentence to a shipped app, without leaving the browser.',
+          sub: 'A sentence becomes a running app: schema, pages, sign-in and API. Then you keep talking to it, or open the editor and change the code yourself — the thing previewing is the thing that deploys.',
           pillars: [
             {
               icon: Wand2,
@@ -62,16 +62,16 @@ export default function AppLanding() {
           items: [
             { icon: Cloud, title: 'Deploy to a live URL', body: 'One click ships your app to real infrastructure on Hanzo Cloud — your-app.hanzo.app — with no Dockerfile or pipeline to set up.' },
             { icon: Database, title: 'Database, built in', body: 'Every app gets Hanzo Base — an embedded datastore with realtime queries and a schema generated from your prompt.' },
-            { icon: ShieldCheck, title: 'Auth, built in', body: 'Sign-in ships wired to Hanzo IAM — OIDC, sessions, and org-scoped access with zero config.' },
+            { icon: ShieldCheck, title: 'Auth, built in', body: 'Sign-in arrives wired to Hanzo IAM over OIDC, with sessions and org-scoped access already in place. Nothing here stores a password, because nothing here hosts identity.' },
             { icon: Bot, title: 'AI, built in', body: `Call ${MODELS_PHRASE} — Zen alongside Anthropic, OpenAI, Google, and Mistral — from your app through one gateway.` },
-            { icon: KeyRound, title: 'Secrets & storage', body: 'API keys land in Hanzo KMS, never in your code, and files go to S3-compatible object storage.' },
-            { icon: Zap, title: 'Functions & edge', body: 'Server logic runs as serverless functions at the edge, scaled and routed by the platform automatically.' },
+            { icon: KeyRound, title: 'Secrets and files', body: 'An API key goes to Hanzo KMS and is read from there, so it is never a string in your source. Uploads go to object storage on the same account.' },
+            { icon: Zap, title: 'Server logic', body: 'The parts that cannot run in a browser run as functions the platform deploys and routes for you. There is nothing to configure until you want to.' },
           ],
         }}
         finalCta={{
           icon: Rocket,
           title: 'Ship your first app today',
-          sub: 'Describe what you want to build and watch it come to life — then deploy it live on Hanzo Cloud in one click.',
+          sub: 'Describe it, watch it come up, then change the parts that are wrong. Deploying is one click, and the URL is real.',
           buttons: [
             { label: 'Open the builder', href: APP, icon: Rocket },
             { label: 'Read the docs', href: DOCS },

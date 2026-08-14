@@ -47,7 +47,7 @@ export default function StudioLanding() {
             {
               icon: Images,
               title: 'Every modality',
-              body: 'One canvas for image, video, audio, and 3D — SDXL, Flux, Qwen Image, Wan, Hunyuan Video, Stable Audio, and Hunyuan3D, plus editing and upscaling.',
+              body: 'One canvas for image, video, audio and 3D, plus the editing and upscaling steps after them. The checkpoints are the ones you put in the models folder — the graph does not care which family they came from.',
             },
             {
               icon: Cpu,
@@ -64,7 +64,7 @@ export default function StudioLanding() {
             { icon: FileJson, title: 'Portable workflows', body: 'Save and load workflows as JSON, or drop in a generated PNG, WebP, or FLAC to restore the exact graph and seed that made it.' },
             { icon: BrainCircuit, title: 'Hanzo Engine nodes', body: 'First-class nodes call Hanzo Engine for chat, vision, image, speech, and transcription — mix language models and diffusion in one graph.' },
             { icon: Sparkles, title: 'Studio Copilot', body: 'A sidebar assistant that edits the graph in plain language — add nodes, connect them, set prompts, and queue a run.' },
-            { icon: Puzzle, title: 'ComfyUI-compatible', body: 'Every custom node, model, and workflow from the ComfyUI ecosystem runs unmodified — pinned and reproducible.' },
+            { icon: Puzzle, title: 'Custom nodes', body: 'A node is a Python class with declared inputs and outputs, so the graph is extended by writing one rather than by waiting for us to ship it. Installed nodes are pinned, which is what makes a graph reproducible later.' },
             { icon: Server, title: 'Multi-tenant cloud', body: 'On studio.hanzo.ai, sign in with Hanzo IAM, bring your own GPU, and share a durable, per-org render queue with metered billing.' },
           ],
         }}
