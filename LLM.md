@@ -69,13 +69,13 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
   Push to the real name — a redirect is why `gh` reports runs under one repo while
   you push to another. Push to `hanzogit` too: that remote is what the forge
   builds from.
-- **Not yet the live origin.** The apex still resolves to Cloudflare Pages, so the
-  Sites deploy publishes to `hanzo-ai.hanzo.app` and hanzo.ai keeps serving its
-  last Pages build until DNS moves. Two things gate the cutover, both outside this
-  repo: point `hanzo.ai` / `www.hanzo.ai` at the sites edge, and roll out the
-  cloud build carrying the `<rel>.html` candidate in `apps/sites` (without it the
-  edge finds `index.html` and 404s every other route, because `output: export`
-  writes `pricing.html`, not `pricing/index.html`).
+- **The apex IS the live origin.** `hanzo.ai` and `hanzo-ai.hanzo.app` serve the
+  same Sites-plane build; the DNS cutover this file used to gate on has happened.
+  Measured: a green `deploy.yml` run, and both hosts immediately serving a header
+  menu that existed only in that commit — which is the only honest check, because
+  a route that predates the build proves nothing. Do NOT read `server: cloudflare`
+  as evidence otherwise: Cloudflare fronts the sites edge too, so that header is
+  byte-identical on both hosts and distinguishes nothing.
 
 ## Two faces, one export
 
