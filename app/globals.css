@@ -454,3 +454,192 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
 [data-hanzo-shell] > a[href^="https://docs.hanzo.ai"] {
   display: none !important;
 }
+
+/* ── The composer, docked ─────────────────────────────────────────────────────
+   The front door rides the bottom of the viewport the whole way down the page
+   and comes to rest at the end of it. `position: sticky`, not `fixed`: fixed
+   would hover over the footer forever, and the point of the ride is that it
+   ARRIVES somewhere.
+
+   Two placement rules the sticky depends on, both easy to undo by accident. The
+   dock must be the LAST child of the stack it rides — a sticky box is held
+   inside its containing block and pins only while its own flow position is
+   below the viewport — and it must sit OUTSIDE any transformed ancestor, since
+   a transform makes its subject the containing block for everything positioned
+   inside it. `<main>` is that stack here, so the composer rests just above the
+   footer.
+
+   This vocabulary is hanzo.app's, ported rather than reinvented: the same two
+   class names carry the same two jobs there (assets/globals.css), so the two
+   front doors are one design in two places instead of two designs that have to
+   be kept agreeing.
+
+   The inset lives INSIDE as padding. Written as `bottom:` it leaves a strip
+   under the box where the page shows through, and as padding it does double
+   duty — breathing room while pinned, bottom margin at rest. */
+.hz-dock {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  background: var(--background);
+}
+
+/* The bar keeps clear of the corner launcher on a phone.
+   `hanzo.app/edit.js` (loaded in app/layout.tsx) pins a 44px "improve this page"
+   button in the BOTTOM-RIGHT corner, inside a shadow root, at z-index
+   2147483000 — the top of the stacking order. Nothing here can outrank it and
+   nothing here should try: it is another product's widget and hiding it under
+   our own chrome is not ours to do.
+   On a wide viewport the composer is a centred 672px column and the two never
+   meet. On a phone the bar runs the full width and the launcher lands exactly on
+   the send button. Sitting the bar ABOVE it is the one arrangement where both
+   stay reachable — measured: the launcher occupies 12-56px up from the bottom
+   edge, so 64px clears it with room to spare. */
+@media (max-width: 560px) {
+  .hz-dock {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+}
+
+/* The dissolve sits ABOVE the box rather than inside its padding: the padding
+   is the resting band's rhythm and the fade is a fixed 40px, and braiding them
+   makes one number answer two questions. A hard edge here cuts a heading in
+   half as it scrolls under. */
+.hz-dock::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: 40px;
+  background: linear-gradient(to top, var(--background), transparent);
+  pointer-events: none;
+}
+
+/* The composer's ring — the ONE place this site draws a spectrum on chrome.
+   `@property` lets the conic angle animate; where it is unsupported the ring is
+   simply static, which is a ring either way.
+
+   LUMINANCE, NOT HUE, and the stops are hanzo.app's and hanzo.chat's exactly.
+   Four saturated stops swept around a rounded box do not distribute evenly —
+   the long edges take a wide angular slice and the short sides almost none — so
+   one edge wears a bright arc and the opposite a dim one, which reads as a ring
+   that is slightly off. White at two close alphas removes the arc and keeps the
+   drift as a sheen. Colour on this site means something is TALKING (the globe's
+   conversations); chrome does not get to borrow that. */
+@property --hz-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes hzComposerSpin {
+  to {
+    --hz-angle: 360deg;
+  }
+}
+
+:root {
+  --hz-spectrum: rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.1);
+}
+
+.hz-composer {
+  position: relative;
+  isolation: isolate;
+  padding: 1.5px;
+  border-radius: 9999px;
+}
+
+/* The ring itself: a conic fill masked down to the 1.5px padding band, so what
+   shows is an outline and not a disc. */
+.hz-composer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--hz-angle), var(--hz-spectrum));
+  animation: hzComposerSpin 10s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  /* After the standard shorthand: WebKit aliases `mask` onto `-webkit-mask`, so
+     declaring this second lets the shorthand reset it to `source-over` — the
+     filled disc again — on exactly the browsers too old to have
+     `mask-composite` at all. */
+  -webkit-mask-composite: xor;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* The halo, 6px outside the box. */
+.hz-composer::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  padding: 6px;
+  border-radius: inherit;
+  background: conic-gradient(from var(--hz-angle), var(--hz-spectrum));
+  filter: blur(16px);
+  opacity: 0.22;
+  animation: hzComposerSpin 10s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* The panel covers the middle, so only the band shows. */
+.hz-composer > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hz-composer::before,
+  .hz-composer::after {
+    animation: none;
+  }
+}
+
+/* The composer's three controls are circles, and they are 30px — smaller than
+   the 36px hanzo.app gives its two, because that composer is a paragraph box
+   with a control row under it and this one is a single line, where the buttons
+   have to fit INSIDE the line's height rather than beneath it.
+
+   THE FLOOR DOES NOT APPLY HERE, and this is the one exemption on the site.
+   The mobile floor above states 44px under `@media (pointer: coarse)` because a
+   thumb needs a thumb-sized target — but it is stated over `button`, and the
+   tap target in a composer is the FIELD: the whole bar focuses the input, at 45
+   px tall and the width of the column. These three are its secondary chrome,
+   and stretching them to 44px would make a "single line" three lines tall on
+   the one device where that matters most. 30px still clears WCAG 2.5.8 AA (24
+   px), which is the floor that holds for every pointer.
+
+   Scoped to `.hz-composer`, so the exemption cannot leak: it is an exemption
+   for this bar, not a second opinion about touch targets. */
+.hz-composer :is(button, a).hz-round {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
