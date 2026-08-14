@@ -477,12 +477,28 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
    The inset lives INSIDE as padding. Written as `bottom:` it leaves a strip
    under the box where the page shows through, and as padding it does double
    duty — breathing room while pinned, bottom margin at rest. */
+/* THE TWO BARS ARE ONE MATERIAL. `@hanzogui/shell`'s header is glass — it
+   composites `rgba(9,9,11,0.72)` over `blur(20px) saturate(1.8)` with a 9%-white
+   hairline — and the dock is the same kind of object at the other edge of the
+   viewport: chrome the page passes behind. Painting it opaque made it a shelf
+   instead, and the difference was legible, because the two are on screen at the
+   same time.
+   Stated once, here, as the value both the band and the bar inside it read.
+   Blur wants something to blur, so the fill has to stay translucent: raise the
+   alpha and it stops being glass and goes back to being a shelf. */
+:root {
+  --hz-chrome: rgba(9, 9, 11, 0.72);
+  --hz-chrome-blur: blur(20px) saturate(1.8);
+}
+
 .hz-dock {
   position: sticky;
   bottom: 0;
   z-index: 20;
   padding-bottom: max(12px, env(safe-area-inset-bottom));
-  background: var(--background);
+  background: var(--hz-chrome);
+  backdrop-filter: var(--hz-chrome-blur);
+  -webkit-backdrop-filter: var(--hz-chrome-blur);
 }
 
 /* The bar keeps clear of the corner launcher on a phone.
@@ -502,18 +518,22 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
   }
 }
 
-/* The dissolve sits ABOVE the box rather than inside its padding: the padding
-   is the resting band's rhythm and the fade is a fixed 40px, and braiding them
-   makes one number answer two questions. A hard edge here cuts a heading in
-   half as it scrolls under. */
+/* A hairline, not a dissolve. The opaque version of this bar needed 40px of
+   gradient above it to keep a hard edge from cutting a heading in half as it
+   scrolled under; glass does not, because there is no hard edge — the band
+   blurs what passes behind it and the boundary is already soft. What is left to
+   draw is the edge itself, and it is the header's, mirrored: the same 9% white
+   hairline on the side the content comes from. A gradient to an opaque ground
+   would also have been WRONG here rather than merely unnecessary — it would sit
+   above a translucent band while being more opaque than it. */
 .hz-dock::before {
   content: "";
   position: absolute;
   right: 0;
   bottom: 100%;
   left: 0;
-  height: 40px;
-  background: linear-gradient(to top, var(--background), transparent);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.09);
   pointer-events: none;
 }
 

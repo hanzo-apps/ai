@@ -96,7 +96,18 @@ export default function Composer() {
   return (
     <div className="hz-dock px-4 sm:px-6 lg:px-8">
       <form onSubmit={submit} className="hz-composer mx-auto w-full max-w-2xl">
-        <div className="flex items-center gap-1.5 rounded-full border border-neutral-800 bg-neutral-950 p-[6px] transition-colors focus-within:border-neutral-600">
+        {/* Glass, like the band it sits in and the header at the other edge —
+            `--hz-chrome` is that one material (app/globals.css). An opaque pill
+            on a translucent band reads as a second, heavier object floating on
+            the chrome instead of being part of it. */}
+        <div
+          className="flex items-center gap-1.5 rounded-full border border-white/10 p-[6px] transition-colors focus-within:border-white/25"
+          style={{
+            background: 'var(--hz-chrome)',
+            backdropFilter: 'var(--hz-chrome-blur)',
+            WebkitBackdropFilter: 'var(--hz-chrome-blur)',
+          }}
+        >
           {/* Opens UPWARD — the bar lives at the bottom of the viewport, so
               `top-start` is the only placement with room to render into. */}
           <DropdownMenu placement="top-start">
