@@ -1,21 +1,15 @@
 'use client'
 
 import React from "react"
-import dynamic from "next/dynamic"
 import Link from "next/link"
 import { motion } from "framer-motion"
-
-// WebGL point-globe backdrop — client-only + code-split (never SSR/build);
-// static radial below is the no-WebGL / reduced-motion fallback.
-const PointGlobe = dynamic(() => import("@/components/webgl/PointGlobe"), { ssr: false })
+import Frame from "@hanzo/frame"
 import { ArrowRight, CreditCard, Cpu, Check, Github } from "lucide-react"
 import { CopyButton } from "@hanzo/ui/product"
-import { ProductShot } from "@hanzogui/shell"
 import CloudCategoryShowcase, { CloudCategoryMap } from "@/components/cloud/CloudCategoryShowcase"
 import { CONSOLE } from "@/components/home/nav-data"
 import { categoryCount } from "@/lib/data/cloud-primitives"
 import { MODELS_PHRASE } from '@/lib/data/model-count'
-import { heroShot } from "@/lib/data/product-shots"
 
 const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
 const GH = "https://github.com/hanzoai"
@@ -40,81 +34,23 @@ const DEPLOY = "npx @hanzo/cloud deploy"
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden px-4 pb-24 pt-24 sm:px-6 lg:px-8">
-      {/* The globe is the page's one picture, so it is lit as a centrepiece
-          (`hero`) rather than a backdrop, and the veil over it is cut to the
-          shape of the text rather than to the shape of the globe: a wide, flat
-          ellipse across the headline band that has fallen away by the time the
-          sphere's lit rim comes up. The previous veil was a tall 0.8-black
-          ellipse centred on the globe itself, which is why the motif read as an
-          empty starfield. The white bloom drops to 0.07 for the same reason —
-          at 0.14 it washed the conversation hues back to grey. */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div
-          className="absolute left-1/2 top-[38%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.07]"
-          style={{ background: "radial-gradient(circle, #ffffff 0%, transparent 70%)", filter: "blur(120px)" }}
-        />
-        {/* Sized OFF the section on purpose. The sphere's on-screen diameter is
-            a fixed fraction of the canvas HEIGHT (the projection is 48° vertical
-            at a fixed camera distance) and owes nothing to its width, so filling
-            the hero box exactly gave a 447px globe adrift in 1440px of black.
-            118% of the section makes it a planet the headline sits on; at mobile
-            the same rule would drown a 390px column, so it drops to 62% and the
-            globe crowns the copy instead. Width is only elbow room — the canvas
-            is wider than the section so the sphere is never squeezed by it. */}
-        <PointGlobe
-          variant="hero"
-          conversations={18}
-          className="absolute left-1/2 top-[8%] h-[62%] w-[190%] max-w-none -translate-x-1/2 sm:top-[4%] sm:h-[118%] sm:w-[135%]"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse 60% 29% at 50% 33%, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.38) 55%, transparent 86%)" }}
-        />
-      </div>
+    <section className="relative">
+      {/* The film IS the hero. It says the product's name for it, in the
+          console's own chrome, copy and typefaces — so the badge, the headline
+          and the paragraph that used to stand here are gone rather than
+          repeated over the top of it. What stays is what a film cannot do: the
+          three actions, and a command you can copy.
 
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs font-medium text-neutral-300"
-        >
-          Open-source · Self-host or managed
-        </motion.div>
+          Rendered from `film/cloud` — one generator, two masters, because a
+          phone and a laptop are not the same shape and `object-fit: cover`
+          crops whichever it is handed. `@hanzo/frame` resolves all six files
+          from this one prefix and picks by orientation. */}
+      <Frame
+        src="/cloud-hero"
+        alt="One command brings up a Hanzo Cloud org. The console lists the model catalog — the house Enso family beside every model the gateway serves — and the Playground answers a prompt against it."
+      />
 
-        <motion.h1
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.05 }}
-          className="text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
-        >
-          {/* The house headline treatment, borrowed verbatim from EnsoHero on
-              the apex: one weight, one tracking, one monochrome white→neutral
-              sheen. Coherence between the two faces is a shared type scale, not
-              a second look that merely resembles the first. */}
-          <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
-            The AI cloud for agents and apps.
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400"
-        >
-          One API for <span className="text-white">{MODELS_PHRASE}</span>, Base backends, identity,
-          secrets, vector search, and full-text search. Pay-as-you-go, billed per organization.
-          {/* "your own Kubernetes" was the whole of the self-host story, and it
-              set the floor at a cluster. The smaller and more convincing claim
-              was missing: it also runs on the laptop you are reading this on.
-              Same API on localhost, same code, one binary. */}{' '}
-          Run it on Hanzo Cloud, self-host the same stack on your own Kubernetes, or run it on your
-          own machine — <span className="text-white">one binary</span>, same API on{' '}
-          <span className="text-white">localhost</span>.
-        </motion.p>
-
+      <div className="relative mx-auto max-w-4xl px-4 pb-24 pt-12 text-center sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -155,38 +91,6 @@ function Hero() {
             <CopyButton value={DEPLOY} label="Copy deploy command" size={20} id="install-cli" />
           </div>
         </motion.div>
-      </div>
-    </section>
-  )
-}
-
-/* ------------------------------------------------------------ console --- */
-
-/**
- * The console, shown rather than described.
- *
- * The hero above makes a claim ("the AI cloud for agents and apps") and this is
- * the evidence for it — so it sits directly under the claim, before the catalog
- * that elaborates it. Frame, art direction and loading behaviour all come from
- * `<ProductShot>` in the shared shell, so this shot and every category shot on
- * `/products/<slug>` present identically; a screenshot styled per-page is how a
- * product starts looking like three products.
- *
- * `priority` because this one is at the fold. Every OTHER shot on the site stays
- * lazy — the shell defaults to it, so no other call site has to remember.
- */
-function ConsoleShot() {
-  if (!heroShot) return null
-  return (
-    <section className="px-4 pb-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
-        <ProductShot
-          desktop={heroShot.desktop}
-          mobile={heroShot.mobile}
-          alt={heroShot.alt}
-          priority
-          href={CONSOLE}
-        />
       </div>
     </section>
   )
@@ -340,7 +244,6 @@ export default function CloudLanding() {
   return (
     <>
       <Hero />
-      <ConsoleShot />
       <Primitives />
       <Billing />
       <FinalCTA />
