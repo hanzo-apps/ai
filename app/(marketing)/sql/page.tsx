@@ -36,16 +36,16 @@ export default function SQLPage() {
             <span className="bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">SQL</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} className="text-2xl md:text-3xl font-medium text-foreground mb-4">
-            Managed PostgreSQL 18
+            PostgreSQL 18, run for you
           </motion.p>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Full ACID compliance, 100+ extensions, connection pooling, and automated backups. pgvector for embeddings. Logical replication. Zero downtime upgrades.
+            This is Postgres itself, not a reimplementation of it, so your driver, your ORM and psql connect the way they always have. Five extensions are enabled before you get the connection string — pgvector for embeddings, pg_trgm for fuzzy text, btree_gin for mixed indexes, uuid-ossp for keys, and pg_stat_statements so the slow query is already recorded when you go looking for it.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto">
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">PG 18</div><div className="text-sm text-muted-foreground">Latest</div></div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">ACID</div><div className="text-sm text-muted-foreground">Compliant</div></div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">100+</div><div className="text-sm text-muted-foreground">Extensions</div></div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">HA</div><div className="text-sm text-muted-foreground">Failover</div></div>
+            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">PG 18</div><div className="text-sm text-muted-foreground">Version</div></div>
+            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">ACID</div><div className="text-sm text-muted-foreground">Transactions</div></div>
+            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">pgvector</div><div className="text-sm text-muted-foreground">Already on</div></div>
+            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">WAL</div><div className="text-sm text-muted-foreground">Restore to a second</div></div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap justify-center gap-4">
             <a href="https://docs.hanzo.ai/docs/sql" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Get Started <ArrowRight className="w-4 h-4" /></a>
@@ -57,17 +57,17 @@ export default function SQLPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">PostgreSQL, Fully Managed</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Focus on your queries, not your database operations.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Postgres, without the pager duty</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">You write the queries. We take the upgrades, the archiving and the replicas.</p>
           </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Layers, title: "pgvector", description: "Store and query embeddings natively. HNSW and IVFFlat indexes. Perfect for AI applications." },
+              { icon: Layers, title: "pgvector", description: "An embedding is a column beside the row it describes, so nearest-neighbour search and a WHERE clause are one query against one store. HNSW and IVFFlat indexes, cosine, L2 or inner product." },
               { icon: Zap, title: "Connection Pooling", description: "Built-in PgBouncer. Handle thousands of connections without overloading PostgreSQL." },
               { icon: GitBranch, title: "Branching", description: "Create database branches for development and testing. Instant copy-on-write clones." },
-              { icon: Shield, title: "Automated Backups", description: "Continuous WAL archiving. Point-in-time recovery to any second. Cross-region replication." },
-              { icon: BarChart3, title: "Query Insights", description: "pg_stat_statements integration. Identify slow queries, index suggestions, and lock contention." },
-              { icon: Server, title: "High Availability", description: "Streaming replication with automatic failover. Read replicas for horizontal scaling." },
+              { icon: Shield, title: "Backups you don’t schedule", description: "The write-ahead log is archived as it is written, so recovery targets a second rather than the last nightly dump. Name a timestamp and the database comes back as it stood." },
+              { icon: BarChart3, title: "Query Insights", description: "pg_stat_statements is on from first boot, so the query that got slow last Tuesday was already being counted. Calls, total and mean time, rows and buffer hits, per normalised statement." },
+              { icon: Server, title: "Read replicas", description: "Streaming replication keeps a second copy in step with the primary, byte for byte. Send reports and dashboards there and leave the primary to the writes." },
             ].map((feature, index) => (
               <motion.div key={feature.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.05 }} className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors">
                 <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10"><feature.icon className="h-6 w-6 text-foreground" /></div>
@@ -82,7 +82,7 @@ export default function SQLPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Standard PostgreSQL. Nothing Custom.</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">It is Postgres. That is the feature.</h2>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="bg-secondary border border-border rounded-xl overflow-hidden">
             <div className="flex items-center gap-2 px-4 py-2 border-b border-border"><div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-neutral-700" /><div className="w-3 h-3 rounded-full bg-neutral-700" /><div className="w-3 h-3 rounded-full bg-neutral-700" /></div><span className="text-xs text-muted-foreground ml-2">schema.sql</span></div>
@@ -118,7 +118,7 @@ LIMIT 10;`}</code></pre>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="relative bg-secondary/50 border border-border rounded-2xl p-8 md:p-12 text-center overflow-hidden">
             <div className="absolute inset-0 overflow-hidden"><div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" /><div className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" /></div>
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Your Data, Rock Solid</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Point a connection string at it</h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">Free tier includes 1 GB storage and 1M row reads/month.</p>
               <div className="flex flex-wrap justify-center gap-4">
                 <a href="https://docs.hanzo.ai/docs/sql" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Provision a Database <ArrowRight className="w-4 h-4" /></a>
