@@ -8,7 +8,6 @@ import { ArrowRight, CreditCard, Cpu, Check, Github } from "lucide-react"
 import { CopyButton } from "@hanzo/ui/product"
 import CloudCategoryShowcase, { CloudCategoryMap } from "@/components/cloud/CloudCategoryShowcase"
 import { CONSOLE } from "@/components/home/nav-data"
-import { categoryCount } from "@/lib/data/cloud-primitives"
 import { MODELS_PHRASE } from '@/lib/data/model-count'
 
 const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
@@ -113,9 +112,18 @@ function Primitives() {
       <section className="border-t border-neutral-900 px-4 pb-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            {/* The page's ONE `<h1>`, and it is here because the fold is a
+                film: the hero used to carry the heading, and lifting the copy
+                off it left the document with no `<h1>` at all — the same
+                zero-heading export this repo has shipped before by a different
+                route. A hero film cannot hold a heading (its message is the
+                `alt`), so the heading belongs to the first section that has
+                words, and this line is the page's thesis rather than a section
+                label. It stays visible; a heading only a screen reader can find
+                is the message said twice, once badly. */}
+            <h1 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               Every primitive. One cloud.
-            </h2>
+            </h1>
             <p className="mt-4 text-lg text-neutral-400">
               Composable, open-source building blocks with one identity, one bill, and one API.
               Use one, use all — they work together out of the box.
