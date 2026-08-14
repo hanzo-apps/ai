@@ -1,14 +1,14 @@
 'use client'
 
-import React from "react"
+import React, { useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { ArrowRight, CreditCard, Cpu, Check, Github } from "lucide-react"
 import { CopyButton } from "@hanzo/ui/product"
 import CloudCategoryShowcase, { CloudCategoryMap } from "@/components/cloud/CloudCategoryShowcase"
 import { CONSOLE } from "@/components/home/nav-data"
 import { MODELS_PHRASE } from '@/lib/data/model-count'
-import { cloudCategories } from '@/lib/data/cloud-primitives'
+import { cloudCategories, tour } from '@/lib/data/cloud-primitives'
 
 const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
 
@@ -87,17 +87,190 @@ function Film() {
  * the fold on a 375px screen and hand a reader a video before the page has said
  * its own name.
  */
+/* ------------------------------------------------------------------ tour --- */
+
+/** The products whose API this beat's operation belongs to, from the catalogue. */
+function productsFor(path: string) {
+  return cloudCategories
+    .flatMap((c) => c.items)
+    .filter((p) => {
+      const api = p.api?.replace(/\/$/, '')
+      if (!api) return false
+      return path === api || path.startsWith(api + '/') || api.startsWith(path.replace(/\/$/, ''))
+    })
+}
+
+const TYPE_MS = 26
+const HOLD_MS = 2100
+
+/**
+ * The hero tour — one story, told as the operations that would actually run it.
+ *
+ * WHY IT CAN BE TRUSTED. Every beat is resolved at BUILD time against the served
+ * `/v1/openapi.json` (see `scripts/sync-catalog.mjs`): a beat survives iff the
+ * document carries its path AND its verb, so an invented path and a real path
+ * with the wrong verb are both dropped before they can reach a reader. The line
+ * is ours; the verb, the path and the description under it are the API's own
+ * words. The product chips come from the same catalogue the count and the menu
+ * read — and where an operation has no product row yet, none are drawn rather
+ * than a stand-in being found for it.
+ *
+ * MOTION IS OPTIONAL, not decorated with an opt-out. Under
+ * `prefers-reduced-motion` there is no typing and no auto-advance: the first
+ * beat is simply shown, whole, and the dots still work as buttons. Someone who
+ * wants to read is never a hostage — the panel pauses on the button, and on
+ * hover or keyboard focus, and a dot both selects a beat and stops the clock.
+ *
+ * NOTHING RESIZES. The line reserves two lines, the description two more and the
+ * chip row one, so a short beat and a long one occupy the same box and the fold
+ * never moves under the reader. One `setTimeout` chain drives it — no interval
+ * per beat, no timer left running when the tab is hidden.
+ */
+function Tour() {
+  const reduced = useReducedMotion()
+  const beats = tour.beats
+  const [at, setAt] = useState(0)
+  const [typed, setTyped] = useState(reduced ? Infinity : 0)
+  const [held, setHeld] = useState(false)
+  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
+
+  const beat = beats[at]
+  const line = beat?.line ?? ''
+  const paused = held || !!reduced
+
+  useEffect(() => {
+    if (paused || !beats.length) return
+    if (typed < line.length) {
+      timer.current = setTimeout(() => setTyped((n) => n + 1), TYPE_MS)
+    } else {
+      timer.current = setTimeout(() => {
+        setAt((i) => (i + 1) % beats.length)
+        setTyped(0)
+      }, HOLD_MS)
+    }
+    return () => clearTimeout(timer.current)
+  }, [typed, line.length, paused, beats.length])
+
+  // A hidden tab should not be typing to nobody.
+  useEffect(() => {
+    const onVis = () => setHeld(document.hidden ? true : false)
+    document.addEventListener('visibilitychange', onVis)
+    return () => document.removeEventListener('visibilitychange', onVis)
+  }, [])
+
+  const pick = (i: number) => {
+    setAt(i)
+    setTyped(Infinity)
+    setHeld(true)
+  }
+
+  if (!beats.length) return null
+  const shown = reduced ? line : line.slice(0, typed)
+  const lit = productsFor(beat.path)
+
+  return (
+    <div
+      onMouseEnter={() => setHeld(true)}
+      onMouseLeave={() => setHeld(false)}
+      onFocusCapture={() => setHeld(true)}
+      className="mt-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5"
+    >
+      <p className="text-xs uppercase tracking-wider text-neutral-600">{tour.story}</p>
+
+      {/* Two lines reserved, so a short beat and a long one are the same box. */}
+      <p className="mt-3 min-h-[3.5rem] text-lg font-medium leading-snug text-white">
+        {shown}
+        {!reduced && typed < line.length ? (
+          <span className="ml-0.5 inline-block h-5 w-[2px] translate-y-0.5 bg-white/80 motion-safe:animate-pulse" />
+        ) : null}
+      </p>
+
+      {/* The operation that beat would actually run, in the API's own words. */}
+      <div className="mt-1 min-h-[3.25rem]">
+        <code className="font-mono text-xs text-neutral-300">
+          <span className="text-neutral-500">{beat.method}</span> {beat.path}
+        </code>
+        <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-neutral-500">{beat.summary}</p>
+      </div>
+
+      {/* Real products, where the catalogue carries one for that operation. */}
+      <div className="mt-3 flex min-h-[1.75rem] flex-wrap items-center gap-1.5">
+        {lit.map((p) => {
+          const Icon = p.icon
+          return (
+            <span
+              key={p.title}
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-2.5 py-1 text-xs text-neutral-300"
+            >
+              <Icon className="h-3.5 w-3.5 text-neutral-400" /> {p.title}
+            </span>
+          )
+        })}
+      </div>
+
+      <div className="mt-4 flex items-center gap-3">
+        <button
+          type="button"
+          onClick={() => setHeld((v) => !v)}
+          aria-pressed={held}
+          className="rounded-full border border-white/15 px-3 py-1 text-xs text-neutral-300 transition-colors hover:border-white/40 hover:text-white motion-reduce:transition-none"
+        >
+          {paused ? 'Play' : 'Pause'}
+        </button>
+        <div className="-mx-1 flex flex-wrap items-center">
+          {beats.map((b, i) => (
+            // The DOT is drawn inside the target rather than being it. This site
+            // floors every button at 24px (44px where a finger points), which is
+            // WCAG 2.5.8 / 2.5.5 and correct — a 6px control is not clickable by
+            // anyone. Sized as a dot it obeyed the floor by stretching into a
+            // 6x24 bar; sized as a target with a dot in it, both are right. The
+            // width follows the same pointer question the height already asks,
+            // so a finger gets 44x44 and a mouse keeps a 24px dot row.
+            <button
+              key={b.path + b.method}
+              type="button"
+              onClick={() => pick(i)}
+              aria-label={b.line}
+              aria-current={i === at ? 'true' : undefined}
+              className="grid h-6 w-6 place-items-center rounded-full [@media(pointer:coarse)]:w-11"
+            >
+              <span
+                className={`h-1.5 w-1.5 rounded-full transition-colors motion-reduce:transition-none ${
+                  i === at ? 'bg-white' : 'bg-white/25 hover:bg-white/60'
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function Hero() {
   return (
-    <section className="px-4 pb-20 pt-14 sm:px-6 lg:px-8 lg:pb-24">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
+    <section className="flex min-h-svh w-full items-center px-4 py-14 sm:px-6 lg:px-8">
+      {/* The SECTION is the viewport — full width, and `svh` rather than `vh`
+          because mobile browser chrome makes `100vh` taller than the screen and
+          the fold overflows by exactly the address bar. The CONTENT is what is
+          capped: at 2560 a full-bleed grid would stretch the copy into a strip
+          and blow the film past its 1920 master, which is the one way to make a
+          crisp render look soft. 1600 keeps the measure readable and holds the
+          film at ~780px, under 1x even on a retina panel. It takes ONE step up
+          past 1536, to 1920, because at 2560 a 1600 island leaves 480px of black
+          down each side; 1920 is the widest the cap may go, since half of it is
+          928px and the master is 1920 — a film asked for more would be upscaled,
+          which is the one way to make a crisp render look soft. Two even columns,
+          not a narrow one beside a wide one: at 1280 a 5/7 split left the copy
+          480px and broke the three actions across two ragged lines. */}
+      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-10 lg:grid-cols-2 lg:gap-16 2xl:max-w-[1920px]">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
           className="max-w-xl"
         >
-          <h1 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl 2xl:text-7xl">
             {/* The house headline treatment: one weight, one tracking, one
                 monochrome white -> neutral sheen, same as the apex hero. */}
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
@@ -105,7 +278,7 @@ function Hero() {
             </span>
           </h1>
 
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-neutral-400">
+          <p className="mt-6 max-w-lg text-lg leading-relaxed text-neutral-400 2xl:max-w-xl 2xl:text-xl">
             One API for <span className="text-white">{MODELS_PHRASE}</span>, Base backends,
             identity, secrets, and vector plus full-text search. Pay-as-you-go, billed per
             organization — run it managed, self-host it on your own Kubernetes, or run the same
@@ -150,6 +323,7 @@ function Hero() {
           transition={{ duration: 0.4, delay: 0.1 }}
         >
           <Film />
+          <Tour />
         </motion.div>
       </div>
     </section>

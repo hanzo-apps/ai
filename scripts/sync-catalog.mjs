@@ -69,6 +69,7 @@ import { CATALOG_URL, DOCUMENT_URL, KNOWN_UNSERVED, read, serves } from "./catal
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SNAPSHOT = resolve(ROOT, "lib/data/catalog.json");
+const TOUR = resolve(ROOT, "lib/data/tour.json");
 const DRY_RUN = process.argv.includes("--dry-run");
 
 const load = (path) => {
@@ -106,7 +107,7 @@ async function main() {
 
   console.log(`[catalog] fetching ${CATALOG_URL}`);
   console.log(`[catalog] probing  ${DOCUMENT_URL}`);
-  const { catalog, paths, error } = await read();
+  const { catalog, document, paths, error } = await read();
 
   if (error) {
     // No fallback on disk at all: the taxonomy imports this file, so the build
@@ -192,6 +193,30 @@ async function main() {
   // repo's pricing snapshot reached four months stale without anyone noticing.
   // `excluded` is provenance too — without it the file cannot say why it holds
   // 53 rows rather than the 84 the catalog advertises.
+  // ── The tour, judged by the same document ────────────────────────────────
+  //
+  // The hero tells one story in a dozen beats, and every beat names a real
+  // operation. It is resolved HERE, against the document that was just used to
+  // decide which products exist, so a beat cannot outlive the operation it
+  // describes: an unserved path is dropped with its reason printed, exactly as
+  // an unreachable product is. The prose is ours; the verb, the path and the
+  // one-line description are the API's own words, read out of the document.
+  const declared = JSON.parse(readFileSync(TOUR, "utf8"));
+  const beats = [];
+  const droppedBeats = [];
+  for (const b of declared.beats) {
+    const op = document?.paths?.[b.path]?.[b.method.toLowerCase()];
+    if (!op) {
+      droppedBeats.push(b.path);
+      continue;
+    }
+    beats.push({ ...b, summary: (op.summary ?? "").trim() });
+  }
+  if (droppedBeats.length) {
+    console.log(`  tour: dropped ${droppedBeats.length} beat(s) the document does not serve — ${droppedBeats.join(", ")}`);
+  }
+  console.log(`[tour] ${beats.length}/${declared.beats.length} beats answer`);
+
   const next = {
     source: CATALOG_URL,
     document: DOCUMENT_URL,
@@ -199,6 +224,7 @@ async function main() {
     categories: [...categories].sort((a, b) => a.order - b.order),
     products: rendered.sort((a, b) => a.category.localeCompare(b.category) || a.order - b.order),
     excluded: excluded.sort((a, b) => a.id.localeCompare(b.id)),
+    tour: { story: declared.story, beats },
   };
 
   if (DRY_RUN) {

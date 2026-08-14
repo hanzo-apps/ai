@@ -379,3 +379,28 @@ export const categorySlugs: string[] = allCategories.map((c) => c.id)
 export function getCategoryBySlug(slug: string): CloudCategory | undefined {
   return allCategories.find((c) => c.id === slug)
 }
+
+// ── The hero tour ────────────────────────────────────────────────────────────
+
+/** One beat of the hero's story: our line, and the API's own words for it. */
+export interface Beat {
+  /** The line the hero types. Prose, and the only part of a beat we write. */
+  line: string
+  method: string
+  path: string
+  /** The served document's own one-line description of that operation. */
+  summary: string
+}
+
+/**
+ * The story the hero tells, resolved at build time against the SAME served
+ * document that decides which products exist (`scripts/sync-catalog.mjs`).
+ *
+ * A beat survives iff `/v1/openapi.json` carries its path AND its verb, so the
+ * hero cannot narrate an operation the platform does not serve — an invented
+ * path and a real path with the wrong verb are both dropped, with the reason
+ * printed. That is what keeps a scenario from becoming marketing fiction in a
+ * terminal font: the prose is ours, the verb, the path and the description are
+ * the API's.
+ */
+export const tour: { story: string; beats: Beat[] } = snapshot.tour ?? { story: '', beats: [] }

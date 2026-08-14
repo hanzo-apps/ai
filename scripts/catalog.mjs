@@ -116,7 +116,7 @@ const get = async (url) => {
 export async function read() {
   try {
     const [catalog, document] = await Promise.all([get(CATALOG_URL), get(DOCUMENT_URL)]);
-    return { catalog, paths: new Set(Object.keys(document?.paths ?? {})) };
+    return { catalog, document, paths: new Set(Object.keys(document?.paths ?? {})) };
   } catch (e) {
     return { error: e.message };
   }
