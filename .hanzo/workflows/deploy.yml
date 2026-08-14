@@ -170,14 +170,17 @@ jobs:
           KMS: ${{ vars.KMS_ENDPOINT || 'https://kms.hanzo.ai' }}
         run: |
           set -euo pipefail
-          val() { python3 -c 'import json,sys;print(json.load(sys.stdin).get(sys.argv[1],""))' "$1"; }
-          kt=$(curl -fsS "$KMS/v1/kms/auth/login" -H 'Content-Type: application/json' \
+          # No -f anywhere: curl's --fail exits 22 and prints nothing an operator
+          # can act on, which is the same silence an absent secret already gives.
+          # Reading the body and testing the field says which of the two it was.
+          val() { python3 -c 'import json,sys;print(json.load(sys.stdin).get(sys.argv[1],""))' "$1" 2>/dev/null; }
+          kt=$(curl -sS "$KMS/v1/kms/auth/login" -H 'Content-Type: application/json' \
                  -d "{\"clientId\":\"$KMS_CLIENT_ID\",\"clientSecret\":\"$KMS_CLIENT_SECRET\"}" | val accessToken)
-          [ -n "$kt" ] || { echo "::error::KMS login failed at $KMS/v1/kms/auth/login (check KMS_CLIENT_ID/KMS_CLIENT_SECRET)"; exit 1; }
-          # No -f on the read: a miss must name the path that was empty rather
-          # than exiting 22 with nothing to act on.
+          [ -n "$kt" ] || { echo "::error::KMS login refused at $KMS/v1/kms/auth/login (check KMS_CLIENT_ID/KMS_CLIENT_SECRET on the hanzoai org)"; exit 1; }
+          # Flat, like every other credential the fleet reads. A miss names the
+          # path, which is the one thing an operator needs to act on it.
           key=$(curl -sS "$KMS/v1/kms/secrets/HANZO_DEPLOY_TOKEN?env=prod" -H "Authorization: Bearer $kt" | val value)
-          [ -n "$key" ] || { echo "::error::no HANZO_DEPLOY_TOKEN at $KMS/v1/kms/secrets/HANZO_DEPLOY_TOKEN?env=prod"; exit 1; }
+          [ -n "$key" ] || { echo "::error::no HANZO_DEPLOY_TOKEN at $KMS/v1/kms/secrets/HANZO_DEPLOY_TOKEN?env=prod — seal a live sk- key there"; exit 1; }
           # Masked before it is ever an output, so it cannot surface in a log.
           echo "::add-mask::$key"
           echo "token=$key" >> "$GITHUB_OUTPUT"
