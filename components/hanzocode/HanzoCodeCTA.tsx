@@ -16,10 +16,10 @@ const HanzoCodeCTA = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl font-bold mb-8">Upgrade Your Editor Today</h2>
-          
+          <h2 className="text-3xl font-bold mb-8">Open it in your own repo</h2>
+
           <p className="text-xl text-foreground/80 mb-12 max-w-2xl mx-auto">
-            Transform your VS Code, Cursor, Windsurf, or Void experience with the most advanced AI coding tools available.
+            The fastest way to judge an editor is to point it at code you already know is difficult.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4 mb-16">
@@ -51,12 +51,12 @@ const HanzoCodeCTA = () => {
           </div>
           
           <div className="bg-[var(--black)]/40 rounded-xl p-8 border border-neutral-800 mb-12">
-            <h3 className="text-xl font-semibold mb-4">Already Using Cursor or Windsurf?</h3>
+            <h3 className="text-xl font-semibold mb-4">Not ready to change editors?</h3>
             <p className="text-foreground/80 mb-6">
-              Install Hanzo Code alongside your current editor and supercharge it with our agentic capabilities. No need to switch or change your workflow.
+              The same agent runs in a terminal. Type hanzo in any repo and you get the identical session, in the editor you already have open beside it.
             </p>
             <Button size="sm">
-              One-Click Integration
+              Use it from the terminal
             </Button>
           </div>
           

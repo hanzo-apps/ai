@@ -23,11 +23,12 @@ const HanzoCodeHero = () => {
           className="text-center"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            The <span className="text-foreground">Ultimate AI-Powered</span> Code Editor
+            A <span className="text-foreground">code editor</span> with the agent inside it
           </h1>
           <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto mb-12">
-            Beyond Cursor and Windsurf, Hanzo Code supercharges your favorite VS Code-compatible editor 
-            with autonomous agents that transform how you build software.
+            Hanzo Code is a fork of VS Code. Your extensions, keybindings and settings come across
+            unchanged — and the agent that opens files, runs the tests and shows you the diff is already
+            there. Open source, in open beta.
           </p>
           
           <div className="mb-12">

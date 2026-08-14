@@ -18,9 +18,9 @@ import {
 const features = [
   {
     icon: Component,
-    title: "60+ Components",
+    title: "Overlays are components. The rest is CSS.",
     description:
-      "Buttons, dialogs, dropdowns, tables, forms, navigation — everything you need to build a Hanzo-grade React app, batteries included.",
+      "Dialog and DropdownMenu are real components, because they carry focus management, keyboard behaviour and placement that CSS cannot. Buttons, panels, fields and tables are classes over tokens — which is why reading the markup is still possible.",
   },
   {
     icon: Accessibility,
@@ -30,9 +30,9 @@ const features = [
   },
   {
     icon: Palette,
-    title: "Themeable, Not Theme-locked",
+    title: "Nothing invents a colour",
     description:
-      "@hanzo/design tokens — plain CSS variables — re-skin every component in seconds. White-label per org, theme per route, dark by default.",
+      "Every value comes from a @hanzo/design token — a plain CSS variable, alongside self-hosted faces. Nothing hard-codes a colour, a size or a radius, so retuning the tokens retunes every surface at once and a brand fork costs nothing.",
   },
   {
     icon: Code2,
@@ -112,8 +112,9 @@ export default function UiPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Open-source, accessible, themeable React components built on @hanzo/gui
-            primitives and @hanzo/design tokens. Install them, theme them, ship faster.
+            Open source, on @hanzo/gui primitives and @hanzo/design tokens. No
+            Tailwind, no Radix, no vendored component folder to maintain — the
+            admin you are reading about elsewhere on this site is built out of it.
           </motion.p>
 
           <motion.div

@@ -48,7 +48,7 @@ export default function DashboardsPage() {
           >
             <LayoutDashboard className="w-4 h-4 text-foreground" />
             <span className="text-sm font-medium text-foreground/80">
-              Grafana-Compatible
+              Traces · observations · scores
             </span>
           </motion.div>
 
@@ -70,7 +70,7 @@ export default function DashboardsPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Monitoring and observability
+            A dashboard is a saved query
           </motion.p>
 
           <motion.p
@@ -79,9 +79,10 @@ export default function DashboardsPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Grafana-compatible dashboards for infrastructure, application, and
-            business metrics. Custom panels, alerts, and data source
-            integrations. Managed or self-hosted.
+            Views over what your own applications recorded. A widget is a query
+            against the traces, observations and scores this service already
+            holds — not a copy of them in a second system, and not a metrics
+            store you have to feed on the side.
           </motion.p>
 
           <motion.div
@@ -91,16 +92,16 @@ export default function DashboardsPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Grafana</div>
-              <div className="text-sm text-muted-foreground">Compatible</div>
+              <div className="text-2xl font-bold text-foreground">Traces</div>
+              <div className="text-sm text-muted-foreground">The thing being queried</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">50+</div>
-              <div className="text-sm text-muted-foreground">Data sources</div>
+              <div className="text-2xl font-bold text-foreground">Scores</div>
+              <div className="text-sm text-muted-foreground">Yours to define</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Alerts</div>
-              <div className="text-sm text-muted-foreground">Built-in</div>
+              <div className="text-2xl font-bold text-foreground">Monitors</div>
+              <div className="text-sm text-muted-foreground">Saved and watched</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">SSO</div>
@@ -142,10 +143,10 @@ export default function DashboardsPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              See Everything That Matters
+              What a dashboard is made of
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Infrastructure, application, and business metrics in one place.
+              Widgets, monitors, saved views and score configs — all of them queries over one store.
             </p>
           </motion.div>
 
@@ -153,39 +154,39 @@ export default function DashboardsPage() {
             {[
               {
                 icon: BarChart3,
-                title: "Custom Panels",
+                title: "Widgets over your own data",
                 description:
-                  "Time series, gauges, tables, heatmaps, histograms, and 30+ visualization types.",
+                  "A widget names what to select and how to group it. Because it queries the store that already holds your traces, a chart cannot drift from what happened.",
               },
               {
                 icon: Bell,
-                title: "Alerting",
+                title: "Monitors",
                 description:
-                  "Threshold, anomaly, and composite alerts. Route to Slack, PagerDuty, email, or webhooks.",
+                  "A saved query you want watched rather than looked at. Same definition as the widget beside it, kept in one place so the alert and the chart cannot disagree.",
               },
               {
                 icon: Database,
-                title: "Data Sources",
+                title: "One store, not two",
                 description:
-                  "Prometheus, Datastore, PostgreSQL, Elasticsearch, CloudWatch, and 50+ integrations.",
+                  "Traces, observations and scores live in the service that serves the dashboards. There is no export step, no second database to keep in sync, and nothing to reconcile after an outage.",
               },
               {
                 icon: Layers,
-                title: "Templates",
+                title: "Saved table views",
                 description:
-                  "Pre-built dashboards for Kubernetes, Node.js, PostgreSQL, Redis, and NGINX.",
+                  "The columns, filters and sort you arrived at are a preset you can name and return to. Presets belong to the project, so a colleague opens the view you meant.",
               },
               {
                 icon: Globe,
-                title: "Sharing",
+                title: "Scores are yours to define",
                 description:
-                  "Public snapshots, embedded panels, PDF reports, and scheduled email digests.",
+                  "Score configs say what good means for your application — a rating, a label, a number from an evaluator. Dashboards then aggregate the thing you actually care about.",
               },
               {
                 icon: Shield,
-                title: "Team Access",
+                title: "Permission per category",
                 description:
-                  "Organization and team-level permissions. SSO via Hanzo IAM. Viewer and editor roles.",
+                  "Access is granted by category rather than per object, and the boundary is the organization on your token. Reading somebody else's project is not a URL away.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -230,10 +231,10 @@ export default function DashboardsPage() {
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Monitor Everything
+                Start from a trace
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
-                Free tier includes 3 dashboards and 14 days retention.
+                Send traces from your application, then build the view that answers the question you keep asking about them.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">

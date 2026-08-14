@@ -79,11 +79,11 @@ export default function SdksPage() {
               SDKs for every language
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              One cloud, every language. A <span className="text-foreground">full Cloud SDK</span> generated
-              from one OpenAPI spec — idiomatic in each ecosystem — plus a hand-crafted{" "}
-              <span className="text-foreground">AI + Agents</span> flagship. Real code lives in the
-              per-language org; the umbrella <span className="font-mono text-foreground">hanzoai/sdk</span>{" "}
-              ties it all together.
+              Two lines, not one. A <span className="text-foreground">full Cloud SDK</span> generated from
+              the OpenAPI document the API itself serves, so it is never behind the API — and a
+              hand-written <span className="text-foreground">AI + Agents</span> library for the work a
+              generator cannot express. Real code lives in the per-language org; the umbrella{" "}
+              <span className="font-mono text-foreground">hanzoai/sdk</span> points at all of them.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
@@ -122,8 +122,10 @@ export default function SdksPage() {
               <h2 className="font-semibold text-foreground">Full Cloud SDK</h2>
             </div>
             <p className="text-sm text-muted-foreground">
-              Generated from one OpenAPI spec, idiomatic in every language. Covers the whole cloud —
-              models, agents, data, compute, network, security, platform, and chain. Real code lives in{" "}
+              Generated from one document and never edited by hand, so every route is reachable the day
+              it ships — models, agents, data, compute, network, security, platform and chain. Method and
+              class names are the document&apos;s operation ids, which is what makes a client checkable
+              against a release instead of against somebody&apos;s memory. Real code lives in{" "}
               <span className="font-mono text-foreground/80">hanzo-&lt;lang&gt;/sdk</span>.
             </p>
           </motion.div>
@@ -166,8 +168,10 @@ export default function SdksPage() {
             A home for every ecosystem
           </h2>
           <p className="text-muted-foreground mb-4 max-w-2xl">
-            Each language has its own org with the generated cloud SDK, an AI + agents library, and
-            split-out packages — so the SDK is native, not an afterthought.
+            Each language has its own org holding the generated cloud SDK, an AI + agents library and
+            the split-out packages. Every one of them ships the same six runnable examples — prove the
+            key works, one completion, balance and usage, a store round-trip, create and run an agent,
+            list the tools — so knowing one language&apos;s set is enough to navigate another&apos;s.
           </p>
           <p className="text-sm text-muted-foreground/80 mb-8 max-w-2xl">
             <span className="text-foreground">Python, Go, and TypeScript are generally available</span>{" "}

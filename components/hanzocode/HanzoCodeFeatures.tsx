@@ -36,58 +36,58 @@ const HanzoCodeFeatures = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold mb-4">Beyond Other AI Editors</h2>
+          <h2 className="text-3xl font-bold mb-4">What the agent can do here</h2>
           <p className="text-xl text-foreground/80">
-            Capabilities that leave Cursor, Windsurf, and other AI editors far behind
+            The same agent the terminal runs, with the editor around it
           </p>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <FeatureCard 
-            title="Holistic Understanding"
-            description="Unlike others, we analyze your entire codebase, not just the current file or context window"
+            title="It opens the files"
+            description="The agent reads what it needs from the repo rather than waiting for you to paste it into a chat"
             icon={<Code className="h-10 w-10 text-foreground" />}
           />
           
           <FeatureCard 
-            title="Parallel Execution"
-            description="Run multiple autonomous agents simultaneously to solve different parts of your project"
+            title="Several at once"
+            description="Big jobs split across agents, each working in its own git worktree so they never edit the same file"
             icon={<Zap className="h-10 w-10 text-foreground" />}
           />
           
           <FeatureCard 
-            title="Advanced Reasoning"
-            description="Complex problem solving with multi-step reasoning that other AI tools can't match"
+            title="Think harder when it matters"
+            description="Set the effort per task and trade speed for depth only on the work that needs it"
             icon={<MessageSquare className="h-10 w-10 text-foreground" />}
           />
           
           <FeatureCard 
-            title="Multi-repo Context"
-            description="Understand dependencies across multiple repositories and codebases simultaneously"
+            title="Nothing hidden"
+            description="You see the model, the whole prompt and the context window on every request — no silent swaps, no quiet compression"
             icon={<Globe className="h-10 w-10 text-foreground" />}
           />
           
           <FeatureCard 
-            title="Complete Autonomy"
-            description="Agents can work independently, making decisions without constant human guidance"
+            title="It reviews its own work"
+            description="A watcher checks every change in a separate worktree and offers fixes you can apply — and never blocks the session"
             icon={<Bot className="h-10 w-10 text-foreground" />}
           />
           
           <FeatureCard 
-            title="Full System Access"
-            description="Agents have controlled access to your file system, dev environment, and tooling"
+            title="Commands run in a sandbox"
+            description="Opening a repo means running its scripts, so it runs them in a sandbox every time. Drop it for one run and it is never saved"
             icon={<FileCode className="h-10 w-10 text-foreground" />}
           />
           
           <FeatureCard 
-            title="Unlimited Context"
-            description="No token limits or context windows - process entire codebases at once"
+            title="Your tools, when you ask"
+            description="Add MCP tools for files, databases or APIs. The repo's own tools stay off until you turn them on"
             icon={<Infinity className="h-10 w-10 text-foreground" />}
           />
           
           <FeatureCard 
-            title="Agent Collaboration"
-            description="Multiple agents working together with different roles and responsibilities"
+            title="Any model, one login"
+            description="Enso is ours. The same sign-in reaches every other model on the gateway, and the bill lands in one place"
             icon={<Network className="h-10 w-10 text-foreground" />}
           />
         </div>

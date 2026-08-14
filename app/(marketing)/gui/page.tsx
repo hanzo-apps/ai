@@ -24,9 +24,9 @@ const features = [
   },
   {
     icon: Palette,
-    title: "Design Tokens, Not CSS",
+    title: "Design tokens, not CSS",
     description:
-      "Color, spacing, typography, motion — all centralized as tokens. White-label by org, theme by feature, all without forking.",
+      "Colour, spacing, typography and motion are tokens in one place. Brand is resolved from the hostname a surface is served on, so the same build wears the right name on every domain without a fork.",
   },
   {
     icon: Zap,
@@ -48,9 +48,9 @@ const features = [
   },
   {
     icon: Code2,
-    title: "Type-Safe Theming",
+    title: "The shorthands are the API",
     description:
-      "Every token is typed. TypeScript catches design-system drift before it lands in production.",
+      "p, px, bg, items, justify, rounded — the short style props are what the config accepts, and every token behind them is typed. A value that has drifted out of the design system fails the typecheck rather than the review.",
   },
 ]
 
@@ -112,9 +112,10 @@ export default function GuiPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            The cross-platform UI kit and design system that powers every Hanzo
-            surface — web, mobile, desktop. Tokens, primitives, and motion that
-            ship the same code everywhere.
+            The primitives underneath every Hanzo surface. One component tree
+            renders through react-native-web in a browser and natively on a
+            phone, off the same props — so a screen is written once and read
+            once, whichever thing is showing it.
           </motion.p>
 
           <motion.div
