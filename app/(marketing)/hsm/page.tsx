@@ -11,28 +11,28 @@ const features = [
   },
   {
     icon: Cpu,
-    title: "Hardware key generation",
-    description: "Keys generated and held inside the HSM. Private material never leaves the secure boundary in plaintext.",
+    title: "You send a message, you get a signature",
+    description: "The private key is made inside the module and stays there. Your code passes a key id and some bytes and receives a signature back, so there is no moment at which the key exists in your process to be leaked, logged, or written to a core dump.",
   },
   {
     icon: Lock,
-    title: "Envelope encryption",
-    description: "Wrap data keys with HSM-resident master keys. Standard KMS interface, hardware-rooted trust.",
+    title: "Unlocking the database",
+    description: "The password that decrypts an encrypted store is itself stored encrypted, and the module decrypts it at boot. Nothing on the disk, in the environment or in a manifest is enough on its own to read the data.",
   },
   {
     icon: FileCheck,
-    title: "Sign and verify",
-    description: "RSA, ECDSA, EdDSA, and post-quantum signatures executed inside the HSM. Audit-logged per operation.",
+    title: "Post-quantum, and honest about where it runs",
+    description: "ML-DSA-65 is available as a signing algorithm today. On a module with post-quantum firmware it runs inside the boundary like any other key; without one it runs in the process, which is the right answer for a service that has to be quantum-ready before the hardware is, and the wrong one to describe as hardware-backed.",
   },
   {
     icon: Network,
-    title: "Cluster replication",
-    description: "Multi-region HSM clusters with quorum-based key sync. No single point of failure for cryptographic operations.",
+    title: "Threshold signing, where the hardware can do it",
+    description: "Some modules can run key generation and signing rounds internally, so no share is ever assembled anywhere. Shares are attested and encrypted at rest, and a share that arrives unattested is refused. Cloud key services cannot do this, and the interface says so rather than pretending.",
   },
   {
     icon: KeyRound,
-    title: "BYOK and HYOK",
-    description: "Bring your own key material via wrapped import, or hold your own key with customer-controlled root of trust.",
+    title: "Bring the module you already have",
+    description: "AWS KMS, Google Cloud KMS, Azure Key Vault, a Zymbit secure compute module over local PKCS#11, or an in-memory signer for development. One Go interface behind all of them, so which module you use is a line of configuration rather than a rewrite.",
   },
 ]
 

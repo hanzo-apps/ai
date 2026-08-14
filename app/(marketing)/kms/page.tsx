@@ -79,9 +79,11 @@ export default function KMSPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            End-to-end encrypted secret storage with environment sync, automatic
-            rotation, audit trails, and native K8s integration. Never hardcode a
-            secret again.
+            Hanzo KMS is where the credentials your code needs actually live, so they stop living in a file
+            somebody committed. The SDK seals a value on your machine before it goes anywhere: your passphrase
+            becomes a key through Argon2id, that key becomes an organization key through HKDF-SHA256, and the
+            value is sealed with AES-256-GCM. The organization key never leaves the client. What the server
+            stores is a blob it cannot read.
           </motion.p>
 
           <motion.div
@@ -91,20 +93,20 @@ export default function KMSPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">E2EE</div>
-              <div className="text-sm text-muted-foreground">Encrypted</div>
+              <div className="text-2xl font-bold text-foreground">AES-256</div>
+              <div className="text-sm text-muted-foreground">Sealed on your machine</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">K8s</div>
-              <div className="text-sm text-muted-foreground">Native sync</div>
+              <div className="text-sm text-muted-foreground">Secrets kept in step</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">Audit</div>
-              <div className="text-sm text-muted-foreground">Full trail</div>
+              <div className="text-sm text-muted-foreground">Every read recorded</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">OSS</div>
-              <div className="text-sm text-muted-foreground">Self-hosted</div>
+              <div className="text-2xl font-bold text-foreground">MIT</div>
+              <div className="text-sm text-muted-foreground">Run it yourself</div>
             </div>
           </motion.div>
 
@@ -142,10 +144,11 @@ export default function KMSPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Secrets Done Right
+              What it holds and how it holds it
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Centralize, encrypt, rotate, and audit every secret in your stack.
+              A secret is a value under a path, a name and an environment, inside one organization. That is the
+              whole model.
             </p>
           </motion.div>
 
@@ -153,39 +156,39 @@ export default function KMSPage() {
             {[
               {
                 icon: Lock,
-                title: "End-to-End Encryption",
+                title: "Sealed before it leaves you",
                 description:
-                  "Secrets encrypted client-side before transmission. Server never sees plaintext. AES-256-GCM.",
+                  "Argon2id turns a passphrase into a key, HKDF-SHA256 turns that into the organization's key, and AES-256-GCM seals the value. The organization key stays on the client. Sharing with a colleague wraps that same key to their public key using a hybrid post-quantum exchange, so nobody has to send anybody a secret to share one.",
               },
               {
                 icon: GitBranch,
-                title: "Environment Sync",
+                title: "Into the process, not into a file",
                 description:
-                  "Sync secrets to .env files, K8s secrets, Docker, Vercel, GitHub Actions, and more.",
+                  "Run a command with the secrets already in its environment, export a dotenv when a tool insists on one, or let the Kubernetes operator keep a Secret in step with what KMS holds. The CLI also reads your repository and its git history looking for values that escaped.",
               },
               {
                 icon: RefreshCw,
-                title: "Auto Rotation",
+                title: "Replacing one is deliberate",
                 description:
-                  "Schedule automatic secret rotation. Rotate database passwords, API keys, and certificates.",
+                  "Rotate is a command, and a write states the version it means to replace — so a second writer who read the old value is refused rather than quietly winning. Signing keys generate, sign and rotate through the same surface, backed by threshold MPC.",
               },
               {
                 icon: Eye,
-                title: "Audit Trail",
+                title: "Who read it, when, and why",
                 description:
-                  "Complete history of who accessed, changed, or rotated every secret. Compliance-ready logs.",
+                  "Reads and writes land in an append-only record written by a single writer off the request path, so keeping it never slows a fetch. An AI agent's read is attributed to that agent by name, not to whichever human's key it borrowed.",
               },
               {
                 icon: Terminal,
-                title: "CLI & SDK",
+                title: "One key, several languages",
                 description:
-                  "Inject secrets at runtime. CLI for local dev. SDKs for Node.js, Python, Go, and Rust.",
+                  "A CLI for a laptop and for CI. SDKs in Go, Node and Python over the same routes. In-cluster callers can take the binary ZAP transport instead of HTTP, and it enforces the identical token and role checks.",
               },
               {
                 icon: Shield,
-                title: "RBAC & SSO",
+                title: "Fail closed, or do not start",
                 description:
-                  "Role-based access per project and environment. SSO via Hanzo IAM. Machine identities.",
+                  "Every call carries a Hanzo IAM token verified against a cached JWKS; HMAC and alg none are refused outright. The organization comes from the verified token, never from a field the caller sets. Outside development the daemon will not boot without an issuer, an audience and a JWKS URL — there is no accidental open mode. A secret can be marked so that any agent read waits for a person to approve it, or is refused.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -222,7 +225,7 @@ export default function KMSPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Inject Secrets Anywhere
+              Nothing lands on disk
             </h2>
           </motion.div>
 
@@ -244,21 +247,21 @@ export default function KMSPage() {
               </span>
             </div>
             <pre className="p-4 overflow-x-auto text-sm">
-              <code className="text-foreground/80">{`# Login to KMS
-hanzo kms login
+              <code className="text-foreground/80">{`# Sign in, then point this directory at a path
+kms login
+kms init
 
-# Pull secrets to .env
-hanzo kms pull --env production --out .env
+# Start the process with its secrets already in the environment
+kms run -- npm start
 
-# Run with injected secrets
-hanzo kms run --env production -- npm start
+# ...or write a dotenv, for a tool that insists on one
+kms export --format=dotenv
 
-# Sync to Kubernetes
-hanzo kms sync --env production --target k8s \\
-  --namespace hanzo --secret my-app-secrets
+# Replace a value
+kms rotate DATABASE_PASSWORD
 
-# Rotate a secret
-hanzo kms rotate DATABASE_PASSWORD --env production`}</code>
+# Find the ones that already escaped, here and in git history
+kms scan`}</code>
             </pre>
           </motion.div>
         </div>
@@ -283,10 +286,11 @@ hanzo kms rotate DATABASE_PASSWORD --env production`}</code>
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Stop Leaking Secrets
+                Take them out of the repo
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
-                Free for teams up to 5. Unlimited secrets and environments.
+                Use it hosted, or run the same binary yourself. The source is MIT and the client is where the
+                encryption happens either way.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">
