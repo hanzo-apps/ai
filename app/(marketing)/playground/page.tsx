@@ -23,58 +23,60 @@ import { ProductFooter } from "@/components/products/ProductFooter"
 const tryOut = [
   {
     icon: Brain,
-    title: 'Zen Models',
-    blurb: 'Run prompts against 50+ open-weight models. Compare side-by-side.',
+    title: 'Zen models',
+    blurb: 'The family we train ourselves — 0.6B you can run on a laptop up to frontier. Most are open weight; read the specs and the price per million tokens.',
     href: '/zen',
-    cta: 'Try a model',
+    cta: 'See the models',
   },
   {
     icon: Bot,
     title: 'Bot',
-    blurb: 'Spin up a multi-agent simulation in the browser. No setup.',
+    blurb: 'Bots as backend services: routing, async runs that last hours, durable state, and an identity per bot instead of a shared key.',
     href: '/bot',
-    cta: 'Launch a bot',
+    cta: 'Read about Bot',
   },
   {
     icon: Plug,
     title: 'MCP',
-    blurb: 'Connect tools to Claude/Cursor/Hanzo Dev with one click.',
+    blurb: 'Thirteen tools — shell, files, code, git, HTTP — behind one server. One block in .mcp.json and your client has them.',
     href: '/mcp',
-    cta: 'Browse MCP servers',
+    cta: 'Set up MCP',
   },
   {
     icon: Terminal,
     title: 'Hanzo Dev',
-    blurb: 'AI engineer that ships PRs from a sentence.',
+    blurb: 'A coding agent in your terminal. It opens the files, makes the change, runs the tests, and shows you the diff.',
     href: '/dev',
-    cta: 'Run Dev',
+    cta: 'Install Dev',
   },
   {
     icon: MessageSquare,
     title: 'Chat',
-    blurb: 'Talk to 14 Zen models + 100+ third-party LLMs with MCP tools.',
+    blurb: 'One thread with every model, your MCP tools, your files and a code sandbox. Free to try at hanzo.chat.',
     href: '/chat',
     cta: 'Open Chat',
   },
   {
     icon: Layers,
     title: 'Agents',
-    blurb: 'Multi-agent SDK with tool use, planning, memory.',
+    blurb: 'A Python SDK where an agent is a model, instructions and tools — and several of them can sit behind one router.',
     href: '/agents',
     cta: 'Read the SDK',
   },
 ]
 
 const examples = [
-  { lang: 'curl', label: 'Hello Zen', code: `curl https://api.hanzo.ai/v1/chat/completions \\
+  { lang: 'curl', label: 'One request', code: `curl https://api.hanzo.ai/v1/chat/completions \\
   -H "Authorization: Bearer $HANZO_API_KEY" \\
-  -d '{"model":"zen-2","messages":[{"role":"user","content":"Hello"}]}'` },
-  { lang: 'python', label: 'Agents SDK', code: `from hanzo import Agent
-agent = Agent(model="zen-2", tools=["search", "browser"])
-print(agent.run("Find the latest AI papers and summarize"))` },
-  { lang: 'typescript', label: 'MCP client', code: `import { Client } from '@hanzo/mcp'
-const c = new Client({ server: 'hanzo://search' })
-const r = await c.call('search', { query: 'rust async runtime' })` },
+  -d '{"model":"zen5","messages":[{"role":"user","content":"Hello"}]}'` },
+  { lang: 'python', label: 'An agent', code: `pip install hanzo-agent
+
+from agents import Agent, Runner
+agent = Agent(name="Assistant", instructions="You are a helpful assistant")
+print(Runner.run_sync(agent, "Write a haiku about recursion").final_output)` },
+  { lang: 'bash', label: 'Tools for your editor', code: `npm install -g @hanzo/mcp
+hanzo-mcp list-tools
+hanzo-mcp install-desktop`, },
 ]
 
 const Playground = () => {
@@ -90,11 +92,12 @@ const Playground = () => {
               </span>
             </div>
             <h1 className="text-5xl lg:text-7xl font-bold mb-6">
-              <ChromeText>Try Hanzo in your browser</ChromeText>
+              <ChromeText>Where to start</ChromeText>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              Hands-on sandbox for every Hanzo product. No install, no signup
-              for read-only flows. Run models, prompt agents, wire up MCP.
+              Six ways into Hanzo, and what each one is actually for. Some are
+              a page you read, some are a command you run. None of them need a
+              sales call first.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/zen" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
@@ -112,7 +115,7 @@ const Playground = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Pick what to try</h2>
-            <p className="text-muted-foreground">Each card is a working sandbox.</p>
+            <p className="text-muted-foreground">Reach for the one that matches the problem in front of you.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {tryOut.map((t, i) => {
@@ -142,7 +145,7 @@ const Playground = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Or copy-paste a starter</h2>
-            <p className="text-muted-foreground">Three ways in. All open source.</p>
+            <p className="text-muted-foreground">A key, a model name, and a message is the whole first request.</p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {examples.map((e, i) => (
@@ -166,10 +169,11 @@ const Playground = () => {
 
       <section className="py-16 border-t border-neutral-800">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Open source DX, end to end</h2>
+          <h2 className="text-2xl font-bold mb-4">Read the code first if you want</h2>
           <p className="text-muted-foreground mb-8">
-            Playground · Dev (CLI agent) · MCP · Hanzo CLI · Extensions ·
-            SDKs in 4 languages. All on GitHub.
+            Dev, MCP, the agent SDK, the CLI, the editor extensions and the
+            clients in four languages are all on GitHub. So are most of the
+            model weights.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="https://docs.hanzo.ai/docs/skills/hanzo-playground" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">

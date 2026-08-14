@@ -57,7 +57,7 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="text-2xl md:text-3xl font-medium text-foreground mb-4"
         >
-          Hybrid search and RAG chat for your docs, apps, and APIs
+          Keyword and meaning in the same query
         </motion.p>
 
         <motion.p
@@ -66,8 +66,12 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
         >
-          Full-text and semantic results in one query — no reindexing, no per-search bill.
-          Powered by Meilisearch + Qdrant.
+          Push your documents once. Ask for a part number and full-text finds
+          the exact string; describe the thing vaguely and vector search finds
+          it anyway. One request runs both and returns one ranked list, so you
+          do not have to decide in advance which kind of question a user will
+          ask. Then point a model at the same index and get answers with the
+          passages that support them attached.
         </motion.p>
 
         {/* Stats */}
@@ -78,20 +82,20 @@ const HeroSection = () => {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
         >
           <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">&lt; 50ms</div>
-            <div className="text-sm text-muted-foreground">Search latency</div>
+            <div className="text-2xl font-bold text-foreground/70">Text</div>
+            <div className="text-sm text-muted-foreground">Typos and facets</div>
           </div>
           <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">12+</div>
-            <div className="text-sm text-muted-foreground">Embedding providers</div>
+            <div className="text-2xl font-bold text-foreground/70">Vector</div>
+            <div className="text-sm text-muted-foreground">Your embeddings</div>
           </div>
           <div className="bg-secondary/50 border border-border rounded-xl p-4">
             <div className="text-2xl font-bold text-foreground/70">RRF</div>
-            <div className="text-sm text-muted-foreground">Hybrid fusion</div>
+            <div className="text-sm text-muted-foreground">One merged rank</div>
           </div>
           <div className="bg-secondary/50 border border-border rounded-xl p-4">
             <div className="text-2xl font-bold text-foreground/70">RAG</div>
-            <div className="text-sm text-muted-foreground">AI chat + citations</div>
+            <div className="text-sm text-muted-foreground">Answers with sources</div>
           </div>
         </motion.div>
 

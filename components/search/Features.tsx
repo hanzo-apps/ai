@@ -7,27 +7,27 @@ import { Search, Sparkles, GitMerge, MessageSquare } from "lucide-react";
 const features = [
   {
     icon: Search,
-    title: "Full-Text Search",
+    title: "Full text",
     description:
-      "Meilisearch-powered instant search with typo tolerance, faceting, filtering, and sub-50ms response times out of the box.",
+      "Typo tolerance, facets and filters. A user who types Kubernets still finds the page, and a user who wants only last quarter's docs can say so.",
   },
   {
     icon: Sparkles,
-    title: "Vector Search",
+    title: "Vector",
     description:
-      "Qdrant-powered semantic search with embeddings from 12+ providers. Find results by meaning, not just keywords.",
+      "Bring your own embedding model — ours or anyone's — and search by meaning. Useful exactly when the user does not know the word your document uses.",
   },
   {
     icon: GitMerge,
-    title: "Hybrid Search",
+    title: "Hybrid",
     description:
-      "Reciprocal Rank Fusion merges keyword and semantic results for the best of both worlds. One query, two engines.",
+      "Reciprocal Rank Fusion merges the two lists by rank rather than by score, so a keyword hit and a semantic hit compete fairly without a threshold you have to tune.",
   },
   {
     icon: MessageSquare,
-    title: "RAG Chat",
+    title: "RAG chat",
     description:
-      "Ask questions and get AI answers grounded in your content with inline citations. Streaming responses, real sources.",
+      "The retrieved passages go to a model and come back as an answer with links to what it read. Streamed, so the first sentence arrives before the last one is written.",
   },
 ];
 
@@ -43,11 +43,11 @@ const Features = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Four search modes, one API
+            Four ways to ask, one index
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Full-text, vector, hybrid, and conversational search --
-            all from a single endpoint.
+            The same documents answer all four. Choose per query, not
+            per deployment.
           </p>
         </motion.div>
 

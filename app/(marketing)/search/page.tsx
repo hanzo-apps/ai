@@ -9,9 +9,9 @@ import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
 import { ProductFooter } from "@/components/products/ProductFooter"
 export const metadata = {
-  title: "Hanzo Search - Hybrid Search + RAG Chat",
+  title: "Hanzo Search — keyword and meaning in the same query",
   description:
-    "Hybrid search and RAG chat for your docs, apps, and APIs — full-text and vector in one query. Powered by Meilisearch + Qdrant.",
+    "Push your documents once. Full text finds the exact string, vector search finds the thing you described, and one request runs both and returns a single ranked list. Point a model at the same index for answers with sources.",
 }
 
 export default function SearchPage() {

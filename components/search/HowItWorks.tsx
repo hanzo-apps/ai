@@ -10,21 +10,21 @@ const steps = [
     icon: Database,
     title: "Index your content",
     description:
-      "Push documents at build time or via the REST API. Meilisearch indexes text fields instantly. Qdrant stores vector embeddings from your chosen provider.",
+      "Push documents at build time or over the REST API. Text fields become searchable as they land; embeddings go to the vector store beside them. Adding a vector field later does not force a text reindex.",
   },
   {
     number: "02",
     icon: Globe,
-    title: "Search from any frontend",
+    title: "Query it from anywhere",
     description:
-      "Use the React hook for instant UI, the REST API for custom integrations, or the MCP tool for agent workflows. One index, many surfaces.",
+      "A React hook for search-as-you-type, the REST API for everything else, and an MCP tool so an agent can search the same index a user searches. One index, three callers.",
   },
   {
     number: "03",
     icon: MessageCircle,
-    title: "Chat with your docs",
+    title: "Let people ask instead",
     description:
-      "Enable RAG chat and users can ask natural-language questions. Streaming AI answers cite your content with source links.",
+      "Turn on RAG chat and a question gets an answer built from the passages that were retrieved, each one linked. If the index has nothing, the answer says so rather than inventing one.",
   },
 ];
 
@@ -43,7 +43,7 @@ const HowItWorks = () => {
             How it works
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Three steps from content to searchable, conversational knowledge.
+            Content in, ranked results out, and a model over the top if you want one.
           </p>
         </motion.div>
 
