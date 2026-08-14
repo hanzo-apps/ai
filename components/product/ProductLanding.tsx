@@ -84,6 +84,22 @@ export interface ProductLandingProps {
   code?: { head?: SectionCopy; lang: string; source: string; ctas?: CTA[] }
   /** Final CTA card. */
   finalCta: { title: string; sub: string; buttons: CTA[]; icon?: LucideIcon }
+  /**
+   * Sections only one product has, rendered after the shared ones and before
+   * the final CTA.
+   *
+   * The kit describes what every product page shares; it is not a ceiling. A
+   * product with more to say than the shared shape holds — Team has an AI
+   * coworker gallery, the people who lead it, and a compliance surface — used
+   * to have to stop using the kit to say it, which is how a page ends up
+   * looking like it belongs to a different site. Handing those sections in
+   * here keeps one standard for the parts that ARE shared.
+   *
+   * It goes before the final CTA rather than after because a call to action
+   * that is not last is not final: anything following it reads as content the
+   * reader was asked to leave for.
+   */
+  children?: ReactNode
 }
 
 function SectionHead({ eyebrow, title, sub }: SectionCopy) {
@@ -334,6 +350,8 @@ export function ProductLanding(p: ProductLandingProps) {
           </div>
         </section>
       )}
+
+      {p.children}
 
       {/* ── Final CTA ──────────────────────────────────────────────────────── */}
       <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
