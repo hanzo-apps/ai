@@ -28,10 +28,10 @@ const UseCasesSection = () => {
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="text-center mb-16">
           <ChromeText as="h2" className="text-3xl md:text-5xl font-bold mb-6">
-            Datastore at Scale
+            What people point it at
           </ChromeText>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto mb-8">
-            Powering a wide range of applications across industries with unmatched performance
+            Different industries, the same shape of problem: a great many rows in, a small answer out, asked again a second later.
           </p>
         </div>
 

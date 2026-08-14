@@ -8,9 +8,9 @@ import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
 import { ProductFooter } from "@/components/products/ProductFooter"
 export const metadata = {
-  title: "Hanzo Datastore - Managed Database",
+  title: "Hanzo Datastore — a column store for analytical SQL",
   description:
-    "High-performance managed database for modern applications.",
+    "Each column of a table lives in its own compressed file, so a query reads only the columns it names and aggregates them with vector instructions. Built for dashboards, event analytics, metrics, logs and traces.",
 }
 
 export default function DatastorePage() {
@@ -24,7 +24,7 @@ export default function DatastorePage() {
       <GetStartedSection />
       <section className="py-16 border-t border-neutral-800">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Get started with Datastore</h2>
+          <h2 className="text-2xl font-bold mb-4">Load a table and ask it something</h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="https://docs.hanzo.ai/docs/datastore" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />

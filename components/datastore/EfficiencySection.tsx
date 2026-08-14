@@ -37,30 +37,30 @@ const EfficiencyCard = ({ title, mainText, subText, initialY, delay }: Efficienc
 const EfficiencySection = () => {
   const efficiencyItems = [
     {
-      title: "Hardware Efficient",
-      mainText: "Datastore processes analytical queries 100-1000x faster than traditional row-oriented systems with the same available I/O throughput and CPU capacity.",
-      subText: "Columnar storage format allows fitting more hot data in RAM, which leads to shorter response times.",
+      title: "Read only what the query names",
+      mainText: "A row store reads the whole row to answer a question about two of its fields. A column store reads the two.",
+      subText: "Fewer bytes off the disk, fewer bytes to decompress, and more of the working set fits in memory.",
       initialY: 30,
       delay: 0
     },
     {
-      title: "Maximizes CPU Efficiency",
-      mainText: "Vectorized query execution uses SIMD processor instructions and runtime code generation.",
-      subText: "Processing data in columns increases CPU cache line hit rate.",
+      title: "One instruction, many values",
+      mainText: "Values from a single column sit next to each other in memory in the same representation, so a sum or a filter runs across a block of them with vector instructions instead of once per row.",
+      subText: "That layout is also what keeps the CPU cache full rather than chasing pointers.",
       initialY: 30,
       delay: 0.2
     },
     {
-      title: "Optimizes Disk Access",
-      mainText: "Datastore minimizes the number of seeks for range queries to increase efficiency of using disk drives.",
-      subText: "Maintains locality of reference for continually stored data.",
+      title: "Sorted, so a range is contiguous",
+      mainText: "Rows are written in the order of the table's sorting key and grouped into parts by partition, so a query bounded by time reads a run of adjacent blocks instead of seeking around the disk.",
+      subText: "Marks inside each part let the scan jump straight to the block that could hold the answer.",
       initialY: 30,
       delay: 0.3
     },
     {
-      title: "Minimizes Data Transfers",
-      mainText: "Datastore enables companies to manage their data and create reports without using specialized networks.",
-      subText: "Perfect for high-performance computing at any scale.",
+      title: "Compression chosen per column",
+      mainText: "A rising timestamp compresses as deltas. A repeated label compresses as a dictionary. A general-purpose compressor runs over whatever is left.",
+      subText: "Less data on disk is also less data on the wire once the query is spread across nodes.",
       initialY: 30,
       delay: 0.4
     }
@@ -71,10 +71,10 @@ const EfficiencySection = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <ChromeText as="h2" className="text-3xl md:text-5xl font-bold mb-6">
-            Datastore Efficiency
+            Where the speed comes from
           </ChromeText>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto mb-8">
-            Optimized for peak performance at every level
+            Nothing exotic. Read less, decompress less, and touch memory in the order the CPU wants it.
           </p>
         </div>
 

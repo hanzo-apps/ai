@@ -23,11 +23,16 @@ const HeroSection = () => {
             Hanzo Datastore
           </div>
           <ChromeText as="h1" className="text-4xl md:text-6xl font-bold mb-6">
-            The Fastest Open-Source Planet Scale Datastore
+            A column store for analytical SQL
           </ChromeText>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto mt-6">
-            Hanzo Datastore is a column-oriented data store that enables its users to generate powerful analytics, 
-            using SQL queries, in real-time.
+            Datastore keeps each column of a table in its own file, compressed on
+            its own terms, so a query naming four columns out of a hundred reads
+            four. Aggregations run over compressed blocks with vector
+            instructions rather than a row at a time. It is built for the
+            queries that scan a great deal and return very little — dashboards,
+            event analytics, metrics, logs and traces. It is an analytics
+            database and only that, not the place your application's rows live.
           </p>
         </motion.div>
         

@@ -39,33 +39,33 @@ const KeyFeatures = () => {
   const features = [
     {
       icon: Zap,
-      title: "Blazing Fast",
-      description: "Processes analytical queries faster than traditional row and column oriented systems."
+      title: "Columns, not rows",
+      description: "A table is stored one column at a time, so a query reads only the columns it names. Each column gets a codec suited to what it holds — deltas for a rising timestamp, dictionaries for a repeated label, general compression over the result."
     },
     {
       icon: Scale,
-      title: "Linearly Scalable",
-      description: "Scales efficiently with hardware resources horizontally and vertically to petabyte scale."
+      title: "Shard it and it keeps up",
+      description: "Tables are partitioned and spread across nodes; add nodes and both the storage and the scan spread with them. Parts merge in the background, so ingest never stops for a compaction window."
     },
     {
       icon: Shield,
-      title: "Highly Reliable",
-      description: "Supports asyncronous replication and can be deployed across multiple datacenters."
+      title: "Replicas that agree",
+      description: "Replicated tables coordinate through a Raft quorum running inside the server itself — there is no separate coordination service to stand up beside the database. A replica that falls behind catches up part by part."
     },
     {
       icon: Grid,
-      title: "Flexible Architecture",
-      description: "Supports shared-nothing clusters as well as separation of storage and compute."
+      title: "Local disks, or object storage",
+      description: "Run a shared-nothing cluster on local NVMe, or put the table's data on object storage and scale query nodes on their own. Old partitions expire on a TTL you write into the schema."
     },
     {
       icon: DatabaseIcon,
-      title: "Feature-rich",
-      description: "The most complete analytical datastore with support for joins, federated queries, and more."
+      title: "Events, metrics and logs are one shape",
+      description: "Append-heavy, partitioned by time, queried by range — the same engine serves all three. Materialized views keep rollups current as rows land, so the summary exists before anyone asks for it."
     },
     {
       icon: Activity,
-      title: "Easy to Use",
-      description: "Simplifies writing queries with a user-friendly SQL dialect, optimized for common analytical use cases."
+      title: "SQL, and several doors in",
+      description: "Query over HTTP on 8123, on the native protocol on 9000, or through the MySQL and PostgreSQL wire ports — which is how BI tools and drivers that know nothing about it still connect. A CSV, a Parquet file or a JSON stream loads without a conversion step first."
     }
   ];
 
@@ -74,10 +74,10 @@ const KeyFeatures = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <ChromeText as="h2" className="text-3xl md:text-5xl font-bold mb-6">
-            Key Features
+            What it does
           </ChromeText>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            A powerful datastore built for modern analytical applications
+            Scan a great many rows. Return a small answer. Do it while the rows are still arriving.
           </p>
         </div>
         

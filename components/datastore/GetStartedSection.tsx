@@ -17,10 +17,10 @@ const GetStartedSection = () => {
           transition={{ duration: 0.6 }}
         >
           <ChromeText as="h2" className="text-3xl md:text-5xl font-bold mb-6">
-            Start Using Datastore in Minutes
+            Start with one process
           </ChromeText>
           <p className="text-lg text-foreground/80 mb-12 max-w-3xl mx-auto">
-            Get up and running quickly with multiple installation options for MacOS, Linux, Windows, FreeBSD, and Docker.
+            The server, the client and the single-process local mode are one binary under different names. Run the container, or install it and start datastore-server — then point datastore-client at it and load a file.
           </p>
 
           <div className="flex flex-col items-center justify-center space-y-8 mb-12">
