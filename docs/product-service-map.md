@@ -189,9 +189,8 @@ Split by intent:
   (currently only Dashboards maps here).
 - `/v1/crm/*` (`clients/crm`), `/v1/tracker/*` (`clients/tracker`),
   `/v1/team/*` (`clients/team`), `/v1/framework/*` + `cms`/`erp`/`help` —
-  business apps (CRM / issues / workspace / DocType + CMS/ERP/Helpdesk). Present
-  in the legacy `lib/data/product-taxonomy.ts` (CX/Apps) but **not** in the
-  canonical cloud-primitives nav. → an **Apps**/**Business** lane if productized.
+  business apps (CRM / issues / workspace / DocType + CMS/ERP/Helpdesk). Not in
+  the catalog, so not in the nav. → an **Apps** lane if productized.
 - `/v1/finance/*` (`clients/treasury`) — finance.hanzo.ai ledger (its own surface).
 - `/v1/world/*` (`clients/world`), `/v1/notify/*` (`clients/notify`) — data/OTP
   planes; internal today.

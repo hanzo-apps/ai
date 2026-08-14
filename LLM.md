@@ -398,9 +398,11 @@ markdown file is exactly the hand list this change deleted. Run
 - Product ↔ `/v1/<svc>` ↔ plan/usage mapping: **`docs/product-service-map.md`**
   (reconciled against `~/work/hanzo/cloud/subsystems/subsystems.go`).
 
-> `lib/data/product-taxonomy.ts` is a SEPARATE, legacy catalog still used by
-> `components/products/ProductPageTemplate` (the ~80 bespoke `/<slug>` product
-> pages) and the orphaned `solutions/` pages — it is NOT the products-nav source.
+> There is no second catalog. `lib/data/product-taxonomy.ts` held a nine-id
+> taxonomy (`data`, `compute`, `async`, `ml`, `observability`, `platform`,
+> `apps`, `growth`, `cx`) that no page rendered — it, and the three components
+> that read it, are deleted. The bespoke `/<slug>` product pages import
+> `components/products/ProductFooter`, not a template built on that list.
 
 ### What hydration cost, and who fixes it
 
@@ -438,7 +440,6 @@ There are five lists, and no two agree:
 | List | Where | Count |
 |---|---|---|
 | Site taxonomy | `lib/data/catalog.json` | **53** — the catalog, filtered to what answers |
-| Legacy taxonomy | `lib/data/product-taxonomy.ts` | **9** categories |
 | Docs prose | `hanzo-docs/docs` (7 files) | **67** capabilities / 8 movements |
 | Curation manifest | `hanzoai/openapi` `capabilities.yaml` | 8 domains over **180** tags |
 | Commerce catalog | `GET /v1/commerce/catalog?brand=hanzo` | **84** products |
