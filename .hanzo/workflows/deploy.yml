@@ -154,6 +154,34 @@ jobs:
       - name: Gates
         run: pnpm gates
 
+      # THE DEPLOY KEY IS READ FROM KMS, WHICH IS WHERE A SECRET LIVES. It was
+      # `secrets.HANZO_DEPLOY_TOKEN`, an org-level forge secret holding an `sk-`
+      # key that resolves to no principal, so cloud answered 403 on every call
+      # and the publish was the one red step under 48 green gates. A forge secret
+      # is also the wrong home: rotating it means editing the forge, and a key
+      # nobody can read is a key nobody can tell is dead.
+      #
+      # python3, not jq: this job installs node and pnpm, not jq.
+      - name: Read the deploy key from KMS
+        id: key
+        env:
+          KMS_CLIENT_ID: ${{ secrets.KMS_CLIENT_ID }}
+          KMS_CLIENT_SECRET: ${{ secrets.KMS_CLIENT_SECRET }}
+          KMS: ${{ vars.KMS_ENDPOINT || 'https://kms.hanzo.ai' }}
+        run: |
+          set -euo pipefail
+          val() { python3 -c 'import json,sys;print(json.load(sys.stdin).get(sys.argv[1],""))' "$1"; }
+          kt=$(curl -fsS "$KMS/v1/kms/auth/login" -H 'Content-Type: application/json' \
+                 -d "{\"clientId\":\"$KMS_CLIENT_ID\",\"clientSecret\":\"$KMS_CLIENT_SECRET\"}" | val accessToken)
+          [ -n "$kt" ] || { echo "::error::KMS login failed at $KMS/v1/kms/auth/login (check KMS_CLIENT_ID/KMS_CLIENT_SECRET)"; exit 1; }
+          # No -f on the read: a miss must name the path that was empty rather
+          # than exiting 22 with nothing to act on.
+          key=$(curl -sS "$KMS/v1/kms/secrets/HANZO_DEPLOY_TOKEN?env=prod" -H "Authorization: Bearer $kt" | val value)
+          [ -n "$key" ] || { echo "::error::no HANZO_DEPLOY_TOKEN at $KMS/v1/kms/secrets/HANZO_DEPLOY_TOKEN?env=prod"; exit 1; }
+          # Masked before it is ever an output, so it cannot surface in a log.
+          echo "::add-mask::$key"
+          echo "token=$key" >> "$GITHUB_OUTPUT"
+
       # ONE credential. The 202 carries a prefix-scoped, 30-minute presigned POST
       # grant, so nothing here holds a bucket key. Do NOT add SITES_S3_* — that is
       # the standing shared-bucket credential the grant replaced, and it could
@@ -165,4 +193,4 @@ jobs:
           dir: out
           jobs: '48'
         env:
-          HANZO_DEPLOY_TOKEN: ${{ secrets.HANZO_DEPLOY_TOKEN }}
+          HANZO_DEPLOY_TOKEN: ${{ steps.key.outputs.token }}
