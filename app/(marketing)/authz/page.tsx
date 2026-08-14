@@ -6,33 +6,33 @@ import { ProductFooter } from "@/components/products/ProductFooter"
 const features = [
   {
     icon: Network,
-    title: "Relationship-based access",
-    description: "Zanzibar-style relationship graph. Model real-world permissions: documents own folders, folders own teams, teams own users.",
+    title: "Where a thing is, and who may touch it",
+    description: "A location is a path — acme, acme/prod, acme/prod/web, and the app or site under that. Access is a grant at a prefix of one. Keeping them apart is the whole design: containment names a resource, it does not hand every ancestor's members the child.",
   },
   {
     icon: Zap,
-    title: "Sub-10ms checks",
-    description: "Distributed cache with consistent snapshots. Authorization decisions at the speed of database reads, not API calls.",
+    title: "Nothing on the decision path does I/O",
+    description: "No store, no config, no init, no network call. Authz is a leaf package a service imports, so the check is a function call and a request that reaches your handler has already been decided.",
   },
   {
     icon: GitBranch,
-    title: "Schema as code",
-    description: "Define object types, relations, and permissions in a typed schema. Version-controlled, tested, and migration-safe.",
+    title: "One rule covers every arrangement",
+    description: "Can is true when some grant the caller holds prefixes the target and its role admits the verb. An org-wide member holds a grant at the org; a workspace member holds one a level down; an invite-only project is a grant with no ancestor above it. There is no second mechanism.",
   },
   {
     icon: Shield,
-    title: "Fine-grained policies",
-    description: "Per-resource, per-relation authorization. No more coarse role-bucketing. Express exactly who can do what.",
+    title: "Delegation is a narrower grant",
+    description: "Handing an agent or a short-lived credential part of your authority means writing a grant deeper in the path than your own, with an expiry if you want one. Nothing can be delegated that the delegator does not already hold.",
   },
   {
     icon: ScrollText,
-    title: "Full audit trail",
-    description: "Every check, every write, every schema change. Immutable log for compliance and incident review.",
+    title: "The decision travels, the grant set stays",
+    description: "The edge resolves the requested scope once and writes the resolved path and role into the token, so the token stays the same size no matter how many grants a person has, and no service behind the edge asks IAM anything.",
   },
   {
     icon: Search,
-    title: "Reverse lookup",
-    description: "Ask the inverse question: which resources can this user access? Native list-objects API for filtered views.",
+    title: "Only what IAM signs",
+    description: "Verification accepts the algorithms IAM's signer actually produces — RSA, EC, and ML-DSA-65 for a post-quantum certificate. HMAC and alg none are rejected. Key material is an argument, so the leaf never fetches a JWKS and a caller that supplies no keys verifies nothing.",
   },
 ]
 
@@ -50,7 +50,10 @@ export default function AuthzPage() {
               Hanzo Authz
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              Fine-grained authorization engine. Zanzibar-style relationship graph for production scale. Move permission checks out of your code and into a single source of truth.
+              Hanzo Authz reads a token and answers whether the caller may do the thing. It verifies the JWT
+              that IAM signed, then asks one question: does a grant this caller holds cover this path, and does
+              its role admit this verb. It is a library, not a service — no store, no configuration, no network
+              call on any path — so every Hanzo service asks that question the same way and gets the same answer.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="https://docs.hanzo.ai/docs/authz" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
