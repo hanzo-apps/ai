@@ -123,10 +123,19 @@ export default function CareersPage() {
                         <span className="inline-flex items-center text-sm text-muted-foreground"><Users className="h-4 w-4 mr-1" /> {job.department}</span>
                       </div>
                       <p className="text-muted-foreground text-sm mb-4">{job.description}</p>
-                      <button className="inline-flex items-center px-4 py-2 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground">
-                        Apply Now
+                      {/* A REAL APPLICATION PATH. This was a <button> with no
+                          handler and no href — every one of these openings
+                          rendered a control that did nothing, which is worse
+                          than no button: it reads as applied-to. The role rides
+                          in the subject so an application arrives already
+                          filed. */}
+                      <a
+                        href={`mailto:careers@hanzo.ai?subject=${encodeURIComponent(`Application: ${job.title}`)}`}
+                        className="inline-flex items-center min-h-11 px-4 py-2 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
+                      >
+                        Apply for this role
                         <ArrowRight className="ml-2 h-4 w-4" />
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </motion.div>

@@ -17,11 +17,20 @@ import {
 } from "lucide-react"
 import { HanzoLogo } from "@hanzo/logo/react"
 
+// FACTS A JOURNALIST CAN CHECK, and only those.
+//
+// "Employees 50+" and "Customers 10,000+" were here and neither is
+// corroborated anywhere in this company — no headcount source, no customer
+// count that any system reports. On a press page those two are worse than
+// vague: they are the numbers that get quoted, and a reporter who repeats one
+// is repeating something we made up. Founding year and the Techstars cohort
+// are stated elsewhere on this site and are checkable; the entity is who the
+// contract is with.
 const companyFacts = [
   { label: "Founded", value: "2016" },
   { label: "Headquarters", value: "Los Angeles, CA" },
-  { label: "Employees", value: "50+" },
-  { label: "Customers", value: "10,000+" },
+  { label: "Entity", value: "Hanzo Industries Inc." },
+  { label: "Backing", value: "Techstars ’17" },
 ]
 
 const pressReleases = [
