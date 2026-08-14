@@ -2,12 +2,13 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
-import { motion, useReducedMotion } from "framer-motion"
+import { useReducedMotion } from "framer-motion"
 import { ArrowRight, CreditCard, Cpu, Check, Github } from "lucide-react"
 import { CopyButton } from "@hanzo/ui/product"
 import CloudCategoryShowcase, { CloudCategoryMap } from "@/components/cloud/CloudCategoryShowcase"
+import Orbit from "@/components/cloud/Orbit"
 import { CONSOLE } from "@/components/home/nav-data"
-import { MODELS_PHRASE } from '@/lib/data/model-count'
+import { useModelCount } from '@/hooks/useModelCount'
 import { cloudCategories, tour } from '@/lib/data/cloud-primitives'
 
 const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
@@ -33,59 +34,6 @@ const GH = "https://github.com/hanzoai"
 
 const DEPLOY = "npx @hanzo/cloud deploy"
 
-/**
- * The film, in a column.
- *
- * `@hanzo/frame` is the film as THE FOLD — `min-height: 100svh`, full bleed,
- * no knob, by its own contract — and that is a different thing from a film
- * beside the copy. Dropped into half a grid it is a 100svh black box with the
- * headline stranded next to it, so the column plays the same six-file master
- * itself, in a 16:9 box it cannot outgrow.
- *
- * Landscape at every width (a 16:9 box is landscape even at 375), so it always
- * wants the `-wide` master; the `-tall` one exists for a fold that fills a
- * portrait screen, which this is not. Reduced motion gets the first frame and
- * no player, because a paused <video> still fetches the megabytes.
- */
-function Film() {
-  return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black">
-      <video
-        className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
-        src="/cloud-hero-wide.mp4"
-        poster="/cloud-hero-wide-first.jpg"
-        autoPlay
-        muted
-        playsInline
-        preload="metadata"
-        aria-hidden="true"
-      />
-      {/* The words the film says, for anyone not watching it. */}
-      <img
-        className="absolute inset-0 hidden h-full w-full object-cover motion-reduce:block"
-        src="/cloud-hero-wide-first.jpg"
-        alt="One command brings up a Hanzo Cloud org. The console lists the model catalog — the house Enso family beside every model the gateway serves — and the Playground answers a prompt against it."
-      />
-    </div>
-  )
-}
-
-/**
- * Two columns: what the cloud is on the left, what it looks like on the right.
- *
- * The film used to BE the fold, with the copy underneath it and the headline
- * inside the picture. Words burned into a moving field of dots cannot be
- * selected, translated, or read by anything that is not watching, and body copy
- * over one needs a scrim to be legible at all — which is a patch for a layout
- * that put text on top of media in the first place. Giving each its own column
- * removes the problem instead of dimming it.
- *
- * It STACKS at the phone, copy first. The copy column carries the only two
- * things a visitor can act on — the console link and a command they can copy —
- * plus the page's one `<h1>`; leading with a 16:9 film would push both below
- * the fold on a 375px screen and hand a reader a video before the page has said
- * its own name.
- */
 /* ------------------------------------------------------------------ tour --- */
 
 /** The products whose API this beat's operation belongs to, from the catalogue. */
@@ -246,30 +194,43 @@ function Tour() {
   )
 }
 
-function Hero() {
+/**
+ * What the cloud is, beside every part of it.
+ *
+ * WHAT IT REPLACED, and why. The right column used to be a 16:9 film of a
+ * console, in a rounded bordered box — a window drawn inside a window, half a
+ * grid wide, which reads as a thumbnail of the product rather than the product.
+ * The section under it then claimed ten categories while a 900px viewport
+ * reached five of them. One picture answers both: the ten categories themselves,
+ * around the one API they share, at full size and above the fold. Nothing is
+ * framed, because there is no longer a second surface to frame.
+ *
+ * THE COPY ARRIVES. Four elements on a 70ms stagger, each 0.42s on a quintic
+ * ease-out — quick enough that a reader who scrolls immediately is not waiting
+ * on it, and flat at the end so nothing bounces. It is `hz-rise` in globals.css
+ * rather than a prop on a motion component, so it starts at FIRST PAINT instead
+ * of at hydration: an entrance declared in JavaScript ships `opacity: 0` in the
+ * HTML, and the largest element on the page has no business being invisible
+ * until a bundle lands. Reduced motion is decided in the same one place.
+ */
+function Hero({ models }: { models: string }) {
+  /** The nth thing to arrive. One definition, so the rhythm cannot drift. */
+  const rise = (i: number) => ({ animationDelay: `${i * 0.07}s` })
+
   return (
-    <section className="flex min-h-svh w-full items-center px-4 py-14 sm:px-6 lg:px-8">
-      {/* The SECTION is the viewport — full width, and `svh` rather than `vh`
-          because mobile browser chrome makes `100vh` taller than the screen and
-          the fold overflows by exactly the address bar. The CONTENT is what is
-          capped: at 2560 a full-bleed grid would stretch the copy into a strip
-          and blow the film past its 1920 master, which is the one way to make a
-          crisp render look soft. 1600 keeps the measure readable and holds the
-          film at ~780px, under 1x even on a retina panel. It takes ONE step up
-          past 1536, to 1920, because at 2560 a 1600 island leaves 480px of black
-          down each side; 1920 is the widest the cap may go, since half of it is
-          928px and the master is 1920 — a film asked for more would be upscaled,
-          which is the one way to make a crisp render look soft. Two even columns,
-          not a narrow one beside a wide one: at 1280 a 5/7 split left the copy
-          480px and broke the three actions across two ragged lines. */}
-      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-10 lg:grid-cols-2 lg:gap-16 2xl:max-w-[1920px]">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="max-w-xl"
-        >
-          <h1 className="text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl 2xl:text-7xl">
+    // `svh`, not `vh`: mobile browser chrome makes `100vh` taller than the
+    // screen and the fold overflows by exactly the address bar.
+    <section className="flex min-h-svh w-full items-center px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
+      {/* The copy column is CAPPED and the orbit takes the rest, rather than the
+          two splitting the width evenly. A measure wider than ~32rem is a
+          measure nobody finishes reading, and every pixel it does not take is a
+          pixel the ring can use. */}
+      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-6 sm:gap-12 lg:grid-cols-[minmax(0,32rem)_minmax(0,1fr)] lg:gap-14 2xl:max-w-[1800px]">
+        <div>
+          <h1
+            style={rise(0)}
+            className="hz-rise text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl 2xl:text-7xl"
+          >
             {/* The house headline treatment: one weight, one tracking, one
                 monochrome white -> neutral sheen, same as the apex hero. */}
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
@@ -277,14 +238,17 @@ function Hero() {
             </span>
           </h1>
 
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-neutral-400 2xl:max-w-xl 2xl:text-xl">
-            One API for <span className="text-white">{MODELS_PHRASE}</span>, Base backends,
-            identity, secrets, and vector plus full-text search. Pay-as-you-go, billed per
-            organization — run it managed, self-host it on your own Kubernetes, or run the same
-            binary on <span className="text-white">localhost</span>.
+          <p
+            style={rise(1)}
+            className="hz-rise mt-5 text-lg leading-relaxed text-neutral-400 sm:mt-6 2xl:text-xl"
+          >
+            One API for <span className="text-white">{models}</span>, Base backends, identity,
+            secrets, and vector plus full-text search. Pay-as-you-go, billed per organization — run
+            it managed, self-host it on your own Kubernetes, or run the same binary on{' '}
+            <span className="text-white">localhost</span>.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
+          <div style={rise(2)} className="hz-rise mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
             <a
               href={CONSOLE}
               className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
@@ -310,20 +274,21 @@ function Hero() {
           {/* The `$` is a prompt glyph, so it is shown but never copied. The row
               wraps rather than scrolls: a command that runs off the right edge of
               a phone is a command nobody can read before they run it. */}
-          <div className="mt-8 inline-flex max-w-full flex-wrap items-center gap-3 rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-2.5">
+          <div
+            style={rise(3)}
+            className="hz-rise mt-6 inline-flex max-w-full flex-wrap items-center gap-3 rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-2.5 sm:mt-8"
+          >
             <span className="font-mono text-sm text-neutral-300">$ {DEPLOY}</span>
             <CopyButton value={DEPLOY} label="Copy deploy command" size={20} id="install-cli" />
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-        >
-          <Film />
-          <Tour />
-        </motion.div>
+        {/* Capped by WIDTH, not height: the ring is square, so a width cap is
+            the only one it can obey without distorting. 44rem keeps it under a
+            900px fold once the section's own padding is paid for. */}
+        <div className="mx-auto w-full max-w-[30rem] sm:max-w-[34rem] lg:max-w-[38rem] xl:max-w-[44rem]">
+          <Orbit />
+        </div>
       </div>
     </section>
   )
@@ -379,7 +344,7 @@ function Products() {
 
 /* ------------------------------------------------------------- billing --- */
 
-function Billing() {
+function Billing({ models }: { models: string }) {
   return (
     <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
@@ -419,7 +384,11 @@ function Billing() {
             $9<span className="text-xl font-normal text-neutral-500">/mo to start</span>
           </div>
           <p className="mt-3 text-sm text-neutral-400">
-            Create an organization, pick a plan, and call any of {MODELS_PHRASE}. Usage accrues per
+            {/* "call any of {models}" read correctly for a number and became
+                "any of every model we serve" the moment the gateway was slow.
+                A sentence that takes a substitution has to parse for every
+                value the substitution can take. */}
+            Create an organization, pick a plan, and start calling {models}. Usage accrues per
             call and is debited from your organization balance in real time.
           </p>
           <a
@@ -485,11 +454,29 @@ function FinalCTA() {
 /* --------------------------------------------------------------- page ---- */
 
 export default function CloudLanding() {
+  // How many models the gateway will actually answer for, asked of the gateway.
+  // Until it answers — and if it never does — the sentences that would quote a
+  // number say a true thing without one instead of a stale thing with one. See
+  // `lib/data/model-count.ts` for why a build-time snapshot cannot be right here.
+  const n = useModelCount()
+  const models = n ? `${n} models` : 'every model we serve'
+
   return (
     <>
-      <Hero />
+      <Hero models={models} />
+      {/* The tour is the fold's evidence, not its furniture: it belongs under
+          the claim, at full measure, rather than as a second panel stacked in
+          the hero's other column. Nothing renders if the served OpenAPI
+          document left it with no beats. */}
+      {tour.beats.length > 0 ? (
+        <section className="border-t border-neutral-900 px-4 py-16 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl">
+            <Tour />
+          </div>
+        </section>
+      ) : null}
       <Products />
-      <Billing />
+      <Billing models={models} />
       <FinalCTA />
     </>
   )

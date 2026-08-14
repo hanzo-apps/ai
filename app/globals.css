@@ -680,3 +680,124 @@ html:root #hanzo-products-menu > div {
   max-width: 1152px;
   margin-inline: auto;
 }
+
+/* The hero orbit's ambient life (components/cloud/Orbit.tsx).
+
+   IT DOES NOT SPIN. Ten labels carried around a circle are ten labels a reader
+   has to track to finish reading, which is a lava lamp wearing a diagram's
+   clothes. What moves instead is the thing with no words on it: a dash travels
+   down each spoke toward the centre, so the ambient motion says the one thing
+   the picture is for — every category's traffic arrives at one API — and the
+   type never leaves its pixel. The ring breathes by 1.2%, under the threshold
+   where an eye reads it as movement rather than as being alive.
+
+   Both are CSS, not script: a decoration that runs forever should not hold a
+   JavaScript timer forever. The arrival choreography IS script, because it runs
+   once and has to know whether motion is wanted at all.
+
+   Only at 640px and up. Below that the ring is a grid, and a grid that breathes
+   is just a grid that will not sit still. */
+@media (min-width: 640px) {
+  .hz-orbit {
+    animation: hzOrbitBreathe 9s ease-in-out infinite;
+  }
+
+  .hz-spoke {
+    animation: hzSpoke 3.6s linear infinite;
+  }
+}
+
+@keyframes hzOrbitBreathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.012);
+  }
+}
+
+/* 5 on, 13 off — one full period is 18, so the dash arrives where the next one
+   left and the loop has no seam. Increasing the offset walks the pattern back
+   along the line, which is from the node toward the centre. */
+@keyframes hzSpoke {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 18;
+  }
+}
+
+/* The fold's ARRIVAL — headline, body, actions, command, then the ring.
+
+   CSS, not script, and the reason is not tidiness. An entrance written as
+   `initial={{ opacity: 0 }}` is rendered into the HTML as `opacity: 0`, so the
+   headline is INVISIBLE until React has shipped, parsed and hydrated — on a
+   slow phone that is the largest element on the page painting nothing for a
+   second, and for a reader with JavaScript off it never arrives at all. A
+   keyframe starts at first paint, needs nothing to have loaded, and cannot
+   strand the copy in its own initial state.
+
+   `both` holds the opening frame through the delay, so the stagger is a stagger
+   and not four things sliding at once. Nothing overshoots: the curve is a
+   quintic ease-out, which is fast off the mark and flat at the end.
+
+   The ring's nodes fade only — they are CENTRED on their coordinate with a
+   transform, and a keyframe that animated transform would throw that away for
+   the length of the animation and snap it back at the end. Their travel comes
+   from the ring scaling up underneath them, which is one transform on one
+   element that owns no other. */
+.hz-rise {
+  animation: hzRise 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hz-arrive {
+  animation: hzArrive 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hz-node {
+  animation: hzFade 0.34s ease-out both;
+}
+
+@keyframes hzRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hzArrive {
+  from {
+    opacity: 0;
+    transform: scale(0.72);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hzFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* One place decides that none of it runs. */
+@media (prefers-reduced-motion: reduce) {
+  .hz-orbit,
+  .hz-spoke,
+  .hz-rise,
+  .hz-arrive,
+  .hz-node {
+    animation: none;
+  }
+}

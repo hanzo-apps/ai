@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import CloudLanding from "@/components/cloud/CloudLanding"
-import { MODELS_PHRASE } from '@/lib/data/model-count'
 import { ogImages, twitterImages } from '@/lib/constants/og'
 
 // The umbrella "Explore Cloud" landing and the single canonical /cloud route —
@@ -16,13 +15,18 @@ import { ogImages, twitterImages } from '@/lib/constants/og'
 // share of this host announced two different products depending on which
 // scraper read it. A `twitter` block that restates the page title is not
 // duplication: it is what stops the inherited one from speaking for this page.
+// A description is baked at BUILD time and read by scrapers months later, so it
+// is the one place a model count cannot be kept true — the catalog's providers
+// are switched on and off between builds. The page states the number where it
+// can ask for it (see `useModelCount`); the metadata states the breadth without
+// asserting an arithmetic it has no way to recheck.
 const TITLE = "Hanzo Cloud — the infrastructure behind your agents and apps"
-const SUMMARY = `One cloud to provision, secure, and bill your AI stack — ${MODELS_PHRASE}, Base backends, IAM, KMS, and vector + full-text search, metered per organization. Self-host the open-source components or run it managed.`
+const SUMMARY = `One cloud to provision, secure, and bill your AI stack — every model we serve, Base backends, IAM, KMS, and vector + full-text search, metered per organization. Self-host the open-source components or run it managed.`
 
 export const metadata: Metadata = {
   title: TITLE,
   description:
-    `Provision, deploy, secure, and bill everything your AI agents and apps run on: one API for ${MODELS_PHRASE}, Base app backends, IAM and KMS, and vector plus full-text search — metered pay-as-you-go and billed per organization. Run it managed on Hanzo Cloud, or self-host the open-source components on your own Kubernetes.`,
+    `Provision, deploy, secure, and bill everything your AI agents and apps run on: one API for every model we serve, Base app backends, IAM and KMS, and vector plus full-text search — metered pay-as-you-go and billed per organization. Run it managed on Hanzo Cloud, or self-host the open-source components on your own Kubernetes.`,
   openGraph: {
     title: TITLE,
     description: SUMMARY,
