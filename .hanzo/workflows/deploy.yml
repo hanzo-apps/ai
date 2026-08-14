@@ -123,15 +123,31 @@ jobs:
         run: |
           set -euo pipefail
           key=$(grep -rhoE 'pk-[A-Za-z0-9_-]{20,}' out/_next/static | sort -u | head -1)
-          code=$(curl -s -o /tmp/door.json -w '%{http_code}' \
-            -X POST "https://api.hanzo.ai/v1/event?ingest_key=${key}" \
-            -H 'content-type: application/json' -d '{"batch":[]}')
-          if [ "${code}" != "200" ]; then
-            echo "::error::the key in this bundle does not resolve: the door answered ${code}. $(cat /tmp/door.json)"
-            echo "::error::publishing would ship a site that loses every event; refusing"
-            exit 1
-          fi
-          echo "door accepted the bundle's key (200)"
+          ask() {
+            curl -s -m 20 -o /tmp/door.json -w '%{http_code}' \
+              -X POST "https://api.hanzo.ai/v1/event?ingest_key=${key}" \
+              -H 'content-type: application/json' -d '{"batch":[]}'
+          }
+          # A 5xx is the door being down, which says NOTHING about the key — the
+          # step read one as the other and reported "the key does not resolve"
+          # three times running while api.hanzo.ai was 503 on every path. Ask
+          # again before believing it; an unreachable door is usually brief.
+          for wait in 0 10 30 60; do
+            [ "$wait" = 0 ] || sleep "$wait"
+            code=$(ask)
+            case "$code" in 200|401|403) break ;; esac
+          done
+          case "$code" in
+            200) echo "door accepted the bundle's key (200)" ;;
+            401|403)
+              echo "::error::the key in this bundle does not resolve: the door answered ${code}. $(cat /tmp/door.json)"
+              echo "::error::publishing would ship a site that loses every event; refusing"
+              exit 1 ;;
+            *)
+              echo "::error::the door is down — api.hanzo.ai answered ${code} to four tries over 100s. $(cat /tmp/door.json)"
+              echo "::error::the key is unverified, not refused; this is an outage, not a bad bundle"
+              exit 1 ;;
+          esac
 
       # The gates run in the job that PUBLISHES, because that is the only placement
       # that makes "nothing publishes ungated" true: workflows sharing a trigger do
