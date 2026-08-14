@@ -147,7 +147,23 @@ test('the apex publish pins the action and carries the one credential it needs',
   // grant, so CI needs no bucket key — SITES_S3_* is the standing shared-bucket
   // credential the grant replaced, and any repo holding it could overwrite every
   // other org's site.
+  //
+  // It arrives as a step output because it is READ FROM KMS at run time. This
+  // gate used to demand the opposite — `secrets.HANZO_DEPLOY_TOKEN`, a forge
+  // secret — and so it pinned the credential to the one place that cannot say
+  // whether the key inside it is still alive. The key in it resolved to no
+  // principal, cloud answered 403, and the publish was the single red step under
+  // every green gate including this one.
   expect(apex.text, `${apex.name} publishes without HANZO_DEPLOY_TOKEN`).toMatch(
+    /HANZO_DEPLOY_TOKEN:\s*\$\{\{\s*steps\.[\w-]+\.outputs\.[\w-]+\s*\}\}/,
+  )
+  expect(apex.text, `${apex.name} does not read the deploy key from KMS`).toMatch(
+    /\/v1\/kms\/secrets\/HANZO_DEPLOY_TOKEN/,
+  )
+  // The interpolation form, not the bare name — for the reason spelled out below
+  // about SITES_S3_*. This workflow's comments carry the bare name, in the lines
+  // that explain where the key moved and why.
+  expect(apex.text, `${apex.name} takes the deploy key from a forge secret again`).not.toMatch(
     /\$\{\{\s*secrets\.HANZO_DEPLOY_TOKEN\s*\}\}/,
   )
   // `secrets.SITES_S3_`, not the bare name. The bare name is how the previous
