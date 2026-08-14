@@ -8,8 +8,14 @@
  * EVERY point carries a mark, ours included. The mark branch used to be guarded on
  * NOT being highlighted, so the three Enso tiers — the only reason this chart is on
  * the page — were the one thing on it drawn as a blank white disc while every
- * competitor wore a logo. Ours is `ENSO_MARK` from `@hanzo/logo`, the same closed
- * ring `ProviderMark` draws, so the two surfaces cannot disagree about our own mark.
+ * competitor wore a logo. Ours is the HANZO H — `MARK_PATHS` from `@hanzo/logo`,
+ * the same glyph the header wears — not the ensō ring.
+ *
+ * The ring is the mark of the enso PRODUCT; the H is the mark of the COMPANY that
+ * makes it. Every other point here is a lab's company mark (OpenAI's, Anthropic's,
+ * Google's), so a product mark in that row answers a different question than the
+ * row is asking and reads as a fourth vendor nobody recognises. Ours is the only
+ * one a visitor is guaranteed to have just seen, at the top of this very page.
  * Its ink is the house black: the house mark is monochrome, which is not an
  * exception to "each lab in its own colour" — it IS ours.
  *
@@ -26,7 +32,7 @@
  * exported `Geom`s below, which are the one place to edit them.
  */
 import { colors, fonts, typography } from '@hanzo/design'
-import { ENSO_MARK } from '@hanzo/logo/logos'
+import { MARK_PATHS, MARK_VIEWBOX } from '@hanzo/logo/logos'
 
 export interface ScatterPoint {
   label: string
@@ -357,9 +363,10 @@ function Plot({ points, g, className }: { points: ScatterPoint[]; g: Geom; class
               strokeWidth={pt.highlight || pt.kind === 'measured' ? 2 : 1.5}
               strokeDasharray={!pt.highlight && pt.kind === 'reported' ? '2.5 2.2' : undefined} />
             {pt.highlight
-              ? <svg x={pt.cx - half} y={pt.cy - half} width={g.disc.mark} height={g.disc.mark} viewBox="0 0 24 24"
-                  fillRule="evenodd" style={{ color: INK.house }}
-                  dangerouslySetInnerHTML={{ __html: ENSO_MARK }} />
+              ? <svg x={pt.cx - half} y={pt.cy - half} width={g.disc.mark} height={g.disc.mark}
+                  viewBox={MARK_VIEWBOX}
+                  fillRule="evenodd" fill={INK.house}
+                  dangerouslySetInnerHTML={{ __html: MARK_PATHS }} />
               : mark?.file
                 ? <image href={`/logos/color/${mark.file}.svg`} x={pt.cx - half} y={pt.cy - half}
                     width={g.disc.mark} height={g.disc.mark} preserveAspectRatio="xMidYMid meet" />
