@@ -40,15 +40,15 @@ export default function StreamPage() {
             <span className="bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">Stream</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} className="text-2xl md:text-3xl font-medium text-foreground mb-4">
-            Kafka clients, JetStream durability
+            A Kafka port in front of Hanzo PubSub
           </motion.p>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Use standard Kafka producers and consumers with NATS JetStream as the backend. No ZooKeeper, no broker management, no JVM tuning. Just durable event streaming.
+            Stream speaks the Kafka binary protocol on 9092 and stores nothing itself. A produce becomes a message in a durable PubSub stream — topic orders, partition 0, is the stream kafka-orders-0 — and a fetch reads it back out. Your producers and consumers connect unchanged, and it runs inside your cluster, next to the store it fronts.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto">
             <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Kafka</div><div className="text-sm text-muted-foreground">Wire protocol</div></div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">NATS</div><div className="text-sm text-muted-foreground">JetStream</div></div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">0</div><div className="text-sm text-muted-foreground">JVM overhead</div></div>
+            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">PubSub</div><div className="text-sm text-muted-foreground">Holds the log</div></div>
+            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Stateless</div><div className="text-sm text-muted-foreground">No broker disk</div></div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Durable</div><div className="text-sm text-muted-foreground">At-least-once</div></div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap justify-center gap-4">
@@ -61,17 +61,17 @@ export default function StreamPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Kafka Without the Pain</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Keep your Kafka clients. Drop the operational burden.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Your clients, our store</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Keep the producers and consumers you have. Drop the cluster underneath them.</p>
           </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Layers, title: "Kafka Compatible", description: "Standard Kafka wire protocol. Use kafka-python, sarama, confluent-kafka, or any Kafka client library." },
-              { icon: Zap, title: "JetStream Backend", description: "NATS JetStream provides durable, replicated storage with at-least-once delivery guarantees." },
-              { icon: Server, title: "Zero JVM", description: "No Java, no ZooKeeper, no broker tuning. Single Go binary with minimal resource usage." },
-              { icon: GitBranch, title: "Consumer Groups", description: "Full consumer group support with automatic partition rebalancing and offset management." },
-              { icon: BarChart3, title: "Topic Management", description: "Create, list, and delete topics via Kafka admin API. Retention policies and compaction." },
-              { icon: Shield, title: "TLS & Auth", description: "SASL/PLAIN and SASL/SCRAM authentication. TLS encryption in transit. ACL support." },
+              { icon: Layers, title: "It speaks Kafka", description: "Produce, Fetch, ListOffsets, Metadata, OffsetCommit, OffsetFetch, FindCoordinator, JoinGroup, SyncGroup, Heartbeat, CreateTopics and ApiVersions, at the versions modern clients negotiate. kafka-python, sarama, confluent-kafka and franz-go all connect." },
+              { icon: Zap, title: "The log lives in PubSub", description: "One topic partition is one durable PubSub stream. Retention, replicas and disk are that stream's settings, so the thing actually holding your events is a system you already run and already back up." },
+              { icon: Server, title: "Nothing to operate", description: "One Go binary that keeps no state of its own. Restart it, run several, roll it mid-deploy — the log is somewhere else, so the gateway is never the piece you are afraid to touch." },
+              { icon: GitBranch, title: "Offsets survive a restart", description: "A group's committed offsets live in a PubSub key-value bucket, so a consumer that dies comes back where it left off instead of at the top. Ask for an offset that has aged out and you get OFFSET_OUT_OF_RANGE, so the client resets rather than hangs." },
+              { icon: BarChart3, title: "Offsets are stamped, not inferred", description: "Every Kafka offset is written into the record batch header when the batch is produced, and read straight back from there. Deriving them from the store's own sequence numbers works right up until the sequence has gaps in it — and then one record can make every fetch after it unreadable." },
+              { icon: Shield, title: "Bad batches stop at the door", description: "A produce whose batch chain does not line up is refused with INVALID_RECORD instead of being written and discovered later by a consumer that cannot get past it. The scan that recovers a partition's bounds is capped, so a damaged topic degrades rather than stalls." },
             ].map((feature, index) => (
               <motion.div key={feature.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.05 }} className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors">
                 <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10"><feature.icon className="h-6 w-6 text-foreground" /></div>
@@ -86,13 +86,14 @@ export default function StreamPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Drop-In Kafka Replacement</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">One line changes: the bootstrap server</h2>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="bg-secondary border border-border rounded-xl overflow-hidden">
             <div className="flex items-center gap-2 px-4 py-2 border-b border-border"><div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-neutral-700" /><div className="w-3 h-3 rounded-full bg-neutral-700" /><div className="w-3 h-3 rounded-full bg-neutral-700" /></div><span className="text-xs text-muted-foreground ml-2">producer.py</span></div>
-            <pre className="p-4 overflow-x-auto text-sm"><code className="text-foreground/80">{`from kafka import KafkaProducer, KafkaConsumer
+            <pre className="p-4 overflow-x-auto text-sm"><code className="text-foreground/80">{`import json
+from kafka import KafkaProducer, KafkaConsumer
 
-# Just change the bootstrap server
+# The only line that changes
 producer = KafkaProducer(
     bootstrap_servers=["stream.hanzo.ai:9092"],
     value_serializer=lambda v: json.dumps(v).encode(),
@@ -122,8 +123,8 @@ for message in consumer:
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="relative bg-secondary/50 border border-border rounded-2xl p-8 md:p-12 text-center overflow-hidden">
             <div className="absolute inset-0 overflow-hidden"><div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" /><div className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" /></div>
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Stream Events at Scale</h2>
-              <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">Migrate from Kafka in minutes. Keep your existing code.</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Point the bootstrap server at it</h2>
+              <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">The clients stay as they are. The cluster underneath them goes away.</p>
               <div className="flex flex-wrap justify-center gap-4">
                 <a href="https://docs.hanzo.ai/docs/services/stream" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Read the Docs <ArrowRight className="w-4 h-4" /></a>
                 <a href="https://github.com/hanzoai/stream" className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors">View on GitHub</a>

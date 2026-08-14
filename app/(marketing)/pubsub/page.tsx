@@ -71,7 +71,7 @@ export default function PubSubPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            NATS JetStream messaging
+            The bus everything else rides
           </motion.p>
 
           <motion.p
@@ -80,9 +80,13 @@ export default function PubSubPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Managed NATS with JetStream for durable messaging. At-least-once
-            delivery, key-value stores, object stores, and request-reply
-            patterns. The backbone of Hanzo Cloud.
+            PubSub moves messages between services on port 4222. Publish to a
+            subject and everyone listening on it — or on a pattern that matches
+            it — has the message. Add a stream and those same messages are
+            written down too, so a consumer that was offline can start from the
+            beginning, from a sequence number, or from a timestamp. Streams,
+            key-value buckets, an object store and request-reply are one server,
+            not four.
           </motion.p>
 
           <motion.div
@@ -92,20 +96,20 @@ export default function PubSubPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">NATS</div>
-              <div className="text-sm text-muted-foreground">JetStream</div>
+              <div className="text-2xl font-bold text-foreground">4222</div>
+              <div className="text-sm text-muted-foreground">Client port</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">&lt;1ms</div>
-              <div className="text-sm text-muted-foreground">Latency</div>
+              <div className="text-2xl font-bold text-foreground">Replay</div>
+              <div className="text-sm text-muted-foreground">From any point</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">Durable</div>
-              <div className="text-sm text-muted-foreground">Guaranteed</div>
+              <div className="text-sm text-muted-foreground">Written to disk</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">HA</div>
-              <div className="text-sm text-muted-foreground">Clustered</div>
+              <div className="text-2xl font-bold text-foreground">Replicas</div>
+              <div className="text-sm text-muted-foreground">Set per stream</div>
             </div>
           </motion.div>
 
@@ -143,11 +147,11 @@ export default function PubSubPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              More Than Pub/Sub
+              More than pub/sub
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Durable streams, key-value, object store, and request-reply in one
-              system.
+              Durable streams, key-value, an object store and request-reply —
+              one server, one connection, one set of credentials.
             </p>
           </motion.div>
 
@@ -155,39 +159,39 @@ export default function PubSubPage() {
             {[
               {
                 icon: Layers,
-                title: "JetStream Streams",
+                title: "Streams write it down",
                 description:
-                  "Durable, replicated message streams. Replay from any point. Retention by time, count, or size.",
+                  "A stream captures the subjects you name and keeps them by age, by count or by bytes. A consumer starts at the beginning, at the newest message, at a sequence number or at a wall-clock time, and reads at the original pace or as fast as it can take them.",
               },
               {
                 icon: Zap,
-                title: "At-Least-Once",
+                title: "Acked, so nothing goes quiet",
                 description:
-                  "Acknowledged delivery with consumer groups. No message loss. Exactly-once deduplication.",
+                  "A message is redelivered until a consumer acknowledges it. Publishers that stamp a message id get duplicates collapsed inside a window — two minutes unless you say otherwise. Ack every message, ack a sequence to cover everything below it, or ask for no acks at all when fire-and-forget is what you meant.",
               },
               {
                 icon: Server,
-                title: "Key-Value Store",
+                title: "Key-value buckets",
                 description:
-                  "Distributed KV built into NATS. Watch for changes. TTL expiration. History per key.",
+                  "A bucket is a stream that keeps the last value per key, so you get watches, per-key history and expiry from the same server and the same connection. It is where Hanzo Stream keeps its consumer offsets.",
               },
               {
                 icon: Clock,
                 title: "Request-Reply",
                 description:
-                  "Synchronous request-reply pattern. Service discovery. Load-balanced queue groups.",
+                  "Send to a subject and wait for one answer. Put several instances of a service in a queue group on that subject and each request goes to exactly one of them — load balancing with nothing in front of them doing it.",
               },
               {
                 icon: BarChart3,
                 title: "Object Store",
                 description:
-                  "Store and retrieve large objects via NATS. Chunked uploads. Watch for changes.",
+                  "Payloads too big to be a message are chunked into a stream and put back together on the way out, with a watch for when one changes. Same connection, same credentials, no second system to stand up.",
               },
               {
                 icon: Shield,
-                title: "Auth & TLS",
+                title: "Accounts, not passwords",
                 description:
-                  "NKey and JWT-based authentication. TLS encryption. Per-subject authorization.",
+                  "An account walls one tenant's subjects off from another's. Credentials are nkeys or signed JWTs rather than a shared secret, permissions are granted per subject, and TLS covers the wire.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -292,7 +296,7 @@ for _, msg := range msgs {
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Real-Time Messaging at Scale
+                Put it between your services
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
                 Free tier includes 1M messages/month.

@@ -49,7 +49,7 @@ export default function MQPage() {
           >
             <ListOrdered className="w-4 h-4 text-foreground" />
             <span className="text-sm font-medium text-foreground/80">
-              Message Queue
+              Job queue
             </span>
           </motion.div>
 
@@ -71,7 +71,7 @@ export default function MQPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Distributed message queue
+            Background work, done later
           </motion.p>
 
           <motion.p
@@ -80,9 +80,12 @@ export default function MQPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            BullMQ-compatible job queue with scheduling, rate limiting,
-            priorities, retries, and dead letter queues. Backed by Hanzo KV for
-            durability.
+            MQ is a TypeScript library, not a server to run. Import it and
+            your jobs live as data structures in Hanzo KV: add one here, and a
+            worker in another process picks it up — with priorities, delays,
+            retries with backoff, a rate limit per queue, and parent jobs that
+            wait on their children. Every state change is a Lua script running
+            inside the store, so two workers never take the same job.
           </motion.p>
 
           <motion.div
@@ -92,20 +95,20 @@ export default function MQPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">BullMQ</div>
-              <div className="text-sm text-muted-foreground">Compatible</div>
+              <div className="text-2xl font-bold text-foreground">Library</div>
+              <div className="text-sm text-muted-foreground">No broker to run</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
               <div className="text-2xl font-bold text-foreground">Cron</div>
               <div className="text-sm text-muted-foreground">Scheduling</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">DLQ</div>
-              <div className="text-sm text-muted-foreground">Dead letters</div>
+              <div className="text-2xl font-bold text-foreground">Retries</div>
+              <div className="text-sm text-muted-foreground">With backoff</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Durable</div>
-              <div className="text-sm text-muted-foreground">Guaranteed</div>
+              <div className="text-2xl font-bold text-foreground">At-least-once</div>
+              <div className="text-sm text-muted-foreground">Delivery</div>
             </div>
           </motion.div>
 
@@ -143,10 +146,11 @@ export default function MQPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Job Processing at Scale
+              The queue is data, the workers are yours
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Reliable background job processing for any workload.
+              Nothing sits in the middle deciding. The state is in Hanzo KV and
+              your processes race for it, safely.
             </p>
           </motion.div>
 
@@ -156,37 +160,37 @@ export default function MQPage() {
                 icon: Clock,
                 title: "Scheduling",
                 description:
-                  "Cron expressions, delayed jobs, and repeatable tasks. Timezone-aware scheduling.",
+                  "A cron expression, a delay in milliseconds, or a job that repeats on an interval — timezone aware, and held in the store rather than in a process that might restart.",
               },
               {
                 icon: Zap,
                 title: "Rate Limiting",
                 description:
-                  "Per-queue and global rate limits. Concurrency controls. Prevent resource exhaustion.",
+                  "Cap how many jobs a queue may start in a window, and how many a single worker runs at once. The third-party API with a quota stops being the reason your service falls over.",
               },
               {
                 icon: Layers,
                 title: "Priority Queues",
                 description:
-                  "Multiple priority levels. Critical jobs jump the line. FIFO within same priority.",
+                  "A job carries a priority, so the urgent one goes ahead of the backlog. Inside one priority it stays first in, first out, which is what keeps ordinary work from quietly starving.",
               },
               {
                 icon: Repeat,
                 title: "Retry & Backoff",
                 description:
-                  "Configurable retry strategies with exponential backoff. Custom retry delays per attempt.",
+                  "Set attempts and a backoff — fixed, exponential, or a function you write. A worker that dies mid-job loses its lock and the job is handed to another, so work is attempted at least once and can be attempted twice. Write it to be idempotent and that is a property rather than a surprise.",
               },
               {
                 icon: BarChart3,
-                title: "Dashboard",
+                title: "Watch it happen",
                 description:
-                  "Web UI to monitor queues, inspect jobs, retry failed jobs, and view throughput metrics.",
+                  "QueueEvents streams completed, failed, progress and stalled as they occur, so a job's life is something you observe rather than reconstruct from logs afterwards.",
               },
               {
                 icon: Shield,
-                title: "Dead Letter Queue",
+                title: "Failure is a state, not a deletion",
                 description:
-                  "Failed jobs move to DLQ after max retries. Inspect, debug, and replay manually.",
+                  "A job that runs out of attempts lands in the failed set carrying its error and stack. Read it, fix the cause, retry it. Nothing disappears because it went wrong.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -223,7 +227,7 @@ export default function MQPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              BullMQ-Compatible API
+              Add a job here, run it there
             </h2>
           </motion.div>
 
@@ -245,10 +249,10 @@ export default function MQPage() {
               </span>
             </div>
             <pre className="p-4 overflow-x-auto text-sm">
-              <code className="text-foreground/80">{`import { Queue, Worker } from "bullmq"
+              <code className="text-foreground/80">{`import { Queue, Worker } from "@hanzo/mq"
 
 const queue = new Queue("emails", {
-  connection: { host: "mq.hanzo.ai", port: 6379 }
+  connection: { host: "kv.hanzo.ai", port: 6379 }
 })
 
 // Add jobs with options
@@ -263,7 +267,7 @@ await queue.add("welcome", { userId: "usr_123" }, {
 const worker = new Worker("emails", async (job) => {
   await sendEmail(job.data.userId, "welcome")
 }, {
-  connection: { host: "mq.hanzo.ai", port: 6379 },
+  connection: { host: "kv.hanzo.ai", port: 6379 },
   concurrency: 10,
   limiter: { max: 100, duration: 60_000 },
 })`}</code>
@@ -292,7 +296,7 @@ const worker = new Worker("emails", async (job) => {
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Process Jobs Reliably
+                Add a job and walk away
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
                 Free tier includes 10K jobs/month. No job size limits.
