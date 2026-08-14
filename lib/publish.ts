@@ -102,6 +102,11 @@ export const EMPTY: readonly string[] = [
   // was a second copy of that subject built by hand from sample data, under a
   // `/products/<slug>` name no category answers to. Nothing ever linked it.
   '/products/integrations',
+  // The category the catalog used to call Platform. It is Infrastructure now,
+  // because the section it sits in is called Platform and a category cannot
+  // nest inside a section of its own name. The slug follows the label, so the
+  // old URL forwards rather than dying.
+  '/products/platform',
   '/dashboard',
   '/docs',
   '/docs/api',
