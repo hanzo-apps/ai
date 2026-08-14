@@ -44,8 +44,8 @@ const ITEMS: CardItem[] = PAPERS.map((paper) => ({
 export default function Research() {
   return (
     <Section
-      title="The reasoning is published"
-      lede="Measured campaigns, negative results and formal work behind the stack — written up, with the PDFs and the LaTeX in the open."
+      title="The research is public"
+      lede="The methods, the measurements, and the results that did not work."
     >
       <CardGrid items={ITEMS} columns={2} />
       <YStack marginTop="$6">
