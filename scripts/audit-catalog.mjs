@@ -114,9 +114,20 @@ async function main() {
         console.log(`    ${p.category.padEnd(9)} ${p.id.padEnd(20)} ${String(p.apiPath).padEnd(28)}${to}`);
       }
     }
+    // The legend names only the buckets that have members, so it never explains
+    // a category nothing is in.
+    const legend = {
+      renamed: `"renamed" is ${byReason.renamed.length} one-line catalog fix${byReason.renamed.length === 1 ? "" : "es"}`,
+      client: `"client" wants a kind field, not an apiPath`,
+      external: `"external" is Lux`,
+      absent: `only "absent" is a hole in the cloud`,
+    };
     console.log(
-      `\n  Only "absent" is a hole in the cloud. "renamed" is ${byReason.renamed.length} one-line\n` +
-        `  catalog fixes; "client" wants a kind field, not an apiPath; "external" is Lux.`
+      "\n  " +
+        REASONS.filter((r) => byReason[r].length)
+          .map((r) => legend[r])
+          .join("; ") +
+        "."
     );
   }
 

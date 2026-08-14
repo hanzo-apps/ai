@@ -42,46 +42,25 @@ export const DOCUMENT_URL = `${API}/v1/openapi.json`;
  */
 export const KNOWN_UNSERVED = {
   // --- renamed: the capability exists, the apiPath does not ------------------
-  vpc: { why: "renamed", served: "/v1/vpcs" },
-  "load-balancer": { why: "renamed", served: "/v1/balancers" },
-  wallet: { why: "renamed", served: "/v1/wallets" },
-  alerts: { why: "renamed", served: "/v1/o11y/alerts" },
-  dashboards: { why: "renamed", served: "/v1/o11y/dashboards" },
-  indexer: { why: "renamed", served: "/v1/indexers" },
-  "zero-trust": { why: "renamed", served: "/v1/networks" },
-  "service-mesh": { why: "renamed", served: "/v1/mesh/services" },
-  providers: { why: "renamed", served: "/v1/ai/providers" },
   containers: { why: "renamed", served: "/v1/platform/projects" },
-  applications: { why: "renamed", served: "/v1/platform/projects" },
-  kubernetes: { why: "renamed", served: "/v1/platform/fleet" },
-  status: { why: "renamed", served: "/v1/platform/health" },
 
   // --- client: consumes the API, is not an operation -------------------------
   cli: { why: "client" },
   sdks: { why: "client" },
-  ide: { why: "client" },
   desktop: { why: "client" },
   console: { why: "client" },
   studio: { why: "client" },
   api: { why: "client", note: "the API itself — /v1/api was never a route" },
-
-  // --- external: another network serves it -----------------------------------
-  nodes: { why: "external", note: "luxfi/node — Lux Network, not api.hanzo.ai" },
 
   // --- absent: advertised, enabled, and nothing serves it ---------------------
   edge: { why: "absent", note: "hanzoai/edge is real Rust, never mounted into cloud" },
   cdn: { why: "absent", note: "hanzoai/cdn is our own asset bucket, not a tenant product" },
   hsm: { why: "absent", note: "hanzoai/hsm is a Go library behind /v1/kms, not a surface" },
   mpc: { why: "absent" },
-  settlement: { why: "absent", note: "only /v1/x402/settlements/{id} exists — no quote, no pay" },
   // `tokens` was here, exempted as absent. It answers now — cloud serves
   // /v1/tokens/{chain}/{address} — so the ratchet demanded its own line back,
   // which is the whole point of it. The site renders the product.
   attestations: { why: "absent" },
-  datasets: { why: "absent" },
-  scores: { why: "absent" },
-  "score-configs": { why: "absent" },
-  "annotation-queues": { why: "absent" },
 };
 
 export const REASONS = ["renamed", "client", "external", "absent"];
