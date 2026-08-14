@@ -21,10 +21,10 @@ const OperativeUsage = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--white)] mb-6">
-              Getting Started with Hanzo Operative
+              One docker run
             </h2>
             <p className="text-xl text-foreground/80">
-              Set up your environment in minutes and start using AI to operate your computer
+              Nothing is installed on your machine. The desktop, the tools and the agent are all inside the image
             </p>
           </motion.div>
         </div>
@@ -42,21 +42,21 @@ const OperativeUsage = () => {
               
               <div className="space-y-4">
                 <div>
-                  <p className="text-muted-foreground mb-2">1. Install Hanzo tools</p>
+                  <p className="text-muted-foreground mb-2">Pull the image</p>
                   <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
-                    curl -fsSL hanzo.sh | bash
+                    docker pull ghcr.io/hanzoai/operative:latest
                   </div>
                 </div>
-                
+
                 <div>
-                  <p className="text-muted-foreground mb-2">2. Run the operative</p>
+                  <p className="text-muted-foreground mb-2">Run it with your key and the four ports</p>
                   <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
-                    operative
+                    docker run -e ANTHROPIC_API_KEY -p 8501:8501 -p 6080:6080 -p 5900:5900 -p 8080:8080 -it ghcr.io/hanzoai/operative:latest
                   </div>
                 </div>
-                
+
                 <div>
-                  <p className="text-muted-foreground mb-2">3. Enter your API key when prompted</p>
+                  <p className="text-muted-foreground mb-2">Open localhost:8501 and type an objective</p>
                 </div>
               </div>
               
@@ -78,10 +78,10 @@ const OperativeUsage = () => {
               <h3 className="text-xl font-semibold text-[var(--white)] mb-4">System Requirements</h3>
               
               <ul className="space-y-2 text-muted-foreground">
-                <li>• macOS, Windows, or Linux (with X server)</li>
-                <li>• Python 3.8 or higher</li>
-                <li>• 8GB RAM recommended</li>
-                <li>• Internet connection for API access</li>
+                <li>• Docker. Nothing else installed on the host</li>
+                <li>• A key for the API, Bedrock, or Vertex</li>
+                <li>• Four ports free: 8501, 6080, 5900, 8080</li>
+                <li>• Give the container the fewest privileges that work</li>
               </ul>
             </motion.div>
           </div>
@@ -97,35 +97,35 @@ const OperativeUsage = () => {
             
             <div className="space-y-6">
               <div>
-                <p className="text-muted-foreground mb-2">Running with default settings (GLM 5.2)</p>
+                <p className="text-muted-foreground mb-2">Watch it in a browser, no VNC client needed</p>
                 <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
-                  operative
+                  open http://localhost:6080
                 </div>
               </div>
-              
+
               <div>
-                <p className="text-muted-foreground mb-2">Using voice input mode</p>
+                <p className="text-muted-foreground mb-2">Send the model through Bedrock instead</p>
                 <div className="bg-neutral-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
-                  operative --voice
+                  docker run -e API_PROVIDER=bedrock -e AWS_PROFILE -e AWS_REGION=us-west-2 …
                 </div>
               </div>
-              
+
               <div>
-                <p className="text-muted-foreground mb-2">Using OCR mode for enhanced element detection</p>
+                <p className="text-muted-foreground mb-2">Or through Vertex</p>
                 <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
-                  operative -m glm-5.2-with-ocr
+                  docker run -e API_PROVIDER=vertex -e VERTEX_REGION -e VERTEX_PROJECT_ID …
                 </div>
               </div>
-              
+
               <div>
-                <p className="text-muted-foreground mb-2">Using Set-of-Mark (SoM) prompting</p>
+                <p className="text-muted-foreground mb-2">Keep the session between runs</p>
                 <div className="bg-gray-900 rounded-md p-3 font-mono text-sm text-[var(--white)] overflow-x-auto">
-                  operative -m glm-5.2-with-som
+                  docker run -v $HOME/.anthropic:/home/operative/.anthropic …
                 </div>
               </div>
               
               <div className="pt-2">
-                <p className="text-muted-foreground">After running any of these commands, you'll be prompted to enter an objective for the AI to accomplish.</p>
+                <p className="text-muted-foreground">Computer use is beta, and instructions written into a web page or an image can try to talk to the model as if they were you. Limit outbound traffic to domains you name, and ask for a human yes before anything with consequences outside the container.</p>
               </div>
             </div>
           </motion.div>

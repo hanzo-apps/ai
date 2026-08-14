@@ -9,33 +9,33 @@ const OperativeFeatures = () => {
   const features = [
     {
       icon: Globe,
-      title: "Cross-Platform",
-      description: "Compatible with Mac OS, Windows, and Linux with X server installed."
+      title: "A desktop in the image",
+      description: "Xvfb and X11 give the container a screen with no monitor attached, so a real window manager and real applications run inside it."
     },
     {
       icon: Zap,
-      title: "Self-Operating",
-      description: "Models can view the screen and decide on mouse and keyboard actions autonomously."
-    },
-    {
-      icon: ShieldCheck,
-      title: "Secure Framework",
-      description: "Open-source implementation with transparent security practices."
+      title: "Watch it work",
+      description: "VNC on 5900 for a native client, noVNC on 6080 in a browser, and the control page on 8501. You see the cursor move as it moves."
     },
     {
       icon: Compass,
-      title: "Objective-Driven",
-      description: "Complete complex tasks based on natural language objectives."
+      title: "Say what you want",
+      description: "Type an objective and it plans, acts, looks at the result, and goes again. You can interrupt at any point."
     },
     {
       icon: Database,
-      title: "OCR Integration",
-      description: "Optional OCR mode provides models with clickable element maps for enhanced accuracy."
+      title: "Bash and a file editor too",
+      description: "Not only the screen. It can run a command or edit a file directly when that is the shorter path, instead of typing into a GUI text editor."
+    },
+    {
+      icon: ShieldCheck,
+      title: "Blast radius is the container",
+      description: "Stop it and everything it touched goes with it. Give it the narrowest privileges and an allowlist of domains, and keep credentials that matter out of the image."
     },
     {
       icon: Cpu,
-      title: "Model Flexibility",
-      description: "Compatible with various multimodal models including GPT-4o, Claude, Gemini 3.1 Pro."
+      title: "Where the model comes from",
+      description: "The API directly, AWS Bedrock, or Google Vertex — chosen with an environment variable. The container is the same in all three cases."
     }
   ];
 
@@ -53,11 +53,10 @@ const OperativeFeatures = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[var(--white)] mb-6">
-              Key Capabilities
+              What is in the container
             </h2>
             <p className="text-xl text-foreground/80">
-              Hanzo Operative gives AI models the ability to interact with computers
-              the same way humans do
+              A screen, a way to watch it, and the tools the model drives it with
             </p>
           </motion.div>
         </div>

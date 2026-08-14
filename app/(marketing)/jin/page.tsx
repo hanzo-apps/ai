@@ -68,7 +68,7 @@ export default function JinPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Unified multimodal LLM
+            Research on learning without labels
           </motion.p>
 
           <motion.p
@@ -77,9 +77,12 @@ export default function JinPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Text, vision, audio, and 3D in a single model. Jin understands the
-            world the way humans do — across modalities, in one shared latent
-            space.
+            A joint-embedding predictive architecture does not reconstruct
+            pixels. It predicts the embedding of a piece of an image from the
+            embedding of another piece — so the model spends its capacity on
+            what the image means rather than on what it looks like. Jin is our
+            work on that idea, in the open, with the code and the papers to
+            read.
           </motion.p>
 
           <motion.div
@@ -89,20 +92,20 @@ export default function JinPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Text</div>
-              <div className="text-sm text-muted-foreground">Reasoning</div>
+              <div className="text-2xl font-bold text-foreground">I-JEPA</div>
+              <div className="text-sm text-muted-foreground">Reference build</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Vision</div>
-              <div className="text-sm text-muted-foreground">Image + video</div>
+              <div className="text-2xl font-bold text-foreground">Saccade</div>
+              <div className="text-sm text-muted-foreground">Our own variant</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Audio</div>
-              <div className="text-sm text-muted-foreground">Speech + music</div>
+              <div className="text-2xl font-bold text-foreground">MAE</div>
+              <div className="text-sm text-muted-foreground">Self-distilled</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">3D</div>
-              <div className="text-sm text-muted-foreground">Scene + mesh</div>
+              <div className="text-2xl font-bold text-foreground">Papers</div>
+              <div className="text-sm text-muted-foreground">Edge AI proposals</div>
             </div>
           </motion.div>
 
@@ -140,51 +143,52 @@ export default function JinPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              One model, every modality
+              What is in the repository
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              No more pipelines. No more model-per-task. Jin reasons across
-              modalities in a single forward pass.
+              Research code, not a product. It trains, it has no tests, and
+              nothing in production depends on it. The repository is archived —
+              read it, fork it, take the parts you want.
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                icon: FileText,
-                title: "Text reasoning",
+                icon: Layers,
+                title: "I-JEPA",
                 description:
-                  "Long-context language understanding, code, math, and tool use — competitive with text-only frontier models.",
+                  "A clean implementation of the image variant: a context encoder, a target encoder that is its moving average, and a predictor that has to guess the target embeddings. Both a ViT and an energy-transformer backbone.",
               },
               {
                 icon: ImageIcon,
-                title: "Vision-language",
+                title: "Saccade JEPA",
                 description:
-                  "Image captioning, visual QA, document understanding, and video analysis at frame and clip level.",
-              },
-              {
-                icon: Mic,
-                title: "Audio in and out",
-                description:
-                  "Speech recognition, speech generation, music understanding, and ambient sound classification.",
+                  "Ours. Eyes jitter constantly and the brain predicts what the jitter will do to the scene, so the model shifts an image, predicts how its embedding moves, and shifts back to check it lands where it started.",
               },
               {
                 icon: Box,
-                title: "3D understanding",
+                title: "Three losses at once",
                 description:
-                  "Mesh, point cloud, and scene reasoning. Native input format support for industrial and creative workflows.",
+                  "Huber loss on the prediction, a cycle-consistency term that punishes drift on the round trip, and the invariance and covariance parts of VICReg to stop the representation collapsing.",
               },
               {
-                icon: Layers,
-                title: "Shared latent space",
+                icon: FileText,
+                title: "Masked autoencoding",
                 description:
-                  "Unified embedding across modalities means you can search images with audio, or generate 3D from text.",
+                  "An MAE with self-distillation sits alongside, for the comparison that matters: is a decoder worth its parameters when the goal is a good representation rather than a good reconstruction?",
               },
               {
                 icon: Zap,
-                title: "Single API",
+                title: "Ways to see what it learned",
                 description:
-                  "Send any combination of modalities in one request. Get any combination back. No glue code required.",
+                  "Self-supervised training has no validation loss to watch, so there are linear probes, KNN, attention-map visualisation in a Dash dashboard, correlation dimension, and UMAP coloured by true class.",
+              },
+              {
+                icon: Mic,
+                title: "The papers",
+                description:
+                  "Grant proposals on hierarchical JEPA for edge AI, where the interesting constraint is learning useful representations on hardware that cannot phone home.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -213,7 +217,7 @@ export default function JinPage() {
       {/* Final CTA */}
       <section className="py-16 border-t border-neutral-800">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Get started with Jin</h2>
+          <h2 className="text-2xl font-bold mb-4">Read the code</h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="https://docs.hanzo.ai/docs/skills/hanzo-jin"

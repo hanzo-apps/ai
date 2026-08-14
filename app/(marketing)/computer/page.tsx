@@ -69,7 +69,7 @@ export default function ComputerPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Computer-use agent for desktop automation
+            An agent that uses the computer in front of it
           </motion.p>
 
           <motion.p
@@ -78,9 +78,12 @@ export default function ComputerPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            A vision-grounded agent that drives your real desktop. Click,
-            type, scroll, screenshot, and chain workflows across any app —
-            with sandbox isolation and full audit replay.
+            It takes a screenshot, decides where to click, and clicks —
+            the same inputs and outputs a person has. Say what you want in a
+            sentence and it works through the apps already on the machine,
+            with no API and no integration for any of them. Install it with
+            pip, run <span className="font-mono">operate</span>, and type an
+            objective.
           </motion.p>
 
           <motion.div
@@ -117,10 +120,12 @@ export default function ComputerPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Drives Any App You Have
+              If a person can click it, so can this
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              No API needed. If a human can click it, Computer can run it.
+              The screen is the interface. That is the whole trick, and it is
+              why the app you need to automate does not have to know anything
+              about it.
             </p>
           </motion.div>
 
@@ -128,39 +133,39 @@ export default function ComputerPage() {
             {[
               {
                 icon: Eye,
-                title: "Vision Grounded",
+                title: "It reads pixels",
                 description:
-                  "Pixel-accurate UI understanding. Reads buttons, fields, dialogs — even custom widgets without DOM.",
+                  "No DOM, no accessibility tree, no selectors to maintain. A native app, a canvas, a remote desktop and a web page all look the same to it — like a screenshot.",
               },
               {
                 icon: MousePointer2,
-                title: "Real Mouse + Keyboard",
+                title: "Mouse and keyboard",
                 description:
-                  "Native input events, not synthetic. Works on Mac, Windows, Linux, and remote VMs.",
-              },
-              {
-                icon: Workflow,
-                title: "Chained Workflows",
-                description:
-                  "Multi-step plans with checkpoints. Resumes from failure. Branches on screen state.",
-              },
-              {
-                icon: Shield,
-                title: "Sandboxed",
-                description:
-                  "Run in an isolated VM by default. Approval prompts for destructive actions. Per-app allowlists.",
-              },
-              {
-                icon: Zap,
-                title: "Fast Loop",
-                description:
-                  "Streamed screenshots, sub-second action latency. Tuned for Zen vision models out of the box.",
+                  "Mac, Windows, and Linux with an X server. On macOS the terminal asks for Screen Recording and Accessibility the first time, because those are exactly the permissions this needs.",
               },
               {
                 icon: Keyboard,
-                title: "Replay Everything",
+                title: "OCR when clicking is hard",
                 description:
-                  "Every session is recorded as a replayable trace. Audit, debug, share — or fork into a script.",
+                  "Add -with-ocr to the model and it reads text off the screen to build a map of clickable elements — the fix for a button a model can see but keeps missing by twenty pixels.",
+              },
+              {
+                icon: Workflow,
+                title: "Set-of-Mark prompting",
+                description:
+                  "Add -with-som and the screenshot arrives pre-labelled, so the model names a marked element instead of guessing a coordinate.",
+              },
+              {
+                icon: Zap,
+                title: "Say it out loud",
+                description:
+                  "operate --voice takes the objective by microphone. Needs the audio extras and portaudio installed; it is not in the base install.",
+              },
+              {
+                icon: Shield,
+                title: "It has whatever you have",
+                description:
+                  "This runs as you, on your machine, with your logged-in sessions. Give it a fresh user account or a VM before you give it anything that matters — and remember that text on a web page can try to redirect it.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -203,10 +208,11 @@ export default function ComputerPage() {
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Hand Off the Boring Work
+                For the software with no API
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
-                Pull invoices. Triage tickets. Run nightly reports. While you sleep.
+                The vendor portal that exports one CSV at a time. The desktop
+                tool from 2009. The internal app nobody will reopen. Those.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">

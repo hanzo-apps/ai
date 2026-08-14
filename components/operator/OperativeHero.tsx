@@ -22,7 +22,7 @@ const OperativeHero = () => {
             transition={{ duration: 0.5 }}
           >
             <span className="inline-block px-4 py-1 rounded-full bg-primary/20 border border-white/30 text-foreground/70 text-sm font-medium mb-6">
-              AI Engineering Framework
+              Computer use, in a container
             </span>
             
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[var(--white)] mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/10">
@@ -30,8 +30,11 @@ const OperativeHero = () => {
             </h1>
 
             <p className="mt-6 text-xl text-foreground/80 max-w-3xl mx-auto">
-              A framework that enables multimodal AI models to operate a computer using the same inputs and 
-              outputs as a human operator, viewing the screen and executing mouse and keyboard actions to achieve objectives.
+              A container with a Linux desktop inside it, and a model driving
+              that desktop by screenshot, mouse and keyboard. You watch through
+              a browser and send instructions from the same page. Nothing it
+              does reaches your machine, because the machine it is using is the
+              container.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">

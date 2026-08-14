@@ -24,11 +24,11 @@ const OperativeCTA = () => {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-2xl md:text-3xl font-bold text-[var(--white)] ">
-              Ready to Experience Self-Operating Computing?
+              Run it and watch
             </h2>
             <p className="text-xl text-foreground/80">
-              Join the community of developers, researchers, and enthusiasts 
-              pioneering the future of human-AI collaboration.
+              The most useful hour you can spend with computer use is the
+              first one, watching where it gets stuck.
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center">
