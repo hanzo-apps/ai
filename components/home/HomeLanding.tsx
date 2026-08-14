@@ -1,4 +1,3 @@
-import Frame from '@hanzo/frame'
 import { SiteHeader, SiteFooter } from './shell'
 import Fold from './Fold'
 import EnsoHero from './EnsoHero'
@@ -40,6 +39,13 @@ import LocalStack from './LocalStack'
  * from `lib/data/cloud-primitives.ts` — the same source as the mega-menu and the
  * `/products/<slug>` pages — so the front page cannot drift from the product.
  *
+ * It used to follow a film of the console, which is gone. That film had its
+ * headline and its command RENDERED INTO THE PIXELS, and a sidebar naming seven
+ * categories while the list under it named ten — so the page contradicted itself
+ * and the contradiction could only be fixed by re-rendering a video. Type that
+ * cannot be selected, translated, reflowed or read aloud is not type. What the
+ * film introduced, `CloudCategories` already states, from the catalog.
+ *
  * `Research` follows it, and the order is an argument: the categories say what we
  * sell, the papers say why it is built the way it is, and they are next to each
  * other so the second is read as evidence for the first. Its content is the
@@ -53,20 +59,6 @@ export default function HomeLanding() {
         <Fold />
         <LocalStack />
         <EnsoHero />
-        {/* The cloud, shown rather than described — the same film cloud.hanzo.ai
-            opens on, from the same six files. One command brings an org up and
-            the console runs; `CloudCategories` immediately below then names what
-            is in it, so the film introduces the thing the list enumerates.
-
-            It sits HERE and not at the top because the film carries no HTML over
-            it — that is `@hanzo/frame`'s one rule — and the fold is the globe,
-            which is this page's one picture at the top. Nothing is repeated
-            either way: the film speaks in the console's own chrome, and the
-            sections around it say what a film cannot. */}
-        <Frame
-          src="/cloud-hero"
-          alt="One command brings up a Hanzo Cloud org. The console lists the model catalog — the house Enso family beside every model the gateway serves — and the Playground answers a prompt against it."
-        />
         <CloudCategories />
         <Research />
         <BuildStory />
