@@ -64,6 +64,16 @@ const modelCategories = [
       { name: "GPT-4o", provider: "OpenAI", features: ["128K context window", "Multimodal", "Advanced reasoning", "Tool use"], description: "OpenAI's flagship model with advanced reasoning capabilities." },
       { name: "GPT-4o Mini", provider: "OpenAI", features: ["128K context window", "Fast and affordable", "Good quality", "Low latency"], description: "Cost-efficient OpenAI model for everyday tasks." },
       { name: "Gemini 3.1 Pro", provider: "Google", features: ["1M context window", "Multimodal", "Long-context reasoning", "Code generation"], description: "Google's flagship with the longest context window." },
+      // Listed under Z.ai, which is whose they are. The house rule is that Zen
+      // models are ours and are never described as someone else's work; the
+      // reverse holds just as firmly, and a catalogue that hid whose model a
+      // reader was calling would be the same mistake pointed the other way.
+      // ProviderMark already maps glm -> zai.
+      //
+      // Ids taken from catalog.hanzo.ai, which is the only authority on what is
+      // served. 5.2 is the newest GLM there; there is no 5.3 to list yet.
+      { name: "GLM-5.2", provider: "Z.ai", features: ["Agentic tool use", "Strong coding", "Served as z-ai/glm-5.2"], description: "The newest GLM on the gateway. Reach for it the way you reach for any other model here — change the string." },
+      { name: "GLM-4.7", provider: "Z.ai", features: ["Cost efficient", "High throughput", "Served as z-ai/glm-4.7"], description: "The previous GLM generation, still a common default for high-volume work." },
     ]
   },
   {
