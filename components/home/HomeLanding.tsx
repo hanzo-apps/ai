@@ -1,3 +1,4 @@
+import Frame from '@hanzo/frame'
 import { SiteHeader, SiteFooter } from './shell'
 import EnsoHero from './EnsoHero'
 import CloudCategories from './CloudCategories'
@@ -38,6 +39,20 @@ export default function HomeLanding() {
         <ChatHero />
         <LocalStack />
         <EnsoHero />
+        {/* The cloud, shown rather than described — the same film cloud.hanzo.ai
+            opens on, from the same six files. One command brings an org up and
+            the console runs; `CloudCategories` immediately below then names what
+            is in it, so the film introduces the thing the list enumerates.
+
+            It sits HERE and not at the top because the film carries no HTML over
+            it — that is `@hanzo/frame`'s one rule, and the apex's fold is the
+            composer, which is copy. Nothing is repeated either way: the film
+            speaks in the console's own chrome, and the sections around it say
+            what a film cannot. */}
+        <Frame
+          src="/cloud-hero"
+          alt="One command brings up a Hanzo Cloud org. The console lists the model catalog — the house Enso family beside every model the gateway serves — and the Playground answers a prompt against it."
+        />
         <CloudCategories />
         <BuildStory />
       </main>
