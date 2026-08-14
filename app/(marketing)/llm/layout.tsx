@@ -2,7 +2,7 @@ import { pageMeta } from '@/lib/page-meta'
 export { default } from '@/lib/meta-layout'
 
 export const metadata = pageMeta({
-  title: 'Hanzo AI — one API for every model',
-  description: 'The AI cloud: 400+ models behind a single API. OpenAI- and Anthropic-compatible, with observability, cost controls, and rate limits built in.',
+  title: 'One API, 400+ models',
+  description: 'Send a request to api.hanzo.ai and name a model. Change the name and the same request reaches a different one. One key, one bill, and a spend ceiling you set.',
   path: '/llm',
 })

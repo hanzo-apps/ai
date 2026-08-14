@@ -2,7 +2,7 @@ import { pageMeta } from '@/lib/page-meta'
 export { default } from '@/lib/meta-layout'
 
 export const metadata = pageMeta({
-  title: 'Connect with hundreds of apps',
-  description: 'Hanzo Automations connects your AI agents to the tools you use every day. Build powerful workflows without code.',
+  title: 'The apps a workflow can reach',
+  description: 'Every connector you can drop onto a Hanzo Auto canvas: read from it, write to it, or let a change in it start a run.',
   path: '/automations',
 })

@@ -3,6 +3,6 @@ export { default } from '@/lib/meta-layout'
 
 export const metadata = pageMeta({
   title: 'Hanzo Operative',
-  description: 'A framework that enables multimodal AI models to operate a computer using the same inputs and outputs as a human operator.',
+  description: 'A container with a Linux desktop inside it and a model driving that desktop by screenshot, mouse and keyboard. You watch through a browser.',
   path: '/operative',
 })

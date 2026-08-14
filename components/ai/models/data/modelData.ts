@@ -1,8 +1,8 @@
 // Frontier AI model families from Hanzo
 const modelCategories = [
   {
-    name: "Hanzo Zen Models",
-    description: "41 foundation models across language, code, vision, image, audio, speech, and retrieval",
+    name: "Zen — the models we train",
+    description: "Language, code, vision, image, audio, speech and retrieval. Most have their weights published, so you can serve them yourself",
     models: [
       // Zen5 — Next Generation
       { name: "Zen5", provider: "Hanzo", features: ["1M+ context window", "Agentic-trained", "MoDE + CoT", "Preview"], description: "Next-generation agentic frontier model with native chain-of-thought." },
@@ -55,16 +55,14 @@ const modelCategories = [
     ]
   },
   {
-    name: "Third-Party Models",
-    description: "100+ industry-leading models available through the Hanzo AI Cloud gateway",
+    name: "Models from other labs",
+    description: "Same endpoint, same key, same request shape. Reaching for one of these is changing a string, not a migration",
     models: [
       { name: "Claude Opus 4.6", provider: "Anthropic", features: ["1M context window", "Most capable model", "Complex reasoning", "Extended thinking"], description: "Anthropic's most powerful model for the hardest tasks." },
       { name: "Claude Sonnet 4.6", provider: "Anthropic", features: ["1M context window", "Best balance of speed and intelligence", "Strong coding", "Fast inference"], description: "Ideal balance of capability and speed for production workloads." },
       { name: "Claude Haiku 4.5", provider: "Anthropic", features: ["200K context window", "Fastest Anthropic model", "Cost efficient", "Low latency"], description: "Fastest and most affordable Claude model for high-throughput tasks." },
       { name: "GPT-4o", provider: "OpenAI", features: ["128K context window", "Multimodal", "Advanced reasoning", "Tool use"], description: "OpenAI's flagship model with advanced reasoning capabilities." },
       { name: "GPT-4o Mini", provider: "OpenAI", features: ["128K context window", "Fast and affordable", "Good quality", "Low latency"], description: "Cost-efficient OpenAI model for everyday tasks." },
-      { name: "Zen4 Ultra", provider: "Hanzo", features: ["202K context window", "Reasoning model", "Chain-of-thought", "Math and code"], description: "Advanced reasoning model with extended chain-of-thought." },
-      { name: "Zen4", provider: "Hanzo", features: ["202K context window", "744B MoE", "Strong general performance", "Open-weight"], description: "Flagship general-purpose model with strong benchmarks." },
       { name: "Gemini 3.1 Pro", provider: "Google", features: ["1M context window", "Multimodal", "Long-context reasoning", "Code generation"], description: "Google's flagship with the longest context window." },
     ]
   },

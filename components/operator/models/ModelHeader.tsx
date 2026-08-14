@@ -14,11 +14,11 @@ const ModelHeader = () => {
         transition={{ duration: 0.6 }}
       >
         <h2 className="text-3xl md:text-4xl font-bold text-[var(--white)] mb-6">
-          Supported Models
+          Where the model comes from
         </h2>
         <p className="text-xl text-foreground/80">
-          Hanzo Operative works with multiple multimodal AI models, 
-          each with different capabilities and strengths
+          One environment variable decides. The container, the desktop and
+          the tools are identical in all four cases
         </p>
       </motion.div>
     </div>

@@ -3,6 +3,6 @@ export { default } from '@/lib/meta-layout'
 
 export const metadata = pageMeta({
   title: 'Hanzo AI Studio',
-  description: 'Your workspace for AI model experimentation, prompt engineering, and creating agent-based applications.',
+  description: 'A workspace for the part before you write the client. Send a prompt, switch the model under it, read the response, and keep what worked.',
   path: '/ai-studio',
 })

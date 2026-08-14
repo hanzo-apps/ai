@@ -2,7 +2,7 @@ import { pageMeta } from '@/lib/page-meta'
 export { default } from '@/lib/meta-layout'
 
 export const metadata = pageMeta({
-  title: 'Ship agents that do the work',
-  description: 'A multi-agent SDK, runtime, and tool harness with OpenAI compatibility. Build, orchestrate, and run autonomous agents that call tools, use memory, and…',
+  title: 'A Python SDK for agents that work together',
+  description: 'An agent is a model, a set of instructions, and the tools it may call. A network is several of them behind a router that decides which one gets the turn.',
   path: '/agents',
 })

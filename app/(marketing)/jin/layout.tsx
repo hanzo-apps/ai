@@ -3,6 +3,6 @@ export { default } from '@/lib/meta-layout'
 
 export const metadata = pageMeta({
   title: 'Jin',
-  description: 'Text, vision, audio, and 3D in a single model. Jin understands the world the way humans do, across modalities, in one shared latent space.',
+  description: 'Hanzo research on joint-embedding predictive architectures: I-JEPA, our Saccade variant, and an MAE with self-distillation. Research code, archived and open to read.',
   path: '/jin',
 })

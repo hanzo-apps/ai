@@ -3,6 +3,6 @@ export { default } from '@/lib/meta-layout'
 
 export const metadata = pageMeta({
   title: 'Hanzo Computer',
-  description: 'Computer-use agent for desktop automation',
+  description: 'An agent that takes a screenshot, decides where to click, and clicks. No API and no integration for the apps it drives — it uses the screen, like you do.',
   path: '/computer',
 })

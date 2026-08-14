@@ -9,45 +9,51 @@ export interface OperatorModel {
 
 export const operatorModels: OperatorModel[] = [
   {
-    name: "GPT-4o",
-    provider: "OpenAI",
-    features: ["Highest accuracy", "Fast response time", "Best for complex tasks", "Excellent UI understanding"],
+    name: "Hanzo",
+    provider: "The default",
+    features: [
+      "Runs through api.hanzo.ai",
+      "Every run shows up in the console with its cost",
+      "Bring a Hanzo key, or one you already have",
+      "Pick the model in the sidebar",
+    ],
     recommended: true,
-    command: "operative"
+    command: "docker run -e HANZO_API_KEY …"
   },
   {
-    name: "Claude",
-    provider: "Anthropic",
-    features: ["Strong screen analysis", "Detailed reasoning", "Long context window", "Good UI navigation"],
+    name: "Direct",
+    provider: "Straight to the model vendor",
+    features: [
+      "No Hanzo in the request path",
+      "Your existing key and your existing bill",
+      "Nothing here to log the run for you",
+      "Set API_PROVIDER=anthropic",
+    ],
     recommended: false,
-    command: "operative -m claude"
+    command: "docker run -e API_PROVIDER=anthropic …"
   },
   {
-    name: "Gemini 3.1 Pro",
-    provider: "Google",
-    features: ["Good general performance", "Reliable screen analysis", "Accessible API", "Improving rapidly"],
+    name: "Bedrock",
+    provider: "Inside your AWS account",
+    features: [
+      "Reads your local AWS profile",
+      "Stays in the region you name",
+      "For when the model must not leave your account",
+      "Set API_PROVIDER=bedrock",
+    ],
     recommended: false,
-    command: "operative -m gemini-3.1-pro"
+    command: "docker run -e API_PROVIDER=bedrock -e AWS_PROFILE …"
   },
   {
-    name: "zen3-vl",
-    provider: "Hanzo Cloud",
-    features: ["Strong visual capabilities", "30B MoE architecture", "Good for basic tasks", "Native API support"],
+    name: "Vertex",
+    provider: "Inside your Google Cloud project",
+    features: [
+      "Application default credentials",
+      "Names a region and a project id",
+      "Same container, same desktop, same tools",
+      "Set API_PROVIDER=vertex",
+    ],
     recommended: false,
-    command: "operative -m zen3-vl"
-  },
-  {
-    name: "LLaVA",
-    provider: "Ollama (Local)",
-    features: ["Runs locally", "No API costs", "Privacy-focused", "Basic capabilities"],
-    recommended: false,
-    command: "operative -m llava"
-  },
-  {
-    name: "o3-with-ocr",
-    provider: "OpenAI (Experimental)",
-    features: ["Advanced OCR", "Element detection", "Highest precision", "Best for complex UIs"],
-    recommended: false,
-    command: "operative -m o3-with-ocr"
+    command: "docker run -e API_PROVIDER=vertex -e VERTEX_PROJECT_ID …"
   }
 ];
