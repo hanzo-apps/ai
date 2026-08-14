@@ -127,7 +127,7 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({ className = ""
           }}
           secondaryAction={{
             label: "Schedule a call",
-            href: "tel:+1234567890",
+            href: "tel:+19137774443",
             type: "phone",
           }}
         />

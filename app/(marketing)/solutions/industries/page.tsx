@@ -476,7 +476,7 @@ const SolutionIndustries: React.FC = () => {
           icon={Shield}
           color="secondary"
           primaryAction={{ label: "Visit Sensei Group", href: "https://sensei.group", external: true }}
-          secondaryAction={{ label: "Schedule a call", href: "tel:+1234567890", type: "phone" }}
+          secondaryAction={{ label: "Schedule a call", href: "tel:+19137774443", type: "phone" }}
         />
       </div>
     </div>

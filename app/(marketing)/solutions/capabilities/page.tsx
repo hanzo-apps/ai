@@ -353,7 +353,7 @@ const SolutionCapabilities: React.FC = () => {
           icon={Shield}
           color="secondary"
           primaryAction={{ label: "Visit Sensei Group", href: "https://sensei.group", external: true }}
-          secondaryAction={{ label: "Schedule a call", href: "tel:+1234567890", type: "phone" }}
+          secondaryAction={{ label: "Schedule a call", href: "tel:+19137774443", type: "phone" }}
         />
       </div>
     </div>
@@ -435,7 +435,7 @@ const SolutionCapabilities: React.FC = () => {
                   </a>
                 </Button>
                 <Button asChild size="lg" variant="outline">
-                  <a href="tel:+1234567890">
+                  <a href="tel:+19137774443">
                     Schedule a Call
                     <Phone />
                   </a>

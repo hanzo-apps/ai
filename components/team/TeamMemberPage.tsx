@@ -123,7 +123,7 @@ const TeamMemberPage = ({ memberId }: TeamMemberPageProps) => {
                     Contact Sensei Group
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </Button>
-                  <a href="tel:+1234567890" className="flex items-center gap-2 px-5 py-2.5 border border-border hover:border-border rounded-md text-foreground/70 hover:text-foreground/70 transition-colors">
+                  <a href="tel:+19137774443" className="flex items-center gap-2 px-5 py-2.5 border border-border hover:border-border rounded-md text-foreground/70 hover:text-foreground/70 transition-colors">
                     <span>Schedule a call</span>
                     <Phone size={14} />
                   </a>
