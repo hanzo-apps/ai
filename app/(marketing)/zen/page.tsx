@@ -478,18 +478,25 @@ const Zen = () => {
               </div>
               <h2 className="text-2xl font-bold text-foreground mb-3">The Philosophy Behind the Models</h2>
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto text-sm">
-                {/* FIVE, and the number is not a choice made here — /philosophy
-                    defines the operating laws and there are five of them, which
-                    is also exactly how many this sentence goes on to name. It
-                    read "ten", and the likeliest source is the row of ten
-                    hexagram glyphs directly above: a decorative count borrowed
-                    as a measurement, the same mistake this site already made
-                    once with "60 capabilities", where a two-rows-of-five
-                    mega-menu became a claim about how much we sell. A reader
-                    who counts the list finds five and stops believing the
-                    paragraph. */}
-                These models are built on five engineering principles drawn from the 64 hexagrams of the I-Ching.
-                Orthogonality. Smallness. Completeness. Clarity. Composability.
+                {/* EIGHT, and "among them" is doing real work in that sentence.
+                    It read "ten" and then named five, so the paragraph argued
+                    with itself and a reader who counts stopped believing it.
+
+                    Eight is corroborated twice, independently: the curation
+                    manifest (hanzoai/openapi capabilities.yaml) declares eight
+                    DOMAINS, and the docs are grouped by the "eight movements".
+                    It is NOT the five on /philosophy — those are operating laws,
+                    how we work, a different list that happens to sit nearby.
+                    Conflating the two is how this line got corrected to five
+                    before it got corrected to eight.
+
+                    The five qualities are a SAMPLE and now say so. A count and
+                    a list that disagree is the defect; naming a subset openly
+                    is not. Ten is the CATEGORY count (lib/data/cloud-primitives,
+                    the mega-menu's ten) — a real number about a different
+                    thing, which is the likeliest reason it wandered in here. */}
+                These models are built on eight engineering principles drawn from the 64 hexagrams of the I-Ching —
+                orthogonality, smallness, completeness, clarity and composability among them.
                 Ancient pattern language for systems that last.
               </p>
               <Link
