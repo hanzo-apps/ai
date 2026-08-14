@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { cloudCategories } from '@/lib/data/cloud-primitives'
+import { hueAt } from '@/lib/spectrum'
 
 /**
  * Every category of the cloud, around the one thing they share.
@@ -51,7 +52,6 @@ export default function Orbit() {
   // preview is not a thing only a mouse can reach.
   const [at, setAt] = useState<number | null>(null)
   const active = at === null ? null : cats[at]
-  const products = cats.reduce((t, c) => t + c.items.length, 0)
 
   return (
     // Two elements, two jobs: this one breathes forever (`hz-orbit`), the one
@@ -96,7 +96,11 @@ export default function Orbit() {
           />
           {cats.map((c, i) => {
             const near = place(i, n, 14)
-            const far = place(i, n, R - 7)
+            // Reaches the node, near enough. It used to stop 7 units short, which
+            // left the ring reading as ten chips floating beside a wheel instead
+            // of ten things attached to one centre — the whole argument of the
+            // picture, undone by a gap.
+            const far = place(i, n, R - 2.5)
             // TWO strokes, not one. The dashed one carries the motion; on its
             // own it is a row of loose fragments in every still frame the page
             // spends most of its life in — and under reduced motion, where it
@@ -112,13 +116,18 @@ export default function Orbit() {
                   stroke="rgba(255,255,255,0.14)"
                   strokeWidth="0.22"
                 />
+                {/* The travelling dash is a REQUEST, and traffic is the one
+                    thing on this site allowed a colour — the same rule, and now
+                    the same four hues, as the conversations the globe draws.
+                    The line under it stays white: the wire is chrome, what
+                    moves along it is not. */}
                 <line
                   x1={near.x}
                   y1={near.y}
                   x2={far.x}
                   y2={far.y}
-                  stroke="rgba(255,255,255,0.55)"
-                  strokeWidth="0.3"
+                  stroke={hueAt(i)}
+                  strokeWidth="0.42"
                   strokeDasharray="4 14"
                   strokeLinecap="round"
                   className="hz-spoke"
@@ -138,13 +147,14 @@ export default function Orbit() {
             <p className="text-sm font-semibold tracking-tight text-white sm:text-base">
               {active ? active.title : 'One cloud'}
             </p>
+            {/* No count. Membership is whatever the catalog answered at build
+                time, so a number here is a fact about the API's morning — and
+                this one was wrong in the direction that matters: it read 78
+                against a catalog of 84, because the ring counts only the leaves
+                that resolved to a page. The tagline says what the thing IS,
+                which does not go stale overnight. */}
             <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-neutral-400 sm:text-xs">
               {active ? active.tagline : 'one API · one identity · one bill'}
-            </p>
-            <p className="mt-1.5 text-[11px] tabular-nums text-neutral-500">
-              {active
-                ? `${active.items.length} products`
-                : `${products} products · ${n} categories`}
             </p>
           </div>
         </div>
@@ -175,9 +185,6 @@ export default function Orbit() {
                 >
                   <Icon className="h-4 w-4 shrink-0 text-neutral-400 transition-colors group-hover:text-white group-focus-visible:text-white motion-reduce:transition-none" />
                   <span className="whitespace-nowrap font-medium">{c.title}</span>
-                  <span className="ml-auto tabular-nums text-[11px] text-neutral-500 sm:ml-0">
-                    {c.items.length}
-                  </span>
                 </Link>
               </li>
             )

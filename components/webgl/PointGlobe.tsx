@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { SPECTRUM } from '@/lib/spectrum'
 
 /**
  * PointGlobe — the flagship WebGL hero motif: a sphere of white points on true
@@ -42,14 +43,6 @@ export interface PointGlobeProps {
 }
 
 /* ------------------------------------------------------------------ palette */
-
-/** The conversation spectrum, in the order a run of them cycles through it. */
-const SPECTRUM: ReadonlyArray<readonly [number, number, number]> = [
-  [0.31, 0.55, 1.0], // blue
-  [0.6, 0.42, 1.0],  // violet
-  [1.0, 0.44, 0.71], // pink
-  [1.0, 0.71, 0.33], // amber
-]
 
 const WHITE: readonly [number, number, number] = [1, 1, 1]
 
