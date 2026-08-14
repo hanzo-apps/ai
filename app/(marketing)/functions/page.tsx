@@ -25,7 +25,7 @@ const Functions = () => {
               Hanzo Functions
             </h1>
             <p className="text-xl text-foreground/80 mb-8">
-              Serverless function execution for any workload. Deploy code in seconds without managing infrastructure.
+              Functions that run on Kubernetes. Hand it a handler and a runtime; it builds the image, deploys it, routes to it, and keeps as many copies alive as the traffic needs — down to none.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
@@ -73,10 +73,10 @@ const Functions = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <ChromeText as="h2" className="text-3xl font-bold mb-4">
-              Key Features & Capabilities
+              What you get
             </ChromeText>
             <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-              Deploy serverless functions that scale automatically and only run when needed
+              A handler file, a trigger, and the cluster you already run
             </p>
           </div>
 
@@ -89,9 +89,9 @@ const Functions = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Code className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Multi-Language Support</h3>
+              <h3 className="text-xl font-bold mb-2">Python, Go, Node.js, Rust</h3>
               <p className="text-foreground/80">
-                Write functions in JavaScript, TypeScript, Python, Go, or Rust with native runtime support.
+                Name a runtime and point at a handler file. When the language you want is not one of them, bring a container you built yourself and deploy that instead.
               </p>
             </motion.div>
 
@@ -103,9 +103,9 @@ const Functions = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Terminal className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Zero Cold Starts</h3>
+              <h3 className="text-xl font-bold mb-2">Warm before the request</h3>
               <p className="text-foreground/80">
-                Our intelligent prediction system keeps functions warm for instant execution.
+                Pools are prewarmed, so a function is not booting on the request that needed it. Scale to zero is still the default when nothing is calling.
               </p>
             </motion.div>
 
@@ -117,9 +117,9 @@ const Functions = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Database className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Native Database Access</h3>
+              <h3 className="text-xl font-bold mb-2">On your own cluster</h3>
               <p className="text-foreground/80">
-                Seamless integration with Hanzo Datastore and Vector for persistent storage.
+                Install it with Helm into Kubernetes you already run. Functions are ordinary workloads there, so quotas, node pools and network policy keep meaning what they meant.
               </p>
             </motion.div>
 
@@ -131,9 +131,9 @@ const Functions = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Server className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Edge Deployment</h3>
+              <h3 className="text-xl font-bold mb-2">A GPU is a normal ask</h3>
               <p className="text-foreground/80">
-                Deploy to 200+ global edge locations for ultra-low latency responses.
+                A function can request an NVIDIA GPU and be scheduled onto a node that has one. That is what lets model work be a function instead of a service somebody has to keep alive.
               </p>
             </motion.div>
 
@@ -145,9 +145,9 @@ const Functions = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Network className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Event-Driven Architecture</h3>
+              <h3 className="text-xl font-bold mb-2">Triggers, not just HTTP</h3>
               <p className="text-foreground/80">
-                Trigger functions from HTTP requests, webhooks, schedules, or database changes.
+                An HTTP route, a cron schedule, a Kafka topic, a RabbitMQ queue. The trigger is its own object, so the same handler can answer to several without knowing about any of them.
               </p>
             </motion.div>
 
@@ -159,9 +159,9 @@ const Functions = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Shield className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Security & Isolation</h3>
+              <h3 className="text-xl font-bold mb-2">Versions you can move between</h3>
               <p className="text-foreground/80">
-                Each function runs in an isolated environment with configurable permissions.
+                Blue/green and canary between versions of a function, so backing out a bad deploy is a traffic decision rather than another build.
               </p>
             </motion.div>
           </div>

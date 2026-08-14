@@ -21,7 +21,7 @@ const Node = () => {
               Hanzo Node
             </h1>
             <p className="text-xl text-foreground/80 mb-8">
-              Run a node on the Hanzo Network. Contribute compute, serve inference, and earn rewards from a decentralized AI marketplace.
+              hanzod is the node that runs hanzo.network. It joins the fabric over a peer-to-peer transport, serves models to whatever the cluster routes to it, and settles the work on Lux. One Rust binary, started with hanzo fabric up.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://docs.hanzo.ai/docs/proof-of-ai/node-operator" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
@@ -43,7 +43,7 @@ const Node = () => {
               Why Run a Hanzo Node
             </ChromeText>
             <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-              Turn idle hardware into productive compute on a permissionless AI network
+              What a machine starts doing once it is on the fabric
             </p>
           </div>
 
@@ -56,9 +56,9 @@ const Node = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Server className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Bring Your Own GPU</h3>
+              <h3 className="text-xl font-bold mb-2">The hardware you already have</h3>
               <p className="text-foreground/80">
-                Run on consumer GPUs, datacenter accelerators, or Apple Silicon. The runtime adapts to your hardware.
+                Consumer cards, datacenter accelerators, or Apple Silicon. The node reports what it can serve and the cluster routes to it on that basis.
               </p>
             </motion.div>
 
@@ -70,9 +70,9 @@ const Node = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Coins className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Earn for Inference</h3>
+              <h3 className="text-xl font-bold mb-2">Paid out of the block reward</h3>
               <p className="text-foreground/80">
-                Stake to join the network and earn rewards every time your node serves a verified inference request.
+                A tenth of the block reward is set aside for AI compute. A provider's share is scaled by the level of the work — embeddings and small models, chat-sized models, large and multimodal, training, or specialized compute like proofs.
               </p>
             </motion.div>
 
@@ -84,9 +84,9 @@ const Node = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Cpu className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Zen Models Out of the Box</h3>
+              <h3 className="text-xl font-bold mb-2">The cluster knows who has what</h3>
               <p className="text-foreground/80">
-                Pre-bundled with Zen MoDE model variants. Pull, quantize, and serve with a single command.
+                Ask it for models and it lists everything served across the peers your node can see. Ask it to route and it names who would answer; ask for placement and it says where a model nobody serves should be loaded.
               </p>
             </motion.div>
 
@@ -98,9 +98,9 @@ const Node = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Shield className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Verifiable Execution</h3>
+              <h3 className="text-xl font-bold mb-2">Attested, then trusted</h3>
               <p className="text-foreground/80">
-                Proof of AI receipts let clients verify which model produced which response, signed by your node key.
+                A node's confidential-compute tier is attested rather than declared, and its share is scaled by that tier and by a trust score. Claiming a capability is not the same as proving one.
               </p>
             </motion.div>
 
@@ -112,9 +112,9 @@ const Node = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Container className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">One-Container Deploy</h3>
+              <h3 className="text-xl font-bold mb-2">Three commands, no orchestration</h3>
               <p className="text-foreground/80">
-                Single OCI image, no orchestration required. Run on a laptop, a homelab, or a Kubernetes cluster.
+                up starts it on the active network, join switches network and starts it, stop signals the process this CLI started by its recorded pid — and never anything else that happens to share the name.
               </p>
             </motion.div>
 
@@ -126,9 +126,9 @@ const Node = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Activity className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Live Telemetry</h3>
+              <h3 className="text-xl font-bold mb-2">Settled on Lux</h3>
               <p className="text-foreground/80">
-                Built-in metrics, health checks, and reward tracking. Watch your node earn in real time.
+                Work is ordered on the Hanzo L2 and committed to Lux as a Merkle root, so what a node did is anchored where it cannot quietly be rewritten later.
               </p>
             </motion.div>
           </div>
@@ -140,9 +140,9 @@ const Node = () => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 md:p-12 border border-white/30">
             <div className="text-center">
-              <h2 className="text-3xl font-bold mb-4">Join the Network</h2>
+              <h2 className="text-3xl font-bold mb-4">Put a machine on the fabric</h2>
               <p className="text-xl text-foreground/80 mb-8 max-w-3xl mx-auto">
-                Spin up a node in under five minutes and start earning from the decentralized AI compute layer.
+                Install the CLI, pick a network, run hanzo fabric up. The node binary is resolved from your PATH or an env var — the CLI runs it and never builds it for you.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="https://docs.hanzo.ai/docs/proof-of-ai/node-operator" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">

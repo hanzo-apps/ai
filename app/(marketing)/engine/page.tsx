@@ -69,7 +69,7 @@ export default function EnginePage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Rust-native LLM and embedding inference engine
+            The inference engine, in one binary
           </motion.p>
 
           <motion.p
@@ -78,9 +78,10 @@ export default function EnginePage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            High-throughput, low-latency inference for transformer LLMs and
-            embedding models. Built in Rust for memory safety, predictable
-            performance, and deployment to any hardware target.
+            Name a model on Hugging Face and it runs. Engine quantizes it for
+            the hardware it finds, then serves an HTTP API and a web chat from
+            the same process — text, vision, audio, speech, image and
+            embeddings, without a second stack underneath.
           </motion.p>
 
           <motion.div
@@ -117,11 +118,11 @@ export default function EnginePage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Inference without the overhead
+              One process, laptop to GPU cluster
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              One engine for LLM generation and embedding generation. No
-              Python runtime, no GIL, no cold-start tax.
+              Chat, an API server, and a benchmark are three commands on the
+              same binary. There is no Python interpreter under any of them.
             </p>
           </motion.div>
 
@@ -129,39 +130,39 @@ export default function EnginePage() {
             {[
               {
                 icon: Zap,
-                title: "Rust-native",
+                title: "run, serve, bench",
                 description:
-                  "Pure Rust runtime. No Python interpreter, no FFI overhead. Predictable latency under load.",
+                  "One binary, three verbs. Chat with a model, put it behind an HTTP API, or measure it — the thing you benchmarked is the thing you shipped.",
               },
               {
                 icon: Gauge,
-                title: "High throughput",
+                title: "Built to serve, not just to run",
                 description:
-                  "Continuous batching, paged attention, and quantized kernels. Saturate your GPU or CPU.",
+                  "Paged attention and continuous batching keep the card busy across concurrent requests. A disk-first KV cache carries a session across a restart, so an agent that reuses a long prefix does not pay for it twice.",
               },
               {
                 icon: Layers,
-                title: "LLM + embeddings",
+                title: "More than text",
                 description:
-                  "One binary serves both generation and embedding workloads. Share memory, share weights.",
+                  "Vision, audio, speech, image and embeddings go through the same modality pipeline as generation, in the same process. A multimodal app is one deployment, not four.",
               },
               {
                 icon: Boxes,
-                title: "Quantization built-in",
+                title: "It quantizes on the way in",
                 description:
-                  "GGUF, AWQ, and GPTQ formats supported out of the box. Run 70B models on consumer GPUs.",
+                  "In-situ quantization of any Hugging Face model, plus GGUF from 2 to 8 bits, GPTQ, AWQ, HQQ, FP8 and bitsandbytes. Ask for a level and it takes a published prebuilt when one exists, or makes one when it doesn't.",
               },
               {
                 icon: Server,
-                title: "Any hardware",
+                title: "The silicon you have",
                 description:
-                  "CUDA, Metal, ROCm, and CPU backends. Same engine, same API, every target.",
+                  "CUDA with FlashAttention and multi-GPU tensor parallelism, Metal on Apple Silicon, or plain CPU. Same engine and same commands on each, and a doctor command that reports what it found.",
               },
               {
                 icon: Shield,
-                title: "Memory safe",
+                title: "Tools, and a UI to watch them",
                 description:
-                  "Rust's ownership model eliminates entire classes of CVEs. Production-grade reliability.",
+                  "It can call MCP servers over a process, HTTP or a WebSocket. The built-in UI at /ui shows reasoning, code execution and plots inline, and edits branch a conversation with its own state. Pass --no-ui and it is a plain API server.",
               },
             ].map((feature, index) => (
               <motion.div
