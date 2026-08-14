@@ -26,7 +26,10 @@ render: compose
 # viewer is served instead of the film, so it has to be the product at rest —
 # `-sseof` seeks from the end, which is the only way to name it without knowing
 # the frame count.
-stills:
+# stills DEPENDS on render. Without this edge `make` walks all -> publish ->
+# stills and never composes or renders: it re-cuts jpgs from whatever mp4 is
+# already on disk and copies a stale film to public/, reporting success.
+stills: render
 	ffmpeg -y -loglevel error -i tall/cloud-tall.mp4 -vf "select=eq(n\,0)" -vframes 1 -q:v 3 tall/first.jpg
 	ffmpeg -y -loglevel error -sseof -0.1 -i tall/cloud-tall.mp4 -update 1 -q:v 3 tall/last.jpg
 	ffmpeg -y -loglevel error -i wide/cloud-wide.mp4 -vf "select=eq(n\,0)" -vframes 1 -q:v 3 wide/first.jpg

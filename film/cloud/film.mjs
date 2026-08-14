@@ -61,17 +61,20 @@ const REPLY =
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 // ── the two frames ─────────────────────────────────────────────────────────
-// `win` is the console's width; `top` is where it sits; `cap` is the caption
-// band above it. The tall frame gives the window the middle of the screen and
-// lets the black breathe above and below; the wide frame seats it lower and
-// wider, the way a window actually sits on a desktop.
+// `win` is the console's width and `top` centres it. There is no caption band:
+// the film speaks in the product's own chrome, so nothing is set outside the
+// window to be read.
+// The FRAME shape is not free — @hanzo/frame paints the film `object-fit: cover`
+// edge to edge, so a master must already be the shape of the screen it serves.
+// Cropping these down to the window itself sounds tidier and cuts 192px off each
+// side of the console on a 390x844 phone.
 // The window is sized to its CONTENT, not to the frame. An 1180px-tall console
 // holding 700px of Playground ends the film on a half-empty pane — and the last
 // frame is exactly the one a reduced-motion viewer is served, so it has to be
 // the product looking used.
 const FRAMES = {
-  tall: { w: 1080, h: 1920, win: 862, winH: 940, top: 600, cap: 300, capSize: 62, subSize: 27 },
-  wide: { w: 1920, h: 1080, win: 1480, winH: 700, top: 268, cap: 104, capSize: 54, subSize: 24 },
+  tall: { w: 1080, h: 1920, win: 862, winH: 940, top: 490 },
+  wide: { w: 1920, h: 1080, win: 1480, winH: 700, top: 190 },
 };
 
 const page = (f) => `<!doctype html>
@@ -102,10 +105,6 @@ const page = (f) => `<!doctype html>
         background: rgba(255,255,255,0.055); filter: blur(200px);
       }
 
-      /* ── captions ── */
-      .cap { position: absolute; left: 0; right: 0; top: ${f.cap}px; text-align: center; padding: 0 60px; }
-      .cap h1 { font-size: ${f.capSize}px; font-weight: 600; letter-spacing: -${(f.capSize * 0.045).toFixed(1)}px; line-height: 1.06; color: #fff; }
-      .cap p { margin-top: 18px; font-family: "Geist Mono", ui-monospace, monospace; font-size: ${f.subSize}px; color: #8a8a8a; letter-spacing: -0.2px; }
 
       /* ── the console window ── */
       .win {
@@ -160,8 +159,8 @@ const page = (f) => `<!doctype html>
 
       /* Frame 0 is the poster and the frame playback starts on, so the opening
          beat is PAINTED, not animated in. */
-      #capA, .win, #term { opacity: 1; visibility: visible; }
-      #capB, #models, #play { opacity: 0; }
+      .win, #term { opacity: 1; visibility: visible; }
+      #models, #play { opacity: 0; }
     </style>
   </head>
   <body>
@@ -170,8 +169,6 @@ const page = (f) => `<!doctype html>
         <div class="bg"></div>
         <div class="glow"></div>
 
-        <div class="cap" id="capA"><h1>One command.</h1><p>${esc(DEPLOY)}</p></div>
-        <div class="cap" id="capB"><h1>One API for every capability.</h1><p>open models &middot; one bill &middot; one identity</p></div>
 
         <div class="win" id="win">
           <div class="bar">
@@ -238,8 +235,6 @@ const page = (f) => `<!doctype html>
 
       // A caption arrives from below and leaves upward — the same move both
       // ways, so the two never look like different kinds of event.
-      const capIn = (s, t) => tl.fromTo(s, { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.66, ease: IN }, t);
-      const capOut = (s, t) => tl.to(s, { y: -22, autoAlpha: 0, duration: 0.44, ease: OUT }, t);
 
       // Type a string into a node by advancing an index, so every frame between
       // two keystrokes is a real state of the string and a seek lands mid-word
@@ -263,8 +258,6 @@ const page = (f) => `<!doctype html>
       tl.fromTo("#o3", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 }, 3.8);
 
       // ── beat 2 · the console ────────────────────────────────────────────
-      capOut("#capA", 4.35);
-      capIn("#capB", 4.95);
       tl.to("#term", { autoAlpha: 0, duration: 0.4, ease: OUT }, 4.5);
       tl.to("#crumb", { autoAlpha: 0, duration: 0.2 }, 4.5);
       tl.call(() => { $("#crumb").textContent = "Models"; $("#nav0").classList.remove("on"); $("#nav1").classList.add("on"); }, null, 4.72);
@@ -273,7 +266,6 @@ const page = (f) => `<!doctype html>
       ${ROWS.map((_, i) => `tl.fromTo("#r${i}", { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.36, ease: IN }, ${(5.3 + i * 0.19).toFixed(2)});`).join("\n      ")}
 
       // ── beat 3 · the playground ─────────────────────────────────────────
-      capOut("#capB", 8.6);
       tl.to("#models", { autoAlpha: 0, duration: 0.4, ease: OUT }, 8.7);
       tl.to("#crumb", { autoAlpha: 0, duration: 0.2 }, 8.7);
       tl.call(() => { $("#crumb").textContent = "Playground"; $("#nav1").classList.remove("on"); $("#nav1").classList.add("on"); }, null, 8.92);
