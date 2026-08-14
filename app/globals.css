@@ -302,6 +302,26 @@
   outline-offset: 2px;
 }
 
+/* …and it goes on the control a person can SEE.
+   A field styled `bg-transparent` has no surface of its own: the pill or card
+   around it is the control, and the field is just where the text goes. Ringing
+   the field draws a hard rectangle INSIDE a rounded shape — which is the ugly
+   box on the chat bar, a 2px white edge tracing an input nobody can see the
+   bounds of.
+   `bg-transparent` is the marker because it is the thing that makes it true.
+   The ring moves outward to whatever directly wraps the field, where it picks
+   up that element's own border-radius and traces the shape people recognise.
+   Nothing loses a focus indicator: the two rules are one ring, moved. */
+:root:root :is(input, textarea).bg-transparent:focus-visible {
+  outline: none;
+}
+
+:root:root :has(> input.bg-transparent:focus-visible),
+:root:root :has(> textarea.bg-transparent:focus-visible) {
+  outline: 2px solid rgba(255, 255, 255, 0.72);
+  outline-offset: 2px;
+}
+
 /* ── The shared header, before hydration, on a phone ──────────────────────────
    `@hanzogui/shell`'s HanzoHeader chooses its layout in JavaScript, from the
    measured viewport — so it renders no media query, only inline styles, and the
