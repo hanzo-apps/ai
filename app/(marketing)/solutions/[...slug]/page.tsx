@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle, ChevronRight } from 'lucide-react'
 import type { Metadata } from 'next'
 
 import { getSolutionBySlug, solutionsData } from '@/lib/constants/solutions-data'
+import { pageMeta } from '@/lib/page-meta'
 import ChromeText from '@/components/ui/chrome-text'
 import { Button } from '@hanzo/ui'
 
@@ -21,10 +22,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params
   const solution = getSolutionBySlug(slug)
   if (!solution) return {}
-  return {
-    title: `${solution.title} — Hanzo AI`,
+  // Qualified by the shelf, because a solution and a PRODUCT can share a name
+  // and did: `/solutions/industries/enterprise` and `/enterprise` both titled
+  // themselves "Enterprise AI", so the pair read as one page listed twice. The
+  // solution is renamed here rather than in `solutions-data`, which also feeds
+  // the page's own <h1> and the index that links to it — the collision is
+  // between two TITLES, not two products.
+  return pageMeta({
+    title: `${solution.title} — Solutions`,
     description: solution.description,
-  }
+    path: `/solutions/${slug.join('/')}`,
+  })
 }
 
 export default async function SolutionPage({ params }: PageProps) {

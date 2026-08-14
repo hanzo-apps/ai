@@ -77,6 +77,26 @@ export const UNAPPROVED: readonly string[] = [
  * shorter than these, and none of these may grow copy without being published.
  */
 export const EMPTY: readonly string[] = [
+  // Redirect shells. Each exists so links minted under an old name keep
+  // working, and each renders one sentence and a forwarding link — `/defi` and
+  // `/fintech` to the products that absorbed them, `/sentry` to Sentinel (the
+  // rename is a trademark matter, see that page). They are pages only because
+  // this is a STATIC EXPORT: Next's `redirects()` needs a server and is
+  // silently absent from an export, so a configured rewrite would 404 every
+  // inbound link.
+  //
+  // Offering them for indexing put six results in front of readers that carry
+  // nothing to read, and it dragged the thin-page floor down onto the whole
+  // `/docs/*` shelf — one cause, two red gates, which is why they arrive
+  // together.
+  '/defi',
+  '/defi/exchange',
+  '/defi/staking',
+  '/fintech',
+  '/fintech/payments',
+  '/sentry',
+  // Same shape: this one forwards to status.hanzo.ai, which owns live status.
+  '/status',
   '/dashboard',
   '/docs',
   '/docs/api',
