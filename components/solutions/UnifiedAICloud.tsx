@@ -11,9 +11,9 @@ import SectionHeader from "@/components/zen/SectionHeader";
 const UnifiedAICloud: React.FC = () => {
   return (
     <div className="mb-24">
-      <SectionHeader 
-        title="Unified AI Cloud" 
-        description="One platform to build, deploy, and scale your AI applications" 
+      <SectionHeader
+        title="Unified AI Cloud"
+        description="One API for the models, the data, and the machines underneath them"
       />
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
@@ -29,8 +29,8 @@ const UnifiedAICloud: React.FC = () => {
           </div>
           <h3 className="text-xl font-bold mb-2 text-[var(--white)]">Enterprise Infrastructure</h3>
           <p className="text-foreground/80">
-            Scalable, secure infrastructure designed for enterprise AI workloads, with global availability, 
-            compliance-ready security, and managed services.
+            GPUs and machines by the second, object storage, a database per tenant, and a gateway in
+            front of all of it. Run it managed, or run the same binaries in your own cluster.
           </p>
         </motion.div>
         
@@ -46,8 +46,8 @@ const UnifiedAICloud: React.FC = () => {
           </div>
           <h3 className="text-xl font-bold mb-2 text-[var(--white)]">Developer Experience</h3>
           <p className="text-foreground/80">
-            Comprehensive tooling and frameworks that accelerate development, simplify deployments, and reduce 
-            time-to-market for AI-powered applications.
+            One CLI, one key, SDKs in the languages you already use, and a coding agent that works in
+            your repo. The endpoints on localhost are the endpoints in production.
           </p>
         </motion.div>
         
@@ -63,8 +63,8 @@ const UnifiedAICloud: React.FC = () => {
           </div>
           <h3 className="text-xl font-bold mb-2 text-[var(--white)]">Expert Services</h3>
           <p className="text-foreground/80">
-            Access to industry and technical experts who help you strategize, implement, and optimize your AI 
-            initiatives for maximum business impact.
+            Hanzo Agency and Sensei Group take a seat on your team — scoping the problem, building the
+            first version, and staying until it runs.
           </p>
         </motion.div>
       </div>
@@ -72,7 +72,7 @@ const UnifiedAICloud: React.FC = () => {
       <div className="text-center">
         <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
           <Link href="/cloud">
-            Explore Our AI Cloud Platform <ChevronRight className="ml-2 h-5 w-5" />
+            See the cloud <ChevronRight className="ml-2 h-5 w-5" />
           </Link>
         </Button>
       </div>

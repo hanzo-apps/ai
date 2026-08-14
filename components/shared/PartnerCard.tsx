@@ -99,7 +99,7 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({ className = ""
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <PartnerCard
           name="Hanzo Agency"
-          description="Our AI-powered creative agency helps brands transform their digital presence with advanced design, content, and marketing strategies powered by artificial intelligence."
+          description="Our creative agency. Design, content, and marketing campaigns, made with the same AI stack we sell."
           url="https://hanzo.agency"
           icon={Users}
           color="primary"
@@ -116,7 +116,7 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({ className = ""
         />
         <PartnerCard
           name="Sensei Group"
-          description="Our collective of fractional CXOs and industry experts help enterprises implement transformative technology solutions and drive strategic growth initiatives."
+          description="A collective of fractional CXOs and industry experts who take a seat on your team for the length of a project."
           url="https://sensei.group"
           icon={Shield}
           color="secondary"

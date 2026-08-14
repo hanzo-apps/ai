@@ -25,9 +25,8 @@ const MainCards: React.FC = () => {
         </div>
         <div className="p-8">
           <p className="text-foreground/80 mb-6">
-            Discover our comprehensive suite of technical capabilities that enable your organization to innovate
-            and transform. From AI and cloud infrastructure to custom development solutions, we provide everything
-            you need to stay ahead.
+            The work Hanzo takes on, by use case — AI engineering, cloud infrastructure, data and
+            analytics, and the products built on top of them.
           </p>
           <div className="flex flex-wrap gap-3 mb-8">
             <span className="px-3 py-1 bg-primary/20 rounded-full text-sm text-foreground border border-white/30">
@@ -45,7 +44,7 @@ const MainCards: React.FC = () => {
           </div>
           <Button asChild className="w-full">
             <Link href="/solutions/capabilities">
-              Explore Our Capabilities <ChevronRight className="ml-2 h-5 w-5" />
+              See the capabilities <ChevronRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
         </div>
@@ -66,9 +65,8 @@ const MainCards: React.FC = () => {
         </div>
         <div className="p-8">
           <p className="text-foreground/80 mb-6">
-            Our industry-specific expertise helps organizations across sectors overcome unique challenges and seize
-            opportunities. We combine deep domain knowledge with advanced technology to deliver tailored
-            solutions for your business.
+            The same platform seen from inside a sector — financial services, healthcare, retail,
+            technology. What changes is the data and the compliance surface, not the stack underneath.
           </p>
           <div className="flex flex-wrap gap-3 mb-8">
             <span className="px-3 py-1 bg-primary/20 rounded-full text-sm text-foreground/70 border border-white/30">
@@ -86,7 +84,7 @@ const MainCards: React.FC = () => {
           </div>
           <Button asChild className="w-full">
             <Link href="/solutions/industries">
-              Explore Our Industry Solutions <ChevronRight className="ml-2 h-5 w-5" />
+              See the industries <ChevronRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
         </div>

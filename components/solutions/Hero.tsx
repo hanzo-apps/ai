@@ -44,9 +44,9 @@ const SolutionsHero: React.FC = () => {
           transition={{ duration: 0.4, delay: 0.05 }}
           className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6"
         >
-          <span className="text-foreground">AI Solutions</span>
+          <span className="text-foreground">AI infrastructure</span>
           <br />
-          <span className="text-muted-foreground">for every industry.</span>
+          <span className="text-muted-foreground">and the team to land it.</span>
         </motion.h1>
 
         <motion.p
@@ -55,9 +55,10 @@ const SolutionsHero: React.FC = () => {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-10"
         >
-          Hanzo delivers a unified ecosystem of AI Cloud infrastructure, developer platforms,
-          and expert consulting to transform how enterprises build, deploy, and scale
-          next-generation applications.
+          Hanzo runs the cloud your workload sits on — models, machines, databases, identity,
+          secrets — behind one API. It is open source, so you can take it in-house whenever you
+          want. When a project needs people rather than infrastructure, Hanzo Agency and Sensei
+          Group do that part with your team.
         </motion.p>
 
         <motion.div
@@ -71,14 +72,14 @@ const SolutionsHero: React.FC = () => {
             className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
 
           >
-            Talk to Sales
+            Talk to sales
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
           <Link
             href="/solutions/capabilities"
             className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"
           >
-            Explore Capabilities
+            See the capabilities
           </Link>
         </motion.div>
       </div>
