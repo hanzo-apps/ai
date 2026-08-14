@@ -188,14 +188,17 @@ const Automations = () => {
                 className="inline-flex text-xs font-medium rounded-full px-4 py-2 border mb-6"
                 style={{ color: "var(--primary)", borderColor: "color-mix(in srgb, var(--primary) 30%, transparent)" }}
               >
-                Integrations & Automation
+                Hanzo Auto · Connectors
               </p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6">
-                <span className="text-foreground">Connect with</span>{" "}
-                <span>Hundreds of apps</span>
+                <span className="text-foreground">The apps</span>{" "}
+                <span>a workflow can reach</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-                Hanzo Automations connects your AI agents to the tools you use every day. Build powerful workflows without code.
+                Every one of these is a step you can drop onto a Hanzo Auto
+                canvas: read from it, write to it, or let a change in it start
+                a run. Search for the one you need, and check it is here before
+                you plan around it.
               </p>
 
               {/* Search */}
@@ -219,7 +222,7 @@ const Automations = () => {
               className="mb-16"
             >
               <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4 text-center">
-                Popular Integrations
+                Most reached for
               </h2>
               <div className="flex flex-wrap justify-center gap-3">
                 {popularIntegrations.slice(0, 12).map((integration) => (
@@ -315,10 +318,12 @@ const Automations = () => {
         <section className="py-20 px-4 md:px-8 border-t border-border">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-              Don't see your app?
+              Not here?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              We add new integrations every week. Request an integration or build your own with our SDK.
+              Anything with an HTTP API can be a step today — a request node
+              and a connection holding the credential. If it deserves a proper
+              connector, tell us and we will add one.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link

@@ -70,7 +70,7 @@ export default function AutoPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Workflow automation
+            Workflow automation in one binary
           </motion.p>
 
           <motion.p
@@ -79,9 +79,12 @@ export default function AutoPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Connect 300+ apps and services with a visual workflow builder.
-            Trigger automations from webhooks, schedules, or events. AI-assisted
-            workflow creation.
+            Draw a workflow, connect the apps it touches, and fire it from a
+            webhook or a schedule. The whole thing is one Go process: the
+            editor, the connector catalog, the database and the durable
+            executor are compiled in. There is no Node at runtime, no
+            reverse proxy to configure, and no Postgres to run beside it.
+            One image, one port, one thing to restart.
           </motion.p>
 
           <motion.div
@@ -91,19 +94,19 @@ export default function AutoPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">300+</div>
-              <div className="text-sm text-muted-foreground">Integrations</div>
+              <div className="text-2xl font-bold text-foreground">Go</div>
+              <div className="text-sm text-muted-foreground">One process</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Visual</div>
-              <div className="text-sm text-muted-foreground">Builder</div>
+              <div className="text-2xl font-bold text-foreground">SQLite</div>
+              <div className="text-sm text-muted-foreground">Per replica</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">AI</div>
-              <div className="text-sm text-muted-foreground">Assisted</div>
+              <div className="text-2xl font-bold text-foreground">/v1</div>
+              <div className="text-sm text-muted-foreground">Flows and runs</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">OSS</div>
+              <div className="text-2xl font-bold text-foreground">Apache</div>
               <div className="text-sm text-muted-foreground">Self-hosted</div>
             </div>
           </motion.div>
@@ -142,50 +145,51 @@ export default function AutoPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Automate Everything
+              A run that survives the restart
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Connect your tools, define triggers, and let automations run.
+              Most of what makes automation hard is what happens on step
+              seven of nine when the process dies.
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                icon: Plug,
-                title: "300+ Integrations",
+                icon: Clock,
+                title: "Durable execution",
                 description:
-                  "Slack, GitHub, Notion, Google Sheets, Stripe, HubSpot, Salesforce, and hundreds more.",
+                  "A run is a record, not a goroutine. Step state is written down as it goes, so a crash, a deploy or a rescheduled pod resumes where it stopped rather than starting over or losing the run.",
+              },
+              {
+                icon: Plug,
+                title: "The catalog is in the binary",
+                description:
+                  "GET /v1/pieces lists the connectors this build has. No plugin registry to reach at boot, so the version you deployed is the version that runs, offline and forever.",
               },
               {
                 icon: Zap,
                 title: "Triggers",
                 description:
-                  "Webhooks, cron schedules, email, form submissions, database changes, and custom events.",
+                  "POST to a trigger and a run starts. Or start one by hand against /v1/runs. Either way it is the same run object with the same history.",
               },
               {
                 icon: Eye,
-                title: "Visual Builder",
+                title: "Watch it live",
                 description:
-                  "Drag-and-drop workflow editor. Conditional logic, loops, error handling, and parallel branches.",
-              },
-              {
-                icon: Clock,
-                title: "Scheduling",
-                description:
-                  "Cron-based scheduling with timezone support. Run workflows every minute or once a month.",
+                  "The editor is React Flow, embedded in the binary, and it follows a run over a server-sent event stream — so the canvas you drew is the canvas you watch execute.",
               },
               {
                 icon: GitBranch,
-                title: "Branching Logic",
+                title: "Draft, then publish",
                 description:
-                  "If/else conditions, switch statements, and filters. Route data based on any condition.",
+                  "Edit a flow freely; nothing changes for callers until you publish. What triggers fire is a published version, so editing in the afternoon does not change what runs overnight.",
               },
               {
                 icon: Shield,
-                title: "Credential Store",
+                title: "Connections, not pasted keys",
                 description:
-                  "Encrypted credential storage. OAuth flows for third-party apps. KMS integration.",
+                  "A connection is a named credential the flow refers to. It is encrypted at rest through Hanzo KMS, and who may touch it is Hanzo IAM's answer, not a second login here.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -222,7 +226,7 @@ export default function AutoPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Connect Your Stack
+              Some of what it connects
             </h2>
           </motion.div>
 
@@ -266,10 +270,11 @@ export default function AutoPage() {
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Automate Your Workflows
+                Or run it yourself
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
-                Free tier includes 5K executions/month.
+                One container, one port, a SQLite file for state. Nothing
+                else to stand up first.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">

@@ -70,7 +70,7 @@ export default function FlowPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Visual AI workflow builder
+            Build an AI workflow on a canvas, ship it as an API
           </motion.p>
 
           <motion.p
@@ -79,9 +79,13 @@ export default function FlowPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Build AI agents, RAG pipelines, and multi-step workflows with a
-            drag-and-drop canvas. 300+ pre-built components. Export as API
-            endpoints or deploy as chatbots.
+            Drag a model, a vector store and a prompt onto a canvas, wire
+            them together, and run it with the values you actually have.
+            Every component is Python you can open and edit in place, so the
+            canvas stops where your code starts instead of at a wall. When it
+            works, publish it: a REST endpoint, a JSON file a Python app
+            loads, or an MCP server, which turns the flow into a tool any MCP
+            client can call.
           </motion.p>
 
           <motion.div
@@ -91,19 +95,19 @@ export default function FlowPage() {
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">300+</div>
-              <div className="text-sm text-muted-foreground">Components</div>
+              <div className="text-2xl font-bold text-foreground">Python</div>
+              <div className="text-sm text-muted-foreground">Every component</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Drag</div>
-              <div className="text-sm text-muted-foreground">& drop</div>
+              <div className="text-2xl font-bold text-foreground">REST</div>
+              <div className="text-sm text-muted-foreground">Or JSON, or MCP</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">API</div>
-              <div className="text-sm text-muted-foreground">Export</div>
+              <div className="text-2xl font-bold text-foreground">:7860</div>
+              <div className="text-sm text-muted-foreground">On your machine</div>
             </div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">OSS</div>
+              <div className="text-2xl font-bold text-foreground">MIT</div>
               <div className="text-sm text-muted-foreground">Self-hosted</div>
             </div>
           </motion.div>
@@ -142,10 +146,11 @@ export default function FlowPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Build AI Workflows Visually
+              The canvas is not the ceiling
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              From simple chatbots to complex multi-agent systems.
+              Visual builders usually work right up until you need the thing
+              they did not think of. This one hands you the source.
             </p>
           </motion.div>
 
@@ -153,39 +158,39 @@ export default function FlowPage() {
             {[
               {
                 icon: Puzzle,
-                title: "300+ Components",
+                title: "The library",
                 description:
-                  "LLMs, vector stores, tools, memory, output parsers, text splitters, and custom nodes.",
-              },
-              {
-                icon: Eye,
-                title: "Visual Debugging",
-                description:
-                  "See data flow through each node in real-time. Inspect inputs, outputs, and errors visually.",
+                  "Models, vector stores, document loaders, text splitters, output parsers, memory, retrievers and toolkits — plus anything you write yourself, which is a component like the rest.",
               },
               {
                 icon: Code,
-                title: "Export as API",
+                title: "Open any node",
                 description:
-                  "Deploy any flow as a REST API endpoint. Embed as a chat widget. Trigger via webhooks.",
+                  "A component is a Python class. Edit it in the browser and the change is live on the next run — no rebuild, no plugin format, no waiting for someone to add the parameter you need.",
+              },
+              {
+                icon: Eye,
+                title: "Step through it",
+                description:
+                  "The playground runs a flow one node at a time and shows what each one received and returned. When a chain gives a strange answer, this is where you find the node that caused it.",
               },
               {
                 icon: GitBranch,
-                title: "Version Control",
+                title: "Multi-agent",
                 description:
-                  "Flow versioning with diff view. Rollback to any version. Branch and merge flows.",
+                  "Several agents on the same canvas, with conversation state between them and retrieval underneath — visible as a graph rather than buried in a prompt.",
               },
               {
                 icon: Zap,
-                title: "Streaming",
+                title: "Publish it three ways",
                 description:
-                  "Real-time streaming responses. Server-sent events for live chat experiences.",
+                  "As a REST endpoint, as JSON your Python app loads directly, or as an MCP server — after which the flow is a tool your coding agent can call.",
               },
               {
                 icon: Shield,
-                title: "Variables & Secrets",
+                title: "Keys stay out of the flow",
                 description:
-                  "Secure credential management. Environment variables. KMS integration for API keys.",
+                  "Credentials live as variables the graph references by name, so a flow you export or share carries the wiring and not the secrets.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -230,10 +235,11 @@ export default function FlowPage() {
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Build Your First AI Workflow
+                Run it locally first
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
-                Free to start. No coding required.
+                uv pip install hanzoflow, then uv run hanzoflow run. It opens
+                on 127.0.0.1:7860. Docker works too.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">
