@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
-import { APP, OUT, requireExport } from './export'
+import { APP, OUT, ROOT, requireExport } from './export'
 
 /**
  * Every mockup film a page asks for is in the export.
@@ -20,9 +20,26 @@ import { APP, OUT, requireExport } from './export'
  * page, forget the list, and the gate passes while the page is broken.
  */
 
+/**
+ * The slugs `/cloud/<slug>` renders a film for.
+ *
+ * That route wires its mockup from a variable — `<Mockup slug={primitive.slug}>`
+ * — so the source scan below cannot see it, and one page there stands for 42
+ * products. It selects them the way `cloudPrimitiveSlugs` does, out of the same
+ * catalog the route reads, so a product that gains a `/cloud/` href is covered
+ * here without this file being edited.
+ */
+function generated(): string[] {
+  const path = join(ROOT, 'lib/data/catalog.json')
+  const { products } = JSON.parse(readFileSync(path, 'utf8')) as {
+    products: { slug: string; href: string }[]
+  }
+  return products.filter((p) => p.href.startsWith('/cloud/')).map((p) => p.slug)
+}
+
 /** Every slug a page wires a mockup to, read from the app source. */
 function wired(): string[] {
-  const slugs = new Set<string>()
+  const slugs = new Set<string>(generated())
   const walk = (dir: string) => {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       const path = join(dir, entry.name)

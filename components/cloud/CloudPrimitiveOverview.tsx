@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, BookOpen, Check, Github } from 'lucide-react'
 import { Button } from '@hanzo/ui'
+import { Mockup } from '@/components/product/Mockup'
 import { POSITIONING, type CloudCategory, type Primitive } from '@/lib/data/cloud-primitives'
 
 const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
@@ -87,6 +88,14 @@ export function CloudPrimitiveOverview({
             </div>
           )}
         </dl>
+
+        {/* The product's own surface, running. One film per catalog product is
+            rendered by film/mock, keyed by the same slug this page is routed
+            on — so a product added to the catalog arrives here with its film
+            already named, and there is no second list to keep in step. */}
+        <figure className="mt-10">
+          <Mockup slug={primitive.slug} alt={`The ${primitive.title} surface, running.`} />
+        </figure>
 
         {/* Description */}
         {primitive.description && (
