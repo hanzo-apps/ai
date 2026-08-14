@@ -42,6 +42,29 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
   `HANZO_DEPLOY_TOKEN` (forge org secret, mirrored from KMS `deploy/`). The 202
   hands back a prefix-scoped 30-minute presigned POST grant, so CI holds no bucket
   key — never add `SITES_S3_*`.
+
+  **The gates run BEFORE the upload, so a red gate freezes the SITE.** They are
+  steps in the publishing job, which is the placement that makes "nothing ships
+  ungated" true — and the cost is that a failing gate is indistinguishable from a
+  broken deploy unless you look. It happened: four gates went red (111 pages
+  inheriting the root layout's title, six redirect shells offered for indexing)
+  and hanzo.ai published nothing for a day while pushes kept succeeding.
+
+  Read the STEPS, never hunt for the log — logs live in object storage, not on
+  the git pod:
+
+      SELECT s."index", s.name,
+             CASE s.status WHEN 1 THEN 'success' WHEN 2 THEN 'failure'
+                           WHEN 4 THEN 'skipped' ELSE s.status::text END,
+             (s.stopped - s.started) AS secs
+        FROM action_task_step s
+       WHERE s.task_id = (SELECT t.id FROM action_task t WHERE t.job_id = <job>)
+       ORDER BY s."index";
+
+  A step's DURATION is the diagnosis. `Publish to the Sites plane | failure | 1s`
+  cannot be an upload of 850 pages; `Gates | failure | 92s` is a real run that
+  found something. And a later step reading `skipped` HIDES its own failure —
+  fixing the gates is what revealed that the publish had been broken all along.
 - **The GitHub repo is `hanzo-apps/ai`.** `hanzoai/hanzo.ai` only redirects there.
   Push to the real name — a redirect is why `gh` reports runs under one repo while
   you push to another. Push to `hanzogit` too: that remote is what the forge
