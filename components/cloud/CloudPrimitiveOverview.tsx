@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { ArrowRight, BookOpen, Check, Github } from 'lucide-react'
-import { Button } from '@hanzo/ui'
 import { Mockup } from '@/components/product/Mockup'
 import { POSITIONING, type CloudCategory, type Primitive } from '@/lib/data/cloud-primitives'
 
@@ -120,36 +119,53 @@ export function CloudPrimitiveOverview({
         {/* Positioning line */}
         <p className="mt-14 text-sm text-muted-foreground">{POSITIONING}</p>
 
-        {/* CTAs */}
+        {/* CTAs — anchors, not `Button asChild`.
+            `Button` is Tamagui, and a sub-theme makes it wrap its child in
+            `<span class="t_sub_theme" style="display:contents">`. That wrapper
+            needs the Tamagui provider context, which a SERVER component does not
+            carry: the server wrote a bare `<a role="button">` and the client
+            rendered the span, so every one of these pages failed hydration and
+            regenerated its whole tree. The sibling heroes never hit it because
+            both are 'use client'.
+
+            An anchor with the page's own tokens is what CloudLanding already
+            uses for exactly this row, so the shape is the house one — and it
+            drops a runtime from a page that only needed four links. */}
         <div className="mt-6 flex flex-wrap gap-3">
-          <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-            <Link href="/signup">
-              Get started
-              <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Link>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            className="border-border bg-transparent text-foreground/80 hover:bg-accent hover:text-foreground"
+          <Link
+            href="/signup"
+            className="inline-flex min-h-11 items-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground no-underline transition-opacity hover:opacity-90 hover:no-underline"
           >
-            <Link href="/contact/sales">Talk to us</Link>
-          </Button>
+            Get started
+            <ArrowRight className="ml-1.5 h-4 w-4" />
+          </Link>
+          <Link
+            href="/contact/sales"
+            className="inline-flex min-h-11 items-center rounded-md border border-border px-6 text-sm font-medium text-foreground/80 no-underline transition-colors hover:text-foreground hover:no-underline"
+          >
+            Talk to us
+          </Link>
           {primitive.github && (
-            <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
-              <a href={primitive.github} target="_blank" rel="noopener noreferrer">
-                <Github className="mr-1.5 h-4 w-4" />
-                Source
-              </a>
-            </Button>
+            <a
+              href={primitive.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center rounded-md px-4 text-sm font-medium text-muted-foreground no-underline transition-colors hover:text-foreground hover:no-underline"
+            >
+              <Github className="mr-1.5 h-4 w-4" />
+              Source
+            </a>
           )}
           {primitive.docs && (
-            <Button asChild variant="ghost" className="text-muted-foreground hover:text-foreground">
-              <a href={primitive.docs} target="_blank" rel="noopener noreferrer">
-                <BookOpen className="mr-1.5 h-4 w-4" />
-                Docs
-              </a>
-            </Button>
+            <a
+              href={primitive.docs}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center rounded-md px-4 text-sm font-medium text-muted-foreground no-underline transition-colors hover:text-foreground hover:no-underline"
+            >
+              <BookOpen className="mr-1.5 h-4 w-4" />
+              Docs
+            </a>
           )}
         </div>
       </section>
