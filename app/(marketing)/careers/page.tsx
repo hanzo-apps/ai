@@ -25,10 +25,10 @@ const jobOpenings = [
 ]
 
 const benefits = [
-  { icon: Globe, title: "Remote-First Culture", description: "Work from anywhere in the world with our distributed team." },
-  { icon: Clock, title: "Flexible Hours", description: "Set your own schedule and work when you're most productive." },
-  { icon: Users, title: "Collaborative Environment", description: "Work with talented individuals from diverse backgrounds." },
-  { icon: Sparkles, title: "Cutting-Edge Tech", description: "Access to the latest AI technologies and resources." },
+  { icon: Globe, title: "Remote-first", description: "The team is distributed. Work from wherever you already live." },
+  { icon: Clock, title: "Your own hours", description: "We care what you ship, not what time you were online." },
+  { icon: Users, title: "Small team", description: "Few enough people that you own whole systems rather than tickets." },
+  { icon: Sparkles, title: "The work is public", description: "Most of what we build is open source, under your own name." },
 ]
 
 const hiringSteps = [
@@ -52,16 +52,16 @@ export default function CareersPage() {
             <div className="text-center">
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6 bg-primary/20 text-foreground">
                 <Heart className="w-3.5 h-3.5" />
-                Join Our Team
+                Careers
               </motion.div>
 
               <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.05 }} className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6">
-                <span className="text-foreground">Build the future</span><br />
-                <span className="text-muted-foreground">of AI.</span>
+                <span className="text-foreground">Compilers, cryptography,</span><br />
+                <span className="text-muted-foreground">and the cloud they run on.</span>
               </motion.h1>
 
               <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto">
-                Join a team passionate about democratizing access to AI and creating technology that empowers developers worldwide.
+                Hanzo is a small team building an open AI cloud — the inference engine, the models, the backend services, and the agents that use them. Most of what we write is public, so you can read the codebase before you apply.
               </motion.p>
 
               <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.15 }} className="flex flex-wrap items-center justify-center gap-4">
@@ -70,7 +70,7 @@ export default function CareersPage() {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
                 <Link href="/about" className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground">
-                  Learn About Us
+                  Read the history
                 </Link>
               </motion.div>
             </div>
@@ -82,7 +82,7 @@ export default function CareersPage() {
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Benefits & Perks</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">We take care of our team so they can focus on building amazing things.</p>
+              <p className="text-muted-foreground max-w-2xl mx-auto">How the team actually works.</p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {benefits.map((benefit, index) => {
@@ -106,7 +106,7 @@ export default function CareersPage() {
           <div className="max-w-6xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Open Positions</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">Find your next opportunity and help us shape the future of AI.</p>
+              <p className="text-muted-foreground max-w-2xl mx-auto">Remote, unless the work needs hardware in a room.</p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {jobOpenings.map((job, index) => (
@@ -146,7 +146,7 @@ export default function CareersPage() {
           <div className="max-w-4xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Our Hiring Process</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">We&apos;ve designed our process to be straightforward, respectful of your time, and focused on finding the right match.</p>
+              <p className="text-muted-foreground max-w-2xl mx-auto">No whiteboarding. Here is the whole thing.</p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               {hiringSteps.map((step, index) => (
@@ -169,7 +169,7 @@ export default function CareersPage() {
           <div className="max-w-4xl mx-auto text-center relative z-10">
             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold text-foreground mb-4">Ready to join us?</motion.h2>
             <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
-              We&apos;re always looking for talented individuals who are passionate about pushing the boundaries of what&apos;s possible with AI.
+              If you have read the codebase and had opinions about it, we want to hear them.
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-wrap items-center justify-center gap-4">
               <a href="#open-positions" className="inline-flex items-center px-8 py-4 rounded-full font-medium transition-all hover:opacity-90 text-base bg-primary text-primary-foreground">

@@ -54,7 +54,7 @@ const leaders = [
   {
     name: "Michael Kelling",
     title: "President",
-    bio: "As President, Michael leads Hanzo's mission to democratize access to AI with a focus on sustainable, responsible technology that empowers developers worldwide.",
+    bio: "As President, Michael leads Hanzo's push to put AI infrastructure within reach of any developer, not only the companies that can afford to build it.",
     tags: [
       { icon: Briefcase, text: "Executive Leadership", color: "#ffffff" },
       { icon: Database, text: "AI Infrastructure", color: "#f97316" },
@@ -69,7 +69,7 @@ const leaders = [
   {
     name: "Antje Worring",
     title: "Chief Operating Officer",
-    bio: "Antje oversees Hanzo's day-to-day operations, ensuring the company delivers on its promise of world-class AI infrastructure at scale.",
+    bio: "Antje runs Hanzo's day-to-day operations and the work of scaling a distributed team.",
     tags: [
       { icon: Briefcase, text: "Operations", color: "#ffffff" },
       { icon: Database, text: "Scaling Organizations", color: "#f97316" },
@@ -99,7 +99,7 @@ const leaders = [
   {
     name: 'Major "Dream" Williams',
     title: "Chief Visionary Officer",
-    bio: "Dream shapes Hanzo's long-term vision, bridging the gap between cutting-edge AI research and real-world impact.",
+    bio: "Dream shapes Hanzo's long-term view of where AI research turns into products people actually use.",
     tags: [
       { icon: Briefcase, text: "Vision & Innovation", color: "#ffffff" },
       { icon: Database, text: "AI Strategy", color: "#f97316" },
@@ -281,8 +281,8 @@ const Leadership = () => {
                 transition={{ duration: 0.4, delay: 0.1 }}
                 className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8 max-w-3xl mx-auto"
               >
-                Meet the team behind Hanzo AI, dedicated to democratizing access to
-                Amazon-level AI infrastructure for everyone.
+                The people who run Hanzo — a Techstars company that has built most of its
+                platform in the open since 2017.
               </motion.p>
 
               {/* Stats Row */}
@@ -391,7 +391,7 @@ const Leadership = () => {
             >
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Our Values</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                The principles that guide everything we do at Hanzo.
+                What we argue from when a decision is close.
               </p>
             </motion.div>
 
@@ -399,18 +399,18 @@ const Leadership = () => {
               {[
                 {
                   icon: Rocket,
-                  title: "Innovation First",
-                  description: "We push boundaries and challenge the status quo to create breakthrough AI technology."
+                  title: "Build the hard part",
+                  description: "We would rather write the difficult piece ourselves than ship a wrapper around someone else's."
                 },
                 {
                   icon: Users,
-                  title: "Community Driven",
-                  description: "We believe in open collaboration and building technology that empowers developers worldwide."
+                  title: "Open by default",
+                  description: "Most of the platform is public on GitHub, under MIT or Apache-2.0. You can read it before you trust it."
                 },
                 {
                   icon: Award,
-                  title: "Excellence Always",
-                  description: "We maintain the highest standards in everything from code quality to customer support."
+                  title: "Nowhere to hide",
+                  description: "When the code is public, the quality of it is public too. That is the point."
                 }
               ].map((value, index) => {
                 const Icon = value.icon;
