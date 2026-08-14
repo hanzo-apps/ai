@@ -16,11 +16,10 @@ function rng(seed) {
   };
 }
 
-/* The runtime global is __hyperframes in the skill docs and __frames in the
-   package docs; accept either, and fall back to declared defaults so the
+/* Fall back to declared defaults when the renderer's global is absent, so the
    file still opens in a plain browser. */
 function vars() {
-  const g = window.__hyperframes || window.__frames;
+  const g = window.__frames;
   if (g && typeof g.getVariables === "function") return g.getVariables();
   const decl = document.documentElement.getAttribute("data-composition-variables");
   const out = {};

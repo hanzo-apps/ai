@@ -290,16 +290,5 @@ for (const [name, f] of Object.entries(FRAMES)) {
   mkdirSync(join(dir, "assets"), { recursive: true });
   for (const a of readdirSync(join(here, "assets"))) copyFileSync(join(here, "assets", a), join(dir, "assets", a));
   writeFileSync(join(dir, "index.html"), page(f));
-  writeFileSync(
-    join(dir, "hyperframes.json"),
-    JSON.stringify(
-      {
-        $schema: "https://hyperframes.heygen.com/schema/hyperframes.json",
-        paths: { blocks: "compositions", components: "compositions/components", assets: "assets" },
-      },
-      null,
-      2
-    ) + "\n"
-  );
   console.log(`${name}  ${f.w}x${f.h}  ${DUR}s`);
 }

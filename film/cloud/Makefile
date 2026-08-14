@@ -8,7 +8,7 @@
 
 BASE  := cloud-hero
 OUT   := ../../public
-HF    := npx --yes hyperframes@0.7.108
+HF    := npx --yes @hanzo/frames@0.7.83
 
 .PHONY: all compose render stills publish clean
 all: publish
