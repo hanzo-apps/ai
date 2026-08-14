@@ -21,7 +21,7 @@ const Registry = () => {
               Hanzo Registry
             </h1>
             <p className="text-xl text-foreground/80 mb-8">
-              Container registry with IAM-token auth. Push, pull, and sign OCI images without rotating long-lived registry passwords.
+              A private registry for your container images at registry.hanzo.ai. It serves the OCI distribution API, so docker, podman, buildkit, skopeo and crane already know how to talk to it — and the credential is a short-lived token minted by your Hanzo IAM login, not a password living in a dockerconfigjson secret.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://docs.hanzo.ai/docs/registry" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
@@ -40,7 +40,7 @@ const Registry = () => {
               <code className="text-foreground/80">
                 <span className="text-foreground/60">$</span> <span className="text-foreground">hanzo</span> <span className="text-[var(--white)]">login registry.hanzo.ai</span>
                 <br/>
-                <span className="text-foreground/60"># IAM token minted, valid 1h</span>
+                <span className="text-foreground/60"># IAM mints a short-lived token</span>
                 <br/>
                 <span className="text-foreground/60">$</span> <span className="text-foreground">docker push</span> <span className="text-[var(--white)]">registry.hanzo.ai/acme/api:v1.2.3</span>
               </code>
@@ -57,7 +57,7 @@ const Registry = () => {
               Built on Hanzo IAM
             </ChromeText>
             <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-              Identity-aware container delivery with no static credentials to leak
+              The credential expires on its own, so there is nothing to rotate and nothing to leak
             </p>
           </div>
 
@@ -72,7 +72,7 @@ const Registry = () => {
               <KeyRound className="h-10 w-10 text-foreground mb-4" />
               <h3 className="text-xl font-bold mb-2">IAM Token Auth</h3>
               <p className="text-foreground/80">
-                Short-lived OIDC tokens from Hanzo IAM gate every push and pull. No registry passwords to rotate or revoke.
+                An unauthenticated pull gets a 401 naming Hanzo IAM. Your client fetches a token there, the registry checks its signature against a certificate it holds, and the push goes through. No password is stored at either end.
               </p>
             </motion.div>
 
@@ -86,7 +86,7 @@ const Registry = () => {
               <UserCheck className="h-10 w-10 text-foreground mb-4" />
               <h3 className="text-xl font-bold mb-2">Org-Scoped Repos</h3>
               <p className="text-foreground/80">
-                Every repository belongs to an org. RBAC follows IAM groups, so onboarding a teammate is one IAM grant away.
+                A repository name begins with your org, and what a token may do with it is decided by IAM at the moment the token is minted. Adding a teammate is one grant in one place, not a secret copied into a second.
               </p>
             </motion.div>
 
@@ -100,7 +100,7 @@ const Registry = () => {
               <Shield className="h-10 w-10 text-foreground mb-4" />
               <h3 className="text-xl font-bold mb-2">Cosign + Attestation</h3>
               <p className="text-foreground/80">
-                Native sigstore signing and SLSA attestations. Verify provenance before any image runs.
+                cosign signatures and in-toto attestations are ordinary OCI artifacts, so they push and pull to the same repository as the image they describe. Verification happens where the image runs, against exactly what the registry stored.
               </p>
             </motion.div>
 
@@ -114,7 +114,7 @@ const Registry = () => {
               <Layers className="h-10 w-10 text-foreground mb-4" />
               <h3 className="text-xl font-bold mb-2">OCI Compliant</h3>
               <p className="text-foreground/80">
-                Standard OCI v1.1 distribution and image specs. Works with docker, podman, buildkit, skopeo, crane.
+                The registry HTTP API v2 at /v2/, and nothing bespoke on top of it. Every client, scanner and admission controller that reads an image already speaks it, which is the whole point of not inventing one.
               </p>
             </motion.div>
 
@@ -126,9 +126,9 @@ const Registry = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Zap className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Pull-Through Cache</h3>
+              <h3 className="text-xl font-bold mb-2">Tags come off cleanly</h3>
               <p className="text-foreground/80">
-                Mirror upstream registries (Docker Hub, GHCR, GAR) with on-demand caching. Predictable bandwidth, no rate limits.
+                Deletes are enabled, so a tag you pushed by mistake goes away and the blobs behind it are reclaimed. A registry you can only add to is one that only grows.
               </p>
             </motion.div>
 
@@ -140,9 +140,9 @@ const Registry = () => {
               className="bg-primary/10 border border-white/30 rounded-xl p-6"
             >
               <Globe className="h-10 w-10 text-foreground mb-4" />
-              <h3 className="text-xl font-bold mb-2">Edge Replication</h3>
+              <h3 className="text-xl font-bold mb-2">The same account as everything else</h3>
               <p className="text-foreground/80">
-                Layers replicate to every Hanzo region. Pulls hit the nearest cache for fast cluster bootstraps.
+                Whoever signs into Hanzo Cloud is who pushes an image. One directory of people, one place to revoke someone — and no separate registry account to remember when they leave.
               </p>
             </motion.div>
           </div>
@@ -154,9 +154,9 @@ const Registry = () => {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 md:p-12 border border-white/30">
             <div className="text-center">
-              <h2 className="text-3xl font-bold mb-4">No More Static Registry Creds</h2>
+              <h2 className="text-3xl font-bold mb-4">Delete the dockerconfigjson secret</h2>
               <p className="text-xl text-foreground/80 mb-8 max-w-3xl mx-auto">
-                Replace dockerconfigjson secrets with IAM-issued tokens. Audit every push, expire every credential.
+                Put a token IAM mints in its place, and let it expire on its own. There is nothing left to rotate.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="https://docs.hanzo.ai/docs/registry" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">

@@ -36,16 +36,16 @@ export default function LedgerPage() {
             <span className="bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">Ledger</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} className="text-2xl md:text-3xl font-medium text-foreground mb-4">
-            Programmable double-entry ledger for fintech apps
+            A double-entry ledger you post to over HTTP
           </motion.p>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Atomic, balanced transactions across millions of accounts. Idempotent posting, immutable history, real-time balances. The accounting backbone for wallets, marketplaces, and banking products.
+            Money here only ever moves: a posting names a source account, a destination account, an amount and an asset. There is no way to write a debit without its credit, because a one-sided entry is not something the API can express. Every account but one has to stay at or above zero, so a transfer that would overdraw is refused instead of recorded.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto">
             <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Atomic</div><div className="text-sm text-muted-foreground">Postings</div></div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Immutable</div><div className="text-sm text-muted-foreground">History</div></div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">10K TPS</div><div className="text-sm text-muted-foreground">Throughput</div></div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">GAAP</div><div className="text-sm text-muted-foreground">Ready</div></div>
+            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Reverts</div><div className="text-sm text-muted-foreground">Never edits</div></div>
+            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">USD/2</div><div className="text-sm text-muted-foreground">Assets carry precision</div></div>
+            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Numscript</div><div className="text-sm text-muted-foreground">Money-movement DSL</div></div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap justify-center gap-4">
             <a href="https://docs.hanzo.ai/docs/skills/hanzo-ledger" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Get Started <ArrowRight className="w-4 h-4" /></a>
@@ -57,17 +57,17 @@ export default function LedgerPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Money Movement, Done Right</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Every cent accounted for. Every transaction balanced. Always.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Every cent lands somewhere</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">A posting has two ends. There is no call that writes only one of them.</p>
           </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: BookOpen, title: "Double-Entry Core", description: "Every transaction debits and credits balanced accounts. Mathematically impossible to lose money. GAAP-compliant out of the box." },
-              { icon: CheckCircle2, title: "Idempotency", description: "Safe retries with idempotency keys. Submit the same transaction twice — only one posts. Critical for distributed systems." },
-              { icon: Lock, title: "Immutable History", description: "Append-only ledger. No edits, no deletes — only reversing entries. Full audit trail for SOC 2, PCI, and bank examiners." },
-              { icon: Workflow, title: "Programmable Rules", description: "Define complex flows: split-payments, escrow, fee distribution, FX. Composable transaction primitives evaluated server-side." },
-              { icon: GitBranch, title: "Multi-Currency", description: "Native support for fiat, crypto, points, credits, and custom assets. Per-asset precision rules. FX rate snapshotting at posting time." },
-              { icon: Search, title: "Real-Time Balances", description: "Sub-millisecond balance reads at any scale. Time-travel queries — see any account's balance at any point in history." },
+              { icon: BookOpen, title: "Balanced by construction", description: "A posting is a movement from one account to another, so an unbalanced entry is not rejected by a check — it cannot be written down. New money enters through one account named world; every other account must stay at or above zero, and a transaction that would push one under is refused whole." },
+              { icon: CheckCircle2, title: "Safe to retry", description: "Send an Idempotency-Key and a repeat returns the original rather than posting again. The ledger also fingerprints what you sent, so reusing a key with different postings is caught instead of quietly accepted — which is the failure that makes retries dangerous in the first place." },
+              { icon: Lock, title: "Nothing is edited", description: "No endpoint changes a posted transaction. A mistake is corrected by a reversing transaction that points back at the original, so what happened and what you meant both survive. Entries can also be SHA-256 chained, each hashed over the one before it, which makes a later edit in the database detectable rather than invisible." },
+              { icon: Workflow, title: "Numscript", description: "Describe the movement instead of computing it. Send an amount from an account and split it across destinations by percentage, nesting splits inside splits. The whole flow posts as one transaction, so a fee that cannot be taken takes the payment with it." },
+              { icon: GitBranch, title: "Assets carry their own precision", description: "An asset is a code plus the number of decimal places it uses — USD/2 for cents, and the same shape for points, credits or a token with eighteen. Amounts are whole numbers in the asset's smallest unit, so nothing rounds on the way in." },
+              { icon: Search, title: "Balances arrive with the transaction", description: "Each transaction records the balances it produced for the accounts it touched, so a balance is read rather than recomputed from the whole history. Aggregate across a subtree of accounts in one query." },
             ].map((feature, index) => (
               <motion.div key={feature.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.05 }} className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors">
                 <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10"><feature.icon className="h-6 w-6 text-foreground" /></div>
@@ -82,24 +82,31 @@ export default function LedgerPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Atomic. Balanced. Auditable.</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">One transaction, however many parties</h2>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="bg-secondary border border-border rounded-xl overflow-hidden">
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-border"><div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-neutral-700" /><div className="w-3 h-3 rounded-full bg-neutral-700" /><div className="w-3 h-3 rounded-full bg-neutral-700" /></div><span className="text-xs text-muted-foreground ml-2">posting.ts</span></div>
-            <pre className="p-4 overflow-x-auto text-sm"><code className="text-foreground/80">{`import { Ledger } from '@hanzo/ledger';
+            <div className="flex items-center gap-2 px-4 py-2 border-b border-border"><div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-neutral-700" /><div className="w-3 h-3 rounded-full bg-neutral-700" /><div className="w-3 h-3 rounded-full bg-neutral-700" /></div><span className="text-xs text-muted-foreground ml-2">payout.sh</span></div>
+            <pre className="p-4 overflow-x-auto text-sm"><code className="text-foreground/80">{`# A split payment: the vendor is paid and the platform takes its cut,
+# in one transaction that lands whole or not at all.
 
-const ledger = new Ledger({ apiKey: process.env.HANZO_API_KEY });
+curl -X POST http://localhost:3068/v2/main/transactions \\
+  -H 'Content-Type: application/json' \\
+  -H 'Idempotency-Key: order_42_payout' \\
+  -d '{
+    "postings": [
+      { "source": "users:001", "destination": "merchants:042", "amount": 9500, "asset": "USD/2" },
+      { "source": "users:001", "destination": "platform:fees", "amount":   500, "asset": "USD/2" }
+    ],
+    "metadata": { "order": "ord_42" }
+  }'
 
-// Atomic split-payment: customer pays vendor + 5% platform fee
-await ledger.transactions.create({
-  idempotency_key: 'order_42_payout',
-  postings: [
-    { account: 'customer:alice',   amount: -10500, asset: 'USD' },
-    { account: 'vendor:bob',       amount:  10000, asset: 'USD' },
-    { account: 'platform:revenue', amount:    500, asset: 'USD' },
-  ],
-  metadata: { order_id: 'ord_42', type: 'split_payment' },
-});`}</code></pre>
+# Or say it once in Numscript and let the ledger do the arithmetic:
+#
+#   send [USD/2 10000] (
+#     source = @users:001
+#     destination = { 95% to @merchants:042
+#                      5% to @platform:fees }
+#   )`}</code></pre>
           </motion.div>
         </div>
       </section>
