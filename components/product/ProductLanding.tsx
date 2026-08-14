@@ -18,6 +18,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, Check } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { Mockup } from '@/components/product/Mockup'
 
 const fade = {
   initial: { opacity: 0, y: 20 },
@@ -72,6 +73,9 @@ export interface ProductLandingProps {
   ctas: CTA[]
   note?: { icon?: LucideIcon; text: string }
   availableThrough?: string[]
+  /** Catalog slug of the product's mockup film, plus the sentence it says.
+      The film carries no words; this alt is what it means. */
+  mockup?: { slug: string; alt: string }
   /** What-it-is — numbered pillar grid. */
   what: SectionCopy & { pillars: Pillar[] }
   /** Feature grid. */
@@ -218,6 +222,15 @@ export function ProductLanding(p: ProductLandingProps) {
           )}
         </div>
       </section>
+
+      {/* ── The product, running ───────────────────────────────────────────── */}
+      {p.mockup && (
+        <section className="border-t border-neutral-900 px-4 pt-16 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <Mockup slug={p.mockup.slug} alt={p.mockup.alt} />
+          </div>
+        </section>
+      )}
 
       {/* ── What it is ─────────────────────────────────────────────────────── */}
       <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">

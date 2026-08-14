@@ -44,6 +44,10 @@ export default function CliPage() {
           { label: 'View on GitHub', href: GITHUB },
         ]}
         note={{ icon: Cloud, text: 'Open source (Apache-2.0). One binary — macOS, Linux, and CI.' }}
+        mockup={{
+          slug: 'cli',
+          alt: 'A shell session: commands run against Hanzo Cloud and their output streams back.',
+        }}
         what={{
           eyebrow: 'What is Hanzo CLI',
           title: 'Your terminal, now agentic',
