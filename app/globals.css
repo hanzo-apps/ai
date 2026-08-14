@@ -643,3 +643,40 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
   justify-content: center;
   flex-shrink: 0;
 }
+
+/* The mega-menu drapes are GLASS, and their contents are centred.
+ *
+ * Both faces this export serves — hanzo.ai and cloud.hanzo.ai — wear the same
+ * chrome as hanzo.app, and these are the two rules that were missing from it.
+ *
+ * DENSE, not opaque, and not the 0.72 the shell ships either. The shell's own
+ * ground is `rgba(9,9,11,0.72)` behind a 20px blur, which is correct wherever
+ * the blur composites and unreadable where it does not: WebKit accepts both
+ * spellings of `backdrop-filter` and still declines to paint it, so the page's
+ * own headings read straight THROUGH the panel. 88% is the density at which a
+ * white heading behind resolves to 12% over black — a wash you sense rather
+ * than read — so the surface is legible with no blur at all and still lets the
+ * light through in the engines that do composite.
+ *
+ * `!important` is load-bearing: the shell writes these backgrounds INLINE, and
+ * an inline declaration beats any selector at any specificity. Without it the
+ * rule is a silent no-op that looks right in the file.
+ *
+ * CENTRED: the drape is full-bleed on purpose — it is the header's own surface
+ * continuing down the page — but its CONTENTS were stretched edge to edge with
+ * it, so at 1600 the link columns ran 1332px wide holding ~500px of links and
+ * the right two-thirds was empty black. The content now sits on the same 1152
+ * column the page uses, so the menu lines up with the page beneath it rather
+ * than with the viewport edge. */
+html:root #hanzo-meet-menu,
+html:root #hanzo-products-menu {
+  background-color: color-mix(in srgb, var(--popover) 88%, transparent) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  backdrop-filter: blur(20px) saturate(1.8);
+}
+html:root #hanzo-meet-menu > div,
+html:root #hanzo-products-menu > div {
+  width: 100%;
+  max-width: 1152px;
+  margin-inline: auto;
+}

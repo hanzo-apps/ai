@@ -13,7 +13,6 @@ import { cloudCategories, tour } from '@/lib/data/cloud-primitives'
 const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
 
 /** Every product in the taxonomy — the number the page states about itself. */
-const PRODUCT_COUNT = cloudCategories.reduce((n, c) => n + c.items.length, 0)
 const GH = "https://github.com/hanzoai"
 
 /**
@@ -347,17 +346,19 @@ function Products() {
       <section className="border-t border-neutral-900 px-4 pb-4 pt-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
-            {/* The count is DERIVED from the taxonomy every build, never typed.
-                The line it replaced said "22 primitives. 7 categories" for as
-                long as it took someone to notice — a hand-written number about
-                a catalog that grows is a claim with an expiry date nobody
-                writes down. Say what is there, and it can only be wrong for as
-                long as a build takes.
+            {/* No arithmetic. This said "53 products. 10 categories." — derived
+                from the taxonomy every build, so never WRONG, and still the
+                wrong thing to say. A count invites the reader to compare a
+                number against some other vendor's number, which is a contest
+                about size rather than about what any of it does; and it dates
+                the page the moment the catalog moves, even when the figure
+                keeps up. What matters is that the pieces fit together, which is
+                exactly what the sentence below already says and what the map
+                under it shows.
 
-                `<h2>`, because the hero carries the page's one `<h1>` again now
-                that it has words of its own. */}
+                `<h2>`, because the hero carries the page's one `<h1>`. */}
             <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              {PRODUCT_COUNT} products. {cloudCategories.length} categories. One cloud.
+              Every building block. One cloud.
             </h2>
             <p className="mt-4 text-lg text-neutral-400">
               Composable, open-source building blocks with one identity, one bill, and one API.
