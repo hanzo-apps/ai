@@ -65,7 +65,8 @@ export function Mockup({ slug, alt }: { slug: string; alt: string }) {
           {/* No JS runs before this paints, so the choice has to be the
               browser's: a reduced-motion viewer is served the ending. */}
           <source media="(prefers-reduced-motion: reduce)" srcSet={`${base}-last.jpg`} />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
+          {/* A bare img, because next/image renders no <source> and the choice
+              above is the browser's to make. */}
           <img className="block aspect-video w-full" src={`${base}-first.jpg`} alt={alt} />
         </picture>
       )}
