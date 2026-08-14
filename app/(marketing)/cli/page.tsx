@@ -19,17 +19,21 @@ const DOCS = 'https://docs.hanzo.ai/docs/services/platform/getting-started/cli'
 const GITHUB = 'https://github.com/hanzoai/cli'
 const CONSOLE = 'https://console.hanzo.ai'
 
-const INSTALL = `# Install the Hanzo CLI
-curl -fsSL hanzo.sh | bash
+const INSTALL = `# Install the CLI — the same line every Hanzo surface prints
+curl -fsSL https://hanzo.sh | sh
 
-# Log in to Hanzo Cloud
-hanzo login
+# Sign in. Interactive picker, or name a provider.
+hanzo auth login
 
-# Run a coding agent against your repo
-hanzo dev "add rate limiting to the /v1/chat endpoint"
+# Bare hanzo IS a coding session in this repo
+hanzo
 
-# Build and deploy the current project
-hanzo deploy`
+# ...or hand it the task and let it run headless
+hanzo "add rate limiting to the /v1/chat endpoint"
+
+# What did that cost, and what is left
+hanzo usage summary
+hanzo billing balance`
 
 export default function CliPage() {
   return (
@@ -37,37 +41,37 @@ export default function CliPage() {
       <ProductLanding
         badge="Hanzo CLI · Developers"
         badgeIcon={Terminal}
-        title="A senior engineer in your shell"
-        lede="One CLI for the whole stack. Plan, edit, and ship code with a model in your terminal — then build, deploy, and tail logs on Hanzo Cloud without leaving the shell."
+        title="An AI engineer in your terminal"
+        lede="Type hanzo in a repo and you get a coding session. Type hanzo and a noun and you get the rest of the cloud — identity, usage, billing, clusters, machines, networks — typed straight from the API's own document."
         ctas={[
-          { label: 'Install the CLI', href: DOCS, icon: Rocket },
+          { label: 'Install from hanzo.sh', href: DOCS, icon: Rocket },
           { label: 'View on GitHub', href: GITHUB },
         ]}
-        note={{ icon: Cloud, text: 'Open source (Apache-2.0). One binary — macOS, Linux, and CI.' }}
+        note={{ icon: Cloud, text: 'Open source (MIT). One static Rust binary — macOS and Linux on amd64 and arm64, Windows on amd64. No runtime, no daemon.' }}
         what={{
           eyebrow: 'What is Hanzo CLI',
-          title: 'Your terminal, now agentic',
-          sub: 'The same command line you already live in, with a model that understands your repo and a direct line to Hanzo Cloud.',
+          title: 'A resource tree, not a pile of flags',
+          sub: 'hanzo <resource> <command>. The resources beyond the hand-written ones are generated from the OpenAPI documents, so the CLI can only ask for things the API has.',
           pillars: [
             {
               icon: Bot,
-              title: 'AI pair programmer',
-              body: 'Natural language in, working diffs out — every step explained. The CLI grounds itself in your repo before it writes a line.',
+              title: 'A coding session, metered',
+              body: 'Bare hanzo runs our dev agent with the Hanzo toolset attached and the model calls billed to your organization. Point it at claude or codex instead and it drives an agent you already have.',
             },
             {
               icon: Cloud,
-              title: 'Deploy from the shell',
-              body: 'One command from your branch to production on Hanzo Cloud — build, deploy, tail logs, and roll back.',
+              title: 'Run the cloud on your machine',
+              body: 'hanzo serve cloud starts the whole API locally, or name one service — iam, kms, gateway, storage, pubsub. hanzo engine serve puts a model on a local endpoint.',
             },
             {
               icon: Workflow,
-              title: 'Scriptable by design',
-              body: 'Pipes, exit codes, and JSON output. Drop it into Makefiles, CI jobs, and git hooks like any other Unix tool.',
+              title: 'No raw-path escape hatch',
+              body: 'There is no hanzo api verb and no URL to hand-write. Every cloud capability arrives as a typed subcommand, which is what keeps the CLI and the API from disagreeing.',
             },
           ],
         }}
         code={{
-          head: { eyebrow: 'Get started', title: 'From install to deploy in four lines' },
+          head: { eyebrow: 'Get started', title: 'Install, sign in, start working' },
           lang: 'bash',
           source: INSTALL,
           ctas: [
@@ -77,20 +81,20 @@ export default function CliPage() {
         }}
         features={{
           eyebrow: 'Capabilities',
-          title: 'Everything the stack needs, one command away',
+          title: 'What the binary carries',
           items: [
-            { icon: Code2, title: 'Repo-aware', body: 'Reads your code, conventions, and tests before it writes — no copy-paste prompts.' },
-            { icon: Bug, title: 'Debug, don’t guess', body: 'Stack trace in, root cause out. Reproduce, narrow, patch, and verify without leaving your shell.' },
-            { icon: Bot, title: 'Any coding agent', body: 'Run dev or any coding agent from the terminal, grounded in the current repository.' },
-            { icon: Rocket, title: 'Build & deploy', body: 'Build images and deploy to Hanzo Cloud; tail logs and roll back with a single command.' },
-            { icon: KeyRound, title: 'Cloud login', body: 'Authenticate once; the CLI carries your Hanzo identity to every command and surface.' },
-            { icon: ScrollText, title: 'Automation-ready', body: 'Structured output and stable exit codes make it a first-class citizen in CI.' },
+            { icon: KeyRound, title: 'Several identities at once', body: 'Hold as many principals as you need and switch between them. A second login never clobbers the first, and hanzo auth show says which one is answering right now.' },
+            { icon: Code2, title: 'Secrets arrive on stdin', body: 'Pass --token - and the credential is read from the pipe, never from argv — so nothing lands in shell history, ps, or a CI log. It is stored in the OS keychain, or an owner-only file where there is none.' },
+            { icon: Rocket, title: 'A public URL for a local port', body: 'hanzo share 3000 publishes a service over the zero-trust fabric while the port stays bound to localhost. Pass --name to keep the same subdomain next time.' },
+            { icon: Bug, title: 'Find the secret before the commit', body: 'hanzo scan walks a path for exposed credentials and exits non-zero when it finds one, which is what makes it usable as a hook rather than a habit.' },
+            { icon: ScrollText, title: 'The whole cloud, unhealthy first', body: 'hanzo status leads with what is broken, then clusters, applications and the machines on your fleet. The thing you needed to know is the first line, not the last.' },
+            { icon: Bot, title: 'Put this shell on the fabric', body: 'hanzo link publishes the terminal you are in so the console can watch it — or drive it. --read-only when you would rather be watched than typed at.' },
           ],
         }}
         finalCta={{
           icon: GitBranch,
-          title: 'Install once. Use it everywhere.',
-          sub: 'Local repos, CI, remote machines, hot fixes at 2am — the CLI comes with you.',
+          title: 'Install once. It comes with you.',
+          sub: 'A local repo, a CI job, a machine you sshed into, a fix at 2am. Same binary, same identity, same commands.',
           buttons: [
             { label: 'Install the CLI', href: DOCS, icon: Rocket },
             { label: 'GitHub', href: GITHUB },

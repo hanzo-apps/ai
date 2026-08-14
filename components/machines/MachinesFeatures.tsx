@@ -36,38 +36,38 @@ const MachinesFeatures = () => {
   const features = [
     {
       icon: Cpu,
-      title: "High-Performance GPUs",
-      description: "Access to NVIDIA H100, A100, and L4 GPUs for AI training and inference workloads.",
+      title: "Ask what exists",
+      description: "The sizes and regions you can launch into are an endpoint, not a page in the docs. Read them, then pick one — nothing to keep in sync by hand.",
       delay: 0
     },
     {
       icon: Server,
-      title: "Flexible Configurations",
-      description: "Custom CPU, memory, and storage configurations to match your specific workload requirements.",
+      title: "Price it before you buy it",
+      description: "A launch with dryRun returns the price and creates nothing. The same call without it creates the machine, so what you were quoted is what you asked for.",
       delay: 0.1
     },
     {
       icon: Zap,
-      title: "Instant Provisioning",
-      description: "Launch machines in seconds with pre-configured environments for ML frameworks and data science.",
+      title: "Metered to the organization",
+      description: "Time is debited from your org's prepaid balance while a machine is up. Before it launches, the cloud says whether you may — and what is missing if you may not.",
       delay: 0.2
     },
     {
       icon: Network,
-      title: "High-Speed Networking",
-      description: "Up to 100 Gbps networking with ultra-low latency between machines for distributed workloads.",
+      title: "One list, whoever owns them",
+      description: "Rented machines, the droplets and cluster workers behind them, and your own hardware that dialed in with hanzo link all appear as one fleet, deduplicated.",
       delay: 0.3
     },
     {
       icon: BarChart,
-      title: "Comprehensive Monitoring",
-      description: "Real-time metrics and performance monitoring for all machine resources and workloads.",
+      title: "A row per accelerator",
+      description: "The GPU view counts real cards: from the size of the nodes you rented, and from what your own workers report through nvidia-smi. Where there is no inventory, it returns nothing rather than inventing something.",
       delay: 0.4
     },
     {
       icon: Globe,
-      title: "Global Availability",
-      description: "Deploy machines in 20+ regions worldwide with automatic failover and redundancy.",
+      title: "A machine can carry an agent",
+      description: "Bind a cloud agent to a machine and the pair is one thing to launch, message, stop and tear down. Unbinding is separate, so the agent can move without the machine going with it.",
       delay: 0.5
     }
   ];
@@ -77,10 +77,10 @@ const MachinesFeatures = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <ChromeText as="h2" className="text-3xl font-bold mb-4">
-            Key Features & Capabilities
+            How renting one works
           </ChromeText>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Purpose-built infrastructure for the most demanding AI and compute workloads
+            Every step is an API call, so anything you do once by hand you can put in a script afterwards
           </p>
         </div>
 

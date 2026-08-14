@@ -33,39 +33,39 @@ const UseCaseCard = ({ title, description, features }: UseCaseCardProps) => {
 const MachinesUseCases = () => {
   const useCases = [
     {
-      title: "ML Training",
-      description: "Train large-scale AI models with high-performance GPU clusters and optimized ML frameworks.",
+      title: "Training runs",
+      description: "A job that needs cards for hours and nothing for the rest of the week.",
       features: [
-        "Multi-GPU instances with NVLink",
-        "Distributed training across multiple machines",
-        "Pre-installed PyTorch, TensorFlow, and JAX"
+        "GPU sizes named from the list the API returns",
+        "GPU-hours metered while the job runs",
+        "Cancel and the hours used so far are billed, then the job stops"
       ]
     },
     {
-      title: "Inference Optimization",
-      description: "Deploy models for inference with optimized runtime configurations.",
+      title: "Serving a model",
+      description: "A machine that stays up because something is calling it.",
       features: [
-        "GPU-accelerated inference endpoints",
-        "Automatic model quantization and optimization",
-        "Horizontal scaling for high-throughput demands"
+        "Run Hanzo Engine on a card you rented",
+        "Terminate it when the traffic goes away",
+        "The bill follows the machine, not a reservation"
       ]
     },
     {
-      title: "High-Performance Computing",
-      description: "Run scientific simulations, financial modeling, and other compute-intensive workloads.",
+      title: "Work that will not fit in a request",
+      description: "Renders, batches and simulations that take longer than an HTTP call.",
       features: [
-        "High core-count CPU machines",
-        "MPI and other HPC frameworks pre-installed",
-        "Bare metal performance with containerized convenience"
+        "A queue per GPU, plus a shared any-GPU lane",
+        "Each item says which node claimed it",
+        "Read the queue instead of guessing where a job went"
       ]
     },
     {
-      title: "Large Language Models",
-      description: "Run and fine-tune frontier Large Language Models with optimized environments.",
+      title: "Agents that need a computer",
+      description: "An agent with a machine under it, launched and torn down as one thing.",
       features: [
-        "Optimized for LLaMA, Falcon, and other open LLMs",
-        "LoRA and QLoRA fine-tuning support",
-        "Native integration with Hanzo AI endpoints"
+        "Bind a cloud agent to a machine",
+        "Message it, or stop it, by name",
+        "Tearing down the pair unbinds the agent first"
       ]
     }
   ];
@@ -78,10 +78,10 @@ const MachinesUseCases = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <ChromeText as="h2" className="text-3xl font-bold mb-4">
-            Designed for AI Workloads
+            When you want a whole machine
           </ChromeText>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Optimized infrastructure for every stage of machine learning and AI development
+            Reach for one when the work outlasts a request, or needs a card of its own
           </p>
         </div>
 

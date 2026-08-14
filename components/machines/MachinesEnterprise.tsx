@@ -28,18 +28,18 @@ const MachinesEnterprise = () => {
   const features = [
     {
       icon: Shield,
-      title: "Security & Compliance",
-      description: "Enterprise security with GDPR controls and hardware-level isolation."
+      title: "Scoped to your organization",
+      description: "A machine belongs to one org and is named within it. Every read and every terminate is checked against the org on your token, not against the id in the URL."
     },
     {
       icon: Database,
-      title: "Data Sovereignty",
-      description: "Regional deployment options to meet data residency and sovereignty requirements."
+      title: "Bring your own account",
+      description: "Link a DigitalOcean, AWS or GCP account and the clusters it holds fold into the same fleet. Your capacity, your contract, one place to see it."
     },
     {
       icon: Server,
-      title: "Reserved Capacity",
-      description: "Guaranteed availability with capacity reservations for critical workloads."
+      title: "Pick the region deliberately",
+      description: "Launches name a region from the list the API returns, so where a workload runs is a decision you made rather than one that was made for you."
     }
   ];
 
@@ -48,10 +48,10 @@ const MachinesEnterprise = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <ChromeText as="h2" className="text-3xl font-bold mb-4">
-            Enterprise-Grade Infrastructure
+            Whose machine it is
           </ChromeText>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Built for organizations with the most demanding requirements
+            Ownership, region and account are decisions the API makes you state
           </p>
         </div>
 

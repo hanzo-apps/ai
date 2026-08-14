@@ -14,9 +14,9 @@ const MachinesCTA = () => {
           }}
         >
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Power Your AI Workloads</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">Launch one, or attach one you own</h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-              Get started with Hanzo Machines today and experience high-performance AI infrastructure.
+              Rent by the hour from the console or the CLI, or run hanzo link on a machine you already have and it joins the same fleet.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button

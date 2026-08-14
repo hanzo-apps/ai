@@ -27,7 +27,7 @@ const MachinesHero = () => {
             Hanzo Machines
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
-            Dedicated AI compute infrastructure optimized for machine learning and high-performance workloads.
+            Rent a machine by the hour, metered to your organization. Ask what sizes and regions exist, price a launch before you make it, and see it in the same list as the workers you already own.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
