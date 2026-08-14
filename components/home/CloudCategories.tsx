@@ -1,12 +1,7 @@
 'use client'
 
 import { CardGrid, Section, type CardItem } from '@/components/marketing/page-kit'
-import {
-  capabilityCount,
-  categoryCount,
-  categorySlug,
-  cloudCategories,
-} from '@/lib/data/cloud-primitives'
+import { categorySlug, cloudCategories } from '@/lib/data/cloud-primitives'
 
 /**
  * The cloud taxonomy, on the apex.
@@ -42,8 +37,8 @@ const CATEGORIES: CardItem[] = cloudCategories.map((c) => ({
 export default function CloudCategories() {
   return (
     <Section
-      title={`${capabilityCount} capabilities. One API.`}
-      lede={`Every capability is one route on api.hanzo.ai/v1 — ${capabilityCount} of them across ${categoryCount} categories. Open source, metered, and settled on-chain.`}
+      title="Every capability. One API."
+      lede="Every capability is one route on api.hanzo.ai/v1. Open source, metered, and settled on-chain."
     >
       <CardGrid items={CATEGORIES} columns={2} />
     </Section>

@@ -13,7 +13,7 @@ import { CopyButton } from "@hanzo/ui/product"
 import { ProductShot } from "@hanzogui/shell"
 import CloudCategoryShowcase, { CloudCategoryMap } from "@/components/cloud/CloudCategoryShowcase"
 import { CONSOLE } from "@/components/home/nav-data"
-import { capabilityCount, categoryCount } from "@/lib/data/cloud-primitives"
+import { categoryCount } from "@/lib/data/cloud-primitives"
 import { MODELS_PHRASE } from '@/lib/data/model-count'
 import { heroShot } from "@/lib/data/product-shots"
 
@@ -131,7 +131,7 @@ function Hero() {
             href="/products"
             className="inline-flex min-h-11 items-center rounded-full border border-neutral-700 px-7 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
           >
-            Explore {capabilityCount} products
+            Explore the products
           </Link>
           <a
             href={GH}
@@ -210,7 +210,7 @@ function Primitives() {
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              {capabilityCount} primitives. {categoryCount} categories. One cloud.
+              Every primitive. One cloud.
             </h2>
             <p className="mt-4 text-lg text-neutral-400">
               Composable, open-source building blocks with one identity, one bill, and one API.

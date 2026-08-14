@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { capabilityCount, categoryCount, categorySlug, cloudCategories } from "@/lib/data/cloud-primitives";
+import { categorySlug, cloudCategories } from "@/lib/data/cloud-primitives";
 
 // Category overview cards — derived from the ONE cloud-primitive taxonomy
 // (lib/data/cloud-primitives.ts), the same source the mega-menu and the
@@ -34,10 +34,10 @@ const PlatformOverviewSection = () => {
           className="text-left mb-12"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mb-4">
-            {capabilityCount} capabilities. One API.
+            Every capability. One API.
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Everything the cloud does is one route — <code className="font-mono text-foreground/90 text-[0.95em]">api.hanzo.ai/v1/&lt;capability&gt;</code>. {capabilityCount} capabilities across {categoryCount} categories. Breadth without the overwhelm.
+            Everything the cloud does is one route — <code className="font-mono text-foreground/90 text-[0.95em]">api.hanzo.ai/v1/&lt;capability&gt;</code>. Breadth without the overwhelm.
           </p>
         </motion.div>
 
