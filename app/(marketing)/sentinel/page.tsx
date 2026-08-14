@@ -78,9 +78,11 @@ export default function SentinelPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Catch every exception, regression, and slow request before users do.
-            Stack traces with source context, release health, and performance
-            insights for backend and frontend.
+            Sentinel takes the errors your applications throw, groups the identical ones into a single issue,
+            and tells you which issues are new, which came back, and which are getting worse. It speaks the
+            Sentry wire protocol, so the client libraries you already have report to it unchanged — a DSN
+            pointing at your instance is the only line that differs. There is no Sentinel SDK to adopt, and
+            none is planned. The protocol is the interface.
           </motion.p>
 
           <motion.div
@@ -119,10 +121,11 @@ export default function SentinelPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Errors, Latency, Releases
+              Enough context to fix it without asking
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              The full picture, not just stack traces.
+              A stack trace tells you where. The rest of this tells you who, how often, since when, and what
+              they were doing.
             </p>
           </motion.div>
 
@@ -130,39 +133,39 @@ export default function SentinelPage() {
             {[
               {
                 icon: Bug,
-                title: "Error Tracking",
+                title: "One issue, not ten thousand events",
                 description:
-                  "Group identical exceptions, surface frequency, and pin owners. Source maps, breadcrumbs, and user context attached automatically.",
+                  "Identical exceptions collapse into a single issue with a count and a first-seen date. Minified frontend frames are resolved through your source maps, and the breadcrumbs leading up to the throw come with it, so you read what the person did rather than guessing.",
               },
               {
                 icon: Activity,
-                title: "Performance Monitoring",
+                title: "Traces, and profiles under them",
                 description:
-                  "Distributed tracing across services. Spot N+1 queries, slow API calls, and frontend bottlenecks before they spread.",
+                  "A request that crosses four services is one trace, and the span that took the time is visible in it. Profiles go a level down to the function. Session replay shows the same failure from the browser's side.",
               },
               {
                 icon: GitBranch,
-                title: "Release Health",
+                title: "Did this release make it worse",
                 description:
-                  "Crash-free session rate per release. Catch regressions in the first hour, roll back before pages light up.",
+                  "Crash-free sessions per release, so a regression shows up in the first hour of a rollout rather than in a support queue on Monday. Cron monitors catch the opposite failure — the job that stopped running and threw nothing at all.",
               },
               {
                 icon: Users,
-                title: "User Impact",
+                title: "Which customers are hitting it",
                 description:
-                  "Know which users hit which errors. Filter by org, plan, or environment. Reach out before they file a ticket.",
+                  "Events carry the identity and the environment they came from, so an issue can be read as a list of affected accounts. That turns triage from a guess about severity into a decision about who to call.",
               },
               {
                 icon: Bell,
-                title: "Smart Alerts",
+                title: "Where the alert goes",
                 description:
-                  "Alert on new issues, regressions, and spike anomalies. Slack, PagerDuty, email, or webhook.",
+                  "New issues, regressions and spikes route to Slack, PagerDuty, Opsgenie, Discord, Microsoft Teams, email, or a webhook of your own. It can also open the ticket — GitHub, GitLab, Jira and Bitbucket are wired both ways.",
               },
               {
                 icon: Zap,
-                title: "Drop-in SDKs",
+                title: "A fork, and it says so",
                 description:
-                  "Compatible with the Sentry SDK ecosystem. Switch hosts without changing a line of application code.",
+                  "Sentinel is a fork of Sentry, used under the Functional Source License with attribution kept current. Sentry is a trademark of Functional Software, Inc., and Sentinel is neither affiliated with nor endorsed by them. Naming what you forked is not the same as branding yourself with it.",
               },
             ].map((feature, index) => (
               <motion.div

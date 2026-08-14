@@ -69,7 +69,7 @@ export default function VisorPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            VM and bare-metal management plane
+            Machines from several clouds, through one API
           </motion.p>
 
           <motion.p
@@ -78,9 +78,10 @@ export default function VisorPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Provision, configure, monitor, and tear down virtual machines and
-            bare-metal hosts from one API. Built for AI workloads — GPU-aware,
-            image-cached, and boot-fast.
+            Launch a machine, attach a volume, open a console, tear it down — the same four verbs whether the
+            hardware is DigitalOcean, AWS, Hetzner, Azure, Google Cloud, Aliyun, Lightsail, or a KVM host in
+            your own rack. Every machine belongs to an organization, and that organization is read from the
+            signed identity on the request, never from a field the caller filled in.
           </motion.p>
 
           <motion.div
@@ -117,10 +118,10 @@ export default function VisorPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              One API for Every Host
+              What you get for the price of one integration
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              VMs, bare metal, GPUs — Visor treats them all the same.
+              A machine is a machine. The provider is a field on it.
             </p>
           </motion.div>
 
@@ -128,39 +129,39 @@ export default function VisorPage() {
             {[
               {
                 icon: Cpu,
-                title: "GPU-Aware",
+                title: "One catalogue, GPUs included",
                 description:
-                  "First-class scheduling for NVIDIA, AMD, and accelerator hosts. Topology-aware placement and partitioning.",
+                  "Regions, sizes and GPU instances from each provider, cached and priced, read through the same call. Ask for what you want; Visor knows which provider can give it to you and what it will cost there.",
               },
               {
                 icon: HardDrive,
-                title: "Image Caching",
+                title: "Volumes and images",
                 description:
-                  "Content-addressable image store on every node. Cold-boot a 50GB image in seconds, not minutes.",
+                  "Attach and detach block storage, launch from a provider image or one of your own. Batch launches name themselves in sequence and group under the prefix, so a fleet is just machines and there is no second object to learn.",
               },
               {
                 icon: Network,
-                title: "Software-Defined Networking",
+                title: "Pools, and managed Kubernetes",
                 description:
-                  "Per-tenant overlay networks, security groups, and floating IPs. Wire-speed via XDP and VXLAN.",
+                  "Node pools group machines by shape and role. Managed Kubernetes clusters are provisioned through the same surface, so the cluster and the machines beside it are one inventory rather than two consoles.",
               },
               {
                 icon: Activity,
-                title: "Live Telemetry",
+                title: "Priced before it exists",
                 description:
-                  "Per-VM CPU, memory, GPU, disk, and network metrics streamed to your observability sink in real time.",
+                  "A launch can run as a dry run: it returns the quote and spends nothing. A real launch is metered against the organization as it goes, per provider, so the bill is assembled from the same numbers the quote came from.",
               },
               {
                 icon: Terminal,
-                title: "Console & Serial",
+                title: "A console in the browser",
                 description:
-                  "Browser-based VNC and serial console. Recover stuck hosts without leaving the dashboard.",
+                  "RDP, VNC and SSH reach the machine through a gateway and render in a tab — no client to install, no key to hand out, and no bastion of your own to keep patched. The session is a record, not just a connection.",
               },
               {
                 icon: ShieldCheck,
-                title: "Hardware-Rooted Trust",
+                title: "Every action leaves a row",
                 description:
-                  "TPM attestation and measured boot for bare metal. Verified images, signed kernels, encrypted disks.",
+                  "Who launched it, who opened a console, who destroyed it, under which organization and project. Authorization runs through the same grant calculus the rest of the estate uses, so a machine cannot be reached by anyone whose token does not cover it.",
               },
             ].map((feature, index) => (
               <motion.div
