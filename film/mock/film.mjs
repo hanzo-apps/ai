@@ -7,9 +7,13 @@
  * changes the film's identity hash and re-renders it; nothing here is a list
  * of products to maintain.
  *
- *   node bin/build.mjs                 every product, skipping ones already current
- *   node bin/build.mjs --only cli,kms  just these
- *   node bin/build.mjs --force         re-render even if current
+ * Rendered by @hanzo/frames, our own build of the renderer. Driven by the
+ * Makefile beside this file, which is also where the storage decision is
+ * written down:
+ *
+ *   make                 every product, skipping the ones already current
+ *   make ONLY=cli,kms    just these
+ *   make FORCE=1         re-render everything
  */
 
 import { execFileSync } from "node:child_process";
@@ -19,7 +23,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
-const CLI = process.env.FRAMES_CLI ?? "hyperframes@0.7.108";
+const CLI = process.env.FRAMES_CLI ?? "@hanzo/frames@0.7.83";
 const CATALOG = process.env.CATALOG_URL ?? "https://api.hanzo.ai/v1/commerce/catalog?brand=hanzo";
 
 /* Tailwind 500s — the same ramp the site's brandColor names refer to. */
@@ -38,6 +42,8 @@ const HEX = {
  * added to the catalog tomorrow still renders. */
 const SURFACE = {
   terminal: ["cli", "api", "functions", "builds", "crawl", "logs", "indexer", "embeddings"],
+  table: ["providers", "dns", "api-keys", "search", "evals", "datasets", "alerts",
+          "annotation-queues", "o11y"],
   editor: ["prompts", "sql", "docdb", "authz", "sdks", "ide", "score-configs"],
   chat: ["chat", "bot", "playground", "inference", "sessions", "desktop"],
   graph: ["agents", "edge", "clusters", "gateway", "nodes", "vpc", "cdn",

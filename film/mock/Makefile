@@ -17,6 +17,14 @@
 # Three files per product, one prefix, the shape @hanzo/frame uses for the apex
 # hero: <slug>-wide.mp4, <slug>-wide-first.jpg (frame 0, the poster) and
 # <slug>-wide-last.jpg (the last frame, what a reduced-motion viewer is served).
+#
+# The rendered films are COMMITTED, under public/mock. `pnpm build` copies
+# public/ and never runs a renderer, so a fresh clone builds a site whose films
+# all resolve, with no Chrome and no ffmpeg on the runner and nothing added to
+# build time. Run this target when the catalog changes or a surface is edited,
+# and commit what it writes. e2e/gates/mock.spec.ts asserts, against the export
+# that ships, that every slug a page wires has all three of its files — an
+# uncommitted render fails there rather than in a visitor's browser.
 
 OUT := ../../public/mock
 
