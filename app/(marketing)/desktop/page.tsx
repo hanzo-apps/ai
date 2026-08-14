@@ -18,39 +18,39 @@ import {
 const features = [
   {
     icon: Cloud,
-    title: "All of Hanzo Cloud",
+    title: "Nothing to scaffold",
     description:
-      "Sign in once and reach every Hanzo Cloud surface — projects, deployments, logs, billing, secrets — natively, without a browser tab.",
+      "An agent is made in the window: give it a job, some tools, and a model. There is no project to create first and no file to check in before it exists.",
   },
   {
     icon: Brain,
-    title: "Models, On Tap",
+    title: "Local model or cloud model, per agent",
     description:
-      "Chat with Zen models and 100+ third-party LLMs from a window that's always one keystroke away.",
+      "Point one agent at a model running on your machine and another at one on Hanzo Cloud. It is a setting on the agent, not a decision about the whole install.",
   },
   {
     icon: Bot,
-    title: "Agents That Live On Your Desk",
+    title: "They work together",
     description:
-      "Run, monitor, and intervene in long-running agents from a real native UI. See tool calls and outputs as they happen.",
+      "Agents share context and hand steps to each other, so a job that needs several of them is one workflow instead of you copying between three chat windows.",
   },
   {
     icon: Wifi,
-    title: "Online or Off",
+    title: "It works with the network off",
     description:
-      "Pin local models for offline work. Sync notes, prompts, and conversations the moment you reconnect.",
+      "With a local model pinned, an agent keeps running when the connection goes. Nothing has to be uploaded for it to do its job.",
   },
   {
     icon: Lock,
-    title: "Enterprise Auth",
+    title: "Your keys stay on your machine",
     description:
-      "SSO via Hanzo IAM with your org policy, MFA, and KMS-backed credentials. No tokens stored in plaintext, ever.",
+      "Keys and the data an agent touches stay local. An agent that has to pay for something spends from a key you hold, on hardware you own.",
   },
   {
     icon: Settings,
-    title: "Native Performance",
+    title: "MCP is how it reaches your tools",
     description:
-      "Built on a native shell — instant launch, no Electron sluggishness, GPU-accelerated where it matters.",
+      "Agents speak the Model Context Protocol, so a tool you have already connected elsewhere works here without a second integration written for this app.",
   },
 ]
 
@@ -103,7 +103,7 @@ export default function DesktopPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Hanzo Cloud, Models, and Agents — natively
+            Build agents on your own machine
           </motion.p>
 
           <motion.p
@@ -112,8 +112,10 @@ export default function DesktopPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            One signed-in window for every Hanzo product on your machine.
-            macOS, Windows, and Linux. Always-on, always-connected, always private.
+            A window for making agents and letting them work together. Each one
+            runs on a model you pick — local or on Hanzo Cloud — and what it
+            touches stays on the machine unless you send it somewhere. macOS,
+            Windows and Linux; 4GB of memory and 2GB of disk.
           </motion.p>
 
           <motion.div
@@ -150,10 +152,10 @@ export default function DesktopPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              The Hanzo OS, on your desktop
+              What you can build in it
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Skip the browser. Skip the tabs. Open one app and you're already there.
+              Free and open source. Download it, and the first agent is a few minutes of clicking.
             </p>
           </motion.div>
 
@@ -234,10 +236,10 @@ export default function DesktopPage() {
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Stop tab-switching. Start shipping.
+                Download it and build one
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
-                One window. Every Hanzo product. Sign in once and never lose context again.
+                Pick a model, describe the job, hand it the tools. If the model is a local one, the whole thing runs without an account.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">

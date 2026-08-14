@@ -26,8 +26,8 @@ const HanzoExtensionHero = () => {
             Hanzo <span className="text-foreground">Extension</span>
           </h1>
           <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto mb-12">
-            Access Hanzo AI directly in your browser
-            <br />for an integrated web experience
+            Your browser, as a tool an agent can use.
+            <br />It opens tabs, reads pages, and clicks things — in the session you are already signed into.
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -62,7 +62,7 @@ const HanzoExtensionHero = () => {
                 <div className="relative z-10 h-full flex items-center justify-center">
                   <div className="text-center">
                     <div className="text-xs uppercase tracking-widest text-muted-foreground">Extension Preview</div>
-                    <div className="text-2xl font-semibold text-[var(--white)] mt-2">Browser-native AI</div>
+                    <div className="text-2xl font-semibold text-[var(--white)] mt-2">Chrome · Firefox · Safari</div>
                   </div>
                 </div>
               </div>

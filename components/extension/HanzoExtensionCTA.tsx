@@ -22,10 +22,10 @@ const HanzoExtensionCTA = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Get Started with Hanzo Extension Today
+            Install it and open a tab
           </h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto mb-10">
-            Join thousands of users who have enhanced their browsing experience with Hanzo AI capabilities.
+            Once it is registered, your coding agent can check the page it just changed instead of asking you to.
           </p>
           
           <Button 

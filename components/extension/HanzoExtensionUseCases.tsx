@@ -32,35 +32,35 @@ const HanzoExtensionUseCases = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold mb-4">Use Cases</h2>
+          <h2 className="text-3xl font-bold mb-4">What you would use it for</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Discover how the Hanzo Extension can enhance your daily workflows
+            Mostly the work that only exists inside a browser window
           </p>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <UseCaseCard 
             icon={FileText}
-            title="Content Research"
-            description="Quickly summarize articles, extract key insights, and save information to your knowledge base while browsing."
+            title="Check the change you just made"
+            description="An agent that edited a page can open it, look at what rendered, and read the console — instead of telling you it thinks the fix worked."
           />
-          
-          <UseCaseCard 
+
+          <UseCaseCard
             icon={Search}
-            title="Enhanced Web Search"
-            description="Get more relevant search results with AI-powered refinements and suggestions based on your context."
+            title="Behind a login"
+            description="An internal dashboard, a vendor console, an admin panel. It runs in the session you already have, so there is no service account to provision for a one-off task."
           />
-          
-          <UseCaseCard 
+
+          <UseCaseCard
             icon={Code}
-            title="Developer Assistance"
-            description="Get code explanations, documentation lookups, and debugging suggestions while reviewing technical content."
+            title="Debug the request, not the guess"
+            description="Network requests and console messages come back as data. When a page misbehaves, the agent can read what the browser saw."
           />
-          
-          <UseCaseCard 
+
+          <UseCaseCard
             icon={ShoppingCart}
-            title="Shopping Assistant"
-            description="Compare products, find better deals, and get instant reviews while shopping online."
+            title="The long boring form"
+            description="Multi-step flows that exist only in a UI and have no API behind them. It fills them in and tells you where it got stuck."
           />
         </div>
       </div>

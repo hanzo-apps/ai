@@ -27,43 +27,43 @@ const HanzoExtensionFeatures = () => {
   const features = [
     {
       icon: Sparkles,
-      title: "AI Assistance",
-      description: "Get intelligent assistance for any website or content you're browsing."
+      title: "It uses your session",
+      description: "The agent drives the browser you are already signed into, so a page behind a login is a page it can read. Nothing has to be scraped from the outside."
     },
     {
       icon: Zap,
-      title: "Quick Access",
-      description: "One-click access to Hanzo AI capabilities from any web page."
+      title: "No port to open",
+      description: "The extension talks to the local Hanzo daemon through a native messaging host over a Unix socket. There is no WebSocket, no localhost port, and nothing else on the machine can dial in."
     },
     {
       icon: Lock,
-      title: "Privacy Focused",
-      description: "Your data stays private with client-side processing and optional analytics."
+      title: "Connected means registered",
+      description: "It only reports itself connected once the daemon lists it as a provider. An open pipe to a wedged process is the failure this replaced, and it is checked on every tick."
     },
     {
       icon: Globe,
-      title: "Works Everywhere",
-      description: "Compatible with all major websites and content platforms."
+      title: "Three browsers, one behaviour",
+      description: "Chrome, Firefox and Safari builds come out of the same source. The evaluate rule is shared, so the same snippet from a caller behaves identically in all three."
     },
     {
       icon: Lightbulb,
-      title: "Smart Suggestions",
-      description: "Contextual recommendations based on your browsing activity."
+      title: "Tabs are addressable",
+      description: "Each browser registers separately, so listing tabs asks the browser that is active — and naming a tab id from another browser's list is how you reach the other one."
     },
     {
       icon: Share2,
-      title: "Easy Sharing",
-      description: "Share content directly with your team or to your Hanzo workspace."
+      title: "The rest of your tools, too",
+      description: "The same repo carries connectors for the software your work already lives in — documents, tickets, design files, mail, calendars — so an agent reaches them the same way it reaches a tab."
     },
     {
       icon: FileText,
-      title: "Content Summaries",
-      description: "Get instant summaries of articles, documentation, and long-form content."
+      title: "Read a page as text",
+      description: "It hands back page content, console messages and network requests, which is what makes it useful for checking your own site rather than just browsing someone else's."
     },
     {
       icon: Command,
-      title: "Keyboard Shortcuts",
-      description: "Power users can access all features with customizable shortcuts."
+      title: "Installs from a file",
+      description: "Load it unpacked in Chrome or as a temporary add-on in Firefox while you are working on it. The build produces all three targets in one command."
     }
   ];
 
@@ -77,9 +77,9 @@ const HanzoExtensionFeatures = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold mb-4">Powerful Features</h2>
+          <h2 className="text-3xl font-bold mb-4">How it works</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Enhance your browsing experience with AI-powered capabilities
+            The extension registers as a provider on the local fabric. Whatever can reach the fabric can then reach a tab.
           </p>
         </motion.div>
         

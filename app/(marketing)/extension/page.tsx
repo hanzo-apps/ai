@@ -7,9 +7,9 @@ import HanzoExtensionCTA from "@/components/extension/HanzoExtensionCTA"
 
 import { ProductFooter } from "@/components/products/ProductFooter"
 export const metadata = {
-  title: "Hanzo Extension - Browser AI Assistant",
+  title: "Hanzo Extension — your browser, as a tool an agent can use",
   description:
-    "AI-powered browser extension for enhanced web productivity.",
+    "A Chrome, Firefox and Safari extension that lets a Hanzo agent drive the browser you are already signed into: open tabs, read pages, fill forms, and read the console and network traffic back. It joins the local Hanzo fabric through a native messaging host, so there is no port to open.",
 }
 
 export default function ExtensionPage() {
