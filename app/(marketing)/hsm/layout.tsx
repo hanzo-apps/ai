@@ -7,7 +7,7 @@ import { pageMeta } from '@/lib/page-meta'
 // itself say the same thing.
 export const metadata: Metadata = pageMeta({
   title: 'Hanzo HSM',
-  description: 'Cloud HSM. FIPS 140-3 hardware-backed key management for production workloads.',
+  description: 'One interface to the key hardware you already trust — AWS KMS, Azure Key Vault, Google Cloud KMS, or a Zymbit module. Hanzo holds a handle, never the key.',
   path: '/hsm',
 })
 

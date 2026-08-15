@@ -3,10 +3,10 @@ import { ogImages, twitterImages } from '@/lib/constants/og'
 
 export const metadata: Metadata = {
   title: 'Enterprise AI — Hanzo AI',
-  description: 'Enterprise-grade AI infrastructure with custom SLAs, dedicated support, air-gapped deployment, SSO, audit logs, and volume pricing. Techstars-backed, SOC 2 readiness.',
+  description: 'Run Hanzo in our cloud or in yours. Air-gapped deployment, SSO, audit logs, volume pricing, and a person to call.',
   openGraph: {
     title: 'Enterprise AI — Hanzo AI',
-    description: 'Enterprise-grade AI infrastructure with custom SLAs, dedicated support, air-gapped deployment, SSO, audit logs, and volume pricing. Techstars-backed, SOC 2 readiness.',
+    description: 'Run Hanzo in our cloud or in yours. Air-gapped deployment, SSO, audit logs, volume pricing, and a person to call.',
     url: 'https://hanzo.ai/enterprise',
     siteName: 'Hanzo AI',
     type: 'website',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Enterprise AI — Hanzo AI',
-    description: 'Enterprise-grade AI infrastructure with custom SLAs, dedicated support, air-gapped deployment, SSO, audit logs, and volume pricing. Techstars-backed, SOC 2 readiness.',
+    description: 'Run Hanzo in our cloud or in yours. Air-gapped deployment, SSO, audit logs, volume pricing, and a person to call.',
     images: twitterImages,
   },
 }
