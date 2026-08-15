@@ -143,9 +143,15 @@ const page = (f, kind) => {
       .main { padding: 26px 28px; overflow: hidden; }
       .h { font-size: 26px; font-weight: 600; color: #fff; }
       .sub { margin-top: 7px; font-size: 17px; color: #7e7e7e; }
+      /* Frame 0 is the POSTER: <Frame> ships the first frame as the still, so a
+         film that animates its content in from nothing publishes an EMPTY
+         console to every reader before the video loads — and on a page that
+         calls this a mockup, empty reads as broken. The rows are therefore
+         present from the first frame and only BRIGHTEN, so every frame of this
+         film, including the one that is a picture, looks used. */
       .rows { margin-top: 22px; display: flex; flex-direction: column; gap: 9px; }
       .row { display: flex; align-items: center; gap: 18px; height: 52px; padding: 0 16px;
-        border: 1px solid #1a1a1a; border-radius: 10px; background: #0a0a0a; opacity: 0; }
+        border: 1px solid #1a1a1a; border-radius: 10px; background: #0a0a0a; opacity: 0.55; }
       .verbs { display: flex; gap: 6px; width: 210px; flex: none; }
       .verbs i { font-family: "Geist Mono", monospace; font-style: normal; font-size: 14px;
         letter-spacing: 0.04em; color: #9a9a9a; border: 1px solid #262626; border-radius: 6px;
@@ -183,10 +189,10 @@ const page = (f, kind) => {
       // by name.
       const tl = gsap.timeline();
       for (let i = 0; i < ${shown.length}; i++) {
-        tl.fromTo("#r" + i, { opacity: 0, y: 14 },
+        tl.fromTo("#r" + i, { opacity: 0.55, y: 14 },
           { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.45 + i * 0.2);
       }
-      tl.fromTo("#foot", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.45 + ${shown.length} * 0.2);
+      tl.fromTo("#foot", { opacity: 0.4 }, { opacity: 1, duration: 0.6 }, 0.45 + ${shown.length} * 0.2);
       // Held on the populated console — the frame a reduced-motion viewer gets,
       // and it has to look used.
       tl.to({}, { duration: 3.6 });

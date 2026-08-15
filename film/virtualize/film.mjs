@@ -99,9 +99,15 @@ const page = (f) => {
       .h { font-size: 26px; font-weight: 600; color: #fff; }
       .sub { margin-top: 7px; font-size: 17px; color: #7e7e7e; }
 
+      /* Frame 0 is the POSTER: <Frame> ships the first frame as the still, so a
+         film that animates its content in from nothing publishes an EMPTY
+         console to every reader before the video loads — and on a page that
+         calls this a mockup, empty reads as broken. The rows are therefore
+         present from the first frame and only BRIGHTEN, so every frame of this
+         film, including the one that is a picture, looks used. */
       .rows { margin-top: 22px; display: flex; flex-direction: column; gap: 11px; }
       .row { display: flex; align-items: center; gap: 20px; padding: 16px 18px;
-        border: 1px solid #1a1a1a; border-radius: 11px; background: #0a0a0a; opacity: 0; }
+        border: 1px solid #1a1a1a; border-radius: 11px; background: #0a0a0a; opacity: 0.55; }
       .left { width: 260px; flex: none; }
       .head { font-size: 19px; color: #ededed; }
       .route { margin-top: 4px; font-family: "Geist Mono", monospace; font-size: 15px; color: #5f5f5f; }
@@ -112,7 +118,7 @@ const page = (f) => {
       /* The one plane they compose into, stated as the console's own footer. */
       .plane { margin-top: 22px; display: flex; align-items: center; gap: 12px;
         padding: 14px 18px; border: 1px solid #303030; border-radius: 11px; background: #111;
-        opacity: 0; }
+        opacity: 0.55; }
       .plane .dot { width: 9px; height: 9px; border-radius: 999px; background: #fff; flex: none; }
       .plane .name { font-size: 19px; color: #fff; }
       .plane .addr { margin-left: auto; font-family: "Geist Mono", monospace; font-size: 16px; color: #8f8f8f; }
@@ -153,10 +159,10 @@ const page = (f) => {
       // and stutters under the frame-seek capture engine.
       const tl = gsap.timeline();
       for (let i = 0; i < ${SOURCES.length}; i++) {
-        tl.fromTo("#r" + i, { opacity: 0, y: 16 },
+        tl.fromTo("#r" + i, { opacity: 0.55, y: 16 },
           { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.5 + i * 0.42);
       }
-      tl.fromTo("#plane", { opacity: 0, y: 14 },
+      tl.fromTo("#plane", { opacity: 0.55, y: 14 },
         { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 2.3);
       // Held on the composed cloud: the frame a reduced-motion viewer is served.
       tl.to({}, { duration: 5.2 });
