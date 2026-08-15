@@ -264,18 +264,25 @@ function Hero({ layers, models }: { layers: number; models: string | null }) {
             {/* SOLID INK. A white -> neutral gradient clipped to the glyphs
                 makes the END of the line its dimmest point, so the last word
                 reads as a render that never finished. Hanzo's ink is
-                paper-white. */}
-            Give your cloud superpowers
+                paper-white.
+
+                The line names the product rather than a feeling. "Superpowers"
+                was the whole promise and it described nothing -- a reader
+                finished the fold unable to say what this is. What it does IS
+                the surprise: metal you own and accounts you rent stop being
+                separate places. */}
+            All your infrastructure.
+            <br />
+            One cloud.
           </h1>
 
           <p
             style={rise(2)}
             className="hz-rise mt-7 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl"
           >
-            Virtualize every layer of infrastructure — compute, networking, identity, and
-            services — into one AI-native cloud, composed from any combination of bare metal, your
-            own cloud accounts, and the hyperscalers&rsquo; regions and services. So you can build,
-            ship, and scale with superpowers.
+            Bare metal in your rack, the cloud accounts you already pay for, and
+            the hyperscalers&rsquo; regions — compute, networking, identity and services —
+            answer as one cloud. You build against one thing instead of five.
           </p>
 
           {/* The one number on the fold, and it is asked of the gateway at read
