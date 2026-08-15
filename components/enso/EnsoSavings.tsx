@@ -136,18 +136,24 @@ export default function EnsoSavings() {
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-5 md:p-6">
             <div className="space-y-3">
               {COORD.map((c) => (
-                <div key={c.name} className="grid grid-cols-[8.5rem_1fr_4rem] items-center gap-3 sm:grid-cols-[10rem_1fr_4.5rem]">
-                  <div className="text-right text-sm">
+                // The bar is the only thing on this row that carries a quantity, so it is the
+                // column that must not be squeezed. Three side-by-side tracks need ~640px to
+                // work: the two fixed ones (label + price) cost 200px, and at 390 that left the
+                // bar 92px — narrower than the label beside it, on a chart that IS the bar. So
+                // below `sm` the row stacks: name and price share the top line, the bar spans
+                // the full width beneath it and measures 316px instead of 92px.
+                <div key={c.name} className="grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-2 sm:grid-cols-[10rem_1fr_4.5rem]">
+                  <div className="text-left text-sm sm:text-right">
                     <span className={c.banned ? 'font-semibold text-white' : 'text-neutral-300'}>{c.name}</span>
                     {c.banned && <span className="block font-mono text-[10px] text-neutral-500">not used to coordinate</span>}
                   </div>
-                  <div className="h-6 overflow-hidden rounded bg-black/40">
+                  <div className="col-span-2 row-start-2 h-6 overflow-hidden rounded bg-black/40 sm:col-span-1 sm:col-start-2 sm:row-start-1">
                     <div
                       className={`h-full rounded ${c.banned ? 'bg-neutral-600' : 'bg-white'}`}
                       style={{ width: `${Math.max((c.price / COORD_MAX) * 100, 1.5)}%` }}
                     />
                   </div>
-                  <div className="text-right font-mono text-sm font-semibold tabular-nums text-neutral-200">{fmtPrice(c.price)}</div>
+                  <div className="col-start-2 row-start-1 text-right font-mono text-sm font-semibold tabular-nums text-neutral-200 sm:col-start-3">{fmtPrice(c.price)}</div>
                 </div>
               ))}
             </div>
