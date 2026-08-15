@@ -3,7 +3,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "@/components/motion";
-import { useAnimation } from "framer-motion";
 import { Github, ExternalLink, Users, BookOpen } from "lucide-react";
 import { Button } from "@hanzo/ui";
 
@@ -31,35 +30,35 @@ const statsItems = [
   }
 ];
 
+/**
+ * The observer here COUNTS, it does not conceal.
+ *
+ * It used to do both: one `IntersectionObserver` started the tallies AND drove
+ * an `animate={controls}` that held both card grids at `opacity: 0` until it
+ * fired — so a reader the observer missed got the stats section as a blank
+ * 872px. Starting a count when the number comes into view is a real thing to
+ * watch for; deciding whether the copy exists is not, and the two had no
+ * business on the same trigger. The reveal is `whileInView` now, like every
+ * other on the site, which cannot hide anything (`components/motion.tsx`).
+ */
 const Community = () => {
   const [isInView, setIsInView] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const controls = useAnimation();
-  
+
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !isInView) {
-          setIsInView(true);
-          controls.start("visible");
-        }
+        if (entry.isIntersecting) setIsInView(true);
       },
       { threshold: 0.2 }
     );
-    
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-    
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [controls, isInView]);
+    observer.observe(el);
+    return () => observer.unobserve(el);
+  }, []);
 
   const containerVariants = {
-    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
@@ -67,9 +66,8 @@ const Community = () => {
       }
     }
   };
-  
+
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
   };
 
@@ -94,8 +92,8 @@ const Community = () => {
         <div ref={ref}>
           <motion.div
             variants={containerVariants}
-            initial="hidden"
-            animate={controls}
+            whileInView="visible"
+            viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
           >
             {statsItems.map((item, index) => (
@@ -126,8 +124,8 @@ const Community = () => {
           
           <motion.div
             variants={containerVariants}
-            initial="hidden"
-            animate={controls}
+            whileInView="visible"
+            viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
             <motion.div

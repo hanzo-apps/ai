@@ -1,16 +1,11 @@
 'use client'
 
 
-import React, { useRef } from "react";
-import { motion } from "@/components/motion";
-import { useInView } from "framer-motion";
+import React from "react";
 import { AlertTriangle, Eye, Zap } from "lucide-react";
 import AIFeatureCard from "./AIFeatureCard";
 
 const AIFeatureList = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-  
   const features = [
     {
       icon: <Eye className="h-10 w-10 text-foreground" />,
@@ -33,7 +28,7 @@ const AIFeatureList = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16" ref={ref}>
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
       {features.map((feature, index) => (
         <AIFeatureCard
           key={index}

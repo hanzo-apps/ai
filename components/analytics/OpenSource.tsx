@@ -73,18 +73,18 @@ const OpenSource = () => {
                 >
                   <div className="flex justify-center mb-2">{item.icon}</div>
                   <div className="flex justify-center items-baseline">
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={isInView ? { opacity: 1 } : {}}
-                      transition={{ duration: item.countUpDuration }}
-                      className="text-3xl font-bold"
-                    >
+                    {/* The tally starts when the card arrives; the NUMBER does not
+                        wait for it. This span was `initial={{opacity:0}}` with the
+                        fade gated on the same viewport event, so until it fired the
+                        figure was blank beside a visible "M+" — and if it never
+                        fired, permanently. It reads 0 and then counts. */}
+                    <span className="text-3xl font-bold">
                       {isInView ? (
                         <CountUp end={item.value} duration={item.countUpDuration} />
                       ) : (
                         0
                       )}
-                    </motion.span>
+                    </span>
                     <span className="text-3xl font-bold">{item.suffix}</span>
                   </div>
                   <div className="text-muted-foreground text-sm mt-1">{item.label}</div>

@@ -14,17 +14,12 @@ interface AIFeatureCardProps {
 }
 
 const AIFeatureCard = ({ icon, title, description, delay, index }: AIFeatureCardProps) => {
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
-  };
-
   return (
     <motion.div
       key={index}
-      variants={itemVariants}
-      initial="hidden"
-      animate="hidden"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
       className="bg-gradient-to-br from-neutral-900/60 to-neutral-900/40 rounded-xl p-8 border border-neutral-800 hover:border-white/30 transition-colors group"
     >
