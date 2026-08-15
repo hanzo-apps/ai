@@ -1,0 +1,31 @@
+{
+  "source": "https://api.github.com/orgs",
+  "fetched": "2026-08-15T17:31:36.796Z",
+  "repos": 590,
+  "orgs": [
+    {
+      "name": "hanzoai",
+      "repos": 298
+    },
+    {
+      "name": "luxfi",
+      "repos": 132
+    },
+    {
+      "name": "zenlm",
+      "repos": 86
+    },
+    {
+      "name": "hanzo-js",
+      "repos": 6
+    },
+    {
+      "name": "hanzo-apps",
+      "repos": 65
+    },
+    {
+      "name": "zoo-labs",
+      "repos": 3
+    }
+  ]
+}

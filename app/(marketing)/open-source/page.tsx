@@ -1,38 +1,11 @@
 'use client'
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "@/components/motion";
 import { Github, GitBranch, Star, Heart, ArrowRight, ExternalLink, Code, Building2, Scale, Sparkles, Check, Wallet, DollarSign, Coins, ShieldCheck, Eye, Users } from "lucide-react";
 import OSSCatalog from "@/components/oss/OSSCatalog"
 import OSSComputeDividends from "@/components/oss/OSSComputeDividends";
-
-// Real org repo counts (fallbacks verified 2026-02-27; refreshed dynamically)
-const ORG_NAMES = ["hanzoai", "luxfi", "zenlm", "hanzo-js", "hanzo-apps", "zoo-labs"];
-const ORG_DEFAULTS: Record<string, number> = {
-  hanzoai: 303, luxfi: 289, zenlm: 83, "hanzo-js": 15, "hanzo-apps": 8, "zoo-labs": 25,
-};
-
-function useOSSStats() {
-  const [totalRepos, setTotalRepos] = useState(
-    Object.values(ORG_DEFAULTS).reduce((a, b) => a + b, 0)
-  );
-  useEffect(() => {
-    let sum = 0;
-    let fetched = 0;
-    ORG_NAMES.forEach(org => {
-      fetch(`https://api.github.com/orgs/${org}`)
-        .then(r => r.ok ? r.json() : null)
-        .then(d => {
-          if (d?.public_repos) sum += d.public_repos;
-          else sum += ORG_DEFAULTS[org];
-          fetched++;
-          if (fetched === ORG_NAMES.length) setTotalRepos(sum);
-        })
-        .catch(() => { fetched++; sum += ORG_DEFAULTS[org]; if (fetched === ORG_NAMES.length) setTotalRepos(sum); });
-    });
-  }, []);
-  return totalRepos;
-}
+import oss from "@/lib/data/oss.json";
 
 const OSS_FOUNDATIONS = [
   { name: "Python", description: "The language powering our ML/AI stack", url: "https://python.org", github: "https://github.com/python/cpython", creator: "Python Software Foundation", license: "PSF", emoji: "🐍" },
@@ -77,10 +50,11 @@ const COMMITMENTS = [
 ]
 
 const OpenSource = () => {
-  const totalRepos = useOSSStats();
+  // Counted once per build by scripts/sync-oss.mjs. Both numbers come off the
+  // same snapshot, so the orgs and the repositories they hold cannot disagree.
   const stats = [
-    { label: "Public Repositories", value: `${totalRepos}+`, icon: Code },
-    { label: "GitHub Organizations", value: "6", icon: Building2 },
+    { label: "Public Repositories", value: `${oss.repos}+`, icon: Code },
+    { label: "GitHub Organizations", value: String(oss.orgs.length), icon: Building2 },
     { label: "Open License", value: "MIT/Apache", icon: Scale },
     { label: "Open-Weight Models", value: "90+", icon: Sparkles },
   ];
@@ -117,7 +91,7 @@ const OpenSource = () => {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.05 }}
-                className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6"
+                className="hz-display mb-6"
               >
                 <span className="text-foreground">Building in the</span>
                 <br />

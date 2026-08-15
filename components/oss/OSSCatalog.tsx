@@ -629,10 +629,16 @@ const OSSCatalog: React.FC = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
+            {/* A control whose whole label is a glyph has to SAY what it does,
+                and a control that is a switch has to say which way it is set.
+                The darker background was the only thing saying so, and a screen
+                reader cannot read a background. */}
             <div className="flex border border-border rounded-md">
               <Button
                 variant="ghost"
                 size="sm"
+                aria-label="Grid view"
+                aria-pressed={view === 'grid'}
                 onClick={() => setView('grid')}
                 className={cn('px-2', view === 'grid' && 'bg-neutral-800')}
               >
@@ -641,6 +647,8 @@ const OSSCatalog: React.FC = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                aria-label="List view"
+                aria-pressed={view === 'list'}
                 onClick={() => setView('list')}
                 className={cn('px-2', view === 'list' && 'bg-neutral-800')}
               >
@@ -693,7 +701,11 @@ const OSSCatalog: React.FC = () => {
             {selectedCollection && (
               <Badge variant="outline" className="bg-primary/10 text-foreground border-white/30">
                 Collection
-                <button onClick={() => setSelectedCollection(null)} className="ml-1">
+                <button
+                  onClick={() => setSelectedCollection(null)}
+                  aria-label="Clear the collection filter"
+                  className="ml-1"
+                >
                   <X className="w-3 h-3" />
                 </button>
               </Badge>
@@ -707,6 +719,7 @@ const OSSCatalog: React.FC = () => {
                     setSelectedCategories(selectedCategories.filter(c => c !== filter));
                     setSelectedLanguages(selectedLanguages.filter(l => l !== filter));
                   }}
+                  aria-label={`Remove the ${filter} filter`}
                   className="ml-1"
                 >
                   <X className="w-3 h-3" />
