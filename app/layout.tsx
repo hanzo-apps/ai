@@ -52,12 +52,21 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   // Full modern favicon set from the canonical Hanzo mark (public/favicon.*).
   // Single source of truth — there is no app/icon.* convention file.
+  // THE SVG LEADS, AND THE .ico CARRIES NO `sizes`. `sizes="any"` is not a hint
+  // that a raster fits every box — it makes the .ico the browser's PREFERRED
+  // candidate, outranking a typed SVG whatever the order, so the vector never
+  // drew and the tab showed whatever that 5 KB raster was baked from. hanzoai/id
+  // hit the identical bug: it swapped the SVG per brand and the swap was
+  // invisible for the same reason.
+  //
+  // Unqualified, the .ico is what a browser with no SVG support falls back to,
+  // which is the job it should have had all along.
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
       { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
       { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/favicon.ico' },
     ],
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
