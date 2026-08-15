@@ -216,14 +216,21 @@ const MODELS_PER_PAGE = 50;
 // API pins access-control-allow-origin to https://hanzo.ai exactly, so every
 // preview deploy and local run renders this. scripts/sync-pricing.mjs refreshes
 // it on prebuild; `source`/`fetched` in the file say where it came from.
-const snapshot = pricingData as unknown as PricingResponse;
+const snapshot = pricingData as unknown as Omit<PricingResponse, "hanzoModels"> & {
+  hanzoModels?: ApiModel[];
+};
 
 const STATIC_DATA: PricingResponse = {
   // Never `?? new Date()`: fabricating "now" for a file that forgot to say how
   // old it is renders a confident, wrong "Updated today" in the footer.
   updated: snapshot.updated,
   summary: snapshot.summary,
-  hanzoModels: snapshot.hanzoModels ?? [],
+  // The snapshot is the API's own payload, so it takes the API's own
+  // normalization. 12 of its 35 rows carry no `specs` — every embedding,
+  // rerank, image, audio and video model — and reading one as a HanzoModel
+  // asserts a field that is not there. The card renders it unconditionally, so
+  // the assertion throws on first paint and takes the whole tab down with it.
+  hanzoModels: (snapshot.hanzoModels ?? []).map(apiToHanzo),
   thirdPartyModels: snapshot.thirdPartyModels ?? [],
   tools: snapshot.tools ?? [],
   providers: snapshot.providers,
@@ -329,14 +336,20 @@ const APIPricing = () => {
             <p className="text-muted-foreground mb-3">{model.description}</p>
           )}
 
-          <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3 flex-wrap">
-            <span>
-              Parameters: <span className="text-foreground/80">{model.specs.params}</span>
-            </span>
-            <span>
-              Architecture: <span className="text-foreground/80">{model.specs.arch}</span>
-            </span>
-          </div>
+          {(model.specs.params || model.specs.arch) && (
+            <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3 flex-wrap">
+              {model.specs.params && (
+                <span>
+                  Parameters: <span className="text-foreground/80">{model.specs.params}</span>
+                </span>
+              )}
+              {model.specs.arch && (
+                <span>
+                  Architecture: <span className="text-foreground/80">{model.specs.arch}</span>
+                </span>
+              )}
+            </div>
+          )}
 
           {model.features && (
             <div className="mb-4">

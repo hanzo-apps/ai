@@ -885,6 +885,20 @@ itself — the package's 55 hand-maintained rows for a failed fetch, the API's 4
 for a successful one — and meant refreshing the snapshot could not have helped,
 because the rows it refreshed were not the rows being rendered.
 
+And it takes the API's NORMALIZATION with it: `STATIC_DATA` maps the file
+through the same `apiToHanzo` the live fetch uses. The snapshot is the API's
+payload, so its fields are optional where `HanzoModel` is required — 12 of the
+35 rows carry no `specs` at all (every embedding, rerank, image, audio and
+video model), while the card renders `model.specs.params` unconditionally.
+Reading the file as `HanzoModel[]` asserted a field that is not there, and the
+assertion threw on first paint and took the entire tab with it.
+
+**A tab the prerender never opens has no build coverage.** `/pricing` renders
+one tab, so `pnpm build` prerendered the plans and never once ran the rate
+tables — the API tab was dead on the live site and every gate was green.
+Whatever a page shows only after a click has to be clicked, in a browser,
+before it is believed.
+
 `lib/leaderboard.ts` and `components/enso/EnsoLanding.tsx` still hold correct
 literals on purpose. They are the only public surfaces stating the true
 4/20 · 2/4 · 5/25, so they convert to readers AFTER the catalog is authoritative
