@@ -61,13 +61,28 @@ export function Mockup({
     return () => io.disconnect()
   }, [])
 
+  // A product's own screen arrives with a window drawn around it — titlebar,
+  // chrome, the lot — so framing it again draws a second window around the
+  // first and it reads as a thumbnail of the product rather than the product.
+  // That is why `slug` films paint nothing here.
+  //
+  // A `base` film is not a screen. It is a diagram, and a diagram is ink on the
+  // same black the page is, with no chrome of its own to give it an edge. On
+  // the cloud fold it dissolved: a faint grey rectangle a reader's eye slid
+  // past, on the one visual above the fold. So a diagram gets the edge its
+  // subject does not carry — a hairline and a surface a shade off the page,
+  // which is what tells an eye where the figure starts.
+  const diagram = at !== undefined
+
   return (
-    // No frame. The film already draws a window — its own titlebar, its own
-    // chrome — so a bordered box around it is a second window drawn around the
-    // first, which reads as a thumbnail of the product rather than the product.
-    // The div stays because the observer needs something to watch; it paints
-    // nothing.
-    <div ref={ref}>
+    <div
+      ref={ref}
+      className={
+        diagram
+          ? 'overflow-hidden rounded-xl border border-neutral-800 bg-neutral-950 shadow-2xl shadow-black/60'
+          : undefined
+      }
+    >
       {film ? (
         <video
           className={`block w-full ${ratio}`}

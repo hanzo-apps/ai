@@ -335,9 +335,16 @@ function Hero({ layers, models }: { layers: number; models: string | null }) {
             behind one address. It carries no copy — a film cannot reflow or
             answer a screen reader — so its meaning is the alt. */}
         <div style={rise(5)} className="hz-rise mt-14 min-w-0 lg:mt-0">
+          {/* The console, running. A reader deciding whether to put their
+              infrastructure here wants to see the thing they will be looking at
+              every day, not a diagram of how it fits together -- the diagram
+              answers a question nobody asks on the fold, and drawn as ink on the
+              same black as the page it had no edge and slid straight past the
+              eye. The stack diagram still runs further down, where the reader
+              has already agreed to care how it works. */}
           <Mockup
-            base="/cloud-virtualize-wide"
-            alt="Bare metal, your own cloud accounts (digitalocean, aws, gcp, azure) and hyperscaler regions composing into one cloud at api.hanzo.ai/v1, carrying all ten layers."
+            slug="console"
+            alt="The Hanzo console: machines, clusters and services from bare metal and connected cloud accounts, in one list."
           />
         </div>
 
