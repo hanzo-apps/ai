@@ -129,7 +129,12 @@ const MARKS: Record<string, string> = {
   // `clip-path: circle(11.5px …)` resolves against the RENDERED box instead, so
   // at an 18px icon it cuts nothing and the venn squares off into a scribble.
   zoo:
-    '<defs><clipPath id="zoo-cut"><circle cx="12" cy="12" r="11.5"></circle></clipPath></defs><g clip-path="url(#zoo-cut)" fill="none" stroke="currentColor"><circle cx="12.203" cy="6.27" r="9.509" stroke-width="1.341"></circle><circle cx="6.189" cy="15.454" r="9.509" stroke-width="1.341"></circle><circle cx="17.486" cy="15.454" r="9.509" stroke-width="1.341"></circle><circle cx="12" cy="12" r="10.769" stroke-width="1.463"></circle></g>',
+    // The three petals carry Zoo's own primaries, taken by POSITION from Zoo's
+    // disc (zoo-disc.svg): top green, bottom-left red, bottom-right blue, whose
+    // pairwise overlaps are the secondaries the full disc shows. The enclosing
+    // ring stays `currentColor` — it is the frame, not one of the three, and a
+    // fourth hue there would read as a fourth petal.
+    '<defs><clipPath id="zoo-cut"><circle cx="12" cy="12" r="11.5"></circle></clipPath></defs><g clip-path="url(#zoo-cut)" fill="none" stroke="currentColor"><circle cx="12.203" cy="6.27" r="9.509" stroke-width="1.341" stroke="#00A652"></circle><circle cx="6.189" cy="15.454" r="9.509" stroke-width="1.341" stroke="#ED1C24"></circle><circle cx="17.486" cy="15.454" r="9.509" stroke-width="1.341" stroke="#2E3192"></circle><circle cx="12" cy="12" r="10.769" stroke-width="1.463"></circle></g>',
 }
 
 /**
@@ -168,8 +173,43 @@ const OF: Record<string, string> = {
   zen: 'zoo',
 }
 
+/**
+ * The mark's NAME, resolved through the alias table — not its body. The body
+ * and the hue are both read under this one key, so a lab cannot end up wearing
+ * one lab's glyph in another lab's colour.
+ */
 const look = (key: string): string | undefined =>
-  key ? MARKS[key] ?? MARKS[OF[key] ?? ''] : undefined
+  !key ? undefined : MARKS[key] ? key : MARKS[OF[key] ?? ''] ? OF[key] : undefined
+
+/**
+ * A lab's own colour. Every body here is `currentColor`, so ONE declaration on
+ * the `<svg>` colours the whole mark — which is why this is a table of hues and
+ * not a second set of bodies. The values are the same brand hexes the
+ * `public/logos/color/*.svg` set was generated with, so the inline mark and the
+ * `<image href>` mark a chart draws cannot disagree.
+ *
+ * ABSENCE IS A CHOICE, and it is the reason three famous labs are missing.
+ * OpenAI and xAI publish their mark as `#000000` and Moonshot as `#16191E`;
+ * painting those would put near-black on a near-black page and delete the mark.
+ * Their real treatment is the page's ink — white here, dark on `.light` — which
+ * is exactly what `currentColor` already resolves to in BOTH themes, so the fix
+ * is to say nothing rather than to invent a lighter blue for them.
+ *
+ * Enso is absent for a different reason: our ring is house ink by design, not a
+ * lab's brand, and it stays the colour of the text it sits beside.
+ */
+const HUE: Record<string, string> = {
+  anthropic: '#C37E4E',
+  deepseek: '#4D6BFE',
+  gemini: '#4285F4',
+  meta: '#0064E0',
+  minimax: '#F23F5D',
+  mistral: '#FA520F',
+  nvidia: '#649D00',
+  qwen: '#615CED',
+  xiaomimimo: '#EF6200',
+  zhipu: '#3859FF',
+}
 
 /**
  * The model's own family wins over the lab that trained it, because our gateway
@@ -222,8 +262,11 @@ export function ProviderMark({
       fill="currentColor"
       fillRule="evenodd"
       className={`shrink-0 ${className ?? ''}`}
-      style={{ flex: 'none' }}
-      dangerouslySetInnerHTML={{ __html: mark }}
+      // `color`, not `fill` — the bodies use `currentColor` for BOTH fill and
+      // stroke, so one property colours a filled glyph and a drawn one alike.
+      // A lab with no hue inherits the page's ink, which is the whole point.
+      style={{ flex: 'none', color: HUE[mark] }}
+      dangerouslySetInnerHTML={{ __html: MARKS[mark] }}
     />
   )
 }

@@ -15,22 +15,22 @@ import {
 
 export const revalidate = 3600
 
-// The two families this endpoint leads with: Enso, which we train, and Zen,
-// which Zoo Labs Foundation trains and we serve first-party. Membership is about
-// what the page leads with, not about who trained it — anything not in this list
-// groups by the lab that trained it, further down.
-const FEATURED = [
-  'enso',
-  'enso-flash',
-  'enso-ultra',
-  'zen5',
-  'zen5-pro',
-  'zen5-coder',
-  'zen5-flash',
-  'zen-vl',
-  'zen-image',
-  'zen-embedding',
-]
+// The two families this endpoint leads with, kept APART because the thing a
+// reader most needs to know differs between them: Enso is ours and answers here
+// only, while Zen's weights are published and can be run without us at all.
+// Under one heading that distinction has nowhere to live, and the page spent a
+// paragraph explaining a split its own layout had collapsed.
+//
+// Membership is about what the page leads with, not about who trained it —
+// anything not in these lists groups by the lab that trained it, further down.
+
+/** Ours. Trained by Hanzo, served at this address and no other. */
+const ENSO = ['enso', 'enso-flash', 'enso-ultra']
+
+/** Zoo Labs Foundation's, weights published. We serve it first-party. */
+const ZEN = ['zen5', 'zen5-pro', 'zen5-coder', 'zen5-flash', 'zen-vl', 'zen-image', 'zen-embedding']
+
+const FEATURED = [...ENSO, ...ZEN]
 
 // "Top models" shows one flagship per major lab, in the order we would point a
 // visitor at. The labs are named; the model is resolved from the live catalogue,
@@ -168,8 +168,9 @@ export default async function ModelsPage() {
   // selector asked for `category === 'flagship'`, which no model in the
   // catalogue has ever carried — so every slot fell through to the
   // third-party clause and the featured models never appeared.
-  const featured = FEATURED.flatMap((id) => byId.get(id) ?? [])
-  const featuredIds = new Set(featured.map((m) => m.id))
+  const enso = ENSO.flatMap((id) => byId.get(id) ?? [])
+  const zen = ZEN.flatMap((id) => byId.get(id) ?? [])
+  const featuredIds = new Set(FEATURED.flatMap((id) => byId.get(id) ?? []).map((m) => m.id))
   // One canonical flagship per lab in TOP_LABS, in that order. `find` takes the
   // first canonical model the catalogue lists for the lab, which is its newest;
   // a lab with nothing canonical drops out rather than showing a variant.
@@ -203,13 +204,14 @@ export default async function ModelsPage() {
           </div>
           <h1 className="mb-6 text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
-              Enso and Zen, on one endpoint
+              Every model, one endpoint
             </span>
           </h1>
           <p className="mx-auto mb-10 max-w-2xl text-lg text-neutral-300 md:text-xl">
-            Enso is our frontier family. Zen is Zoo Labs Foundation&rsquo;s open-weight family — call it here or
-            run the weights yourself. Models from other labs answer on the same endpoint when you need one.
-
+            <span className="font-medium text-white">Enso</span>{' '}is our frontier family, and it answers
+            here only. <span className="font-medium text-white">Zen</span>{' '}is Zoo Labs Foundation&rsquo;s
+            open-weight family — call it here, or download the weights and run it yourself. Every other lab
+            answers on the same address, under the same key.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
@@ -228,19 +230,37 @@ export default async function ModelsPage() {
         </div>
       </section>
 
-      {/* Our models */}
+      {/* Enso — ours. Its own section, because "you can only get this here" and
+          "you can take this home" are opposite promises and cannot share copy. */}
       <section className="px-6 py-20 md:py-28">
         <div className="mx-auto max-w-6xl">
-          <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Featured models</h2>
+          <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Enso</h2>
           <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
-            <span className="font-medium text-foreground">Enso</span> is our frontier family.{' '}
-            <span className="font-medium text-foreground">Zen</span> is the open-weight family from{' '}
-            <Link href="https://zoo.industries" className="underline hover:no-underline">Zoo Labs Foundation</Link>,
-            with the weights published. Both are served here.
-
+            Our frontier family, trained by Hanzo and served at this address only.
           </p>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
-            {featured.map((model) => (
+            {enso.map((model) => (
+              <ModelCard key={model.id} model={model} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Zen — open weights. The download is the point, so the section says it
+          in its own words rather than as a clause on someone else's. */}
+      <section className="border-t border-border px-6 py-20 md:py-28">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Zen</h2>
+          <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
+            The open-weight family from{' '}
+            <Link href="https://zoo.industries" className="underline hover:no-underline">
+              Zoo Labs Foundation
+            </Link>
+            . We serve it first-party — and the weights are published, so you can run it yourself and never
+            call us at all.
+          </p>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+            {zen.map((model) => (
               <ModelCard key={model.id} model={model} />
             ))}
           </div>
@@ -351,27 +371,6 @@ export default async function ModelsPage() {
         </div>
       </section>
 
-      {/* Stats bar */}
-      <section className="border-t border-border bg-secondary/10 px-6 py-16">
-        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-6 text-center md:grid-cols-4">
-          <div>
-            <div className="text-3xl font-semibold">2</div>
-            <div className="mt-1 text-sm text-muted-foreground">Featured model families</div>
-          </div>
-          <div>
-            <div className="text-3xl font-semibold">1</div>
-            <div className="mt-1 text-sm text-muted-foreground">Host</div>
-          </div>
-          <div>
-            <div className="text-3xl font-semibold">1</div>
-            <div className="mt-1 text-sm text-muted-foreground">API Key</div>
-          </div>
-          <div>
-            <div className="text-3xl font-semibold">$0</div>
-            <div className="mt-1 text-sm text-muted-foreground">To Start</div>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }
