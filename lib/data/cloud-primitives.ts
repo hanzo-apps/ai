@@ -400,6 +400,32 @@ export const cloudLayers: CloudCategory[] = [...cloudCategories].sort((a, b) => 
   return (at < 0 ? depth.length : at) - (bt < 0 ? depth.length : bt)
 })
 
+/**
+ * How many layers the cloud has — counted, never typed.
+ *
+ * cloud.hanzo.ai's headline is a number: "Ten integrated layers." That is the
+ * line a reader trusts most and the line nobody thinks to re-check, so it is
+ * derived from the same catalog that draws the layers directly beneath it. If
+ * commerce ever carries nine categories or eleven, the headline says nine or
+ * eleven in the same build the ring and the list change.
+ */
+export const layerCount: number = cloudCategories.length
+
+/**
+ * A small count as prose spells it — `10` → `Ten`.
+ *
+ * Display type is the one place a numeral reads worse than a word, and it is
+ * exactly where a hand-typed word would go stale. Beyond twelve, prose uses the
+ * numeral too, so the fallback is the numeral rather than a longer table.
+ */
+export function spell(n: number): string {
+  const words = [
+    'Zero', 'One', 'Two', 'Three', 'Four', 'Five',
+    'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve',
+  ]
+  return words[n] ?? String(n)
+}
+
 /** Slugs hosted by the `/cloud/[slug]` dynamic route — every leaf without a page of its own. */
 export const cloudPrimitiveSlugs: string[] = allCategories
   .flatMap((c) => c.items)
