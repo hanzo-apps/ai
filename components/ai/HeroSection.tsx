@@ -170,7 +170,7 @@ const HeroSection = () => {
 
                   {/* Action buttons */}
                   <div className="flex gap-2">
-                    <Link href="/download">
+                    <Link href="https://hanzo.app/download">
                       <Button
                         size="sm"
                         variant="outline"

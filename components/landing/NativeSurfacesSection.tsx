@@ -126,7 +126,7 @@ const NativeSurfacesSection = () => {
             Read the install guide
           </a>
           <Link
-            href="/download"
+            href="https://hanzo.app/download"
             className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium text-sm border border-white/25 bg-transparent hover:bg-white/10 hover:border-white/50 transition-colors"
           >
             <Download className="w-4 h-4" />
