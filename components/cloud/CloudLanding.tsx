@@ -7,7 +7,6 @@ import { ArrowRight, Github } from "lucide-react"
 import { CopyButton } from "@hanzo/ui/product"
 import Ladder from "@/components/cloud/Ladder"
 import Layers from "@/components/cloud/Layers"
-import Orbit from "@/components/cloud/Orbit"
 import { CONSOLE } from "@/components/home/nav-data"
 import { useModelCount } from '@/hooks/useModelCount'
 import { cloudCategories, layerCount, spell, tour } from '@/lib/data/cloud-primitives'
@@ -306,12 +305,6 @@ function Hero({ layers, models }: { layers: number; models: string | null }) {
           </div>
         </div>
 
-        {/* Capped by WIDTH, not height: the ring is square, so a width cap is
-            the only one it can obey without distorting. 44rem keeps it under a
-            900px fold once the section's own padding is paid for. */}
-        <div className="mx-auto w-full max-w-[30rem] sm:max-w-[34rem] lg:max-w-[38rem] xl:max-w-[44rem]">
-          <Orbit />
-        </div>
       </div>
     </section>
   )
