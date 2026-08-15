@@ -1,12 +1,18 @@
 import type { Metadata } from 'next'
 import { ogImages, twitterImages } from '@/lib/constants/og'
 
+// NO PRICES HERE. This description outlived two repricings still advertising
+// Pro $20, Plus $100 and Max $200 — a ladder with a tier we retired — because
+// metadata is the one copy nobody re-reads and it cannot read the catalog: it
+// is static export, resolved at build with no place to await a fetch. The cards
+// state the numbers, live. This states the shape, which does not move.
+
 export const metadata: Metadata = {
   title: 'Pricing — Hanzo AI',
-  description: 'Pay only for what you use. Pro $20/mo, Plus $100/mo, Max $200/mo — one subscription, unified AI usage across hanzo.ai, hanzo.app & hanzo.team, 3 invited guests included. Team $25/user/mo, minimum 2 seats. Enterprise: custom SLAs and dedicated support.',
+  description: 'Start free on our free models. Paid plans open the best models, lift the limits and include spendable credit every month. Business is per user with a two seat minimum; Enterprise is custom.',
   openGraph: {
     title: 'Pricing — Hanzo AI',
-    description: 'Pay only for what you use. Pro $20/mo, Plus $100/mo, Max $200/mo — one subscription, unified AI usage across hanzo.ai, hanzo.app & hanzo.team, 3 invited guests included. Team $25/user/mo, minimum 2 seats. Enterprise: custom SLAs and dedicated support.',
+    description: 'Start free on our free models. Paid plans open the best models, lift the limits and include spendable credit every month. Business is per user with a two seat minimum; Enterprise is custom.',
     url: 'https://hanzo.ai/pricing',
     siteName: 'Hanzo AI',
     type: 'website',
@@ -15,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing — Hanzo AI',
-    description: 'Pay only for what you use. Pro $20/mo, Plus $100/mo, Max $200/mo — one subscription, unified AI usage across hanzo.ai, hanzo.app & hanzo.team, 3 invited guests included. Team $25/user/mo, minimum 2 seats. Enterprise: custom SLAs and dedicated support.',
+    description: 'Start free on our free models. Paid plans open the best models, lift the limits and include spendable credit every month. Business is per user with a two seat minimum; Enterprise is custom.',
     images: twitterImages,
   },
 }
