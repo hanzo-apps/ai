@@ -47,19 +47,12 @@ const catalog = JSON.parse(
   readFileSync(join(here, "..", "..", "lib", "data", "catalog.json"), "utf8"),
 );
 
-/** Depth, base to crown. The one fact the catalog does not state. */
-const STACK = [
-  "web3",           // the chain everything settles on
-  "compute",
-  "data",
-  "network",
-  "security",
-  "infrastructure", // the deploy plane — PaaS is a layer, not the platform
-  "observe",
-  "dev",
-  "ai",
-  "apps",           // what a person opens
-];
+/** Depth, base to crown — read from lib/data/stack.ts, which the hero uses too. */
+const STACK = readFileSync(join(here, "..", "..", "lib", "data", "stack.ts"), "utf8")
+  .match(/export const STACK = \[([\s\S]*?)\] as const/)[1]
+  .split("\n")
+  .map((l) => (l.match(/'([a-z0-9-]+)'/) || [])[1])
+  .filter(Boolean);
 
 const LAYERS = STACK.map((id) => {
   const c = catalog.categories.find((x) => x.id === id);
