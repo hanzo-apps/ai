@@ -9,9 +9,9 @@
 // the subject. That is the whole idea, and it is why this shares film/stack's
 // geometry rather than inventing a second look.
 //
-// Every word is the catalog's, and the depth is film/stack's STACK. Neither is
-// restated here: this imports both, so a layer added, renamed or re-ordered
-// there moves every one of these films on the next render.
+// Every word is the catalog's, and the depth is lib/data/stack.json. Neither is
+// restated here: this reads both, so a layer added, renamed or re-ordered there
+// moves every one of these films on the next render.
 
 import { mkdirSync, writeFileSync, copyFileSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -25,14 +25,21 @@ const catalog = JSON.parse(
   readFileSync(join(here, "..", "..", "lib", "data", "catalog.json"), "utf8"),
 );
 
-// The one declaration of depth — lib/data/stack.ts, which the hero reads too.
-const STACK = readFileSync(join(here, "..", "..", "lib", "data", "stack.ts"), "utf8")
-  .match(/export const STACK = \[([\s\S]*?)\] as const/)[1]
-  .split("\n")
-  .map((l) => (l.match(/'([a-z0-9-]+)'/) || [])[1])
-  .filter(Boolean);
+// The one declaration of depth, read from the file that owns it. It used to be
+// scraped out of film/stack/film.mjs with a regex over that file's SOURCE — a
+// reader that a comment reflow breaks, and that reports the breakage as "read 0
+// layers" rather than as what it is.
+const STACK = JSON.parse(
+  readFileSync(join(here, "..", "..", "lib", "data", "stack.json"), "utf8"),
+);
 
-if (STACK.length !== 10) throw new Error(`read ${STACK.length} layers from lib/data/stack.ts, expected 10`);
+// The stack is the WHOLE platform or it is a diagram of something else. Compared
+// against the catalog rather than against a typed ten, so a category commerce
+// adds stops the render until stack.json says where it stands.
+if (STACK.length !== catalog.categories.length)
+  throw new Error(
+    `stack.json declares ${STACK.length} layers, the catalog carries ${catalog.categories.length}`,
+  );
 
 const LAYERS = STACK.map((id) => {
   const c = catalog.categories.find((x) => x.id === id);

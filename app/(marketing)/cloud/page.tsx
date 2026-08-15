@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import CloudLanding from "@/components/cloud/CloudLanding"
 import { ogImages, twitterImages } from '@/lib/constants/og'
+import { cloudCategories, layerCount, spell } from '@/lib/data/cloud-primitives'
 
 // The umbrella "Explore Cloud" landing and the single canonical /cloud route —
 // the CloudLanding served under the shared (marketing) site header +
@@ -20,13 +21,21 @@ import { ogImages, twitterImages } from '@/lib/constants/og'
 // are switched on and off between builds. The page states the number where it
 // can ask for it (see `useModelCount`); the metadata states the breadth without
 // asserting an arithmetic it has no way to recheck.
-const TITLE = "Hanzo Cloud — the infrastructure behind your agents and apps"
-const SUMMARY = `One cloud to provision, secure, and bill your AI stack — every model we serve, Base backends, IAM, KMS, and vector + full-text search, metered per organization. Self-host the open-source components or run it managed.`
+//
+// The LAYER count is a different kind of fact and is stated here, because it is
+// settled at exactly the moment this string is written: the same build that
+// bakes this description reads the catalog that decides how many there are. It
+// is derived rather than typed for the same reason the headline is — a share
+// card that says ten while the page shows nine is a lie nobody would notice.
+const COUNT = spell(layerCount).toLowerCase()
+const NAMES = cloudCategories.map((c) => c.title).join(', ')
+const TITLE = `Hanzo Cloud — ${COUNT} integrated layers, one bill, no assembly tax`
+const SUMMARY = `AI infrastructure, inference, data, and agents built into one platform. Every layer answers on one origin, to one key, against one balance — so the code that would hold ${COUNT} vendors together is code you never write. Run it managed, or run the same open-source image yourself.`
 
 export const metadata: Metadata = {
   title: TITLE,
   description:
-    `Provision, deploy, secure, and bill everything your AI agents and apps run on: one API for every model we serve, Base app backends, IAM and KMS, and vector plus full-text search — metered pay-as-you-go and billed per organization. Run it managed on Hanzo Cloud, or self-host the open-source components on your own Kubernetes.`,
+    `${spell(layerCount)} integrated layers — ${NAMES} — on one origin, one identity and one bill. The assembly tax is the accounts, keys, SDKs, invoices and glue code that stitching ${COUNT} vendors together costs you every year; integrated means those joins are already made. Run it managed on Hanzo Cloud, or self-host the same open-source image on your own Kubernetes.`,
   openGraph: {
     title: TITLE,
     description: SUMMARY,
