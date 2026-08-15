@@ -138,7 +138,14 @@ const CATEGORY: Record<string, { icon: CloudIcon; tagline: string }> = {
   network: { icon: Network, tagline: 'Connect, route, and protect every service.' },
   security: { icon: Shield, tagline: 'Identity, keys, and audit for the whole cloud.' },
   dev: { icon: Terminal, tagline: 'Clients, SDKs, and keys for the whole API.' },
-  platform: { icon: Layers, tagline: 'Source to production as declared state.' },
+  // `infrastructure`, not `platform`. The catalog renamed this category — the
+  // section it sits in is called Platform and a category cannot nest inside a
+  // section of its own name — and the key here was left on the old id, so the
+  // lookup missed and the category rendered with the fallback Cloud icon and NO
+  // tagline at all. It was the one tile on the front door with nothing written
+  // under it, on every surface that reads this map: the mega-menu column, the
+  // homepage grid, the orbit's centre, and the `/products/<id>` landing.
+  infrastructure: { icon: Layers, tagline: 'Source to production as declared state.' },
   observe: { icon: Activity, tagline: 'Logs, metrics, traces, and cost in one pane.' },
   web3: { icon: Landmark, tagline: 'On-chain infrastructure for the cloud.' },
   apps: { icon: LayoutDashboard, tagline: 'Production apps built on the cloud.' },
