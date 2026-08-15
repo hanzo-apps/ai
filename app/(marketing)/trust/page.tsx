@@ -7,9 +7,14 @@ import { Page, PageHero, Section, Prose, CardGrid, Cta, type CardItem } from '@/
  * The trust page.
  *
  * Every card below names a mechanism that was read in the source before it was
- * written here, and nothing is on this page that could not be pointed at. The
- * controls a reviewer asks about are the ones we have; the certifications they
- * ask for are the ones we do not, and both are said in the same voice.
+ * written here, and nothing is on this page that could not be pointed at.
+ *
+ * It leads with what a reviewer can GET — a questionnaire answered, a working
+ * session, the control detail, a framework scoped to their engagement — because
+ * that is the useful half and it is all available. The frameworks we do not hold
+ * are stated too, once, in a section that says so plainly. Opening with the
+ * denial made the page argue against itself: a reviewer establishes that fact in
+ * one email either way, so it costs nothing to say and everything to lead with.
  *
  * The banned claim is not a word, it is a shape: anything that lets a reader
  * conclude a report exists. `e2e/gates/trust-copy.spec.ts` holds the page to
@@ -112,31 +117,72 @@ const KEYS: CardItem[] = [
   },
 ]
 
+/**
+ * What a reviewer can actually get, and how fast.
+ *
+ * Deliberately no framework names here. The copy gate refuses any sentence that
+ * names one without denying we hold it, and that rule exists because a badge row
+ * on /security once rendered four framework names with green checkmarks while the
+ * qualifiers that made them honest sat in a field the markup never printed. A row
+ * of logos is the shape of that defect, so this row offers artifacts instead —
+ * every one of which we can send.
+ */
+const REQUEST: CardItem[] = [
+  {
+    title: 'A security questionnaire, answered',
+    description:
+      'Send the one your process uses — SIG, CAIQ, VSA, or your own spreadsheet. We answer it against the code, and where an answer is a mechanism rather than a yes, we point at the mechanism.',
+  },
+  {
+    title: 'An architecture review',
+    description:
+      'A working session with the engineers who wrote it. Identity, tenancy, the audit trail, key custody — whichever part your reviewer wants to press on, in as much depth as they want to go.',
+  },
+  {
+    title: 'The control detail behind this page',
+    description:
+      'Everything summarised below, at the level a reviewer needs: the algorithms, the parameters, the failure behaviour, and what happens at each boundary. Under NDA where your process requires one.',
+  },
+  {
+    title: 'A framework scoped to your engagement',
+    description:
+      'Tell us what your process runs on and what your reviewer needs to see. We scope the work with you as part of the enterprise agreement rather than pointing at a checkmark.',
+  },
+]
+
 export default function TrustPage() {
   return (
     <Page>
       <PageHero
         eyebrow="Trust"
         icon={ShieldCheck}
-        title="The controls, not a badge"
-        lede="Hanzo does not hold SOC 2, ISO 27001, or FedRAMP. There is no report behind this page. What there is instead is the code — how you get in, what a credential reaches, what gets written down, and where the keys live."
+        title="Security you can read"
+        lede="How you get in, what a credential reaches, what gets written down, and where the keys live — each one a mechanism you can point at in the source. Ask for the detail your review needs and we will send it."
       />
 
-      <Section title="Where we stand">
+      <Section
+        title="What you can ask us for"
+        lede="Most reviews want the same four things. All four are available now, and the first three come back the same week."
+      >
+        <CardGrid items={REQUEST} columns={2} />
+      </Section>
+
+      <Section title="Where we stand today">
         <Prose>
           <p>
-            A page like this usually opens with logos. Ours cannot, because we have not earned them, and a
-            security reviewer finds that out in one email. So the argument here is the other one: we run the
-            controls those audits examine, and you can read most of them.
+            We run the controls those audits examine, and this page is the evidence — every mechanism below
+            was read in the source before it was written here. Bring your questionnaire and we will answer it
+            against the code rather than against a summary of it.
           </p>
           <p>
-            Formal certification is scoped per enterprise engagement. Tell us which framework your process
-            requires and what your reviewer needs to see, and we will tell you what it takes. We would rather
-            have that conversation than put a checkmark next to a word.
+            On the frameworks themselves, plainly, because a security reviewer establishes this in one email
+            and it should not cost you the email: Hanzo does not hold SOC 2, ISO 27001, or FedRAMP today.
+            Formal certification is scoped per enterprise engagement — tell us which framework your process
+            runs on and what your reviewer needs to see, and we will scope it with you.
           </p>
           <p>
-            Everything below was read in the source before it was written here. If a control you need is not
-            on this page, that is because we could not point at it, and the honest answer is to ask.
+            If a control you need is not on this page, ask. Where we have it we will show you the code, and
+            where we do not you will get a straight answer the same day.
           </p>
         </Prose>
       </Section>
@@ -173,27 +219,33 @@ export default function TrustPage() {
         <CardGrid items={KEYS} columns={2} />
       </Section>
 
-      <Section title="What we do not claim">
+      <Section
+        title="Status, stated plainly"
+        lede="So your reviewer can establish this here rather than by asking, and so nothing on this page can be relied on that should not be."
+      >
         <Prose>
           <p>
-            <strong>No certification.</strong> We do not hold SOC 2, ISO 27001, FedRAMP, PCI DSS, or HITRUST.
-            There is no report, and there is no audit platform behind this page mirroring one.
+            <strong>Frameworks.</strong> We do not hold SOC 2, ISO 27001, FedRAMP, PCI DSS, or HITRUST today,
+            and this page mirrors no audit platform. Certification is scoped per engagement — the fourth card
+            above is how that conversation starts.
           </p>
           <p>
-            <strong>No FIPS validation.</strong> Our code implements published standards, ML-KEM and ML-DSA
-            among them. Implementing a standard is not holding a certificate, and a 140-3 validation belongs
-            to the vendor of a module, not to us.
+            <strong>FIPS.</strong> Our code implements published standards, ML-KEM and ML-DSA among them.
+            Implementing a standard is not the same as holding a validation, and a 140-3 validation belongs to
+            the vendor of a module rather than to us. Where your deployment needs validated modules, the
+            signing interface already reaches AWS KMS, Google Cloud KMS, Azure Key Vault and Zymbit — ask and
+            we will map yours.
           </p>
           <p>
-            <strong>No passkey sign-in.</strong> Passkey credentials can be stored and managed, but nothing
-            challenges one, so a passkey cannot complete a sign-in on the build running today. The login
-            screen does not offer it — which is the only honest thing a login screen can do about a method
-            the server cannot perform.
+            <strong>Passkeys.</strong> Passkey credentials can be stored and managed, and the sign-in
+            challenge is not in the build running today — so the login screen does not offer it, which is the
+            only honest thing a login screen can do about a method the server cannot yet perform. Second
+            factors that do work: an authenticator app, SMS, and email, with recovery codes.
           </p>
           <p>
-            <strong>No availability figure here.</strong> An uptime number is a contractual commitment. Ours
-            lives in the agreement, where it has consequences, rather than on a marketing page where it does
-            not.
+            <strong>Availability.</strong> An uptime number is a contractual commitment, so ours lives in the
+            agreement where it has consequences rather than on a marketing page where it does not. Ask for
+            the number your agreement would carry and we will put it in writing.
           </p>
         </Prose>
       </Section>
@@ -215,10 +267,10 @@ export default function TrustPage() {
       </Section>
 
       <Section
-        title="Ask us the hard questions"
-        lede="Bring your questionnaire, your architecture review, and the framework your process runs on. We will answer what we can and say so where we cannot."
+        title="Bring us the hard questions"
+        lede="Your questionnaire, your architecture review, your framework. We answer against the code, we move at the speed of your review, and you will always know which of those two you are getting."
       >
-        <Cta href="/contact-sales">Talk to us about an enterprise deployment</Cta>
+        <Cta href="/contact-sales">Request a review or an enterprise deployment</Cta>
       </Section>
     </Page>
   )
