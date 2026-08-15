@@ -1,17 +1,46 @@
 'use client'
 
+/**
+ * hanzo.ai's page about Hanzo Chat.
+ *
+ * THE SPLIT. hanzo.chat is the chat product and owns the invitation to use it —
+ * a visitor who lands there gets a composer and can type. This page is the
+ * company's page ABOUT that product: what it is, and that the code is open. It
+ * is the only one of the two with a reason to say the second half, and it hands
+ * every reader who wants the first half over to hanzo.chat, which is the
+ * canonical address and the first button here.
+ *
+ * WHAT THIS PAGE STOPPED SAYING. It used to be pitched as "a chat app for the
+ * whole cloud" whose thread was "a window onto the account — the same key,
+ * tools, agents and files your code uses". That is a developer's console, and
+ * cloud.hanzo.ai already sells the cloud. It also claimed a routing cost in
+ * microseconds that nothing here measures.
+ *
+ * FIVE CAPABILITIES CAME OFF, each checked in hanzoai/chat rather than assumed:
+ * image generation ships no key and has no endpoint behind it; MCP is under a
+ * standing build gate refusing it until something filters its tools, so a reader
+ * may bring their own server but we do not hand them tools; the agent
+ * marketplace is off for the USER role; conversation search reads env vars
+ * nothing sets; and projects are a card linking to hanzo.app.
+ *
+ * The self-host quickstart came off too, and that one is worth stating plainly:
+ * it published the wrong port for as long as it existed, named three of five
+ * services, and `cp .env.example .env && make up` does not come up clean — UID
+ * and GID are commented out and the search key is empty. Publishing an install
+ * that fails is its own kind of untruth. The claim stays and the reader is sent
+ * to the repo, which is where an install that works will live.
+ */
+
 import {
   MessageSquare,
-  Boxes,
-  Bot,
-  Compass,
-  Cloud,
-  Workflow,
-  Wrench,
-  Code2,
-  FileStack,
   Globe,
-  ImagePlus,
+  Terminal,
+  FileStack,
+  Bot,
+  Route,
+  Cloud,
+  Share2,
+  GitBranch,
 } from 'lucide-react'
 import { ProductLanding } from '@/components/product/ProductLanding'
 import { ProductFooter } from '@/components/products/ProductFooter'
@@ -20,47 +49,44 @@ const CHAT = 'https://hanzo.chat'
 const DOCS = 'https://docs.hanzo.ai/docs/chat'
 const GITHUB = 'https://github.com/hanzoai/chat'
 
-const SELFHOST = `git clone https://github.com/hanzoai/chat.git
-cd chat
-cp .env.example .env        # set HANZO_API_KEY
-make up                     # app + MongoDB + Meilisearch
-
-# open http://localhost:3080`
-
 export function ChatLanding() {
   return (
     <>
       <ProductLanding
         badge="Hanzo Chat · hanzo.chat"
         badgeIcon={MessageSquare}
-        title="A chat app for the whole cloud"
-        lede="One thread reaches every model, your MCP tools, your files, the web, a code sandbox, and the agents you already deployed. Switch models mid-conversation and keep the history."
+        title="A chat app that does more than answer"
+        lede="It searches the web, runs the code it writes, and reads the files you drop in — in one conversation. Use it at hanzo.chat, or read the code and run the same thing yourself."
         ctas={[
           { label: 'Open Hanzo Chat', href: CHAT, icon: MessageSquare },
           { label: 'Read the docs', href: DOCS },
           { label: 'View on GitHub', href: GITHUB },
         ]}
-        note={{ icon: Cloud, text: 'Open source, MIT. Sign in with your Hanzo account at hanzo.chat, or run the whole stack yourself.' }}
-        availableThrough={['hanzo.chat', 'Self-hosted', 'MCP tools', 'Hanzo Cloud agents']}
+        note={{ icon: Cloud, text: 'Open source, MIT. Sign in with your Hanzo account at hanzo.chat, where the first two questions need no account at all.' }}
+        availableThrough={['hanzo.chat', 'Self-hosted']}
+        mockup={{
+          slug: 'chat',
+          alt: 'A Hanzo Chat conversation, with the reader’s earlier chats listed beside it.',
+        }}
         what={{
           eyebrow: 'What is Hanzo Chat',
-          title: 'The thread is the workspace',
-          sub: 'Most chat apps are a window onto one model. This one is a window onto the account — the same key, tools, agents and files your code uses, in a place where you can try them by typing.',
+          title: 'What a plain chat box cannot do',
+          sub: 'All of it happens in the conversation you are already having, rather than in something you have to go and open.',
           pillars: [
             {
-              icon: Boxes,
-              title: 'Every model, one thread',
-              body: 'Change the model on the next turn and the conversation carries over, so you can hand a hard question up to a bigger model without repeating yourself. Or send it to Enso and let the router decide per turn.',
+              icon: Route,
+              title: 'You do not have to pick a model',
+              body: 'Enso is our own model, and it picks which model answers each question. Name a different one whenever you like — the conversation carries over, so a hard question can go to something bigger without you saying it all again.',
             },
             {
-              icon: Bot,
-              title: 'Agents and tools',
-              body: 'Build an agent in the thread, or call one you already deployed with /agent or an @mention. Connect a Model Context Protocol server and its tools become things the model can call here.',
+              icon: Terminal,
+              title: 'It goes and does the work',
+              body: 'It searches the web and says where the answer came from, runs the code it writes and shows what came back, and reads the files you hand it. Not a description of the work. The work.',
             },
             {
-              icon: Compass,
-              title: 'Answers with sources',
-              body: 'Attach files and ask across them, search the web through our own backend rather than reselling someone else\'s, and run code in a sandbox that returns real output.',
+              icon: Cloud,
+              title: 'It is yours to run',
+              body: 'The code is open under MIT and the repo is public. Clone it and you get the same product with your own database under it, federating sign-in to Hanzo IAM and routing through api.hanzo.ai.',
             },
           ],
         }}
@@ -68,27 +94,18 @@ export function ChatLanding() {
           eyebrow: 'Capabilities',
           title: 'What a turn can do',
           items: [
-            { icon: Workflow, title: 'Enso routing', body: 'Send the turn to Enso instead of a model and the router classifies it, prices it, and picks. Easy turns stay cheap; hard ones escalate. The choice costs microseconds on a CPU, so it is free next to the call it precedes.' },
-            { icon: Wrench, title: 'MCP tools', body: 'Point the thread at a Model Context Protocol server and its tools show up as things the model may call — yours, ours, or anyone\'s.' },
-            { icon: Code2, title: 'Code interpreter', body: 'Code runs in a sandbox and the output comes back inline, so a wrong answer is visibly wrong instead of confidently formatted.' },
-            { icon: FileStack, title: 'Your files', body: 'Images, PDFs and text. Ask across everything attached to the thread, not one document at a time.' },
-            { icon: Globe, title: 'Web search', body: 'Grounded in our own search backend. There is no third-party search vendor in the loop, so what a query costs and what it retrieves are both ours to answer for.' },
-            { icon: ImagePlus, title: 'Images', body: 'Generate them in the conversation you are already in, and keep iterating on the same thread rather than starting a new tool.' },
-          ],
-        }}
-        code={{
-          head: { eyebrow: 'Self-host', title: 'The whole stack, on your machine', sub: 'Node 24 and pnpm 10, or skip both and use the compose file. Sign-in federates to Hanzo IAM; inference, code execution and web search all route through api.hanzo.ai, so a self-hosted install is the same product with your database under it.' },
-          lang: 'bash',
-          source: SELFHOST,
-          ctas: [
-            { label: 'Read the docs', href: DOCS },
-            { label: 'View on GitHub', href: GITHUB },
+            { icon: Globe, title: 'Search the web', body: 'Ask about something that happened this morning and it goes and looks. No third-party search vendor sits in the middle of it.' },
+            { icon: Terminal, title: 'Run code', body: 'Code runs in a sandbox leased under your own account, and the output comes back inline — so an answer that does not work is visibly broken instead of confidently formatted.' },
+            { icon: FileStack, title: 'Read your files', body: 'Images, PDFs and text. Ask across everything attached to the conversation, rather than one document at a time.' },
+            { icon: Bot, title: 'Build an agent', body: 'Give a job you do often to something you can call by name, and hand it the tools it needs to finish.' },
+            { icon: GitBranch, title: 'Fork a thread', body: 'Split the conversation where it got interesting and try the next question two ways, without losing the way it went the first time.' },
+            { icon: Share2, title: 'Share a link', body: 'Hand someone the conversation and they can read it without an account of their own.' },
           ],
         }}
         finalCta={{
           icon: MessageSquare,
-          title: 'Open a thread',
-          sub: 'Sign in at hanzo.chat, or clone the repo and run it yourself.',
+          title: 'Go and ask it something',
+          sub: 'The first two questions do not need an account.',
           buttons: [
             { label: 'Open Hanzo Chat', href: CHAT, icon: MessageSquare },
             { label: 'Read the docs', href: DOCS },

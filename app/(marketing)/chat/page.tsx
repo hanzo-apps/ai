@@ -1,17 +1,18 @@
 import type { Metadata } from 'next'
 import { ChatSection } from '@/components/chat/ChatSection'
 
-const TITLE = 'Hanzo Chat — a chat app for the whole cloud'
+const TITLE = 'Hanzo Chat — a chat app that does more than answer'
 const DESCRIPTION =
-  'One thread reaches every model, your MCP tools, your files, the web, a code sandbox, and the agents you already deployed. Switch models mid-conversation and keep the history. Open source: use hanzo.chat or run it yourself.'
+  'It searches the web, runs the code it writes, reads the files you drop in and makes pictures — in one conversation. Use it at hanzo.chat, or run the same thing on your own machine.'
 
+/* `url` is hanzo.chat, not this page. The product lives there and that is the
+   address worth sharing; this page is what the company has to say about it. */
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   openGraph: {
     title: TITLE,
-    description:
-      'Every model, your agents, your MCP tools, your files, web search, code and images — in one thread. Open source; use hanzo.chat or run it yourself.',
+    description: DESCRIPTION,
     url: 'https://hanzo.chat',
     siteName: 'Hanzo Chat',
     type: 'website',
