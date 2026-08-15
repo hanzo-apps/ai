@@ -503,7 +503,22 @@ states); prose for a product the catalog dropped renders nowhere. Neither can
 resurrect a product or bury one, which is what makes `COPY` a copy deck rather
 than a second taxonomy.
 
-**Top level**: Meet Hanzo · Products · Learn · Docs · Pricing
+**Top level**: Meet Hanzo · Products · Solutions · Resources · Developers
+
+**Resources is a MENU**, and it is the only local-nav entry that is. What we
+publish is five pages — Learn · Research · Open Source · Blog · Customers — and
+four of them were reachable from nowhere in the bar while sitting in the sitemap
+and the palette. Nine flat links do not fit: measured at 1440 the row has 606px
+of slack and at 960 it has 126px, against ~340px of new labels.
+
+The menu is `@hanzogui/shell` 8.1.14's `items` on a nav entry (`HanzoNav`) — a
+card under the label on the desktop, the sheet's existing disclosure on a phone
+— and the entry keeps `href`, so "Resources" is still a real link to `/learn`
+before hydration and without JavaScript. Each `hint` is the page's own sentence
+shortened; a menu that describes a page in words the page does not use is a
+second copy that drifts. `e2e/gates/chrome.spec.ts` opens the card by HOVER (a
+click that lands before hydration follows the label's href and moves the test to
+another page) and walks every row to its page.
 
 **Products dropdown** — the catalog's ten categories, two rows of five. Their
 membership is measured per build and is NOT listed here: a table of leaves in a
