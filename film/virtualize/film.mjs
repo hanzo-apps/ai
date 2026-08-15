@@ -1,18 +1,21 @@
-// Many machines, one cloud — the hero's own sentence, shown.
+// Many machines, one cloud — the hero's own sentence, shown as the console.
 //
 //   node film.mjs
 //
 // The fold claims the cloud is "composed from any combination of bare metal,
 // your own cloud accounts, and the hyperscalers' regions and services". This is
-// that: three columns of real sources converging into one plane, which then
-// carries the ten layers.
+// that claim as the PRODUCT: the console's own Clouds page, with each substrate
+// listed as a row that names the route it is folded in through.
+//
+// IT IS A MOCKUP, NOT A TITLE CARD. The first cut set three columns of words on
+// black, which reads as a slide however nice the type is. A picture of a product
+// has to look like the product, so everything here lives inside the window.
 //
 // WHAT MAY BE IN IT. The providers are the four `apps/venue` actually links —
-// digitalocean, aws, gcp, azure — spelled as the catalog and the API spell
-// them. Bare metal is drawn as unlabelled machines because a rack has no brand
-// to claim. No count, no capacity, no latency: this film states WHAT composes,
-// never HOW MUCH, because a quantity here would be a claim the product has not
-// made.
+// digitalocean, aws, gcp, azure — spelled as the catalog and the API spell them.
+// No count, no capacity, no latency: this film states WHAT composes, never HOW
+// MUCH, because a quantity here would be a claim the product has not made. And
+// no invented resource names: every row is a substrate and a route, both real.
 
 import { mkdirSync, writeFileSync, copyFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -32,52 +35,32 @@ const DUR = 9.6;
  * lie a picture of an API must not tell.
  */
 const SOURCES = [
-  {
-    head: "Your cloud accounts",
-    route: "/v1/cloud",
-    // Spelled as apps/venue and the API spell them.
-    items: ["aws", "gcp", "azure", "digitalocean"],
-  },
-  {
-    head: "Your Kubernetes",
-    route: "/v1/k8s",
-    items: ["clusters", "nodes", "namespaces", "workloads"],
-  },
-  {
-    head: "Your machines",
-    route: "/v1/machines",
-    items: ["bare metal", "GPUs", "workers", "fleet"],
-  },
+  { head: "Your cloud accounts", route: "/v1/cloud", items: ["aws", "gcp", "azure", "digitalocean"] },
+  { head: "Your Kubernetes", route: "/v1/k8s", items: ["clusters", "nodes", "namespaces", "workloads"] },
+  { head: "Your machines", route: "/v1/machines", items: ["bare metal", "GPUs", "workers", "fleet"] },
 ];
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+// Same geometry as film/cloud, so every window on this site is the same window.
 const FRAMES = {
-  tall: { w: 1080, h: 1920, base: 22, colW: 300, top: 560, gap: 26 },
-  wide: { w: 1920, h: 1080, base: 18, colW: 380, top: 300, gap: 34 },
+  tall: { w: 1080, h: 1920, win: 862, winH: 940, top: 490 },
+  wide: { w: 1920, h: 1080, win: 1480, winH: 700, top: 190 },
 };
 
 const page = (f) => {
-  const cols = SOURCES.length;
-  const spread = cols * f.colW + (cols - 1) * f.gap;
-  const planeY = f.top + Math.round(f.base * 13);
-
-  const sources = SOURCES.map((s, i) => {
-    const x = Math.round(-spread / 2 + i * (f.colW + f.gap));
-    return `
-      <div class="src" id="src${i}" style="left:50%; margin-left:${x}px; top:${f.top}px; width:${f.colW}px;">
-        <div class="shead">${esc(s.head)}</div>
-        <div class="sroute">${esc(s.route)}</div>
-        <div class="tiles">
-          ${s.items
-            .map(
-              (n) =>
-                `<div class="tile">${esc(n)}</div>`,
-            )
-            .join("")}
-        </div>
-      </div>`;
-  }).join("");
+  const rows = SOURCES.map(
+    (s, i) => `
+              <div class="row" id="r${i}">
+                <div class="left">
+                  <div class="head">${esc(s.head)}</div>
+                  <div class="route">${esc(s.route)}</div>
+                </div>
+                <div class="tags">
+                  ${s.items.map((n) => `<span>${esc(n)}</span>`).join("")}
+                </div>
+              </div>`,
+  ).join("");
 
   return `<!doctype html>
 <html lang="en">
@@ -94,74 +77,87 @@ const page = (f) => {
       body { font-family: "Geist", system-ui, sans-serif; color: #ededed; -webkit-font-smoothing: antialiased; }
       #root { position: relative; width: ${f.w}px; height: ${f.h}px; overflow: hidden; }
       .bg { position: absolute; inset: 0; background: #000; }
-      .glow { position: absolute; left: 50%; top: ${planeY - Math.round(f.h * 0.18)}px;
-        width: ${Math.round(f.w * 1.1)}px; height: ${Math.round(f.h * 0.5)}px;
-        margin-left: ${-Math.round(f.w * 0.55)}px; border-radius: 9999px;
+      .glow { position: absolute; left: 50%; top: ${Math.round(f.top - f.h * 0.06)}px;
+        width: ${Math.round(f.w * 1.05)}px; height: ${Math.round(f.h * 0.5)}px;
+        margin-left: ${-Math.round(f.w * 0.525)}px; border-radius: 9999px;
         background: rgba(255,255,255,0.05); filter: blur(200px); }
 
-      .src { position: absolute; opacity: 0; }
-      .shead { font-size: ${Math.round(f.base * 0.86)}px; letter-spacing: 0.1em; text-transform: uppercase;
-        color: #6f6f6f; margin-bottom: ${Math.round(f.base * 0.28)}px; }
-      /* The route is what makes the column checkable rather than decorative. */
-      .sroute { font-family: "Geist Mono", monospace; font-size: ${Math.round(f.base * 0.74)}px;
-        color: #4a4a4a; margin-bottom: ${Math.round(f.base * 0.8)}px; }
-      .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: ${Math.round(f.base * 0.55)}px; }
-      .tile { height: ${Math.round(f.base * 2.9)}px; border: 1px solid #262626; border-radius: ${Math.round(f.base * 0.5)}px;
-        background: #0b0b0b; display: flex; align-items: center; justify-content: center;
-        font-family: "Geist Mono", monospace; font-size: ${Math.round(f.base * 0.78)}px; color: #8a8a8a; }
+      .win { position: absolute; left: 50%; top: ${f.top}px; width: ${f.win}px; height: ${f.winH}px;
+        margin-left: ${-f.win / 2}px; background: #050505;
+        border: 1px solid #1f1f1f; border-radius: 16px; overflow: hidden;
+        box-shadow: 0 40px 120px rgba(0,0,0,0.9), inset 0 1px 0 0 rgba(255,255,255,0.05); }
+      .bar { display: flex; align-items: center; gap: 14px; height: 54px; padding: 0 20px; border-bottom: 1px solid #171717; background: #0a0a0a; }
+      .dots { display: flex; gap: 8px; }
+      .dots i { width: 11px; height: 11px; border-radius: 999px; background: #232323; display: block; }
+      .bar .crumb { font-size: 18px; color: #8a8a8a; }
+      .bar .who { margin-left: auto; font-family: "Geist Mono", monospace; font-size: 17px; color: #777777; }
+      .body { display: grid; grid-template-columns: 232px 1fr; height: calc(100% - 54px); }
+      .side { border-right: 1px solid #171717; padding: 18px 12px; background: #030303; }
+      .side a { display: block; padding: 11px 14px; border-radius: 9px; font-size: 19px; color: #8a8a8a; text-decoration: none; }
+      .side a.on { background: #171717; color: #fff; }
+      .main { padding: 26px 28px; overflow: hidden; }
+      .h { font-size: 26px; font-weight: 600; color: #fff; }
+      .sub { margin-top: 7px; font-size: 17px; color: #7e7e7e; }
 
-      /* The one plane everything composes into. */
-      .plane { position: absolute; left: 50%; top: ${planeY}px; width: ${spread}px; margin-left: ${-spread / 2}px;
-        border: 1px solid #3a3a3a; border-radius: ${Math.round(f.base * 0.8)}px; background: #121212;
-        box-shadow: 0 ${f.base * 2}px ${f.base * 5}px rgba(0,0,0,0.9);
-        padding: ${Math.round(f.base * 1.4)}px ${Math.round(f.base * 1.6)}px;
-        display: flex; align-items: center; gap: ${Math.round(f.base * 0.9)}px;
+      .rows { margin-top: 22px; display: flex; flex-direction: column; gap: 11px; }
+      .row { display: flex; align-items: center; gap: 20px; padding: 16px 18px;
+        border: 1px solid #1a1a1a; border-radius: 11px; background: #0a0a0a; opacity: 0; }
+      .left { width: 260px; flex: none; }
+      .head { font-size: 19px; color: #ededed; }
+      .route { margin-top: 4px; font-family: "Geist Mono", monospace; font-size: 15px; color: #5f5f5f; }
+      .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+      .tags span { font-family: "Geist Mono", monospace; font-size: 15px; color: #8a8a8a;
+        border: 1px solid #232323; border-radius: 999px; padding: 5px 12px; background: #0d0d0d; }
+
+      /* The one plane they compose into, stated as the console's own footer. */
+      .plane { margin-top: 22px; display: flex; align-items: center; gap: 12px;
+        padding: 14px 18px; border: 1px solid #303030; border-radius: 11px; background: #111;
         opacity: 0; }
-      .plane .dot { width: ${Math.round(f.base * 0.5)}px; height: ${Math.round(f.base * 0.5)}px; border-radius: 999px; background: #fff; flex: none; }
-      .plane .name { font-size: ${Math.round(f.base * 1.35)}px; font-weight: 500; color: #fff; }
-      .plane .addr { margin-left: auto; font-family: "Geist Mono", monospace; font-size: ${Math.round(f.base * 0.9)}px; color: #8f8f8f; }
-
-      /* What the plane then carries. Named, not counted. */
-      .layers { position: absolute; left: 50%; top: ${planeY + Math.round(f.base * 5.4)}px;
-        width: ${spread}px; margin-left: ${-spread / 2}px;
-        display: flex; flex-wrap: wrap; gap: ${Math.round(f.base * 0.5)}px; opacity: 0; }
-      .layers span { font-family: "Geist Mono", monospace; font-size: ${Math.round(f.base * 0.82)}px;
-        color: #7e7e7e; border: 1px solid #232323; border-radius: 999px;
-        padding: ${Math.round(f.base * 0.28)}px ${Math.round(f.base * 0.66)}px; }
+      .plane .dot { width: 9px; height: 9px; border-radius: 999px; background: #fff; flex: none; }
+      .plane .name { font-size: 19px; color: #fff; }
+      .plane .addr { margin-left: auto; font-family: "Geist Mono", monospace; font-size: 16px; color: #8f8f8f; }
     </style>
   </head>
   <body>
     <div id="root" data-composition-id="main" data-start="0" data-duration="${DUR}" data-width="${f.w}" data-height="${f.h}" data-fps="${FPS}">
       <div class="bg"></div>
       <div class="glow"></div>
-      ${sources}
-      <div class="plane" id="plane">
-        <span class="dot"></span>
-        <span class="name">One cloud</span>
-        <span class="addr">api.hanzo.ai/v1</span>
-      </div>
-      <div class="layers" id="layers">
-        ${["Web3", "Compute", "Data", "Network", "Security", "Infrastructure", "Observe", "Dev", "AI", "Apps"]
-          .map((l) => `<span>${l}</span>`)
-          .join("")}
+      <div class="win">
+        <div class="bar">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <div class="crumb">Hanzo Cloud &middot; Infrastructure</div>
+          <div class="who">z@hanzo.ai</div>
+        </div>
+        <div class="body">
+          <div class="side">
+            <a class="on">Clouds</a>
+            <a>Kubernetes</a>
+            <a>Machines</a>
+            <a>Regions</a>
+          </div>
+          <div class="main">
+            <div class="h">Clouds</div>
+            <div class="sub">Everything this org runs on, folded in under one address.</div>
+            <div class="rows">${rows}</div>
+            <div class="plane" id="plane">
+              <span class="dot"></span>
+              <span class="name">One cloud</span>
+              <span class="addr">api.hanzo.ai/v1</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <script>
-      // The three arrive, then FALL INTO the plane — y and opacity only, because
-      // a layout property snaps to integer device pixels and stutters under the
-      // frame-seek capture engine.
+      // y and opacity only — a layout property snaps to integer device pixels
+      // and stutters under the frame-seek capture engine.
       const tl = gsap.timeline();
       for (let i = 0; i < ${SOURCES.length}; i++) {
-        tl.fromTo("#src" + i, { opacity: 0, y: ${Math.round(f.base * 1.6)} },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.3 + i * 0.42);
+        tl.fromTo("#r" + i, { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.5 + i * 0.42);
       }
-      // They do not vanish — they RECEDE. The machines are still yours; what
-      // changed is that one address now answers for them.
-      tl.to(".src", { opacity: 0.22, y: ${-Math.round(f.base * 0.8)}, duration: 0.9, ease: "power2.inOut" }, 2.5);
-      tl.fromTo("#plane", { opacity: 0, y: ${Math.round(f.base * 2.2)} },
-        { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, 2.7);
-      tl.fromTo("#layers", { opacity: 0, y: ${Math.round(f.base * 1.2)} },
-        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 3.5);
+      tl.fromTo("#plane", { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 2.3);
       // Held on the composed cloud: the frame a reduced-motion viewer is served.
       tl.to({}, { duration: 5.2 });
       window.__timelines = window.__timelines || {};
