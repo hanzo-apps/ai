@@ -57,11 +57,13 @@ export default function HomeLanding() {
     <div className="min-h-screen bg-black text-white">
       <SiteHeader surface="ai" />
       <main>
+        {/* Research sits second, not fifth. A research-led company puts the
+            research where a reader lands; the products it pays for follow. */}
         <Fold />
-        <LocalStack />
-        <EnsoHero />
-        <CloudCategories />
         <Research />
+        <EnsoHero />
+        <LocalStack />
+        <CloudCategories />
         <BuildStory />
         <Composer />
       </main>

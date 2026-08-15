@@ -58,12 +58,20 @@ export default function Fold() {
       <Frame src="/hero" alt={ALT} />
 
       <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6 sm:py-28 lg:px-8">
+        {/* Research first, product second. This is the company's front door,
+            and a reader arriving at it is asking who we are before what we
+            sell -- the API, the layers and the pricing all have their own
+            pages and every one of them is a click away. What is true of us and
+            of almost nobody else is that we train the models AND run the cloud
+            under them, and publish the weights and the papers. That is the
+            sentence. */}
         <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          Frontier models, agents, and the cloud under them.
+          We train the models and run the cloud under them.
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-neutral-400">
-          Chat, build and ship on one API — models, Base backends, identity, secrets and vector
-          search. The same code runs on your own hardware.
+          Zen is open weights, from something that fits on a laptop up to frontier. Enso is
+          ours, and it routes across them. The papers, the methods and the results that did
+          not work are public.
         </p>
       </section>
     </>
