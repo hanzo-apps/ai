@@ -3,7 +3,7 @@
 /**
  * The gui runtime, mounted once.
  *
- * gui's atomic CSS does NOT come from here. It is generated from `gui.config.ts`
+ * gui's atomic CSS does NOT come from here. It is generated from `lib/gui.ts`
  * into `app/gui.css` by `prebuild` (scripts/gen-gui-css.mjs) and imported by the
  * root layout, so Next fingerprints it and the browser caches it once.
  *
@@ -21,7 +21,7 @@
 import * as React from 'react'
 import { GuiProvider as Gui } from '@hanzo/gui'
 import { useTheme } from 'next-themes'
-import config from '@/gui.config'
+import config from '@/lib/gui'
 
 export function GuiProvider({ children }: { children: React.ReactNode }) {
   const { resolvedTheme } = useTheme()

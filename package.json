@@ -24,7 +24,8 @@
     "sync:catalog": "node scripts/sync-catalog.mjs",
     "sync:papers": "node scripts/sync-papers.mjs",
     "sync:pages": "node scripts/sync-pages.mjs",
-    "audit:catalog": "node scripts/audit-catalog.mjs"
+    "audit:catalog": "node scripts/audit-catalog.mjs",
+    "lint:design": "hanzo-design-lint components app lib"
   },
   "dependencies": {
     "@hanzo/ai": "^0.3.7",
@@ -34,7 +35,7 @@
     "@hanzo/chat": "^1.0.3",
     "@hanzo/dashboard": "0.2.0",
     "@hanzo/data": "1.2.4",
-    "@hanzo/design": "^0.5.4",
+    "@hanzo/design": "^0.5.7",
     "@hanzo/event": "^0.3.15",
     "@hanzo/frame": "^0.1.0",
     "@hanzo/gui": "^8.1.0",
@@ -42,7 +43,7 @@
     "@hanzo/logo": "^1.0.17",
     "@hanzo/observe": "^0.1.6",
     "@hanzo/plans": "^1.4.12",
-    "@hanzo/ui": "^8.0.81",
+    "@hanzo/ui": "^8.0.83",
     "@hanzo/usage": ">=0.1.6",
     "@hanzo/voice": "^0.1.8",
     "@hanzogui/config": "^8.1.0",

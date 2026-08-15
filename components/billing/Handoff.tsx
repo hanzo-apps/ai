@@ -32,7 +32,7 @@ export default function Handoff({
 
   return (
     <Section title={title} lede="Billing is at billing.hanzo.ai. Taking you there.">
-      <YStack marginTop="$6">
+      <YStack marginTop="$5">
         <Cta href={href}>Continue to billing</Cta>
       </YStack>
     </Section>

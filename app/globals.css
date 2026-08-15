@@ -170,26 +170,46 @@
     align-items: center;
   }
 
+  /* `.hz-tap` says "this is a standalone tap target". A link in a paragraph is
+     not one — stretching it to 44px would tear the line it sits in — so the
+     floor cannot simply name every `a[href]`, and a link that IS a control has
+     to say so. Same mark hanzo.app uses, for the same reason. */
   @media (pointer: coarse) {
     button,
     [role='button'],
-    :is(header, footer) a[href] {
-      min-height: 44px;
+    :is(header, footer) a[href],
+    .hz-tap {
+      min-height: 44px !important;
     }
   }
 
   /* An icon-only control is `display: inline` by default, where a min-height has
      no effect at all — it needs a box before it can have a size. The box is
      unconditional; only the thumb-sized minimum tracks the pointer. */
-  :is(header, footer) :is(a[href], button):has(> svg:only-child) {
+  :is(a[href], button, [role='button']):has(> svg:only-child) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
 
+  /* A TAP TARGET IS A BOX, and the floor applies to the SMALLER SIDE. Height
+     alone is half a policy: an icon-only control has no text to widen it, so it
+     stays as narrow as its glyph however tall the rule makes it. Measured on
+     this homepage at 390 and 834 — the composer's three controls (Start
+     something, Talk to Hanzo, Send) render 30×30 while the rule above claims
+     44, because they are not in a header or a footer and nothing set a width.
+     The rule used to be scoped to `:is(header, footer)`; the composer is
+     neither, and it is the one place on this page a thumb actually goes.
+
+     `!important` IS LOAD-BEARING here and is not a shortcut. @hanzo/gui writes a
+     control's size INLINE, and an inline declaration outranks a stylesheet rule
+     on the same property at any specificity — so without it this rule is a
+     silent no-op on exactly the controls it exists for. Those three were
+     `min-height:30px;min-width:30px` inline, and the un-important version lost
+     to them while computing correctly in devtools. */
   @media (pointer: coarse) {
-    :is(header, footer) :is(a[href], button):has(> svg:only-child) {
-      min-width: 44px;
+    :is(a[href], button, [role='button']):has(> svg:only-child) {
+      min-width: 44px !important;
     }
   }
 }

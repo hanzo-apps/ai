@@ -10,7 +10,7 @@
  *
  * It is built on `@hanzo/gui` — the same substrate as @hanzo/ui's product layer,
  * so these shapes render from the SAME tokens as the rest of the ecosystem
- * (`gui.config.ts` binds gui's token namespace to @hanzo/design). Pages
+ * (`lib/gui.ts` is @hanzo/ui's token table, the fleet's). Pages
  * therefore MUST NOT reach around the kit with their own styling: pass content,
  * not styling.
  */
@@ -68,10 +68,10 @@ const MEASURE = { width: '100%', maxWidth: 896, marginHorizontal: 'auto' } as co
 /**
  * Values with no gui token behind them.
  *
- * gui types its style PROPS against its own token namespace (`gui.config.ts`),
+ * gui types its style PROPS against its own token namespace (`lib/gui.ts`),
  * so a literal `var(--tracking-tight)` is not a legal `letterSpacing` prop even
  * though gui emits it correctly. These are not tokens and must not be faked as
- * tokens: a named font key in `gui.config.ts` breaks `createGui`'s constraint,
+ * tokens: a named font key in that table breaks `createGui`'s constraint,
  * which degrades EVERY gui component's props to `undefined` (measured: 726
  * errors). They ride the `style` prop instead — gui's escape hatch for exactly
  * this — and land in the same generated rule. Named here so the intent reads.
@@ -123,17 +123,17 @@ export function PageHero({
   const titleRise = useRise(0.05, DISPLAY)
   const ledeRise = useRise(0.1, RELAXED)
   return (
-    <YStack render="section" paddingTop="$24" paddingBottom="$12" {...GUTTER}>
+    <YStack render="section" paddingTop="$12" paddingBottom="$8" {...GUTTER}>
       <YStack {...MEASURE}>
         <XStack
           {...badgeRise}
           alignSelf="flex-start"
           alignItems="center"
           gap="$2"
-          marginBottom="$6"
+          marginBottom="$5"
           paddingHorizontal="$3"
           paddingVertical="$1"
-          borderRadius="$9"
+          borderRadius="$10"
         >
           {Icon ? <Icon size={14} color="var(--primary)" /> : null}
           <Text fontSize="$1" fontWeight="500" color="var(--primary)">
@@ -144,7 +144,7 @@ export function PageHero({
           render="h1"
           {...titleRise}
           marginBottom="$4"
-          fontSize="$9"
+          fontSize="$10"
           $sm={{ fontSize: '$10' }}
           fontWeight="500"
           color="$foreground"
@@ -162,7 +162,7 @@ export function PageHero({
             {lede}
           </Text>
         ) : null}
-        {children ? <YStack marginTop="$8">{children}</YStack> : null}
+        {children ? <YStack marginTop="$6">{children}</YStack> : null}
       </YStack>
     </YStack>
   )
@@ -180,7 +180,7 @@ export function Section({
   children: React.ReactNode
 }) {
   return (
-    <YStack render="section" paddingVertical="$10" {...GUTTER}>
+    <YStack render="section" paddingVertical="$7" {...GUTTER}>
       <YStack {...MEASURE}>
         {title ? (
           <Text
@@ -195,7 +195,7 @@ export function Section({
           </Text>
         ) : null}
         {lede ? (
-          <Text render="p" marginBottom="$6" maxWidth={672} fontSize="$3" color="$mutedForeground">
+          <Text render="p" marginBottom="$5" maxWidth={672} fontSize="$3" color="$mutedForeground">
             {lede}
           </Text>
         ) : null}
@@ -309,10 +309,10 @@ export function Cta({
         minHeight={44}
         alignItems="center"
         gap="$2"
-        paddingHorizontal="$5"
+        paddingHorizontal="$4.5"
         borderWidth={1}
         borderColor="$border"
-        borderRadius="$9"
+        borderRadius="$10"
         hoverStyle={{ borderColor: '$borderStrong' }}
       >
         <Text fontSize="$3" fontWeight="500" color="$foreground">
@@ -345,7 +345,7 @@ export function Prose({ children }: { children: React.ReactNode }) {
 export function Page({ children }: { children: React.ReactNode }) {
   return (
     <YStack minHeight="100vh" backgroundColor="$background">
-      <YStack render="main" paddingBottom="$16">
+      <YStack render="main" paddingBottom="$10">
         {children}
       </YStack>
     </YStack>

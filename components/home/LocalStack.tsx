@@ -101,7 +101,7 @@ export default function LocalStack() {
             </code>
             <a
               href={SH}
-              className="inline-flex min-h-[24px] items-center gap-1.5 text-sm font-medium text-white"
+              className="hz-tap inline-flex items-center gap-1.5 text-sm font-medium text-white"
             >
               Install options
               <ArrowUpRight className="h-4 w-4" />
