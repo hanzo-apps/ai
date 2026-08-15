@@ -25,12 +25,18 @@ import {
   Bug
 } from "lucide-react";
 
-const COMPLIANCE_BADGES = [
-  { name: "SOC 2 Type II", description: "Controls aligned; assessment planned" },
-  { name: "GDPR", description: "Data protection ready" },
-  { name: "CCPA", description: "Privacy controls" },
-  { name: "HIPAA", description: "BAA available" },
-];
+/*
+ * There was a badge row here: four names — SOC 2 Type II, GDPR, CCPA, HIPAA —
+ * each rendered with a green checkmark. The qualifiers that made them honest
+ * ("assessment planned", "BAA available") were carried in a `description` field
+ * the markup never rendered, so what shipped was four certifications with a tick
+ * beside them and nothing anywhere saying we hold none of them.
+ *
+ * The certification question now has exactly one answer, at /trust, and it opens
+ * by saying what we do not hold. This page describes mechanisms; that one holds
+ * the position. Two pages answering it is how the qualifier got lost the first
+ * time.
+ */
 
 const SECURITY_FEATURES = [
   {
@@ -119,7 +125,7 @@ const Security = () => {
                 style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
               >
                 <Shield className="w-3.5 h-3.5" />
-                SOC 2 readiness — controls aligned to NIST 800-53
+                We hold no certification — see what we do claim
               </motion.div>
 
               <motion.h1
@@ -170,23 +176,18 @@ const Security = () => {
                 </a>
               </motion.div>
 
-              {/* Compliance Badges */}
-              <motion.div
+              <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.2 }}
-                className="flex flex-wrap justify-center gap-3"
+                className="text-sm text-muted-foreground"
               >
-                {COMPLIANCE_BADGES.map((badge) => (
-                  <div
-                    key={badge.name}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary border border-border"
-                  >
-                    <CheckCircle className="w-4 h-4 text-foreground/70" />
-                    <span className="text-sm font-medium text-foreground">{badge.name}</span>
-                  </div>
-                ))}
-              </motion.div>
+                Hanzo holds no SOC 2, ISO 27001 or FedRAMP report.{" "}
+                <Link href="/trust" className="text-foreground underline underline-offset-4">
+                  What we do claim, and how to check it
+                </Link>
+                .
+              </motion.p>
             </div>
           </div>
         </section>

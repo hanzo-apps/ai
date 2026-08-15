@@ -121,6 +121,13 @@ export const EMPTY: readonly string[] = [
   '/referral',
   '/signup',
   '/user-profile',
+  // Typed, not linked. It forwards to /trust, which states the certification
+  // position in its first sentence — so the URL's question is answered by the
+  // page it lands on rather than by a second copy of that answer here. Offering
+  // it for indexing would put a result reading "soc2" in front of someone
+  // searching for exactly that, which is the impression the page exists to
+  // prevent; /trust carries the words instead.
+  '/soc2',
 ]
 
 export type Policy = 'public' | 'private' | 'noindex'
