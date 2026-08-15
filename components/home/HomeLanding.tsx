@@ -11,14 +11,14 @@ import LocalStack from './LocalStack'
  * The apex hanzo.ai landing.
  *
  * TWO THINGS CHANGED SHAPE HERE, and they are one change: the fold and the front
- * door swapped places. The page used to open on a composer with the globe dimmed
+ * door swapped places. The page used to open on a composer with a picture dimmed
  * behind it — the picture serving as a backdrop for a text field. Now `Fold` is
- * the globe, at full contrast, and the composer is `Composer`, docked to the
+ * the picture at full contrast, and the composer is `Composer`, docked to the
  * bottom of the viewport where it rides the whole page and comes to rest above
  * the footer. Every section between them is unchanged. Both halves are stated
- * where they live: see `Fold` for why the globe won the fold over a montage, and
- * `Composer` for why it is one line and what each of its three controls honestly
- * does.
+ * where they live: see `Fold` for what the picture is and why the heading sits
+ * beneath it rather than inside it, and `Composer` for why it is one line and
+ * what each of its three controls honestly does.
  *
  * THE COMPOSER MUST STAY THE LAST CHILD OF `<main>`. `.hz-dock` is
  * `position: sticky`, and a sticky box is held inside its containing block and
@@ -39,12 +39,13 @@ import LocalStack from './LocalStack'
  * from `lib/data/cloud-primitives.ts` — the same source as the mega-menu and the
  * `/products/<slug>` pages — so the front page cannot drift from the product.
  *
- * It used to follow a film of the console, which is gone. That film had its
- * headline and its command RENDERED INTO THE PIXELS, and a sidebar naming seven
- * categories while the list under it named ten — so the page contradicted itself
- * and the contradiction could only be fixed by re-rendering a video. Type that
- * cannot be selected, translated, reflowed or read aloud is not type. What the
- * film introduced, `CloudCategories` already states, from the catalog.
+ * It is also the section the fold's film hands off to, and the two agree by
+ * construction: this reads the catalog through `cloud-primitives.ts` and
+ * `film/hero` reads `lib/data/catalog.json` itself, so the ten layers the film
+ * ends on are the ten cards here, named identically. An earlier apex film had a
+ * sidebar naming seven categories over a section naming ten, and the
+ * contradiction could only be fixed by re-rendering a video — which is why
+ * nothing in `film/hero` is typed and no word of it is a heading.
  *
  * `Research` follows it, and the order is an argument: the categories say what we
  * sell, the papers say why it is built the way it is, and they are next to each
