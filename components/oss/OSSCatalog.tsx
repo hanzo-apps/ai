@@ -27,7 +27,6 @@ import {
   DropdownMenuTrigger,
   Input,
 } from "@hanzo/ui";
-import { Sheet, YStack, Text } from "@hanzo/gui";
 import { cn } from '@/lib/utils';
 import {
   ossCatalog,
@@ -536,9 +535,12 @@ const OSSCatalog: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+          {/* `h2`. This catalog is a SECTION of /open-source, whose fold already
+              carries the page's one `h1`; two of them made the page claim two
+              subjects, and the count is exactly what the publish gates check. */}
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
             OSS Catalog
-          </h1>
+          </h2>
           <p className="text-muted-foreground text-lg">
             Open source tools, templates, and infrastructure for building AI applications
           </p>
@@ -662,26 +664,24 @@ const OSSCatalog: React.FC = () => {
                   </span>
                 )}
               </Button>
-              <Sheet
-                modal
-                open={filtersOpen}
-                onOpenChange={setFiltersOpen}
-                snapPoints={[80]}
-                dismissOnSnapToBottom
-              >
-                <Sheet.Overlay backgroundColor="rgb(0 0 0 / 0.6)" />
-                <Sheet.Handle />
-                <Sheet.Frame backgroundColor="$secondary" padding="$4" gap="$4">
-                  <Text fontSize="$6" fontWeight="500" color="$foreground">
-                    Filters
-                  </Text>
-                  <Sheet.ScrollView>
-                    <YStack paddingBottom="$20">
-                      <FacetRail />
-                    </YStack>
-                  </Sheet.ScrollView>
-                </Sheet.Frame>
-              </Sheet>
+              {/* The mobile filter panel. It is a DISCLOSURE, not a gui Sheet:
+                  that Sheet ignored `open` here and rendered its frame into the
+                  top of the document, so a wall of checkboxes sat over the fold
+                  on every visit, desktop included. This shows the SAME FacetRail
+                  the sidebar shows — one filter UI, revealed in place. */}
+              {filtersOpen && (
+                <div className="lg:hidden fixed inset-x-0 bottom-0 top-16 z-50 flex flex-col border-t border-border bg-background">
+                  <div className="flex items-center justify-between border-b border-border px-4 py-3">
+                    <span className="text-base font-medium text-foreground">Filters</span>
+                    <Button variant="ghost" size="sm" onClick={() => setFiltersOpen(false)} aria-label="Close filters">
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  <div className="flex-1 overflow-y-auto p-4 pb-24">
+                    <FacetRail />
+                  </div>
+                </div>
+              )}
             </>
           </div>
         </div>
