@@ -339,6 +339,17 @@ sideways scroll `overflow-x: clip` exists to swallow.
 NAME from `framer-motion`, with `components/motion.tsx` the one exemption.
 Everything else framer exports still comes from framer.
 
+**The proxy cannot reach a component that was WIRED to stay hidden**, and four
+on `/analytics` were. It grounds `initial`, so it can only help something whose
+end state is visible; `AIFeatureCard` read `initial="hidden" animate="hidden"`
+and animated TO the hidden state, which meant three 234px cards were invisible
+on every visit, scrolled to or not. `Community` ran ONE IntersectionObserver
+doing two jobs — starting the CountUp tallies AND holding 872px of cards at
+opacity 0 — so the rule is: **an observer may start a count; it may not decide
+whether the copy exists.** Those two triggers stay separate. When auditing, grep
+for `animate=` with a variant NAME and for `useAnimation`/`controls.start`, not
+just for `whileInView`.
+
 ## ⌘K searches the SITE, and the page list is derived
 
 The palette is `@hanzogui/shell`'s (`HanzoCommandPalette`), and it indexes three
