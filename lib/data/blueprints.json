@@ -1,0 +1,64 @@
+{
+  "source": "https://api.hanzo.ai/v1/blueprint/sbom",
+  "fetched": "2026-08-15T01:18:51.896Z",
+  "rateCard": {
+    "microUsdPerVcpuHour": 12000,
+    "microUsdPerGbHour": 6000,
+    "basis": "DigitalOcean droplet retail + Hanzo platform margin (estimate)"
+  },
+  "blueprints": [
+    {
+      "id": "redis",
+      "images": [
+        "redis:7-alpine"
+      ],
+      "services": 1,
+      "vcpuHr": 0.5,
+      "gbHr": 1,
+      "centsPerMonth": 876
+    },
+    {
+      "id": "postgres",
+      "images": [
+        "postgres:16-alpine"
+      ],
+      "services": 1,
+      "vcpuHr": 1,
+      "gbHr": 2,
+      "centsPerMonth": 1752
+    },
+    {
+      "id": "wordpress",
+      "images": [
+        "mariadb:11",
+        "wordpress:6-php8.2-apache"
+      ],
+      "services": 2,
+      "vcpuHr": 1.5,
+      "gbHr": 1.5,
+      "centsPerMonth": 1971
+    },
+    {
+      "id": "ghost",
+      "images": [
+        "mysql:8",
+        "ghost:5-alpine"
+      ],
+      "services": 2,
+      "vcpuHr": 1.5,
+      "gbHr": 2.5,
+      "centsPerMonth": 2409
+    },
+    {
+      "id": "n8n",
+      "images": [
+        "postgres:16-alpine",
+        "n8nio/n8n:1.60.1"
+      ],
+      "services": 2,
+      "vcpuHr": 2,
+      "gbHr": 4,
+      "centsPerMonth": 3504
+    }
+  ]
+}

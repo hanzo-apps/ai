@@ -18,7 +18,7 @@
     "test:headed": "playwright test --headed",
     "test:report": "playwright show-report",
     "gen:gui-css": "node scripts/gen-gui-css.mjs",
-    "prebuild": "node scripts/gen-gui-css.mjs && node scripts/sync-pricing.mjs && node scripts/sync-catalog.mjs && node scripts/sync-papers.mjs && node scripts/sync-pages.mjs",
+    "prebuild": "node scripts/gen-gui-css.mjs && node scripts/sync-pricing.mjs && node scripts/sync-catalog.mjs && node scripts/sync-papers.mjs && node scripts/sync-blueprints.mjs && node scripts/sync-pages.mjs",
     "predev": "node scripts/gen-gui-css.mjs",
     "sync:pricing": "node scripts/sync-pricing.mjs",
     "sync:catalog": "node scripts/sync-catalog.mjs",
