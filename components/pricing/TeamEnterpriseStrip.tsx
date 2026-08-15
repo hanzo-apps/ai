@@ -100,7 +100,7 @@ const TeamEnterpriseStrip = () => {
           <>
             {" "}
             <span className="text-muted-foreground/80">
-              Billed annually; ${monthly} per user per month month to month.
+              Billed annually. Month to month it is ${monthly} per user.
             </span>
           </>
         )}

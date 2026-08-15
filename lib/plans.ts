@@ -184,6 +184,24 @@ export function credit(plan: SubscriptionPlan): Credit | null {
   return { amount, whole: monthly != null && monthly > 0 && amount >= monthly };
 }
 
+/**
+ * The feature lines minus the one that restates the monthly credit.
+ *
+ * Every plan carries a bullet like "$49 of credit each month", written from the
+ * advertised field rather than the granted one. Beside a block that states the
+ * granted amount, that bullet is both a duplicate and a contradiction — one
+ * card claiming two different numbers for the same thing, which is worse than
+ * either number alone.
+ *
+ * The credit is stated ONCE, in the block, at the amount that is paid. The
+ * match needs both words: "credentials" is not "credit", and a line about
+ * monthly anything else is not this line.
+ */
+export function featuresBeside(credit: Credit | null, features: string[]): string[] {
+  if (!credit) return features;
+  return features.filter((f) => !(/credit/i.test(f) && /month/i.test(f)));
+}
+
 /** The published catalog row, as @hanzo/plans ships it. */
 interface CatalogPlan {
   id: string;

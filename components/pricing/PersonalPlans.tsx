@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Code, Zap, Users, Rocket, Sparkles } from "lucide-react";
-import { loadPlans, fallbackPlans, credit, type SubscriptionPlan } from "@/lib/plans";
+import { loadPlans, fallbackPlans, credit, featuresBeside, type SubscriptionPlan } from "@/lib/plans";
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
   go: <Rocket className="h-6 w-6 text-muted-foreground" />,
@@ -124,10 +124,18 @@ const PersonalPlans = () => {
           billingPeriod="/month"
           description={FREE.description}
           features={FREE.features}
+          // Free states the same fact the paid cards state, at zero. It keeps
+          // the row aligned without a reserved blank, and it puts the credit on
+          // the ladder where a reader compares rungs.
+          credit={{ amount: 0, whole: false }}
           checkoutUrl={SIGNUP_URL}
           ctaLabel="Get started free"
         />
-        {plans.map((plan) => (
+        {plans.map((plan) => {
+          // Derived once per card: the block states the credit, and the feature
+          // list drops the line that would state it again at a different number.
+          const granted = credit(plan);
+          return (
           <PricingPlan
             key={plan.id}
             name={plan.name}
@@ -135,14 +143,14 @@ const PersonalPlans = () => {
             price={formatPrice(plan)}
             billingPeriod={billingPeriod(plan)}
             description={plan.description}
-            features={plan.features}
-            // The headline, derived from the same row that charges.
-            credit={credit(plan)}
+            features={featuresBeside(granted, plan.features)}
+            credit={granted}
             popular={plan.popular}
             checkoutUrl={planCheckoutUrl(plan)}
             ctaLabel={planCtaLabel()}
           />
-        ))}
+          );
+        })}
       </div>
 
       {/* The free path is now a card, not a footnote, so this line carries the

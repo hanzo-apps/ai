@@ -181,35 +181,51 @@ const PricingPlan = ({
         </div>
 
         {/* The offer, against the number it modifies.
-​
+
             This is the whole point of the card and it used to be the last
             bullet under a fold: the money comes back. A reader who stops at
-            "$19/month" has read half the price.
+            "$19/month" has read half the price. The amount is derived from the
+            field the biller pays from, so no card can overstate its plan.
 
-            Both sentences are derived, so neither can overstate: a plan that
-            returns its whole price says so, a plan that returns part of it
-            names the part. Go returns part.
+            EVERY CARD GETS THIS BOX, including the one with nothing to put in
+            it. The first attempt reserved an empty slot of a guessed height
+            instead, and the guess was wrong by 20px — the cards sit five across
+            at lg, which leaves 111px of text width, not the 180px the estimate
+            assumed, so both lines wrapped and the real box stood taller than
+            its reservation. Every card's button inherited the error.
 
-            The slot is reserved on `md` up even when empty, for the reason the
-            description below reserves one — the cards sit in a stretched row
-            there and a block present on three of four would step every CTA out
-            of line. Stacked on a phone there is no row to align to. */}
-        <div className="md:min-h-[5.25rem] mb-4">
-          {credit && (
-            <div className="rounded-xl border border-neutral-700 bg-neutral-900/60 px-4 py-3">
-              <p className="text-sm font-semibold text-foreground">
-                {credit.whole
-                  ? `$${credit.amount.toLocaleString("en-US")} back in credit every month`
-                  : `$${credit.amount.toLocaleString("en-US")} of credit included every month`}
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {credit.whole
-                  ? "Every dollar of your subscription, to spend on AI or compute."
-                  : "Yours to spend on AI or compute."}
-              </p>
-            </div>
-          )}
-        </div>
+            A constant cannot fix that, because the right constant is different
+            at every breakpoint: the same words wrap to two lines at 111px and
+            one line at 358px. Same markup and same shape on all five cards
+            means they wrap together and their heights track with nothing to
+            maintain — and stating the credit on the free card too turns the
+            box into the rung-by-rung comparison it should have been. */}
+        {credit && (
+          <div
+            className={`mb-4 rounded-xl border px-4 py-3 ${
+              credit.amount > 0
+                ? "border-neutral-700 bg-neutral-900/60"
+                : "border-neutral-800 bg-transparent"
+            }`}
+          >
+            <p
+              className={`text-sm font-semibold ${
+                credit.amount > 0 ? "text-foreground" : "text-muted-foreground"
+              }`}
+            >
+              {credit.amount > 0
+                ? `$${credit.amount.toLocaleString("en-US")} ${
+                    credit.whole ? "back" : "credit"
+                  } every month`
+                : "No credit included"}
+            </p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              {credit.amount > 0
+                ? "Spend it on AI or compute."
+                : "Paid plans add credit."}
+            </p>
+          </div>
+        )}
 
         <p className="text-muted-foreground md:min-h-[7.5rem]">{description}</p>
       </div>
