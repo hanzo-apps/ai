@@ -25,14 +25,14 @@ const catalog = JSON.parse(
   readFileSync(join(here, "..", "..", "lib", "data", "catalog.json"), "utf8"),
 );
 
-// The one declaration of depth, read from the film that owns it.
-const STACK = readFileSync(join(here, "..", "stack", "film.mjs"), "utf8")
-  .match(/const STACK = \[([\s\S]*?)\];/)[1]
+// The one declaration of depth — lib/data/stack.ts, which the hero reads too.
+const STACK = readFileSync(join(here, "..", "..", "lib", "data", "stack.ts"), "utf8")
+  .match(/export const STACK = \[([\s\S]*?)\] as const/)[1]
   .split("\n")
-  .map((l) => (l.match(/"([a-z0-9-]+)"/) || [])[1])
+  .map((l) => (l.match(/'([a-z0-9-]+)'/) || [])[1])
   .filter(Boolean);
 
-if (STACK.length !== 10) throw new Error(`read ${STACK.length} layers from film/stack, expected 10`);
+if (STACK.length !== 10) throw new Error(`read ${STACK.length} layers from lib/data/stack.ts, expected 10`);
 
 const LAYERS = STACK.map((id) => {
   const c = catalog.categories.find((x) => x.id === id);

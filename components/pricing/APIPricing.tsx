@@ -12,7 +12,11 @@ interface HanzoModel {
   description: string;
   features: string[];
   tier: string;
-  specs: { params: string; arch: string };
+  // Optional, because the catalog is: an embedding, rerank, image, audio or
+  // video model states no parameter count and no architecture. Declaring it
+  // required did not make it present — it only moved the discovery from the
+  // compiler to a reader's blank screen.
+  specs?: { params?: string; arch?: string };
   pricing: { input?: number; output?: number; cacheRead?: number | null; cacheWrite?: number | null; perUnit?: number };
   pricingUnit?: string;
   endpoint?: string;
@@ -336,14 +340,14 @@ const APIPricing = () => {
             <p className="text-muted-foreground mb-3">{model.description}</p>
           )}
 
-          {(model.specs.params || model.specs.arch) && (
+          {(model.specs?.params || model.specs?.arch) && (
             <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3 flex-wrap">
-              {model.specs.params && (
+              {model.specs?.params && (
                 <span>
                   Parameters: <span className="text-foreground/80">{model.specs.params}</span>
                 </span>
               )}
-              {model.specs.arch && (
+              {model.specs?.arch && (
                 <span>
                   Architecture: <span className="text-foreground/80">{model.specs.arch}</span>
                 </span>

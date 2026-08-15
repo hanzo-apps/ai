@@ -6,7 +6,7 @@ import { useReducedMotion } from "framer-motion"
 import { ArrowRight, CreditCard, Cpu, Check, Github } from "lucide-react"
 import { CopyButton } from "@hanzo/ui/product"
 import CloudCategoryShowcase, { CloudCategoryMap } from "@/components/cloud/CloudCategoryShowcase"
-import Orbit from "@/components/cloud/Orbit"
+import Stack from "@/components/cloud/Stack"
 import { Mockup } from "@/components/product/Mockup"
 import { CONSOLE } from "@/components/home/nav-data"
 import { useModelCount } from '@/hooks/useModelCount'
@@ -288,7 +288,7 @@ function Hero({ models }: { models: string }) {
             the only one it can obey without distorting. 44rem keeps it under a
             900px fold once the section's own padding is paid for. */}
         <div className="mx-auto w-full max-w-[30rem] sm:max-w-[34rem] lg:max-w-[38rem] xl:max-w-[44rem]">
-          <Orbit />
+          <Stack />
         </div>
       </div>
     </section>
