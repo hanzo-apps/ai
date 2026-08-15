@@ -24,10 +24,26 @@ import { useEffect, useRef, useState } from 'react'
  * still is the LAST frame, because that is the finished product; the poster is
  * frame 0, so the swap to the player is invisible.
  */
-export function Mockup({ slug, alt }: { slug: string; alt: string }) {
+/**
+ * `slug` names a film under /mock — the per-product surfaces film/mock renders.
+ * `base` names one anywhere else, for a film that is not a product's own screen
+ * (the platform stack). One of the two, never both: a component that takes two
+ * ways to say where its film is has two ways to be pointed at nothing.
+ */
+export function Mockup({
+  slug,
+  base: at,
+  alt,
+  ratio = 'aspect-video',
+}: {
+  slug?: string
+  base?: string
+  alt: string
+  ratio?: string
+}) {
   const ref = useRef<HTMLDivElement>(null)
   const [film, setFilm] = useState(false)
-  const base = `/mock/${slug}-wide`
+  const base = at ?? `/mock/${slug}-wide`
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -54,7 +70,7 @@ export function Mockup({ slug, alt }: { slug: string; alt: string }) {
     <div ref={ref}>
       {film ? (
         <video
-          className="block aspect-video w-full"
+          className={`block w-full ${ratio}`}
           src={`${base}.mp4`}
           poster={`${base}-first.jpg`}
           autoPlay
@@ -69,7 +85,7 @@ export function Mockup({ slug, alt }: { slug: string; alt: string }) {
           <source media="(prefers-reduced-motion: reduce)" srcSet={`${base}-last.jpg`} />
           {/* A bare img, because next/image renders no <source> and the choice
               above is the browser's to make. */}
-          <img className="block aspect-video w-full" src={`${base}-first.jpg`} alt={alt} />
+          <img className={`block w-full ${ratio}`} src={`${base}-first.jpg`} alt={alt} />
         </picture>
       )}
     </div>

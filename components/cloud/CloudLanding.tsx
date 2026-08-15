@@ -7,6 +7,7 @@ import { ArrowRight, CreditCard, Cpu, Check, Github } from "lucide-react"
 import { CopyButton } from "@hanzo/ui/product"
 import CloudCategoryShowcase, { CloudCategoryMap } from "@/components/cloud/CloudCategoryShowcase"
 import Orbit from "@/components/cloud/Orbit"
+import { Mockup } from "@/components/product/Mockup"
 import { CONSOLE } from "@/components/home/nav-data"
 import { useModelCount } from '@/hooks/useModelCount'
 import { cloudCategories, tour } from '@/lib/data/cloud-primitives'
@@ -330,6 +331,17 @@ function Products() {
               identity, a bill, and a key, so reaching for a second one costs you a line
               of code rather than an account.
             </p>
+          </div>
+
+          {/* The ten layers, assembling. It carries no copy of its own — a
+              film cannot reflow, translate or answer a screen reader — so what
+              it MEANS is the alt, and the sentence above already said it. The
+              map under it is how you reach any one of them. */}
+          <div className="mt-14">
+            <Mockup
+              base="/cloud-stack-wide"
+              alt="The ten layers of the Open AI Cloud, assembling from AI at the base to Apps on top: Compute, Data, Network, Security, Dev, Infrastructure, Observe and Web3 between them."
+            />
           </div>
 
           <div className="mt-14">
