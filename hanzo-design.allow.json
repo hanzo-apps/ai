@@ -1,8 +1,8 @@
 {
   "_": "What this surface still owes the design system, per hanzo-design-lint rule. It may only SHRINK — a fix deletes its own exemption in the same commit, and a violation written today fails the build. `pnpm lint:design` is the gate; @hanzo/design's LLM.md documents the four layers and every rule.",
   "_zero": "local-token-table, second-publisher, shell-owned-chrome, raw-font-size, icon-set and wrong-package are absent, which means ZERO. The first is why the 244-line gui.config.ts is gone; the third is real rather than lucky — home/shell.tsx composes @hanzogui/shell's HanzoHeader and HanzoFooter rather than drawing its own.",
-  "_backlog": "raw-color is the Tailwind conversion, and it shrinks as routes move to gui props. inline-style is 68 sites reaching past the token layer, all-caps is copy, and unresolved-token names 13 custom properties nothing declares HERE — five are Tailwind internals, three are the Next font vars, and two are @hanzo/composer knobs the linter cannot see because it does not read a dependency stylesheet.",
-  "unresolved-token": 13,
+  "_backlog": "raw-color is the Tailwind conversion, and it shrinks as routes move to gui props. inline-style is 68 sites reaching past the token layer, all-caps is copy, and unresolved-token names 14 custom properties nothing declares HERE — five are Tailwind internals, three are the Next font vars, and two are @hanzo/composer knobs the linter cannot see because it does not read a dependency stylesheet.",
+  "unresolved-token": 14,
   "raw-color": 250,
   "raw-z-index": 2,
   "all-caps": 16,

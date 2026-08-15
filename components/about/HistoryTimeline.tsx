@@ -5,7 +5,6 @@ import React, { useRef } from "react";
 import { motion } from "@/components/motion";
 import { useScroll, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import { Code, Rocket, Stars, Coins, Trophy, Lightbulb, Bot, User2 } from "lucide-react";
-import { Button } from "@hanzo/ui";
 
 const timelineEvents = [
   {
@@ -100,9 +99,17 @@ const TimelineEvent = ({ event, index }) => {
           <div className="bg-primary/10 border border-border rounded-lg p-4 mb-6">
             <p className="text-foreground/80 italic">&ldquo;{event.highlight}&rdquo;</p>
           </div>
-          <Button variant="outline" className="border-border text-foreground hover:bg-accent">
-            <a href={event.link.url || "#"}>{event.link.text}</a>
-          </Button>
+          {/* The LINK is the control. It used to be an `<a>` inside a
+              `<Button>` — interactive content nested in a button, which is
+              invalid, and it measured 158x20 inside a box the touch floor had
+              already grown to 44: the top and bottom of the button navigated
+              nowhere. One element, so the thing you see is the thing you hit. */}
+          <a
+            href={event.link.url || "#"}
+            className="hz-tap rounded-md border border-border px-4 text-sm font-medium text-foreground no-underline transition-colors hover:bg-accent hover:no-underline"
+          >
+            {event.link.text}
+          </a>
         </div>
       </div>
 

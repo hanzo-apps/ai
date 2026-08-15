@@ -190,8 +190,16 @@
      while each computes min-height:44px and obeys none of it. The old blanket
      rule looked like a touch-target policy and was decoration.
 
+     `.hz-tap` was given the floor below and NOT the box, so it inherited the
+     whole defect the header links had just been cured of: 81 controls on
+     /cloud and 13 on /open-source compute min-height:44px and measure 17px
+     tall at 390. A floor is only a floor once the thing standing on it is a
+     box, so the two are stated together, for every control that claims to be
+     a tap target.
+
      The BOX is unconditional; only its minimum size tracks the pointer. */
-  :is(header, footer) a[href] {
+  :is(header, footer) a[href],
+  .hz-tap {
     display: inline-flex;
     align-items: center;
   }
@@ -234,7 +242,8 @@
      `min-height:30px;min-width:30px` inline, and the un-important version lost
      to them while computing correctly in devtools. */
   @media (pointer: coarse) {
-    :is(a[href], button, [role='button']):has(> svg:only-child) {
+    :is(a[href], button, [role='button']):has(> svg:only-child),
+    .hz-tap {
       min-width: 44px !important;
     }
   }

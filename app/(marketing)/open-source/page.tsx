@@ -118,7 +118,7 @@ const OpenSource = () => {
                   href="https://github.com/hanzoai"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
+                  className="hz-tap px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
                 >
                   <Github className="w-4 h-4 mr-2" />
                   View on GitHub
