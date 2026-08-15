@@ -3,7 +3,8 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
-import { Download, Monitor, Apple } from "lucide-react";
+import { Download, Apple } from "lucide-react";
+import { Mockup } from "@/components/product/Mockup";
 
 const DownloadHero = () => {
   return (
@@ -93,23 +94,22 @@ const DownloadHero = () => {
             </button>
           </motion.div>
 
-          {/* Video preview placeholder */}
+          {/* The app itself, running, under the two ways to get it.
+              `Mockup` is the site's one way to place a product film, and the
+              film is the device: it draws its own window — the traffic lights,
+              the titlebar, the sidebar, the conversation — on its own ground.
+              Nothing is drawn around it, because a border here would be a
+              second window around the first. It fills the hero's column, so
+              the film and the copy above it share one measure. */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="max-w-4xl mx-auto rounded-xl overflow-hidden border border-border bg-secondary/50"
           >
-            <div className="relative pb-[56.25%] h-0">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div
-                  className="p-4 rounded-full"
-                  style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)" }}
-                >
-                  <Monitor className="h-12 w-12" />
-                </div>
-              </div>
-            </div>
+            <Mockup
+              slug="desktop"
+              alt="The Hanzo desktop app: a conversation beside the workspace it acts on."
+            />
           </motion.div>
         </motion.div>
       </div>
