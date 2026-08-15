@@ -783,6 +783,16 @@ fix is forced to delete its own exemption. Do not add entries to make it pass.
   styling. `Prose` deliberately stays an element tree + `prose.css`: gui's
   `Text` is `white-space: pre-wrap`, right for a label and wrong for a
   paragraph authored across several source lines.
+- **The display heading is `.hz-display`**, in `app/globals.css`, and
+  `components/ui/chrome-text.tsx` is the component that wears it. It states the
+  WHOLE type — `--type-hero` for the role (600, 1.05, display face) and one rung
+  of the same ramp per breakpoint, `--text-4xl` / `--text-5xl` / `--text-6xl` =
+  32 / 40 / 52. Splitting it — ink and leading in the component, scale at the
+  call site — is how six measured pages came to state four mobile scales (one of
+  them 41.6px, no rung of anything), three laptop scales, three weights and two
+  whites for one `h1`. The rule sits in `base`, so a page that still writes its
+  own `text-*` keeps winning and converts on its own schedule; a converted page
+  passes CONTENT and spacing, never type.
 - Hero: radial gradient bg (800px, blur 100px, 15% opacity)
 - Animation: framer-motion, 0.4s base, 0.05s stagger
 - Font: Geist Sans (`next/font/google`), bound to @hanzo/design's
@@ -802,7 +812,30 @@ fix is forced to delete its own exemption. Do not add entries to make it pass.
   44px for EVERY pointer was the wrong policy — it stretched ten of the eleven
   controls on the homepage, turning the 21px "Chat with Enso" pills into 44px
   slabs. A mouse does not need a thumb target.
+- **A floor needs a box, and it applies to the SMALLER SIDE.** `min-height`
+  does nothing to a non-replaced inline box, so every mark that claims a tap
+  target — `.hz-tap` and header/footer links alike — is given `inline-flex`
+  unconditionally and the 44px minimum only under a coarse pointer. Stating the
+  minimum without the box is the defect that reads as fixed and measures 17px;
+  stating only the height leaves "Bot" at 21x44. Prose links are deliberately
+  outside all of it: stretching a link inside a sentence tears the line.
+- **The drawer carries the bottom inset**, as the header carries the top one.
+  It is `position: fixed`, so `body`'s inset cannot reach it, and it runs the
+  full height below the bar. The spacer is an `::after` of
+  `env(safe-area-inset-bottom)` rather than padding, because the panel states
+  its own padding inline and a stylesheet can only replace that, not add to it.
 - Verify at 390px with Playwright before claiming mobile works.
+
+## No authoring widget ships
+
+`hanzo.app/edit.js` used to load in `app/layout.tsx` on all 883 pages. It is an
+authoring tool, and this is a published static site: it mounted a launcher in a
+shadow root at z-index 2147483000, which on a phone covered 43x32px of the
+drawer's "Try Hanzo" — the one primary action — so the edge of the CTA opened an
+editor. Two rules in `app/globals.css` existed only to live beside it (a z-index
+clamp on `[data-hanzo-edit]`, and 64px of `.hz-dock` clearance to keep the
+composer above the launcher) and went with it. Do not put it back; the door for
+editing this site is this repo.
 
 ## Static Export
 
@@ -936,6 +969,16 @@ Three rules the page cost us before they were written down:
   every square mark — the H worst of all. Every source declares
   `fill-rule="evenodd"` on its root, so the wrapper repeats it: without it
   Mistral's inner square fills in and the mark is quietly wrong.
+
+**The favicon is DERIVED, not drawn.** `scripts/sync-mark.mjs` copies
+`@hanzo/brand/assets/logo/favicon.svg` into `public/` in `prebuild` and refuses
+a mark that arrives stroked or with the wrong number of shapes. The
+hand-maintained copy it replaced painted the five shapes twice — a stroked
+`.rim` behind a `.core` — and then set both layers to one colour in each scheme
+a browser actually reports, so a 5.58px stroke bridged the gaps and served a
+solid blob everywhere except the no-preference default. One layer, one ink that
+flips with the scheme, is the only construction that cannot do that.
+`console.hanzo.ai` resolves an org's logo to this same URL.
 
 `public/logos/*.svg` is a SECOND representation of eight of these, and it exists
 for exactly one reason: `AccuracyCostScatter` draws them through `<image href>`,

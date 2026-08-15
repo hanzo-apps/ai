@@ -1,3 +1,9 @@
+// A CLIENT component, and `ssr: false` below is the whole reason. Next refuses
+// that option in a Server Component outright — `app/page.tsx` imports this
+// through HomeLanding, so without this line the apex does not compile and
+// nothing publishes.
+'use client'
+
 import dynamic from 'next/dynamic'
 
 /**
