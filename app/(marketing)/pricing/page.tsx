@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, type ReactNode } from "react"
 import { useAnalytics } from "@hanzo/event/react"
 import { EVENTS } from "@hanzo/event"
 import PricingHeader from "@/components/pricing/PricingHeader"
@@ -15,26 +15,30 @@ import PricingFAQ from "@/components/pricing/PricingFAQ"
 import BillingManagement from "@/components/pricing/BillingManagement"
 import PricingCallouts from "@/components/pricing/PricingCallouts"
 
-// "Team & Enterprise" is gone as a tab. It was eight comparison cards for a
-// choice that is two sentences, and it made the page's first question "which of
-// seven audiences am I" instead of "which plan". Team and Enterprise now sit
-// under the plans as a two-item strip, so the page opens on the one decision a
-// visitor is actually here to make.
-//
-// "API" is now "API & Models" because that tab already carries the live
-// per-model rate table (input / output / cache-write, fetched from
-// api.hanzo.ai/v1/models) and the old label hid it.
+// Two tabs, because there are two ways to pay: a monthly plan, or usage.
+// Every service rate table is a SECTION of the usage tab — the visitor chooses
+// how they pay, not which of five products they arrived for.
 const tabs = [
-  { id: "personal", label: "Plans" },
-  { id: "api", label: "API & Models" },
-  { id: "search", label: "Search & Data" },
-  { id: "infrastructure", label: "Infrastructure" },
-  { id: "blockchain", label: "Blockchain" },
-  { id: "world", label: "World" },
+  { id: "plans", label: "Plans" },
+  { id: "usage", label: "Pay as you go" },
 ]
 
+// One service's rates under its name. The rate tables already carry their own
+// max-w-7xl and bottom margin, so a section adds only the label and the rule
+// that separates it from the service above.
+function Service({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className="max-w-7xl mx-auto pt-16 border-t border-neutral-800">
+      <h2 className="mb-8 text-sm font-medium uppercase tracking-widest text-neutral-500">
+        {title}
+      </h2>
+      {children}
+    </section>
+  )
+}
+
 export default function PricingPage() {
-  const [activeTab, setActiveTab] = useState("personal")
+  const [activeTab, setActiveTab] = useState("plans")
   const analytics = useAnalytics()
 
   useEffect(() => {
@@ -43,7 +47,27 @@ export default function PricingPage() {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case "personal":
+      case "usage":
+        return (
+          <>
+            <Service title="API & Models">
+              <APIPricing />
+            </Service>
+            <Service title="Search & Data">
+              <SearchDataPricing />
+            </Service>
+            <Service title="Infrastructure">
+              <InfrastructurePricing />
+            </Service>
+            <Service title="Blockchain">
+              <BlockchainPricing />
+            </Service>
+            <Service title="World">
+              <WorldPricing />
+            </Service>
+          </>
+        )
+      default:
         return (
           <>
             <PersonalPlans />
@@ -52,18 +76,6 @@ export default function PricingPage() {
             <BillingManagement />
           </>
         )
-      case "world":
-        return <WorldPricing />
-      case "api":
-        return <APIPricing />
-      case "search":
-        return <SearchDataPricing />
-      case "infrastructure":
-        return <InfrastructurePricing />
-      case "blockchain":
-        return <BlockchainPricing />
-      default:
-        return <PersonalPlans />
     }
   }
 
@@ -74,6 +86,9 @@ export default function PricingPage() {
 
         {/* Tab Navigation */}
         <div className="max-w-3xl mx-auto mb-12">
+          <p className="text-center text-muted-foreground mb-6">
+            Pick a monthly plan, or pay only for what you use.
+          </p>
           <div className="flex justify-center">
             <div className="bg-neutral-900/50 rounded-full p-1 border border-neutral-800">
               {tabs.map((tab) => (
