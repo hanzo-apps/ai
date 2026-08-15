@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { FileText, BookOpen, MessageSquare, ExternalLink } from "lucide-react";
 

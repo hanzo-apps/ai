@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Github, GitBranch, Star, Heart, ArrowRight, ExternalLink, Code, Building2, Scale, Sparkles, Check, Wallet, DollarSign, Coins, ShieldCheck, Eye, Users } from "lucide-react";
 import OSSCatalog from "@/components/oss/OSSCatalog"
 import OSSComputeDividends from "@/components/oss/OSSComputeDividends";

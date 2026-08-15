@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Search, ArrowRight } from "lucide-react";
 
 const HeroSection = () => {

@@ -3,7 +3,7 @@
 
 import React from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Project } from "./models/project";
 import ResourceUsageSection from "./ResourceUsageSection";
 import ProjectCostSection from "./ProjectCostSection";

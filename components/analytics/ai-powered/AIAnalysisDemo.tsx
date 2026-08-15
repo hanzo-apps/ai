@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { LineChart } from "lucide-react";
 
 const AIAnalysisDemo = () => {

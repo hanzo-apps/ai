@@ -2,7 +2,8 @@
 
 
 import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "@/components/motion";
+import { useInView } from "framer-motion";
 import { AlertTriangle, Eye, Zap } from "lucide-react";
 import AIFeatureCard from "./AIFeatureCard";
 

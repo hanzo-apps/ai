@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Bot, Cpu, GitBranch, Braces, Users, Brain, Server, Maximize } from "lucide-react";
 
 interface FeatureCardProps {

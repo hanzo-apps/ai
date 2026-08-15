@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { Github, Twitter, ExternalLink } from "lucide-react";
 

@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Github, CalendarDays, FileEdit, Trello, MessageSquare, Code } from "lucide-react";
 
 const IntegrationCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (

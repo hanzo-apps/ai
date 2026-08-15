@@ -1,7 +1,7 @@
 'use client'
 
 import { LucideIcon } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Info } from "lucide-react";
 
 interface TeamMemberCardProps {

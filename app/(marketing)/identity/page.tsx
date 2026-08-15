@@ -2,7 +2,7 @@
 
 
 import React, { useState } from 'react';
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { ArrowRight, User, UserCheck, Shield, Lock, UserCog, Key, Fingerprint, History } from "lucide-react";
 import { Button } from "@hanzo/ui";
 import ChromeText from "@/components/ui/chrome-text";

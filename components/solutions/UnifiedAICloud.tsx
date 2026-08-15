@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { ChevronRight, Users, BookOpen, Shield } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@hanzo/ui";

@@ -1,7 +1,7 @@
 'use client'
 
 import type { ComponentType } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { ExternalLink, Github, MessageCircle, Users, BookOpen, Calendar, MessageSquare } from "lucide-react";
 import Link from "next/link";
 

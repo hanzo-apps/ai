@@ -2,7 +2,8 @@
 
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "@/components/motion";
+import { useScroll, useTransform } from "framer-motion";
 import { ShoppingCart, DollarSign, CreditCard, Zap } from "lucide-react";
 
 const CommerceAnalytics = () => {

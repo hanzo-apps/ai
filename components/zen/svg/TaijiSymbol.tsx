@@ -2,8 +2,8 @@
 
 
 import React from "react";
-import { motion, type Variants } from 'framer-motion';
-
+import { motion } from '@/components/motion';
+import { type Variants } from 'framer-motion';
 interface TaijiProps {
   size?: number;
   className?: string;

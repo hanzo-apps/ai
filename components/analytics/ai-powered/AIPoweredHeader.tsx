@@ -2,8 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
-
+import { motion } from "@/components/motion";
 const AIPoweredHeader = () => {
   return (
     <motion.div

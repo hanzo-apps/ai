@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import Link from "next/link";
 import { MessageSquare, Check } from "lucide-react";
 import { Spinner } from "@hanzo/gui";

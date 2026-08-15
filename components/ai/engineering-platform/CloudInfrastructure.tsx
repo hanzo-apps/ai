@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { BrainCog, Cloud, Server, Database, Monitor, Network, Activity } from "lucide-react";
 
 const CloudInfrastructure = () => {

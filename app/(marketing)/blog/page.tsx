@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "@/components/motion"
 import { ArrowRight, BookOpen, Calendar } from "lucide-react"
 
 const posts = [

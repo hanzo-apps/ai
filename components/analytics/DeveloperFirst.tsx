@@ -2,7 +2,7 @@
 
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Code, Terminal, PenTool, Layers } from "lucide-react";
 import { Button } from "@hanzo/ui";
 

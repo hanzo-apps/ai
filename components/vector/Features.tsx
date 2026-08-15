@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Search, Filter, Ruler, Database, Minimize2, Server } from "lucide-react";
 
 const features = [

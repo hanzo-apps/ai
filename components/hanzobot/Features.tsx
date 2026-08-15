@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Bot, Braces, Users, Database, FileText, Image, Code, Layers } from "lucide-react";
 
 const Features = () => {

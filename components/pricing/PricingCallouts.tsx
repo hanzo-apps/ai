@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "@/components/motion"
 import { Gift, Heart, ArrowRight } from "lucide-react"
 
 export default function PricingCallouts() {

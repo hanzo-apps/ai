@@ -23,7 +23,7 @@
  * can pick between them. Prices stay exact -- see the note above PRESETS -- for
  * the opposite reason: a price is checkable against the bill.
  */
-import { motion } from 'framer-motion'
+import { motion } from '@/components/motion'
 import {
   ArrowRight,
   ArrowUpRight,

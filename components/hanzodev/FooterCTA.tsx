@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { CopyButton } from "@hanzo/ui/product";

@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { 
   Code, Brain, Database, Bot, Search, FileText, Workflow, 
   BarChart3, Lock, MessageSquare, Layers, Zap

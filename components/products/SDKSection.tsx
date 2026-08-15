@@ -1,7 +1,7 @@
 'use client'
 
 import type { ReactElement } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { ExternalLink, Package } from "lucide-react";
 
 interface SDK {

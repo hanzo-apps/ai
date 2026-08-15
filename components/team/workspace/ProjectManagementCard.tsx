@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Kanban, CheckCircle, Bot } from "lucide-react";
 import { Badge } from "@hanzo/ui";
 

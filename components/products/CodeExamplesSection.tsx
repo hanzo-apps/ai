@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Terminal } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@hanzo/ui";
 import { CopyButton } from "@hanzo/ui/product";

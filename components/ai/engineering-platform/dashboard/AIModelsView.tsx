@@ -2,7 +2,7 @@
 
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { BrainCircuit, BrainCog, Activity, ServerCog, Zap, Terminal } from "lucide-react";
 import { aiModels } from "../data/aiModels";
 

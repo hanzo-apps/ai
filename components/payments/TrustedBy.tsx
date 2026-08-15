@@ -2,8 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
-
+import { motion } from "@/components/motion";
 const clients = [
   { name: "Damon", delay: 0 },
   { name: "Triller", delay: 0.1 },

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from "framer-motion"
+import { motion } from "@/components/motion"
 import { ArrowRight, Link2, GitFork } from "lucide-react"
 import Link from "next/link"
 

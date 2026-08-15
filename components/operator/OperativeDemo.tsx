@@ -2,7 +2,7 @@
 
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { Play, Pause, SkipForward, SkipBack } from "lucide-react";
 

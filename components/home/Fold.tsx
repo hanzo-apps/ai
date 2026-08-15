@@ -1,8 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { motion } from 'framer-motion'
-
+import { motion } from '@/components/motion'
 // WebGL point-globe — client-only + code-split so it never runs at build/SSR
 // and stays out of the main bundle. Falls back to the static radial below when
 // WebGL is unavailable.

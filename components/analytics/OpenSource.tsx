@@ -2,7 +2,7 @@
 
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Github, Star, Download, Users } from "lucide-react";
 import { Button } from "@hanzo/ui";
 

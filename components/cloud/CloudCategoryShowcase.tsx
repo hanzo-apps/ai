@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/motion'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { cloudCategories, type CloudCategory, type Primitive } from '@/lib/data/cloud-primitives'
 

@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { LucideIcon } from "lucide-react";
 import { BrandColor } from "@/lib/constants/brand";
 

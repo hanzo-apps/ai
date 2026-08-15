@@ -12,7 +12,7 @@
  * derived from the billed tier rates at one stated mix (1K in / 1K out), never
  * typed in. Present results and savings; the routing mechanism is not described here.
  */
-import { motion } from 'framer-motion'
+import { motion } from '@/components/motion'
 import AccuracyCostScatter, { type ScatterPoint } from '@/components/models/AccuracyCostScatter'
 import CostCalculator from '@/components/models/CostCalculator'
 import { MODELS, scatterRows, fmtPrice, ensoSavings, ensoTier, fmtReqCost, reqCost, HARD_FRACTION, TOP_RATE } from '@/lib/leaderboard'

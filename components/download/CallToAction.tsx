@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Apple, Monitor, Chrome } from "lucide-react";
 import { CTA_PRIMARY, CTA_OUTLINE } from "./cta";
 

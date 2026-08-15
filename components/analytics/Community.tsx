@@ -2,7 +2,8 @@
 
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "@/components/motion";
+import { useAnimation } from "framer-motion";
 import { Github, ExternalLink, Users, BookOpen } from "lucide-react";
 import { Button } from "@hanzo/ui";
 

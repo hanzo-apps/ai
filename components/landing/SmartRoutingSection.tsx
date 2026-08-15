@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Route, TerminalSquare, Receipt, ArrowRight, BookOpen } from "lucide-react";
 
 // Smart routing — the money-saving value prop. Send `model: "auto"` to

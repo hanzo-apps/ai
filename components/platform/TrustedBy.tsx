@@ -2,7 +2,7 @@
 
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { testimonials } from "@/lib/data/testimonials";
 
 

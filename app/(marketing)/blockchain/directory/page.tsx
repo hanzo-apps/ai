@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import {
   Globe,
   Search,

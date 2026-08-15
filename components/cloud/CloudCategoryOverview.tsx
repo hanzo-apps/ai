@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/motion'
 import { ArrowRight, ArrowUpRight, BookOpen, Github } from 'lucide-react'
 import { Button } from '@hanzo/ui'
 import { ProductShot } from '@hanzogui/shell'

@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { ArrowRight, Code, Terminal, Download } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";

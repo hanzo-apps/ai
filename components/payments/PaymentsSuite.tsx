@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { CreditCard, Calendar, Send, CreditCard as CardIcon, Coins } from "lucide-react";
 
 const suiteItems = [

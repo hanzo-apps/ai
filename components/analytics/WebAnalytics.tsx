@@ -2,7 +2,8 @@
 
 
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useAnimation, type Variants } from 'framer-motion';
+import { motion } from '@/components/motion';
+import { useAnimation, type Variants } from 'framer-motion';
 import { LineChart, Users, Filter, Layers, Activity } from "lucide-react";
 
 const features = [
