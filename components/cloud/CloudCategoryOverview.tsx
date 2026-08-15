@@ -4,14 +4,13 @@ import Link from 'next/link'
 import { motion } from '@/components/motion'
 import { ArrowRight, ArrowUpRight, BookOpen, Github } from 'lucide-react'
 import { Button } from '@hanzo/ui'
-import { ProductShot } from '@hanzogui/shell'
 import {
   POSITIONING,
   cloudCategories,
   getCategoryBySlug,
   type Primitive,
 } from '@/lib/data/cloud-primitives'
-import { shotForCategory } from '@/lib/data/product-shots'
+import { Mockup } from '@/components/product/Mockup'
 
 const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
   ga: 'GA',
@@ -34,8 +33,6 @@ const isExternal = (item: Primitive) => /^https?:\/\//.test(item.href)
 export function CloudCategoryOverview({ slug }: { slug: string }) {
   const category = getCategoryBySlug(slug)
   if (!category) return null
-
-  const shot = shotForCategory(slug)
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -70,11 +67,18 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
           evidence, then the parts. Lazy by default (the shell's default, not a
           decision re-made here), and absent entirely for a category with no
           shot rather than substituted with a stand-in. */}
-      {shot && (
-        <section className="mx-auto max-w-6xl px-6 pb-16">
-          <ProductShot desktop={shot.desktop} mobile={shot.mobile} alt={shot.alt} />
-        </section>
-      )}
+      {/* The layer, lifting out of the platform it is part of. Same stack the
+          cloud landing shows, so a visitor who saw it there recognises this
+          one; then this category opens and names everything it holds. The
+          film carries no copy — its message is the alt. */}
+      <section className="mx-auto max-w-6xl px-6 pb-16">
+        <Mockup
+          base={`/layer/${slug}-wide`}
+          alt={`${category.title}, lifting out of the ten-layer Open AI Cloud: ${category.items
+            .map((i) => i.title)
+            .join(', ')}.`}
+        />
+      </section>
 
       {/* Product grid — every leaf in the category, each a real link */}
       <section className="mx-auto max-w-6xl px-6 pb-20">

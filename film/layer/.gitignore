@@ -1,0 +1,12 @@
+# node film.mjs writes one directory per layer — build output, like tall/ and
+# wide/ beside every other film. The generator and assets/ are the source.
+ai/
+compute/
+data/
+network/
+security/
+dev/
+infrastructure/
+observe/
+web3/
+apps/
