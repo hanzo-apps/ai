@@ -89,6 +89,11 @@ export const EMPTY: readonly string[] = [
   // nothing to read, and it dragged the thin-page floor down onto the whole
   // `/docs/*` shelf — one cause, two red gates, which is why they arrive
   // together.
+  // Forwards to hanzo.app/download, the ONE download page. This site used to
+  // hold a second one, and the two disagreed about which artifact "Desktop"
+  // meant. `@hanzogui/shell` still points every Hanzo surface's "Download" at
+  // this URL, so the shell is what carries the whole estate to the real page.
+  '/download',
   '/defi',
   '/defi/exchange',
   '/defi/staking',

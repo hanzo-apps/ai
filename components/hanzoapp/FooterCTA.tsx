@@ -42,7 +42,7 @@ const FooterCTA = () => {
               <ArrowRight className="ml-2 h-5 w-5" />
             </a>
             <Link
-              href="/download"
+              href="https://hanzo.app/download"
               className="inline-flex items-center justify-center px-8 py-4 rounded-full font-medium text-foreground text-lg border border-border hover:bg-secondary transition-colors"
             >
               <Download className="mr-2 h-5 w-5" />

@@ -95,13 +95,18 @@ export default function Composer() {
 
   return (
     <div className="hz-dock px-4 sm:px-6 lg:px-8">
-      <form onSubmit={submit} className="hz-composer mx-auto w-full max-w-2xl">
-        {/* Glass, like the band it sits in and the header at the other edge —
-            `--hz-chrome` is that one material (app/globals.css). An opaque pill
-            on a translucent band reads as a second, heavier object floating on
-            the chrome instead of being part of it. */}
+      <form onSubmit={submit} className="hz-composer mx-auto w-full max-w-xl">
+        {/* Glass, the same material as the header at the other edge —
+            `--hz-chrome` (app/globals.css). The pill carries it ALONE now: the
+            band it sits in is transparent, because tinting the full width to
+            hold one centred control drew a shade across the bottom of every
+            page. Chrome where there is a control; nothing where there is not. */}
+        {/* One border, at one value. Brightening it on focus put a second ring
+            inside the focus ring app/globals.css draws around this element —
+            and with nothing else changing colour here, `transition-colors` had
+            nothing left to carry. */}
         <div
-          className="flex items-center gap-1.5 rounded-full border border-white/10 p-[6px] transition-colors focus-within:border-white/25"
+          className="flex items-center gap-1.5 rounded-full border border-white/[0.07] p-[4px]"
           style={{
             background: 'var(--hz-chrome)',
             backdropFilter: 'var(--hz-chrome-blur)',
@@ -140,7 +145,7 @@ export default function Composer() {
             onChange={(e) => setValue(e.target.value)}
             placeholder="Ask Hanzo anything"
             aria-label="Ask Hanzo anything"
-            className="min-w-0 flex-1 bg-transparent px-2 text-[15px] text-white placeholder-neutral-500 outline-none"
+            className="min-w-0 flex-1 bg-transparent px-2 text-[14px] text-white placeholder-neutral-500 outline-none"
           />
 
           <Voice

@@ -110,7 +110,7 @@ const CATEGORIES: Category[] = [
     color: "#d4d4d4",
     products: [
       { name: "Hanzo Dev", description: "AI coding assistant", icon: Terminal, href: "/dev" },
-      { name: "CLI", description: "Command line tools", icon: Terminal, href: "/download" },
+      { name: "CLI", description: "Command line tools", icon: Terminal, href: "https://hanzo.app/download" },
       { name: "Console", description: "Web dashboard", icon: Layout },
       { name: "SDKs", description: "Client libraries", icon: Code },
       { name: "Templates", description: "Starter projects", icon: Boxes },

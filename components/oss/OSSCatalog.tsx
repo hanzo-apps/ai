@@ -27,7 +27,6 @@ import {
   DropdownMenuTrigger,
   Input,
 } from "@hanzo/ui";
-import { Sheet, YStack, Text } from "@hanzo/gui";
 import { cn } from '@/lib/utils';
 import {
   ossCatalog,
@@ -142,7 +141,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
           )}
           {repo.actions.githubUrl && (
             <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-foreground" asChild>
-              <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer">
+              <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github className="w-4 h-4" />
               </a>
             </Button>
@@ -224,14 +223,14 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
       {/* Actions */}
       <div className="mt-auto p-4 pt-3 border-t border-border flex items-center gap-2">
         {primaryAction ? (
-          <Button size="sm" className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
+          <Button size="sm" className="hz-tap flex-1 bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
             <a href={primaryAction.url || "#"} target="_blank" rel="noopener noreferrer">
               <primaryAction.icon className="w-3.5 h-3.5 mr-1.5" />
               {primaryAction.label}
             </a>
           </Button>
         ) : repo.actions.githubUrl ? (
-          <Button size="sm" variant="outline" className="flex-1 border-border hover:bg-accent" asChild>
+          <Button size="sm" variant="outline" className="hz-tap flex-1 border-border hover:bg-accent" asChild>
             <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer">
               <Github className="w-3.5 h-3.5 mr-1.5" />
               View Source
@@ -241,22 +240,22 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
 
         <div className="flex gap-1">
           {repo.actions.docsUrl && (
-            <Button size="sm" variant="ghost" className="px-2 text-muted-foreground hover:text-foreground" asChild title="Docs">
-              <a href={repo.actions.docsUrl || "#"} target="_blank" rel="noopener noreferrer">
+            <Button size="sm" variant="ghost" className="hz-tap px-2 text-muted-foreground hover:text-foreground" asChild title="Docs">
+              <a href={repo.actions.docsUrl || "#"} target="_blank" rel="noopener noreferrer" aria-label="Docs">
                 <BookOpen className="w-4 h-4" />
               </a>
             </Button>
           )}
           {repo.actions.learnUrl && (
-            <Button size="sm" variant="ghost" className="px-2 text-muted-foreground hover:text-foreground" asChild title="Learn">
-              <a href={repo.actions.learnUrl || "#"}>
+            <Button size="sm" variant="ghost" className="hz-tap px-2 text-muted-foreground hover:text-foreground" asChild title="Learn">
+              <a href={repo.actions.learnUrl || "#"} aria-label="Learn">
                 <GraduationCap className="w-4 h-4" />
               </a>
             </Button>
           )}
           {primaryAction && repo.actions.githubUrl && (
-            <Button size="sm" variant="ghost" className="px-2 text-muted-foreground hover:text-foreground" asChild title="GitHub">
-              <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer">
+            <Button size="sm" variant="ghost" className="hz-tap px-2 text-muted-foreground hover:text-foreground" asChild title="GitHub">
+              <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github className="w-4 h-4" />
               </a>
             </Button>
@@ -536,9 +535,12 @@ const OSSCatalog: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+          {/* `h2`. This catalog is a SECTION of /open-source, whose fold already
+              carries the page's one `h1`; two of them made the page claim two
+              subjects, and the count is exactly what the publish gates check. */}
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
             OSS Catalog
-          </h1>
+          </h2>
           <p className="text-muted-foreground text-lg">
             Open source tools, templates, and infrastructure for building AI applications
           </p>
@@ -662,26 +664,24 @@ const OSSCatalog: React.FC = () => {
                   </span>
                 )}
               </Button>
-              <Sheet
-                modal
-                open={filtersOpen}
-                onOpenChange={setFiltersOpen}
-                snapPoints={[80]}
-                dismissOnSnapToBottom
-              >
-                <Sheet.Overlay backgroundColor="rgb(0 0 0 / 0.6)" />
-                <Sheet.Handle />
-                <Sheet.Frame backgroundColor="$secondary" padding="$4" gap="$4">
-                  <Text fontSize="$6" fontWeight="500" color="$foreground">
-                    Filters
-                  </Text>
-                  <Sheet.ScrollView>
-                    <YStack paddingBottom="$20">
-                      <FacetRail />
-                    </YStack>
-                  </Sheet.ScrollView>
-                </Sheet.Frame>
-              </Sheet>
+              {/* The mobile filter panel. It is a DISCLOSURE, not a gui Sheet:
+                  that Sheet ignored `open` here and rendered its frame into the
+                  top of the document, so a wall of checkboxes sat over the fold
+                  on every visit, desktop included. This shows the SAME FacetRail
+                  the sidebar shows — one filter UI, revealed in place. */}
+              {filtersOpen && (
+                <div className="lg:hidden fixed inset-x-0 bottom-0 top-16 z-50 flex flex-col border-t border-border bg-background">
+                  <div className="flex items-center justify-between border-b border-border px-4 py-3">
+                    <span className="text-base font-medium text-foreground">Filters</span>
+                    <Button variant="ghost" size="sm" onClick={() => setFiltersOpen(false)} aria-label="Close filters">
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
+                  <div className="flex-1 overflow-y-auto p-4 pb-24">
+                    <FacetRail />
+                  </div>
+                </div>
+              )}
             </>
           </div>
         </div>

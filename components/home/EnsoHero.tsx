@@ -98,7 +98,7 @@ export default function EnsoHero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="group mt-8 inline-flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-sm text-neutral-400 transition-colors hover:text-white"
+          className="hz-tap group mt-8 inline-flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-sm text-neutral-400 transition-colors hover:text-white"
         >
           <span className="text-neutral-300 group-hover:text-white">Flash</span>
           <span aria-hidden className="text-neutral-700">·</span>

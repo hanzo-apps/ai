@@ -31,6 +31,12 @@
 @import '@hanzo/design/tokens/base.css' layer(base);
 @import 'tailwindcss';
 
+/* The composer's material — the lit ring around the field in the dock. Shared
+   with hanzo.chat and hanzo.app, which is the point: it was copied into all
+   three stylesheets and the copies drifted. Unlayered, so it outranks the
+   utilities, which is what lets it size the field from --text-base. */
+@import '@hanzo/composer/composer.css';
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -170,26 +176,58 @@
     align-items: center;
   }
 
+  /* `.hz-tap` says "this is a standalone tap target". A link in a paragraph is
+     not one — stretching it to 44px would tear the line it sits in — so the
+     floor cannot simply name every `a[href]`, and a link that IS a control has
+     to say so. Same mark hanzo.app uses, for the same reason. */
   @media (pointer: coarse) {
     button,
     [role='button'],
-    :is(header, footer) a[href] {
-      min-height: 44px;
+    :is(header, footer) a[href],
+    .hz-tap {
+      min-height: 44px !important;
     }
   }
 
   /* An icon-only control is `display: inline` by default, where a min-height has
      no effect at all — it needs a box before it can have a size. The box is
      unconditional; only the thumb-sized minimum tracks the pointer. */
-  :is(header, footer) :is(a[href], button):has(> svg:only-child) {
+  :is(a[href], button, [role='button']):has(> svg:only-child) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
 
+  /* The edit widget is a GUEST, and a guest does not outrank the host's modals.
+     `hanzo.app/edit.js` mounts `[data-hanzo-edit]` and its shadow content asked
+     for 2147483000 — measured covering 43×32px of the mobile drawer's "Try
+     Hanzo" button, which is this site's one primary action on a phone. The host
+     element is a stacking context from that script's own side, so this one
+     number governs everything inside it. 400 is above the page and below
+     `--z-overlay` (500) and the shell's drawer (600): a widget belongs over
+     content and under anything modal. */
+  [data-hanzo-edit] {
+    z-index: 400 !important;
+  }
+
+  /* A TAP TARGET IS A BOX, and the floor applies to the SMALLER SIDE. Height
+     alone is half a policy: an icon-only control has no text to widen it, so it
+     stays as narrow as its glyph however tall the rule makes it. Measured on
+     this homepage at 390 and 834 — the composer's three controls (Start
+     something, Talk to Hanzo, Send) render 30×30 while the rule above claims
+     44, because they are not in a header or a footer and nothing set a width.
+     The rule used to be scoped to `:is(header, footer)`; the composer is
+     neither, and it is the one place on this page a thumb actually goes.
+
+     `!important` IS LOAD-BEARING here and is not a shortcut. @hanzo/gui writes a
+     control's size INLINE, and an inline declaration outranks a stylesheet rule
+     on the same property at any specificity — so without it this rule is a
+     silent no-op on exactly the controls it exists for. Those three were
+     `min-height:30px;min-width:30px` inline, and the un-important version lost
+     to them while computing correctly in devtools. */
   @media (pointer: coarse) {
-    :is(header, footer) :is(a[href], button):has(> svg:only-child) {
-      min-width: 44px;
+    :is(a[href], button, [role='button']):has(> svg:only-child) {
+      min-width: 44px !important;
     }
   }
 }
@@ -304,6 +342,20 @@
    carry more specificity than gui.css's `:root.t_dark` (0,2,0), because
    globals.css is imported BEFORE gui.css and would otherwise lose the tie.
    White at 72%, offset clear of the control, so it reads on every surface. */
+
+/* The ring's colour is stated at REST as well, and this is what stops it
+   flashing. `outline-color` has no resting value of its own — its initial value
+   is `currentColor`, which on a control with white text is white — and
+   Tailwind's `transition-colors` lists `outline-color` among the properties it
+   animates. A control wearing that utility therefore interpolates its ring from
+   FULL WHITE down to the alpha below every time focus lands. Measured on the
+   composer's [+]: α=1.0 in the first frame, α=0.72 once settled.
+   Saying it here leaves the transition nothing to cross. What changes on focus
+   is `outline-style`, and style does not animate. */
+:root:root * {
+  outline-color: rgba(255, 255, 255, 0.72);
+}
+
 :root:root :focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.72);
   outline-offset: 2px;
@@ -335,21 +387,38 @@
 
 /* Softer on a WRAPPER, and the reason is perimeter, not preference.
    A focus ring's ink is its alpha times the length it traces. At 72% white 2px
-   around a 44px button is a mark; the same value around a 700px pill is a bright
-   loop across the fold, which is what it looked like. The indicator does not
-   need to be brighter on a bigger control — if anything the opposite, because
-   there is more of it to see.
-   45% is chosen against the requirement rather than by eye. Composited on the
-   pill's own ground it is #787879 for 4.51:1, where WCAG 1.4.11 asks 3:1 of a
-   focus indicator — so it keeps half again the margin it needs while dropping
-   the apparent brightness by more than half (72% measures 10.26:1). 32% was the
-   next step down and falls to 2.80:1, under the floor, so this is as quiet as
-   the ring is allowed to get.
-   Small controls keep the 72% above: they have little perimeter to spend. */
+   around a 44px button is a mark; the same value around a 576px pill is a bright
+   loop across the fold. The indicator does not need to be brighter on a bigger
+   control — if anything the opposite, because there is more of it to see.
+   Small controls keep the 72% outline above: they have little perimeter to spend.
+
+   A SHADOW here, not an outline, and it is the one focus signal the wrapper
+   gets. Two properties of a shadow are why:
+
+   - it interpolates, so the ring arrives over 150ms. A ring that appears
+     between two frames reads as a flash however dim it is, and dimming it
+     further only trades a visible indicator for a quieter flash.
+   - it lands FLUSH on the control's edge. `outline-offset` leaves a gap, and
+     around a pill that already draws an edge — .hz-composer's spectrum band —
+     the gap makes two concentric rings out of one.
+
+   40% is chosen against the requirement rather than by eye: composited on the
+   pill's own ground it is #666667 for 3.53:1, where WCAG 1.4.11 asks 3:1 of a
+   focus indicator. 32% falls to 2.42:1, under the floor, so this is close to as
+   quiet as the ring is allowed to get.
+
+   The resting shadow is the same ring at zero alpha rather than `none`, because
+   `none` is not a shadow and does not interpolate — without it the ring fades
+   out on blur and still pops on focus. */
+:root:root :has(> input.bg-transparent),
+:root:root :has(> textarea.bg-transparent) {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0);
+  transition: box-shadow 150ms ease;
+}
+
 :root:root :has(> input.bg-transparent:focus-visible),
 :root:root :has(> textarea.bg-transparent:focus-visible) {
-  outline: 2px solid rgba(255, 255, 255, 0.45);
-  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
 }
 
 /* ── The shared header, before hydration, on a phone ──────────────────────────
@@ -554,11 +623,16 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
      nothing, on the fold, where every pixel the bar takes is a pixel of the
      picture. 6px above and 8px below wraps the pill closely and still clears
      the focus ring's 2px offset. */
-  padding-top: 4px;
-  padding-bottom: max(6px, env(safe-area-inset-bottom));
-  background: var(--hz-chrome);
-  backdrop-filter: var(--hz-chrome-blur);
-  -webkit-backdrop-filter: var(--hz-chrome-blur);
+  padding-top: 3px;
+  padding-bottom: max(5px, env(safe-area-inset-bottom));
+  /* NO band material down here. The header earns its glass — it is a full-width
+     bar holding nav, and it has to stay legible over whatever scrolls under it.
+     The dock holds ONE centred pill, so tinting and blurring the whole width to
+     carry it drew a shade across the bottom of every page: on the fold it cut a
+     grey seam under the globe, and against the black canvas it read as a strip
+     of a slightly different black rather than as chrome.
+     The pill carries its own glass; the band around it carries nothing. */
+  background: transparent;
 }
 
 /* The header draws no bottom edge, and `!important` is the only thing that can
@@ -604,132 +678,10 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
    header's is neutralized below), so the page runs behind the chrome and the
    only thing separating them is the blur. */
 
-/* The composer's ring — the ONE place this site draws a spectrum on chrome.
-   `@property` lets the conic angle animate; where it is unsupported the ring is
-   simply static, which is a ring either way.
-
-   LUMINANCE, NOT HUE, and the stops are hanzo.app's and hanzo.chat's exactly.
-   Four saturated stops swept around a rounded box do not distribute evenly —
-   the long edges take a wide angular slice and the short sides almost none — so
-   one edge wears a bright arc and the opposite a dim one, which reads as a ring
-   that is slightly off. White at two close alphas removes the arc and keeps the
-   drift as a sheen. Colour on this site means something is TALKING (the globe's
-   conversations); chrome does not get to borrow that. */
-@property --hz-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes hzComposerSpin {
-  to {
-    --hz-angle: 360deg;
-  }
-}
-
-:root {
-  --hz-spectrum: rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.18),
-    rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.18),
-    rgba(255, 255, 255, 0.1);
-}
-
-.hz-composer {
-  position: relative;
-  isolation: isolate;
-  padding: 1.5px;
-  border-radius: 9999px;
-}
-
-/* The ring itself: a conic fill masked down to the 1.5px padding band, so what
-   shows is an outline and not a disc. */
-.hz-composer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 1.5px;
-  border-radius: inherit;
-  background: conic-gradient(from var(--hz-angle), var(--hz-spectrum));
-  animation: hzComposerSpin 10s linear infinite;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  /* After the standard shorthand: WebKit aliases `mask` onto `-webkit-mask`, so
-     declaring this second lets the shorthand reset it to `source-over` — the
-     filled disc again — on exactly the browsers too old to have
-     `mask-composite` at all. */
-  -webkit-mask-composite: xor;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* The halo, 6px outside the box. */
-.hz-composer::after {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  padding: 6px;
-  border-radius: inherit;
-  background: conic-gradient(from var(--hz-angle), var(--hz-spectrum));
-  filter: blur(16px);
-  opacity: 0.22;
-  animation: hzComposerSpin 10s linear infinite;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* The panel covers the middle, so only the band shows. */
-.hz-composer > * {
-  position: relative;
-  z-index: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hz-composer::before,
-  .hz-composer::after {
-    animation: none;
-  }
-}
-
-/* The composer's three controls are circles, and they are 30px — smaller than
-   the 36px hanzo.app gives its two, because that composer is a paragraph box
-   with a control row under it and this one is a single line, where the buttons
-   have to fit INSIDE the line's height rather than beneath it.
-
-   THE FLOOR DOES NOT APPLY HERE, and this is the one exemption on the site.
-   The mobile floor above states 44px under `@media (pointer: coarse)` because a
-   thumb needs a thumb-sized target — but it is stated over `button`, and the
-   tap target in a composer is the FIELD: the whole bar focuses the input, at 45
-   px tall and the width of the column. These three are its secondary chrome,
-   and stretching them to 44px would make a "single line" three lines tall on
-   the one device where that matters most. 30px still clears WCAG 2.5.8 AA (24
-   px), which is the floor that holds for every pointer.
-
-   Scoped to `.hz-composer`, so the exemption cannot leak: it is an exemption
-   for this bar, not a second opinion about touch targets. */
-.hz-composer :is(button, a).hz-round {
-  width: 30px;
-  min-width: 30px;
-  height: 30px;
-  min-height: 30px;
-  padding: 0;
-  border-radius: 9999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
+/* The composer is @hanzo/composer, imported at the head of this file. Its ring,
+   halo and round controls are the same material hanzo.chat and hanzo.app draw,
+   and every number in it is a custom property this site could override and does
+   not need to — the package publishes these values as its defaults. */
 
 /* The mega-menu drapes are GLASS, and their contents are centred.
  *

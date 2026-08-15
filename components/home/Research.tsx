@@ -48,7 +48,7 @@ export default function Research() {
       lede="The methods, the measurements, and the results that did not work."
     >
       <CardGrid items={ITEMS} columns={2} />
-      <YStack marginTop="$6">
+      <YStack marginTop="$5">
         <Cta href={papers.source} icon={ArrowUpRight}>
           Read the papers
         </Cta>

@@ -75,6 +75,27 @@ test:
       pnpm build
       pnpm exec playwright install --with-deps chromium
       pnpm gates
+  # ONE design system, and this is what keeps it one. `hanzo-design-lint` ships
+  # in @hanzo/design and every Hanzo surface runs the same twelve rules: eight
+  # about writing a VALUE that should have been a token, and four about OWNING a
+  # layer that should have been imported — a second `createGui` table, a second
+  # publisher of a token this package declares, a local header or search control.
+  # The four layers are values→@hanzo/design, structure→@hanzo/gui,
+  # chrome→@hanzogui/shell, components→@hanzo/ui; a surface is data and layout.
+  #
+  # `hanzo-design.allow.json` is the ratchet: it states what this site still owes
+  # per rule, and the number may only SHRINK. A violation written today fails
+  # here. A count UNDER its allowance fails too, so a fix has to delete its own
+  # exemption rather than leave room for the next author to regress into — the
+  # same discipline `audit-catalog.mjs` holds its ratchet to, one step below.
+  #
+  # Needs the workspace (the binary is a dependency) and not the build.
+  - name: one design system
+    run: |
+      corepack enable
+      pnpm install --frozen-lockfile
+      pnpm lint:design
+
   # A model's per-token price has one owner (the commerce catalog, published at
   # api.hanzo.ai/v1/pricing). This fails the build if a second copy is typed into
   # source, which is how this site came to advertise Enso BELOW what it charged.

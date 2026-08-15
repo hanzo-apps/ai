@@ -26,8 +26,14 @@ export const GITHUB = 'https://github.com/hanzoai'
 export const FOUNDATION = 'https://zoo.ngo'
 
 /** The ONE chat hand-off. hanzo.chat is the chat product; hanzo.ai never
- *  reimplements a chat client, it forwards the prompt — `?q=` lands in the
- *  hanzo.chat composer ready to send.
+ *  reimplements a chat client, it forwards the prompt and hanzo.chat answers it.
+ *
+ *  Two params, and they are hanzo.chat's own vocabulary rather than anything
+ *  invented here: `q` carries the text into its composer, `submit` sends it. A
+ *  person who pressed send on this bar has already asked — landing them in
+ *  front of their own words with the button still to press is asking twice, so
+ *  the hand-off carries both. Without a prompt there is nothing to submit and
+ *  the param is not set, which leaves an empty visit an ordinary one.
  *
  *  `hz_ref=site` is the funnel join. hanzo.ai and hanzo.chat are separate
  *  origins, so a logged-out visitor has a DIFFERENT anonymousId on each — no
@@ -38,6 +44,9 @@ export const FOUNDATION = 'https://zoo.ngo'
 export function goToChat(prompt = '') {
   const q = prompt.trim()
   const params = new URLSearchParams({ hz_ref: 'site' })
-  if (q) params.set('q', q)
+  if (q) {
+    params.set('q', q)
+    params.set('submit', 'true')
+  }
   window.location.href = `${CHAT}/?${params.toString()}`
 }

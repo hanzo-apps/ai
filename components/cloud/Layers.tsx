@@ -50,8 +50,14 @@ const isExternal = (item: Primitive) => /^https?:\/\//.test(item.href)
 
 /** One product, named and linked — the leaf of a layer, as prose rather than a card. */
 function Leaf({ item }: { item: Primitive }) {
+  // `hz-tap` because this IS a control, not a link inside a sentence. There are
+  // ~80 of them on this page and each rendered a 17px-tall box — the largest
+  // cluster of sub-thumb targets on the site, and the reason /cloud measured 101
+  // of them at 390. The class is the one way to say "standalone tap target";
+  // globals.css gives it the 44px floor on a coarse pointer and nothing on a
+  // mouse, so the dense mouse layout these rows were designed for is unchanged.
   const className =
-    'text-neutral-400 no-underline transition-colors hover:text-white hover:no-underline motion-reduce:transition-none'
+    'hz-tap text-neutral-400 no-underline transition-colors hover:text-white hover:no-underline motion-reduce:transition-none'
   return isExternal(item) ? (
     <a href={item.href} target="_blank" rel="noreferrer noopener" className={className}>
       {item.title}
@@ -64,7 +70,20 @@ function Leaf({ item }: { item: Primitive }) {
 }
 
 export default function Layers() {
-  const layers = cloudLayers
+  /**
+   * The list reads DOWN, exactly like the picture above it.
+   *
+   * `cloudLayers` is ordered by DEPTH — web3 first, because it is the base — and
+   * the film draws index 0 at the BOTTOM of the column. Rendering that array
+   * straight down therefore ran the list backwards against its own illustration:
+   * Apps sat at the crown of the picture and at the foot of the list, and a
+   * reader comparing the two found every row in the opposite place.
+   *
+   * Reversed for READING ORDER only. The numeral stays the layer's depth, so 01
+   * is the base wherever it is read, and the alt below still describes the film
+   * base-to-crown because that is the order the film assembles in.
+   */
+  const layers = [...cloudLayers].reverse()
 
   return (
     <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
@@ -88,7 +107,7 @@ export default function Layers() {
         <div className="mt-14">
           <Mockup
             base="/cloud-stack-wide"
-            alt={`The ${layers.length} layers of the Open AI Cloud, assembling base to crown: ${layers
+            alt={`The ${cloudLayers.length} layers of the Open AI Cloud, assembling base to crown: ${cloudLayers
               .map((l) => l.title)
               .join(', ')}.`}
           />
@@ -128,7 +147,10 @@ export default function Layers() {
                       }`}
                     />
                     <span className="relative z-10 inline-flex bg-black py-1 font-mono text-sm text-neutral-600 sm:block sm:w-full sm:text-center">
-                      {String(i + 1).padStart(2, '0')}
+                      {/* DEPTH, not row position. The list reads crown-first, so
+                          counting rows would number the base 10 and the crown 01,
+                          which is the thing this ordering exists to fix. */}
+                      {String(layers.length - i).padStart(2, '0')}
                     </span>
                   </div>
 

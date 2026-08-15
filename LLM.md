@@ -66,6 +66,34 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
   inheriting the root layout's title, six redirect shells offered for indexing)
   and hanzo.ai published nothing for a day while pushes kept succeeding.
 
+  **A 520 on `/` while every named route answers 200 is STORAGE, not the site.**
+  The `s3` deployment runs master + filer + gateway in ONE pod (`weed server
+  -filer -s3`, `Recreate`, 1 replica). Every restart of it drops the master's
+  volume map, the volume servers reconnect without fully re-registering, and any
+  object whose chunk lives on a volume that did not come back reads as
+  `volume N not found`. When that volume happens to hold
+  `hanzo-sites/hanzo/hanzo-ai/index.html`, the apex root 520s and nothing else
+  does — `/models` and `/comparison` keep serving, which is what makes it look
+  like a page bug.
+
+  Confirm it in one command, and do not guess from the browser:
+
+      kubectl -n hanzo logs deploy/s3 --since=60s | grep -oE 'failed to stream [^ ]+' | sort -u
+
+  **The fix is a RE-PUBLISH, not a restart.** Dispatching `deploy.yml` rewrites
+  the object with fresh chunks and the root comes back within the run. Restarting
+  s3 or the volume servers is the tempting move and it does not converge — the
+  master will resolve the volume to the correct live pod IP while the filer's own
+  lookup still refuses it, so you can cycle storage all day and change nothing.
+  Restarting the master is also what CAUSES the next occurrence, so reaching for
+  it is strictly negative.
+
+  Same signature, same cure, for any single page: `/comparison` returned `200`
+  with an empty body after 15s from this, and a re-publish fixed it. A publish
+  that runs while storage is degraded is how the object gets stranded in the
+  first place — `sitedeploy` sends a manifest and the server deletes keys absent
+  from it, so an upload that fails mid-publish takes the live page with it.
+
   Read the STEPS, never hunt for the log — logs live in object storage, not on
   the git pod:
 
@@ -233,8 +261,12 @@ copy is how hanzo.ai drifted from console/chat/app.
 
 `components/webgl/PointGlobe.tsx` is the site's only WebGL motif — raw GL and
 inline GLSL, no dependency, code-split behind `next/dynamic({ ssr:false })`.
-Two consumers: `ChatHero` and `HanzoNetworkSection`. It was three — the cloud
-hero is a film now (below), and a page gets ONE picture, not two.
+ONE consumer now: `HanzoNetworkSection`, on `/overview`. It was three — the cloud
+hero and then the apex fold both became films (below), and a page gets ONE
+picture, not two. The sphere is the right picture for a section about a network
+and the wrong one for a front door: it is the best abstract thing we draw, and a
+visitor who has not heard of Hanzo watched it and learned nothing about the
+product. It is not deleted and it is not homeless.
 
 The chrome stays monochrome. What carries hue is CONVERSATIONS — great-circle
 paths between agents, spawned and retired continuously, each with a travelling
@@ -318,6 +350,25 @@ House rules, learned the expensive way:
   Nothing catches this — the export is valid, the build is green, and `<h1>`
   count is not one of the four things `e2e/gates` asserts. Check it by hand:
   `grep -c '<h1' out/<page>.html` must be exactly 1.
+
+**The apex fold is a film too, and it is a TRAILER rather than a product tour.**
+`film/hero` → one `<Frame src="/hero" …/>` in `components/home/Fold.tsx`. Three
+movements of one console over 21s: the model catalog, the catalog's own tour told
+as the calls that build a business in an afternoon, and the ten layers those
+calls land on — held there for the last 3.3s, because that frame is what every
+reduced-motion reader is served. It reads what it shows from the files the page
+beside it reads (`pricing.json` for the models and the two counts,
+`catalog.json` for the tour and the categories), so the film and
+`CloudCategories` structurally cannot name different tens.
+
+**The heading did not go into the master; it moved down the page.** It is real
+type in the section directly under the film, visible on the first scroll. The
+apex film this replaces had its headline in the pixels next to a sidebar naming
+seven categories over a section naming ten, so the page contradicted itself and
+every correction cost a re-render. `film/hero` therefore draws no sentence at all
+— its whole message in words is the `alt`, and that is COMPOSED from the catalog
+rather than typed, because an alt written by hand goes on describing a sequence
+the film has stopped having.
 
 **Still to film.** Each of these takes its own `film/<name>` and one `<Frame>`:
 the ten category pages `/products/{ai,compute,data,network,security,dev,infrastructure,observe,web3,apps}`,

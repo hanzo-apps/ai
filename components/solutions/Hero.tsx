@@ -69,7 +69,7 @@ const SolutionsHero: React.FC = () => {
         >
           <Link
             href="/contact"
-            className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
+            className="hz-tap inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
 
           >
             Talk to sales
@@ -77,7 +77,7 @@ const SolutionsHero: React.FC = () => {
           </Link>
           <Link
             href="/solutions/capabilities"
-            className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"
+            className="hz-tap inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"
           >
             See the capabilities
           </Link>

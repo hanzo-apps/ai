@@ -61,8 +61,8 @@ export function Faq({ items }: { items: FaqItem[] }) {
           </Accordion.Trigger>
           <Accordion.HeightAnimator transition="medium">
             <Accordion.Content transition="medium" exitStyle={{ opacity: 0 }} unstyled>
-              <YStack paddingHorizontal="$1" paddingBottom="$5">
-                <Text fontSize="$4" lineHeight={22} color="$mutedForeground">
+              <YStack paddingHorizontal="$1" paddingBottom="$4.5">
+                <Text fontSize="$3" lineHeight={22} color="$mutedForeground">
                   {item.answer}
                 </Text>
               </YStack>

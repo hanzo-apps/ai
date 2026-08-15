@@ -4,8 +4,22 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 import { GuiProvider } from '@/components/GuiProvider'
 import { Providers } from './providers'
 import './globals.css'
+// THE MATERIAL. `glass.css` is @hanzo/ui's frosted surfaces, row separators,
+// dialog scrim and the PAPER ladder — `.elevation-1/2` reading @hanzo/design's
+// `--shadow-sheet-*`, and `.fold`, the corner turned back that means an item
+// opens. It is the rules alone: every value in it is a design token this app
+// already mounts, so it publishes nothing and shadows nothing.
+//
+// Not `@hanzo/ui/theme.css`, which is the same rules WITH design's whole sheet
+// and `base.css` inlined ahead of them. globals.css already imports design's ten
+// token files, and it imports `base.css` into `layer(base)` deliberately — bare,
+// its element selectors (`a { color: … }`) outrank every layered utility, because
+// unlayered wins regardless of specificity, and the header CTA renders
+// white-on-white. hanzo.app takes theme.css because it has no utility layer to
+// lose to; this site has 63,151 utility tokens and takes the material only.
+import '@hanzo/ui/glass.css'
 // The @hanzo/gui atomic sheet, as a real stylesheet Next can fingerprint and the
-// browser can cache. Generated from gui.config.ts by `prebuild`; see
+// browser can cache. Generated from lib/gui.ts by `prebuild`; see
 // scripts/gen-gui-css.mjs for why it is not injected at render time.
 import './gui.css'
 import { ogImages, twitterImages } from '@/lib/constants/og'

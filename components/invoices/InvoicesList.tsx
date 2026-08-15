@@ -46,12 +46,12 @@ const InvoicesList = () => {
     <YStack
       borderWidth={1}
       borderColor="$border"
-      borderRadius="$4"
+      borderRadius="$5"
       backgroundColor="$card"
       overflow="hidden"
     >
       <XStack
-        padding="$6"
+        padding="$5"
         borderBottomWidth={1}
         borderColor="$border"
         justifyContent="space-between"

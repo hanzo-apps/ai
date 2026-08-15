@@ -223,7 +223,7 @@ const HeroSection = () => {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
               <Link
-                href="/download"
+                href="https://hanzo.app/download"
                 className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"
               >
                 <Download className="mr-2 h-4 w-4" />

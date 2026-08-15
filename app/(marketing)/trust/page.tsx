@@ -7,9 +7,14 @@ import { Page, PageHero, Section, Prose, CardGrid, Cta, type CardItem } from '@/
  * The trust page.
  *
  * Every card below names a mechanism that was read in the source before it was
- * written here, and nothing is on this page that could not be pointed at. The
- * controls a reviewer asks about are the ones we have; the certifications they
- * ask for are the ones we do not, and both are said in the same voice.
+ * written here, and nothing is on this page that could not be pointed at.
+ *
+ * It leads with what a reviewer can GET — a questionnaire answered, a working
+ * session, the control detail, a framework scoped to their engagement — because
+ * that is the useful half and it is all available. The frameworks we do not hold
+ * are stated too, once, in a section that says so plainly. Opening with the
+ * denial made the page argue against itself: a reviewer establishes that fact in
+ * one email either way, so it costs nothing to say and everything to lead with.
  *
  * The banned claim is not a word, it is a shape: anything that lets a reader
  * conclude a report exists. `e2e/gates/trust-copy.spec.ts` holds the page to
@@ -57,9 +62,9 @@ const REACH: CardItem[] = [
       'A resource has a path: organization, then workspace, then project, then whatever sits under those. A grant covers a path and everything below it. One check asks whether some grant the caller holds covers the target and admits the verb — and org-wide access, one workspace, an invite-only project, and a narrowed credential handed to an agent all fall out of that with no special case for any of them.',
   },
   {
-    title: 'The prefix test walks segments, not characters',
+    title: 'A grant is matched exactly, not by prefix',
     description:
-      'A grant on acme/prod does not cover acme/production. The comparison is segment-wise, because a string prefix test there is a read across two tenants. An empty path covers nothing, so a scope that arrived missing or malformed denies rather than matching everything.',
+      'A grant on acme/prod does not cover acme/production. What stops it is an exact match against a known set rather than a prefix walk — a plain string prefix test would admit the second, which is a read across two tenants. An empty path covers nothing, so a scope that arrived missing or malformed denies rather than matching everything.',
   },
   {
     title: 'The decision travels, the grant set stays put',
@@ -77,7 +82,7 @@ const APART: CardItem[] = [
   {
     title: 'One organization, one file',
     description:
-      'On Hanzo Base an organization’s data is its own SQLite file. Two organizations are two files, so a query cannot reach across them — there is no second file open to reach into. Where a master key is configured, each file is also opened under a key derived for that organization alone, which makes a leaked key worth one tenant instead of the estate.',
+      'On Hanzo Base an organization’s data is its own SQLite file. Two organizations are two files, so a query cannot reach across them — there is no second file open to reach into. Where a master key is configured each file is opened under its own derived key, so a leaked key is worth one file rather than the estate. Two derivations exist and only one of them is keyed to the organization; treat this as per-file isolation, which is what it is, rather than as a per-tenant key.',
   },
 ]
 
@@ -85,7 +90,7 @@ const RECORD: CardItem[] = [
   {
     title: 'One row per request',
     description:
-      'The trail records the organization and the user who acted, the address they came from, the method and the URI they called, the action, the request body with passwords masked, the status the server returned, and the time. Who did what, when, from where, and what the system answered.',
+      'The trail records the organization and the user who acted, the address they came from, the method and the URI they called, the action, the status the server returned, and the time. It does NOT record the request body: nothing on this path captures one, so there is no payload to mask and none to leak. Who did what, when, from where, and what the system answered.',
   },
   {
     title: 'The platform’s own actions cannot be authored',
@@ -95,7 +100,7 @@ const RECORD: CardItem[] = [
   {
     title: 'Indexed for the questions that get asked',
     description:
-      'Organization, user, action and time each carry an index. Everything one person did, or every time one action was taken, is a lookup rather than a walk through the whole trail — which is the difference between answering a reviewer and promising to.',
+      'Organization, action and time each carry an index, so every time one action was taken is a lookup rather than a walk. The actor is not indexed today, so "everything one person did" still reads the table — answerable, but not yet fast, and worth knowing before you scope a review around it.',
   },
 ]
 
@@ -106,9 +111,61 @@ const KEYS: CardItem[] = [
       'Each database gets its key from one master through HKDF-SHA256, bound to the namespace that owns it and to what it holds. It is a pure function of those inputs, so a file reopens after a restart with nothing kept beside it, and no two databases share a key. A master of the wrong length is an error, not a quiet fall back to no key.',
   },
   {
-    title: 'A signing key is a handle',
+    title: 'Signing keys are held by the platform',
     description:
-      'The signing interface takes a key id and some bytes and gives back a signature. The implementations behind it reach AWS KMS, Google Cloud KMS, Azure Key Vault, and Zymbit modules. The private key is made inside the module and stays there, so there is no moment when it exists in our process to be logged, leaked, or written into a crash dump.',
+      'Signing goes through one interface that takes a key id and some bytes and gives back a signature. Today every implementation behind it runs in our own process: the key material is held on the platform and parsed by the running binary. An external key module — where the private key is made inside the module and never enters our memory — is the shape we want and is not what runs now. If your deployment requires it, say so and we will scope it; do not read this row as custody you have not been given.',
+  },
+]
+
+/**
+ * What a reviewer can actually get, and how fast.
+ *
+ * Deliberately no framework names here. The copy gate refuses any sentence that
+ * names one without denying we hold it, and that rule exists because a badge row
+ * on /security once rendered four framework names with green checkmarks while the
+ * qualifiers that made them honest sat in a field the markup never printed. A row
+ * of logos is the shape of that defect, so this row offers artifacts instead —
+ * every one of which we can send.
+ *
+ * The first two are stronger than that: they are published, so a reviewer reads
+ * them without asking and without waiting. They are also the two a review asks
+ * for first, which is why they lead. Both render `content/legal/*.md` and both
+ * are still drafts, so the cards say so — a reviewer who relies on unexecuted
+ * terms because a marketing card implied otherwise is the failure this whole
+ * page exists to avoid.
+ */
+const REQUEST: CardItem[] = [
+  {
+    title: 'The Data Processing Addendum',
+    href: '/dpa',
+    description:
+      'The processor terms in full — roles and instructions, subprocessor governance, security measures, the Standard Contractual Clause modules for EEA and UK transfers, and the U.S. state service-provider terms. Still a draft pending counsel, which the page says at the top, so read it as terms proposed rather than terms signed.',
+  },
+  {
+    title: 'The subprocessor register',
+    href: '/subprocessors',
+    description:
+      'Which providers can process your data, what each one does, where it runs, and whether it may train on your content — including the model providers a routed request reaches through a gateway. Rows still being confirmed against a provider’s signed terms are marked as such rather than left to look settled.',
+  },
+  {
+    title: 'A security questionnaire, answered',
+    description:
+      'Send the one your process uses — SIG, CAIQ, VSA, or your own spreadsheet. We answer it against the code, and where an answer is a mechanism rather than a yes, we point at the mechanism.',
+  },
+  {
+    title: 'An architecture review',
+    description:
+      'A working session with the engineers who wrote it. Identity, tenancy, the audit trail, key custody — whichever part your reviewer wants to press on, in as much depth as they want to go.',
+  },
+  {
+    title: 'The control detail behind this page',
+    description:
+      'Everything summarised below, at the level a reviewer needs: the algorithms, the parameters, the failure behaviour, and what happens at each boundary. Under NDA where your process requires one.',
+  },
+  {
+    title: 'A framework scoped to your engagement',
+    description:
+      'Tell us what your process runs on and what your reviewer needs to see. We scope the work with you as part of the enterprise agreement rather than pointing at a checkmark.',
   },
 ]
 
@@ -118,25 +175,33 @@ export default function TrustPage() {
       <PageHero
         eyebrow="Trust"
         icon={ShieldCheck}
-        title="The controls, not a badge"
-        lede="Hanzo does not hold SOC 2, ISO 27001, or FedRAMP. There is no report behind this page. What there is instead is the code — how you get in, what a credential reaches, what gets written down, and where the keys live."
+        title="Security you can read"
+        lede="How you get in, what a credential reaches, what gets written down, and where the keys live — each one a mechanism you can point at in the source. Ask for the detail your review needs and we will send it."
       />
 
-      <Section title="Where we stand">
+      <Section
+        title="What you can read, and what you can ask for"
+        lede="The two documents a review opens first are published — read them now, no email. The other four we send on request: the questionnaire, the review session and the control detail come back the same week."
+      >
+        <CardGrid items={REQUEST} columns={2} />
+      </Section>
+
+      <Section title="Where we stand today">
         <Prose>
           <p>
-            A page like this usually opens with logos. Ours cannot, because we have not earned them, and a
-            security reviewer finds that out in one email. So the argument here is the other one: we run the
-            controls those audits examine, and you can read most of them.
+            We run the controls those audits examine, and this page is the evidence — every mechanism below
+            was read in the source before it was written here. Bring your questionnaire and we will answer it
+            against the code rather than against a summary of it.
           </p>
           <p>
-            Formal certification is scoped per enterprise engagement. Tell us which framework your process
-            requires and what your reviewer needs to see, and we will tell you what it takes. We would rather
-            have that conversation than put a checkmark next to a word.
+            On the frameworks themselves, plainly, because a security reviewer establishes this in one email
+            and it should not cost you the email: Hanzo does not hold SOC 2, ISO 27001, or FedRAMP today.
+            Formal certification is scoped per enterprise engagement — tell us which framework your process
+            runs on and what your reviewer needs to see, and we will scope it with you.
           </p>
           <p>
-            Everything below was read in the source before it was written here. If a control you need is not
-            on this page, that is because we could not point at it, and the honest answer is to ask.
+            If a control you need is not on this page, ask. Where we have it we will show you the code, and
+            where we do not you will get a straight answer the same day.
           </p>
         </Prose>
       </Section>
@@ -173,27 +238,39 @@ export default function TrustPage() {
         <CardGrid items={KEYS} columns={2} />
       </Section>
 
-      <Section title="What we do not claim">
+      <Section
+        title="Status, stated plainly"
+        lede="So your reviewer can establish this here rather than by asking, and so nothing on this page can be relied on that should not be."
+      >
         <Prose>
           <p>
-            <strong>No certification.</strong> We do not hold SOC 2, ISO 27001, FedRAMP, PCI DSS, or HITRUST.
-            There is no report, and there is no audit platform behind this page mirroring one.
+            <strong>Frameworks.</strong> We do not hold SOC 2, ISO 27001, FedRAMP, PCI DSS, or HITRUST today,
+            and this page mirrors no audit platform. Certification is scoped per engagement — the fourth card
+            above is how that conversation starts.
           </p>
           <p>
-            <strong>No FIPS validation.</strong> Our code implements published standards, ML-KEM and ML-DSA
-            among them. Implementing a standard is not holding a certificate, and a 140-3 validation belongs
-            to the vendor of a module, not to us.
+            {/* No full stop after this label. The copy gate reads the page one
+                SENTENCE at a time and requires the word FIPS to appear in one
+                that also denies holding a validation — and `FIPS.` IS a
+                sentence, so the term sat orphaned from its own denial one
+                clause away, and the page failed a rule it was obeying. */}
+            <strong>FIPS:</strong> our code implements published standards, ML-KEM and ML-DSA among them, but
+            implementing a standard is not the same as holding a validation, and a 140-3 validation belongs to
+            the vendor of a module rather than to us. Nor do we run one today: signing happens in our own
+            process, not inside an external module. If your deployment requires validated hardware custody,
+            tell us and we will scope it with you rather than imply you already have it.
           </p>
           <p>
-            <strong>No passkey sign-in.</strong> Passkey credentials can be stored and managed, but nothing
-            challenges one, so a passkey cannot complete a sign-in on the build running today. The login
-            screen does not offer it — which is the only honest thing a login screen can do about a method
-            the server cannot perform.
+            <strong>Passkeys.</strong> Passkey credentials can be stored and managed, but{' '}
+            <strong>a passkey cannot complete a sign-in</strong> — the assertion ceremony is not in the build
+            running today, so the login screen does not offer it, which is the only honest thing a login
+            screen can do about a method the server cannot yet perform. Second factors that do work: an
+            authenticator app, SMS, and email, with recovery codes.
           </p>
           <p>
-            <strong>No availability figure here.</strong> An uptime number is a contractual commitment. Ours
-            lives in the agreement, where it has consequences, rather than on a marketing page where it does
-            not.
+            <strong>Availability.</strong> An uptime number is a contractual commitment, so ours lives in the
+            agreement where it has consequences rather than on a marketing page where it does not. Ask for
+            the number your agreement would carry and we will put it in writing.
           </p>
         </Prose>
       </Section>
@@ -215,10 +292,10 @@ export default function TrustPage() {
       </Section>
 
       <Section
-        title="Ask us the hard questions"
-        lede="Bring your questionnaire, your architecture review, and the framework your process runs on. We will answer what we can and say so where we cannot."
+        title="Bring us the hard questions"
+        lede="Your questionnaire, your architecture review, your framework. We answer against the code, we move at the speed of your review, and you will always know which of those two you are getting."
       >
-        <Cta href="/contact-sales">Talk to us about an enterprise deployment</Cta>
+        <Cta href="/contact-sales">Request a review or an enterprise deployment</Cta>
       </Section>
     </Page>
   )

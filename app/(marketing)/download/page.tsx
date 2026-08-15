@@ -1,33 +1,25 @@
-import DownloadHero from '@/components/download/DownloadHero'
-import Platforms from '@/components/download/Platforms'
-import Surfaces from '@/components/download/Surfaces'
-import Capabilities from '@/components/download/Capabilities'
-import Models from '@/components/download/Models'
-import Integrations from '@/components/download/Integrations'
-import FAQ from '@/components/download/FAQ'
-import HanzoDev from '@/components/download/HanzoDev'
+'use client'
+import Redirect from '@/app/(marketing)/_redirect'
 
 /**
- * /download — get the app, in one pass down the page.
+ * /download forwards to hanzo.app/download, which is the ONE download page.
  *
- * The order is the order the questions arrive: what it is, how to get it, where
- * else it runs, what it does, what it thinks with, what it reaches, what you
- * were still wondering, and the same thing from a terminal. Every section is one
- * subject and every subject appears once — the page previously ran eleven
- * sections and asked for the download twice, at the top and again at the very
- * bottom, with four empty preview boxes between them.
+ * There were two, and they disagreed: this one offered the `hanzoai/dev`
+ * tarballs as "Desktop" while the desktop app is published elsewhere, and it
+ * carried no browser or editor artifact at all. Keeping a second copy in step
+ * with the releases is work nobody was doing, so the copy is gone rather than
+ * corrected.
+ *
+ * A shell rather than a `redirects()` rule because this is a STATIC EXPORT —
+ * Next's redirects need a server and are silently absent from an export, so a
+ * configured rewrite would 404 every inbound link. It is listed in `EMPTY` in
+ * `lib/publish.ts`, which keeps it out of sitemap.xml and marks it `noindex`:
+ * a page with nothing to read may not be offered to a crawler.
+ *
+ * This also repairs every OTHER surface at once. `@hanzogui/shell`'s registry
+ * points every Hanzo property's "Download" at `hanzo.ai/download`, so the whole
+ * estate lands on the canonical page without republishing a shared package.
  */
-const Download = () => (
-  <div className="min-h-screen bg-black text-white">
-    <DownloadHero />
-    <Platforms />
-    <Surfaces />
-    <Capabilities />
-    <Models />
-    <Integrations />
-    <FAQ />
-    <HanzoDev />
-  </div>
-)
-
-export default Download
+export default function Page() {
+  return <Redirect to="https://hanzo.app/download" />
+}

@@ -30,10 +30,10 @@ const columns = [
 const ReferralHistory = ({ referralHistory }: ReferralHistoryProps) => (
   <YStack
     gap="$4"
-    padding="$6"
+    padding="$5"
     borderWidth={1}
     borderColor="$border"
-    borderRadius="$3"
+    borderRadius="$5"
     backgroundColor="$card"
   >
     <Text fontSize="$7" fontWeight="500" color="$foreground">

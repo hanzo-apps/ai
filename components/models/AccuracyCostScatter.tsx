@@ -49,8 +49,29 @@ export interface ScatterPoint {
  * Worth stating rather than hiding: a viewBox has no rem, so unlike page text this
  * plot does NOT follow a browser text-size preference. Making it do so means laying
  * the plot out in CSS instead of in a viewBox, which is a different component.
+ *
+ * It THROWS on a value it cannot read, and that is the whole point of it being a
+ * function. This reads a number out of another package, and `parseFloat` answers
+ * NaN for anything it does not understand — which then propagates through every
+ * width, every box and every collision test without one of them complaining.
+ * @hanzo/design 0.5.0 made these tokens `calc(0.6875rem * var(--type-scale, 1))`
+ * so the ramp could be retuned at runtime; every label in this chart silently
+ * became NaN wide, `settle()` could not seat any of them, and the gate that
+ * measures this chart went red — which, because the gates run inside the job that
+ * publishes, took hanzo.ai's whole deploy down with it. A build that stops here
+ * naming the token costs a minute; a NaN costs a day.
  */
-const unit = (rem: string) => parseFloat(rem) * 16
+const unit = (rem: string) => {
+  const n = parseFloat(rem) * 16
+  if (!Number.isFinite(n)) {
+    throw new Error(
+      `AccuracyCostScatter: '${rem}' is not a length this chart can compute with. ` +
+        `@hanzo/design's programmatic tokens must be plain values — the runtime knob ` +
+        `belongs to the cascade, not to the table (design >= 0.5.4).`,
+    )
+  }
+  return n
+}
 
 /** Ink. One name per role, every value a @hanzo/design token. */
 const INK = {
