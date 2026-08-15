@@ -39,32 +39,59 @@ import { SH } from './nav-data'
  * that its contents ship. Read the bundle config, not the folder listing.
  */
 
+/**
+ * A piece, the way IN to it, and the way to READ it.
+ *
+ * All four cards used to lead with "View source" and nothing else, under a
+ * heading that says "Install options". A reader there wants the thing, and was
+ * offered a repository — so `get` is the primary action now and it is the
+ * shortest real path to running each piece.
+ *
+ * EVERY href here answered 200 before it was written down, and the label says
+ * only what the destination actually is: "Download" where a download page
+ * exists, "Docs" where the honest answer is a page that explains it. There is
+ * no ML page on this site and no desktop page in the docs; neither is invented.
+ * A card that promises a download and 404s is worse than one that says nothing.
+ *
+ * Source is `git.hanzo.ai` — the forge is where our code lives and github is a
+ * mirror of it, so the landing links to the original.
+ */
 interface Piece {
   name: string
-  href: string
   body: string
+  get: { label: string; href: string }
+  source: string
 }
+
+const FORGE = 'https://git.hanzo.ai/hanzoai'
+const DOCS = 'https://docs.hanzo.ai/docs'
 
 const PIECES: Piece[] = [
   {
     name: 'Desktop',
-    href: 'https://github.com/hanzoai/desktop',
     body: 'The whole stack as an app. The agent node ships inside the bundle as a sidecar; inference comes from the engine, running locally or on your LAN.',
+    get: { label: 'Download', href: '/desktop' },
+    source: `${FORGE}/desktop`,
   },
   {
     name: 'CLI',
-    href: 'https://github.com/hanzoai/cli',
+    // The one-liner is already on this page, directly above, so this is the
+    // page that covers the other ways in rather than a second copy of it.
     body: 'One static Rust binary — a coding agent, the MCP server, and every product of the cloud from your terminal. No runtime, no daemon.',
+    get: { label: 'Install', href: `${DOCS}/services/platform/getting-started/cli` },
+    source: `${FORGE}/cli`,
   },
   {
     name: 'Engine',
-    href: 'https://github.com/hanzoai/engine',
     body: 'The inference engine that actually runs the model. LLM and embedding serving in Rust, built for local hardware first.',
+    get: { label: 'Docs', href: `${DOCS}/services/engine` },
+    source: `${FORGE}/engine`,
   },
   {
     name: 'ML',
-    href: 'https://github.com/hanzoai/ml',
     body: 'The compute core underneath: multi-backend tensors across CPU, CUDA, Metal, ROCm and Vulkan, with quantization built in.',
+    get: { label: 'Docs', href: `${DOCS}/services/ml` },
+    source: `${FORGE}/ml`,
   },
 ]
 
@@ -114,9 +141,10 @@ export default function LocalStack() {
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {PIECES.map((p, i) => (
-            <motion.a
+            /* A CARD, not a link. It carries two destinations — the way in and
+               the source — and an anchor cannot hold another anchor. */
+            <motion.div
               key={p.name}
-              href={p.href}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
@@ -132,11 +160,22 @@ export default function LocalStack() {
               />
               <h3 className="relative z-10 text-xl font-semibold text-white">{p.name}</h3>
               <p className="relative z-10 mt-2 text-[15px] leading-relaxed text-neutral-400">{p.body}</p>
-              <span className="relative z-10 mt-auto pt-6 inline-flex items-center gap-1.5 text-sm font-medium text-white">
-                View source
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </motion.a>
+              <div className="relative z-10 mt-auto flex items-center gap-4 pt-6">
+                <a
+                  href={p.get.href}
+                  className="hz-tap items-center gap-1.5 text-sm font-medium text-white no-underline hover:no-underline"
+                >
+                  {p.get.label}
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </a>
+                <a
+                  href={p.source}
+                  className="hz-tap items-center text-sm text-neutral-400 no-underline transition-colors hover:text-white hover:no-underline"
+                >
+                  Source
+                </a>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

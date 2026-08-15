@@ -22,7 +22,6 @@ export const CLOUD = 'https://cloud.hanzo.ai'
 export const CONSOLE = 'https://console.hanzo.ai'
 export const DOCS = 'https://docs.hanzo.ai'
 export const BLOG = 'https://blog.hanzo.ai'
-export const GITHUB = 'https://github.com/hanzoai'
 export const FOUNDATION = 'https://zoo.ngo'
 
 /** The ONE chat hand-off. hanzo.chat is the chat product; hanzo.ai never
