@@ -188,27 +188,42 @@ const look = (key: string): string | undefined =>
  * `public/logos/color/*.svg` set was generated with, so the inline mark and the
  * `<image href>` mark a chart draws cannot disagree.
  *
- * ABSENCE IS A CHOICE, and it is the reason three famous labs are missing.
- * OpenAI and xAI publish their mark as `#000000` and Moonshot as `#16191E`;
- * painting those would put near-black on a near-black page and delete the mark.
- * Their real treatment is the page's ink — white here, dark on `.light` — which
- * is exactly what `currentColor` already resolves to in BOTH themes, so the fix
- * is to say nothing rather than to invent a lighter blue for them.
+ * ABSENCE IS A CHOICE. OpenAI and xAI publish their mark as `#000000` and
+ * Moonshot as `#16191E`: black IS the brand, and the way those labs render it on
+ * their own dark surfaces is white. `currentColor` already resolves to exactly
+ * that in both themes, so leaving them out is what draws them correctly — a
+ * lighter blue chosen here would be a colour they do not have.
  *
- * Enso is absent for a different reason: our ring is house ink by design, not a
+ * The rest are absent only because this repo cannot verify their hex. A lab
+ * joins this table when its brand colour is checkable, not when a plausible one
+ * comes to mind.
+ *
+ * Enso is absent for its own reason: our ring is house ink by design, not a
  * lab's brand, and it stays the colour of the text it sits beside.
  */
 const HUE: Record<string, string> = {
-  anthropic: '#C37E4E',
+  // KEYED TO `MARKS`, not to the lab's common name. The first version of this
+  // table was keyed by company — anthropic, gemini, zhipu — and MARKS keys those
+  // same three marks `claude`, `google` and `zai`, so the three labs a reader
+  // most expects to recognise were the three that stayed grey while everyone
+  // around them had colour. Every key below is a key in MARKS.
+  alibaba: '#FF6A00',
+  aws: '#FF9900',
+  baidu: '#2932E1',
+  claude: '#C37E4E',
   deepseek: '#4D6BFE',
-  gemini: '#4285F4',
+  gemma: '#4285F4',
+  google: '#4285F4',
+  ibm: '#0F62FE',
   meta: '#0064E0',
   minimax: '#F23F5D',
   mistral: '#FA520F',
-  nvidia: '#649D00',
+  nvidia: '#76B900',
+  perplexity: '#20808D',
   qwen: '#615CED',
+  tencent: '#0052D9',
   xiaomimimo: '#EF6200',
-  zhipu: '#3859FF',
+  zai: '#3859FF',
 }
 
 /**
