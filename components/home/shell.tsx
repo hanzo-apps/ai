@@ -1,8 +1,15 @@
 'use client'
 
-import { HanzoHeader, HanzoFooter, resolveSurface, type ProductCategory } from '@hanzogui/shell'
+import {
+  HanzoHeader,
+  HanzoFooter,
+  resolveSurface,
+  type HanzoCommandEntry,
+  type ProductCategory,
+} from '@hanzogui/shell'
 import { cloudCategories } from '@/lib/data/cloud-primitives'
 import { policy } from '@/lib/publish'
+import pages from '@/lib/data/pages.json'
 import { CONSOLE, goToChat } from './nav-data'
 
 /**
@@ -122,6 +129,20 @@ const MENU_COLUMNS = {
 } as React.CSSProperties
 
 /**
+ * What ⌘K can find besides the products: every page this site publishes.
+ *
+ * Written by `scripts/sync-pages.mjs` at prebuild from the App Router tree,
+ * through the same `policy()` that writes the sitemap — so the palette can
+ * neither miss a published page nor offer a withheld one, and neither can go
+ * stale, because nobody maintains the list. Before this the palette searched
+ * the taxonomy alone and answered "no results" for `pricing`.
+ */
+const SITE_PAGES: HanzoCommandEntry[] = pages.map((page) => ({
+  ...page,
+  group: 'Pages',
+}))
+
+/**
  * The header, bound to this site's IA.
  *
  * `signInHref` is the whole login story: this is a marketing site, it owns no
@@ -208,6 +229,7 @@ export function SiteHeader({
           primaryCTA: TRY,
         }}
         productsTaxonomy={PRODUCTS_TAXONOMY}
+        commands={SITE_PAGES}
         currentCategoryId={currentCategoryId}
         onAskHanzo={goToChat}
         tryMenu
