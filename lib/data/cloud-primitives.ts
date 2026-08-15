@@ -55,6 +55,9 @@ import {
 // Node is what runs the Playwright specs that import this taxonomy. Without it
 // e2e/catalog-agreement.spec.ts cannot even load.
 import snapshot from './catalog.json' with { type: 'json' }
+// Depth, base to crown — the one fact the catalog does not carry. See
+// `cloudLayers` below for what it means and who else reads it.
+import depth from './stack.json' with { type: 'json' }
 
 export type PrimitiveStatus = 'ga' | 'beta' | 'coming'
 export type CloudIcon = ComponentType<{ className?: string; size?: number | string }>
@@ -361,6 +364,41 @@ const allCategories: CloudCategory[] = catalog.categories.map((c) => ({
 export const cloudCategories: CloudCategory[] = allCategories
   .map((c) => ({ ...c, items: c.items.filter((item) => policy(item.href) === 'public') }))
   .filter((c) => c.items.length > 0)
+
+/**
+ * The same categories, in DEPTH order — what each one stands on.
+ *
+ * The catalog's `order` is the MENU order: what the Products dropdown offers
+ * first, which is AI because AI is the headline. A stack asks a different
+ * question, and answering it with the menu's answer puts settlement ninth and
+ * AI underneath everything, which is not how any of it is built.
+ *
+ * Depth is therefore its own fact, declared once in `lib/data/stack.json` and
+ * only there. `film/stack` composes the ten slabs from that file and
+ * `film/layer` lifts one out of them; this is the same order in DOM text, so
+ * the film on cloud.hanzo.ai and the list under it are one picture. It used to
+ * be a const inside `film/stack/film.mjs`, which the page had no way to read —
+ * so the page listed the ten in menu order and the picture above it stood on
+ * the chain while the list beside it started at AI.
+ *
+ * The chain is the ground: value settles on it, and everything above it is
+ * something we run. Compute, data and network are the substrate over that;
+ * security and the deploy plane are how it is operated; observe and dev are how
+ * it is watched and driven; AI is what it is for; apps are what a person opens.
+ * Apps is the crown — the layer someone touches, standing on nine they do not
+ * have to think about.
+ *
+ * A category `stack.json` does not place falls to the END rather than
+ * disappearing: this is what a page RENDERS, and a layer silently missing from
+ * the front door is worse than one standing in the wrong place. The films, which
+ * are composed for an exact count, throw instead — the right answer there, and
+ * the wrong one here.
+ */
+export const cloudLayers: CloudCategory[] = [...cloudCategories].sort((a, b) => {
+  const at = depth.indexOf(a.id)
+  const bt = depth.indexOf(b.id)
+  return (at < 0 ? depth.length : at) - (bt < 0 ? depth.length : bt)
+})
 
 /** Slugs hosted by the `/cloud/[slug]` dynamic route — every leaf without a page of its own. */
 export const cloudPrimitiveSlugs: string[] = allCategories
