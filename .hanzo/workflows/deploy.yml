@@ -35,7 +35,18 @@ name: deploy
 # The mechanics of the publish are NOT here — they are bin/sitedeploy in
 # hanzoai/ci, because hanzo.app, hips and computer need the identical three calls
 # and a contract transcribed per repo is a contract that drifts.
+# A DAILY RUN, because part of this site is not in this repo. The model pages are
+# a static export of the live catalog — /models, every lab page and every model
+# page are generated from what models.hanzo.ai answers at BUILD time, and the
+# page says so in its own copy ("prices and context windows come from the live
+# catalog"). The catalog changes without anyone touching this tree, so a build
+# only on push means the promise is kept exactly until the next model ships.
+# `revalidate` cannot cover it: `output: 'export'` leaves no runtime to revalidate
+# in, and the per-model routes come from generateStaticParams, so a page for a new
+# model cannot exist until a build makes it.
 on:
+  schedule:
+    - cron: '0 9 * * *'
   push:
     branches: [main]
   workflow_dispatch:
