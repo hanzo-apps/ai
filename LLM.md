@@ -66,6 +66,34 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
   inheriting the root layout's title, six redirect shells offered for indexing)
   and hanzo.ai published nothing for a day while pushes kept succeeding.
 
+  **A 520 on `/` while every named route answers 200 is STORAGE, not the site.**
+  The `s3` deployment runs master + filer + gateway in ONE pod (`weed server
+  -filer -s3`, `Recreate`, 1 replica). Every restart of it drops the master's
+  volume map, the volume servers reconnect without fully re-registering, and any
+  object whose chunk lives on a volume that did not come back reads as
+  `volume N not found`. When that volume happens to hold
+  `hanzo-sites/hanzo/hanzo-ai/index.html`, the apex root 520s and nothing else
+  does — `/models` and `/comparison` keep serving, which is what makes it look
+  like a page bug.
+
+  Confirm it in one command, and do not guess from the browser:
+
+      kubectl -n hanzo logs deploy/s3 --since=60s | grep -oE 'failed to stream [^ ]+' | sort -u
+
+  **The fix is a RE-PUBLISH, not a restart.** Dispatching `deploy.yml` rewrites
+  the object with fresh chunks and the root comes back within the run. Restarting
+  s3 or the volume servers is the tempting move and it does not converge — the
+  master will resolve the volume to the correct live pod IP while the filer's own
+  lookup still refuses it, so you can cycle storage all day and change nothing.
+  Restarting the master is also what CAUSES the next occurrence, so reaching for
+  it is strictly negative.
+
+  Same signature, same cure, for any single page: `/comparison` returned `200`
+  with an empty body after 15s from this, and a re-publish fixed it. A publish
+  that runs while storage is degraded is how the object gets stranded in the
+  first place — `sitedeploy` sends a manifest and the server deletes keys absent
+  from it, so an upload that fails mid-publish takes the live page with it.
+
   Read the STEPS, never hunt for the log — logs live in object storage, not on
   the git pod:
 
