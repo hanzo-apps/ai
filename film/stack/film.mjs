@@ -9,11 +9,22 @@
 // pricing beside it — and when a product lands, it appears here on the next
 // render with nothing to edit.
 //
-// THE STACK ORDER IS NOT A DESIGN DECISION. The catalog states `order` 0..9 and
-// this reads it, base to crown. Inventing a "better" stack would be a second
-// taxonomy, which is the thing this repo keeps deleting. Apps is order 9, so
-// Apps is the crown — the layer a person actually touches, standing on nine it
-// does not have to think about.
+// DEPTH IS ITS OWN FACT, and the catalog does not carry it. The catalog's
+// `order` is the MENU order — what the Products dropdown shows first, which is
+// AI because AI is the headline. A stack asks a different question: what does
+// each layer STAND ON. Reading the menu order as depth put settlement ninth and
+// AI at the bottom, which is not how any of it is built.
+//
+// So the depth is declared once, here, in STACK — and only the depth. Labels,
+// names and membership stay the catalog's. One new fact, stated in one place,
+// rather than a second taxonomy.
+//
+// The chain is the ground: value settles on it, and everything above it is
+// something we run. Compute, data and network are the substrate over that;
+// security and the deploy plane are how it is operated; observe and dev are how
+// it is watched and driven; AI is what it is for; apps are what a person opens.
+// Apps is the crown — the layer someone touches, standing on nine they do not
+// have to think about.
 //
 // No count appears anywhere. Membership is whatever answered at build time, so
 // a number painted into a film is a fact about that morning that outlives it.
@@ -36,9 +47,25 @@ const catalog = JSON.parse(
   readFileSync(join(here, "..", "..", "lib", "data", "catalog.json"), "utf8"),
 );
 
-/** The ten layers, base to crown, exactly as the catalog orders them. */
-const LAYERS = [...catalog.categories]
-  .sort((a, b) => a.order - b.order)
+/** Depth, base to crown. The one fact the catalog does not state. */
+const STACK = [
+  "web3",           // the chain everything settles on
+  "compute",
+  "data",
+  "network",
+  "security",
+  "infrastructure", // the deploy plane — PaaS is a layer, not the platform
+  "observe",
+  "dev",
+  "ai",
+  "apps",           // what a person opens
+];
+
+const LAYERS = STACK.map((id) => {
+  const c = catalog.categories.find((x) => x.id === id);
+  if (!c) throw new Error(`STACK names ${id}, which the catalog does not carry`);
+  return c;
+})
   .map((c) => ({
     id: c.id,
     label: c.label,
@@ -53,9 +80,12 @@ const LAYERS = [...catalog.categories]
 
 if (LAYERS.length !== 10) {
   // Ten slabs is the composition — the geometry below divides the column by it.
-  // A catalog that stops carrying ten categories is a real change and should
-  // stop the render rather than silently produce a crooked stack.
-  throw new Error(`the stack is composed for ten layers; the catalog has ${LAYERS.length}`);
+  throw new Error(`the stack is composed for ten layers; STACK names ${LAYERS.length}`);
+}
+// A category the catalog carries and STACK forgets would be a layer this film
+// silently omits, which is worse than a crooked one.
+for (const c of catalog.categories) {
+  if (!STACK.includes(c.id)) throw new Error(`the catalog carries ${c.id}, which STACK does not place`);
 }
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");

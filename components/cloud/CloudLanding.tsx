@@ -340,7 +340,7 @@ function Products() {
           <div className="mt-14">
             <Mockup
               base="/cloud-stack-wide"
-              alt="The ten layers of the Open AI Cloud, assembling from AI at the base to Apps on top: Compute, Data, Network, Security, Dev, Infrastructure, Observe and Web3 between them."
+              alt="The ten layers of the Open AI Cloud, assembling from the chain at the base to Apps on top: Web3, Compute, Data, Network, Security, Infrastructure, Observe, Dev, AI, Apps."
             />
           </div>
 
