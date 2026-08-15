@@ -9,6 +9,7 @@ import Ladder from "@/components/cloud/Ladder"
 import { Mockup } from '@/components/product/Mockup'
 import Workloads from '@/components/cloud/Workloads'
 import Layers from "@/components/cloud/Layers"
+import Stack from "@/components/cloud/Stack"
 import { CONSOLE } from "@/components/home/nav-data"
 import { useModelCount } from '@/hooks/useModelCount'
 import { cloudCategories, layerCount, spell, tour } from '@/lib/data/cloud-primitives'
@@ -603,6 +604,10 @@ export default function CloudLanding() {
       {/* The ten, immediately. A visitor who scrolls once should see the shape
           of the thing, not a third paragraph about it. */}
       <Layers />
+      {/* The same ten, interrogable. Layers states them all at once, which is
+          the right answer to "what is there"; this answers "which one do I
+          need" — point at a layer and only that layer speaks. */}
+      <Stack />
       <Workloads />
       <AssemblyTax layers={layerCount} />
       <Evidence />
