@@ -88,7 +88,10 @@ export default function LocalStack() {
             brings up the cloud itself — control plane, identity, secrets, gateway, storage,
             pub/sub — on your own hardware.
           </p>
-          <p className="mt-3 text-[15px] leading-relaxed text-neutral-500">
+          {/* neutral-400, not 500: #737373 on this black measures 4.43:1 at
+              15px, just under AA's 4.5. The tier below the lead paragraph is
+              carried by size here, not by a shade that fails to be readable. */}
+          <p className="mt-3 text-[15px] leading-relaxed text-neutral-400">
             It is the same code we run in our own cloud, under an open licence. Point a client at{' '}
             <code className="rounded bg-neutral-900 px-1.5 py-0.5 text-neutral-300">localhost</code> or
             at <code className="rounded bg-neutral-900 px-1.5 py-0.5 text-neutral-300">api.hanzo.ai</code>{' '}

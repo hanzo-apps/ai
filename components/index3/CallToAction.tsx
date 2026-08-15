@@ -3,7 +3,6 @@
 
 import React from "react";
 import { motion } from "@/components/motion";
-import { Button } from "@hanzo/ui";
 import ChromeText from "@/components/ui/chrome-text";
 
 const CallToAction = () => {
@@ -28,12 +27,17 @@ const CallToAction = () => {
             Join the revolution of AI-driven development. Hanzo gives your team the tools, platform, and support needed to innovate fearlessly, deploy instantly, and scale infinitely.
           </p>
           
-          <Button 
-            size="lg"
-            className="bg-[var(--white)] hover:bg-neutral-100 text-primary-foreground px-8 py-6 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all"
+          {/* One element, one control. This was an <a> nested inside a Button:
+              the button painted 225x70 and only the 160x20 anchor inside it
+              navigated, so most of the CTA was dead pixels — and interactive
+              content inside a button is invalid markup besides. The anchor
+              carries the look, so the whole pill is the link. */}
+          <a
+            href="https://dashboard.hanzo.cloud"
+            className="hz-tap inline-flex items-center justify-center bg-[var(--white)] hover:bg-neutral-100 text-primary-foreground px-8 py-6 rounded-lg text-lg font-medium shadow-lg hover:shadow-xl transition-all"
           >
-            <a href="https://dashboard.hanzo.cloud">Get Started with Hanzo</a>
-          </Button>
+            Get Started with Hanzo
+          </a>
         </motion.div>
       </div>
     </section>

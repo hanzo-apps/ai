@@ -43,7 +43,11 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
         <div className="mx-auto max-w-6xl px-6 pt-28 pb-16">
           {/* Breadcrumb — reads like a cloud console path */}
           <nav className="mb-8 flex items-center gap-2 text-xs text-muted-foreground">
-            <Link href="/products" className="transition-colors hover:text-foreground">
+            {/* A breadcrumb is a control, so it says so. `hz-tap` states the
+                thumb floor and `inline-flex` gives it a box to apply to — a
+                min-height cannot size an inline element, which is what left
+                this link 14.7px tall on a phone. */}
+            <Link href="/products" className="hz-tap inline-flex items-center transition-colors hover:text-foreground">
               Products
             </Link>
             <span aria-hidden>/</span>
@@ -57,7 +61,10 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
           >
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">{category.title}</h1>
             <p className="mt-4 max-w-2xl text-lg text-muted-foreground">{category.tagline}</p>
-            <p className="mt-3 text-sm text-muted-foreground/70">Open source · On-chain settlement</p>
+            {/* /80, not /70: at 13px the dimmer step composited to 4.28:1 on
+                this ground, under AA's 4.5. /80 measures 5.3 and still reads a
+                tier below the tagline above it. */}
+            <p className="mt-3 text-sm text-muted-foreground/80">Open source · On-chain settlement</p>
           </motion.div>
         </div>
       </section>
@@ -168,7 +175,7 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
                 <Link
                   key={c.id}
                   href={`/products/${c.id}`}
-                  className="rounded-full border border-border px-4 py-1.5 text-sm text-muted-foreground transition-colors hover:border-neutral-600 hover:text-foreground"
+                  className="hz-tap inline-flex items-center rounded-full border border-border px-4 py-1.5 text-sm text-muted-foreground transition-colors hover:border-neutral-600 hover:text-foreground"
                 >
                   {c.title}
                 </Link>

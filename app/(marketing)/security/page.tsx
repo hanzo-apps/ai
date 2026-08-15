@@ -159,7 +159,7 @@ const Security = () => {
               >
                 <Link
                   href="/contact"
-                  className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
+                  className="hz-tap inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
 
                 >
                   Talk to Security Team
@@ -169,7 +169,7 @@ const Security = () => {
                   href="https://docs.hanzo.ai/docs/zero-trust"
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"
+                  className="hz-tap inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"
                 >
                   Security Documentation
                   <ExternalLink className="ml-2 h-4 w-4" />
@@ -346,7 +346,7 @@ const Security = () => {
 
                   <Link
                     href="/contact"
-                    className="inline-flex items-center mt-8 text-sm font-medium transition-colors"
+                    className="hz-tap inline-flex items-center mt-8 text-sm font-medium transition-colors"
 
                   >
                     Contact Sales
@@ -410,7 +410,7 @@ const Security = () => {
                   </p>
                   <a
                     href="mailto:security@hanzo.ai"
-                    className="inline-flex items-center text-sm font-medium text-foreground/60 hover:text-foreground/60 transition-colors"
+                    className="hz-tap inline-flex items-center text-sm font-medium text-foreground/60 hover:text-foreground/60 transition-colors"
                   >
                     security@hanzo.ai
                     <ExternalLink className="ml-2 h-4 w-4" />
@@ -481,7 +481,7 @@ const Security = () => {
                 href="https://docs.hanzo.ai/docs/zero-trust"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="hz-tap inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 Read the security documentation
               </a>
