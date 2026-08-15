@@ -1,0 +1,602 @@
+[
+  {
+    "id": "about",
+    "title": "About",
+    "href": "/about"
+  },
+  {
+    "id": "affiliate",
+    "title": "Affiliate",
+    "href": "/affiliate"
+  },
+  {
+    "id": "agents",
+    "title": "Agents",
+    "href": "/agents"
+  },
+  {
+    "id": "ai",
+    "title": "AI",
+    "href": "/ai"
+  },
+  {
+    "id": "ai-studio",
+    "title": "AI Studio",
+    "href": "/ai-studio"
+  },
+  {
+    "id": "analytics",
+    "title": "Analytics",
+    "href": "/analytics"
+  },
+  {
+    "id": "api",
+    "title": "API",
+    "href": "/api"
+  },
+  {
+    "id": "app",
+    "title": "App",
+    "href": "/app"
+  },
+  {
+    "id": "authz",
+    "title": "Authorization",
+    "href": "/authz"
+  },
+  {
+    "id": "auto",
+    "title": "Auto",
+    "href": "/auto"
+  },
+  {
+    "id": "automations",
+    "title": "Automations",
+    "href": "/automations"
+  },
+  {
+    "id": "base",
+    "title": "Base",
+    "href": "/base"
+  },
+  {
+    "id": "billing",
+    "title": "Billing",
+    "href": "/billing"
+  },
+  {
+    "id": "blockchain",
+    "title": "Blockchain",
+    "href": "/blockchain"
+  },
+  {
+    "id": "blog",
+    "title": "Blog",
+    "href": "/blog"
+  },
+  {
+    "id": "bot",
+    "title": "Bot",
+    "href": "/bot"
+  },
+  {
+    "id": "brand",
+    "title": "Brand",
+    "href": "/brand"
+  },
+  {
+    "id": "calculator",
+    "title": "Calculator",
+    "href": "/calculator"
+  },
+  {
+    "id": "captable",
+    "title": "Cap table",
+    "href": "/captable"
+  },
+  {
+    "id": "careers",
+    "title": "Careers",
+    "href": "/careers"
+  },
+  {
+    "id": "chat",
+    "title": "Chat",
+    "href": "/chat"
+  },
+  {
+    "id": "cli",
+    "title": "CLI",
+    "href": "/cli"
+  },
+  {
+    "id": "cloud",
+    "title": "Cloud",
+    "href": "/cloud"
+  },
+  {
+    "id": "code",
+    "title": "Code",
+    "href": "/code"
+  },
+  {
+    "id": "commerce",
+    "title": "Commerce",
+    "href": "/commerce"
+  },
+  {
+    "id": "computer",
+    "title": "Computer",
+    "href": "/computer"
+  },
+  {
+    "id": "console",
+    "title": "Console",
+    "href": "/console"
+  },
+  {
+    "id": "contact",
+    "title": "Contact",
+    "href": "/contact"
+  },
+  {
+    "id": "contact-sales",
+    "title": "Contact Sales",
+    "href": "/contact-sales"
+  },
+  {
+    "id": "cookies",
+    "title": "Cookies",
+    "href": "/cookies"
+  },
+  {
+    "id": "crawl",
+    "title": "Crawl",
+    "href": "/crawl"
+  },
+  {
+    "id": "customers",
+    "title": "Customers",
+    "href": "/customers"
+  },
+  {
+    "id": "dashboards",
+    "title": "Dashboards",
+    "href": "/dashboards"
+  },
+  {
+    "id": "database",
+    "title": "Database",
+    "href": "/database"
+  },
+  {
+    "id": "dataroom",
+    "title": "Dataroom",
+    "href": "/dataroom"
+  },
+  {
+    "id": "datastore",
+    "title": "Datastore",
+    "href": "/datastore"
+  },
+  {
+    "id": "desktop",
+    "title": "Desktop",
+    "href": "/desktop"
+  },
+  {
+    "id": "dev",
+    "title": "Dev",
+    "href": "/dev"
+  },
+  {
+    "id": "dns",
+    "title": "DNS",
+    "href": "/dns"
+  },
+  {
+    "id": "docdb",
+    "title": "DocDB",
+    "href": "/docdb"
+  },
+  {
+    "id": "download",
+    "title": "Download",
+    "href": "/download"
+  },
+  {
+    "id": "edge",
+    "title": "Edge",
+    "href": "/edge"
+  },
+  {
+    "id": "engine",
+    "title": "Engine",
+    "href": "/engine"
+  },
+  {
+    "id": "enso",
+    "title": "Enso",
+    "href": "/enso"
+  },
+  {
+    "id": "enterprise",
+    "title": "Enterprise",
+    "href": "/enterprise"
+  },
+  {
+    "id": "extension",
+    "title": "Extension",
+    "href": "/extension"
+  },
+  {
+    "id": "flow",
+    "title": "Flow",
+    "href": "/flow"
+  },
+  {
+    "id": "functions",
+    "title": "Functions",
+    "href": "/functions"
+  },
+  {
+    "id": "gallery",
+    "title": "Gallery",
+    "href": "/gallery"
+  },
+  {
+    "id": "gateway",
+    "title": "Gateway",
+    "href": "/gateway"
+  },
+  {
+    "id": "guard",
+    "title": "Guard",
+    "href": "/guard"
+  },
+  {
+    "id": "gui",
+    "title": "GUI",
+    "href": "/gui"
+  },
+  {
+    "id": "hsm",
+    "title": "HSM",
+    "href": "/hsm"
+  },
+  {
+    "id": "iam",
+    "title": "IAM",
+    "href": "/iam"
+  },
+  {
+    "id": "identity",
+    "title": "Identity",
+    "href": "/identity"
+  },
+  {
+    "id": "idv",
+    "title": "Identity verification",
+    "href": "/idv"
+  },
+  {
+    "id": "ingress",
+    "title": "Ingress",
+    "href": "/ingress"
+  },
+  {
+    "id": "insights",
+    "title": "Insights",
+    "href": "/insights"
+  },
+  {
+    "id": "integrations",
+    "title": "Integrations",
+    "href": "/integrations"
+  },
+  {
+    "id": "investors",
+    "title": "Investors",
+    "href": "/investors"
+  },
+  {
+    "id": "jin",
+    "title": "Jin",
+    "href": "/jin"
+  },
+  {
+    "id": "kms",
+    "title": "KMS",
+    "href": "/kms"
+  },
+  {
+    "id": "kv",
+    "title": "KV",
+    "href": "/kv"
+  },
+  {
+    "id": "learn",
+    "title": "Learn",
+    "href": "/learn"
+  },
+  {
+    "id": "ledger",
+    "title": "Ledger",
+    "href": "/ledger"
+  },
+  {
+    "id": "llm",
+    "title": "LLM",
+    "href": "/llm"
+  },
+  {
+    "id": "machines",
+    "title": "Machines",
+    "href": "/machines"
+  },
+  {
+    "id": "mcp",
+    "title": "MCP",
+    "href": "/mcp"
+  },
+  {
+    "id": "metrics",
+    "title": "Metrics",
+    "href": "/metrics"
+  },
+  {
+    "id": "models",
+    "title": "Models",
+    "href": "/models"
+  },
+  {
+    "id": "mq",
+    "title": "MQ",
+    "href": "/mq"
+  },
+  {
+    "id": "network",
+    "title": "Network",
+    "href": "/network"
+  },
+  {
+    "id": "node",
+    "title": "Node",
+    "href": "/node"
+  },
+  {
+    "id": "o11y",
+    "title": "Observability",
+    "href": "/o11y"
+  },
+  {
+    "id": "open-source",
+    "title": "Open Source",
+    "href": "/open-source"
+  },
+  {
+    "id": "open-source-fund",
+    "title": "Open Source Fund",
+    "href": "/open-source-fund"
+  },
+  {
+    "id": "operative",
+    "title": "Operative",
+    "href": "/operative"
+  },
+  {
+    "id": "operator",
+    "title": "Operator",
+    "href": "/operator"
+  },
+  {
+    "id": "overview",
+    "title": "Overview",
+    "href": "/overview"
+  },
+  {
+    "id": "payments",
+    "title": "Payments",
+    "href": "/payments"
+  },
+  {
+    "id": "philosophy",
+    "title": "Philosophy",
+    "href": "/philosophy"
+  },
+  {
+    "id": "platform",
+    "title": "Platform",
+    "href": "/platform"
+  },
+  {
+    "id": "playground",
+    "title": "Playground",
+    "href": "/playground"
+  },
+  {
+    "id": "press",
+    "title": "Press",
+    "href": "/press"
+  },
+  {
+    "id": "pricing",
+    "title": "Pricing",
+    "href": "/pricing"
+  },
+  {
+    "id": "privacy",
+    "title": "Privacy",
+    "href": "/privacy"
+  },
+  {
+    "id": "products",
+    "title": "Products",
+    "href": "/products"
+  },
+  {
+    "id": "pubsub",
+    "title": "Pubsub",
+    "href": "/pubsub"
+  },
+  {
+    "id": "realtime",
+    "title": "Realtime",
+    "href": "/realtime"
+  },
+  {
+    "id": "registry",
+    "title": "Registry",
+    "href": "/registry"
+  },
+  {
+    "id": "research",
+    "title": "Research",
+    "href": "/research"
+  },
+  {
+    "id": "research-access",
+    "title": "Research Access",
+    "href": "/research-access"
+  },
+  {
+    "id": "risk",
+    "title": "Risk",
+    "href": "/risk"
+  },
+  {
+    "id": "s3",
+    "title": "S3",
+    "href": "/s3"
+  },
+  {
+    "id": "sdks",
+    "title": "SDKs",
+    "href": "/sdks"
+  },
+  {
+    "id": "search",
+    "title": "Search",
+    "href": "/search"
+  },
+  {
+    "id": "security",
+    "title": "Security",
+    "href": "/security"
+  },
+  {
+    "id": "sentinel",
+    "title": "Sentinel",
+    "href": "/sentinel"
+  },
+  {
+    "id": "sign",
+    "title": "Sign",
+    "href": "/sign"
+  },
+  {
+    "id": "skills",
+    "title": "Skills",
+    "href": "/skills"
+  },
+  {
+    "id": "sms-opt-in",
+    "title": "SMS Opt in",
+    "href": "/sms-opt-in"
+  },
+  {
+    "id": "solutions",
+    "title": "Solutions",
+    "href": "/solutions"
+  },
+  {
+    "id": "sql",
+    "title": "SQL",
+    "href": "/sql"
+  },
+  {
+    "id": "startups",
+    "title": "Startups",
+    "href": "/startups"
+  },
+  {
+    "id": "storage",
+    "title": "Storage",
+    "href": "/storage"
+  },
+  {
+    "id": "stream",
+    "title": "Stream",
+    "href": "/stream"
+  },
+  {
+    "id": "studio",
+    "title": "Studio",
+    "href": "/studio"
+  },
+  {
+    "id": "support",
+    "title": "Support",
+    "href": "/support"
+  },
+  {
+    "id": "tasks",
+    "title": "Tasks",
+    "href": "/tasks"
+  },
+  {
+    "id": "team",
+    "title": "Team",
+    "href": "/team"
+  },
+  {
+    "id": "telemetry",
+    "title": "Telemetry",
+    "href": "/telemetry"
+  },
+  {
+    "id": "terms",
+    "title": "Terms",
+    "href": "/terms"
+  },
+  {
+    "id": "treasury",
+    "title": "Treasury",
+    "href": "/treasury"
+  },
+  {
+    "id": "tunnel",
+    "title": "Tunnel",
+    "href": "/tunnel"
+  },
+  {
+    "id": "ui",
+    "title": "UI",
+    "href": "/ui"
+  },
+  {
+    "id": "vector",
+    "title": "Vector",
+    "href": "/vector"
+  },
+  {
+    "id": "visor",
+    "title": "Visor",
+    "href": "/visor"
+  },
+  {
+    "id": "world",
+    "title": "World",
+    "href": "/world"
+  },
+  {
+    "id": "zap",
+    "title": "Zap",
+    "href": "/zap"
+  },
+  {
+    "id": "zen",
+    "title": "Zen",
+    "href": "/zen"
+  }
+]

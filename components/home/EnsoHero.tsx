@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion } from '@/components/motion'
 import { ArrowRight, MessageSquare } from 'lucide-react'
 import { EnsoLogo } from '@/components/enso/EnsoLogo'
 import { CHAT } from './nav-data'

@@ -584,12 +584,12 @@ export function getCommunityForProduct(productId: string): ProductCommunity {
 // =============================================================================
 
 export const sbomRevenueConfig = {
-  sharePercentage: 25,
+  sharePercentage: 5,
   payoutOptions: ['USD', 'Hanzo Network', 'AI Coin'] as const,
   supportedChains: ['Ethereum', 'Solana', 'Polygon', 'Base', 'Arbitrum'] as const,
   dashboardUrl: '/open-source/dividends',
   connectUrl: '/open-source/dividends',
-  description: 'Hanzo dedicates 25% of all compute costs to open source contributors, distributed transparently based on verified SBOMs.',
+  description: 'Hanzo dedicates up to 5% of all compute costs to open source contributors, distributed transparently based on verified SBOMs.',
 };
 
 export function getSBOMPackagesForProduct(productId: string): string[] {

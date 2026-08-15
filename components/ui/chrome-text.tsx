@@ -1,101 +1,81 @@
-'use client'
-
-
-import React, { useState, useEffect, useRef, CSSProperties } from "react";
-import { cn } from "@/lib/utils";
+import React, { type CSSProperties } from 'react'
+import { cn } from '@/lib/utils'
 
 /**
- * The eyebrow above the heading is the SAME pill every other hero on this site
- * uses — dark, hairline-bordered, `text-xs` (CloudLanding's "Open-source ·
- * Self-host or managed", AboutHero's "Our Journey"). It used to be its own
- * thing, and being its own thing is what made it the single light slab on an
- * all-black site: `bg-primary/20` over `#0a0a0a` reads as `#3b3b3b`, under a
- * `border-white/50` twice as bright as any other border in the tree.
+ * The display heading, and the eyebrow that can sit above it.
  *
- * It also carried a `::before` sweep on `animation: glow 2s infinite`, painting
- * +0.3 white over the LABEL as well as the pill. At rest the text measured
- * 6.3:1; at the peak of every two-second cycle it measured 3.18:1, so a 13px
- * label dropped below AA and back twice a second, forever, with no
- * `prefers-reduced-motion` guard and no way to stop it (WCAG 2.2.2). A
- * marketing eyebrow is not worth an animation that never ends.
+ * SOLID INK. The heading used to be painted with a horizontal
+ * grey→white→grey gradient clipped to the glyphs, which cost more than it
+ * looked like it did:
+ *
+ *   - the ends of every headline were `rgb(180,180,180)` while the middle was
+ *     `rgb(240,240,240)`, so the last word of each one was its dimmest and the
+ *     line read as a render that had not finished;
+ *   - the gradient's offset tracked the POINTER, through a `mousemove`
+ *     listener on `window` that called `setState` and `getBoundingClientRect`
+ *     on every event — a React re-render and a forced layout per mouse move,
+ *     on 33 surfaces, for an effect most readers never noticed;
+ *   - the rule shipped inside the component, so a page with six headings put
+ *     six identical `<style>` blocks in the DOM.
+ *
+ * Hanzo is monochrome and its ink is paper-white. A confident heading is that
+ * white, once, at a tight display leading — which is also the one treatment a
+ * reader can rely on meaning "this is the heading" rather than "this heading
+ * is decorated".
+ *
+ * The API is unchanged, so all 33 call sites keep their own size classes: this
+ * owns the INK and the LEADING, and the page owns the scale.
  */
 interface ChromeTextProps {
-  children: React.ReactNode;
-  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "span" | "p";
-  className?: string;
-  preHeading?: string;
-  preHeadingClassName?: string;
-  style?: CSSProperties;
+  children: React.ReactNode
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'p'
+  className?: string
+  preHeading?: string
+  preHeadingClassName?: string
+  style?: CSSProperties
 }
 
-const ChromeText = ({ 
-  children, 
-  as: Component = "h1", 
+/**
+ * Display leading and tracking, stated here so every heading agrees.
+ *
+ * 1.08 rather than the `leading-relaxed` (1.625) it carried: a display line
+ * set at body leading reads as a paragraph that happens to be large, and two
+ * lines of it drift so far apart they stop being one sentence. The negative
+ * tracking is what large type needs to keep its word shapes — the same
+ * correction the rest of the site's heroes make by hand.
+ */
+const DISPLAY: CSSProperties = {
+  lineHeight: 1.08,
+  letterSpacing: '-0.02em',
+  textWrap: 'balance',
+}
+
+const ChromeText = ({
+  children,
+  as: Component = 'h1',
   className,
   preHeading,
   preHeadingClassName,
-  style
-}: ChromeTextProps) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  // Use a more generic ref type that works with any HTML element
-  const textRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (textRef.current) {
-        const rect = textRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top,
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
-  return (
-    <div className={cn("flex flex-col", preHeading ? "items-center" : "items-start")}>
-      {preHeading && (
-        <div className={cn(
-          "mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs font-medium text-neutral-300",
+  style,
+}: ChromeTextProps) => (
+  <div className={cn('flex flex-col', preHeading ? 'items-center' : 'items-start')}>
+    {preHeading && (
+      <div
+        className={cn(
+          'mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs font-medium text-neutral-300',
           preHeadingClassName
-        )}>
-          {preHeading}
-        </div>
-      )}
-      <div ref={textRef} className="inline-block">
-        <Component
-          className={cn("chrome-gradient leading-relaxed py-1", className)}
-          style={{
-            backgroundPosition: `${(mousePosition.x / (textRef.current?.offsetWidth || 1)) * 100}% ${(mousePosition.y / (textRef.current?.offsetHeight || 1)) * 100}%`,
-            ...style
-          }}
-        >
-          {children}
-        </Component>
-        <style>{`
-          .chrome-gradient {
-            background: linear-gradient(
-              90deg,
-              rgb(180, 180, 180),
-              rgb(240, 240, 240),
-              rgb(180, 180, 180)
-            );
-            background-size: 200% 100%;
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            transition: background-position 0.1s ease;
-            line-height: 1.3;
-          }
-        `}</style>
+        )}
+      >
+        {preHeading}
       </div>
-    </div>
-  );
-};
+    )}
+    <Component
+      className={cn('text-foreground', className)}
+      style={{ ...DISPLAY, ...style }}
+    >
+      {children}
+    </Component>
+  </div>
+)
 
-export default ChromeText;
+export default ChromeText

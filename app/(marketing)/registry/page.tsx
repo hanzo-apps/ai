@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { ArrowRight, Container, Lock, KeyRound, Shield, Zap, Globe, Layers, UserCheck } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
 

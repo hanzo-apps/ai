@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Activity, Zap, Globe, Users, Clock, Lock, Workflow, Shield } from "lucide-react";
 
 interface FeatureCardProps {

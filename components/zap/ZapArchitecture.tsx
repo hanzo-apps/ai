@@ -1,8 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
-
+import { motion } from "@/components/motion";
 const ZapArchitecture = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30">

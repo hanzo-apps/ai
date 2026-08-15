@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/motion'
 import { Home, ArrowLeft, FileQuestion } from 'lucide-react'
 // The static export serves this as the SPA fallback for every unresolved path
 // on BOTH hosts, so it wears the same shared chrome as every other page —

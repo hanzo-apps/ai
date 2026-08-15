@@ -73,6 +73,25 @@ export default [
       'prefer-const': 'off',
       'react-hooks/exhaustive-deps': 'warn',
       'react-hooks/rules-of-hooks': 'warn',
+
+      // One door for `motion`, so a scroll reveal cannot go back to shipping
+      // real copy at `opacity: 0` and waiting for an observer to take it back.
+      // Only the NAME is restricted: everything else framer-motion exports
+      // still comes from framer-motion, and `components/motion.tsx` is where
+      // the two meet.
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'framer-motion',
+              importNames: ['motion'],
+              message: "import { motion } from '@/components/motion' — a reveal may not hide content.",
+            },
+          ],
+        },
+      ],
     },
   },
+  { files: ['components/motion.tsx'], rules: { 'no-restricted-imports': 'off' } },
 ]

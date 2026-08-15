@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion } from '@/components/motion'
 import { ArrowUpRight } from 'lucide-react'
 import { SH } from './nav-data'
 
@@ -83,7 +83,7 @@ export default function LocalStack() {
           <p className="mt-4 text-lg text-neutral-400">
             Most AI platforms hand you an API key. We hand you the platform. One binary, and{' '}
             <code className="rounded bg-neutral-900 px-1.5 py-0.5 text-[15px] text-neutral-300">
-              hanzo serve
+              hanzo up
             </code>{' '}
             brings up the cloud itself — control plane, identity, secrets, gateway, storage,
             pub/sub — on your own hardware.

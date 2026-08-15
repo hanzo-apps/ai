@@ -2,7 +2,7 @@
 
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion } from '@/components/motion';
 import { Bot, MessageSquare, BookOpen, Search, FileCode, Database, Brain, Headphones } from 'lucide-react';
 
 const UseCases = () => {

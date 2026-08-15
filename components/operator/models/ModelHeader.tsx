@@ -2,8 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
-
+import { motion } from "@/components/motion";
 const ModelHeader = () => {
   return (
     <div className="text-center max-w-3xl mx-auto mb-16">

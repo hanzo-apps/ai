@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { PartnerLogoRow } from "@/components/shared";
 import { infrastructureLogos } from "@/lib/constants/partner-logos";
 

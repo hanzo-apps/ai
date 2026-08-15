@@ -25,21 +25,23 @@ import { ProductFooter } from '@/components/products/ProductFooter'
 // section, and it is the ONLY thing that links the sixteen agent profiles under
 // /team. Without it those pages are live and reachable from nothing.
 import AgentGallery from '@/components/team/AgentGallery'
-import HumanLeadership from '@/components/team/HumanLeadership'
 import HumanAIIntegration from '@/components/team/HumanAIIntegration'
 import WorkspaceIntegration from '@/components/team/WorkspaceIntegration'
 import AuditFeatures from '@/components/team/AuditFeatures'
 import EnterpriseReadiness from '@/components/team/EnterpriseReadiness'
 
 // This page is the front door of hanzo.team itself, as well as /team here, so
-// "open the app" cannot be a link to hanzo.team — on that host it is a link to
-// the page you are already reading. It names the app directly instead.
+// "open the app" cannot be a link to the bare host — on hanzo.team that is a
+// link to the page you are already reading.
 //
-// tracker.hanzo.ai is that app: the workspace board on Hanzo IAM as its only
-// sign-in, which is where hanzo.team's apex already sent every visitor before
-// this page existed. Naming it here keeps that destination one click away
-// rather than making it the whole experience.
-const APP = 'https://tracker.hanzo.ai'
+// It names the workspace's sign-in directly. The apex serves this page to a
+// signed-out reader and the workspace to a signed-in one, and /login is the
+// door in both cases: a signed-in reader is carried straight through it.
+//
+// It used to name tracker.hanzo.ai, which was right when that board was the
+// only app behind this page. It is not anymore — that host is Hanzo Todo, a
+// different product, and Hanzo Team is the workspace served here.
+const APP = 'https://hanzo.team/login'
 // The Team product manual, not the platform-wide docs — this page is about one
 // product and docs.hanzo.team is that product's own book.
 const DOCS = 'https://docs.hanzo.team'
@@ -58,7 +60,7 @@ export default function TeamLanding() {
           { label: 'Read the docs', href: DOCS },
           { label: 'View on GitHub', href: GITHUB },
         ]}
-        note={{ icon: Cloud, text: 'Open source (EPL-2.0). Self-host the full platform, or use the managed workspace.' }}
+        note={{ icon: Cloud, text: 'Open source (AGPL-3.0). Self-host the full platform, or use the managed workspace.' }}
         what={{
           eyebrow: 'What is Hanzo Team',
           title: 'Everything your team shares, in one place',
@@ -107,7 +109,6 @@ export default function TeamLanding() {
         {/* Who works in the workspace — the coworkers first, then the people
             who lead them, then how the two actually share the work. */}
         <AgentGallery />
-        <HumanLeadership />
         <HumanAIIntegration />
         {/* What the workspace looks like, then what makes it safe to put a
             company inside it. */}

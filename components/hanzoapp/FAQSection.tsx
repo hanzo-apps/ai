@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "@/components/motion";
+import { AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { MODELS_PHRASE } from '@/lib/data/model-count'

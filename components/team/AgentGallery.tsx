@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "@/components/motion";
+import { AnimatePresence } from "framer-motion";
 import {
   Bot,
   Briefcase,

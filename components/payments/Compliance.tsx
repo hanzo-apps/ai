@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { ShieldCheck, Receipt, AlertTriangle } from "lucide-react";
 
 const Compliance = () => {

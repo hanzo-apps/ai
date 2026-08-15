@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Activity, BarChart, Clock, ShoppingCart, Shield, Lightbulb, Signal, LineChart, Gamepad2, Cpu, Network, Users } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
 

@@ -333,9 +333,22 @@
   border-color: transparent;
 }
 
+/* Softer on a WRAPPER, and the reason is perimeter, not preference.
+   A focus ring's ink is its alpha times the length it traces. At 72% white 2px
+   around a 44px button is a mark; the same value around a 700px pill is a bright
+   loop across the fold, which is what it looked like. The indicator does not
+   need to be brighter on a bigger control — if anything the opposite, because
+   there is more of it to see.
+   45% is chosen against the requirement rather than by eye. Composited on the
+   pill's own ground it is #787879 for 4.51:1, where WCAG 1.4.11 asks 3:1 of a
+   focus indicator — so it keeps half again the margin it needs while dropping
+   the apparent brightness by more than half (72% measures 10.26:1). 32% was the
+   next step down and falls to 2.80:1, under the floor, so this is as quiet as
+   the ring is allowed to get.
+   Small controls keep the 72% above: they have little perimeter to spend. */
 :root:root :has(> input.bg-transparent:focus-visible),
 :root:root :has(> textarea.bg-transparent:focus-visible) {
-  outline: 2px solid rgba(255, 255, 255, 0.72);
+  outline: 2px solid rgba(255, 255, 255, 0.45);
   outline-offset: 2px;
 }
 

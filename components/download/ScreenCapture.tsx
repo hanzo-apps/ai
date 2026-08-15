@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Crop, MonitorSmartphone } from "lucide-react";
 
 const ScreenCapture = () => {

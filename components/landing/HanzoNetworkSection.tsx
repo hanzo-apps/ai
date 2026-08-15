@@ -2,7 +2,7 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import Link from "next/link";
 import { Github, Network, ArrowRight, Cpu, ShieldCheck, Globe } from "lucide-react";
 

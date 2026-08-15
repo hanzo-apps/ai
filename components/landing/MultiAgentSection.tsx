@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Zap, FileCheck, Trophy } from "lucide-react";
 
 // Race agents. Ship the winner.

@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Badge } from "@hanzo/ui";
 
 const WorkspaceFooter = () => {

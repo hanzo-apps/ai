@@ -95,7 +95,6 @@ export const resourcesNav: NavSection[] = [
     items: [
       { title: "About", href: "/about", description: "Our story", icon: Users },
       { title: "Team", href: "/team", description: "Meet the team", icon: Users },
-      { title: "Leadership", href: "/leadership", description: "Leadership", icon: Users },
       { title: "Brand", href: "/brand", description: "Brand assets", icon: AppWindow },
       { title: "Careers", href: "/careers", description: "Open positions", icon: Rocket },
       { title: "Security", href: "/security", description: "Security practices", icon: ShieldCheck },

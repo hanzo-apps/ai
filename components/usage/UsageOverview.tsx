@@ -3,7 +3,7 @@
 
 import React from "react";
 import { Button } from "@hanzo/ui";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { createAnimationVariant, curves } from "@/components/ui/animation-variants";
 
 interface UsageOverviewProps {

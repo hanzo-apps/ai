@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Shield, FileCheck, Workflow, UserCheck } from "lucide-react";
 
 // "Why Hanzo" — agents need infrastructure, not just prompts.

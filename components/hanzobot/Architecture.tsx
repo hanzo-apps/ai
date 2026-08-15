@@ -2,8 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
-
+import { motion } from "@/components/motion";
 const Architecture = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-950">

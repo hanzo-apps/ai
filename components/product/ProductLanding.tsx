@@ -14,7 +14,7 @@
  * real (measured) stats — never fabricated benchmarks.
  */
 
-import { motion } from 'framer-motion'
+import { motion } from '@/components/motion'
 import { ArrowRight, ArrowUpRight, Check } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'

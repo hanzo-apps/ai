@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion } from '@/components/motion'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import { Button } from '@hanzo/ui'
 import { CopyButton } from '@hanzo/ui/product'

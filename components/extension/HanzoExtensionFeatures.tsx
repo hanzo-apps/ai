@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Sparkles, Zap, Lock, Globe, Lightbulb, Share2, FileText, Command } from "lucide-react";
 
 const FeatureCard = ({ icon: Icon, title, description }) => {

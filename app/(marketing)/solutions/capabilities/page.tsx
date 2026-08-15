@@ -18,8 +18,8 @@ import {
   Award
 } from "lucide-react";
 import { getIcon } from "@/lib/constants/iconMappings";
-import { motion, AnimatePresence } from "framer-motion";
-
+import { motion } from "@/components/motion";
+import { AnimatePresence } from "framer-motion";
 import { Button } from "@hanzo/ui";
 import SectionHeader from "@/components/zen/SectionHeader";
 import PartnerCard from "@/components/shared/PartnerCard";

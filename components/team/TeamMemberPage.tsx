@@ -3,7 +3,7 @@
 
 
 
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { LucideIcon, ExternalLink, Mail, Phone, Shield, Users } from "lucide-react";
 import TeamSlack from "@/components/TeamSlack";
 import { Button, toast } from "@hanzo/ui";

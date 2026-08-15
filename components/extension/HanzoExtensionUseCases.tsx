@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { FileText, Search, Code, ShoppingCart } from "lucide-react";
 
 const UseCaseCard = ({ icon: Icon, title, description }) => {

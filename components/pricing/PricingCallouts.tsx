@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "@/components/motion"
 import { Gift, Heart, ArrowRight } from "lucide-react"
 
 export default function PricingCallouts() {
@@ -24,7 +24,7 @@ export default function PricingCallouts() {
               Earn While You Build
             </h3>
             <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-              $20 in AI credits for every developer you refer. Unlock revenue share up to 7.5% at Partner tier.
+              $20 in AI credits for every developer you refer. Unlock revenue share up to 5% at Partner tier.
             </p>
             <a
               href="/referral"
@@ -50,10 +50,10 @@ export default function PricingCallouts() {
               <Heart className="h-5 w-5 text-foreground" />
             </div>
             <h3 className="text-xl font-bold text-foreground mb-3">
-              25% Goes to Open Source
+              Up to 5% Goes to Open Source
             </h3>
             <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-              A quarter of all platform revenue goes directly to the open source developers whose work powers Hanzo infrastructure.
+              Up to 5% of platform revenue goes directly to the open source developers whose work powers Hanzo infrastructure.
             </p>
             <a
               href="/open-source-fund"

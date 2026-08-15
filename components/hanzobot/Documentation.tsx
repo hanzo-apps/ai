@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Rocket, HelpCircle, BookOpen, GraduationCap, Folder, Star, List, Book } from "lucide-react";
 
 const Documentation = () => {

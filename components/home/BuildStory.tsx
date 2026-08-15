@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion } from '@/components/motion'
 import { HanzoLogo } from '@hanzo/logo/react'
 import { ArrowRight, ArrowUpRight, Blocks } from 'lucide-react'
 import { EnsoLogo } from '@/components/enso/EnsoLogo'

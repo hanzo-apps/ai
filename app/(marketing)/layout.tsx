@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { SiteHeader, SiteFooter } from '@/components/home/shell'
 import { AccountProvider } from '@/contexts/AccountContext'
-import { BillingProvider } from '@/contexts/BillingContext'
 import { ogImages, twitterImages } from '@/lib/constants/og'
 
 const SITE_TITLE = 'Hanzo — the AI cloud for agents and apps'
@@ -33,21 +32,19 @@ export default function MarketingLayout({
 }) {
   return (
     <AccountProvider>
-      <BillingProvider>
-        <div className="min-h-screen bg-black text-white">
-          {/* Keyboard users land on the nav first and would otherwise tab through
-              every menu on every page before reaching the content. */}
-          <a
-            href="#main"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:border focus:border-neutral-700 focus:bg-black focus:px-4 focus:py-2 focus:text-sm focus:text-white"
-          >
-            Skip to content
-          </a>
-          <SiteHeader surface="cloud" />
-          <main id="main">{children}</main>
-          <SiteFooter surface="cloud" />
-        </div>
-      </BillingProvider>
+      <div className="min-h-screen bg-black text-white">
+        {/* Keyboard users land on the nav first and would otherwise tab through
+            every menu on every page before reaching the content. */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:border focus:border-neutral-700 focus:bg-black focus:px-4 focus:py-2 focus:text-sm focus:text-white"
+        >
+          Skip to content
+        </a>
+        <SiteHeader surface="cloud" />
+        <main id="main">{children}</main>
+        <SiteFooter surface="cloud" />
+      </div>
     </AccountProvider>
   )
 }

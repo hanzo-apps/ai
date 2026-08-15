@@ -2,7 +2,7 @@
 
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import AIModelsView from "./dashboard/AIModelsView";
 import ObservabilityView from "./dashboard/ObservabilityView";
 import AnalyticsView from "./dashboard/AnalyticsView";

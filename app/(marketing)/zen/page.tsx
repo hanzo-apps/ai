@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import {
   ArrowRight, Code2, Eye, Zap, ExternalLink, Brain, Shield,
   Globe, Cpu, Layers, Clock, Github, Sparkles, Mic, FileCode,

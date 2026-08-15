@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Github, Twitter, MessagesSquare, Facebook, Linkedin, Instagram } from "lucide-react";
 
 const Community = () => {

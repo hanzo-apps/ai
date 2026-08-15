@@ -18,11 +18,12 @@
     "test:headed": "playwright test --headed",
     "test:report": "playwright show-report",
     "gen:gui-css": "node scripts/gen-gui-css.mjs",
-    "prebuild": "node scripts/gen-gui-css.mjs && node scripts/sync-pricing.mjs && node scripts/sync-catalog.mjs && node scripts/sync-papers.mjs",
+    "prebuild": "node scripts/gen-gui-css.mjs && node scripts/sync-pricing.mjs && node scripts/sync-catalog.mjs && node scripts/sync-papers.mjs && node scripts/sync-blueprints.mjs && node scripts/sync-pages.mjs",
     "predev": "node scripts/gen-gui-css.mjs",
     "sync:pricing": "node scripts/sync-pricing.mjs",
     "sync:catalog": "node scripts/sync-catalog.mjs",
     "sync:papers": "node scripts/sync-papers.mjs",
+    "sync:pages": "node scripts/sync-pages.mjs",
     "audit:catalog": "node scripts/audit-catalog.mjs"
   },
   "dependencies": {
@@ -47,7 +48,7 @@
     "@hanzogui/config": "^8.1.0",
     "@hanzogui/lucide-icons-2": "^8.1.0",
     "@hanzogui/next-theme": "^8.1.0",
-    "@hanzogui/shell": "^8.1.8",
+    "@hanzogui/shell": "^8.1.13",
     "@hanzogui/web": "^8.1.0",
     "@hookform/resolvers": "^3.9.0",
     "@tanstack/react-query": "^5.56.2",

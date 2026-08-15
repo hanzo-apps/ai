@@ -1,20 +1,12 @@
 /**
- * The part of a file a reader of the SITE can see.
+ * The part of a file a reader of the site can see.
  *
- * The audits beside this one forbid a fact being typed where it should be read —
- * a model count, a price. Both scan raw lines, so both also read the comments,
- * and a comment is where you explain the rule. `audit-model-counts.mjs` failed on
- * its own explanation of why "400+ models" is wrong, quoted inside a doc comment
- * in hooks/useModelCount.ts. A gate that fires on the sentence describing it
- * teaches people to phrase around it, which is how a gate stops being trusted.
+ * The audits beside this one forbid a fact being typed where it should be read.
+ * Both scan lines, and a comment is where the rule gets explained, so comment
+ * spans are blanked here — line numbers kept, strings left alone, because a
+ * string is copy.
  *
- * Comment spans are blanked rather than removed, so a line number still points at
- * the line it came from.
- *
- * `//` only opens a comment when a colon is not in front of it, or `https://…`
- * would swallow the rest of the line. Getting that wrong can only blank MORE
- * text, never less, so it cannot manufacture a pass — but it could hide one, and
- * this gate has to be right about the one thing it claims.
+ * `//` opens a comment only when no colon precedes it, so a URL keeps its path.
  */
 const blank = (s) => s.replace(/[^\n]/g, " ");
 

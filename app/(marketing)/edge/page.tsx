@@ -2,7 +2,7 @@
 
 
 import React from 'react';
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { ArrowRight, Zap, Globe, Network, Server, Cloud, Code, Shield } from "lucide-react";
 import { Button } from "@hanzo/ui";
 import ChromeText from "@/components/ui/chrome-text";

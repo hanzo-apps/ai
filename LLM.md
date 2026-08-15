@@ -308,20 +308,100 @@ the ten category pages `/products/{ai,compute,data,network,security,dev,platform
 and the 25 generated `/cloud/<slug>` primitive pages. None of them has a film
 yet, and none needs new code to get one.
 
+## A scroll reveal may not hide the content it reveals
+
+`initial={{ opacity: 0 }}` IS RENDERED — framer-motion writes it into the
+`style` attribute of the exported HTML — so the shipped page states that a
+section is transparent and the only thing that can take it back is an
+IntersectionObserver firing after hydration. Every way that observer can be late
+or absent leaves real copy at zero forever. Measured live at 1440x900 before the
+fix: **4,380px of /about, 2,229px of the homepage, 972px of /solutions**, and a
+blank band inside all ten sections of /cloud.
+
+The tell was that reduced-motion and no-JS readers saw MORE than everyone else.
+`app/globals.css` already forces the start state visible under
+`prefers-reduced-motion` and under `html.no-js` (both rules are still there and
+still correct) — so the two audiences with a rescue rule were the two the page
+worked for, and nobody had asked why they needed rescuing.
+
+**`components/motion.tsx` is now the only door to `motion`.** It is a Proxy over
+framer's, and it grounds the start state once: for any element carrying
+`whileInView`, `opacity`, `x` and `scale` never reach the DOM and `y` is clamped
+to 8px. The element ships opaque and in position; what is left of `initial` is a
+nudge the entrance closes. Call sites keep their props, durations and stagger —
+253 of them changed one import line and nothing else.
+
+Horizontal offsets are DROPPED rather than clamped, because an `x: -20` enter is
+wider than a 390px viewport for the length of the animation, which is the
+sideways scroll `overflow-x: clip` exists to swallow.
+
+`eslint.config.js` holds the door shut: `no-restricted-imports` on the `motion`
+NAME from `framer-motion`, with `components/motion.tsx` the one exemption.
+Everything else framer exports still comes from framer.
+
+**The proxy cannot reach a component that was WIRED to stay hidden**, and four
+on `/analytics` were. It grounds `initial`, so it can only help something whose
+end state is visible; `AIFeatureCard` read `initial="hidden" animate="hidden"`
+and animated TO the hidden state, which meant three 234px cards were invisible
+on every visit, scrolled to or not. `Community` ran ONE IntersectionObserver
+doing two jobs — starting the CountUp tallies AND holding 872px of cards at
+opacity 0 — so the rule is: **an observer may start a count; it may not decide
+whether the copy exists.** Those two triggers stay separate. When auditing, grep
+for `animate=` with a variant NAME and for `useAnimation`/`controls.start`, not
+just for `whileInView`.
+
+## ⌘K searches the SITE, and the page list is derived
+
+The palette is `@hanzogui/shell`'s (`HanzoCommandPalette`), and it indexes three
+things merged into one ranked list: the doors (`TRY_HANZO_GROUPS`), **this
+site's own pages**, and the cloud taxonomy. It used to index the taxonomy alone,
+so typing `pricing` answered "No results for pricing" about a page the header
+links three inches above it.
+
+    app/ tree ── scripts/sync-pages.mjs ──> lib/data/pages.json ──> components/home/shell.tsx
+                 (walks routes(), filters          120 routes         commands={SITE_PAGES}
+                  policy(route) === 'public')                        on <HanzoHeader>
+
+**Derived, never listed.** The sync runs at `prebuild` through the same
+`policy()` that writes the sitemap, so the palette cannot miss a published page
+or offer a withheld one, and nobody maintains a list. Top level only —
+everything deeper is the taxonomy, which the palette already indexes from
+`catalog.json` under the names commerce gives it. `SPELLING` in that script is an
+ORTHOGRAPHY table (`api` → API), not a taxonomy: it cannot add a page or
+withhold one.
+
+Ranking lives in the package (`search.ts`, `score`): a contiguous run beats a
+scattered one, a word start beats a word middle, a name beats a description, and
+a scattered match must ANCHOR where a word does — without that anchor "docs"
+matches half the sentences on the site, since `d·o·c·s` walks through most
+prose. Descriptions are matched whole or not at all; only names are forgiving,
+which is what lets "machins" find Machines. Every query ends in an Ask row, so
+none of them dead-ends.
+
+`e2e/gates/palette.spec.ts` drives the real export for all of it, plus a ceiling
+on the doors card. The palette needs HYDRATION, so `open()` retries the chord
+rather than pressing it once — `load` fires well before the ⌘K listener is
+attached, and a single press makes the whole suite flaky for a reason that is
+not the palette.
+
 ## Key Files
 
 ```
 app/(marketing)/<slug>/page.tsx   # Flat product pages — /dev, /chat, /vector, etc.
 app/(marketing)/cloud/[slug]/     # Generated primitive overviews, from cloudPrimitiveSlugs
 app/(marketing)/products/[categoryId]/   # Category landings, from categorySlugs
+components/motion.tsx             # The ONE door to framer's `motion` (see above)
+components/ui/chrome-text.tsx     # The display heading — solid ink, 33 surfaces
 lib/data/
   catalog.json                    # The committed product snapshot (written by prebuild)
+  pages.json                      # The published top-level routes (written by prebuild)
   cloud-primitives.ts             # Reads it; owns the prose and nothing else
 scripts/
   catalog.mjs                     # The ONE probe — catalog + served document
   sync-catalog.mjs                # prebuild: fetch, gate on reachability, write the snapshot
+  sync-pages.mjs                  # prebuild: walk app/, filter by policy(), write pages.json
   audit-catalog.mjs               # hanzo.yml gate: the drift ratchet
-components/home/shell.tsx         # The header/footer chrome; PRODUCTS_TAXONOMY for the mega-menu
+components/home/shell.tsx         # The header/footer chrome; PRODUCTS_TAXONOMY + SITE_PAGES
 lib/constants/brand.ts            # Brand tokens
 ```
 
@@ -804,6 +884,20 @@ come from `@zenlm/models` instead, which made the component disagree with
 itself — the package's 55 hand-maintained rows for a failed fetch, the API's 41
 for a successful one — and meant refreshing the snapshot could not have helped,
 because the rows it refreshed were not the rows being rendered.
+
+And it takes the API's NORMALIZATION with it: `STATIC_DATA` maps the file
+through the same `apiToHanzo` the live fetch uses. The snapshot is the API's
+payload, so its fields are optional where `HanzoModel` is required — 12 of the
+35 rows carry no `specs` at all (every embedding, rerank, image, audio and
+video model), while the card renders `model.specs.params` unconditionally.
+Reading the file as `HanzoModel[]` asserted a field that is not there, and the
+assertion threw on first paint and took the entire tab with it.
+
+**A tab the prerender never opens has no build coverage.** `/pricing` renders
+one tab, so `pnpm build` prerendered the plans and never once ran the rate
+tables — the API tab was dead on the live site and every gate was green.
+Whatever a page shows only after a click has to be clicked, in a browser,
+before it is believed.
 
 `lib/leaderboard.ts` and `components/enso/EnsoLanding.tsx` still hold correct
 literals on purpose. They are the only public surfaces stating the true

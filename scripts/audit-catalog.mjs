@@ -114,8 +114,7 @@ async function main() {
         console.log(`    ${p.category.padEnd(9)} ${p.id.padEnd(20)} ${String(p.apiPath).padEnd(28)}${to}`);
       }
     }
-    // The legend names only the buckets that have members, so it never explains
-    // a category nothing is in.
+    // Only the buckets with members are explained.
     const legend = {
       renamed: `"renamed" is ${byReason.renamed.length} one-line catalog fix${byReason.renamed.length === 1 ? "" : "es"}`,
       client: `"client" wants a kind field, not an apiPath`,

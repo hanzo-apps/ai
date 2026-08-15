@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import Link from "next/link";
 import { Blocks, ArrowRight, BookOpen, Download } from "lucide-react";
 import { Mark } from "@/components/Mark";

@@ -2,7 +2,8 @@
 
 
 import React from "react";
-import { motion, MotionProps, HTMLMotionProps } from "framer-motion";
+import { motion } from "@/components/motion";
+import { MotionProps, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { sectionAnimation, headingAnimation, staggerContainer } from "./animation-variants";
 

@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { cloudCategories } from "@/lib/data/cloud-primitives";
 
 // Category overview cards — derived from the ONE cloud-primitive taxonomy

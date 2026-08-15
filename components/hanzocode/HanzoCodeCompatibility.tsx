@@ -2,7 +2,7 @@
 
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Check, Code2, PanelLeft, Plug, Settings, Shield } from "lucide-react";
 
 const HanzoCodeCompatibility = () => {

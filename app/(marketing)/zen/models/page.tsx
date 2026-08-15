@@ -3,8 +3,7 @@
 import Link from 'next/link'
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-
+import { motion } from "@/components/motion";
 import { Spinner } from "@hanzo/gui";
 import { allModels } from "@zenlm/models";
 import type { ZenModel } from "@zenlm/models";

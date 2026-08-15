@@ -4,7 +4,7 @@ import TeamLanding from '@/components/team/TeamLanding'
 export const metadata: Metadata = {
   title: 'Hanzo Team — one workspace for people and AI coworkers',
   description:
-    'Channels, projects, tasks, docs, and people in one shared workspace — with AI agents working as coworkers alongside your team. Open source (EPL-2.0), self-hostable, or managed at hanzo.team.',
+    'Channels, projects, tasks, docs, and people in one shared workspace — with AI agents working as coworkers alongside your team. Open source (AGPL-3.0), self-hostable, or managed at hanzo.team.',
   openGraph: {
     title: 'Hanzo Team — one workspace for people and AI coworkers',
     description:

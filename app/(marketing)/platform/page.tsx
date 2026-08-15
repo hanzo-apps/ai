@@ -11,7 +11,7 @@ import ZenBackground from "@/components/zen/ZenBackground";
 import ZenQuoteSection from "@/components/zen/ZenQuoteSection";
 import OSSComputeDividends from "@/components/oss/OSSComputeDividends";
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner";
-import { motion } from "framer-motion";
+import { motion } from "@/components/motion";
 import { Github, Cloud, Server, Lock, Code2, Network, Terminal, ArrowRight } from "lucide-react";
 
 import { ProductFooter } from "@/components/products/ProductFooter"
