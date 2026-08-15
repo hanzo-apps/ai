@@ -5,6 +5,7 @@ import {
   HanzoFooter,
   resolveSurface,
   type HanzoCommandEntry,
+  type HanzoNav,
   type ProductCategory,
 } from '@hanzogui/shell'
 import { cloudCategories } from '@/lib/data/cloud-primitives'
@@ -163,12 +164,14 @@ export function SiteHeader({
   // these three are the rest.
   //
   // Every href is a page this site actually serves — measured, not assumed.
-  // `/resources` and `/developers` DO NOT EXIST (both 404 live), so the labels
-  // point at the hubs that do: Learn and Dev. That is deliberate and it is the
-  // honest half of a compromise — the labels are the words the menu needs and
-  // the URLs are the pages we have. Giving them their own `/resources` and
-  // `/developers` hubs is the finish, and until someone writes those pages a
-  // matching URL would be a 404 wearing the right name.
+  // Resources is the one that names more than a page: what we publish is five
+  // pages, not one, so the label HOLDS them and carries `/learn` as the page it
+  // names — which is what it opens without JavaScript, and what the label meant
+  // when it was a plain link. `/developers` still does not exist, so Developers
+  // keeps pointing at `/dev`, the hub that does.
+  //
+  // Each hint is the page's own sentence, shortened. A menu that describes a
+  // page in words the page does not use is a second copy that drifts.
   //
   // Documentation is NOT here and is not a top-level action either. It used to
   // be the far-right secondary CTA, which put a link to another host in the
@@ -185,9 +188,30 @@ export function SiteHeader({
   // rule in app/globals.css takes it off the page.
   const DOCS = { id: 'docs', label: 'Documentation', href: 'https://docs.hanzo.ai' }
 
-  const localNav = [
+  const localNav: HanzoNav[] = [
     { id: 'solutions', label: 'Solutions', href: '/solutions' },
-    { id: 'resources', label: 'Resources', href: '/learn' },
+    {
+      id: 'resources',
+      label: 'Resources',
+      href: '/learn',
+      items: [
+        { id: 'learn', label: 'Learn', href: '/learn', hint: 'Guides and documentation' },
+        { id: 'research', label: 'Research', href: '/research', hint: 'Work we publish' },
+        {
+          id: 'open-source',
+          label: 'Open Source',
+          href: '/open-source',
+          hint: 'Every tool we build, published',
+        },
+        { id: 'blog', label: 'Blog', href: '/blog', hint: 'News and deep dives' },
+        {
+          id: 'customers',
+          label: 'Customers',
+          href: '/customers',
+          hint: 'Teams building on Hanzo',
+        },
+      ].filter((l) => shown(l.href)),
+    },
     { id: 'developers', label: 'Developers', href: '/dev' },
   ].filter((l) => shown(l.href))
 

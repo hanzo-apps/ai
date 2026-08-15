@@ -77,4 +77,39 @@ test.describe('header chrome', () => {
       await expect(footer.locator(`a[href^="${DOCS}"]:visible`).first()).toBeVisible()
     }
   })
+
+  /**
+   * What we publish is five pages, and Resources holds all five.
+   *
+   * The card only exists once the bar has hydrated, so this is the one thing
+   * reading the export's bytes cannot answer — the hrefs are not in the HTML
+   * until the menu opens. It is a HOVER rather than a click: resting the pointer
+   * is what `useIntent` opens on, and a hover that lands early is harmless,
+   * while an early click follows the label's own href and quietly moves the test
+   * to another page.
+   *
+   * Then every row is walked to its page. A menu naming a route the export does
+   * not carry is the one failure a header can ship that looks perfect.
+   */
+  test('Resources holds what we publish, and every row answers', async ({ page }) => {
+    await page.goto(`${base}/`, { waitUntil: 'load' })
+    const trigger = page
+      .locator('header[data-hanzo-shell]')
+      .getByRole('link', { name: 'Resources' })
+    const card = page.getByRole('dialog', { name: 'Resources' })
+    await expect(async () => {
+      await trigger.hover()
+      await expect(card).toBeVisible({ timeout: 1000 })
+    }).toPass({ timeout: 15000 })
+
+    const hrefs = await card
+      .getByRole('link')
+      .evaluateAll((rows) => rows.map((row) => row.getAttribute('href')))
+    expect(hrefs).toEqual(['/learn', '/research', '/open-source', '/blog', '/customers'])
+
+    for (const href of hrefs) {
+      await page.goto(`${base}${href}`)
+      await expect(page.locator('h1').first()).toBeVisible()
+    }
+  })
 })

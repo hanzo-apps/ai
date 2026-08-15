@@ -451,12 +451,12 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
    the declaration being defeated is inline — the same reason the `no-js` rules
    above carry it.
 
-   This belongs IN the package, and the fix is written for it. It cannot be
-   published yet: `@hanzogui/shell` 8.1.5 was published from `hanzoai/gui` on
-   GitHub, which is now ARCHIVED and read-only, while the live forge copy is an
-   earlier generation of the package (no `shellStyles`, no `rove`, 7.6.5). Which
-   lineage owns the package is the owner's call, not this repo's. Delete this
-   block and the carrier in shell.tsx together the day it lands upstream. */
+   This belongs IN the package, and the fix is written for it. The lineage
+   question that used to block it is settled: `hanzoai/gui` on the FORGE
+   (git.hanzo.ai) is the copy that publishes — it carries the current package
+   and `.hanzo/workflows/publish-gui-all.yml` ships it, which is how 8.1.14 was
+   released. Move `columnsFor` into `ProductsMegaMenu`, then delete this block
+   and the carrier in shell.tsx together. */
 [data-hanzo-shell][aria-label='Products'] > div {
   max-width: 1800px;
   margin-inline: auto;
