@@ -187,47 +187,48 @@ const PricingPlan = ({
             "$19/month" has read half the price. The amount is derived from the
             field the biller pays from, so no card can overstate its plan.
 
-            EVERY CARD GETS THIS BOX, including the one with nothing to put in
-            it. The first attempt reserved an empty slot of a guessed height
-            instead, and the guess was wrong by 20px — the cards sit five across
-            at lg, which leaves 111px of text width, not the 180px the estimate
-            assumed, so both lines wrapped and the real box stood taller than
-            its reservation. Every card's button inherited the error.
+            ONE SENTENCE PAIR, ON EVERY CARD, ZERO INCLUDED. Two earlier
+            attempts aligned the row by hand and both failed, for the same
+            reason in different clothes: a reserved blank of a guessed height,
+            then a real box holding DIFFERENT words. Cards five across leave the
+            box ~113px, where "Paid plans add credit." takes one line and
+            "Spend it on AI or compute." takes two — 14.66px of drift that
+            dragged the free card's button off the row, and more at 1024 where
+            the headlines split too.
 
-            A constant cannot fix that, because the right constant is different
-            at every breakpoint: the same words wrap to two lines at 111px and
-            one line at 358px. Same markup and same shape on all five cards
-            means they wrap together and their heights track with nothing to
-            maintain — and stating the credit on the free card too turns the
-            box into the rung-by-rung comparison it should have been. */}
-        {credit && (
+            Same strings wrap the same way at every width, so the free card
+            says $0 rather than saying it differently. Nothing to keep in sync
+            and no constant to get wrong; only the styling is dimmed, which
+            cannot change a line count. */}
+        {/* Only for a card whose caller states a credit. The other five
+            surfaces that render this component sell things with no monthly
+            allotment at all, and an unasked-for "$0" box on a captable tier
+            would be an answer to a question nobody put. `undefined` is "not
+            applicable"; `null` and zero both mean "none, and worth saying". */}
+        {credit !== undefined && (
           <div
             className={`mb-4 rounded-xl border px-4 py-3 ${
-              credit.amount > 0
+              credit && credit.amount > 0
                 ? "border-neutral-700 bg-neutral-900/60"
                 : "border-neutral-800 bg-transparent"
             }`}
           >
             <p
               className={`text-sm font-semibold ${
-                credit.amount > 0 ? "text-foreground" : "text-muted-foreground"
+                credit && credit.amount > 0 ? "text-foreground" : "text-muted-foreground"
               }`}
             >
-              {credit.amount > 0
-                ? `$${credit.amount.toLocaleString("en-US")} ${
-                    credit.whole ? "back" : "credit"
-                  } every month`
-                : "No credit included"}
+              {`$${(credit?.amount ?? 0).toLocaleString("en-US")} ${
+                credit?.whole ? "back" : "credit"
+              } every month`}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              {credit.amount > 0
-                ? "Spend it on AI or compute."
-                : "Paid plans add credit."}
+              Spend it on AI or compute.
             </p>
           </div>
         )}
 
-        <p className="text-muted-foreground md:min-h-[7.5rem]">{description}</p>
+        <p className="text-muted-foreground md:min-h-[8.75rem]">{description}</p>
       </div>
 
       {renderButton()}

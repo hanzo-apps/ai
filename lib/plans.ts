@@ -193,13 +193,23 @@ export function credit(plan: SubscriptionPlan): Credit | null {
  * card claiming two different numbers for the same thing, which is worse than
  * either number alone.
  *
- * The credit is stated ONCE, in the block, at the amount that is paid. The
- * match needs both words: "credentials" is not "credit", and a line about
- * monthly anything else is not this line.
+ * The credit is stated ONCE, in the block, at the amount that is paid.
+ *
+ * The line is written three ways across the catalog and the published package —
+ * "$5 of credit each month", "250 compute/API credits per month", "$5 of
+ * foundational API gateway credits included" — so matching the month alone left
+ * the third one sitting under its own box. It has to say CREDIT, and then
+ * either name a month or name a figure.
+ *
+ * Checked against every row commerce serves: it takes those four lines and
+ * nothing else. "Centralized, KMS-backed credentials" is not a credit, and
+ * Team's "$25 per user per month" never claims to be one.
  */
 export function featuresBeside(credit: Credit | null, features: string[]): string[] {
   if (!credit) return features;
-  return features.filter((f) => !(/credit/i.test(f) && /month/i.test(f)));
+  return features.filter(
+    (f) => !(/credit/i.test(f) && (/\$\d/.test(f) || /month/i.test(f)))
+  );
 }
 
 /** The published catalog row, as @hanzo/plans ships it. */
