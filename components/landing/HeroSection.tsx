@@ -128,7 +128,7 @@ const HeroSection = () => {
 
         {/* Content */}
         <div className="relative z-10 h-full px-4 sm:px-6 md:px-10 lg:px-12 py-10 sm:py-12 lg:py-16">
-          <div className="grid lg:grid-cols-[1.1fr_1fr] lg:gap-10 xl:gap-14 items-center min-w-0">
+          <div className="grid xl:grid-cols-[1.1fr_1fr] xl:gap-14 items-center min-w-0">
           {/*
             min-w-0 above is critical: without it, the grid track stretches
             to fit the widest child on narrow viewports and pushes the H1/body
@@ -251,7 +251,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: mounted ? 1 : 0, y: mounted ? 0 : 20 }}
               transition={{ duration: 0.6, delay: 0.35 }}
-              className="mt-10 lg:mt-0 w-full min-w-0"
+              className="mt-10 xl:mt-0 w-full min-w-0"
             >
               <motion.div
                 animate={{ y: [0, -8, 0] }}
@@ -278,7 +278,14 @@ const HeroSection = () => {
 
                 {/* Console body: sidebar + metric cards + activity + CLI strip */}
                 <div className="bg-background">
-                  <div className="grid grid-cols-[120px_1fr] min-h-[300px]">
+                  {/* The 120px sidebar track and the sidebar itself have to appear at the SAME
+                      breakpoint. The sidebar is `hidden sm:flex`, so below `sm` it left the grid
+                      entirely while its track stayed — the console body auto-placed into the
+                      120px column and rendered 120px wide inside a 322px box, with 202px of dead
+                      space beside it. `minmax(0,1fr)` on the body: a bare `1fr` floors at
+                      min-content, which measured 570px, so the console overflowed any column
+                      narrower than 690px and was silently cut off by the card's overflow-hidden. */}
+                  <div className="grid grid-cols-1 sm:grid-cols-[120px_minmax(0,1fr)] min-h-[300px]">
                     {/* Sidebar */}
                     <div className="border-r border-border/60 p-3 hidden sm:flex flex-col gap-1">
                       {CONSOLE_NAV.map((n, i) => (
