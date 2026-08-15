@@ -554,11 +554,16 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
      nothing, on the fold, where every pixel the bar takes is a pixel of the
      picture. 6px above and 8px below wraps the pill closely and still clears
      the focus ring's 2px offset. */
-  padding-top: 4px;
-  padding-bottom: max(6px, env(safe-area-inset-bottom));
-  background: var(--hz-chrome);
-  backdrop-filter: var(--hz-chrome-blur);
-  -webkit-backdrop-filter: var(--hz-chrome-blur);
+  padding-top: 3px;
+  padding-bottom: max(5px, env(safe-area-inset-bottom));
+  /* NO band material down here. The header earns its glass — it is a full-width
+     bar holding nav, and it has to stay legible over whatever scrolls under it.
+     The dock holds ONE centred pill, so tinting and blurring the whole width to
+     carry it drew a shade across the bottom of every page: on the fold it cut a
+     grey seam under the globe, and against the black canvas it read as a strip
+     of a slightly different black rather than as chrome.
+     The pill carries its own glass; the band around it carries nothing. */
+  background: transparent;
 }
 
 /* The header draws no bottom edge, and `!important` is the only thing that can
@@ -633,20 +638,28 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
     rgba(255, 255, 255, 0.1);
 }
 
+/* The padding here is what the ring occupies, so it MUST equal `::before`'s —
+   they are two halves of one measurement. Leave them disagreeing and the band
+   either clips or shows a hairline of panel behind it. */
 .hz-composer {
   position: relative;
   isolation: isolate;
-  padding: 1.5px;
+  padding: 1px;
   border-radius: 9999px;
 }
 
-/* The ring itself: a conic fill masked down to the 1.5px padding band, so what
-   shows is an outline and not a disc. */
+/* The ring itself: a conic fill masked down to the 1px padding band, so what
+   shows is an outline and not a disc.
+   It rests at .5 and lifts to .8 on hover or focus — a CHANGE you notice
+   without a flash. At full strength the spectrum reads as a hard white edge on
+   black, which is louder than the one control it is drawing around. */
 .hz-composer::before {
   content: "";
   position: absolute;
   inset: 0;
-  padding: 1.5px;
+  padding: 1px;
+  opacity: 0.5;
+  transition: opacity 200ms ease;
   border-radius: inherit;
   background: conic-gradient(from var(--hz-angle), var(--hz-spectrum));
   animation: hzComposerSpin 10s linear infinite;
@@ -666,16 +679,20 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
   pointer-events: none;
 }
 
-/* The halo, 6px outside the box. */
+/* The halo, 5px outside the box — a bloom, not a second ring. It sat at .22
+   over the dock's own tint, and the two together read as a lit slab. With the
+   band transparent it only has the page behind it, so it needs far less to be
+   felt: .10 at rest, .16 while the composer has attention. */
 .hz-composer::after {
   content: "";
   position: absolute;
-  inset: -6px;
-  padding: 6px;
+  inset: -5px;
+  padding: 5px;
   border-radius: inherit;
   background: conic-gradient(from var(--hz-angle), var(--hz-spectrum));
-  filter: blur(16px);
-  opacity: 0.22;
+  filter: blur(14px);
+  opacity: 0.1;
+  transition: opacity 200ms ease;
   animation: hzComposerSpin 10s linear infinite;
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -687,6 +704,20 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
   -webkit-mask-composite: xor;
   z-index: -1;
   pointer-events: none;
+}
+
+/* Attention lifts both layers a little, together, so the control answers the
+   pointer without changing character. Hover and focus-within say the same
+   thing here — the pill is one target, and a keyboard user arriving at the
+   input should see what a mouse user sees. */
+.hz-composer:hover::before,
+.hz-composer:focus-within::before {
+  opacity: 0.8;
+}
+
+.hz-composer:hover::after,
+.hz-composer:focus-within::after {
+  opacity: 0.16;
 }
 
 /* The panel covers the middle, so only the band shows. */
