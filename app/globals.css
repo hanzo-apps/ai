@@ -31,6 +31,12 @@
 @import '@hanzo/design/tokens/base.css' layer(base);
 @import 'tailwindcss';
 
+/* The composer's material — the lit ring around the field in the dock. Shared
+   with hanzo.chat and hanzo.app, which is the point: it was copied into all
+   three stylesheets and the copies drifted. Unlayered, so it outranks the
+   utilities, which is what lets it size the field from --text-base. */
+@import '@hanzo/composer/composer.css';
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -672,161 +678,10 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
    header's is neutralized below), so the page runs behind the chrome and the
    only thing separating them is the blur. */
 
-/* The composer's ring — the ONE place this site draws a spectrum on chrome.
-   `@property` lets the conic angle animate; where it is unsupported the ring is
-   simply static, which is a ring either way.
-
-   LUMINANCE, NOT HUE, and the stops are hanzo.app's and hanzo.chat's exactly.
-   Four saturated stops swept around a rounded box do not distribute evenly —
-   the long edges take a wide angular slice and the short sides almost none — so
-   one edge wears a bright arc and the opposite a dim one, which reads as a ring
-   that is slightly off. White at two close alphas removes the arc and keeps the
-   drift as a sheen. Colour on this site means something is TALKING (the globe's
-   conversations); chrome does not get to borrow that. */
-@property --hz-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes hzComposerSpin {
-  to {
-    --hz-angle: 360deg;
-  }
-}
-
-:root {
-  --hz-spectrum: rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.18),
-    rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.18),
-    rgba(255, 255, 255, 0.1);
-}
-
-/* The padding here is what the ring occupies, so it MUST equal `::before`'s —
-   they are two halves of one measurement. Leave them disagreeing and the band
-   either clips or shows a hairline of panel behind it. */
-.hz-composer {
-  position: relative;
-  isolation: isolate;
-  padding: 1px;
-  border-radius: 9999px;
-}
-
-/* The ring itself: a conic fill masked down to the 1px padding band, so what
-   shows is an outline and not a disc.
-   It rests at .5 and lifts to .8 on hover or focus — a CHANGE you notice
-   without a flash. At full strength the spectrum reads as a hard white edge on
-   black, which is louder than the one control it is drawing around. */
-.hz-composer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 1px;
-  opacity: 0.5;
-  transition: opacity 200ms ease;
-  border-radius: inherit;
-  background: conic-gradient(from var(--hz-angle), var(--hz-spectrum));
-  animation: hzComposerSpin 10s linear infinite;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  /* After the standard shorthand: WebKit aliases `mask` onto `-webkit-mask`, so
-     declaring this second lets the shorthand reset it to `source-over` — the
-     filled disc again — on exactly the browsers too old to have
-     `mask-composite` at all. */
-  -webkit-mask-composite: xor;
-  z-index: 0;
-  pointer-events: none;
-}
-
-/* The halo, 5px outside the box — a bloom, not a second ring. It sat at .22
-   over the dock's own tint, and the two together read as a lit slab. With the
-   band transparent it only has the page behind it, so it needs far less to be
-   felt: .10 at rest, .16 while the composer has attention. */
-.hz-composer::after {
-  content: "";
-  position: absolute;
-  inset: -5px;
-  padding: 5px;
-  border-radius: inherit;
-  background: conic-gradient(from var(--hz-angle), var(--hz-spectrum));
-  filter: blur(14px);
-  opacity: 0.1;
-  transition: opacity 200ms ease;
-  animation: hzComposerSpin 10s linear infinite;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
-  z-index: -1;
-  pointer-events: none;
-}
-
-/* The pointer lifts both layers a little, together, so the control answers it
-   without changing character.
-
-   FOCUS does not, and that is the rule: the focus ring above is the indicator,
-   and lifting the band as well is the same message said twice — around 576px of
-   perimeter, twice reads as a flash. A mouse is hovering before it clicks, so
-   the band is already lifted when the caret lands and the only thing that
-   changes on focus is the ring. A keyboard arrives at the ring alone, which is
-   the signal that carries the contrast. */
-.hz-composer:hover::before {
-  opacity: 0.8;
-}
-
-.hz-composer:hover::after {
-  opacity: 0.16;
-}
-
-/* The panel covers the middle, so only the band shows. */
-.hz-composer > * {
-  position: relative;
-  z-index: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hz-composer::before,
-  .hz-composer::after {
-    animation: none;
-  }
-}
-
-/* The composer's three controls are circles, and they are 30px — smaller than
-   the 36px hanzo.app gives its two, because that composer is a paragraph box
-   with a control row under it and this one is a single line, where the buttons
-   have to fit INSIDE the line's height rather than beneath it.
-
-   THE FLOOR DOES NOT APPLY HERE, and this is the one exemption on the site.
-   The mobile floor above states 44px under `@media (pointer: coarse)` because a
-   thumb needs a thumb-sized target — but it is stated over `button`, and the
-   tap target in a composer is the FIELD: the whole bar focuses the input, at 45
-   px tall and the width of the column. These three are its secondary chrome,
-   and stretching them to 44px would make a "single line" three lines tall on
-   the one device where that matters most. 30px still clears WCAG 2.5.8 AA (24
-   px), which is the floor that holds for every pointer.
-
-   Scoped to `.hz-composer`, so the exemption cannot leak: it is an exemption
-   for this bar, not a second opinion about touch targets. */
-.hz-composer :is(button, a).hz-round {
-  width: 30px;
-  min-width: 30px;
-  height: 30px;
-  min-height: 30px;
-  padding: 0;
-  border-radius: 9999px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
+/* The composer is @hanzo/composer, imported at the head of this file. Its ring,
+   halo and round controls are the same material hanzo.chat and hanzo.app draw,
+   and every number in it is a custom property this site could override and does
+   not need to — the package publishes these values as its defaults. */
 
 /* The mega-menu drapes are GLASS, and their contents are centred.
  *
