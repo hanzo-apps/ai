@@ -304,9 +304,60 @@ House rules, learned the expensive way:
   `grep -c '<h1' out/<page>.html` must be exactly 1.
 
 **Still to film.** Each of these takes its own `film/<name>` and one `<Frame>`:
-the ten category pages `/products/{ai,compute,data,network,security,dev,platform,observe,web3,apps}`,
+the ten category pages `/products/{ai,compute,data,network,security,dev,infrastructure,observe,web3,apps}`,
 and the 25 generated `/cloud/<slug>` primitive pages. None of them has a film
 yet, and none needs new code to get one.
+
+## cloud.hanzo.ai runs an argument, and `/products` keeps the index
+
+The front door used to open on "The AI cloud for agents and apps", show the ten
+categories, and then spend four thousand pixels listing every product as a card.
+All of it was true and none of it was a REASON: it described the inventory and
+left the reader to work out why owning one of these beats owning ten. The page
+is now an argument, one claim to a screen — headline, the cost avoided, the
+evidence, the ten layers, the terms — and it is 6.8k pixels instead of 7.2k
+desktop, 9.4k instead of 14k on a phone.
+
+- **The pitch is "Ten integrated layers. One bill. No assembly tax."** The
+  assembly tax is the accounts, keys, SDKs, consoles, invoices, security reviews
+  and glue code that stitching ten vendors together costs every year. The page
+  COUNTS it in a table (n vs 1, seven rows) rather than asserting it, and then
+  settles it with the tour: one org, one bearer, twelve real operations across
+  six layers, no integration between them.
+- **`components/cloud/Layers.tsx`** is the ten, as rows off one spine, under the
+  `film/stack` film of the same ten assembling. Each row is its number, its name
+  (which IS the link to `/products/<id>`), its tagline, and every product in it
+  named and linked as prose. Nothing is lost by dropping the card grid — every
+  leaf is still one click from the front door.
+- **Depth is `lib/data/stack.json`, and only there.** The catalog's `order` is
+  the MENU's — AI first, because AI is the headline — and reading it as depth
+  puts settlement ninth and AI under everything. The stack order was declared
+  inside `film/stack/film.mjs`, which the PAGE cannot read: the list beside the
+  film started at AI while the film stood on the chain, and `film/layer` got at
+  it by regex-parsing its sibling's source. One file now, three readers —
+  `cloudLayers` in `cloud-primitives.ts`, and both film generators. The film's
+  `alt` is composed from the same order rather than typed, which is how it came
+  to name a sequence the film no longer had.
+- **`components/cloud/Ladder.tsx`** renders the SHAPE of the bill from
+  `lib/plans.ts` (GET /v1/billing/plans, @hanzo/plans as first paint). Prices and
+  the credit each plan returns are read, never typed. "Predictable pricing" is
+  only worth writing above the rows that charge.
+- **`CloudCategoryShowcase` is still the index and still lives at `/products`.**
+  It is no longer rendered by `CloudLanding`. Do not put it back: the front door
+  and the catalogue browser are two different jobs.
+- **Every count on that page is counted.** `layerCount` and `spell()` in
+  `lib/data/cloud-primitives.ts` give the headline, the section heading and the
+  page metadata their number from the catalog — including the `<title>`, which is
+  baked at build time and is exactly when the catalog is read. The model count
+  stays a read-time question (`useModelCount`), and the sentence that would quote
+  it is not drawn at all until the gateway answers.
+- **The category prose map is keyed by the catalog's CURRENT id.** `CATEGORY` in
+  `cloud-primitives.ts` was still keyed `platform` after commerce renamed that
+  category to `infrastructure`, so the lookup missed and the category rendered
+  with the fallback icon and NO tagline — on the mega-menu column, the homepage
+  grid, the orbit's centre and its own `/products/infrastructure` landing. A
+  missing key is silent by construction here (`?? Cloud`, `?? ''`), which is the
+  right behaviour for a build and the reason nothing reported it.
 
 ## A scroll reveal may not hide the content it reveals
 
