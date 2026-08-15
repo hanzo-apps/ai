@@ -62,9 +62,9 @@ const REACH: CardItem[] = [
       'A resource has a path: organization, then workspace, then project, then whatever sits under those. A grant covers a path and everything below it. One check asks whether some grant the caller holds covers the target and admits the verb — and org-wide access, one workspace, an invite-only project, and a narrowed credential handed to an agent all fall out of that with no special case for any of them.',
   },
   {
-    title: 'The prefix test walks segments, not characters',
+    title: 'A grant is matched exactly, not by prefix',
     description:
-      'A grant on acme/prod does not cover acme/production. The comparison is segment-wise, because a string prefix test there is a read across two tenants. An empty path covers nothing, so a scope that arrived missing or malformed denies rather than matching everything.',
+      'A grant on acme/prod does not cover acme/production. What stops it is an exact match against a known set rather than a prefix walk — a plain string prefix test would admit the second, which is a read across two tenants. An empty path covers nothing, so a scope that arrived missing or malformed denies rather than matching everything.',
   },
   {
     title: 'The decision travels, the grant set stays put',
@@ -82,7 +82,7 @@ const APART: CardItem[] = [
   {
     title: 'One organization, one file',
     description:
-      'On Hanzo Base an organization’s data is its own SQLite file. Two organizations are two files, so a query cannot reach across them — there is no second file open to reach into. Where a master key is configured, each file is also opened under a key derived for that organization alone, which makes a leaked key worth one tenant instead of the estate.',
+      'On Hanzo Base an organization’s data is its own SQLite file. Two organizations are two files, so a query cannot reach across them — there is no second file open to reach into. Where a master key is configured each file is opened under its own derived key, so a leaked key is worth one file rather than the estate. Two derivations exist and only one of them is keyed to the organization; treat this as per-file isolation, which is what it is, rather than as a per-tenant key.',
   },
 ]
 
@@ -90,7 +90,7 @@ const RECORD: CardItem[] = [
   {
     title: 'One row per request',
     description:
-      'The trail records the organization and the user who acted, the address they came from, the method and the URI they called, the action, the request body with passwords masked, the status the server returned, and the time. Who did what, when, from where, and what the system answered.',
+      'The trail records the organization and the user who acted, the address they came from, the method and the URI they called, the action, the status the server returned, and the time. It does NOT record the request body: nothing on this path captures one, so there is no payload to mask and none to leak. Who did what, when, from where, and what the system answered.',
   },
   {
     title: 'The platform’s own actions cannot be authored',
@@ -100,7 +100,7 @@ const RECORD: CardItem[] = [
   {
     title: 'Indexed for the questions that get asked',
     description:
-      'Organization, user, action and time each carry an index. Everything one person did, or every time one action was taken, is a lookup rather than a walk through the whole trail — which is the difference between answering a reviewer and promising to.',
+      'Organization, action and time each carry an index, so every time one action was taken is a lookup rather than a walk. The actor is not indexed today, so "everything one person did" still reads the table — answerable, but not yet fast, and worth knowing before you scope a review around it.',
   },
 ]
 
@@ -111,9 +111,9 @@ const KEYS: CardItem[] = [
       'Each database gets its key from one master through HKDF-SHA256, bound to the namespace that owns it and to what it holds. It is a pure function of those inputs, so a file reopens after a restart with nothing kept beside it, and no two databases share a key. A master of the wrong length is an error, not a quiet fall back to no key.',
   },
   {
-    title: 'A signing key is a handle',
+    title: 'Signing keys are held by the platform',
     description:
-      'The signing interface takes a key id and some bytes and gives back a signature. The implementations behind it reach AWS KMS, Google Cloud KMS, Azure Key Vault, and Zymbit modules. The private key is made inside the module and stays there, so there is no moment when it exists in our process to be logged, leaked, or written into a crash dump.',
+      'Signing goes through one interface that takes a key id and some bytes and gives back a signature. Today every implementation behind it runs in our own process: the key material is held on the platform and parsed by the running binary. An external key module — where the private key is made inside the module and never enters our memory — is the shape we want and is not what runs now. If your deployment requires it, say so and we will scope it; do not read this row as custody you have not been given.',
   },
 ]
 
@@ -126,8 +126,27 @@ const KEYS: CardItem[] = [
  * qualifiers that made them honest sat in a field the markup never printed. A row
  * of logos is the shape of that defect, so this row offers artifacts instead —
  * every one of which we can send.
+ *
+ * The first two are stronger than that: they are published, so a reviewer reads
+ * them without asking and without waiting. They are also the two a review asks
+ * for first, which is why they lead. Both render `content/legal/*.md` and both
+ * are still drafts, so the cards say so — a reviewer who relies on unexecuted
+ * terms because a marketing card implied otherwise is the failure this whole
+ * page exists to avoid.
  */
 const REQUEST: CardItem[] = [
+  {
+    title: 'The Data Processing Addendum',
+    href: '/dpa',
+    description:
+      'The processor terms in full — roles and instructions, subprocessor governance, security measures, the Standard Contractual Clause modules for EEA and UK transfers, and the U.S. state service-provider terms. Still a draft pending counsel, which the page says at the top, so read it as terms proposed rather than terms signed.',
+  },
+  {
+    title: 'The subprocessor register',
+    href: '/subprocessors',
+    description:
+      'Which providers can process your data, what each one does, where it runs, and whether it may train on your content — including the model providers a routed request reaches through a gateway. Rows still being confirmed against a provider’s signed terms are marked as such rather than left to look settled.',
+  },
   {
     title: 'A security questionnaire, answered',
     description:
@@ -161,8 +180,8 @@ export default function TrustPage() {
       />
 
       <Section
-        title="What you can ask us for"
-        lede="Most reviews want the same four things. All four are available now, and the first three come back the same week."
+        title="What you can read, and what you can ask for"
+        lede="The two documents a review opens first are published — read them now, no email. The other four we send on request: the questionnaire, the review session and the control detail come back the same week."
       >
         <CardGrid items={REQUEST} columns={2} />
       </Section>
@@ -237,9 +256,9 @@ export default function TrustPage() {
                 clause away, and the page failed a rule it was obeying. */}
             <strong>FIPS:</strong> our code implements published standards, ML-KEM and ML-DSA among them, but
             implementing a standard is not the same as holding a validation, and a 140-3 validation belongs to
-            the vendor of a module rather than to us. Where your deployment needs validated modules, the
-            signing interface already reaches AWS KMS, Google Cloud KMS, Azure Key Vault and Zymbit — ask and
-            we will map yours.
+            the vendor of a module rather than to us. Nor do we run one today: signing happens in our own
+            process, not inside an external module. If your deployment requires validated hardware custody,
+            tell us and we will scope it with you rather than imply you already have it.
           </p>
           <p>
             <strong>Passkeys.</strong> Passkey credentials can be stored and managed, but{' '}
