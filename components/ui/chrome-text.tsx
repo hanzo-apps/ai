@@ -23,8 +23,12 @@ import { cn } from '@/lib/utils'
  * reader can rely on meaning "this is the heading" rather than "this heading
  * is decorated".
  *
- * The API is unchanged, so all 33 call sites keep their own size classes: this
- * owns the INK and the LEADING, and the page owns the scale.
+ * And it owns the WHOLE display type rather than half of it. Ink and leading
+ * here while the page owned the scale is the split that let six measured
+ * pages state four mobile scales, three laptop scales, three weights and two
+ * whites for one `h1`. `.hz-display` in globals.css is the one statement of
+ * all of it, off @hanzo/design's `--type-hero` and the rungs of its ramp. A
+ * call site passes CONTENT and spacing, never type.
  */
 interface ChromeTextProps {
   children: React.ReactNode
@@ -33,21 +37,6 @@ interface ChromeTextProps {
   preHeading?: string
   preHeadingClassName?: string
   style?: CSSProperties
-}
-
-/**
- * Display leading and tracking, stated here so every heading agrees.
- *
- * 1.08 rather than the `leading-relaxed` (1.625) it carried: a display line
- * set at body leading reads as a paragraph that happens to be large, and two
- * lines of it drift so far apart they stop being one sentence. The negative
- * tracking is what large type needs to keep its word shapes — the same
- * correction the rest of the site's heroes make by hand.
- */
-const DISPLAY: CSSProperties = {
-  lineHeight: 1.08,
-  letterSpacing: '-0.02em',
-  textWrap: 'balance',
 }
 
 const ChromeText = ({
@@ -69,10 +58,7 @@ const ChromeText = ({
         {preHeading}
       </div>
     )}
-    <Component
-      className={cn('text-foreground', className)}
-      style={{ ...DISPLAY, ...style }}
-    >
+    <Component className={cn('hz-display', className)} style={style}>
       {children}
     </Component>
   </div>

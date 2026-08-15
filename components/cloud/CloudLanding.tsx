@@ -266,7 +266,7 @@ function Hero({ layers, models }: { layers: number; models: string | null }) {
 
           <h1
             style={rise(1)}
-            className="hz-rise mt-5 text-[2.6rem] font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4rem] 2xl:text-7xl"
+            className="hz-display hz-rise mt-5"
           >
             {/* SOLID INK. A white -> neutral gradient clipped to the glyphs
                 makes the END of the line its dimmest point, so the last word

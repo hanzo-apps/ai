@@ -58,7 +58,7 @@ export default function Fold() {
             of almost nobody else is that we train the models AND run the cloud
             under them, and publish the weights and the papers. That is the
             sentence. */}
-        <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+        <h1 className="hz-display">
           We train the models and run the cloud under them.
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-neutral-400">

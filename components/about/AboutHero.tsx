@@ -48,7 +48,7 @@ const AboutHero = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.05 }}
-            className="text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tight leading-[1.1] mb-6"
+            className="hz-display mb-6"
           >
             <span className="text-foreground">History of</span>
             <br />

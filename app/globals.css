@@ -238,6 +238,44 @@
       min-width: 44px !important;
     }
   }
+
+  /* THE DISPLAY HEADING, said once.
+
+     A page's `h1` had been sized, weighted and inked at the call site, and six
+     measured pages consequently stated FOUR mobile scales (26, 32, 40 and
+     41.6 — the last is not a rung of any ramp), three laptop scales, three
+     weights and two whites, for one level of one hierarchy. At 1440 the
+     homepage heading was SMALLER and LIGHTER than /about's, which is the
+     hierarchy saying the opposite of what the pages mean.
+
+     Every value here is @hanzo/design's. `--type-hero` is the ROLE — its
+     weight, its leading and its face — and the only thing that tracks the
+     viewport is which rung of the same ramp it stands on: 4xl, 5xl, 6xl.
+     Nothing is written in pixels, so retuning `--type-scale` moves all three
+     together and no rung can drift out of relation with the others.
+
+     It is in `base` deliberately. A page that still states its own `text-*`
+     keeps winning until its hardcodes are deleted, so pages convert one at a
+     time and none of them is ever half-converted. */
+  .hz-display {
+    font: var(--type-hero);
+    font-size: var(--text-4xl);
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-primary);
+    text-wrap: balance;
+  }
+
+  @media (min-width: 640px) {
+    .hz-display {
+      font-size: var(--text-5xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hz-display {
+      font-size: var(--text-6xl);
+    }
+  }
 }
 
 /* ── Decorative grid ──────────────────────────────────────────────────────────
