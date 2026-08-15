@@ -7,7 +7,7 @@ import { pageMeta } from '@/lib/page-meta'
 // itself say the same thing.
 export const metadata: Metadata = pageMeta({
   title: 'Security without compromise.',
-  description: 'Enterprise-grade security built into every layer. Your data is encrypted, access is controlled, and compliance is maintained by default.',
+  description: 'How Hanzo is built: per-tenant keys, identity verified at the edge, and an audit trail of who reached what.',
   path: '/security',
 })
 

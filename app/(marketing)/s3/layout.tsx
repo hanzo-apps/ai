@@ -7,7 +7,7 @@ import { pageMeta } from '@/lib/page-meta'
 // itself say the same thing.
 export const metadata: Metadata = pageMeta({
   title: 'Hanzo S3',
-  description: 'S3-compatible object storage — your existing SDK just works, and you never pay to read your own data back.',
+  description: 'Object storage that your existing tools already speak, and you never pay to read your own data back.',
   path: '/s3',
 })
 
