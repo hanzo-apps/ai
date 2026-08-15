@@ -3,6 +3,9 @@ import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { APP, OUT, ROOT, requireExport } from './export'
 
+/** The other tree a page's sections live in. */
+const COMPONENTS = join(ROOT, 'components')
+
 /**
  * Every mockup film a page asks for is in the export.
  *
@@ -37,7 +40,21 @@ function generated(): string[] {
   return products.filter((p) => p.href.startsWith('/cloud/')).map((p) => p.slug)
 }
 
-/** Every slug a page wires a mockup to, read from the app source. */
+/**
+ * The two ways a slug reaches `Mockup`, both read out of the source.
+ *
+ * A product page declares one in its DATA (`mockup: { slug: 'kms' }`) and
+ * `ProductLanding` passes it through. A page that shows one film and has no
+ * catalog entry behind it — /download shows the desktop app — names it on the
+ * ELEMENT. Reading only the first shape is how a literal slips past a gate
+ * whose whole subject is slugs with no film behind them.
+ */
+const NAMED = [
+  /mockup=\{\{[^}]*?slug:\s*'([^']+)'/g,
+  /<Mockup\b[^>]*?\bslug=["']([^"']+)["']/g,
+]
+
+/** Every slug a page wires a mockup to, read from the source. */
 function wired(): string[] {
   const slugs = new Set<string>(generated())
   const walk = (dir: string) => {
@@ -46,15 +63,17 @@ function wired(): string[] {
       if (entry.isDirectory()) {
         walk(path)
       } else if (entry.name.endsWith('.tsx')) {
-        for (const [, slug] of readFileSync(path, 'utf8').matchAll(
-          /mockup=\{\{[^}]*?slug:\s*'([^']+)'/g,
-        )) {
-          slugs.add(slug)
+        const source = readFileSync(path, 'utf8')
+        for (const pattern of NAMED) {
+          for (const [, slug] of source.matchAll(pattern)) slugs.add(slug)
         }
       }
     }
   }
+  // Both trees: a route names its film in app/, a section component names one
+  // in components/, and a gate that reads one of the two covers half the site.
   walk(APP)
+  walk(COMPONENTS)
   return [...slugs].sort()
 }
 
