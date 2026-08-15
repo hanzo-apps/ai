@@ -243,11 +243,18 @@ function Hero({ layers, models }: { layers: number; models: string | null }) {
     // `svh`, not `vh`: mobile browser chrome makes `100vh` taller than the
     // screen and the fold overflows by exactly the address bar.
     <section className="flex min-h-svh w-full items-center px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
-      {/* The copy column is CAPPED and the orbit takes the rest, rather than the
+      {/* The copy column is CAPPED and the film takes the rest, rather than the
           two splitting the width evenly. A measure wider than ~34rem is a
           measure nobody finishes reading, and every pixel it does not take is a
-          pixel the ring can use. */}
-      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-8 sm:gap-12 lg:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] lg:gap-14 2xl:max-w-[1800px]">
+          pixel the film can use.
+
+          It splits at xl, not lg. A fixed 34rem column plus the gap leaves the
+          film whatever remains, and at 1024 that is 360px -- measured, on the
+          live page: a 360x203 video sitting in a third of the space the copy
+          got, which is worse than stacking. xl leaves it 616px and it grows
+          from there. A breakpoint has to be wide enough for BOTH columns, not
+          just the one whose width is written down. */}
+      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-8 sm:gap-12 xl:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] xl:gap-14 2xl:max-w-[1800px]">
         <div>
           {/* THE POSITIONING, and it is one sentence long: what this is, and
               what it does for you. The eyebrow names the CATEGORY, because a
@@ -321,20 +328,22 @@ function Hero({ layers, models }: { layers: number; models: string | null }) {
 
         </div>
 
-        {/* THE SECOND COLUMN, which the grid above has always declared and
-            nothing has ever occupied. `lg:grid-cols-[minmax(0,34rem)_minmax(0,1fr)]`
-            makes two tracks — measured at 1440: `544px 776px` — and this div
-            was nested INSIDE the copy, so the film rendered under the buttons at
-            544 wide while 776px of the fold, 54% of the viewport, stayed empty.
-            Below `lg` there is one track and the film simply follows the copy,
-            which is why the defect was invisible at 390 and 834 and only ever
-            showed on a laptop.
+        {/* THE SECOND COLUMN. `xl:grid-cols-[minmax(0,34rem)_minmax(0,1fr)]`
+            makes two tracks — measured at 1440: `544px 776px`. Below xl there is
+            one track and the film simply follows the copy at full width.
+
+            It used to split at lg, and that was the bug: the first track is
+            fixed, so the film gets the remainder, and at 1024 the remainder is
+            360px. Measured on the live page — a 360x203 film beside 544px of
+            copy. Stacking would have been better. A breakpoint has to be wide
+            enough for both tracks, not just the one whose width is written
+            down.
 
             The sentence above says the cloud is COMPOSED. This is that: bare
             metal, your own accounts and the hyperscalers' regions receding
             behind one address. It carries no copy — a film cannot reflow or
             answer a screen reader — so its meaning is the alt. */}
-        <div style={rise(5)} className="hz-rise mt-14 min-w-0 lg:mt-0">
+        <div style={rise(5)} className="hz-rise mt-14 min-w-0 xl:mt-0">
           {/* The console, running. A reader deciding whether to put their
               infrastructure here wants to see the thing they will be looking at
               every day, not a diagram of how it fits together -- the diagram
