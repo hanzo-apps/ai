@@ -60,7 +60,7 @@ export default function TeamLanding() {
           { label: 'Read the docs', href: DOCS },
           { label: 'View on GitHub', href: GITHUB },
         ]}
-        note={{ icon: Cloud, text: 'Open source (EPL-2.0). Self-host the full platform, or use the managed workspace.' }}
+        note={{ icon: Cloud, text: 'Open source (AGPL-3.0). Self-host the full platform, or use the managed workspace.' }}
         what={{
           eyebrow: 'What is Hanzo Team',
           title: 'Everything your team shares, in one place',
