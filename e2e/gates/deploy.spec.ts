@@ -99,7 +99,7 @@ test('every build-arg a workflow passes names an ARG its Dockerfile declares', (
 /**
  * How the apex PUBLISHES. It is a Sites-plane deploy, not an image push: the
  * export goes to `POST /v1/projects/hanzo-ai/deploy` through hanzoai/ci's
- * sitedeploy action, so there is no `push: true` in the apex lane any more.
+ * `site` action, so there is no `push: true` in the apex lane any more.
  *
  * This is matched by the ACTION, not by a name in prose. The previous version
  * looked for the string `ghcr.io/hanzoai/hanzo-ai-www` anywhere in a workflow,
@@ -112,7 +112,13 @@ test('every build-arg a workflow passes names an ARG its Dockerfile declares', (
  * (cloud.yml → ghcr.io/hanzoai/cloud-www) and is still an image, still ungated —
  * a real gap, and one that belongs to that host rather than to this file.
  */
-const PUBLISH = 'hanzoai/ci/.github/actions/sitedeploy'
+/**
+ * `v1` is a FLOATING tag, so hanzoai/ci can rename the action under every
+ * consumer at once — `sitedeploy` became `site` and six repos' publishes broke
+ * together. This name is the one place this file says which action publishes,
+ * so a rename is a one-line follow.
+ */
+const PUBLISH = 'hanzoai/ci/.github/actions/site'
 
 test('the workflow that publishes the apex runs the gates before it publishes', () => {
   // Workflows on one trigger do not order themselves. cicd.yml (which runs
@@ -137,10 +143,14 @@ test('the apex publish pins the action and carries the one credential it needs',
   const [apex] = workflows().filter(({ text }) =>
     new RegExp(`^\\s*uses:\\s*${PUBLISH}@`, 'm').test(text),
   )
+  // Say which action is missing. Reading `.text` off nothing throws
+  // "Cannot read properties of undefined", which is how a rename upstream
+  // reported itself as a broken test rather than as an unpublishable site.
+  expect(apex, `no workflow publishes the apex via ${PUBLISH}`).toBeDefined()
   // A floating action ref is the same defect as a floating image tag: the build
-  // that ships becomes unnameable. bin/sitedeploy resolves the action ref as its
+  // that ships becomes unnameable. bin/site resolves the action ref as its
   // OWN script ref, so @v1 is what makes "which publisher ran" answerable.
-  expect(apex.text, `${apex.name} must pin the sitedeploy action to a ref`).toMatch(
+  expect(apex.text, `${apex.name} must pin the publish action to a ref`).toMatch(
     new RegExp(`uses:\\s*${PUBLISH}@v\\d`),
   )
   // ONE credential. The 202 returns a prefix-scoped, short-lived presigned POST

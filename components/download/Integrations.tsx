@@ -1,84 +1,42 @@
-'use client'
+import { SECTION, HOLD, HEAD, LEAD, ROW } from './style'
 
+/**
+ * The tools Hanzo reaches, as rows.
+ *
+ * Six bordered cards with an icon block each became six lines. Nothing here
+ * needs a frame: it is a list of names and what each one is for, and a card per
+ * name spent three times the height saying the same thing.
+ */
+const TOOLS = [
+  { name: 'GitHub', line: 'Issues, reviews and releases' },
+  { name: 'Notion', line: 'Notes and tasks, both ways' },
+  { name: 'Google Calendar', line: 'Meetings, and what came out of them' },
+  { name: 'Linear', line: 'File an issue from any context' },
+  { name: 'Slack', line: 'Summarize a channel, post the result' },
+  { name: 'MCP', line: 'Bring your own tools over Model Context Protocol' },
+]
 
-import React from "react";
-import { motion } from "@/components/motion";
-import { Github, CalendarDays, FileEdit, Trello, MessageSquare, Code } from "lucide-react";
+const Integrations = () => (
+  <section className={SECTION}>
+    <div className={HOLD}>
+      <h2 className={HEAD}>Connect your own tools</h2>
+      <p className={LEAD}>Your data stays where it lives; Hanzo reads it where it is.</p>
 
-const IntegrationCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (
-  <div className="flex items-start space-x-4 p-6 rounded-xl border border-neutral-800 bg-neutral-900/50">
-    <div className="flex-shrink-0">
-      {icon}
-    </div>
-    <div>
-      <h3 className="text-lg font-semibold text-[var(--white)] mb-1">{title}</h3>
-      <p className="text-muted-foreground text-sm">{description}</p>
-    </div>
-  </div>
-);
-
-const Integrations = () => {
-  return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)]/50">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-[var(--white)]">
-            Connect your own tools & datasources
-          </h2>
-        </motion.div>
-        
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <IntegrationCard 
-            icon={<Github className="h-8 w-8 text-foreground" />}
-            title="GitHub"
-            description="Automatically manage development work and more"
-          />
-          
-          <IntegrationCard 
-            icon={<FileEdit className="h-8 w-8 text-foreground" />}
-            title="Notion"
-            description="Sync notes and tasks with your Notion workspace"
-          />
-          
-          <IntegrationCard 
-            icon={<CalendarDays className="h-8 w-8 text-foreground" />}
-            title="Google Calendar"
-            description="Connect your calendar to automate meeting workflows"
-          />
-          
-          <IntegrationCard 
-            icon={<Trello className="h-8 w-8 text-foreground" />}
-            title="Linear"
-            description="Create Linear issues directly from any context"
-          />
-          
-          <IntegrationCard 
-            icon={<MessageSquare className="h-8 w-8 text-foreground" />}
-            title="Slack"
-            description="Summarize channels and post meeting notes to Slack"
-          />
-          
-          <IntegrationCard 
-            icon={<Code className="h-8 w-8 text-foreground" />}
-            title="MCP"
-            description="Add your own tooling securely using Model Context Protocol"
-          />
-        </motion.div>
+      <div className="mt-8 grid gap-x-10 sm:grid-cols-2">
+        {TOOLS.map((t) => (
+          // The line WRAPS rather than truncating — half of these read
+          // "Meetings, and what came out of t…" at the width this grid actually
+          // gets, which is a row that costs its own height and says nothing —
+          // and it sits UNDER the name on a phone, where two columns leave both
+          // of them about twelve characters wide.
+          <div key={t.name} className={`${ROW} flex-col items-start gap-0.5 sm:flex-row sm:items-center sm:gap-4`}>
+            <span className="shrink-0 text-sm text-white">{t.name}</span>
+            <span className="text-sm text-neutral-500 sm:text-right">{t.line}</span>
+          </div>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+)
 
-export default Integrations;
+export default Integrations

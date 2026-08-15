@@ -36,12 +36,28 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
   green on push 5/5. A pull mirror on this Gitea runs its Actions perfectly well.
   Do not restore a second pipeline on the strength of that sentence.
 
-  The publish itself is `bin/sitedeploy` in **hanzoai/ci**, used through
-  `hanzoai/ci/.github/actions/sitedeploy@v1` — hanzo.app, hips and computer make
-  the identical three calls, so the contract lives in one place. ONE credential:
-  `HANZO_DEPLOY_TOKEN` (forge org secret, mirrored from KMS `deploy/`). The 202
-  hands back a prefix-scoped 30-minute presigned POST grant, so CI holds no bucket
-  key — never add `SITES_S3_*`.
+  The publish itself is `bin/site` in **hanzoai/ci**, used through
+  `hanzoai/ci/.github/actions/site@v1` — hips, logo, flow and gallery make the
+  identical calls, so the contract lives in one place. ONE credential, read from
+  KMS: the job passes `KMS_CLIENT_ID` / `KMS_CLIENT_SECRET` and the action reads
+  the deploy key from there, so it rotates by resealing. The 202 hands back a
+  prefix-scoped 30-minute presigned POST grant, so CI holds no bucket key — never
+  add `SITES_S3_*`.
+
+  **`v1` is a FLOATING tag, and that is the whole risk surface.** It is a branch
+  wearing a version's name: `hanzoai/ci` moves it forward, and every consumer
+  takes the new tree on its next run without editing anything. So a rename in
+  that repo lands here whether or not this repo is ready for it — `sitedeploy`
+  became `site`, the tag moved, and six repos' publishes broke at once.
+
+  **Its signature is unmistakable once you have seen it: EVERY step `cancelled`
+  at `0s` while the JOB reads `failure`.** `act` resolves every step's action
+  before it runs step 0, so an action path that no longer exists kills the job
+  before any step can start. Nothing ran, so nothing can be blamed — it looks
+  exactly like a broken runner or a red gate and is neither. Read the job log
+  (`GET /v1/repos/{owner}/{repo}/actions/jobs/{JOB_ID}/logs`, the **job** id from
+  `action_run_job` — not the run number, not a task id) and the last line names
+  the missing `action.yml` outright.
 
   **The gates run BEFORE the upload, so a red gate freezes the SITE.** They are
   steps in the publishing job, which is the placement that makes "nothing ships
@@ -503,7 +519,22 @@ states); prose for a product the catalog dropped renders nowhere. Neither can
 resurrect a product or bury one, which is what makes `COPY` a copy deck rather
 than a second taxonomy.
 
-**Top level**: Meet Hanzo · Products · Learn · Docs · Pricing
+**Top level**: Meet Hanzo · Products · Solutions · Resources · Developers
+
+**Resources is a MENU**, and it is the only local-nav entry that is. What we
+publish is five pages — Learn · Research · Open Source · Blog · Customers — and
+four of them were reachable from nowhere in the bar while sitting in the sitemap
+and the palette. Nine flat links do not fit: measured at 1440 the row has 606px
+of slack and at 960 it has 126px, against ~340px of new labels.
+
+The menu is `@hanzogui/shell` 8.1.14's `items` on a nav entry (`HanzoNav`) — a
+card under the label on the desktop, the sheet's existing disclosure on a phone
+— and the entry keeps `href`, so "Resources" is still a real link to `/learn`
+before hydration and without JavaScript. Each `hint` is the page's own sentence
+shortened; a menu that describes a page in words the page does not use is a
+second copy that drifts. `e2e/gates/chrome.spec.ts` opens the card by HOVER (a
+click that lands before hydration follows the label's href and moves the test to
+another page) and walks every row to its page.
 
 **Products dropdown** — the catalog's ten categories, two rows of five. Their
 membership is measured per build and is NOT listed here: a table of leaves in a

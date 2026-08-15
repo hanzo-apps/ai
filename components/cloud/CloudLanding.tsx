@@ -6,6 +6,8 @@ import { useReducedMotion } from "framer-motion"
 import { ArrowRight, Github } from "lucide-react"
 import { CopyButton } from "@hanzo/ui/product"
 import Ladder from "@/components/cloud/Ladder"
+import { Mockup } from '@/components/product/Mockup'
+import Workloads from '@/components/cloud/Workloads'
 import Layers from "@/components/cloud/Layers"
 import { CONSOLE } from "@/components/home/nav-data"
 import { useModelCount } from '@/hooks/useModelCount'
@@ -13,6 +15,8 @@ import { cloudCategories, layerCount, spell, tour } from '@/lib/data/cloud-primi
 
 const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
 const GH = "https://github.com/hanzoai"
+// The demo door. One address, so the hero and any later ask cannot diverge.
+const DEMO = "mailto:sales@hanzo.ai?subject=Hanzo%20Cloud%20demo"
 const STATUS = "https://status.hanzo.ai"
 
 /** The image we operate for you, and the one you can pull. Same artifact. */
@@ -244,36 +248,33 @@ function Hero({ layers, models }: { layers: number; models: string | null }) {
           pixel the ring can use. */}
       <div className="mx-auto grid w-full max-w-[1600px] items-center gap-8 sm:gap-12 lg:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] lg:gap-14 2xl:max-w-[1800px]">
         <div>
-          {/* SOLID INK. This headline was painted with a white → neutral-500
-              gradient clipped to the glyphs, which is the treatment
-              `components/ui/chrome-text.tsx` dropped from all 33 of its
-              surfaces: the end of the line is its dimmest point, so the last
-              word — here, "layers" — reads as a render that has not finished.
-              Hanzo is monochrome and its ink is paper-white.
+          {/* THE POSITIONING, and it is one sentence long: what this is, and
+              what it does for you. The eyebrow names the CATEGORY, because a
+              reader who has never heard of us needs to know what KIND of thing
+              this is before the promise means anything. */}
+          <p style={rise(0)} className="hz-rise text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
+            The Cloud Virtualization Platform
+          </p>
 
-              The count is COUNTED, and spelled. A headline is the last place a
-              page should hold a hand-typed inventory figure: it is the line a
-              reader trusts most and the line nobody thinks to re-check. */}
-          {/* THREE BEATS, THREE LINES. Set as one run of text it broke as "One
-              bill. No / assembly tax." — a wrap through the middle of the
-              sharpest sentence on the page, decided by the column width rather
-              than by the sense. Each sentence owns its line, so the rhythm is
-              the same at every width and the punchline lands last. */}
           <h1
-            style={rise(0)}
-            className="hz-rise text-[2.35rem] font-bold leading-[1.06] tracking-tight text-white sm:text-5xl lg:text-[3.4rem] 2xl:text-6xl"
+            style={rise(1)}
+            className="hz-rise mt-5 text-[2.6rem] font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4rem] 2xl:text-7xl"
           >
-            <span className="block">{spell(layers)} integrated layers.</span>
-            <span className="block">One bill.</span>
-            <span className="block">No assembly tax.</span>
+            {/* SOLID INK. A white -> neutral gradient clipped to the glyphs
+                makes the END of the line its dimmest point, so the last word
+                reads as a render that never finished. Hanzo's ink is
+                paper-white. */}
+            Give your cloud superpowers
           </h1>
 
           <p
-            style={rise(1)}
-            className="hz-rise mt-6 text-lg leading-relaxed text-neutral-400 sm:mt-7 sm:text-xl"
+            style={rise(2)}
+            className="hz-rise mt-7 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl"
           >
-            AI infrastructure, inference, data, and agents, built into one platform — not{' '}
-            {spell(layers).toLowerCase()} products with your code holding them together.
+            Virtualize every layer of infrastructure — compute, networking, identity, and
+            services — into one AI-native cloud, composed from any combination of bare metal, your
+            own cloud accounts, and the hyperscalers&rsquo; regions and services. So you can build,
+            ship, and scale with superpowers.
           </p>
 
           {/* The one number on the fold, and it is asked of the gateway at read
@@ -281,27 +282,44 @@ function Hero({ layers, models }: { layers: number; models: string | null }) {
               sentence about how much we serve, with no measurement behind it, is
               a sentence worth less than the space it takes. */}
           {models && (
-            <p style={rise(2)} className="hz-rise mt-5 text-sm text-neutral-500">
+            <p style={rise(3)} className="hz-rise mt-6 text-sm text-neutral-500">
               One endpoint answers for{' '}
               <span className="font-medium text-neutral-300">{models}</span> right now.
             </p>
           )}
 
-          <div style={rise(3)} className="hz-rise mt-8 flex flex-wrap items-center gap-3">
+          <div style={rise(4)} className="hz-rise mt-9 flex flex-wrap items-center gap-3">
             <a
               href={CONSOLE}
               className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
             >
-              Start building <ArrowRight className="h-4 w-4" />
+              Get started <ArrowRight className="h-4 w-4" />
+            </a>
+            <a
+              href={DEMO}
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-neutral-700 px-7 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
+            >
+              Request a demo
             </a>
             <a
               href={GH}
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-neutral-700 px-7 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-neutral-400 no-underline transition-colors hover:text-white hover:no-underline"
             >
               <Github className="h-4 w-4" /> View source
             </a>
+          </div>
+
+          {/* The sentence above says the cloud is COMPOSED. This is that: bare
+              metal, your own accounts and the hyperscalers' regions receding
+              behind one address. It carries no copy — a film cannot reflow or
+              answer a screen reader — so its meaning is the alt. */}
+          <div style={rise(5)} className="hz-rise mt-14 sm:mt-16">
+            <Mockup
+              base="/cloud-virtualize-wide"
+              alt="Bare metal, your own cloud accounts (digitalocean, aws, gcp, azure) and hyperscaler regions composing into one cloud at api.hanzo.ai/v1, carrying all ten layers."
+            />
           </div>
         </div>
 
@@ -582,9 +600,12 @@ export default function CloudLanding() {
   return (
     <>
       <Hero layers={layerCount} models={n ? `${n} models` : null} />
+      {/* The ten, immediately. A visitor who scrolls once should see the shape
+          of the thing, not a third paragraph about it. */}
+      <Layers />
+      <Workloads />
       <AssemblyTax layers={layerCount} />
       <Evidence />
-      <Layers />
       <Terms />
       <FinalCTA />
     </>

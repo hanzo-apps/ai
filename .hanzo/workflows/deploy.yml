@@ -32,9 +32,9 @@ name: deploy
 # untouched: a static export and a promoted image are different products of one
 # build, and only the apex moved.
 #
-# The mechanics of the publish are NOT here — they are bin/sitedeploy in
-# hanzoai/ci, because hanzo.app, hips and computer need the identical three calls
-# and a contract transcribed per repo is a contract that drifts.
+# The mechanics of the publish are NOT here — they are bin/site in hanzoai/ci,
+# because hips, logo, flow and gallery need the identical calls and a contract
+# transcribed per repo is a contract that drifts.
 # A DAILY RUN, because part of this site is not in this repo. The model pages are
 # a static export of the live catalog — /models, every lab page and every model
 # page are generated from what models.hanzo.ai answers at BUILD time, and the
@@ -192,7 +192,7 @@ jobs:
       # the standing shared-bucket credential the grant replaced, and it could
       # overwrite every other org's site.
       - name: Publish to the Sites plane
-        uses: hanzoai/ci/.github/actions/sitedeploy@v1
+        uses: hanzoai/ci/.github/actions/site@v1
         with:
           slug: hanzo-ai
           dir: out
