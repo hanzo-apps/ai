@@ -40,7 +40,7 @@ const steps = [
     icon: DollarSign,
     title: "Monthly Payouts",
     description:
-      "25% of platform revenue is pooled monthly and distributed proportionally. Connect your Git identity and wallet at console.hanzo.ai/contributor to start receiving payouts.",
+      "Up to 5% of platform revenue is pooled monthly and distributed proportionally. Connect your Git identity and wallet at console.hanzo.ai/contributor to start receiving payouts.",
   },
 ]
 
@@ -87,7 +87,7 @@ export default function OpenSourceFundPage() {
               transition={{ duration: 0.4, delay: 0.05 }}
               className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-[1.1] mb-6"
             >
-              <span className="text-foreground">25% of Revenue</span>
+              <span className="text-foreground">Up to 5% of Revenue</span>
               <br />
               <span className="text-muted-foreground">to Open Source</span>
             </motion.h1>
@@ -98,7 +98,7 @@ export default function OpenSourceFundPage() {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto"
             >
-              A quarter of all platform revenue goes directly to the open source developers
+              Up to 5% of all platform revenue goes directly to the open source developers
               whose code powers Hanzo infrastructure. Attribution is automated, transparent,
               and proportional to actual production usage.
             </motion.p>
@@ -110,7 +110,7 @@ export default function OpenSourceFundPage() {
               className="grid grid-cols-3 gap-4 mb-12 max-w-2xl mx-auto"
             >
               <div className="bg-secondary/50 border border-border rounded-xl p-4">
-                <div className="text-2xl font-bold text-foreground">25%</div>
+                <div className="text-2xl font-bold text-foreground">Up to 5%</div>
                 <div className="text-xs text-muted-foreground">Revenue Allocated</div>
               </div>
               <div className="bg-secondary/50 border border-border rounded-xl p-4">

@@ -140,7 +140,7 @@ export default function DividendsPage() {
               className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto"
             >
               Hanzo allocates up to{" "}
-              <span className="text-foreground font-semibold">25% of compute costs</span> to OSS authors whose
+              <span className="text-foreground font-semibold">5% of compute costs</span> to OSS authors whose
               software is running in production. Connect your Git identity, verify contributions, collect automatically.
             </motion.p>
 

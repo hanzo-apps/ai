@@ -3,10 +3,10 @@ import { ogImages, twitterImages } from '@/lib/constants/og'
 
 export const metadata: Metadata = {
   title: 'Open Source — Hanzo AI | 723+ Repos',
-  description: '723+ open-source repositories across AI infrastructure, frontier models, blockchain, and developer tools. MIT/Apache licensed. Fork, self-host, or contribute. OSS Compute Dividends: up to 25% of compute costs paid back to open source authors via SBOM-verified attribution.',
+  description: '723+ open-source repositories across AI infrastructure, frontier models, blockchain, and developer tools. MIT/Apache licensed. Fork, self-host, or contribute. OSS Compute Dividends: up to 5% of compute costs paid back to open source authors via SBOM-verified attribution.',
   openGraph: {
     title: 'Open Source — Hanzo AI | 723+ Repos',
-    description: '723+ open-source repositories across AI infrastructure, frontier models, blockchain, and developer tools. MIT/Apache licensed. Fork, self-host, or contribute. OSS Compute Dividends: up to 25% of compute costs paid back to open source authors via SBOM-verified attribution.',
+    description: '723+ open-source repositories across AI infrastructure, frontier models, blockchain, and developer tools. MIT/Apache licensed. Fork, self-host, or contribute. OSS Compute Dividends: up to 5% of compute costs paid back to open source authors via SBOM-verified attribution.',
     url: 'https://hanzo.ai/open-source',
     siteName: 'Hanzo AI',
     type: 'website',
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Open Source — Hanzo AI | 723+ Repos',
-    description: '723+ open-source repositories across AI infrastructure, frontier models, blockchain, and developer tools. MIT/Apache licensed. Fork, self-host, or contribute. OSS Compute Dividends: up to 25% of compute costs paid back to open source authors via SBOM-verified attribution.',
+    description: '723+ open-source repositories across AI infrastructure, frontier models, blockchain, and developer tools. MIT/Apache licensed. Fork, self-host, or contribute. OSS Compute Dividends: up to 5% of compute costs paid back to open source authors via SBOM-verified attribution.',
     images: twitterImages,
   },
 }
@@ -28,7 +28,7 @@ const jsonLd = {
   operatingSystem: 'Linux, macOS, Windows',
   url: 'https://hanzo.ai/open-source',
   description:
-    'Hanzo AI publishes 723+ open-source repositories under MIT/Apache licenses. The OSS Compute Dividends program pays back up to 25% of compute costs to open source authors whose software is detected via SBOM (Software Bill of Materials) as running in Hanzo production infrastructure. Authors verify contributions via GitHub/GitLab, link a wallet or Stripe account, and receive automatic weekly payouts proportional to their code\'s compute usage.',
+    'Hanzo AI publishes 723+ open-source repositories under MIT/Apache licenses. The OSS Compute Dividends program pays back up to 5% of compute costs to open source authors whose software is detected via SBOM (Software Bill of Materials) as running in Hanzo production infrastructure. Authors verify contributions via GitHub/GitLab, link a wallet or Stripe account, and receive automatic weekly payouts proportional to their code\'s compute usage.',
   offers: {
     '@type': 'Offer',
     price: '0',

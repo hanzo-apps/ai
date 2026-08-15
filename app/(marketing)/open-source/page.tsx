@@ -314,7 +314,7 @@ const OpenSource = () => {
                 Earn from Open Source
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                We dedicate <span className="text-foreground font-semibold">25% of all compute costs</span> to
+                We dedicate up to <span className="text-foreground font-semibold">5% of all compute costs</span> to
                 open source &mdash; distributed transparently based on verified Software Bills of Materials (SBOMs).
               </p>
             </motion.div>

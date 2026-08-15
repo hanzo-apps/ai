@@ -64,7 +64,7 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
                   Open Source Compute Dividends
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
-                  25% of compute goes back to OSS authors
+                  Up to 5% of compute goes back to OSS authors
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed max-w-xl">
                   Every Hanzo deployment tracks software dependencies via SBOM. When your code powers compute on Hanzo,
@@ -128,7 +128,7 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
           </div>
 
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 tracking-tight">
-            25% of compute goes back to the OSS authors
+            Up to 5% of compute goes back to the OSS authors
             <br className="hidden md:block" /> who made it possible
           </h2>
 

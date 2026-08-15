@@ -23,7 +23,7 @@ export function OSSRevenueBanner({ upstreamName, compact = false }: OSSRevenueBa
           <p className="flex items-center gap-2 text-sm text-muted-foreground">
             <Link2 className="w-4 h-4 text-foreground flex-shrink-0" />
             <span>
-              25% of compute revenue goes to open source contributors.
+              Up to 5% of compute revenue goes to open source contributors.
               Connect your GitHub &amp; wallet to earn.
             </span>
           </p>
@@ -64,7 +64,7 @@ export function OSSRevenueBanner({ upstreamName, compact = false }: OSSRevenueBa
               </div>
 
               <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
-                25% of compute goes back to open source
+                Up to 5% of compute goes back to open source
               </h3>
 
               <p className="text-muted-foreground text-sm md:text-base">
