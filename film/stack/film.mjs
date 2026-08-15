@@ -15,16 +15,13 @@
 // each layer STAND ON. Reading the menu order as depth put settlement ninth and
 // AI at the bottom, which is not how any of it is built.
 //
-// So the depth is declared once, here, in STACK — and only the depth. Labels,
-// names and membership stay the catalog's. One new fact, stated in one place,
-// rather than a second taxonomy.
-//
-// The chain is the ground: value settles on it, and everything above it is
-// something we run. Compute, data and network are the substrate over that;
-// security and the deploy plane are how it is operated; observe and dev are how
-// it is watched and driven; AI is what it is for; apps are what a person opens.
-// Apps is the crown — the layer someone touches, standing on nine they do not
-// have to think about.
+// So the depth is declared once — and only the depth — in lib/data/stack.json,
+// where BOTH the films and the page can read it. It lived here, and the page
+// that shows this film had no way to reach a const inside a build script: it
+// listed the same ten in the catalog's menu order, so the picture stood on the
+// chain while the list beside it started at AI. film/layer had the same problem
+// and solved it by REGEX-PARSING this file's source for the array. One fact,
+// one file, three readers. See lib/data/cloud-primitives.ts for the reasoning.
 //
 // No count appears anywhere. Membership is whatever answered at build time, so
 // a number painted into a film is a fact about that morning that outlives it.
@@ -47,12 +44,10 @@ const catalog = JSON.parse(
   readFileSync(join(here, "..", "..", "lib", "data", "catalog.json"), "utf8"),
 );
 
-/** Depth, base to crown — read from lib/data/stack.ts, which the hero uses too. */
-const STACK = readFileSync(join(here, "..", "..", "lib", "data", "stack.ts"), "utf8")
-  .match(/export const STACK = \[([\s\S]*?)\] as const/)[1]
-  .split("\n")
-  .map((l) => (l.match(/'([a-z0-9-]+)'/) || [])[1])
-  .filter(Boolean);
+/** Depth, base to crown. The one fact the catalog does not state. */
+const STACK = JSON.parse(
+  readFileSync(join(here, "..", "..", "lib", "data", "stack.json"), "utf8"),
+);
 
 const LAYERS = STACK.map((id) => {
   const c = catalog.categories.find((x) => x.id === id);

@@ -1,39 +1,54 @@
 'use client'
 
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { useReducedMotion } from "framer-motion"
-import { ArrowRight, CreditCard, Cpu, Check, Github } from "lucide-react"
+import { ArrowRight, Github } from "lucide-react"
 import { CopyButton } from "@hanzo/ui/product"
-import CloudCategoryShowcase, { CloudCategoryMap } from "@/components/cloud/CloudCategoryShowcase"
-import Stack from "@/components/cloud/Stack"
-import { Mockup } from "@/components/product/Mockup"
+import Ladder from "@/components/cloud/Ladder"
+import Layers from "@/components/cloud/Layers"
+import Orbit from "@/components/cloud/Orbit"
 import { CONSOLE } from "@/components/home/nav-data"
 import { useModelCount } from '@/hooks/useModelCount'
-import { cloudCategories, tour } from '@/lib/data/cloud-primitives'
+import { cloudCategories, layerCount, spell, tour } from '@/lib/data/cloud-primitives'
 
 const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
-
-/** Every product in the taxonomy — the number the page states about itself. */
 const GH = "https://github.com/hanzoai"
+const STATUS = "https://status.hanzo.ai"
+
+/** The image we operate for you, and the one you can pull. Same artifact. */
+const DEPLOY = "docker run -p 8080:8080 ghcr.io/hanzoai/cloud"
 
 /**
  * cloud.hanzo.ai's front door — the body of `app/(marketing)/cloud/page.tsx`,
  * promoted to this host's web root by the Dockerfile's `SITE_ROOT=cloud`.
  *
  * It renders the PAGE only. The header and footer come from the shared
- * `(marketing)` layout (the shared `HanzoHeader` + `HanzoFooter`), which
- * is the same chrome hanzo.ai wears — so the two hosts are one product with one
- * nav, and this file cannot grow a second, divergent one. It used to carry
- * private `TopNav` / `Footer` copies whose "Sign in" pointed at a bare
- * hanzo.id/signin with no OAuth parameters, which could only strand the visitor
- * at a portal with nowhere to return to. Login is the shared header's single
- * console action now, and nothing here re-states it.
+ * `(marketing)` layout, which is the same chrome hanzo.ai wears — so the two
+ * hosts are one product with one nav, and this file cannot grow a second,
+ * divergent one.
+ *
+ * THE ARGUMENT, IN ORDER. The page used to open on "The AI cloud for agents and
+ * apps", show the ten categories, and then spend four thousand pixels listing
+ * seventy-nine products as cards. Every word of it was true and none of it was a
+ * reason: it described the inventory and left the reader to work out why owning
+ * one of these beats owning ten. So the page now runs an argument, one claim to
+ * a screen:
+ *
+ *   1. the claim        ten integrated layers, one bill, no assembly tax
+ *   2. the cost avoided what assembling ten vendors actually costs, counted
+ *   3. the evidence     one org, one key, twelve real API calls, no glue
+ *   4. the layers       what the ten are, and that they share one origin
+ *   5. the terms        reliable, served, and priced — with the prices shown
+ *
+ * The inventory did not go anywhere: `/products` renders it, which is the page
+ * whose job it is, and every product is still one click from here (see Layers).
+ *
+ * NOTHING HERE ASSERTS A NUMBER IT CANNOT COUNT. The ten is
+ * `cloudCategories.length` — the commerce catalog's answer, read at build. The
+ * model count is asked of the gateway at read time. The prices are the rows that
+ * charge. A claim this page cannot check is a claim this page does not make.
  */
-
-/* ---------------------------------------------------------------- hero --- */
-
-const DEPLOY = "docker run -p 8080:8080 ghcr.io/hanzoai/cloud"
 
 /* ------------------------------------------------------------------ tour --- */
 
@@ -62,6 +77,11 @@ const HOLD_MS = 2100
  * words. The product chips come from the same catalogue the count and the menu
  * read — and where an operation has no product row yet, none are drawn rather
  * than a stand-in being found for it.
+ *
+ * IT IS THE PROOF, NOT THE DECORATION. It sits under the assembly-tax argument
+ * because it is what settles it: twelve operations across six layers, one key,
+ * and not one line of integration between them. A reader who does not believe
+ * the claim above can read the paths.
  *
  * MOTION IS OPTIONAL, not decorated with an opt-out. Under
  * `prefers-reduced-motion` there is no typing and no auto-advance: the first
@@ -121,12 +141,12 @@ function Tour() {
       onMouseEnter={() => setHeld(true)}
       onMouseLeave={() => setHeld(false)}
       onFocusCapture={() => setHeld(true)}
-      className="mt-4 rounded-2xl border border-white/10 bg-white/[0.02] p-5"
+      className="rounded-2xl border border-white/10 bg-white/[0.02] p-5 sm:p-7"
     >
       <p className="text-xs uppercase tracking-wider text-neutral-600">{tour.story}</p>
 
       {/* Two lines reserved, so a short beat and a long one are the same box. */}
-      <p className="mt-3 min-h-[3.5rem] text-lg font-medium leading-snug text-white">
+      <p className="mt-3 min-h-[3.5rem] text-lg font-medium leading-snug text-white sm:text-xl">
         {shown}
         {!reduced && typed < line.length ? (
           <span className="ml-0.5 inline-block h-5 w-[2px] translate-y-0.5 bg-white/80 motion-safe:animate-pulse" />
@@ -156,7 +176,10 @@ function Tour() {
         })}
       </div>
 
-      <div className="mt-4 flex items-center gap-3">
+      {/* The button sits BESIDE the dots where there is room and ABOVE them
+          where there is not: at 390px the twelve targets wrap to three rows and
+          a vertically centred button reads as floating in the middle of them. */}
+      <div className="mt-4 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
         <button
           type="button"
           onClick={() => setHeld((v) => !v)}
@@ -195,16 +218,10 @@ function Tour() {
   )
 }
 
+/* ------------------------------------------------------------------ hero --- */
+
 /**
- * What the cloud is, beside every part of it.
- *
- * WHAT IT REPLACED, and why. The right column used to be a 16:9 film of a
- * console, in a rounded bordered box — a window drawn inside a window, half a
- * grid wide, which reads as a thumbnail of the product rather than the product.
- * The section under it then claimed ten categories while a 900px viewport
- * reached five of them. One picture answers both: the ten categories themselves,
- * around the one API they share, at full size and above the fold. Nothing is
- * framed, because there is no longer a second surface to frame.
+ * The claim, and the ten it is about.
  *
  * THE COPY ARRIVES. Four elements on a 70ms stagger, each 0.42s on a quintic
  * ease-out — quick enough that a reader who scrolls immediately is not waiting
@@ -214,7 +231,7 @@ function Tour() {
  * HTML, and the largest element on the page has no business being invisible
  * until a bundle lands. Reduced motion is decided in the same one place.
  */
-function Hero({ models }: { models: string }) {
+function Hero({ layers, models }: { layers: number; models: string | null }) {
   /** The nth thing to arrive. One definition, so the rhythm cannot drift. */
   const rise = (i: number) => ({ animationDelay: `${i * 0.07}s` })
 
@@ -223,64 +240,69 @@ function Hero({ models }: { models: string }) {
     // screen and the fold overflows by exactly the address bar.
     <section className="flex min-h-svh w-full items-center px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
       {/* The copy column is CAPPED and the orbit takes the rest, rather than the
-          two splitting the width evenly. A measure wider than ~32rem is a
+          two splitting the width evenly. A measure wider than ~34rem is a
           measure nobody finishes reading, and every pixel it does not take is a
           pixel the ring can use. */}
-      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-6 sm:gap-12 lg:grid-cols-[minmax(0,32rem)_minmax(0,1fr)] lg:gap-14 2xl:max-w-[1800px]">
+      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-8 sm:gap-12 lg:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] lg:gap-14 2xl:max-w-[1800px]">
         <div>
+          {/* SOLID INK. This headline was painted with a white → neutral-500
+              gradient clipped to the glyphs, which is the treatment
+              `components/ui/chrome-text.tsx` dropped from all 33 of its
+              surfaces: the end of the line is its dimmest point, so the last
+              word — here, "layers" — reads as a render that has not finished.
+              Hanzo is monochrome and its ink is paper-white.
+
+              The count is COUNTED, and spelled. A headline is the last place a
+              page should hold a hand-typed inventory figure: it is the line a
+              reader trusts most and the line nobody thinks to re-check. */}
+          {/* THREE BEATS, THREE LINES. Set as one run of text it broke as "One
+              bill. No / assembly tax." — a wrap through the middle of the
+              sharpest sentence on the page, decided by the column width rather
+              than by the sense. Each sentence owns its line, so the rhythm is
+              the same at every width and the punchline lands last. */}
           <h1
             style={rise(0)}
-            className="hz-rise text-balance text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl 2xl:text-7xl"
+            className="hz-rise text-[2.35rem] font-bold leading-[1.06] tracking-tight text-white sm:text-5xl lg:text-[3.4rem] 2xl:text-6xl"
           >
-            {/* The house headline treatment: one weight, one tracking, one
-                monochrome white -> neutral sheen, same as the apex hero. */}
-            <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
-              The AI cloud for agents and apps.
-            </span>
+            <span className="block">{spell(layers)} integrated layers.</span>
+            <span className="block">One bill.</span>
+            <span className="block">No assembly tax.</span>
           </h1>
 
           <p
             style={rise(1)}
-            className="hz-rise mt-5 text-lg leading-relaxed text-neutral-400 sm:mt-6 2xl:text-xl"
+            className="hz-rise mt-6 text-lg leading-relaxed text-neutral-400 sm:mt-7 sm:text-xl"
           >
-            One API for <span className="text-white">{models}</span>, Base backends, identity,
-            secrets, and vector plus full-text search. Pay-as-you-go, billed per organization — run
-            it managed, self-host it on your own Kubernetes, or run the same binary on{' '}
-            <span className="text-white">localhost</span>.
+            AI infrastructure, inference, data, and agents, built into one platform — not{' '}
+            {spell(layers).toLowerCase()} products with your code holding them together.
           </p>
 
-          <div style={rise(2)} className="hz-rise mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
+          {/* The one number on the fold, and it is asked of the gateway at read
+              time rather than baked. Nothing is drawn until it answers: a
+              sentence about how much we serve, with no measurement behind it, is
+              a sentence worth less than the space it takes. */}
+          {models && (
+            <p style={rise(2)} className="hz-rise mt-5 text-sm text-neutral-500">
+              One endpoint answers for{' '}
+              <span className="font-medium text-neutral-300">{models}</span> right now.
+            </p>
+          )}
+
+          <div style={rise(3)} className="hz-rise mt-8 flex flex-wrap items-center gap-3">
             <a
               href={CONSOLE}
               className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
             >
               Start building <ArrowRight className="h-4 w-4" />
             </a>
-            <Link
-              href="/products"
-              className="inline-flex min-h-11 items-center rounded-full border border-neutral-700 px-7 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
-            >
-              Explore the products
-            </Link>
             <a
               href={GH}
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-flex min-h-11 items-center gap-2 rounded-full px-5 text-sm font-medium text-neutral-400 no-underline transition-colors hover:text-white hover:no-underline"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-neutral-700 px-7 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
             >
               <Github className="h-4 w-4" /> View source
             </a>
-          </div>
-
-          {/* The `$` is a prompt glyph, so it is shown but never copied. The row
-              wraps rather than scrolls: a command that runs off the right edge of
-              a phone is a command nobody can read before they run it. */}
-          <div
-            style={rise(3)}
-            className="hz-rise mt-6 inline-flex max-w-full flex-wrap items-center gap-3 rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-2.5 sm:mt-8"
-          >
-            <span className="font-mono text-sm text-neutral-300">$ {DEPLOY}</span>
-            <CopyButton value={DEPLOY} label="Copy deploy command" size={20} id="install-cli" />
           </div>
         </div>
 
@@ -288,137 +310,210 @@ function Hero({ models }: { models: string }) {
             the only one it can obey without distorting. 44rem keeps it under a
             900px fold once the section's own padding is paid for. */}
         <div className="mx-auto w-full max-w-[30rem] sm:max-w-[34rem] lg:max-w-[38rem] xl:max-w-[44rem]">
-          <Stack />
+          <Orbit />
         </div>
       </div>
     </section>
   )
 }
 
-/* ------------------------------------------------------------ products --- */
+/* --------------------------------------------------------- assembly tax --- */
 
 /**
- * The ten categories of cloud products — the whole catalog, on the front door.
+ * What assembling it yourself costs — the argument the headline makes, made.
  *
- * This replaces a hand-written list of six feature blurbs that named a subset
- * of the cloud and then went stale on its own. The section renders the SAME
- * `CloudCategoryShowcase` the `/products` index does, from the same taxonomy
- * the Products mega-menu reads, so what the menu promises and what this page
- * shows are one thing by construction.
+ * "No assembly tax" is an assertion until the page says what the tax IS, so the
+ * section counts it. Every row is a thing you own once per vendor and once per
+ * platform, and the column of repeated {n}s against the column of 1s is the
+ * argument stated as arithmetic rather than as an adjective. The last row is the
+ * one that has no number on either side, and it is the expensive one.
+ *
+ * The {n} is `cloudCategories.length`, not a typed ten: the whole rhetorical
+ * force of the table is that it is the SAME ten the page just showed, so it had
+ * better move when that does.
+ *
+ * No competitor is named and none is implied — "ten vendors" is the shape of the
+ * alternative, not an accusation about anyone's product.
  */
-function Products() {
+function AssemblyTax({ layers }: { layers: number }) {
+  const rows: [string, string, string][] = [
+    ['Accounts to open', String(layers), '1'],
+    ['Keys to store and rotate', String(layers), '1'],
+    ['SDKs to keep on a version', String(layers), '1'],
+    ['Consoles to learn', String(layers), '1'],
+    ['Invoices to reconcile', String(layers), '1'],
+    ['Vendors to review for security', String(layers), '1'],
+    ['Code holding it together', 'yours', 'none'],
+  ]
+
   return (
-    <>
-      <section className="border-t border-neutral-900 px-4 pb-4 pt-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="mx-auto max-w-2xl text-center">
-            {/* No arithmetic. This said "53 products. 10 categories." — derived
-                from the taxonomy every build, so never WRONG, and still the
-                wrong thing to say. A count invites the reader to compare a
-                number against some other vendor's number, which is a contest
-                about size rather than about what any of it does; and it dates
-                the page the moment the catalog moves, even when the figure
-                keeps up. What matters is that the pieces fit together, which is
-                exactly what the sentence below already says and what the map
-                under it shows.
+    <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+      <div className="mx-auto max-w-5xl">
+        <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          The assembly tax.
+        </h2>
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
+          Nobody sends you a bill for it. You pay it in engineering — in the accounts, the keys, the
+          SDK bumps, the security reviews, and above all in the code that holds one vendor's answer
+          to the next vendor's input. It is the largest thing most teams buy, and it is invisible.
+        </p>
 
-                `<h2>`, because the hero carries the page's one `<h1>`. */}
-            <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Every building block. One cloud.
-            </h2>
-            <p className="mt-4 text-lg text-neutral-400">
-              Open-source building blocks behind one origin and one /v1. They share an
-              identity, a bill, and a key, so reaching for a second one costs you a line
-              of code rather than an account.
-            </p>
-          </div>
-
-          {/* The ten layers, assembling. It carries no copy of its own — a
-              film cannot reflow, translate or answer a screen reader — so what
-              it MEANS is the alt, and the sentence above already said it. The
-              map under it is how you reach any one of them. */}
-          <div className="mt-14">
-            <Mockup
-              base="/cloud-stack-wide"
-              alt="The ten layers of the Open AI Cloud, assembling from the chain at the base to Apps on top: Web3, Compute, Data, Network, Security, Infrastructure, Observe, Dev, AI, Apps."
-            />
-          </div>
-
-          <div className="mt-14">
-            <CloudCategoryMap />
-          </div>
+        <div className="mt-14 overflow-hidden rounded-2xl border border-neutral-800">
+          <table className="w-full border-collapse text-left">
+            <thead>
+              <tr className="border-b border-neutral-800">
+                <th scope="col" className="px-5 py-4 text-sm font-normal text-neutral-500 sm:px-7">
+                  Per year, forever
+                </th>
+                {/* The two answers are held CLOSE and the label takes the rest,
+                    because the whole argument is read across those two columns:
+                    spread to the width of the table they are two lists a reader
+                    compares row by row, and side by side they are one glance. */}
+                <th
+                  scope="col"
+                  className="w-24 px-3 py-4 text-right text-sm font-normal text-neutral-500 sm:w-32 sm:px-4"
+                >
+                  Assembled
+                </th>
+                <th
+                  scope="col"
+                  className="w-24 px-5 py-4 text-right text-sm font-medium text-white sm:w-36 sm:px-7"
+                >
+                  Hanzo Cloud
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(([label, many, one]) => (
+                <tr key={label} className="border-b border-neutral-900 last:border-0">
+                  <th
+                    scope="row"
+                    className="px-5 py-4 text-left text-sm font-normal text-neutral-300 sm:px-7 sm:py-5 sm:text-base"
+                  >
+                    {label}
+                  </th>
+                  {/* The dim column is the one you pay for. Weight and value do
+                      the work — no red, no strike-through, nothing that would
+                      make a comparison read as a sneer. */}
+                  <td className="px-3 py-4 text-right text-xl font-medium text-neutral-600 sm:px-4 sm:py-5 sm:text-2xl">
+                    {many}
+                  </td>
+                  <td className="px-5 py-4 text-right text-xl font-medium text-white sm:px-7 sm:py-5 sm:text-2xl">
+                    {one}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </section>
 
-      <CloudCategoryShowcase />
-    </>
+        <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400">
+          Integrated means the joins are already made. One origin, one identity, one balance — you
+          did not build them, and you do not maintain them.
+        </p>
+      </div>
+    </section>
   )
 }
 
-/* ------------------------------------------------------------- billing --- */
+/* -------------------------------------------------------------- evidence --- */
 
-function Billing({ models }: { models: string }) {
+/** The claim above, settled by the operations that would actually run it. */
+function Evidence() {
+  if (!tour.beats.length) return null
   return (
-    <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
-        <div>
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs font-medium text-neutral-300">
-            <CreditCard className="h-3.5 w-3.5" /> Usage-based pricing
+    <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+      <div className="mx-auto max-w-5xl">
+        {/* Counted, and spelled the way the headline spells its ten — a page
+            that writes one count as a word and the next as a numeral reads as
+            two pages. */}
+        <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          One key. {spell(tour.beats.length)} calls. No glue.
+        </h2>
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
+          Models, routing, agents, sandboxes, memory, a channel, a site, a storefront, and the bill
+          for all of it — one organization, one bearer token, one origin. Every operation below is
+          one the platform serves: each is checked against the published OpenAPI document on every
+          build, and a beat the document does not carry is dropped rather than drawn.
+        </p>
+        <div className="mt-12">
+          <Tour />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* --------------------------------------------------------------- terms --- */
+
+/**
+ * The three promises, each said with the thing that makes it checkable.
+ *
+ * A pillar with nothing under it is a poster. Reliable is answered by an image
+ * you can pull and a status page you can read; served, by source you can read
+ * and terms you can negotiate; priced, by the ladder — the actual rows commerce
+ * charges, rendered from the catalog rather than described.
+ */
+function Terms() {
+  return (
+    <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+      <div className="mx-auto max-w-5xl">
+        <div className="grid gap-14 lg:grid-cols-3 lg:gap-10">
+          <div>
+            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+              Reliable platform.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-neutral-400">
+              What we run for you is an image you can run yourself — the same artifact, on your own
+              cluster or on a laptop. A platform you can hold is a platform that cannot strand you.
+            </p>
+            <p className="mt-5">
+              <a
+                href={STATUS}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-sm text-neutral-400 no-underline transition-colors hover:text-white hover:no-underline motion-reduce:transition-none"
+              >
+                Live status, in public →
+              </a>
+            </p>
           </div>
-          <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Pay only for what you use.
-          </h2>
-          <p className="mt-4 max-w-lg text-lg leading-relaxed text-neutral-400">
-            Every model call, every byte, every key — metered and billed per organization.
-            No seats, no minimums. Add a balance and start; the whole team draws down the
-            same one, and usage records say which call spent what.
-          </p>
-          <ul className="mt-8 space-y-3">
-            {[
-              "Per-organization balances and usage records",
-              "Transparent per-token and per-request metering",
-              "Plans from $9/mo, with gateway credits included",
-              "Self-host for $0 and bring your own provider keys",
-            ].map((t) => (
-              <li key={t} className="flex items-start gap-3">
-                <Check className="mt-0.5 h-5 w-5 shrink-0 text-white" />
-                <span className="text-neutral-300">{t}</span>
-              </li>
-            ))}
-          </ul>
+
+          <div>
+            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+              World-class service.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-neutral-400">
+              The source is public, so an answer can be a commit and a bug can be fixed in the open —
+              not filed with someone who has never read the code. And if it has to run your way, it
+              runs your way: dedicated, on-premise, or air-gapped.
+            </p>
+            <p className="mt-5">
+              <Link
+                href="/contact-sales"
+                className="text-sm text-neutral-400 no-underline transition-colors hover:text-white hover:no-underline motion-reduce:transition-none"
+              >
+                Talk to an engineer →
+              </Link>
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+              Predictable pricing.
+            </h2>
+            {/* NOT "no seats, no minimums", which the page then contradicts two
+                inches lower: Team is priced per person with a floor of two. A
+                plan, then metered usage, is what is actually true of every row
+                in the ladder below. */}
+            <p className="mt-4 text-base leading-relaxed text-neutral-400">
+              A plan, then usage — metered per call against one organization balance, so every line
+              traces back to a request. Here is the whole shape of it.
+            </p>
+          </div>
         </div>
 
-        <div className="rounded-2xl border border-neutral-800 bg-gradient-to-b from-neutral-900/80 to-black p-8">
-          <div className="flex items-baseline gap-2">
-            <Cpu className="h-6 w-6 text-white" />
-            <span className="text-sm font-medium text-neutral-400">Pay-as-you-go</span>
-          </div>
-          <div className="mt-4 text-5xl font-semibold tracking-tight text-white">
-            $9<span className="text-xl font-normal text-neutral-500">/mo to start</span>
-          </div>
-          <p className="mt-3 text-sm text-neutral-400">
-            {/* "call any of {models}" read correctly for a number and became
-                "any of every model we serve" the moment the gateway was slow.
-                A sentence that takes a substitution has to parse for every
-                value the substitution can take. */}
-            Create an organization, pick a plan, and start calling {models}. Usage accrues per
-            call and is debited from your organization balance in real time.
-          </p>
-          <a
-            href={CONSOLE}
-            className="mt-7 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
-          >
-            Open the console <ArrowRight className="h-4 w-4" />
-          </a>
-          <a
-            href={GH}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-neutral-700 px-6 text-sm font-medium text-white no-underline transition-colors hover:border-neutral-400 hover:no-underline"
-          >
-            <Github className="h-4 w-4" /> Self-host it free
-          </a>
-        </div>
+        <Ladder />
       </div>
     </section>
   )
@@ -428,7 +523,7 @@ function Billing({ models }: { models: string }) {
 
 function FinalCTA() {
   return (
-    <section className="relative overflow-hidden border-t border-neutral-900 px-4 py-28 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden border-t border-neutral-900 px-4 py-28 sm:px-6 sm:py-32 lg:px-8">
       <div className="pointer-events-none absolute inset-0">
         <div
           className="absolute left-1/2 top-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.12]"
@@ -437,13 +532,30 @@ function FinalCTA() {
       </div>
       <div className="relative z-10 mx-auto max-w-3xl text-center">
         <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-          Start building on Hanzo Cloud
+          Start with one bill.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-neutral-400">
-          Open the console and provision models, Base, IAM, KMS and search against one
-          organization. Or pull the image and run the same stack yourself — it is the
-          same artifact either way.
+          Open the console and the whole platform is already provisioned against one organization.
+          Or pull the image and run it yourself — it is the same artifact either way.
         </p>
+
+        {/* The `$` is a prompt glyph, so it is shown but never copied. The row
+            wraps rather than scrolls: a command that runs off the right edge of
+            a phone is a command nobody can read before they run it. It sits
+            HERE, beside the sentence that offers it, rather than in the hero —
+            on the fold it was a fourth thing competing with the claim, and in a
+            third-width column it broke across three lines. */}
+        <div className="mx-auto mt-8 inline-flex max-w-full flex-wrap items-center justify-center gap-3 rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-2.5">
+          {/* `break-words`, not `break-all`: at 390px the latter broke the image
+              name mid-token — "…/clou" then "d" — which is a command nobody can
+              read, let alone trust. This wraps between the words the command
+              already has and only splits a token that cannot fit on its own. */}
+          <span className="break-words text-left font-mono text-xs text-neutral-300 sm:text-sm">
+            $ {DEPLOY}
+          </span>
+          <CopyButton value={DEPLOY} label="Copy deploy command" size={20} id="install-cli" />
+        </div>
+
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
             href={CONSOLE}
@@ -469,28 +581,18 @@ function FinalCTA() {
 
 export default function CloudLanding() {
   // How many models the gateway will actually answer for, asked of the gateway.
-  // Until it answers — and if it never does — the sentences that would quote a
-  // number say a true thing without one instead of a stale thing with one. See
-  // `lib/data/model-count.ts` for why a build-time snapshot cannot be right here.
+  // Until it answers — and if it never does — the sentence that would quote a
+  // number is not drawn at all. See `lib/data/model-count.ts` for why a
+  // build-time snapshot cannot be right here.
   const n = useModelCount()
-  const models = n ? `${n} models` : 'every model we serve'
 
   return (
     <>
-      <Hero models={models} />
-      {/* The tour is the fold's evidence, not its furniture: it belongs under
-          the claim, at full measure, rather than as a second panel stacked in
-          the hero's other column. Nothing renders if the served OpenAPI
-          document left it with no beats. */}
-      {tour.beats.length > 0 ? (
-        <section className="border-t border-neutral-900 px-4 py-16 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl">
-            <Tour />
-          </div>
-        </section>
-      ) : null}
-      <Products />
-      <Billing models={models} />
+      <Hero layers={layerCount} models={n ? `${n} models` : null} />
+      <AssemblyTax layers={layerCount} />
+      <Evidence />
+      <Layers />
+      <Terms />
       <FinalCTA />
     </>
   )
