@@ -22,7 +22,7 @@ const features = [
   {
     icon: FileText,
     title: "Polling where a callback cannot be trusted",
-    description: "Where a provider's signing scheme is not implemented, the webhook is refused and the result is polled instead. That loses a notification. It never loses a decision, and it never accepts a stranger's claim as a verdict.",
+    description: "Every result is verified before it counts. A webhook whose signature we can check is accepted; anything else is polled from the provider directly, so the verdict always comes from the source.",
   },
   {
     icon: Activity,

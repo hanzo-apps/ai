@@ -128,7 +128,7 @@ const Privacy = () => {
               <div>
                 <h2 className="text-xl font-semibold text-foreground mb-3">7. Data Security</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  We implement industry-standard security measures including encryption at rest (AES-256) and in transit (TLS 1.3), access controls, audit logging, and regular security assessments. However, no method of transmission over the Internet is 100% secure.
+                  Your data is encrypted at rest with AES-256 and in transit with TLS 1.3. Access is controlled, every reach is logged, and we assess our security regularly.
                 </p>
               </div>
 
