@@ -1,63 +1,53 @@
-import Frame from '@hanzo/frame'
-import { cloudCategories, layerCount, spell, tour } from '@/lib/data/cloud-primitives'
+import dynamic from 'next/dynamic'
 
 /**
- * The fold: the film, and the sentence that says what it is.
+ * The fold: the globe, and the sentence that says what it is.
  *
- * THE FILM IS THE PICTURE NOW. It was the globe — thousands of points with live
- * conversations arching between them, and still the best abstract thing we draw
- * — but abstract is what it is: a visitor who had never heard of Hanzo watched a
- * sphere and learned nothing about the product. The film is the product, in the
- * product's own chrome: the model catalog, an afternoon of real calls, and the
- * ten layers underneath. It is ASSETS: `film/hero` composes it and `make`
- * publishes the six files, so there is no component here to hold it and nothing
- * to register.
+ * THE GLOBE IS THE PICTURE. Thousands of points with live conversations arching
+ * between them — the one place colour is allowed on this site, and the rule that
+ * makes it mean something: if a viewer sees hue here, something is TALKING.
  *
- * The globe is not deleted and is not homeless — `HanzoNetworkSection` still
- * draws it on /overview, which is where an abstract picture of a network belongs.
- * A page gets ONE picture, and this page's is now the film.
+ * `next/dynamic({ ssr: false })` because it is raw WebGL — there is no canvas to
+ * draw into during a static export, and this site is `output: 'export'`.
  *
- * A MONTAGE WAS THE OTHER CANDIDATE and it stays rejected for the reason it was
- * rejected before: hanzo.agency's case-study films are third-party YouTube
- * embeds at 480p with no masters in any repo, so cutting a hero from them would
- * put someone else's compression and someone else's rights on our front door.
- * The objection was never to film — it was to footage we cannot re-render. A
- * rendered master has neither problem, and @hanzo/frame answers the other one
- * by shipping two of them: a phone is 0.46 wide-to-tall and a laptop 1.6, and
- * one master covering both shows the middle quarter of itself on one of them.
+ * SIZING IS HEIGHT, NOT WIDTH, and it is the one thing a call site has to get
+ * right. The sphere's on-screen diameter is a fixed fraction of the CANVAS
+ * HEIGHT (a 48° vertical field of view at a fixed camera distance) and owes
+ * nothing to how wide the canvas is, so fitting it to a wide, short band yields
+ * a small globe adrift in black. The fold is the viewport MINUS the header
+ * (`--hz-header`, stated once in globals.css) and the globe takes all of it.
  *
- * `<Frame>` IS THE WHOLE CALL SITE. Two props: `src` is the shared prefix of the
- * six rendered files and the names are the contract, and `alt` is what the film
- * says for anyone not watching it. There is no third prop and there must not be
- * — a knob here is a second way to hang a film at the top of a page.
+ * `dvh`, not `vh`: a phone's URL bar moves the usable height and `vh` measures
+ * the tall state, so the globe would sit under the chrome while the bar shows.
  *
- * THE HEADING CANNOT RIDE IN THE FILM, so it does not. Type baked into pixels
- * cannot be selected, translated, reflowed or read aloud, and correcting it
- * costs a re-render: the previous apex film had its headline in the master and a
- * sidebar that named seven categories while the section under it named ten, and
- * the page contradicted itself until the video was rebuilt. The sentence lives
- * here, in the DOM, directly under the film and visible on the first scroll —
- * cloud.hanzo.ai shipped a live page with ZERO `<h1>` by taking this step for
- * granted. The film never draws it, so nothing is said twice.
+ * THE HEADING CANNOT RIDE IN THE PICTURE, so it does not. Type baked into pixels
+ * cannot be selected, translated, reflowed or read aloud. The sentence lives
+ * here, in the DOM, under the globe and visible on the first scroll —
+ * cloud.hanzo.ai shipped a live page with ZERO `<h1>` by taking this for granted.
  *
- * The `alt` is COMPOSED, never typed. It names the layers the film's last
- * movement lists and quotes the tour's own story, from the same catalog the film
- * reads — an alt written by hand goes on describing a sequence the film has
- * stopped having.
+ * The console film that was here is cloud.hanzo.ai's story and belongs on
+ * cloud.hanzo.ai, which runs its own (`film/cloud`, `components/cloud/CloudLanding`).
+ * A page gets ONE picture; this page's is the globe.
  */
-const ALT = [
-  'The Hanzo console, in three moves.',
-  'The model catalog — the house Enso family beside every model the gateway serves.',
-  `${tour.story} Every step of it a real call on api.hanzo.ai/v1.`,
-  `And the ${spell(layerCount).toLowerCase()} layers underneath: ${cloudCategories.map((c) => c.title).join(', ')}.`,
-].join(' ')
+const PointGlobe = dynamic(() => import('@/components/webgl/PointGlobe'), { ssr: false })
 
 export default function Fold() {
   return (
     <>
-      <Frame src="/hero" alt={ALT} />
+      <section
+        className="relative w-full overflow-hidden"
+        style={{ height: 'calc(100dvh - var(--hz-header))' }}
+      >
+        <PointGlobe variant="hero" conversations={10} className="block h-full w-full" />
+        {/* The globe meets the copy below it in black rather than at an edge. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-32"
+          style={{ background: 'linear-gradient(to top, var(--pure-black) 0%, transparent 100%)' }}
+        />
+      </section>
 
-      <section className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6 sm:py-28 lg:px-8">
+      <section className="mx-auto max-w-3xl px-4 pb-24 pt-8 text-center sm:px-6 sm:pb-28 lg:px-8">
         <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl">
           Frontier models, agents, and the cloud under them.
         </h1>
