@@ -118,7 +118,7 @@ export const productsMetadata: Record<string, ProductMetadata> = {
   skills:       { slug: 'skills',     tagline: 'Reusable agent skills', license: 'Apache-2.0', github_repo: G },
   sql:          { slug: 'sql',        tagline: 'Managed PostgreSQL', license: 'PostgreSQL', github_repo: `${G}/sql` },
   status:       { slug: 'status',     tagline: 'Status pages', license: 'Apache-2.0', github_repo: `${G}/status`, docs_slug: null },
-  storage:      { slug: 'storage',    tagline: 'S3-compatible object storage', license: 'Apache-2.0', github_repo: `${G}/s3`, upstream_fork: 'SeaweedFS', upstream_license: 'Apache-2.0', upstream_url: 'https://github.com/seaweedfs/seaweedfs' },
+  storage:      { slug: 'storage',    tagline: 'Distributed object storage', license: 'Apache-2.0', github_repo: `${G}/s3`, upstream_fork: 'SeaweedFS', upstream_license: 'Apache-2.0', upstream_url: 'https://github.com/seaweedfs/seaweedfs' },
   stream:       { slug: 'stream',     tagline: 'Event stream', license: 'Apache-2.0', github_repo: `${G}/stream`, docs_slug: 'services/stream' },
   studio:       { slug: 'studio',     tagline: 'Visual builder studio', license: 'GPL-3.0', github_repo: `${G}/studio`, upstream_fork: 'ComfyUI', upstream_license: 'GPL-3.0', upstream_url: 'https://www.comfy.org', docs_slug: 'services/studio' },
   tasks:        { slug: 'tasks',      tagline: 'Durable workflows + scheduling', license: 'MIT', github_repo: `${G}/tasks` },
@@ -146,7 +146,7 @@ export const productsMetadata: Record<string, ProductMetadata> = {
   // identity is an alias for IAM under /identity (legacy slug)
   identity:     { slug: 'identity',   tagline: 'Identity surface', license: 'Apache-2.0', github_repo: `${G}/iam`, docs_slug: 'services/identity' },
   // S3-compatible storage is an alias under /s3
-  s3:           { slug: 's3',         tagline: 'S3-compatible object storage', license: 'Apache-2.0', github_repo: `${G}/s3`, upstream_fork: 'SeaweedFS', upstream_license: 'Apache-2.0', upstream_url: 'https://github.com/seaweedfs/seaweedfs', docs_slug: 'services/s3' },
+  s3:           { slug: 's3',         tagline: 'Distributed object storage', license: 'Apache-2.0', github_repo: `${G}/s3`, upstream_fork: 'SeaweedFS', upstream_license: 'Apache-2.0', upstream_url: 'https://github.com/seaweedfs/seaweedfs', docs_slug: 'services/s3' },
 };
 
 export function getProductMetadata(slug: string): ProductMetadata | undefined {

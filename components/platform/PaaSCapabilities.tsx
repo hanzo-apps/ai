@@ -48,7 +48,7 @@ const CORE_SERVICES: Service[] = [
   },
   {
     name: "Storage",
-    description: "S3-compatible object storage with CDN integration",
+    description: "Distributed object storage with CDN integration",
     icon: HardDrive,
   },
   {
