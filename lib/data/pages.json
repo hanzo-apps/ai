@@ -570,6 +570,11 @@
     "href": "/treasury"
   },
   {
+    "id": "trust",
+    "title": "Trust",
+    "href": "/trust"
+  },
+  {
     "id": "tunnel",
     "title": "Tunnel",
     "href": "/tunnel"
