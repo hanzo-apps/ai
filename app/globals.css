@@ -709,8 +709,28 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
 
 /* The composer is @hanzo/composer, imported at the head of this file. Its ring,
    halo and round controls are the same material hanzo.chat and hanzo.app draw,
-   and every number in it is a custom property this site could override and does
-   not need to — the package publishes these values as its defaults. */
+   and every number in it is a custom property this site could override — the
+   package publishes these values as its defaults. This site overrides one.
+
+   FOCUS ANSWERS WITH THE RING, AND ONLY THE RING. The package lifts the band
+   from --hz-composer-rest to --hz-composer-lift on `:hover` AND on
+   `:focus-within`, off one rule holding both. Hover lifting it is right: a
+   pointer over the pill is asking what it is. Focus lifting it is a second
+   voice saying the same word the ring already says, and the ring is the answer
+   — e2e/gates/composer.spec.ts measures exactly that and reads the band easing
+   0.5 -> 0.8 under a caret that never moved.
+
+   So the two cases are separated rather than retuned: focus keeps the resting
+   value, hover keeps the package's lift, and both are still the package's own
+   numbers. Nothing here touches the ring, whose colour is stated at rest so it
+   has nothing to interpolate from and cannot flash. */
+.hz-composer:focus-within::before {
+  opacity: var(--hz-composer-rest);
+}
+
+.hz-composer:hover::before {
+  opacity: var(--hz-composer-lift);
+}
 
 /* The mega-menu drapes are GLASS, and their contents are centred.
  *

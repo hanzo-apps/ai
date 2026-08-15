@@ -27,7 +27,7 @@ const PricingPreviewSection = () => {
         >
           <p
             className="inline-flex text-xs font-medium rounded-full px-4 py-2 border mb-6"
-            style={{ color: "var(--text-primary)", borderColor: "var(--border-card)" }}
+            style={{ color: "var(--text-primary)", borderColor: "var(--border)" }}
           >
             Pricing
           </p>
@@ -88,7 +88,7 @@ const PricingPreviewSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="p-8 rounded-2xl border border-[var(--border-card)] bg-gradient-to-br from-white/[0.08] to-transparent backdrop-blur-sm"
+            className="p-8 rounded-2xl border border-[var(--border)] bg-gradient-to-br from-white/[0.08] to-transparent backdrop-blur-sm"
           >
             <div className="flex items-center gap-2 mb-4">
               <Building2 className="w-5 h-5 text-foreground" />
@@ -121,7 +121,7 @@ const PricingPreviewSection = () => {
 
             <Link
               href="/contact/sales"
-              className="inline-flex justify-center items-center w-full px-6 py-3 rounded-full font-medium text-sm border border-[var(--border-card)] hover:border-[var(--border-strong)] hover:bg-[var(--white-10)] transition-all"
+              className="inline-flex justify-center items-center w-full px-6 py-3 rounded-full font-medium text-sm border border-[var(--border)] hover:border-[var(--border-strong)] hover:bg-[var(--white-10)] transition-all"
             >
               Contact sales
               <ArrowRight className="ml-2 h-4 w-4" />
