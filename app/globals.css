@@ -304,6 +304,20 @@
    carry more specificity than gui.css's `:root.t_dark` (0,2,0), because
    globals.css is imported BEFORE gui.css and would otherwise lose the tie.
    White at 72%, offset clear of the control, so it reads on every surface. */
+
+/* The ring's colour is stated at REST as well, and this is what stops it
+   flashing. `outline-color` has no resting value of its own — its initial value
+   is `currentColor`, which on a control with white text is white — and
+   Tailwind's `transition-colors` lists `outline-color` among the properties it
+   animates. A control wearing that utility therefore interpolates its ring from
+   FULL WHITE down to the alpha below every time focus lands. Measured on the
+   composer's [+]: α=1.0 in the first frame, α=0.72 once settled.
+   Saying it here leaves the transition nothing to cross. What changes on focus
+   is `outline-style`, and style does not animate. */
+:root:root * {
+  outline-color: rgba(255, 255, 255, 0.72);
+}
+
 :root:root :focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.72);
   outline-offset: 2px;
@@ -335,21 +349,38 @@
 
 /* Softer on a WRAPPER, and the reason is perimeter, not preference.
    A focus ring's ink is its alpha times the length it traces. At 72% white 2px
-   around a 44px button is a mark; the same value around a 700px pill is a bright
-   loop across the fold, which is what it looked like. The indicator does not
-   need to be brighter on a bigger control — if anything the opposite, because
-   there is more of it to see.
-   45% is chosen against the requirement rather than by eye. Composited on the
-   pill's own ground it is #787879 for 4.51:1, where WCAG 1.4.11 asks 3:1 of a
-   focus indicator — so it keeps half again the margin it needs while dropping
-   the apparent brightness by more than half (72% measures 10.26:1). 32% was the
-   next step down and falls to 2.80:1, under the floor, so this is as quiet as
-   the ring is allowed to get.
-   Small controls keep the 72% above: they have little perimeter to spend. */
+   around a 44px button is a mark; the same value around a 576px pill is a bright
+   loop across the fold. The indicator does not need to be brighter on a bigger
+   control — if anything the opposite, because there is more of it to see.
+   Small controls keep the 72% outline above: they have little perimeter to spend.
+
+   A SHADOW here, not an outline, and it is the one focus signal the wrapper
+   gets. Two properties of a shadow are why:
+
+   - it interpolates, so the ring arrives over 150ms. A ring that appears
+     between two frames reads as a flash however dim it is, and dimming it
+     further only trades a visible indicator for a quieter flash.
+   - it lands FLUSH on the control's edge. `outline-offset` leaves a gap, and
+     around a pill that already draws an edge — .hz-composer's spectrum band —
+     the gap makes two concentric rings out of one.
+
+   40% is chosen against the requirement rather than by eye: composited on the
+   pill's own ground it is #666667 for 3.53:1, where WCAG 1.4.11 asks 3:1 of a
+   focus indicator. 32% falls to 2.42:1, under the floor, so this is close to as
+   quiet as the ring is allowed to get.
+
+   The resting shadow is the same ring at zero alpha rather than `none`, because
+   `none` is not a shadow and does not interpolate — without it the ring fades
+   out on blur and still pops on focus. */
+:root:root :has(> input.bg-transparent),
+:root:root :has(> textarea.bg-transparent) {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0);
+  transition: box-shadow 150ms ease;
+}
+
 :root:root :has(> input.bg-transparent:focus-visible),
 :root:root :has(> textarea.bg-transparent:focus-visible) {
-  outline: 2px solid rgba(255, 255, 255, 0.45);
-  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
 }
 
 /* ── The shared header, before hydration, on a phone ──────────────────────────
@@ -706,17 +737,20 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
   pointer-events: none;
 }
 
-/* Attention lifts both layers a little, together, so the control answers the
-   pointer without changing character. Hover and focus-within say the same
-   thing here — the pill is one target, and a keyboard user arriving at the
-   input should see what a mouse user sees. */
-.hz-composer:hover::before,
-.hz-composer:focus-within::before {
+/* The pointer lifts both layers a little, together, so the control answers it
+   without changing character.
+
+   FOCUS does not, and that is the rule: the focus ring above is the indicator,
+   and lifting the band as well is the same message said twice — around 576px of
+   perimeter, twice reads as a flash. A mouse is hovering before it clicks, so
+   the band is already lifted when the caret lands and the only thing that
+   changes on focus is the ring. A keyboard arrives at the ring alone, which is
+   the signal that carries the contrast. */
+.hz-composer:hover::before {
   opacity: 0.8;
 }
 
-.hz-composer:hover::after,
-.hz-composer:focus-within::after {
+.hz-composer:hover::after {
   opacity: 0.16;
 }
 
