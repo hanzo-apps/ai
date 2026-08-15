@@ -22,7 +22,11 @@ import { loadPlans, fallbackPlans } from "@/lib/plans";
 // Enter or Space — see BillingManagement for the same defect measured live.
 
 const TEAM_URL = "https://billing.hanzo.ai/?plan=team#pricing";
-const SALES_URL = "mailto:sales@hanzo.ai?subject=Hanzo%20Enterprise";
+// The sales page, not a raw mailto. /contact/sales carries the booking link
+// (cal.hanzo.ai) and the enterprise address together, so a reader picks the
+// channel; a mailto picks for them and dead-ends anyone without a mail client
+// configured. Every other enterprise surface on the site already points here.
+const SALES_URL = "/contact/sales";
 
 // The seat price is read from commerce — GET /v1/billing/plans, category `team`,
 // the same rows that actually charge. $25 stays as the FALLBACK rather than the
