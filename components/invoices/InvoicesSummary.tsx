@@ -25,9 +25,12 @@ const InvoicesSummary = () => {
           <h3 className="text-xl font-medium">Active Subscription</h3>
         </div>
         
+        {/* No signup grant exists — a new account starts at a zero balance and
+            pays as it goes, so a "free credit grant" line described money that
+            was never issued. */}
         <div className="mb-6">
-          <div className="text-3xl font-bold mb-1">Trial Plan</div>
-          <p className="text-muted-foreground">Free credit grant of $5.00</p>
+          <div className="text-3xl font-bold mb-1">Pay as you go</div>
+          <p className="text-muted-foreground">Add credit when you are ready</p>
         </div>
         
         <Button 

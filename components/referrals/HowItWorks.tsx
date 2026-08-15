@@ -24,10 +24,12 @@ const HowItWorks = () => {
             <div className="h-8 w-8 rounded-full bg-primary/10 text-foreground flex items-center justify-center mr-3">
               2
             </div>
-            <h3 className="font-medium">They Get Rewards</h3>
+            <h3 className="font-medium">They Get Started</h3>
           </div>
+          {/* No credit is granted at signup — a new account starts at zero, on
+              purpose. What the code actually buys them is the free tier. */}
           <p className="text-sm text-muted-foreground">
-            New users get a free $5/mo Hanzo Bot trial and $5 in compute credits on Hanzo Console
+            They create a free account and start on the free models right away
           </p>
         </div>
 

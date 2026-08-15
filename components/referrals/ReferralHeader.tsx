@@ -11,8 +11,12 @@ const ReferralHeader = () => {
         </div>
         <div className="text-center">
           <h1 className="text-3xl font-bold mb-2">Referral Program</h1>
+          {/* What the referrer earns. It used to promise the person they refer
+              a credit on signup, and nothing grants one: account creation lands
+              on a zero balance by design. A page cannot offer money the biller
+              will not pay. */}
           <p className="text-lg text-foreground/80">
-            Earn $5 per referral. New users get a free Hanzo Bot trial + $5 compute credits with code{' '}
+            Earn credit for every developer you refer with code{' '}
             <span className="font-mono font-bold text-white">TRYFREE</span>
           </p>
         </div>

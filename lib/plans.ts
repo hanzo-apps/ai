@@ -146,6 +146,44 @@ export function fallbackPlans(category: string): SubscriptionPlan[] {
     }));
 }
 
+/**
+ * What a paid plan actually grants each month, and whether that covers its price.
+ *
+ * The credit is the strongest thing this page can say and it sat buried as the
+ * last bullet in a feature list. It belongs beside the price — but only at the
+ * amount the biller really pays out, which is NOT the field the feature strings
+ * were written from.
+ *
+ * READ THE FIELD THE GRANT READS. commerce's IncludedMonthlyCents
+ * (api/billing/plans.go) resolves the monthly allotment in this order:
+ * includedCloudCredits, then includedCloudCreditsPerUser, then
+ * includedCreditUsd. The order matters because plans set more than one: a plan
+ * advertising includedCreditUsd while carrying a smaller includedCloudCredits
+ * is granted the SMALLER number, and a page reading the advertised field states
+ * a figure no account ever receives. Mirroring the precedence here means the
+ * card and the ledger cannot disagree — whatever commerce decides to grant is
+ * what the page claims, with no second opinion to keep in sync.
+ *
+ * `whole` is measured, not declared. It says the credit covers the whole
+ * subscription price, so "every dollar back" appears only where that is
+ * arithmetic rather than aspiration.
+ */
+export interface Credit {
+  /** Dollars of spendable credit granted each month. */
+  amount: number;
+  /** The credit covers the whole subscription price. */
+  whole: boolean;
+}
+
+export function credit(plan: SubscriptionPlan): Credit | null {
+  const l = plan.limits;
+  const amount =
+    l?.includedCloudCredits ?? l?.includedCloudCreditsPerUser ?? l?.includedCreditUsd;
+  if (amount == null || amount <= 0) return null;
+  const monthly = plan.priceMonthly;
+  return { amount, whole: monthly != null && monthly > 0 && amount >= monthly };
+}
+
 /** The published catalog row, as @hanzo/plans ships it. */
 interface CatalogPlan {
   id: string;

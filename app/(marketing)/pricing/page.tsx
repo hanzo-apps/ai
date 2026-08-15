@@ -15,12 +15,15 @@ import PricingFAQ from "@/components/pricing/PricingFAQ"
 import BillingManagement from "@/components/pricing/BillingManagement"
 import PricingCallouts from "@/components/pricing/PricingCallouts"
 
-// Two tabs, because there are two ways to pay: a monthly plan, or usage.
-// Every service rate table is a SECTION of the usage tab — the visitor chooses
-// how they pay, not which of five products they arrived for.
+// Three tabs, because there are three buyers and they want different pages.
+// Someone buying for themselves needs a ladder; someone buying for a company
+// needs seats and a conversation; someone building against the API needs rates.
+// Sorting by BUYER rather than by product means a visitor reads one answer
+// instead of skipping five.
 const tabs = [
-  { id: "plans", label: "Plans" },
-  { id: "usage", label: "Pay as you go" },
+  { id: "individual", label: "Individual" },
+  { id: "business", label: "Business & Enterprise" },
+  { id: "api", label: "API" },
 ]
 
 // One service's rates under its name. The rate tables already carry their own
@@ -38,7 +41,7 @@ function Service({ title, children }: { title: string; children: ReactNode }) {
 }
 
 export default function PricingPage() {
-  const [activeTab, setActiveTab] = useState("plans")
+  const [activeTab, setActiveTab] = useState("individual")
   const analytics = useAnalytics()
 
   useEffect(() => {
@@ -47,7 +50,14 @@ export default function PricingPage() {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case "usage":
+      case "business":
+        return (
+          <>
+            <TeamEnterpriseStrip />
+            <PricingFAQ />
+          </>
+        )
+      case "api":
         return (
           <>
             <Service title="API & Models">
@@ -71,7 +81,6 @@ export default function PricingPage() {
         return (
           <>
             <PersonalPlans />
-            <TeamEnterpriseStrip />
             <PricingFAQ />
             <BillingManagement />
           </>
@@ -87,7 +96,8 @@ export default function PricingPage() {
         {/* Tab Navigation */}
         <div className="max-w-3xl mx-auto mb-12">
           <p className="text-center text-muted-foreground mb-6">
-            Pick a monthly plan, or pay only for what you use.
+            Start free. Move up for the best models, higher limits and credit
+            every month.
           </p>
           <div className="flex justify-center">
             <div className="bg-neutral-900/50 rounded-full p-1 border border-neutral-800">

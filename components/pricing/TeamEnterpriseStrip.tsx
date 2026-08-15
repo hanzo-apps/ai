@@ -38,12 +38,16 @@ const SALES_URL = "mailto:sales@hanzo.ai?subject=Hanzo%20Enterprise";
 // same reason the personal ladder is: a hand-typed 25 goes stale silently the
 // moment the catalog reprices, and a pricing page that is confidently wrong is
 // worse than one that is briefly blank.
-function teamFallback() {
-  const seat = fallbackPlans("team")
+const entrySeat = (rows: ReturnType<typeof fallbackPlans>) =>
+  rows
     .filter((p) => p.priceMonthly != null && p.priceMonthly > 0)
     .sort((a, b) => (a.priceMonthly ?? 0) - (b.priceMonthly ?? 0))[0];
+
+function teamFallback() {
+  const seat = entrySeat(fallbackPlans("team"));
   return {
-    price: seat?.priceMonthly ?? 25,
+    monthly: seat?.priceMonthly ?? null,
+    annual: seat?.priceAnnual ?? null,
     minSeats: Number(seat?.limits?.minSeats) || 2,
   };
 }
@@ -56,12 +60,11 @@ function useTeamTerms() {
       // The cheapest sellable row is the entry seat — `team` today, but read
       // rather than named so adding a cheaper tier does not silently keep
       // advertising the old one.
-      const seat = live
-        .filter((p) => p.priceMonthly != null && p.priceMonthly > 0)
-        .sort((a, b) => (a.priceMonthly ?? 0) - (b.priceMonthly ?? 0))[0];
+      const seat = entrySeat(live);
       if (!seat?.priceMonthly) return;
       setTerms({
-        price: seat.priceMonthly,
+        monthly: seat.priceMonthly,
+        annual: seat.priceAnnual ?? null,
         minSeats: Number(seat.limits?.minSeats) || teamFallback().minSeats,
       });
     });
@@ -70,23 +73,37 @@ function useTeamTerms() {
 }
 
 const TeamEnterpriseStrip = () => {
-  const { price, minSeats } = useTeamTerms();
+  const { monthly, annual, minSeats } = useTeamTerms();
+  // Annual is the headline because it is the cheaper of the two and the one a
+  // company buying seats will take; monthly is the footnote. Both are read, so
+  // a plan sold at a single price simply states that price and no footnote.
+  const headline = annual ?? monthly;
   return (
   <div className="max-w-6xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-6">
     <div className="p-6 rounded-xl border border-border bg-[var(--black)] flex flex-col">
       <div className="flex items-center gap-3 mb-3">
         <Users className="h-5 w-5 text-muted-foreground" />
-        <h3 className="text-lg font-medium">Team</h3>
+        <h3 className="text-lg font-medium">Business</h3>
       </div>
       <p className="text-sm text-muted-foreground mb-6 leading-relaxed flex-1">
-        <span className="text-foreground font-medium">${price}/user per month</span>,
-        minimum {minSeats} seats. Org workspaces, SSO via Hanzo IAM, and one unified bill
-        for everyone — the difference from a personal plan is the org, not the
-        model access.
+        <span className="text-foreground font-medium">
+          ${headline} per user per month
+        </span>
+        , minimum {minSeats} seats. A secure workspace with company context: org
+        projects and shared history, SSO via Hanzo IAM, roles, and one unified
+        bill for everyone.
+        {annual != null && monthly != null && annual !== monthly && (
+          <>
+            {" "}
+            <span className="text-muted-foreground/80">
+              Billed annually; ${monthly} per user per month month to month.
+            </span>
+          </>
+        )}
       </p>
       <Button asChild variant="outline" className="w-full border-border">
         <a href={TEAM_URL} target="_blank" rel="noopener noreferrer">
-          Set up a team
+          Get started
         </a>
       </Button>
     </div>
@@ -102,7 +119,7 @@ const TeamEnterpriseStrip = () => {
         starts with a conversation rather than a number.
       </p>
       <Button asChild variant="outline" className="w-full border-border">
-        <a href={SALES_URL}>Contact us</a>
+        <a href={SALES_URL}>Contact sales</a>
       </Button>
     </div>
   </div>

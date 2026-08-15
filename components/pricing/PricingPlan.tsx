@@ -5,6 +5,7 @@ import { Button } from "@hanzo/ui";
 import { Check } from "lucide-react";
 import { useAnalytics } from "@hanzo/event/react";
 import { EVENTS } from "@hanzo/event";
+import type { Credit } from "@/lib/plans";
 
 interface PricingPlanProps {
   name: string;
@@ -13,6 +14,8 @@ interface PricingPlanProps {
   billingPeriod?: string;
   description: string;
   features: string[];
+  /** The monthly credit this plan returns, derived from the catalog. */
+  credit?: Credit | null;
   popular?: boolean;
   customColor?: string;
   showDetails?: boolean;
@@ -31,6 +34,7 @@ const PricingPlan = ({
   billingPeriod,
   description,
   features,
+  credit,
   popular = false,
   customColor,
   showDetails = false,
@@ -175,6 +179,38 @@ const PricingPlan = ({
             <span className="text-muted-foreground">{billingPeriod}</span>
           )}
         </div>
+
+        {/* The offer, against the number it modifies.
+​
+            This is the whole point of the card and it used to be the last
+            bullet under a fold: the money comes back. A reader who stops at
+            "$19/month" has read half the price.
+
+            Both sentences are derived, so neither can overstate: a plan that
+            returns its whole price says so, a plan that returns part of it
+            names the part. Go returns part.
+
+            The slot is reserved on `md` up even when empty, for the reason the
+            description below reserves one — the cards sit in a stretched row
+            there and a block present on three of four would step every CTA out
+            of line. Stacked on a phone there is no row to align to. */}
+        <div className="md:min-h-[5.25rem] mb-4">
+          {credit && (
+            <div className="rounded-xl border border-neutral-700 bg-neutral-900/60 px-4 py-3">
+              <p className="text-sm font-semibold text-foreground">
+                {credit.whole
+                  ? `$${credit.amount.toLocaleString("en-US")} back in credit every month`
+                  : `$${credit.amount.toLocaleString("en-US")} of credit included every month`}
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {credit.whole
+                  ? "Every dollar of your subscription, to spend on AI or compute."
+                  : "Yours to spend on AI or compute."}
+              </p>
+            </div>
+          )}
+        </div>
+
         <p className="text-muted-foreground md:min-h-[7.5rem]">{description}</p>
       </div>
 
