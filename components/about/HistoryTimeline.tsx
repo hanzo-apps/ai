@@ -1,8 +1,9 @@
 'use client'
 
 
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "@/components/motion";
+import { useScroll, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import { Code, Rocket, Stars, Coins, Trophy, Lightbulb, Bot, User2 } from "lucide-react";
 import { Button } from "@hanzo/ui";
 
@@ -10,7 +11,7 @@ const timelineEvents = [
   {
     year: "2014-2016",
     title: "Origins: Verus Media & Crowdstart",
-    description: "Zach Kelling founded Verus Media and launched Crowdstart, which used crowd data and AI to run product launches and crowdfunding campaigns.",
+    description: "Verus Media launched Crowdstart, which used crowd data and AI to run product launches and crowdfunding campaigns.",
     icon: <Rocket className="text-foreground" />,
     highlight: "Record-breaking product launches and significant crowdfunding success.",
     link: { text: "Learn about our platform", url: "/platform" }
@@ -57,6 +58,22 @@ const timelineEvents = [
   },
 ];
 
+/**
+ * One stop on the line.
+ *
+ * The entrance is deliberately the plain vertical nudge and nothing more.
+ * `@/components/motion` grounds the start state — opacity, x and scale never
+ * reach the DOM on a `whileInView` element — because `initial` is written into
+ * the EXPORTED HTML, and a reveal that needs an observer to become readable has
+ * blanked this page before (4,380px of it). A sideways enter is dropped for a
+ * second reason: it is wider than a 390px viewport while it plays.
+ *
+ * So the sense of travelling THROUGH the timeline is not carried by the cards
+ * at all. It is the rail, below, which is decorative and hides nothing.
+ *
+ * `viewport.margin` fires slightly BEFORE the card reaches centre: a reveal
+ * keyed to dead centre plays after the reader is already looking at it.
+ */
 const TimelineEvent = ({ event, index }) => {
   const isEven = index % 2 === 0;
 
@@ -64,9 +81,9 @@ const TimelineEvent = ({ event, index }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`flex flex-col md:flex-row items-center gap-8 mb-16 ${isEven ? '' : 'md:flex-row-reverse'}`}
+      viewport={{ once: true, margin: "0px 0px -20% 0px" }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      className={`relative flex flex-col md:flex-row items-center gap-8 mb-16 ${isEven ? '' : 'md:flex-row-reverse'}`}
     >
       <div className="md:w-1/2">
         <div className="bg-card backdrop-blur-sm border border-border rounded-lg p-8 h-full">
@@ -81,7 +98,7 @@ const TimelineEvent = ({ event, index }) => {
           </div>
           <p className="text-muted-foreground mb-4">{event.description}</p>
           <div className="bg-primary/10 border border-border rounded-lg p-4 mb-6">
-            <p className="text-foreground/80 italic">"{event.highlight}"</p>
+            <p className="text-foreground/80 italic">&ldquo;{event.highlight}&rdquo;</p>
           </div>
           <Button variant="outline" className="border-border text-foreground hover:bg-accent">
             <a href={event.link.url || "#"}>{event.link.text}</a>
@@ -89,21 +106,51 @@ const TimelineEvent = ({ event, index }) => {
         </div>
       </div>
 
-      <div className="hidden md:block md:w-1/2 relative">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-1 h-full bg-primary/30"></div>
-        </div>
-        <div className="relative flex justify-center">
-          <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-            <span className="text-foreground font-bold">{index + 1}</span>
-          </div>
-        </div>
-      </div>
+      {/* The marker only. The RAIL is drawn once by the section, not once per
+          event — six stacked columns with their own margins never met end to
+          end, so the line the eye follows had a gap at every card.
+
+          Absolutely centred on the ROW rather than inside its half-column: the
+          halves are (width - gap)/2, so anything aligned to a column edge sits
+          half a gap off the midline and the rail misses it by 16px, alternating
+          sides. The empty half below still reserves the space it always did. */}
+      <div className="hidden md:block md:w-1/2" aria-hidden />
+      <motion.div
+        initial={{ scale: 1 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true, margin: "0px 0px -20% 0px" }}
+        transition={{ duration: 0.4, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+        className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-primary items-center justify-center ring-8 ring-background"
+      >
+        <span className="text-primary-foreground font-bold">{index + 1}</span>
+      </motion.div>
     </motion.div>
   );
 };
 
 const HistoryTimeline = () => {
+  // ONE rail for the whole section, drawn here rather than once per event.
+  // Six stacked columns with their own margins never met end to end, so the
+  // line the eye is meant to follow had a gap at every card.
+  //
+  // It FILLS with scroll: `useScroll` over this section maps the reader's
+  // position to the height of a lit overlay on top of a dim track, so the line
+  // grows downward as they descend and the passage of time is something you
+  // watch rather than infer. Spring-smoothed, because a raw scroll value
+  // twitches with every wheel tick.
+  //
+  // Decorative and additive: the track is always visible, the fill is an
+  // overlay on top of it, and no content anywhere depends on this. That is what
+  // makes it safe where a `whileInView` reveal is not.
+  const rail = useRef<HTMLDivElement>(null)
+  const still = useReducedMotion()
+  const { scrollYProgress } = useScroll({
+    target: rail,
+    offset: ['start 65%', 'end 55%'],
+  })
+  const smooth = useSpring(scrollYProgress, { stiffness: 120, damping: 28, restDelta: 0.001 })
+  const height = useTransform(smooth, (v) => `${v * 100}%`)
+
   return (
     <section id="timeline" className="py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -122,7 +169,20 @@ const HistoryTimeline = () => {
           </p>
         </motion.div>
 
-        <div className="mt-16">
+        <div ref={rail} className="mt-16 relative">
+          {/* The track, and the part of it that has been travelled. Both sit
+              behind the cards and neither is announced — this is a picture of
+              the scroll position, and a screen reader already has the years. */}
+          <div
+            aria-hidden
+            className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-border"
+          />
+          <motion.div
+            aria-hidden
+            style={{ height: still ? '100%' : height }}
+            className="hidden md:block absolute left-1/2 top-0 w-px -translate-x-1/2 bg-foreground/60"
+          />
+
           {timelineEvents.map((event, index) => (
             <TimelineEvent key={index} event={event} index={index} />
           ))}

@@ -25,7 +25,6 @@ import { ProductFooter } from '@/components/products/ProductFooter'
 // section, and it is the ONLY thing that links the sixteen agent profiles under
 // /team. Without it those pages are live and reachable from nothing.
 import AgentGallery from '@/components/team/AgentGallery'
-import HumanLeadership from '@/components/team/HumanLeadership'
 import HumanAIIntegration from '@/components/team/HumanAIIntegration'
 import WorkspaceIntegration from '@/components/team/WorkspaceIntegration'
 import AuditFeatures from '@/components/team/AuditFeatures'
@@ -110,7 +109,6 @@ export default function TeamLanding() {
         {/* Who works in the workspace — the coworkers first, then the people
             who lead them, then how the two actually share the work. */}
         <AgentGallery />
-        <HumanLeadership />
         <HumanAIIntegration />
         {/* What the workspace looks like, then what makes it safe to put a
             company inside it. */}

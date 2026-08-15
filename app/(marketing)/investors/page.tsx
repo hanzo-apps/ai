@@ -85,17 +85,11 @@ export default function InvestorsPage() {
 
       <Section
         title="Governance"
-        lede="Who runs the company, and the terms the work is published under."
+        lede="The terms the work is published under."
       >
         <CardGrid
-          columns={3}
+          columns={2}
           items={[
-            {
-              icon: Users,
-              title: 'Leadership',
-              description: 'The people accountable for the company and its products.',
-              href: '/leadership',
-            },
             {
               icon: Scale,
               title: 'Legal',

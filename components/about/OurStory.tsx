@@ -25,9 +25,9 @@ const OurStory = () => {
           className="bg-card backdrop-blur-sm border border-border rounded-lg p-8 mb-10"
         >
           <p className="text-muted-foreground md:text-lg leading-relaxed mb-6">
-            Hanzo AI, Inc. began as Crowdstart, a crowd-powered marketing platform built under Verus Media.
-            Zach Kelling founded it in the mid-2010s with David Tai as co-founder. It took the Hanzo name in
-            2016 and joined the first Techstars Kansas City cohort the following year.
+            Hanzo AI, Inc. began as Crowdstart, a crowd-powered marketing platform built under Verus Media
+            in the mid-2010s. It took the Hanzo name in 2016 and joined the first Techstars Kansas City
+            cohort the following year.
           </p>
 
           <p className="text-muted-foreground md:text-lg leading-relaxed mb-6">
