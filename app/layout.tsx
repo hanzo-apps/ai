@@ -71,8 +71,6 @@ export const metadata: Metadata = {
     apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   manifest: '/site.webmanifest',
-  // Hanzo Edit widget reads this to know which repo backs the page (fork→edit→PR).
-  other: { 'hanzo:repo': 'hanzoai/hanzo.ai' },
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
@@ -121,9 +119,16 @@ export default function RootLayout({
         {/* No analytics tag here: pageviews AND interaction autocapture already ride
             the ONE @hanzo/event client in <Providers> (host + ingest key + consent
             gate in one place). A second hz.js tag posted to the same /v1/event door
-            and double-counted every pageview. */}
-        {/* Hanzo Edit — ever-present "improve this page" widget (repo in metadata.other). */}
-        <script async src="https://hanzo.app/edit.js" />
+            and double-counted every pageview.
+
+            NOR an authoring widget. `hanzo.app/edit.js` used to load here, and it
+            is an AUTHORING tool on a PUBLISHED page: a shadow-root launcher pinned
+            bottom-right at z-index 2147483000, which on a phone landed on 43x32px
+            of the drawer's "Try Hanzo" button — this site's one primary action —
+            so the edge of the CTA opened an editor instead. Two rules in
+            globals.css were written to live with it, a z-index clamp and 64px of
+            dock clearance, and both are gone with it. A reader of hanzo.ai is not
+            editing hanzo.ai; the door for that is the repo. */}
       </body>
     </html>
   )

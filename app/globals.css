@@ -136,6 +136,26 @@
     padding-top: env(safe-area-inset-top);
   }
 
+  /* And the drawer that header opens carries the BOTTOM inset, for the same
+     reason: it is `position: fixed`, so `body`'s inset above cannot reach it,
+     and it runs to `calc(100vh - 60px)` — the rest of the screen. Measured at
+     390x844: the bottom edge of "Try Hanzo", the one primary action on a phone,
+     landed on 844 — the viewport's last pixel, which on a phone with a home
+     indicator is under the hardware.
+
+     The spacer is a block CHILD rather than padding on the panel. The panel
+     states `padding: 12` inline, and an inline declaration outranks any
+     stylesheet rule on the same property, so a rule here cannot add to it —
+     only replace it, and only with `!important`, which means writing 12 down a
+     second time in a repo that does not own the number. An `::after` the height
+     of the inset adds room under the last control and reads nothing of the
+     panel's own spacing. `env()` is 0 on a flat screen. */
+  [role='dialog'][data-hanzo-shell]::after {
+    content: '';
+    display: block;
+    height: env(safe-area-inset-bottom);
+  }
+
   /* Tailwind v4's preflight dropped v3's `cursor: pointer` on buttons, so every
      <button> on the site fell back to the UA default arrow — indistinguishable
      from dead text. Restore it once, here, rather than per component. */
@@ -196,18 +216,6 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-  }
-
-  /* The edit widget is a GUEST, and a guest does not outrank the host's modals.
-     `hanzo.app/edit.js` mounts `[data-hanzo-edit]` and its shadow content asked
-     for 2147483000 — measured covering 43×32px of the mobile drawer's "Try
-     Hanzo" button, which is this site's one primary action on a phone. The host
-     element is a stacking context from that script's own side, so this one
-     number governs everything inside it. 400 is above the page and below
-     `--z-overlay` (500) and the shell's drawer (600): a widget belongs over
-     content and under anything modal. */
-  [data-hanzo-edit] {
-    z-index: 400 !important;
   }
 
   /* A TAP TARGET IS A BOX, and the floor applies to the SMALLER SIDE. Height
@@ -649,23 +657,6 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
    ran straight through the globe. */
 :root:root header[data-hanzo-shell] {
   border-bottom-color: transparent !important;
-}
-
-/* The bar keeps clear of the corner launcher on a phone.
-   `hanzo.app/edit.js` (loaded in app/layout.tsx) pins a 44px "improve this page"
-   button in the BOTTOM-RIGHT corner, inside a shadow root, at z-index
-   2147483000 — the top of the stacking order. Nothing here can outrank it and
-   nothing here should try: it is another product's widget and hiding it under
-   our own chrome is not ours to do.
-   On a wide viewport the composer is a centred 672px column and the two never
-   meet. On a phone the bar runs the full width and the launcher lands exactly on
-   the send button. Sitting the bar ABOVE it is the one arrangement where both
-   stay reachable — measured: the launcher occupies 12-56px up from the bottom
-   edge, so 64px clears it with room to spare. */
-@media (max-width: 560px) {
-  .hz-dock {
-    padding-bottom: calc(64px + env(safe-area-inset-bottom));
-  }
 }
 
 /* NO hairline on either band, and that is the glass being glass.
