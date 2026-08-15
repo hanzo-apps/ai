@@ -192,6 +192,18 @@
     justify-content: center;
   }
 
+  /* The edit widget is a GUEST, and a guest does not outrank the host's modals.
+     `hanzo.app/edit.js` mounts `[data-hanzo-edit]` and its shadow content asked
+     for 2147483000 — measured covering 43×32px of the mobile drawer's "Try
+     Hanzo" button, which is this site's one primary action on a phone. The host
+     element is a stacking context from that script's own side, so this one
+     number governs everything inside it. 400 is above the page and below
+     `--z-overlay` (500) and the shell's drawer (600): a widget belongs over
+     content and under anything modal. */
+  [data-hanzo-edit] {
+    z-index: 400 !important;
+  }
+
   /* A TAP TARGET IS A BOX, and the floor applies to the SMALLER SIDE. Height
      alone is half a policy: an icon-only control has no text to widen it, so it
      stays as narrow as its glyph however tall the rule makes it. Measured on

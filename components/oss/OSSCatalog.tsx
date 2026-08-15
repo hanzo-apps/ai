@@ -141,7 +141,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
           )}
           {repo.actions.githubUrl && (
             <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-foreground" asChild>
-              <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer">
+              <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github className="w-4 h-4" />
               </a>
             </Button>
@@ -223,14 +223,14 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
       {/* Actions */}
       <div className="mt-auto p-4 pt-3 border-t border-border flex items-center gap-2">
         {primaryAction ? (
-          <Button size="sm" className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
+          <Button size="sm" className="hz-tap flex-1 bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
             <a href={primaryAction.url || "#"} target="_blank" rel="noopener noreferrer">
               <primaryAction.icon className="w-3.5 h-3.5 mr-1.5" />
               {primaryAction.label}
             </a>
           </Button>
         ) : repo.actions.githubUrl ? (
-          <Button size="sm" variant="outline" className="flex-1 border-border hover:bg-accent" asChild>
+          <Button size="sm" variant="outline" className="hz-tap flex-1 border-border hover:bg-accent" asChild>
             <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer">
               <Github className="w-3.5 h-3.5 mr-1.5" />
               View Source
@@ -240,22 +240,22 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
 
         <div className="flex gap-1">
           {repo.actions.docsUrl && (
-            <Button size="sm" variant="ghost" className="px-2 text-muted-foreground hover:text-foreground" asChild title="Docs">
-              <a href={repo.actions.docsUrl || "#"} target="_blank" rel="noopener noreferrer">
+            <Button size="sm" variant="ghost" className="hz-tap px-2 text-muted-foreground hover:text-foreground" asChild title="Docs">
+              <a href={repo.actions.docsUrl || "#"} target="_blank" rel="noopener noreferrer" aria-label="Docs">
                 <BookOpen className="w-4 h-4" />
               </a>
             </Button>
           )}
           {repo.actions.learnUrl && (
-            <Button size="sm" variant="ghost" className="px-2 text-muted-foreground hover:text-foreground" asChild title="Learn">
-              <a href={repo.actions.learnUrl || "#"}>
+            <Button size="sm" variant="ghost" className="hz-tap px-2 text-muted-foreground hover:text-foreground" asChild title="Learn">
+              <a href={repo.actions.learnUrl || "#"} aria-label="Learn">
                 <GraduationCap className="w-4 h-4" />
               </a>
             </Button>
           )}
           {primaryAction && repo.actions.githubUrl && (
-            <Button size="sm" variant="ghost" className="px-2 text-muted-foreground hover:text-foreground" asChild title="GitHub">
-              <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer">
+            <Button size="sm" variant="ghost" className="hz-tap px-2 text-muted-foreground hover:text-foreground" asChild title="GitHub">
+              <a href={repo.actions.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github className="w-4 h-4" />
               </a>
             </Button>

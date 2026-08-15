@@ -312,16 +312,26 @@ function Hero({ layers, models }: { layers: number; models: string | null }) {
             </a>
           </div>
 
-          {/* The sentence above says the cloud is COMPOSED. This is that: bare
-              metal, your own accounts and the hyperscalers' regions receding
-              behind one address. It carries no copy — a film cannot reflow or
-              answer a screen reader — so its meaning is the alt. */}
-          <div style={rise(5)} className="hz-rise mt-14 sm:mt-16">
-            <Mockup
-              base="/cloud-virtualize-wide"
-              alt="Bare metal, your own cloud accounts (digitalocean, aws, gcp, azure) and hyperscaler regions composing into one cloud at api.hanzo.ai/v1, carrying all ten layers."
-            />
-          </div>
+        </div>
+
+        {/* THE SECOND COLUMN, which the grid above has always declared and
+            nothing has ever occupied. `lg:grid-cols-[minmax(0,34rem)_minmax(0,1fr)]`
+            makes two tracks — measured at 1440: `544px 776px` — and this div
+            was nested INSIDE the copy, so the film rendered under the buttons at
+            544 wide while 776px of the fold, 54% of the viewport, stayed empty.
+            Below `lg` there is one track and the film simply follows the copy,
+            which is why the defect was invisible at 390 and 834 and only ever
+            showed on a laptop.
+
+            The sentence above says the cloud is COMPOSED. This is that: bare
+            metal, your own accounts and the hyperscalers' regions receding
+            behind one address. It carries no copy — a film cannot reflow or
+            answer a screen reader — so its meaning is the alt. */}
+        <div style={rise(5)} className="hz-rise mt-14 min-w-0 lg:mt-0">
+          <Mockup
+            base="/cloud-virtualize-wide"
+            alt="Bare metal, your own cloud accounts (digitalocean, aws, gcp, azure) and hyperscaler regions composing into one cloud at api.hanzo.ai/v1, carrying all ten layers."
+          />
         </div>
 
       </div>

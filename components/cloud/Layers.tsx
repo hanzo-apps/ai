@@ -50,8 +50,14 @@ const isExternal = (item: Primitive) => /^https?:\/\//.test(item.href)
 
 /** One product, named and linked — the leaf of a layer, as prose rather than a card. */
 function Leaf({ item }: { item: Primitive }) {
+  // `hz-tap` because this IS a control, not a link inside a sentence. There are
+  // ~80 of them on this page and each rendered a 17px-tall box — the largest
+  // cluster of sub-thumb targets on the site, and the reason /cloud measured 101
+  // of them at 390. The class is the one way to say "standalone tap target";
+  // globals.css gives it the 44px floor on a coarse pointer and nothing on a
+  // mouse, so the dense mouse layout these rows were designed for is unchanged.
   const className =
-    'text-neutral-400 no-underline transition-colors hover:text-white hover:no-underline motion-reduce:transition-none'
+    'hz-tap text-neutral-400 no-underline transition-colors hover:text-white hover:no-underline motion-reduce:transition-none'
   return isExternal(item) ? (
     <a href={item.href} target="_blank" rel="noreferrer noopener" className={className}>
       {item.title}
