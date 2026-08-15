@@ -8,6 +8,11 @@ export interface ModelSpec {
   arch?: string
 }
 
+export interface ModelPrice {
+  input?: number | null
+  output?: number | null
+}
+
 export interface ModelData {
   id: string
   name: string
@@ -25,6 +30,8 @@ export interface ModelData {
   aliases?: string[]
   tier?: string
   generation?: string
+  /** USD per million tokens, as the live catalog states it. */
+  pricing?: ModelPrice | null
 }
 
 export interface ModelsResponse {
@@ -99,6 +106,18 @@ export async function fetchModels(): Promise<ModelsResponse> {
     cachedResult = STATIC_FALLBACK
     return STATIC_FALLBACK
   }
+}
+
+/**
+ * A price per million tokens, as a person reads it. Free is stated as Free rather
+ * than as $0.00, because that is the fact somebody is looking for; a price nobody
+ * published is stated as nothing at all rather than as zero.
+ */
+export function formatPrice(usdPerMillion?: number | null): string | null {
+  if (usdPerMillion === null || usdPerMillion === undefined) return null
+  if (usdPerMillion === 0) return 'Free'
+  const digits = usdPerMillion < 1 ? 3 : 2
+  return `$${usdPerMillion.toFixed(digits)} / M tokens`
 }
 
 export function getOrgAndSlug(modelId: string): { org: string; slug: string } {

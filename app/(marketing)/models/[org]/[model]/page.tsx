@@ -6,6 +6,7 @@ import {
   getOrgAndSlug,
   orgDisplayName,
   formatContext,
+  formatPrice,
   getModelContext,
   MODALITY_STYLES,
   modelPagePath,
@@ -217,6 +218,10 @@ export default async function ModelPage({ params }: Props) {
   if (model.spec?.params) specRows.push({ label: 'Parameters', value: model.spec.params })
   if (model.spec?.activeParams) specRows.push({ label: 'Active Params', value: model.spec.activeParams })
   if (model.modalities?.length) specRows.push({ label: 'Modalities', value: model.modalities.join(', ') })
+  const inPrice = formatPrice(model.pricing?.input)
+  const outPrice = formatPrice(model.pricing?.output)
+  if (inPrice) specRows.push({ label: 'Input', value: inPrice })
+  if (outPrice) specRows.push({ label: 'Output', value: outPrice })
   specRows.push({ label: 'Status', value: model.status })
   specRows.push({ label: 'Category', value: model.category })
   specRows.push({ label: 'Model ID', value: model.id })
