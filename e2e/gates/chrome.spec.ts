@@ -64,7 +64,12 @@ test.describe('header chrome', () => {
 
     // …and into the menu. Open it and read the row, rather than trusting that
     // the registry still holds it: the registry DID hold it throughout the bug.
-    await page.getByRole('button', { name: 'Meet Hanzo' }).click()
+    //
+    // The trigger is named by @hanzogui/shell and it says "Hanzo" (it said "Meet
+    // Hanzo" through 8.1.18). `exact` matters: "Search Hanzo or ask AI" is also
+    // a button in this bar, and the wordmark beside it is a link of the same
+    // name. What is asserted is unchanged — only who spells the label.
+    await page.getByRole('button', { name: 'Hanzo', exact: true }).click()
     const menu = page.locator('#hanzo-meet-menu')
     await expect(menu).toBeVisible()
     await expect(menu.getByRole('link', { name: 'Documentation' })).toBeVisible()

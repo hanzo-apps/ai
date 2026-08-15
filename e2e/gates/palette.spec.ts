@@ -175,7 +175,15 @@ test('the doors card stays small', async ({ page }) => {
 
     // It held 466x443 for thirteen links. The ceiling is what stops the
     // padding creeping back one comfortable value at a time.
-    expect(box.width).toBeLessThanOrEqual(430)
+    //
+    // 450, from 430, and the reason is not padding: this site handed gui a
+    // 244-line token table of its own and now takes @hanzo/ui's, where several
+    // rungs are a different pixel. Every box inside a shell card is measured in
+    // those rungs, so the card moved when the table did. Measured six times on
+    // the export: 440.0 five times and 445.5 on a cold font cache, height 337
+    // against a 380 ceiling nobody has moved. Still far under the 466 this
+    // exists to prevent, and it still fails if padding creeps back toward it.
+    expect(box.width).toBeLessThanOrEqual(450)
     expect(box.height).toBeLessThanOrEqual(380)
 
     // Every door is a real link, and it still lines up with the header's edge.
