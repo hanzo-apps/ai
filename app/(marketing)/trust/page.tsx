@@ -230,17 +230,23 @@ export default function TrustPage() {
             above is how that conversation starts.
           </p>
           <p>
-            <strong>FIPS.</strong> Our code implements published standards, ML-KEM and ML-DSA among them.
-            Implementing a standard is not the same as holding a validation, and a 140-3 validation belongs to
+            {/* No full stop after this label. The copy gate reads the page one
+                SENTENCE at a time and requires the word FIPS to appear in one
+                that also denies holding a validation — and `FIPS.` IS a
+                sentence, so the term sat orphaned from its own denial one
+                clause away, and the page failed a rule it was obeying. */}
+            <strong>FIPS:</strong> our code implements published standards, ML-KEM and ML-DSA among them, but
+            implementing a standard is not the same as holding a validation, and a 140-3 validation belongs to
             the vendor of a module rather than to us. Where your deployment needs validated modules, the
             signing interface already reaches AWS KMS, Google Cloud KMS, Azure Key Vault and Zymbit — ask and
             we will map yours.
           </p>
           <p>
-            <strong>Passkeys.</strong> Passkey credentials can be stored and managed, and the sign-in
-            challenge is not in the build running today — so the login screen does not offer it, which is the
-            only honest thing a login screen can do about a method the server cannot yet perform. Second
-            factors that do work: an authenticator app, SMS, and email, with recovery codes.
+            <strong>Passkeys.</strong> Passkey credentials can be stored and managed, but{' '}
+            <strong>a passkey cannot complete a sign-in</strong> — the assertion ceremony is not in the build
+            running today, so the login screen does not offer it, which is the only honest thing a login
+            screen can do about a method the server cannot yet perform. Second factors that do work: an
+            authenticator app, SMS, and email, with recovery codes.
           </p>
           <p>
             <strong>Availability.</strong> An uptime number is a contractual commitment, so ours lives in the
