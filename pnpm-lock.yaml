@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@hanzo/ai':
-        specifier: ^0.3.1
-        version: 0.3.1
+        specifier: ^0.3.7
+        version: 0.3.7
       '@hanzo/brand':
         specifier: ^1.4.5
         version: 1.4.5(react@19.2.8)
@@ -22,7 +22,7 @@ importers:
         version: 0.1.1(@hanzo/canvas@0.2.1(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(@xyflow/react@12.11.2(@types/react-dom@19.2.4(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@hanzo/chat':
         specifier: ^1.0.3
-        version: 1.0.3(@hanzo/ai@0.3.1)(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react@19.2.8)
+        version: 1.0.3(@hanzo/ai@0.3.7)(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@hanzo/dashboard':
         specifier: 0.2.0
         version: 0.2.0(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -937,8 +937,8 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
-  '@hanzo/ai@0.3.1':
-    resolution: {integrity: sha512-c6dOPc8z3tONUjh8VSurwu9+1qRFH6sMXkbUX/NEfqerSaLawr0MGo8J6CAFn7p6ZDv0xB/uxICb1t+mmnLVKg==}
+  '@hanzo/ai@0.3.7':
+    resolution: {integrity: sha512-1cPnLCppm5t9KcpnVRo+rAHU4x7/iOjNOh3m6FtDmE75fo4dOxSM5o+UZOjMA9XXq2nZ28ng7sy3auLB99v4SA==}
     engines: {node: '>=18'}
 
   '@hanzo/brand@1.4.5':
@@ -4752,7 +4752,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@hanzo/ai@0.3.1': {}
+  '@hanzo/ai@0.3.7': {}
 
   '@hanzo/brand@1.4.5(react@19.2.8)':
     dependencies:
@@ -4774,9 +4774,9 @@ snapshots:
     optionalDependencies:
       react: 19.2.8
 
-  '@hanzo/chat@1.0.3(@hanzo/ai@0.3.1)(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react@19.2.8)':
+  '@hanzo/chat@1.0.3(@hanzo/ai@0.3.7)(@hanzo/gui@8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@hanzo/ai': 0.3.1
+      '@hanzo/ai': 0.3.7
       '@hanzo/gui': 8.1.0(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8)
       react: 19.2.8
 
@@ -6409,9 +6409,7 @@ snapshots:
       metro-runtime: 0.84.4
     transitivePeerDependencies:
       - '@babel/core'
-      - bufferutil
       - supports-color
-      - utf-8-validate
 
   '@react-native/normalize-color@2.1.0': {}
 
