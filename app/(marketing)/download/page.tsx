@@ -1,39 +1,33 @@
-'use client'
+import DownloadHero from '@/components/download/DownloadHero'
+import Platforms from '@/components/download/Platforms'
+import Surfaces from '@/components/download/Surfaces'
+import Capabilities from '@/components/download/Capabilities'
+import Models from '@/components/download/Models'
+import Integrations from '@/components/download/Integrations'
+import FAQ from '@/components/download/FAQ'
+import HanzoDev from '@/components/download/HanzoDev'
 
+/**
+ * /download — get the app, in one pass down the page.
+ *
+ * The order is the order the questions arrive: what it is, how to get it, where
+ * else it runs, what it does, what it thinks with, what it reaches, what you
+ * were still wondering, and the same thing from a terminal. Every section is one
+ * subject and every subject appears once — the page previously ran eleven
+ * sections and asked for the download twice, at the top and again at the very
+ * bottom, with four empty preview boxes between them.
+ */
+const Download = () => (
+  <div className="min-h-screen bg-black text-white">
+    <DownloadHero />
+    <Platforms />
+    <Surfaces />
+    <Capabilities />
+    <Models />
+    <Integrations />
+    <FAQ />
+    <HanzoDev />
+  </div>
+)
 
-import React from "react";
-import DownloadHero from "@/components/download/DownloadHero";
-import DownloadFeatures from "@/components/download/DownloadFeatures";
-import VoiceFeature from "@/components/download/VoiceFeature";
-import TextInteraction from "@/components/download/TextInteraction";
-import ScreenCapture from "@/components/download/ScreenCapture";
-import Customization from "@/components/download/Customization";
-import Integrations from "@/components/download/Integrations";
-import Extensions from "@/components/download/Extensions";
-import FAQ from "@/components/download/FAQ";
-import CallToAction from "@/components/download/CallToAction";
-import HanzoDev from "@/components/download/HanzoDev";
-
-const Download = () => {
-  return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
-      
-      <main>
-        <DownloadHero />
-        <DownloadFeatures />
-        <VoiceFeature />
-        <TextInteraction />
-        <ScreenCapture />
-        <Customization />
-        <Extensions />
-        <Integrations />
-        <FAQ />
-        <HanzoDev />
-        <CallToAction />
-      </main>
-      
-    </div>
-  );
-};
-
-export default Download;
+export default Download

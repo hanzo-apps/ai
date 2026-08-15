@@ -1,68 +1,58 @@
 'use client'
 
+import { Faq } from '@/components/ui/faq'
+import { SECTION, HOLD, HEAD } from './style'
 
-import React from "react";
-import { motion } from "@/components/motion";
-import { Faq } from "@/components/ui/faq";
+/**
+ * The questions someone actually stops to ask before installing.
+ *
+ * Six, down from seven, and the three that went were the ones the page already
+ * answers: what platforms it runs on (the list above it), how to get started
+ * (download, open) and what the VS Code extension does (the row that installs
+ * it). A question whose answer is one screen up is a page arguing with itself.
+ */
+const QUESTIONS = [
+  {
+    question: 'Do I need a paid plan?',
+    answer:
+      'No. The desktop app is free to use, and a large part of the model catalog is callable at no cost. A Hanzo subscription raises the limits and unlocks the paid models; you can start without one and add it later from your account.',
+  },
+  {
+    question: 'How is the desktop app different from the browser?',
+    answer:
+      'The browser extension works inside the page you are looking at. The desktop app works everywhere else — it can hear the meeting you are in, read the window you are pointing at, take a keystroke from any app, and put its answer back where you were typing.',
+  },
+  {
+    question: 'Is my data private?',
+    answer:
+      'Transcription and screen capture are processed on your device wherever the hardware allows, so the audio and the pixels do not leave it. What is sent to a model is sent under our data policy, and nothing is used to train anything.',
+  },
+  {
+    question: 'Does it work offline?',
+    answer:
+      'Partly. Capture, transcription and your local history keep working with no connection. Anything that needs a model needs the network, unless you are running a local model through Hanzo Dev.',
+  },
+  {
+    question: 'Can I connect my own tools?',
+    answer:
+      'Yes — over Model Context Protocol. Anything that speaks MCP can be added, alongside the built-in connections to GitHub, Notion, Linear, Slack and Calendar.',
+  },
+  {
+    question: 'Is there a Linux build?',
+    answer:
+      'Yes, for x86_64 and arm64, in the list above. Every build and its checksum is published on the releases page.',
+  },
+]
 
-const FAQ = () => {
-  const faqs = [
-    {
-      question: "What platforms does the Hanzo desktop app support?",
-      answer: "Currently, the Hanzo desktop app supports macOS (both Apple Silicon and Intel) and Windows. Mobile support for iOS and Android is coming soon. We also offer browser extensions for Chrome, Firefox, and Edge, as well as a VS Code extension."
-    },
-    {
-      question: "How do the browser extensions differ from the desktop app?",
-      answer: "The browser extensions provide core Hanzo functionality within your browser, while the desktop app offers system-wide capabilities including screen capture, voice commands, and integration with all applications on your computer. For the most complete experience, we recommend using the desktop app."
-    },
-    {
-      question: "Is my data kept private?",
-      answer: "Yes, your data privacy is our priority. Audio transcription and screen captures are processed locally on your device whenever possible, and we maintain strict data protection policies for any cloud processing."
-    },
-    {
-      question: "How do I get started with the desktop app?",
-      answer: "Simply download the appropriate version for your operating system, run the installer, and follow the on-screen instructions. The app will guide you through the initial setup process."
-    },
-    {
-      question: "Can I use the desktop app offline?",
-      answer: "Some features are available offline, but full functionality requires an internet connection for AI processing and integration with cloud services."
-    },
-    {
-      question: "Do I need a subscription to use the desktop app?",
-      answer: "The basic features of the desktop app are free to use. Premium features require a Hanzo subscription, which you can manage through your account settings."
-    },
-    {
-      question: "How does the VS Code extension work with Hanzo?",
-      answer: "The Hanzo VS Code extension brings AI-powered code assistance directly into your development environment. It works alongside the desktop app to provide contextual code generation, refactoring, and documentation based on your project context."
-    }
-  ];
-
-  return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)]">
-      <div className="max-w-4xl mx-auto">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-[var(--white)]">
-            Common Questions
-          </h2>
-        </motion.div>
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <Faq items={faqs} />
-        </motion.div>
+const FAQ = () => (
+  <section className={SECTION}>
+    <div className={HOLD}>
+      <h2 className={HEAD}>Questions</h2>
+      <div className="mt-8">
+        <Faq items={QUESTIONS} />
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+)
 
-export default FAQ;
+export default FAQ
