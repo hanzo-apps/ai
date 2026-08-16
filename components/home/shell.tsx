@@ -13,7 +13,7 @@ import { useIam } from '@hanzo/iam/react'
 import { cloudCategories } from '@/lib/data/cloud-primitives'
 import { policy } from '@/lib/publish'
 import pages from '@/lib/data/pages.json'
-import { AGENCY, APP, CHAT, CONSOLE, DOCS as DOCS_HOST, FOUNDATION, STUDIO, goToChat } from './nav-data'
+import { AGENCY, APP, CHAT, CLOUD, CONSOLE, DOCS as DOCS_HOST, FOUNDATION, STUDIO, goToChat } from './nav-data'
 
 /**
  * The chrome links a page iff it is PUBLISHED — the same `policy()` that
@@ -57,6 +57,19 @@ const shown = (href: string): boolean => {
  * correct for a foreign property embedding the menu, wrong for the site that
  * owns the pages, which would leave cloud.hanzo.ai's menu pointing off-host.
  */
+/**
+ * What cloud.hanzo.ai's bar carries, by id.
+ *
+ * An ALLOW-LIST over the one nav, not a second nav: a bar written twice drifts,
+ * and this repo has already paid for that (three hand-written navs, all
+ * disagreeing — see the module note above). Adding an entry for both surfaces
+ * is one edit; adding it for cloud is one edit and one id here.
+ *
+ * `platform` is deliberately absent — on this surface the taxonomy IS the menu,
+ * so the link would point at the page the reader is standing on.
+ */
+const CLOUD_NAV = new Set(['developers', 'solutions'])
+
 /** How many leaves a mega-menu tile shows before handing off to its page. */
 const MENU_LEAVES = 5
 
@@ -168,57 +181,22 @@ export function SiteHeader({
   // disappears rather than 404s — which is also why each list is written long
   // and filtered rather than trimmed by hand.
   const localNav: HanzoNav[] = ([
-    {
-      id: 'products',
-      label: 'Products',
-      href: '/products',
-      glyph: 'blocks',
-      items: ([
-        { id: 'p-chat', label: 'Chat', href: CHAT, glyph: 'chat', hint: 'Ask anything' },
-        { id: 'p-app', label: 'App', href: APP, glyph: 'blocks', hint: 'Build and ship apps' },
-        { id: 'p-team', label: 'Team', href: '/team', glyph: 'users', hint: 'People and AI coworkers' },
-        { id: 'p-dev', label: 'Dev', href: '/dev', glyph: 'terminal', hint: 'A coding agent in your terminal' },
-        { id: 'p-studio', label: 'Studio', href: STUDIO, glyph: 'display', hint: 'Build and tune models' },
-        { id: 'p-insights', label: 'Insights', href: '/insights', glyph: 'spark', hint: 'What customers did' },
-      ] as HanzoLink[]).filter((l) => shown(l.href)),
-      groups: [
-        {
-          id: 'intelligence',
-          title: 'Intelligence',
-          items: ([
-            { id: 'g-enso', label: 'Enso', href: '/enso' },
-            { id: 'g-models', label: 'Models', href: '/models' },
-            { id: 'g-agents', label: 'Agents', href: '/agents' },
-            { id: 'g-zen', label: 'Zen', href: '/zen' },
-          ] as HanzoLink[]).filter((l) => shown(l.href)),
-        },
-        {
-          id: 'build',
-          title: 'Build',
-          items: ([
-            { id: 'g-code', label: 'Code', href: '/code' },
-            { id: 'g-functions', label: 'Functions', href: '/functions' },
-            { id: 'g-tabs', label: 'Tabs', href: '/tabs' },
-            { id: 'g-mcp', label: 'MCP', href: '/mcp' },
-            { id: 'g-zap', label: 'ZAP', href: '/zap' },
-            { id: 'g-base', label: 'Base', href: '/base' },
-          ] as HanzoLink[]).filter((l) => shown(l.href)),
-        },
-        {
-          id: 'run',
-          title: 'Run',
-          items: ([
-            { id: 'g-cloud', label: 'Hanzo Cloud', href: '/cloud' },
-            { id: 'g-compute', label: 'Compute', href: '/products/compute' },
-            { id: 'g-data', label: 'Data', href: '/products/data' },
-            { id: 'g-storage', label: 'Storage', href: '/storage' },
-            { id: 'g-network', label: 'Network', href: '/network' },
-            { id: 'g-o11y', label: 'Observability', href: '/o11y' },
-            { id: 'g-security', label: 'Security', href: '/security' },
-          ] as HanzoLink[]).filter((l) => shown(l.href)),
-        },
-      ],
-    },
+    // Platform is a LINK to cloud.hanzo.ai, not a menu drawn here.
+    //
+    // This taxonomy is the cloud's own primitives (see PRODUCTS_TAXONOMY, built
+    // from cloudCategories), and cloud.hanzo.ai is the page that presents them.
+    // Carrying a second copy as a mega-menu on this surface meant the same list
+    // was rendered in two places and could answer to two different names — it
+    // already did, reading Products here and Platform on hanzo.app.
+    //
+    // `/products` is withdrawn, so there is no local page to point at either.
+    // One list, one home, and a door to it from here.
+    // On hanzo.ai only. cloud.hanzo.ai IS the page this points at, so on that
+    // surface the taxonomy renders as the menu below and a link to itself would
+    // be the door you are already standing in.
+    ...(surface === 'cloud'
+      ? []
+      : [{ id: 'platform', label: 'Platform', href: CLOUD, external: true, glyph: 'blocks' } as HanzoNav]),
     {
       id: 'developers',
       label: 'Developers',
@@ -346,7 +324,22 @@ export function SiteHeader({
     // rendered nothing, because the mark set spells it `spark`. `satisfies`
     // checks the literal against the type and still infers it, which is the
     // whole difference between a claim and a question.
-  ] satisfies HanzoNav[]).filter((l) => shown(l.href))
+  ] satisfies HanzoNav[])
+    .filter((l) => shown(l.href))
+    // Two surfaces, two jobs, so two bars.
+    //
+    // hanzo.ai is the company's front door and answers "who is this and what
+    // do they make": the platform, then who builds on it, who buys it, what we
+    // research, who we are, who governs us.
+    //
+    // cloud.hanzo.ai is the PRODUCT, and a reader who is already there has
+    // stopped asking those questions. Its bar is the platform itself — the ten
+    // categories as the mega-menu below — plus the three things somebody
+    // evaluating it reaches for. Research, Company and Foundation are about
+    // the company and belong on the company's page; carrying them here made
+    // the product site read as a second copy of the marketing site with a
+    // different hero.
+    .filter((l) => (surface === 'cloud' ? CLOUD_NAV.has(l.id) : true))
 
   // ONE action, far right: try the thing.
   //
@@ -412,7 +405,11 @@ export function SiteHeader({
           secondaryCTA: DOCS,
           primaryCTA: TRY,
         }}
-        productsTaxonomy={PRODUCTS_TAXONOMY}
+        // The mega-menu belongs to the surface that OWNS these pages. It is the
+        // cloud's own primitives, and cloud.hanzo.ai presents them; drawing a
+        // second copy on hanzo.ai meant one list rendered twice under two
+        // names. From hanzo.ai it is the Platform link above.
+        productsTaxonomy={surface === 'cloud' ? PRODUCTS_TAXONOMY : undefined}
         // "Platform", the same word hanzo.app opens this taxonomy under. It is
         // one taxonomy, so it should answer to one name across the estate —
         // this surface was the only one still calling it Products, which reads
