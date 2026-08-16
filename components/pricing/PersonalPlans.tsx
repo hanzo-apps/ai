@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
-import { Code, Zap, Users, Rocket, Sparkles } from "lucide-react";
+import { Zap, Users, Rocket, Sparkles } from "lucide-react";
 import { loadPlans, fallbackPlans, sellableFeatures, planCheckoutUrl, type SubscriptionPlan } from "@/lib/plans";
 import { Box } from '@hanzo/ui'
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
+  free: <Sparkles className="h-6 w-6 text-muted-foreground" />,
   go: <Rocket className="h-6 w-6 text-muted-foreground" />,
-  dev: <Code className="h-6 w-6 text-muted-foreground" />,
   pro: <Zap className="h-6 w-6 text-muted-foreground" />,
   max: <Users className="h-6 w-6 text-muted-foreground" />,
 };
@@ -20,48 +20,19 @@ function planCtaLabel(): string {
 // Where an account is made. The same door the rest of the site sends people to.
 const SIGNUP_URL = "https://console.hanzo.ai";
 
-/**
- * The free tier, stated once.
- *
- * Free is NOT a billing row. It has no price, no checkout and no credit, so it
- * is not in the price catalog and does not pretend to be — putting a $0 row in
- * a catalog of things that charge would make every consumer of that catalog
- * filter it back out again, which is what `isSellable` was already doing.
- *
- * What it is, is the first rung, and it belongs first: an account, our free
- * models, a limited amount of use each day. The bullets say "limited" without a
- * number on purpose — the daily allowance is set by the free-model pool and
- * moves with it, and a number printed here would be a promise the pool has
- * never made.
- */
-const FREE = {
-  name: "Free",
-  // Kept no longer than the longest catalog description (Go, 82 chars). The
-  // card reserves a fixed block for this so every button lands on one line, and
-  // a description that outruns the reserve pushes only its own card's button
-  // down — which is what a 103-character first draft did at 1024.
-  description: "An account, the free models, and a little compute to try Hanzo properly.",
-  features: [
-    "The free models, with a daily limit",
-    "A small amount of sandbox compute",
-    "Chat, the desktop app, and web search",
-    "Community support",
-    "Every open source release and model, free to self-host",
-  ],
-};
-
-// What the CATALOG may contribute to the paid lineup: a row that charges.
+// What the CATALOG may contribute to the lineup: a rung anyone can start on
+// without talking to us.
 //
-// A zero here does not mean free — Enterprise is served at 0 to mean "ask us" —
-// so a $0 row rendered as a plan card would print "Free" over a tier that is
-// the most expensive thing we sell. Free is its own card above, written by
-// hand because it has no billing row to read.
+// A zero alone does not say which — Enterprise is served at 0 to mean "ask us",
+// and Free is served at 0 because it costs nothing — so contactSales is what
+// separates them. Free was written by hand here for as long as it had no
+// billing row to read; it has one now, and reads like every other rung.
 //
 // The filter runs on the fetched list as well as the seeded one, because the
 // live response replaces the array wholesale and a filter on only one path is
 // a filter that does not hold.
 const isSellable = (p: SubscriptionPlan) =>
-  p.priceMonthly != null && p.priceMonthly > 0;
+  !p.contactSales && p.priceMonthly != null;
 
 // There is no static ladder here any more. It used to be a hand-copied array of
 // plan rows, which is precisely how this page came to publish Pro at one price
@@ -110,37 +81,31 @@ const PersonalPlans = () => {
         compute. Paid gets you the best models, higher limits, and real compute.
       </p>
 
-      <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
-        {/* Free leads. Everyone starts here, so it is the first thing read. */}
-        <PricingPlan
-          // No `plan`, so this card reports no plan click. Free is deliberately
-          // not a billing row, and it is the one rung that can never reach a
-          // checkout — counting it as a plan choice would dilute the step it
-          // sits in with the choice that definitionally cannot convert.
-          name={FREE.name}
-          icon={<Sparkles className="h-6 w-6 text-muted-foreground" />}
-          price="$0"
-          billingPeriod="/month"
-          description={FREE.description}
-          features={FREE.features}
-          checkoutUrl={SIGNUP_URL}
-          ctaLabel="Get started free"
-        />
-        {plans.map((plan) => (
-          <PricingPlan
-            key={plan.id}
-            plan={plan.id}
-            name={plan.name}
-            icon={PLAN_ICONS[plan.id] || iconFallback}
-            price={formatPrice(plan)}
-            billingPeriod={billingPeriod(plan)}
-            description={plan.description}
-            features={sellableFeatures(plan.features)}
-            popular={plan.popular}
-            checkoutUrl={planCheckoutUrl(plan)}
-            ctaLabel={planCtaLabel()}
-          />
-        ))}
+      {/* Free leads, because everyone starts there — and it leads because the
+          catalog puts it first, not because a card was placed ahead of the
+          list. */}
+      <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        {plans.map((plan) => {
+          const free = plan.priceMonthly === 0;
+          return (
+            <PricingPlan
+              key={plan.id}
+              // Free reports no plan click: it is the one rung that can never
+              // reach a checkout, and counting it would dilute the step it sits
+              // in with the choice that definitionally cannot convert.
+              plan={free ? undefined : plan.id}
+              name={plan.name}
+              icon={PLAN_ICONS[plan.id] || iconFallback}
+              price={formatPrice(plan)}
+              billingPeriod={billingPeriod(plan)}
+              description={plan.description}
+              features={sellableFeatures(plan.features)}
+              popular={plan.popular}
+              checkoutUrl={free ? SIGNUP_URL : planCheckoutUrl(plan)}
+              ctaLabel={free ? "Get started free" : planCtaLabel()}
+            />
+          );
+        })}
       </Box>
 
       {/* The free path is now a card, not a footnote, so this line carries the

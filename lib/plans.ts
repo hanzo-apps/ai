@@ -13,7 +13,7 @@
  *                           NO `features` on any of them. Shaped `{plans:[…]}`.
  *
  * They collide on the words "pro" and "enterprise" and on nothing else: `pro`
- * the subscription is $20/mo, `pro` the VM tier is $25/mo for 2 vCPU. Reading
+ * the subscription is $19/mo, `pro` the VM tier is $25/mo for 2 vCPU. Reading
  * the VM catalog to render subscriptions is not a wrong number, it is a wrong
  * product — and it crashed this page. The team/enterprise view filtered /v1/plans
  * for `category === "enterprise"`, matched the $429 VM row, replaced the real

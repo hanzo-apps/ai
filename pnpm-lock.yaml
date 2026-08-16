@@ -50,8 +50,8 @@ importers:
         specifier: ^0.1.7
         version: 0.1.7(react@19.2.8)
       '@hanzo/plans':
-        specifier: ^1.4.12
-        version: 1.4.12
+        specifier: ^1.4.16
+        version: 1.4.16
       '@hanzo/ui':
         specifier: ^8.0.102
         version: 8.0.102(ejolrp37dq7tthfemyvkqx7w7q)
@@ -1015,8 +1015,8 @@ packages:
       react:
         optional: true
 
-  '@hanzo/plans@1.4.12':
-    resolution: {integrity: sha512-jufyhOTaCyPAVUIb+kZuz42LvrDksSrkAev3gMoVSID2Dj4kOwpf9/rvxpUs2z1RhPwJjDH6cSeLHSzuTgqxvA==}
+  '@hanzo/plans@1.4.16':
+    resolution: {integrity: sha512-/YEJx8/bD3C7A8NZVG2Nck623uEi7NuHq2GIQWrdMy5OSoEhzHcv8EA1KocrEaiYiSNJdgFfHnzQXsACiZrqMw==}
 
   '@hanzo/products@0.2.0':
     resolution: {integrity: sha512-SGVBJvJOyN5a7DXacwlRpLOoDjNXGx5ucWMkRAp/ZUP7DOqm9lZlypGG+uXvLmURIUr3SQ152jVgSugm0vXIjw==}
@@ -4737,7 +4737,7 @@ snapshots:
     optionalDependencies:
       react: 19.2.8
 
-  '@hanzo/plans@1.4.12': {}
+  '@hanzo/plans@1.4.16': {}
 
   '@hanzo/products@0.2.0(@hanzogui/lucide-icons-2@8.1.1(react-dom@19.2.8(react@19.2.8))(react-native-svg@15.15.5(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react@19.2.8))(react@19.2.8)':
     optionalDependencies:

@@ -42,7 +42,7 @@
     "@hanzo/iam": "^0.21.13",
     "@hanzo/logo": "^1.0.20",
     "@hanzo/observe": "^0.1.7",
-    "@hanzo/plans": "^1.4.12",
+    "@hanzo/plans": "^1.4.16",
     "@hanzo/ui": "^8.0.102",
     "@hanzo/usage": ">=0.1.6",
     "@hanzo/voice": "^0.1.8",

@@ -25,7 +25,7 @@ const OrganizationProfile = () => {
     location: "San Francisco, CA",
     website: "https://hanzo.industries",
     teamSize: "43 members",
-    plans: "Pro Plan ($20/month)",
+    plans: "Pro Plan ($19/month)",
     security: "Enterprise Security, GDPR Ready"
   };
 
@@ -89,7 +89,7 @@ const OrganizationProfile = () => {
           <Box className="bg-[var(--black)] border-0 rounded-lg p-6">
             <h3 className="font-medium text-muted-foreground mb-2">Current Plan</h3>
             <Box className="text-2xl font-bold">Pro Plan</Box>
-            <Box className="text-sm text-muted-foreground mt-1">$16/month, billed annually</Box>
+            <Box className="text-sm text-muted-foreground mt-1">$16.50/month, billed annually</Box>
           </Box>
           
           <Box className="bg-[var(--black)] border-0 rounded-lg p-6">
