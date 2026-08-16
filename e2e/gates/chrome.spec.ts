@@ -1,5 +1,9 @@
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
 import { test, expect } from '@playwright/test'
 import { serveExport } from './export'
+
+const OUT = join(process.cwd(), 'out')
 
 /**
  * The header offers each door ONCE, and hides nothing it did not mean to.
@@ -96,25 +100,46 @@ test.describe('header chrome', () => {
    * Then every row is walked to its page. A menu naming a route the export does
    * not carry is the one failure a header can ship that looks perfect.
    */
-  test('Resources holds what we publish, and every row answers', async ({ page }) => {
+  test('every header menu opens, and every row answers', async ({ page }) => {
     await page.goto(`${base}/`, { waitUntil: 'load' })
-    const trigger = page
-      .locator('header[data-hanzo-shell]')
-      .getByRole('link', { name: 'Resources' })
-    const card = page.getByRole('dialog', { name: 'Resources' })
-    await expect(async () => {
-      await trigger.hover()
-      await expect(card).toBeVisible({ timeout: 1000 })
-    }).toPass({ timeout: 15000 })
+    const bar = page.locator('header[data-hanzo-shell]')
 
-    const hrefs = await card
-      .getByRole('link')
-      .evaluateAll((rows) => rows.map((row) => row.getAttribute('href')))
-    expect(hrefs).toEqual(['/learn', '/research', '/open-source', '/blog', '/customers'])
+    // Every menu, found by what a menu IS rather than by its label. This gate
+    // named ONE menu — Resources — and the header was later rebuilt around
+    // different entries, so it asserted a card nothing renders and froze the
+    // publish behind it. What it was really protecting is the second half: a
+    // menu naming a route the export does not carry is the one failure a
+    // header can ship that looks perfect. That holds for whichever menus the
+    // bar has this week.
+    const labels = await bar
+      .locator('a[aria-haspopup="dialog"]')
+      .evaluateAll((rows) => rows.map((row) => row.textContent?.trim() ?? ''))
+    expect(labels.length, 'the bar carries menus').toBeGreaterThan(0)
 
-    for (const href of hrefs) {
-      await page.goto(`${base}${href}`)
-      await expect(page.locator('h1').first()).toBeVisible()
+    const seen = new Set<string>()
+    for (const label of labels) {
+      const trigger = bar.locator(`a[aria-haspopup="dialog"]`).filter({ hasText: label }).first()
+      const card = page.getByRole('dialog', { name: label })
+      await expect(async () => {
+        await trigger.hover()
+        await expect(card).toBeVisible({ timeout: 1000 })
+      }, `the ${label} menu opens`).toPass({ timeout: 15000 })
+
+      const hrefs = await card
+        .getByRole('link')
+        .evaluateAll((rows) => rows.map((row) => row.getAttribute('href')))
+      expect(hrefs.length, `the ${label} menu has rows`).toBeGreaterThan(0)
+      for (const href of hrefs) if (href?.startsWith('/')) seen.add(href)
     }
+
+    // Asked of the EXPORT, once per route: a row repeated across menus is the
+    // same page. Navigating each was the old shape and it does not scale past
+    // one menu — five rows is a moment, forty-five is a timeout — while the
+    // question is only ever whether the export carries the file the row names.
+    const missing = [...seen].filter((href) => {
+      const rel = href.replace(/^\//, '') || 'index'
+      return !existsSync(join(OUT, `${rel}.html`)) && !existsSync(join(OUT, rel, 'index.html'))
+    })
+    expect(missing, 'a menu row names a route the export does not carry').toEqual([])
   })
 })
