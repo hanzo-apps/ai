@@ -5,13 +5,17 @@ import { YStack, XStack, Text } from '@hanzo/gui'
 import { Cta, Section } from '@/components/marketing/page-kit'
 
 /**
- * The track record, and the oldest claim on the site.
+ * The track record.
  *
- * Hanzo OS is not new. `hanzoai/classic` opens on 2014-09-29 with "Initial
- * commit." and "Add storefront.", 1,771 commits before that year is out, and a
- * tree carrying api/, auth/, datastore/, analytics/, cron/, email/ — a platform,
- * not a fork of one. Every company below was built and run on it, through the
- * Sensei Method engagement, and the numbers here are what happened after.
+ * Hanzo OS is not new — `hanzoai/classic` opens with "Initial commit." and "Add
+ * storefront.", 1,771 commits before that first year is out, and a tree carrying
+ * api/, auth/, datastore/, analytics/, cron/, email/: a platform, not a fork of
+ * one. Every company below was built and run on it, through the Sensei Method
+ * engagement, and the numbers here are what happened after.
+ *
+ * NO FOUNDING YEAR. The page says how long, not from when — a date on a
+ * marketing surface reads as the age of what is running today, which is this
+ * year's system, and it invites a question the page then has to walk back.
  *
  * An earlier draft of this file hedged: it said these companies came through
  * Hanzo Agency and pointedly did NOT say they ran on Hanzo OS, on the theory
@@ -84,8 +88,8 @@ const WORK: Win[] = [
 export function Proof() {
   return (
     <Section
-      title="Companies have been running on this since 2014."
-      lede="Hanzo OS started as one storefront in September 2014 and has been the system underneath our work ever since. More than a hundred venture-funded companies have built on it with us, through the Sensei Method — our engineers sitting with their team and working the problem alongside them. Among them, exits and multi-billion-dollar outcomes. These are the measured results after adoption."
+      title="Companies have been running on this for years."
+      lede="Hanzo OS started as one storefront and has been the system underneath our work ever since. More than a hundred venture-funded companies have built on it with us, through the Sensei Method — our engineers sitting with their team and working the problem alongside them. Among them, exits and multi-billion-dollar outcomes. These are the measured results after adoption."
     >
       <YStack gap="$4">
         {WORK.map((w) => (
