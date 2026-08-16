@@ -325,16 +325,28 @@ export function SiteHeader({
             { id: 'c-philosophy', label: 'Philosophy', href: '/philosophy' },
             { id: 'c-osfund', label: 'Open Source Fund', href: '/open-source-fund' },
             { id: 'c-status', label: 'Status', href: '/status' },
-            // Zoo Labs Foundation governs Hanzo. It held a top-level slot in the
-            // bar, spending one of five on an institution nobody arrives looking
-            // for — governance is something a reader looks UP once, and this is
-            // where they look.
-            { id: 'c-foundation', label: 'Foundation', href: FOUNDATION, external: true },
           ] as HanzoLink[]).filter((l) => shown(l.href)),
         },
       ],
     },
-  ] as HanzoNav[]).filter((l) => shown(l.href))
+    // Zoo Labs Foundation governs Hanzo, and it is the one entry here that
+    // leaves for another institution — so it is a LINK, last, wearing the
+    // marker that says so, rather than a section that opens.
+    //
+    // It sat inside Company for a while on the argument that governance is
+    // looked up once and does not deserve a slot. That is true of a menu you
+    // read; it is false of a menu you SCAN, which is what the top level is for.
+    // Who owns this company is a question a reader answers before anything else
+    // on the page matters, and burying it under a section made the answer look
+    // like a detail of ours instead of a separate body.
+    { id: 'foundation', label: 'Foundation', href: FOUNDATION, external: true, glyph: 'globe' },
+    // `satisfies`, never `as`. An assertion tells the compiler what the literal
+    // is; it does not ask. So every glyph name, every field and every typo in
+    // this array went unchecked — `glyph: 'sparkles'` type-checked clean and
+    // rendered nothing, because the mark set spells it `spark`. `satisfies`
+    // checks the literal against the type and still infers it, which is the
+    // whole difference between a claim and a question.
+  ] satisfies HanzoNav[]).filter((l) => shown(l.href))
 
   // ONE action, far right: try the thing.
   //
