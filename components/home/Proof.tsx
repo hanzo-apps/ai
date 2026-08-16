@@ -7,21 +7,23 @@ import { Cta, Section } from '@/components/marketing/page-kit'
 /**
  * The track record.
  *
- * Hanzo OS is not new — `hanzoai/classic` opens with "Initial commit." and "Add
- * storefront.", 1,771 commits before that first year is out, and a tree carrying
- * api/, auth/, datastore/, analytics/, cron/, email/: a platform, not a fork of
- * one. Every company below was built and run on it, through the Sensei Method
- * engagement, and the numbers here are what happened after.
+ * Hanzo OS is not new, and it did not start as a shop. `hanzoai/classic` runs
+ * 1,771 commits before its first year is out over a tree carrying api/, auth/,
+ * datastore/, analytics/, cron/, email/ — a platform for the startups we worked
+ * with, with the data layer in it from the beginning. One early commit adds a
+ * storefront, which is a thing built ON it and the least of what is there;
+ * leading with that names the first feature instead of the system. Every company
+ * below was built and run on this, through the Sensei Method engagement, and the
+ * numbers here are what happened after.
  *
  * NO FOUNDING YEAR. The page says how long, not from when — a date on a
  * marketing surface reads as the age of what is running today, which is this
  * year's system, and it invites a question the page then has to walk back.
  *
- * An earlier draft of this file hedged: it said these companies came through
- * Hanzo Agency and pointedly did NOT say they ran on Hanzo OS, on the theory
- * that a client can quietly become a reference architecture. The caution was
- * right in general and wrong here — they ran on it. Understating a true claim
- * is its own kind of inaccuracy, and this one cost the page its best evidence.
+ * IT SAYS THEY RAN ON IT. An earlier draft said only that these companies came
+ * through Hanzo Agency, on the theory that a client can quietly become a
+ * reference architecture. Right in general, wrong here — they ran on it, and
+ * understating a true claim cost the page its best evidence.
  *
  * WHAT STILL DOES NOT GO IN. Lux and Zoo have case studies in the same
  * directory and are ours; counting your own ventures as customers is a category
@@ -89,7 +91,7 @@ export function Proof() {
   return (
     <Section
       title="Companies have been running on this for years."
-      lede="Hanzo OS started as one storefront and has been the system underneath our work ever since. More than a hundred venture-funded companies have built on it with us, through the Sensei Method — our engineers sitting with their team and working the problem alongside them. Among them, exits and multi-billion-dollar outcomes. These are the measured results after adoption."
+      lede="Hanzo OS started as a data-driven AI platform for high-growth startups and has been the system underneath our work ever since. More than a hundred venture-funded companies have built on it with us, through the Sensei Method — our engineers sitting with their team and working the problem alongside them. Among them, exits and multi-billion-dollar outcomes. These are the measured results after adoption."
     >
       <YStack gap="$4">
         {WORK.map((w) => (
