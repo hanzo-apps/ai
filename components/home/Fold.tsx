@@ -64,14 +64,24 @@ export default function Fold() {
             consequence is the product: the layers were designed together, so
             there are no seams to pay for. That is a category, and a category is
             what a front door should state. */}
+        {/* The date belongs HERE, as a credential, and not in the category line
+            below it. "The operating system for agentic companies, since 2014"
+            invites the one question we cannot answer — agentic companies did not
+            exist in 2014 — and a reader who spots that stops trusting the rest of
+            the page. As an eyebrow it reads as heritage, which is what it is. */}
         <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
-          Hanzo OS
+          Hanzo OS · Since 2014
         </p>
         <h1 className="hz-display">
           Everything your company needs. Built together.
         </h1>
+        {/* The category names the COMPANY, not the era and not the agent. What
+            has been true since 2014 is that the layers were built together; what
+            changed is who operates them. Pin the category to the thing that
+            lasted and the arc holds — "agentic" is this year's word for the
+            operator, and a category line has to outlive that. */}
         <p className="mx-auto mt-5 max-w-2xl text-2xl leading-snug text-neutral-200 sm:text-3xl">
-          The operating system for AI-native companies.
+          The complete operating system for the modern company.
         </p>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-neutral-400">
           Frontier intelligence, AI coworkers, the applications a company runs on, secure
