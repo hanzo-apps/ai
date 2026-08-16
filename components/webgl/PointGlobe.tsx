@@ -451,7 +451,24 @@ export default function PointGlobe({
     const mry = new Float32Array(16)
     const mv = new Float32Array(16)
     const mvp = new Float32Array(16)
-    const camDist = 3.15
+    /**
+     * FRAME is the distance that framed the globe edge to edge; SCALE is how
+     * much of that it fills now. Dollying the camera back is the whole move —
+     * the sphere is unchanged, so nothing that reads a position has to know.
+     *
+     * Point sizes keep measuring against FRAME rather than the new distance, so
+     * the dots shrink WITH the globe: `gl_PointSize` divides by depth, and
+     * FRAME over a camera twice as far away is exactly SCALE. Sizing them
+     * against the new distance instead would hold every dot at its old pixel
+     * size and pack the same count into a quarter of the area — a denser
+     * picture, not a smaller one.
+     *
+     * `vFade` reads `uCamDist - clip.w`, a depth RELATIVE to the camera, so the
+     * near-to-far falloff is the same at any distance and needs no rescaling.
+     */
+    const FRAME = 3.15
+    const SCALE = 0.5
+    const camDist = FRAME / SCALE
     view[0] = 1; view[5] = 1; view[10] = 1; view[15] = 1; view[14] = -camDist
 
     let aspect = 1
@@ -493,7 +510,7 @@ export default function PointGlobe({
       gl!.uniform3f(uColor, color[0], color[1], color[2])
       gl!.uniform1f(uAlpha, alpha)
       gl!.uniform1f(uIsPoint, size > 0 ? 1 : 0)
-      gl!.uniform1f(uPointSize, size > 0 ? size * dpr * camDist : 0)
+      gl!.uniform1f(uPointSize, size > 0 ? size * dpr * FRAME : 0)
     }
 
     function draw(time: number) {
