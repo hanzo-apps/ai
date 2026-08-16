@@ -83,9 +83,9 @@ test.describe('the command palette', () => {
 
       // A subsequence through prose is not a result: "docs" walks d·o·c·s
       // through most sentences on the site, and answering that is what makes a
-      // search untrustworthy. Documentation, and almost nothing else.
+      // search untrustworthy. The docs row, and almost nothing else.
       const docs = await results(page, 'docs')
-      expect(docs[0]).toBe('Documentation')
+      expect(docs[0]).toBe('Docs')
       expect(docs.length).toBeLessThanOrEqual(3)
 
       // No query is a dead end — whatever was typed can always be asked.
