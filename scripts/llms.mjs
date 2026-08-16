@@ -16,6 +16,7 @@
  */
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, statSync } from 'node:fs'
 import { dirname, join, relative } from 'node:path'
+import { indexable } from '../lib/publish.ts'
 
 const OUT = 'out'
 const SITE = 'https://hanzo.ai'
@@ -99,15 +100,18 @@ const full = []
 
 for (const file of pages.sort()) {
   const html = readFileSync(file, 'utf8')
+  const route = '/' + relative(OUT, file).replace(/\.html$/, '').replace(/^index$/, '')
   // Anything withheld from indexing is withheld here too — one gate, one answer.
-  if (/<meta name="robots" content="[^"]*noindex/.test(html)) continue
+  // Asked of the ROUTE, which is where the answer lives, rather than read back
+  // off the tag in the built page: the tag is one rendering of this decision,
+  // and matching it here would be a second spelling to keep in step.
+  if (!indexable(route)) continue
 
   const body = mainOf(html)
   if (!body) continue
   const md = toMarkdown(body)
   if (md.length < 200) continue // a shell, not a page
 
-  const route = '/' + relative(OUT, file).replace(/\.html$/, '').replace(/^index$/, '')
   const title = strip((html.match(/<title>([^<]*)<\/title>/) || [, ''])[1])
   const description = meta(html, 'description')
 

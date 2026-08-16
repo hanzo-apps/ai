@@ -167,7 +167,11 @@ test('the doors card stays small', async ({ page }) => {
     await hydrated(page)
     // A LINK, not a button: the pill carries `primaryCTA.href` so it goes
     // somewhere before hydration and for anyone without JavaScript.
-    await page.getByRole('link', { name: 'Try Hanzo' }).click()
+    //
+    // Scoped to the BANNER, because this is the header's doors pill and the
+    // page is free to carry a CTA of its own by the same name — one does, and
+    // an unscoped role query matches both and refuses to guess.
+    await page.getByRole('banner').getByRole('link', { name: 'Try Hanzo' }).click()
 
     const card = page.locator('[role="dialog"][aria-label="Try Hanzo"]')
     await expect(card).toBeVisible()
