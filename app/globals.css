@@ -588,46 +588,6 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
   transform: none !important;
 }
 
-/* The products mega-menu lays its categories in EQUAL rows.
-
-   `@hanzogui/shell` 8.1.5 states `repeat(5, minmax(0,1fr))` INLINE. Five only
-   ever divided ten, so the seven categories `lib/publish` currently publishes
-   rendered as a 5x2 grid with three dead cells; and because the panel is a
-   full-bleed drape, at 2560 those five tracks were 507px wide apiece.
-
-   The counts come from `components/home/shell.tsx`, which is where the taxonomy
-   is and so is the only place that can count it; these rules choose between them
-   by width, which is the half no inline style can express. `!important` because
-   the declaration being defeated is inline — the same reason the `no-js` rules
-   above carry it.
-
-   This belongs IN the package, and the fix is written for it. The lineage
-   question that used to block it is settled: `hanzoai/gui` on the FORGE
-   (git.hanzo.ai) is the copy that publishes — it carries the current package
-   and `.hanzo/workflows/publish-gui-all.yml` ships it, which is how 8.1.14 was
-   released. Move `columnsFor` into `ProductsMegaMenu`, then delete this block
-   and the carrier in shell.tsx together. */
-[data-hanzo-shell][aria-label='Products'] > div {
-  max-width: 1800px;
-  margin-inline: auto;
-}
-
-[data-hanzo-shell][aria-label='Products'] > div > div {
-  grid-template-columns: repeat(var(--hanzo-products-cols-base, 4), minmax(0, 1fr)) !important;
-}
-
-@media (min-width: 1100px) {
-  [data-hanzo-shell][aria-label='Products'] > div > div {
-    grid-template-columns: repeat(var(--hanzo-products-cols-mid, 5), minmax(0, 1fr)) !important;
-  }
-}
-
-@media (min-width: 1400px) {
-  [data-hanzo-shell][aria-label='Products'] > div > div {
-    grid-template-columns: repeat(var(--hanzo-products-cols-wide, 7), minmax(0, 1fr)) !important;
-  }
-}
-
 /* Documentation is not a header action.
  *
  * It sat far right as the shell's secondary CTA — a link to ANOTHER HOST in the

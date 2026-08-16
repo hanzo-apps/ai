@@ -98,40 +98,6 @@ export const PRODUCTS_TAXONOMY: ProductCategory[] = cloudCategories.map((categor
 })
 
 /**
- * The column count that splits the taxonomy into EQUAL rows, no wider than `max`.
- *
- * Seven categories give one row of seven; ten give two rows of five — the shape
- * the shelves were written for. `@hanzogui/shell` 8.1.5 states a FIXED five
- * instead, which only ever divided ten: with seven published it laid a 5x2 grid
- * and left THREE dead cells in the second row, and at 2560 those five tracks
- * were 507px wide apiece, so a one-word leaf sat marooned in the middle of a
- * column. Deriving the count means the grid cannot hold a hole again whatever
- * `lib/publish` withdraws or restores.
- */
-const columnsFor = (n: number, max: number): number =>
-  n < 1 ? 1 : Math.ceil(n / Math.ceil(n / Math.min(max, n)))
-
-/**
- * The three counts the menu picks between, as custom properties.
- *
- * The COUNT is computed here, where the taxonomy is; the WIDTHS that choose
- * between them are three media queries in `app/globals.css`, because a media
- * query is the one thing an inline style cannot say. Neither half repeats the
- * other, and both are deleted together the day the fix lands in the package.
- *
- * `display: contents` on the carrier: the properties inherit down the DOM to
- * the panel, which is a descendant of the header, while no box is generated —
- * a real wrapper would become the sticky header's containing block and the
- * header would stop sticking the moment it scrolled.
- */
-const MENU_COLUMNS = {
-  display: 'contents',
-  '--hanzo-products-cols-base': columnsFor(PRODUCTS_TAXONOMY.length, 4),
-  '--hanzo-products-cols-mid': columnsFor(PRODUCTS_TAXONOMY.length, 5),
-  '--hanzo-products-cols-wide': columnsFor(PRODUCTS_TAXONOMY.length, 7),
-} as React.CSSProperties
-
-/**
  * What ⌘K can find besides the products: every page this site publishes.
  *
  * Written by `scripts/sync-pages.mjs` at prebuild from the App Router tree,
@@ -426,7 +392,7 @@ export function SiteHeader({
       }
 
   return (
-    <div style={MENU_COLUMNS}>
+    <>
       <HanzoHeader
         surface={{
           ...base,
@@ -441,7 +407,7 @@ export function SiteHeader({
         auth={auth}
         tryMenu
       />
-    </div>
+    </>
   )
 }
 
