@@ -1,6 +1,19 @@
-# Hanzo AI
+# Hanzo
 
-> Hanzo builds frontier AI models and the cloud that runs them.
+> Hanzo OS is the operating system for agentic companies.
+
+Hanzo OS unifies Enso, AI coworkers, secure execution, company data, full-stack
+observability and the cloud beneath them in one open system. Four layers —
+company, intelligence, execution, infrastructure — with learning and governance
+cutting across all of them.
+
+Run Hanzo OS on Hanzo Cloud or your own infrastructure.
+
+Enso is the intelligence layer: one endpoint that reads the objective, applies
+your policies and puts the right model behind the work. Zen is the open-weight
+family. Both run beside 500+ models on the same endpoint and the same key.
+
+Hanzo AI Inc, Techstars '17.
 
 ## About
 Hanzo AI (Techstars '17) trains its own models and operates the infrastructure
