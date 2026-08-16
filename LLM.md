@@ -1265,8 +1265,8 @@ that.** The catalog itself carries zero Enso rows, so there is nothing to
 render. The cards already sort Enso first (`ENSO_ORDER`) and the pipeline is
 wired end-to-end — verified against a synthetic newer catalog, which wrote,
 stamped and reported all three rows. Re-run `pnpm sync:pricing` once commerce
-publishes; do NOT hand-type the rates. (`enso-vl` / `enso-vl-pro` are internal
-SKUs and must never appear here — the sync prints every Enso name it sees, so a
+publishes; do NOT hand-type the rates. (`enso-vl` is the internal vision engine
+and must never appear here — the sync prints every Enso name it sees, so a
 leak shows up in the build log.)
 
 `STATIC_DATA` takes EVERY field from that one snapshot. `hanzoModels` used to
