@@ -21,7 +21,10 @@ export interface ModelData {
   description?: string
   context?: number
   modalities?: string[]
-  status: string
+  /** @zenlm/models' own union. Widened to `string` here once, which is what let
+   *  six `status !== 'coming-soon'` filters compile and silently match every
+   *  model — dead code that read as a safeguard. Narrow, so the next one fails. */
+  status: 'available' | 'cloud-only'
   category: string
   spec?: ModelSpec
   features?: string[]

@@ -141,7 +141,7 @@ function ModelCard({ model }: { model: ModelData }) {
 
 export default async function ModelsPage() {
   const data = await fetchModels()
-  const available = data.models.filter((m) => m.status !== 'coming-soon')
+  const available = data.models
   const byId = new Map(available.map((m) => [m.id, m]))
 
   // Group by lab. A leading `~` marks a latest-alias namespace of a lab that is

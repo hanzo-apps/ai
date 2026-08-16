@@ -22,7 +22,6 @@ interface Props {
 export async function generateStaticParams() {
   const data = await fetchModels()
   return data.models
-    .filter((m) => m.status !== 'coming-soon')
     .map((m) => {
       const { org, slug } = getOrgAndSlug(m.id)
       return { org, model: slug }
@@ -208,7 +207,7 @@ export default async function ModelPage({ params }: Props) {
   const related = data.models
     .filter((m) => {
       const { org: mOrg } = getOrgAndSlug(m.id)
-      return mOrg === org && m.id !== model.id && m.status !== 'coming-soon'
+      return mOrg === org && m.id !== model.id
     })
     .slice(0, 6)
 
@@ -265,11 +264,6 @@ export default async function ModelPage({ params }: Props) {
                   {model.tier && (
                     <span className="text-xs px-2 py-0.5 rounded-full bg-secondary border border-border text-muted-foreground">
                       {model.tier}
-                    </span>
-                  )}
-                  {model.status === 'preview' && (
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-white/70">
-                      preview
                     </span>
                   )}
                 </div>

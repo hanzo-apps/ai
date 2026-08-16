@@ -454,10 +454,12 @@ export const ossCatalog: OSSRepo[] = [
     id: 'cpp-sdk',
     name: 'C++ SDK',
     slug: 'hanzo-cpp/sdk',
-    description: 'Full cloud SDK for C++. Idiomatic, header-first, wired through find_package(hanzo).',
+    description: 'Full cloud SDK for C++. Header-first and idiomatic, built from source.',
     type: 'sdk',
     categories: ['Developer Tools'],
-    languages: ['Rust'],
+    // Was ['Rust'] -- the one entry in this catalog whose language disagreed
+    // with its own name, so it answered a filter for Rust and never for C++.
+    languages: ['C++'],
     useCases: ['Inference Gateway'],
     maturity: 'active',
     deployment: ['library'],

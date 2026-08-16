@@ -22,7 +22,6 @@ export async function generateStaticParams() {
   const data = await fetchModels()
   const orgs = new Set<string>()
   for (const model of data.models) {
-    if (model.status === 'coming-soon') continue
     const { org } = getOrgAndSlug(model.id)
     orgs.add(canonicalOrg(org))
   }
@@ -34,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = await fetchModels()
   const models = data.models.filter((m) => {
     const { org: mOrg } = getOrgAndSlug(m.id)
-    return canonicalOrg(mOrg) === org && m.status !== 'coming-soon'
+    return canonicalOrg(mOrg) === org
   })
   const providerName = orgDisplayName(org)
   const count = models.length
@@ -73,7 +72,7 @@ export default async function OrgPage({ params }: Props) {
 
   const orgModels = data.models.filter((m) => {
     const { org: mOrg } = getOrgAndSlug(m.id)
-    return canonicalOrg(mOrg) === org && m.status !== 'coming-soon'
+    return canonicalOrg(mOrg) === org
   })
 
   const providerName = orgDisplayName(org)
@@ -168,11 +167,6 @@ export default async function OrgPage({ params }: Props) {
                     {(model.modalities ?? []).slice(0, 3).map((m) => (
                       <ModalityBadge key={m} modality={m} />
                     ))}
-                    {model.status === 'preview' && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium uppercase tracking-wide bg-white/10 text-white/70">
-                        preview
-                      </span>
-                    )}
                   </div>
                 </Link>
               )
