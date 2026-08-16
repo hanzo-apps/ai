@@ -67,9 +67,12 @@ const PersonalPlans = () => {
     });
   }, []);
 
-  // Free leads, then everything that charges. Taking Free from the bundle and
-  // the rest from commerce means neither can produce it twice.
-  const ladder = [...(FREE ? [FREE] : []), ...plans.filter((p) => p.priceMonthly !== 0)];
+  // Free leads, then everything that charges. The live row wins when commerce
+  // publishes one — it is the authority, and its copy should reach the page —
+  // and the bundled row stands in until then, so the rung is never absent and
+  // never doubled.
+  const free = plans.find((p) => p.priceMonthly === 0) ?? FREE;
+  const ladder = [...(free ? [free] : []), ...plans.filter((p) => p.priceMonthly !== 0)];
 
   function formatPrice(plan: SubscriptionPlan) {
     if (plan.contactSales || plan.priceMonthly == null) return "Custom";
