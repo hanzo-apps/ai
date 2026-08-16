@@ -8,23 +8,23 @@ import { ShoppingCart, Repeat, LayoutGrid, CreditCard } from "lucide-react";
 const useCases = [
   {
     icon: <ShoppingCart className="h-6 w-6 text-foreground" />,
-    title: "Ecommerce",
-    description: "Sell directly to consumers worldwide with optimized, secure checkout experiences."
+    title: "Selling in several countries",
+    description: "You sell in more than one country and each one wants a different payment method. Add the connector, write the rule, leave the checkout alone."
   },
   {
     icon: <Repeat className="h-6 w-6 text-foreground" />,
-    title: "SaaS & Subscription",
-    description: "Automate recurring billing and manage complex pricing tiers."
+    title: "Recovering declines",
+    description: "Renewals fail for reasons that have nothing to do with the customer. Retrying through a second processor turns some of those failures back into payments."
   },
   {
     icon: <LayoutGrid className="h-6 w-6 text-foreground" />,
-    title: "Marketplaces",
-    description: "Integrate multi-party payments and payouts for buyers and sellers."
+    title: "Leaving a processor",
+    description: "The reason nobody switches is the rewrite. When the integration is here, moving is a routing change, and you can move a percentage first."
   },
   {
     icon: <CreditCard className="h-6 w-6 text-foreground" />,
-    title: "Embedded Finance",
-    description: "Embed financial services directly into your product, from cards to loans."
+    title: "Comparing two of them",
+    description: "Run both and read the approval rates side by side. The argument about which processor is better becomes a measurement."
   }
 ];
 
@@ -39,9 +39,9 @@ const UseCases = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Use Cases</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">When a switch earns its place</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Hanzo Payments powers diverse business models across industries with flexible, scalable solutions.
+            One processor and one country does not need one. These four do.
           </p>
         </motion.div>
 

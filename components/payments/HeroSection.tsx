@@ -17,19 +17,20 @@ const HeroSection = () => {
           className="text-center mb-8"
         >
           <span className="inline-block px-4 py-1 rounded-full bg-primary/10 border border-white/30 text-foreground/70 text-sm font-medium mb-4">
-            Integrated Global Payments Platform
+            Payment orchestration
           </span>
           <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-400 mb-6">
             Hanzo Payments
           </h1>
           <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto mb-8">
-            Effortlessly accept payments, manage subscriptions, and scale globally.
+            One integration, and the processor becomes a routing decision.
           </p>
           <p className="text-foreground/80 max-w-3xl mx-auto mb-10">
-            Hanzo Payments is a unified financial infrastructure that simplifies and automates payments, 
-            subscriptions, and global financial compliance. From innovative startups to enterprise giants, 
-            Hanzo Payments delivers customizable checkout experiences, native integrations, and powerful
-            analytics to drive revenue growth.
+            A switch that sits between your checkout and the companies that actually move the
+            money. You integrate once; it speaks to each processor in that processor&rsquo;s own
+            language. When one declines a payment another would have taken, it retries there
+            instead of handing your customer an error — and changing processors stops being a
+            project.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button 
@@ -55,10 +56,10 @@ const HeroSection = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16"
         >
           {[
-            { icon: <CreditCard className="h-6 w-6 text-foreground" />, title: "200+ Currencies", text: "Accept payments in local currencies worldwide" },
-            { icon: <Lock className="h-6 w-6 text-foreground" />, title: "Automatic Compliance", text: "Global tax and regulatory compliance built-in" },
-            { icon: <Globe className="h-6 w-6 text-foreground" />, title: "Global Reach", text: "Scale your business to new markets instantly" },
-            { icon: <Zap className="h-6 w-6 text-foreground" />, title: "Instant Setup", text: "Go live with payments in minutes" }
+            { icon: <CreditCard className="h-6 w-6 text-foreground" />, title: "One integration", text: "Cards, wallets, bank debits, buy-now-pay-later and crypto through the same API" },
+            { icon: <Lock className="h-6 w-6 text-foreground" />, title: "No card data", text: "Numbers are tokenized in the vault, so this service never holds one" },
+            { icon: <Globe className="h-6 w-6 text-foreground" />, title: "Route on outcome", text: "Send each payment to the processor most likely to approve it" },
+            { icon: <Zap className="h-6 w-6 text-foreground" />, title: "Retry elsewhere", text: "A decline cascades to a backup rather than to your customer" }
           ].map((item, index) => (
             <motion.div
               key={index}

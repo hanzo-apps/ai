@@ -16,9 +16,10 @@ const Integrations = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Powerful Integrations & APIs</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">One API in front of all of them</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Connect Hanzo Payments to your existing systems with ease through powerful APIs and pre-built integrations.
+            The connectors are the product. Each is a real implementation of one processor&rsquo;s
+            API, kept behind a single interface so your side never learns their differences.
           </p>
         </motion.div>
 
@@ -57,36 +58,26 @@ const Integrations = () => {
             className="lg:col-span-3 bg-neutral-900/30 border border-neutral-800 rounded-lg overflow-hidden"
           >
             <div className="p-6 border-b border-neutral-800">
-              <h3 className="text-2xl font-bold mb-2">Developer-First APIs</h3>
+              <h3 className="text-2xl font-bold mb-2">The processor is not in your code</h3>
               <p className="text-muted-foreground">
-                Comprehensive API and detailed developer documentation for custom integrations.
+                You ask for a payment. Which company took it is an answer, not an argument.
               </p>
             </div>
             <div className="p-6 bg-neutral-950 font-mono text-sm overflow-auto" style={{ maxHeight: '300px' }}>
               <pre className="text-foreground/80">
-{`// Create a payment intent
-const paymentIntent = await hanzo.paymentIntents.create({
+{`// Take a payment. You do not name the processor.
+const payment = await hanzo.payments.create({
   amount: 2000,
   currency: 'usd',
-  payment_method_types: ['card'],
   customer: customer.id,
-  metadata: {
-    order_id: '6735',
-  },
+  metadata: { order_id: '6735' },
 });
 
-// Handle the payment
-const { paymentIntent, error } = await stripe.confirmCardPayment(
-  clientSecret,
-  {
-    payment_method: {
-      card: cardElement,
-      billing_details: {
-        name: 'Jenny Rosen',
-      },
-    },
-  }
-);`}
+// The routing rule picked one, and says so.
+// If it had declined, the cascade would already
+// have tried the next and told you that instead.
+console.log(payment.status);    // 'succeeded'
+console.log(payment.connector); // 'adyen'`}
               </pre>
             </div>
             <div className="p-4 flex justify-between items-center border-t border-neutral-800">

@@ -35,15 +35,15 @@ const CheckoutExperience = () => {
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start gap-2">
                   <span className="text-foreground">•</span>
-                  <span>Over 200 currencies and local payment methods</span>
+                  <span>Cards, wallets, bank debits, buy-now-pay-later and crypto</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-foreground">•</span>
-                  <span>Optimized global payment acceptance with Adaptive Acceptance</span>
+                  <span>Local methods handled by whichever processor supports them best</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-foreground">•</span>
-                  <span>Smart routing for higher authorization rates</span>
+                  <span>The method someone expects to see, in the country they are in</span>
                 </li>
               </ul>
 
@@ -98,7 +98,7 @@ const CheckoutExperience = () => {
             </div>
             <h3 className="text-xl font-semibold mb-3">Global Reach</h3>
             <p className="text-muted-foreground">
-              Accept payments in 200+ countries and territories with localized experiences for each market.
+              Regional processors are connectors like any other, so entering a market is a routing rule rather than a new integration.
             </p>
           </motion.div>
 

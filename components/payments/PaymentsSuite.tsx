@@ -8,18 +8,18 @@ import { CreditCard, Calendar, Send, CreditCard as CardIcon, Coins } from "lucid
 const suiteItems = [
   {
     icon: <CreditCard className="h-6 w-6 text-foreground" />,
-    title: "Online Payments",
-    description: "Flexible integration with any website, optimized checkouts, and local payment methods."
+    title: "Smart routing",
+    description: "Choose the processor per payment on cost, success rate or latency. The rule lives here, so tuning it is a config change rather than a deploy."
   },
   {
     icon: <Calendar className="h-6 w-6 text-foreground" />,
-    title: "Subscriptions & Billing",
-    description: "Automated subscription management, recurring billing, and multilingual invoicing."
+    title: "Cascading retries",
+    description: "A soft decline is often a fact about one processor, not about the card. Failed attempts fall through to a backup automatically, and the customer sees one outcome."
   },
   {
     icon: <Send className="h-6 w-6 text-foreground" />,
-    title: "Embedded Finance (Connect)",
-    description: "Integrate end-to-end payment experiences for marketplaces and platforms, including streamlined payouts."
+    title: "Normalized webhooks",
+    description: "Every processor announces a settlement differently. You subscribe to one event shape and keep it when you add or drop a provider."
   },
   {
     icon: <CardIcon className="h-6 w-6 text-foreground" />,
@@ -44,10 +44,11 @@ const PaymentsSuite = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Comprehensive Payments Infrastructure</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">What sits behind the one integration</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Hanzo Payments provides the essential tools needed to process payments and optimize your financial operations, 
-            fully integrated into your Hanzo workflow.
+            Each processor has its own API, its own idea of an error, and its own webhook
+            format. This normalises all three, so your code sees one shape whichever of them
+            took the payment.
           </p>
         </motion.div>
 
@@ -89,19 +90,19 @@ const PaymentsSuite = () => {
           <div className="absolute inset-0 hz-grid [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
           <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
             <div className="md:w-2/3">
-              <h3 className="text-2xl font-bold mb-4">Optimized for Growth</h3>
+              <h3 className="text-2xl font-bold mb-4">What you can see once it is one pipe</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
                   <span className="text-foreground">•</span>
-                  <span>Real-time analytics and detailed financial reporting.</span>
+                  <span>Approval rates, cost and latency compared across processors, on one screen.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-foreground">•</span>
-                  <span>Forecast and predict revenues with built-in AI-driven analytics.</span>
+                  <span>3D Secure where the issuer asks for it, without a second integration.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-foreground">•</span>
-                  <span>Transparent pricing with no hidden fees.</span>
+                  <span>Open source, so the routing logic is readable before you trust it.</span>
                 </li>
               </ul>
             </div>

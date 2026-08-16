@@ -112,9 +112,10 @@ const CallToAction = () => {
           transition={{ duration: 0.5 }}
           className="bg-gradient-to-r from-white/20 to-white/10 border border-border rounded-lg p-8 text-center"
         >
-          <h2 className="text-3xl font-bold mb-4">Start Building Your Financial Future Today</h2>
+          <h2 className="text-3xl font-bold mb-4">Put one payment through it</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto mb-8">
-            Hanzo Payments helps your team streamline operations, grow faster, and simplify financial complexity.
+            Point it at the processor you already use, send a live payment, and add the second
+            one when you want to see the difference. Nothing has to move on day one.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button 
