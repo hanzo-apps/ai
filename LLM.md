@@ -1019,6 +1019,22 @@ own, and no check of its own for a session.
   frame with an empty measure and fills it after hydration. That is the honest
   static answer — a file cannot know who fetched it — and nothing indexes it.
 
+**The three routes that reach it are one screen.** `/login`, `/signup` and
+`/auth/callback` say where the reader is going and go — IAM owns the form — so
+they share `components/auth/waiting.tsx` and differ only in their words. It
+sizes to the message (360px) rather than asking for `min-h-screen` inside a
+layout that already has a header and a footer, which is what made a page with
+one line of text scroll 513px. The callback's Suspense fallback is a `Waiting`
+too: as an empty box it shipped the landing route with no heading at all.
+
+**Measure these with JavaScript ON.** react-native-web injects its stylesheet at
+runtime, so with scripting off the Spinner's `r-height`/`r-width` classes have no
+rules and its SVG falls back to the 300x300 default for a replaced element with
+no intrinsic size. Tailwind classes come from the external stylesheet and do
+apply, so a JS-off measurement looks authoritative and silently inflates
+anything gui sizes — it read a 36px spinner as 300 and put 264px of phantom
+height into every number around it.
+
 ## Static Export
 
 `next.config.ts` uses `output: 'export'`. GitHub Pages has never been the target
