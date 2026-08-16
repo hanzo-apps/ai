@@ -22,9 +22,10 @@ const CallToAction = () => {
           <div className="inline-flex items-center justify-center bg-primary/10 p-3 rounded-full border border-white/30 text-foreground mb-6">
             <LineChart className="h-10 w-10" />
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">Start Analyzing Smarter, Today</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">Add the script</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto mb-10">
-            Enable better business decisions with Hanzo Analytics—start for free and scale effortlessly.
+            One tag on the page and the dashboard fills in on its own. Host it yourself or
+            let us run it — the software is the same either way.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -53,16 +54,16 @@ const CallToAction = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
-              title: "Rapid Implementation",
-              description: "Get up and running in minutes with our easy-to-use SDKs and APIs."
+              title: "One tag",
+              description: "Paste it into the head of your site. Pageviews start arriving before you have decided what to name anything."
             },
             {
-              title: "Scale With Confidence",
-              description: "From startups to enterprises, Hanzo Analytics grows with your business."
+              title: "Your data stays yours",
+              description: "The events live in your own Postgres, MySQL or MariaDB. Nothing is sampled, and nothing is held back from an export."
             },
             {
-              title: "24/7 Support",
-              description: "Our expert team and vibrant community are always ready to help."
+              title: "Open source, MIT",
+              description: "Run it on a small server for as long as you like. The hosted version is the same code with the operations taken care of."
             }
           ].map((feature, index) => (
             <motion.div

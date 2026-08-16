@@ -43,14 +43,15 @@ const HeroSection = () => {
           className="mb-8 text-center"
         >
           <div className="inline-block px-4 py-1 rounded-full bg-primary/10 border border-white/30 text-foreground/70 text-sm font-medium mb-6">
-            AI-Powered Analytics for Next-Generation Growth
+            Web analytics you host yourself
           </div>
           <ChromeText as="h1" className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
             Hanzo Analytics
           </ChromeText>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Precise, real-time insights into user behavior, product performance, and business outcomes, 
-            enabling you to optimize faster, smarter, and at scale.
+            Traffic, sessions and revenue for the sites you run, in a dashboard you can read
+            without training. It is one script on the page and one database you own — no
+            sampling, no data-processing agreement, and no export limits on your own numbers.
           </p>
         </motion.div>
 

@@ -9,28 +9,28 @@ import { LineChart, Users, Filter, Layers, Activity } from "lucide-react";
 const features = [
   { 
     icon: <Activity />,
-    title: "Real-Time Data", 
-    description: "Instantly track live user actions and site performance."
+    title: "Realtime",
+    description: "Who is on the site right now, which page they are on and how they got there. Useful the hour you ship something and the hour something breaks."
   },
-  { 
+  {
     icon: <Users />,
-    title: "User Journeys", 
-    description: "Visualize complete paths users take within your site or app."
+    title: "Journeys",
+    description: "The route people actually took through the site, laid out as a tree. It rarely matches the one in the navigation, and that gap is the finding."
   },
   {
     icon: <Layers />,
-    title: "Funnels & Retention", 
-    description: "Analyze user conversion and retention metrics with clarity."
+    title: "Funnels, goals and retention",
+    description: "Define the steps and see where the drop is. Goals count the thing you care about, and retention answers the harder question of whether anyone came back."
   },
-  { 
+  {
     icon: <LineChart />,
-    title: "Event Tracking", 
-    description: "Capture user interactions, from clicks to complex events."
+    title: "Events",
+    description: "Track a click or a signup with a name and a few properties. No schema to declare up front and nothing to migrate when you add one."
   },
-  { 
+  {
     icon: <Filter />,
-    title: "Powerful Segmentation", 
-    description: "Deeply filter and segment your data by geography, platform, and more."
+    title: "Attribution and UTM",
+    description: "Which channel, campaign and referrer brought the session that converted — including the touch that started it, not only the one that closed it."
   }
 ];
 
@@ -101,9 +101,9 @@ const WebAnalytics = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">Comprehensive Web Analytics</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">The reports</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Hanzo Analytics delivers real-time insights into every interaction, from clicks to conversions.
+            Each one answers a question you would otherwise export a CSV to answer.
           </p>
         </motion.div>
         

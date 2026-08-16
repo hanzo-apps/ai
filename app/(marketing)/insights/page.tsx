@@ -79,9 +79,11 @@ export default function InsightsPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Understand user behavior with event analytics, session recording,
-            funnels, and A/B testing. Roll out features safely with feature
-            flags. Self-hosted and privacy-first.
+            Every event your product emits lands in one place, and the questions you ask
+            of it are the same ones you would ask of a database — funnels and retention
+            when a chart will do, SQL when it will not. The flag that turned a feature on
+            and the recording of someone using it are in that same place, so "did this
+            change work" is one product rather than three.
           </motion.p>
 
           <motion.div
@@ -142,10 +144,10 @@ export default function InsightsPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Everything to Understand Your Users
+              Ship it, then find out
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Analytics, feature flags, and experiments in one platform.
+              The rollout and the measurement are the same product, so the loop closes.
             </p>
           </motion.div>
 
@@ -153,39 +155,39 @@ export default function InsightsPage() {
             {[
               {
                 icon: LineChart,
-                title: "Event Analytics",
+                title: "Events, and SQL when you need it",
                 description:
-                  "Track custom events and auto-captured interactions. Build funnels, retention charts, and user paths.",
+                  "Autocapture gets you data before you have instrumented anything, and named events get you data you can trust. When a chart cannot express the question, write the query instead — it is the same table underneath.",
               },
               {
                 icon: Flag,
-                title: "Feature Flags",
+                title: "Feature flags",
                 description:
-                  "Progressive rollouts with percentage-based targeting. Kill switches. Per-user and per-group flags.",
+                  "Roll out to a percentage, a cohort, or one account. The flag is also a kill switch, which is the reason to reach for one: turning a feature off should not require a deploy at the worst possible moment.",
               },
               {
                 icon: Play,
-                title: "Session Recording",
+                title: "Session replay",
                 description:
-                  "Watch real user sessions. Click heatmaps, scroll depth, and rage click detection.",
+                  "Watch what actually happened. Heatmaps and scroll depth tell you where attention went; a replay tells you why someone gave up, which no funnel ever will.",
               },
               {
                 icon: FlaskConical,
-                title: "A/B Testing",
+                title: "Experiments",
                 description:
-                  "Run experiments with statistical significance. Multi-variate tests. Auto-stop on significance.",
+                  "An experiment is a flag with a metric attached to it. Pick the goal before you start, and let it run until the result means something rather than until it looks good.",
               },
               {
                 icon: Filter,
-                title: "Funnels & Paths",
+                title: "Funnels, retention and paths",
                 description:
-                  "Visualize conversion funnels. Find where users drop off. Discover unexpected user journeys.",
+                  "Funnels show where people stop, retention shows whether they came back, and paths show the route nobody designed. The third one is usually where the surprise is.",
               },
               {
                 icon: Users,
-                title: "Cohort Analysis",
+                title: "Errors and LLM cost",
                 description:
-                  "Group users by behavior, properties, or signup date. Track retention across cohorts.",
+                  "Error tracking sits beside the analytics, so a spike in rage clicks and the exception behind it are one investigation. If your product calls a model, the traces, latency and cost per generation land here too.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -222,7 +224,7 @@ export default function InsightsPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              One Line to Instrument
+              The flag and the event, in one provider
             </h2>
           </motion.div>
 
@@ -290,10 +292,12 @@ function MyApp() {
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Know Your Users
+                Start with autocapture
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-xl mx-auto">
-                Free tier includes 1M events/month and unlimited feature flags.
+                Drop the provider in and you have data by this afternoon. Name the events
+                that matter once you know which ones those are. There is a free tier, and
+                the whole thing is open source if you would rather run it yourself.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">

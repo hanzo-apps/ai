@@ -16,9 +16,10 @@ const BuildForGrowth = () => {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto text-center mb-24"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">Built for Growth</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">From a visit to a number</h2>
           <p className="text-xl text-foreground/80">
-            Optimize user journeys and boost your conversions by understanding every interaction from entry point to checkout.
+            A pageview is not worth much on its own. It gets interesting once it is joined to
+            the step someone stopped at, the campaign that sent them and the money that followed.
           </p>
         </motion.div>
         
@@ -26,21 +27,21 @@ const BuildForGrowth = () => {
           {[
             {
               icon: <TrendingUp className="h-8 w-8 text-foreground" />,
-              title: "Conversion Optimization",
-              description: "Identify and fix bottlenecks in your user journey to improve conversion rates.",
-              metrics: "Funnel analysis & A/B testing"
+              title: "Where they stop",
+              description: "Build the funnel from steps you already track and read the drop between them. The step with the cliff is the one worth a week of work.",
+              metrics: "Funnels and goals"
             },
             {
               icon: <Users className="h-8 w-8 text-foreground/70" />,
-              title: "Audience Insights",
-              description: "Understand your users better with detailed demographics and behavior analysis.",
-              metrics: "Cohort & segment analytics"
+              title: "Whether they return",
+              description: "Retention by the week someone arrived. Growth that comes only from new visitors looks identical to growth that lasts, until you look at this.",
+              metrics: "Retention and journeys"
             },
             {
               icon: <CreditCard className="h-8 w-8 text-foreground/70" />,
-              title: "Revenue Impact",
-              description: "See the direct financial impact of your optimization efforts in real-time.",
-              metrics: "Revenue attribution tracking"
+              title: "What it was worth",
+              description: "Send the order value with the event and revenue shows up beside the traffic that produced it, split by channel and campaign.",
+              metrics: "Revenue and attribution"
             }
           ].map((item, index) => (
             <motion.div
@@ -69,7 +70,7 @@ const BuildForGrowth = () => {
           className="mt-16 text-center"
         >
           <a href="#learn-more" className="inline-flex items-center text-foreground hover:text-foreground/70 transition-colors">
-            Learn how our customers achieved growth <ArrowRight className="ml-2 h-4 w-4" />
+            See what a report looks like <ArrowRight className="ml-2 h-4 w-4" />
           </a>
         </motion.div>
       </div>

@@ -102,9 +102,9 @@ const DeveloperFirst = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">Developer-First API & SDKs</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">A script, then an API</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Easy-to-integrate SDKs and APIs designed for minimal friction and maximum flexibility.
+            The tag collects pageviews on its own. Everything past that is a function call.
           </p>
         </motion.div>
         
@@ -118,29 +118,29 @@ const DeveloperFirst = () => {
             >
               <div className="flex items-center mb-5">
                 <Layers className="h-6 w-6 text-foreground mr-3" />
-                <h3 className="text-2xl font-bold">Designed for Developers</h3>
+                <h3 className="text-2xl font-bold">What you are signing up for</h3>
               </div>
               
               <ul className="space-y-4 mb-8">
                 <li className="flex">
                   <div className="mr-3 text-foreground">•</div>
                   <div>
-                    <span className="font-medium text-[var(--white)]">OpenTelemetry Integration</span>
-                    <p className="text-muted-foreground mt-1">Integrate with your existing observability stack.</p>
+                    <span className="font-medium text-[var(--white)]">Your database, your rows</span>
+                    <p className="text-muted-foreground mt-1">It runs against Postgres, MySQL or MariaDB — one you already operate. The raw events stay somewhere you can query directly.</p>
                   </div>
                 </li>
                 <li className="flex">
                   <div className="mr-3 text-foreground">•</div>
                   <div>
-                    <span className="font-medium text-[var(--white)]">API-first, highly customizable</span>
-                    <p className="text-muted-foreground mt-1">Build exactly what you need with our flexible API.</p>
+                    <span className="font-medium text-[var(--white)]">Many sites, one install</span>
+                    <p className="text-muted-foreground mt-1">Add a site, get a tracking id. Group people into teams, and share a board with someone who should not have an account.</p>
                   </div>
                 </li>
                 <li className="flex">
                   <div className="mr-3 text-foreground">•</div>
                   <div>
-                    <span className="font-medium text-[var(--white)]">Comprehensive documentation and code examples</span>
-                    <p className="text-muted-foreground mt-1">Comprehensive guides and examples to get you started quickly.</p>
+                    <span className="font-medium text-[var(--white)]">Open source, MIT</span>
+                    <p className="text-muted-foreground mt-1">Read it, fork it, run it on a small server for as long as you like. The hosted version exists so you do not have to.</p>
                   </div>
                 </li>
               </ul>

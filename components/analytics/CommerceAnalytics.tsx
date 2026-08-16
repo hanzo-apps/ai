@@ -33,9 +33,9 @@ const CommerceAnalytics = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">Commerce-Focused Analytics</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">If you sell something</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Optimize your sales funnel and boost revenue with insights designed specifically for commerce.
+            Revenue is a report here, not an integration you buy on top.
           </p>
         </motion.div>
         
@@ -44,18 +44,18 @@ const CommerceAnalytics = () => {
             {[
               {
                 icon: <Zap className="h-6 w-6" />,
-                title: "AI-powered recommendations",
-                description: "Personalize experiences based on real-time user insights and behavior patterns."
+                title: "Revenue beside the traffic",
+                description: "Send an amount and a currency with the event and it lands in the same reports as everything else. Totals, order values and the sessions behind them."
               },
               {
                 icon: <DollarSign className="h-6 w-6" />,
-                title: "Dynamic Pricing & Predictive Analytics",
-                description: "Forecast sales, detect anomalies, and optimize revenue streams with AI-powered insights."
+                title: "Which campaign paid for itself",
+                description: "Attribution splits revenue across the channels and campaigns that touched the session, so spend can be argued with numbers rather than instinct."
               },
               {
                 icon: <CreditCard className="h-6 w-6" />,
-                title: "Integrated Payments & Omnichannel Insights",
-                description: "Unified tracking across web, mobile, in-store, and global commerce channels."
+                title: "The checkout, step by step",
+                description: "Cart to payment as a funnel, with the abandonment rate per step. Add a goal for the one step you would defend in a meeting."
               }
             ].map((feature, index) => (
               <motion.div
