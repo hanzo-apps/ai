@@ -1,44 +1,61 @@
 'use client'
 
-import { CardGrid, Section, type CardItem } from '@/components/marketing/page-kit'
+import { ArrowRight } from 'lucide-react'
+import { YStack } from '@hanzo/gui'
+import { CardGrid, Cta, Section, type CardItem } from '@/components/marketing/page-kit'
 import { cloudCategories } from '@/lib/data/cloud-primitives'
 
 /**
- * The cloud taxonomy, on the apex.
+ * The breadth of the cloud, on the apex — six groups, not a catalog.
  *
- * The ten categories used to appear nowhere on hanzo.ai's front page: the only
- * designed path to the full set of capabilities was a breadcrumb on a generated
- * stub page, so most of them were reachable only by accident. This is that path,
- * made deliberate — every category card links to its `/products/<id>` page,
- * which lists and links every capability in it.
+ * Ten categories used to render here with every product in each one named,
+ * because the only designed path to the full set was a breadcrumb on a generated
+ * stub page. The path is what mattered and the inventory was the cost: the
+ * complete list belongs in the product catalog, which is a page built to be
+ * read that way, and a landing page repeating it is a second copy that answers
+ * a question nobody asked here. Six groups say the shape; /products says the
+ * rest.
  *
- * Content is DERIVED from `lib/data/cloud-primitives.ts` — the same single source
- * the mega-menu, the `/products/<id>` category pages and the generated
- * `/cloud/<slug>` overview pages read — so a category cannot appear here without
- * its page existing and no link can rot. The card body is the capability NAMES
- * rather than the category tagline: the tagline is the first thing the
- * destination page says, while the names are what make the breadth legible from
- * the front page.
+ * WEB3 AND APPS ARE NOT PRIMARY. Both are real categories in the catalog and
+ * both keep their /products page — they are simply not one of the six a reader
+ * needs to understand what this cloud is. Settlement, the part of web3 that
+ * belongs on this page, is named under Network.
  *
- * Shapes come from `components/marketing/page-kit` (`Section` + `CardGrid` +
- * `Cta`), which renders from the @hanzo/design tokens through gui — so this
- * section carries no styling of its own and stays in step with every other
- * marketing surface.
+ * TITLE, ICON AND LINK ARE DERIVED from `lib/data/cloud-primitives.ts` — the
+ * same source as the mega-menu and the `/products/<id>` pages — so a link here
+ * cannot rot, and a category the catalog drops disappears rather than 404s. The
+ * four or five words under each are this page's own: short enough to scan, and
+ * every one of them is a product in that category (Enso, which is Hanzo's own
+ * model, is named under AI because it is what a reader is looking for there).
  */
-const CATEGORIES: CardItem[] = cloudCategories.map((c) => ({
-  title: c.title,
-  icon: c.icon,
-  description: c.items.map((i) => i.title).join(' · '),
-  href: `/products/${c.id}`,
-}))
+const GROUPS: [id: string, items: string][] = [
+  ['ai', 'Models, Enso, agents, embeddings'],
+  ['compute', 'GPU, functions, machines, Kubernetes'],
+  ['data', 'SQL, vector, KV, storage, analytics'],
+  ['observe', 'Insights, logs, metrics, traces, evals'],
+  ['security', 'Identity, authorization, secrets, zero trust'],
+  ['network', 'Gateway, networking, edge, settlement'],
+]
+
+const CATEGORIES: CardItem[] = GROUPS.flatMap(([id, items]) => {
+  const category = cloudCategories.find((c) => c.id === id)
+  return category
+    ? [{ title: category.title, icon: category.icon, description: items, href: `/products/${id}` }]
+    : []
+})
 
 export default function CloudCategories() {
   return (
     <Section
-      title="Everything else an app needs"
-      lede="Databases, storage, identity, secrets, agents, payments. Each one is a route on api.hanzo.ai/v1 — same key, same base URL. Open source, metered, and settled on-chain."
+      title="More than an AI layer."
+      lede="Each one is a route on api.hanzo.ai/v1 — same key, same base URL."
     >
-      <CardGrid items={CATEGORIES} columns={2} />
+      <CardGrid items={CATEGORIES} columns={3} />
+      <YStack marginTop="$5">
+        <Cta href="/products" icon={ArrowRight}>
+          Explore all products
+        </Cta>
+      </YStack>
     </Section>
   )
 }

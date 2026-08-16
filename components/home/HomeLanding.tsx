@@ -15,7 +15,7 @@ import Proof from './Proof'
 import Security from './Security'
 import ReplaceTheCore from './ReplaceTheCore'
 import Observability from './Observability'
-import BuildStory from './BuildStory'
+import Together from './Together'
 import Composer from './Composer'
 import LocalStack from './LocalStack'
 import { Box } from '@hanzo/ui'
@@ -48,17 +48,19 @@ import { Box } from '@hanzo/ui'
  * stated before anything we sell.
  *
  * `CloudCategories` sits between the flagship and the story on purpose: it is the
- * one place the apex answers "what else is here". It renders the ten categories
- * from `lib/data/cloud-primitives.ts` — the same source as the mega-menu and the
- * `/products/<slug>` pages — so the front page cannot drift from the product.
+ * one place the apex answers "what else is here". It names six of the catalog's
+ * categories and hands the rest to /products, and each card's title, icon and
+ * link are still read from `lib/data/cloud-primitives.ts` — the same source as
+ * the mega-menu and the `/products/<slug>` pages — so the front page cannot
+ * drift from the product.
  *
- * It is also the section the fold's film hands off to, and the two agree by
- * construction: this reads the catalog through `cloud-primitives.ts` and
- * `film/hero` reads `lib/data/catalog.json` itself, so the ten layers the film
- * ends on are the ten cards here, named identically. An earlier apex film had a
- * sidebar naming seven categories over a section naming ten, and the
- * contradiction could only be fixed by re-rendering a video — which is why
- * nothing in `film/hero` is typed and no word of it is a heading.
+ * It is also the section the fold's film hands off to. The film still ends on
+ * all ten of the catalog's layers, read from `lib/data/catalog.json` itself, so
+ * the two are drawn from one catalog but no longer card-for-layer: the section
+ * is an entry, the film is the sweep. An earlier apex film had a sidebar naming
+ * seven categories over a section naming ten, and the contradiction could only
+ * be fixed by re-rendering a video — which is why nothing in `film/hero` is
+ * typed and no word of it is a heading.
  *
  * `Research` follows it, and the order is an argument: the categories say what we
  * sell, the papers say why it is built the way it is, and they are next to each
@@ -88,16 +90,16 @@ export default async function HomeLanding() {
         <Team />
         <EnsoHero />
         <AgentRuntime />
-        <Infrastructure />
         <LearnLoop />
+        <Proof />
+        <Infrastructure />
         <Observability />
         <Security />
         <OneInterface />
-        <CloudCategories />
         <LocalStack />
         <Research />
-        <Proof />
-        <BuildStory />
+        <CloudCategories />
+        <Together />
         <Composer />
       </main>
       <SiteFooter surface="ai" />

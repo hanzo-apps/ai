@@ -1,12 +1,18 @@
+import { Box } from '@hanzo/ui'
 
-import { Box } from '@hanzo/ui'/**
+/**
  * What an agent DOES — the layer between Enso and the company. The page could
  * describe a model and a cloud but not the thing in between them that does the
  * work, and this is that thing.
  *
  * "Agents with hands" is the whole distinction and it is worth being blunt
- * about: a model that returns text is not what is being sold here. The sandbox
- * is the part that makes it safe to mean it, so it is named rather than implied.
+ * about: a model that returns text is not what is being sold here.
+ *
+ * THE LEDE IS AN ORDER, and that is its job. Enso decides, agents coordinate,
+ * Tabs is where they act — so the three are ranked in one sentence instead of
+ * competing as equals, which is what the paragraph under them used to do by
+ * naming tools, sandboxes, workflows and Tabs in a row. Anything added here has
+ * to fit somewhere in that order or it does not belong on this page.
  *
  * This file used to render a SECOND section after this one — "Where people and
  * AI work together", the Hanzo Team block. That is now `./Team`, built from the
@@ -24,9 +30,11 @@ export default function AgentRuntime() {
           </p>
           <h2 className="hz-display text-4xl sm:text-5xl">Agents with hands.</h2>
           <p className="mx-auto mt-5 text-lg leading-relaxed text-neutral-400">
-            Hanzo agents do more than answer. They use tools, operate software, browse, write
-            code, work with files, run workflows and hand off to each other — inside isolated
-            execution environments. Tabs puts every one of those shells in front of you.
+            Enso decides. Agents coordinate. Tabs gives them somewhere secure to act.
+          </p>
+          <p className="mx-auto mt-3 text-lg leading-relaxed text-neutral-400">
+            They use tools, operate software, write code, run workflows and hand off to each
+            other — in isolated environments.
           </p>
         </Box>
         <Box className="mt-9 flex flex-wrap items-center justify-center gap-3">

@@ -5,12 +5,17 @@ import { Box, Monitor, SquareTerminal } from 'lucide-react'
 import { Mockup } from '@/components/product/Mockup'
 
 /**
- * The three ways to run something on this cloud.
+ * Compute — one runtime, and the kinds of work it takes.
  *
- * A container, a whole machine, and a leased shell are not three products — they
- * are three isolations of one compute plane, chosen per workload. The section
- * says that by putting them in one control rather than three sections: picking
- * one swaps the film, and the film is the API surface that kind actually has.
+ * TWO DEPTHS, on purpose. The SPECTRUM names all six kinds and orders them by
+ * how much of a machine each one holds: a function borrows one for the length
+ * of a call, Kubernetes IS the machine. That ordering is the argument — they
+ * are not six products to choose between, they are one runtime addressed six
+ * ways, so moving along it is a deploy target rather than a migration.
+ *
+ * Under it, the three ISOLATIONS a reader can actually inspect. A container, a
+ * whole machine and a leased shell each have their own API surface, and picking
+ * one swaps the film to show it.
  *
  * EVERY OPERATION IN EVERY FILM IS QUOTED, NOT WRITTEN. film/workload composes
  * from GET /v1/openapi.json at render time, so an endpoint added or removed
@@ -22,6 +27,16 @@ import { Mockup } from '@/components/product/Mockup'
  * and a number without one is the thing every other claim on this site is
  * checked against.
  */
+
+/** The six, lightest hold on a machine first. */
+const SPECTRUM: [string, string][] = [
+  ['Functions', 'Scale to zero between calls.'],
+  ['Containers', 'Your image, deployed and addressable.'],
+  ['Sandboxes', 'Isolated shells for agents and untrusted code.'],
+  ['Machines', 'A whole machine, by the second.'],
+  ['GPUs', 'Accelerators attached to any of them.'],
+  ['Kubernetes', 'The substrate all of it runs on.'],
+]
 const KINDS = [
   {
     id: 'containers',
@@ -32,8 +47,11 @@ const KINDS = [
     route: '/v1/functions',
   },
   {
+    // `Machines`, the catalog's own name for it and the spectrum's — the film
+    // is still `/workload/vms-wide`, which is an asset path rather than a name
+    // a reader sees.
     id: 'vms',
-    title: 'Virtual machines',
+    title: 'Machines',
     icon: Monitor,
     blurb:
       'A whole machine when a container is the wrong shape — provisioned on our account or folded in from yours, each one carrying an agent you address directly.',
@@ -56,18 +74,40 @@ export default function Workloads() {
   return (
     <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
       <div className="mx-auto max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
-          {/* `<h2>`, because the fold carries the page's one `<h1>`. */}
-          <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Every workload, one compute plane
-          </h2>
-          <p className="mt-4 text-lg leading-relaxed text-neutral-400">
-            A container, a whole machine, or a leased shell — the isolation is a choice per
-            workload, not three products to buy.
-          </p>
+        {/* `<h2>`, because the fold carries the page's one `<h1>`. Left-aligned
+            and full measure, like every other band on this page — a centred
+            heading in a column of left-aligned ones reads as a different page. */}
+        <h2 className="max-w-5xl text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+          One runtime for every kind of work.
+        </h2>
+        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-neutral-400 sm:text-xl">
+          The same plane, held for a millisecond or held for a month. What
+          changes is how much of a machine the work needs, not what you have to
+          learn.
+        </p>
+
+        {/* The spectrum. The rule beneath it brightens left to right, so the
+            ordering reads as one continuum before a single label is read. */}
+        <div className="mt-14">
+          <div
+            aria-hidden="true"
+            className="h-px w-full"
+            style={{
+              background:
+                'linear-gradient(to right, rgba(255,255,255,0.10), rgba(255,255,255,0.55))',
+            }}
+          />
+          <ol className="grid grid-cols-2 gap-x-6 gap-y-7 pt-6 sm:grid-cols-3 lg:grid-cols-6">
+            {SPECTRUM.map(([name, line]) => (
+              <li key={name}>
+                <p className="text-base font-medium text-white">{name}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-neutral-500">{line}</p>
+              </li>
+            ))}
+          </ol>
         </div>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-12">
+        <div className="mt-20 grid gap-8 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] lg:gap-12">
           {/* The three, as one control. Buttons, not links: this swaps a picture
               on the page rather than going anywhere. */}
           <div className="flex flex-col">

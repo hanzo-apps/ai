@@ -46,11 +46,14 @@ export function ProofStrip({ modelCount }: { modelCount: number }) {
 
   const items: Item[] = [
     { label: models, href: '/models' },
-    { label: '13 MCP tools', href: '/mcp' },
-    { label: 'Functions, containers, gVisor, Firecracker', href: '/cloud' },
+    { label: 'Agents', href: '/agents' },
+    { label: 'Apps', href: '/app' },
+    { label: 'Insights', href: '/insights' },
     { label: 'Kubernetes-native', href: '/operator' },
-    { label: 'Full-stack observability', href: '/o11y' },
     { label: 'Open source', href: '/open-source' },
+    // Kept when the hero's own strip went: it is a real credential and it
+    // appears nowhere else on the page.
+    { label: 'Techstars ’17' },
   ]
 
   return (

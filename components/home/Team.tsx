@@ -1,74 +1,53 @@
 'use client'
 
-import { ArrowUpRight, Bot, History, ListChecks, Users } from 'lucide-react'
-import { YStack } from '@hanzo/gui'
-import { CardGrid, Cta, Section, type CardItem } from '@/components/marketing/page-kit'
+import { ArrowUpRight } from 'lucide-react'
+import { YStack, Text } from '@hanzo/gui'
+import { Cta, Section } from '@/components/marketing/page-kit'
 
 /**
  * The company layer, on the front page.
  *
- * This section used to be the second half of `AgentRuntime` — one component
- * rendering two unrelated claims, in Tailwind classes the rest of the page has
- * moved off. It is the same claim, extracted, so each section is one component
- * and this one is built from the kit like everything around it.
+ * THE SHARED SCOPE IS THE PROJECT. This section used to say work "belongs to a
+ * workspace", and a workspace is not a resource, a switcher, a URL scope or an
+ * API object anywhere in the platform — so the one noun carrying the claim was
+ * the one noun a reader cannot go and find. A project is what people, agents and
+ * deployable resources share, and it is the same project in Team, in the console
+ * and over the API. Do not put the other word back.
  *
- * EVERY NOUN HERE IS A COLLECTION THAT EXISTS. `hanzoai/team`'s migrations
- * define `workspaces`, `projects`, `tasks`, `issues`, `channels`, `messages`,
- * `documents` and `members`, and those are the words used. The brief for this
- * section also offered "goals", "approvals" and "decisions"; none of the three
- * is a collection in that repo, so none of them is written here. A noun on a
- * landing page is a promise that a screen exists behind it.
- *
- * The card that carries the argument is the second one. "An agent is a member"
- * is not a metaphor — a bot IS a row in `members`, keyed by a deterministic
- * uuid v5 of its service-account id so a re-sync resolves to the same row
- * rather than a duplicate, and carrying the same `role` enum a person carries.
- * That is why the section can say agents work inside the company without
- * inventing a job title for one.
- *
- * NO AI EXECUTIVES. The product page renders sixteen named agent personas, and
- * a homepage that promoted them to officers would be claiming something about
- * org charts rather than about software. Work moving through shared records is
+ * NO AI EXECUTIVES. /team renders sixteen named agent personas, and a homepage
+ * that promoted them to officers would be claiming something about org charts
+ * rather than about software. Work moving through shared records is
  * demonstrable; an "AI CFO" is not.
  *
- * Nothing here names a compliance framework. The product page's audit section
- * does, hedged; a hedge that travels to the apex stops reading as a hedge.
+ * Nothing here names a compliance framework. /team's audit section does, hedged,
+ * and a hedge that travels to the apex stops reading as a hedge.
+ *
+ * MOVED TO /team RATHER THAN DELETED — each one true, each one a paragraph a
+ * landing page cannot afford: the task state enum (backlog, in progress, review,
+ * done, with priority, assignee and reporter); what happens to authorship when
+ * an agent is deactivated rather than deleted; how a bot's membership resolves
+ * from a Hanzo IAM service account or the agent registry; and the deterministic
+ * uuid v5 that keeps a re-synced bot on one row instead of two. They are the
+ * evidence for the second line here, and the second line is what the page needs.
  */
-const ITEMS: CardItem[] = [
-  {
-    icon: Users,
-    title: 'One workspace',
-    description:
-      'Projects, tasks, issues, channels, messages and documents belong to a workspace. People and agents read and write the same records, so work never has to be copied out of a tool and into a chat to reach whoever does it next.',
-  },
-  {
-    icon: Bot,
-    title: 'An agent is a member',
-    description:
-      'A bot joins as an ordinary member with a role, resolved from a Hanzo IAM service account or the agent registry. It can hold a task, answer in a channel, and be given or refused access the same way a person is.',
-  },
-  {
-    icon: ListChecks,
-    title: 'Work carries a state',
-    description:
-      'A task moves through backlog, in progress, review and done, with a priority, an assignee and a reporter. What an agent did is a record you can sort and filter, not a message somebody has to read to find out.',
-  },
-  {
-    icon: History,
-    title: 'Authorship outlives the agent',
-    description:
-      'An agent taken off a workspace is deactivated rather than deleted, so every message and document it wrote keeps its author. The history still reads correctly a year later.',
-  },
-]
-
 export default function Team() {
   return (
     <Section
       title="Where people and AI work together."
-      lede="Agents work inside the company, not outside it in another chat window."
+      lede="Hanzo Team gives people and AI coworkers the same projects, conversations, knowledge, tasks, permissions and approvals."
     >
-      <CardGrid items={ITEMS} columns={2} />
-      <YStack marginTop="$5">
+      <YStack gap="$4" maxWidth={672}>
+        <Text render="p" fontSize="$3" color="$mutedForeground">
+          Agents aren’t assistants outside the organization. They’re members of it — with work to
+          own, context to use, permissions to respect, and history that stays attributable.
+        </Text>
+        <Text render="p" fontSize="$3" color="$mutedForeground">
+          One project context — projects, tasks, channels, messages, knowledge, agents, deployments,
+          data and integrations share it.
+        </Text>
+        <Text render="p" fontSize="$5" fontWeight="500" color="$foreground">
+          People and agents. Same team.
+        </Text>
         <Cta href="/team" icon={ArrowUpRight}>
           See Hanzo Team
         </Cta>

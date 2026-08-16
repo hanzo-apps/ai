@@ -65,7 +65,7 @@ export default function CliPage() {
             {
               icon: Cloud,
               title: 'Run the cloud on your machine',
-              body: 'hanzo up cloud starts the whole API locally, or name one service — iam, kms, gateway, storage, pubsub. hanzo engine serve puts a model on a local endpoint.',
+              body: 'hanzo serve cloud starts the whole API locally, or name one service — iam, kms, gateway, storage, pubsub. hanzo engine serve puts a model on a local endpoint.',
             },
             {
               icon: Workflow,

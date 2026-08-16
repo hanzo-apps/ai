@@ -4,6 +4,7 @@ import { motion } from '@/components/motion'
 import { ArrowRight } from 'lucide-react'
 import { EnsoLogo } from '@/components/enso/EnsoLogo'
 import { Box } from '@hanzo/ui'
+import { MODEL_COUNT_LABEL } from '@/lib/data/model-count'
 
 /**
  * The apex LEAD — Enso, Hanzo's flagship frontier model, front and center at the
@@ -12,6 +13,15 @@ import { Box } from '@hanzo/ui'
  * read as one brand. Honest by construction: the primary CTA is "Explore Enso" →
  * /enso (the Enso landing) — NOT a "technical report" (none is published). Positions
  * Enso as the flagship frontier model without quoting any specific benchmark number.
+ *
+ * THE COUNT IS DERIVED, never typed. `MODEL_COUNT_LABEL` floors the served-model
+ * total from the pricing snapshot to the hundred, so "500+" stays true as the
+ * registry moves and cannot disagree with the same claim in `ProofStrip`.
+ *
+ * The spec line says "one compatible API" rather than naming the two wire
+ * formats. Which formats they are is /enso's and /models/enso's sentence — both
+ * say "one OpenAI- and Anthropic-compatible API" — and this line is the tap that
+ * goes there.
  */
 export default function EnsoHero() {
   return (
@@ -69,9 +79,8 @@ export default function EnsoHero() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mx-auto mt-6 max-w-2xl text-lg text-neutral-300 sm:text-xl"
         >
-          Enso reads the objective, understands the context, and puts the right intelligence
-          behind the work. Fast when it can be. Powerful when it needs to be. Governed by your
-          company’s policies, through one API across the system.
+          One objective in. The right combination of intelligence out. Fast when it can be,
+          powerful when it needs to be, governed by your company’s policies.
         </motion.p>
 
         <motion.div
@@ -106,8 +115,10 @@ export default function EnsoHero() {
           <span className="text-neutral-300 group-hover:text-white">Pro</span>
           <span aria-hidden className="text-neutral-700">·</span>
           <span className="text-neutral-300 group-hover:text-white">Ultra</span>
-          <span aria-hidden className="text-neutral-700">—</span>
-          <span>one OpenAI- and Anthropic-compatible API</span>
+          <span aria-hidden className="text-neutral-700">·</span>
+          <span>{MODEL_COUNT_LABEL} callable models</span>
+          <span aria-hidden className="text-neutral-700">·</span>
+          <span>one compatible API</span>
         </motion.a>
       </Box>
     </section>

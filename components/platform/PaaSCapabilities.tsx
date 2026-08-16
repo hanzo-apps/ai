@@ -252,7 +252,7 @@ const PaaSCapabilities = () => {
                 </span>
               </Box>
               <Box className="mt-4 text-muted-foreground">
-                <span className="text-foreground">$</span> hanzo deploy
+                <span className="text-foreground">$</span> hanzo serve cloud
               </Box>
               <Box className="text-muted-foreground">
                 Deploying to production...
