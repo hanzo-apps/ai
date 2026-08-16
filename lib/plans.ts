@@ -171,6 +171,27 @@ export function sellableFeatures(features: string[]): string[] {
   );
 }
 
+/**
+ * The dollars commerce actually mints for a plan each month, or null.
+ *
+ * Field for field and in the same order as the biller's IncludedMonthlyCents:
+ * includedCloudCredits, then includedCloudCreditsPerUser, then includedCreditUsd.
+ *
+ * The ORDER is the entire point, because plans set more than one. `pro` declares
+ * includedCreditUsd 49 AND includedCloudCredits 25; the biller reads the cloud
+ * field first, so a Pro subscription mints $25. A page reading the other field
+ * publishes $49 over an invoice that pays $25 — the gap is not a rounding
+ * difference, it is a promise the ledger never keeps.
+ *
+ * So the amount is read here and only here. A second opinion about what a plan
+ * grants is the defect this replaces, not a convenience.
+ */
+export function credit(plan: SubscriptionPlan): number | null {
+  const l = plan.limits;
+  const usd = l?.includedCloudCredits ?? l?.includedCloudCreditsPerUser ?? l?.includedCreditUsd;
+  return typeof usd === "number" && usd > 0 ? usd : null;
+}
+
 /** The published catalog row, as @hanzo/plans ships it. */
 interface CatalogPlan {
   id: string;

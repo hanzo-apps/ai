@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Github } from 'lucide-react'
-import { loadPlans, fallbackPlans, type SubscriptionPlan } from '@/lib/plans'
+import { loadPlans, fallbackPlans, credit, type SubscriptionPlan } from '@/lib/plans'
 import { Box } from '@hanzo/ui'
 
 /**
@@ -12,8 +12,8 @@ import { Box } from '@hanzo/ui'
  * "Predictable pricing" is only worth writing beside the thing that makes it
  * checkable, so this renders the rows commerce actually charges rather than an
  * adjective about them. Every number here is read: the plan price, and the
- * credit the plan carries (`limits.includedCreditUsd`). Nothing in this file is
- * typed.
+ * credit the biller mints for it (`credit`, in lib/plans). Nothing in this file
+ * is typed.
  *
  * ONE SOURCE, TWO RENDERINGS. `lib/plans.ts` is the catalog for every pricing
  * surface — GET /v1/billing/plans, with @hanzo/plans as the first-paint fallback
@@ -29,12 +29,6 @@ import { Box } from '@hanzo/ui'
  * is no free tier of the hosted product, and a $0 card in the lineup reads as
  * one. The free path is the open source, and it is stated as itself.
  */
-
-/** The credit a plan hands back each month, when it carries one. */
-function credit(plan: SubscriptionPlan): number | null {
-  const n = plan.limits?.includedCreditUsd
-  return typeof n === 'number' && n > 0 ? n : null
-}
 
 const sellable = (p: SubscriptionPlan) => p.priceMonthly != null && p.priceMonthly > 0
 const byPrice = (a: SubscriptionPlan, b: SubscriptionPlan) =>
