@@ -87,7 +87,7 @@ const DeveloperExperience = () => {
                   <p className="text-muted-foreground mb-2">$ cd my-project && npm run dev</p>
                   <p className="text-foreground/70 mb-2">✓ Hanzo Base server started on http://localhost:3000</p>
                   <p className="text-foreground/70 mb-2">✓ Admin UI available at http://localhost:3000/admin</p>
-                  <p className="text-muted-foreground mb-2">$ hanzo deploy</p>
+                  <p className="text-muted-foreground mb-2">$ hanzo serve cloud</p>
                   <p className="text-foreground/70">✓ Project deployed to https://my-project.hanzo.app</p>
                 </Box>
               </Box>

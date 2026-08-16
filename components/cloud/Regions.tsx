@@ -45,7 +45,7 @@ const Regions = () => {
                 <Box className="text-muted-foreground text-sm">Terminal</Box>
               </div>
               <Box className="p-4 font-mono text-sm text-foreground/80">
-                <Box className="text-foreground/70">$ hanzo deploy</Box>
+                <Box className="text-foreground/70">$ hanzo serve cloud</Box>
                 <Box className="text-muted-foreground">Initializing deployment...</Box>
                 <Box className="text-muted-foreground">Deploying to region: us-east-1</Box>
                 <Box className="text-muted-foreground">Building container image...</Box>

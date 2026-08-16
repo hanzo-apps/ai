@@ -82,12 +82,11 @@ export default function Fold() {
             lasted and the arc holds — "agentic" is this year's word for the
             operator, and a category line has to outlive that. */}
         <p className="mx-auto mt-5 max-w-2xl text-2xl leading-snug text-neutral-200 sm:text-3xl">
-          The complete operating system for the modern company.
+          The operating system for agentic companies.
         </p>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-neutral-400">
-          Frontier intelligence, AI coworkers, the applications a company runs on, secure
-          execution, company data, full-stack observability and Kubernetes-native
-          infrastructure — designed together rather than assembled.
+          Enso, AI coworkers, the apps your company runs on, secure execution, data,
+          observability and Kubernetes-native infrastructure — designed as one system.
         </p>
         <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-neutral-500">
           Run Hanzo OS on Hanzo Cloud or your own infrastructure.
@@ -108,17 +107,9 @@ export default function Fold() {
           </a>
         </Box>
 
-        {/* Trust markers, and they sit HERE rather than in the headline: a
-            headline carrying its own credentials is a headline about us. */}
-        <p className="mt-8 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-sm text-neutral-500">
-          <span className="text-neutral-400">Open source</span>
-          <span aria-hidden className="text-neutral-700">·</span>
-          <span className="text-neutral-400">Fully observable</span>
-          <span aria-hidden className="text-neutral-700">·</span>
-          <span className="text-neutral-400">Run anywhere</span>
-          <span aria-hidden className="text-neutral-700">·</span>
-          <span>Techstars ’17</span>
-        </p>
+        {/* The strip that used to sit here said Open source · Fully observable ·
+            Run anywhere, and <ProofStrip/> directly below repeated two of the
+            three. One strip, and it is the one whose numbers are derived. */}
       </section>
     </>
   )
