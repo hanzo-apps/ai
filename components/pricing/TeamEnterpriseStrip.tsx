@@ -3,7 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@hanzo/ui";
 import { Users, Building2 } from "lucide-react";
-import { loadPlans, fallbackPlans } from "@/lib/plans";
+import { loadPlans, fallbackPlans, planCheckoutUrl, type SubscriptionPlan } from "@/lib/plans";
+import { useAnalytics } from "@hanzo/event/react";
+import { EVENTS } from "@hanzo/event";
 import { Box } from '@hanzo/ui'
 
 // Team and Enterprise used to be four full plan cards sitting beside the
@@ -22,7 +24,6 @@ import { Box } from '@hanzo/ui'
 // onClick renders a div[role=button], which is focusable but never fires on
 // Enter or Space — see BillingManagement for the same defect measured live.
 
-const TEAM_URL = "https://billing.hanzo.ai/?plan=team#pricing";
 // The sales page, not a raw mailto. /contact/sales carries the booking link
 // (cal.hanzo.ai) and the enterprise address together, so a reader picks the
 // channel; a mailto picks for them and dead-ends anyone without a mail client
@@ -48,37 +49,38 @@ const entrySeat = (rows: ReturnType<typeof fallbackPlans>) =>
     .filter((p) => p.priceMonthly != null && p.priceMonthly > 0)
     .sort((a, b) => (a.priceMonthly ?? 0) - (b.priceMonthly ?? 0))[0];
 
-function teamFallback() {
-  const seat = entrySeat(fallbackPlans("team"));
-  return {
-    monthly: seat?.priceMonthly ?? null,
-    annual: seat?.priceAnnual ?? null,
-    minSeats: Number(seat?.limits?.minSeats) || 2,
-  };
-}
-
-/** The seat price and seat minimum, both from the row commerce charges. */
-function useTeamTerms() {
-  const [terms, setTerms] = useState(teamFallback);
+/**
+ * The row commerce charges for a seat.
+ *
+ * The ROW, not a copy of three of its fields: the price, the seat minimum, the
+ * checkout link and the id the click reports are all answers to "which plan is
+ * this", and reading them off one value is what keeps them answers about the
+ * same plan.
+ */
+function useEntrySeat(): SubscriptionPlan | undefined {
+  const [seat, setSeat] = useState(() => entrySeat(fallbackPlans("team")));
   useEffect(() => {
     loadPlans("team").then((live) => {
-      // The cheapest sellable row is the entry seat — `team` today, but read
-      // rather than named so adding a cheaper tier does not silently keep
-      // advertising the old one.
-      const seat = entrySeat(live);
-      if (!seat?.priceMonthly) return;
-      setTerms({
-        monthly: seat.priceMonthly,
-        annual: seat.priceAnnual ?? null,
-        minSeats: Number(seat.limits?.minSeats) || teamFallback().minSeats,
-      });
+      const fresh = entrySeat(live);
+      if (fresh?.priceMonthly) setSeat(fresh);
     });
   }, []);
-  return terms;
+  return seat;
 }
 
 const TeamEnterpriseStrip = () => {
-  const { monthly, annual, minSeats } = useTeamTerms();
+  const seat = useEntrySeat();
+  const monthly = seat?.priceMonthly ?? null;
+  const annual = seat?.priceAnnual ?? null;
+  const minSeats = Number(seat?.limits?.minSeats) || 2;
+  const analytics = useAnalytics();
+  // The same event the ladder above reports, from the two cards that were
+  // silent: a business buyer choosing a plan is the step the upgrade funnel
+  // reads between viewing prices and reaching checkout, and these CTAs were
+  // absent from it. `plan` is the catalog id, so it joins to the id billing
+  // and pay file their side of the funnel under.
+  const choose = (plan: string, cta: string) =>
+    analytics.capture(EVENTS.PLAN_CLICKED, { plan, cta });
   // Annual is the headline because it is the cheaper of the two and the one a
   // company buying seats will take; monthly is the footnote. Both are read, so
   // a plan sold at a single price simply states that price and no footnote.
@@ -106,11 +108,18 @@ const TeamEnterpriseStrip = () => {
           </>
         )}
       </p>
-      <Button asChild variant="outline" className="w-full border-border">
-        <a href={TEAM_URL} target="_blank" rel="noopener noreferrer">
-          Get started
-        </a>
-      </Button>
+      {seat && (
+        <Button asChild variant="outline" className="w-full border-border">
+          <a
+            href={planCheckoutUrl(seat)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => choose(seat.id, "Get started")}
+          >
+            Get started
+          </a>
+        </Button>
+      )}
     </Box>
 
     <Box className="p-6 rounded-xl border border-border bg-[var(--black)] flex flex-col">
@@ -124,7 +133,9 @@ const TeamEnterpriseStrip = () => {
         starts with a conversation rather than a number.
       </p>
       <Button asChild variant="outline" className="w-full border-border">
-        <a href={SALES_URL}>Contact sales</a>
+        <a href={SALES_URL} onClick={() => choose("enterprise", "Contact sales")}>
+          Contact sales
+        </a>
       </Button>
     </Box>
   </Box>

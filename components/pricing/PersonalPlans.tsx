@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Code, Zap, Users, Rocket, Sparkles } from "lucide-react";
-import { loadPlans, fallbackPlans, sellableFeatures, type SubscriptionPlan } from "@/lib/plans";
+import { loadPlans, fallbackPlans, sellableFeatures, planCheckoutUrl, type SubscriptionPlan } from "@/lib/plans";
 import { Box } from '@hanzo/ui'
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
@@ -12,18 +12,6 @@ const PLAN_ICONS: Record<string, React.ReactNode> = {
   pro: <Zap className="h-6 w-6 text-muted-foreground" />,
   max: <Users className="h-6 w-6 text-muted-foreground" />,
 };
-
-// Canonical checkout. The billing shell reads the "#pricing" hash and opens the
-// subscription portal for the signed-in user (auto OIDC via hanzo.id when
-// needed), where selecting a plan starts the subscription. If /v1/plans ever
-// supplies a checkout link/id we honor it; otherwise we deep-link by plan id.
-const BILLING_URL = "https://billing.hanzo.ai";
-
-function planCheckoutUrl(plan: SubscriptionPlan): string {
-  if (plan.checkoutUrl) return plan.checkoutUrl;
-  const id = plan.checkoutId || plan.id;
-  return `${BILLING_URL}/?plan=${encodeURIComponent(id)}#pricing`;
-}
 
 function planCtaLabel(): string {
   return "Get started";
@@ -125,6 +113,10 @@ const PersonalPlans = () => {
       <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
         {/* Free leads. Everyone starts here, so it is the first thing read. */}
         <PricingPlan
+          // Free has no catalog row to take an id from — it is the one rung
+          // that never charges — so it states the id the rest of the site
+          // already calls it by.
+          plan="free"
           name={FREE.name}
           icon={<Sparkles className="h-6 w-6 text-muted-foreground" />}
           price="$0"
@@ -137,6 +129,7 @@ const PersonalPlans = () => {
         {plans.map((plan) => (
           <PricingPlan
             key={plan.id}
+            plan={plan.id}
             name={plan.name}
             icon={PLAN_ICONS[plan.id] || iconFallback}
             price={formatPrice(plan)}

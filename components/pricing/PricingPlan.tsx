@@ -8,6 +8,13 @@ import { EVENTS } from "@hanzo/event";
 import { Box } from '@hanzo/ui'
 
 interface PricingPlanProps {
+  /** Catalog id of the tier — the value `plan_clicked` carries.
+   *
+   *  The event needs the plan's IDENTITY, and `name` is its label. billing and
+   *  pay both file their side of the upgrade funnel under the catalog id, so a
+   *  card that reported "Pro" described the same tier by a name no other
+   *  surface answers to, and no step could be joined to the next on it. */
+  plan: string;
   name: string;
   icon: React.ReactNode;
   price: string;
@@ -26,6 +33,7 @@ interface PricingPlanProps {
 }
 
 const PricingPlan = ({
+  plan,
   name,
   icon,
   price,
@@ -41,7 +49,7 @@ const PricingPlan = ({
   ctaLabel,
 }: PricingPlanProps) => {
   const analytics = useAnalytics();
-  const track = (cta: string) => analytics.capture(EVENTS.PLAN_CLICKED, { plan: name, cta });
+  const track = (cta: string) => analytics.capture(EVENTS.PLAN_CLICKED, { plan, cta });
   // A CTA that NAVIGATES is an anchor, not a click handler. Button renders a
   // div[role=button], which never fires on Enter or Space — so a `window.open`
   // handler made these plans unstartable by keyboard or screen reader, and took

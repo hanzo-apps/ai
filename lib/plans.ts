@@ -64,6 +64,27 @@ export interface SubscriptionPlan {
 
 export const PLANS_API = "https://api.hanzo.ai/v1/billing/plans";
 
+/** Where the subscription is started. */
+const BILLING_URL = "https://billing.hanzo.ai";
+
+/**
+ * The checkout a plan's CTA opens.
+ *
+ * Here rather than beside a card, because the personal ladder and the business
+ * strip both send buyers to the same door and each used to write the address
+ * itself — one reading the catalog, the other naming `team` by hand. Two copies
+ * of one URL is two chances to point at a plan the catalog stopped selling.
+ *
+ * A catalog row may carry its own link, and then that link wins; otherwise the
+ * id is the whole address. The id is also what `plan_clicked` reports, so the
+ * plan the event names and the plan the door opens cannot disagree.
+ */
+export function planCheckoutUrl(plan: SubscriptionPlan): string {
+  if (plan.checkoutUrl) return plan.checkoutUrl;
+  const id = plan.checkoutId || plan.id;
+  return `${BILLING_URL}/?plan=${encodeURIComponent(id)}#pricing`;
+}
+
 /**
  * Billing speaks CENTS; these pages render dollars. Converting here, once, at
  * the boundary — a price that is 100x wrong on a checkout page is the worst

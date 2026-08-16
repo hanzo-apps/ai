@@ -144,6 +144,7 @@ const WorldPricing = () => {
         {sortedPlans.map((plan) => (
           <PricingPlan
             key={plan.id}
+            plan={plan.id}
             name={plan.name}
             icon={PLAN_ICONS[plan.id] || iconFallback}
             price={formatPrice(plan)}

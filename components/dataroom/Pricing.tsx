@@ -18,6 +18,7 @@ const Pricing = () => {
 
         <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           <PricingPlan
+            plan="free"
             name="Free"
             icon={<Github className="h-6 w-6 text-muted-foreground" />}
             price="$0"
@@ -33,6 +34,7 @@ const Pricing = () => {
             ]}
           />
           <PricingPlan
+            plan="pro"
             name="Pro"
             icon={<FolderLock className="h-6 w-6 text-muted-foreground" />}
             price="$25"
@@ -48,6 +50,7 @@ const Pricing = () => {
             ]}
           />
           <PricingPlan
+            plan="business"
             name="Business"
             icon={<Building2 className="h-6 w-6 text-muted-foreground" />}
             price="$59"
@@ -66,6 +69,7 @@ const Pricing = () => {
             ]}
           />
           <PricingPlan
+            plan="data-rooms"
             name="Data Rooms"
             icon={<Rocket className="h-6 w-6 text-muted-foreground" />}
             price="$99"
