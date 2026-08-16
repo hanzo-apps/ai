@@ -16,6 +16,27 @@ import raw from './data/leaderboard.json'
 
 export type BenchId = string
 
+/*
+ * WHY THIS IS A COMMITTED SNAPSHOT AND NOT A READ OF /v1/benchmark.
+ *
+ * `cloud/apps/benchmark` is the right destination and it is deployed: the arena
+ * keeps a vendor's `published_claim` and a `hanzo-measured` attempt as SEPARATE
+ * append-only planes, which is exactly the provenance this file carries by hand.
+ * Pointing at it is the obvious cleanup and it is WRONG TODAY.
+ *
+ * Measured 2026-08-16. GET api.hanzo.ai/v1/benchmark/leaderboard answers 200 for
+ * gpqa_diamond with four rows — fable-5, gpt-5.5, fugu-ultra, grok-4.5 — every
+ * one of them `measured: null, n: 0`. Published claims only, no enso row at all.
+ * `loadAttempts` reads the measured plane from one JSONL per model and returns an
+ * empty leaderboard when the directory is missing, which is honest and is what a
+ * deployment with no harness run looks like.
+ *
+ * So the swap would trade 134 models of real measurement for four rows of vendor
+ * claims, and delete the 194/198 the enso tiers are derived from. The order is:
+ * populate the arena from the harness FIRST, confirm the enso rows carry
+ * `measured` and an `n`, then read it here and delete this file. Not before.
+ */
+
 export interface Score {
   value: number
   source: string
