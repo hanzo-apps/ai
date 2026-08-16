@@ -9,6 +9,7 @@ import {
   type HanzoNav,
   type ProductCategory,
 } from '@hanzogui/shell'
+import { useIam } from '@hanzo/iam/react'
 import { cloudCategories } from '@/lib/data/cloud-primitives'
 import { policy } from '@/lib/publish'
 import pages from '@/lib/data/pages.json'
@@ -401,6 +402,29 @@ export function SiteHeader({
   // go once you have an account; chat is where you go to find out.
   const TRY = { ...base.primaryCTA, label: 'Try Hanzo', href: CHAT }
 
+  // Who is reading this page.
+  //
+  // The site still owns no session and runs no OAuth of its own: `IamProvider`
+  // is mounted site-wide and hanzo.id is the issuer, so this READS a session
+  // rather than establishing one. What changes is that the header now says
+  // which one it found — before, a signed-in visitor and a stranger were shown
+  // the same thing, so there was no way to tell whether the browser knew you.
+  //
+  // `isLoading` is why it waits. A static export has no session at build time,
+  // so the first paint is always signed-out; rendering that as fact would flash
+  // "Sign in" at someone who is already signed in. With `auth` absent the shell
+  // draws nothing, which is exactly what this header did before.
+  const { user, isLoading, login, logout } = useIam()
+  const auth = isLoading
+    ? undefined
+    : {
+        // A person is their name where we have one; the address is the only
+        // other thing they will recognise as themselves.
+        user: user ? { name: user.name ?? user.email, email: user.email } : null,
+        onSignIn: login,
+        onSignOut: logout,
+      }
+
   return (
     <div style={MENU_COLUMNS}>
       <HanzoHeader
@@ -414,6 +438,7 @@ export function SiteHeader({
         commands={SITE_PAGES}
         currentCategoryId={currentCategoryId}
         onAskHanzo={goToChat}
+        auth={auth}
         tryMenu
       />
     </div>
