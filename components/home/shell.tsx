@@ -413,6 +413,15 @@ export function SiteHeader({
           primaryCTA: TRY,
         }}
         productsTaxonomy={PRODUCTS_TAXONOMY}
+        // "Platform", the same word hanzo.app opens this taxonomy under. It is
+        // one taxonomy, so it should answer to one name across the estate —
+        // this surface was the only one still calling it Products, which reads
+        // as a different menu to anyone who moves between the two.
+        //
+        // A LABEL and not a link, deliberately: there is no /platform page and
+        // there should not be, because the taxonomy IS that page. A row whose
+        // only job is to open a menu is the menu.
+        productsLabel="Platform"
         commands={SITE_PAGES}
         currentCategoryId={currentCategoryId}
         onAskHanzo={goToChat}
