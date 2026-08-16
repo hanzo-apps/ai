@@ -5,11 +5,16 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { ShieldCheck, Lock, CheckCircle } from "lucide-react";
 
-const certifications = [
-  { name: "SOC 2 Type II", details: "Audit in progress. Enterprise security controls." },
-  { name: "GDPR ready", details: "Data protection controls for EU compliance." },
-  { name: "Privacy-first", details: "Built with privacy-by-design principles." },
-  { name: "HIPAA capable", details: "BAA available for healthcare use cases." }
+// A framework name under a heading reading "Certifications" IS a claim to
+// hold one, whatever the line beneath it says -- and the qualifier here sat in
+// `details`, a second line nobody reads before they read the name. That is the
+// exact shape the /security badge row had. What each of these is instead: a
+// control we run, named by the control.
+const assurances = [
+  { name: "Continual internal audits", details: "Report on request." },
+  { name: "Data protection", details: "EU data handling, deletion, and export on request." },
+  { name: "Privacy by design", details: "Collected because it is used, not because it can be." },
+  { name: "BAA available", details: "For healthcare workloads." }
 ];
 
 const SecurityFeatures = [
@@ -87,10 +92,10 @@ const Security = () => {
             className="lg:col-span-2"
           >
             <div className="bg-gradient-to-br from-neutral-900 to-neutral-900/50 rounded-xl border border-neutral-800 p-6 h-full">
-              <h3 className="text-xl font-bold mb-6">Compliance Certifications</h3>
+              <h3 className="text-xl font-bold mb-6">Security and assurance</h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {certifications.map((cert, index) => (
+                {assurances.map((cert, index) => (
                   <motion.div
                     key={cert.name}
                     initial={{ opacity: 0, y: 20 }}

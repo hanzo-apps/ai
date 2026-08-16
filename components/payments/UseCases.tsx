@@ -9,21 +9,25 @@ const useCases = [
   {
     icon: <ShoppingCart className="h-6 w-6 text-foreground" />,
     title: "Selling in several countries",
+    points: ['Local methods', 'Currency routing', 'One checkout', 'Rules per country'],
     description: "You sell in more than one country and each one wants a different payment method. Add the connector, write the rule, leave the checkout alone."
   },
   {
     icon: <Repeat className="h-6 w-6 text-foreground" />,
     title: "Recovering declines",
+    points: ['Retry on a second processor', 'Decline reasons', 'Renewal recovery', 'Rules per code'],
     description: "Renewals fail for reasons that have nothing to do with the customer. Retrying through a second processor turns some of those failures back into payments."
   },
   {
     icon: <LayoutGrid className="h-6 w-6 text-foreground" />,
     title: "Leaving a processor",
+    points: ['Move a percentage first', 'No checkout rewrite', 'The same API', 'Roll back at once'],
     description: "The reason nobody switches is the rewrite. When the integration is here, moving is a routing change, and you can move a percentage first."
   },
   {
     icon: <CreditCard className="h-6 w-6 text-foreground" />,
     title: "Comparing two of them",
+    points: ['Approval rates side by side', 'Split by percentage', 'One traffic, two routes', 'Cost per authorization'],
     description: "Run both and read the approval rates side by side. The argument about which processor is better becomes a measurement."
   }
 ];
@@ -64,14 +68,11 @@ const UseCases = () => {
               <div className="mt-6 pt-6 border-t border-neutral-800">
                 <h4 className="text-lg font-medium mb-3">Key Features</h4>
                 <div className="grid grid-cols-2 gap-3">
-                  {[...Array(4)].map((_, i) => (
+                  {useCase.points.map((_, i) => (
                     <div key={i} className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-primary"></div>
                       <span className="text-sm text-muted-foreground">
-                        {index === 0 && ['Optimized checkout', 'Global shipping', 'Inventory sync', 'Tax compliance'][i]}
-                        {index === 1 && ['Recurring billing', 'Trials & coupons', 'Revenue recovery', 'Usage metering'][i]}
-                        {index === 2 && ['Split payments', 'Escrow', 'KYC verification', 'Seller onboarding'][i]} 
-                        {index === 3 && ['Card issuing', 'Lending', 'Account connectivity', 'Balance management'][i]}
+                        {useCase.points[i]}
                       </span>
                     </div>
                   ))}
