@@ -336,18 +336,21 @@ function Hero({ models }: { models: string | null }) {
     // `svh`, not `vh`: mobile browser chrome makes `100vh` taller than the
     // screen and the fold overflows by exactly the address bar.
     <section className="flex min-h-svh w-full items-center px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
-      {/* The copy column is CAPPED and the film takes the rest, rather than the
-          two splitting the width evenly. A measure wider than ~34rem is a
-          measure nobody finishes reading, and every pixel it does not take is a
-          pixel the film can use.
+      {/* Two columns from lg, and the tracks change SHAPE at xl rather than
+          appearing there. Reading runs left to right, so the picture belongs
+          beside the copy at every width that can hold both.
 
-          It splits at xl, not lg. A fixed 34rem column plus the gap leaves the
-          film whatever remains, and at 1024 that is 360px -- measured, on the
-          live page: a 360x203 video sitting in a third of the space the copy
-          got, which is worse than stacking. xl leaves it 616px and it grows
-          from there. A breakpoint has to be wide enough for BOTH columns, not
-          just the one whose width is written down. */}
-      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-8 sm:gap-12 xl:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] xl:gap-14 2xl:max-w-[1800px]">
+          At lg they share the width in proportion — 1fr to 1.1fr, which at 1024
+          is 434 against 478. Naming the fixed 34rem measure this early is what
+          used to force a stack: the first track takes its 544 whatever is left,
+          so the picture got 360 and a 360x203 still beside a full column of
+          type is worse than stacking.
+
+          From xl the measure is capped instead. Past ~34rem a line is wider
+          than anyone finishes reading, so every pixel beyond it belongs to the
+          picture — 544 against 776 at 1440. Keeping the proportion there would
+          grow both and leave the copy unreadable. */}
+      <div className="mx-auto grid w-full max-w-[1600px] items-center gap-8 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] xl:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] xl:gap-14 2xl:max-w-[1800px]">
         <div>
           <p style={rise(0)} className="hz-rise text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
             Hanzo Cloud
@@ -361,8 +364,12 @@ function Hero({ models }: { models: string | null }) {
 
                 Four words, and they are the category rather than a feeling.
                 What this is IS the surprise: a cloud whose primitives assume
-                there is a model in the application. */}
-            The AI-native cloud.
+                there is a model in the application.
+
+                The hyphen is U+2011, which does not offer a break. An ordinary
+                one does, and at 434px of measure the line broke after it: "The
+                AI-" over "native cloud.", which reads as a word cut in half. */}
+            The AI&#8209;native cloud.
           </h1>
 
           <p
@@ -412,15 +419,15 @@ function Hero({ models }: { models: string | null }) {
           </Box>
         </div>
 
-        {/* THE SECOND COLUMN. `xl:grid-cols-[minmax(0,34rem)_minmax(0,1fr)]`
-            makes two tracks — measured at 1440: `544px 776px`. Below xl there is
-            one track and the film simply follows the copy at full width.
+        {/* THE SECOND COLUMN. Below lg there is one track and it simply follows
+            the copy at full width, which is the only honest answer on a phone —
+            two tracks there give each about 170px.
 
             The console, running. A reader deciding whether to put their work
             here wants to see the thing they will be looking at every day, not a
-            diagram of how it fits together. It carries no copy — a film cannot
-            reflow or answer a screen reader — so its meaning is the alt. */}
-        <div style={rise(7)} className="hz-rise mt-14 min-w-0 xl:mt-0">
+            diagram of how it fits together. It carries no copy — a picture
+            cannot reflow or answer a screen reader — so its meaning is the alt. */}
+        <div style={rise(7)} className="hz-rise mt-14 min-w-0 lg:mt-0">
           <Mockup
             slug="console"
             alt="The Hanzo console: models, agents, applications, databases and clusters in one list."
