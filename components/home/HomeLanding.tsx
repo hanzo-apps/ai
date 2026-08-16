@@ -12,6 +12,7 @@ import Infrastructure from './Infrastructure'
 import CloudCategories from './CloudCategories'
 import Research from './Research'
 import Proof from './Proof'
+import Security from './Security'
 import ReplaceTheCore from './ReplaceTheCore'
 import Observability from './Observability'
 import BuildStory from './BuildStory'
@@ -89,6 +90,7 @@ export default async function HomeLanding() {
         <Infrastructure />
         <LearnLoop />
         <Observability />
+        <Security />
         <OneInterface />
         <CloudCategories />
         <LocalStack />

@@ -1,10 +1,10 @@
 'use client'
 
 import {
-  Boxes,
+  Cpu,
+  Database,
   Fingerprint,
   KeyRound,
-  Lock,
   Network,
   ScrollText,
   ShieldCheck,
@@ -21,24 +21,48 @@ import { CardGrid, Cta, Section, type CardItem } from '@/components/marketing/pa
  * action run under" — so the section leads with identity and answers it with
  * mechanisms rather than posture.
  *
- * EVERY CARD BELOW IS ALREADY ON /trust OR /security, in those pages' words.
- * That is a rule, not a convenience. Both pages were written against the source
- * — each mechanism was read in the code before it was written there — and both
- * are held to what they say (`e2e/gates/trust-copy.spec.ts` checks /trust
- * against the rendered DOM). A landing page that re-derives a security claim in
- * fresher language is a second claim that starts drifting the day it ships, and
- * the drift always runs one direction: toward stronger than the code.
+ * MOST OF WHAT FOLLOWS IS ALREADY ON /trust OR /security, in those pages' words,
+ * and that is a rule rather than a convenience. Both were written against the
+ * source — each mechanism read in the code before it was written there — and
+ * /trust is held to what it says by `e2e/gates/trust-copy.spec.ts` against the
+ * rendered DOM. A landing page that re-derives a security claim in fresher
+ * language is a second claim that starts drifting the day it ships, and the
+ * drift always runs one direction: toward stronger than the code.
  *
- * So this section may SELECT from those pages and compress; it may not add. If
- * a claim here is wrong, it is wrong there too, and both move together.
+ * Two cards go beyond those pages, both read in the source first: the envelope
+ * detail on "A key is derived, not stored" (luxfi/kms `pkg/store/crypto.go`,
+ * which is where hanzoai/kms's server logic actually lives), and the whole of
+ * "Execution runs behind a boundary it cannot lose" (hanzoai/runtime
+ * `apps/runner/pkg/docker/isolation.go` and `container_configs.go`). The
+ * isolation default, the refusal to substitute a weaker runtime, the org
+ * allowlist on plain runc and the capability drop are each a line of code.
+ *
+ * Three things the source refuses and this page therefore does not say:
+ *   - Isolation is per SANDBOX, not per run — a sandbox is long-lived and many
+ *     executions share one. `runtime/LLM.md` says "isolated per-run"; the code
+ *     does not.
+ *   - There is no egress policy. No default-deny, no allowlist, no filtering —
+ *     `getContainerNetworkingConfig` returns nil when unconfigured, which is
+ *     the Docker bridge and full outbound. Never claim network isolation here.
+ *   - No latency number. "Sub-90ms" appears in runtime's own README with no
+ *     committed benchmark behind it, only a histogram bucket built to measure
+ *     it one day. Repeating it would be repeating marketing, not a fact.
+ *
+ * Post-quantum is stated at exactly one strength per system, because they
+ * differ: IAM's verifier ALLOWLIST includes ML-DSA-65 (real, FIPS 204, but
+ * inert until a signing cert selects it — so this page says what the verifier
+ * accepts, never that we sign with it today), and ML-KEM-768 hybrid key
+ * exchange is live on the wire. PQ wrapping of the at-rest key is v2 and
+ * unimplemented upstream; a comment in the source describes it as though it
+ * ships, and it does not. It is absent here.
  *
  * NO FRAMEWORK IS NAMED, deliberately. `ci/bin/certclaims` fails any line that
  * names one beside a certificate word or a hedge, and the failure it exists to
- * catch is a real one: four framework names once rendered on /security with
- * green checkmarks while the qualifiers that made them honest sat in a field the
- * markup never printed. The position on frameworks has exactly one home, /trust,
- * and this page links there rather than restating it. Two pages answering that
- * question is how the qualifier got lost the first time.
+ * catch is real: four framework names once rendered on /security with green
+ * checkmarks while the qualifiers that made them honest sat in a field the
+ * markup never printed. The position on frameworks has exactly one home,
+ * /trust, and this section links there rather than restating it. Two pages
+ * answering that question is how the qualifier got lost the first time.
  */
 const MECHANISMS: CardItem[] = [
   {
@@ -63,31 +87,31 @@ const MECHANISMS: CardItem[] = [
     title: 'A key is derived, not stored',
     icon: KeyRound,
     description:
-      'Each database takes its key from one master through HKDF-SHA256, bound to the namespace that owns it, so no two databases share a key and a file reopens after a restart with nothing kept beside it. A master of the wrong length is an error, not a quiet fall back to no key. Secrets never reach a manifest — services fetch them from Hanzo KMS at boot.',
+      'Each database takes its key from one master through HKDF-SHA256, salted with the organization that owns it, so no two share a key and a file reopens after a restart with nothing kept beside it. Every secret gets a fresh key sealed under the master with AES-256-GCM and bound to its own path, so a ciphertext cannot be moved to another tenant. A master of the wrong length is an error, not a quiet fall back to no key.',
   },
   {
     title: 'One organization, one file',
-    icon: Boxes,
+    icon: Database,
     description:
-      'A tenancy boundary that only exists in a WHERE clause is one bug from being nothing. On Hanzo Base an organization’s data is its own database file, opened under its own derived key, so a query cannot reach across two. Workloads sit in hardware-virtualised machines, one tenant to a boundary.',
+      'A tenancy boundary that only exists in a WHERE clause is one bug from being nothing. On Hanzo Base an organization’s data is its own database file, opened under its own derived key, so a query cannot reach across two — there is no second file open to reach into.',
+  },
+  {
+    title: 'Execution runs behind a boundary it cannot lose',
+    icon: Cpu,
+    description:
+      'Every sandbox runs inside an isolation boundary, and the default is gVisor. A node that cannot provide the boundary that was asked for is an error rather than a substitution — nothing hands back a weaker runtime than the one requested — and the plain container runtime is reachable only for an organization named on an allowlist. Every Linux capability is dropped, and eight are handed back.',
   },
   {
     title: 'The edge deletes what a caller claims to be',
     icon: Network,
     description:
-      'Headers naming an organization, a user, an email or a role are stripped at the gateway before a handler reads one, and identity is written back only from a verified token. Inside the cluster, services reach each other over a binary protocol rather than the public internet.',
+      'Headers naming an organization, a user, an email or a role are stripped at the gateway before a handler reads one, and identity is written back only from a verified token. In transit it is TLS 1.3, and the edge offers hybrid ML-KEM-768 key exchange. Inside the cluster, services reach each other over a binary protocol rather than the public internet.',
   },
   {
     title: 'One row per request',
     icon: ScrollText,
     description:
       'The trail records the organization and the user who acted, the address they came from, the method and the URI they called, the action, the status the server returned, and the time. Rows recording a consent answer, or a credential issued or revoked, are reserved: the API refuses to create, correct or delete one. Evidence the subject of the evidence can write is not evidence.',
-  },
-  {
-    title: 'Encrypted at rest, and on the wire',
-    icon: Lock,
-    description:
-      'At rest, every tenant’s data sits under a key derived for that tenant alone and sealed with AES-256-GCM, and backups are encrypted with age. In transit it is TLS 1.3, and the edge offers hybrid ML-KEM-768 key exchange, so traffic captured today is not readable by a quantum computer later.',
   },
 ]
 
