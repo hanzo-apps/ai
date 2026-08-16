@@ -20,23 +20,23 @@
  */
 const LAYERS = [
   {
-    name: 'Hanzo Team',
-    body: 'Humans, AI coworkers, goals, projects, knowledge and approvals.',
+    name: 'Company',
+    body: 'Hanzo Team — people and AI coworkers, goals, projects, knowledge, decisions and approvals.',
     href: 'https://hanzo.team',
   },
   {
-    name: 'Agent execution',
-    body: 'Roles, memory, tools, workflows, Tabs and secure sandboxes.',
-    href: 'https://tabs.hanzo.ai',
-  },
-  {
-    name: 'Enso',
-    body: 'Reasoning, routing, models and planning.',
+    name: 'Intelligence',
+    body: 'Enso and Zen — reasoning, company context, policy, routing across models.',
     href: '/enso',
   },
   {
-    name: 'Hanzo Cloud',
-    body: 'Compute, data, networking, identity, storage, deployment, billing and APIs.',
+    name: 'Execution',
+    body: 'Agents, memory, tools, MCP, durable workflows, Tabs and isolated sandboxes.',
+    href: 'https://tabs.hanzo.ai',
+  },
+  {
+    name: 'Infrastructure',
+    body: 'Hanzo Cloud — Kubernetes, Visor across clouds, compute, data, networking, deployment and APIs.',
     href: 'https://cloud.hanzo.ai',
   },
 ]
@@ -44,12 +44,12 @@ const LAYERS = [
 const PLANES = [
   {
     name: 'Learn & adapt',
-    body: 'Insights, traces, evaluations, experiments and outcomes.',
+    body: 'Insights, traces, evaluations, experiments and outcomes — a rail across every layer, not a layer of its own.',
     href: 'https://insights.hanzo.ai',
   },
   {
-    name: 'Govern & secure',
-    body: 'Identity, permissions, policy, secrets, audit, approvals and post-quantum.',
+    name: 'Trust & govern',
+    body: 'Identity for every human and every agent, permissions, secrets, boundaries, approvals, audit and post-quantum.',
     href: '/security',
   },
 ]
@@ -65,12 +65,14 @@ export default function SystemArchitecture() {
         <p className="mx-auto mt-5 text-lg leading-relaxed text-neutral-400">
           Most companies assemble AI, communication, project management, analytics,
           infrastructure, identity, security and billing from separate vendors, then pay to
-          make them behave as one thing. Hanzo was designed as one system.
+          make them behave as one thing. Hanzo was designed as one system — four layers, and
+          two rails that cut across all of them.
         </p>
       </div>
 
-      {/* The stack. Column-reverse so the DOM reads bottom-up — infrastructure
-          first, the way the system is built — while the eye reads top-down. */}
+      {/* Declared top-down (Company first) and reversed for layout, so the DOM
+          reads bottom-up — infrastructure first, the way the system is built —
+          while the eye reads top-down, the way a reader arrives at it. */}
       <div className="mt-14 flex flex-col-reverse gap-3">
         {[...LAYERS].reverse().map((layer, i) => (
           <div key={layer.name}>

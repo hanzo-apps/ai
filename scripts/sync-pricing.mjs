@@ -45,6 +45,12 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 // whose whole problem is duplicated prices.
 const SNAPSHOT = resolve(ROOT, "lib/data/pricing.json");
 const API = process.env.PRICING_API_URL || "https://api.hanzo.ai/v1/pricing";
+// The SERVING catalog, which is a different question from the priced one and is
+// the question the copy asks. `/v1/pricing` lists what has a published rate (432);
+// `/v1/models` lists what the gateway will actually answer for (527, zen and enso
+// included). The site said "400+" off the first while a caller could reach a
+// hundred more — under-reporting our own catalog by a full hundred.
+const MODELS_API = process.env.MODELS_API_URL || "https://api.hanzo.ai/v1/models";
 const DRY_RUN = process.argv.includes("--dry-run");
 
 // Enso is the flagship family and the reason this script now runs on every
@@ -68,6 +74,20 @@ const ensoIn = (doc) =>
   (doc?.hanzoModels ?? []).filter((m) => ENSO.test(String(m?.name ?? ""))).map((m) => m.name);
 
 // `ok: false` is a reason to keep what we have, never a reason to stop the build.
+/** How many models the gateway will answer for. `null` on any failure — this
+ *  must never fail a build, exactly like the catalog fetch above it. */
+async function fetchServed() {
+  try {
+    const res = await fetch(MODELS_API, { headers: { accept: "application/json" } });
+    if (!res.ok) return null;
+    const doc = await res.json();
+    const rows = Array.isArray(doc?.data) ? doc.data : null;
+    return rows && rows.length > 0 ? rows.length : null;
+  } catch {
+    return null;
+  }
+}
+
 async function fetchCatalog() {
   try {
     const res = await fetch(API, { headers: { accept: "application/json" } });
@@ -82,8 +102,16 @@ async function fetchCatalog() {
   }
 }
 
-const keep = (why) => {
+const keep = (why, current, servedModels) => {
   console.warn(`[pricing] keeping the committed snapshot — ${why}`);
+  // HOW MANY MODELS ANSWER is a different fact from WHAT THEY COST, and it moves
+  // on its own schedule. Gating it on the priced catalog's `updated` stamp is why
+  // the site kept saying 400+ while the gateway served 527: the rates had not
+  // changed, so the count that had nothing to do with them was never written.
+  if (current && servedModels !== undefined && servedModels !== current.servedModels) {
+    writeFileSync(SNAPSHOT, JSON.stringify({ ...current, servedModels }, null, 2) + "\n");
+    console.log(`[pricing] updated servedModels to ${servedModels}`);
+  }
   return 0;
 };
 
@@ -98,9 +126,25 @@ async function main() {
   console.log(`[pricing] fetching ${API}`);
   const { doc, error } = await fetchCatalog();
 
+  const served = await fetchServed();
+  if (served === null) {
+    console.log(`[pricing] ${MODELS_API} unreachable — keeping the committed servedModels`);
+  } else {
+    console.log(`[pricing] gateway serves ${served} models`);
+  }
+  // Never regress a count: a smaller answer is far more likely a degraded
+  // response than a hundred models being withdrawn, and writing it would quietly
+  // shrink every claim on the site.
+  const heldServed = current?.servedModels ?? 0;
+  if (served !== null && served < heldServed) {
+    console.log(`[pricing] REFUSED servedModels ${served} < committed ${heldServed}`);
+  }
+  const servedModels =
+    served !== null && served >= heldServed ? served : current?.servedModels;
+
   if (error) {
     if (!current) throw new Error(`no snapshot on disk and the catalog is unreachable: ${error}`);
-    return keep(error);
+    return keep(error, current, servedModels);
   }
 
   const fresh = stamp(doc.updated);
@@ -115,17 +159,28 @@ async function main() {
 
   if (current && fresh !== null && held !== null && fresh <= held) {
     return keep(
-      `the catalog is serving ${doc.updated}, which is not newer than the committed ${current.updated}`
+      `the catalog is serving ${doc.updated}, which is not newer than the committed ${current.updated}`,
+      current,
+      servedModels
     );
   }
   if (current && (fresh === null || held === null)) {
-    return keep("either the catalog or the snapshot has no usable `updated` stamp to compare");
+    return keep(
+      "either the catalog or the snapshot has no usable `updated` stamp to compare",
+      current,
+      servedModels
+    );
   }
 
   // Provenance travels WITH the data: where it came from and when it was taken.
   // A snapshot that cannot say how old it is rots invisibly, which is how this
   // file reached four months stale without anyone noticing.
-  const next = { ...doc, source: API, fetched: new Date().toISOString() };
+  const next = {
+    ...doc,
+    ...(servedModels === undefined ? {} : { servedModels }),
+    source: API,
+    fetched: new Date().toISOString(),
+  };
 
   if (DRY_RUN) {
     console.log(`[pricing] --dry-run: would write ${SNAPSHOT}`);

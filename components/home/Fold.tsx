@@ -68,15 +68,18 @@ export default function Fold() {
           Hanzo OS
         </p>
         <h1 className="hz-display">
-          The operating system for agentic companies.
+          Everything your company needs. Built together.
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-2xl leading-snug text-neutral-200 sm:text-3xl">
-          Give your company intelligence.
+          The operating system for AI-native companies.
         </p>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-neutral-400">
-          Hanzo OS unifies Enso, autonomous agents, company context, secure execution,
-          full-stack observability, and the cloud beneath them — so people and agents think,
-          act, learn and scale as one system.
+          Frontier intelligence, AI coworkers, the applications a company runs on, secure
+          execution, company data, full-stack observability and Kubernetes-native
+          infrastructure — designed together rather than assembled.
+        </p>
+        <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-neutral-500">
+          Run Hanzo OS on Hanzo Cloud or your own infrastructure.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
@@ -84,7 +87,7 @@ export default function Fold() {
             href="https://cloud.hanzo.ai"
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black transition-opacity hover:opacity-90"
           >
-            Start building
+            Try Hanzo
           </a>
           <a
             href="#system"

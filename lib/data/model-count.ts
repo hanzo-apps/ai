@@ -17,8 +17,22 @@
  */
 import pricing from './pricing.json';
 
-/** Exact model count in the published catalog (zen + third-party). */
-export const TOTAL_MODELS: number = pricing.summary.totalModels;
+/**
+ * Exact model count — what the GATEWAY WILL ANSWER FOR, which is the question
+ * the copy asks when it says "models".
+ *
+ * Two catalogs, two different numbers, and reading the wrong one under-reported
+ * us by a hundred models. `/v1/pricing` lists what carries a published rate
+ * (432 at this snapshot); `/v1/models` lists what a caller can actually reach
+ * (527, zen and enso included). A reader who counts the models they can call
+ * and gets more than the site claims has caught us being wrong about ourselves —
+ * in the direction that costs a sale.
+ *
+ * `servedModels` is absent from an older snapshot, so this falls back to the
+ * priced count and the site keeps working rather than rendering NaN.
+ */
+export const TOTAL_MODELS: number =
+  (pricing as { servedModels?: number }).servedModels ?? pricing.summary.totalModels;
 
 /** Distinct upstream providers behind them. */
 export const TOTAL_PROVIDERS: number = pricing.summary.providers;

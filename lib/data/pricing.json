@@ -279,7 +279,7 @@
       "30-day free trial",
       "Automated backups",
       "End-to-end encryption",
-      "SQL over HTTP \u2014 standard OLAP drivers connect",
+      "SQL over HTTP — standard OLAP drivers connect",
       "JSONEachRow + Parquet ingestion",
       "Async inserts",
       "IAM SSO authentication",
@@ -8608,5 +8608,6 @@
   ],
   "updated": "2026-08-06T03:18:40.358Z",
   "source": "https://api.hanzo.ai/v1/pricing",
-  "fetched": "2026-08-08T17:24:36.604Z"
+  "fetched": "2026-08-08T17:24:36.604Z",
+  "servedModels": 527
 }

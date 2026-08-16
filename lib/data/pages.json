@@ -540,6 +540,11 @@
     "href": "/support"
   },
   {
+    "id": "tabs",
+    "title": "Tabs",
+    "href": "/tabs"
+  },
+  {
     "id": "tasks",
     "title": "Tasks",
     "href": "/tasks"

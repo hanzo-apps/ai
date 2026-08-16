@@ -1,12 +1,19 @@
+import { fetchModels } from '@/lib/models'
 import { SiteHeader, SiteFooter } from './shell'
 import Fold from './Fold'
+import ProofStrip from './ProofStrip'
 import SystemArchitecture from './SystemArchitecture'
 import EnsoHero from './EnsoHero'
 import AgentRuntime from './AgentRuntime'
+import Team from './Team'
 import LearnLoop from './LearnLoop'
 import OneInterface from './OneInterface'
+import Infrastructure from './Infrastructure'
 import CloudCategories from './CloudCategories'
 import Research from './Research'
+import Proof from './Proof'
+import ReplaceTheCore from './ReplaceTheCore'
+import Observability from './Observability'
 import BuildStory from './BuildStory'
 import Composer from './Composer'
 import LocalStack from './LocalStack'
@@ -56,7 +63,11 @@ import LocalStack from './LocalStack'
  * other so the second is read as evidence for the first. Its content is the
  * library's own, re-fetched every build.
  */
-export default function HomeLanding() {
+export default async function HomeLanding() {
+  /* The strip's number is derived here rather than typed there — one build,
+     one read of the registry, and the page cannot drift from it. */
+  const { total: modelCount } = await fetchModels()
+
   return (
     <div className="min-h-screen bg-black text-white">
       <SiteHeader surface="ai" />
@@ -69,14 +80,20 @@ export default function HomeLanding() {
             been given the claim first. The catalog and the library are the last
             two things on the page because they are the proof, not the pitch. */}
         <Fold />
+        <ProofStrip modelCount={modelCount} />
+        <ReplaceTheCore />
         <SystemArchitecture />
+        <Team />
         <EnsoHero />
         <AgentRuntime />
+        <Infrastructure />
         <LearnLoop />
+        <Observability />
         <OneInterface />
-        <LocalStack />
         <CloudCategories />
+        <LocalStack />
         <Research />
+        <Proof />
         <BuildStory />
         <Composer />
       </main>

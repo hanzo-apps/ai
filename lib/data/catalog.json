@@ -1,7 +1,7 @@
 {
   "source": "https://api.hanzo.ai/v1/commerce/catalog?brand=hanzo",
   "document": "https://api.hanzo.ai/v1/openapi.json",
-  "fetched": "2026-08-16T05:24:38.334Z",
+  "fetched": "2026-08-16T05:33:42.403Z",
   "categories": [
     {
       "id": "ai",
