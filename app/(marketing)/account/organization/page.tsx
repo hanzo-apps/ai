@@ -31,6 +31,7 @@ import {
   withdrawInvitation,
   type Invitation,
 } from '@/lib/hanzo/team';
+import { Box } from '@hanzo/ui'
 
 
 const Organization = () => {
@@ -129,17 +130,17 @@ const Organization = () => {
           <h2 className="text-2xl font-bold mb-6">Organization Settings</h2>
         </AnimatedHeading>
 
-        <div className="flex flex-col md:flex-row md:items-center gap-6">
-          <div className="h-24 w-24 bg-neutral-900/30 rounded-xl flex items-center justify-center">
+        <Box className="flex flex-col md:flex-row md:items-center gap-6">
+          <Box className="h-24 w-24 bg-neutral-900/30 rounded-xl flex items-center justify-center">
             <Building className="h-12 w-12 text-muted-foreground" />
-          </div>
+          </Box>
           
           <div>
             <h2 className="text-2xl font-bold mb-2">{currentOrganization.name}</h2>
-            <div className="text-muted-foreground">
+            <Box className="text-muted-foreground">
               {currentOrganization.role === 'owner' ? 'You are the owner of this organization' : 
                 `You are a ${currentOrganization.role} in this organization`}
-            </div>
+            </Box>
             
             <div className="mt-4 space-x-4">
               <Button variant="outline" size="sm" className="bg-[var(--black)] border-neutral-800/30 hover:bg-neutral-900/30 space-x-2">
@@ -153,9 +154,9 @@ const Organization = () => {
               </Link>
             </div>
           </div>
-        </div>
+        </Box>
         
-        <div className="border-t border-neutral-800/10 pt-6">
+        <Box className="border-t border-neutral-800/10 pt-6">
           <h3 className="text-xl font-medium mb-4">Organization Details</h3>
           
           <form onSubmit={handleSubmit} className="space-y-6 max-w-xl">
@@ -206,20 +207,20 @@ const Organization = () => {
               Update Organization
             </Button>
           </form>
-        </div>
+        </Box>
 
-        <div className="pt-6">
-          <div className="flex justify-between items-center mb-4">
+        <Box className="pt-6">
+          <Box className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-medium">Team Members</h3>
             
             <Button onClick={() => setInviteOpen((v) => !v)} className="space-x-2 bg-neutral-900 hover:bg-neutral-800 border-none">
               <UserPlus className="h-4 w-4" />
               <span>Invite member</span>
             </Button>
-          </div>
+          </Box>
 
           {inviteOpen && (
-            <div className="flex items-center gap-3 mb-4">
+            <Box className="flex items-center gap-3 mb-4">
               <Input
                 type="email"
                 value={inviteEmail}
@@ -235,20 +236,20 @@ const Organization = () => {
               >
                 {inviteBusy ? 'Creating…' : 'Create invite link'}
               </Button>
-            </div>
+            </Box>
           )}
 
           {pending.length > 0 && (
-            <div className="mb-6">
+            <Box className="mb-6">
               <h4 className="text-sm font-medium text-neutral-400 mb-2">Pending invitations</h4>
               <div className="space-y-2">
                 {pending.map((inv) => (
-                  <div key={`${inv.owner}/${inv.name}`} className="flex items-center justify-between rounded-lg border border-neutral-800 px-4 py-2">
-                    <div className="min-w-0">
-                      <div className="text-sm truncate">{inv.email || 'Anyone with the link'}</div>
-                      <div className="text-xs text-neutral-500 font-mono truncate">{inviteLink(inv.code)}</div>
-                    </div>
-                    <div className="flex items-center gap-2 shrink-0">
+                  <Box key={`${inv.owner}/${inv.name}`} className="flex items-center justify-between rounded-lg border border-neutral-800 px-4 py-2">
+                    <Box className="min-w-0">
+                      <Box className="text-sm truncate">{inv.email || 'Anyone with the link'}</Box>
+                      <Box className="text-xs text-neutral-500 font-mono truncate">{inviteLink(inv.code)}</Box>
+                    </Box>
+                    <Box className="flex items-center gap-2 shrink-0">
                       <Button
                         variant="ghost"
                         size="sm"
@@ -262,11 +263,11 @@ const Organization = () => {
                       <Button variant="ghost" size="sm" onClick={() => handleWithdraw(inv)}>
                         Withdraw
                       </Button>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
                 ))}
               </div>
-            </div>
+            </Box>
           )}
 
           <DataTable
@@ -318,7 +319,7 @@ const Organization = () => {
             rowKey={(m: TeamMember) => m.id}
             empty="No team members yet. Invite someone to get started."
           />
-        </div>
+        </Box>
       </div>
     </AnimatedSection>
   );

@@ -23,6 +23,7 @@ import {
   Keyboard,
   Blocks
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -48,18 +49,18 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   const router = useRouter();
 
   return (
-    <div className="flex h-screen bg-[var(--black)] text-[var(--white)] overflow-hidden">
+    <Box className="flex h-screen bg-[var(--black)] text-[var(--white)] overflow-hidden">
       {/* Sidebar */}
-      <div className="w-56 border-r border-neutral-900 flex flex-col">
+      <Box className="w-56 border-r border-neutral-900 flex flex-col">
         {/* User/Team Selector */}
-        <div className="p-3 border-b border-neutral-900 flex items-center">
-          <div className="w-6 h-6 bg-primary/10 rounded-md flex items-center justify-center text-xs font-bold mr-2">H</div>
+        <Box className="p-3 border-b border-neutral-900 flex items-center">
+          <Box className="w-6 h-6 bg-primary/10 rounded-md flex items-center justify-center text-xs font-bold mr-2">H</Box>
           <span className="font-medium">Hanzo AI</span>
           <ChevronDown className="w-4 h-4 ml-auto" />
-        </div>
+        </Box>
         
         {/* Search */}
-        <div className="px-3 py-2 border-b border-neutral-900">
+        <Box className="px-3 py-2 border-b border-neutral-900">
           <Button
             variant="outline"
             className="w-full justify-start text-muted-foreground bg-[var(--black)] border-neutral-800"
@@ -67,17 +68,17 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           >
             <Search className="w-4 h-4 mr-2" />
             <span>Search...</span>
-            <div className="ml-auto flex items-center text-xs text-muted-foreground">
+            <Box className="ml-auto flex items-center text-xs text-muted-foreground">
               <Command className="w-3 h-3 mr-1" />
               <span>K</span>
-            </div>
+            </Box>
           </Button>
-        </div>
+        </Box>
         
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-3 px-3">
-          <div className="mb-6">
-            <div className="text-muted-foreground text-xs font-medium mb-2 px-2">WORKSPACE</div>
+          <Box className="mb-6">
+            <Box className="text-muted-foreground text-xs font-medium mb-2 px-2">WORKSPACE</Box>
             <ul className="space-y-1">
               <li>
                 <Button variant="ghost" className="w-full justify-start text-foreground/80 hover:bg-neutral-900 hover:text-[var(--white)]" onClick={() => router.push("/dashboard")}>
@@ -116,69 +117,69 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                 </Button>
               </li>
             </ul>
-          </div>
+          </Box>
           
-          <div className="mb-6">
-            <div className="flex items-center justify-between text-muted-foreground text-xs font-medium mb-2 px-2">
+          <Box className="mb-6">
+            <Box className="flex items-center justify-between text-muted-foreground text-xs font-medium mb-2 px-2">
               <span>MODELS</span>
               <Button size="icon" variant="ghost" className="h-4 w-4 text-muted-foreground hover:text-[var(--white)] hover:bg-neutral-900">
                 <PlusCircle className="h-3 w-3" />
               </Button>
-            </div>
+            </Box>
             <ul className="space-y-1">
               <li>
                 <Button variant="ghost" className="w-full justify-start text-foreground/80 hover:bg-neutral-900 hover:text-[var(--white)]">
-                  <div className="w-4 h-4 bg-primary rounded-sm flex items-center justify-center text-[10px] mr-2">G</div>
+                  <Box className="w-4 h-4 bg-primary rounded-sm flex items-center justify-center text-[10px] mr-2">G</Box>
                   GPT-5
                 </Button>
               </li>
               <li>
                 <Button variant="ghost" className="w-full justify-start text-foreground/80 hover:bg-neutral-900 hover:text-[var(--white)]">
-                  <div className="w-4 h-4 bg-primary/10 rounded-sm flex items-center justify-center text-[10px] mr-2">C</div>
+                  <Box className="w-4 h-4 bg-primary/10 rounded-sm flex items-center justify-center text-[10px] mr-2">C</Box>
                   Claude
                 </Button>
               </li>
               <li>
                 <Button variant="ghost" className="w-full justify-start text-foreground/80 hover:bg-neutral-900 hover:text-[var(--white)]">
-                  <div className="w-4 h-4 bg-primary/10 rounded-sm flex items-center justify-center text-[10px] mr-2">L</div>
+                  <Box className="w-4 h-4 bg-primary/10 rounded-sm flex items-center justify-center text-[10px] mr-2">L</Box>
                   Llama 4
                 </Button>
               </li>
             </ul>
-          </div>
+          </Box>
           
-          <div className="mb-6">
-            <div className="flex items-center justify-between text-muted-foreground text-xs font-medium mb-2 px-2">
+          <Box className="mb-6">
+            <Box className="flex items-center justify-between text-muted-foreground text-xs font-medium mb-2 px-2">
               <span>TEAMS</span>
               <Button size="icon" variant="ghost" className="h-4 w-4 text-muted-foreground hover:text-[var(--white)] hover:bg-neutral-900">
                 <PlusCircle className="h-3 w-3" />
               </Button>
-            </div>
+            </Box>
             <ul className="space-y-1">
               <li>
                 <Button variant="ghost" className="w-full justify-start text-foreground/80 hover:bg-neutral-900 hover:text-[var(--white)]">
-                  <div className="w-4 h-4 bg-primary/10 rounded-sm flex items-center justify-center text-[10px] mr-2">E</div>
+                  <Box className="w-4 h-4 bg-primary/10 rounded-sm flex items-center justify-center text-[10px] mr-2">E</Box>
                   Engineering
                 </Button>
               </li>
               <li>
                 <Button variant="ghost" className="w-full justify-start text-foreground/80 hover:bg-neutral-900 hover:text-[var(--white)]">
-                  <div className="w-4 h-4 bg-primary rounded-sm flex items-center justify-center text-[10px] mr-2">D</div>
+                  <Box className="w-4 h-4 bg-primary rounded-sm flex items-center justify-center text-[10px] mr-2">D</Box>
                   Design
                 </Button>
               </li>
               <li>
                 <Button variant="ghost" className="w-full justify-start text-foreground/80 hover:bg-neutral-900 hover:text-[var(--white)]">
-                  <div className="w-4 h-4 bg-primary/10 rounded-sm flex items-center justify-center text-[10px] mr-2">M</div>
+                  <Box className="w-4 h-4 bg-primary/10 rounded-sm flex items-center justify-center text-[10px] mr-2">M</Box>
                   Marketing
                 </Button>
               </li>
             </ul>
-          </div>
+          </Box>
         </nav>
         
         {/* Footer */}
-        <div className="mt-auto border-t border-neutral-900 p-3">
+        <Box className="mt-auto border-t border-neutral-900 p-3">
           <ul className="space-y-1">
             <li>
               <Button variant="ghost" className="w-full justify-start text-foreground/80 hover:bg-neutral-900 hover:text-[var(--white)]">
@@ -199,19 +200,19 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
               </Button>
             </li>
           </ul>
-        </div>
-      </div>
+        </Box>
+      </Box>
       
       {/* Main Content */}
-      <div className="flex-1 overflow-hidden flex flex-col">
+      <Box className="flex-1 overflow-hidden flex flex-col">
         {/* Header */}
         <header className="h-12 border-b border-neutral-900 flex items-center px-4">
-          <div className="flex-1"></div>
+          <Box className="flex-1"></Box>
           <div className="flex items-center space-x-3">
             <Button size="icon" variant="ghost" className="text-muted-foreground hover:text-[var(--white)]">
               <BellDot className="h-5 w-5" />
             </Button>
-            <div className="h-8 w-8 rounded-full bg-gradient-to-br from-neutral-700 to-neutral-900 border border-neutral-800"></div>
+            <Box className="h-8 w-8 rounded-full bg-gradient-to-br from-neutral-700 to-neutral-900 border border-neutral-800"></Box>
           </div>
         </header>
         
@@ -219,8 +220,8 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         <main className="flex-1 overflow-hidden p-6">
           {children}
         </main>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

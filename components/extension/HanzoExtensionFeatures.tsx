@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Sparkles, Zap, Lock, Globe, Lightbulb, Share2, FileText, Command } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const FeatureCard = ({ icon: Icon, title, description }) => {
   return (
@@ -14,9 +15,9 @@ const FeatureCard = ({ icon: Icon, title, description }) => {
       transition={{ duration: 0.5 }}
       className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6 h-full"
     >
-      <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/20">
+      <Box className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/20">
         <Icon className="h-6 w-6 text-foreground" />
-      </div>
+      </Box>
       <h3 className="text-xl font-bold mb-2">{title}</h3>
       <p className="text-foreground/80">{description}</p>
     </motion.div>
@@ -69,7 +70,7 @@ const HanzoExtensionFeatures = () => {
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)]/50">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -83,7 +84,7 @@ const HanzoExtensionFeatures = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <FeatureCard 
               key={index}
@@ -92,8 +93,8 @@ const HanzoExtensionFeatures = () => {
               description={feature.description}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

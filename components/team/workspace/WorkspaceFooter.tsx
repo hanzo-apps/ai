@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Badge } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const WorkspaceFooter = () => {
   return (
@@ -19,7 +20,7 @@ const WorkspaceFooter = () => {
         natively while maintaining a complete audit trail of all actions.
       </p>
 
-      <div className="inline-flex flex-wrap justify-center gap-4">
+      <Box className="inline-flex flex-wrap justify-center gap-4">
         <Badge
           className="px-3 py-2"
           style={{ backgroundColor: "color-mix(in srgb, var(--primary) 20%, transparent)", borderColor: "color-mix(in srgb, var(--primary) 30%, transparent)", color: "var(--primary)" }}
@@ -50,7 +51,7 @@ const WorkspaceFooter = () => {
         >
           Enterprise security
         </Badge>
-      </div>
+      </Box>
     </motion.div>
   );
 };

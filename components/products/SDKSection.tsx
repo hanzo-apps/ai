@@ -3,6 +3,7 @@
 import type { ReactElement } from "react";
 import { motion } from "@/components/motion";
 import { ExternalLink, Package } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface SDK {
   language: string;
@@ -63,13 +64,13 @@ export function SDKSection({ productName, sdks }: SDKSectionProps) {
       transition={{ duration: 0.6 }}
       className="py-16 px-4 md:px-8"
     >
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-2 mb-2">
+      <Box className="max-w-4xl mx-auto">
+        <Box className="flex items-center gap-2 mb-2">
           <Package className="w-5 h-5 text-foreground" />
           <span className="text-sm font-medium text-foreground uppercase tracking-wider">
             SDKs & Libraries
           </span>
-        </div>
+        </Box>
 
         <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
           Official {productName} SDKs
@@ -78,7 +79,7 @@ export function SDKSection({ productName, sdks }: SDKSectionProps) {
           Use our official SDKs to integrate {productName} into your application
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Box className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {sdks.map((sdk, index) => (
             <motion.div
               key={sdk.language}
@@ -88,25 +89,25 @@ export function SDKSection({ productName, sdks }: SDKSectionProps) {
               transition={{ duration: 0.4, delay: index * 0.1 }}
               className="bg-secondary/50 border border-border rounded-xl p-5 hover:border-border transition-colors"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-foreground/80">
+              <Box className="flex items-start justify-between mb-4">
+                <Box className="flex items-center gap-3">
+                  <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center text-foreground/80">
                     {languageLogos[sdk.language.toLowerCase()] || <Package className="w-5 h-5" />}
-                  </div>
+                  </Box>
                   <div>
                     <h3 className="font-semibold text-foreground">{sdk.name}</h3>
                     <span className={`inline-flex items-center px-2 py-0.5 text-xs rounded border ${registryColors[sdk.registry.toLowerCase()] || "bg-neutral-800 text-muted-foreground border-border"}`}>
                       {sdk.registry}
                     </span>
                   </div>
-                </div>
-              </div>
+                </Box>
+              </Box>
 
-              <div className="bg-background rounded-lg p-3 mb-4 font-mono text-sm overflow-x-auto text-foreground/80">
+              <Box className="bg-background rounded-lg p-3 mb-4 font-mono text-sm overflow-x-auto text-foreground/80">
                 {sdk.installCommand}
-              </div>
+              </Box>
 
-              <div className="flex gap-3">
+              <Box className="flex gap-3">
                 <a
                   href={sdk.url || "#"}
                   target="_blank"
@@ -128,11 +129,11 @@ export function SDKSection({ productName, sdks }: SDKSectionProps) {
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 )}
-              </div>
+              </Box>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </motion.section>
   );
 }

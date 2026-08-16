@@ -23,6 +23,7 @@ import {
   type TrigramKey,
 } from "./hexagrams";
 import { HexagramCard, HexagramDetail, HexagramHead, TrigramLines } from "./HexagramCard";
+import { Box } from '@hanzo/ui'
 
 type View = "sequence" | "matrix" | "lenses";
 
@@ -56,7 +57,7 @@ export default function HexagramExplorer() {
 
   return (
     <div>
-      <div
+      <Box
         role="tablist"
         aria-label="Ways to explore the sixty-four patterns"
         className="inline-flex flex-wrap gap-1 rounded-full border border-border bg-secondary/30 p-1"
@@ -86,11 +87,11 @@ export default function HexagramExplorer() {
             </button>
           );
         })}
-      </div>
+      </Box>
 
       <p className="mt-4 text-sm text-muted-foreground">{VIEWS.find((v) => v.key === view)!.hint}</p>
 
-      <div className="mt-8">
+      <Box className="mt-8">
         <div role="tabpanel" id="panel-sequence" aria-labelledby="tab-sequence" hidden={view !== "sequence"}>
           {view === "sequence" && <SequenceView />}
         </div>
@@ -100,7 +101,7 @@ export default function HexagramExplorer() {
         <div role="tabpanel" id="panel-lenses" aria-labelledby="tab-lenses" hidden={view !== "lenses"}>
           {view === "lenses" && <LensesView />}
         </div>
-      </div>
+      </Box>
     </div>
   );
 }
@@ -111,7 +112,7 @@ function SequenceView() {
     <div className="space-y-12">
       {GROUPS.map((g) => (
         <section key={g.roman} aria-labelledby={`group-${g.roman}`}>
-          <div className="mb-4 flex items-baseline gap-3 border-b border-border/60 pb-2">
+          <Box className="mb-4 flex items-baseline gap-3 border-b border-border/60 pb-2">
             <span className="font-mono text-xs text-muted-foreground/50">{g.roman}</span>
             <h3 id={`group-${g.roman}`} className="text-lg font-semibold text-foreground">
               {g.name}
@@ -119,7 +120,7 @@ function SequenceView() {
             <span className="font-mono text-xs text-muted-foreground/40">
               {displayNum(g.from)}–{displayNum(g.to)}
             </span>
-          </div>
+          </Box>
           <div className={CARD_GRID}>
             {HEXAGRAMS.filter((h) => h.num >= g.from && h.num <= g.to).map((h) => (
               <HexagramCard key={h.num} h={h} />
@@ -153,7 +154,7 @@ function LensesView() {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2">
+      <Box className="flex flex-wrap gap-2">
         <button aria-pressed={lens === null} onClick={() => setLens(null)} className={chip(lens === null)}>
           All lensed patterns
         </button>
@@ -167,7 +168,7 @@ function LensesView() {
             {l.name} <span className="opacity-50">{lensCount(l.key)}</span>
           </button>
         ))}
-      </div>
+      </Box>
 
       <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
         {active ? (
@@ -233,7 +234,7 @@ function MatrixView() {
           force (top three lines). Select a row or column to see how one force meets every other.
         </p>
 
-        <div className="overflow-x-auto pb-2">
+        <Box className="overflow-x-auto pb-2">
           <div
             role="group"
             aria-label="The sixty-four hexagrams arranged by upper and lower trigram"
@@ -241,9 +242,9 @@ function MatrixView() {
             style={{ gridTemplateColumns: "2.75rem repeat(8, minmax(2.5rem, 1fr))" }}
           >
             {/* corner */}
-            <div className="flex items-end justify-center pb-1 text-[9px] font-mono uppercase leading-tight text-muted-foreground/40">
+            <Box className="flex items-end justify-center pb-1 text-[9px] font-mono uppercase leading-tight text-muted-foreground/40">
               U/L
-            </div>
+            </Box>
             {/* column headers = lower trigram */}
             {TRIGRAM_ORDER.map((lk) => {
               const t = TRIGRAMS[lk];
@@ -314,10 +315,10 @@ function MatrixView() {
               );
             })}
           </div>
-        </div>
+        </Box>
 
         {/* Trigram legend / how to read */}
-        <div className="mt-6 rounded-xl border border-border bg-secondary/20 p-4">
+        <Box className="mt-6 rounded-xl border border-border bg-secondary/20 p-4">
           <p className="mb-3 text-[11px] font-mono uppercase tracking-wider text-muted-foreground/50">
             The eight trigrams
           </p>
@@ -335,19 +336,19 @@ function MatrixView() {
               );
             })}
           </ul>
-        </div>
+        </Box>
       </div>
 
       {/* Selected detail */}
       <aside className="lg:sticky lg:top-24 lg:self-start">
-        <div className="rounded-xl border border-border bg-secondary/20 p-5">
-          <div className="mb-4 flex items-center gap-4">
+        <Box className="rounded-xl border border-border bg-secondary/20 p-5">
+          <Box className="mb-4 flex items-center gap-4">
             <HexagramHead h={selected} glyphClass="text-4xl" />
-          </div>
-          <div className="border-t border-border/60 pt-4">
+          </Box>
+          <Box className="border-t border-border/60 pt-4">
             <HexagramDetail h={selected} />
-          </div>
-        </div>
+          </Box>
+        </Box>
       </aside>
     </div>
   );

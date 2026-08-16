@@ -8,37 +8,38 @@ import { Button } from "@hanzo/ui";
 import ChromeText from "@/components/ui/chrome-text";
 
 import { ProductFooter } from "@/components/products/ProductFooter"
+import { Box } from '@hanzo/ui'
 const Functions = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
 
       {/* Hero Section */}
       <section className="py-20 lg:py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="bg-primary/10 border border-border rounded-full px-4 py-1 inline-block mb-4">
+        <Box className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></Box>
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <Box className="text-center max-w-3xl mx-auto mb-16">
+            <Box className="bg-primary/10 border border-border rounded-full px-4 py-1 inline-block mb-4">
               <span className="text-foreground text-sm font-medium">Serverless Computing</span>
-            </div>
+            </Box>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/10">
               Hanzo Functions
             </h1>
             <p className="text-xl text-foreground/80 mb-8">
               Functions that run on Kubernetes. Hand it a handler and a runtime; it builds the image, deploys it, routes to it, and keeps as many copies alive as the traffic needs — down to none.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Box className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
                 Get Started
               </Button>
               <Button variant="outline" className="border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-6 text-lg">
                 View Documentation
               </Button>
-            </div>
-          </div>
+            </Box>
+          </Box>
 
           {/* Hero Visual */}
-          <div className="relative bg-primary/10 border border-border rounded-xl p-8 overflow-hidden">
+          <Box className="relative bg-primary/10 border border-border rounded-xl p-8 overflow-hidden">
             <div className="absolute inset-0 hz-grid [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
             <pre className="text-sm sm:text-base overflow-x-auto bg-[var(--black)]/50 p-4 rounded-lg border border-white/30">
               <code className="text-foreground/80">
@@ -64,23 +65,23 @@ const Functions = () => {
                 <span className="text-[var(--white)]">{'}'}</span>
               </code>
             </pre>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Features */}
       <section className="py-20 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="text-center mb-16">
             <ChromeText as="h2" className="text-3xl font-bold mb-4">
               What you get
             </ChromeText>
             <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
               A handler file, a trigger, and the cluster you already run
             </p>
-          </div>
+          </Box>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -164,24 +165,24 @@ const Functions = () => {
                 Blue/green and canary between versions of a function, so backing out a bad deploy is a traffic decision rather than another build.
               </p>
             </motion.div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Use Cases */}
       <section className="py-20 bg-gradient-to-b from-background to-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="text-center mb-16">
             <ChromeText as="h2" className="text-3xl font-bold mb-4">
               Common Use Cases
             </ChromeText>
             <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
               Hanzo Functions powers a wide range of serverless applications
             </p>
-          </div>
+          </Box>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-primary/5 border border-border rounded-xl p-8">
+          <Box className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Box className="bg-primary/5 border border-border rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-4">API Backends</h3>
               <p className="text-foreground/80 mb-4">
                 Build complete REST or GraphQL APIs with automatic scaling and no server management.
@@ -200,9 +201,9 @@ const Functions = () => {
                   <span>Automatic OpenAPI schema generation</span>
                 </li>
               </ul>
-            </div>
+            </Box>
 
-            <div className="bg-primary/5 border border-border rounded-xl p-8">
+            <Box className="bg-primary/5 border border-border rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-4">Real-time Processing</h3>
               <p className="text-foreground/80 mb-4">
                 Process events in real-time with automatic scaling for traffic spikes.
@@ -221,9 +222,9 @@ const Functions = () => {
                   <span>Real-time analytics processing</span>
                 </li>
               </ul>
-            </div>
+            </Box>
 
-            <div className="bg-primary/5 border border-border rounded-xl p-8">
+            <Box className="bg-primary/5 border border-border rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-4">AI/ML Inference</h3>
               <p className="text-foreground/80 mb-4">
                 Deploy machine learning models for inference with built-in GPU acceleration.
@@ -242,9 +243,9 @@ const Functions = () => {
                   <span>Real-time recommendations</span>
                 </li>
               </ul>
-            </div>
+            </Box>
 
-            <div className="bg-primary/5 border border-border rounded-xl p-8">
+            <Box className="bg-primary/5 border border-border rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-4">Scheduled Tasks</h3>
               <p className="text-foreground/80 mb-4">
                 Run tasks on a schedule without maintaining a dedicated server.
@@ -263,49 +264,49 @@ const Functions = () => {
                   <span>Recurring data integration and ETL processes</span>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
       </section>
 
       {/* CTA Section */}
       <section className="py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 md:p-12 border border-white/30">
-            <div className="text-center">
+        <Box className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 md:p-12 border border-white/30">
+            <Box className="text-center">
               <h2 className="text-3xl font-bold mb-4">Ready to Build?</h2>
               <p className="text-xl text-foreground/80 mb-8 max-w-3xl mx-auto">
                 Get started with Hanzo Functions today and deploy your first serverless function in minutes.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Box className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
                   Sign Up Free
                 </Button>
                 <Button variant="outline" className="border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-6 text-lg">
                   Read Documentation
                 </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
       </section>
 
       <section className="py-16 border-t border-neutral-800">
-        <div className="max-w-3xl mx-auto px-4 text-center">
+        <Box className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Get started with Functions</h2>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Box className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="https://docs.hanzo.ai/docs/functions" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />
             </a>
             <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
               View on GitHub
             </a>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
             <ProductFooter slug="functions" name="Functions" />
-</div>
+</Box>
   );
 };
 

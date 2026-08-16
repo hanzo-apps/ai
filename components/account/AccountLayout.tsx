@@ -25,6 +25,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@hanzo/ui";
 import { Button } from "@hanzo/ui";
 import AnimatedSection, { AnimatedHeading } from "@/components/ui/animated-section";
 import { usePathname } from "next/navigation";
+import { Box } from '@hanzo/ui'
 
 const AccountLayout = ({ children }: { children?: React.ReactNode }) => {
   const { organizations, currentOrganization, switchOrganization, isLoading } = useAccount();
@@ -52,17 +53,17 @@ const AccountLayout = ({ children }: { children?: React.ReactNode }) => {
   };
 
   if (isLoading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+    return <Box className="flex items-center justify-center min-h-screen">Loading...</Box>;
   }
 
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
       
       <main className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <AnimatedSection>
-            <div className="flex justify-between items-center mb-10">
+            <Box className="flex justify-between items-center mb-10">
               <AnimatedHeading>
                 <h1 className="text-3xl sm:text-4xl font-medium">Account</h1>
               </AnimatedHeading>
@@ -74,12 +75,12 @@ const AccountLayout = ({ children }: { children?: React.ReactNode }) => {
                 >
                   <SelectTrigger className="w-[250px] bg-[var(--black)] border-border/30">
                     <SelectValue>
-                      <div className="flex items-center">
-                        <div className="h-6 w-6 bg-secondary rounded-full mr-2 flex items-center justify-center text-sm">
+                      <Box className="flex items-center">
+                        <Box className="h-6 w-6 bg-secondary rounded-full mr-2 flex items-center justify-center text-sm">
                           {currentOrganization.name.charAt(0)}
-                        </div>
+                        </Box>
                         {currentOrganization.name}
-                      </div>
+                      </Box>
                     </SelectValue>
                   </SelectTrigger>
                   {/* v8's Select.Content is the focus scope, not the surface: it
@@ -88,23 +89,23 @@ const AccountLayout = ({ children }: { children?: React.ReactNode }) => {
                   <SelectContent>
                     {organizations.map((org) => (
                       <SelectItem key={org.id} value={org.id} className="text-[var(--white)] hover:bg-secondary/30">
-                        <div className="flex items-center">
-                          <div className="h-6 w-6 bg-secondary rounded-full mr-2 flex items-center justify-center text-sm">
+                        <Box className="flex items-center">
+                          <Box className="h-6 w-6 bg-secondary rounded-full mr-2 flex items-center justify-center text-sm">
                             {org.name.charAt(0)}
-                          </div>
+                          </Box>
                           {org.name}
                           <span className="ml-2 text-muted-foreground text-xs">({org.role})</span>
-                        </div>
+                        </Box>
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               )}
-            </div>
+            </Box>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <Box className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {/* Sidebar Navigation */}
-              <div className="col-span-1">
+              <Box className="col-span-1">
                 <div className="backdrop-blur-xl bg-[var(--black)]/40 border border-border rounded-xl p-4 space-y-1">
                   {accountNavItems.map((item) => (
                     <Link 
@@ -131,23 +132,23 @@ const AccountLayout = ({ children }: { children?: React.ReactNode }) => {
                     Sign Out
                   </Button>
                 </div>
-              </div>
+              </Box>
               
               {/* Main Content */}
-              <div className="col-span-1 md:col-span-3">
-                <div className="backdrop-blur-xl bg-[var(--black)]/40 border border-border rounded-xl p-8">
+              <Box className="col-span-1 md:col-span-3">
+                <Box className="backdrop-blur-xl bg-[var(--black)]/40 border border-border rounded-xl p-8">
                   {children}
-                </div>
-              </div>
-            </div>
+                </Box>
+              </Box>
+            </Box>
           </AnimatedSection>
-        </div>
+        </Box>
       </main>
 
-      <div className="w-full">
+      <Box className="w-full">
         
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

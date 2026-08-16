@@ -6,6 +6,7 @@ import { Plus, MoreHorizontal } from "lucide-react";
 import TaskCard from "../TaskCard";
 import KanbanAddTaskButton from "./KanbanAddTaskButton";
 import { Task } from "../data/tasks/task-data";
+import { Box } from '@hanzo/ui'
 
 interface KanbanColumnProps {
   column: {
@@ -36,21 +37,21 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
       onDragOver={onDragOver}
       onDrop={onDrop}
     >
-      <div className="flex items-center justify-between p-3 border-b border-neutral-800">
-        <div className="flex items-center">
+      <Box className="flex items-center justify-between p-3 border-b border-neutral-800">
+        <Box className="flex items-center">
           {column.icon}
           <h3 className="font-medium ml-2">{column.title}</h3>
           <span className="text-sm text-muted-foreground ml-1">{column.tasks.length}</span>
-        </div>
-        <div className="flex items-center">
+        </Box>
+        <Box className="flex items-center">
           <Button size="icon" variant="ghost" className="h-6 w-6 text-muted-foreground hover:text-[var(--white)]" onClick={() => onAddTask(column.id)}>
             <Plus className="h-4 w-4" />
           </Button>
           <Button size="icon" variant="ghost" className="h-6 w-6 text-muted-foreground hover:text-[var(--white)]">
             <MoreHorizontal className="h-4 w-4" />
           </Button>
-        </div>
-      </div>
+        </Box>
+      </Box>
       <div className="flex-1 overflow-y-auto p-2 space-y-2">
         {column.tasks.map((task) => (
           <div

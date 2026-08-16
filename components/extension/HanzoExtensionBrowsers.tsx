@@ -5,6 +5,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Chrome, Compass, LayoutGrid, Globe } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const BrowserCard = ({ icon: Icon, title, description, buttonText }) => {
   return (
@@ -15,17 +16,17 @@ const BrowserCard = ({ icon: Icon, title, description, buttonText }) => {
       transition={{ duration: 0.5 }}
       className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 flex flex-col"
     >
-      <div className="mb-4">
+      <Box className="mb-4">
         <Icon className="h-12 w-12 text-foreground mb-4" />
         <h3 className="text-2xl font-bold mb-2">{title}</h3>
         <p className="text-foreground/80 mb-6">{description}</p>
-      </div>
+      </Box>
       
-      <div className="mt-auto">
+      <Box className="mt-auto">
         <Button className="w-full bg-primary hover:bg-primary/90">
           {buttonText}
         </Button>
-      </div>
+      </Box>
     </motion.div>
   );
 };
@@ -33,7 +34,7 @@ const BrowserCard = ({ icon: Icon, title, description, buttonText }) => {
 const HanzoExtensionBrowsers = () => {
   return (
     <section id="browsers" className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)]">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +48,7 @@ const HanzoExtensionBrowsers = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <BrowserCard 
             icon={Chrome}
             title="Chrome"
@@ -75,8 +76,8 @@ const HanzoExtensionBrowsers = () => {
             description="Safari, Opera, and other Chromium-based browsers are also supported."
             buttonText="View All Browsers"
           />
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

@@ -3,25 +3,26 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Github, ExternalLink, MessageCircle } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const OpenSource = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-4xl mx-auto">
+      <Box className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="bg-gradient-to-br from-neutral-900 to-neutral-800/50 rounded-xl p-8 md:p-12 border border-border text-center"
         >
-          <div className="flex justify-center mb-6">
-            <div
+          <Box className="flex justify-center mb-6">
+            <Box
               className="w-16 h-16 rounded-2xl flex items-center justify-center"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
             >
               <Github className="w-8 h-8" />
-            </div>
-          </div>
+            </Box>
+          </Box>
 
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Open Source
@@ -38,7 +39,7 @@ const OpenSource = () => {
             context window size on each request, along with the full prompts.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
+          <Box className="flex flex-wrap justify-center gap-4 mb-8">
             <a
               href="https://github.com/hanzoai/dev"
               target="_blank"
@@ -58,7 +59,7 @@ const OpenSource = () => {
               <MessageCircle className="mr-2 h-4 w-4" />
               Join Discord
             </a>
-          </div>
+          </Box>
 
           <p className="text-sm text-muted-foreground">
             Join our community on Discord and contribute to help shape Hanzo's
@@ -66,7 +67,7 @@ const OpenSource = () => {
           </p>
         </motion.div>
 
-      </div>
+      </Box>
     </section>
   );
 };

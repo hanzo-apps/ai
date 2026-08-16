@@ -14,12 +14,13 @@ import {
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
 import { ProductFooter } from "@/components/products/ProductFooter"
+import { Box } from '@hanzo/ui'
 export default function DashboardsPage() {
   return (
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 overflow-hidden">
+        <Box className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -37,9 +38,9 @@ export default function DashboardsPage() {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
+        <Box className="relative z-10 max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -91,22 +92,22 @@ export default function DashboardsPage() {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Traces</div>
-              <div className="text-sm text-muted-foreground">The thing being queried</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Scores</div>
-              <div className="text-sm text-muted-foreground">Yours to define</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Monitors</div>
-              <div className="text-sm text-muted-foreground">Saved and watched</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">SSO</div>
-              <div className="text-sm text-muted-foreground">IAM login</div>
-            </div>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">Traces</Box>
+              <Box className="text-sm text-muted-foreground">The thing being queried</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">Scores</Box>
+              <Box className="text-sm text-muted-foreground">Yours to define</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">Monitors</Box>
+              <Box className="text-sm text-muted-foreground">Saved and watched</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">SSO</Box>
+              <Box className="text-sm text-muted-foreground">IAM login</Box>
+            </Box>
           </motion.div>
 
           <motion.div
@@ -129,12 +130,12 @@ export default function DashboardsPage() {
               GitHub
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Features Grid */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-7xl mx-auto">
+        <Box className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -150,7 +151,7 @@ export default function DashboardsPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 icon: BarChart3,
@@ -197,9 +198,9 @@ export default function DashboardsPage() {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors"
               >
-                <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
+                <Box className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
                   <feature.icon className="h-6 w-6 text-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-lg font-semibold text-foreground mb-2">
                   {feature.title}
                 </h3>
@@ -208,15 +209,15 @@ export default function DashboardsPage() {
                 </p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       <OSSRevenueBanner upstreamName="Grafana" />
 
       {/* CTA */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -224,12 +225,12 @@ export default function DashboardsPage() {
             transition={{ duration: 0.5 }}
             className="relative bg-secondary/50 border border-border rounded-2xl p-8 md:p-12 text-center overflow-hidden"
           >
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-              <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-            </div>
+            <Box className="absolute inset-0 overflow-hidden">
+              <Box className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+              <Box className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+            </Box>
 
-            <div className="relative z-10">
+            <Box className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Start from a trace
               </h2>
@@ -237,7 +238,7 @@ export default function DashboardsPage() {
                 Send traces from your application, then build the view that answers the question you keep asking about them.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-4">
+              <Box className="flex flex-wrap justify-center gap-4">
                 <a
                   href="https://docs.hanzo.ai/docs/dashboards"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
@@ -251,11 +252,11 @@ export default function DashboardsPage() {
                 >
                   View on GitHub
                 </a>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
                 <ProductFooter slug="dashboards" name="Dashboards" />
-</div>
+</Box>
       </section>
     </>
   )

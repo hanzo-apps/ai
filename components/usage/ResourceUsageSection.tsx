@@ -3,6 +3,7 @@ import React from "react";
 import { Server, CircuitBoard, HardDrive, Globe } from "lucide-react";
 import { Progress } from "@hanzo/ui";
 import { ProjectResources } from "./models/project";
+import { Box } from '@hanzo/ui'
 
 interface ResourceUsageSectionProps {
   resources: ProjectResources;
@@ -15,46 +16,46 @@ const ResourceUsageSection = ({ resources }: ResourceUsageSectionProps) => {
       
       <div className="space-y-6">
         <div>
-          <div className="flex justify-between mb-1">
-            <div className="flex items-center gap-2">
+          <Box className="flex justify-between mb-1">
+            <Box className="flex items-center gap-2">
               <Server className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm text-muted-foreground">CPU</span>
-            </div>
+            </Box>
             <span className="text-sm">{resources.cpu.value}</span>
-          </div>
+          </Box>
           <Progress value={resources.cpu.usage} className="h-2" />
         </div>
         
         <div>
-          <div className="flex justify-between mb-1">
-            <div className="flex items-center gap-2">
+          <Box className="flex justify-between mb-1">
+            <Box className="flex items-center gap-2">
               <CircuitBoard className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm text-muted-foreground">RAM</span>
-            </div>
+            </Box>
             <span className="text-sm">{resources.memory.value}</span>
-          </div>
+          </Box>
           <Progress value={resources.memory.usage} className="h-2" />
         </div>
         
         <div>
-          <div className="flex justify-between mb-1">
-            <div className="flex items-center gap-2">
+          <Box className="flex justify-between mb-1">
+            <Box className="flex items-center gap-2">
               <Globe className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm text-muted-foreground">Network Egress</span>
-            </div>
+            </Box>
             <span className="text-sm">{resources.network.value}</span>
-          </div>
+          </Box>
           <Progress value={resources.network.usage} className="h-2" />
         </div>
         
         <div>
-          <div className="flex justify-between mb-1">
-            <div className="flex items-center gap-2">
+          <Box className="flex justify-between mb-1">
+            <Box className="flex items-center gap-2">
               <HardDrive className="h-4 w-4 text-muted-foreground" />
               <span className="text-sm text-muted-foreground">Volume</span>
-            </div>
+            </Box>
             <span className="text-sm">{resources.storage.value}</span>
-          </div>
+          </Box>
           <Progress value={resources.storage.usage} className="h-2" />
         </div>
       </div>

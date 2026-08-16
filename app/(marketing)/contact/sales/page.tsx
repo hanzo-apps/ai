@@ -14,6 +14,7 @@ import {
   Clock,
 } from "lucide-react"
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const ENTERPRISE_BENEFITS = [
   {
@@ -40,11 +41,11 @@ const ENTERPRISE_BENEFITS = [
 
 export default function ContactSalesPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       <main>
         {/* Hero Section */}
         <section className="relative pt-28 pb-8 px-4 md:px-8 lg:px-12">
-          <div className="max-w-5xl mx-auto">
+          <Box className="max-w-5xl mx-auto">
             <Link
               href="/contact"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
@@ -66,7 +67,7 @@ export default function ContactSalesPage() {
                 Book a call to discuss your needs. We&apos;ll help you find the right solution for your team.
               </p>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Booking — a LINK, never a frame.
@@ -79,7 +80,7 @@ export default function ContactSalesPage() {
             component (@hanzo/cal, publishable key + api.hanzo.ai) replaces
             this without an iframe. */}
         <section className="pb-16 px-4 md:px-8 lg:px-12">
-          <div className="max-w-2xl mx-auto text-center">
+          <Box className="max-w-2xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -97,13 +98,13 @@ export default function ContactSalesPage() {
                 Opens the Hanzo calendar — pick any slot that suits you.
               </p>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Quick Contact Options */}
         <section className="py-12 px-4 md:px-8 lg:px-12 border-t border-border">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Box className="max-w-5xl mx-auto">
+            <Box className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <motion.a
                 href="mailto:enterprise@hanzo.ai"
                 initial={{ opacity: 0, y: 20 }}
@@ -112,9 +113,9 @@ export default function ContactSalesPage() {
                 transition={{ duration: 0.4 }}
                 className="flex items-center gap-4 p-5 rounded-xl border border-border bg-secondary hover:border-border hover:bg-accent/50 transition-all group"
               >
-                <div className="w-12 h-12 rounded-lg bg-neutral-800 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                <Box className="w-12 h-12 rounded-lg bg-neutral-800 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   <Mail className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                </div>
+                </Box>
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
                   <p className="text-foreground font-medium">enterprise@hanzo.ai</p>
@@ -128,9 +129,9 @@ export default function ContactSalesPage() {
                 transition={{ duration: 0.4, delay: 0.1 }}
                 className="flex items-center gap-4 p-5 rounded-xl border border-border bg-secondary"
               >
-                <div className="w-12 h-12 rounded-lg bg-neutral-800 flex items-center justify-center">
+                <Box className="w-12 h-12 rounded-lg bg-neutral-800 flex items-center justify-center">
                   <MapPin className="w-5 h-5 text-muted-foreground" />
-                </div>
+                </Box>
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
                   <p className="text-foreground font-medium">995 Market St, San Francisco</p>
@@ -147,22 +148,22 @@ export default function ContactSalesPage() {
                 transition={{ duration: 0.4, delay: 0.2 }}
                 className="flex items-center gap-4 p-5 rounded-xl border border-border bg-secondary hover:border-border hover:bg-accent/50 transition-all group"
               >
-                <div className="w-12 h-12 rounded-lg bg-neutral-800 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                <Box className="w-12 h-12 rounded-lg bg-neutral-800 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                   <MessageSquare className="w-5 h-5 text-muted-foreground group-hover:text-foreground/70 transition-colors" />
-                </div>
+                </Box>
                 <div>
                   <p className="text-sm text-muted-foreground">Community</p>
                   <p className="text-foreground font-medium">Join Discord</p>
                 </div>
                 <ExternalLink className="w-4 h-4 text-muted-foreground ml-auto" />
               </motion.a>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Enterprise Benefits */}
         <section className="py-16 px-4 md:px-8 lg:px-12 bg-secondary/20">
-          <div className="max-w-5xl mx-auto">
+          <Box className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -178,7 +179,7 @@ export default function ContactSalesPage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Box className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {ENTERPRISE_BENEFITS.map((benefit, index) => {
                 const Icon = benefit.icon
                 return (
@@ -200,10 +201,10 @@ export default function ContactSalesPage() {
                   </motion.div>
                 )
               })}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
       </main>
-    </div>
+    </Box>
   )
 }

@@ -16,6 +16,7 @@ import {
   Wallet,
 } from 'lucide-react'
 import ChromeText from '@/components/ui/chrome-text'
+import { Box } from '@hanzo/ui'
 
 const tiers = [
   {
@@ -50,16 +51,16 @@ const benefits = [
 
 const Affiliate = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       <section className="py-20 lg:py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="bg-primary/10 border border-border rounded-full px-4 py-1 inline-block mb-4">
+        <Box className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent" />
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <Box className="text-center max-w-3xl mx-auto mb-16">
+            <Box className="bg-primary/10 border border-border rounded-full px-4 py-1 inline-block mb-4">
               <span className="text-sm flex items-center gap-2">
                 <Handshake className="w-4 h-4" /> Affiliate Program
               </span>
-            </div>
+            </Box>
             <h1 className="text-5xl lg:text-7xl font-bold mb-6">
               <ChromeText>Earn with Hanzo</ChromeText>
             </h1>
@@ -67,25 +68,25 @@ const Affiliate = () => {
               Recurring revenue share for agencies, creators, and developers who refer
               customers to Hanzo&apos;s AI cloud, models, and developer tools.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Box className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/contact/sales" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
                 Become a partner <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/referral" className="inline-flex items-center justify-center gap-2 border border-border bg-transparent hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
                 Individual referral program
               </Link>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
       </section>
 
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Partner tiers</h2>
             <p className="text-muted-foreground">Pick the tier that matches your reach.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          </Box>
+          <Box className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {tiers.map((tier, i) => (
               <motion.div
                 key={tier.name}
@@ -94,8 +95,8 @@ const Affiliate = () => {
                 transition={{ delay: i * 0.05 }}
                 className={`p-6 rounded-xl border ${tier.highlight ? 'border-white/40 bg-neutral-900/80' : 'border-neutral-800 bg-neutral-900/50'}`}
               >
-                <div className="text-sm text-muted-foreground">{tier.name}</div>
-                <div className="text-5xl font-bold my-3">{tier.rate}</div>
+                <Box className="text-sm text-muted-foreground">{tier.name}</Box>
+                <Box className="text-5xl font-bold my-3">{tier.rate}</Box>
                 <p className="text-muted-foreground mb-6 text-sm">{tier.description}</p>
                 <ul className="space-y-2 mb-6">
                   {tier.features.map(f => (
@@ -109,14 +110,14 @@ const Affiliate = () => {
                 </Link>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       <section className="py-20 border-t border-neutral-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-center mb-12">Why partner with Hanzo</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map((b, i) => {
               const Icon = b.icon
               return (
@@ -133,29 +134,29 @@ const Affiliate = () => {
                 </motion.div>
               )
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       <section className="py-20 border-t border-neutral-800">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <Box className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Building2 className="h-10 w-10 mx-auto mb-4 text-foreground/70" />
           <h2 className="text-3xl font-bold mb-4">Build with us</h2>
           <p className="text-muted-foreground mb-8">
             Strategic partners ship faster. Co-engineering, go-to-market support, and
             integration help — direct from the Hanzo team.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Box className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/contact/sales" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Talk to partnerships <ArrowRight className="h-4 w-4" />
             </Link>
             <a href="https://docs.hanzo.ai/docs/referrals" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border bg-transparent hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
               Read the program docs
             </a>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
-    </div>
+    </Box>
   )
 }
 

@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect } from "react";
 import ChatHeader from "./ChatHeader";
 import ChatMessages from "./ChatMessages";
 import MessageInput from "./MessageInput";
+import { Box } from '@hanzo/ui'
 
 const ChatInterface: React.FC = () => {
   const [message, setMessage] = useState("");
@@ -66,7 +67,7 @@ const ChatInterface: React.FC = () => {
   };
 
   return (
-    <div className="w-full min-w-0 max-w-4xl mx-auto bg-neutral-900/90 border border-neutral-800 rounded-xl shadow-lg backdrop-blur-lg overflow-hidden flex flex-col h-[600px] my-10">
+    <Box className="w-full min-w-0 max-w-4xl mx-auto bg-neutral-900/90 border border-neutral-800 rounded-xl shadow-lg backdrop-blur-lg overflow-hidden flex flex-col h-[600px] my-10">
       <ChatHeader />
       
       <ChatMessages 
@@ -82,7 +83,7 @@ const ChatInterface: React.FC = () => {
         handleSendMessage={handleSendMessage} 
         isTyping={isTyping}
       />
-    </div>
+    </Box>
   );
 };
 

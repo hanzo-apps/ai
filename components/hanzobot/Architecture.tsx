@@ -3,10 +3,11 @@
 
 import React from "react";
 import { motion } from "@/components/motion";
+import { Box } from '@hanzo/ui'
 const Architecture = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-950">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -20,7 +21,7 @@ const Architecture = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <Box className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -28,13 +29,13 @@ const Architecture = () => {
             transition={{ duration: 0.6 }}
             className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-8"
           >
-            <div className="relative overflow-hidden rounded-lg bg-[var(--black)]/50 p-6 h-64 flex items-center justify-center">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10"></div>
-              <div className="relative z-10 text-center">
-                <div className="text-2xl font-bold text-[var(--white)] mb-4">Modular Architecture</div>
+            <Box className="relative overflow-hidden rounded-lg bg-[var(--black)]/50 p-6 h-64 flex items-center justify-center">
+              <Box className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10"></Box>
+              <Box className="relative z-10 text-center">
+                <Box className="text-2xl font-bold text-[var(--white)] mb-4">Modular Architecture</Box>
                 <p className="text-muted-foreground">Visualization of the Hanzo Bot architecture would appear here</p>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
 
           <motion.div
@@ -44,40 +45,40 @@ const Architecture = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-4"
           >
-            <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
+            <Box className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
               <h3 className="text-xl font-semibold text-[var(--white)] mb-2">Character Files</h3>
               <p className="text-muted-foreground">
                 Contains the agent's personality, backstory, knowledge, and topics to discuss. 
                 It also defines which clients, models, and plugins to load.
               </p>
-            </div>
+            </Box>
             
-            <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
+            <Box className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
               <h3 className="text-xl font-semibold text-[var(--white)] mb-2">Database</h3>
               <p className="text-muted-foreground">
                 Stores relevant information for generating responses, including previous interactions 
                 and embeddings. Essential for contextual responses.
               </p>
-            </div>
+            </Box>
             
-            <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
+            <Box className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
               <h3 className="text-xl font-semibold text-[var(--white)] mb-2">Runtime</h3>
               <p className="text-muted-foreground">
                 The core agent logic that coordinates between modules and external services. 
                 It processes inputs through the LLM and generates responses or action items.
               </p>
-            </div>
+            </Box>
             
-            <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
+            <Box className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
               <h3 className="text-xl font-semibold text-[var(--white)] mb-2">Clients</h3>
               <p className="text-muted-foreground">
                 The platforms where agents interact with users (Discord, Twitter, Slack, Farcaster). 
                 Agents can run on multiple clients simultaneously.
               </p>
-            </div>
+            </Box>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

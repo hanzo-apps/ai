@@ -12,6 +12,7 @@ import {
   Users
 } from "lucide-react";
 import { Card, CardContent } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const HumanAIIntegration = () => {
   const features = [
@@ -49,20 +50,20 @@ const HumanAIIntegration = () => {
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/20">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <Box className="max-w-7xl mx-auto">
+        <Box className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div
+            <Box
               className="inline-flex p-2 rounded-full mb-4"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)", color: "var(--primary)" }}
             >
               <Users className="h-6 w-6" />
-            </div>
+            </Box>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
               Human-AI Integration
             </h2>
@@ -71,18 +72,18 @@ const HumanAIIntegration = () => {
               creating a natural integration that enhances productivity and creativity.
             </p>
 
-            <div
+            <Box
               className="relative aspect-video rounded-xl overflow-hidden bg-card/50"
               style={{ border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)" }}
             >
-              <div className="absolute inset-0 flex items-center justify-center">
+              <Box className="absolute inset-0 flex items-center justify-center">
                 {/* This would be a real video in production */}
-                <div className="text-center p-8">
+                <Box className="text-center p-8">
                   <Video className="h-16 w-16 mx-auto mb-4 opacity-70" />
                   <p className="text-muted-foreground">Interactive demo video would be here</p>
-                </div>
-              </div>
-            </div>
+                </Box>
+              </Box>
+            </Box>
           </motion.div>
 
           <motion.div
@@ -91,28 +92,28 @@ const HumanAIIntegration = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <Box className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {features.map((feature, index) => (
                 <Card
                   key={index}
                   className="bg-card border border-border backdrop-blur-sm overflow-hidden"
                 >
                   <CardContent className="p-6">
-                    <div
+                    <Box
                       className="p-3 rounded-lg inline-flex mb-4"
                       style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
                     >
                       {feature.icon}
-                    </div>
+                    </Box>
                     <h3 className="text-xl font-semibold text-foreground mb-2">{feature.title}</h3>
                     <p className="text-muted-foreground">{feature.description}</p>
                   </CardContent>
                 </Card>
               ))}
-            </div>
+            </Box>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

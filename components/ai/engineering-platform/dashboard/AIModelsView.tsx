@@ -5,13 +5,14 @@ import React, { useState } from "react";
 import { motion } from "@/components/motion";
 import { BrainCircuit, BrainCog, Activity, ServerCog, Zap, Terminal } from "lucide-react";
 import { aiModels } from "../data/aiModels";
+import { Box } from '@hanzo/ui'
 
 const AIModelsView = () => {
   const [selectedModel, setSelectedModel] = useState<string | null>(null);
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between mb-4">
+      <Box className="flex items-center justify-between mb-4">
         <h3 className="text-sm font-medium text-[var(--white)]">AI Model Registry</h3>
         <div className="flex space-x-2">
           <button className="px-2 py-1 bg-primary/40 rounded-md text-xs text-foreground/70 flex items-center">
@@ -23,9 +24,9 @@ const AIModelsView = () => {
             Import
           </button>
         </div>
-      </div>
+      </Box>
 
-      <div className="grid grid-cols-1 gap-3">
+      <Box className="grid grid-cols-1 gap-3">
         {aiModels.map((model) => (
           <motion.div
             key={model.id}
@@ -34,26 +35,26 @@ const AIModelsView = () => {
             whileHover={{ scale: 1.01 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="flex items-start justify-between">
+            <Box className="flex items-start justify-between">
               <div>
-                <div className="flex items-center">
+                <Box className="flex items-center">
                   <BrainCircuit className="w-4 h-4 text-foreground mr-2" />
                   <span className="font-medium text-[var(--white)] text-sm">{model.name}</span>
                   <span className="ml-2 px-1.5 py-0.5 bg-neutral-700/60 rounded text-xs text-foreground/80">{model.type}</span>
-                </div>
-                <div className="text-xs text-muted-foreground mt-1">Provider: {model.provider}</div>
+                </Box>
+                <Box className="text-xs text-muted-foreground mt-1">Provider: {model.provider}</Box>
               </div>
               <div className="flex items-center space-x-4">
-                <div className="text-right">
-                  <div className="text-xs text-muted-foreground">Accuracy</div>
-                  <div className="text-sm font-medium text-foreground/70">{model.accuracy}%</div>
-                </div>
-                <div className="text-right">
-                  <div className="text-xs text-muted-foreground">Latency</div>
-                  <div className="text-sm font-medium text-foreground/70">{model.latency}ms</div>
-                </div>
+                <Box className="text-right">
+                  <Box className="text-xs text-muted-foreground">Accuracy</Box>
+                  <Box className="text-sm font-medium text-foreground/70">{model.accuracy}%</Box>
+                </Box>
+                <Box className="text-right">
+                  <Box className="text-xs text-muted-foreground">Latency</Box>
+                  <Box className="text-sm font-medium text-foreground/70">{model.latency}ms</Box>
+                </Box>
               </div>
-            </div>
+            </Box>
 
             {selectedModel === model.id && (
               <motion.div 
@@ -78,7 +79,7 @@ const AIModelsView = () => {
             )}
           </motion.div>
         ))}
-      </div>
+      </Box>
     </div>
   );
 };

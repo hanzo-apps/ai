@@ -15,6 +15,7 @@ import {
   CheckCircle,
   ExternalLink
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface ColorSwatchProps {
   name: string;
@@ -25,8 +26,8 @@ interface ColorSwatchProps {
 const ColorSwatch = ({ name, hex, className }: ColorSwatchProps) => (
   <div className="space-y-2">
     <div className={`w-full aspect-square rounded-lg ${className} border border-border`}></div>
-    <div className="text-sm font-medium text-foreground">{name}</div>
-    <div className="text-xs text-muted-foreground">{hex}</div>
+    <Box className="text-sm font-medium text-foreground">{name}</Box>
+    <Box className="text-xs text-muted-foreground">{hex}</Box>
   </div>
 );
 
@@ -39,7 +40,7 @@ interface TypographyExampleProps {
 const TypographyExample = ({ name, className, description }: TypographyExampleProps) => (
   <div className="space-y-2 mb-10">
     <div className={`${className}`}>{name}</div>
-    <div className="text-xs text-muted-foreground">{description}</div>
+    <Box className="text-xs text-muted-foreground">{description}</Box>
   </div>
 );
 
@@ -49,44 +50,44 @@ interface ComponentShowcaseProps {
 }
 
 const ComponentShowcase = ({ title, children }: ComponentShowcaseProps) => (
-  <div className="border border-border rounded-xl overflow-hidden">
-    <div className="p-4 border-b border-border bg-secondary/50">
+  <Box className="border border-border rounded-xl overflow-hidden">
+    <Box className="p-4 border-b border-border bg-secondary/50">
       <h3 className="text-sm font-medium text-foreground">{title}</h3>
-    </div>
-    <div className="p-8 flex flex-wrap gap-4 items-center justify-center bg-secondary/30">
+    </Box>
+    <Box className="p-8 flex flex-wrap gap-4 items-center justify-center bg-secondary/30">
       {children}
-    </div>
-  </div>
+    </Box>
+  </Box>
 );
 
 const Brand = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
       
 
       <main>
         {/* Hero Section */}
         <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-            <div
+          <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+            <Box
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
               style={{
                 background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
                 filter: "blur(100px)",
               }}
             />
-            <div
+            <Box
               className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full opacity-10"
               style={{
                 background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
                 filter: "blur(80px)",
               }}
             />
-          </div>
+          </Box>
 
-          <div className="max-w-5xl mx-auto relative z-10">
-            <div className="text-center">
+          <Box className="max-w-5xl mx-auto relative z-10">
+            <Box className="text-center">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -140,13 +141,13 @@ const Brand = () => {
                   Press Kit
                 </Link>
               </motion.div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Design Principles */}
         <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-background to-neutral-900/30">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -159,7 +160,7 @@ const Brand = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Box className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
                   icon: Sparkles,
@@ -187,24 +188,24 @@ const Brand = () => {
                     transition={{ delay: index * 0.1 }}
                     className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-white/30 transition-colors"
                   >
-                    <div
+                    <Box
                       className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
                       style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)" }}
                     >
                       <Icon className="w-6 h-6" />
-                    </div>
+                    </Box>
                     <h3 className="text-lg font-semibold text-foreground mb-2">{principle.title}</h3>
                     <p className="text-sm text-muted-foreground">{principle.description}</p>
                   </motion.div>
                 );
               })}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Color Palette */}
         <section className="py-16 px-4 md:px-8">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -224,10 +225,10 @@ const Brand = () => {
                 viewport={{ once: true }}
               >
                 <h3 className="text-xl font-medium mb-6 text-foreground">Brand Colors</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+                <Box className="grid grid-cols-2 sm:grid-cols-4 gap-6">
                   <ColorSwatch name="Hanzo Black" hex="#0A0A0B" className="bg-[#0A0A0B]" />
                   <ColorSwatch name="Hanzo White" hex="#FFFFFF" className="bg-white" />
-                </div>
+                </Box>
               </motion.div>
 
               <motion.div
@@ -236,14 +237,14 @@ const Brand = () => {
                 viewport={{ once: true }}
               >
                 <h3 className="text-xl font-medium mb-6 text-foreground">Gray Scale</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6">
+                <Box className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6">
                   <ColorSwatch name="Gray 900" hex="#171717" className="bg-[#171717]" />
                   <ColorSwatch name="Gray 800" hex="#262626" className="bg-[#262626]" />
                   <ColorSwatch name="Gray 700" hex="#404040" className="bg-[#404040]" />
                   <ColorSwatch name="Gray 600" hex="#525252" className="bg-[#525252]" />
                   <ColorSwatch name="Gray 500" hex="#737373" className="bg-[#737373]" />
                   <ColorSwatch name="Gray 400" hex="#A3A3A3" className="bg-[#A3A3A3]" />
-                </div>
+                </Box>
               </motion.div>
 
               <motion.div
@@ -252,7 +253,7 @@ const Brand = () => {
                 viewport={{ once: true }}
               >
                 <h3 className="text-xl font-medium mb-6 text-foreground">Gradients</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <Box className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   <ColorSwatch
                     name="Brand Glow"
                     hex="Radial"
@@ -268,15 +269,15 @@ const Brand = () => {
                     hex="Linear"
                     className="bg-gradient-to-r from-neutral-800/50 to-transparent"
                   />
-                </div>
+                </Box>
               </motion.div>
             </div>
-          </div>
+          </Box>
         </section>
 
         {/* Typography */}
         <section className="py-16 px-4 md:px-8 bg-secondary/30">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -331,12 +332,12 @@ const Brand = () => {
                 description="Supporting text, metadata, labels"
               />
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Components */}
         <section className="py-16 px-4 md:px-8">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -380,13 +381,13 @@ const Brand = () => {
                 viewport={{ once: true }}
               >
                 <ComponentShowcase title="Cards">
-                  <div className="w-full max-w-md p-6 rounded-xl bg-secondary/50 border border-border hover:border-white/30 transition-colors">
+                  <Box className="w-full max-w-md p-6 rounded-xl bg-secondary/50 border border-border hover:border-white/30 transition-colors">
                     <h3 className="text-xl font-medium mb-2 text-foreground">Card Title</h3>
                     <p className="text-muted-foreground mb-4">This is a standard card component with hover states and consistent styling.</p>
                     <Button variant="outline" size="sm" className="border-border text-foreground hover:bg-secondary">
                       Learn More
                     </Button>
-                  </div>
+                  </Box>
                 </ComponentShowcase>
               </motion.div>
 
@@ -396,27 +397,27 @@ const Brand = () => {
                 viewport={{ once: true }}
               >
                 <ComponentShowcase title="Badges">
-                  <div
+                  <Box
                     className="px-3 py-1 rounded-full text-sm font-medium"
                     style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
                   >
                     Brand Badge
-                  </div>
-                  <div className="px-3 py-1 rounded-full bg-secondary border border-border text-foreground/80 text-sm font-medium">
+                  </Box>
+                  <Box className="px-3 py-1 rounded-full bg-secondary border border-border text-foreground/80 text-sm font-medium">
                     Default Badge
-                  </div>
-                  <div className="px-3 py-1 rounded-full bg-primary/10 border border-border text-foreground/70 text-sm font-medium">
+                  </Box>
+                  <Box className="px-3 py-1 rounded-full bg-primary/10 border border-border text-foreground/70 text-sm font-medium">
                     Success Badge
-                  </div>
+                  </Box>
                 </ComponentShowcase>
               </motion.div>
             </div>
-          </div>
+          </Box>
         </section>
 
         {/* Download Assets */}
         <section id="assets" className="py-16 px-4 md:px-8 bg-secondary/30">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -429,7 +430,7 @@ const Brand = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 max-w-md mx-auto gap-6">
+            <Box className="grid grid-cols-1 max-w-md mx-auto gap-6">
               {[
                 { title: "Press Kit", description: "Logos and brand assets (ZIP)", size: "", href: "/press/hanzo-press-kit.zip" },
               ].map((asset, index) => (
@@ -442,28 +443,28 @@ const Brand = () => {
                   transition={{ delay: index * 0.1 }}
                   className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-white/30 transition-colors group"
                 >
-                  <div
+                  <Box
                     className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
                     style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)" }}
                   >
                     <Download className="w-6 h-6" />
-                  </div>
+                  </Box>
                   <h3 className="text-lg font-semibold text-foreground mb-1 group-hover:text-foreground transition-colors">
                     {asset.title}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-2">{asset.description}</p>
                 </motion.a>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* CTA Section */}
         <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-neutral-900/30 to-background relative overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+          <Box className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+          <Box className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="max-w-4xl mx-auto text-center relative z-10">
+          <Box className="max-w-4xl mx-auto text-center relative z-10">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -505,12 +506,12 @@ const Brand = () => {
                 brand@hanzo.ai
               </a>
             </motion.div>
-          </div>
+          </Box>
         </section>
       </main>
 
       
-    </div>
+    </Box>
   );
 };
 

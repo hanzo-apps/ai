@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { useIam } from '@hanzo/iam/react';
 import { Spinner } from '@hanzo/gui';
 import { useRouter } from 'next/navigation';
+import { Box } from '@hanzo/ui'
 
 const LoginPage = () => {
   const { login, isAuthenticated, isLoading } = useIam();
@@ -26,12 +27,12 @@ const LoginPage = () => {
   }, [login, isAuthenticated, isLoading, router]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background">
+    <Box className="min-h-screen flex flex-col items-center justify-center bg-background">
       <div className="text-center space-y-6">
         <Spinner size="large" color="$foreground" alignItems="center" />
         <h1 className="text-xl font-medium text-foreground">Redirecting to sign in…</h1>
       </div>
-    </div>
+    </Box>
   );
 };
 

@@ -2,6 +2,7 @@
 
 
 import React from "react";
+import { Box } from '@hanzo/ui'
 
 interface GridLinesProps {
   className?: string;
@@ -18,7 +19,7 @@ export const GridLines: React.FC<GridLinesProps> = ({
 }) => {
   return (
     <div className={`absolute inset-0 pointer-events-none overflow-hidden ${className}`}>
-      <div 
+      <Box 
         className="absolute inset-0"
         style={{
           backgroundImage: `

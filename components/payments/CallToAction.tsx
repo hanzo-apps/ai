@@ -5,11 +5,12 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { FileText, BookOpen, MessageSquare, ExternalLink } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const CallToAction = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-t from-background to-neutral-900/20">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -23,7 +24,7 @@ const CallToAction = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -31,9 +32,9 @@ const CallToAction = () => {
             transition={{ duration: 0.5, delay: 0 }}
             className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6 flex flex-col"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <FileText className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold mb-3">API Reference</h3>
             <p className="text-muted-foreground mb-6 flex-grow">
               Detailed documentation on all Hanzo Payments APIs and integration options.
@@ -51,9 +52,9 @@ const CallToAction = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6 flex flex-col"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <BookOpen className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold mb-3">Hanzo App Marketplace</h3>
             <p className="text-muted-foreground mb-6 flex-grow">
               Explore hundreds of pre-built integrations and apps for Hanzo Payments.
@@ -71,9 +72,9 @@ const CallToAction = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6 flex flex-col"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <MessageSquare className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold mb-3">Checkout Integration</h3>
             <p className="text-muted-foreground mb-6 flex-grow">
               Step-by-step guide to integrating Hanzo Payments checkout into your website or app.
@@ -91,9 +92,9 @@ const CallToAction = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6 flex flex-col"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <BookOpen className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold mb-3">Case Studies</h3>
             <p className="text-muted-foreground mb-6 flex-grow">
               Read success stories from businesses using Hanzo Payments around the world.
@@ -103,7 +104,7 @@ const CallToAction = () => {
               <span>View Case Studies</span>
             </Button>
           </motion.div>
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -117,7 +118,7 @@ const CallToAction = () => {
             Point it at the processor you already use, send a live payment, and add the second
             one when you want to see the difference. Nothing has to move on day one.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <Box className="flex flex-wrap justify-center gap-4">
             <Button 
               size="lg" 
               className="bg-gradient-to-r from-white to-white/10 hover:from-[#cccccc] hover:to-white"
@@ -131,9 +132,9 @@ const CallToAction = () => {
             >
               Contact Sales
             </Button>
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

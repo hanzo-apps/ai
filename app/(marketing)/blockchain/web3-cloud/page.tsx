@@ -28,6 +28,7 @@ import {
   Cloud,
   Terminal
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const coreApis = [
   {
@@ -116,12 +117,12 @@ const deploymentOptions = [
 
 const HanzoWeb3Cloud = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
 
       {/* Hero */}
       <section className="pt-24 pb-16 px-4 md:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -138,9 +139,9 @@ const HanzoWeb3Cloud = () => {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <Box className="max-w-5xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -189,22 +190,22 @@ const HanzoWeb3Cloud = () => {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">100+</div>
-              <div className="text-sm text-muted-foreground">Chains Supported</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">HA</div>
-              <div className="text-sm text-muted-foreground">Failover</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">&lt;50ms</div>
-              <div className="text-sm text-muted-foreground">Global Latency</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">ERC-4337</div>
-              <div className="text-sm text-muted-foreground">Account Abstraction</div>
-            </div>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">100+</Box>
+              <Box className="text-sm text-muted-foreground">Chains Supported</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">HA</Box>
+              <Box className="text-sm text-muted-foreground">Failover</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">&lt;50ms</Box>
+              <Box className="text-sm text-muted-foreground">Global Latency</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">ERC-4337</Box>
+              <Box className="text-sm text-muted-foreground">Account Abstraction</Box>
+            </Box>
           </motion.div>
 
           {/* CTAs */}
@@ -228,12 +229,12 @@ const HanzoWeb3Cloud = () => {
               View Documentation
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Core APIs */}
       <section className="py-20 px-4 md:px-8 border-t border-border">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -246,7 +247,7 @@ const HanzoWeb3Cloud = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {coreApis.map((api, index) => {
               const Icon = api.icon;
               return (
@@ -258,12 +259,12 @@ const HanzoWeb3Cloud = () => {
                   transition={{ delay: index * 0.05 }}
                   className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-white/30 transition-colors"
                 >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <Box className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-foreground" />
-                  </div>
+                  </Box>
                   <h3 className="text-xl font-semibold text-foreground mb-2">{api.name}</h3>
                   <p className="text-muted-foreground text-sm mb-4">{api.description}</p>
-                  <div className="flex flex-wrap gap-2">
+                  <Box className="flex flex-wrap gap-2">
                     {api.features.map((feature, idx) => (
                       <span
                         key={idx}
@@ -272,27 +273,27 @@ const HanzoWeb3Cloud = () => {
                         {feature}
                       </span>
                     ))}
-                  </div>
+                  </Box>
                 </motion.div>
               );
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Account Abstraction */}
       <section className="py-20 px-4 md:px-8 bg-background">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-border mb-6">
+            <Box className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-border mb-6">
               <Wallet className="w-4 h-4 text-foreground" />
               <span className="text-sm font-medium text-foreground/70">ERC-4337</span>
-            </div>
+            </Box>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Account Abstraction
             </h2>
@@ -301,7 +302,7 @@ const HanzoWeb3Cloud = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-3 gap-6">
             {accountAbstraction.map((product, index) => {
               const Icon = product.icon;
               return (
@@ -316,22 +317,22 @@ const HanzoWeb3Cloud = () => {
                     href={product.href || "#"}
                     className="block bg-secondary/50 border border-border rounded-xl p-6 hover:border-white/30 transition-colors h-full"
                   >
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                    <Box className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                       <Icon className="w-6 h-6 text-foreground" />
-                    </div>
+                    </Box>
                     <h3 className="text-xl font-semibold text-foreground mb-2">{product.name}</h3>
                     <p className="text-muted-foreground">{product.description}</p>
                   </Link>
                 </motion.div>
               );
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Supported Chains */}
       <section className="py-20 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -346,7 +347,7 @@ const HanzoWeb3Cloud = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {Object.entries(supportedChains).map(([category, chains], index) => (
               <motion.div
                 key={category}
@@ -360,14 +361,14 @@ const HanzoWeb3Cloud = () => {
                 <ul className="space-y-2">
                   {chains.map((chain, idx) => (
                     <li key={idx} className="flex items-center gap-2 text-sm text-foreground/80">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                      <Box className="w-1.5 h-1.5 rounded-full bg-primary" />
                       {chain}
                     </li>
                   ))}
                 </ul>
               </motion.div>
             ))}
-          </div>
+          </Box>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -382,12 +383,12 @@ const HanzoWeb3Cloud = () => {
               View All Chains & Endpoints <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* White Label Products */}
       <section className="py-20 px-4 md:px-8 bg-background">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -402,7 +403,7 @@ const HanzoWeb3Cloud = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {whiteLabelProducts.map((product, index) => {
               const Icon = product.icon;
               return (
@@ -414,23 +415,23 @@ const HanzoWeb3Cloud = () => {
                   transition={{ delay: index * 0.05 }}
                   className="bg-secondary/50 border border-border rounded-xl p-5 hover:border-white/30 transition-colors"
                 >
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Box className="flex items-center gap-3 mb-2">
+                    <Box className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                       <Icon className="w-5 h-5 text-foreground" />
-                    </div>
+                    </Box>
                     <h3 className="font-semibold text-foreground">{product.name}</h3>
-                  </div>
+                  </Box>
                   <p className="text-sm text-muted-foreground">{product.description}</p>
                 </motion.div>
               );
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Deployment Options */}
       <section className="py-20 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -445,7 +446,7 @@ const HanzoWeb3Cloud = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {deploymentOptions.map((option, index) => {
               const Icon = option.icon;
               return (
@@ -457,25 +458,25 @@ const HanzoWeb3Cloud = () => {
                   transition={{ delay: index * 0.05 }}
                   className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30 transition-colors"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Box className="flex items-center gap-3">
+                    <Box className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                       <Icon className="w-5 h-5 text-foreground" />
-                    </div>
+                    </Box>
                     <div>
                       <h3 className="font-semibold text-foreground">{option.name}</h3>
                       <p className="text-xs text-muted-foreground">{option.description}</p>
                     </div>
-                  </div>
+                  </Box>
                 </motion.div>
               );
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Code Example */}
       <section className="py-20 px-4 md:px-8 border-t border-border">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -491,14 +492,14 @@ const HanzoWeb3Cloud = () => {
             viewport={{ once: true }}
             className="bg-secondary border border-border rounded-xl overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-              </div>
+            <Box className="flex items-center gap-2 px-4 py-2 border-b border-border">
+              <Box className="flex gap-1.5">
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+              </Box>
               <span className="text-xs text-muted-foreground ml-2">web3.ts</span>
-            </div>
+            </Box>
             <pre className="p-4 overflow-x-auto text-sm">
               <code className="text-foreground/80">{`import { HanzoWeb3 } from "@hanzo/web3";
 
@@ -544,12 +545,12 @@ await smartWallet.execute({
 });`}</code>
             </pre>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -563,7 +564,7 @@ await smartWallet.execute({
               Free tier includes 3M compute units/month. Scale to enterprise with dedicated infrastructure.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
+            <Box className="flex flex-wrap justify-center gap-4">
               <a
                 href="https://console.hanzo.ai"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-full transition-colors"
@@ -577,13 +578,13 @@ await smartWallet.execute({
               >
                 Contact Enterprise Sales
               </a>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       
-    </div>
+    </Box>
   );
 };
 

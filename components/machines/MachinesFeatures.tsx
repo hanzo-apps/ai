@@ -5,6 +5,7 @@ import React from 'react';
 import { motion } from "@/components/motion";
 import { Cpu, Server, Zap, Network, BarChart, Globe } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 interface FeatureCardProps {
   icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
@@ -74,17 +75,17 @@ const MachinesFeatures = () => {
 
   return (
     <section className="py-20 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+      <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Box className="text-center mb-16">
           <ChromeText as="h2" className="text-3xl font-bold mb-4">
             How renting one works
           </ChromeText>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Every step is an API call, so anything you do once by hand you can put in a script afterwards
           </p>
-        </div>
+        </Box>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
@@ -94,8 +95,8 @@ const MachinesFeatures = () => {
               delay={feature.delay}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

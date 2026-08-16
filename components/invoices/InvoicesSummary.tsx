@@ -6,6 +6,7 @@ import { Button } from "@hanzo/ui";
 import { CreditCard, Receipt, Clock, AlertCircle } from "lucide-react";
 import { motion } from "@/components/motion";
 import { createAnimationVariant, curves } from "@/components/ui/animation-variants";
+import { Box } from '@hanzo/ui'
 
 const cardAnimation = createAnimationVariant("fadeInBlur", {
   duration: 0.4,
@@ -15,23 +16,23 @@ const cardAnimation = createAnimationVariant("fadeInBlur", {
 
 const InvoicesSummary = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <motion.div 
         variants={cardAnimation}
         className="p-6 rounded-xl border border-neutral-800 bg-neutral-900/20"
       >
-        <div className="flex items-center gap-3 mb-4">
+        <Box className="flex items-center gap-3 mb-4">
           <CreditCard className="h-5 w-5 text-muted-foreground" />
           <h3 className="text-xl font-medium">Active Subscription</h3>
-        </div>
+        </Box>
         
         {/* No signup grant exists — a new account starts at a zero balance and
             pays as it goes, so a "free credit grant" line described money that
             was never issued. */}
-        <div className="mb-6">
-          <div className="text-3xl font-bold mb-1">Pay as you go</div>
+        <Box className="mb-6">
+          <Box className="text-3xl font-bold mb-1">Pay as you go</Box>
           <p className="text-muted-foreground">Add credit when you are ready</p>
-        </div>
+        </Box>
         
         <Button 
           className="bg-primary hover:bg-primary/90 text-primary-foreground w-full"
@@ -44,24 +45,24 @@ const InvoicesSummary = () => {
         variants={cardAnimation}
         className="p-6 rounded-xl border border-neutral-800 bg-neutral-900/20"
       >
-        <div className="flex items-center gap-3 mb-4">
+        <Box className="flex items-center gap-3 mb-4">
           <Receipt className="h-5 w-5 text-muted-foreground" />
           <h3 className="text-xl font-medium">Payment Summary</h3>
-        </div>
+        </Box>
         
         <div className="space-y-2 mb-4">
-          <div className="flex justify-between">
+          <Box className="flex justify-between">
             <span className="text-muted-foreground">Current Usage</span>
             <span>$0.04</span>
-          </div>
-          <div className="flex justify-between">
+          </Box>
+          <Box className="flex justify-between">
             <span className="text-muted-foreground">Next Invoice</span>
             <span>$0.00</span>
-          </div>
-          <div className="flex justify-between font-medium">
+          </Box>
+          <Box className="flex justify-between font-medium">
             <span>Credits Available</span>
             <span>$5.00</span>
-          </div>
+          </Box>
         </div>
         
         <Button className="bg-[var(--white)] hover:bg-neutral-200 text-primary-foreground w-full">
@@ -73,15 +74,15 @@ const InvoicesSummary = () => {
         variants={cardAnimation}
         className="p-6 rounded-xl border border-neutral-800 bg-neutral-900/20"
       >
-        <div className="flex items-center gap-3 mb-4">
+        <Box className="flex items-center gap-3 mb-4">
           <Clock className="h-5 w-5 text-muted-foreground" />
           <h3 className="text-xl font-medium">Upcoming Charges</h3>
-        </div>
+        </Box>
         
-        <div className="bg-[var(--black)]/30 p-4 rounded-lg flex items-center gap-3 mb-6">
+        <Box className="bg-[var(--black)]/30 p-4 rounded-lg flex items-center gap-3 mb-6">
           <AlertCircle className="h-5 w-5 text-foreground" />
           <p className="text-foreground/80">No upcoming charges. You're on a trial plan.</p>
-        </div>
+        </Box>
         
         <Button 
           variant="outline" 
@@ -90,7 +91,7 @@ const InvoicesSummary = () => {
           View Pricing
         </Button>
       </motion.div>
-    </div>
+    </Box>
   );
 };
 

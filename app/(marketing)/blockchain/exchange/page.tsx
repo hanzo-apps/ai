@@ -21,6 +21,7 @@ import {
   Settings,
   RefreshCw
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const exchangeProducts = [
   {
@@ -100,12 +101,12 @@ const capabilities = [
 
 const HanzoExchange = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
 
       {/* Hero */}
       <section className="pt-24 pb-16 px-4 md:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -122,9 +123,9 @@ const HanzoExchange = () => {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <Box className="max-w-5xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -187,12 +188,12 @@ const HanzoExchange = () => {
               Contact Sales
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Products Grid */}
       <section className="py-20 px-4 md:px-8 border-t border-border">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -205,7 +206,7 @@ const HanzoExchange = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <Box className="grid md:grid-cols-2 gap-6">
             {exchangeProducts.map((product, index) => {
               const Icon = product.icon;
               return (
@@ -217,18 +218,18 @@ const HanzoExchange = () => {
                   transition={{ delay: index * 0.1 }}
                   className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-white/30 transition-colors"
                 >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div
+                  <Box className="flex items-start gap-4 mb-4">
+                    <Box
                       className="w-12 h-12 rounded-lg flex items-center justify-center"
                       style={{ backgroundColor: `${product.color}1a` }}
                     >
                       <Icon className="w-6 h-6" style={{ color: product.color }} />
-                    </div>
+                    </Box>
                     <div>
                       <h3 className="text-xl font-semibold text-foreground">{product.name}</h3>
                       <p className="text-muted-foreground text-sm">{product.description}</p>
                     </div>
-                  </div>
+                  </Box>
 
                   <ul className="grid grid-cols-2 gap-2 mb-4">
                     {product.features.map((feature, idx) => (
@@ -248,13 +249,13 @@ const HanzoExchange = () => {
                 </motion.div>
               );
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Capabilities */}
       <section className="py-20 px-4 md:px-8 bg-background">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -266,7 +267,7 @@ const HanzoExchange = () => {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <Box className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
             {capabilities.map((cap, index) => (
               <motion.div
                 key={cap.title}
@@ -276,34 +277,34 @@ const HanzoExchange = () => {
                 transition={{ delay: index * 0.05 }}
                 className="bg-secondary/50 border border-border rounded-xl p-4 text-center"
               >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
+                <Box className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
                   <cap.icon className="w-5 h-5 text-foreground" />
-                </div>
+                </Box>
                 <h3 className="font-semibold text-foreground text-sm mb-1">{cap.title}</h3>
                 <p className="text-xs text-muted-foreground">{cap.description}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Code Example */}
       <section className="py-20 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="bg-secondary border border-border rounded-xl overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-              </div>
+            <Box className="flex items-center gap-2 px-4 py-2 border-b border-border">
+              <Box className="flex gap-1.5">
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+              </Box>
               <span className="text-xs text-muted-foreground ml-2">exchange.ts</span>
-            </div>
+            </Box>
             <pre className="p-4 overflow-x-auto text-sm">
               <code className="text-foreground/80">{`import { HanzoExchange } from "@hanzo/blockchain";
 
@@ -338,12 +339,12 @@ await exchange.orderbook.placeLimitOrder({
 });`}</code>
             </pre>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 md:px-8 border-t border-border">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -357,7 +358,7 @@ await exchange.orderbook.placeLimitOrder({
               From DeFi protocols to institutional trading platforms—we have the infrastructure.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
+            <Box className="flex flex-wrap justify-center gap-4">
               <a
                 href="https://docs.hanzo.ai/docs/blockchain"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-full transition-colors"
@@ -371,14 +372,14 @@ await exchange.orderbook.placeLimitOrder({
               >
                 View Pricing
               </a>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       
             <ProductFooter slug="exchange" name="Exchange" />
-</div>
+</Box>
   );
 };
 

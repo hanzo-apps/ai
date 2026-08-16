@@ -9,6 +9,7 @@ import { Progress } from "@hanzo/ui";
 import { DummyAgentData, Agent } from "./data";
 import AgentDetail from "./AgentDetail";
 import { toast } from "sonner";
+import { Box } from '@hanzo/ui'
 
 interface AgentsListProps {
   viewMode?: "list" | "grid";
@@ -67,9 +68,9 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
   };
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex justify-between items-center mb-4">
-        <div className="relative w-80">
+    <Box className="h-full flex flex-col">
+      <Box className="flex justify-between items-center mb-4">
+        <Box className="relative w-80">
           <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input 
             placeholder="Search agents..." 
@@ -77,7 +78,7 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-        </div>
+        </Box>
         <div className="flex space-x-2">
           <Button 
             variant="ghost" 
@@ -92,10 +93,10 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
             New Agent
           </Button>
         </div>
-      </div>
+      </Box>
       
       {displayMode === "grid" ? (
-        <div className="border border-neutral-800 rounded-lg overflow-hidden">
+        <Box className="border border-neutral-800 rounded-lg overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-[var(--black)] text-left">
@@ -118,34 +119,34 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
                   onClick={() => handleAgentClick(agent)}
                 >
                   <td className="px-4 py-3">
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 rounded-md bg-primary/10 border border-border flex items-center justify-center mr-3">
+                    <Box className="flex items-center">
+                      <Box className="w-8 h-8 rounded-md bg-primary/10 border border-border flex items-center justify-center mr-3">
                         <Bot className="h-4 w-4 text-foreground" />
-                      </div>
+                      </Box>
                       <div>
-                        <div className="font-medium">{agent.name}</div>
-                        <div className="text-xs text-muted-foreground">Last active: {agent.lastActive}</div>
+                        <Box className="font-medium">{agent.name}</Box>
+                        <Box className="text-xs text-muted-foreground">Last active: {agent.lastActive}</Box>
                       </div>
-                    </div>
+                    </Box>
                   </td>
                   <td className="px-4 py-3">
-                    <div className="flex items-center">
+                    <Box className="flex items-center">
                       <div className={`h-2 w-2 rounded-full ${statusColors[agent.status]} mr-2`}></div>
                       {getStatusText(agent.status)}
-                    </div>
+                    </Box>
                   </td>
                   <td className="px-4 py-3">
-                    <div className="flex items-center">
+                    <Box className="flex items-center">
                       {agent.type === "Research" && <Database className="h-4 w-4 mr-1 text-foreground" />}
                       {agent.type === "Coding" && <Brain className="h-4 w-4 mr-1 text-foreground/70" />}
                       {agent.type === "Assistant" && <Activity className="h-4 w-4 mr-1 text-foreground/70" />}
                       {agent.type}
-                    </div>
+                    </Box>
                   </td>
                   <td className="px-4 py-3 text-foreground/80">{agent.model}</td>
                   <td className="px-4 py-3">{agent.tasks}</td>
                   <td className="px-4 py-3">
-                    <div className="flex items-center">
+                    <Box className="flex items-center">
                       <Progress 
                         value={agent.memory} 
                         className="h-1.5 w-16 mr-2 bg-neutral-800" 
@@ -156,7 +157,7 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
                         } as React.CSSProperties}
                       />
                       <span>{agent.memory}%</span>
-                    </div>
+                    </Box>
                   </td>
                   <td className="px-4 py-3">{agent.tokens.toLocaleString()}</td>
                   <td className="px-4 py-3">${agent.cost.toFixed(2)}</td>
@@ -180,33 +181,33 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
               ))}
             </tbody>
           </table>
-        </div>
+        </Box>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredAgents.map((agent) => (
-            <div 
+            <Box 
               key={agent.id}
               className="bg-[var(--black)] border border-neutral-800 rounded-lg p-4 cursor-pointer hover:bg-neutral-900/20 transition-colors"
               onClick={() => handleAgentClick(agent)}
             >
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-md bg-primary/10 border border-border flex items-center justify-center mr-3">
+              <Box className="flex items-center justify-between mb-3">
+                <Box className="flex items-center">
+                  <Box className="w-8 h-8 rounded-md bg-primary/10 border border-border flex items-center justify-center mr-3">
                     <Bot className="h-4 w-4 text-foreground" />
-                  </div>
+                  </Box>
                   <div>
-                    <div className="font-medium">{agent.name}</div>
-                    <div className="text-xs text-muted-foreground">Last active: {agent.lastActive}</div>
+                    <Box className="font-medium">{agent.name}</Box>
+                    <Box className="text-xs text-muted-foreground">Last active: {agent.lastActive}</Box>
                   </div>
-                </div>
-                <div className="flex items-center">
+                </Box>
+                <Box className="flex items-center">
                   <div className={`h-2 w-2 rounded-full ${statusColors[agent.status]} mr-2`}></div>
                   <span className="text-sm">{getStatusText(agent.status)}</span>
-                </div>
-              </div>
+                </Box>
+              </Box>
               
-              <div className="mb-3 text-sm">
-                <div className="flex justify-between mb-1">
+              <Box className="mb-3 text-sm">
+                <Box className="flex justify-between mb-1">
                   <span className="text-muted-foreground">Type:</span>
                   <span className="flex items-center">
                     {agent.type === "Research" && <Database className="h-3 w-3 mr-1 text-foreground" />}
@@ -214,27 +215,27 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
                     {agent.type === "Assistant" && <Activity className="h-3 w-3 mr-1 text-foreground/70" />}
                     {agent.type}
                   </span>
-                </div>
-                <div className="flex justify-between mb-1">
+                </Box>
+                <Box className="flex justify-between mb-1">
                   <span className="text-muted-foreground">Model:</span>
                   <span>{agent.model}</span>
-                </div>
-                <div className="flex justify-between mb-1">
+                </Box>
+                <Box className="flex justify-between mb-1">
                   <span className="text-muted-foreground">Tasks:</span>
                   <span>{agent.tasks}</span>
-                </div>
-                <div className="flex justify-between mb-1">
+                </Box>
+                <Box className="flex justify-between mb-1">
                   <span className="text-muted-foreground">Tokens:</span>
                   <span>{agent.tokens.toLocaleString()}</span>
-                </div>
-                <div className="flex justify-between">
+                </Box>
+                <Box className="flex justify-between">
                   <span className="text-muted-foreground">Cost:</span>
                   <span>${agent.cost.toFixed(2)}</span>
-                </div>
-              </div>
+                </Box>
+              </Box>
               
-              <div className="flex items-center justify-between">
-                <div className="flex items-center text-sm">
+              <Box className="flex items-center justify-between">
+                <Box className="flex items-center text-sm">
                   <span className="text-muted-foreground mr-2">Memory:</span>
                   <Progress 
                     value={agent.memory} 
@@ -246,7 +247,7 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
                     } as React.CSSProperties}
                   />
                   <span>{agent.memory}%</span>
-                </div>
+                </Box>
                 
                 <div className="flex space-x-1" onClick={(e) => e.stopPropagation()}>
                   {agent.status === "running" ? (
@@ -262,10 +263,10 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
                     <Settings className="h-4 w-4" />
                   </Button>
                 </div>
-              </div>
-            </div>
+              </Box>
+            </Box>
           ))}
-        </div>
+        </Box>
       )}
 
       {selectedAgent && (
@@ -275,7 +276,7 @@ const AgentsList = ({ viewMode = "grid" }: AgentsListProps) => {
           onUpdate={handleAgentUpdate}
         />
       )}
-    </div>
+    </Box>
   );
 };
 

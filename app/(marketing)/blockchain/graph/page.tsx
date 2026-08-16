@@ -14,6 +14,7 @@ import {
   Activity,
   RefreshCw,
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const features = [
   {
@@ -55,12 +56,12 @@ const supportedChains = [
 
 const HanzoGraph = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
 
       {/* Hero */}
       <section className="pt-24 pb-16 px-4 md:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -77,9 +78,9 @@ const HanzoGraph = () => {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <Box className="max-w-5xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -128,22 +129,22 @@ const HanzoGraph = () => {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground/70">100+</div>
-              <div className="text-sm text-muted-foreground">Chains</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground/70">&lt;1s</div>
-              <div className="text-sm text-muted-foreground">Index Latency</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground/70">HA</div>
-              <div className="text-sm text-muted-foreground">Failover</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground/70">∞</div>
-              <div className="text-sm text-muted-foreground">Queries</div>
-            </div>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground/70">100+</Box>
+              <Box className="text-sm text-muted-foreground">Chains</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground/70">&lt;1s</Box>
+              <Box className="text-sm text-muted-foreground">Index Latency</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground/70">HA</Box>
+              <Box className="text-sm text-muted-foreground">Failover</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground/70">∞</Box>
+              <Box className="text-sm text-muted-foreground">Queries</Box>
+            </Box>
           </motion.div>
 
           {/* CTAs */}
@@ -167,13 +168,13 @@ const HanzoGraph = () => {
               Documentation
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Features */}
       <section className="py-20 px-4 md:px-8 border-t border-border">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Box className="max-w-6xl mx-auto">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -183,20 +184,20 @@ const HanzoGraph = () => {
                 transition={{ delay: index * 0.05 }}
                 className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-border transition-colors"
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center mb-4">
+                <Box className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center mb-4">
                   <feature.icon className="w-6 h-6 text-foreground/70" />
-                </div>
+                </Box>
                 <h3 className="text-xl font-semibold text-foreground mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.description}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Supported Chains */}
       <section className="py-20 px-4 md:px-8 bg-background">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -225,26 +226,26 @@ const HanzoGraph = () => {
               +88 more chains
             </span>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Code Example */}
       <section className="py-20 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="bg-secondary border border-border rounded-xl overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-              </div>
+            <Box className="flex items-center gap-2 px-4 py-2 border-b border-border">
+              <Box className="flex gap-1.5">
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+              </Box>
               <span className="text-xs text-muted-foreground ml-2">schema.graphql</span>
-            </div>
+            </Box>
             <pre className="p-4 overflow-x-auto text-sm">
               <code className="text-foreground/80">{`# Define your schema
 type Token @entity {
@@ -285,12 +286,12 @@ query GetTopHolders($tokenId: ID!) {
 }`}</code>
             </pre>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Deploy Steps */}
       <section className="py-20 px-4 md:px-8 bg-background">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -314,24 +315,24 @@ query GetTopHolders($tokenId: ID!) {
                 transition={{ delay: index * 0.1 }}
                 className="flex items-start gap-4 bg-secondary/50 border border-border rounded-xl p-4"
               >
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-foreground font-bold flex-shrink-0">
+                <Box className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-foreground font-bold flex-shrink-0">
                   {item.step}
-                </div>
-                <div className="flex-1">
+                </Box>
+                <Box className="flex-1">
                   <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
                   <code className="text-sm text-foreground/70 bg-neutral-800 px-2 py-1 rounded">
                     {item.code}
                   </code>
-                </div>
+                </Box>
               </motion.div>
             ))}
           </div>
-        </div>
+        </Box>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -345,7 +346,7 @@ query GetTopHolders($tokenId: ID!) {
               Free tier includes 100K queries/day. Scale to billions.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
+            <Box className="flex flex-wrap justify-center gap-4">
               <a
                 href="https://console.hanzo.ai"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-primary/10 hover:bg-primary/10 text-foreground font-medium rounded-full transition-colors"
@@ -359,13 +360,13 @@ query GetTopHolders($tokenId: ID!) {
               >
                 View Pricing
               </a>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       
-    </div>
+    </Box>
   );
 };
 

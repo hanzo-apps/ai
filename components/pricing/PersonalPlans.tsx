@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Code, Zap, Users, Rocket, Sparkles } from "lucide-react";
 import { loadPlans, fallbackPlans, credit, featuresBeside, type SubscriptionPlan } from "@/lib/plans";
+import { Box } from '@hanzo/ui'
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
   go: <Rocket className="h-6 w-6 text-muted-foreground" />,
@@ -102,7 +103,7 @@ const PersonalPlans = () => {
   const iconFallback = <Rocket className="h-6 w-6 text-muted-foreground" />;
 
   return (
-    <div className="max-w-6xl mx-auto mb-12">
+    <Box className="max-w-6xl mx-auto mb-12">
       {/* The value exchange, before the prices rather than after them.
 
           The measured funnel says readers reach this page, see a monthly price
@@ -115,7 +116,7 @@ const PersonalPlans = () => {
         lifts the limits, and includes credit every month to spend on AI or compute.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+      <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
         {/* Free leads. Everyone starts here, so it is the first thing read. */}
         <PricingPlan
           name={FREE.name}
@@ -151,7 +152,7 @@ const PersonalPlans = () => {
           />
           );
         })}
-      </div>
+      </Box>
 
       {/* The free path is now a card, not a footnote, so this line carries the
           part a card cannot: the source is open, and running it yourself costs
@@ -168,7 +169,7 @@ const PersonalPlans = () => {
         </a>{" "}
         is free to download and run yourself.
       </p>
-    </div>
+    </Box>
   );
 };
 

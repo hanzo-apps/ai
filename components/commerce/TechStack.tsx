@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Server, Database, Shield, Zap, Layers, GitBranch } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface TechCardProps {
   icon: React.ReactNode;
@@ -10,13 +11,13 @@ interface TechCardProps {
 
 const TechCard = ({ icon, title, description }: TechCardProps) => {
   return (
-    <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6 hover:border-border transition-all duration-300">
-      <div className="mb-4">
+    <Box className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6 hover:border-border transition-all duration-300">
+      <Box className="mb-4">
         {icon}
-      </div>
+      </Box>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
       <p className="text-muted-foreground">{description}</p>
-    </div>
+    </Box>
   );
 };
 
@@ -57,14 +58,14 @@ const TechStack = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-neutral-900/30 to-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <Box className="text-center mb-12">
           <h2 className="text-3xl font-bold">What you are running</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
             Worth knowing before you put your revenue behind it.
           </p>
-        </div>
+        </Box>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {techItems.map((item, index) => (
             <TechCard
               key={index}
@@ -73,7 +74,7 @@ const TechStack = () => {
               description={item.description}
             />
           ))}
-        </div>
+        </Box>
       </div>
     </section>
   );

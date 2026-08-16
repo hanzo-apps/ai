@@ -7,6 +7,7 @@ import { EVENTS } from '@hanzo/event'
 import { useVoice, Voice } from '@hanzo/voice'
 import { ArrowUp, Boxes, Cloud, MessageSquare, Mic, Plus } from 'lucide-react'
 import { APP, CLOUD, goToChat } from './nav-data'
+import { Box } from '@hanzo/ui'
 
 /**
  * The front door, docked to the bottom of the viewport.
@@ -105,7 +106,7 @@ export default function Composer() {
             inside the focus ring app/globals.css draws around this element —
             and with nothing else changing colour here, `transition-colors` had
             nothing left to carry. */}
-        <div
+        <Box
           className="flex items-center gap-1.5 rounded-full border border-white/[0.07] p-[4px]"
           style={{
             background: 'var(--hz-chrome)',
@@ -162,7 +163,7 @@ export default function Composer() {
           >
             <ArrowUp className="h-[15px] w-[15px]" strokeWidth={2.5} />
           </button>
-        </div>
+        </Box>
       </form>
     </div>
   )

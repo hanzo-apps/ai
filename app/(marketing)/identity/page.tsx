@@ -7,20 +7,21 @@ import { ArrowRight, User, UserCheck, Shield, Lock, UserCog, Key, Fingerprint, H
 import { Button } from "@hanzo/ui";
 import ChromeText from "@/components/ui/chrome-text";
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner";
+import { Box } from '@hanzo/ui'
 
 const Identity = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
       
       {/* Hero Section */}
       <section className="py-20 lg:py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="bg-primary/5 border border-border rounded-full px-4 py-1 inline-block mb-4">
+        <Box className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent"></Box>
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <Box className="text-center max-w-3xl mx-auto mb-16">
+            <Box className="bg-primary/5 border border-border rounded-full px-4 py-1 inline-block mb-4">
               <span className="text-foreground/70 text-sm font-medium">Identity surface</span>
-            </div>
+            </Box>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white/20 to-white/10">
               Hanzo Identity
             </h1>
@@ -30,55 +31,55 @@ const Identity = () => {
               Your application redirects, a person signs in, and your code gets back a signed token. It never
               sees the password.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Box className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button className="bg-primary/10 hover:bg-primary/10 text-[var(--white)] px-8 py-6 text-lg">
                 Get Started
               </Button>
               <Button variant="outline" className="border-border text-[var(--white)] hover:bg-primary/10 px-8 py-6 text-lg">
                 View Documentation
               </Button>
-            </div>
-          </div>
+            </Box>
+          </Box>
           
           {/* Hero Visual */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-1 bg-primary/10 border border-border rounded-xl p-6 flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+          <Box className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Box className="md:col-span-1 bg-primary/10 border border-border rounded-xl p-6 flex flex-col items-center">
+              <Box className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                 <User className="h-10 w-10 text-foreground/70" />
-              </div>
+              </Box>
               <h3 className="text-lg font-bold mb-2">Signing in</h3>
               <p className="text-foreground/80 text-center">
                 A password, a passkey, or a Google or GitHub account. A second factor when the organization asks for one.
               </p>
-            </div>
+            </Box>
             
-            <div className="md:col-span-1 bg-primary/10 border border-border rounded-xl p-6 flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <Box className="md:col-span-1 bg-primary/10 border border-border rounded-xl p-6 flex flex-col items-center">
+              <Box className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                 <Shield className="h-10 w-10 text-foreground/70" />
-              </div>
+              </Box>
               <h3 className="text-lg font-bold mb-2">What the token carries</h3>
               <p className="text-foreground/80 text-center">
                 Who signed in, which organizations they belong to, and the role they hold where they asked to act.
               </p>
-            </div>
+            </Box>
             
-            <div className="md:col-span-1 bg-primary/10 border border-border rounded-xl p-6 flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <Box className="md:col-span-1 bg-primary/10 border border-border rounded-xl p-6 flex flex-col items-center">
+              <Box className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                 <Lock className="h-10 w-10 text-foreground/70" />
-              </div>
+              </Box>
               <h3 className="text-lg font-bold mb-2">One sign-in, every app</h3>
               <p className="text-foreground/80 text-center">
                 Sign in once and the session is good across every app in the organization, including ours.
               </p>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
       </section>
       
       {/* Features */}
       <section className="py-20 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="text-center mb-16">
             <ChromeText as="h2" className="text-3xl font-bold mb-4">
               What it does
             </ChromeText>
@@ -86,9 +87,9 @@ const Identity = () => {
               Standards, not a proprietary protocol. If your framework can read an OpenID Connect discovery
               document, it can already talk to this.
             </p>
-          </div>
+          </Box>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -179,24 +180,24 @@ const Identity = () => {
                 write path exists; there is no edit path for normal operation, which is the point of keeping one.
               </p>
             </motion.div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
       
       {/* Enterprise Section */}
       <section className="py-20 bg-gradient-to-b from-background to-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="text-center mb-16">
             <ChromeText as="h2" className="text-3xl font-bold mb-4">
               Running it for a large organization
             </ChromeText>
             <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
               The same service, wearing your name, on hardware you choose.
             </p>
-          </div>
+          </Box>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-primary/5 border border-border rounded-xl p-8">
+          <Box className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Box className="bg-primary/5 border border-border rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-4">Where the data sits</h3>
               <p className="text-foreground/80 mb-4">
                 An organization is a tenancy boundary, and the boundary is enforced by the code that reads the
@@ -216,9 +217,9 @@ const Identity = () => {
                   <span>One Go binary, embedded SQLite by default — nothing to run beside it</span>
                 </li>
               </ul>
-            </div>
+            </Box>
             
-            <div className="bg-primary/5 border border-border rounded-xl p-8">
+            <Box className="bg-primary/5 border border-border rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-4">Bring the identity you already have</h3>
               <p className="text-foreground/80 mb-4">
                 Point Identity at your own issuer and it becomes the front door without becoming the record.
@@ -237,9 +238,9 @@ const Identity = () => {
                   <span>White-labelled by hostname — your mark on your domain, never ours</span>
                 </li>
               </ul>
-            </div>
+            </Box>
             
-            <div className="bg-primary/5 border border-border rounded-xl p-8">
+            <Box className="bg-primary/5 border border-border rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-4">Signing up your customers</h3>
               <p className="text-foreground/80 mb-4">
                 An organization can hold its own customers as sub-organizations, so a business you serve manages
@@ -259,9 +260,9 @@ const Identity = () => {
                   <span>Org admins manage their own members without platform access</span>
                 </li>
               </ul>
-            </div>
+            </Box>
             
-            <div className="bg-primary/5 border border-border rounded-xl p-8">
+            <Box className="bg-primary/5 border border-border rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-4">What you write</h3>
               <p className="text-foreground/80 mb-4">
                 Almost nothing. Nobody should be hand-rolling OAuth in 2026, and with this you do not.
@@ -280,49 +281,49 @@ const Identity = () => {
                   <span>The sign-in page is hosted and already built — you send people to it</span>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
       </section>
       
       {/* CTA Section */}
       <section className="py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 md:p-12 border border-border">
-            <div className="text-center">
+        <Box className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 md:p-12 border border-border">
+            <Box className="text-center">
               <h2 className="text-3xl font-bold mb-4">Add sign-in</h2>
               <p className="text-xl text-foreground/80 mb-8 max-w-3xl mx-auto">
                 Register the app, set the callback your framework already uses, install the SDK. That is the
                 whole integration.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Box className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button className="bg-primary/10 hover:bg-primary/10 text-[var(--white)] px-8 py-6 text-lg">
                   Sign Up Free
                 </Button>
                 <Button variant="outline" className="border-border text-[var(--white)] hover:bg-primary/10 px-8 py-6 text-lg">
                   Read Documentation
                 </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
       </section>
 
       <section className="py-16 border-t border-neutral-800">
-        <div className="max-w-3xl mx-auto px-4 text-center">
+        <Box className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Get started with Identity</h2>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Box className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="https://docs.hanzo.ai/docs/services/identity" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />
             </a>
             <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
               View on GitHub
             </a>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
-    </div>
+    </Box>
   );
 };
 

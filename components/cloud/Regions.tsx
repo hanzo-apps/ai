@@ -3,12 +3,13 @@
 
 import React from "react";
 import { motion } from "@/components/motion";
+import { Box } from '@hanzo/ui'
 const Regions = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
       <div className="absolute inset-0 hz-grid pointer-events-none" />
       
-      <div className="max-w-7xl mx-auto relative z-10">
+      <Box className="max-w-7xl mx-auto relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,7 +25,7 @@ const Regions = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-16">
+        <Box className="grid md:grid-cols-2 gap-16">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -36,23 +37,23 @@ const Regions = () => {
               Functions and apps boot and respond to web requests in 250ms or less with Hanzo Machines. You decide to keep them running or automatically put them to sleep.
             </p>
             
-            <div className="rounded-lg bg-neutral-900/50 border border-neutral-800 overflow-hidden">
+            <Box className="rounded-lg bg-neutral-900/50 border border-neutral-800 overflow-hidden">
               <div className="bg-neutral-800 py-2 px-4 flex items-center space-x-2">
-                <div className="w-3 h-3 rounded-full bg-primary/10"></div>
-                <div className="w-3 h-3 rounded-full bg-primary/10"></div>
-                <div className="w-3 h-3 rounded-full bg-primary/10"></div>
-                <div className="text-muted-foreground text-sm">Terminal</div>
+                <Box className="w-3 h-3 rounded-full bg-primary/10"></Box>
+                <Box className="w-3 h-3 rounded-full bg-primary/10"></Box>
+                <Box className="w-3 h-3 rounded-full bg-primary/10"></Box>
+                <Box className="text-muted-foreground text-sm">Terminal</Box>
               </div>
-              <div className="p-4 font-mono text-sm text-foreground/80">
-                <div className="text-foreground/70">$ hanzo deploy</div>
-                <div className="text-muted-foreground">Initializing deployment...</div>
-                <div className="text-muted-foreground">Deploying to region: us-east-1</div>
-                <div className="text-muted-foreground">Building container image...</div>
-                <div className="text-muted-foreground">Pushing to registry...</div>
-                <div className="text-foreground">✓ Deployed in 250ms</div>
-                <div className="text-muted-foreground">Your app is live at: <span className="text-foreground">https://myapp.hanzo.cloud</span></div>
-              </div>
-            </div>
+              <Box className="p-4 font-mono text-sm text-foreground/80">
+                <Box className="text-foreground/70">$ hanzo deploy</Box>
+                <Box className="text-muted-foreground">Initializing deployment...</Box>
+                <Box className="text-muted-foreground">Deploying to region: us-east-1</Box>
+                <Box className="text-muted-foreground">Building container image...</Box>
+                <Box className="text-muted-foreground">Pushing to registry...</Box>
+                <Box className="text-foreground">✓ Deployed in 250ms</Box>
+                <Box className="text-muted-foreground">Your app is live at: <span className="text-foreground">https://myapp.hanzo.cloud</span></Box>
+              </Box>
+            </Box>
           </motion.div>
 
           <motion.div
@@ -66,15 +67,15 @@ const Regions = () => {
               JavaScript, TypeScript, Bun, Deno—whatever your flavor, Hanzo Launch automatically detects your runtime and generates a VM with everything you need to run your app.
             </p>
             
-            <div className="p-6 rounded-lg bg-gradient-to-br from-white/10 to-white/10 border border-white/30">
+            <Box className="p-6 rounded-lg bg-gradient-to-br from-white/10 to-white/10 border border-white/30">
               <h4 className="text-xl font-bold mb-4">Real GPUs & CPUs on the Edge</h4>
               <p className="text-foreground/80">
                 Run workloads that require GPUs or lots of CPUs, memory, and storage in over 30 regions around the world—all interconnected by a private, encrypted WireGuard network that works out of the box.
               </p>
-            </div>
+            </Box>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

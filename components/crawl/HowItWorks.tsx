@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Globe, FileText, Database } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const steps = [
   {
@@ -31,7 +32,7 @@ const steps = [
 const HowItWorks = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
+      <Box className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -57,13 +58,13 @@ const HowItWorks = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex items-start gap-6 bg-secondary/50 border border-border rounded-xl p-6"
             >
-              <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-primary/5 flex items-center justify-center">
+              <Box className="flex-shrink-0 w-14 h-14 rounded-xl bg-primary/5 flex items-center justify-center">
                 <step.icon className="h-6 w-6 text-foreground/70" />
-              </div>
+              </Box>
               <div>
-                <div className="text-xs font-mono text-muted-foreground mb-1">
+                <Box className="text-xs font-mono text-muted-foreground mb-1">
                   Step {step.number}
-                </div>
+                </Box>
                 <h3 className="text-xl font-semibold text-foreground mb-2">
                   {step.title}
                 </h3>
@@ -87,7 +88,7 @@ const HowItWorks = () => {
           <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
             Over HTTP at /v1/crawl when your code is doing the asking, or over MCP when a model is.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <Box className="flex flex-wrap justify-center gap-3">
             {["Static Sites", "SPAs", "Documentation", "E-Commerce", "Forums", "REST API"].map(
               (name) => (
                 <span
@@ -98,9 +99,9 @@ const HowItWorks = () => {
                 </span>
               )
             )}
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

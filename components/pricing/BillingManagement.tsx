@@ -3,14 +3,15 @@
 import React from "react";
 import { Button } from "@hanzo/ui";
 import { CreditCard } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const BillingManagement = () => {
   return (
-    <div className="max-w-4xl mx-auto mb-16 p-8 rounded-xl border border-border backdrop-blur-xl bg-[var(--black)] hover:border-border transition-all">
-      <div className="flex items-center gap-4 mb-5">
+    <Box className="max-w-4xl mx-auto mb-16 p-8 rounded-xl border border-border backdrop-blur-xl bg-[var(--black)] hover:border-border transition-all">
+      <Box className="flex items-center gap-4 mb-5">
         <CreditCard className="h-8 w-8 text-[var(--white)]" />
         <h2 className="text-2xl font-medium">Billing Management</h2>
-      </div>
+      </Box>
       <p className="text-foreground/80 mb-6 leading-relaxed">
         Manage your subscription easily. Need assistance? Join our Discord server for immediate support.
       </p>
@@ -31,7 +32,7 @@ const BillingManagement = () => {
 
           The console is first-party so it navigates in place; Discord is
           external so it opens a tab. */}
-      <div className="flex flex-wrap gap-4">
+      <Box className="flex flex-wrap gap-4">
         <Button
           asChild
           className="bg-[var(--black)] hover:bg-secondary text-[var(--white)] border border-border px-6 py-6"
@@ -51,8 +52,8 @@ const BillingManagement = () => {
             Join Discord
           </a>
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

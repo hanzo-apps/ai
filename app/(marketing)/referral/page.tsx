@@ -17,6 +17,7 @@ import {
   createReferrer,
   generateReferralCode,
 } from '@/lib/hanzo/referrals'
+import { Box } from '@hanzo/ui'
 
 const ReferralProgram = () => {
   const { user } = useAccount()
@@ -86,17 +87,17 @@ const ReferralProgram = () => {
         <ReferralHeader />
 
         {error && (
-          <div className="bg-red-900/20 border border-red-800 rounded-lg p-4 text-red-300 text-sm">
+          <Box className="bg-red-900/20 border border-red-800 rounded-lg p-4 text-red-300 text-sm">
             {error}
-          </div>
+          </Box>
         )}
 
         {loading ? (
           <div className="space-y-6">
             {[1, 2, 3].map((i) => (
               <div key={i} className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6 animate-pulse">
-                <div className="h-4 bg-neutral-800 rounded w-1/3 mb-4" />
-                <div className="h-8 bg-neutral-800 rounded w-full" />
+                <Box className="h-4 bg-neutral-800 rounded w-1/3 mb-4" />
+                <Box className="h-8 bg-neutral-800 rounded w-full" />
               </div>
             ))}
           </div>

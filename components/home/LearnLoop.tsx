@@ -1,4 +1,5 @@
-/**
+
+import { Box } from '@hanzo/ui'/**
  * Learning, drawn as a cycle — because drawing it as a stage would be a lie.
  *
  * Every instinct on a landing page is to put "Learn" in a row between "Build"
@@ -25,7 +26,7 @@ const STEPS = [
 export default function LearnLoop() {
   return (
     <section className="mx-auto max-w-5xl px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl text-center">
+      <Box className="mx-auto max-w-2xl text-center">
         <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
           Hanzo Insights
         </p>
@@ -34,7 +35,7 @@ export default function LearnLoop() {
           See what customers did. See what agents did. See which decisions produced results —
           then improve the memory, the workflow, the routing or the policy that produced them.
         </p>
-      </div>
+      </Box>
 
       <ol className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {STEPS.map((step, i) => (
@@ -42,7 +43,7 @@ export default function LearnLoop() {
             key={step.name}
             className="rounded-2xl border border-neutral-800 bg-white/[0.02] px-6 py-5"
           >
-            <div className="flex items-baseline gap-3">
+            <Box className="flex items-baseline gap-3">
               <span className="text-base font-medium text-white">{step.name}</span>
               {/* The last step names where it returns to, so the ring closes in
                   words as well as in layout — the return edge is the whole idea
@@ -50,20 +51,20 @@ export default function LearnLoop() {
               {i === STEPS.length - 1 ? (
                 <span className="text-sm text-neutral-500">→ back to Sense</span>
               ) : null}
-            </div>
-            <div className="mt-1 text-sm leading-relaxed text-neutral-400">{step.body}</div>
+            </Box>
+            <Box className="mt-1 text-sm leading-relaxed text-neutral-400">{step.body}</Box>
           </li>
         ))}
       </ol>
 
-      <div className="mt-10 text-center">
+      <Box className="mt-10 text-center">
         <a
           href="https://insights.hanzo.ai"
           className="inline-flex min-h-11 items-center gap-2 rounded-full border border-neutral-700 px-7 text-sm font-medium text-white transition-colors hover:border-neutral-400"
         >
           Explore Insights
         </a>
-      </div>
+      </Box>
     </section>
   )
 }

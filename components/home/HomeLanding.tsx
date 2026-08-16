@@ -18,6 +18,7 @@ import Observability from './Observability'
 import BuildStory from './BuildStory'
 import Composer from './Composer'
 import LocalStack from './LocalStack'
+import { Box } from '@hanzo/ui'
 
 /**
  * The apex hanzo.ai landing.
@@ -70,7 +71,7 @@ export default async function HomeLanding() {
   const { total: modelCount } = await fetchModels()
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <Box className="min-h-screen bg-black text-white">
       <SiteHeader surface="ai" />
       <main>
         {/* The page descends the stack. It states the category, shows the
@@ -100,6 +101,6 @@ export default async function HomeLanding() {
         <Composer />
       </main>
       <SiteFooter surface="ai" />
-    </div>
+    </Box>
   )
 }

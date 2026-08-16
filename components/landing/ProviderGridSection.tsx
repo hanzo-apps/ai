@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { providerCatalog } from "@hanzo/usage";
 import { Mark } from "@/components/Mark";
+import { Box } from '@hanzo/ui'
 
 // Every provider the usage plane can track and Hanzo Cloud can route — names and
 // icon ids come from the @hanzo/usage catalog (one source of truth); the SVGs are
@@ -63,7 +64,7 @@ function ProviderTile({ p }: { p: { id: string; name: string; icon?: string } })
 const ProviderGridSection = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -93,7 +94,7 @@ const ProviderGridSection = () => {
             <ProviderTile key={p.id} p={p} />
           ))}
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

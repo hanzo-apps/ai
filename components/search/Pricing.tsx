@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Check, ArrowRight } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface PlanProps {
   name: string;
@@ -23,10 +24,10 @@ const Plan = ({ name, price, period, features, highlighted, ctaLabel, ctaHref }:
     }`}
   >
     <h3 className="text-xl font-semibold text-foreground mb-1">{name}</h3>
-    <div className="mb-6">
+    <Box className="mb-6">
       <span className="text-3xl font-bold text-foreground">{price}</span>
       {period && <span className="text-muted-foreground">/{period}</span>}
-    </div>
+    </Box>
     <ul className="space-y-3 mb-8 flex-1">
       {features.map((feature) => (
         <li key={feature} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -97,7 +98,7 @@ const plans: PlanProps[] = [
 const Pricing = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
+      <Box className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -135,7 +136,7 @@ const Pricing = () => {
           Meilisearch is open source. Self-host free forever.
           Pay only for our hosted API, vector search, and AI features.
         </motion.p>
-      </div>
+      </Box>
     </section>
   );
 };

@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { motion } from "@/components/motion";
 import { Code, Terminal, PenTool, Layers } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const tabs = [
   { id: "js", label: "JavaScript", icon: <Code className="h-4 w-4" /> },
@@ -92,9 +93,9 @@ const DeveloperFirst = () => {
   
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"></div>
+      <Box className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"></Box>
       
-      <div className="max-w-7xl mx-auto relative z-10">
+      <Box className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -108,36 +109,36 @@ const DeveloperFirst = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-7 gap-10">
-          <div className="lg:col-span-3 flex flex-col justify-center">
+        <Box className="grid grid-cols-1 lg:grid-cols-7 gap-10">
+          <Box className="lg:col-span-3 flex flex-col justify-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="flex items-center mb-5">
+              <Box className="flex items-center mb-5">
                 <Layers className="h-6 w-6 text-foreground mr-3" />
                 <h3 className="text-2xl font-bold">What you are signing up for</h3>
-              </div>
+              </Box>
               
               <ul className="space-y-4 mb-8">
                 <li className="flex">
-                  <div className="mr-3 text-foreground">•</div>
+                  <Box className="mr-3 text-foreground">•</Box>
                   <div>
                     <span className="font-medium text-[var(--white)]">Your database, your rows</span>
                     <p className="text-muted-foreground mt-1">It runs against Postgres, MySQL or MariaDB — one you already operate. The raw events stay somewhere you can query directly.</p>
                   </div>
                 </li>
                 <li className="flex">
-                  <div className="mr-3 text-foreground">•</div>
+                  <Box className="mr-3 text-foreground">•</Box>
                   <div>
                     <span className="font-medium text-[var(--white)]">Many sites, one install</span>
                     <p className="text-muted-foreground mt-1">Add a site, get a tracking id. Group people into teams, and share a board with someone who should not have an account.</p>
                   </div>
                 </li>
                 <li className="flex">
-                  <div className="mr-3 text-foreground">•</div>
+                  <Box className="mr-3 text-foreground">•</Box>
                   <div>
                     <span className="font-medium text-[var(--white)]">Open source, MIT</span>
                     <p className="text-muted-foreground mt-1">Read it, fork it, run it on a small server for as long as you like. The hosted version exists so you do not have to.</p>
@@ -145,13 +146,13 @@ const DeveloperFirst = () => {
                 </li>
               </ul>
               
-              <div className="flex flex-wrap gap-3">
+              <Box className="flex flex-wrap gap-3">
                 <Button variant="outline" size="sm">View Documentation</Button>
                 <Button variant="outline" size="sm">API Reference</Button>
                 <Button variant="outline" size="sm">Example Projects</Button>
-              </div>
+              </Box>
             </motion.div>
-          </div>
+          </Box>
           
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -160,8 +161,8 @@ const DeveloperFirst = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="lg:col-span-4"
           >
-            <div className="bg-neutral-900/50 rounded-xl border border-neutral-800 overflow-hidden shadow-xl">
-              <div className="flex border-b border-neutral-800">
+            <Box className="bg-neutral-900/50 rounded-xl border border-neutral-800 overflow-hidden shadow-xl">
+              <Box className="flex border-b border-neutral-800">
                 {tabs.map((tab) => (
                   <button
                     key={tab.id}
@@ -176,23 +177,23 @@ const DeveloperFirst = () => {
                     {tab.label}
                   </button>
                 ))}
-              </div>
+              </Box>
               
-              <div className="p-5 overflow-x-auto">
+              <Box className="p-5 overflow-x-auto">
                 <pre className="text-sm text-foreground/80 font-mono whitespace-pre">
                   {codeExamples[activeTab as keyof typeof codeExamples]}
                 </pre>
-              </div>
+              </Box>
               
-              <div className="bg-neutral-900 p-3 border-t border-neutral-800 text-sm text-muted-foreground">
+              <Box className="bg-neutral-900 p-3 border-t border-neutral-800 text-sm text-muted-foreground">
                 {activeTab === "js" && "npm install hanzo-analytics"}
                 {activeTab === "py" && "pip install hanzo-analytics"}
                 {activeTab === "api" && "API Key: Get yours from the Hanzo Analytics dashboard"}
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

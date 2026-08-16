@@ -3,6 +3,7 @@
 import React from "react"
 import { Button } from "@hanzo/ui"
 import { useServiceCard } from "@/lib/plans"
+import { Box } from '@hanzo/ui'
 
 // The service table comes from the catalog (@hanzo/plans first paint, GET
 // /v1/pricing/services live) rather than an array here — the same reason every
@@ -19,14 +20,14 @@ export default function ManagedServicesPricing() {
     note: r.note,
   }));
   return (
-    <div className="mb-20">
+    <Box className="mb-20">
       <h2 className="text-3xl font-bold mb-2">Managed Services</h2>
       <p className="text-muted-foreground text-lg mb-8">
         Fully managed infrastructure services. One-click provisioning, automated backups,
         and zero-downtime scaling. All services include IAM SSO and KMS-managed secrets.
       </p>
 
-      <div className="overflow-x-auto rounded-xl border border-neutral-800/50">
+      <Box className="overflow-x-auto rounded-xl border border-neutral-800/50">
         <table className="w-full text-left">
           <thead>
             <tr className="border-b border-neutral-800 bg-neutral-900/30">
@@ -40,8 +41,8 @@ export default function ManagedServicesPricing() {
             {services.map((svc) => (
               <tr key={svc.name} className="border-b border-neutral-800/50 hover:bg-neutral-900/20 transition-colors">
                 <td className="py-4 px-5">
-                  <div className="font-medium">{svc.name}</div>
-                  <div className="text-xs text-muted-foreground">{svc.description}</div>
+                  <Box className="font-medium">{svc.name}</Box>
+                  <Box className="text-xs text-muted-foreground">{svc.description}</Box>
                 </td>
                 <td className="py-4 px-5 text-sm text-green-400 font-medium">{svc.freeTier}</td>
                 <td className="py-4 px-5 text-sm font-mono">{svc.pro}</td>
@@ -50,14 +51,14 @@ export default function ManagedServicesPricing() {
             ))}
           </tbody>
         </table>
-      </div>
+      </Box>
 
       <p className="text-sm text-muted-foreground mt-6">
         All managed services run on Hanzo Cloud with automated failover, end-to-end encryption,
         and multi-region replication available on Business and Enterprise plans.
       </p>
 
-      <div className="flex justify-center mt-8">
+      <Box className="flex justify-center mt-8">
         <Button
           size="lg"
           className="bg-primary text-primary-foreground hover:bg-neutral-100 px-8 py-3"
@@ -65,7 +66,7 @@ export default function ManagedServicesPricing() {
         >
           Deploy Now
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }

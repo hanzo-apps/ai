@@ -12,11 +12,12 @@ import {
   Bookmark,
   CheckCircle
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const AuditFeatures = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,12 +25,12 @@ const AuditFeatures = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div
+          <Box
             className="inline-flex p-2 rounded-full mb-4"
             style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)", color: "var(--primary)" }}
           >
             <History className="h-6 w-6" />
-          </div>
+          </Box>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
             Enterprise-Grade Audit & Security
           </h2>
@@ -39,7 +40,7 @@ const AuditFeatures = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        <Box className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -48,13 +49,13 @@ const AuditFeatures = () => {
             className="relative rounded-xl bg-card overflow-hidden p-6"
             style={{ border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)" }}
           >
-            <div className="absolute top-0 right-0 h-20 w-20 rounded-bl-full" style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)" }}></div>
-            <div
+            <Box className="absolute top-0 right-0 h-20 w-20 rounded-bl-full" style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)" }}></Box>
+            <Box
               className="p-3 rounded-lg inline-flex mb-4"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
             >
               <Eye className="h-8 w-8" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold text-foreground mb-3">Real-Time Monitoring</h3>
             <p className="text-muted-foreground mb-4">
               Watch your AI agents' work in real-time through a secure virtual desktop environment.
@@ -84,13 +85,13 @@ const AuditFeatures = () => {
             className="relative rounded-xl bg-card overflow-hidden p-6"
             style={{ border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)" }}
           >
-            <div className="absolute top-0 right-0 h-20 w-20 rounded-bl-full" style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)" }}></div>
-            <div
+            <Box className="absolute top-0 right-0 h-20 w-20 rounded-bl-full" style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)" }}></Box>
+            <Box
               className="p-3 rounded-lg inline-flex mb-4"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
             >
               <GitCommit className="h-8 w-8" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold text-foreground mb-3">Comprehensive Audit Logs</h3>
             <p className="text-muted-foreground mb-4">
               Every action taken by AI agents is meticulously logged and stored securely.
@@ -120,13 +121,13 @@ const AuditFeatures = () => {
             className="relative rounded-xl bg-card overflow-hidden p-6"
             style={{ border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)" }}
           >
-            <div className="absolute top-0 right-0 h-20 w-20 rounded-bl-full" style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)" }}></div>
-            <div
+            <Box className="absolute top-0 right-0 h-20 w-20 rounded-bl-full" style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)" }}></Box>
+            <Box
               className="p-3 rounded-lg inline-flex mb-4"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
             >
               <Shield className="h-8 w-8" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold text-foreground mb-3">Enterprise Security</h3>
             <p className="text-muted-foreground mb-4">
               Military-grade encryption, role-based access control, and compliance
@@ -147,7 +148,7 @@ const AuditFeatures = () => {
               </li>
             </ul>
           </motion.div>
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -157,31 +158,31 @@ const AuditFeatures = () => {
           className="rounded-xl p-8 text-center"
           style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)", border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)" }}
         >
-          <div className="flex justify-center gap-8 flex-wrap">
-            <div className="flex items-center">
+          <Box className="flex justify-center gap-8 flex-wrap">
+            <Box className="flex items-center">
               <Lock className="h-6 w-6 mr-2" />
               <span className="text-muted-foreground">SOC 2 compatible</span>
-            </div>
-            <div className="flex items-center">
+            </Box>
+            <Box className="flex items-center">
               <Lock className="h-6 w-6 mr-2" />
               <span className="text-muted-foreground">HIPAA BAA available</span>
-            </div>
-            <div className="flex items-center">
+            </Box>
+            <Box className="flex items-center">
               <Lock className="h-6 w-6 mr-2" />
               <span className="text-muted-foreground">GDPR</span>
-            </div>
-            <div className="flex items-center">
+            </Box>
+            <Box className="flex items-center">
               <Lock className="h-6 w-6 mr-2" />
               <span className="text-muted-foreground">CCPA</span>
-            </div>
-            <div className="flex items-center">
+            </Box>
+            <Box className="flex items-center">
               <Bookmark className="h-6 w-6 mr-2" />
               <span className="text-muted-foreground">High Availability</span>
-            </div>
-          </div>
+            </Box>
+          </Box>
           <p className="text-xs text-muted-foreground/60 mt-4">Audit report available upon request.</p>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

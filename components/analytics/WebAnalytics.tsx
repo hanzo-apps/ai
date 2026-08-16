@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion } from '@/components/motion';
 import { useAnimation, type Variants } from 'framer-motion';
 import { LineChart, Users, Filter, Layers, Activity } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const features = [
   { 
@@ -91,9 +92,9 @@ const WebAnalytics = () => {
 
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative">
-      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+      <Box className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></Box>
       
-      <div className="max-w-7xl mx-auto relative z-10">
+      <Box className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -107,7 +108,7 @@ const WebAnalytics = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+        <Box className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
           <div className="space-y-8">
             {features.map((feature, index) => (
               <motion.div
@@ -118,9 +119,9 @@ const WebAnalytics = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="flex"
               >
-                <div className="mr-4 mt-1 bg-primary/10 p-2 rounded-lg text-foreground">
+                <Box className="mr-4 mt-1 bg-primary/10 p-2 rounded-lg text-foreground">
                   {feature.icon}
-                </div>
+                </Box>
                 <div>
                   <h3 className="text-xl font-bold text-[var(--white)] mb-2">{feature.title}</h3>
                   <p className="text-muted-foreground">{feature.description}</p>
@@ -137,22 +138,22 @@ const WebAnalytics = () => {
             className="relative"
             ref={chartRef}
           >
-            <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800">
-              <div className="flex justify-between items-center mb-4">
+            <Box className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800">
+              <Box className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-medium">Live User Activity</h3>
                 <div className="bg-primary/10 animate-pulse h-2 w-2 rounded-full"></div>
-              </div>
+              </Box>
               
-              <div className="h-80 w-full relative">
+              <Box className="h-80 w-full relative">
                 {/* Chart grid */}
-                <div className="absolute inset-0 grid grid-cols-6 grid-rows-5">
+                <Box className="absolute inset-0 grid grid-cols-6 grid-rows-5">
                   {Array(30).fill(0).map((_, i) => (
-                    <div key={i} className="border-b border-r border-neutral-800 opacity-30"></div>
+                    <Box key={i} className="border-b border-r border-neutral-800 opacity-30"></Box>
                   ))}
-                </div>
+                </Box>
                 
                 {/* Chart area */}
-                <div className="absolute inset-0 p-4">
+                <Box className="absolute inset-0 p-4">
                   <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
                     {/* Chart lines */}
                     <motion.path
@@ -196,7 +197,7 @@ const WebAnalytics = () => {
                       />
                     ))}
                   </svg>
-                </div>
+                </Box>
                 
                 {/* Tooltip */}
                 <motion.div
@@ -212,29 +213,29 @@ const WebAnalytics = () => {
                     }
                   }}
                 >
-                  <div className="flex justify-between">
+                  <Box className="flex justify-between">
                     <span>Pageviews</span>
                     <span className="font-bold">1,240</span>
-                  </div>
-                  <div className="flex justify-between mt-1">
+                  </Box>
+                  <Box className="flex justify-between mt-1">
                     <span>Users</span>
                     <span className="font-bold">876</span>
-                  </div>
-                  <div className="text-foreground/70 text-right mt-1">+24.5%</div>
+                  </Box>
+                  <Box className="text-foreground/70 text-right mt-1">+24.5%</Box>
                 </motion.div>
-              </div>
+              </Box>
               
-              <div className="flex justify-between text-sm text-muted-foreground mt-2">
+              <Box className="flex justify-between text-sm text-muted-foreground mt-2">
                 <span>00:00</span>
                 <span>06:00</span>
                 <span>12:00</span>
                 <span>18:00</span>
                 <span>24:00</span>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

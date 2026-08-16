@@ -7,35 +7,36 @@ import ChromeText from "@/components/ui/chrome-text";
 
 import { ProductFooter } from "@/components/products/ProductFooter"
 import Link from 'next/link'
+import { Box } from '@hanzo/ui'
 const Registry = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       {/* Hero Section */}
       <section className="py-20 lg:py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="bg-primary/10 border border-border rounded-full px-4 py-1 inline-block mb-4">
+        <Box className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></Box>
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <Box className="text-center max-w-3xl mx-auto mb-16">
+            <Box className="bg-primary/10 border border-border rounded-full px-4 py-1 inline-block mb-4">
               <span className="text-foreground text-sm font-medium">Container Registry</span>
-            </div>
+            </Box>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/10">
               Hanzo Registry
             </h1>
             <p className="text-xl text-foreground/80 mb-8">
               A private registry for your container images at registry.hanzo.ai. It serves the OCI distribution API, so docker, podman, buildkit, skopeo and crane already know how to talk to it — and the credential is a short-lived token minted by your Hanzo IAM login, not a password living in a dockerconfigjson secret.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Box className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://docs.hanzo.ai/docs/registry" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
                 Push an Image <ArrowRight className="h-5 w-5" />
               </a>
               <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
                 View Source
               </a>
-            </div>
-          </div>
+            </Box>
+          </Box>
 
           {/* Hero terminal */}
-          <div className="relative bg-primary/10 border border-border rounded-xl p-8 overflow-hidden max-w-3xl mx-auto">
+          <Box className="relative bg-primary/10 border border-border rounded-xl p-8 overflow-hidden max-w-3xl mx-auto">
             <div className="absolute inset-0 hz-grid [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
             <pre className="text-sm sm:text-base overflow-x-auto bg-[var(--black)]/50 p-4 rounded-lg border border-white/30">
               <code className="text-foreground/80">
@@ -46,23 +47,23 @@ const Registry = () => {
                 <span className="text-foreground/60">$</span> <span className="text-foreground">docker push</span> <span className="text-[var(--white)]">registry.hanzo.ai/acme/api:v1.2.3</span>
               </code>
             </pre>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Features */}
       <section className="py-20 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="text-center mb-16">
             <ChromeText as="h2" className="text-3xl font-bold mb-4">
               Built on Hanzo IAM
             </ChromeText>
             <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
               The credential expires on its own, so there is nothing to rotate and nothing to leak
             </p>
-          </div>
+          </Box>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -146,47 +147,47 @@ const Registry = () => {
                 Whoever signs into Hanzo Cloud is who pushes an image. One directory of people, one place to revoke someone — and no separate registry account to remember when they leave.
               </p>
             </motion.div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* CTA Section */}
       <section className="py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 md:p-12 border border-white/30">
-            <div className="text-center">
+        <Box className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 md:p-12 border border-white/30">
+            <Box className="text-center">
               <h2 className="text-3xl font-bold mb-4">Delete the dockerconfigjson secret</h2>
               <p className="text-xl text-foreground/80 mb-8 max-w-3xl mx-auto">
                 Put a token IAM mints in its place, and let it expire on its own. There is nothing left to rotate.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Box className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="https://docs.hanzo.ai/docs/registry" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
                   Quickstart <ArrowRight className="h-5 w-5" />
                 </a>
                 <Link href="/iam" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
                   About IAM
                 </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
       </section>
 
       <section className="py-16 border-t border-neutral-800">
-        <div className="max-w-3xl mx-auto px-4 text-center">
+        <Box className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Get started with Registry</h2>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Box className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="https://docs.hanzo.ai/docs/registry" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />
             </a>
             <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
               View on GitHub
             </a>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
             <ProductFooter slug="registry" name="Registry" />
-</div>
+</Box>
   );
 };
 

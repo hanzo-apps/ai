@@ -3,6 +3,7 @@
 
 import React from "react";
 import { motion } from "@/components/motion";
+import { Box } from '@hanzo/ui'
 const clients = [
   { name: "Damon", delay: 0 },
   { name: "Triller", delay: 0.1 },
@@ -21,7 +22,7 @@ const testimonial = {
 const TrustedBy = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -35,7 +36,7 @@ const TrustedBy = () => {
           </p>
         </motion.div>
         
-        <div className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 px-4 mb-16">
+        <Box className="flex flex-wrap justify-center items-center gap-6 sm:gap-10 px-4 mb-16">
           {clients.map((client, index) => (
             <motion.div
               key={client.name}
@@ -48,7 +49,7 @@ const TrustedBy = () => {
               {client.name}
             </motion.div>
           ))}
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,18 +58,18 @@ const TrustedBy = () => {
           transition={{ duration: 0.5 }}
           className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-8 max-w-3xl mx-auto"
         >
-          <div className="flex flex-col items-center text-center">
-            <div className="text-5xl text-foreground mb-4">"</div>
+          <Box className="flex flex-col items-center text-center">
+            <Box className="text-5xl text-foreground mb-4">"</Box>
             <p className="text-xl text-neutral-200 italic mb-6">
               {testimonial.quote}
             </p>
-            <div className="mt-4">
+            <Box className="mt-4">
               <p className="font-semibold">{testimonial.author}</p>
               <p className="text-muted-foreground text-sm">{testimonial.role}</p>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

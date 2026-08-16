@@ -16,6 +16,7 @@
 import React from 'react'
 import { Rocket, BookOpen, ArrowRight } from 'lucide-react'
 import { deployUrl, docsUrl, getProductMetadata } from '@/lib/constants/products-metadata'
+import { Box } from '@hanzo/ui'
 
 type Props = {
   slug: string
@@ -35,14 +36,14 @@ export function DeployBlock({ slug, name, className = '' }: Props) {
       data-testid="deploy-block"
       className={`py-16 px-4 md:px-8 border-t border-border ${className}`}
     >
-      <div className="max-w-3xl mx-auto text-center">
+      <Box className="max-w-3xl mx-auto text-center">
         <h2 className="text-2xl md:text-3xl font-medium text-foreground mb-3">
           Get {displayName}
         </h2>
         <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-sm">
           {meta?.tagline ?? 'Deploy in seconds or self-host with the open-source release.'}
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+        <Box className="flex flex-col sm:flex-row gap-3 justify-center">
           <a
             data-testid="deploy-cta"
             href={deploy}
@@ -66,8 +67,8 @@ export function DeployBlock({ slug, name, className = '' }: Props) {
               Self-host
             </a>
           )}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   )
 }

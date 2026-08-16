@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from "react";
 import { X, Plus, LayoutGrid, List, MenuSquare } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 export type TabType = {
   id: string;
@@ -45,8 +46,8 @@ const TabsManager: React.FC<TabsManagerProps> = ({ initialTabs, onAddTab }) => {
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex border-b border-neutral-800">
+    <Box className="flex flex-col h-full">
+      <Box className="flex border-b border-neutral-800">
         <div className="flex-1 flex overflow-x-auto scrollbar-none">
           {tabs.map(tab => (
             <div
@@ -67,7 +68,7 @@ const TabsManager: React.FC<TabsManagerProps> = ({ initialTabs, onAddTab }) => {
             </div>
           ))}
         </div>
-        <div className="flex items-center">
+        <Box className="flex items-center">
           <button
             onClick={onAddTab}
             className="p-2 hover:bg-neutral-800 transition-colors"
@@ -82,13 +83,13 @@ const TabsManager: React.FC<TabsManagerProps> = ({ initialTabs, onAddTab }) => {
           >
             {viewMode === "kanban" ? <List size={16} /> : <LayoutGrid size={16} />}
           </button>
-        </div>
-      </div>
+        </Box>
+      </Box>
       
-      <div className="flex-1 overflow-hidden">
+      <Box className="flex-1 overflow-hidden">
         {activeTab && activeTab.content}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

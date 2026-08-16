@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Search, Filter, Ruler, Database, Minimize2, Server } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const features = [
   {
@@ -46,7 +47,7 @@ const features = [
 const Features = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,7 +64,7 @@ const Features = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -73,17 +74,17 @@ const Features = () => {
               transition={{ duration: 0.5, delay: index * 0.05 }}
               className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-500 transition-colors"
             >
-              <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/5">
+              <Box className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/5">
                 <feature.icon className="h-6 w-6 text-foreground/70" />
-              </div>
+              </Box>
               <h3 className="text-lg font-semibold text-foreground mb-2">
                 {feature.title}
               </h3>
               <p className="text-muted-foreground text-sm">{feature.description}</p>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

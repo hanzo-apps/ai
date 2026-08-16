@@ -11,6 +11,7 @@
 import { useState } from 'react'
 import type { BenchRow, SourceKind } from '@/lib/leaderboard'
 import { fmtScore, fmtPrice, sourceShort } from '@/lib/leaderboard'
+import { Box } from '@hanzo/ui'
 
 export interface BenchGroup {
   id: string
@@ -58,9 +59,9 @@ export default function BenchmarkBrowser({
   const rows = group.rows.filter((r) => filter === 'all' || r.kind === filter)
 
   return (
-    <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-5 md:p-6">
+    <Box className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-5 md:p-6">
       {/* benchmark tabs */}
-      <div className="mb-4 flex flex-wrap gap-2">
+      <Box className="mb-4 flex flex-wrap gap-2">
         {groups.map((g) => (
           <button
             key={g.id}
@@ -74,10 +75,10 @@ export default function BenchmarkBrowser({
             {g.label}
           </button>
         ))}
-      </div>
+      </Box>
 
       {/* provenance filter */}
-      <div className="mb-4 flex flex-wrap gap-2">
+      <Box className="mb-4 flex flex-wrap gap-2">
         {FILTERS.map((f) => (
           <button
             key={f.id}
@@ -91,10 +92,10 @@ export default function BenchmarkBrowser({
             {f.label}
           </button>
         ))}
-      </div>
+      </Box>
 
       {/* table */}
-      <div className="overflow-x-auto">
+      <Box className="overflow-x-auto">
         <table className="w-full min-w-[30rem] border-collapse font-mono text-sm">
           <thead>
             <tr className="border-b border-neutral-800 text-left">
@@ -128,12 +129,12 @@ export default function BenchmarkBrowser({
             )}
           </tbody>
         </table>
-      </div>
+      </Box>
 
       <p className="mt-4 text-xs leading-relaxed text-neutral-500">
         Vendors report on their own harness; Hanzo measures everyone on one. Where both exist the gap is the
         harness talking — not the model getting better. Hover a source for its exact provenance.
       </p>
-    </div>
+    </Box>
   )
 }

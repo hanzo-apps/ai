@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { CreditCard, MessageSquare, Globe, Phone, RefreshCw, Code } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const Templates = () => {
   const templates = [
@@ -47,7 +48,7 @@ const Templates = () => {
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-neutral-900/30">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +62,7 @@ const Templates = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {templates.map((template, index) => (
             <motion.div
               key={index}
@@ -72,17 +73,17 @@ const Templates = () => {
               className="bg-neutral-800/50 rounded-lg overflow-hidden border border-neutral-700/50 hover:border-neutral-600/50 transition-colors group"
             >
               <div className={`h-2 bg-gradient-to-r ${template.color}`}></div>
-              <div className="p-6">
-                <div className="flex items-center mb-4">
+              <Box className="p-6">
+                <Box className="flex items-center mb-4">
                   <template.icon className="w-6 h-6 mr-3 text-muted-foreground group-hover:text-[var(--white)] transition-colors" />
                   <h3 className="text-xl font-semibold text-[var(--white)]">{template.title}</h3>
-                </div>
+                </Box>
                 <p className="text-foreground/80">{template.description}</p>
-              </div>
+              </Box>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { motion } from "@/components/motion";
 import { AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface FeaturePoint {
   text: string;
@@ -45,13 +46,13 @@ const ExpandableFeatureCard: React.FC<ExpandableFeatureCardProps> = ({
       transition={{ duration: 0.5, delay }}
       className="bg-neutral-900/20 border border-neutral-800 rounded-2xl p-6 h-full"
     >
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center">
+      <Box className="flex items-center justify-between mb-4">
+        <Box className="flex items-center">
           <div className={`w-12 h-12 rounded-xl ${iconBgClass} flex items-center justify-center mr-4`}>
             <div className={iconTextClass}>{icon}</div>
           </div>
           <h3 className="text-xl font-bold">{title}</h3>
-        </div>
+        </Box>
         <button 
           onClick={toggleExpand}
           className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isExpanded ? 'bg-primary/20' : 'bg-neutral-800/50 hover:bg-neutral-700/50'}`}
@@ -62,7 +63,7 @@ const ExpandableFeatureCard: React.FC<ExpandableFeatureCardProps> = ({
             <Plus className="h-4 w-4 text-foreground/80" />
           )}
         </button>
-      </div>
+      </Box>
       
       <p className="text-foreground/80 mb-4">{description}</p>
       
@@ -75,7 +76,7 @@ const ExpandableFeatureCard: React.FC<ExpandableFeatureCardProps> = ({
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="pt-2 border-t border-neutral-800">
+            <Box className="pt-2 border-t border-neutral-800">
               <h4 className="font-medium text-[var(--white)] mb-3 mt-3">Key Features:</h4>
               <ul className="space-y-2">
                 {featurePoints.map((point, index) => (
@@ -85,7 +86,7 @@ const ExpandableFeatureCard: React.FC<ExpandableFeatureCardProps> = ({
                   </li>
                 ))}
               </ul>
-            </div>
+            </Box>
           </motion.div>
         )}
       </AnimatePresence>

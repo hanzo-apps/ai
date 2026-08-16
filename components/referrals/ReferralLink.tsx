@@ -10,6 +10,7 @@ import { toast } from 'sonner'
 import { useAnalytics } from '@hanzo/event/react'
 import { EVENTS } from '@hanzo/event'
 import { sendReferralInvites } from '@/lib/hanzo/referrals'
+import { Box } from '@hanzo/ui'
 
 interface ReferralLinkProps {
   referralLink: string
@@ -63,29 +64,29 @@ const ReferralLink = ({ referralLink, referralCode }: ReferralLinkProps) => {
   }
 
   return (
-    <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
+    <Box className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
       <h2 className="text-xl font-medium mb-4">Your Referral Link</h2>
-      <div className="flex flex-col md:flex-row gap-4">
-        <div className="relative flex-1">
+      <Box className="flex flex-col md:flex-row gap-4">
+        <Box className="relative flex-1">
           <Input
             value={referralLink}
             readOnly
             className="pr-12 bg-neutral-900 border-neutral-700"
           />
-          <div className="absolute right-2 top-1/2 -translate-y-1/2">
+          <Box className="absolute right-2 top-1/2 -translate-y-1/2">
             <CopyButton value={referralLink} label="Copy referral link" id="referral-link" />
-          </div>
-        </div>
+          </Box>
+        </Box>
         <Button className="flex items-center gap-2" onClick={handleShare}>
           <Share2 className="h-4 w-4" />
           Share Link
         </Button>
-      </div>
+      </Box>
 
-      <div className="mt-6 pt-6 border-t border-neutral-800">
+      <Box className="mt-6 pt-6 border-t border-neutral-800">
         <h3 className="text-lg font-medium mb-4">Send Invites via Email</h3>
         <form onSubmit={handleSendInvites} className="flex flex-col md:flex-row gap-4">
-          <div className="flex-1">
+          <Box className="flex-1">
             <Label htmlFor="emails" className="sr-only">
               Email Addresses
             </Label>
@@ -97,14 +98,14 @@ const ReferralLink = ({ referralLink, referralCode }: ReferralLinkProps) => {
               className="bg-neutral-900 border-neutral-700"
               disabled={sending}
             />
-          </div>
+          </Box>
           <Button type="submit" className="flex items-center gap-2" disabled={sending}>
             <Mail className="h-4 w-4" />
             {sending ? 'Sending...' : 'Send Invites'}
           </Button>
         </form>
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
 

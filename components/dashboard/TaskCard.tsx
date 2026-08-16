@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Bot, MessageSquare, Paperclip, AlertCircle } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface TaskCardProps {
   task: {
@@ -25,16 +26,16 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
   };
 
   return (
-    <div className="bg-neutral-900 rounded-md p-3 border border-neutral-800 hover:border-neutral-700 cursor-pointer transition-colors">
+    <Box className="bg-neutral-900 rounded-md p-3 border border-neutral-800 hover:border-neutral-700 cursor-pointer transition-colors">
       {/* Task ID and Priority */}
-      <div className="flex items-center justify-between mb-2">
-        <div className="text-xs text-muted-foreground flex items-center">
+      <Box className="flex items-center justify-between mb-2">
+        <Box className="text-xs text-muted-foreground flex items-center">
           <span>HAN-{task.id}</span>
-        </div>
+        </Box>
         {task.priority && (
           <div className={`h-2 w-2 rounded-full ${priorityColors[task.priority]}`}></div>
         )}
-      </div>
+      </Box>
       
       {/* Title */}
       <h3 className="font-medium text-sm mb-2">{task.title}</h3>
@@ -52,7 +53,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           behind it — every rung reads, and a new colour cannot introduce an
           unreadable chip. */}
       {task.labels && task.labels.length > 0 && (
-        <div className="flex flex-wrap gap-1 mb-3">
+        <Box className="flex flex-wrap gap-1 mb-3">
           {task.labels.map(label => (
             <span
               key={label.id}
@@ -62,11 +63,11 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
               {label.name}
             </span>
           ))}
-        </div>
+        </Box>
       )}
       
       {/* Footer */}
-      <div className="flex items-center justify-between mt-2">
+      <Box className="flex items-center justify-between mt-2">
         {/* Assignees */}
         <div className="flex -space-x-2">
           {task.assignees && task.assignees.map((assignee, index) => (
@@ -96,21 +97,21 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
         {/* Metadata */}
         <div className="flex items-center space-x-2 text-muted-foreground">
           {task.messageCount && task.messageCount > 0 && (
-            <div className="flex items-center text-xs">
+            <Box className="flex items-center text-xs">
               <MessageSquare className="h-3 w-3 mr-1" />
               {task.messageCount}
-            </div>
+            </Box>
           )}
           
           {task.dueDate && (
-            <div className="flex items-center text-xs">
+            <Box className="flex items-center text-xs">
               <AlertCircle className="h-3 w-3 mr-1" />
               {new Date(task.dueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-            </div>
+            </Box>
           )}
         </div>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

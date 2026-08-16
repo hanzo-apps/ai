@@ -49,6 +49,7 @@ import Link from 'next/link'
 import { SiteHeader, SiteFooter } from '@/components/home/shell'
 import { EnsoLogo } from './EnsoLogo'
 import EnsoSavings from './EnsoSavings'
+import { Box } from '@hanzo/ui'
 
 const CONSOLE = 'https://console.hanzo.ai'
 const CLOUD = 'https://cloud.hanzo.ai'
@@ -64,7 +65,7 @@ const fade = {
 function SectionHead({ eyebrow, title, sub }: { eyebrow: string; title: string; sub?: string }) {
   return (
     <motion.div {...fade} transition={{ duration: 0.5 }} className="mx-auto mb-14 max-w-2xl text-center">
-      <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">{eyebrow}</div>
+      <Box className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">{eyebrow}</Box>
       <h2 className="text-3xl font-bold text-white md:text-4xl">{title}</h2>
       {sub && <p className="mt-4 text-lg text-neutral-400">{sub}</p>}
     </motion.div>
@@ -171,16 +172,16 @@ export default function EnsoLanding({ models }: { models: string }) {
       <main className="bg-black pt-16 text-white">
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="relative flex min-h-[88vh] items-center justify-center overflow-hidden px-4 py-24 sm:px-6 lg:px-8">
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <Box className="pointer-events-none absolute inset-0 overflow-hidden">
             <motion.div
               className="absolute left-1/2 top-1/2 h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 68%)', filter: 'blur(110px)' }}
               animate={{ scale: [1, 1.08, 1], opacity: [0.4, 0.6, 0.4] }}
               transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
             />
-          </div>
+          </Box>
 
-          <div className="relative z-10 mx-auto max-w-5xl text-center">
+          <Box className="relative z-10 mx-auto max-w-5xl text-center">
             <motion.div {...fade} transition={{ duration: 0.5 }} className="mb-8 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2">
               <EnsoLogo size={16} className="text-white" />
               <span className="text-sm font-medium text-neutral-200">Enso · the intelligence layer of Hanzo OS</span>
@@ -226,32 +227,32 @@ export default function EnsoLanding({ models }: { models: string }) {
                 <span key={s} className="text-neutral-300">{s}</span>
               ))}
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* ── What is Enso ─────────────────────────────────────────────────── */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
+          <Box className="mx-auto max-w-7xl">
             <SectionHead
               eyebrow="What is Hanzo Enso"
               title="A multi-agent system, delivered as one model"
               sub="Instead of hand-designing team roles and workflows, Enso learns to assemble agents from a pool and coordinate them through efficient, non-obvious collaboration patterns — automatically, per task."
             />
-            <div className="grid gap-6 md:grid-cols-3">
+            <Box className="grid gap-6 md:grid-cols-3">
               {PILLARS.map((p, i) => (
                 <motion.div key={p.n} {...fade} transition={{ duration: 0.5, delay: i * 0.06 }} className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-7">
-                  <div className="mb-5 flex items-center justify-between">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10">
+                  <Box className="mb-5 flex items-center justify-between">
+                    <Box className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10">
                       <p.icon className="h-6 w-6 text-white" />
-                    </div>
+                    </Box>
                     <span className="text-sm font-semibold text-neutral-600">{p.n}</span>
-                  </div>
+                  </Box>
                   <h3 className="mb-2 text-lg font-semibold text-white">{p.title}</h3>
                   <p className="text-sm leading-relaxed text-neutral-400">{p.body}</p>
                 </motion.div>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* The connection the page lacked. Enso answering a question is the
@@ -261,7 +262,7 @@ export default function EnsoLanding({ models }: { models: string }) {
             what-it-is section, because a reader deciding between Enso and a
             model API is deciding exactly this. */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl">
+          <Box className="mx-auto max-w-3xl">
             <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
               Built into Hanzo OS
             </p>
@@ -275,31 +276,31 @@ export default function EnsoLanding({ models }: { models: string }) {
               Observability and Insights — so the loop from intent to outcome closes inside
               one system rather than across five vendors.
             </p>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-neutral-400">
+            <Box className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-neutral-400">
               <Link href="/agents" className="hover:text-neutral-100">Agents</Link>
               <Link href="/tabs" className="hover:text-neutral-100">Sandboxes</Link>
               <Link href="/team" className="hover:text-neutral-100">Company context</Link>
               <Link href="/cloud" className="hover:text-neutral-100">Hanzo Cloud</Link>
               <Link href="/o11y" className="hover:text-neutral-100">Observability</Link>
               <Link href="/insights" className="hover:text-neutral-100">Insights</Link>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
 
         {/* ── Enso vs Zen ──────────────────────────────────────────────────── */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-5xl">
+          <Box className="mx-auto max-w-5xl">
             <SectionHead eyebrow="Enso vs Zen" title="Proprietary orchestration, on open foundations" />
-            <div className="grid gap-6 md:grid-cols-2">
+            <Box className="grid gap-6 md:grid-cols-2">
               <motion.div {...fade} transition={{ duration: 0.5 }} className="rounded-2xl border border-neutral-700 bg-neutral-900/60 p-8">
-                <div className="mb-4 flex items-center gap-3">
+                <Box className="mb-4 flex items-center gap-3">
                   <EnsoLogo size={28} className="text-white" />
                   <div>
                     <h3 className="text-xl font-semibold text-white">Enso</h3>
                     <p className="text-sm text-neutral-500">Proprietary · Hanzo Cloud only</p>
                   </div>
-                </div>
+                </Box>
                 <ul className="space-y-2 text-sm text-neutral-300">
                   {['Learned orchestration over the best models', 'Flash · Pro · Ultra presets', 'One OpenAI + Anthropic endpoint', 'Managed, metered, audited on Hanzo Cloud'].map((x) => (
                     <li key={x} className="flex items-center gap-2"><Check className="h-4 w-4 shrink-0 text-white" /> {x}</li>
@@ -310,13 +311,13 @@ export default function EnsoLanding({ models }: { models: string }) {
                 </Link>
               </motion.div>
               <motion.div {...fade} transition={{ duration: 0.5, delay: 0.06 }} className="rounded-2xl border border-neutral-800 bg-neutral-900/40 p-8">
-                <div className="mb-4 flex items-center gap-3">
+                <Box className="mb-4 flex items-center gap-3">
                   <Boxes className="h-7 w-7 text-neutral-300" />
                   <div>
                     <h3 className="text-xl font-semibold text-white">Zen</h3>
                     <p className="text-sm text-neutral-500">Open weights · run anywhere</p>
                   </div>
-                </div>
+                </Box>
                 <ul className="space-y-2 text-sm text-neutral-300">
                   {['Open-weight frontier models', 'Chat, code, and agents', 'Self-host on your own hardware', 'Free — or managed on Hanzo Cloud'].map((x) => (
                     <li key={x} className="flex items-center gap-2"><Check className="h-4 w-4 shrink-0 text-neutral-400" /> {x}</li>
@@ -326,47 +327,47 @@ export default function EnsoLanding({ models }: { models: string }) {
                   Explore Zen models <ArrowUpRight className="h-4 w-4 text-neutral-500" />
                 </Link>
               </motion.div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* ── Tech behind ──────────────────────────────────────────────────── */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-5xl">
+          <Box className="mx-auto max-w-5xl">
             <SectionHead
               eyebrow="The technology"
               title="Research-driven coordination for multi-agent intelligence"
               sub="Enso is grounded in Hanzo’s research on learned model orchestration (HIP-0510): how a system can learn to assemble, route, and coordinate expert agents for each task instead of relying on hand-designed workflows."
             />
-            <div className="grid gap-6 md:grid-cols-2">
+            <Box className="grid gap-6 md:grid-cols-2">
               {[
                 { tag: 'Learned router', title: 'Microsecond routing', body: 'A lightweight coordinator scores every request and dispatches it to the right model in microseconds — routing overhead you can ignore, applied to every call.' },
                 { tag: 'Learned coordinator', title: 'Roles, turns, and verification', body: 'Enso assigns Thinker / Worker / Verifier roles and adaptively delegates across coding, math, reasoning, and knowledge tasks — coordinating diverse model pools to outperform any single worker.' },
               ].map((c, i) => (
                 <motion.div key={c.tag} {...fade} transition={{ duration: 0.5, delay: i * 0.06 }} className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-7">
-                  <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">{c.tag}</div>
+                  <Box className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">{c.tag}</Box>
                   <h3 className="mb-2 text-xl font-semibold text-white">{c.title}</h3>
                   <p className="text-sm leading-relaxed text-neutral-400">{c.body}</p>
                 </motion.div>
               ))}
-            </div>
-            <div className="mt-8 text-center">
+            </Box>
+            <Box className="mt-8 text-center">
               <a href={DOCS} className="inline-flex items-center gap-1 text-sm font-medium text-neutral-300 hover:text-white">
                 Learn more about Enso <ArrowUpRight className="h-4 w-4 text-neutral-500" />
               </a>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* ── How to use — Flash / Pro / Ultra ─────────────────────────────── */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
+          <Box className="mx-auto max-w-7xl">
             <SectionHead
               eyebrow="How to use"
               title="Three presets — price × performance"
               sub="Ultra, Pro, and Flash trade cost against accuracy in that order. Pick the one that fits the work, and switch between them without changing your integration — it is one endpoint either way."
             />
-            <div className="grid gap-6 md:grid-cols-3">
+            <Box className="grid gap-6 md:grid-cols-3">
               {TIERS.map((t, i) => (
                 <motion.div
                   key={t.name}
@@ -380,27 +381,27 @@ export default function EnsoLanding({ models }: { models: string }) {
                         : 'border-neutral-800 bg-neutral-900/50'
                   }`}
                 >
-                  <div className="mb-4 flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10">
+                  <Box className="mb-4 flex items-center gap-3">
+                    <Box className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10">
                       <t.icon className="h-6 w-6 text-white" />
-                    </div>
+                    </Box>
                     <div>
-                      <div className="flex items-center gap-2">
+                      <Box className="flex items-center gap-2">
                         <h3 className="text-xl font-semibold text-white">{t.name}</h3>
                         {t.flagship && <span className="rounded-full border border-white/30 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Flagship</span>}
                         {t.featured && <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-black">Default</span>}
-                      </div>
+                      </Box>
                       <p className="font-mono text-xs text-neutral-500">{t.id}</p>
                     </div>
-                  </div>
+                  </Box>
                   {/* The price leads, because it is the number a reader can
                       check against their own bill. A benchmark score sat here
                       at 3xl -- the largest thing on the card -- and nothing
                       published backs it. */}
-                  <div className="mb-4 flex items-baseline gap-2 border-y border-neutral-800 py-3">
+                  <Box className="mb-4 flex items-baseline gap-2 border-y border-neutral-800 py-3">
                     <span className="text-3xl font-bold text-white">{t.priceBand}</span>
                     <span className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">/MTok in → out</span>
-                  </div>
+                  </Box>
                   <p className="mb-2 text-xs font-medium text-neutral-500">{t.tag}</p>
                   <p className="mb-5 text-sm leading-relaxed text-neutral-400">{t.body}</p>
                   <ul className="mt-auto space-y-2">
@@ -412,38 +413,38 @@ export default function EnsoLanding({ models }: { models: string }) {
                   </ul>
                 </motion.div>
               ))}
-            </div>
-            <div className="mt-8 text-center">
+            </Box>
+            <Box className="mt-8 text-center">
               <Link href="/models/enso" className="inline-flex items-center gap-1 text-sm font-medium text-neutral-300 hover:text-white">
                 Compare every measured benchmark <ArrowUpRight className="h-4 w-4 text-neutral-500" />
               </Link>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* ── Quantitative results ─────────────────────────────────────────── */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
+          <Box className="mx-auto max-w-7xl">
             <SectionHead
               eyebrow="Quantitative results"
               title="Frontier capability, measured — without single-vendor risk"
               sub="Enso reaches frontier-level results by routing each request to the right model in microseconds. Real, measured numbers — not a fabricated benchmark table."
             />
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <Box className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {stats(models).map((s, i) => (
                 <motion.div key={s.label} {...fade} transition={{ duration: 0.5, delay: i * 0.05 }} className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-7 text-center">
                   <s.icon className="mx-auto mb-4 h-6 w-6 text-neutral-400" />
-                  <div className="text-4xl font-bold text-white">{s.value}</div>
-                  <div className="mt-1 text-sm font-medium text-neutral-300">{s.label}</div>
-                  <div className="mt-0.5 text-xs text-neutral-500">{s.sub}</div>
+                  <Box className="text-4xl font-bold text-white">{s.value}</Box>
+                  <Box className="mt-1 text-sm font-medium text-neutral-300">{s.label}</Box>
+                  <Box className="mt-0.5 text-xs text-neutral-500">{s.sub}</Box>
                 </motion.div>
               ))}
-            </div>
+            </Box>
             <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-neutral-600">
               Enso delivers frontier capability without the risk of single-vendor export controls or lock-in — the router
               always dispatches to a currently-available model in its pool.
             </p>
-          </div>
+          </Box>
         </section>
 
         {/* ── Efficiency & savings ─────────────────────────────────────────── */}
@@ -451,33 +452,33 @@ export default function EnsoLanding({ models }: { models: string }) {
 
         {/* ── Built for (use cases) ────────────────────────────────────────── */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
+          <Box className="mx-auto max-w-7xl">
             <SectionHead eyebrow="Built for" title="What teams build with Enso" />
-            <div className="grid gap-6 md:grid-cols-2">
+            <Box className="grid gap-6 md:grid-cols-2">
               {USE_CASES.map((u, i) => (
                 <motion.div key={u.role} {...fade} transition={{ duration: 0.5, delay: i * 0.05 }} className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-7">
-                  <div className="mb-4 flex items-center gap-3">
+                  <Box className="mb-4 flex items-center gap-3">
                     <u.icon className="h-5 w-5 text-white" />
                     <h3 className="text-base font-semibold text-white">{u.role}</h3>
-                  </div>
+                  </Box>
                   <p className="text-sm leading-relaxed text-neutral-400">{u.body}</p>
                 </motion.div>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* ── Pricing ──────────────────────────────────────────────────────── */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-5xl">
+          <Box className="mx-auto max-w-5xl">
             <SectionHead
               eyebrow="Pricing"
               title="Pay for intelligence, not integrations"
               sub="Usage-based, per-organization billing on Hanzo Cloud. When one agent handles a task you pay the standard rate for that model; when Enso coordinates several, you’re charged a single rate based on the top-tier model involved — never stacked fees."
             />
-            <div className="grid gap-6 md:grid-cols-2">
+            <Box className="grid gap-6 md:grid-cols-2">
               <motion.div {...fade} transition={{ duration: 0.5 }} className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-8">
-                <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-neutral-300"><Cpu className="h-4 w-4" /> Pay-as-you-go</div>
+                <Box className="mb-2 flex items-center gap-2 text-sm font-semibold text-neutral-300"><Cpu className="h-4 w-4" /> Pay-as-you-go</Box>
                 <p className="mb-5 text-sm text-neutral-400">For production workloads that need maximum reliability. Consumption-based tokens, served at higher priority, with transparent per-request cost you can predict and export.</p>
                 <ul className="space-y-2 text-sm text-neutral-300">
                   {['Single rate — no stacked model fees', 'Per-request orchestration trace', 'Per-org usage & cost export'].map((x) => (
@@ -486,7 +487,7 @@ export default function EnsoLanding({ models }: { models: string }) {
                 </ul>
               </motion.div>
               <motion.div {...fade} transition={{ duration: 0.5, delay: 0.06 }} className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-8">
-                <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-neutral-300"><Sparkles className="h-4 w-4" /> Subscription</div>
+                <Box className="mb-2 flex items-center gap-2 text-sm font-semibold text-neutral-300"><Sparkles className="h-4 w-4" /> Subscription</Box>
                 <p className="mb-5 text-sm text-neutral-400">For casual, everyday hands-on use. Every tier includes Flash, Pro, and Ultra — upgrade when you need longer, heavier, or more frequent sessions.</p>
                 <ul className="space-y-2 text-sm text-neutral-300">
                   {['All three presets on every tier', 'Standard · Pro · Max usage tiers', 'Upgrade or downgrade anytime'].map((x) => (
@@ -494,18 +495,18 @@ export default function EnsoLanding({ models }: { models: string }) {
                   ))}
                 </ul>
               </motion.div>
-            </div>
-            <div className="mt-8 text-center">
+            </Box>
+            <Box className="mt-8 text-center">
               <a href={`${CLOUD}/pricing`} className="inline-flex items-center gap-1 text-sm font-medium text-neutral-300 hover:text-white">
                 See full pricing <ArrowUpRight className="h-4 w-4 text-neutral-500" />
               </a>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* ── FAQ ──────────────────────────────────────────────────────────── */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl">
+          <Box className="mx-auto max-w-3xl">
             <SectionHead eyebrow="FAQ" title="Questions, answered" />
             <div className="divide-y divide-neutral-900 border-y border-neutral-900">
               {FAQ.map((f, i) => (
@@ -518,22 +519,22 @@ export default function EnsoLanding({ models }: { models: string }) {
                 </motion.details>
               ))}
             </div>
-          </div>
+          </Box>
         </section>
 
         {/* ── Final CTA ────────────────────────────────────────────────────── */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl">
+          <Box className="mx-auto max-w-4xl">
             <motion.div {...fade} transition={{ duration: 0.5 }} className="relative overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/50 p-10 text-center md:p-14">
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
-                <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
-              </div>
-              <div className="relative z-10">
+              <Box className="pointer-events-none absolute inset-0">
+                <Box className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+                <Box className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+              </Box>
+              <Box className="relative z-10">
                 <EnsoLogo size={40} className="mx-auto mb-4 text-white" />
                 <h2 className="text-3xl font-bold text-white md:text-4xl">Ready to build with Hanzo Enso?</h2>
                 <p className="mx-auto mt-4 max-w-xl text-lg text-neutral-400">Enable Enso for your Hanzo Cloud organization, or talk to us about enterprise and dedicated deployment.</p>
-                <div className="mt-8 flex flex-wrap justify-center gap-4">
+                <Box className="mt-8 flex flex-wrap justify-center gap-4">
                   <a href={CONSOLE} className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-medium text-black transition-opacity hover:opacity-90">
                     Start using Enso <ArrowRight className="h-4 w-4" />
                   </a>
@@ -543,10 +544,10 @@ export default function EnsoLanding({ models }: { models: string }) {
                   <a href={DOCS} className="inline-flex items-center gap-2 rounded-full border border-neutral-700 px-8 py-3 font-medium text-white transition-colors hover:border-neutral-400">
                     <Cpu className="h-4 w-4" /> Read the research
                   </a>
-                </div>
-              </div>
+                </Box>
+              </Box>
             </motion.div>
-          </div>
+          </Box>
         </section>
       </main>
 

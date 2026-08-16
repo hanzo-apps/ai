@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 import { SDKSection } from "@/components/products/SDKSection"
 import { hanzoSDKs } from "@/lib/data/upstream-projects"
+import { Box } from '@hanzo/ui'
 
 // ---------------------------------------------------------------------------
 // /sdks — the SDK ecosystem landing. One canonical story, two lines:
@@ -54,16 +55,16 @@ const aiFlagship: { lang: string; package: string; install: string; home: string
 
 export default function SdksPage() {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       {/* Hero */}
       <section className="relative pt-32 pb-16 px-4 md:px-8 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
           <div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-[0.15]"
             style={{ background: "radial-gradient(circle, var(--primary) 0%, transparent 70%)", filter: "blur(100px)" }}
           />
-        </div>
-        <div className="max-w-4xl mx-auto relative z-10 text-center">
+        </Box>
+        <Box className="max-w-4xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -82,7 +83,7 @@ export default function SdksPage() {
               generator cannot express. Real code lives in the per-language org; the umbrella{" "}
               <span className="font-mono text-foreground">hanzoai/sdk</span> points at all of them.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Box className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="https://github.com/hanzoai/sdk"
                 target="_blank"
@@ -97,14 +98,14 @@ export default function SdksPage() {
               >
                 API reference <ArrowRight className="h-4 w-4" />
               </Link>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Two SDK lines */}
       <section className="px-4 md:px-8 pb-4">
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-4">
+        <Box className="max-w-4xl mx-auto grid md:grid-cols-2 gap-4">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -112,12 +113,12 @@ export default function SdksPage() {
             transition={{ duration: 0.4 }}
             className="bg-secondary/40 border border-border rounded-xl p-6"
           >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
+            <Box className="flex items-center gap-3 mb-3">
+              <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
                 <Cloud className="w-5 h-5 text-foreground/80" />
-              </div>
+              </Box>
               <h2 className="font-semibold text-foreground">Full Cloud SDK</h2>
-            </div>
+            </Box>
             <p className="text-sm text-muted-foreground">
               Generated from one document and never edited by hand, so every route is reachable the day
               it ships — models, agents, data, compute, network, security, platform and chain. Method and
@@ -133,12 +134,12 @@ export default function SdksPage() {
             transition={{ duration: 0.4, delay: 0.05 }}
             className="bg-secondary/40 border border-border rounded-xl p-6"
           >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
+            <Box className="flex items-center gap-3 mb-3">
+              <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-foreground/80" />
-              </div>
+              </Box>
               <h2 className="font-semibold text-foreground">AI + Agents</h2>
-            </div>
+            </Box>
             <p className="text-sm text-muted-foreground">
               The hand-crafted flagship: models, agents, tools, memory, and MCP. Python{" "}
               <span className="font-mono text-foreground/80">hanzo</span> is the most complete; Node ships{" "}
@@ -146,7 +147,7 @@ export default function SdksPage() {
               cloud SDK — this is the &quot;we love this language&quot; library.
             </p>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Cloud SDK — install grid, every language */}
@@ -154,13 +155,13 @@ export default function SdksPage() {
 
       {/* Per-language orgs */}
       <section className="py-16 px-4 md:px-8 border-t border-border">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex items-center gap-2 mb-2">
+        <Box className="max-w-5xl mx-auto">
+          <Box className="flex items-center gap-2 mb-2">
             <Terminal className="w-5 h-5 text-foreground" />
             <span className="text-sm font-medium text-foreground uppercase tracking-wider">
               Per-language orgs
             </span>
-          </div>
+          </Box>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
             A home for every ecosystem
           </h2>
@@ -170,7 +171,7 @@ export default function SdksPage() {
             key works, one completion, balance and usage, a store round-trip, create and run an agent,
             list the tools — so knowing one language&apos;s set is enough to navigate another&apos;s.
           </p>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Box className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
             {perLanguageOrgs.map((l, i) => (
               <motion.a
                 key={l.lang}
@@ -183,8 +184,8 @@ export default function SdksPage() {
                 transition={{ duration: 0.35, delay: i * 0.04 }}
                 className="group bg-secondary/40 border border-border rounded-xl p-5 hover:border-foreground/30 transition-colors"
               >
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center gap-3">
+                <Box className="flex items-start justify-between mb-3">
+                  <Box className="flex items-center gap-3">
                     <h3 className="font-semibold text-foreground">{l.lang}</h3>
                     {l.flagship && (
                       <span className="inline-flex items-center px-2 py-0.5 text-xs rounded border border-border bg-primary/10 text-foreground/80">
@@ -194,13 +195,13 @@ export default function SdksPage() {
                     <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border bg-background text-foreground/70">
                       GA
                     </span>
-                  </div>
+                  </Box>
                   <span className="font-mono text-xs text-muted-foreground">{l.org}</span>
-                </div>
-                <div className="bg-background rounded-lg p-3 mb-4 font-mono text-sm overflow-x-auto text-foreground/80">
+                </Box>
+                <Box className="bg-background rounded-lg p-3 mb-4 font-mono text-sm overflow-x-auto text-foreground/80">
                   {l.install}
-                </div>
-                <div className="flex flex-wrap gap-2">
+                </Box>
+                <Box className="flex flex-wrap gap-2">
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-background border border-border font-mono text-xs text-foreground/80">
                     <span className="text-foreground/40">sdk</span>
                     {l.realRepo}
@@ -215,22 +216,22 @@ export default function SdksPage() {
                       {l.ai}
                     </span>
                   )}
-                </div>
+                </Box>
               </motion.a>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* AI + Agents flagship */}
       <section className="py-16 px-4 md:px-8 border-t border-border">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex items-center gap-2 mb-2">
+        <Box className="max-w-5xl mx-auto">
+          <Box className="flex items-center gap-2 mb-2">
             <Sparkles className="w-5 h-5 text-foreground" />
             <span className="text-sm font-medium text-foreground uppercase tracking-wider">
               AI + Agents SDK
             </span>
-          </div>
+          </Box>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
             The flagship AI library
           </h2>
@@ -239,7 +240,7 @@ export default function SdksPage() {
             Rust and Node follow.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Box className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {aiFlagship.map((a, i) => (
               <motion.div
                 key={a.lang}
@@ -249,33 +250,33 @@ export default function SdksPage() {
                 transition={{ duration: 0.35, delay: i * 0.04 }}
                 className="bg-secondary/40 border border-border rounded-xl p-5"
               >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
+                <Box className="flex items-center justify-between mb-3">
+                  <Box className="flex items-center gap-2">
                     <h3 className="font-semibold text-foreground">{a.lang}</h3>
                     <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider rounded-full border border-border bg-background text-foreground/70">
                       GA
                     </span>
-                  </div>
+                  </Box>
                   <span className="font-mono text-xs text-muted-foreground">{a.home}</span>
-                </div>
-                <div className="bg-background rounded-lg p-3 mb-4 font-mono text-sm overflow-x-auto text-foreground/80">
+                </Box>
+                <Box className="bg-background rounded-lg p-3 mb-4 font-mono text-sm overflow-x-auto text-foreground/80">
                   {a.install}
-                </div>
+                </Box>
                 <p className="text-sm text-muted-foreground">{a.note}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Umbrella CTA */}
       <section className="py-16 px-4 md:px-8 border-t border-border">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-secondary/40 border border-border rounded-xl p-8 text-center">
-            <div className="flex items-center justify-center gap-2 mb-3">
+        <Box className="max-w-4xl mx-auto">
+          <Box className="bg-secondary/40 border border-border rounded-xl p-8 text-center">
+            <Box className="flex items-center justify-center gap-2 mb-3">
               <Boxes className="w-5 h-5 text-foreground" />
               <span className="font-mono text-sm text-foreground">hanzoai/sdk</span>
-            </div>
+            </Box>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
               One install. Every service. Every language.
             </h2>
@@ -283,7 +284,7 @@ export default function SdksPage() {
               The umbrella that points to every per-language SDK and the AI + Agents flagship. Start
               here and hop to whichever ecosystem you build in.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Box className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="https://github.com/hanzoai/sdk"
                 target="_blank"
@@ -300,10 +301,10 @@ export default function SdksPage() {
               >
                 SDK documentation <ExternalLink className="h-3.5 w-3.5" />
               </a>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
       </section>
-    </div>
+    </Box>
   )
 }

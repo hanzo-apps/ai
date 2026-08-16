@@ -1,4 +1,5 @@
-/**
+
+import { Box } from '@hanzo/ui'/**
  * One system-wide property that is not a product: one interface.
  *
  * "Great developer experience" is a claim every platform makes and none can
@@ -35,7 +36,7 @@ const SURFACES = [
 export default function OneInterface() {
   return (
     <section className="mx-auto max-w-5xl px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <Box className="mx-auto max-w-2xl text-center">
           <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
             One interface
           </p>
@@ -45,9 +46,9 @@ export default function OneInterface() {
           <p className="mx-auto mt-5 text-lg leading-relaxed text-neutral-400">
             Every capability is reachable the same way, whoever is asking.
           </p>
-        </div>
+        </Box>
 
-        <div className="mt-12 flex flex-wrap justify-center gap-2">
+        <Box className="mt-12 flex flex-wrap justify-center gap-2">
           {SURFACES.map((s) => (
             <span
               key={s}
@@ -56,14 +57,14 @@ export default function OneInterface() {
               {s}
             </span>
           ))}
-        </div>
+        </Box>
 
-        <div className="mx-auto mt-12 max-w-2xl text-center text-lg leading-relaxed text-neutral-300">
+        <Box className="mx-auto mt-12 max-w-2xl text-center text-lg leading-relaxed text-neutral-300">
           <p>Same actions.</p>
           <p>Same identity.</p>
           <p>Same policies.</p>
           <p>Same audit trail.</p>
-        </div>
+        </Box>
     </section>
   )
 }

@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { LineChart } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const AIAnalysisDemo = () => {
   return (
@@ -16,17 +17,17 @@ const AIAnalysisDemo = () => {
     >
       <div className="absolute inset-0 hz-grid" style={{ '--hz-grid-size': '24px', '--hz-grid-opacity': '0.02' } as React.CSSProperties}></div>
       
-      <div className="relative z-10">
-        <div className="flex items-center mb-6">
+      <Box className="relative z-10">
+        <Box className="flex items-center mb-6">
           <LineChart className="h-6 w-6 text-foreground mr-3" />
           <h3 className="text-2xl font-bold">AI Analysis in Action</h3>
-        </div>
+        </Box>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="col-span-2">
-            <div className="bg-[var(--black)]/50 rounded-lg p-5 border border-neutral-800">
+        <Box className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Box className="col-span-2">
+            <Box className="bg-[var(--black)]/50 rounded-lg p-5 border border-neutral-800">
               <h4 className="text-lg font-medium mb-4">Traffic Anomaly Detection</h4>
-              <div className="h-60 relative">
+              <Box className="h-60 relative">
                 {/* Base line chart */}
                 <svg className="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
                   <motion.path
@@ -74,16 +75,16 @@ const AIAnalysisDemo = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: 2.2 }}
                 >
-                  <div className="font-bold mb-1">Anomaly Detected</div>
+                  <Box className="font-bold mb-1">Anomaly Detected</Box>
                   <div>Unusual traffic spike</div>
                   <div>Confidence: 98.7%</div>
                 </motion.div>
-              </div>
-            </div>
-          </div>
+              </Box>
+            </Box>
+          </Box>
           
           <div className="space-y-4">
-            <div className="bg-[var(--black)]/50 rounded-lg p-5 border border-neutral-800">
+            <Box className="bg-[var(--black)]/50 rounded-lg p-5 border border-neutral-800">
               <h4 className="text-lg font-medium mb-3">AI Insights</h4>
               <motion.div
                 initial={{ opacity: 0 }}
@@ -92,20 +93,20 @@ const AIAnalysisDemo = () => {
                 transition={{ duration: 0.5, delay: 2.4 }}
                 className="space-y-3"
               >
-                <div className="text-sm">
-                  <div className="font-medium text-foreground/70">Traffic Anomaly</div>
-                  <div className="text-muted-foreground">Unusual spike detected at 14:32 UTC</div>
-                </div>
-                <div className="text-sm">
-                  <div className="font-medium text-foreground/70">Conversion Opportunity</div>
-                  <div className="text-muted-foreground">Checkout abandonment 23% higher on mobile</div>
-                </div>
-                <div className="text-sm">
-                  <div className="font-medium text-foreground/70">Performance Alert</div>
-                  <div className="text-muted-foreground">API latency increased by 150ms</div>
-                </div>
+                <Box className="text-sm">
+                  <Box className="font-medium text-foreground/70">Traffic Anomaly</Box>
+                  <Box className="text-muted-foreground">Unusual spike detected at 14:32 UTC</Box>
+                </Box>
+                <Box className="text-sm">
+                  <Box className="font-medium text-foreground/70">Conversion Opportunity</Box>
+                  <Box className="text-muted-foreground">Checkout abandonment 23% higher on mobile</Box>
+                </Box>
+                <Box className="text-sm">
+                  <Box className="font-medium text-foreground/70">Performance Alert</Box>
+                  <Box className="text-muted-foreground">API latency increased by 150ms</Box>
+                </Box>
               </motion.div>
-            </div>
+            </Box>
             
             <motion.div
               initial={{ opacity: 0 }}
@@ -123,8 +124,8 @@ const AIAnalysisDemo = () => {
               </button>
             </motion.div>
           </div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </motion.div>
   );
 };

@@ -14,6 +14,7 @@ import { Chat } from '@hanzo/chat'
 import { YStack } from '@hanzo/gui'
 import { Try } from '@/components/chat/Free'
 import { useAi } from '@/hooks/useAi'
+import { Box } from '@hanzo/ui'
 
 const PLACEHOLDER = 'Ask any model anything'
 
@@ -39,12 +40,12 @@ export function TryChat() {
   return (
     <>
       <Try placeholder={PLACEHOLDER} />
-      <div className="mt-6 rounded-2xl border border-border bg-secondary/20 p-8 text-center md:p-12">
+      <Box className="mt-6 rounded-2xl border border-border bg-secondary/20 p-8 text-center md:p-12">
         <p className="mx-auto mb-8 max-w-lg text-base text-muted-foreground md:text-lg">
           Sign in to chat with Enso, Zen, or any model on the endpoint — pick a model, start a thread,
           billed to your account and kept private.
         </p>
-        <div className="flex flex-wrap justify-center gap-3">
+        <Box className="flex flex-wrap justify-center gap-3">
           <Link
             href="/signup"
             className="rounded-full bg-white px-8 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
@@ -57,8 +58,8 @@ export function TryChat() {
           >
             Open hanzo.chat
           </Link>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </>
   )
 }

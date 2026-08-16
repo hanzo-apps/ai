@@ -3,19 +3,20 @@
 import React from "react";
 import PricingPlan from "@/components/pricing/PricingPlan";
 import { Github, FolderLock, Building2, Rocket } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const Pricing = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-background to-neutral-900/40">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <Box className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Simple, Transparent Pricing</h2>
           <p className="text-foreground/80 text-lg max-w-2xl mx-auto">
             Start free and scale as you grow. Self-host for free forever or let us handle the infrastructure.
           </p>
-        </div>
+        </Box>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           <PricingPlan
             name="Free"
             icon={<Github className="h-6 w-6 text-muted-foreground" />}
@@ -81,7 +82,7 @@ const Pricing = () => {
               '24/7 email support',
             ]}
           />
-        </div>
+        </Box>
       </div>
     </section>
   );

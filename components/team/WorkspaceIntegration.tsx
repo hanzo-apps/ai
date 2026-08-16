@@ -6,22 +6,23 @@ import TeamChatCard from "./workspace/TeamChatCard";
 import VideoMeetingsCard from "./workspace/VideoMeetingsCard";
 import KnowledgeBaseCard from "./workspace/KnowledgeBaseCard";
 import WorkspaceFooter from "./workspace/WorkspaceFooter";
+import { Box } from '@hanzo/ui'
 
 const WorkspaceIntegration = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <WorkspaceHeader />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <Box className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
           <ProjectManagementCard />
           <TeamChatCard />
           <VideoMeetingsCard />
           <KnowledgeBaseCard />
-        </div>
+        </Box>
 
         <WorkspaceFooter />
-      </div>
+      </Box>
     </section>
   );
 };

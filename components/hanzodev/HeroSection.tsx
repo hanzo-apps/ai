@@ -5,6 +5,7 @@ import { motion } from "@/components/motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CopyButton } from "@hanzo/ui/product";
+import { Box } from '@hanzo/ui'
 
 const INSTALL = "npx hanzo-dev";
 
@@ -12,19 +13,19 @@ const HeroSection = () => {
   return (
     <section className="relative pt-24 pb-20 px-4 md:px-8 lg:px-12 overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-        <div
+      <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
           style={{
             background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
             filter: "blur(100px)",
           }}
         />
-      </div>
+      </Box>
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <Box className="max-w-5xl mx-auto relative z-10">
         {/* Main content - centered */}
-        <div className="text-center">
+        <Box className="text-center">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -84,14 +85,14 @@ const HeroSection = () => {
             transition={{ duration: 0.4, delay: 0.2 }}
             className="mb-12"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-secondary border border-border">
+            <Box className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-secondary border border-border">
               <code className="text-sm font-mono text-foreground/80">{INSTALL}</code>
               <CopyButton value={INSTALL} label="Copy install command" size={20} id="install-cli" />
-            </div>
+            </Box>
           </motion.div>
 
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

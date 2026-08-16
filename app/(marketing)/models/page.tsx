@@ -12,6 +12,7 @@ import {
   MODALITY_STYLES,
   modelPagePath,
 } from '@/lib/models'
+import { Box } from '@hanzo/ui'
 
 export const revalidate = 3600
 
@@ -113,27 +114,27 @@ function ModelCard({ model }: { model: ModelData }) {
       href={modelPagePath(model.id)}
       className="flex flex-col gap-4 rounded-2xl border border-border bg-secondary/30 p-5 transition-all hover:bg-secondary/50 hover:border-neutral-700 md:p-6"
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-3">
+      <Box className="flex items-start justify-between gap-3">
+        <Box className="flex min-w-0 items-center gap-3">
           <ProviderMark org={org} model={model.id} />
-          <div className="min-w-0">
-            <div className="truncate text-base font-medium tracking-tight">{displayName(model)}</div>
-            <div className="truncate font-mono text-xs text-muted-foreground">{model.id}</div>
-          </div>
-        </div>
+          <Box className="min-w-0">
+            <Box className="truncate text-base font-medium tracking-tight">{displayName(model)}</Box>
+            <Box className="truncate font-mono text-xs text-muted-foreground">{model.id}</Box>
+          </Box>
+        </Box>
         {ctx && (
           <span className="shrink-0 rounded-full bg-secondary px-2 py-0.5 text-xs text-muted-foreground">
             {formatContext(ctx)}
           </span>
         )}
-      </div>
+      </Box>
       {desc && <p className="line-clamp-2 text-sm leading-relaxed text-muted-foreground">{desc}</p>}
       {model.modalities && model.modalities.length > 0 && (
-        <div className="flex flex-wrap gap-1">
+        <Box className="flex flex-wrap gap-1">
           {model.modalities.slice(0, 3).map((m) => (
             <ModalityBadge key={m} modality={m} />
           ))}
-        </div>
+        </Box>
       )}
     </Link>
   )
@@ -190,18 +191,18 @@ export default async function ModelsPage() {
   }'`
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-neutral-900 px-6 pb-24 pt-32 text-center md:pb-28">
-        <div
+        <Box
           className="pointer-events-none absolute left-1/2 top-0 z-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full opacity-60"
           style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 68%)', filter: 'blur(100px)' }}
         />
-        <div className="relative z-10 mx-auto max-w-4xl">
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 text-xs text-neutral-300">
+        <Box className="relative z-10 mx-auto max-w-4xl">
+          <Box className="mb-8 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 text-xs text-neutral-300">
             <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
             Live from api.hanzo.ai
-          </div>
+          </Box>
           <h1 className="mb-6 text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
               Every model, one endpoint
@@ -213,7 +214,7 @@ export default async function ModelsPage() {
             open-weight family — call it here, or download the weights and run it yourself. Every other lab
             answers on the same address, under the same key.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <Box className="flex flex-wrap justify-center gap-4">
             <Link
               href="/signup"
               className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90"
@@ -226,30 +227,30 @@ export default async function ModelsPage() {
             >
               View docs
             </Link>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Enso — ours. Its own section, because "you can only get this here" and
           "you can take this home" are opposite promises and cannot share copy. */}
       <section className="px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-6xl">
+        <Box className="mx-auto max-w-6xl">
           <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Enso</h2>
           <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
             Our frontier family, trained by Hanzo and served at this address only.
           </p>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          <Box className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
             {enso.map((model) => (
               <ModelCard key={model.id} model={model} />
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Zen — open weights. The download is the point, so the section says it
           in its own words rather than as a clause on someone else's. */}
       <section className="border-t border-border px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-6xl">
+        <Box className="mx-auto max-w-6xl">
           <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Zen</h2>
           <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
             The open-weight family from{' '}
@@ -259,95 +260,95 @@ export default async function ModelsPage() {
             . We serve it first-party — and the weights are published, so you can run it yourself and never
             call us at all.
           </p>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          <Box className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
             {zen.map((model) => (
               <ModelCard key={model.id} model={model} />
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Top models — the most-reached-for models from other labs, surfaced
           before the full lab index so a visitor sees names they know first. */}
       <section className="border-t border-border bg-secondary/10 px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-6xl">
+        <Box className="mx-auto max-w-6xl">
           <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Top models</h2>
           <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
             One flagship per lab, so you can find the name you already know. They answer at the same address
             with the same key, and switching to one is changing a string.
           </p>
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
+          <Box className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-3">
             {top.map((model) => (
               <ModelCard key={model.id} model={model} />
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Browse by lab */}
       <section className="border-t border-border px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-6xl">
+        <Box className="mx-auto max-w-6xl">
           <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Browse by lab</h2>
           <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
             Every model on the endpoint, grouped by who trained it. Prices and context windows come from the
             live catalog, so what you read here is what you will be billed.
           </p>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5">
+          <Box className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5">
             {sortedOrgs.map(([org, models]) => (
               <Link
                 key={org}
                 href={`/models/${org}`}
                 className="flex flex-col gap-3 rounded-2xl border border-border bg-secondary/20 p-5 transition-all hover:bg-secondary/50 hover:border-neutral-700"
               >
-                <div className="flex items-center gap-3">
+                <Box className="flex items-center gap-3">
                   <ProviderMark org={org} />
                   <span className="truncate text-sm font-medium tracking-tight">{orgDisplayName(org)}</span>
-                </div>
-                <div className="text-xs text-muted-foreground">
+                </Box>
+                <Box className="text-xs text-muted-foreground">
                   {models.length} model{models.length !== 1 ? 's' : ''}
-                </div>
+                </Box>
               </Link>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Try it — the shared chat, with the built-in model picker */}
       <section className="border-t border-border bg-secondary/10 px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-6xl">
+        <Box className="mx-auto max-w-6xl">
           <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">Try it</h2>
           <p className="mb-10 max-w-2xl text-base text-muted-foreground md:mb-12 md:text-lg">
             Pick any model and start a thread — the same chat that runs at hanzo.chat, signed in with your
             Hanzo account.
           </p>
           <TryChat />
-        </div>
+        </Box>
       </section>
 
       {/* Code CTA */}
       <section className="border-t border-border px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-4xl">
-          <div className="rounded-2xl border border-border bg-secondary/20 p-8 md:p-12">
-            <div className="mb-8 text-center">
+        <Box className="mx-auto max-w-4xl">
+          <Box className="rounded-2xl border border-border bg-secondary/20 p-8 md:p-12">
+            <Box className="mb-8 text-center">
               <h2 className="mb-3 text-3xl font-semibold tracking-tight">One key, one host</h2>
               <p className="mx-auto max-w-2xl text-muted-foreground">
                 Changing model is changing one string. The endpoint takes and returns the chat-completions
                 JSON shape, so an HTTP client already written against that shape works once its base URL
                 points at api.hanzo.ai/v1.
               </p>
-            </div>
-            <div className="mb-8 overflow-hidden rounded-xl border border-border bg-background">
-              <div className="flex items-center gap-2 border-b border-border bg-secondary/30 px-4 py-2">
+            </Box>
+            <Box className="mb-8 overflow-hidden rounded-xl border border-border bg-background">
+              <Box className="flex items-center gap-2 border-b border-border bg-secondary/30 px-4 py-2">
                 <span className="h-2.5 w-2.5 rounded-full bg-red-500/60" />
                 <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/60" />
                 <span className="h-2.5 w-2.5 rounded-full bg-green-500/60" />
                 <span className="ml-2 font-mono text-xs text-muted-foreground">typescript</span>
-              </div>
+              </Box>
               <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-foreground/90">
                 <code>{codeExample}</code>
               </pre>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3">
+            </Box>
+            <Box className="flex flex-wrap justify-center gap-3">
               <Link
                 href="/signup"
                 className="rounded-lg bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-90"
@@ -366,11 +367,11 @@ export default async function ModelsPage() {
               >
                 Try in Chat
               </Link>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
       </section>
 
-    </div>
+    </Box>
   )
 }

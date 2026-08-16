@@ -5,6 +5,7 @@ import { HanzoLogo } from '@hanzo/logo/react'
 import { ArrowRight, ArrowUpRight, Blocks } from 'lucide-react'
 import { EnsoLogo } from '@/components/enso/EnsoLogo'
 import { APP, CLOUD } from './nav-data'
+import { Box } from '@hanzo/ui'
 
 /**
  * The cross-site story under the Enso lead: how the pieces fit together, in the
@@ -57,7 +58,7 @@ const STEPS: Step[] = [
 export default function BuildStory() {
   return (
     <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <Box className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +78,7 @@ export default function BuildStory() {
           </p>
         </motion.div>
 
-        <div className="grid gap-5 md:grid-cols-3">
+        <Box className="grid gap-5 md:grid-cols-3">
           {STEPS.map((s, i) => {
             const Arrow = s.external ? ArrowUpRight : ArrowRight
             return (
@@ -90,17 +91,17 @@ export default function BuildStory() {
                 transition={{ duration: 0.45, delay: i * 0.06 }}
                 className="group relative flex min-h-[240px] flex-col overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/40 p-8 transition-colors hover:border-neutral-700"
               >
-                <div
+                <Box
                   className="pointer-events-none absolute inset-0 opacity-70"
                   style={{
                     background:
                       'radial-gradient(120% 120% at 80% 0%, color-mix(in srgb, var(--pure-white) 8%, transparent) 0%, transparent 55%)',
                   }}
                 />
-                <div className="relative z-10 mb-6 flex items-center justify-between">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10">{s.mark}</div>
+                <Box className="relative z-10 mb-6 flex items-center justify-between">
+                  <Box className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10">{s.mark}</Box>
                   <span className="text-sm font-semibold text-neutral-400">{s.n}</span>
-                </div>
+                </Box>
                 <h3 className="relative z-10 text-xl font-semibold text-white">{s.title}</h3>
                 <p className="relative z-10 mt-2 text-[15px] leading-relaxed text-neutral-400">{s.body}</p>
                 <span className="relative z-10 mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-white">
@@ -110,8 +111,8 @@ export default function BuildStory() {
               </motion.a>
             )
           })}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   )
 }

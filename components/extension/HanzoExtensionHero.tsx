@@ -6,16 +6,17 @@ import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { ArrowRight, Chrome, Globe } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 const HanzoExtensionHero = () => {
   return (
     <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-white/10 opacity-30"></div>
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
+      <Box className="absolute inset-0 bg-gradient-to-b from-white/10 to-white/10 opacity-30"></Box>
+      <Box className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></Box>
+      <Box className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></Box>
       
-      <div className="max-w-5xl mx-auto relative z-10">
+      <Box className="max-w-5xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -30,7 +31,7 @@ const HanzoExtensionHero = () => {
             <br />It opens tabs, reads pages, and clicks things — in the session you are already signed into.
           </p>
           
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <Box className="flex flex-wrap justify-center gap-4 mb-12">
             <Button size="lg">
               <a href="#browsers" className="flex items-center">
                 <Chrome className="mr-2 h-5 w-5" />
@@ -49,28 +50,28 @@ const HanzoExtensionHero = () => {
                 Get Firefox Add-on
               </a>
             </Button>
-          </div>
+          </Box>
           
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl">
-              <div className="h-[360px] md:h-[440px] w-full bg-gradient-to-br from-white/25 via-background/40 to-white/10">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.14),transparent_50%)]" />
-                <div className="relative z-10 h-full flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-xs uppercase tracking-widest text-muted-foreground">Extension Preview</div>
-                    <div className="text-2xl font-semibold text-[var(--white)] mt-2">Chrome · Firefox · Safari</div>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent"></div>
-            </div>
+            <Box className="relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl">
+              <Box className="h-[360px] md:h-[440px] w-full bg-gradient-to-br from-white/25 via-background/40 to-white/10">
+                <Box className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.14),transparent_50%)]" />
+                <Box className="relative z-10 h-full flex items-center justify-center">
+                  <Box className="text-center">
+                    <Box className="text-xs uppercase tracking-widest text-muted-foreground">Extension Preview</Box>
+                    <Box className="text-2xl font-semibold text-[var(--white)] mt-2">Chrome · Firefox · Safari</Box>
+                  </Box>
+                </Box>
+              </Box>
+              <Box className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent"></Box>
+            </Box>
           </motion.div>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

@@ -2,10 +2,11 @@
 
 import React from "react";
 import { motion } from "@/components/motion";
+import { Box } from '@hanzo/ui'
 const OurStory = () => {
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-secondary/20">
-      <div className="max-w-5xl mx-auto">
+      <Box className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -14,7 +15,7 @@ const OurStory = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Story</h2>
-          <div className="h-1 w-20 bg-primary mx-auto"></div>
+          <Box className="h-1 w-20 bg-primary mx-auto"></Box>
         </motion.div>
 
         <motion.div
@@ -43,7 +44,7 @@ const OurStory = () => {
             your own hardware. Enso is the exception, and it stays on Hanzo Cloud.
           </p>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

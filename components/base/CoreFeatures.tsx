@@ -8,6 +8,7 @@ import {
   Database, Lock, Code, Workflow, 
   HardDrive, Brain, Server, File 
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const CoreFeatures = () => {
   const features = [
@@ -95,7 +96,7 @@ const CoreFeatures = () => {
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--black)]">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -109,7 +110,7 @@ const CoreFeatures = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
@@ -120,8 +121,8 @@ const CoreFeatures = () => {
               delay={index}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

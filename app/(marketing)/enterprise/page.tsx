@@ -20,6 +20,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const features = [
   {
@@ -77,32 +78,32 @@ const stats = [
 
 const Enterprise = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
       
 
       <main>
         {/* Hero Section */}
         <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-            <div
+          <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+            <Box
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
               style={{
                 background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
                 filter: "blur(100px)",
               }}
             />
-            <div
+            <Box
               className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full opacity-10"
               style={{
                 background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
                 filter: "blur(80px)",
               }}
             />
-          </div>
+          </Box>
 
-          <div className="max-w-5xl mx-auto relative z-10">
-            <div className="text-center">
+          <Box className="max-w-5xl mx-auto relative z-10">
+            <Box className="text-center">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -167,22 +168,22 @@ const Enterprise = () => {
                 className="grid grid-cols-2 md:grid-cols-4 gap-4"
               >
                 {stats.map((stat) => (
-                  <div
+                  <Box
                     key={stat.label}
                     className="bg-secondary/50 border border-border rounded-xl p-4"
                   >
-                    <div className="text-2xl font-bold text-foreground">{stat.value}</div>
-                    <div className="text-xs text-muted-foreground">{stat.label}</div>
-                  </div>
+                    <Box className="text-2xl font-bold text-foreground">{stat.value}</Box>
+                    <Box className="text-xs text-muted-foreground">{stat.label}</Box>
+                  </Box>
                 ))}
               </motion.div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Features Section */}
         <section className="py-16 px-4 md:px-8 bg-gradient-to-b from-background to-neutral-900/30">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -195,7 +196,7 @@ const Enterprise = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {features.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
@@ -207,24 +208,24 @@ const Enterprise = () => {
                     transition={{ delay: index * 0.1 }}
                     className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-white/30 transition-colors"
                   >
-                    <div
+                    <Box
                       className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
                       style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)" }}
                     >
                       <Icon className="w-6 h-6" />
-                    </div>
+                    </Box>
                     <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
                     <p className="text-sm text-muted-foreground">{feature.description}</p>
                   </motion.div>
                 );
               })}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Why Enterprise Section */}
         <section className="py-16 px-4 md:px-8">
-          <div className="max-w-4xl mx-auto">
+          <Box className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -249,28 +250,28 @@ const Enterprise = () => {
                     transition={{ delay: index * 0.1 }}
                     className={`bg-gradient-to-r ${benefit.gradient} rounded-xl p-8 border ${benefit.border}`}
                   >
-                    <div className="flex items-start gap-4">
-                      <div
+                    <Box className="flex items-start gap-4">
+                      <Box
                         className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0"
                         style={{ backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)" }}
                       >
                         <Icon className="w-6 h-6" />
-                      </div>
+                      </Box>
                       <div>
                         <h3 className="text-xl font-semibold text-foreground mb-2">{benefit.title}</h3>
                         <p className="text-foreground/80">{benefit.description}</p>
                       </div>
-                    </div>
+                    </Box>
                   </motion.div>
                 );
               })}
             </div>
-          </div>
+          </Box>
         </section>
 
         {/* Compliance Section */}
         <section className="py-16 px-4 md:px-8 bg-secondary/30">
-          <div className="max-w-4xl mx-auto text-center">
+          <Box className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -282,7 +283,7 @@ const Enterprise = () => {
                 What a security review asks for, and where to get it.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-3">
+              <Box className="flex flex-wrap justify-center gap-3">
                 {[
                   "Continual internal audits",
                   "Audit report on request",
@@ -291,25 +292,25 @@ const Enterprise = () => {
                   "HIPAA BAA available",
                   "Enterprise SSO",
                 ].map((badge) => (
-                  <div
+                  <Box
                     key={badge}
                     className="flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary border border-border"
                   >
                     <CheckCircle className="w-4 h-4 text-foreground/70" />
                     <span className="text-sm font-medium text-foreground">{badge}</span>
-                  </div>
+                  </Box>
                 ))}
-              </div>
+              </Box>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* CTA Section */}
         <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-neutral-900/30 to-background relative overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+          <Box className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+          <Box className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="max-w-4xl mx-auto text-center relative z-10">
+          <Box className="max-w-4xl mx-auto text-center relative z-10">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -352,12 +353,12 @@ const Enterprise = () => {
                 enterprise@hanzo.ai
               </a>
             </motion.div>
-          </div>
+          </Box>
         </section>
       </main>
 
       
-    </div>
+    </Box>
   );
 };
 

@@ -18,6 +18,7 @@ import {
 import { Button } from "@hanzo/ui";
 import Link from "next/link";
 import { goToChat } from "@/components/home/nav-data";
+import { Box } from '@hanzo/ui'
 
 // Quick action presets
 const chatPresets = [
@@ -49,13 +50,13 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-[85vh] flex flex-col items-center justify-center overflow-hidden">
       {/* Subtle background gradient */}
-      <div className="absolute inset-0 pointer-events-none">
+      <Box className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]"></div>
         <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-neutral-800/30 rounded-full blur-[100px]"></div>
-      </div>
+      </Box>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        <div className="max-w-3xl mx-auto">
+        <Box className="max-w-3xl mx-auto">
           {/* Main headline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -90,7 +91,7 @@ const HeroSection = () => {
             onSubmit={handleChatSubmit}
             className="mb-6"
           >
-            <div className="relative flex items-center">
+            <Box className="relative flex items-center">
               <input
                 type="text"
                 value={chatInput}
@@ -106,7 +107,7 @@ const HeroSection = () => {
                 Ask Hanzo
                 <ArrowUp className="w-4 h-4" />
               </Button>
-            </div>
+            </Box>
           </motion.form>
 
           {/* Quick action buttons */}
@@ -130,7 +131,7 @@ const HeroSection = () => {
               );
             })}
           </motion.div>
-        </div>
+        </Box>
       </div>
 
       {/* macOS Download Promo - Bottom right popup */}
@@ -143,24 +144,24 @@ const HeroSection = () => {
             transition={{ duration: 0.3, delay: 1 }}
             className="fixed bottom-6 right-6 z-50 max-w-sm"
           >
-            <div className="bg-secondary border border-border rounded-2xl p-5 shadow-2xl">
+            <Box className="bg-secondary border border-border rounded-2xl p-5 shadow-2xl">
               {/* Header with close button */}
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2 text-muted-foreground text-xs">
+              <Box className="flex items-center justify-between mb-3">
+                <Box className="flex items-center gap-2 text-muted-foreground text-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-neutral-500"></span>
                   Preview
-                </div>
+                </Box>
                 <button
                   onClick={() => setShowMacOSPromo(false)}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
-              </div>
+              </Box>
 
-              <div className="flex gap-4">
+              <Box className="flex gap-4">
                 {/* Text content */}
-                <div className="flex-1">
+                <Box className="flex-1">
                   <h3 className="text-foreground font-semibold text-lg mb-2">
                     Some work needs your actual files
                   </h3>
@@ -169,7 +170,7 @@ const HeroSection = () => {
                   </p>
 
                   {/* Action buttons */}
-                  <div className="flex gap-2">
+                  <Box className="flex gap-2">
                     <Link href="https://hanzo.app/download">
                       <Button
                         size="sm"
@@ -188,26 +189,26 @@ const HeroSection = () => {
                         Learn more
                       </Button>
                     </Link>
-                  </div>
-                </div>
+                  </Box>
+                </Box>
 
                 {/* Visual - Checklist illustration */}
-                <div className="w-24 h-24 bg-primary/10 rounded-xl flex flex-col items-start justify-center p-3 shrink-0">
-                  <div className="flex items-center gap-2 mb-2">
+                <Box className="w-24 h-24 bg-primary/10 rounded-xl flex flex-col items-start justify-center p-3 shrink-0">
+                  <Box className="flex items-center gap-2 mb-2">
                     <CheckSquare className="w-4 h-4 text-foreground" />
-                    <div className="w-10 h-1.5 bg-neutral-700 rounded"></div>
-                  </div>
-                  <div className="flex items-center gap-2 mb-2">
+                    <Box className="w-10 h-1.5 bg-neutral-700 rounded"></Box>
+                  </Box>
+                  <Box className="flex items-center gap-2 mb-2">
                     <Square className="w-4 h-4 text-muted-foreground/60" />
-                    <div className="w-8 h-1.5 bg-neutral-700 rounded"></div>
-                  </div>
-                  <div className="flex items-center gap-2">
+                    <Box className="w-8 h-1.5 bg-neutral-700 rounded"></Box>
+                  </Box>
+                  <Box className="flex items-center gap-2">
                     <Square className="w-4 h-4 text-muted-foreground/60" />
-                    <div className="w-6 h-1.5 bg-neutral-700 rounded"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    <Box className="w-6 h-1.5 bg-neutral-700 rounded"></Box>
+                  </Box>
+                </Box>
+              </Box>
+            </Box>
           </motion.div>
         )}
       </AnimatePresence>

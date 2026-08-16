@@ -16,6 +16,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Github, Scale, Star, ExternalLink } from 'lucide-react'
 import { getProductMetadata, type ProductMetadata } from '@/lib/constants/products-metadata'
+import { Box } from '@hanzo/ui'
 
 type Props = {
   /** Product slug matching app/(marketing)/<slug>/page.tsx */
@@ -63,10 +64,10 @@ export function OssAttribution({ slug, meta: metaProp, className = '' }: Props) 
       data-testid="oss-attribution"
       className={`py-12 px-4 md:px-8 border-t border-border ${className}`}
     >
-      <div className="max-w-5xl mx-auto">
+      <Box className="max-w-5xl mx-auto">
         <h2 className="text-xl md:text-2xl font-medium text-foreground mb-4">Open source</h2>
 
-        <div className="flex flex-wrap items-center gap-3 mb-4">
+        <Box className="flex flex-wrap items-center gap-3 mb-4">
           {/* License pill */}
           <span
             data-testid="oss-license"
@@ -99,8 +100,8 @@ export function OssAttribution({ slug, meta: metaProp, className = '' }: Props) 
               {stars.toLocaleString()} stars
             </span>
           )}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   )
 }

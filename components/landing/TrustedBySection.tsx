@@ -4,11 +4,12 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { backerLogos, infrastructureLogos } from "@/lib/constants/partner-logos";
 import { PartnerLogoRow } from "@/components/shared";
+import { Box } from '@hanzo/ui'
 
 const TrustedBySection = () => {
   return (
     <section className="py-20 px-4 md:px-8 bg-background">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -40,7 +41,7 @@ const TrustedBySection = () => {
             <PartnerLogoRow logos={infrastructureLogos} invert className="gap-x-10 gap-y-6" />
           </div>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

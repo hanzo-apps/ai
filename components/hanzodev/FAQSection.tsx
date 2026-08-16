@@ -5,6 +5,7 @@ import { motion } from "@/components/motion";
 import { AnimatePresence } from "framer-motion";
 import { ChevronDown, MessageSquare } from "lucide-react";
 import Link from "next/link";
+import { Box } from '@hanzo/ui'
 
 const faqs = [
   {
@@ -35,7 +36,7 @@ const faqs = [
 
 const FAQItem = ({ faq, isOpen, onClick }: { faq: typeof faqs[0]; isOpen: boolean; onClick: () => void }) => {
   return (
-    <div className="border-b border-border">
+    <Box className="border-b border-border">
       <button
         onClick={onClick}
         className="w-full py-6 flex items-center justify-between text-left group"
@@ -64,7 +65,7 @@ const FAQItem = ({ faq, isOpen, onClick }: { faq: typeof faqs[0]; isOpen: boolea
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </Box>
   );
 };
 
@@ -73,7 +74,7 @@ const FAQSection = () => {
 
   return (
     <section className="py-24 px-4 bg-background">
-      <div className="max-w-3xl mx-auto">
+      <Box className="max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -107,7 +108,7 @@ const FAQSection = () => {
             />
           ))}
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

@@ -1,24 +1,25 @@
 
 import React from 'react';
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const MachinesCTA = () => {
   return (
     <section className="py-20">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
+      <Box className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Box
           className="rounded-2xl p-8 md:p-12"
           style={{
             background: `linear-gradient(to right, var(--primary)15, var(--primary)10)`,
             border: "1px solid color-mix(in srgb, var(--primary) 25%, transparent)"
           }}
         >
-          <div className="text-center">
+          <Box className="text-center">
             <h2 className="text-3xl font-bold text-foreground mb-4">Launch one, or attach one you own</h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
               Rent by the hour from the console or the CLI, or run hanzo link on a machine you already have and it joins the same fleet.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Box className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 className="text-primary-foreground px-8 py-6 text-lg"
 
@@ -32,10 +33,10 @@ const MachinesCTA = () => {
               >
                 Contact Sales
               </Button>
-            </div>
-          </div>
-        </div>
-      </div>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
     </section>
   );
 };

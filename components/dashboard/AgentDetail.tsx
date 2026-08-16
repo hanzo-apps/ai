@@ -16,6 +16,7 @@ import { Input } from "@hanzo/ui";
 import { Textarea } from "@hanzo/ui";
 import { Progress } from "@hanzo/ui";
 import { Agent } from "./data";
+import { Box } from '@hanzo/ui'
 
 interface AgentDetailProps {
   agent: Agent | null;
@@ -101,9 +102,9 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
         <DialogHeader>
           <DialogTitle className="flex items-center">
-            <div className="w-8 h-8 rounded-md bg-primary/10 border border-border flex items-center justify-center mr-3">
+            <Box className="w-8 h-8 rounded-md bg-primary/10 border border-border flex items-center justify-center mr-3">
               <Bot className="h-4 w-4 text-foreground" />
-            </div>
+            </Box>
             <Input 
               name="name"
               value={editedAgent.name}
@@ -113,7 +114,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
           </DialogTitle>
         </DialogHeader>
 
-        <div className="flex border-b border-neutral-800 mt-2">
+        <Box className="flex border-b border-neutral-800 mt-2">
           <button 
             className={`px-4 py-2 text-sm font-medium ${activeTab === 'overview' ? 'text-[var(--white)] border-b-2 border-white' : 'text-muted-foreground hover:text-[var(--white)]'}`}
             onClick={() => setActiveTab('overview')}
@@ -132,9 +133,9 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
           >
             Settings
           </button>
-        </div>
+        </Box>
 
-        <div className="flex-1 overflow-auto py-4">
+        <Box className="flex-1 overflow-auto py-4">
           {activeTab === 'overview' && (
             <div className="space-y-6">
               <div>
@@ -149,11 +150,11 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                 />
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Box className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-muted-foreground mb-1">Status</label>
-                  <div className="flex items-center justify-between p-3 bg-neutral-900 border border-neutral-800 rounded-md">
-                    <div className="flex items-center">
+                  <Box className="flex items-center justify-between p-3 bg-neutral-900 border border-neutral-800 rounded-md">
+                    <Box className="flex items-center">
                       <div className={`h-2 w-2 rounded-full mr-2 ${
                         editedAgent.status === 'running' ? 'bg-primary/10' : 
                         editedAgent.status === 'paused' ? 'bg-primary/10' : 
@@ -162,7 +163,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                       <span>{
                         editedAgent.status.charAt(0).toUpperCase() + editedAgent.status.slice(1)
                       }</span>
-                    </div>
+                    </Box>
                     {editedAgent.status === 'running' ? (
                       <Button size="sm" variant="ghost" className="h-8 w-8 text-muted-foreground hover:text-[var(--white)]">
                         <StopCircle className="h-4 w-4" />
@@ -172,89 +173,89 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                         <PlayCircle className="h-4 w-4" />
                       </Button>
                     )}
-                  </div>
+                  </Box>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-muted-foreground mb-1">Model</label>
-                  <div className="flex items-center p-3 bg-neutral-900 border border-neutral-800 rounded-md">
+                  <Box className="flex items-center p-3 bg-neutral-900 border border-neutral-800 rounded-md">
                     <Input 
                       name="model"
                       value={editedAgent.model}
                       onChange={handleInputChange}
                       className="bg-transparent border-none p-0 focus:ring-0"
                     />
-                  </div>
+                  </Box>
                 </div>
-              </div>
+              </Box>
 
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground mb-2">Resource Usage</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Box className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <div className="flex justify-between mb-1">
+                    <Box className="flex justify-between mb-1">
                       <span className="text-sm text-muted-foreground">CPU</span>
                       <span className="text-sm">{editedAgent.cpu || 0}%</span>
-                    </div>
+                    </Box>
                     <Progress value={editedAgent.cpu || 0} className="h-2" />
                   </div>
                   <div>
-                    <div className="flex justify-between mb-1">
+                    <Box className="flex justify-between mb-1">
                       <span className="text-sm text-muted-foreground">GPU</span>
                       <span className="text-sm">{editedAgent.gpu || 0}%</span>
-                    </div>
+                    </Box>
                     <Progress value={editedAgent.gpu || 0} className="h-2" />
                   </div>
                   <div>
-                    <div className="flex justify-between mb-1">
+                    <Box className="flex justify-between mb-1">
                       <span className="text-sm text-muted-foreground">Memory</span>
                       <span className="text-sm">{editedAgent.memory}%</span>
-                    </div>
+                    </Box>
                     <Progress value={editedAgent.memory} className="h-2" />
                   </div>
                   <div>
-                    <div className="flex justify-between mb-1">
+                    <Box className="flex justify-between mb-1">
                       <span className="text-sm text-muted-foreground">Storage</span>
                       <span className="text-sm">{editedAgent.storage || 0}%</span>
-                    </div>
+                    </Box>
                     <Progress value={editedAgent.storage || 0} className="h-2" />
                   </div>
-                </div>
+                </Box>
               </div>
 
               <div>
                 <h3 className="text-sm font-medium text-muted-foreground mb-2">Usage Statistics</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <div className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
+                <Box className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <Box className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
                     <h4 className="text-xs text-muted-foreground mb-1">Tokens Used</h4>
                     <p className="text-lg font-medium">{editedAgent.tokens.toLocaleString()}</p>
-                  </div>
-                  <div className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
+                  </Box>
+                  <Box className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
                     <h4 className="text-xs text-muted-foreground mb-1">Cost</h4>
                     <p className="text-lg font-medium">${editedAgent.cost.toFixed(2)}</p>
-                  </div>
-                  <div className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
+                  </Box>
+                  <Box className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
                     <h4 className="text-xs text-muted-foreground mb-1">Tasks Assigned</h4>
                     <p className="text-lg font-medium">{editedAgent.tasks}</p>
-                  </div>
-                  <div className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
+                  </Box>
+                  <Box className="bg-neutral-900 border border-neutral-800 rounded-md p-3">
                     <h4 className="text-xs text-muted-foreground mb-1">Last Active</h4>
                     <p className="text-lg font-medium">{editedAgent.lastActive}</p>
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               </div>
             </div>
           )}
 
           {activeTab === 'rag' && (
-            <div className="grid grid-cols-3 gap-6 h-[400px]">
-              <div className="col-span-1 border-r border-neutral-800 pr-4">
-                <div className="flex justify-between items-center mb-4">
+            <Box className="grid grid-cols-3 gap-6 h-[400px]">
+              <Box className="col-span-1 border-r border-neutral-800 pr-4">
+                <Box className="flex justify-between items-center mb-4">
                   <h3 className="text-sm font-medium">Knowledge Sources</h3>
                   <Button size="sm" variant="ghost" onClick={handleAddRagSource}>
                     <PlusCircle className="h-4 w-4" />
                   </Button>
-                </div>
+                </Box>
                 <div className="space-y-1">
                   {editedAgent.ragSources?.map(source => (
                     <div 
@@ -264,28 +265,28 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                       }`}
                       onClick={() => setSelectedRagSource(source)}
                     >
-                      <div className="flex items-center">
+                      <Box className="flex items-center">
                         {source.type === 'database' && <Database className="h-4 w-4 text-foreground mr-2" />}
                         {source.type === 'vector' && <Activity className="h-4 w-4 text-foreground/70 mr-2" />}
                         {source.type === 'file' && <FileText className="h-4 w-4 text-foreground/60 mr-2" />}
                         {source.type === 'api' && <Globe className="h-4 w-4 text-foreground/70 mr-2" />}
                         <span className="text-sm truncate">{source.name}</span>
-                      </div>
+                      </Box>
                       <ChevronRight className="h-4 w-4 text-muted-foreground" />
                     </div>
                   ))}
                   {!editedAgent.ragSources?.length && (
-                    <div className="text-sm text-muted-foreground p-2">
+                    <Box className="text-sm text-muted-foreground p-2">
                       No knowledge sources added
-                    </div>
+                    </Box>
                   )}
                 </div>
-              </div>
+              </Box>
 
-              <div className="col-span-2">
+              <Box className="col-span-2">
                 {selectedRagSource ? (
                   <div className="space-y-4">
-                    <div className="flex justify-between">
+                    <Box className="flex justify-between">
                       <h3 className="text-sm font-medium">Source Details</h3>
                       <Button 
                         size="sm" 
@@ -296,7 +297,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                         <Trash2 className="h-4 w-4 mr-1" />
                         Remove
                       </Button>
-                    </div>
+                    </Box>
 
                     <div>
                       <label className="block text-xs text-muted-foreground mb-1">Name</label>
@@ -313,7 +314,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
 
                     <div>
                       <label className="block text-xs text-muted-foreground mb-1">Type</label>
-                      <div className="grid grid-cols-4 gap-2">
+                      <Box className="grid grid-cols-4 gap-2">
                         {(['database', 'vector', 'file', 'api'] as const).map(type => (
                           <div 
                             key={type}
@@ -335,7 +336,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                             <span className="text-xs capitalize">{type}</span>
                           </div>
                         ))}
-                      </div>
+                      </Box>
                     </div>
 
                     <div>
@@ -358,12 +359,12 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                     </div>
                   </div>
                 ) : (
-                  <div className="h-full flex items-center justify-center text-muted-foreground text-sm">
+                  <Box className="h-full flex items-center justify-center text-muted-foreground text-sm">
                     Select a knowledge source or add a new one
-                  </div>
+                  </Box>
                 )}
-              </div>
-            </div>
+              </Box>
+            </Box>
           )}
 
           {activeTab === 'settings' && (
@@ -415,9 +416,9 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
               </div>
             </div>
           )}
-        </div>
+        </Box>
 
-        <div className="flex justify-end gap-2 pt-4 border-t border-neutral-800 mt-4">
+        <Box className="flex justify-end gap-2 pt-4 border-t border-neutral-800 mt-4">
           <Button variant="ghost" onClick={onClose}>
             Cancel
           </Button>
@@ -425,7 +426,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
             <Save className="h-4 w-4 mr-2" />
             Save Agent
           </Button>
-        </div>
+        </Box>
       </DialogContent>
     </Dialog>
   );

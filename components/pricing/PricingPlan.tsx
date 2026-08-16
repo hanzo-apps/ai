@@ -6,6 +6,7 @@ import { Check } from "lucide-react";
 import { useAnalytics } from "@hanzo/event/react";
 import { EVENTS } from "@hanzo/event";
 import type { Credit } from "@/lib/plans";
+import { Box } from '@hanzo/ui'
 
 interface PricingPlanProps {
   name: string;
@@ -146,17 +147,17 @@ const PricingPlan = ({
       className={`relative rounded-2xl border ${borderColor} ${bgColor} p-8 backdrop-blur-sm transition-all duration-300 hover:border-neutral-700 hover:bg-neutral-900/20`}
     >
       {popular && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-          <div className="bg-[var(--white)] text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
+        <Box className="absolute -top-4 left-1/2 -translate-x-1/2">
+          <Box className="bg-[var(--white)] text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
             Most Popular
-          </div>
-        </div>
+          </Box>
+        </Box>
       )}
 
-      <div className="flex items-center gap-3 mb-4">
+      <Box className="flex items-center gap-3 mb-4">
         {icon}
         <h3 className="text-xl font-semibold">{name}</h3>
-      </div>
+      </Box>
       
       {/* The description reserves a fixed block so the CTA below it lands at the
           same height in every card. Descriptions come from commerce and differ by
@@ -172,13 +173,13 @@ const PricingPlan = ({
           Only from `md` up, where the cards sit side by side and alignment is
           something you can see. Stacked on a phone there is nothing to align and
           a floor would just add dead space between each card and its button. */}
-      <div className="mb-6">
-        <div className="flex items-baseline gap-1 mb-2">
+      <Box className="mb-6">
+        <Box className="flex items-baseline gap-1 mb-2">
           <span className="text-4xl font-bold">{price}</span>
           {billingPeriod && (
             <span className="text-muted-foreground">{billingPeriod}</span>
           )}
-        </div>
+        </Box>
 
         {/* The offer, against the number it modifies.
 
@@ -229,7 +230,7 @@ const PricingPlan = ({
         )}
 
         <p className="text-muted-foreground md:min-h-[8.75rem]">{description}</p>
-      </div>
+      </Box>
 
       {renderButton()}
 

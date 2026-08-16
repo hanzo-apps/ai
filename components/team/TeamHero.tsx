@@ -5,27 +5,28 @@ import { motion } from "@/components/motion";
 import Link from "next/link";
 import { Button } from "@hanzo/ui";
 import { BrainCircuit, Zap, Users, ArrowRight, Bot } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const TeamHero = () => {
   return (
     <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
       {/* Background gradients */}
-      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-        <div
+      <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
           style={{
             background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
             filter: "blur(100px)",
           }}
         />
-        <div
+        <Box
           className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full opacity-10"
           style={{
             background: `radial-gradient(circle, #ffffff 0%, transparent 70%)`,
             filter: "blur(80px)",
           }}
         />
-        <div
+        <Box
           className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full opacity-10"
           style={{
             background: `radial-gradient(circle, #a3a3a3 0%, transparent 70%)`,
@@ -34,15 +35,15 @@ const TeamHero = () => {
         />
 
         {/* Subtle grid pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="h-full w-full" style={{
+        <Box className="absolute inset-0 opacity-5">
+          <Box className="h-full w-full" style={{
             backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.3) 1px, transparent 0)',
             backgroundSize: '40px 40px'
           }} />
-        </div>
-      </div>
+        </Box>
+      </Box>
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <Box className="max-w-5xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -124,7 +125,7 @@ const TeamHero = () => {
                   whileHover={{ y: -5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div
+                  <Box
                     className="p-3 rounded-full mb-3 border"
                     style={{
                       backgroundColor: "color-mix(in srgb, var(--primary) 10%, transparent)",
@@ -132,14 +133,14 @@ const TeamHero = () => {
                     }}
                   >
                     <Icon className="h-6 w-6" />
-                  </div>
+                  </Box>
                   <span className="text-sm text-muted-foreground">{item.label}</span>
                 </motion.div>
               );
             })}
           </motion.div>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

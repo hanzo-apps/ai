@@ -4,16 +4,17 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { BrainCog, Cloud, Server, Database, Monitor, Network, Activity } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const CloudInfrastructure = () => {
   return (
-    <div className="relative h-64 w-full rounded-xl bg-gradient-to-br from-background to-neutral-900 overflow-hidden">
-      <div className="absolute inset-0" style={{
+    <Box className="relative h-64 w-full rounded-xl bg-gradient-to-br from-background to-neutral-900 overflow-hidden">
+      <Box className="absolute inset-0" style={{
         backgroundImage: "radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px)",
         backgroundSize: "20px 20px",
-      }}></div>
+      }}></Box>
       
-      <div className="absolute inset-0 flex items-center justify-center">
+      <Box className="absolute inset-0 flex items-center justify-center">
         <motion.div 
           className="relative h-20 w-20 rounded-xl bg-neutral-900/70 border border-white/30 flex items-center justify-center z-30"
           initial={{ scale: 0 }}
@@ -127,8 +128,8 @@ const CloudInfrastructure = () => {
             />
           );
         })}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

@@ -10,6 +10,7 @@ import { Task } from "./data/tasks/task-data";
 import KanbanColumn from "./kanban/KanbanColumn";
 import KanbanAddTaskButton from "./kanban/KanbanAddTaskButton";
 import { Clock, CheckCircle, Zap } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const KanbanBoard = () => {
   const [tasks, setTasks] = useState<Task[]>(DummyTaskData);
@@ -92,7 +93,7 @@ const KanbanBoard = () => {
   };
 
   return (
-    <div className="h-full overflow-x-auto">
+    <Box className="h-full overflow-x-auto">
       <div className="flex space-x-4 h-full pb-6 min-w-max">
         {columns.map((column) => (
           <KanbanColumn
@@ -114,7 +115,7 @@ const KanbanBoard = () => {
           onUpdate={handleTaskUpdate}
         />
       )}
-    </div>
+    </Box>
   );
 };
 

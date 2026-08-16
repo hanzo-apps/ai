@@ -10,6 +10,7 @@ import LabelsList from "./LabelsList";
 import StatusSelector from "./StatusSelector";
 import PrioritySelector from "./PrioritySelector";
 import { Task } from "../data/tasks/task-data";
+import { Box } from '@hanzo/ui'
 
 export type TaskFieldValue = Task[keyof Task];
 
@@ -29,9 +30,9 @@ const TaskDetailContent: React.FC<TaskDetailContentProps> = ({ task, onTaskChang
   };
 
   return (
-    <div className="grid grid-cols-3 gap-6">
-      <div className="col-span-2">
-        <div className="mb-6">
+    <Box className="grid grid-cols-3 gap-6">
+      <Box className="col-span-2">
+        <Box className="mb-6">
           <label className="block text-sm font-medium text-muted-foreground mb-1">Description</label>
           <Textarea 
             value={task.description || ""}
@@ -39,7 +40,7 @@ const TaskDetailContent: React.FC<TaskDetailContentProps> = ({ task, onTaskChang
             placeholder="Add a description..."
             className="min-h-32 bg-neutral-900 border-neutral-800"
           />
-        </div>
+        </Box>
 
         <AssigneesList 
           assignees={task.assignees} 
@@ -56,7 +57,7 @@ const TaskDetailContent: React.FC<TaskDetailContentProps> = ({ task, onTaskChang
             onTaskChange("labels", newLabels);
           }} 
         />
-      </div>
+      </Box>
 
       <div className="space-y-6">
         <StatusSelector 
@@ -90,7 +91,7 @@ const TaskDetailContent: React.FC<TaskDetailContentProps> = ({ task, onTaskChang
           </Button>
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 

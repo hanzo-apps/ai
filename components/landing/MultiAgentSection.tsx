@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Zap, FileCheck, Trophy } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 // Race agents. Ship the winner.
 const PROVIDERS = [
@@ -32,7 +33,7 @@ const CARDS = [
 const MultiAgentSection = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -68,7 +69,7 @@ const MultiAgentSection = () => {
           ))}
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <Box className="grid md:grid-cols-3 gap-6">
           {CARDS.map((card, index) => {
             const Icon = card.icon;
             return (
@@ -80,16 +81,16 @@ const MultiAgentSection = () => {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="p-6 rounded-xl border border-border bg-secondary/50"
               >
-                <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
+                <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
                   <Icon className="w-5 h-5 text-muted-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-base font-semibold text-foreground mb-2">{card.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
               </motion.div>
             );
           })}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

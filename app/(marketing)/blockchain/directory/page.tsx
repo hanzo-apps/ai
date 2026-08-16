@@ -17,6 +17,7 @@ import {
   Layers,
   ArrowLeftRight,
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 type ChainCategory = "l1" | "l2" | "rollup" | "lux" | "cosmos" | "other";
 
@@ -342,32 +343,32 @@ const ChainDirectory = () => {
   });
 
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
 
       {/* Hero */}
       <section className="pt-24 pb-12 px-4 md:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-          <div
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+          <Box
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
             style={{
               background: "radial-gradient(circle, #ffffff 0%, transparent 70%)",
               filter: "blur(100px)",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="max-w-6xl mx-auto relative z-10">
+        <Box className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="text-center"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 bg-primary/10 mb-6">
+            <Box className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 bg-primary/10 mb-6">
               <Globe className="w-4 h-4 text-foreground" />
               <span className="text-sm font-medium text-foreground">Chain Resource Directory</span>
-            </div>
+            </Box>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               <span className="text-foreground">100+ Chains.</span>{" "}
@@ -378,15 +379,15 @@ const ChainDirectory = () => {
               RPC endpoints, chain IDs, WebSockets, explorers, and Hanzo product support for every network.
             </p>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Search & Filters */}
       <section className="px-4 md:px-8 pb-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-4 mb-8">
+        <Box className="max-w-6xl mx-auto">
+          <Box className="flex flex-col md:flex-row gap-4 mb-8">
             {/* Search */}
-            <div className="relative flex-1">
+            <Box className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
               <input
                 type="text"
@@ -395,10 +396,10 @@ const ChainDirectory = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-white/50"
               />
-            </div>
+            </Box>
 
             {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
+            <Box className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedCategory("all")}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
@@ -422,22 +423,22 @@ const ChainDirectory = () => {
                   {cat.name}
                 </button>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
 
           {/* Product Support Legend */}
-          <div className="flex flex-wrap gap-4 mb-8 p-4 rounded-lg bg-secondary/50 border border-border">
+          <Box className="flex flex-wrap gap-4 mb-8 p-4 rounded-lg bg-secondary/50 border border-border">
             <span className="text-sm text-muted-foreground">Hanzo Products:</span>
             {PRODUCTS.map((product) => {
               const Icon = product.icon;
               return (
-                <div key={product.key} className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Box key={product.key} className="flex items-center gap-1.5 text-xs text-muted-foreground">
                   <Icon className="w-3.5 h-3.5" />
                   {product.name}
-                </div>
+                </Box>
               );
             })}
-          </div>
+          </Box>
 
           {/* Chains List */}
           <div className="space-y-3">
@@ -454,22 +455,22 @@ const ChainDirectory = () => {
                   onClick={() => setExpandedChain(expandedChain === chain.id ? null : chain.id)}
                   className="w-full p-4 flex items-center justify-between hover:bg-accent/50 transition-colors"
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Box className="flex items-center gap-4">
+                    <Box className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                       <Globe className="w-5 h-5 text-foreground" />
-                    </div>
-                    <div className="text-left">
+                    </Box>
+                    <Box className="text-left">
                       <h3 className="font-semibold text-foreground">{chain.name}</h3>
-                      <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <Box className="flex items-center gap-3 text-xs text-muted-foreground">
                         {chain.chainId && <span>Chain ID: {chain.chainId}</span>}
                         <span className="capitalize">{chain.category === "lux" ? "Lux Ecosystem" : chain.category.toUpperCase()}</span>
-                      </div>
-                    </div>
-                  </div>
+                      </Box>
+                    </Box>
+                  </Box>
 
-                  <div className="flex items-center gap-4">
+                  <Box className="flex items-center gap-4">
                     {/* Product Support Icons */}
-                    <div className="hidden md:flex items-center gap-1">
+                    <Box className="hidden md:flex items-center gap-1">
                       {PRODUCTS.map((product) => {
                         const supported = chain.support[product.key as keyof typeof chain.support];
                         return (
@@ -484,28 +485,28 @@ const ChainDirectory = () => {
                           </div>
                         );
                       })}
-                    </div>
+                    </Box>
                     <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform ${expandedChain === chain.id ? "rotate-180" : ""}`} />
-                  </div>
+                  </Box>
                 </button>
 
                 {/* Expanded Details */}
                 {expandedChain === chain.id && (
-                  <div className="px-4 pb-4 border-t border-border">
-                    <div className="grid md:grid-cols-2 gap-6 pt-4">
+                  <Box className="px-4 pb-4 border-t border-border">
+                    <Box className="grid md:grid-cols-2 gap-6 pt-4">
                       {/* Endpoints */}
                       <div>
                         <h4 className="text-sm font-medium text-muted-foreground mb-3">Endpoints</h4>
                         <div className="space-y-2">
-                          <div className="p-3 rounded-lg bg-background font-mono text-xs">
+                          <Box className="p-3 rounded-lg bg-background font-mono text-xs">
                             <span className="text-muted-foreground">RPC:</span>{" "}
                             <span className="text-foreground">{chain.rpcEndpoint}</span>
-                          </div>
+                          </Box>
                           {chain.wsEndpoint && (
-                            <div className="p-3 rounded-lg bg-background font-mono text-xs">
+                            <Box className="p-3 rounded-lg bg-background font-mono text-xs">
                               <span className="text-muted-foreground">WS:</span>{" "}
                               <span className="text-foreground">{chain.wsEndpoint}</span>
-                            </div>
+                            </Box>
                           )}
                         </div>
                       </div>
@@ -513,7 +514,7 @@ const ChainDirectory = () => {
                       {/* Resources */}
                       <div>
                         <h4 className="text-sm font-medium text-muted-foreground mb-3">Resources</h4>
-                        <div className="flex flex-wrap gap-2">
+                        <Box className="flex flex-wrap gap-2">
                           {chain.explorer && (
                             <a
                               href={chain.explorer || "#"}
@@ -554,14 +555,14 @@ const ChainDirectory = () => {
                               Faucet <ExternalLink className="w-3 h-3" />
                             </a>
                           )}
-                        </div>
+                        </Box>
                       </div>
-                    </div>
+                    </Box>
 
                     {/* Product Support Grid (Mobile) */}
-                    <div className="md:hidden mt-4">
+                    <Box className="md:hidden mt-4">
                       <h4 className="text-sm font-medium text-muted-foreground mb-3">Product Support</h4>
-                      <div className="grid grid-cols-5 gap-2">
+                      <Box className="grid grid-cols-5 gap-2">
                         {PRODUCTS.map((product) => {
                           const supported = chain.support[product.key as keyof typeof chain.support];
                           const Icon = product.icon;
@@ -577,24 +578,24 @@ const ChainDirectory = () => {
                             </div>
                           );
                         })}
-                      </div>
-                    </div>
-                  </div>
+                      </Box>
+                    </Box>
+                  </Box>
                 )}
               </motion.div>
             ))}
           </div>
 
           {filteredChains.length === 0 && (
-            <div className="text-center py-12 text-muted-foreground">
+            <Box className="text-center py-12 text-muted-foreground">
               No chains found matching your search.
-            </div>
+            </Box>
           )}
-        </div>
+        </Box>
       </section>
 
       
-    </div>
+    </Box>
   );
 };
 

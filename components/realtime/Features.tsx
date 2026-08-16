@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Activity, Zap, Globe, Users, Clock, Lock, Workflow, Shield } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface FeatureCardProps {
   icon: React.ElementType;
@@ -21,9 +22,9 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
       transition={{ duration: 0.5, delay }}
       className="bg-gradient-to-br from-neutral-900 to-background border border-neutral-800 rounded-xl p-6"
     >
-      <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+      <Box className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
         <Icon className="h-6 w-6 text-foreground" />
-      </div>
+      </Box>
       <h3 className="text-xl font-semibold text-[var(--white)] mb-2">{title}</h3>
       <p className="text-muted-foreground">{description}</p>
     </motion.div>
@@ -76,7 +77,7 @@ const Features = () => {
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -92,7 +93,7 @@ const Features = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
@@ -102,8 +103,8 @@ const Features = () => {
               delay={index * 0.1}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

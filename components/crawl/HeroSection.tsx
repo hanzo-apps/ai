@@ -3,12 +3,13 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Globe, ArrowRight } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
       {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden">
+      <Box className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
           style={{
@@ -25,9 +26,9 @@ const HeroSection = () => {
             ease: "easeInOut",
           }}
         />
-      </div>
+      </Box>
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center">
+      <Box className="relative z-10 max-w-5xl mx-auto text-center">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -79,22 +80,22 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 0.25 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
         >
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">JS</div>
-            <div className="text-sm text-muted-foreground">Full rendering</div>
-          </div>
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">Parallel</div>
-            <div className="text-sm text-muted-foreground">High throughput</div>
-          </div>
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">LLM</div>
-            <div className="text-sm text-muted-foreground">Structured extraction</div>
-          </div>
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">MD</div>
-            <div className="text-sm text-muted-foreground">Clean Markdown</div>
-          </div>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">JS</Box>
+            <Box className="text-sm text-muted-foreground">Full rendering</Box>
+          </Box>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">Parallel</Box>
+            <Box className="text-sm text-muted-foreground">High throughput</Box>
+          </Box>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">LLM</Box>
+            <Box className="text-sm text-muted-foreground">Structured extraction</Box>
+          </Box>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">MD</Box>
+            <Box className="text-sm text-muted-foreground">Clean Markdown</Box>
+          </Box>
         </motion.div>
 
         {/* CTAs */}
@@ -118,7 +119,7 @@ const HeroSection = () => {
             GitHub
           </a>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

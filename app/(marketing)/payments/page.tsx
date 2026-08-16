@@ -12,9 +12,10 @@ import TrustedBy from "@/components/payments/TrustedBy";
 import CallToAction from "@/components/payments/CallToAction";
 
 import { ProductFooter } from "@/components/products/ProductFooter"
+import { Box } from '@hanzo/ui'
 const Payments = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
       <main>
         <HeroSection />
@@ -28,7 +29,7 @@ const Payments = () => {
               <ProductFooter slug="payments" name="Payments" />
 </main>
       
-    </div>
+    </Box>
   );
 };
 

@@ -4,6 +4,7 @@ import { motion } from "@/components/motion";
 import { Terminal } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@hanzo/ui";
 import { CopyButton } from "@hanzo/ui/product";
+import { Box } from '@hanzo/ui'
 
 interface CodeExample {
   language: string;
@@ -43,13 +44,13 @@ export function CodeExamplesSection({
       transition={{ duration: 0.6 }}
       className="py-16 px-4 md:px-8"
     >
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-2 mb-2">
+      <Box className="max-w-4xl mx-auto">
+        <Box className="flex items-center gap-2 mb-2">
           <Terminal className="w-5 h-5 text-foreground" />
           <span className="text-sm font-medium text-foreground uppercase tracking-wider">
             Code Examples
           </span>
-        </div>
+        </Box>
 
         <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
           {title}
@@ -81,9 +82,9 @@ export function CodeExamplesSection({
               )}
 
               <div className="relative group">
-                <div className="absolute top-3 right-3 z-10">
+                <Box className="absolute top-3 right-3 z-10">
                   <CopyButton value={example.code} id="code-example" />
-                </div>
+                </Box>
 
                 <pre className="bg-secondary border border-border rounded-xl p-4 pr-12 overflow-x-auto">
                   <code className="text-sm text-foreground/80 font-mono whitespace-pre">
@@ -94,7 +95,7 @@ export function CodeExamplesSection({
             </TabsContent>
           ))}
         </Tabs>
-      </div>
+      </Box>
     </motion.section>
   );
 }

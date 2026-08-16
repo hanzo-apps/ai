@@ -5,6 +5,7 @@ import { motion } from "@/components/motion";
 import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { MODELS_PHRASE } from '@/lib/data/model-count'
+import { Box } from '@hanzo/ui'
 
 const GATEWAY_FEATURES = [
   "Choose from more than 60 providers",
@@ -28,7 +29,7 @@ const ALTERNATIVE_FEATURES = [
 const OpenPricing = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-neutral-900/50 to-background">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -44,7 +45,7 @@ const OpenPricing = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <Box className="grid lg:grid-cols-2 gap-8">
           {/* Hanzo Gateway */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -52,14 +53,14 @@ const OpenPricing = () => {
             viewport={{ once: true }}
             className="bg-secondary/80 border border-border rounded-xl p-8"
           >
-            <div className="flex items-center gap-3 mb-6">
-              <div
+            <Box className="flex items-center gap-3 mb-6">
+              <Box
                 className="px-3 py-1 rounded-full text-xs font-medium"
                 style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
               >
                 Recommended
-              </div>
-            </div>
+              </Box>
+            </Box>
 
             <h3 className="text-2xl font-bold text-foreground mb-2">
               Hanzo Gateway
@@ -117,8 +118,8 @@ const OpenPricing = () => {
               <ArrowRight className="ml-2 h-4 w-4" />
             </a>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

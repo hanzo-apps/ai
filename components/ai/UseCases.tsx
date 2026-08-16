@@ -4,6 +4,7 @@
 import React from 'react';
 import { motion } from '@/components/motion';
 import { Bot, MessageSquare, BookOpen, Search, FileCode, Database, Brain, Headphones } from 'lucide-react';
+import { Box } from '@hanzo/ui'
 
 const UseCases = () => {
   const useCases = [
@@ -54,13 +55,13 @@ const UseCases = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative">
       {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
-      </div>
+      <Box className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <Box className="absolute top-1/4 right-0 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></Box>
+        <Box className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></Box>
+      </Box>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+      <Box className="max-w-7xl mx-auto relative z-10">
+        <Box className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -74,9 +75,9 @@ const UseCases = () => {
               Six shapes that keep coming back, and the models each one reaches for
             </p>
           </motion.div>
-        </div>
+        </Box>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {useCases.map((useCase, index) => (
             <motion.div
               key={index}
@@ -96,7 +97,7 @@ const UseCases = () => {
               <p className="text-muted-foreground">{useCase.description}</p>
             </motion.div>
           ))}
-        </div>
+        </Box>
 
         {/* Implementation example */}
         <motion.div
@@ -106,13 +107,13 @@ const UseCases = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-16 bg-neutral-900/30 border border-neutral-800 rounded-xl overflow-hidden"
         >
-          <div className="flex flex-col lg:flex-row">
-            <div className="lg:w-1/2 p-8 flex flex-col justify-center">
+          <Box className="flex flex-col lg:flex-row">
+            <Box className="lg:w-1/2 p-8 flex flex-col justify-center">
               <h3 className="text-2xl font-bold text-[var(--white)] mb-4">What it looks like</h3>
               <p className="text-muted-foreground mb-6">
                 A client, a model name, and a message. The vector store and the agent below use the same client and the same key
               </p>
-              <div className="bg-neutral-950 rounded-lg p-4 font-mono text-sm text-foreground/80 overflow-x-auto">
+              <Box className="bg-neutral-950 rounded-lg p-4 font-mono text-sm text-foreground/80 overflow-x-auto">
                 <pre>
 {`import { Hanzo } from '@hanzo/ai';
 
@@ -133,19 +134,19 @@ const response = await conversation.send('Tell me about AI engineering');
 
 console.log(response);`}
                 </pre>
-              </div>
-            </div>
-            <div className="lg:w-1/2 bg-neutral-950 p-8 flex flex-col">
+              </Box>
+            </Box>
+            <Box className="lg:w-1/2 bg-neutral-950 p-8 flex flex-col">
               <h4 className="text-lg font-semibold text-[var(--white)] mb-4 flex items-center">
                 <BookOpen className="h-4 w-4 mr-2 text-foreground" />
                 Documentation Example
               </h4>
               <div className="flex flex-col h-full space-y-4 overflow-y-auto">
-                <div className="bg-neutral-900 rounded-lg p-4">
-                  <div className="flex items-center mb-2">
+                <Box className="bg-neutral-900 rounded-lg p-4">
+                  <Box className="flex items-center mb-2">
                     <Database className="h-4 w-4 text-foreground mr-2" />
                     <h5 className="text-foreground font-medium">Vector Search</h5>
-                  </div>
+                  </Box>
                   <pre className="text-xs text-foreground/80 overflow-x-auto">
 {`// Create a vector store
 const vectorStore = hanzo.vectorStore('my-store');
@@ -162,13 +163,13 @@ const results = await vectorStore.search(
   { limit: 3 }
 );`}
                   </pre>
-                </div>
+                </Box>
 
-                <div className="bg-neutral-900 rounded-lg p-4">
-                  <div className="flex items-center mb-2">
+                <Box className="bg-neutral-900 rounded-lg p-4">
+                  <Box className="flex items-center mb-2">
                     <Bot className="h-4 w-4 text-foreground/70 mr-2" />
                     <h5 className="text-foreground/70 font-medium">AI Agents</h5>
-                  </div>
+                  </Box>
                   <pre className="text-xs text-foreground/80 overflow-x-auto">
 {`// Create an agent with tools
 const agent = hanzo.agent({
@@ -185,12 +186,12 @@ const result = await agent.run(
   'Analyze our production metrics and suggest optimizations'
 );`}
                   </pre>
-                </div>
+                </Box>
               </div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

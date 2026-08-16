@@ -10,6 +10,7 @@ import {
 import { allModels } from "@zenlm/models";
 
 import { ProductFooter } from "@/components/products/ProductFooter"
+import { Box } from '@hanzo/ui'
 const PRICING_API = 'https://api.hanzo.ai/v1/pricing'
 
 interface ModelStats {
@@ -129,16 +130,16 @@ const Zen = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       <main>
         {/* Hero */}
         <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20"
+          <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20"
               style={{ background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`, filter: "blur(100px)" }} />
-          </div>
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          </Box>
+          <Box className="max-w-7xl mx-auto relative z-10">
+            <Box className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               <div>
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="mb-6">
                   <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-foreground border border-border">
@@ -188,24 +189,24 @@ const Zen = () => {
 
               {/* Stats panel */}
               <motion.div initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: 0.25 }}>
-                <div className="rounded-xl border border-border bg-secondary/95 backdrop-blur-sm overflow-hidden shadow-2xl">
-                  <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-primary/10" />
-                      <div className="w-3 h-3 rounded-full bg-primary/10" />
-                      <div className="w-3 h-3 rounded-full bg-primary/10" />
-                    </div>
+                <Box className="rounded-xl border border-border bg-secondary/95 backdrop-blur-sm overflow-hidden shadow-2xl">
+                  <Box className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
+                    <Box className="flex gap-1.5">
+                      <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                      <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                      <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                    </Box>
                     <span className="text-xs text-muted-foreground font-mono ml-2">zen-models</span>
-                  </div>
-                  <div className="p-6 bg-background">
-                    <div className="grid grid-cols-2 gap-3 mb-5">
+                  </Box>
+                  <Box className="p-6 bg-background">
+                    <Box className="grid grid-cols-2 gap-3 mb-5">
                       {QUICK_STATS.map((stat) => (
-                        <div key={stat.label} className="p-3 bg-secondary/50 rounded-lg border border-border text-center">
-                          <div className="text-xl font-bold text-foreground mb-0.5">{stat.value}</div>
-                          <div className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</div>
-                        </div>
+                        <Box key={stat.label} className="p-3 bg-secondary/50 rounded-lg border border-border text-center">
+                          <Box className="text-xl font-bold text-foreground mb-0.5">{stat.value}</Box>
+                          <Box className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</Box>
+                        </Box>
                       ))}
-                    </div>
+                    </Box>
                     <div className="space-y-2.5">
                       {[
                         { icon: Brain,    label: "Language, code, vision, audio, video" },
@@ -213,24 +214,24 @@ const Zen = () => {
                         { icon: Shield,   label: "One endpoint, one key" },
                         { icon: Github,   label: "Weights published for most of them" },
                       ].map(({ icon: Icon, label }) => (
-                        <div key={label} className="flex items-center gap-2 text-sm">
+                        <Box key={label} className="flex items-center gap-2 text-sm">
                           <Icon className="w-4 h-4 text-foreground/70 flex-shrink-0" />
                           <span className="text-foreground/80">{label}</span>
-                        </div>
+                        </Box>
                       ))}
                     </div>
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               </motion.div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Full Model Catalog */}
         <section className="py-16 px-4 md:px-8 border-t border-border/30">
-          <div className="max-w-7xl mx-auto">
+          <Box className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
-              <div className="flex items-center justify-between flex-wrap gap-4">
+              <Box className="flex items-center justify-between flex-wrap gap-4">
                 <div>
                   <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">Full Model Catalog</h2>
                   <p className="text-muted-foreground text-sm">{ZEN_MODELS.length}+ models · Available via API and HuggingFace</p>
@@ -239,17 +240,17 @@ const Zen = () => {
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm border border-border text-muted-foreground hover:text-foreground transition-colors">
                   <Sparkles className="w-3.5 h-3.5" /> Browse on HuggingFace <ExternalLink className="w-3 h-3" />
                 </a>
-              </div>
+              </Box>
             </motion.div>
 
             {/* Tier legend */}
-            <div className="flex flex-wrap gap-2 mb-6">
+            <Box className="flex flex-wrap gap-2 mb-6">
               {Object.entries(TIER_LABEL).map(([k, v]) => (
                 <span key={k} className={`text-xs px-2 py-1 rounded-full border font-medium ${TIER_STYLE[k]}`}>{v}</span>
               ))}
-            </div>
+            </Box>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {ZEN_MODELS.map((m, i) => {
                 const { cloudOnly } = m;
                 return (
@@ -264,15 +265,15 @@ const Zen = () => {
                   transition={{ duration: 0.25, delay: (i % 6) * 0.04 }}
                   className="group p-4 rounded-xl border border-border/40 bg-secondary/20 hover:bg-secondary/50 hover:border-border transition-all"
                 >
-                  <div className="flex items-start justify-between gap-2 mb-2">
+                  <Box className="flex items-start justify-between gap-2 mb-2">
                     <span className="font-mono text-sm font-semibold text-foreground">{m.label}</span>
                     {cloudOnly ? (
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary font-medium flex-shrink-0">Cloud API</span>
                     ) : (
                       <ExternalLink className="w-3 h-3 text-muted-foreground/40 group-hover:text-muted-foreground flex-shrink-0 transition-colors mt-0.5" />
                     )}
-                  </div>
-                  <div className="flex items-center gap-2 flex-wrap">
+                  </Box>
+                  <Box className="flex items-center gap-2 flex-wrap">
                     <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${TIER_STYLE[m.tier]}`}>
                       {TIER_LABEL[m.tier]}
                     </span>
@@ -280,13 +281,13 @@ const Zen = () => {
                     {m.active && <span className="text-[10px] text-muted-foreground/60">{m.active} active</span>}
                     {m.ctx && <span className="text-[10px] text-muted-foreground/60">{m.ctx} ctx</span>}
                     {m.tag && <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-muted-foreground">{m.tag}</span>}
-                  </div>
+                  </Box>
                 </motion.a>
                 );
               })}
-            </div>
+            </Box>
 
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <Box className="mt-8 flex flex-wrap justify-center gap-4">
               <Link href="/zen/models" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium bg-primary text-primary-foreground hover:opacity-90 transition-all">
                 View Full Specs & Pricing <ArrowRight className="w-4 h-4" />
               </Link>
@@ -294,73 +295,73 @@ const Zen = () => {
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium border border-border text-foreground hover:bg-secondary transition-colors">
                 <Github className="w-4 h-4" /> Open Source on GitHub
               </a>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Model Families (dynamic from API) */}
         {stats.families.length > 0 && (
           <section className="py-16 px-4 md:px-8 bg-background/50">
-            <div className="max-w-7xl mx-auto">
+            <Box className="max-w-7xl mx-auto">
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
                   {stats.total || ZEN_MODELS.length}+ Models Across {stats.families.length} Families
                 </h2>
               </motion.div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+              <Box className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
                 {stats.families.slice(0, 8).map((family, idx) => {
                   const Icon = family.icon;
                   return (
                     <motion.div key={family.name}
                       initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08 }}
                       className="p-5 bg-background border border-border rounded-xl text-center hover:border-white/20 transition-all hover:-translate-y-0.5">
-                      <div className="mx-auto w-11 h-11 mb-3 flex items-center justify-center rounded-xl bg-primary/10 border border-border">
+                      <Box className="mx-auto w-11 h-11 mb-3 flex items-center justify-center rounded-xl bg-primary/10 border border-border">
                         <Icon className="w-5 h-5 text-foreground" />
-                      </div>
+                      </Box>
                       <h3 className="text-base font-semibold text-foreground mb-1">{family.name}</h3>
                       <p className="text-sm text-foreground/70 mb-1">{family.count} {family.count === 1 ? 'model' : 'models'}</p>
                       <p className="text-muted-foreground text-xs leading-relaxed">{family.description}</p>
                     </motion.div>
                   );
                 })}
-              </div>
-            </div>
+              </Box>
+            </Box>
           </section>
         )}
 
         {/* Why Zen */}
         <section className="py-16 px-4 md:px-8">
-          <div className="max-w-7xl mx-auto">
+          <Box className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground">What you get by using ours</h2>
             </motion.div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <Box className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
               {BENEFITS.map((b, idx) => {
                 const Icon = b.icon;
                 return (
                   <motion.div key={b.title}
                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.08 }}
                     className="p-5 bg-background border border-border rounded-xl text-center hover:border-white/20 transition-all">
-                    <div className="mx-auto w-11 h-11 mb-3 flex items-center justify-center rounded-xl bg-primary/10 border border-border">
+                    <Box className="mx-auto w-11 h-11 mb-3 flex items-center justify-center rounded-xl bg-primary/10 border border-border">
                       <Icon className="w-5 h-5 text-foreground" />
-                    </div>
+                    </Box>
                     <h3 className="text-base font-semibold text-foreground mb-2">{b.title}</h3>
                     <p className="text-muted-foreground text-xs leading-relaxed">{b.description}</p>
                   </motion.div>
                 );
               })}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Modalities showcase */}
         <section className="py-16 px-4 md:px-8 bg-background/30 border-y border-border/30">
-          <div className="max-w-5xl mx-auto">
+          <Box className="max-w-5xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">Pick by what you are doing</h2>
               <p className="text-muted-foreground">Different models, one endpoint. The name in the request is the only thing that changes</p>
             </motion.div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Box className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
                 { icon: Brain,    label: "Language",    desc: "Chat, reasoning, retrieval", models: ["zen5","zen5-pro","zen5-max"] },
                 { icon: FileCode, label: "Code",        desc: "A million tokens of it",     models: ["zen5-coder","zen5-mini","zen-sql"] },
@@ -377,28 +378,28 @@ const Zen = () => {
                     <p className="text-xs text-muted-foreground mb-3">{mod.desc}</p>
                     <div className="space-y-1">
                       {mod.models.map(m => (
-                        <div key={m} className="text-[10px] font-mono text-muted-foreground/60 truncate">{m}</div>
+                        <Box key={m} className="text-[10px] font-mono text-muted-foreground/60 truncate">{m}</Box>
                       ))}
                     </div>
                   </motion.div>
                 );
               })}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Zen5 Teaser */}
         <section className="py-16 px-4 md:px-8">
-          <div className="max-w-7xl mx-auto">
+          <Box className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               className="relative p-8 md:p-12 rounded-2xl border border-border bg-background/80 overflow-hidden">
-              <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary text-primary-foreground">
+              <Box className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary text-primary-foreground">
                 In Training
-              </div>
-              <div className="flex items-center gap-2 mb-4">
+              </Box>
+              <Box className="flex items-center gap-2 mb-4">
                 <Zap className="w-5 h-5 text-foreground" />
                 <span className="text-sm font-medium uppercase tracking-wider text-muted-foreground">Next Generation</span>
-              </div>
+              </Box>
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Zen 5 Ultra</h2>
               <p className="text-lg text-muted-foreground mb-6 max-w-2xl">
                 A 2T-parameter MoDE, training now inside NVIDIA TEE
@@ -409,19 +410,19 @@ const Zen = () => {
                 itself: what data went in and what came out is checkable
                 afterwards rather than taken on our word.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              <Box className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                 {[
                   { v: "2T+", l: "Parameters" },
                   { v: "MoDE", l: "Mixture of Diverse Experts" },
                   { v: "TEE", l: "On-Chain Verifiable Training" },
                 ].map(s => (
-                  <div key={s.l} className="p-4 rounded-lg bg-primary/5 border border-border/40">
-                    <div className="text-2xl font-bold text-foreground mb-1">{s.v}</div>
-                    <div className="text-xs text-muted-foreground">{s.l}</div>
-                  </div>
+                  <Box key={s.l} className="p-4 rounded-lg bg-primary/5 border border-border/40">
+                    <Box className="text-2xl font-bold text-foreground mb-1">{s.v}</Box>
+                    <Box className="text-xs text-muted-foreground">{s.l}</Box>
+                  </Box>
                 ))}
-              </div>
-              <div className="flex flex-wrap gap-3">
+              </Box>
+              <Box className="flex flex-wrap gap-3">
                 <Link href="/research-access"
                   className="inline-flex items-center px-5 py-2.5 rounded-full font-medium bg-primary text-primary-foreground hover:opacity-90 text-sm gap-2">
                   Zen 5 Research Preview <ArrowRight className="w-4 h-4" />
@@ -434,18 +435,18 @@ const Zen = () => {
                   className="inline-flex items-center px-5 py-2.5 rounded-full font-medium border border-border text-foreground hover:bg-secondary text-sm gap-2 transition-colors">
                   Current Catalog <ArrowRight className="w-4 h-4" />
                 </Link>
-              </div>
+              </Box>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Get Started */}
         <section className="py-16 px-4 md:px-8 border-t border-border/30">
-          <div className="max-w-7xl mx-auto">
+          <Box className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">Get Started</h2>
             </motion.div>
-            <div className="grid md:grid-cols-3 gap-5">
+            <Box className="grid md:grid-cols-3 gap-5">
               {[
                 { href: "/zen/models", icon: Brain,   title: "The catalog",  desc: "Every model, with its parameters, context window and what it is for", internal: true },
                 { href: "/pricing",   icon: Layers,  title: "What it costs", desc: "Price per million tokens, per model, with nothing rounded in our favour", internal: true },
@@ -453,11 +454,11 @@ const Zen = () => {
               ].map((card, i) => {
                 const Icon = card.icon;
                 const inner = (
-                  <div className="p-6 bg-background border border-border rounded-xl text-center hover:border-white/20 transition-all hover:-translate-y-0.5 h-full">
+                  <Box className="p-6 bg-background border border-border rounded-xl text-center hover:border-white/20 transition-all hover:-translate-y-0.5 h-full">
                     <Icon className="w-7 h-7 mx-auto mb-3 text-foreground" />
                     <h3 className="text-lg font-semibold text-foreground mb-2">{card.title}</h3>
                     <p className="text-muted-foreground text-sm">{card.desc}</p>
-                  </div>
+                  </Box>
                 );
                 return card.internal ? (
                   <motion.div key={card.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
@@ -469,17 +470,17 @@ const Zen = () => {
                     className="block">{inner}</motion.a>
                 );
               })}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Philosophy Bridge */}
         <section className="py-16 px-4 md:px-8 border-t border-border">
-          <div className="max-w-4xl mx-auto text-center">
+          <Box className="max-w-4xl mx-auto text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-              <div className="text-4xl tracking-widest text-foreground/20 mb-6 select-none">
+              <Box className="text-4xl tracking-widest text-foreground/20 mb-6 select-none">
                 ䷀ ䷸ ䷹ ䷺ ䷻ ䷼ ䷽ ䷾ ䷿ ䷡
-              </div>
+              </Box>
               <h2 className="text-2xl font-bold text-foreground mb-3">Why they are named this way</h2>
               <p className="text-muted-foreground mb-6 max-w-xl mx-auto text-sm">
                 {/* EIGHT, and "among them" is doing real work in that sentence.
@@ -511,19 +512,19 @@ const Zen = () => {
                 易經 · Explore the Full Philosophy <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Final CTA */}
         <section className="py-16 px-4 md:px-8 border-t border-border">
-          <div className="max-w-7xl mx-auto">
+          <Box className="max-w-7xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
               <h2 className="text-3xl font-bold text-foreground mb-3">Call one and see</h2>
               <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
                 Start with zen5-mini because it is fast and cheap, and move up
                 only where a harder question needs it.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <Box className="flex flex-wrap justify-center gap-4">
                 <Link href="/zen/models"
                   className="inline-flex items-center px-6 py-3 rounded-full font-medium bg-primary text-primary-foreground hover:opacity-90 text-sm gap-2 transition-all">
                   Explore All Models <ArrowRight className="w-4 h-4" />
@@ -536,27 +537,27 @@ const Zen = () => {
                   className="inline-flex items-center px-6 py-3 rounded-full font-medium border border-border bg-transparent hover:bg-secondary text-sm text-foreground transition-colors">
                   <Globe className="mr-2 h-4 w-4" /> Get API Key
                 </a>
-              </div>
+              </Box>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         <section className="py-16 border-t border-neutral-800">
-          <div className="max-w-3xl mx-auto px-4 text-center">
+          <Box className="max-w-3xl mx-auto px-4 text-center">
             <h2 className="text-2xl font-bold mb-4">Read the specs, or read the code</h2>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Box className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="https://docs.hanzo.ai/docs/services/models" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
                 Read the docs <ArrowRight className="h-4 w-4" />
               </a>
               <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
                 View on GitHub
               </a>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
               <ProductFooter slug="zen" name="Zen Models" />
 </main>
-    </div>
+    </Box>
   );
 };
 

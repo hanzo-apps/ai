@@ -30,6 +30,7 @@ import {
   Volume2,
   Sparkles,
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 // Derive context window from features string (e.g. "202k context window" -> "202K")
 function extractContext(features: string[]): string {
@@ -238,7 +239,7 @@ const ModelRow = ({ model, pricingMode }: { model: HanzoModel; pricingMode?: str
         onClick={() => setExpanded(!expanded)}
       >
         <td className="px-4 md:px-6 py-4">
-          <div className="flex items-center gap-2 flex-wrap">
+          <Box className="flex items-center gap-2 flex-wrap">
             <span className="font-semibold text-foreground text-sm md:text-base">
               {model.fullName?.split(" — ")[0] || model.fullName?.split(" -- ")[0] || model.name}
             </span>
@@ -246,7 +247,7 @@ const ModelRow = ({ model, pricingMode }: { model: HanzoModel; pricingMode?: str
             {model.cloudOnly && (
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary font-medium">Cloud API</span>
             )}
-          </div>
+          </Box>
           <p className="text-xs text-muted-foreground mt-1 hidden md:block">
             {model.description}
           </p>
@@ -274,7 +275,7 @@ const ModelRow = ({ model, pricingMode }: { model: HanzoModel; pricingMode?: str
       {expanded && (
         <tr className="border-t border-border/50">
           <td colSpan={6} className="px-4 md:px-6 py-4 bg-background/80">
-            <div className="grid md:grid-cols-3 gap-6 text-sm">
+            <Box className="grid md:grid-cols-3 gap-6 text-sm">
               <div>
                 <h4 className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">
                   Architecture
@@ -295,10 +296,10 @@ const ModelRow = ({ model, pricingMode }: { model: HanzoModel; pricingMode?: str
                 </h4>
                 <div className="space-y-1">
                   {model.features.map((f, i) => (
-                    <div key={i} className="flex items-center gap-2">
+                    <Box key={i} className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                       <span className="text-foreground/80">{f}</span>
-                    </div>
+                    </Box>
                   ))}
                 </div>
               </div>
@@ -309,28 +310,28 @@ const ModelRow = ({ model, pricingMode }: { model: HanzoModel; pricingMode?: str
                 {model.pricing == null ? (
                   <p className="text-muted-foreground italic">Contact sales for pricing</p>
                 ) : pricingMode === "unit" && model.pricing.perUnit != null ? (
-                  <div className="p-2 bg-secondary rounded border border-border">
+                  <Box className="p-2 bg-secondary rounded border border-border">
                     <span className="text-[10px] text-muted-foreground block">
                       Per {model.pricingUnit || "unit"}
                     </span>
                     <span className="text-foreground font-medium">
                       ${model.pricing.perUnit}
                     </span>
-                  </div>
+                  </Box>
                 ) : (
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="p-2 bg-secondary rounded border border-border">
+                  <Box className="grid grid-cols-2 gap-2">
+                    <Box className="p-2 bg-secondary rounded border border-border">
                       <span className="text-[10px] text-muted-foreground block">Input</span>
                       <span className="text-foreground font-medium">{fmt(model.pricing.input)}</span>
-                    </div>
-                    <div className="p-2 bg-secondary rounded border border-border">
+                    </Box>
+                    <Box className="p-2 bg-secondary rounded border border-border">
                       <span className="text-[10px] text-muted-foreground block">Output</span>
                       <span className="text-foreground font-medium">{fmt(model.pricing.output)}</span>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
                 )}
               </div>
-            </div>
+            </Box>
           </td>
         </tr>
       )}
@@ -344,17 +345,17 @@ const ModelGroupSection = ({ group }: { group: ModelGroup }) => {
 
   return (
     <section id={group.id} className="mb-16">
-      <div className="flex items-center gap-4 mb-6">
-        <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-primary/10 border border-border">
+      <Box className="flex items-center gap-4 mb-6">
+        <Box className="w-12 h-12 rounded-xl flex items-center justify-center bg-primary/10 border border-border">
           <Icon className="w-6 h-6 text-foreground" />
-        </div>
+        </Box>
         <div>
           <h2 className="text-2xl font-bold text-foreground">{group.title}</h2>
           <p className="text-muted-foreground text-sm">{group.description}</p>
         </div>
-      </div>
+      </Box>
 
-      <div className="overflow-x-auto">
+      <Box className="overflow-x-auto">
         <table className="w-full border-collapse bg-background border border-border rounded-xl overflow-hidden">
           <thead>
             <tr className="bg-secondary/80">
@@ -382,7 +383,7 @@ const ModelGroupSection = ({ group }: { group: ModelGroup }) => {
             ))}
           </tbody>
         </table>
-      </div>
+      </Box>
     </section>
   );
 };
@@ -434,22 +435,22 @@ const ZenModels = () => {
   const maxCtx = "2M";
 
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
 
       <main>
         {/* Hero Section */}
         <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-            <div
+          <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+            <Box
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
               style={{
                 background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
                 filter: "blur(100px)",
               }}
             />
-          </div>
+          </Box>
 
-          <div className="max-w-7xl mx-auto relative z-10">
+          <Box className="max-w-7xl mx-auto relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -500,14 +501,14 @@ const ZenModels = () => {
                 { label: "Architectures", value: "MoE + Dense" },
                 { label: "Modalities", value: "7" },
               ].map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <div className="text-xl font-bold text-foreground">
+                <Box key={stat.label} className="text-center">
+                  <Box className="text-xl font-bold text-foreground">
                     {stat.value}
-                  </div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider">
+                  </Box>
+                  <Box className="text-xs text-muted-foreground uppercase tracking-wider">
                     {stat.label}
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               ))}
             </motion.div>
 
@@ -553,21 +554,21 @@ const ZenModels = () => {
                 Get API Key
               </a>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Model Groups */}
         <section className="py-16 px-4 md:px-8">
-          <div className="max-w-7xl mx-auto">
+          <Box className="max-w-7xl mx-auto">
             {loading ? (
-              <div className="flex items-center justify-center py-24">
+              <Box className="flex items-center justify-center py-24">
                 <Spinner size="small" color="$mutedForeground" marginRight={8} />
                 <span className="text-muted-foreground">Loading live pricing...</span>
-              </div>
+              </Box>
             ) : (
             <>
             {/* Quick nav */}
-            <div className="mb-12 flex flex-wrap gap-3 justify-center">
+            <Box className="mb-12 flex flex-wrap gap-3 justify-center">
               {groups.map((group) => {
                 const Icon = group.icon;
                 return (
@@ -581,19 +582,19 @@ const ZenModels = () => {
                   </a>
                 );
               })}
-            </div>
+            </Box>
 
             {groups.map((group) => (
               <ModelGroupSection key={group.id} group={group} />
             ))}
             </>
             )}
-          </div>
+          </Box>
         </section>
 
         {/* API Usage Example */}
         <section className="py-16 px-4 md:px-8 bg-background/50 border-t border-border">
-          <div className="max-w-4xl mx-auto">
+          <Box className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -608,17 +609,17 @@ const ZenModels = () => {
               </p>
             </motion.div>
 
-            <div className="rounded-xl border border-border bg-secondary/95 overflow-hidden">
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-primary/10" />
-                  <div className="w-3 h-3 rounded-full bg-primary/10" />
-                  <div className="w-3 h-3 rounded-full bg-primary/10" />
-                </div>
+            <Box className="rounded-xl border border-border bg-secondary/95 overflow-hidden">
+              <Box className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
+                <Box className="flex gap-1.5">
+                  <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                  <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                  <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                </Box>
                 <span className="text-xs text-muted-foreground font-mono ml-2">
                   python
                 </span>
-              </div>
+              </Box>
               <pre className="p-6 text-sm font-mono text-foreground/80 overflow-x-auto">
                 <code>{`from hanzoai import Hanzo
 
@@ -631,13 +632,13 @@ response = client.chat.completions.create(
 )
 print(response.choices[0].message.content)`}</code>
               </pre>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* CTA Section */}
         <section className="py-20 px-4 md:px-8 border-t border-border">
-          <div className="max-w-7xl mx-auto">
+          <Box className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -651,7 +652,7 @@ print(response.choices[0].message.content)`}</code>
                 All {totalModels} Zen models available via OpenAI-compatible
                 API. Start building today.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <Box className="flex flex-wrap justify-center gap-4">
                 <a
                   href="https://console.hanzo.ai"
                   target="_blank"
@@ -673,13 +674,13 @@ print(response.choices[0].message.content)`}</code>
                 >
                   View Pricing
                 </Link>
-              </div>
+              </Box>
             </motion.div>
-          </div>
+          </Box>
         </section>
       </main>
 
-    </div>
+    </Box>
   );
 };
 

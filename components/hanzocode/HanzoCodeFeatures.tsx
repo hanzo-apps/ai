@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Code, Zap, MessageSquare, Globe, Bot, FileCode, Infinity, Network } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const FeatureCard = ({ title, description, icon }) => {
   return (
@@ -14,13 +15,13 @@ const FeatureCard = ({ title, description, icon }) => {
       transition={{ duration: 0.5 }}
       className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 h-full"
     >
-      <div className="flex flex-col h-full">
-        <div className="mb-6">
+      <Box className="flex flex-col h-full">
+        <Box className="mb-6">
           {icon}
           <h3 className="text-2xl font-semibold mt-4 mb-2">{title}</h3>
           <p className="text-foreground/80 mb-4">{description}</p>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </motion.div>
   );
 };
@@ -28,7 +29,7 @@ const FeatureCard = ({ title, description, icon }) => {
 const HanzoCodeFeatures = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950" id="features">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -42,7 +43,7 @@ const HanzoCodeFeatures = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <FeatureCard 
             title="It opens the files"
             description="The agent reads what it needs from the repo rather than waiting for you to paste it into a chat"
@@ -90,8 +91,8 @@ const HanzoCodeFeatures = () => {
             description="Enso is ours. The same sign-in reaches every other model on the gateway, and the bill lands in one place"
             icon={<Network className="h-10 w-10 text-foreground" />}
           />
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

@@ -12,13 +12,14 @@ import {
   Bell,
   Zap,
 } from "lucide-react"
+import { Box } from '@hanzo/ui'
 
 export default function SentinelPage() {
   return (
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 overflow-hidden">
+        <Box className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -36,9 +37,9 @@ export default function SentinelPage() {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
+        <Box className="relative z-10 max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -107,12 +108,12 @@ export default function SentinelPage() {
               View on GitHub
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Features Grid */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-7xl mx-auto">
+        <Box className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -129,7 +130,7 @@ export default function SentinelPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 icon: Bug,
@@ -176,9 +177,9 @@ export default function SentinelPage() {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors"
               >
-                <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
+                <Box className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
                   <feature.icon className="h-6 w-6 text-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-lg font-semibold text-foreground mb-2">
                   {feature.title}
                 </h3>
@@ -187,15 +188,15 @@ export default function SentinelPage() {
                 </p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Resources / Get Started */}
       <section className="py-16 border-t border-neutral-800">
-        <div className="max-w-3xl mx-auto px-4 text-center">
+        <Box className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Get started with Hanzo Sentinel</h2>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Box className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="https://docs.hanzo.ai/docs/skills/hanzo-sentry"
               target="_blank"
@@ -212,9 +213,9 @@ export default function SentinelPage() {
             >
               View on GitHub
             </a>
-          </div>
+          </Box>
                 <ProductFooter slug="sentinel" name="Sentinel" />
-</div>
+</Box>
       </section>
     </>
   )

@@ -27,6 +27,7 @@ import {
   Globe,
   ExternalLink
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 // Integration categories
 const categories = [
@@ -157,13 +158,13 @@ const Automations = () => {
   const popularIntegrations = integrations.filter((i) => i.popular);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       
       <main>
         {/* Hero Section */}
         <section className="relative pt-32 pb-20 px-4 md:px-8 overflow-hidden">
           {/* Background glow */}
-          <div className="absolute inset-0 overflow-hidden">
+          <Box className="absolute inset-0 overflow-hidden">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.15 }}
@@ -174,9 +175,9 @@ const Automations = () => {
                 filter: "blur(100px)",
               }}
             />
-          </div>
+          </Box>
 
-          <div className="max-w-6xl mx-auto relative z-10">
+          <Box className="max-w-6xl mx-auto relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -201,7 +202,7 @@ const Automations = () => {
               </p>
 
               {/* Search */}
-              <div className="relative max-w-md mx-auto">
+              <Box className="relative max-w-md mx-auto">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                 <input
                   type="text"
@@ -210,7 +211,7 @@ const Automations = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-12 pr-4 py-3 rounded-full bg-secondary border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-white/50 transition-colors"
                 />
-              </div>
+              </Box>
             </motion.div>
 
             {/* Popular Integrations */}
@@ -223,7 +224,7 @@ const Automations = () => {
               <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4 text-center">
                 Most reached for
               </h2>
-              <div className="flex flex-wrap justify-center gap-3">
+              <Box className="flex flex-wrap justify-center gap-3">
                 {popularIntegrations.slice(0, 12).map((integration) => (
                   <motion.a
                     key={integration.name}
@@ -235,14 +236,14 @@ const Automations = () => {
                     <span className="text-sm text-foreground">{integration.name}</span>
                   </motion.a>
                 ))}
-              </div>
+              </Box>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Category Filter */}
         <section className="py-8 px-4 md:px-8 border-y border-border bg-background sticky top-16 z-20">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <div className="flex gap-2 overflow-x-auto pb-2 hz-scrollbar-none">
               {categories.map((category) => {
                 const Icon = category.icon;
@@ -263,13 +264,13 @@ const Automations = () => {
                 );
               })}
             </div>
-          </div>
+          </Box>
         </section>
 
         {/* Integrations Grid */}
         <section className="py-16 px-4 md:px-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex items-center justify-between mb-8">
+          <Box className="max-w-6xl mx-auto">
+            <Box className="flex items-center justify-between mb-8">
               <h2 className="text-2xl font-medium text-foreground">
                 {activeCategory === "all"
                   ? "All Integrations"
@@ -278,9 +279,9 @@ const Automations = () => {
               <span className="text-sm text-muted-foreground">
                 {filteredIntegrations.length} integrations
               </span>
-            </div>
+            </Box>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {filteredIntegrations.map((integration, index) => (
                 <motion.div
                   key={integration.name}
@@ -289,12 +290,12 @@ const Automations = () => {
                   transition={{ duration: 0.3, delay: index * 0.02 }}
                   className="group p-4 rounded-xl border border-border bg-secondary/50 hover:bg-secondary hover:border-border transition-all cursor-pointer"
                 >
-                  <div
+                  <Box
                     className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-3"
                     style={{ backgroundColor: integration.color + "20" }}
                   >
                     {integration.icon}
-                  </div>
+                  </Box>
                   <h3 className="text-sm font-medium text-foreground group-hover:text-foreground transition-colors">
                     {integration.name}
                   </h3>
@@ -303,19 +304,19 @@ const Automations = () => {
                   )}
                 </motion.div>
               ))}
-            </div>
+            </Box>
 
             {filteredIntegrations.length === 0 && (
-              <div className="text-center py-16">
+              <Box className="text-center py-16">
                 <p className="text-muted-foreground">No integrations found matching your search.</p>
-              </div>
+              </Box>
             )}
-          </div>
+          </Box>
         </section>
 
         {/* CTA Section */}
         <section className="py-20 px-4 md:px-8 border-t border-border">
-          <div className="max-w-4xl mx-auto text-center">
+          <Box className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
               Not here?
             </h2>
@@ -324,7 +325,7 @@ const Automations = () => {
               and a connection holding the credential. If it deserves a proper
               connector, tell us and we will add one.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Box className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/contact"
                 className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"
@@ -342,12 +343,12 @@ const Automations = () => {
                 Build Custom Integration
                 <ExternalLink className="ml-2 h-4 w-4" />
               </a>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
       </main>
       
-    </div>
+    </Box>
   );
 };
 

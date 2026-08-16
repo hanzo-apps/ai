@@ -5,6 +5,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Check } from "lucide-react";
 import type { OperatorModel } from "./operatorModelData";
+import { Box } from '@hanzo/ui'
 
 interface ModelCardProps {
   model: OperatorModel;
@@ -42,9 +43,9 @@ const ModelCard = ({ model, index }: ModelCardProps) => {
         ))}
       </ul>
       
-      <div className="pt-2 mt-auto">
+      <Box className="pt-2 mt-auto">
         <p className="text-sm text-muted-foreground font-mono">{model.command}</p>
-      </div>
+      </Box>
     </motion.div>
   );
 };

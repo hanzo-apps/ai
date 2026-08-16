@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@hanzo/ui";
 import { Spinner } from "@hanzo/gui";
+import { Box } from '@hanzo/ui'
 
 const DATASTORE_API = "https://api.hanzo.ai/v1/pricing/datastore";
 
@@ -102,15 +103,15 @@ export default function DatastorePricing() {
   const sales = data?.endpoints?.sales ?? "/contact/sales";
 
   return (
-    <div className="max-w-7xl mx-auto mb-16">
-      <div className="mb-10">
+    <Box className="max-w-7xl mx-auto mb-16">
+      <Box className="mb-10">
         <h2 className="text-3xl font-bold mb-2">Hanzo Datastore</h2>
         <p className="text-muted-foreground text-lg mb-6">
           Real-time analytics database as a service.
           Columnar storage, real-time inserts, petabyte-scale queries.
           {data?.trial && ` ${data.trial.days}-day free trial, no credit card required.`}
         </p>
-        <div className="flex items-center gap-3">
+        <Box className="flex items-center gap-3">
           <span className={`text-sm ${!annual ? "text-foreground" : "text-muted-foreground"}`}>Monthly</span>
           <button
             onClick={() => setAnnual(!annual)}
@@ -121,18 +122,18 @@ export default function DatastorePricing() {
           <span className={`text-sm ${annual ? "text-foreground" : "text-muted-foreground"}`}>
             Annual <span className="text-green-400 text-xs ml-1">Save {data?.discounts?.annual?.percent ?? 17}%</span>
           </span>
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       {loading ? (
-        <div className="flex items-center justify-center py-16">
+        <Box className="flex items-center justify-center py-16">
           <Spinner size="small" color="$mutedForeground" marginRight={8} />
           <span className="text-muted-foreground">Loading pricing...</span>
-        </div>
+        </Box>
       ) : data ? (
         <>
           {/* Tier cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <Box className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             {data.tiers.map((tier) => (
               <div
                 key={tier.id}
@@ -148,15 +149,15 @@ export default function DatastorePricing() {
                 <h3 className="text-xl font-bold mb-1">{tier.name}</h3>
                 <p className="text-muted-foreground text-sm mb-5">{tier.tagline}</p>
 
-                <div className="mb-1">
+                <Box className="mb-1">
                   <span className="text-4xl font-bold">
                     ${monthlyPrice(tier).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                   </span>
                   <span className="text-muted-foreground text-sm">/mo</span>
-                </div>
-                <div className="text-xs text-muted-foreground mb-6">
+                </Box>
+                <Box className="text-xs text-muted-foreground mb-6">
                   ${hourlyPrice(tier).toFixed(4)}/hr · billed per minute
-                </div>
+                </Box>
 
                 <ul className="space-y-2 text-sm text-muted-foreground mb-8 flex-1">
                   {tier.features.map((f) => (
@@ -180,15 +181,15 @@ export default function DatastorePricing() {
                 </Button>
               </div>
             ))}
-          </div>
+          </Box>
 
           {/* Usage rates */}
-          <div className="mb-16">
+          <Box className="mb-16">
             <h3 className="text-2xl font-semibold mb-2">Usage-based pricing</h3>
             <p className="text-muted-foreground text-sm mb-6">
               Billed on top of your base tier. Metered per minute; no minimums.
             </p>
-            <div className="overflow-x-auto rounded-xl border border-neutral-800/50">
+            <Box className="overflow-x-auto rounded-xl border border-neutral-800/50">
               <table className="w-full text-left">
                 <thead>
                   <tr className="border-b border-neutral-800 bg-neutral-900/30">
@@ -233,27 +234,27 @@ export default function DatastorePricing() {
                   </tr>
                 </tbody>
               </table>
-            </div>
-          </div>
+            </Box>
+          </Box>
 
           {/* Included */}
-          <div className="mb-12 bg-neutral-900/30 rounded-xl p-8 border border-neutral-800/50">
+          <Box className="mb-12 bg-neutral-900/30 rounded-xl p-8 border border-neutral-800/50">
             <h3 className="text-xl font-semibold mb-4">Included with every tier</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
+            <Box className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
               {data.included.map((item) => <div key={item}>{item}</div>)}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </>
       ) : (
-        <div className="py-16 text-center">
+        <Box className="py-16 text-center">
           <p className="text-muted-foreground">
             Live pricing is temporarily unavailable.{" "}
             <a href={sales} className="underline">Contact sales</a> for current rates.
           </p>
-        </div>
+        </Box>
       )}
 
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <Box className="flex flex-col sm:flex-row gap-4 justify-center">
         <Button
           size="lg"
           className="bg-primary text-primary-foreground hover:bg-neutral-100 px-8"
@@ -269,7 +270,7 @@ export default function DatastorePricing() {
         >
           Book a call
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

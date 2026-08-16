@@ -1,5 +1,6 @@
 import React from "react";
 import type { PartnerLogo } from "@/lib/constants/partner-logos";
+import { Box } from '@hanzo/ui'
 
 interface PartnerLogoRowProps {
   logos: PartnerLogo[];
@@ -28,11 +29,11 @@ const PartnerLogoRow: React.FC<PartnerLogoRowProps> = ({
           />
         );
         return (
-          <div key={logo.name} className="flex items-center justify-center">
+          <Box key={logo.name} className="flex items-center justify-center">
             {logo.href ? (
               <a href={logo.href} target="_blank" rel="noopener noreferrer">{img}</a>
             ) : img}
-          </div>
+          </Box>
         );
       })}
     </div>

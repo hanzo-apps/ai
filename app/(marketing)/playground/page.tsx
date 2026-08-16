@@ -20,6 +20,7 @@ import {
 import ChromeText from '@/components/ui/chrome-text'
 
 import { ProductFooter } from "@/components/products/ProductFooter"
+import { Box } from '@hanzo/ui'
 const tryOut = [
   {
     icon: Brain,
@@ -81,16 +82,16 @@ hanzo-mcp install-desktop`, },
 
 const Playground = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       <section className="py-20 lg:py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="bg-primary/10 border border-border rounded-full px-4 py-1 inline-block mb-4">
+        <Box className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent" />
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <Box className="text-center max-w-3xl mx-auto mb-16">
+            <Box className="bg-primary/10 border border-border rounded-full px-4 py-1 inline-block mb-4">
               <span className="text-sm flex items-center gap-2">
                 <Play className="w-4 h-4" /> Playground
               </span>
-            </div>
+            </Box>
             <h1 className="text-5xl lg:text-7xl font-bold mb-6">
               <ChromeText>Where to start</ChromeText>
             </h1>
@@ -99,25 +100,25 @@ const Playground = () => {
               a page you read, some are a command you run. None of them need a
               sales call first.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Box className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/zen" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
                 Open Zen playground <ArrowRight className="h-4 w-4" />
               </Link>
               <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
                 <GitBranch className="h-4 w-4" /> Browse open source
               </a>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
       </section>
 
       <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Pick what to try</h2>
             <p className="text-muted-foreground">Reach for the one that matches the problem in front of you.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          </Box>
+          <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {tryOut.map((t, i) => {
               const Icon = t.icon
               return (
@@ -137,17 +138,17 @@ const Playground = () => {
                 </motion.div>
               )
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       <section className="py-20 border-t border-neutral-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="text-center mb-12">
             <h2 className="text-4xl font-bold mb-4">Or copy-paste a starter</h2>
             <p className="text-muted-foreground">A key, a model name, and a message is the whole first request.</p>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          </Box>
+          <Box className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {examples.map((e, i) => (
               <motion.div
                 key={e.label}
@@ -156,37 +157,37 @@ const Playground = () => {
                 transition={{ delay: i * 0.05 }}
                 className="rounded-xl border border-neutral-800 bg-neutral-900/70 overflow-hidden"
               >
-                <div className="px-4 py-2 border-b border-neutral-800 flex items-center justify-between">
+                <Box className="px-4 py-2 border-b border-neutral-800 flex items-center justify-between">
                   <span className="text-xs uppercase tracking-wider text-muted-foreground">{e.lang}</span>
                   <span className="text-xs text-foreground/70">{e.label}</span>
-                </div>
+                </Box>
                 <pre className="px-4 py-4 text-xs leading-relaxed overflow-x-auto"><code>{e.code}</code></pre>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       <section className="py-16 border-t border-neutral-800">
-        <div className="max-w-3xl mx-auto px-4 text-center">
+        <Box className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Read the code first if you want</h2>
           <p className="text-muted-foreground mb-8">
             Dev, MCP, the agent SDK, the CLI, the editor extensions and the
             clients in four languages are all on GitHub. So are most of the
             model weights.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Box className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="https://docs.hanzo.ai/docs/skills/hanzo-playground" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />
             </a>
             <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
               View on GitHub
             </a>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
             <ProductFooter slug="playground" name="Playground" />
-</div>
+</Box>
   )
 }
 

@@ -4,6 +4,7 @@
 import React from 'react';
 import { motion } from '@/components/motion';
 import { Quote } from 'lucide-react';
+import { Box } from '@hanzo/ui'
 
 const Testimonials = () => {
   const testimonials = [
@@ -29,11 +30,11 @@ const Testimonials = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -bottom-64 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-      </div>
+      <Box className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <Box className="absolute -bottom-64 -right-32 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></Box>
+      </Box>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <Box className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +50,7 @@ const Testimonials = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
@@ -61,18 +62,18 @@ const Testimonials = () => {
             >
               <Quote className="absolute top-6 right-6 h-6 w-6 text-foreground/40" />
               <p className="text-foreground/80 mb-8 mt-4">"{testimonial.quote}"</p>
-              <div className="flex items-center">
-                <div className="h-12 w-12 rounded-full bg-primary/20 border border-white/30 flex items-center justify-center text-[var(--white)] font-semibold">
+              <Box className="flex items-center">
+                <Box className="h-12 w-12 rounded-full bg-primary/20 border border-white/30 flex items-center justify-center text-[var(--white)] font-semibold">
                   {getInitials(testimonial.author)}
-                </div>
-                <div className="ml-4">
-                  <div className="text-[var(--white)] font-medium">{testimonial.author}</div>
-                  <div className="text-muted-foreground text-sm">{testimonial.title}</div>
-                </div>
-              </div>
+                </Box>
+                <Box className="ml-4">
+                  <Box className="text-[var(--white)] font-medium">{testimonial.author}</Box>
+                  <Box className="text-muted-foreground text-sm">{testimonial.title}</Box>
+                </Box>
+              </Box>
             </motion.div>
           ))}
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -81,8 +82,8 @@ const Testimonials = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-20 bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 md:p-12"
         >
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="mb-8 md:mb-0 md:mr-8 md:w-2/3">
+          <Box className="flex flex-col md:flex-row items-center justify-between">
+            <Box className="mb-8 md:mb-0 md:mr-8 md:w-2/3">
               <h3 className="text-2xl font-bold text-[var(--white)] mb-4">
                 The AI Engineering Community
               </h3>
@@ -90,39 +91,39 @@ const Testimonials = () => {
                 Build with the engineers shipping production AI.
                 Share experiences, get support, and collaborate on best practices.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <div className="flex items-center bg-neutral-800/50 rounded-full px-4 py-2">
-                  <div className="w-2 h-2 rounded-full bg-primary/10 mr-2"></div>
+              <Box className="flex flex-wrap gap-4">
+                <Box className="flex items-center bg-neutral-800/50 rounded-full px-4 py-2">
+                  <Box className="w-2 h-2 rounded-full bg-primary/10 mr-2"></Box>
                   <span className="text-foreground/80 text-sm">Active developer community</span>
-                </div>
-                <div className="flex items-center bg-neutral-800/50 rounded-full px-4 py-2">
-                  <div className="w-2 h-2 rounded-full bg-primary/10 mr-2"></div>
+                </Box>
+                <Box className="flex items-center bg-neutral-800/50 rounded-full px-4 py-2">
+                  <Box className="w-2 h-2 rounded-full bg-primary/10 mr-2"></Box>
                   <span className="text-foreground/80 text-sm">Weekly office hours</span>
-                </div>
-                <div className="flex items-center bg-neutral-800/50 rounded-full px-4 py-2">
-                  <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
+                </Box>
+                <Box className="flex items-center bg-neutral-800/50 rounded-full px-4 py-2">
+                  <Box className="w-2 h-2 rounded-full bg-primary mr-2"></Box>
                   <span className="text-foreground/80 text-sm">Dedicated support team</span>
-                </div>
-              </div>
-            </div>
-            <div className="md:w-1/3 flex justify-center md:justify-end">
+                </Box>
+              </Box>
+            </Box>
+            <Box className="md:w-1/3 flex justify-center md:justify-end">
               <div className="flex -space-x-4">
                 {[...Array(5)].map((_, i) => (
-                  <div 
+                  <Box 
                     key={i} 
                     className="h-12 w-12 rounded-full bg-primary/30 border-2 border-neutral-900 flex items-center justify-center text-foreground/70 text-sm font-medium"
                   >
                     {["JS", "MK", "AL", "TN", "RW"][i]}
-                  </div>
+                  </Box>
                 ))}
-                <div className="h-12 w-12 rounded-full bg-primary/20 border-2 border-neutral-900 flex items-center justify-center text-[var(--white)] text-sm font-medium">
+                <Box className="h-12 w-12 rounded-full bg-primary/20 border-2 border-neutral-900 flex items-center justify-center text-[var(--white)] text-sm font-medium">
                   +
-                </div>
+                </Box>
               </div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

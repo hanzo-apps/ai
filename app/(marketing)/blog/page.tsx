@@ -2,6 +2,7 @@
 
 import { motion } from "@/components/motion"
 import { ArrowRight, BookOpen, Calendar } from "lucide-react"
+import { Box } from '@hanzo/ui'
 
 const posts = [
   {
@@ -134,14 +135,14 @@ const posts = [
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       <main>
         {/* Hero */}
         <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15" style={{ background: "radial-gradient(circle, #ffffff 0%, transparent 70%)", filter: "blur(100px)" }} />
-          </div>
-          <div className="max-w-5xl mx-auto relative z-10 text-center">
+          <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15" style={{ background: "radial-gradient(circle, #ffffff 0%, transparent 70%)", filter: "blur(100px)" }} />
+          </Box>
+          <Box className="max-w-5xl mx-auto relative z-10 text-center">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6 bg-primary/20 text-foreground">
               <BookOpen className="w-3.5 h-3.5" />Blog
             </motion.div>
@@ -151,12 +152,12 @@ export default function BlogPage() {
             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-6 max-w-3xl mx-auto">
               Product launches, architecture deep dives, and how-to guides from the team building the AI workforce platform.
             </motion.p>
-          </div>
+          </Box>
         </section>
 
         {/* Posts */}
         <section className="py-8 px-4 md:px-8">
-          <div className="max-w-5xl mx-auto">
+          <Box className="max-w-5xl mx-auto">
             <div className="space-y-4">
               {posts.map((post, index) => (
                 <motion.div key={post.slug} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: Math.min(index * 0.05, 0.3) }}>
@@ -166,9 +167,9 @@ export default function BlogPage() {
                     rel="noopener noreferrer"
                     className="block p-6 rounded-xl bg-secondary/50 border border-border hover:border-foreground/20 transition-all group"
                   >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-3 mb-2">
+                    <Box className="flex items-start justify-between gap-4">
+                      <Box className="min-w-0">
+                        <Box className="flex items-center gap-3 mb-2">
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-foreground/80">
                             {post.tag}
                           </span>
@@ -176,28 +177,28 @@ export default function BlogPage() {
                             <Calendar className="w-3 h-3" />
                             {post.date}
                           </span>
-                        </div>
+                        </Box>
                         <h2 className="font-semibold text-foreground mb-2 group-hover:text-foreground/80 transition-colors">
                           {post.title}
                         </h2>
                         <p className="text-sm text-muted-foreground leading-relaxed">
                           {post.description}
                         </p>
-                      </div>
+                      </Box>
                       <ArrowRight className="w-5 h-5 text-muted-foreground/60 group-hover:text-foreground group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" />
-                    </div>
+                    </Box>
                   </a>
                 </motion.div>
               ))}
             </div>
-          </div>
+          </Box>
         </section>
 
         {/* CTA */}
         <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-neutral-900/30 to-background relative overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="max-w-4xl mx-auto text-center relative z-10">
+          <Box className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+          <Box className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+          <Box className="max-w-4xl mx-auto text-center relative z-10">
             <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Build with Hanzo
             </motion.h2>
@@ -212,9 +213,9 @@ export default function BlogPage() {
                 Read the Docs
               </a>
             </motion.div>
-          </div>
+          </Box>
         </section>
       </main>
-    </div>
+    </Box>
   )
 }

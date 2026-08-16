@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Github } from 'lucide-react'
 import { loadPlans, fallbackPlans, type SubscriptionPlan } from '@/lib/plans'
+import { Box } from '@hanzo/ui'
 
 /**
  * The price ladder — the SHAPE of the bill, on the front door.
@@ -64,12 +65,12 @@ export default function Ladder() {
   const allReturn = returned.length > 0 && returned.length === personal.length - 1
 
   return (
-    <div className="mt-14">
-      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-800 sm:grid-cols-4">
+    <Box className="mt-14">
+      <Box className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-800 sm:grid-cols-4">
         {personal.map((plan) => {
           const c = credit(plan)
           return (
-            <div key={plan.id} className="bg-black p-5 sm:p-6">
+            <Box key={plan.id} className="bg-black p-5 sm:p-6">
               <p className="text-sm font-medium text-neutral-400">{plan.name}</p>
               <p className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
                 ${plan.priceMonthly}
@@ -80,10 +81,10 @@ export default function Ladder() {
                   <span className="text-neutral-300">${c}</span> back as credit
                 </p>
               )}
-            </div>
+            </Box>
           )
         })}
-      </div>
+      </Box>
 
       {allReturn && (
         <p className="mt-6 text-base leading-relaxed text-neutral-400">
@@ -130,7 +131,7 @@ export default function Ladder() {
         </div>
       </dl>
 
-      <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+      <Box className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
         <Link
           href="/pricing"
           className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-white no-underline transition-opacity hover:opacity-70 hover:no-underline motion-reduce:transition-none"
@@ -145,7 +146,7 @@ export default function Ladder() {
         >
           <Github className="h-4 w-4" /> Run it yourself
         </a>
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }

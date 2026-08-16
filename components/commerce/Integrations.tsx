@@ -1,10 +1,11 @@
 
 import React from "react";
 import { CheckCircle } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const IntegrationCategory = ({ title, items }: { title: string, items: string[] }) => {
   return (
-    <div className="mb-8">
+    <Box className="mb-8">
       <h3 className="text-xl font-semibold mb-4">{title}</h3>
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2">
         {items.map((item, index) => (
@@ -14,7 +15,7 @@ const IntegrationCategory = ({ title, items }: { title: string, items: string[] 
           </li>
         ))}
       </ul>
-    </div>
+    </Box>
   );
 };
 
@@ -41,16 +42,16 @@ const Integrations = () => {
   return (
     <section className="py-16 bg-[var(--black)]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <Box className="text-center mb-12">
           <h2 className="text-3xl font-bold">Who takes the money</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
             The processor is a setting, not an architecture. Each one gets its own webhook
             endpoint, so adding a second — or leaving the first — is a change here rather
             than a change in your checkout.
           </p>
-        </div>
+        </Box>
         
-        <div className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8">
+        <Box className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8">
           {integrationCategories.map((category, index) => (
             <IntegrationCategory 
               key={index}
@@ -58,7 +59,7 @@ const Integrations = () => {
               items={category.items}
             />
           ))}
-        </div>
+        </Box>
       </div>
     </section>
   );

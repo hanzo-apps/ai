@@ -4,11 +4,12 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Activity, Users, Zap, Cpu, Server, Network } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const Scaling = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-white/10">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,7 +25,7 @@ const Scaling = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -40,15 +41,15 @@ const Scaling = () => {
               size of the collection they are watching.
             </p>
 
-            <div className="mt-6 pt-6 border-t border-neutral-800">
-              <div className="flex items-center justify-between mb-2">
+            <Box className="mt-6 pt-6 border-t border-neutral-800">
+              <Box className="flex items-center justify-between mb-2">
                 <span className="text-muted-foreground text-sm">Cost of a write</span>
                 <span className="text-[var(--white)] font-medium">Per subscriber</span>
-              </div>
-              <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
-                <div className="bg-primary h-full rounded-full" style={{ width: "100%" }}></div>
-              </div>
-            </div>
+              </Box>
+              <Box className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
+                <Box className="bg-primary h-full rounded-full" style={{ width: "100%" }}></Box>
+              </Box>
+            </Box>
           </motion.div>
 
           <motion.div
@@ -66,15 +67,15 @@ const Scaling = () => {
               releases what it held without anything needing to be told.
             </p>
 
-            <div className="mt-6 pt-6 border-t border-neutral-800">
-              <div className="flex items-center justify-between mb-2">
+            <Box className="mt-6 pt-6 border-t border-neutral-800">
+              <Box className="flex items-center justify-between mb-2">
                 <span className="text-muted-foreground text-sm">Per subscriber</span>
                 <span className="text-[var(--white)] font-medium">One open response</span>
-              </div>
-              <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
-                <div className="bg-primary h-full rounded-full" style={{ width: "95%" }}></div>
-              </div>
-            </div>
+              </Box>
+              <Box className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
+                <Box className="bg-primary h-full rounded-full" style={{ width: "95%" }}></Box>
+              </Box>
+            </Box>
           </motion.div>
 
           <motion.div
@@ -92,17 +93,17 @@ const Scaling = () => {
               a shared one, so nobody's growth is anybody else's problem.
             </p>
 
-            <div className="mt-6 pt-6 border-t border-neutral-800">
-              <div className="flex items-center justify-between mb-2">
+            <Box className="mt-6 pt-6 border-t border-neutral-800">
+              <Box className="flex items-center justify-between mb-2">
                 <span className="text-muted-foreground text-sm">Blast radius</span>
                 <span className="text-[var(--white)] font-medium">One tenant</span>
-              </div>
-              <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
-                <div className="bg-primary h-full rounded-full" style={{ width: "90%" }}></div>
-              </div>
-            </div>
+              </Box>
+              <Box className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
+                <Box className="bg-primary h-full rounded-full" style={{ width: "90%" }}></Box>
+              </Box>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -111,31 +112,31 @@ const Scaling = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6"
         >
-          <div className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
+          <Box className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
             <Zap className="h-8 w-8 text-foreground mr-4" />
             <div>
               <h4 className="text-[var(--white)] font-medium">No polling</h4>
               <p className="text-muted-foreground text-sm">The client asks once, not every second</p>
             </div>
-          </div>
+          </Box>
 
-          <div className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
+          <Box className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
             <Cpu className="h-8 w-8 text-foreground mr-4" />
             <div>
               <h4 className="text-[var(--white)] font-medium">Reconnects itself</h4>
               <p className="text-muted-foreground text-sm">A dropped stream reopens with a fresh grant</p>
             </div>
-          </div>
+          </Box>
 
-          <div className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
+          <Box className="bg-[var(--black)]/40 rounded-lg border border-neutral-800 p-4 flex items-center">
             <Server className="h-8 w-8 text-foreground mr-4" />
             <div>
               <h4 className="text-[var(--white)] font-medium">Nothing extra to run</h4>
               <p className="text-muted-foreground text-sm">The same binary that serves the API serves the stream</p>
             </div>
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

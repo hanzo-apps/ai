@@ -20,6 +20,7 @@
  * eighteen of. It says what the surface IS until something can count it.
  */
 import { MODELS_PHRASE } from '@/lib/data/model-count'
+import { Box } from '@hanzo/ui'
 
 const RUNTIMES = [
   {
@@ -51,7 +52,7 @@ const RUNTIMES = [
 export default function Infrastructure() {
   return (
     <section className="mx-auto max-w-5xl px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl text-center">
+      <Box className="mx-auto max-w-2xl text-center">
         <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
           Hanzo Cloud
         </p>
@@ -61,19 +62,19 @@ export default function Infrastructure() {
           document, object and analytical data, messaging, durable tasks, networking, identity,
           secrets, deployment, metering and billing — built together, reached the same way.
         </p>
-      </div>
+      </Box>
 
-      <div className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <Box className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {RUNTIMES.map((r) => (
-          <div
+          <Box
             key={r.name}
             className="rounded-2xl border border-neutral-800 bg-white/[0.02] px-6 py-5"
           >
-            <div className="text-base font-medium text-white">{r.name}</div>
-            <div className="mt-1 text-sm leading-relaxed text-neutral-400">{r.body}</div>
-          </div>
+            <Box className="text-base font-medium text-white">{r.name}</Box>
+            <Box className="mt-1 text-sm leading-relaxed text-neutral-400">{r.body}</Box>
+          </Box>
         ))}
-      </div>
+      </Box>
 
       {/* The sentence that keeps both nouns legible: OS is the category, Cloud is
           a deployment product, and neither replaces the other. */}
@@ -81,7 +82,7 @@ export default function Infrastructure() {
         Run Hanzo OS on Hanzo Cloud or your own infrastructure.
       </p>
 
-      <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+      <Box className="mt-9 flex flex-wrap items-center justify-center gap-3">
         <a
           href="https://cloud.hanzo.ai"
           className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black transition-opacity hover:opacity-90"
@@ -94,7 +95,7 @@ export default function Infrastructure() {
         >
           How Visor schedules it
         </a>
-      </div>
+      </Box>
     </section>
   )
 }

@@ -3,17 +3,18 @@ import React from "react";
 import AIPoweredHeader from "./AIPoweredHeader";
 import AIFeatureList from "./AIFeatureList";
 import AIAnalysisDemo from "./AIAnalysisDemo";
+import { Box } from '@hanzo/ui'
 
 const AIPowered = () => {
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900/20 to-background relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"></div>
+      <Box className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent"></Box>
       
-      <div className="max-w-7xl mx-auto relative z-10">
+      <Box className="max-w-7xl mx-auto relative z-10">
         <AIPoweredHeader />
         <AIFeatureList />
         <AIAnalysisDemo />
-      </div>
+      </Box>
     </section>
   );
 };

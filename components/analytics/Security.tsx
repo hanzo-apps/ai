@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { ShieldCheck, Lock, CheckCircle } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 // A framework name under a heading reading "Certifications" IS a claim to
 // hold one, whatever the line beneath it says -- and the qualifier here sat in
@@ -30,9 +31,9 @@ const SecurityFeatures = [
 const Security = () => {
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-neutral-900/40 via-transparent to-transparent"></div>
+      <Box className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-neutral-900/40 via-transparent to-transparent"></Box>
       
-      <div className="max-w-6xl mx-auto relative z-10">
+      <Box className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -40,16 +41,16 @@ const Security = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center justify-center mb-4">
+          <Box className="inline-flex items-center justify-center mb-4">
             <ShieldCheck className="h-10 w-10 text-foreground" />
-          </div>
+          </Box>
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Enterprise-Grade Security & Compliance</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
             Secure by design, ensuring your data meets stringent compliance standards.
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        <Box className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -57,12 +58,12 @@ const Security = () => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-1"
           >
-            <div className="bg-gradient-to-br from-neutral-900 to-neutral-900/50 rounded-xl border border-neutral-800 p-6 h-full">
-              <div className="flex justify-center mb-6">
-                <div className="p-3 bg-primary/20 rounded-full border border-white/30">
+            <Box className="bg-gradient-to-br from-neutral-900 to-neutral-900/50 rounded-xl border border-neutral-800 p-6 h-full">
+              <Box className="flex justify-center mb-6">
+                <Box className="p-3 bg-primary/20 rounded-full border border-white/30">
                   <Lock className="h-8 w-8 text-foreground" />
-                </div>
-              </div>
+                </Box>
+              </Box>
               
               <h3 className="text-xl font-bold text-center mb-6">Security Features</h3>
               
@@ -81,7 +82,7 @@ const Security = () => {
                   </motion.li>
                 ))}
               </ul>
-            </div>
+            </Box>
           </motion.div>
           
           <motion.div
@@ -91,10 +92,10 @@ const Security = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="lg:col-span-2"
           >
-            <div className="bg-gradient-to-br from-neutral-900 to-neutral-900/50 rounded-xl border border-neutral-800 p-6 h-full">
+            <Box className="bg-gradient-to-br from-neutral-900 to-neutral-900/50 rounded-xl border border-neutral-800 p-6 h-full">
               <h3 className="text-xl font-bold mb-6">Security and assurance</h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Box className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {assurances.map((cert, index) => (
                   <motion.div
                     key={cert.name}
@@ -104,24 +105,24 @@ const Security = () => {
                     transition={{ duration: 0.5, delay: 0.1 * index }}
                     className="bg-neutral-800/30 rounded-lg p-5 border border-neutral-700"
                   >
-                    <div className="flex items-center">
-                      <div className="mr-3 p-2 bg-primary/30 rounded-full">
+                    <Box className="flex items-center">
+                      <Box className="mr-3 p-2 bg-primary/30 rounded-full">
                         <ShieldCheck className="h-6 w-6 text-foreground" />
-                      </div>
+                      </Box>
                       <h4 className="text-lg font-medium">{cert.name}</h4>
-                    </div>
+                    </Box>
                     <p className="mt-3 text-muted-foreground">{cert.details}</p>
                   </motion.div>
                 ))}
-              </div>
+              </Box>
               
-              <div className="mt-8 bg-primary/10 rounded-lg p-5 border border-border">
-                <div className="flex">
-                  <div className="mr-4 p-2 bg-primary/20 rounded-full">
+              <Box className="mt-8 bg-primary/10 rounded-lg p-5 border border-border">
+                <Box className="flex">
+                  <Box className="mr-4 p-2 bg-primary/20 rounded-full">
                     <svg className="h-6 w-6 text-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                  </div>
+                  </Box>
                   <div>
                     <h4 className="text-lg font-medium mb-2">Data Privacy Commitment</h4>
                     <p className="text-muted-foreground">
@@ -131,12 +132,12 @@ const Security = () => {
                       Read our privacy policy →
                     </a>
                   </div>
-                </div>
-              </div>
-            </div>
+                </Box>
+              </Box>
+            </Box>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

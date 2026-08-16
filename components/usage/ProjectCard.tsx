@@ -8,6 +8,7 @@ import { Project } from "./models/project";
 import ResourceUsageSection from "./ResourceUsageSection";
 import ProjectCostSection from "./ProjectCostSection";
 import { createAnimationVariant, curves } from "@/components/ui/animation-variants";
+import { Box } from '@hanzo/ui'
 
 const cardAnimation = createAnimationVariant("fadeInBlur", {
   duration: 0.4,
@@ -26,37 +27,37 @@ const ProjectCard = ({ project, onToggleExpand }: ProjectCardProps) => {
       variants={cardAnimation}
       className="rounded-xl border border-neutral-800 bg-neutral-900/20 overflow-hidden"
     >
-      <div 
+      <Box 
         className="p-4 flex items-center justify-between cursor-pointer hover:bg-neutral-800/30"
         onClick={() => onToggleExpand(project.id)}
       >
-        <div className="flex items-center gap-4">
+        <Box className="flex items-center gap-4">
           {project.expanded ? (
             <ChevronUp className="h-5 w-5 text-muted-foreground" />
           ) : (
             <ChevronDown className="h-5 w-5 text-muted-foreground" />
           )}
           <span className="font-medium">{project.name}</span>
-        </div>
-        <div className="flex items-center gap-8">
+        </Box>
+        <Box className="flex items-center gap-8">
           <div>
-            <div className="text-sm text-muted-foreground">Current Cost</div>
-            <div className="font-medium">{project.currentCost}</div>
+            <Box className="text-sm text-muted-foreground">Current Cost</Box>
+            <Box className="font-medium">{project.currentCost}</Box>
           </div>
           <div>
-            <div className="text-sm text-muted-foreground">Estimated</div>
-            <div className="font-medium">{project.estimatedCost}</div>
+            <Box className="text-sm text-muted-foreground">Estimated</Box>
+            <Box className="font-medium">{project.estimatedCost}</Box>
           </div>
-        </div>
-      </div>
+        </Box>
+      </Box>
       
       {project.expanded && (
-        <div className="p-6 border-t border-neutral-800">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <Box className="p-6 border-t border-neutral-800">
+          <Box className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <ResourceUsageSection resources={project.resources} />
             <ProjectCostSection costs={project.costs} currentCost={project.currentCost} />
-          </div>
-        </div>
+          </Box>
+        </Box>
       )}
     </motion.div>
   );

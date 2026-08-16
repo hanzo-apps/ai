@@ -4,11 +4,12 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Plug, Code, FileText } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const Integrations = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -23,7 +24,7 @@ const Integrations = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-16">
+        <Box className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -31,20 +32,20 @@ const Integrations = () => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-2 bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <Plug className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-2xl font-bold mb-4">Pre-built Integrations</h3>
             <p className="text-muted-foreground mb-6">
               Hundreds of pre-built integrations with popular services, including:
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <Box className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {['Salesforce', 'Adobe', 'SAP', 'QuickBooks', 'Shopify', 'WooCommerce', 'Magento', 'WordPress', 'Squarespace', 'NetSuite', 'Xero', 'HubSpot'].map((integration, index) => (
-                <div key={index} className="py-2 px-3 bg-neutral-800 rounded-md text-sm text-center text-foreground/80">
+                <Box key={index} className="py-2 px-3 bg-neutral-800 rounded-md text-sm text-center text-foreground/80">
                   {integration}
-                </div>
+                </Box>
               ))}
-            </div>
+            </Box>
             <p className="text-muted-foreground mt-4 text-sm text-center">
               And many more via the Hanzo App Marketplace
             </p>
@@ -57,13 +58,13 @@ const Integrations = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-3 bg-neutral-900/30 border border-neutral-800 rounded-lg overflow-hidden"
           >
-            <div className="p-6 border-b border-neutral-800">
+            <Box className="p-6 border-b border-neutral-800">
               <h3 className="text-2xl font-bold mb-2">The processor is not in your code</h3>
               <p className="text-muted-foreground">
                 You ask for a payment. Which company took it is an answer, not an argument.
               </p>
-            </div>
-            <div className="p-6 bg-neutral-950 font-mono text-sm overflow-auto" style={{ maxHeight: '300px' }}>
+            </Box>
+            <Box className="p-6 bg-neutral-950 font-mono text-sm overflow-auto" style={{ maxHeight: '300px' }}>
               <pre className="text-foreground/80">
 {`// Take a payment. You do not name the processor.
 const payment = await hanzo.payments.create({
@@ -79,18 +80,18 @@ const payment = await hanzo.payments.create({
 console.log(payment.status);    // 'succeeded'
 console.log(payment.connector); // 'adyen'`}
               </pre>
-            </div>
-            <div className="p-4 flex justify-between items-center border-t border-neutral-800">
+            </Box>
+            <Box className="p-4 flex justify-between items-center border-t border-neutral-800">
               <span className="text-sm text-muted-foreground">API Reference</span>
               <div className="flex space-x-2">
                 <button className="px-3 py-1 bg-neutral-800 rounded text-sm">Copy</button>
                 <button className="px-3 py-1 bg-primary rounded text-sm text-primary-foreground">Try it</button>
               </div>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -98,9 +99,9 @@ console.log(payment.connector); // 'adyen'`}
             transition={{ duration: 0.5 }}
             className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <Code className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold mb-3">Easy to Implement</h3>
             <p className="text-muted-foreground">
               Quick integration with just a few lines of code, with SDKs for all major programming languages.
@@ -114,9 +115,9 @@ console.log(payment.connector); // 'adyen'`}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <FileText className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold mb-3">Comprehensive Documentation</h3>
             <p className="text-muted-foreground">
               Detailed guides, API reference, and code examples to help you integrate Hanzo Payments quickly.
@@ -140,8 +141,8 @@ console.log(payment.connector); // 'adyen'`}
               API Reference
             </button>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

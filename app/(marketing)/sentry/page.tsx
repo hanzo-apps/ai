@@ -15,6 +15,7 @@
 
 import { useEffect } from 'react'
 import Link from 'next/link'
+import { Box } from '@hanzo/ui'
 
 export default function SentryRedirect() {
   useEffect(() => {
@@ -22,11 +23,11 @@ export default function SentryRedirect() {
   }, [])
 
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4 px-4 text-center">
+    <Box className="min-h-[60vh] flex flex-col items-center justify-center gap-4 px-4 text-center">
       <h1 className="text-2xl font-semibold">Sentinel</h1>
       <p className="text-sm text-foreground/60">
         This page moved to <Link href="/sentinel" className="underline underline-offset-4">/sentinel</Link>.
       </p>
-    </div>
+    </Box>
   )
 }

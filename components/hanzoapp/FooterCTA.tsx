@@ -4,12 +4,13 @@ import React from "react";
 import { motion } from "@/components/motion";
 import Link from "next/link";
 import { ArrowRight, Download } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const FooterCTA = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background relative overflow-hidden">
       {/* Background gradient */}
-      <div
+      <Box
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20"
         style={{
           background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
@@ -17,7 +18,7 @@ const FooterCTA = () => {
         }}
       />
 
-      <div className="max-w-4xl mx-auto relative z-10 text-center">
+      <Box className="max-w-4xl mx-auto relative z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -30,7 +31,7 @@ const FooterCTA = () => {
             Web, desktop, local, or decentralized. Choose your way.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Box className="flex flex-col sm:flex-row justify-center gap-4">
             <a
               href="https://hanzo.app"
               target="_blank"
@@ -48,9 +49,9 @@ const FooterCTA = () => {
               <Download className="mr-2 h-5 w-5" />
               Download desktop
             </Link>
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

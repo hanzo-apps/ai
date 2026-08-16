@@ -7,30 +7,31 @@ import FeatureCard from "./FeatureCard";
 import CloudInfrastructure from "./CloudInfrastructure";
 import PlatformDashboard from "./PlatformDashboard";
 import { featureData } from "@/components/base/ai-engineering/featureData";
+import { Box } from '@hanzo/ui'
 
 const AIEngineeringPlatform: React.FC = () => {
   return (
     <section className="py-16 lg:py-24 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+      <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Box className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/10">
             AI Engineering Platform
           </h2>
           <p className="text-lg text-foreground/80 max-w-3xl mx-auto">
             Build, deploy, and scale AI applications with an integrated suite of tools designed for modern engineering teams.
           </p>
-        </div>
+        </Box>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <Box className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           <div>
             <CloudInfrastructure />
           </div>
           <div>
             <PlatformDashboard />
           </div>
-        </div>
+        </Box>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {featureData.map((feature, index) => (
             <FeatureCard
               key={feature.title}
@@ -44,8 +45,8 @@ const AIEngineeringPlatform: React.FC = () => {
               bulletColor={feature.bulletColor}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

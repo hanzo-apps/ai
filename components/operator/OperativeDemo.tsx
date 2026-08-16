@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { Play, Pause, SkipForward, SkipBack } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const OperativeDemo = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -12,10 +13,10 @@ const OperativeDemo = () => {
   return (
     <section className="py-24 relative overflow-hidden" id="demo">
       {/* Background gradient */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-background to-neutral-950"></div>
+      <Box className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-background to-neutral-950"></Box>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+      <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <Box className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -30,13 +31,13 @@ const OperativeDemo = () => {
               complete tasks, and solve problems autonomously.
             </p>
           </motion.div>
-        </div>
+        </Box>
         
-        <div className="relative mx-auto w-full max-w-5xl aspect-video rounded-xl overflow-hidden border border-neutral-800 shadow-2xl">
-          <div className="absolute inset-0 bg-gradient-to-tr from-neutral-950 to-neutral-900 flex items-center justify-center">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.1),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(255,255,255,0.08),transparent_50%)]" />
+        <Box className="relative mx-auto w-full max-w-5xl aspect-video rounded-xl overflow-hidden border border-neutral-800 shadow-2xl">
+          <Box className="absolute inset-0 bg-gradient-to-tr from-neutral-950 to-neutral-900 flex items-center justify-center">
+            <Box className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.1),transparent_45%),radial-gradient(circle_at_80%_30%,rgba(255,255,255,0.08),transparent_50%)]" />
             
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <Box className="absolute inset-0 flex flex-col items-center justify-center">
               <h3 className="text-2xl md:text-3xl font-bold text-[var(--white)] mb-4">Demo Video</h3>
               <Button 
                 size="lg"
@@ -50,26 +51,26 @@ const OperativeDemo = () => {
                 <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-[var(--white)]">
                   <SkipBack className="h-5 w-5" />
                 </Button>
-                <div className="w-full bg-neutral-700/30 h-1 rounded-full overflow-hidden">
-                  <div className="bg-primary h-full w-1/3 rounded-full"></div>
-                </div>
+                <Box className="w-full bg-neutral-700/30 h-1 rounded-full overflow-hidden">
+                  <Box className="bg-primary h-full w-1/3 rounded-full"></Box>
+                </Box>
                 <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-[var(--white)]">
                   <SkipForward className="h-5 w-5" />
                 </Button>
               </div>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
         
-        <div className="mt-12 text-center">
+        <Box className="mt-12 text-center">
           <a 
             href="https://docs.hanzo.ai/docs/services/operative"
             className="text-foreground hover:text-foreground/70 transition-colors"
           >
             View more examples →
           </a>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

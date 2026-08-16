@@ -5,6 +5,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "@/components/motion";
 import { Github, ExternalLink, Users, BookOpen } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const statsItems = [
   { 
@@ -75,7 +76,7 @@ const Community = () => {
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/30 relative overflow-hidden">
       <div className="absolute inset-0 hz-grid" style={{ '--hz-grid-size': '20px', '--hz-grid-opacity': '0.02' } as React.CSSProperties}></div>
       
-      <div className="max-w-7xl mx-auto relative z-10">
+      <Box className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -102,22 +103,22 @@ const Community = () => {
                 variants={itemVariants}
                 className="bg-neutral-900/50 rounded-xl p-8 border border-neutral-800 text-center"
               >
-                <div className="flex justify-center mb-4">
-                  <div className="p-3 bg-primary/10 rounded-full border border-border text-foreground">
+                <Box className="flex justify-center mb-4">
+                  <Box className="p-3 bg-primary/10 rounded-full border border-border text-foreground">
                     {item.icon}
-                  </div>
-                </div>
+                  </Box>
+                </Box>
                 
-                <div className="text-4xl font-bold mb-2">
+                <Box className="text-4xl font-bold mb-2">
                   {isInView ? (
                     <CountUp end={item.value} duration={item.countUpDuration} />
                   ) : (
                     0
                   )}
                   <span>{item.suffix}</span>
-                </div>
+                </Box>
                 
-                <div className="text-muted-foreground">{item.label}</div>
+                <Box className="text-muted-foreground">{item.label}</Box>
               </motion.div>
             ))}
           </motion.div>
@@ -132,37 +133,37 @@ const Community = () => {
               variants={itemVariants}
               className="bg-neutral-900/50 rounded-xl border border-neutral-800 p-8"
             >
-              <div className="flex items-center mb-6">
+              <Box className="flex items-center mb-6">
                 <Github className="h-6 w-6 text-foreground mr-3" />
                 <h3 className="text-2xl font-bold">Open Source</h3>
-              </div>
+              </Box>
               
               <p className="text-muted-foreground mb-6">
                 Hanzo Analytics is fully open source, with a vibrant community of developers contributing from around the world. Join us on GitHub to collaborate on the future of analytics.
               </p>
               
               <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-neutral-700 mr-3"></div>
-                  <div className="flex-1">
-                    <div className="h-2 w-3/4 bg-neutral-700 rounded"></div>
-                    <div className="h-2 w-1/2 bg-neutral-700 rounded mt-2"></div>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-neutral-700 mr-3"></div>
-                  <div className="flex-1">
-                    <div className="h-2 w-3/4 bg-neutral-700 rounded"></div>
-                    <div className="h-2 w-1/2 bg-neutral-700 rounded mt-2"></div>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-neutral-700 mr-3"></div>
-                  <div className="flex-1">
-                    <div className="h-2 w-3/4 bg-neutral-700 rounded"></div>
-                    <div className="h-2 w-1/2 bg-neutral-700 rounded mt-2"></div>
-                  </div>
-                </div>
+                <Box className="flex items-center">
+                  <Box className="w-8 h-8 rounded-full bg-neutral-700 mr-3"></Box>
+                  <Box className="flex-1">
+                    <Box className="h-2 w-3/4 bg-neutral-700 rounded"></Box>
+                    <Box className="h-2 w-1/2 bg-neutral-700 rounded mt-2"></Box>
+                  </Box>
+                </Box>
+                <Box className="flex items-center">
+                  <Box className="w-8 h-8 rounded-full bg-neutral-700 mr-3"></Box>
+                  <Box className="flex-1">
+                    <Box className="h-2 w-3/4 bg-neutral-700 rounded"></Box>
+                    <Box className="h-2 w-1/2 bg-neutral-700 rounded mt-2"></Box>
+                  </Box>
+                </Box>
+                <Box className="flex items-center">
+                  <Box className="w-8 h-8 rounded-full bg-neutral-700 mr-3"></Box>
+                  <Box className="flex-1">
+                    <Box className="h-2 w-3/4 bg-neutral-700 rounded"></Box>
+                    <Box className="h-2 w-1/2 bg-neutral-700 rounded mt-2"></Box>
+                  </Box>
+                </Box>
               </div>
               
               <Button variant="outline" className="flex items-center gap-2">
@@ -176,16 +177,16 @@ const Community = () => {
               variants={itemVariants}
               className="bg-neutral-900/50 rounded-xl border border-neutral-800 p-8"
             >
-              <div className="flex items-center mb-6">
+              <Box className="flex items-center mb-6">
                 <BookOpen className="h-6 w-6 text-foreground/70 mr-3" />
                 <h3 className="text-2xl font-bold">Resources</h3>
-              </div>
+              </Box>
               
               <p className="text-muted-foreground mb-6">
                 Access comprehensive documentation, tutorials, and examples to help you make the most of Hanzo Analytics.
               </p>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <Box className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
                 {[
                   { 
                     title: "Documentation", 
@@ -217,7 +218,7 @@ const Community = () => {
                     <p className="text-sm text-muted-foreground">{resource.description}</p>
                   </a>
                 ))}
-              </div>
+              </Box>
               
               <Button variant="outline" className="flex items-center gap-2">
                 Browse All Resources
@@ -226,7 +227,7 @@ const Community = () => {
             </motion.div>
           </motion.div>
         </div>
-      </div>
+      </Box>
     </section>
   );
 };

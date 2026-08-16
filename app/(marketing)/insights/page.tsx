@@ -14,12 +14,13 @@ import {
 import { OSSRevenueBanner } from "@/components/oss/OSSRevenueBanner"
 
 import { ProductFooter } from "@/components/products/ProductFooter"
+import { Box } from '@hanzo/ui'
 export default function InsightsPage() {
   return (
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 overflow-hidden">
+        <Box className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -37,9 +38,9 @@ export default function InsightsPage() {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
+        <Box className="relative z-10 max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -92,22 +93,22 @@ export default function InsightsPage() {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Events</div>
-              <div className="text-sm text-muted-foreground">Auto-capture</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Flags</div>
-              <div className="text-sm text-muted-foreground">Feature flags</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">A/B</div>
-              <div className="text-sm text-muted-foreground">Experiments</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">OSS</div>
-              <div className="text-sm text-muted-foreground">Self-hosted</div>
-            </div>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">Events</Box>
+              <Box className="text-sm text-muted-foreground">Auto-capture</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">Flags</Box>
+              <Box className="text-sm text-muted-foreground">Feature flags</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">A/B</Box>
+              <Box className="text-sm text-muted-foreground">Experiments</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">OSS</Box>
+              <Box className="text-sm text-muted-foreground">Self-hosted</Box>
+            </Box>
           </motion.div>
 
           <motion.div
@@ -130,12 +131,12 @@ export default function InsightsPage() {
               Documentation
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Features Grid */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-7xl mx-auto">
+        <Box className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -151,7 +152,7 @@ export default function InsightsPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 icon: LineChart,
@@ -198,9 +199,9 @@ export default function InsightsPage() {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors"
               >
-                <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
+                <Box className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
                   <feature.icon className="h-6 w-6 text-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-lg font-semibold text-foreground mb-2">
                   {feature.title}
                 </h3>
@@ -209,13 +210,13 @@ export default function InsightsPage() {
                 </p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Code Example */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -235,16 +236,16 @@ export default function InsightsPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="bg-secondary border border-border rounded-xl overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-              </div>
+            <Box className="flex items-center gap-2 px-4 py-2 border-b border-border">
+              <Box className="flex gap-1.5">
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+              </Box>
               <span className="text-xs text-muted-foreground ml-2">
                 app.tsx
               </span>
-            </div>
+            </Box>
             <pre className="p-4 overflow-x-auto text-sm">
               <code className="text-foreground/80">{`import { InsightsProvider, useFeatureFlag } from "@hanzo/insights-react"
 
@@ -270,14 +271,14 @@ function MyApp() {
 }`}</code>
             </pre>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       <OSSRevenueBanner upstreamName="Insights" />
 
       {/* CTA */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -285,12 +286,12 @@ function MyApp() {
             transition={{ duration: 0.5 }}
             className="relative bg-secondary/50 border border-border rounded-2xl p-8 md:p-12 text-center overflow-hidden"
           >
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-              <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-            </div>
+            <Box className="absolute inset-0 overflow-hidden">
+              <Box className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+              <Box className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+            </Box>
 
-            <div className="relative z-10">
+            <Box className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Start with autocapture
               </h2>
@@ -300,7 +301,7 @@ function MyApp() {
                 the whole thing is open source if you would rather run it yourself.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-4">
+              <Box className="flex flex-wrap justify-center gap-4">
                 <a
                   href="https://insights.hanzo.ai"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
@@ -316,11 +317,11 @@ function MyApp() {
                 >
                   View on GitHub
                 </a>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
                 <ProductFooter slug="insights" name="Insights" />
-</div>
+</Box>
       </section>
     </>
   )

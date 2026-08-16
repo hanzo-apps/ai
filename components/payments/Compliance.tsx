@@ -4,11 +4,12 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { ShieldCheck, Receipt, AlertTriangle } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const Compliance = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -22,7 +23,7 @@ const Compliance = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -30,9 +31,9 @@ const Compliance = () => {
             transition={{ duration: 0.5, delay: 0 }}
             className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <ShieldCheck className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold mb-3">Automated Tax Management</h3>
             <p className="text-muted-foreground mb-4">
               Automatically handle VAT, GST, and regional taxes (including sales tax).
@@ -61,9 +62,9 @@ const Compliance = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <AlertTriangle className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold mb-3">Fraud Protection</h3>
             <p className="text-muted-foreground mb-4">
               Automatic fraud detection and prevention built-in to protect your business.
@@ -83,8 +84,8 @@ const Compliance = () => {
               </li>
             </ul>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

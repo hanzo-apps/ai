@@ -11,6 +11,7 @@ import {
   SURFACE_ACTIONS,
   type Surface,
 } from "@/data/surfaces";
+import { Box } from '@hanzo/ui'
 
 // Internal routes use next/link; external links get target/rel. One helper, one rule.
 function SurfaceLink({
@@ -49,10 +50,10 @@ function SurfaceCard({ surface, index }: { surface: Surface; index: number }) {
         href={href}
         className="group flex h-full flex-col p-5 rounded-xl border border-border/60 bg-secondary/30 hover:bg-secondary/60 hover:border-border transition-all"
       >
-        <div className="flex items-center gap-3 mb-3">
+        <Box className="flex items-center gap-3 mb-3">
           <Mark src={surface.mark ? `/marks/${surface.mark}.svg` : null} name={surface.name} />
           <span className="font-semibold text-foreground">{surface.name}</span>
-        </div>
+        </Box>
         <p className="text-sm text-muted-foreground leading-relaxed mb-4">{surface.blurb}</p>
         <span className="mt-auto inline-flex items-center gap-1 text-xs font-medium text-muted-foreground/70 group-hover:text-brand transition-colors">
           {label}
@@ -66,7 +67,7 @@ function SurfaceCard({ surface, index }: { surface: Surface; index: number }) {
 const NativeSurfacesSection = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -75,10 +76,10 @@ const NativeSurfacesSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 text-xs font-medium rounded-full px-4 py-2 border mb-6 border-white/20 text-white/80">
+          <Box className="inline-flex items-center gap-2 text-xs font-medium rounded-full px-4 py-2 border mb-6 border-white/20 text-white/80">
             <Blocks className="w-4 h-4" />
             Native everywhere
-          </div>
+          </Box>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mb-4">
             Hanzo AI, native in every tool you use.
           </h2>
@@ -95,16 +96,16 @@ const NativeSurfacesSection = () => {
           const items = SURFACES.filter((s) => s.category === category.key);
           if (items.length === 0) return null;
           return (
-            <div key={category.key} className="mb-10">
+            <Box key={category.key} className="mb-10">
               <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-4">
                 {category.label}
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+              <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                 {items.map((surface, i) => (
                   <SurfaceCard key={surface.name} surface={surface} index={i} />
                 ))}
-              </div>
-            </div>
+              </Box>
+            </Box>
           );
         })}
 
@@ -133,7 +134,7 @@ const NativeSurfacesSection = () => {
             Download the apps
           </Link>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

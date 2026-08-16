@@ -21,6 +21,7 @@ import { CodeExamplesSection } from "@/components/products/CodeExamplesSection"
 import { SDKSection } from "@/components/products/SDKSection"
 import { hanzoSDKs } from "@/lib/data/upstream-projects"
 import { MODELS_PHRASE } from '@/lib/data/model-count'
+import { Box } from '@hanzo/ui'
 
 // ---------------------------------------------------------------------------
 // One unified AI API, drop-in compatible with BOTH the OpenAI and Anthropic
@@ -215,16 +216,16 @@ const baseUrls = [
 
 export default function SdkPage() {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       {/* Hero */}
       <section className="relative pt-32 pb-16 px-4 md:px-8 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
           <div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-[0.15]"
             style={{ background: "radial-gradient(circle, var(--primary) 0%, transparent 70%)", filter: "blur(100px)" }}
           />
-        </div>
-        <div className="max-w-4xl mx-auto relative z-10 text-center">
+        </Box>
+        <Box className="max-w-4xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -243,7 +244,7 @@ export default function SdkPage() {
               already use — change one line, the base URL — and get one gateway to {MODELS_PHRASE}
               plus every Hanzo product SDK.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Box className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="https://docs.hanzo.ai/docs/sdks"
                 target="_blank"
@@ -258,15 +259,15 @@ export default function SdkPage() {
               >
                 Get an API key
               </Link>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Base URL reference */}
       <section className="px-4 md:px-8 pb-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-4">
+        <Box className="max-w-4xl mx-auto">
+          <Box className="grid md:grid-cols-2 gap-4">
             {baseUrls.map((b) => (
               <motion.div
                 key={b.style}
@@ -276,27 +277,27 @@ export default function SdkPage() {
                 transition={{ duration: 0.4 }}
                 className="bg-secondary/40 border border-border rounded-xl p-5"
               >
-                <div className="text-sm font-medium text-foreground mb-3">
+                <Box className="text-sm font-medium text-foreground mb-3">
                   {b.style}-compatible
-                </div>
+                </Box>
                 <dl className="space-y-2 font-mono text-xs text-muted-foreground">
-                  <div className="flex justify-between gap-3">
+                  <Box className="flex justify-between gap-3">
                     <dt className="text-foreground/50">base_url</dt>
                     <dd className="text-foreground/80 text-right break-all">{b.base}</dd>
-                  </div>
-                  <div className="flex justify-between gap-3">
+                  </Box>
+                  <Box className="flex justify-between gap-3">
                     <dt className="text-foreground/50">endpoint</dt>
                     <dd className="text-foreground/80 text-right break-all">{b.path}</dd>
-                  </div>
-                  <div className="flex justify-between gap-3">
+                  </Box>
+                  <Box className="flex justify-between gap-3">
                     <dt className="text-foreground/50">auth</dt>
                     <dd className="text-foreground/80 text-right break-all">{b.auth}</dd>
-                  </div>
+                  </Box>
                 </dl>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* OpenAI-style */}
@@ -314,19 +315,19 @@ export default function SdkPage() {
       />
 
       {/* Multi-language SDKs */}
-      <div className="border-t border-border">
+      <Box className="border-t border-border">
         <SDKSection productName="Hanzo" sdks={hanzoSDKs} />
-      </div>
+      </Box>
 
       {/* Per-product SDKs */}
       <section className="py-16 px-4 md:px-8 border-t border-border">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex items-center gap-2 mb-2">
+        <Box className="max-w-5xl mx-auto">
+          <Box className="flex items-center gap-2 mb-2">
             <Boxes className="w-5 h-5 text-foreground" />
             <span className="text-sm font-medium text-foreground uppercase tracking-wider">
               Per-product SDKs &amp; APIs
             </span>
-          </div>
+          </Box>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
             Every product has its own SDK
           </h2>
@@ -336,7 +337,7 @@ export default function SdkPage() {
             exactly what you need.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Box className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {productSdks.map((p, i) => {
               const Icon = p.icon
               return (
@@ -351,17 +352,17 @@ export default function SdkPage() {
                   transition={{ duration: 0.35, delay: i * 0.04 }}
                   className="group bg-secondary/40 border border-border rounded-xl p-5 hover:border-foreground/30 transition-colors"
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
+                  <Box className="flex items-start justify-between mb-3">
+                    <Box className="flex items-center gap-3">
+                      <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
                         <Icon className="w-5 h-5 text-foreground/80" />
-                      </div>
+                      </Box>
                       <h3 className="font-semibold text-foreground">{p.name}</h3>
-                    </div>
+                    </Box>
                     <Github className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
+                  </Box>
                   <p className="text-sm text-muted-foreground mb-4">{p.purpose}</p>
-                  <div className="flex flex-wrap gap-2">
+                  <Box className="flex flex-wrap gap-2">
                     {p.packages.map((pkg) => (
                       <span
                         key={pkg.name}
@@ -371,13 +372,13 @@ export default function SdkPage() {
                         {pkg.name}
                       </span>
                     ))}
-                  </div>
+                  </Box>
                 </motion.a>
               )
             })}
-          </div>
+          </Box>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4 text-sm">
+          <Box className="mt-8 flex flex-wrap items-center gap-4 text-sm">
             <Link
               href="/sdks"
               className="inline-flex items-center gap-1.5 text-foreground hover:text-foreground/80 transition-colors"
@@ -401,9 +402,9 @@ export default function SdkPage() {
             >
               SDK documentation <ExternalLink className="w-3 h-3" />
             </a>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
-    </div>
+    </Box>
   )
 }

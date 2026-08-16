@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { motion } from "@/components/motion";
 import Link from "next/link";
 import { Github, Network, ArrowRight, Cpu, ShieldCheck, Globe } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 // The flagship WebGL point-globe — client-only + code-split (never SSR/build).
 const PointGlobe = dynamic(() => import("@/components/webgl/PointGlobe"), { ssr: false });
@@ -35,7 +36,7 @@ const NETWORK_CARDS = [
 const HanzoNetworkSection = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background border-t border-border/40">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -43,10 +44,10 @@ const HanzoNetworkSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 text-xs font-medium rounded-full px-4 py-2 border mb-6 border-white/20 text-white/80">
+          <Box className="inline-flex items-center gap-2 text-xs font-medium rounded-full px-4 py-2 border mb-6 border-white/20 text-white/80">
             <Network className="w-4 h-4" />
             Hanzo Network
-          </div>
+          </Box>
           <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-4">
             The network is the cloud.
           </h2>
@@ -65,7 +66,7 @@ const HanzoNetworkSection = () => {
           transition={{ duration: 0.6 }}
           className="relative mb-12 overflow-hidden rounded-2xl border border-border bg-black"
         >
-          <div className="pointer-events-none absolute inset-0">
+          <Box className="pointer-events-none absolute inset-0">
             <div
               className="absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.14]"
               style={{ background: "radial-gradient(circle, var(--pure-white) 0%, transparent 70%)", filter: "blur(120px)" }}
@@ -77,7 +78,7 @@ const HanzoNetworkSection = () => {
                 backgroundSize: "48px 48px",
               }}
             />
-          </div>
+          </Box>
           <PointGlobe variant="hero" conversations={8} className="relative mx-auto block h-[360px] w-full sm:h-[460px]" />
           <div
             className="pointer-events-none absolute inset-x-0 bottom-0 h-24"
@@ -85,7 +86,7 @@ const HanzoNetworkSection = () => {
           />
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-4 mb-10">
+        <Box className="grid md:grid-cols-3 gap-4 mb-10">
           {NETWORK_CARDS.map((card, index) => {
             const Icon = card.icon;
             return (
@@ -97,17 +98,17 @@ const HanzoNetworkSection = () => {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="p-6 rounded-xl border border-border bg-secondary/50"
               >
-                <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
+                <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
                   <Icon className="w-5 h-5 text-muted-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-base font-semibold text-foreground mb-2">{card.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
               </motion.div>
             );
           })}
-        </div>
+        </Box>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <Box className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
             href="/node"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium bg-primary text-primary-foreground hover:opacity-90 transition-all"
@@ -131,8 +132,8 @@ const HanzoNetworkSection = () => {
             <Github className="w-4 h-4" />
             View source
           </a>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

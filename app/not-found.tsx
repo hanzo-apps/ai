@@ -7,34 +7,35 @@ import { Home, ArrowLeft, FileQuestion } from 'lucide-react'
 // on BOTH hosts, so it wears the same shared chrome as every other page —
 // otherwise a mistyped URL is where the two sites visibly become two products.
 import { SiteHeader, SiteFooter } from '@/components/home/shell'
+import { Box } from '@hanzo/ui'
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <Box className="min-h-screen bg-background text-foreground flex flex-col">
       <SiteHeader surface="cloud" />
 
       <main className="flex-grow flex items-center justify-center px-4 py-24">
-        <div className="max-w-2xl mx-auto text-center relative">
-          <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-            <div
+        <Box className="max-w-2xl mx-auto text-center relative">
+          <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+            <Box
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-5"
               style={{
                 background: 'radial-gradient(circle, #ffffff 0%, transparent 70%)',
                 filter: 'blur(100px)',
               }}
             />
-          </div>
+          </Box>
 
-          <div className="relative z-10">
+          <Box className="relative z-10">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
               className="mb-8"
             >
-              <div className="w-24 h-24 rounded-2xl mx-auto flex items-center justify-center mb-6 bg-primary/5">
+              <Box className="w-24 h-24 rounded-2xl mx-auto flex items-center justify-center mb-6 bg-primary/5">
                 <FileQuestion className="w-12 h-12 text-foreground/50" />
-              </div>
+              </Box>
 
               <h1 className="text-8xl md:text-9xl font-bold mb-4 bg-gradient-to-b from-white to-neutral-600 bg-clip-text text-transparent">
                 404
@@ -83,7 +84,7 @@ export default function NotFound() {
               className="mt-12"
             >
               <p className="text-muted-foreground text-sm mb-4">Looking for something?</p>
-              <div className="flex flex-wrap justify-center gap-3">
+              <Box className="flex flex-wrap justify-center gap-3">
                 {[
                   { href: '/products', label: 'Products' },
                   { href: 'https://docs.hanzo.ai', label: 'Documentation' },
@@ -98,13 +99,13 @@ export default function NotFound() {
                     {link.label}
                   </Link>
                 ))}
-              </div>
+              </Box>
             </motion.div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </main>
 
       <SiteFooter surface="cloud" />
-    </div>
+    </Box>
   )
 }

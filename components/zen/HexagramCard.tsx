@@ -13,6 +13,7 @@ import {
   glyphAria,
   displayNum,
 } from "./hexagrams";
+import { Box } from '@hanzo/ui'
 
 // A single trigram drawn as three stacked lines (top → bottom).
 // Yang = solid bar, Yin = broken bar. Purely decorative (aria-hidden).
@@ -45,7 +46,7 @@ export function TrigramLines({
 function LensTags({ lenses }: { lenses: Hexagram["lenses"] }) {
   if (lenses.length === 0) return null;
   return (
-    <div className="flex flex-wrap gap-1.5">
+    <Box className="flex flex-wrap gap-1.5">
       {lenses.map((k) => {
         const lens = LENSES.find((l) => l.key === k)!;
         return (
@@ -58,7 +59,7 @@ function LensTags({ lenses }: { lenses: Hexagram["lenses"] }) {
           </span>
         );
       })}
-    </div>
+    </Box>
   );
 }
 
@@ -157,9 +158,9 @@ export function HexagramCard({ h }: { h: Hexagram }) {
           <path d="M6 9l6 6 6-6" />
         </svg>
       </summary>
-      <div className="border-t border-border/60 px-4 pb-4 pt-4">
+      <Box className="border-t border-border/60 px-4 pb-4 pt-4">
         <HexagramDetail h={h} />
-      </div>
+      </Box>
     </details>
   );
 }

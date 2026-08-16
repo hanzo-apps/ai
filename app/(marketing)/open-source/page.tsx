@@ -6,6 +6,7 @@ import { Github, GitBranch, Star, Heart, ArrowRight, ExternalLink, Code, Buildin
 import OSSCatalog from "@/components/oss/OSSCatalog"
 import OSSComputeDividends from "@/components/oss/OSSComputeDividends";
 import oss from "@/lib/data/oss.json";
+import { Box } from '@hanzo/ui'
 
 const OSS_FOUNDATIONS = [
   { name: "Python", description: "The language powering our ML/AI stack", url: "https://python.org", github: "https://github.com/python/cpython", creator: "Python Software Foundation", license: "PSF", emoji: "🐍" },
@@ -60,22 +61,22 @@ const OpenSource = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       <main>
         {/* Hero Section */}
         <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
-          <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-            <div
+          <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+            <Box
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
               style={{
                 background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
                 filter: "blur(100px)",
               }}
             />
-          </div>
+          </Box>
 
-          <div className="max-w-5xl mx-auto relative z-10">
-            <div className="text-center">
+          <Box className="max-w-5xl mx-auto relative z-10">
+            <Box className="text-center">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -144,24 +145,24 @@ const OpenSource = () => {
                 {stats.map((stat) => {
                   const Icon = stat.icon;
                   return (
-                    <div
+                    <Box
                       key={stat.label}
                       className="bg-secondary/50 border border-border rounded-xl p-4"
                     >
                       <Icon className="w-5 h-5 text-muted-foreground mb-2 mx-auto" />
-                      <div className="text-2xl font-bold text-foreground">{stat.value}</div>
-                      <div className="text-xs text-muted-foreground">{stat.label}</div>
-                    </div>
+                      <Box className="text-2xl font-bold text-foreground">{stat.value}</Box>
+                      <Box className="text-xs text-muted-foreground">{stat.label}</Box>
+                    </Box>
                   );
                 })}
               </motion.div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Standing on the Shoulders of Giants */}
         <section className="py-20 px-4 md:px-8 border-t border-border">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -177,7 +178,7 @@ const OpenSource = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {OSS_FOUNDATIONS.map((foundation, i) => (
                 <motion.a
                   key={foundation.name}
@@ -190,13 +191,13 @@ const OpenSource = () => {
                   transition={{ duration: 0.3, delay: i * 0.04 }}
                   className="group block rounded-xl border border-border bg-secondary/30 p-4 hover:border-primary/50 hover:bg-secondary/60 transition-all"
                 >
-                  <div className="flex items-center gap-3 mb-2">
+                  <Box className="flex items-center gap-3 mb-2">
                     <span className="text-2xl">{foundation.emoji}</span>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors truncate">
+                    <Box className="flex-1 min-w-0">
+                      <Box className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors truncate">
                         {foundation.name}
-                      </div>
-                      <div className="text-xs text-muted-foreground truncate">
+                      </Box>
+                      <Box className="text-xs text-muted-foreground truncate">
                         <a
                           href={foundation.url}
                           target="_blank"
@@ -206,9 +207,9 @@ const OpenSource = () => {
                         >
                           {foundation.creator}
                         </a>
-                      </div>
-                    </div>
-                  </div>
+                      </Box>
+                    </Box>
+                  </Box>
                   <p className="text-xs text-muted-foreground mb-2 leading-relaxed">
                     {foundation.description}
                   </p>
@@ -217,13 +218,13 @@ const OpenSource = () => {
                   </span>
                 </motion.a>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Stewardship Commitments */}
         <section className="py-20 px-4 md:px-8 border-t border-border">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -239,7 +240,7 @@ const OpenSource = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {COMMITMENTS.map((commitment, i) => (
                 <motion.div
                   key={commitment.title}
@@ -249,27 +250,27 @@ const OpenSource = () => {
                   transition={{ duration: 0.3, delay: i * 0.06 }}
                   className="rounded-xl border border-border bg-secondary/30 p-5"
                 >
-                  <div className="flex items-start gap-3">
-                    <div
+                  <Box className="flex items-start gap-3">
+                    <Box
                       className="mt-0.5 flex-shrink-0 rounded-full p-1"
                       style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
                     >
                       <Check className="w-3.5 h-3.5" style={{ color: "var(--primary)" }} />
-                    </div>
+                    </Box>
                     <div>
                       <h3 className="font-semibold text-foreground text-sm mb-1">{commitment.title}</h3>
                       <p className="text-xs text-muted-foreground leading-relaxed">{commitment.body}</p>
                     </div>
-                  </div>
+                  </Box>
                 </motion.div>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* OSS Revenue Sharing */}
         <section className="py-20 px-4 md:px-8 border-t border-border">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -277,13 +278,13 @@ const OpenSource = () => {
               transition={{ duration: 0.4 }}
               className="text-center mb-12"
             >
-              <div
+              <Box
                 className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6"
                 style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
               >
                 <Coins className="w-3.5 h-3.5" />
                 Revenue Sharing Program
-              </div>
+              </Box>
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
                 Earn from Open Source
               </h2>
@@ -294,7 +295,7 @@ const OpenSource = () => {
             </motion.div>
 
             {/* How it works — 4 steps */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+            <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
               {[
                 {
                   step: "01",
@@ -332,17 +333,17 @@ const OpenSource = () => {
                   <span className="absolute top-4 right-4 text-xs font-mono text-muted-foreground/50">
                     {card.step}
                   </span>
-                  <div
+                  <Box
                     className="flex-shrink-0 rounded-full p-2 w-fit mb-4"
                     style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
                   >
                     <card.icon className="w-5 h-5" style={{ color: "var(--primary)" }} />
-                  </div>
+                  </Box>
                   <h3 className="font-semibold text-foreground text-sm mb-2">{card.title}</h3>
                   <p className="text-xs text-muted-foreground leading-relaxed">{card.body}</p>
                 </motion.div>
               ))}
-            </div>
+            </Box>
 
             {/* Feature badges */}
             <motion.div
@@ -368,8 +369,8 @@ const OpenSource = () => {
                 >
                   <badge.icon className="w-4 h-4 flex-shrink-0" style={{ color: "var(--primary)" }} />
                   <div>
-                    <div className="text-xs font-semibold text-foreground">{badge.label}</div>
-                    <div className="text-[11px] text-muted-foreground leading-tight">{badge.sub}</div>
+                    <Box className="text-xs font-semibold text-foreground">{badge.label}</Box>
+                    <Box className="text-[11px] text-muted-foreground leading-tight">{badge.sub}</Box>
                   </div>
                 </motion.div>
               ))}
@@ -413,7 +414,7 @@ const OpenSource = () => {
                 <ExternalLink className="ml-2 h-4 w-4" />
               </a>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* OSS Compute Dividends */}
@@ -426,10 +427,10 @@ const OpenSource = () => {
 
         {/* CTA Section */}
         <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-neutral-900/30 to-background relative overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+          <Box className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+          <Box className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="max-w-4xl mx-auto text-center relative z-10">
+          <Box className="max-w-4xl mx-auto text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -486,10 +487,10 @@ const OpenSource = () => {
                 <ExternalLink className="ml-2 h-5 w-5" />
               </a>
             </motion.div>
-          </div>
+          </Box>
         </section>
       </main>
-    </div>
+    </Box>
   );
 };
 

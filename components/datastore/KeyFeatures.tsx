@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Zap, Scale, Shield, Grid, DatabaseIcon, Activity } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 const FeatureCard = ({ 
   icon: Icon, 
@@ -23,9 +24,9 @@ const FeatureCard = ({
     transition={{ duration: 0.4, delay }}
     className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-8"
   >
-    <div className="h-12 w-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
+    <Box className="h-12 w-12 bg-primary/20 rounded-lg flex items-center justify-center mb-6">
       <Icon className="h-6 w-6 text-foreground/70" />
-    </div>
+    </Box>
     <ChromeText as="h3" className="text-xl font-bold mb-4">
       {title}
     </ChromeText>
@@ -71,17 +72,17 @@ const KeyFeatures = () => {
 
   return (
     <section id="features" className="py-32 px-4 sm:px-6 lg:px-8 bg-[var(--black)]">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-20">
+      <Box className="max-w-6xl mx-auto">
+        <Box className="text-center mb-20">
           <ChromeText as="h2" className="text-3xl md:text-5xl font-bold mb-6">
             What it does
           </ChromeText>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
             Scan a great many rows. Return a small answer. Do it while the rows are still arriving.
           </p>
-        </div>
+        </Box>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard 
               key={feature.title}
@@ -91,8 +92,8 @@ const KeyFeatures = () => {
               delay={0.1 * (index + 1)}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Check, Copy, Download, ChevronDown, ArrowUpRight } from 'lucide-react'
 import { Mockup } from '@/components/product/Mockup'
 import { current, EDITORS, INSTALL, type Platform } from '@/lib/platform'
+import { Box } from '@hanzo/ui'
 
 /**
  * The three doors into Dev, each showing the surface it opens.
@@ -32,7 +33,7 @@ export function GetStarted() {
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl text-center">
+      <Box className="mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
           Choose how to get started with Dev
         </h2>
@@ -40,9 +41,9 @@ export function GetStarted() {
           Dev runs in your terminal, in your editor, and in the cloud. Work beside it
           locally, or hand it the task and let it keep going while you step away.
         </p>
-      </div>
+      </Box>
 
-      <div className="mt-12 grid gap-4 md:grid-cols-3">
+      <Box className="mt-12 grid gap-4 md:grid-cols-3">
         <Card title="Install the CLI" slug="cli" alt="Hanzo Dev running in a terminal">
           {/* The command is the action here, so the pill IS the control — there
               is nowhere else to click and nothing to read twice.
@@ -84,7 +85,7 @@ export function GetStarted() {
           <Editors />
           <Note>Runs in the terminal your editor already has.</Note>
         </Card>
-      </div>
+      </Box>
     </section>
   )
 }
@@ -115,8 +116,8 @@ function Card({
           the design system — the same linear ramp `--glass-prism` spends on a
           glass edge, widened into a field. Linear, not conic: a conic gradient
           distributes unevenly across a rectangle and pools in one corner. */}
-      <div className="relative overflow-hidden rounded-xl p-px">
-        <div
+      <Box className="relative overflow-hidden rounded-xl p-px">
+        <Box
           aria-hidden
           className="absolute inset-0"
           style={{
@@ -128,14 +129,14 @@ function Card({
         <div className="relative overflow-hidden rounded-[11px] bg-black">
           <Mockup slug={slug} alt={alt} />
         </div>
-      </div>
+      </Box>
       <h3 className="px-2 pb-5 pt-6 text-center text-xl font-semibold text-white">{title}</h3>
       {/* The actions sit on ONE line across the row. `mt-auto` alone did not do
           it: the middle card carries a note under its button, so its action
           block was taller and its button rode higher than the other two. Every
           card now renders the same two slots — control, then note — and a card
           with nothing to add still reserves the line. */}
-      <div className="mt-auto px-2 pb-2">{children}</div>
+      <Box className="mt-auto px-2 pb-2">{children}</Box>
     </div>
   )
 }
@@ -197,7 +198,7 @@ function Editors() {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="relative">
+    <Box className="relative">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -228,6 +229,6 @@ function Editors() {
           ))}
         </ul>
       ) : null}
-    </div>
+    </Box>
   )
 }

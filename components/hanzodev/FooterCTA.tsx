@@ -5,13 +5,14 @@ import { motion } from "@/components/motion";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { CopyButton } from "@hanzo/ui/product";
+import { Box } from '@hanzo/ui'
 
 const INSTALL = "curl -fsSL hanzo.sh | bash";
 
 const FooterCTA = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-neutral-900/30 to-background">
-      <div className="max-w-4xl mx-auto text-center">
+      <Box className="max-w-4xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -67,10 +68,10 @@ const FooterCTA = () => {
           transition={{ delay: 0.3 }}
           className="mb-6"
         >
-          <div className="inline-flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary border border-border">
+          <Box className="inline-flex items-center gap-3 px-4 py-3 rounded-lg bg-secondary border border-border">
             <code className="text-sm font-mono text-foreground/80">{INSTALL}</code>
             <CopyButton value={INSTALL} label="Copy install command" id="install-cli" />
-          </div>
+          </Box>
         </motion.div>
 
         <motion.div
@@ -88,7 +89,7 @@ const FooterCTA = () => {
             Read the documentation
           </a>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

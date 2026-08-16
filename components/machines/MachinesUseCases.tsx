@@ -1,6 +1,7 @@
 
 import React from 'react';
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 interface UseCaseCardProps {
   title: string;
@@ -10,7 +11,7 @@ interface UseCaseCardProps {
 
 const UseCaseCard = ({ title, description, features }: UseCaseCardProps) => {
   return (
-    <div
+    <Box
       className="bg-card rounded-xl p-8"
       style={{ backgroundColor: "color-mix(in srgb, var(--primary) 5%, transparent)", border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)" }}
     >
@@ -26,7 +27,7 @@ const UseCaseCard = ({ title, description, features }: UseCaseCardProps) => {
           </li>
         ))}
       </ul>
-    </div>
+    </Box>
   );
 };
 
@@ -75,17 +76,17 @@ const MachinesUseCases = () => {
       className="py-20"
       style={{ background: `linear-gradient(to bottom, transparent, var(--primary)10)` }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+      <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Box className="text-center mb-16">
           <ChromeText as="h2" className="text-3xl font-bold mb-4">
             When you want a whole machine
           </ChromeText>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Reach for one when the work outlasts a request, or needs a card of its own
           </p>
-        </div>
+        </Box>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {useCases.map((useCase, index) => (
             <UseCaseCard
               key={index}
@@ -94,8 +95,8 @@ const MachinesUseCases = () => {
               features={useCase.features}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

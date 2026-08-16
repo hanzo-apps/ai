@@ -23,6 +23,7 @@ import {
   Users,
   Globe
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const defiProducts = [
   {
@@ -119,12 +120,12 @@ const postQuantum = [
 
 const HanzoDeFiStack = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
 
       {/* Hero */}
       <section className="pt-24 pb-16 px-4 md:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -141,9 +142,9 @@ const HanzoDeFiStack = () => {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <Box className="max-w-5xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -192,22 +193,22 @@ const HanzoDeFiStack = () => {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">709</div>
-              <div className="text-sm text-muted-foreground">Tests Passing</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">50+</div>
-              <div className="text-sm text-muted-foreground">Contracts</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">PQ</div>
-              <div className="text-sm text-muted-foreground">Quantum-Safe</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">BSD-3</div>
-              <div className="text-sm text-muted-foreground">Open Source</div>
-            </div>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">709</Box>
+              <Box className="text-sm text-muted-foreground">Tests Passing</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">50+</Box>
+              <Box className="text-sm text-muted-foreground">Contracts</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">PQ</Box>
+              <Box className="text-sm text-muted-foreground">Quantum-Safe</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">BSD-3</Box>
+              <Box className="text-sm text-muted-foreground">Open Source</Box>
+            </Box>
           </motion.div>
 
           {/* CTAs */}
@@ -230,7 +231,7 @@ const HanzoDeFiStack = () => {
               View Documentation
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* DeFi Products */}
@@ -239,7 +240,7 @@ const HanzoDeFiStack = () => {
           key={category.category}
           className={`py-16 px-4 md:px-8 ${categoryIndex % 2 === 0 ? "" : "bg-background"}`}
         >
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -250,7 +251,7 @@ const HanzoDeFiStack = () => {
               <p className="text-muted-foreground">{category.description}</p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Box className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {category.products.map((product, index) => {
                 const Icon = product.icon;
                 return (
@@ -262,34 +263,34 @@ const HanzoDeFiStack = () => {
                     transition={{ delay: index * 0.05 }}
                     className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-border transition-colors"
                   >
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center">
+                    <Box className="flex items-center gap-3 mb-2">
+                      <Box className="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center">
                         <Icon className="w-4 h-4 text-foreground" />
-                      </div>
+                      </Box>
                       <h3 className="font-semibold text-foreground">{product.name}</h3>
-                    </div>
+                    </Box>
                     <p className="text-sm text-muted-foreground">{product.description}</p>
                   </motion.div>
                 );
               })}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
       ))}
 
       {/* Post-Quantum Cryptography */}
       <section className="py-20 px-4 md:px-8 border-t border-border">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-border mb-6">
+            <Box className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-border mb-6">
               <Shield className="w-4 h-4 text-foreground/70" />
               <span className="text-sm font-medium text-foreground/70">Post-Quantum Ready</span>
-            </div>
+            </Box>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Quantum-Resistant Cryptography
             </h2>
@@ -298,7 +299,7 @@ const HanzoDeFiStack = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {postQuantum.map((scheme, index) => (
               <motion.div
                 key={scheme.name}
@@ -312,27 +313,27 @@ const HanzoDeFiStack = () => {
                 <p className="text-sm text-muted-foreground">{scheme.description}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Code Example */}
       <section className="py-20 px-4 md:px-8 bg-background">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="bg-secondary border border-border rounded-xl overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-              </div>
+            <Box className="flex items-center gap-2 px-4 py-2 border-b border-border">
+              <Box className="flex gap-1.5">
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+              </Box>
               <span className="text-xs text-muted-foreground ml-2">MyDeFi.sol</span>
-            </div>
+            </Box>
             <pre className="p-4 overflow-x-auto text-sm">
               <code className="text-foreground/80">{`// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
@@ -372,12 +373,12 @@ contract QuantumSafe {
 }`}</code>
             </pre>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -391,7 +392,7 @@ contract QuantumSafe {
               Production-ready contracts. Comprehensive tests. Post-quantum security.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
+            <Box className="flex flex-wrap justify-center gap-4">
               <a
                 href="https://github.com/luxfi/standard"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-primary/10 hover:bg-primary/10 text-foreground font-medium rounded-full transition-colors"
@@ -405,13 +406,13 @@ contract QuantumSafe {
               >
                 Read Documentation
               </a>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       
-    </div>
+    </Box>
   );
 };
 

@@ -3,6 +3,7 @@
 import React from "react";
 import ChatMessage from "./ChatMessage";
 import { Bot } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface ChatMessagesProps {
   chatHistory: Array<{
@@ -33,18 +34,18 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
       ))}
       
       {isTyping && (
-        <div className="flex justify-start mb-4">
-          <div className="bg-primary/10 h-8 w-8 rounded-full flex items-center justify-center mr-2">
+        <Box className="flex justify-start mb-4">
+          <Box className="bg-primary/10 h-8 w-8 rounded-full flex items-center justify-center mr-2">
             <Bot className="h-4 w-4 text-[var(--white)]" />
-          </div>
-          <div className="bg-neutral-800/60 py-3 px-4 rounded-lg border border-neutral-700/50">
+          </Box>
+          <Box className="bg-neutral-800/60 py-3 px-4 rounded-lg border border-neutral-700/50">
             <div className="flex space-x-1">
               <div className="h-2 w-2 bg-neutral-400 rounded-full animate-bounce"></div>
               <div className="h-2 w-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
               <div className="h-2 w-2 bg-neutral-400 rounded-full animate-bounce" style={{ animationDelay: "0.4s" }}></div>
             </div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       )}
       
       <div ref={endOfMessagesRef} />

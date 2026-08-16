@@ -3,6 +3,7 @@
 
 import { motion } from "@/components/motion";
 import { MessageSquare, Hash, Users, Search, ChevronDown } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const TeamSlack = () => {
   const channels = [
@@ -40,7 +41,7 @@ const TeamSlack = () => {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="rounded-xl border border-neutral-800 bg-[var(--black)]/50 backdrop-blur-sm overflow-hidden"
       >
-        <div className="grid grid-cols-4">
+        <Box className="grid grid-cols-4">
           {/* Sidebar */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -49,10 +50,10 @@ const TeamSlack = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="col-span-1 border-r border-neutral-800 p-4"
           >
-            <div className="flex items-center justify-between p-2 mb-4">
+            <Box className="flex items-center justify-between p-2 mb-4">
               <h3 className="text-foreground/70 font-semibold">Hanzo Team</h3>
               <ChevronDown className="w-4 h-4 text-muted-foreground" />
-            </div>
+            </Box>
             <div className="space-y-2">
               {channels.map((channel, idx) => (
                 <motion.div
@@ -99,21 +100,21 @@ const TeamSlack = () => {
                   transition={{ duration: 0.4, delay: 0.7 + (idx * 0.2) }}
                   className="flex items-start gap-3"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center text-[var(--white)] text-sm">
+                  <Box className="w-8 h-8 rounded-lg bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center text-[var(--white)] text-sm">
                     {msg.user[0]}
-                  </div>
+                  </Box>
                   <div>
-                    <div className="flex items-center gap-2">
+                    <Box className="flex items-center gap-2">
                       <span className="font-medium text-[var(--white)]">{msg.user}</span>
                       <span className="text-xs text-muted-foreground">{msg.time}</span>
-                    </div>
+                    </Box>
                     <p className="text-foreground/80">{msg.message}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
           </motion.div>
-        </div>
+        </Box>
       </motion.div>
     </motion.div>
   );

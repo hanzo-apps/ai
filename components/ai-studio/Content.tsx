@@ -2,6 +2,7 @@
 import React from "react";
 import Chat from "./Chat";
 import { MessageInterface } from "./types";
+import { Box } from '@hanzo/ui'
 
 interface ContentProps {
   activeTab: string;
@@ -19,7 +20,7 @@ const Content = ({
   handleSubmit 
 }: ContentProps) => {
   return (
-    <div className="flex-1 flex flex-col bg-neutral-900/30 border border-neutral-800 rounded-lg overflow-hidden">
+    <Box className="flex-1 flex flex-col bg-neutral-900/30 border border-neutral-800 rounded-lg overflow-hidden">
       {activeTab === "chat" && (
         <Chat 
           conversation={conversation}
@@ -28,7 +29,7 @@ const Content = ({
           handleSubmit={handleSubmit}
         />
       )}
-    </div>
+    </Box>
   );
 };
 

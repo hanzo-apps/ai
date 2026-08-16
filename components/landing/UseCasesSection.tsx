@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Shield, FileCheck, Workflow, UserCheck } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 // "Why Hanzo" — agents need infrastructure, not just prompts.
 const WHY_CARDS = [
@@ -31,7 +32,7 @@ const WHY_CARDS = [
 const UseCasesSection = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-5xl mx-auto">
+      <Box className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -53,7 +54,7 @@ const UseCasesSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Box className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {WHY_CARDS.map((card, index) => {
             const Icon = card.icon;
             return (
@@ -65,16 +66,16 @@ const UseCasesSection = () => {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="p-5 rounded-xl border border-border bg-secondary/50"
               >
-                <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
+                <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
                   <Icon className="w-5 h-5 text-muted-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-base font-semibold text-foreground mb-2">{card.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
               </motion.div>
             );
           })}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

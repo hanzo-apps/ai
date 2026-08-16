@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from '@/components/motion'
 import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import { cloudCategories, type CloudCategory, type Primitive } from '@/lib/data/cloud-primitives'
+import { Box } from '@hanzo/ui'
 
 /**
  * The cloud primitives, shown in full — the ONE product showcase.
@@ -35,20 +36,20 @@ function PrimitiveCard({ item, index }: { item: Primitive; index: number }) {
       transition={{ duration: 0.35, delay: (index % 6) * 0.04 }}
       className="group h-full rounded-xl border border-transparent p-4 transition-colors duration-200 hover:border-white/15 motion-reduce:transition-none"
     >
-      <div className="flex items-start gap-3">
+      <Box className="flex items-start gap-3">
         <div className="grid h-8 w-8 flex-none place-items-center rounded-lg border border-white/10 transition-colors duration-200 group-hover:border-white/15 motion-reduce:transition-none">
           <Icon className="h-4 w-4 text-neutral-400 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none" />
         </div>
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1.5">
+        <Box className="min-w-0 flex-1">
+          <Box className="flex items-center gap-1.5">
             <h3 className="truncate text-sm font-medium text-neutral-200 transition-colors duration-200 group-hover:text-white motion-reduce:transition-none">
               {item.title}
             </h3>
             {external && <ArrowUpRight className="h-3 w-3 flex-shrink-0 text-muted-foreground/40" />}
-          </div>
+          </Box>
           {item.desc && <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-neutral-500">{item.desc}</p>}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </motion.div>
   )
 
@@ -81,7 +82,7 @@ function PrimitiveCard({ item, index }: { item: Primitive; index: number }) {
  */
 export function CloudCategoryMap() {
   return (
-    <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
+    <Box className="grid grid-cols-2 gap-3 lg:grid-cols-5">
       {cloudCategories.map((category, index) => {
         const Icon = category.icon
         return (
@@ -104,7 +105,7 @@ export function CloudCategoryMap() {
           </motion.div>
         )
       })}
-    </div>
+    </Box>
   )
 }
 
@@ -113,8 +114,8 @@ function CategorySection({ category }: { category: CloudCategory }) {
   const slug = category.id
   return (
     <section id={slug} className="border-t border-border px-4 py-16 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-8 flex items-end justify-between gap-4">
+      <Box className="mx-auto max-w-6xl">
+        <Box className="mb-8 flex items-end justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">{category.title}</h2>
             <p className="mt-1 text-sm text-neutral-500">{category.tagline}</p>
@@ -126,14 +127,14 @@ function CategorySection({ category }: { category: CloudCategory }) {
             View all
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
-        </div>
+        </Box>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <Box className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {category.items.map((item, idx) => (
             <PrimitiveCard key={item.title} item={item} index={idx} />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   )
 }

@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import TaijiSymbol from "./svg/TaijiSymbol";
+import { Box } from '@hanzo/ui'
 
 interface ZenQuoteSectionProps {
   quote: string;
@@ -13,7 +14,7 @@ interface ZenQuoteSectionProps {
 const ZenQuoteSection: React.FC<ZenQuoteSectionProps> = ({ quote, attribution }) => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-950/30">
-      <div className="max-w-4xl mx-auto">
+      <Box className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -21,25 +22,25 @@ const ZenQuoteSection: React.FC<ZenQuoteSectionProps> = ({ quote, attribution })
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <div className="relative p-12 bg-gradient-to-br from-neutral-900/40 to-background backdrop-blur-lg border border-neutral-800/30 rounded-lg">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+          <Box className="relative p-12 bg-gradient-to-br from-neutral-900/40 to-background backdrop-blur-lg border border-neutral-800/30 rounded-lg">
+            <Box className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <TaijiSymbol size={48} className="text-[var(--white)]/80" animate={true} />
-            </div>
+            </Box>
             
             <p className="text-foreground/80 md:text-xl leading-relaxed mb-8 max-w-2xl mx-auto">
               "{quote}"
             </p>
             
-            <div className="w-24 h-px bg-gradient-to-r from-transparent via-neutral-700 to-transparent mx-auto mb-4"></div>
+            <Box className="w-24 h-px bg-gradient-to-r from-transparent via-neutral-700 to-transparent mx-auto mb-4"></Box>
             
             {attribution && (
               <p className="text-muted-foreground text-sm italic">
                 {attribution}
               </p>
             )}
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

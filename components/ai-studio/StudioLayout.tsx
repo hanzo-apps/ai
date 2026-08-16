@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar";
 import Toolbar from "./Toolbar";
 import Content from "./Content";
 import { MessageInterface, ModelInterface } from "./types";
+import { Box } from '@hanzo/ui'
 
 interface StudioLayoutProps {
   showSidebar: boolean;
@@ -36,7 +37,7 @@ const StudioLayout = ({
   handleSubmit
 }: StudioLayoutProps) => {
   return (
-    <div className="flex-1 flex overflow-hidden max-w-7xl mx-auto w-full p-4">
+    <Box className="flex-1 flex overflow-hidden max-w-7xl mx-auto w-full p-4">
       <Sidebar 
         showSidebar={showSidebar}
         models={models}
@@ -44,7 +45,7 @@ const StudioLayout = ({
         setModelSelection={setModelSelection}
       />
       
-      <div className="flex-1 flex flex-col bg-neutral-900/30 border border-neutral-800 rounded-lg overflow-hidden">
+      <Box className="flex-1 flex flex-col bg-neutral-900/30 border border-neutral-800 rounded-lg overflow-hidden">
         <Toolbar 
           showSidebar={showSidebar}
           setShowSidebar={setShowSidebar}
@@ -59,8 +60,8 @@ const StudioLayout = ({
           setPromptText={setPromptText}
           handleSubmit={handleSubmit}
         />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

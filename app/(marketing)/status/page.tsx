@@ -6,6 +6,7 @@
 
 import { useEffect } from "react";
 import { Activity, ArrowRight } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const STATUS_URL = "https://status.hanzo.ai";
 
@@ -15,8 +16,8 @@ export default function StatusPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-4">
-      <div className="text-center">
+    <Box className="min-h-screen bg-background text-foreground flex items-center justify-center px-4">
+      <Box className="text-center">
         <Activity className="w-8 h-8 mx-auto mb-4 text-muted-foreground" />
         <h1 className="text-2xl font-medium mb-2">Hanzo Status</h1>
         <p className="text-muted-foreground mb-6">
@@ -29,7 +30,7 @@ export default function StatusPage() {
           Open status.hanzo.ai
           <ArrowRight className="w-4 h-4" />
         </a>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

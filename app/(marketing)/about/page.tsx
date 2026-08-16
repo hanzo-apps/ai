@@ -3,6 +3,7 @@ import HistoryTimeline from "@/components/about/HistoryTimeline"
 import ZenPrinciples from "@/components/about/ZenPrinciples"
 import SenseiMethod from "@/components/about/SenseiMethod"
 import OurStory from "@/components/about/OurStory"
+import { Box } from '@hanzo/ui'
 
 export const metadata = {
   title: "About Hanzo AI — the history",
@@ -26,7 +27,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       <main className="pt-20">
         <AboutHero />
         <OurStory />
@@ -34,6 +35,6 @@ export default function AboutPage() {
         <ZenPrinciples />
         <SenseiMethod />
       </main>
-    </div>
+    </Box>
   )
 }

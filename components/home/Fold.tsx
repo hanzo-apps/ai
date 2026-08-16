@@ -5,6 +5,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { Box } from '@hanzo/ui'
 
 /**
  * The fold: the globe, and the sentence that says what it is.
@@ -92,7 +93,7 @@ export default function Fold() {
           Run Hanzo OS on Hanzo Cloud or your own infrastructure.
         </p>
 
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+        <Box className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
             href="https://cloud.hanzo.ai"
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black transition-opacity hover:opacity-90"
@@ -105,7 +106,7 @@ export default function Fold() {
           >
             Explore Hanzo OS
           </a>
-        </div>
+        </Box>
 
         {/* Trust markers, and they sit HERE rather than in the headline: a
             headline carrying its own credentials is a headline about us. */}

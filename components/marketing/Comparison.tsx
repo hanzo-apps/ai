@@ -2,6 +2,7 @@
 
 import { Section } from '@/components/marketing/page-kit'
 import blueprints from '@/lib/data/blueprints.json'
+import { Box } from '@hanzo/ui'
 
 /**
  * What the same software costs when you run it.
@@ -46,7 +47,7 @@ export default function Comparison() {
         title="Run it yourself, and here is the bill"
         lede="The open-source stacks people reach for, priced from the compute their own compose files reserve."
       >
-        <div className="overflow-x-auto">
+        <Box className="overflow-x-auto">
           <table className="w-full min-w-[36rem] border-collapse text-left text-sm">
             <thead>
               <tr className="border-b border-neutral-800 text-neutral-500">
@@ -75,7 +76,7 @@ export default function Comparison() {
               </tr>
             </tbody>
           </table>
-        </div>
+        </Box>
 
         {/* The basis travels with the number, because a cost a reader cannot
             check is a number they are asked to take on faith. */}

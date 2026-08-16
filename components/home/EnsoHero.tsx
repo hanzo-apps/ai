@@ -3,6 +3,7 @@
 import { motion } from '@/components/motion'
 import { ArrowRight } from 'lucide-react'
 import { EnsoLogo } from '@/components/enso/EnsoLogo'
+import { Box } from '@hanzo/ui'
 
 /**
  * The apex LEAD — Enso, Hanzo's flagship frontier model, front and center at the
@@ -16,7 +17,7 @@ export default function EnsoHero() {
   return (
     <section className="relative overflow-hidden px-4 pb-16 pt-36 sm:px-6 sm:pt-44 lg:px-8">
       {/* Ambient ensō glow — the same living radial the /enso hero breathes. */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      <Box className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <motion.div
           className="absolute left-1/2 top-[42%] h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full"
           style={{
@@ -27,9 +28,9 @@ export default function EnsoHero() {
           animate={{ scale: [1, 1.08, 1], opacity: [0.45, 0.65, 0.45] }}
           transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
         />
-      </div>
+      </Box>
 
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
+      <Box className="relative z-10 mx-auto max-w-4xl text-center">
         <motion.a
           href="/enso"
           initial={{ opacity: 0, y: 16 }}
@@ -108,7 +109,7 @@ export default function EnsoHero() {
           <span aria-hidden className="text-neutral-700">—</span>
           <span>one OpenAI- and Anthropic-compatible API</span>
         </motion.a>
-      </div>
+      </Box>
     </section>
   )
 }

@@ -3,12 +3,13 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Sparkles, ArrowRight } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
       {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden">
+      <Box className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
           style={{
@@ -25,9 +26,9 @@ const HeroSection = () => {
             ease: "easeInOut",
           }}
         />
-      </div>
+      </Box>
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center">
+      <Box className="relative z-10 max-w-5xl mx-auto text-center">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -77,22 +78,22 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 0.25 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
         >
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">HNSW</div>
-            <div className="text-sm text-muted-foreground">ANN algorithm</div>
-          </div>
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">3072d</div>
-            <div className="text-sm text-muted-foreground">Max dimensions</div>
-          </div>
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">&lt; 10ms</div>
-            <div className="text-sm text-muted-foreground">Query latency</div>
-          </div>
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">10B+</div>
-            <div className="text-sm text-muted-foreground">Vectors at scale</div>
-          </div>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">HNSW</Box>
+            <Box className="text-sm text-muted-foreground">ANN algorithm</Box>
+          </Box>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">3072d</Box>
+            <Box className="text-sm text-muted-foreground">Max dimensions</Box>
+          </Box>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">&lt; 10ms</Box>
+            <Box className="text-sm text-muted-foreground">Query latency</Box>
+          </Box>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">10B+</Box>
+            <Box className="text-sm text-muted-foreground">Vectors at scale</Box>
+          </Box>
         </motion.div>
 
         {/* CTAs */}
@@ -116,7 +117,7 @@ const HeroSection = () => {
             GitHub
           </a>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

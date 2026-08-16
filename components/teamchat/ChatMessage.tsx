@@ -10,6 +10,7 @@ const sanitize = (html: string) => {
   return DOMPurify.sanitize(html);
 };
 import { Bot, User } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface ChatMessageProps {
   message: {
@@ -27,9 +28,9 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, formatTimestamp }) =
       className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"} mb-4`}
     >
       {message.sender === "ai" && (
-        <div className="bg-primary/40 h-8 w-8 rounded-full flex items-center justify-center mr-2 mt-1">
+        <Box className="bg-primary/40 h-8 w-8 rounded-full flex items-center justify-center mr-2 mt-1">
           <Bot className="h-4 w-4 text-[var(--white)]" />
-        </div>
+        </Box>
       )}
       
       <div
@@ -47,17 +48,17 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, formatTimestamp }) =
             )
           }}
         />
-        <div className="text-right mt-1">
+        <Box className="text-right mt-1">
           <span className="text-xs text-muted-foreground">
             {formatTimestamp(message.timestamp)}
           </span>
-        </div>
+        </Box>
       </div>
       
       {message.sender === "user" && (
-        <div className="bg-primary/40 h-8 w-8 rounded-full flex items-center justify-center ml-2 mt-1">
+        <Box className="bg-primary/40 h-8 w-8 rounded-full flex items-center justify-center ml-2 mt-1">
           <User className="h-4 w-4 text-[var(--white)]" />
-        </div>
+        </Box>
       )}
     </div>
   );

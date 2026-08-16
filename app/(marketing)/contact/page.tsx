@@ -17,6 +17,7 @@ import {
   Instagram,
 } from "lucide-react"
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const socialLinks = [
   {
@@ -124,11 +125,11 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       <main>
         {/* Hero Section */}
         <section className="relative pt-28 pb-12 px-4 md:px-8 lg:px-12">
-          <div className="max-w-6xl mx-auto text-center">
+          <Box className="max-w-6xl mx-auto text-center">
             <motion.h1
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -146,13 +147,13 @@ export default function ContactPage() {
             >
               Have a question or want to learn more about Hanzo? Our team is here to help you.
             </motion.p>
-          </div>
+          </Box>
         </section>
 
         {/* Main Content - Two Column Layout */}
         <section className="pb-20 px-4 md:px-8 lg:px-12">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+          <Box className="max-w-6xl mx-auto">
+            <Box className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
               {/* Left Column - Contact Form */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -164,20 +165,20 @@ export default function ContactPage() {
                 </h2>
 
                 {submitted ? (
-                  <div className="p-8 rounded-xl border border-border bg-primary/5 text-center">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <Box className="p-8 rounded-xl border border-border bg-primary/5 text-center">
+                    <Box className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                       <Send className="w-6 h-6 text-foreground/70" />
-                    </div>
+                    </Box>
                     <h3 className="text-lg font-semibold text-foreground mb-2">
                       Message Sent!
                     </h3>
                     <p className="text-muted-foreground text-sm">
                       Thank you for reaching out. We&apos;ll get back to you within 24 hours.
                     </p>
-                  </div>
+                  </Box>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <Box className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                           Name
@@ -208,7 +209,7 @@ export default function ContactPage() {
                           className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all"
                         />
                       </div>
-                    </div>
+                    </Box>
 
                     <div>
                       <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2">
@@ -281,19 +282,19 @@ export default function ContactPage() {
                       href="mailto:hello@hanzo.ai"
                       className="flex items-start gap-4 p-4 rounded-xl border border-border bg-secondary hover:border-border hover:bg-accent/50 transition-all group"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                      <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
                         <Mail className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                      </div>
+                      </Box>
                       <div>
                         <p className="font-medium text-foreground">Email</p>
                         <p className="text-sm text-muted-foreground">hello@hanzo.ai</p>
                       </div>
                     </a>
 
-                    <div className="flex items-start gap-4 p-4 rounded-xl border border-border bg-secondary">
-                      <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center flex-shrink-0">
+                    <Box className="flex items-start gap-4 p-4 rounded-xl border border-border bg-secondary">
+                      <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center flex-shrink-0">
                         <MapPin className="w-5 h-5 text-muted-foreground" />
-                      </div>
+                      </Box>
                       <div>
                         <p className="font-medium text-foreground">Location</p>
                         <p className="text-sm text-muted-foreground">
@@ -301,16 +302,16 @@ export default function ContactPage() {
                           San Francisco, CA 94103
                         </p>
                       </div>
-                    </div>
+                    </Box>
                   </div>
                 </div>
 
                 {/* Sales CTA */}
-                <div className="p-6 rounded-xl border border-white/30 bg-primary/5">
-                  <div className="flex items-center gap-3 mb-3">
+                <Box className="p-6 rounded-xl border border-white/30 bg-primary/5">
+                  <Box className="flex items-center gap-3 mb-3">
                     <Calendar className="w-5 h-5 text-foreground" />
                     <h3 className="font-semibold text-foreground">Talk to Sales</h3>
-                  </div>
+                  </Box>
                   <p className="text-sm text-muted-foreground mb-4">
                     Interested in enterprise solutions? Schedule a call with our sales team.
                   </p>
@@ -320,15 +321,15 @@ export default function ContactPage() {
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
                   </Button>
-                </div>
+                </Box>
               </motion.div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Connect With Us */}
         <section className="py-16 px-4 md:px-8 lg:px-12 border-t border-border bg-secondary/20">
-          <div className="max-w-4xl mx-auto">
+          <Box className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -344,7 +345,7 @@ export default function ContactPage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {socialLinks.map((social, index) => {
                 const Icon = social.icon
                 return (
@@ -359,7 +360,7 @@ export default function ContactPage() {
                     transition={{ duration: 0.3, delay: index * 0.05 }}
                     className="flex items-center gap-3 p-4 rounded-xl border border-border bg-secondary hover:bg-accent hover:border-border transition-all group"
                   >
-                    <div
+                    <Box
                       className="w-10 h-10 rounded-lg flex items-center justify-center transition-colors"
                       style={{ backgroundColor: `${social.color}15` }}
                     >
@@ -367,7 +368,7 @@ export default function ContactPage() {
                         className="w-5 h-5 transition-colors"
                         style={{ color: social.color }}
                       />
-                    </div>
+                    </Box>
                     <span className="text-sm font-medium text-foreground">
                       {social.label}
                     </span>
@@ -375,10 +376,10 @@ export default function ContactPage() {
                   </motion.a>
                 )
               })}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
       </main>
-    </div>
+    </Box>
   )
 }

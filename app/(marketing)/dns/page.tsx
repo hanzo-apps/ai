@@ -18,6 +18,7 @@ import {
   BookOpen,
   Check,
 } from "lucide-react"
+import { Box } from '@hanzo/ui'
 
 const features = [
   {
@@ -163,7 +164,7 @@ export default function DNSPage() {
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 overflow-hidden">
+        <Box className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -181,9 +182,9 @@ export default function DNSPage() {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
+        <Box className="relative z-10 max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -233,22 +234,22 @@ export default function DNSPage() {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">5+</div>
-              <div className="text-sm text-muted-foreground">Providers</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">CLI</div>
-              <div className="text-sm text-muted-foreground">Native</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">DNSSEC</div>
-              <div className="text-sm text-muted-foreground">Built-in</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Edge</div>
-              <div className="text-sm text-muted-foreground">CoreDNS</div>
-            </div>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">5+</Box>
+              <Box className="text-sm text-muted-foreground">Providers</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">CLI</Box>
+              <Box className="text-sm text-muted-foreground">Native</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">DNSSEC</Box>
+              <Box className="text-sm text-muted-foreground">Built-in</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">Edge</Box>
+              <Box className="text-sm text-muted-foreground">CoreDNS</Box>
+            </Box>
           </motion.div>
 
           <motion.div
@@ -271,12 +272,12 @@ export default function DNSPage() {
               GitHub
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Features Grid */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-7xl mx-auto">
+        <Box className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -292,7 +293,7 @@ export default function DNSPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -302,9 +303,9 @@ export default function DNSPage() {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors"
               >
-                <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
+                <Box className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
                   <feature.icon className="h-6 w-6 text-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-lg font-semibold text-foreground mb-2">
                   {feature.title}
                 </h3>
@@ -313,14 +314,14 @@ export default function DNSPage() {
                 </p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Architecture Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+        <Box className="max-w-7xl mx-auto">
+          <Box className="grid md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -371,59 +372,59 @@ export default function DNSPage() {
               className="bg-secondary/50 border border-border rounded-xl p-8"
             >
               <div className="space-y-4">
-                <div className="bg-secondary border border-border rounded-lg p-4">
+                <Box className="bg-secondary border border-border rounded-lg p-4">
                   <h4 className="text-sm font-semibold text-foreground mb-2">
                     Your Applications
                   </h4>
-                  <div className="grid grid-cols-3 gap-2 text-xs">
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">CI/CD</div>
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">CLI</div>
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">REST API</div>
-                  </div>
-                </div>
+                  <Box className="grid grid-cols-3 gap-2 text-xs">
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">CI/CD</Box>
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">CLI</Box>
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">REST API</Box>
+                  </Box>
+                </Box>
 
-                <div className="flex justify-center">
-                  <div className="w-px h-6 bg-border" />
-                </div>
+                <Box className="flex justify-center">
+                  <Box className="w-px h-6 bg-border" />
+                </Box>
 
-                <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                <Box className="bg-primary/5 border border-primary/20 rounded-lg p-4">
                   <h4 className="text-sm font-semibold text-foreground mb-2 text-center">
                     Hanzo DNS Control Plane
                   </h4>
-                  <div className="grid grid-cols-2 gap-2 text-xs">
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">Record Manager</div>
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">DNSSEC Engine</div>
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">Parallel Query</div>
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">Audit Log</div>
-                  </div>
-                </div>
+                  <Box className="grid grid-cols-2 gap-2 text-xs">
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">Record Manager</Box>
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">DNSSEC Engine</Box>
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">Parallel Query</Box>
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">Audit Log</Box>
+                  </Box>
+                </Box>
 
-                <div className="flex justify-center">
-                  <div className="w-px h-6 bg-border" />
-                </div>
+                <Box className="flex justify-center">
+                  <Box className="w-px h-6 bg-border" />
+                </Box>
 
-                <div className="bg-secondary border border-border rounded-lg p-4">
+                <Box className="bg-secondary border border-border rounded-lg p-4">
                   <h4 className="text-sm font-semibold text-foreground mb-2">
                     DNS Providers
                   </h4>
-                  <div className="grid grid-cols-3 gap-2 text-xs">
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">Cloudflare</div>
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">Route53</div>
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">CoreDNS</div>
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">GoDaddy</div>
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">DigitalOcean</div>
-                    <div className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">+ More</div>
-                  </div>
-                </div>
+                  <Box className="grid grid-cols-3 gap-2 text-xs">
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">Cloudflare</Box>
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">Route53</Box>
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">CoreDNS</Box>
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">GoDaddy</Box>
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">DigitalOcean</Box>
+                    <Box className="bg-background/50 border border-border rounded p-2 text-center text-muted-foreground">+ More</Box>
+                  </Box>
+                </Box>
               </div>
             </motion.div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* CLI / Quickstart Code Example */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -446,16 +447,16 @@ export default function DNSPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="bg-secondary border border-border rounded-xl overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-              </div>
+            <Box className="flex items-center gap-2 px-4 py-2 border-b border-border">
+              <Box className="flex gap-1.5">
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+              </Box>
               <span className="text-xs text-muted-foreground ml-2">
                 terminal
               </span>
-            </div>
+            </Box>
             <pre className="p-4 overflow-x-auto text-sm">
               <code className="text-foreground/80">{`# Install the Hanzo CLI
 curl -sSL https://hanzo.sh | sh
@@ -476,12 +477,12 @@ hanzo dns sync --provider cloudflare
 hanzo dns records example.com`}</code>
             </pre>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Use Cases */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -507,10 +508,10 @@ hanzo dns records example.com`}</code>
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors"
               >
-                <div className="flex items-start gap-4">
-                  <div className="h-10 w-10 rounded-lg flex items-center justify-center bg-primary/10 flex-shrink-0">
+                <Box className="flex items-start gap-4">
+                  <Box className="h-10 w-10 rounded-lg flex items-center justify-center bg-primary/10 flex-shrink-0">
                     <useCase.icon className="h-5 w-5 text-foreground" />
-                  </div>
+                  </Box>
                   <div>
                     <h3 className="text-lg font-semibold text-foreground mb-2">
                       {useCase.title}
@@ -519,16 +520,16 @@ hanzo dns records example.com`}</code>
                       {useCase.description}
                     </p>
                   </div>
-                </div>
+                </Box>
               </motion.div>
             ))}
           </div>
-        </div>
+        </Box>
       </section>
 
       {/* Pricing */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-5xl mx-auto">
+        <Box className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -544,7 +545,7 @@ hanzo dns records example.com`}</code>
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-3 gap-6">
             {pricingTiers.map((tier, index) => (
               <motion.div
                 key={tier.name}
@@ -559,9 +560,9 @@ hanzo dns records example.com`}</code>
                 }`}
               >
                 {tier.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-primary text-primary-foreground text-xs font-medium rounded-full">
+                  <Box className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-primary text-primary-foreground text-xs font-medium rounded-full">
                     Popular
-                  </div>
+                  </Box>
                 )}
                 <h3 className="text-lg font-semibold text-foreground mb-2">
                   {tier.name}
@@ -595,13 +596,13 @@ hanzo dns records example.com`}</code>
                 </a>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -609,12 +610,12 @@ hanzo dns records example.com`}</code>
             transition={{ duration: 0.5 }}
             className="relative bg-secondary/50 border border-border rounded-2xl p-8 md:p-12 text-center overflow-hidden"
           >
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-              <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-            </div>
+            <Box className="absolute inset-0 overflow-hidden">
+              <Box className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+              <Box className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+            </Box>
 
-            <div className="relative z-10">
+            <Box className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Take Control of Your DNS
               </h2>
@@ -622,7 +623,7 @@ hanzo dns records example.com`}</code>
                 Stop managing DNS in five different consoles. One API, every provider, zero vendor lock-in.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-4">
+              <Box className="flex flex-wrap justify-center gap-4">
                 <a
                   href="https://docs.hanzo.ai/docs/services/dns"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
@@ -636,11 +637,11 @@ hanzo dns records example.com`}</code>
                 >
                   View on GitHub
                 </a>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
                 <ProductFooter slug="dns" name="DNS" />
-</div>
+</Box>
       </section>
     </>
   )

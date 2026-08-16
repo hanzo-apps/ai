@@ -13,6 +13,7 @@ import Stack from "@/components/cloud/Stack"
 import { CONSOLE } from "@/components/home/nav-data"
 import { useModelCount } from '@/hooks/useModelCount'
 import { cloudCategories, layerCount, spell, tour } from '@/lib/data/cloud-primitives'
+import { Box } from '@hanzo/ui'
 
 const DOCS = "https://docs.hanzo.ai/docs/services/cloud"
 const GH = "https://github.com/hanzoai"
@@ -158,15 +159,15 @@ function Tour() {
       </p>
 
       {/* The operation that beat would actually run, in the API's own words. */}
-      <div className="mt-1 min-h-[3.25rem]">
+      <Box className="mt-1 min-h-[3.25rem]">
         <code className="font-mono text-xs text-neutral-300">
           <span className="text-neutral-500">{beat.method}</span> {beat.path}
         </code>
         <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-neutral-500">{beat.summary}</p>
-      </div>
+      </Box>
 
       {/* Real products, where the catalogue carries one for that operation. */}
-      <div className="mt-3 flex min-h-[1.75rem] flex-wrap items-center gap-1.5">
+      <Box className="mt-3 flex min-h-[1.75rem] flex-wrap items-center gap-1.5">
         {lit.map((p) => {
           const Icon = p.icon
           return (
@@ -178,12 +179,12 @@ function Tour() {
             </span>
           )
         })}
-      </div>
+      </Box>
 
       {/* The button sits BESIDE the dots where there is room and ABOVE them
           where there is not: at 390px the twelve targets wrap to three rows and
           a vertically centred button reads as floating in the middle of them. */}
-      <div className="mt-4 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+      <Box className="mt-4 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
         <button
           type="button"
           onClick={() => setHeld((v) => !v)}
@@ -192,7 +193,7 @@ function Tour() {
         >
           {paused ? 'Play' : 'Pause'}
         </button>
-        <div className="-mx-1 flex flex-wrap items-center">
+        <Box className="-mx-1 flex flex-wrap items-center">
           {beats.map((b, i) => (
             // The DOT is drawn inside the target rather than being it. This site
             // floors every button at 24px (44px where a finger points), which is
@@ -216,8 +217,8 @@ function Tour() {
               />
             </button>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </div>
   )
 }
@@ -392,7 +393,7 @@ function AssemblyTax({ layers }: { layers: number }) {
 
   return (
     <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="mx-auto max-w-5xl">
+      <Box className="mx-auto max-w-5xl">
         <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
           The assembly tax.
         </h2>
@@ -402,7 +403,7 @@ function AssemblyTax({ layers }: { layers: number }) {
           to the next vendor's input. It is the largest thing most teams buy, and it is invisible.
         </p>
 
-        <div className="mt-14 overflow-hidden rounded-2xl border border-neutral-800">
+        <Box className="mt-14 overflow-hidden rounded-2xl border border-neutral-800">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="border-b border-neutral-800">
@@ -449,13 +450,13 @@ function AssemblyTax({ layers }: { layers: number }) {
               ))}
             </tbody>
           </table>
-        </div>
+        </Box>
 
         <p className="mt-8 max-w-2xl text-lg leading-relaxed text-neutral-400">
           Integrated means the joins are already made. One origin, one identity, one balance — you
           did not build them, and you do not maintain them.
         </p>
-      </div>
+      </Box>
     </section>
   )
 }
@@ -467,7 +468,7 @@ function Evidence() {
   if (!tour.beats.length) return null
   return (
     <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="mx-auto max-w-5xl">
+      <Box className="mx-auto max-w-5xl">
         {/* Counted, and spelled the way the headline spells its ten — a page
             that writes one count as a word and the next as a numeral reads as
             two pages. */}
@@ -480,10 +481,10 @@ function Evidence() {
           one the platform serves: each is checked against the published OpenAPI document on every
           build, and a beat the document does not carry is dropped rather than drawn.
         </p>
-        <div className="mt-12">
+        <Box className="mt-12">
           <Tour />
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   )
 }
@@ -501,8 +502,8 @@ function Evidence() {
 function Terms() {
   return (
     <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="mx-auto max-w-5xl">
-        <div className="grid gap-14 lg:grid-cols-3 lg:gap-10">
+      <Box className="mx-auto max-w-5xl">
+        <Box className="grid gap-14 lg:grid-cols-3 lg:gap-10">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
               Reliable platform.
@@ -555,10 +556,10 @@ function Terms() {
               traces back to a request. Here is the whole shape of it.
             </p>
           </div>
-        </div>
+        </Box>
 
         <Ladder />
-      </div>
+      </Box>
     </section>
   )
 }
@@ -568,13 +569,13 @@ function Terms() {
 function FinalCTA() {
   return (
     <section className="relative overflow-hidden border-t border-neutral-900 px-4 py-28 sm:px-6 sm:py-32 lg:px-8">
-      <div className="pointer-events-none absolute inset-0">
+      <Box className="pointer-events-none absolute inset-0">
         <div
           className="absolute left-1/2 top-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.12]"
           style={{ background: "radial-gradient(circle, #ffffff 0%, transparent 70%)", filter: "blur(120px)" }}
         />
-      </div>
-      <div className="relative z-10 mx-auto max-w-3xl text-center">
+      </Box>
+      <Box className="relative z-10 mx-auto max-w-3xl text-center">
         <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
           Start with one bill.
         </h2>
@@ -589,7 +590,7 @@ function FinalCTA() {
             HERE, beside the sentence that offers it, rather than in the hero —
             on the fold it was a fourth thing competing with the claim, and in a
             third-width column it broke across three lines. */}
-        <div className="mx-auto mt-8 inline-flex max-w-full flex-wrap items-center justify-center gap-3 rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-2.5">
+        <Box className="mx-auto mt-8 inline-flex max-w-full flex-wrap items-center justify-center gap-3 rounded-lg border border-neutral-800 bg-neutral-900/60 px-4 py-2.5">
           {/* `break-words`, not `break-all`: at 390px the latter broke the image
               name mid-token — "…/clou" then "d" — which is a command nobody can
               read, let alone trust. This wraps between the words the command
@@ -598,9 +599,9 @@ function FinalCTA() {
             $ {DEPLOY}
           </span>
           <CopyButton value={DEPLOY} label="Copy deploy command" size={20} id="install-cli" />
-        </div>
+        </Box>
 
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+        <Box className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
             href={CONSOLE}
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black no-underline transition-opacity hover:opacity-90 hover:no-underline"
@@ -615,8 +616,8 @@ function FinalCTA() {
           >
             Read the docs
           </a>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   )
 }

@@ -5,6 +5,7 @@ import { Button } from "@hanzo/ui";
 import { Check, Server, Search, Wallet, Shield, Zap, Bell, Database, Layers } from "lucide-react";
 import { loadBlockchain, fallbackBlockchain, formatCatalogPrice, type BlockchainCatalog } from "@/lib/plans";
 import Link from 'next/link'
+import { Box } from '@hanzo/ui'
 
 // Icons are presentation, so they stay here — the catalog prices a product, it
 // does not choose a glyph. Keyed by catalog id so a renamed product keeps its icon
@@ -84,15 +85,15 @@ const BlockchainPricing = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto mb-16">
+    <Box className="max-w-7xl mx-auto mb-16">
       {/* RPC Plans */}
-      <div className="mb-20">
+      <Box className="mb-20">
         <h2 className="text-3xl font-bold mb-4">RPC Node Access</h2>
         <p className="text-muted-foreground text-lg mb-8">
           Multi-chain RPC endpoints with 100+ chains, archive data, and enterprise-grade reliability
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {rpcPricing.map((plan) => (
             <div
               key={plan.name}
@@ -103,20 +104,20 @@ const BlockchainPricing = () => {
               }`}
             >
               {plan.highlighted && (
-                <div className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">
+                <Box className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">
                   Most Popular
-                </div>
+                </Box>
               )}
               <h3 className="text-xl font-semibold mb-2">{plan.name}</h3>
               <p className="text-muted-foreground text-sm mb-4">{plan.description}</p>
 
-              <div className="mb-6">
+              <Box className="mb-6">
                 <span className="text-3xl font-bold">{plan.price}</span>
                 <span className="text-muted-foreground">{plan.period}</span>
                 {plan.cuRate && (
-                  <div className="text-xs text-muted-foreground mt-1">{plan.cuRate}</div>
+                  <Box className="text-xs text-muted-foreground mt-1">{plan.cuRate}</Box>
                 )}
-              </div>
+              </Box>
 
               <ul className="space-y-3 mb-6">
                 {plan.features.map((feature, idx) => (
@@ -138,114 +139,114 @@ const BlockchainPricing = () => {
               </Button>
             </div>
           ))}
-        </div>
+        </Box>
 
         <p className="text-sm text-muted-foreground text-center">
           All plans include WebSocket support, JSON-RPC & REST APIs, and auto-scaling.
           <Link href="/blockchain" className="text-foreground hover:underline ml-1">Compare all features →</Link>
         </p>
-      </div>
+      </Box>
 
       {/* Data APIs */}
-      <div className="mb-20">
+      <Box className="mb-20">
         <h2 className="text-3xl font-bold mb-4">Data APIs</h2>
         <p className="text-muted-foreground text-lg mb-8">
           High-level APIs for tokens, NFTs, wallets, and blockchain indexing
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           {apiPricing.map((api) => {
             const Icon = api.icon;
             return (
-              <div key={api.name} className="rounded-xl p-6 border border-neutral-800 bg-neutral-900/30">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+              <Box key={api.name} className="rounded-xl p-6 border border-neutral-800 bg-neutral-900/30">
+                <Box className="flex items-start gap-4 mb-4">
+                  <Box className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5 text-foreground" />
-                  </div>
+                  </Box>
                   <div>
                     <h3 className="text-xl font-semibold">{api.name}</h3>
                     <p className="text-muted-foreground text-sm">{api.description}</p>
                   </div>
-                </div>
+                </Box>
 
-                <div className="grid grid-cols-3 gap-4 text-sm">
+                <Box className="grid grid-cols-3 gap-4 text-sm">
                   {api.pricing.map((tier) => (
-                    <div key={tier.tier} className="text-center p-3 rounded-lg bg-background/20">
-                      <div className="text-muted-foreground text-xs mb-1">{tier.tier}</div>
-                      <div className="font-semibold">{tier.price}</div>
-                      <div className="text-xs text-muted-foreground">{tier.requests}</div>
-                    </div>
+                    <Box key={tier.tier} className="text-center p-3 rounded-lg bg-background/20">
+                      <Box className="text-muted-foreground text-xs mb-1">{tier.tier}</Box>
+                      <Box className="font-semibold">{tier.price}</Box>
+                      <Box className="text-xs text-muted-foreground">{tier.requests}</Box>
+                    </Box>
                   ))}
-                </div>
-              </div>
+                </Box>
+              </Box>
             );
           })}
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       {/* Premium Features */}
-      <div className="mb-20">
+      <Box className="mb-20">
         <h2 className="text-3xl font-bold mb-4">Premium Features</h2>
         <p className="text-muted-foreground text-lg mb-8">
           Advanced capabilities for production applications
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {premiumFeatures.map((feature) => {
             const Icon = feature.icon;
             return (
-              <div key={feature.name} className="rounded-xl p-6 border border-neutral-800 bg-neutral-900/30">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <Box key={feature.name} className="rounded-xl p-6 border border-neutral-800 bg-neutral-900/30">
+                <Box className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                   <Icon className="w-5 h-5 text-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-lg font-semibold mb-2">{feature.name}</h3>
                 <p className="text-muted-foreground text-sm mb-4">{feature.description}</p>
-                <div className="text-xl font-bold text-foreground">{feature.price}</div>
-                <div className="text-xs text-muted-foreground mt-1">{feature.note}</div>
-              </div>
+                <Box className="text-xl font-bold text-foreground">{feature.price}</Box>
+                <Box className="text-xs text-muted-foreground mt-1">{feature.note}</Box>
+              </Box>
             );
           })}
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       {/* Supported Chains */}
-      <div className="mb-20">
+      <Box className="mb-20">
         <h2 className="text-3xl font-bold mb-4 text-center">100+ Supported Chains</h2>
         <p className="text-muted-foreground text-lg mb-8 text-center">
           EVM, Solana, Cosmos, and more
         </p>
 
-        <div className="flex flex-wrap justify-center gap-3">
+        <Box className="flex flex-wrap justify-center gap-3">
           {supportedChains.map((chain) => (
-            <div
+            <Box
               key={chain}
               className="px-4 py-2 rounded-full border border-border bg-secondary/50 text-sm text-foreground/80"
             >
               {chain}
-            </div>
+            </Box>
           ))}
-          <div className="px-4 py-2 rounded-full border border-white/30 bg-primary/10 text-sm text-foreground">
+          <Box className="px-4 py-2 rounded-full border border-white/30 bg-primary/10 text-sm text-foreground">
             +80 more
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
 
       {/* CTA */}
-      <div className="text-center">
+      <Box className="text-center">
         <h2 className="text-2xl font-bold mb-4">Ready to build on Web3?</h2>
         <p className="text-muted-foreground mb-6">
           Start free and scale as you grow. No credit card required.
         </p>
-        <div className="flex justify-center gap-4">
+        <Box className="flex justify-center gap-4">
           <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8">
             Start Building Free
           </Button>
           <Button size="lg" variant="outline" className="border-border hover:border-neutral-600">
             Talk to Sales
           </Button>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

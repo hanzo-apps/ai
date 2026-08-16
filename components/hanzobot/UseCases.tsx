@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { HeadsetIcon, MessageCircle, BookOpen, FilePlus } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const UseCases = () => {
   const useCases = [
@@ -31,7 +32,7 @@ const UseCases = () => {
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -45,7 +46,7 @@ const UseCases = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {useCases.map((useCase, index) => (
             <motion.div
               key={index}
@@ -55,9 +56,9 @@ const UseCases = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-gradient-to-br from-neutral-900/50 to-neutral-900/30 border border-neutral-800 rounded-xl p-6 hover:border-white/30 transition-colors"
             >
-              <div className="bg-primary/10 p-3 rounded-lg inline-block mb-4">
+              <Box className="bg-primary/10 p-3 rounded-lg inline-block mb-4">
                 <useCase.icon className="h-6 w-6 text-foreground" />
-              </div>
+              </Box>
               <h3 className="text-xl font-semibold text-[var(--white)] mb-4">{useCase.title}</h3>
               <ul className="space-y-2">
                 {useCase.examples.map((example, i) => (
@@ -69,8 +70,8 @@ const UseCases = () => {
               </ul>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

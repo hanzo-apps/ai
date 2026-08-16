@@ -4,6 +4,7 @@ import type { ComponentType } from "react";
 import { motion } from "@/components/motion";
 import { ExternalLink, Github, MessageCircle, Users, BookOpen, Calendar, MessageSquare } from "lucide-react";
 import Link from "next/link";
+import { Box } from '@hanzo/ui'
 
 interface CommunityLink {
   type: "discord" | "github" | "docs" | "discussions" | "twitter" | "slack" | "events" | "forum";
@@ -69,13 +70,13 @@ export function CommunitySection({ productName, links, contributors, stars }: Co
       transition={{ duration: 0.6 }}
       className="py-16 px-4 md:px-8"
     >
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-2 mb-2">
+      <Box className="max-w-4xl mx-auto">
+        <Box className="flex items-center gap-2 mb-2">
           <Users className="w-5 h-5 text-foreground" />
           <span className="text-sm font-medium text-foreground uppercase tracking-wider">
             Community
           </span>
-        </div>
+        </Box>
 
         <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
           Join the {productName} Community
@@ -86,24 +87,24 @@ export function CommunitySection({ productName, links, contributors, stars }: Co
 
         {/* Stats */}
         {(contributors || stars) && (
-          <div className="flex gap-6 mb-8">
+          <Box className="flex gap-6 mb-8">
             {stars && (
-              <div className="flex items-center gap-2">
+              <Box className="flex items-center gap-2">
                 <span className="text-2xl font-bold text-foreground">{stars}</span>
                 <span className="text-muted-foreground">GitHub Stars</span>
-              </div>
+              </Box>
             )}
             {contributors && (
-              <div className="flex items-center gap-2">
+              <Box className="flex items-center gap-2">
                 <span className="text-2xl font-bold text-foreground">{contributors}+</span>
                 <span className="text-muted-foreground">Contributors</span>
-              </div>
+              </Box>
             )}
-          </div>
+          </Box>
         )}
 
         {/* Links Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {links.map((link, index) => {
             const Icon = iconMap[link.type];
             const label = link.label || labelMap[link.type];
@@ -111,12 +112,12 @@ export function CommunitySection({ productName, links, contributors, stars }: Co
 
             const content = (
               <>
-                <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
+                <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
                   <Icon className="w-5 h-5 text-foreground/80" />
-                </div>
-                <div className="flex-1">
+                </Box>
+                <Box className="flex-1">
                   <span className="font-medium text-foreground">{label}</span>
-                </div>
+                </Box>
                 {!link.internal && <ExternalLink className="w-4 h-4 text-muted-foreground" />}
               </>
             );
@@ -156,10 +157,10 @@ export function CommunitySection({ productName, links, contributors, stars }: Co
               </motion.a>
             );
           })}
-        </div>
+        </Box>
 
         {/* Contribute CTA */}
-        <div className="mt-8 p-6 bg-gradient-to-r from-white/10 to-transparent border border-border rounded-xl">
+        <Box className="mt-8 p-6 bg-gradient-to-r from-white/10 to-transparent border border-border rounded-xl">
           <h3 className="text-lg font-semibold text-foreground mb-2">
             Want to Contribute?
           </h3>
@@ -175,8 +176,8 @@ export function CommunitySection({ productName, links, contributors, stars }: Co
             Read our Contributing Guide
             <ExternalLink className="w-3 h-3" />
           </a>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </motion.section>
   );
 }

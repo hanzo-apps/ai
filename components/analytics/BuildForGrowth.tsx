@@ -4,11 +4,12 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { TrendingUp, Users, CreditCard, ArrowRight } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const BuildForGrowth = () => {
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900/20 to-background">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -23,7 +24,7 @@ const BuildForGrowth = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
               icon: <TrendingUp className="h-8 w-8 text-foreground" />,
@@ -52,15 +53,15 @@ const BuildForGrowth = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800"
             >
-              <div className="mb-5">{item.icon}</div>
+              <Box className="mb-5">{item.icon}</Box>
               <h3 className="text-xl font-bold mb-3">{item.title}</h3>
               <p className="text-muted-foreground mb-5">{item.description}</p>
-              <div className="text-sm font-medium px-3 py-1 bg-neutral-800 rounded-full inline-block text-foreground/70">
+              <Box className="text-sm font-medium px-3 py-1 bg-neutral-800 rounded-full inline-block text-foreground/70">
                 {item.metrics}
-              </div>
+              </Box>
             </motion.div>
           ))}
-        </div>
+        </Box>
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -73,7 +74,7 @@ const BuildForGrowth = () => {
             See what a report looks like <ArrowRight className="ml-2 h-4 w-4" />
           </a>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };
