@@ -5,14 +5,13 @@ import { useIam } from '@hanzo/iam/react'
 import { useAnalytics } from '@hanzo/event/react'
 import { EVENTS } from '@hanzo/event'
 import { markSignupIntent } from '@/lib/analytics/signup-intent'
-import { Spinner } from '@hanzo/gui'
-import { Box } from '@hanzo/ui'
+import { Waiting } from '@/components/auth/waiting'
 
 /**
- * /signup — no local registration form. HIP-0111: IAM owns onboarding. We
- * start the OAuth2 PKCE redirect with a signup hint; IAM hosts the form.
+ * /signup — no registration form here either. HIP-0111: IAM owns onboarding, so
+ * this starts the OAuth2 PKCE redirect with a signup hint and IAM hosts the form.
  */
-const SignUpPage = () => {
+export default function SignUpPage() {
   const { login } = useIam()
   const analytics = useAnalytics()
 
@@ -27,15 +26,5 @@ const SignUpPage = () => {
     login({ additionalParams: { signup: 'true' } })
   }, [login, analytics])
 
-  return (
-    <Box className="min-h-screen flex flex-col items-center justify-center bg-background">
-      <div className="text-center space-y-6">
-        <Spinner size="large" color="$foreground" alignItems="center" />
-        <h1 className="text-xl font-medium text-foreground">Redirecting to sign up…</h1>
-        <p className="text-muted-foreground">Taking you to Hanzo ID.</p>
-      </div>
-    </Box>
-  )
+  return <Waiting title="Redirecting to sign up…" lede="Taking you to Hanzo ID." />
 }
-
-export default SignUpPage
