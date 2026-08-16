@@ -113,10 +113,10 @@ const PersonalPlans = () => {
       <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
         {/* Free leads. Everyone starts here, so it is the first thing read. */}
         <PricingPlan
-          // Free has no catalog row to take an id from — it is the one rung
-          // that never charges — so it states the id the rest of the site
-          // already calls it by.
-          plan="free"
+          // No `plan`, so this card reports no plan click. Free is deliberately
+          // not a billing row, and it is the one rung that can never reach a
+          // checkout — counting it as a plan choice would dilute the step it
+          // sits in with the choice that definitionally cannot convert.
           name={FREE.name}
           icon={<Sparkles className="h-6 w-6 text-muted-foreground" />}
           price="$0"

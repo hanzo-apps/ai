@@ -87,6 +87,11 @@ const TeamEnterpriseStrip = () => {
   const headline = annual ?? monthly;
   return (
   <Box className="max-w-6xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+    {/* Every line of this card — the price, the seat minimum, the door it opens
+        and the id its click reports — is read off one row. With no row there is
+        nothing to sell, and the card would otherwise render a price with no
+        number, a minimum nothing stated, and no way to buy. */}
+    {seat && (
     <Box className="p-6 rounded-xl border border-border bg-[var(--black)] flex flex-col">
       <Box className="flex items-center gap-3 mb-3">
         <Users className="h-5 w-5 text-muted-foreground" />
@@ -108,19 +113,18 @@ const TeamEnterpriseStrip = () => {
           </>
         )}
       </p>
-      {seat && (
-        <Button asChild variant="outline" className="w-full border-border">
-          <a
-            href={planCheckoutUrl(seat)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => choose(seat.id, "Get started")}
-          >
-            Get started
-          </a>
-        </Button>
-      )}
+      <Button asChild variant="outline" className="w-full border-border">
+        <a
+          href={planCheckoutUrl(seat)}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => choose(seat.id, "Get started")}
+        >
+          Get started
+        </a>
+      </Button>
     </Box>
+    )}
 
     <Box className="p-6 rounded-xl border border-border bg-[var(--black)] flex flex-col">
       <Box className="flex items-center gap-3 mb-3">

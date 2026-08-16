@@ -8,13 +8,22 @@ import { EVENTS } from "@hanzo/event";
 import { Box } from '@hanzo/ui'
 
 interface PricingPlanProps {
-  /** Catalog id of the tier — the value `plan_clicked` carries.
+  /** Catalog id of the tier, and the value `plan_clicked` carries.
    *
    *  The event needs the plan's IDENTITY, and `name` is its label. billing and
    *  pay both file their side of the upgrade funnel under the catalog id, so a
    *  card that reported "Pro" described the same tier by a name no other
-   *  surface answers to, and no step could be joined to the next on it. */
-  plan: string;
+   *  surface answers to, and no step could be joined to the next on it.
+   *
+   *  OMITTED by a card that sells no catalog row, and then the card reports no
+   *  plan click. The product pages reuse this layout for tiers the biller has
+   *  never heard of, whose CTAs go to GitHub or a sales call rather than a
+   *  checkout — those are not upgrade intent, and `$click` already records
+   *  them as the interactions they are. Naming them anyway would be worse than
+   *  silence: the subscription and machine catalogs collide on `pro` and
+   *  `enterprise` (see the note atop lib/plans), so a hand-typed id files a
+   *  dataroom click against the personal ladder. */
+  plan?: string;
   name: string;
   icon: React.ReactNode;
   price: string;
@@ -49,7 +58,9 @@ const PricingPlan = ({
   ctaLabel,
 }: PricingPlanProps) => {
   const analytics = useAnalytics();
-  const track = (cta: string) => analytics.capture(EVENTS.PLAN_CLICKED, { plan, cta });
+  const track = (cta: string) => {
+    if (plan) analytics.capture(EVENTS.PLAN_CLICKED, { plan, cta });
+  };
   // A CTA that NAVIGATES is an anchor, not a click handler. Button renders a
   // div[role=button], which never fires on Enter or Space — so a `window.open`
   // handler made these plans unstartable by keyboard or screen reader, and took
