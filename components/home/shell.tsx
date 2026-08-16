@@ -257,9 +257,9 @@ export function SiteHeader({
       id: 'solutions',
       label: 'Solutions',
       href: '/solutions',
-      glyph: 'blocks',
+      glyph: 'puzzle',
       items: ([
-        { id: 'solutions', label: 'Solutions', href: '/solutions', glyph: 'blocks', hint: 'By industry and by job' },
+        { id: 'solutions', label: 'Solutions', href: '/solutions', glyph: 'puzzle', hint: 'By industry and by job' },
         { id: 'customers', label: 'Customers', href: '/customers', glyph: 'users', hint: 'Teams building on Hanzo' },
         { id: 'pricing', label: 'Pricing', href: '/pricing', glyph: 'card', hint: 'Plans and rates' },
         { id: 'contact', label: 'Contact sales', href: '/contact', glyph: 'chat', hint: 'Talk to us' },
@@ -290,7 +290,7 @@ export function SiteHeader({
       id: 'research',
       label: 'Research',
       href: '/research',
-      glyph: 'ring',
+      glyph: 'pulse',
       items: ([
         { id: 'papers', label: 'Papers', href: '/research', glyph: 'book', hint: 'What we publish' },
         { id: 'models', label: 'Models', href: '/models', glyph: 'spark', hint: 'Every model we serve' },
