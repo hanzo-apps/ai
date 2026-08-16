@@ -69,7 +69,7 @@ export default function O11yPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            Unified observability — traces, metrics, logs, profiles
+            Traces, metrics and logs, in one place
           </motion.p>
 
           <motion.p
@@ -78,9 +78,10 @@ export default function O11yPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            One platform for every signal: traces, metrics, logs, and continuous
-            profiles. Correlate across pillars from a single query, debug from
-            symptom to root cause without tab switching.
+            Your services send OpenTelemetry; it lands in one column store and comes
+            back as APM, logs, traces, metrics and exceptions. Because it is one store,
+            a span and the log line it produced are one query rather than two tabs and
+            a copied timestamp.
           </motion.p>
 
           <motion.div
@@ -119,10 +120,11 @@ export default function O11yPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Four Pillars, One Query Surface
+              One store, one query language
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Stop pivoting between five tools to debug one incident.
+              Every panel scopes to your org from the token, so a shared deployment
+              still answers one tenant at a time.
             </p>
           </motion.div>
 
@@ -130,39 +132,39 @@ export default function O11yPage() {
             {[
               {
                 icon: Workflow,
-                title: "Distributed Traces",
+                title: "Traces and APM",
                 description:
-                  "End-to-end spans across services, queues, and databases. Latency-by-percentile, exemplars, and service maps.",
+                  "Follow one request across services, queues and databases. Sort by the slow tail rather than the average, and open the span that spent the time.",
               },
               {
                 icon: BarChart3,
                 title: "Metrics",
                 description:
-                  "Powered by Hanzo Metrics. PromQL-compatible, high-cardinality friendly, with native histograms.",
+                  "Write PromQL if you already have it, or build the query in the UI if you do not. Both run against the same store the traces are in.",
               },
               {
                 icon: ScrollText,
-                title: "Structured Logs",
+                title: "Logs",
                 description:
-                  "Schema-aware log search with millisecond latency. Pivot from a span straight to its log line and back.",
+                  "Search structured logs by field, not by regex over a blob. A span carries the id its log lines were written with, so the pivot is a click.",
               },
               {
                 icon: Flame,
-                title: "Continuous Profiling",
+                title: "Exceptions",
                 description:
-                  "Always-on CPU and memory profiles. Find the function that costs you ten percent of every dollar.",
+                  "Errors are grouped and counted rather than listed, so a thousand of the same stack trace is one row with a number on it — and it links to the trace that raised it.",
               },
               {
                 icon: Search,
-                title: "Cross-Signal Correlation",
+                title: "Dashboards and alerts",
                 description:
-                  "Click a trace, see its metrics, logs, and profile in one view. No copy-pasting timestamps.",
+                  "An alert rule is a saved query, so what fires at three in the morning is something you already looked at. It reaches PagerDuty, Opsgenie, Slack, Teams, email or a webhook.",
               },
               {
                 icon: Activity,
-                title: "OpenTelemetry Native",
+                title: "OpenTelemetry on the wire",
                 description:
-                  "Ingest from any OTLP source — Hanzo Telemetry, vanilla OTel collectors, or vendor agents.",
+                  "OTLP over gRPC on 4317 and HTTP on 4318. Any OTel SDK or collector points at it by setting one endpoint variable — there is no agent of ours to install.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -191,7 +193,9 @@ export default function O11yPage() {
       {/* Resources / Get Started */}
       <section className="py-16 border-t border-neutral-800">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Get started with O11y</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Point an OTLP endpoint at it
+          </h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="https://docs.hanzo.ai/docs/o11y"

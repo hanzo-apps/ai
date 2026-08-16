@@ -69,7 +69,7 @@ export default function TelemetryPage() {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="text-2xl md:text-3xl font-medium text-foreground mb-4"
           >
-            OpenTelemetry collector and pipeline for AI workloads
+            The collector that sits between your app and wherever the data goes
           </motion.p>
 
           <motion.p
@@ -78,9 +78,10 @@ export default function TelemetryPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
           >
-            Collect, transform, and route traces, metrics, and logs from any
-            source to any backend. Built on OpenTelemetry, tuned for
-            high-cardinality AI inference traffic.
+            Your services talk to it instead of talking to a backend. It receives OTLP,
+            batches it, holds a memory ceiling so a traffic spike cannot take the host
+            down with it, and forwards onward. Change where the data goes by editing its
+            config — not by redeploying every service that produces the data.
           </motion.p>
 
           <motion.div
@@ -119,10 +120,10 @@ export default function TelemetryPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-              One Pipeline for Every Signal
+              One hop you control
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Vendor-neutral collection, transformation, and routing.
+              The last place your telemetry is yours before it goes anywhere.
             </p>
           </motion.div>
 
@@ -130,39 +131,39 @@ export default function TelemetryPage() {
             {[
               {
                 icon: Cable,
-                title: "OTLP Native",
+                title: "OTLP in, OTLP out",
                 description:
-                  "First-class support for OTLP/gRPC and OTLP/HTTP — point your existing collectors at Hanzo and they just work.",
+                  "Receives over gRPC and HTTP, exports the same way. OTLP is the format the OpenTelemetry SDKs already speak, so nothing in your code changes to point at it.",
               },
               {
                 icon: Layers,
-                title: "Traces, Metrics, Logs",
+                title: "Traces, metrics and logs",
                 description:
-                  "One pipeline for all three signals. Correlate spans, gauges, and log lines without juggling agents.",
+                  "All three move through the same process, so there is one thing to run, one config to read and one place to look when telemetry stops arriving.",
               },
               {
                 icon: Filter,
-                title: "Smart Sampling",
+                title: "Batching",
                 description:
-                  "Tail-based sampling on errors, latency, and cost. Keep what matters, drop the noise.",
+                  "Spans arrive one at a time and leave in batches. That is the difference between a request per span and a request per few thousand, and your backend feels it.",
               },
               {
                 icon: Zap,
-                title: "AI-Aware Processors",
+                title: "A memory ceiling",
                 description:
-                  "Built-in processors for token counts, prompt redaction, model routing, and inference latency.",
+                  "Tell it how much memory it may use and it refuses work rather than exceeding it. Telemetry is the thing that should degrade during an incident, not the thing that causes one.",
               },
               {
                 icon: Globe,
-                title: "Any Backend",
+                title: "Assembled, not installed",
                 description:
-                  "Export to Hanzo Metrics, Hanzo O11y, Datadog, Honeycomb, Grafana — or all at once.",
+                  "This is the collector itself. Build a distribution with the receivers, processors and exporters you actually want, and ship one binary containing those and nothing else.",
               },
               {
                 icon: Shield,
-                title: "Privacy First",
+                title: "It runs where you run",
                 description:
-                  "Redact PII at the edge. Self-hosted by default. Your prompts never leave your network.",
+                  "A binary in your own network. Whatever you decide not to forward, you decide before the data has left — which is the only point where that is still your call.",
               },
             ].map((feature, index) => (
               <motion.div
@@ -191,7 +192,9 @@ export default function TelemetryPage() {
       {/* Resources / Get Started */}
       <section className="py-16 border-t border-neutral-800">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Get started with Telemetry</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Put it in front of your backend
+          </h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="https://docs.hanzo.ai/docs/projects/hanzoai/telemetry"
