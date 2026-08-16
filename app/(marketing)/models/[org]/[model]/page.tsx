@@ -77,9 +77,9 @@ function CodeBlock({ code, lang }: { code: string; lang: string }) {
   return (
     <Box className="rounded-xl bg-background border border-border overflow-hidden">
       <Box className="flex items-center gap-2 px-4 py-2 border-b border-border bg-secondary/30">
-        <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-        <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+        <span className="w-2.5 h-2.5 rounded-full bg-chrome-dot-red" />
+        <span className="w-2.5 h-2.5 rounded-full bg-chrome-dot-yellow" />
+        <span className="w-2.5 h-2.5 rounded-full bg-chrome-dot-green" />
         <span className="ml-2 text-xs text-muted-foreground font-mono">{lang}</span>
       </Box>
       <pre className="p-4 text-xs text-foreground/90 font-mono overflow-x-auto leading-relaxed">

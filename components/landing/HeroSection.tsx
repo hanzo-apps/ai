@@ -262,12 +262,9 @@ const HeroSection = () => {
                 {/* Browser chrome */}
                 <Box className="flex items-center gap-2 px-4 py-2.5 border-b border-border bg-secondary">
                   <Box className="flex gap-1.5">
-                    {/* The only saturated colour on this hero. @hanzo/design owns
-                        these three exactly (--chrome-dot-*), alpha included, so the
-                        /70 modifier goes with the hex. */}
-                    <Box className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-red)]" />
-                    <Box className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-yellow)]" />
-                    <Box className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-green)]" />
+                    <Box className="w-2.5 h-2.5 rounded-full bg-chrome-dot-red" />
+                    <Box className="w-2.5 h-2.5 rounded-full bg-chrome-dot-yellow" />
+                    <Box className="w-2.5 h-2.5 rounded-full bg-chrome-dot-green" />
                   </Box>
                   <Box className="ml-2 flex-1 flex items-center justify-center">
                     <span className="text-[11px] text-muted-foreground font-mono px-3 py-1 rounded-md bg-background/60 border border-border/60">

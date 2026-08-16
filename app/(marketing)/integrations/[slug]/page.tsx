@@ -139,7 +139,7 @@ export default async function IntegrationPage({ params }: Props) {
                   href={integration.creatorUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-red-400 hover:underline"
+                  className="text-state-error hover:underline"
                 >
                   {integration.creator}
                 </a>
