@@ -104,12 +104,16 @@ export default function Composer() {
             band it sits in is transparent, because tinting the full width to
             hold one centred control drew a shade across the bottom of every
             page. Chrome where there is a control; nothing where there is not. */}
-        {/* One border, at one value. Brightening it on focus put a second ring
-            inside the focus ring app/globals.css draws around this element —
-            and with nothing else changing colour here, `transition-colors` had
-            nothing left to carry. */}
+        {/* ONE EDGE, DRAWN ONCE. @hanzo/composer already rings this pill — a
+            1.5px conic band on `.hz-composer::before`, masked to the perimeter,
+            brighter where the light would fall and dimmer where it would not.
+            A flat `border-white/[0.07]` on top of it was a second stroke doing
+            the first one's job, and two strokes on one edge is what makes a
+            control read as an outline drawn around a hole rather than as a
+            surface with a lit rim. The band is the edge; the fill and the blur
+            under it are the rest. */}
         <Box
-          className="flex items-center gap-1.5 rounded-full border border-white/[0.07] p-[4px]"
+          className="flex items-center gap-1.5 rounded-full p-[4px]"
           style={{
             background: 'var(--hz-chrome)',
             backdropFilter: 'var(--hz-chrome-blur)',
