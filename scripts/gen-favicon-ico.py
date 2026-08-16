@@ -19,11 +19,6 @@ sizes = [(16, 16), (32, 32), (48, 48), (64, 64)]
 src.save(os.path.join(PUB, "favicon.ico"), format="ICO", sizes=sizes)
 print("wrote favicon.ico", sizes)
 
-# apple-touch-icon must be opaque (no alpha) so iOS doesn't composite on black.
-apple = Image.open(os.path.join(PUB, "apple-touch-icon.png")).convert("RGB")
-apple.save(os.path.join(PUB, "apple-touch-icon.png"), format="PNG")
-print("flattened apple-touch-icon.png to RGB")
-
 intermediate = os.path.join(PUB, "favicon-48.png")
 if os.path.exists(intermediate):
     os.remove(intermediate)
