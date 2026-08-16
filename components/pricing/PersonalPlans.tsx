@@ -40,10 +40,24 @@ const isSellable = (p: SubscriptionPlan) =>
 // first-paint fallback now comes from @hanzo/plans — the same package commerce
 // seeds its catalog from — and the live catalog replaces it on load.
 
+// Free, read from the bundled catalog rather than the live one.
+//
+// Commerce is the authority on what a plan COSTS, and Free costs nothing — so
+// there is no price here for the live catalog to be authoritative about, and
+// waiting on it only creates a window where the page can lose the rung
+// altogether. That window is real: the catalog and this page ship separately,
+// and a page that draws Free from the API is a page with no Free tier for as
+// long as the API has not caught up.
+//
+// It is still the ONE catalog either way: @hanzo/plans is the package commerce
+// seeds from, so this is the same row by a build-time path.
+const FREE = fallbackPlans("personal").find((p) => p.priceMonthly === 0);
+
 const PersonalPlans = () => {
-  // Commerce is the price authority — /v1/billing/plans, fetched on load. The
-  // static array is a first-paint fallback so the page never flashes empty, not
-  // a second source of truth: whatever commerce returns replaces it wholesale.
+  // Commerce is the price authority for every rung that CHARGES —
+  // /v1/billing/plans, fetched on load. The static array is a first-paint
+  // fallback so the page never flashes empty, not a second source of truth:
+  // whatever commerce returns replaces it wholesale.
   const [plans, setPlans] = useState<SubscriptionPlan[]>(fallbackPlans("personal").filter(isSellable));
 
   useEffect(() => {
@@ -52,6 +66,10 @@ const PersonalPlans = () => {
       if (sellable.length) setPlans(sellable);
     });
   }, []);
+
+  // Free leads, then everything that charges. Taking Free from the bundle and
+  // the rest from commerce means neither can produce it twice.
+  const ladder = [...(FREE ? [FREE] : []), ...plans.filter((p) => p.priceMonthly !== 0)];
 
   function formatPrice(plan: SubscriptionPlan) {
     if (plan.contactSales || plan.priceMonthly == null) return "Custom";
@@ -85,7 +103,7 @@ const PersonalPlans = () => {
           catalog puts it first, not because a card was placed ahead of the
           list. */}
       <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {plans.map((plan) => {
+        {ladder.map((plan) => {
           const free = plan.priceMonthly === 0;
           return (
             <PricingPlan
