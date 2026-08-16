@@ -67,14 +67,33 @@
   --color-ring: var(--ring);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
+  /* The only hues @hanzo/design permits (its DESIGN.md §2.4), reached by their
+     token names. Spelled as Tailwind palette literals they were a different
+     colour than the system publishes — v4 retuned its ramp, so `bg-green-400`
+     painted #05df72 where design's live dot is #4ade80 — and a chroma audit
+     could not tell a sanctioned state from a stray one. */
+  --color-state-error: var(--state-error);
+  --color-state-error-text: var(--state-error-text);
+  --color-state-online: var(--state-online);
+  --color-state-success: var(--state-success);
+  --color-chrome-dot-red: var(--chrome-dot-red);
+  --color-chrome-dot-yellow: var(--chrome-dot-yellow);
+  --color-chrome-dot-green: var(--chrome-dot-green);
 }
 
 /* next/font mints a per-build family name and exposes it as --font-geist /
    --font-geist-mono on <html>. @hanzo/design's fonts.css declares --font-sans /
    --font-display / --font-mono in terms of Geist by NAME; binding them to the
    next/font variables here is what makes the loaded, subsetted, self-hosted
-   files the ones that actually render. One binding, one place. */
-:root {
+   files the ones that actually render. One binding, one place.
+
+   `html:root`, not `:root`: @hanzo/ui's <Hanzo> imports its own styles.css,
+   which carries a copy of design's tokens and loads after this file, so a plain
+   :root tied and lost on order. What it took with it is next/font's
+   metric-matched "Geist Fallback" — the face that keeps the swap from moving the
+   page — and the whole site paints the unadjusted stack until Geist arrives.
+   One selector outranks any package sheet restating the family. */
+html:root {
   --font-sans: var(--font-geist), 'Geist Sans', ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-sans);
   --font-mono: var(--font-geist-mono), 'Geist Mono', ui-monospace, monospace;

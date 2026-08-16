@@ -200,7 +200,7 @@ export default async function ModelsPage() {
         />
         <Box className="relative z-10 mx-auto max-w-4xl">
           <Box className="mb-8 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 text-xs text-neutral-300">
-            <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
+            <span className="h-1.5 w-1.5 rounded-full bg-state-online animate-pulse" />
             Live from api.hanzo.ai
           </Box>
           <h1 className="mb-6 text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
@@ -339,9 +339,9 @@ export default async function ModelsPage() {
             </Box>
             <Box className="mb-8 overflow-hidden rounded-xl border border-border bg-background">
               <Box className="flex items-center gap-2 border-b border-border bg-secondary/30 px-4 py-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-500/60" />
-                <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/60" />
-                <span className="h-2.5 w-2.5 rounded-full bg-green-500/60" />
+                <span className="h-2.5 w-2.5 rounded-full bg-chrome-dot-red" />
+                <span className="h-2.5 w-2.5 rounded-full bg-chrome-dot-yellow" />
+                <span className="h-2.5 w-2.5 rounded-full bg-chrome-dot-green" />
                 <span className="ml-2 font-mono text-xs text-muted-foreground">typescript</span>
               </Box>
               <pre className="overflow-x-auto p-4 font-mono text-xs leading-relaxed text-foreground/90">

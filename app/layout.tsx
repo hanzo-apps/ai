@@ -25,6 +25,7 @@ import './gui.css'
 import { ogImages, twitterImages } from '@/lib/constants/og'
 import mark from '@/lib/data/mark.json'
 import AppearanceDock from '@/components/home/AppearanceDock'
+import { bootScript } from '@hanzo/appearance/state'
 
 const geist = Geist({
   variable: '--font-geist',
@@ -124,6 +125,11 @@ export default function RootLayout({
             is parsed; when it never runs, globals.css's `html.no-js` rules
             force every JS-gated reveal visible. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.remove('no-js')" }} />
+        {/* The reader's own type size and density, back on the document before
+            the first paint. The dock writes them to storage; this is the half
+            that reads them, so the setting survives a reload and a navigation
+            instead of lasting until the tab moves. */}
+        <script dangerouslySetInnerHTML={{ __html: bootScript() }} />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

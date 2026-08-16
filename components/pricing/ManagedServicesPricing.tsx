@@ -44,7 +44,7 @@ export default function ManagedServicesPricing() {
                   <Box className="font-medium">{svc.name}</Box>
                   <Box className="text-xs text-muted-foreground">{svc.description}</Box>
                 </td>
-                <td className="py-4 px-5 text-sm text-green-400 font-medium">{svc.freeTier}</td>
+                <td className="py-4 px-5 text-sm text-state-success font-medium">{svc.freeTier}</td>
                 <td className="py-4 px-5 text-sm font-mono">{svc.pro}</td>
                 <td className="py-4 px-5 text-muted-foreground text-sm hidden md:table-cell">{svc.note}</td>
               </tr>

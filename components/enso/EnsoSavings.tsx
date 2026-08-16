@@ -161,7 +161,10 @@ export default function EnsoSavings() {
                 // below `sm` the row stacks: name and price share the top line, the bar spans
                 // the full width beneath it and measures 316px instead of 92px.
                 <div key={c.name} className="grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-2 sm:grid-cols-[10rem_1fr_4.5rem]">
-                  <Box className="text-left text-sm sm:text-right">
+                  {/* No `text-left`: alignment rides as an inline style on a
+                      Box, and an inline style outranks the `sm:` class that is
+                      the whole point of the pair. Left is the default anyway. */}
+                  <Box className="text-sm sm:text-right">
                     <span className={c.banned ? 'font-semibold text-white' : 'text-neutral-300'}>{c.name}</span>
                     {c.banned && <span className="block font-mono text-[10px] text-neutral-500">not used to coordinate</span>}
                   </Box>

@@ -120,7 +120,7 @@ export default function DatastorePricing() {
             <span className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white transition-transform ${annual ? "translate-x-4" : ""}`} />
           </button>
           <span className={`text-sm ${annual ? "text-foreground" : "text-muted-foreground"}`}>
-            Annual <span className="text-green-400 text-xs ml-1">Save {data?.discounts?.annual?.percent ?? 17}%</span>
+            Annual <span className="text-state-success text-xs ml-1">Save {data?.discounts?.annual?.percent ?? 17}%</span>
           </span>
         </Box>
       </Box>
@@ -229,7 +229,7 @@ export default function DatastorePricing() {
                   </tr>
                   <tr className="hover:bg-neutral-900/20 transition-colors">
                     <td className="py-4 px-5 font-medium">Intra-region</td>
-                    <td className="py-4 px-5 text-right font-mono text-green-400">Free</td>
+                    <td className="py-4 px-5 text-right font-mono text-state-success">Free</td>
                     <td className="py-4 px-5 text-muted-foreground text-sm hidden md:table-cell">{data.usage.egress.intra_region.note}</td>
                   </tr>
                 </tbody>

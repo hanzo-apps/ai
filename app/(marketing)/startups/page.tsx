@@ -738,7 +738,7 @@ export default function StartupsPage() {
 
                 {/* Error */}
                 {error && (
-                  <Box className="p-4 rounded-lg border border-red-500/30 bg-red-500/10 text-sm text-red-300">
+                  <Box className="p-4 rounded-lg border border-state-error/30 bg-state-error/10 text-sm text-state-error-text">
                     {error}
                   </Box>
                 )}

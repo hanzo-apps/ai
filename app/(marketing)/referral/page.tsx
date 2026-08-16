@@ -87,7 +87,7 @@ const ReferralProgram = () => {
         <ReferralHeader />
 
         {error && (
-          <Box className="bg-red-900/20 border border-red-800 rounded-lg p-4 text-red-300 text-sm">
+          <Box className="bg-state-error/10 border border-state-error/30 rounded-lg p-4 text-state-error-text text-sm">
             {error}
           </Box>
         )}
