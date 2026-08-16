@@ -302,20 +302,25 @@ export default function PointGlobe({
     const scale = variant === 'ambient' ? 0.72 : 1
     // HOW LARGE THE GLOBE RENDERS SETS ITS DENSITY — not how large the window
     // is, which is what this budget used to read. The sphere's diameter is a
-    // fixed fraction of the CANVAS height and owes nothing to the viewport, so a
-    // call site that overflows its section to make a planet (the documented way
-    // to size a hero globe) spreads exactly these points over a far larger
-    // silhouette. That is not a hypothetical: the fold's canvas runs to 124% of
-    // a fold that is itself the viewport, and the sphere came back as the
-    // starfield the line above says is the failure.
+    // fixed multiple of the canvas's SHORTER side (see FILL below) and owes
+    // nothing to the viewport, so a call site that overflows its section to make
+    // a planet spreads exactly these points over a far larger silhouette. That
+    // is not a hypothetical: the fold's canvas runs to 124% of a fold that is
+    // itself the viewport, and the sphere came back as the starfield the line
+    // above says is the failure.
     //
-    // Apparent density is N over the silhouette's AREA, and the silhouette is a
-    // disc whose diameter tracks the canvas height — so holding density constant
-    // means N tracks that ratio SQUARED. Bounded at both ends: a canvas smaller
-    // than the viewport keeps a floor of points so it never thins out, and the
-    // ceiling keeps a very tall canvas from asking for a budget nothing needs.
-    // Read once, at mount, beside every other buffer decision; `clientHeight` is
-    // valid here because the element is in the tree with its classes on it.
+    // Apparent density is N over the silhouette's AREA, so holding it constant
+    // means N tracks the diameter SQUARED. Bounded at both ends: a canvas
+    // smaller than the viewport keeps a floor of points so it never thins out,
+    // and the ceiling keeps a very tall canvas from asking for a budget nothing
+    // needs. Read once, at mount, beside every other buffer decision;
+    // `clientHeight` is valid here because the element is in the tree with its
+    // classes on it.
+    //
+    // The proxy is the canvas HEIGHT, which is the shorter side on a wide canvas
+    // — exact where the fold lives — and the longer one on a tall canvas, where
+    // it therefore over-counts. That errs dense, and dense is the safe side of
+    // this budget: the failure it exists to prevent is a starfield.
     const drawn = canvas.clientHeight || minSide
     const spread = Math.min(2.2, Math.max(0.8, (drawn / minSide) ** 2))
     let N = Math.round((small ? 2200 : minSide < 1024 ? 4000 : 6400) * scale * spread)
@@ -452,25 +457,41 @@ export default function PointGlobe({
     const mv = new Float32Array(16)
     const mvp = new Float32Array(16)
     /**
-     * FRAME is the distance that framed the globe edge to edge; SCALE is how
-     * much of that it fills now. Dollying the camera back is the whole move —
-     * the sphere is unchanged, so nothing that reads a position has to know.
+     * HOW BIG THE GLOBE LOOKS IS ONE NUMBER, and it is the one you can see.
      *
-     * Point sizes keep measuring against FRAME rather than the new distance, so
-     * the dots shrink WITH the globe: `gl_PointSize` divides by depth, and
-     * FRAME over a camera twice as far away is exactly SCALE. Sizing them
-     * against the new distance instead would hold every dot at its old pixel
-     * size and pack the same count into a quarter of the area — a denser
-     * picture, not a smaller one.
+     * FILL is the sphere's diameter as a fraction of the canvas's SHORTER side.
+     * Past 1 the silhouette bleeds off that side, and that is the point: a disc
+     * inscribed in its frame reads as a marble on a table. Under it — 0.68 was
+     * the measured value — a wide canvas holds a small globe adrift in black,
+     * because the black is then most of what there is.
+     *
+     * The camera distance is DERIVED from FILL, not typed beside it, because a
+     * sphere's silhouette is not linear in distance: at distance d a unit sphere
+     * projects to radius 1/sqrt(d² - 1) at unit depth, against a frustum whose
+     * shorter half-side there is tan(FOV/2). Solving those for d is the line
+     * below. A hand-tuned distance is that same arithmetic, done once, badly,
+     * and then unable to say what it means.
+     *
+     * FRAME stays the distance every point size is measured against, so the dots
+     * grow WITH the globe: `gl_PointSize` divides by depth, so FRAME over a
+     * nearer camera is exactly the magnification. Measuring them against camDist
+     * instead would hold every dot at its old pixel size and spread the same
+     * count over a larger area — a sparser picture, not a bigger one.
      *
      * `vFade` reads `uCamDist - clip.w`, a depth RELATIVE to the camera, so the
      * near-to-far falloff is the same at any distance and needs no rescaling.
      */
+    const FOV = (48 * Math.PI) / 180
+    // 1.08, and the ceiling is DENSITY, not taste. The budget above is a function
+    // of the canvas, not of FILL, so a larger sphere spreads the same points over
+    // a larger disc: at 1.25 the 1440 fold measured a 1050px silhouette holding
+    // the 5,574 points that used to crowd a 575px one, and it came back as the
+    // starfield that budget exists to prevent. 1.08 bleeds the sphere ~34px past
+    // the short edges — enough that it is a picture rather than a diagram — and
+    // the rim still closes.
+    const FILL = 1.08
     const FRAME = 3.15
-    // Just under 1, so the sphere fills the fold and still closes inside it —
-    // at 1 it touches the short edges, past 1 the silhouette bleeds off them.
-    const SCALE = 0.918
-    const camDist = FRAME / SCALE
+    const camDist = Math.sqrt(1 + 1 / (FILL * Math.tan(FOV / 2)) ** 2)
     view[0] = 1; view[5] = 1; view[10] = 1; view[15] = 1; view[14] = -camDist
 
     let aspect = 1
@@ -485,7 +506,14 @@ export default function PointGlobe({
       }
       gl!.viewport(0, 0, cw, ch)
       aspect = cw / ch
-      perspective(proj, (48 * Math.PI) / 180, aspect, 0.1, 100)
+      // THE SHORTER SIDE FRAMES THE PICTURE, whichever side that is. A fixed
+      // VERTICAL field of view frames by height alone, which is why the same
+      // globe was a marble on a laptop and a cropped band on a phone. On a
+      // canvas taller than it is wide the vertical angle is opened until the
+      // HORIZONTAL one is FOV; on a wider one it already is. The sphere is then
+      // the same size against the short side at every aspect, and the long side
+      // is simply where the extra room goes.
+      perspective(proj, aspect >= 1 ? FOV : 2 * Math.atan(Math.tan(FOV / 2) / aspect), aspect, 0.1, 100)
     }
 
     // Smoothed mouse parallax.
