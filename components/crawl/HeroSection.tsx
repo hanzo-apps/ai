@@ -57,7 +57,7 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="text-2xl md:text-3xl font-medium text-foreground mb-4"
         >
-          Turn any website into clean, structured data for LLMs
+          Give it a URL, get back Markdown
         </motion.p>
 
         <motion.p
@@ -66,8 +66,10 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto"
         >
-          Give it a URL, get back Markdown an LLM can read — JavaScript rendered, boilerplate stripped.
-          Powered by crawl4ai.
+          It fetches the page, finds the part a person would actually read, and renders that
+          as Markdown. Navigation, cookie banners and footers do not come with it. A page that
+          needs JavaScript gets a real browser; everything else is a fetch and a parse, which
+          is most of the web and far faster.
         </motion.p>
 
         {/* Stats */}

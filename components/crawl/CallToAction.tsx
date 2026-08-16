@@ -24,13 +24,13 @@ const CallToAction = () => {
           </div>
 
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-            Turn the web into structured knowledge
+            Send it a URL
           </h2>
 
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Crawl once, use everywhere.
+            One call, and the page comes back as Markdown.
             <br />
-            <span className="text-foreground/70">Clean Markdown, structured data, and direct integration with Search and Vector.</span>
+            <span className="text-foreground/70">From your code over HTTP, or from a model over MCP.</span>
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">

@@ -109,7 +109,7 @@ const Pricing = () => {
             Pricing
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Pay for hosted crawling and rendering. Self-host crawl4ai free forever.
+            You are paying for the hosted API and the browsers behind it, not for the code.
           </p>
         </motion.div>
 
@@ -132,8 +132,8 @@ const Pricing = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center text-sm text-muted-foreground max-w-2xl mx-auto"
         >
-          crawl4ai is open source (Apache 2.0). Self-host free forever.
-          Pay only for our hosted API, JS rendering, and managed infrastructure.
+          The crawler is open source, and so is the headless-browser image it escalates to.
+          Run both yourself for nothing. The plans buy you somebody else operating them.
         </motion.p>
       </div>
     </section>

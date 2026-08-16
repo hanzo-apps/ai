@@ -8,23 +8,23 @@ const steps = [
   {
     number: "01",
     icon: Globe,
-    title: "Point at any URL",
+    title: "Fetch",
     description:
-      "Provide a seed URL or sitemap. Hanzo Crawl discovers pages, follows links, and handles pagination. Configure depth limits, URL filters, and concurrency to match your needs.",
+      "One guarded HTTP request. The dialer refuses private and link-local addresses on every hop, so a URL that redirects somewhere it should not reach is stopped there rather than after the fact.",
   },
   {
     number: "02",
     icon: FileText,
-    title: "Extract structured data",
+    title: "Extract",
     description:
-      "Each page is rendered with a full Playwright browser, then converted to clean Markdown. Use CSS selectors, XPath, or LLM-based schemas to extract typed data from any layout.",
+      "The document is reduced to the subtree a reader would call the content, plus the title, description and canonical URL the page claims for itself. If the HTML alone is not enough, this is where a headless browser gets involved.",
   },
   {
     number: "03",
     icon: Database,
-    title: "Index and search",
+    title: "Render",
     description:
-      "Push extracted content directly into Hanzo Search for full-text and hybrid search, or into Hanzo Vector for semantic embeddings. One pipeline from raw web to queryable knowledge.",
+      "That subtree becomes Markdown with its structure intact — headings, lists, code and links, with relative URLs resolved against the page. It is the format a model reads best and a person can still diff.",
   },
 ];
 
@@ -43,7 +43,7 @@ const HowItWorks = () => {
             How it works
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Three steps from any website to structured, searchable data.
+            Each step is its own file and can be tested without the other two.
           </p>
         </motion.div>
 
@@ -82,11 +82,10 @@ const HowItWorks = () => {
           className="mt-16 text-center"
         >
           <h3 className="text-xl font-semibold text-foreground mb-4">
-            Works with any content source
+            Two ways to call it
           </h3>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
-            Crawl marketing sites, documentation portals, e-commerce catalogs, forums, and more.
-            REST API for programmatic control.
+            Over HTTP at /v1/crawl when your code is doing the asking, or over MCP when a model is.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {["Static Sites", "SPAs", "Documentation", "E-Commerce", "Forums", "REST API"].map(

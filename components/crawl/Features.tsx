@@ -7,39 +7,39 @@ import { FileText, Monitor, Braces, Zap, Search, Shield } from "lucide-react";
 const features = [
   {
     icon: FileText,
-    title: "LLM-Ready Output",
+    title: "The readable part, not the page",
     description:
-      "Converts any webpage into clean Markdown with structured metadata. Ready for ingestion by any LLM, RAG pipeline, or Hanzo Search index.",
+      "Deciding which subtree is the article is the hard problem, and it is the one this solves. You get the content and what the page says about itself, without the chrome around it.",
   },
   {
     icon: Monitor,
-    title: "JavaScript Rendering",
+    title: "A browser only when needed",
     description:
-      "Full Playwright browser engine handles SPAs, dynamic content, lazy loading, and infinite scroll. See the page exactly as users do.",
+      "Most pages are a fetch and a parse. Headless Chromium is a separate service it escalates to for the ones that genuinely need rendering, so you do not pay browser cost for a documentation page.",
   },
   {
     icon: Braces,
-    title: "Structured Extraction",
+    title: "Markdown, and the metadata",
     description:
-      "Extract data using CSS selectors, XPath expressions, or LLM-based schemas. Get typed JSON from any page layout.",
+      "Headings stay headings and links keep their targets, resolved against the page they came from. Title, description and canonical URL come back alongside — including the URL after redirects, which is the one worth citing.",
   },
   {
     icon: Zap,
-    title: "Parallel Crawling",
+    title: "It cannot be pointed at your cluster",
     description:
-      "Crawl thousands of pages concurrently with configurable rate limiting. Respect robots.txt while maximizing throughput.",
+      "The caller supplies the URL, which makes any crawler a request-forgery primitive. Loopback, link-local and multicast are refused — including the cloud metadata endpoint on 169.254.169.254 that hands out credentials.",
   },
   {
     icon: Search,
-    title: "Direct Search Integration",
+    title: "Every redirect is checked too",
     description:
-      "Pipe crawled content directly into Hanzo Search and Hanzo Vector. One pipeline from raw web to searchable, embeddable knowledge.",
+      "Blocking the first address is not enough, because a public URL can redirect to a private one. The guard sits on the dialer, so a 302 toward metadata is refused at the hop that matters.",
   },
   {
     icon: Shield,
-    title: "Anti-Detection & Stealth",
+    title: "A tool an agent can call",
     description:
-      "Built-in stealth mode with proxy rotation, user-agent management, and fingerprint randomization for reliable large-scale crawls.",
+      "It answers on MCP as well as over HTTP, so a model can read a page mid-conversation without you building the plumbing for it.",
   },
 ];
 
@@ -55,11 +55,10 @@ const Features = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Crawl anything, extract everything
+            Three steps, and a boundary
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            From static HTML to JavaScript-heavy SPAs --
-            get structured, LLM-ready data from any website.
+            Fetch, extract, render. Then the part that matters when the URL comes from a stranger.
           </p>
         </motion.div>
 
