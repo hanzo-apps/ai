@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import { YStack } from '@hanzo/gui'
 import { Section, Cta } from '@/components/marketing/page-kit'
+import { checkoutUrl } from '@/lib/plans'
 
 /**
  * Money lives at billing.hanzo.ai. This site sells; it does not charge.
@@ -15,8 +16,6 @@ import { Section, Cta } from '@/components/marketing/page-kit'
  * card that was clicked instead of dropping the visitor at the top of a ladder
  * they have already read.
  */
-export const BILLING_URL = 'https://billing.hanzo.ai'
-
 export default function Handoff({
   title,
   plan,
@@ -24,7 +23,7 @@ export default function Handoff({
   title: string
   plan?: string
 }) {
-  const href = plan ? `${BILLING_URL}/?plan=${plan}#pricing` : BILLING_URL
+  const href = checkoutUrl(plan)
 
   useEffect(() => {
     window.location.replace(href)

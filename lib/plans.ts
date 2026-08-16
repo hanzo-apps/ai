@@ -68,21 +68,26 @@ export const PLANS_API = "https://api.hanzo.ai/v1/billing/plans";
 const BILLING_URL = "https://billing.hanzo.ai";
 
 /**
- * The checkout a plan's CTA opens.
+ * The checkout door, opened on a plan when one is named.
  *
- * Here rather than beside a card, because the personal ladder and the business
- * strip both send buyers to the same door and each used to write the address
- * itself — one reading the catalog, the other naming `team` by hand. Two copies
- * of one URL is two chances to point at a plan the catalog stopped selling.
+ * ONE writer for this address. It was spelled out in three places — the
+ * personal ladder, the business strip and the /account hand-off — and a plan id
+ * only selects the card a reader clicked if every writer spells the query the
+ * same way.
+ */
+export function checkoutUrl(id?: string): string {
+  return id ? `${BILLING_URL}/?plan=${encodeURIComponent(id)}#pricing` : BILLING_URL;
+}
+
+/**
+ * The checkout a plan's CTA opens.
  *
  * A catalog row may carry its own link, and then that link wins; otherwise the
  * id is the whole address. The id is also what `plan_clicked` reports, so the
  * plan the event names and the plan the door opens cannot disagree.
  */
 export function planCheckoutUrl(plan: SubscriptionPlan): string {
-  if (plan.checkoutUrl) return plan.checkoutUrl;
-  const id = plan.checkoutId || plan.id;
-  return `${BILLING_URL}/?plan=${encodeURIComponent(id)}#pricing`;
+  return plan.checkoutUrl || checkoutUrl(plan.checkoutId || plan.id);
 }
 
 /**
