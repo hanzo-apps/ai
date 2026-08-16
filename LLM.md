@@ -121,6 +121,76 @@ Main Hanzo AI marketing site. **Next.js 14 App Router** (NOT Vite — migrated).
   as evidence otherwise: Cloudflare fronts the sites edge too, so that header is
   byte-identical on both hosts and distinguishes nothing.
 
+## The apex is Hanzo OS, and it descends the stack
+
+`components/home/HomeLanding.tsx` is a SERVER component and orders its sections
+as a descent: the company at the top, the machines at the bottom, the evidence
+after both, the ask last.
+
+    Fold                 the promise, then the category
+    ProofStrip           scope, in numbers that are derived
+    ReplaceTheCore       the strategic claim
+    SystemArchitecture   the layers, drawn as layers
+    Team → EnsoHero → AgentRuntime → Infrastructure
+    LearnLoop → Observability → OneInterface
+    CloudCategories → LocalStack
+    Research → Proof
+    BuildStory → Composer
+
+Research moved DOWN from second. A paper is evidence for a claim, and a reader
+has to be given the claim first; the catalog and the library are the last two
+things on the page because they are the proof, not the pitch.
+
+### The numbers are derived, never typed
+
+`ProofStrip` takes `modelCount` as a PROP. `HomeLanding` awaits `fetchModels()`,
+which reads models.hanzo.ai/v1/models at build time and falls back to the
+bundled catalog, so the figure is re-derived by every build and the page cannot
+drift from the registry it describes. It is rounded DOWN to the hundred: `500+`
+from 529 is a promise the catalog keeps, `529` is wrong the moment one model is
+deprecated.
+
+Three numbers were proposed for that strip and are deliberately absent, each for
+its own reason:
+
+- **600+ integrations.** `lib/integrations.ts` holds 19, and the build emits 19
+  pages. Off by more than an order of magnitude.
+- **260+ MCP tools.** Closer to real, and it argues against our own product:
+  `/mcp`'s thesis is "a catalog of 260 collapsed into 13", because a tool list is
+  a prompt and two hundred near-duplicates make a model choose badly. The
+  thirteen ARE the achievement; advertising the 260 sells the problem.
+- **"the average company uses 400 SaaS products".** There is no single true
+  value — published 2025-26 figures run from ~106 per organization, to 152 under
+  500 employees against 660 over 10,000, to 831 once shadow IT is discovered.
+  `ReplaceTheCore` says "more than a hundred, and several hundred at enterprise
+  scale", which is true across all of them.
+
+Also absent: **"99% of what a business needs"**, which invites "99% of which
+workflows, measured how?" and has no measurement behind it. The section names
+the categories we ship first-party instead, each linked to a page a reader can
+open and check.
+
+### Proof is the agency's track record, and it is a different claim
+
+`Proof` names Triller, Bellabeat, Casper Labs, Unikrn, Damon and Cover Build —
+every one has a case study in `hanzo/agency/src/data/case-studies/`. These
+companies came through Hanzo Agency, which built and shipped their products.
+That is NOT the sentence "these companies run Hanzo OS in production", and
+writing the second one would repeat the error `lib/constants/partner-logos.ts`
+was split up to prevent: a mixed list that quietly upgrades a vendor into a
+customer. Lux and Zoo are deliberately absent — counting your own ventures as
+customers is the same category error in a friendlier coat. No multiplier claims:
+the Damon study carries a "500X ROI" line, and a return figure without its
+methodology is one a reader cannot check.
+
+### Analogies stay out of the page
+
+"Heroku for the age of AI" and "Apple-like vertical integration" explain the
+platform well in a room and are not on the site. An analogy asks a reader to
+hold someone else's brand in mind while deciding about ours. The page says the
+thing itself: the intelligence, applications, runtime, data and cloud are
+designed together.
+
 ## Two faces, one export
 
 This ONE static export (`out/`) serves TWO sites — split by host, not by build:
