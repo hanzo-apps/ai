@@ -1,5 +1,10 @@
 'use client'
 
+/* MODELS is a PROP, not a literal. It comes from `fetchModels()` in the server
+   page, which reads the serving catalog at build time — the same source the
+   homepage strip uses, so the two cannot disagree. This said `400+` while the
+   catalog served 527, which is the failure mode a typed number always has. */
+
 /**
  * Hanzo Enso — the proprietary model-orchestration product landing.
  *
@@ -91,9 +96,9 @@ const PILLARS = [
 // technical report to send anyone to for the rest of the picture — so the
 // claim lives in prose, without a figure, where it can be read as the sentence
 // it is. The three below are facts about how the thing behaves.
-const STATS = [
+const stats = (models: string) => [
   { icon: Zap, value: '<15µs', label: 'Routing overhead', sub: 'per request' },
-  { icon: Boxes, value: '400+', label: 'Models available', sub: 'frontier + open Zen' },
+  { icon: Boxes, value: models, label: 'Callable models', sub: 'frontier + open Zen, one API' },
   { icon: Sparkles, value: '1 API', label: 'OpenAI + Anthropic', sub: 'drop-in, or via Hanzo CLI' },
 ]
 
@@ -153,12 +158,12 @@ const FAQ = [
   { q: 'What are Flash, Pro, and Ultra?', a: 'The three default Enso presets: Flash for fast, high-volume work; Pro as the balanced everyday default for coding and agents; Ultra for maximum quality on hard, high-stakes problems. All behind one API — switch by changing the model id. Zen and other models remain available too.' },
   { q: 'How is Enso different from the Zen models?', a: 'Zen is the family of OPEN-WEIGHT models built by Zoo Labs Foundation that you can self-host. Enso is Hanzo’s PROPRIETARY orchestration layer on top — a learned router that assembles and coordinates the best available models (Zen and frontier) per task. Enso runs only on Hanzo Cloud; Zen runs anywhere.' },
   { q: 'Can I control which models or providers Enso uses?', a: 'Yes. Opt specific providers or models out of Enso’s pool to satisfy data-residency, privacy, or compliance requirements. Every request records which models actually ran.' },
-  { q: 'Will my data be used to train models? Can I opt out?', a: 'No customer data is used to train models. Enso runs inside your Hanzo Cloud organization with a full audit trail; opt-out and data controls are first-class.' },
+  { q: 'Will my data be used to train models? Can I opt out?', a: 'Off unless you turn it on. We do not use your inputs or outputs to train our models unless you explicitly opt in, and where an organization administers accounts the administrator controls that for everyone in it. Enso runs inside your Hanzo Cloud organization with a full audit trail. The terms are at /legal/research-contribution.' },
   { q: 'Can I see which underlying models Enso used for each query?', a: 'Yes. Each response carries the orchestration trace — the models selected, the roles they played, and the routing decisions — visible in the console and via the API.' },
   { q: 'Is Enso generally available?', a: 'Yes. Enso is available now on Hanzo Cloud and is the default for new chats and API requests — every default request routes through the Enso router, which selects the right tier (Flash, Pro, or Ultra) per task. Zen and other models stay available for explicit selection. Enterprise and dedicated deployment are available on request.' },
 ]
 
-export default function EnsoLanding() {
+export default function EnsoLanding({ models }: { models: string }) {
   return (
     <>
       <SiteHeader surface="ai" />
@@ -178,7 +183,7 @@ export default function EnsoLanding() {
           <div className="relative z-10 mx-auto max-w-5xl text-center">
             <motion.div {...fade} transition={{ duration: 0.5 }} className="mb-8 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2">
               <EnsoLogo size={16} className="text-white" />
-              <span className="text-sm font-medium text-neutral-200">Hanzo Enso · available on Hanzo Cloud</span>
+              <span className="text-sm font-medium text-neutral-200">Enso · the intelligence layer of Hanzo OS</span>
             </motion.div>
 
             <motion.div {...fade} transition={{ duration: 0.6, delay: 0.05 }} className="mx-auto mb-8 flex justify-center">
@@ -197,7 +202,7 @@ export default function EnsoLanding() {
             </motion.h1>
 
             <motion.p {...fade} transition={{ duration: 0.5, delay: 0.15 }} className="mx-auto mt-6 max-w-2xl text-xl text-neutral-300 md:text-2xl">
-              Enso is the agentic language model. It reads every request and puts the
+              Enso is a multi-agent intelligence system, delivered as one model. It reads every request and puts the
               right models on it — the frontier when the work is hard, the fast ones
               when it isn’t.
             </motion.p>
@@ -248,6 +253,39 @@ export default function EnsoLanding() {
             </div>
           </div>
         </section>
+
+        {/* The connection the page lacked. Enso answering a question is the
+            smallest thing it does; what makes it worth the integration is that
+            the answer can become an action and the action becomes a measured
+            outcome, without leaving the system. Placed high, right after the
+            what-it-is section, because a reader deciding between Enso and a
+            model API is deciding exactly this. */}
+        <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl">
+            <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
+              Built into Hanzo OS
+            </p>
+            <h2 className="text-3xl font-medium tracking-tight text-neutral-100 sm:text-4xl">
+              Intelligence, action, outcome. One system.
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-neutral-400">
+              Enso does not stop at an answer. It works through Hanzo agents, calls
+              governed tools, executes in isolated sandboxes, reads your company context,
+              deploys through Hanzo Cloud, and the result comes back measured by
+              Observability and Insights — so the loop from intent to outcome closes inside
+              one system rather than across five vendors.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-neutral-400">
+              <a href="/agents" className="hover:text-neutral-100">Agents</a>
+              <a href="/tabs" className="hover:text-neutral-100">Sandboxes</a>
+              <a href="/team" className="hover:text-neutral-100">Company context</a>
+              <a href="/cloud" className="hover:text-neutral-100">Hanzo Cloud</a>
+              <a href="/o11y" className="hover:text-neutral-100">Observability</a>
+              <a href="/insights" className="hover:text-neutral-100">Insights</a>
+            </div>
+          </div>
+        </section>
+
 
         {/* ── Enso vs Zen ──────────────────────────────────────────────────── */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
@@ -392,7 +430,7 @@ export default function EnsoLanding() {
               sub="Enso reaches frontier-level results by routing each request to the right model in microseconds. Real, measured numbers — not a fabricated benchmark table."
             />
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {STATS.map((s, i) => (
+              {stats(models).map((s, i) => (
                 <motion.div key={s.label} {...fade} transition={{ duration: 0.5, delay: i * 0.05 }} className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-7 text-center">
                   <s.icon className="mx-auto mb-4 h-6 w-6 text-neutral-400" />
                   <div className="text-4xl font-bold text-white">{s.value}</div>

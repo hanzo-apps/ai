@@ -1,6 +1,6 @@
 {
   "source": "https://api.hanzo.ai/v1/blueprint/sbom",
-  "fetched": "2026-08-16T05:54:58.933Z",
+  "fetched": "2026-08-16T06:01:14.929Z",
   "rateCard": {
     "microUsdPerVcpuHour": 12000,
     "microUsdPerGbHour": 6000,

@@ -53,8 +53,16 @@ const ULTRA_RATIO = ((DEAREST.price as number) / (ULTRA.price as number)).toFixe
 // KPI and the calculator can never disagree.
 const SAVED = Math.round(ensoSavings() * 100)
 
+// Every score in the snapshot carries a `source`, and enso's are "hanzo-measured"
+// while most competitors' come from Artificial Analysis or Vals AI. A number that
+// tops a field it was measured on by the party who benefits has to say so ON the
+// tile — a reader who discovers it later discounts every other figure here.
+const ULTRA_SOURCE = ULTRA.scores.gpqa_diamond?.source === 'hanzo-measured'
+  ? 'Hanzo-measured'
+  : ULTRA.scores.gpqa_diamond?.source ?? ''
+
 const KPIS = [
-  { v: '98.0%', k: 'GPQA-Diamond · enso-ultra — best in the field' },
+  { v: '98.0%', k: `GPQA-Diamond · enso-ultra · ${ULTRA_SOURCE}` },
   { v: `${ULTRA_RATIO}× cheaper`, k: `than ${DEAREST.model}, which scores ${DEAREST.value}%` },
   { v: `${SAVED}%`, k: `saved vs always calling a top model, at ${HARD_FRACTION * 100}% hard` },
   { v: '3 tiers', k: 'Flash 92.9 · Pro 96.0 · Ultra 98.0 GPQA' },
@@ -115,7 +123,7 @@ export default function EnsoSavings() {
           <Head
             n="01"
             title="Accuracy at cost"
-            sub={`The goal is the top-left: high accuracy, low cost. enso-ultra sits there — 98.0% GPQA-Diamond, the best in the field, at ${fmtPrice(ULTRA.price)}/MTok against fable-5 at $42 and ${DEAREST.model} at ${fmtPrice(DEAREST.price)}, both of which score lower. Pro and Flash trade accuracy for even lower cost.`}
+            sub={`The goal is the top-left: high accuracy, low cost. enso-ultra sits there — 98.0% GPQA-Diamond (Hanzo-measured), at ${fmtPrice(ULTRA.price)}/MTok against fable-5 at $42 and ${DEAREST.model} at ${fmtPrice(DEAREST.price)}, both of which score lower. Pro and Flash trade accuracy for even lower cost.`}
           />
           <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 md:p-6">
             <AccuracyCostScatter points={SCATTER} />
