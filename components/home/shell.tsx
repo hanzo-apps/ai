@@ -12,7 +12,7 @@ import {
 import { cloudCategories } from '@/lib/data/cloud-primitives'
 import { policy } from '@/lib/publish'
 import pages from '@/lib/data/pages.json'
-import { AGENCY, CONSOLE, DOCS as DOCS_HOST, FOUNDATION, goToChat } from './nav-data'
+import { AGENCY, APP, CHAT, CONSOLE, DOCS as DOCS_HOST, FOUNDATION, STUDIO, goToChat } from './nav-data'
 
 /**
  * The chrome links a page iff it is PUBLISHED — the same `policy()` that
@@ -202,103 +202,53 @@ export function SiteHeader({
   // and filtered rather than trimmed by hand.
   const localNav: HanzoNav[] = ([
     {
-      id: 'research',
-      label: 'Research',
-      href: '/research',
-      glyph: 'ring',
-      items: ([
-        { id: 'papers', label: 'Papers', href: '/research', glyph: 'book', hint: 'What we publish' },
-        { id: 'models', label: 'Models', href: '/models', glyph: 'spark', hint: 'Every model we serve' },
-        { id: 'zen', label: 'Zen', href: '/zen', glyph: 'circle', hint: 'Our open-weight family' },
-        { id: 'open-source', label: 'Open Source', href: '/open-source', glyph: 'package', hint: 'Every tool we build' },
-      ] as HanzoLink[]).filter((l) => shown(l.href)),
-    },
-    // Products sits SECOND, between the research and the commercial pitch,
-    // because that is the order a reader asks in: what have you proven, what can
-    // I use, what will it cost. It was missing entirely — every product was
-    // reachable only through Business, which frames a thing you run as a thing
-    // you buy.
-    //
-    // The primary column is the OS read top-down, the same order the homepage
-    // descends: the company, the intelligence, the agents, the cloud beneath
-    // them. Nav and page tell one story, or a reader has to reconcile two.
-    {
       id: 'products',
       label: 'Products',
       href: '/products',
       glyph: 'blocks',
       items: ([
-        { id: 'team', label: 'Hanzo Team', href: '/team', glyph: 'users', hint: 'People and AI coworkers' },
-        { id: 'enso', label: 'Enso', href: '/enso', glyph: 'ring', hint: 'The intelligence layer' },
-        { id: 'agents', label: 'Agents', href: '/agents', glyph: 'spark', hint: 'Tools, memory and sandboxes' },
-        { id: 'cloud', label: 'Hanzo Cloud', href: '/cloud', glyph: 'globe', hint: 'The infrastructure beneath' },
+        { id: 'p-chat', label: 'Chat', href: CHAT, glyph: 'chat', hint: 'Ask anything' },
+        { id: 'p-app', label: 'App', href: APP, glyph: 'blocks', hint: 'Build and ship apps' },
+        { id: 'p-team', label: 'Team', href: '/team', glyph: 'users', hint: 'People and AI coworkers' },
+        { id: 'p-dev', label: 'Dev', href: '/dev', glyph: 'terminal', hint: 'A coding agent in your terminal' },
+        { id: 'p-studio', label: 'Studio', href: STUDIO, glyph: 'display', hint: 'Build and tune models' },
+        { id: 'p-insights', label: 'Insights', href: '/insights', glyph: 'spark', hint: 'What customers did' },
       ] as HanzoLink[]).filter((l) => shown(l.href)),
       groups: [
+        {
+          id: 'intelligence',
+          title: 'Intelligence',
+          items: ([
+            { id: 'g-enso', label: 'Enso', href: '/enso' },
+            { id: 'g-models', label: 'Models', href: '/models' },
+            { id: 'g-agents', label: 'Agents', href: '/agents' },
+            { id: 'g-zen', label: 'Zen', href: '/zen' },
+          ] as HanzoLink[]).filter((l) => shown(l.href)),
+        },
         {
           id: 'build',
           title: 'Build',
           items: ([
-            { id: 'p-dev', label: 'Hanzo Dev', href: '/dev' },
-            { id: 'p-code', label: 'Hanzo Code', href: '/code' },
-            { id: 'p-base', label: 'Base', href: '/base' },
-            { id: 'p-functions', label: 'Functions', href: '/functions' },
-            { id: 'p-tabs', label: 'Tabs', href: '/tabs' },
-            { id: 'p-mcp', label: 'MCP', href: '/mcp' },
-          ] as HanzoLink[]).filter((l) => shown(l.href)),
-        },
-        {
-          id: 'observe',
-          title: 'Observe',
-          items: ([
-            { id: 'p-o11y', label: 'Observability', href: '/o11y' },
-            { id: 'p-insights', label: 'Insights', href: '/insights' },
-            { id: 'p-analytics', label: 'Analytics', href: '/analytics' },
-            { id: 'p-security', label: 'Security', href: '/security' },
+            { id: 'g-code', label: 'Code', href: '/code' },
+            { id: 'g-functions', label: 'Functions', href: '/functions' },
+            { id: 'g-tabs', label: 'Tabs', href: '/tabs' },
+            { id: 'g-mcp', label: 'MCP', href: '/mcp' },
+            { id: 'g-zap', label: 'ZAP', href: '/zap' },
+            { id: 'g-base', label: 'Base', href: '/base' },
           ] as HanzoLink[]).filter((l) => shown(l.href)),
         },
         {
           id: 'run',
           title: 'Run',
           items: ([
-            { id: 'p-compute', label: 'Compute', href: '/products/compute' },
-            { id: 'p-storage', label: 'Storage', href: '/storage' },
-            { id: 'p-database', label: 'Database', href: '/database' },
-            { id: 'p-network', label: 'Network', href: '/network' },
-            { id: 'p-commerce', label: 'Commerce', href: '/commerce' },
+            { id: 'g-cloud', label: 'Hanzo Cloud', href: '/cloud' },
+            { id: 'g-compute', label: 'Compute', href: '/products/compute' },
+            { id: 'g-data', label: 'Data', href: '/products/data' },
+            { id: 'g-storage', label: 'Storage', href: '/storage' },
+            { id: 'g-network', label: 'Network', href: '/network' },
+            { id: 'g-o11y', label: 'Observability', href: '/o11y' },
+            { id: 'g-security', label: 'Security', href: '/security' },
           ] as HanzoLink[]).filter((l) => shown(l.href)),
-        },
-      ],
-    },
-    {
-      id: 'business',
-      label: 'Business',
-      href: '/solutions',
-      glyph: 'blocks',
-      items: ([
-        { id: 'solutions', label: 'Solutions', href: '/solutions', glyph: 'blocks', hint: 'By industry and by job' },
-        { id: 'customers', label: 'Customers', href: '/customers', glyph: 'users', hint: 'Teams building on Hanzo' },
-        { id: 'pricing', label: 'Pricing', href: '/pricing', glyph: 'card', hint: 'Plans and rates' },
-        { id: 'contact', label: 'Contact sales', href: '/contact', glyph: 'chat', hint: 'Talk to us' },
-      ] as HanzoLink[]).filter((l) => shown(l.href)),
-      groups: [
-        {
-          id: 'by-need',
-          title: 'Solutions',
-          items: ([
-            { id: 'agents', label: 'Agents', href: '/agents' },
-            { id: 'search', label: 'Search', href: '/search' },
-            { id: 'data', label: 'Data', href: '/products/data' },
-            { id: 'compute', label: 'Compute', href: '/products/compute' },
-            { id: 'security', label: 'Security', href: '/security' },
-          ] as HanzoLink[]).filter((l) => shown(l.href)),
-        },
-        {
-          id: 'services',
-          title: 'Services',
-          items: [
-            { id: 'agency', label: 'Agency', href: AGENCY, external: true },
-            { id: 'support', label: 'Enterprise support', href: '/contact' },
-          ] as HanzoLink[],
         },
       ],
     },
@@ -338,6 +288,51 @@ export function SiteHeader({
       ],
     },
     {
+      id: 'solutions',
+      label: 'Solutions',
+      href: '/solutions',
+      glyph: 'blocks',
+      items: ([
+        { id: 'solutions', label: 'Solutions', href: '/solutions', glyph: 'blocks', hint: 'By industry and by job' },
+        { id: 'customers', label: 'Customers', href: '/customers', glyph: 'users', hint: 'Teams building on Hanzo' },
+        { id: 'pricing', label: 'Pricing', href: '/pricing', glyph: 'card', hint: 'Plans and rates' },
+        { id: 'contact', label: 'Contact sales', href: '/contact', glyph: 'chat', hint: 'Talk to us' },
+      ] as HanzoLink[]).filter((l) => shown(l.href)),
+      groups: [
+        {
+          id: 'by-need',
+          title: 'Solutions',
+          items: ([
+            { id: 'agents', label: 'Agents', href: '/agents' },
+            { id: 'search', label: 'Search', href: '/search' },
+            { id: 'data', label: 'Data', href: '/products/data' },
+            { id: 'compute', label: 'Compute', href: '/products/compute' },
+            { id: 'security', label: 'Security', href: '/security' },
+          ] as HanzoLink[]).filter((l) => shown(l.href)),
+        },
+        {
+          id: 'services',
+          title: 'Services',
+          items: [
+            { id: 'agency', label: 'Agency', href: AGENCY, external: true },
+            { id: 'support', label: 'Enterprise support', href: '/contact' },
+          ] as HanzoLink[],
+        },
+      ],
+    },
+    {
+      id: 'research',
+      label: 'Research',
+      href: '/research',
+      glyph: 'ring',
+      items: ([
+        { id: 'papers', label: 'Papers', href: '/research', glyph: 'book', hint: 'What we publish' },
+        { id: 'models', label: 'Models', href: '/models', glyph: 'spark', hint: 'Every model we serve' },
+        { id: 'zen', label: 'Zen', href: '/zen', glyph: 'circle', hint: 'Our open-weight family' },
+        { id: 'open-source', label: 'Open Source', href: '/open-source', glyph: 'package', hint: 'Every tool we build' },
+      ] as HanzoLink[]).filter((l) => shown(l.href)),
+    },
+    {
       id: 'company',
       label: 'Company',
       href: '/about',
@@ -364,13 +359,15 @@ export function SiteHeader({
             { id: 'c-philosophy', label: 'Philosophy', href: '/philosophy' },
             { id: 'c-osfund', label: 'Open Source Fund', href: '/open-source-fund' },
             { id: 'c-status', label: 'Status', href: '/status' },
+            // Zoo Labs Foundation governs Hanzo. It held a top-level slot in the
+            // bar, spending one of five on an institution nobody arrives looking
+            // for — governance is something a reader looks UP once, and this is
+            // where they look.
+            { id: 'c-foundation', label: 'Foundation', href: FOUNDATION, external: true },
           ] as HanzoLink[]).filter((l) => shown(l.href)),
         },
       ],
     },
-    // Zoo Labs Foundation governs Hanzo, so it is a peer of the company entry
-    // rather than a link buried inside it.
-    { id: 'foundation', label: 'Foundation', href: FOUNDATION, glyph: 'globe', external: true },
   ] as HanzoNav[]).filter((l) => shown(l.href))
 
   // ONE action, far right: try the thing.
@@ -399,7 +396,11 @@ export function SiteHeader({
   // It arrives WITH its pin, in one commit. The prop landed here once ahead of
   // the package that declares it and turned main red: this site has no
   // `ignoreBuildErrors`, so an unknown prop is a failed BUILD, not a warning.
-  const TRY = { ...base.primaryCTA, label: 'Try Hanzo', href: CONSOLE }
+  // The fallback is CHAT, not the console. This href is what the pill means
+  // before hydration and without JS, and it is the default a click lands on — so
+  // it should be the door most visitors actually want. The console is where you
+  // go once you have an account; chat is where you go to find out.
+  const TRY = { ...base.primaryCTA, label: 'Try Hanzo', href: CHAT }
 
   return (
     <div style={MENU_COLUMNS}>
