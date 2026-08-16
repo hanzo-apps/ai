@@ -23,6 +23,7 @@ import '@hanzo/ui/glass.css'
 // scripts/gen-gui-css.mjs for why it is not injected at render time.
 import './gui.css'
 import { ogImages, twitterImages } from '@/lib/constants/og'
+import mark from '@/lib/data/mark.json'
 
 const geist = Geist({
   variable: '--font-geist',
@@ -41,6 +42,22 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
+}
+
+/**
+ * An icon's URL carries a hash of its own bytes.
+ *
+ * These are served from the edge with a 24h TTL, and asked for by bare path the
+ * cache key never moved when the bytes did — the corrected mark shipped and
+ * every visitor kept the old one for a day. `scripts/sync-mark.mjs` derives the
+ * hash from each file in `prebuild`, so it cannot be forgotten the way a
+ * hand-bumped constant is, and an icon nobody edited keeps its URL and stays
+ * cached. Unstamped if the file is unknown to the map: a bare path is the
+ * behaviour we already had, and it beats requesting `?v=undefined`.
+ */
+const stamp = (path: keyof typeof mark.icons | string): string => {
+  const hash = (mark.icons as Record<string, string>)[path]
+  return hash ? `${path}?v=${hash}` : path
 }
 
 const SITE_TITLE = 'Hanzo — the AI cloud for agents and apps'
@@ -63,12 +80,12 @@ export const metadata: Metadata = {
   // which is the job it should have had all along.
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
-      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
-      { url: '/favicon.ico' },
+      { url: stamp('/favicon.svg'), type: 'image/svg+xml' },
+      { url: stamp('/favicon-32x32.png'), type: 'image/png', sizes: '32x32' },
+      { url: stamp('/favicon-16x16.png'), type: 'image/png', sizes: '16x16' },
+      { url: stamp('/favicon.ico') },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    apple: [{ url: stamp('/apple-touch-icon.png'), sizes: '180x180', type: 'image/png' }],
   },
   manifest: '/site.webmanifest',
   openGraph: {
