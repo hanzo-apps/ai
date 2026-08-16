@@ -23,6 +23,7 @@ export const CONSOLE = 'https://console.hanzo.ai'
 export const DOCS = 'https://docs.hanzo.ai'
 export const BLOG = 'https://blog.hanzo.ai'
 export const FOUNDATION = 'https://zoo.ngo'
+export const AGENCY = 'https://hanzo.agency'
 
 /** The ONE chat hand-off. hanzo.chat is the chat product; hanzo.ai never
  *  reimplements a chat client, it forwards the prompt and hanzo.chat answers it.

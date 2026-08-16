@@ -5,13 +5,14 @@ import {
   HanzoFooter,
   resolveSurface,
   type HanzoCommandEntry,
+  type HanzoLink,
   type HanzoNav,
   type ProductCategory,
 } from '@hanzogui/shell'
 import { cloudCategories } from '@/lib/data/cloud-primitives'
 import { policy } from '@/lib/publish'
 import pages from '@/lib/data/pages.json'
-import { CONSOLE, goToChat } from './nav-data'
+import { AGENCY, CONSOLE, DOCS as DOCS_HOST, FOUNDATION, goToChat } from './nav-data'
 
 /**
  * The chrome links a page iff it is PUBLISHED — the same `policy()` that
@@ -188,32 +189,76 @@ export function SiteHeader({
   // rule in app/globals.css takes it off the page.
   const DOCS = { id: 'docs', label: 'Documentation', href: 'https://docs.hanzo.ai' }
 
-  const localNav: HanzoNav[] = [
-    { id: 'solutions', label: 'Solutions', href: '/solutions' },
+  // The bar names the six things a visitor can be here for, in the order they
+  // are usually wanted: what we know, what we sell, who buys it, who builds on
+  // it, who we are, and who governs us. It was three entries — Solutions,
+  // Resources, Developers — and two of those name a shape of page rather than a
+  // reason to click.
+  //
+  // `glyph` is a NAME from the shell's own MARKS set, never an element, so no
+  // surface can give one menu a mark the others cannot draw. `shown()` gates
+  // every href against the registry, so a link to a page we do not serve
+  // disappears rather than 404s — which is also why each list is written long
+  // and filtered rather than trimmed by hand.
+  const localNav: HanzoNav[] = ([
     {
-      id: 'resources',
-      label: 'Resources',
-      href: '/learn',
-      items: [
-        { id: 'learn', label: 'Learn', href: '/learn', hint: 'Guides and documentation' },
-        { id: 'research', label: 'Research', href: '/research', hint: 'Work we publish' },
-        {
-          id: 'open-source',
-          label: 'Open Source',
-          href: '/open-source',
-          hint: 'Every tool we build, published',
-        },
-        { id: 'blog', label: 'Blog', href: '/blog', hint: 'News and deep dives' },
-        {
-          id: 'customers',
-          label: 'Customers',
-          href: '/customers',
-          hint: 'Teams building on Hanzo',
-        },
-      ].filter((l) => shown(l.href)),
+      id: 'research',
+      label: 'Research',
+      href: '/research',
+      glyph: 'ring',
+      items: ([
+        { id: 'papers', label: 'Papers', href: '/research', glyph: 'book', hint: 'What we publish' },
+        { id: 'models', label: 'Models', href: '/models', glyph: 'spark', hint: 'Every model we serve' },
+        { id: 'zen', label: 'Zen', href: '/zen', glyph: 'circle', hint: 'Our open-weight family' },
+        { id: 'open-source', label: 'Open Source', href: '/open-source', glyph: 'package', hint: 'Every tool we build' },
+      ] as HanzoLink[]).filter((l) => shown(l.href)),
     },
-    { id: 'developers', label: 'Developers', href: '/dev' },
-  ].filter((l) => shown(l.href))
+    {
+      id: 'business',
+      label: 'Business',
+      href: '/solutions',
+      glyph: 'blocks',
+      items: ([
+        { id: 'solutions', label: 'Solutions', href: '/solutions', glyph: 'blocks', hint: 'By industry and by job' },
+        { id: 'customers', label: 'Customers', href: '/customers', glyph: 'users', hint: 'Teams building on Hanzo' },
+        { id: 'pricing', label: 'Pricing', href: '/pricing', glyph: 'card', hint: 'Plans and rates' },
+        { id: 'agency', label: 'Agency', href: AGENCY, glyph: 'template', hint: 'hanzo.agency', external: true },
+        { id: 'contact', label: 'Contact sales', href: '/contact', glyph: 'chat', hint: 'Talk to us' },
+      ] as HanzoLink[]).filter((l) => shown(l.href)),
+    },
+    {
+      id: 'developers',
+      label: 'Developers',
+      href: '/dev',
+      glyph: 'code',
+      items: ([
+        { id: 'docs', label: 'Docs', href: DOCS_HOST, glyph: 'book', hint: 'docs.hanzo.ai', external: true },
+        { id: 'api', label: 'API', href: '/api', glyph: 'gateway', hint: 'One endpoint, one key' },
+        { id: 'sdks', label: 'SDKs', href: '/sdks', glyph: 'package', hint: 'Python, TypeScript, Go, Rust' },
+        { id: 'cli', label: 'CLI', href: '/cli', glyph: 'terminal', hint: 'Hanzo from a terminal' },
+        { id: 'dev', label: 'Hanzo Dev', href: '/dev', glyph: 'code', hint: 'The coding agent' },
+        { id: 'learn', label: 'Learn', href: '/learn', glyph: 'cap', hint: 'Guides and walkthroughs' },
+        { id: 'status', label: 'Status', href: '/status', glyph: 'pulse', hint: 'What is up right now' },
+      ] as HanzoLink[]).filter((l) => shown(l.href)),
+    },
+    {
+      id: 'company',
+      label: 'Company',
+      href: '/about',
+      glyph: 'user',
+      items: ([
+        { id: 'about', label: 'About', href: '/about', glyph: 'user', hint: 'Who we are' },
+        { id: 'careers', label: 'Careers', href: '/careers', glyph: 'rocket', hint: 'Work here' },
+        { id: 'blog', label: 'Blog', href: '/blog', glyph: 'book', hint: 'News and deep dives' },
+        { id: 'press', label: 'Press', href: '/press', glyph: 'display', hint: 'Media and brand' },
+        { id: 'trust', label: 'Trust', href: '/trust', glyph: 'shield', hint: 'Security and compliance' },
+        { id: 'investors', label: 'Investors', href: '/investors', glyph: 'card', hint: 'Backing this' },
+      ] as HanzoLink[]).filter((l) => shown(l.href)),
+    },
+    // Zoo Labs Foundation governs Hanzo, so it is a peer of the company entry
+    // rather than a link buried inside it.
+    { id: 'foundation', label: 'Foundation', href: FOUNDATION, glyph: 'globe', external: true },
+  ] as HanzoNav[]).filter((l) => shown(l.href))
 
   // ONE action, far right: try the thing.
   //
