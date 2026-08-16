@@ -64,7 +64,7 @@ const features = [
 
 const useCases = [
   {
-    title: "Institutional Custody",
+    title: "Institutional key management",
     description: "Enterprise-grade key management for funds, exchanges, and asset managers.",
   },
   {
