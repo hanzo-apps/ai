@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@hanzo/ui";
 import { Users, Building2 } from "lucide-react";
 import { loadPlans, fallbackPlans } from "@/lib/plans";
+import { Box } from '@hanzo/ui'
 
 // Team and Enterprise used to be four full plan cards sitting beside the
 // personal plans — Team, Team Max, Enterprise ($9999/mo) and Custom. That put
@@ -83,12 +84,12 @@ const TeamEnterpriseStrip = () => {
   // a plan sold at a single price simply states that price and no footnote.
   const headline = annual ?? monthly;
   return (
-  <div className="max-w-6xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div className="p-6 rounded-xl border border-border bg-[var(--black)] flex flex-col">
-      <div className="flex items-center gap-3 mb-3">
+  <Box className="max-w-6xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <Box className="p-6 rounded-xl border border-border bg-[var(--black)] flex flex-col">
+      <Box className="flex items-center gap-3 mb-3">
         <Users className="h-5 w-5 text-muted-foreground" />
         <h3 className="text-lg font-medium">Business</h3>
-      </div>
+      </Box>
       <p className="text-sm text-muted-foreground mb-6 leading-relaxed flex-1">
         <span className="text-foreground font-medium">
           ${headline} per user per month
@@ -110,13 +111,13 @@ const TeamEnterpriseStrip = () => {
           Get started
         </a>
       </Button>
-    </div>
+    </Box>
 
-    <div className="p-6 rounded-xl border border-border bg-[var(--black)] flex flex-col">
-      <div className="flex items-center gap-3 mb-3">
+    <Box className="p-6 rounded-xl border border-border bg-[var(--black)] flex flex-col">
+      <Box className="flex items-center gap-3 mb-3">
         <Building2 className="h-5 w-5 text-muted-foreground" />
         <h3 className="text-lg font-medium">Enterprise</h3>
-      </div>
+      </Box>
       <p className="text-sm text-muted-foreground mb-6 leading-relaxed flex-1">
         Dedicated capacity, on-prem or air-gapped deployment, custom SLAs and
         model hosting. Priced against your infrastructure and volume, so it
@@ -125,8 +126,8 @@ const TeamEnterpriseStrip = () => {
       <Button asChild variant="outline" className="w-full border-border">
         <a href={SALES_URL}>Contact sales</a>
       </Button>
-    </div>
-  </div>
+    </Box>
+  </Box>
   );
 };
 

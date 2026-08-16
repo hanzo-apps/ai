@@ -4,15 +4,16 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 const CallToAction = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-30"></div>
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
+      <Box className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-30"></Box>
+      <Box className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></Box>
+      <Box className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></Box>
       
-      <div className="max-w-5xl mx-auto relative z-10">
+      <Box className="max-w-5xl mx-auto relative z-10">
         <motion.div 
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -39,7 +40,7 @@ const CallToAction = () => {
             Get Started with Hanzo
           </a>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

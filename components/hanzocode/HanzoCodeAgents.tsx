@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Bot, Cpu, GitBranch, Braces, Users, Brain, Server, Maximize } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface FeatureCardProps {
   icon: React.FC<{ className?: string }>;
@@ -30,7 +31,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, descriptio
 const HanzoCodeAgents: React.FC = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)]">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,7 +45,7 @@ const HanzoCodeAgents: React.FC = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           <FeatureCard 
             icon={Bot}
             title="Superagents"
@@ -68,10 +69,10 @@ const HanzoCodeAgents: React.FC = () => {
             title="Code Generation"
             description="Generate entire modules, components, or services with detailed specifications in plain English"
           />
-        </div>
+        </Box>
         
-        <div className="bg-gradient-to-br from-white/10 to-white/10 rounded-2xl p-8 border border-border">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <Box className="bg-gradient-to-br from-white/10 to-white/10 rounded-2xl p-8 border border-border">
+          <Box className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h3 className="text-2xl font-bold mb-6">Massively Parallel Development</h3>
               <p className="text-lg text-foreground/80 mb-8">
@@ -79,46 +80,46 @@ const HanzoCodeAgents: React.FC = () => {
               </p>
               
               <div className="space-y-4">
-                <div className="flex items-start">
+                <Box className="flex items-start">
                   <Users className="h-5 w-5 text-foreground mr-3 mt-1" />
                   <p className="text-foreground/80">True pair programming with agents that have full system access</p>
-                </div>
+                </Box>
                 
-                <div className="flex items-start">
+                <Box className="flex items-start">
                   <Brain className="h-5 w-5 text-foreground mr-3 mt-1" />
                   <p className="text-foreground/80">Agents learn your coding style and project patterns over time</p>
-                </div>
+                </Box>
                 
-                <div className="flex items-start">
+                <Box className="flex items-start">
                   <Server className="h-5 w-5 text-foreground mr-3 mt-1" />
                   <p className="text-foreground/80">Scale from a single helper to a massive distributed workforce</p>
-                </div>
+                </Box>
                 
-                <div className="flex items-start">
+                <Box className="flex items-start">
                   <Maximize className="h-5 w-5 text-foreground mr-3 mt-1" />
                   <p className="text-foreground/80">Tackle enterprise-scale projects that would normally require entire teams</p>
-                </div>
+                </Box>
               </div>
             </div>
             
-            <div className="bg-[var(--black)]/40 rounded-xl p-6 border border-neutral-800">
+            <Box className="bg-[var(--black)]/40 rounded-xl p-6 border border-neutral-800">
               <div className="text-sm font-mono text-foreground/80 space-y-2">
-                <div className="text-foreground">// Creating a team of agents to refactor an entire codebase</div>
-                <div className="text-[var(--white)]">const project = await HanzoCode.createProject('./my-app');</div>
-                <div className="text-[var(--white)]">const agents = await project.createAgentTeam({"{"}</div>
-                <div className="text-[var(--white)] ml-4">size: 12,</div>
-                <div className="text-[var(--white)] ml-4">task: 'Refactor to React 18 with TypeScript',</div>
-                <div className="text-[var(--white)] ml-4">coordination: 'hierarchical',</div>
-                <div className="text-[var(--white)] ml-4">parallelization: true</div>
-                <div className="text-[var(--white)]">{"}"});</div>
-                <div className="text-[var(--white)]">await agents.execute();</div>
-                <div className="text-[var(--white)]">// Agents will work together, with some focusing on</div>
-                <div className="text-[var(--white)]">// component logic, others on types, others on tests</div>
+                <Box className="text-foreground">// Creating a team of agents to refactor an entire codebase</Box>
+                <Box className="text-[var(--white)]">const project = await HanzoCode.createProject('./my-app');</Box>
+                <Box className="text-[var(--white)]">const agents = await project.createAgentTeam({"{"}</Box>
+                <Box className="text-[var(--white)] ml-4">size: 12,</Box>
+                <Box className="text-[var(--white)] ml-4">task: 'Refactor to React 18 with TypeScript',</Box>
+                <Box className="text-[var(--white)] ml-4">coordination: 'hierarchical',</Box>
+                <Box className="text-[var(--white)] ml-4">parallelization: true</Box>
+                <Box className="text-[var(--white)]">{"}"});</Box>
+                <Box className="text-[var(--white)]">await agents.execute();</Box>
+                <Box className="text-[var(--white)]">// Agents will work together, with some focusing on</Box>
+                <Box className="text-[var(--white)]">// component logic, others on types, others on tests</Box>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
     </section>
   );
 };

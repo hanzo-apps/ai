@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const SUPPORTED_PROVIDERS = [
   "Zen",
@@ -21,8 +22,8 @@ const SUPPORTED_PROVIDERS = [
 const OpenModels = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <Box className="max-w-6xl mx-auto">
+        <Box className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left: Text content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -40,7 +41,7 @@ const OpenModels = () => {
               models the day they come out and try stealth models for free.
             </p>
 
-            <div className="flex flex-wrap gap-4">
+            <Box className="flex flex-wrap gap-4">
               <a
                 href="https://hanzo.ai/leaderboard"
                 target="_blank"
@@ -59,7 +60,7 @@ const OpenModels = () => {
               >
                 Compare models
               </a>
-            </div>
+            </Box>
           </motion.div>
 
           {/* Right: Providers */}
@@ -70,14 +71,14 @@ const OpenModels = () => {
             transition={{ delay: 0.1 }}
             className="bg-secondary/80 border border-border rounded-xl overflow-hidden"
           >
-            <div className="p-4 border-b border-border">
+            <Box className="p-4 border-b border-border">
               <span className="text-sm font-medium text-foreground">
                 Supported Providers
               </span>
-            </div>
+            </Box>
 
-            <div className="p-4">
-              <div className="flex flex-wrap gap-2">
+            <Box className="p-4">
+              <Box className="flex flex-wrap gap-2">
                 {SUPPORTED_PROVIDERS.map((provider, index) => (
                   <motion.span
                     key={provider}
@@ -93,17 +94,17 @@ const OpenModels = () => {
                 <span className="px-3 py-1.5 bg-neutral-800/50 rounded-full text-sm text-muted-foreground">
                   + many more
                 </span>
-              </div>
-            </div>
+              </Box>
+            </Box>
 
-            <div className="p-4 border-t border-border text-center">
+            <Box className="p-4 border-t border-border text-center">
               <span className="text-xs text-muted-foreground">
                 Bring your own API keys or use Hanzo Gateway
               </span>
-            </div>
+            </Box>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

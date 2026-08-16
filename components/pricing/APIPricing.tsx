@@ -5,6 +5,7 @@ import { Button } from "@hanzo/ui";
 import Link from "next/link";
 import { Search, ChevronDown, ChevronUp, Star, Filter } from "lucide-react";
 import pricingData from "@/lib/data/pricing.json";
+import { Box } from '@hanzo/ui'
 
 interface HanzoModel {
   name: string;
@@ -329,19 +330,19 @@ const APIPricing = () => {
   const videoModels = rest.filter((m) => kindOf(m) === "video");
 
   const HanzoModelCard = ({ model }: { model: HanzoModel }) => (
-    <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50 mb-4">
-      <div className="flex justify-between items-start mb-4">
-        <div className="flex-1">
-          <div className="flex items-center gap-3 mb-2 flex-wrap">
+    <Box className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50 mb-4">
+      <Box className="flex justify-between items-start mb-4">
+        <Box className="flex-1">
+          <Box className="flex items-center gap-3 mb-2 flex-wrap">
             <h3 className="text-xl font-semibold">{model.fullName || model.name}</h3>
             <TierBadge tier={model.tier} />
-          </div>
+          </Box>
           {model.description && (
             <p className="text-muted-foreground mb-3">{model.description}</p>
           )}
 
           {(model.specs?.params || model.specs?.arch) && (
-            <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3 flex-wrap">
+            <Box className="flex items-center gap-4 text-xs text-muted-foreground mb-3 flex-wrap">
               {model.specs?.params && (
                 <span>
                   Parameters: <span className="text-foreground/80">{model.specs.params}</span>
@@ -352,22 +353,22 @@ const APIPricing = () => {
                   Architecture: <span className="text-foreground/80">{model.specs.arch}</span>
                 </span>
               )}
-            </div>
+            </Box>
           )}
 
           {model.features && (
-            <div className="mb-4">
+            <Box className="mb-4">
               {model.features.map((feature, index) => (
-                <div key={index} className="flex items-center text-sm text-muted-foreground mb-1.5">
+                <Box key={index} className="flex items-center text-sm text-muted-foreground mb-1.5">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2.5"></span>
                   {feature}
-                </div>
+                </Box>
               ))}
-            </div>
+            </Box>
           )}
-        </div>
+        </Box>
 
-        <div className="ml-6 shrink-0">
+        <Box className="ml-6 shrink-0">
           <Button
             className="bg-[var(--white)] text-primary-foreground border border-neutral-300 hover:bg-transparent hover:text-[var(--white)] hover:border-[var(--white)] transition-all duration-300"
             onClick={() => {
@@ -376,59 +377,59 @@ const APIPricing = () => {
           >
             Start Using {model.name}
           </Button>
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       {model.pricingUnit ? (
-        <div className="flex items-center gap-4 text-sm bg-background/20 rounded-lg p-4">
+        <Box className="flex items-center gap-4 text-sm bg-background/20 rounded-lg p-4">
           <div>
             <span className="text-muted-foreground block mb-1">Price</span>
-            <div className="font-medium text-lg">{fmtUnit(model.pricing.perUnit, model.pricingUnit)}</div>
+            <Box className="font-medium text-lg">{fmtUnit(model.pricing.perUnit, model.pricingUnit)}</Box>
           </div>
           {model.endpoint && (
-            <div className="ml-auto">
+            <Box className="ml-auto">
               <code className="text-xs text-muted-foreground bg-background/30 rounded px-2 py-1">{model.endpoint}</code>
-            </div>
+            </Box>
           )}
-        </div>
+        </Box>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm bg-background/20 rounded-lg p-4">
+        <Box className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm bg-background/20 rounded-lg p-4">
           <div>
             <span className="text-muted-foreground block mb-1">Input</span>
-            <div className="font-medium text-lg">{fmt(model.pricing.input ?? null)}</div>
+            <Box className="font-medium text-lg">{fmt(model.pricing.input ?? null)}</Box>
           </div>
           <div>
             <span className="text-muted-foreground block mb-1">Output</span>
-            <div className="font-medium text-lg">{fmt(model.pricing.output ?? null)}</div>
+            <Box className="font-medium text-lg">{fmt(model.pricing.output ?? null)}</Box>
           </div>
           <div>
             <span className="text-muted-foreground block mb-1">Cache Write</span>
-            <div className="font-medium text-lg">{fmt(model.pricing.cacheWrite ?? null)}</div>
+            <Box className="font-medium text-lg">{fmt(model.pricing.cacheWrite ?? null)}</Box>
           </div>
           <div>
             <span className="text-muted-foreground block mb-1">Cache Read</span>
-            <div className="font-medium text-lg">{fmt(model.pricing.cacheRead ?? null)}</div>
+            <Box className="font-medium text-lg">{fmt(model.pricing.cacheRead ?? null)}</Box>
           </div>
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 
   const ToolCard = ({ tool }: { tool: ToolEntry }) => (
-    <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50">
+    <Box className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50">
       <h3 className="text-xl font-semibold mb-2">{tool.name}</h3>
-      <div className="text-right">
+      <Box className="text-right">
         <span className="text-muted-foreground">{tool.unit}</span>
-        <div className="font-medium">${tool.price}</div>
-      </div>
-    </div>
+        <Box className="font-medium">${tool.price}</Box>
+      </Box>
+    </Box>
   );
 
   return (
-    <div className="max-w-7xl mx-auto mb-16">
+    <Box className="max-w-7xl mx-auto mb-16">
       {/* Summary Stats */}
       {summary && (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+        <Box className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
           {[
             { label: "Zen Models", value: summary.zenModels },
             { label: "Third-Party", value: summary.thirdPartyModels },
@@ -437,22 +438,22 @@ const APIPricing = () => {
             { label: "Featured", value: summary.featuredModels },
             { label: "Free Models", value: summary.freeModels },
           ].map((stat) => (
-            <div
+            <Box
               key={stat.label}
               className="bg-neutral-900/30 rounded-xl p-4 border border-neutral-800/50 text-center"
             >
-              <div className="text-2xl font-bold text-foreground">{stat.value}</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
+              <Box className="text-2xl font-bold text-foreground">{stat.value}</Box>
+              <Box className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
                 {stat.label}
-              </div>
-            </div>
+              </Box>
+            </Box>
           ))}
-        </div>
+        </Box>
       )}
 
       {/* Hanzo Enso — flagship frontier family (Flash / Pro / Ultra) */}
-      <div className="mb-16">
-        <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
+      <Box className="mb-16">
+        <Box className="flex items-center justify-between mb-4 flex-wrap gap-4">
           <div>
             <h2 className="text-3xl font-bold">Hanzo Enso</h2>
             <p className="text-muted-foreground text-lg mt-2">
@@ -465,7 +466,7 @@ const APIPricing = () => {
           >
             Explore Enso
           </Link>
-        </div>
+        </Box>
 
         {ensoModels.length > 0 ? (
           <div className="space-y-4">
@@ -474,34 +475,34 @@ const APIPricing = () => {
             ))}
           </div>
         ) : (
-          <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50">
-            <div className="flex items-center gap-3 mb-2 flex-wrap">
+          <Box className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50">
+            <Box className="flex items-center gap-3 mb-2 flex-wrap">
               <h3 className="text-xl font-semibold">Enso Flash · Pro · Ultra</h3>
               <span className="inline-flex items-center px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full bg-primary/10 text-foreground/70 border border-border">
                 Default
               </span>
-            </div>
+            </Box>
             <p className="text-muted-foreground">
               Enso is the default for every new chat and API request — Flash, Pro, and Ultra behind one
               endpoint, with the Enso router picking the right tier per task. Live per-token retail pricing
               appears here automatically — served straight from <code className="text-foreground/80">api.hanzo.ai/v1/models</code>,
               no placeholder numbers.
             </p>
-            <div className="mt-4">
+            <Box className="mt-4">
               <Button
                 className="bg-transparent border border-border text-foreground hover:bg-[var(--white)] hover:text-primary-foreground transition-all duration-300"
                 onClick={() => window.open("https://console.hanzo.ai", "_blank", "noopener,noreferrer")}
               >
                 Start with Enso
               </Button>
-            </div>
-          </div>
+            </Box>
+          </Box>
         )}
-      </div>
+      </Box>
 
       {/* Zen Models Section */}
-      <div className="mb-16">
-        <div className="flex items-center justify-between mb-4 flex-wrap gap-4">
+      <Box className="mb-16">
+        <Box className="flex items-center justify-between mb-4 flex-wrap gap-4">
           <div>
             <h2 className="text-3xl font-bold">Zen Models</h2>
             <p className="text-muted-foreground text-lg mt-2">
@@ -519,14 +520,14 @@ const APIPricing = () => {
           >
             Full Model Catalog
           </Link>
-        </div>
+        </Box>
 
         {/* Tier legend */}
-        <div className="flex flex-wrap gap-3 mb-8">
+        <Box className="flex flex-wrap gap-3 mb-8">
           {Object.keys(TIER_STYLES).map((tier) => (
             <TierBadge key={tier} tier={tier} />
           ))}
-        </div>
+        </Box>
 
         {/* LLM Models */}
         <div className="space-y-4 mb-8">
@@ -535,14 +536,14 @@ const APIPricing = () => {
           ))}
         </div>
 
-        <div className="text-sm text-muted-foreground mb-6">
+        <Box className="text-sm text-muted-foreground mb-6">
           All Zen LLMs available via OpenAI-compatible API at{" "}
           <code className="text-foreground/80">api.hanzo.ai/v1/chat/completions</code>
-        </div>
+        </Box>
 
         {/* Embedding Models */}
         {embeddingModels.length > 0 && (
-          <div className="mb-8">
+          <Box className="mb-8">
             <h3 className="text-2xl font-bold mb-2">Embedding Models</h3>
             <p className="text-muted-foreground mb-4">High-quality text embeddings via <code className="text-foreground/80">/v1/embeddings</code></p>
             <div className="space-y-4">
@@ -550,12 +551,12 @@ const APIPricing = () => {
                 <HanzoModelCard key={model.name} model={model} />
               ))}
             </div>
-          </div>
+          </Box>
         )}
 
         {/* Reranker Models */}
         {rerankerModels.length > 0 && (
-          <div className="mb-8">
+          <Box className="mb-8">
             <h3 className="text-2xl font-bold mb-2">Reranker Models</h3>
             <p className="text-muted-foreground mb-4">Improve retrieval quality via <code className="text-foreground/80">/v1/rerank</code></p>
             <div className="space-y-4">
@@ -563,12 +564,12 @@ const APIPricing = () => {
                 <HanzoModelCard key={model.name} model={model} />
               ))}
             </div>
-          </div>
+          </Box>
         )}
 
         {/* Image Generation Models */}
         {imageModels.length > 0 && (
-          <div className="mb-8">
+          <Box className="mb-8">
             <h3 className="text-2xl font-bold mb-2">Image Generation</h3>
             <p className="text-muted-foreground mb-4">FLUX, Stable Diffusion, and more via <code className="text-foreground/80">/v1/images/generations</code></p>
             <div className="space-y-4">
@@ -576,12 +577,12 @@ const APIPricing = () => {
                 <HanzoModelCard key={model.name} model={model} />
               ))}
             </div>
-          </div>
+          </Box>
         )}
 
         {/* Audio & Speech Models */}
         {audioModels.length > 0 && (
-          <div className="mb-8">
+          <Box className="mb-8">
             <h3 className="text-2xl font-bold mb-2">Audio &amp; Speech</h3>
             <p className="text-muted-foreground mb-4">Speech-to-text, text-to-speech, and audio generation via <code className="text-foreground/80">/v1/audio/*</code></p>
             <div className="space-y-4">
@@ -589,12 +590,12 @@ const APIPricing = () => {
                 <HanzoModelCard key={model.name} model={model} />
               ))}
             </div>
-          </div>
+          </Box>
         )}
 
         {/* Video Generation Models */}
         {videoModels.length > 0 && (
-          <div className="mb-8">
+          <Box className="mb-8">
             <h3 className="text-2xl font-bold mb-2">Video Generation</h3>
             <p className="text-muted-foreground mb-4">Text-to-video via <code className="text-foreground/80">/v1/videos/generations</code></p>
             <div className="space-y-4">
@@ -602,83 +603,83 @@ const APIPricing = () => {
                 <HanzoModelCard key={model.name} model={model} />
               ))}
             </div>
-          </div>
+          </Box>
         )}
 
-        <div className="text-sm text-muted-foreground mb-6">
+        <Box className="text-sm text-muted-foreground mb-6">
           Customers can purchase prioritized API capacity with Priority Tier
-        </div>
+        </Box>
 
-        <div className="text-sm text-muted-foreground mb-8">
+        <Box className="text-sm text-muted-foreground mb-8">
           Prompt caching pricing is for our standard 5-minute TTL;{" "}
           <a href="#" className="text-foreground hover:underline">
             extended prompt caching
           </a>{" "}
           is available at an additional cost
-        </div>
+        </Box>
 
-        <div className="flex justify-center">
+        <Box className="flex justify-center">
           <Button size="lg" className="bg-primary text-primary-foreground hover:bg-neutral-100 px-8 py-3">
             Start building
           </Button>
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       {/* Tools Section */}
       {tools && tools.length > 0 && (
-        <div className="mb-16">
+        <Box className="mb-16">
           <h2 className="text-2xl font-bold mb-8">Explore pricing for tools</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {tools.map((tool) => (
               <ToolCard key={tool.name} tool={tool} />
             ))}
-          </div>
+          </Box>
 
-          <div className="text-sm text-muted-foreground mb-8">
+          <Box className="text-sm text-muted-foreground mb-8">
             *Does not include input and output tokens required to process requests
-          </div>
+          </Box>
 
-          <div className="flex justify-center">
+          <Box className="flex justify-center">
             <Button size="lg" className="bg-primary text-primary-foreground hover:bg-neutral-100 px-8 py-3">
               Start building
             </Button>
-          </div>
-        </div>
+          </Box>
+        </Box>
       )}
 
       {/* Featured Third-Party Models */}
       {featuredModels.length > 0 && (
-        <div className="mb-16">
+        <Box className="mb-16">
           <h2 className="text-2xl font-bold mb-2">Featured Third-Party Models</h2>
           <p className="text-muted-foreground mb-8">
             Top models from leading AI providers — all accessible through one Hanzo API key
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Box className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {featuredModels.map((model) => (
-              <div
+              <Box
                 key={model.id || model.name}
                 className="bg-neutral-900/30 rounded-xl p-5 border border-neutral-800/50 hover:border-border transition-colors"
               >
-                <div className="flex items-start justify-between mb-3">
+                <Box className="flex items-start justify-between mb-3">
                   <div>
-                    <div className="flex items-center gap-2 mb-1">
+                    <Box className="flex items-center gap-2 mb-1">
                       <h3 className="font-semibold text-foreground">{model.name}</h3>
                       {model.isFree && <FreeBadge />}
-                    </div>
+                    </Box>
                     <span className="text-xs text-muted-foreground">{model.provider}</span>
                   </div>
                   <FeaturedBadge />
-                </div>
+                </Box>
                 {model.features && (
-                  <div className="mb-3">
+                  <Box className="mb-3">
                     {model.features.map((f, i) => (
                       <span key={i} className="text-xs text-muted-foreground mr-3">
                         {f}
                       </span>
                     ))}
-                  </div>
+                  </Box>
                 )}
-                <div className="grid grid-cols-2 gap-3 text-sm bg-background/20 rounded-lg p-3">
+                <Box className="grid grid-cols-2 gap-3 text-sm bg-background/20 rounded-lg p-3">
                   <div>
                     <span className="text-muted-foreground text-xs block">Input</span>
                     <span className="font-medium">{fmt(model.pricing.input)}</span>
@@ -687,25 +688,25 @@ const APIPricing = () => {
                     <span className="text-muted-foreground text-xs block">Output</span>
                     <span className="font-medium">{fmt(model.pricing.output)}</span>
                   </div>
-                </div>
-              </div>
+                </Box>
+              </Box>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       )}
 
       {/* All Third-Party Models — Searchable Table */}
       {data.thirdPartyModels && data.thirdPartyModels.length > 0 && (
-        <div className="mb-16">
+        <Box className="mb-16">
           <h2 className="text-2xl font-bold mb-2">All Third-Party Models</h2>
           <p className="text-muted-foreground mb-6">
             {data.thirdPartyModels.length} models from {providers.length} providers — dynamically detected and priced
           </p>
 
           {/* Filters */}
-          <div className="flex flex-wrap items-center gap-3 mb-6">
+          <Box className="flex flex-wrap items-center gap-3 mb-6">
             {/* Search */}
-            <div className="relative flex-1 min-w-[200px] max-w-md">
+            <Box className="relative flex-1 min-w-[200px] max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
@@ -714,10 +715,10 @@ const APIPricing = () => {
                 onChange={(e) => { setSearch(e.target.value); setShowCount(MODELS_PER_PAGE); }}
                 className="w-full pl-9 pr-4 py-2 rounded-lg bg-secondary border border-border text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-ring"
               />
-            </div>
+            </Box>
 
             {/* Provider filter */}
-            <div className="relative">
+            <Box className="relative">
               <Filter className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
               <select
                 value={selectedProvider}
@@ -730,7 +731,7 @@ const APIPricing = () => {
                 ))}
               </select>
               <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground pointer-events-none" />
-            </div>
+            </Box>
 
             {/* Free toggle */}
             <button
@@ -748,10 +749,10 @@ const APIPricing = () => {
             <span className="text-xs text-muted-foreground ml-auto">
               {filteredModels.length} model{filteredModels.length !== 1 ? "s" : ""}
             </span>
-          </div>
+          </Box>
 
           {/* Table */}
-          <div className="overflow-x-auto">
+          <Box className="overflow-x-auto">
             <table className="w-full border-collapse bg-background border border-border rounded-xl overflow-hidden">
               <thead>
                 <tr className="bg-secondary/80">
@@ -781,11 +782,11 @@ const APIPricing = () => {
                     }`}
                   >
                     <td className="px-4 py-3">
-                      <div className="flex items-center gap-2 flex-wrap">
+                      <Box className="flex items-center gap-2 flex-wrap">
                         <span className="font-medium text-foreground text-sm">{model.name}</span>
                         {model.featured && <FeaturedBadge />}
                         {model.isFree && <FreeBadge />}
-                      </div>
+                      </Box>
                       <span className="text-xs text-muted-foreground sm:hidden">{model.provider}</span>
                     </td>
                     <td className="px-4 py-3 text-sm text-muted-foreground hidden sm:table-cell">
@@ -814,34 +815,34 @@ const APIPricing = () => {
                 ))}
               </tbody>
             </table>
-          </div>
+          </Box>
 
           {/* Show more */}
           {filteredModels.length > showCount && (
-            <div className="flex justify-center mt-6">
+            <Box className="flex justify-center mt-6">
               <button
                 onClick={() => setShowCount((c) => c + MODELS_PER_PAGE)}
                 className="px-6 py-2 rounded-full text-sm font-medium border border-border bg-transparent hover:bg-secondary text-foreground/80 transition-colors"
               >
                 Show more ({filteredModels.length - showCount} remaining)
               </button>
-            </div>
+            </Box>
           )}
 
           {filteredModels.length === 0 && (
-            <div className="text-center py-12 text-muted-foreground">
+            <Box className="text-center py-12 text-muted-foreground">
               No models match your filters.
-            </div>
+            </Box>
           )}
 
-          <div className="text-sm text-muted-foreground mt-6">
+          <Box className="text-sm text-muted-foreground mt-6">
             Third-party model pricing includes a passthrough markup. Prices update automatically every 6 hours.
             All models accessible via <code className="text-foreground/80">api.hanzo.ai/v1/chat/completions</code> using
             the provider-prefixed model ID (e.g. <code className="text-foreground/80">anthropic/claude-sonnet-4.6</code>).
-          </div>
-        </div>
+          </Box>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 };
 

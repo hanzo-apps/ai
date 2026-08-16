@@ -5,6 +5,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Cpu, MessageSquare, Code, Bot } from "lucide-react";
 import { ModelInterface } from "./types";
+import { Box } from '@hanzo/ui'
 
 interface SidebarProps {
   showSidebar: boolean;
@@ -43,7 +44,7 @@ const Sidebar = ({
                 <Cpu className="w-4 h-4 mr-2" />
                 <div>
                   <div>{model.name}</div>
-                  <div className="text-xs text-muted-foreground">{model.provider}</div>
+                  <Box className="text-xs text-muted-foreground">{model.provider}</Box>
                 </div>
               </button>
             ))}

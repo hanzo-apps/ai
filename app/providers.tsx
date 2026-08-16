@@ -5,6 +5,7 @@ import { AnalyticsProvider, ErrorBoundary, useAnalytics, usePageview } from '@ha
 import { ObserveProvider } from '@hanzo/observe/react'
 import { usePathname } from 'next/navigation'
 import { useEffect, type ReactNode } from 'react'
+import { Box } from '@hanzo/ui'
 
 /** Cloud front door: POST /v1/event, body { batch: [Event…] }. */
 const EVENT_HOST = process.env.NEXT_PUBLIC_HANZO_API_URL || 'https://api.hanzo.ai'
@@ -170,7 +171,7 @@ export function iamTraits(user: unknown): Record<string, unknown> | undefined {
  *  this just keeps the page usable. */
 function Crashed(_error: Error, reset: () => void) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-black px-6 text-center text-white">
+    <Box className="flex min-h-screen flex-col items-center justify-center gap-4 bg-black px-6 text-center text-white">
       <p className="text-lg font-medium">Something went wrong.</p>
       <button
         onClick={reset}
@@ -178,7 +179,7 @@ function Crashed(_error: Error, reset: () => void) {
       >
         Try again
       </button>
-    </div>
+    </Box>
   )
 }
 

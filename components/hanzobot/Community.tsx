@@ -5,11 +5,12 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { Github, MessageSquare } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const Community = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative">
-      <div className="max-w-7xl mx-auto relative z-10">
+      <Box className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -30,32 +31,32 @@ const Community = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="bg-gradient-to-r from-white/10 to-white/10 border border-border rounded-xl p-8 md:p-12"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <Box className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
               <h3 className="text-2xl font-bold text-[var(--white)] mb-4">Next Steps</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
-                  <div className="bg-primary/20 p-1 rounded text-foreground mr-3 mt-0.5">
-                    <div className="w-4 h-4 flex items-center justify-center">1</div>
-                  </div>
+                  <Box className="bg-primary/20 p-1 rounded text-foreground mr-3 mt-0.5">
+                    <Box className="w-4 h-4 flex items-center justify-center">1</Box>
+                  </Box>
                   <div>
                     <span className="text-[var(--white)] font-medium">Create Your First Agent</span>
                     <p className="text-muted-foreground text-sm mt-1">Follow our guide to build your first AI agent</p>
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <div className="bg-primary/20 p-1 rounded text-foreground mr-3 mt-0.5">
-                    <div className="w-4 h-4 flex items-center justify-center">2</div>
-                  </div>
+                  <Box className="bg-primary/20 p-1 rounded text-foreground mr-3 mt-0.5">
+                    <Box className="w-4 h-4 flex items-center justify-center">2</Box>
+                  </Box>
                   <div>
                     <span className="text-[var(--white)] font-medium">Understand Core Concepts</span>
                     <p className="text-muted-foreground text-sm mt-1">Learn about the key components of the Hanzo Bot framework</p>
                   </div>
                 </li>
                 <li className="flex items-start">
-                  <div className="bg-primary/20 p-1 rounded text-foreground mr-3 mt-0.5">
-                    <div className="w-4 h-4 flex items-center justify-center">3</div>
-                  </div>
+                  <Box className="bg-primary/20 p-1 rounded text-foreground mr-3 mt-0.5">
+                    <Box className="w-4 h-4 flex items-center justify-center">3</Box>
+                  </Box>
                   <div>
                     <span className="text-[var(--white)] font-medium">Explore Advanced Features</span>
                     <p className="text-muted-foreground text-sm mt-1">Discover how to use the full potential of your agents</p>
@@ -88,20 +89,20 @@ const Community = () => {
                 </Button>
               </div>
               
-              <div className="text-muted-foreground text-sm">
+              <Box className="text-muted-foreground text-sm">
                 <p className="mb-2">Looking for examples?</p>
                 <a href="#" className="text-foreground hover:text-foreground/70">
                   View ready-to-use character templates and implementations →
                 </a>
-              </div>
+              </Box>
             </div>
-          </div>
+          </Box>
         </motion.div>
         
-        <div className="mt-12 text-center text-muted-foreground text-sm">
+        <Box className="mt-12 text-center text-muted-foreground text-sm">
           Last updated on Feb 20, 2025 by jin
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

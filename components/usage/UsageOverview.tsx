@@ -5,6 +5,7 @@ import React from "react";
 import { Button } from "@hanzo/ui";
 import { motion } from "@/components/motion";
 import { createAnimationVariant, curves } from "@/components/ui/animation-variants";
+import { Box } from '@hanzo/ui'
 
 interface UsageOverviewProps {
   dateRange: {
@@ -39,52 +40,52 @@ const UsageOverview = ({
       variants={cardAnimation}
       className="rounded-xl border border-neutral-800 bg-neutral-900/20 overflow-hidden"
     >
-      <div className="p-6 border-b border-neutral-800">
+      <Box className="p-6 border-b border-neutral-800">
         <h2 className="text-xl font-semibold mb-1">
           {dateRange.start} to {dateRange.end} Credit Usage
         </h2>
-      </div>
+      </Box>
       
-      <div className="p-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <Box className="p-6">
+        <Box className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">
-            <div className="flex justify-between items-center">
+            <Box className="flex justify-between items-center">
               <span className="text-muted-foreground">Current Usage</span>
               <span>{currentUsage}</span>
-            </div>
-            <div className="flex justify-between items-center">
+            </Box>
+            <Box className="flex justify-between items-center">
               <span className="text-muted-foreground">Discounts</span>
               <span>{discounts}</span>
-            </div>
-            <div className="flex justify-between items-center">
+            </Box>
+            <Box className="flex justify-between items-center">
               <span className="text-muted-foreground">Credits Used</span>
               <span>{creditsUsed}</span>
-            </div>
-            <div className="flex justify-between items-center">
+            </Box>
+            <Box className="flex justify-between items-center">
               <span className="text-muted-foreground">Estimated Month's Cost</span>
               <span>{estimatedCost}</span>
-            </div>
+            </Box>
           </div>
           
-          <div className="bg-neutral-900/30 rounded-xl p-6 flex flex-col items-center justify-center text-center">
-            <div className="mb-2">
-              <div className="text-sm text-muted-foreground">Credits Available</div>
-              <div className="text-3xl font-bold">{creditsAvailable}</div>
-            </div>
+          <Box className="bg-neutral-900/30 rounded-xl p-6 flex flex-col items-center justify-center text-center">
+            <Box className="mb-2">
+              <Box className="text-sm text-muted-foreground">Credits Available</Box>
+              <Box className="text-3xl font-bold">{creditsAvailable}</Box>
+            </Box>
             
-            <div className="mb-6">
-              <div className="text-sm text-foreground/70">Est Credits Required</div>
-              <div className="text-3xl font-bold text-foreground/70">{creditsRequired}</div>
-            </div>
+            <Box className="mb-6">
+              <Box className="text-sm text-foreground/70">Est Credits Required</Box>
+              <Box className="text-3xl font-bold text-foreground/70">{creditsRequired}</Box>
+            </Box>
             
             <Button 
               className="bg-primary hover:bg-primary/90 text-primary-foreground w-full"
             >
               Purchase Credits
             </Button>
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
     </motion.div>
   );
 };

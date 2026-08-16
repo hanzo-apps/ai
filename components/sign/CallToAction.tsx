@@ -3,19 +3,20 @@
 import React from "react";
 import { Button } from "@hanzo/ui";
 import { ArrowRight, PenLine, Book, Code } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const CallToAction = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-background to-neutral-900/40">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center mb-10">
+        <Box className="max-w-4xl mx-auto text-center mb-10">
           <h2 className="text-3xl font-bold mb-6">Send the first one</h2>
           <p className="text-lg text-foreground/80 mb-8">
             Upload a PDF and place a signature field. You will know inside five minutes whether this fits.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 flex flex-col items-center">
+          <Box className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Box className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 flex flex-col items-center">
               <PenLine className="h-12 w-12 text-foreground/60 mb-4" />
               <h3 className="text-xl font-semibold mb-2">Start signing</h3>
               <p className="text-muted-foreground mb-4 text-center">Open the hosted app and send a document</p>
@@ -25,9 +26,9 @@ const CallToAction = () => {
               >
                 Get Started <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            </div>
+            </Box>
 
-            <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 flex flex-col items-center">
+            <Box className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 flex flex-col items-center">
               <Book className="h-12 w-12 text-foreground/60 mb-4" />
               <h3 className="text-xl font-semibold mb-2">Documentation</h3>
               <p className="text-muted-foreground mb-4 text-center">Setup, self-hosting, and the API reference</p>
@@ -37,9 +38,9 @@ const CallToAction = () => {
               >
                 View Docs <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            </div>
+            </Box>
 
-            <div className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 flex flex-col items-center">
+            <Box className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-6 flex flex-col items-center">
               <Code className="h-12 w-12 text-foreground/60 mb-4" />
               <h3 className="text-xl font-semibold mb-2">The source</h3>
               <p className="text-muted-foreground mb-4 text-center">Read it before you trust a contract to it</p>
@@ -49,11 +50,11 @@ const CallToAction = () => {
               >
                 View on GitHub <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
 
-        <div className="bg-primary/5 border border-border rounded-lg p-6 text-center max-w-3xl mx-auto">
+        <Box className="bg-primary/5 border border-border rounded-lg p-6 text-center max-w-3xl mx-auto">
           <h3 className="text-xl font-semibold mb-3">Something more specific</h3>
           <p className="text-foreground/80 mb-6">
             Signing inside your own product, a flow with approvals before the send, or running it on your
@@ -66,7 +67,7 @@ const CallToAction = () => {
           >
             Contact Sales
           </Button>
-        </div>
+        </Box>
       </div>
     </section>
   );

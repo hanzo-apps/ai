@@ -24,6 +24,7 @@ import {
   FileText,
   Bug
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 /*
  * There was a badge row here: four names — SOC 2 Type II, GDPR, CCPA, HIPAA —
@@ -97,7 +98,7 @@ const EDGE_FEATURES = [
 
 const Security = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
       
 
@@ -105,18 +106,18 @@ const Security = () => {
         {/* Hero Section */}
         <section className="relative pt-24 pb-20 px-4 md:px-8 lg:px-12 overflow-hidden">
           {/* Background gradient */}
-          <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-            <div
+          <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+            <Box
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
               style={{
                 background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
                 filter: "blur(100px)",
               }}
             />
-          </div>
+          </Box>
 
-          <div className="max-w-5xl mx-auto relative z-10">
-            <div className="text-center">
+          <Box className="max-w-5xl mx-auto relative z-10">
+            <Box className="text-center">
               {/* Badge */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
@@ -189,13 +190,13 @@ const Security = () => {
                 </Link>
                 .
               </motion.p>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Security Features Grid */}
         <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-background to-neutral-900/50">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -210,7 +211,7 @@ const Security = () => {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {SECURITY_FEATURES.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
@@ -222,12 +223,12 @@ const Security = () => {
                     transition={{ delay: index * 0.1 }}
                     className="bg-secondary/80 border border-border rounded-xl p-6 hover:border-border transition-colors"
                   >
-                    <div
+                    <Box
                       className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
                       style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
                     >
                       <Icon className="w-6 h-6" />
-                    </div>
+                    </Box>
                     <h3 className="text-lg font-semibold text-foreground mb-2">
                       {feature.title}
                     </h3>
@@ -235,26 +236,26 @@ const Security = () => {
                   </motion.div>
                 );
               })}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Infrastructure Security */}
         <section className="py-24 px-4 md:px-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <Box className="max-w-6xl mx-auto">
+            <Box className="grid lg:grid-cols-2 gap-16 items-start">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <div
+                <Box
                   className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6"
                   style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
                 >
                   Infrastructure
-                </div>
+                </Box>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
                   What runs underneath
                 </h2>
@@ -274,10 +275,10 @@ const Security = () => {
                   ].map((item, index) => {
                     const Icon = item.icon;
                     return (
-                      <div key={index} className="flex items-center gap-3">
+                      <Box key={index} className="flex items-center gap-3">
                         <Icon className="w-5 h-5 text-muted-foreground" />
                         <span className="text-foreground/80">{item.text}</span>
-                      </div>
+                      </Box>
                     );
                   })}
                 </div>
@@ -299,26 +300,26 @@ const Security = () => {
 
                 <div className="space-y-4">
                   {EDGE_FEATURES.map((feature) => (
-                    <div
+                    <Box
                       key={feature.name}
                       className="bg-neutral-800/50 rounded-lg p-4 border border-border"
                     >
-                      <div className="flex items-center justify-between">
+                      <Box className="flex items-center justify-between">
                         <span className="font-medium text-foreground">{feature.name}</span>
-                      </div>
+                      </Box>
                       <span className="text-sm text-muted-foreground">{feature.description}</span>
-                    </div>
+                    </Box>
                   ))}
                 </div>
               </motion.div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Enterprise Security */}
         <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-neutral-900/50 to-background">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <Box className="max-w-6xl mx-auto">
+            <Box className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -326,7 +327,7 @@ const Security = () => {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="order-2 lg:order-1"
               >
-                <div className="bg-gradient-to-br from-white/10 to-transparent rounded-xl p-8 border border-border">
+                <Box className="bg-gradient-to-br from-white/10 to-transparent rounded-xl p-8 border border-border">
                   <Shield className="w-10 h-10 mb-6" />
                   <h3 className="text-xl font-bold text-foreground mb-4">
                     What comes with Enterprise
@@ -336,14 +337,14 @@ const Security = () => {
                     somebody to answer the questionnaire your procurement team is about to send.
                   </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <Box className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {ENTERPRISE_FEATURES.map((feature) => (
-                      <div key={feature} className="flex items-start gap-2">
+                      <Box key={feature} className="flex items-start gap-2">
                         <CheckCircle className="w-4 h-4 text-foreground/70 mt-0.5 flex-shrink-0" />
                         <span className="text-sm text-foreground/80">{feature}</span>
-                      </div>
+                      </Box>
                     ))}
-                  </div>
+                  </Box>
 
                   <Link
                     href="/contact"
@@ -353,7 +354,7 @@ const Security = () => {
                     Contact Sales
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
-                </div>
+                </Box>
               </motion.div>
 
               <motion.div
@@ -363,12 +364,12 @@ const Security = () => {
                 transition={{ duration: 0.5 }}
                 className="order-1 lg:order-2"
               >
-                <div
+                <Box
                   className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6"
                   style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
                 >
                   Enterprise
-                </div>
+                </Box>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
                   If you are the one who has to sign off
                 </h2>
@@ -383,13 +384,13 @@ const Security = () => {
                   gap.
                 </p>
               </motion.div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Vulnerability Disclosure */}
         <section className="py-24 px-4 md:px-8">
-          <div className="max-w-4xl mx-auto">
+          <Box className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -397,10 +398,10 @@ const Security = () => {
               transition={{ duration: 0.5 }}
               className="bg-gradient-to-br from-white/20 to-transparent rounded-xl p-8 border border-border"
             >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <Box className="flex items-start gap-4">
+                <Box className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Bug className="w-6 h-6 text-foreground/60" />
-                </div>
+                </Box>
                 <div>
                   <h3 className="text-xl font-bold text-foreground mb-2">
                     Found something
@@ -417,17 +418,17 @@ const Security = () => {
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
                 </div>
-              </div>
+              </Box>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* CTA Section */}
         <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-neutral-900/30 to-background relative overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+          <Box className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+          <Box className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="max-w-4xl mx-auto text-center relative z-10">
+          <Box className="max-w-4xl mx-auto text-center relative z-10">
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -487,12 +488,12 @@ const Security = () => {
                 Read the security documentation
               </a>
             </motion.div>
-          </div>
+          </Box>
         </section>
       </main>
 
       
-    </div>
+    </Box>
   );
 };
 

@@ -1,4 +1,5 @@
-/**
+
+import { Box } from '@hanzo/ui'/**
  * The system, drawn as layers — the section the page's whole argument rests on.
  *
  * The claim everywhere else is "designed together". A reader cannot check that
@@ -57,7 +58,7 @@ const PLANES = [
 export default function SystemArchitecture() {
   return (
     <section id="system" className="mx-auto max-w-5xl scroll-mt-24 px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-2xl text-center">
+      <Box className="mx-auto max-w-2xl text-center">
         <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
           The system
         </p>
@@ -68,53 +69,53 @@ export default function SystemArchitecture() {
           make them behave as one thing. Hanzo was designed as one system — four layers, and
           two rails that cut across all of them.
         </p>
-      </div>
+      </Box>
 
       {/* Declared top-down (Company first) and reversed for layout, so the DOM
           reads bottom-up — infrastructure first, the way the system is built —
           while the eye reads top-down, the way a reader arrives at it. */}
-      <div className="mt-14 flex flex-col-reverse gap-3">
+      <Box className="mt-14 flex flex-col-reverse gap-3">
         {[...LAYERS].reverse().map((layer, i) => (
           <div key={layer.name}>
             <a
               href={layer.href}
               className="block rounded-2xl border border-neutral-800 bg-white/[0.02] px-6 py-5 transition-colors hover:border-neutral-600"
             >
-              <div className="text-base font-medium text-white">{layer.name}</div>
-              <div className="mt-1 text-sm leading-relaxed text-neutral-400">{layer.body}</div>
+              <Box className="text-base font-medium text-white">{layer.name}</Box>
+              <Box className="mt-1 text-sm leading-relaxed text-neutral-400">{layer.body}</Box>
             </a>
             {/* An arrow between layers, never after the last one. */}
             {i < LAYERS.length - 1 ? (
-              <div aria-hidden className="flex justify-center py-1 text-neutral-600">
+              <Box aria-hidden className="flex justify-center py-1 text-neutral-600">
                 ↑
-              </div>
+              </Box>
             ) : null}
           </div>
         ))}
-      </div>
+      </Box>
 
-      <div className="mt-10 grid gap-3 sm:grid-cols-2">
+      <Box className="mt-10 grid gap-3 sm:grid-cols-2">
         {PLANES.map((plane) => (
           <a
             key={plane.name}
             href={plane.href}
             className="rounded-2xl border border-dashed border-neutral-800 px-6 py-5 transition-colors hover:border-neutral-600"
           >
-            <div className="text-base font-medium text-white">{plane.name}</div>
-            <div className="mt-1 text-sm leading-relaxed text-neutral-400">{plane.body}</div>
+            <Box className="text-base font-medium text-white">{plane.name}</Box>
+            <Box className="mt-1 text-sm leading-relaxed text-neutral-400">{plane.body}</Box>
           </a>
         ))}
-      </div>
+      </Box>
 
       {/* What "one system" actually buys, in the terms an engineer can verify.
           Not a benefit list — each line names a thing that exists once. */}
-      <div className="mx-auto mt-14 max-w-2xl text-center text-lg leading-relaxed text-neutral-300">
+      <Box className="mx-auto mt-14 max-w-2xl text-center text-lg leading-relaxed text-neutral-300">
         <p>One company context.</p>
         <p>One intelligence layer.</p>
         <p>One agent runtime.</p>
         <p>One policy plane.</p>
         <p>One operational record.</p>
-      </div>
+      </Box>
     </section>
   )
 }

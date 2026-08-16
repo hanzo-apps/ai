@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Mockup } from '@/components/product/Mockup'
 import { cloudLayers, spell, type Primitive } from '@/lib/data/cloud-primitives'
+import { Box } from '@hanzo/ui'
 
 /**
  * The ten layers, on the one spine they all hang off.
@@ -87,7 +88,7 @@ export default function Layers() {
 
   return (
     <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="mx-auto max-w-5xl">
+      <Box className="mx-auto max-w-5xl">
         <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
           {/* The count is COUNTED. Writing "Ten" here would be a number this
               file cannot check, in the one place the page is most exposed —
@@ -104,16 +105,16 @@ export default function Layers() {
             reflow, translate or answer a screen reader — so what it MEANS is the
             alt, and the list under it is the same ten in the same order, as text
             a reader can select and a crawler can read. */}
-        <div className="mt-14">
+        <Box className="mt-14">
           <Mockup
             base="/cloud-stack-wide"
             alt={`The ${cloudLayers.length} layers of the Open AI Cloud, assembling base to crown: ${cloudLayers
               .map((l) => l.title)
               .join(', ')}.`}
           />
-        </div>
+        </Box>
 
-        <div className="mt-16">
+        <Box className="mt-16">
           <ol>
             {layers.map((layer, i) => {
               const Icon = layer.icon
@@ -139,7 +140,7 @@ export default function Layers() {
                       line that continues into empty space is a line that has
                       somewhere else to go. Hidden below `sm`, where the gutter
                       that would hold it is the width of the numeral itself. */}
-                  <div className="relative mb-3 sm:mb-0">
+                  <Box className="relative mb-3 sm:mb-0">
                     <div
                       aria-hidden="true"
                       className={`absolute -top-10 left-1/2 hidden w-px -translate-x-1/2 bg-neutral-800 sm:block ${
@@ -152,7 +153,7 @@ export default function Layers() {
                           which is the thing this ordering exists to fix. */}
                       {String(layers.length - i).padStart(2, '0')}
                     </span>
-                  </div>
+                  </Box>
 
                   {/* The claim: what the layer is. */}
                   <div className="min-w-0 sm:col-start-2">
@@ -194,8 +195,8 @@ export default function Layers() {
               )
             })}
           </ol>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   )
 }

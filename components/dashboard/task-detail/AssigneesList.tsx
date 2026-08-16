@@ -3,6 +3,7 @@
 import React from "react";
 import { Button } from "@hanzo/ui";
 import { PlusCircle, X } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface Assignee {
   id: string;
@@ -17,23 +18,23 @@ interface AssigneesListProps {
 
 const AssigneesList: React.FC<AssigneesListProps> = ({ assignees = [], onRemove }) => {
   return (
-    <div className="mb-6">
-      <div className="flex justify-between mb-2">
+    <Box className="mb-6">
+      <Box className="flex justify-between mb-2">
         <label className="block text-sm font-medium text-muted-foreground">Assignees</label>
         <Button size="sm" variant="ghost" className="text-foreground hover:text-foreground/70 h-6 px-2">
           <PlusCircle className="h-3.5 w-3.5 mr-1" />
           Add
         </Button>
-      </div>
-      <div className="flex flex-wrap gap-2">
+      </Box>
+      <Box className="flex flex-wrap gap-2">
         {assignees.map(assignee => (
-          <div 
+          <Box 
             key={assignee.id}
             className="flex items-center gap-2 bg-neutral-800 px-2 py-1 rounded text-sm"
           >
-            <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-xs">
+            <Box className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-xs">
               {assignee.name.charAt(0)}
-            </div>
+            </Box>
             <span>{assignee.name}</span>
             <button 
               className="text-muted-foreground hover:text-[var(--white)]"
@@ -41,13 +42,13 @@ const AssigneesList: React.FC<AssigneesListProps> = ({ assignees = [], onRemove 
             >
               <X className="h-3 w-3" />
             </button>
-          </div>
+          </Box>
         ))}
         {!assignees.length && (
-          <div className="text-sm text-muted-foreground">No assignees</div>
+          <Box className="text-sm text-muted-foreground">No assignees</Box>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

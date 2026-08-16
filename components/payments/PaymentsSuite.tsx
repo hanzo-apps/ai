@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { CreditCard, Calendar, Send, CreditCard as CardIcon, Coins } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const suiteItems = [
   {
@@ -26,7 +27,7 @@ const suiteItems = [
 const PaymentsSuite = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)]">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -50,7 +51,7 @@ const PaymentsSuite = () => {
           className="mb-16"
         >
           <h3 className="text-2xl font-bold mb-8 text-center">Unified Payments Suite</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {suiteItems.map((item, index) => (
               <motion.div
                 key={index}
@@ -60,14 +61,14 @@ const PaymentsSuite = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
               >
-                <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+                <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
                   {item.icon}
-                </div>
+                </Box>
                 <h4 className="text-xl font-semibold mb-3">{item.title}</h4>
                 <p className="text-muted-foreground">{item.description}</p>
               </motion.div>
             ))}
-          </div>
+          </Box>
         </motion.div>
 
         <motion.div 
@@ -78,8 +79,8 @@ const PaymentsSuite = () => {
           className="relative bg-gradient-to-br from-neutral-900/50 to-white/10 border border-neutral-800 rounded-xl p-8 overflow-hidden"
         >
           <div className="absolute inset-0 hz-grid [mask-image:linear-gradient(to_bottom,transparent,black)]"></div>
-          <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
-            <div className="md:w-2/3">
+          <Box className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
+            <Box className="md:w-2/3">
               <h3 className="text-2xl font-bold mb-4">What you can see once it is one pipe</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-2">
@@ -95,9 +96,9 @@ const PaymentsSuite = () => {
                   <span>Open source, so the routing logic is readable before you trust it.</span>
                 </li>
               </ul>
-            </div>
-            <div className="md:w-1/3 bg-neutral-900/70 border border-neutral-700 rounded-lg p-5">
-              <div className="text-center">
+            </Box>
+            <Box className="md:w-1/3 bg-neutral-900/70 border border-neutral-700 rounded-lg p-5">
+              <Box className="text-center">
                 <h4 className="text-lg font-semibold mb-3">Payment Growth</h4>
                 <div className="flex items-end justify-center space-x-2 h-32 mb-4">
                   {[20, 35, 28, 45, 60, 75, 90].map((height, i) => (
@@ -108,12 +109,12 @@ const PaymentsSuite = () => {
                     ></div>
                   ))}
                 </div>
-                <div className="text-sm text-muted-foreground">Last 7 days</div>
-              </div>
-            </div>
-          </div>
+                <Box className="text-sm text-muted-foreground">Last 7 days</Box>
+              </Box>
+            </Box>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

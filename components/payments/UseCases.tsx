@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { ShoppingCart, Repeat, LayoutGrid, CreditCard } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const useCases = [
   {
@@ -35,7 +36,7 @@ const useCases = [
 const UseCases = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)]">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -49,7 +50,7 @@ const UseCases = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {useCases.map((useCase, index) => (
             <motion.div
               key={index}
@@ -59,28 +60,28 @@ const UseCases = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6"
             >
-              <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+              <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
                 {useCase.icon}
-              </div>
+              </Box>
               <h3 className="text-xl font-semibold mb-3">{useCase.title}</h3>
               <p className="text-muted-foreground mb-4">{useCase.description}</p>
               
-              <div className="mt-6 pt-6 border-t border-neutral-800">
+              <Box className="mt-6 pt-6 border-t border-neutral-800">
                 <h4 className="text-lg font-medium mb-3">Key Features</h4>
-                <div className="grid grid-cols-2 gap-3">
+                <Box className="grid grid-cols-2 gap-3">
                   {useCase.points.map((_, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-primary"></div>
+                    <Box key={i} className="flex items-center gap-2">
+                      <Box className="w-2 h-2 rounded-full bg-primary"></Box>
                       <span className="text-sm text-muted-foreground">
                         {useCase.points[i]}
                       </span>
-                    </div>
+                    </Box>
                   ))}
-                </div>
-              </div>
+                </Box>
+              </Box>
             </motion.div>
           ))}
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -93,16 +94,16 @@ const UseCases = () => {
           <p className="text-foreground/80 max-w-2xl mx-auto mb-6">
             No-code solutions available, with setup completed in minutes. Scalable from startup to enterprise-level with consistent reliability.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <Box className="flex flex-wrap justify-center gap-4">
             <button className="px-6 py-3 bg-primary hover:bg-primary/90 rounded-md transition duration-200 text-primary-foreground">
               Get Started
             </button>
             <button className="px-6 py-3 bg-transparent border border-neutral-600 hover:border-neutral-400 rounded-md transition duration-200">
               View Documentation
             </button>
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

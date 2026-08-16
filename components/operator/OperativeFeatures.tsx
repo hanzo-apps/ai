@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Github, Globe, Zap, ShieldCheck, Compass, Database, Cpu, Cloud } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const OperativeFeatures = () => {
   const features = [
@@ -42,10 +43,10 @@ const OperativeFeatures = () => {
   return (
     <section className="py-24 bg-neutral-950 relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3/4 h-1/2 bg-primary/10 rounded-full blur-3xl"></div>
+      <Box className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3/4 h-1/2 bg-primary/10 rounded-full blur-3xl"></Box>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+      <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <Box className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -59,9 +60,9 @@ const OperativeFeatures = () => {
               A screen, a way to watch it, and the tools the model drives it with
             </p>
           </motion.div>
-        </div>
+        </Box>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -71,16 +72,16 @@ const OperativeFeatures = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-900/50 transition-colors"
             >
-              <div className="h-12 w-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4">
+              <Box className="h-12 w-12 rounded-lg bg-primary/20 flex items-center justify-center mb-4">
                 <feature.icon className="h-6 w-6 text-foreground" />
-              </div>
+              </Box>
               <h3 className="text-xl font-semibold text-[var(--white)] mb-2">{feature.title}</h3>
               <p className="text-muted-foreground">{feature.description}</p>
             </motion.div>
           ))}
-        </div>
+        </Box>
 
-        <div className="mt-16 flex justify-center">
+        <Box className="mt-16 flex justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -92,8 +93,8 @@ const OperativeFeatures = () => {
             <span className="text-foreground/80">Open Source on</span>
             <a href="https://github.com/hanzo-ai/operative" className="text-[var(--white)] font-semibold hover:text-foreground transition-colors">GitHub</a>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

@@ -4,6 +4,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "@/components/motion";
 import { testimonials } from "@/lib/data/testimonials";
+import { Box } from '@hanzo/ui'
 
 
 const getInitials = (name: string) => name.split(" ").map((part) => part[0]).slice(0, 2).join("").toUpperCase();
@@ -34,7 +35,7 @@ const TrustedBy = () => {
       ref={containerRef} 
       className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--black)]"
     >
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +56,7 @@ const TrustedBy = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={testimonial.company}
@@ -65,7 +66,7 @@ const TrustedBy = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-[var(--black)]/50 backdrop-blur-sm rounded-xl p-8 border border-border/20"
             >
-              <div className="mb-4">
+              <Box className="mb-4">
                 <h3 
                   className="text-xl font-medium"
                   style={{
@@ -74,25 +75,25 @@ const TrustedBy = () => {
                 >
                   {testimonial.company}
                 </h3>
-              </div>
+              </Box>
               
               <p className="text-foreground/80 mb-6 leading-relaxed">"{testimonial.quote}"</p>
               
-              <div className="flex items-center">
-                <div className="mr-4">
-                  <div className="h-12 w-12 rounded-full bg-primary/20 border border-white/30 text-[var(--white)] flex items-center justify-center font-semibold">
+              <Box className="flex items-center">
+                <Box className="mr-4">
+                  <Box className="h-12 w-12 rounded-full bg-primary/20 border border-white/30 text-[var(--white)] flex items-center justify-center font-semibold">
                     {getInitials(testimonial.author)}
-                  </div>
-                </div>
+                  </Box>
+                </Box>
                 <div>
                   <h4 className="font-medium text-[var(--white)]">{testimonial.author}</h4>
                   <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                 </div>
-              </div>
+              </Box>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

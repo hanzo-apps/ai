@@ -7,15 +7,16 @@ import { Button } from "@hanzo/ui";
 import { Github, ArrowRight } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
 import Link from 'next/link'
+import { Box } from '@hanzo/ui'
 
 const CallToAction = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-white/15 to-white/10 opacity-30"></div>
-      <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
+      <Box className="absolute inset-0 bg-gradient-to-r from-white/15 to-white/10 opacity-30"></Box>
+      <Box className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></Box>
+      <Box className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></Box>
       
-      <div className="max-w-5xl mx-auto relative z-10">
+      <Box className="max-w-5xl mx-auto relative z-10">
         <motion.div 
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -31,7 +32,7 @@ const CallToAction = () => {
             Join our community of developers building the future of AI applications with open source tools.
           </p>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Box className="flex flex-col sm:flex-row justify-center gap-4">
             <Button
               size="lg"
               className="shadow-lg hover:shadow-xl transition-all flex items-center"
@@ -48,13 +49,13 @@ const CallToAction = () => {
               <span className="flex-1">Read the Docs</span>
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-          </div>
+          </Box>
           
-          <div className="mt-12 text-muted-foreground text-sm">
+          <Box className="mt-12 text-muted-foreground text-sm">
             Need enterprise features? <Link href="/cloud" className="text-foreground hover:text-foreground/70 underline">Check out Hanzo Cloud</Link>
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

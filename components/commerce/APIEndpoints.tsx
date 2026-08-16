@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 interface EndpointProps {
   path: string;
@@ -11,10 +12,10 @@ interface EndpointProps {
 
 const EndpointCard = ({ path, description }: EndpointProps) => {
   return (
-    <div className="min-w-0 bg-neutral-900/40 border border-neutral-800 rounded-lg p-4 hover:border-border transition-all duration-300">
+    <Box className="min-w-0 bg-neutral-900/40 border border-neutral-800 rounded-lg p-4 hover:border-border transition-all duration-300">
       <div className="font-mono text-sm text-foreground/60 mb-2 break-all">{path}</div>
       <p className="text-muted-foreground text-sm">{description}</p>
-    </div>
+    </Box>
   );
 };
 
@@ -113,15 +114,15 @@ const APIEndpoints = () => {
   return (
     <section className="py-16 bg-gradient-to-b from-background to-neutral-900/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
+        <Box className="text-center mb-10">
           <h2 className="text-3xl font-bold mb-4">The endpoints</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Grouped by what they are about. Every one of them is scoped to your organisation
             by the token you call with, so multi-tenancy is not something you implement on top.
           </p>
-        </div>
+        </Box>
         
-        <div className="max-w-5xl mx-auto">
+        <Box className="max-w-5xl mx-auto">
           <Tabs defaultValue="commerce" className="w-full" onValueChange={setActiveCategory}>
             <TabsList className="w-full mb-6 bg-neutral-900/50 border border-neutral-800 rounded-lg p-1 h-auto flex flex-wrap">
               <TabsTrigger value="commerce" className={`${tabClasses} flex-1`}>
@@ -143,12 +144,12 @@ const APIEndpoints = () => {
             
             {Object.keys(endpointCategories).map((category) => (
               <TabsContent key={category} value={category} className="mt-0">
-                <div className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
+                <Box className="bg-neutral-900/20 border border-neutral-800 rounded-xl p-6">
                   <h3 className="text-xl font-semibold mb-4 text-foreground/60">
                     Hanzo {category.charAt(0).toUpperCase() + category.slice(1)} API Endpoints
                   </h3>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <Box className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {endpointCategories[category as keyof typeof endpointCategories].map((endpoint, index) => (
                       <EndpointCard
                         key={index}
@@ -156,12 +157,12 @@ const APIEndpoints = () => {
                         description={endpoint.description}
                       />
                     ))}
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               </TabsContent>
             ))}
           </Tabs>
-        </div>
+        </Box>
       </div>
     </section>
   );

@@ -5,11 +5,12 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { CreditCard, Lock, Globe, Zap } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const HeroSection = () => {
   return (
     <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/20">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -32,7 +33,7 @@ const HeroSection = () => {
             instead of handing your customer an error — and changing processors stops being a
             project.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <Box className="flex flex-wrap justify-center gap-4">
             <Button 
               size="lg" 
               className="bg-gradient-to-r from-white to-white/10 hover:from-[#cccccc] hover:to-white"
@@ -46,7 +47,7 @@ const HeroSection = () => {
             >
               Explore APIs
             </Button>
-          </div>
+          </Box>
         </motion.div>
 
         <motion.div
@@ -68,15 +69,15 @@ const HeroSection = () => {
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
               className="bg-neutral-900/50 p-6 rounded-lg border border-neutral-800"
             >
-              <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+              <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
                 {item.icon}
-              </div>
+              </Box>
               <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
               <p className="text-muted-foreground">{item.text}</p>
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

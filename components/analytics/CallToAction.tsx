@@ -5,13 +5,14 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { ArrowRight, LineChart } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const CallToAction = () => {
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900/30 to-background relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-70"></div>
+      <Box className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-70"></Box>
       
-      <div className="max-w-6xl mx-auto relative z-10">
+      <Box className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -19,16 +20,16 @@ const CallToAction = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center justify-center bg-primary/10 p-3 rounded-full border border-white/30 text-foreground mb-6">
+          <Box className="inline-flex items-center justify-center bg-primary/10 p-3 rounded-full border border-white/30 text-foreground mb-6">
             <LineChart className="h-10 w-10" />
-          </div>
+          </Box>
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Add the script</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto mb-10">
             One tag on the page and the dashboard fills in on its own. Host it yourself or
             let us run it — the software is the same either way.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <Box className="flex flex-col sm:flex-row gap-6 justify-center">
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -48,10 +49,10 @@ const CallToAction = () => {
                 </span>
               </Button>
             </motion.div>
-          </div>
+          </Box>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
               title: "One tag",
@@ -78,7 +79,7 @@ const CallToAction = () => {
               <p className="text-muted-foreground">{feature.description}</p>
             </motion.div>
           ))}
-        </div>
+        </Box>
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -89,7 +90,7 @@ const CallToAction = () => {
         >
           No credit card required. Free trial includes all premium features for 14 days.
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

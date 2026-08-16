@@ -4,6 +4,7 @@ import { Users, ArrowUpRight } from 'lucide-react'
 import { Page, PageHero, Section, Prose, Cta } from '@/components/marketing/page-kit'
 import { testimonials } from '@/lib/data/testimonials'
 import Link from 'next/link'
+import { Box } from '@hanzo/ui'
 
 export default function CustomersPage() {
   return (
@@ -16,7 +17,7 @@ export default function CustomersPage() {
       />
 
       <Section>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <Box className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {testimonials.map((t) => (
             <figure
               key={t.company}
@@ -26,12 +27,12 @@ export default function CustomersPage() {
               <blockquote className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
                 &ldquo;{t.quote}&rdquo;
               </blockquote>
-              <div className="text-xs text-muted-foreground">
+              <Box className="text-xs text-muted-foreground">
                 <span className="text-foreground">{t.author}</span> · {t.role}
-              </div>
+              </Box>
             </figure>
           ))}
-        </div>
+        </Box>
       </Section>
 
       <Section title="Build on the same platform">
@@ -42,11 +43,11 @@ export default function CustomersPage() {
             <Link href="/contact">talk to us</Link> about your workload.
           </p>
         </Prose>
-        <div className="mt-6">
+        <Box className="mt-6">
           <Cta href="/contact" icon={ArrowUpRight}>
             Talk to us
           </Cta>
-        </div>
+        </Box>
       </Section>
     </Page>
   )

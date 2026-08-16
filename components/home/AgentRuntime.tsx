@@ -1,4 +1,5 @@
-/**
+
+import { Box } from '@hanzo/ui'/**
  * What an agent DOES — the layer between Enso and the company. The page could
  * describe a model and a cloud but not the thing in between them that does the
  * work, and this is that thing.
@@ -17,7 +18,7 @@ export default function AgentRuntime() {
   return (
     <>
       <section className="mx-auto max-w-5xl px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+        <Box className="mx-auto max-w-2xl text-center">
           <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
             Agent runtime
           </p>
@@ -27,8 +28,8 @@ export default function AgentRuntime() {
             code, work with files, run workflows and hand off to each other — inside isolated
             execution environments. Tabs puts every one of those shells in front of you.
           </p>
-        </div>
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+        </Box>
+        <Box className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
             href="/tabs"
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black transition-opacity hover:opacity-90"
@@ -41,7 +42,7 @@ export default function AgentRuntime() {
           >
             Explore agents
           </a>
-        </div>
+        </Box>
       </section>
     </>
   )

@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Activity, BarChart, Clock, ShoppingCart, Shield, Lightbulb, Signal, LineChart, Gamepad2, Cpu, Network, Users } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 const UseCasesSection = () => {
   const useCases = [
@@ -23,19 +24,19 @@ const UseCasesSection = () => {
 
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative">
-      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-30 pointer-events-none"></div>
+      <Box className="absolute inset-0 bg-gradient-to-r from-white/20 to-white/10 opacity-30 pointer-events-none"></Box>
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="text-center mb-16">
+      <Box className="max-w-6xl mx-auto relative z-10">
+        <Box className="text-center mb-16">
           <ChromeText as="h2" className="text-3xl md:text-5xl font-bold mb-6">
             What people point it at
           </ChromeText>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto mb-8">
             Different industries, the same shape of problem: a great many rows in, a small answer out, asked again a second later.
           </p>
-        </div>
+        </Box>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+        <Box className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {useCases.map((useCase, index) => {
             const Icon = useCase.icon;
             return (
@@ -52,8 +53,8 @@ const UseCasesSection = () => {
               </motion.div>
             );
           })}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

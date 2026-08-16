@@ -14,6 +14,7 @@ import {
   Zap,
 } from "lucide-react";
 import { CopyButton } from "@hanzo/ui/product";
+import { Box } from '@hanzo/ui'
 
 const FEATURES = [
   { id: "self-host", label: "Install", icon: Server },
@@ -103,13 +104,13 @@ services:
   const demo = demos[activeFeature];
 
   return (
-    <div className="rounded-xl border border-border bg-secondary/95 backdrop-blur-sm overflow-hidden shadow-2xl">
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
-        <div className="flex gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-primary/10" />
-          <div className="w-3 h-3 rounded-full bg-primary/10" />
-          <div className="w-3 h-3 rounded-full bg-primary/10" />
-        </div>
+    <Box className="rounded-xl border border-border bg-secondary/95 backdrop-blur-sm overflow-hidden shadow-2xl">
+      <Box className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
+        <Box className="flex gap-1.5">
+          <Box className="w-3 h-3 rounded-full bg-primary/10" />
+          <Box className="w-3 h-3 rounded-full bg-primary/10" />
+          <Box className="w-3 h-3 rounded-full bg-primary/10" />
+        </Box>
         <AnimatePresence mode="wait">
           <motion.span
             key={activeFeature}
@@ -121,8 +122,8 @@ services:
             {demo.title}
           </motion.span>
         </AnimatePresence>
-      </div>
-      <div className="p-4 bg-background">
+      </Box>
+      <Box className="p-4 bg-background">
         <AnimatePresence mode="wait">
           <motion.pre
             key={activeFeature}
@@ -135,8 +136,8 @@ services:
             <code>{demo.code}</code>
           </motion.pre>
         </AnimatePresence>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
@@ -148,23 +149,23 @@ const PlatformHero = () => {
   return (
     <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-        <div
+      <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
           style={{
             background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
             filter: "blur(100px)",
           }}
         />
-      </div>
+      </Box>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <Box className="max-w-7xl mx-auto relative z-10">
+        <Box className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column — min-w-0 so the grid item may shrink below its
               content; without it a code sample inside forced 385px into a
               358px column and 27px of text fell outside a viewport that
               cannot scroll. */}
-          <div className="min-w-0">
+          <Box className="min-w-0">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -231,10 +232,10 @@ const PlatformHero = () => {
               transition={{ duration: 0.4, delay: 0.2 }}
               className="mb-8"
             >
-              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-secondary border border-border">
+              <Box className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-secondary border border-border">
                 <code className="text-sm font-mono text-foreground/80">{INSTALL}</code>
                 <CopyButton value={INSTALL} label="Copy install command" size={20} id="install-cli" />
-              </div>
+              </Box>
             </motion.div>
 
             {/* Feature tabs */}
@@ -263,7 +264,7 @@ const PlatformHero = () => {
                 );
               })}
             </motion.div>
-          </div>
+          </Box>
 
           {/* Right Column: Feature Demo — min-w-0 for the same reason as the
               left column: a grid item's default `min-width: auto` will not
@@ -278,8 +279,8 @@ const PlatformHero = () => {
           >
             <FeatureDemo activeFeature={activeFeature} />
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

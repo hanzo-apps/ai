@@ -4,14 +4,15 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { FileText } from "lucide-react";
 import Link from 'next/link'
+import { Box } from '@hanzo/ui'
 
 const Terms = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       <main>
         {/* Hero */}
         <section className="relative pt-24 pb-12 px-4 md:px-8 lg:px-12">
-          <div className="max-w-4xl mx-auto relative z-10">
+          <Box className="max-w-4xl mx-auto relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -38,12 +39,12 @@ const Terms = () => {
             >
               Last updated: July 2026
             </motion.p>
-          </div>
+          </Box>
         </section>
 
         {/* Content */}
         <section className="pb-24 px-4 md:px-8 lg:px-12">
-          <div className="max-w-4xl mx-auto">
+          <Box className="max-w-4xl mx-auto">
             <div className="space-y-10 text-foreground/80">
 
               <div>
@@ -186,18 +187,18 @@ const Terms = () => {
                 <p className="text-muted-foreground leading-relaxed">
                   If you have questions about these Terms, please contact us at:
                 </p>
-                <div className="mt-2 text-muted-foreground">
+                <Box className="mt-2 text-muted-foreground">
                   <p>Hanzo AI, Inc.</p>
                   <p>Email: <a href="mailto:legal@hanzo.ai" className="text-foreground hover:underline">legal@hanzo.ai</a></p>
                   <p>Web: <Link href="/contact" className="text-foreground hover:underline">hanzo.ai/contact</Link></p>
-                </div>
+                </Box>
               </div>
 
             </div>
-          </div>
+          </Box>
         </section>
       </main>
-    </div>
+    </Box>
   );
 };
 

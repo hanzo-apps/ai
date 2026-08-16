@@ -4,11 +4,12 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Globe, Zap, Shield } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const Infrastructure = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-neutral-900/30 overflow-hidden">
-      <div className="max-w-7xl mx-auto relative">
+      <Box className="max-w-7xl mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -22,7 +23,7 @@ const Infrastructure = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -30,9 +31,9 @@ const Infrastructure = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-6 text-center"
           >
-            <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary/20 text-foreground mb-5 mx-auto">
+            <Box className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary/20 text-foreground mb-5 mx-auto">
               <Globe className="h-6 w-6" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold text-[var(--white)] mb-3">Global Distribution</h3>
             <p className="text-foreground/80">
               Multi-region deployments ensuring low latency and high availability for users worldwide.
@@ -46,9 +47,9 @@ const Infrastructure = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-6 text-center"
           >
-            <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary/20 text-foreground mb-5 mx-auto">
+            <Box className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary/20 text-foreground mb-5 mx-auto">
               <Zap className="h-6 w-6" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold text-[var(--white)] mb-3">Automatic Scaling</h3>
             <p className="text-foreground/80">
               Serverless infrastructure that scales resources up and down based on demand without manual intervention.
@@ -62,15 +63,15 @@ const Infrastructure = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="bg-neutral-800/30 border border-neutral-700/50 rounded-lg p-6 text-center"
           >
-            <div className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary/20 text-foreground mb-5 mx-auto">
+            <Box className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-primary/20 text-foreground mb-5 mx-auto">
               <Shield className="h-6 w-6" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold text-[var(--white)] mb-3">High Redundancy</h3>
             <p className="text-foreground/80">
               Fault-tolerant architecture with redundancy and failover capabilities to ensure high availability.
             </p>
           </motion.div>
-        </div>
+        </Box>
         
         <motion.div
           initial={{ opacity: 0 }}
@@ -79,8 +80,8 @@ const Infrastructure = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="mt-16 relative"
         >
-          <div className="border border-border bg-primary/10 rounded-xl p-6 overflow-hidden relative">
-            <div className="grid grid-cols-5 gap-2 md:gap-3 mb-6">
+          <Box className="border border-border bg-primary/10 rounded-xl p-6 overflow-hidden relative">
+            <Box className="grid grid-cols-5 gap-2 md:gap-3 mb-6">
               {Array.from({ length: 15 }).map((_, i) => (
                 <div
                   key={i}
@@ -91,18 +92,18 @@ const Infrastructure = () => {
                   }}
                 ></div>
               ))}
-            </div>
+            </Box>
             
-            <div className="flex flex-wrap justify-center gap-4">
+            <Box className="flex flex-wrap justify-center gap-4">
               {["North America", "Europe", "Asia", "Australia", "South America"].map((region, i) => (
-                <div key={i} className="px-3 py-1 bg-primary/15 rounded-full text-foreground text-sm">
+                <Box key={i} className="px-3 py-1 bg-primary/15 rounded-full text-foreground text-sm">
                   {region}
-                </div>
+                </Box>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

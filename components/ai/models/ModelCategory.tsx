@@ -1,5 +1,6 @@
 import React from "react";
 import ModelCategoryCard from "./ModelCategoryCard";
+import { Box } from '@hanzo/ui'
 
 interface ModelData {
   name: string;
@@ -19,11 +20,11 @@ interface ModelCategoryProps {
 
 const ModelCategory = ({ category, categoryIndex }: ModelCategoryProps) => {
   return (
-    <div key={categoryIndex} className="mb-20">
+    <Box key={categoryIndex} className="mb-20">
       <h3 className="text-2xl font-bold text-[var(--white)] mb-4">{category.name}</h3>
       <p className="text-foreground/80 mb-8">{category.description}</p>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {category.models.map((model, modelIndex) => (
           <ModelCategoryCard 
             key={modelIndex} 
@@ -32,8 +33,8 @@ const ModelCategory = ({ category, categoryIndex }: ModelCategoryProps) => {
             categoryIndex={categoryIndex}
           />
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

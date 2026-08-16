@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Cpu, Check } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface ModelData {
   name: string;
@@ -36,10 +37,10 @@ const ModelCategoryCard = ({ model, modelIndex, categoryIndex }: ModelCategoryCa
       transition={{ duration: 0.5, delay: modelIndex * 0.1 }}
       className={cardClasses}
     >
-      <div className="flex items-center mb-3">
+      <Box className="flex items-center mb-3">
         <Cpu className={`h-5 w-5 ${iconColor} mr-2`} />
         <h4 className="text-xl font-semibold text-[var(--white)]">{model.name}</h4>
-      </div>
+      </Box>
       
       {model.description && (
         <p className="text-sm text-muted-foreground mb-4 italic">{model.description}</p>

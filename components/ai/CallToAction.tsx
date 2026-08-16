@@ -5,18 +5,19 @@ import React from 'react';
 import { motion } from '@/components/motion';
 import { ArrowRight, Code, BookOpen, MessageCircle } from 'lucide-react';
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const CallToAction = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-950 relative overflow-hidden">
       {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-2/3 h-1/2 bg-primary/5 rounded-full blur-3xl transform -translate-x-1/4 -translate-y-1/4"></div>
-        <div className="absolute bottom-0 right-0 w-full h-1/2 bg-primary/5 rounded-full blur-3xl transform translate-x-1/4 translate-y-1/4"></div>
-      </div>
+      <Box className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <Box className="absolute top-0 left-0 w-2/3 h-1/2 bg-primary/5 rounded-full blur-3xl transform -translate-x-1/4 -translate-y-1/4"></Box>
+        <Box className="absolute bottom-0 right-0 w-full h-1/2 bg-primary/5 rounded-full blur-3xl transform translate-x-1/4 translate-y-1/4"></Box>
+      </Box>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16">
+      <Box className="max-w-7xl mx-auto relative z-10">
+        <Box className="flex flex-col items-center text-center max-w-4xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +48,7 @@ const CallToAction = () => {
               Schedule a Demo
             </Button>
           </motion.div>
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -56,10 +57,10 @@ const CallToAction = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          <div className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/40 transition-colors">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+          <Box className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/40 transition-colors">
+            <Box className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
               <BookOpen className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold text-[var(--white)] mb-3">Documentation</h3>
             <p className="text-muted-foreground mb-6">
               Every endpoint, every parameter, and the SDK method that calls it, in four languages.
@@ -68,12 +69,12 @@ const CallToAction = () => {
               Explore Docs
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </a>
-          </div>
+          </Box>
 
-          <div className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/40 transition-colors">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+          <Box className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/40 transition-colors">
+            <Box className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
               <Code className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold text-[var(--white)] mb-3">Quickstart</h3>
             <p className="text-muted-foreground mb-6">
               A key, a curl, and a response — then the same thing again from a real project you can clone.
@@ -82,12 +83,12 @@ const CallToAction = () => {
               Try Quickstart
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </a>
-          </div>
+          </Box>
 
-          <div className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/40 transition-colors">
-            <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
+          <Box className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-8 hover:bg-neutral-900/40 transition-colors">
+            <Box className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6">
               <MessageCircle className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold text-[var(--white)] mb-3">Community</h3>
             <p className="text-muted-foreground mb-6">
               Most of this is open source. Read the code, file the issue, send the patch.
@@ -96,7 +97,7 @@ const CallToAction = () => {
               Join Community
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </a>
-          </div>
+          </Box>
         </motion.div>
 
         <motion.div
@@ -106,22 +107,22 @@ const CallToAction = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-20 border border-neutral-800 rounded-xl p-6 bg-gradient-to-r from-white/10 to-white/10"
         >
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="mb-6 md:mb-0">
+          <Box className="flex flex-col md:flex-row items-center justify-between">
+            <Box className="mb-6 md:mb-0">
               <h3 className="text-2xl font-bold text-[var(--white)] mb-2">Still deciding?</h3>
               <p className="text-foreground/80">An account is free, and some models cost nothing to call. Try it before you talk to anyone.</p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4">
+            </Box>
+            <Box className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="bg-primary hover:bg-primary/90">
                 Create Free Account
               </Button>
               <Button size="lg" variant="outline" className="text-[var(--white)]">
                 Contact Sales
               </Button>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

@@ -11,6 +11,7 @@
 import { useEffect } from "react"
 import Link from "next/link"
 import { ArrowRight, Mail, Calendar, Building2 } from "lucide-react"
+import { Box } from '@hanzo/ui'
 
 export default function ContactSalesPage() {
   // Client-side redirect for users who land here through internal nav.
@@ -23,13 +24,13 @@ export default function ContactSalesPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       <section className="pt-32 pb-24 px-4 md:px-8">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 text-xs font-medium rounded-full px-4 py-2 border mb-6 border-white/20 text-white/80">
+        <Box className="max-w-3xl mx-auto text-center">
+          <Box className="inline-flex items-center gap-2 text-xs font-medium rounded-full px-4 py-2 border mb-6 border-white/20 text-white/80">
             <Building2 className="w-4 h-4" />
             Enterprise sales
-          </div>
+          </Box>
           <h1 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.05] mb-5">
             Talk to Hanzo sales.
           </h1>
@@ -37,7 +38,7 @@ export default function ContactSalesPage() {
             Higher API limits, private deployment, SLAs, dedicated support, compliance, and custom infrastructure. We will help you scope, deploy, and operate Hanzo for your team.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-stretch justify-center gap-3 sm:gap-4">
+          <Box className="flex flex-col sm:flex-row items-stretch justify-center gap-3 sm:gap-4">
             <Link
               href="/contact/sales"
               className="inline-flex items-center justify-center px-6 py-3 rounded-full font-medium text-sm bg-primary text-primary-foreground hover:opacity-90 transition-all"
@@ -62,13 +63,13 @@ export default function ContactSalesPage() {
               <Calendar className="mr-2 h-4 w-4" />
               Book a meeting
             </a>
-          </div>
+          </Box>
 
           <p className="mt-8 text-xs text-muted-foreground/70">
             Redirecting to /contact/sales in a moment.
           </p>
-        </div>
+        </Box>
       </section>
-    </div>
+    </Box>
   )
 }

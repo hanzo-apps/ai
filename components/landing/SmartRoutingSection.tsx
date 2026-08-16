@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Route, TerminalSquare, Receipt, ArrowRight, BookOpen } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 // Smart routing — the money-saving value prop. Send `model: "auto"` to
 // api.hanzo.ai and each prompt is routed to the model that fits the task and
@@ -39,7 +40,7 @@ const MIX = [
 const SmartRoutingSection = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,10 +48,10 @@ const SmartRoutingSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 text-xs font-medium rounded-full px-4 py-2 border mb-6 border-white/20 text-white/80">
+          <Box className="inline-flex items-center gap-2 text-xs font-medium rounded-full px-4 py-2 border mb-6 border-white/20 text-white/80">
             <Route className="w-4 h-4" />
             Smart routing
-          </div>
+          </Box>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mb-4">
             One model id. The right model every time.
           </h2>
@@ -62,7 +63,7 @@ const SmartRoutingSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-4">
+        <Box className="grid md:grid-cols-3 gap-4">
           {STEPS.map((step, index) => {
             const Icon = step.icon;
             return (
@@ -74,15 +75,15 @@ const SmartRoutingSection = () => {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="p-6 rounded-xl border border-border bg-secondary/50 hover:bg-secondary hover:border-border/80 transition-all"
               >
-                <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
+                <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
                   <Icon className="w-5 h-5 text-muted-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{step.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
               </motion.div>
             );
           })}
-        </div>
+        </Box>
 
         {/* Honest cost illustration — the mix behind "up to 90%". */}
         <motion.div
@@ -92,42 +93,42 @@ const SmartRoutingSection = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mt-8 p-6 rounded-xl border border-border bg-secondary/50"
         >
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
+          <Box className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-5">
             <div>
-              <div className="text-sm font-semibold text-foreground">
+              <Box className="text-sm font-semibold text-foreground">
                 A typical workload, routed
-              </div>
-              <div className="text-sm text-muted-foreground">
+              </Box>
+              <Box className="text-sm text-muted-foreground">
                 Most prompts are easy. Only the hard ones need a frontier model.
-              </div>
+              </Box>
             </div>
-            <div className="text-right">
-              <div className="text-2xl md:text-3xl font-semibold text-foreground">
+            <Box className="text-right">
+              <Box className="text-2xl md:text-3xl font-semibold text-foreground">
                 ~89% lower
-              </div>
-              <div className="text-xs text-muted-foreground">
+              </Box>
+              <Box className="text-xs text-muted-foreground">
                 API spend on this example mix
-              </div>
-            </div>
-          </div>
+              </Box>
+            </Box>
+          </Box>
 
-          <div className="flex w-full h-3 rounded-full overflow-hidden mb-4">
-            <div className="bg-neutral-200" style={{ width: "70%" }} />
-            <div className="bg-neutral-500" style={{ width: "20%" }} />
-            <div className="bg-neutral-700" style={{ width: "10%" }} />
-          </div>
+          <Box className="flex w-full h-3 rounded-full overflow-hidden mb-4">
+            <Box className="bg-neutral-200" style={{ width: "70%" }} />
+            <Box className="bg-neutral-500" style={{ width: "20%" }} />
+            <Box className="bg-neutral-700" style={{ width: "10%" }} />
+          </Box>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <Box className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {MIX.map((m) => (
-              <div key={m.label} className="text-sm">
-                <div className="flex items-baseline gap-2">
+              <Box key={m.label} className="text-sm">
+                <Box className="flex items-baseline gap-2">
                   <span className="font-semibold text-foreground">{m.share}%</span>
                   <span className="text-muted-foreground">{m.label}</span>
-                </div>
-                <div className="text-xs text-muted-foreground">{m.note}</div>
-              </div>
+                </Box>
+                <Box className="text-xs text-muted-foreground">{m.note}</Box>
+              </Box>
             ))}
-          </div>
+          </Box>
 
           <p className="text-xs text-muted-foreground mt-5 leading-relaxed">
             Illustrative, not a guarantee — savings depend on your prompt mix. On the
@@ -171,7 +172,7 @@ const SmartRoutingSection = () => {
             Read the docs
           </a>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

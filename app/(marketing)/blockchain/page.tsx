@@ -26,6 +26,7 @@ import {
   ChevronUp
 } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 // Web3 capability categories
 const CAPABILITIES = [
@@ -181,23 +182,23 @@ const Blockchain = () => {
   const [expandedCapability, setExpandedCapability] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
 
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-4 md:px-8 relative overflow-hidden">
         {/* Background gradient */}
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-          <div
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+          <Box
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
             style={{
               background: `radial-gradient(circle, #ffffff 0%, transparent 70%)`,
               filter: "blur(100px)",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="max-w-6xl mx-auto relative z-10">
+        <Box className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -205,10 +206,10 @@ const Blockchain = () => {
             className="text-center mb-16"
           >
             {/* Live Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-primary/5 mb-6">
+            <Box className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-primary/5 mb-6">
               <div className="w-2 h-2 rounded-full bg-primary/10 animate-pulse" />
               <span className="text-sm font-medium text-foreground/70">Now Available</span>
-            </div>
+            </Box>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
               <span className="text-foreground">One API key, every chain.</span>
@@ -258,7 +259,7 @@ const Blockchain = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="rounded-2xl border border-border bg-gradient-to-br from-white/20 to-transparent p-8 md:p-12"
           >
-            <div className="grid grid-cols-3 md:grid-cols-6 gap-6">
+            <Box className="grid grid-cols-3 md:grid-cols-6 gap-6">
               {[
                 { icon: Server, label: "Nodes" },
                 { icon: Wallet, label: "Wallets" },
@@ -276,21 +277,21 @@ const Blockchain = () => {
                     transition={{ duration: 0.4, delay: 0.3 + idx * 0.05 }}
                     className="flex flex-col items-center gap-2"
                   >
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-primary/10 border border-white/30 flex items-center justify-center">
+                    <Box className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-primary/10 border border-white/30 flex items-center justify-center">
                       <Icon className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
-                    </div>
+                    </Box>
                     <span className="text-xs md:text-sm text-muted-foreground">{item.label}</span>
                   </motion.div>
                 );
               })}
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Performance Metrics */}
       <section className="py-16 px-4 md:px-8 border-t border-neutral-900">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -311,18 +312,18 @@ const Blockchain = () => {
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
                 className="text-center"
               >
-                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">{stat.value}</div>
-                <div className="text-sm font-medium text-foreground">{stat.label}</div>
-                <div className="text-xs text-muted-foreground mt-1">{stat.detail}</div>
+                <Box className="text-3xl md:text-4xl font-bold text-foreground mb-1">{stat.value}</Box>
+                <Box className="text-sm font-medium text-foreground">{stat.label}</Box>
+                <Box className="text-xs text-muted-foreground mt-1">{stat.detail}</Box>
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Products Section */}
       <section className="py-24 px-4 md:px-8 bg-background">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -338,7 +339,7 @@ const Blockchain = () => {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <Box className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {PRODUCTS.map((product, index) => {
               const Icon = product.icon;
               return (
@@ -353,28 +354,28 @@ const Blockchain = () => {
                     href={product.href || "#"}
                     className="block p-5 rounded-xl border border-border bg-secondary/50 hover:bg-accent/50 hover:border-border transition-all group"
                   >
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 bg-white/10">
+                    <Box className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 bg-white/10">
                       <Icon className="w-5 h-5 text-white/70" />
-                    </div>
+                    </Box>
                     <h3 className="font-semibold text-foreground mb-1 group-hover:text-foreground transition-colors">
                       {product.name}
                     </h3>
                     <p className="text-sm text-muted-foreground">{product.description}</p>
-                    <div className="mt-3 flex items-center gap-1 text-xs text-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Box className="mt-3 flex items-center gap-1 text-xs text-foreground opacity-0 group-hover:opacity-100 transition-opacity">
                       Get started
                       <ArrowRight className="w-3 h-3" />
-                    </div>
+                    </Box>
                   </Link>
                 </motion.div>
               );
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Capabilities Section */}
       <section className="py-24 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -391,7 +392,7 @@ const Blockchain = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {CAPABILITIES.map((capability, index) => {
               const Icon = capability.icon;
               const isExpanded = expandedCapability === capability.id;
@@ -408,20 +409,20 @@ const Blockchain = () => {
                     onClick={() => setExpandedCapability(isExpanded ? null : capability.id)}
                     className="w-full p-5 text-left flex items-start gap-4 hover:bg-accent/50 transition-colors"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <Box className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <Icon className="w-5 h-5 text-foreground" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between gap-2">
+                    </Box>
+                    <Box className="flex-1 min-w-0">
+                      <Box className="flex items-center justify-between gap-2">
                         <h3 className="font-semibold text-foreground">{capability.title}</h3>
                         {isExpanded ? (
                           <ChevronUp className="w-4 h-4 text-muted-foreground shrink-0" />
                         ) : (
                           <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />
                         )}
-                      </div>
+                      </Box>
                       <p className="text-sm text-muted-foreground mt-1">{capability.description}</p>
-                    </div>
+                    </Box>
                   </button>
 
                   {isExpanded && (
@@ -444,23 +445,23 @@ const Blockchain = () => {
                 </motion.div>
               );
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Integration Section */}
       <section className="py-24 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <Box className="max-w-6xl mx-auto">
+          <Box className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 bg-primary/10 mb-6">
+              <Box className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 bg-primary/10 mb-6">
                 <Zap className="w-4 h-4 text-foreground" />
                 <span className="text-sm font-medium text-foreground">Unified Platform</span>
-              </div>
+              </Box>
               <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
                 An agent with<br />
                 <span className="text-muted-foreground">an address.</span>
@@ -479,9 +480,9 @@ const Blockchain = () => {
                   "Cross-chain portfolio management",
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-center gap-3 text-foreground/80">
-                    <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center">
+                    <Box className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center">
                       <Check className="w-3.5 h-3.5 text-foreground" />
-                    </div>
+                    </Box>
                     {item}
                   </li>
                 ))}
@@ -494,15 +495,15 @@ const Blockchain = () => {
               viewport={{ once: true }}
               className="rounded-xl border border-border bg-secondary/80 overflow-hidden"
             >
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-primary/10" />
-                  <div className="w-3 h-3 rounded-full bg-primary/10" />
-                  <div className="w-3 h-3 rounded-full bg-primary/10" />
-                </div>
+              <Box className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
+                <Box className="flex gap-1.5">
+                  <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                  <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                  <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                </Box>
                 <span className="ml-2 text-xs text-muted-foreground font-mono">hanzo-agent.ts</span>
-              </div>
-              <div className="p-4 font-mono text-sm bg-background">
+              </Box>
+              <Box className="p-4 font-mono text-sm bg-background">
                 <pre className="text-foreground/80 overflow-x-auto">
 {`import { Hanzo } from "@hanzo/ai";
 import { Wallet } from "@hanzo/blockchain";
@@ -519,16 +520,16 @@ await agent.run(\`
   if the price is favorable.
 \`);`}
                 </pre>
-              </div>
+              </Box>
             </motion.div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
 
       {/* Supported Chains */}
       <section className="py-24 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -561,29 +562,29 @@ await agent.run(\`
               // Other Networks
               "Aptos", "Sui", "Sei", "Near", "Tron",
             ].map((chain, index) => (
-              <div
+              <Box
                 key={chain}
                 className="px-4 py-2 rounded-full border border-border bg-secondary/50 text-sm text-foreground/80"
               >
                 {chain}
-              </div>
+              </Box>
             ))}
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* CTA Section */}
       <section className="py-24 px-4 md:px-8 border-t border-neutral-900">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="rounded-2xl border border-white/30 bg-gradient-to-br from-white/20 to-transparent p-8 md:p-12 text-center"
           >
-            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
+            <Box className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-6">
               <Blocks className="w-8 h-8 text-foreground" />
-            </div>
+            </Box>
             <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
               Make the first call
             </h2>
@@ -592,7 +593,7 @@ await agent.run(\`
               the webhooks. Pick a chain and read something. No credit card required.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <Box className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Button
                 className="px-8 py-3 rounded-lg font-medium"
                 style={{ backgroundColor: "#ffffff" }}
@@ -608,9 +609,9 @@ await agent.run(\`
               >
                 View Pricing
               </Button>
-            </div>
+            </Box>
 
-            <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
+            <Box className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
               <span className="flex items-center gap-2">
                 <Lock className="w-4 h-4" />
                 Enterprise-grade security
@@ -623,13 +624,13 @@ await agent.run(\`
                 <Zap className="w-4 h-4" />
                 AI-native integration
               </span>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       
-    </div>
+    </Box>
   );
 };
 

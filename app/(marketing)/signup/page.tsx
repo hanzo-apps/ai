@@ -6,6 +6,7 @@ import { useAnalytics } from '@hanzo/event/react'
 import { EVENTS } from '@hanzo/event'
 import { markSignupIntent } from '@/lib/analytics/signup-intent'
 import { Spinner } from '@hanzo/gui'
+import { Box } from '@hanzo/ui'
 
 /**
  * /signup — no local registration form. HIP-0111: IAM owns onboarding. We
@@ -27,13 +28,13 @@ const SignUpPage = () => {
   }, [login, analytics])
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background">
+    <Box className="min-h-screen flex flex-col items-center justify-center bg-background">
       <div className="text-center space-y-6">
         <Spinner size="large" color="$foreground" alignItems="center" />
         <h1 className="text-xl font-medium text-foreground">Redirecting to sign up…</h1>
         <p className="text-muted-foreground">Taking you to Hanzo ID.</p>
       </div>
-    </div>
+    </Box>
   )
 }
 

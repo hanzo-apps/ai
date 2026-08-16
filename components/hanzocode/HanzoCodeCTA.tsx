@@ -5,11 +5,12 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { Download, ExternalLink, Github } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const HanzoCodeCTA = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950">
-      <div className="max-w-4xl mx-auto text-center">
+      <Box className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -50,7 +51,7 @@ const HanzoCodeCTA = () => {
             </Button>
           </div>
           
-          <div className="bg-[var(--black)]/40 rounded-xl p-8 border border-neutral-800 mb-12">
+          <Box className="bg-[var(--black)]/40 rounded-xl p-8 border border-neutral-800 mb-12">
             <h3 className="text-xl font-semibold mb-4">Not ready to change editors?</h3>
             <p className="text-foreground/80 mb-6">
               The same agent runs in a terminal. Type hanzo in any repo and you get the identical session, in the editor you already have open beside it.
@@ -58,9 +59,9 @@ const HanzoCodeCTA = () => {
             <Button size="sm">
               Use it from the terminal
             </Button>
-          </div>
+          </Box>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
+          <Box className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
             <a href="#" className="hover:text-[var(--white)] transition-colors">Pricing</a>
             <a href="#" className="hover:text-[var(--white)] transition-colors">Downloads</a>
             <a href="#" className="hover:text-[var(--white)] transition-colors">Docs</a>
@@ -69,9 +70,9 @@ const HanzoCodeCTA = () => {
             <a href="#" className="hover:text-[var(--white)] transition-colors">Company</a>
             <a href="#" className="hover:text-[var(--white)] transition-colors">Security</a>
             <a href="#" className="hover:text-[var(--white)] transition-colors">Privacy</a>
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

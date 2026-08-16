@@ -5,6 +5,7 @@ import React from "react";
 import { Cpu, HardDrive, Globe, CircuitBoard } from "lucide-react";
 import { motion } from "@/components/motion";
 import { createAnimationVariant, curves } from "@/components/ui/animation-variants";
+import { Box } from '@hanzo/ui'
 
 const cardAnimation = createAnimationVariant("fadeInBlur", {
   duration: 0.4,
@@ -49,36 +50,36 @@ const ResourceBreakdown = () => {
       variants={cardAnimation}
       className="rounded-xl border border-neutral-800 bg-neutral-900/20 overflow-hidden p-6"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {resources.map((resource, index) => (
-          <div 
+          <Box 
             key={index} 
             className="bg-[var(--black)]/30 rounded-xl p-5 border border-neutral-800"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="text-muted-foreground">
+            <Box className="flex items-center gap-3 mb-4">
+              <Box className="text-muted-foreground">
                 {resource.icon}
-              </div>
-              <div className="font-medium">{resource.name}</div>
-            </div>
+              </Box>
+              <Box className="font-medium">{resource.name}</Box>
+            </Box>
             
-            <div className="mb-4">
-              <div className="text-sm text-muted-foreground mb-1">{resource.description}</div>
-              <div className="font-medium">{resource.cost}</div>
-            </div>
+            <Box className="mb-4">
+              <Box className="text-sm text-muted-foreground mb-1">{resource.description}</Box>
+              <Box className="font-medium">{resource.cost}</Box>
+            </Box>
             
-            <div className="w-full bg-neutral-800 rounded-full h-2.5">
-              <div 
+            <Box className="w-full bg-neutral-800 rounded-full h-2.5">
+              <Box 
                 className="bg-primary h-2.5 rounded-full" 
                 style={{ width: `${resource.percentage}%` }}
-              ></div>
-            </div>
-            <div className="text-sm text-muted-foreground mt-1">
+              ></Box>
+            </Box>
+            <Box className="text-sm text-muted-foreground mt-1">
               {resource.percentage}% of total cost
-            </div>
-          </div>
+            </Box>
+          </Box>
         ))}
-      </div>
+      </Box>
     </motion.div>
   );
 };

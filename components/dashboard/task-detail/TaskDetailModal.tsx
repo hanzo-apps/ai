@@ -12,6 +12,7 @@ import { Button } from "@hanzo/ui";
 import { Input } from "@hanzo/ui";
 import TaskDetailContent, { type TaskFieldValue } from "./TaskDetailContent";
 import { Task } from "../data/tasks/task-data";
+import { Box } from '@hanzo/ui'
 
 interface TaskDetailModalProps {
   task: Task;
@@ -56,14 +57,14 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
           onTaskChange={handleTaskChange} 
         />
 
-        <div className="flex justify-end gap-2 mt-6">
+        <Box className="flex justify-end gap-2 mt-6">
           <Button variant="ghost" onClick={onClose}>
             Cancel
           </Button>
           <Button onClick={handleSave}>
             Save Changes
           </Button>
-        </div>
+        </Box>
       </DialogContent>
     </Dialog>
   );

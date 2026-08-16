@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Globe, Zap, Users, Building2 } from "lucide-react";
 import { type SubscriptionPlan } from "@/lib/plans";
+import { Box } from '@hanzo/ui'
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
   "world-free": <Globe className="h-6 w-6 text-muted-foreground" />,
@@ -129,17 +130,17 @@ const WorldPricing = () => {
   const sortedPlans = [...plans].sort((a, b) => sortKey(a) - sortKey(b));
 
   return (
-    <div className="max-w-7xl mx-auto mb-16">
-      <div className="mb-10">
+    <Box className="max-w-7xl mx-auto mb-16">
+      <Box className="mb-10">
         <h2 className="text-3xl font-bold mb-2">Hanzo World</h2>
         <p className="text-muted-foreground text-lg">
           Real-time global intelligence — live OSINT feeds, sentiment, and trader
           indicators streamed to your dashboard, agents, and API. Included free with
           Hanzo Pro, Plus, Max, Team, and Enterprise.
         </p>
-      </div>
+      </Box>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+      <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
         {sortedPlans.map((plan) => (
           <PricingPlan
             key={plan.id}
@@ -153,8 +154,8 @@ const WorldPricing = () => {
             contactSalesUrl={plan.contactSales ? "https://cal.hanzo.ai/hanzo" : undefined}
           />
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

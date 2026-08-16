@@ -6,21 +6,22 @@ import { motion } from "@/components/motion";
 import AIModelsView from "./dashboard/AIModelsView";
 import ObservabilityView from "./dashboard/ObservabilityView";
 import AnalyticsView from "./dashboard/AnalyticsView";
+import { Box } from '@hanzo/ui'
 
 const PlatformDashboard = () => {
   const [activeSection, setActiveSection] = useState("models");
 
   return (
-    <div className="relative w-full bg-neutral-900/70 rounded-xl overflow-hidden border border-neutral-800 shadow-xl">
+    <Box className="relative w-full bg-neutral-900/70 rounded-xl overflow-hidden border border-neutral-800 shadow-xl">
       {/* Dashboard header */}
-      <div className="bg-neutral-800/90 p-3 flex items-center justify-between">
+      <Box className="bg-neutral-800/90 p-3 flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <div className="flex space-x-1.5">
-            <div className="w-3 h-3 rounded-full bg-primary/10"></div>
-            <div className="w-3 h-3 rounded-full bg-primary/10"></div>
-            <div className="w-3 h-3 rounded-full bg-primary/10"></div>
+            <Box className="w-3 h-3 rounded-full bg-primary/10"></Box>
+            <Box className="w-3 h-3 rounded-full bg-primary/10"></Box>
+            <Box className="w-3 h-3 rounded-full bg-primary/10"></Box>
           </div>
-          <div className="text-xs text-muted-foreground">Hanzo AI Engineering Platform</div>
+          <Box className="text-xs text-muted-foreground">Hanzo AI Engineering Platform</Box>
         </div>
         <div className="flex space-x-3">
           <button 
@@ -42,15 +43,15 @@ const PlatformDashboard = () => {
             Analytics
           </button>
         </div>
-      </div>
+      </Box>
 
       {/* Dashboard content */}
-      <div className="p-4 h-[340px] overflow-auto">
+      <Box className="p-4 h-[340px] overflow-auto">
         {activeSection === "models" && <AIModelsView />}
         {activeSection === "observability" && <ObservabilityView />}
         {activeSection === "analytics" && <AnalyticsView />}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

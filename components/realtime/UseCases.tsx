@@ -5,6 +5,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { MessageSquare, Users, Edit, GamepadIcon, ChartBar, Code, Heart, ArrowRight } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 interface UseCaseCardProps {
   icon: React.ElementType;
@@ -22,9 +23,9 @@ const UseCaseCard: React.FC<UseCaseCardProps> = ({ icon: Icon, title, descriptio
       transition={{ duration: 0.5, delay: 0.1 * index }}
       className="bg-gradient-to-br from-neutral-900 to-background border border-neutral-800 rounded-xl p-6 hover:border-white/30 transition-colors"
     >
-      <div className="bg-primary/10 h-10 w-10 rounded-full flex items-center justify-center mb-4">
+      <Box className="bg-primary/10 h-10 w-10 rounded-full flex items-center justify-center mb-4">
         <Icon className="h-5 w-5 text-foreground" />
-      </div>
+      </Box>
       <h3 className="text-lg font-semibold text-[var(--white)] mb-2">{title}</h3>
       <p className="text-muted-foreground text-sm">{description}</p>
     </motion.div>
@@ -67,7 +68,7 @@ const UseCases = () => {
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-white/10">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -75,10 +76,10 @@ const UseCases = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-white/30 mb-6">
+          <Box className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-white/30 mb-6">
             <Heart className="h-4 w-4 text-foreground mr-2" />
             <span className="text-sm text-foreground/70">Popular Use Cases</span>
-          </div>
+          </Box>
           <h2 className="text-3xl md:text-4xl font-bold text-[var(--white)] mb-4">
             Build Interactive Experiences
           </h2>
@@ -87,7 +88,7 @@ const UseCases = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {useCases.map((useCase, index) => (
             <UseCaseCard
               key={index}
@@ -97,7 +98,7 @@ const UseCases = () => {
               index={index}
             />
           ))}
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -110,7 +111,7 @@ const UseCases = () => {
             Explore All Use Cases <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { Button } from "@hanzo/ui";
 import Link from "next/link";
+import { Box } from '@hanzo/ui'
 
 const principles = [
   {
@@ -44,7 +45,7 @@ const principles = [
 const ZenPrinciples = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-secondary/20">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -53,13 +54,13 @@ const ZenPrinciples = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">The Zen of Hanzo</h2>
-          <div className="h-1 w-20 bg-primary mx-auto mb-6"></div>
+          <Box className="h-1 w-20 bg-primary mx-auto mb-6"></Box>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             The principles the company argues from when a decision is close.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {principles.map((principle, index) => (
             <motion.div
               key={index}
@@ -69,12 +70,12 @@ const ZenPrinciples = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-card backdrop-blur-sm border border-border rounded-lg p-8 h-full"
             >
-              <div className="mb-6">{principle.icon}</div>
+              <Box className="mb-6">{principle.icon}</Box>
               <h3 className="text-2xl font-bold text-foreground mb-4">{principle.title}</h3>
               <p className="text-muted-foreground">{principle.description}</p>
             </motion.div>
           ))}
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -93,7 +94,7 @@ const ZenPrinciples = () => {
             </Link>
           </Button>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

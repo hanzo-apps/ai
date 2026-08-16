@@ -4,10 +4,11 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 const ModelHeader = () => {
   return (
-    <div className="text-center max-w-3xl mx-auto mb-16">
+    <Box className="text-center max-w-3xl mx-auto mb-16">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -22,7 +23,7 @@ const ModelHeader = () => {
           and predictable pricing
         </p>
       </motion.div>
-    </div>
+    </Box>
   );
 };
 

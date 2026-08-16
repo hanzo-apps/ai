@@ -5,6 +5,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Code, ArrowRight } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 // Define a proper type for the presence event
 interface PresenceEvent {
@@ -18,7 +19,7 @@ interface PresenceEvent {
 const Integration = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +35,7 @@ const Integration = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <Box className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -51,35 +52,35 @@ const Integration = () => {
             </p>
             
             <div className="space-y-4 mb-8">
-              <div className="flex items-start">
-                <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mr-3 mt-0.5">
+              <Box className="flex items-start">
+                <Box className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mr-3 mt-0.5">
                   <span className="text-foreground text-sm font-bold">1</span>
-                </div>
+                </Box>
                 <div>
                   <h4 className="text-[var(--white)] font-medium mb-1">Mint a grant</h4>
                   <p className="text-muted-foreground text-sm">One authenticated request returns a string good for thirty seconds and exactly one stream</p>
                 </div>
-              </div>
+              </Box>
 
-              <div className="flex items-start">
-                <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mr-3 mt-0.5">
+              <Box className="flex items-start">
+                <Box className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mr-3 mt-0.5">
                   <span className="text-foreground text-sm font-bold">2</span>
-                </div>
+                </Box>
                 <div>
                   <h4 className="text-[var(--white)] font-medium mb-1">Open the stream, name your topics</h4>
                   <p className="text-muted-foreground text-sm">Spend the grant, take the client id it hands back, then post the collections and records you care about</p>
                 </div>
-              </div>
+              </Box>
 
-              <div className="flex items-start">
-                <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mr-3 mt-0.5">
+              <Box className="flex items-start">
+                <Box className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mr-3 mt-0.5">
                   <span className="text-foreground text-sm font-bold">3</span>
-                </div>
+                </Box>
                 <div>
                   <h4 className="text-[var(--white)] font-medium mb-1">Write a record</h4>
                   <p className="text-muted-foreground text-sm">Any create, update or delete reaches everyone watching whose rule lets them see it</p>
                 </div>
-              </div>
+              </Box>
             </div>
             
             <Button className="bg-primary hover:bg-primary/90">
@@ -94,50 +95,50 @@ const Integration = () => {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="bg-[var(--black)] rounded-xl border border-neutral-800 p-6"
           >
-            <div className="flex items-center mb-4">
+            <Box className="flex items-center mb-4">
               <Code className="h-5 w-5 text-foreground mr-2" />
               <span className="text-foreground/80">The wire, without the SDK</span>
-            </div>
+            </Box>
             
-            <div className="bg-neutral-900 rounded-lg p-4 font-mono text-sm overflow-auto max-h-[400px]">
-              <div className="text-foreground/70">// 1. mint a grant on an ordinary authenticated request</div>
-              <div className="text-foreground/80">const &#123; token &#125; = await post('/v1/realtime/token');</div>
-              <div className="text-foreground/80 mb-4"></div>
+            <Box className="bg-neutral-900 rounded-lg p-4 font-mono text-sm overflow-auto max-h-[400px]">
+              <Box className="text-foreground/70">// 1. mint a grant on an ordinary authenticated request</Box>
+              <Box className="text-foreground/80">const &#123; token &#125; = await post('/v1/realtime/token');</Box>
+              <Box className="text-foreground/80 mb-4"></Box>
               
-              <div className="text-foreground/70">// 2. spend it — once, and within thirty seconds</div>
-              <div className="text-foreground/80">const es = new EventSource('/v1/realtime?token=' + token);</div>
-              <div className="text-foreground/80 pl-4">es.addEventListener('CONNECT', (ev) =&gt; &#123;</div>
-              <div className="text-foreground/80 pl-8">const &#123; clientId &#125; = JSON.parse(ev.data);</div>
-              <div className="text-foreground/80 pl-8">// 3. name the collections and records you want</div>
-              <div className="text-foreground/80 pl-8">post('/v1/realtime', &#123;</div>
-              <div className="text-foreground/80 pl-4">clientId,</div>
-              <div className="text-foreground/80 pl-4">subscriptions: [</div>
-              <div className="text-foreground/80 pl-8">'messages',        // the whole collection</div>
-              <div className="text-foreground/80 pl-12">'orders/ord_42',   // one record</div>
-              <div className="text-foreground/80 pl-8">],</div>
-              <div className="text-foreground/80 pl-12"></div>
-              <div className="text-foreground/80 pl-8">&#125;);</div>
-              <div className="text-foreground/80 pl-4">&#125;);</div>
-              <div className="text-foreground/80"></div>
-              <div className="text-foreground/80 mb-4"></div>
+              <Box className="text-foreground/70">// 2. spend it — once, and within thirty seconds</Box>
+              <Box className="text-foreground/80">const es = new EventSource('/v1/realtime?token=' + token);</Box>
+              <Box className="text-foreground/80 pl-4">es.addEventListener('CONNECT', (ev) =&gt; &#123;</Box>
+              <Box className="text-foreground/80 pl-8">const &#123; clientId &#125; = JSON.parse(ev.data);</Box>
+              <Box className="text-foreground/80 pl-8">// 3. name the collections and records you want</Box>
+              <Box className="text-foreground/80 pl-8">post('/v1/realtime', &#123;</Box>
+              <Box className="text-foreground/80 pl-4">clientId,</Box>
+              <Box className="text-foreground/80 pl-4">subscriptions: [</Box>
+              <Box className="text-foreground/80 pl-8">'messages',        // the whole collection</Box>
+              <Box className="text-foreground/80 pl-12">'orders/ord_42',   // one record</Box>
+              <Box className="text-foreground/80 pl-8">],</Box>
+              <Box className="text-foreground/80 pl-12"></Box>
+              <Box className="text-foreground/80 pl-8">&#125;);</Box>
+              <Box className="text-foreground/80 pl-4">&#125;);</Box>
+              <Box className="text-foreground/80"></Box>
+              <Box className="text-foreground/80 mb-4"></Box>
               
-              <div className="text-foreground/70">// records arrive as events named for the topic</div>
-              <div className="text-foreground/80">es.addEventListener('messages', (ev) =&gt; &#123;</div>
-              <div className="text-foreground/80 pl-4">const &#123; action, record &#125; = JSON.parse(ev.data);</div>
-              <div className="text-foreground/80 pl-8"></div>
-              <div className="text-foreground/80 pl-8"></div>
-              <div className="text-foreground/80 pl-4">if (action === 'delete') remove(record.id);</div>
-              <div className="text-foreground/80 pl-4">else render(record);</div>
-              <div className="text-foreground/80 pl-4"></div>
-              <div className="text-foreground/80">&#125;);</div>
-              <div className="text-foreground/80 mb-4"></div>
+              <Box className="text-foreground/70">// records arrive as events named for the topic</Box>
+              <Box className="text-foreground/80">es.addEventListener('messages', (ev) =&gt; &#123;</Box>
+              <Box className="text-foreground/80 pl-4">const &#123; action, record &#125; = JSON.parse(ev.data);</Box>
+              <Box className="text-foreground/80 pl-8"></Box>
+              <Box className="text-foreground/80 pl-8"></Box>
+              <Box className="text-foreground/80 pl-4">if (action === 'delete') remove(record.id);</Box>
+              <Box className="text-foreground/80 pl-4">else render(record);</Box>
+              <Box className="text-foreground/80 pl-4"></Box>
+              <Box className="text-foreground/80">&#125;);</Box>
+              <Box className="text-foreground/80 mb-4"></Box>
               
-              <div className="text-foreground/70">// a grant is spent; a dropped stream reopens with a new one</div>
-              <div className="text-foreground/80">es.onerror = () =&gt; reconnect();</div>
-            </div>
+              <Box className="text-foreground/70">// a grant is spent; a dropped stream reopens with a new one</Box>
+              <Box className="text-foreground/80">es.onerror = () =&gt; reconnect();</Box>
+            </Box>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import Link from "next/link";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const FINAL_CODE = [
   "$ curl -fsSL hanzo.sh | bash",
@@ -13,7 +14,7 @@ const FINAL_CODE = [
 const FinalCTASection = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background relative overflow-hidden">
-      <div className="absolute inset-0">
+      <Box className="absolute inset-0">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.15 }}
@@ -25,9 +26,9 @@ const FinalCTASection = () => {
             filter: "blur(120px)",
           }}
         />
-      </div>
+      </Box>
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <Box className="max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,16 +83,16 @@ const FinalCTASection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="rounded-xl border border-border bg-secondary/80 overflow-hidden">
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
-              <div className="flex gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-                <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-                <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-              </div>
+          <Box className="rounded-xl border border-border bg-secondary/80 overflow-hidden">
+            <Box className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
+              <Box className="flex gap-1.5">
+                <Box className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+                <Box className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+                <Box className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+              </Box>
               <span className="text-[11px] text-muted-foreground font-mono ml-2">terminal</span>
-            </div>
-            <div className="p-5 font-mono text-sm bg-background overflow-x-auto">
+            </Box>
+            <Box className="p-5 font-mono text-sm bg-background overflow-x-auto">
               {FINAL_CODE.map((line, idx) => (
                 <div
                   key={idx}
@@ -100,10 +101,10 @@ const FinalCTASection = () => {
                   {line}
                 </div>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

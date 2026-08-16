@@ -19,6 +19,7 @@ import { ArrowRight, ArrowUpRight, Check } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Mockup } from '@/components/product/Mockup'
+import { Box } from '@hanzo/ui'
 
 const fade = {
   initial: { opacity: 0, y: 20 },
@@ -109,7 +110,7 @@ export interface ProductLandingProps {
 function SectionHead({ eyebrow, title, sub }: SectionCopy) {
   return (
     <motion.div {...fade} transition={{ duration: 0.5 }} className="mx-auto mb-14 max-w-2xl text-center">
-      <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">{eyebrow}</div>
+      <Box className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">{eyebrow}</Box>
       <h2 className="text-3xl font-bold text-white md:text-4xl">{title}</h2>
       {sub && <p className="mt-4 text-lg text-neutral-400">{sub}</p>}
     </motion.div>
@@ -142,9 +143,9 @@ function OutlineButton({ cta }: { cta: CTA }) {
 
 function CTARow({ ctas }: { ctas: CTA[] }) {
   return (
-    <div className="flex flex-wrap justify-center gap-4">
+    <Box className="flex flex-wrap justify-center gap-4">
       {ctas.map((c, i) => (i === 0 ? <PrimaryButton key={c.label} cta={c} /> : <OutlineButton key={c.label} cta={c} />))}
-    </div>
+    </Box>
   )
 }
 
@@ -154,19 +155,19 @@ export function ProductLanding(p: ProductLandingProps) {
   const FinalIcon = p.finalCta.icon
 
   return (
-    <div className="bg-black pt-16 text-white">
+    <Box className="bg-black pt-16 text-white">
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
       <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden px-4 py-24 sm:px-6 lg:px-8">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <Box className="pointer-events-none absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute left-1/2 top-1/2 h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full"
             style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 68%)', filter: 'blur(110px)' }}
             animate={{ scale: [1, 1.08, 1], opacity: [0.4, 0.6, 0.4] }}
             transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
           />
-        </div>
+        </Box>
 
-        <div className="relative z-10 mx-auto max-w-5xl text-center">
+        <Box className="relative z-10 mx-auto max-w-5xl text-center">
           {p.badge && (
             <motion.div
               {...fade}
@@ -220,23 +221,23 @@ export function ProductLanding(p: ProductLandingProps) {
               ))}
             </motion.div>
           )}
-        </div>
+        </Box>
       </section>
 
       {/* ── The product, running ───────────────────────────────────────────── */}
       {p.mockup && (
         <section className="border-t border-neutral-900 px-4 pt-16 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
+          <Box className="mx-auto max-w-7xl">
             <Mockup slug={p.mockup.slug} alt={p.mockup.alt} />
-          </div>
+          </Box>
         </section>
       )}
 
       {/* ── What it is ─────────────────────────────────────────────────────── */}
       <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+        <Box className="mx-auto max-w-7xl">
           <SectionHead eyebrow={p.what.eyebrow} title={p.what.title} sub={p.what.sub} />
-          <div className="grid gap-6 md:grid-cols-3">
+          <Box className="grid gap-6 md:grid-cols-3">
             {p.what.pillars.map((pl, i) => (
               <motion.div
                 key={pl.title}
@@ -244,26 +245,26 @@ export function ProductLanding(p: ProductLandingProps) {
                 transition={{ duration: 0.5, delay: i * 0.06 }}
                 className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-7"
               >
-                <div className="mb-5 flex items-center justify-between">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10">
+                <Box className="mb-5 flex items-center justify-between">
+                  <Box className="flex h-11 w-11 items-center justify-center rounded-lg bg-white/10">
                     <pl.icon className="h-6 w-6 text-white" />
-                  </div>
+                  </Box>
                   <span className="text-sm font-semibold text-neutral-600">{String(i + 1).padStart(2, '0')}</span>
-                </div>
+                </Box>
                 <h3 className="mb-2 text-lg font-semibold text-white">{pl.title}</h3>
                 <p className="text-sm leading-relaxed text-neutral-400">{pl.body}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* ── Features ───────────────────────────────────────────────────────── */}
       {p.features && (
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
+          <Box className="mx-auto max-w-7xl">
             <SectionHead eyebrow={p.features.eyebrow} title={p.features.title} sub={p.features.sub} />
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <Box className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {p.features.items.map((f, i) => (
                 <motion.div
                   key={f.title}
@@ -271,24 +272,24 @@ export function ProductLanding(p: ProductLandingProps) {
                   transition={{ duration: 0.5, delay: i * 0.05 }}
                   className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-7"
                 >
-                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-white/10">
+                  <Box className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg bg-white/10">
                     <f.icon className="h-5 w-5 text-white" />
-                  </div>
+                  </Box>
                   <h3 className="mb-2 text-base font-semibold text-white">{f.title}</h3>
                   <p className="text-sm leading-relaxed text-neutral-400">{f.body}</p>
                 </motion.div>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
       )}
 
       {/* ── How it works ───────────────────────────────────────────────────── */}
       {p.steps && (
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-5xl">
+          <Box className="mx-auto max-w-5xl">
             <SectionHead eyebrow={p.steps.eyebrow} title={p.steps.title} sub={p.steps.sub} />
-            <div className="grid gap-6 md:grid-cols-3">
+            <Box className="grid gap-6 md:grid-cols-3">
               {p.steps.items.map((s, i) => (
                 <motion.div
                   key={s.n}
@@ -296,24 +297,24 @@ export function ProductLanding(p: ProductLandingProps) {
                   transition={{ duration: 0.5, delay: i * 0.06 }}
                   className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-7"
                 >
-                  <div className="mb-4 text-3xl font-bold text-neutral-700">{s.n}</div>
+                  <Box className="mb-4 text-3xl font-bold text-neutral-700">{s.n}</Box>
                   <h3 className="mb-2 text-lg font-semibold text-white">{s.title}</h3>
                   <p className="text-sm leading-relaxed text-neutral-400">{s.body}</p>
                 </motion.div>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
       )}
 
       {/* ── Stats ──────────────────────────────────────────────────────────── */}
       {p.stats && (
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
+          <Box className="mx-auto max-w-7xl">
             {p.stats.eyebrow && p.stats.title && (
               <SectionHead eyebrow={p.stats.eyebrow} title={p.stats.title} sub={p.stats.sub} />
             )}
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <Box className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {p.stats.items.map((s, i) => (
                 <motion.div
                   key={s.label}
@@ -322,45 +323,45 @@ export function ProductLanding(p: ProductLandingProps) {
                   className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-7 text-center"
                 >
                   {s.icon && <s.icon className="mx-auto mb-4 h-6 w-6 text-neutral-400" />}
-                  <div className="text-4xl font-bold text-white">{s.value}</div>
-                  <div className="mt-1 text-sm font-medium text-neutral-300">{s.label}</div>
-                  {s.sub && <div className="mt-0.5 text-xs text-neutral-500">{s.sub}</div>}
+                  <Box className="text-4xl font-bold text-white">{s.value}</Box>
+                  <Box className="mt-1 text-sm font-medium text-neutral-300">{s.label}</Box>
+                  {s.sub && <Box className="mt-0.5 text-xs text-neutral-500">{s.sub}</Box>}
                 </motion.div>
               ))}
-            </div>
+            </Box>
             {p.stats.footnote && (
               <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-neutral-600">{p.stats.footnote}</p>
             )}
-          </div>
+          </Box>
         </section>
       )}
 
       {/* ── Code ───────────────────────────────────────────────────────────── */}
       {p.code && (
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl">
+          <Box className="mx-auto max-w-3xl">
             {p.code.head && <SectionHead eyebrow={p.code.head.eyebrow} title={p.code.head.title} sub={p.code.head.sub} />}
             <motion.div
               {...fade}
               transition={{ duration: 0.5 }}
               className="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/60"
             >
-              <div className="flex items-center gap-2 border-b border-neutral-800 bg-neutral-900/80 px-4 py-2.5">
+              <Box className="flex items-center gap-2 border-b border-neutral-800 bg-neutral-900/80 px-4 py-2.5">
                 <span className="h-2.5 w-2.5 rounded-full bg-neutral-700" />
                 <span className="h-2.5 w-2.5 rounded-full bg-neutral-700" />
                 <span className="h-2.5 w-2.5 rounded-full bg-neutral-700" />
                 <span className="ml-2 font-mono text-xs text-neutral-500">{p.code.lang}</span>
-              </div>
+              </Box>
               <pre className="overflow-x-auto p-5 font-mono text-sm leading-relaxed text-neutral-300">
                 <code>{p.code.source}</code>
               </pre>
             </motion.div>
             {p.code.ctas && p.code.ctas.length > 0 && (
-              <div className="mt-8">
+              <Box className="mt-8">
                 <CTARow ctas={p.code.ctas} />
-              </div>
+              </Box>
             )}
-          </div>
+          </Box>
         </section>
       )}
 
@@ -368,28 +369,28 @@ export function ProductLanding(p: ProductLandingProps) {
 
       {/* ── Final CTA ──────────────────────────────────────────────────────── */}
       <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl">
+        <Box className="mx-auto max-w-4xl">
           <motion.div
             {...fade}
             transition={{ duration: 0.5 }}
             className="relative overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/50 p-10 text-center md:p-14"
           >
-            <div className="pointer-events-none absolute inset-0">
-              <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
-              <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
-            </div>
-            <div className="relative z-10">
+            <Box className="pointer-events-none absolute inset-0">
+              <Box className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+              <Box className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
+            </Box>
+            <Box className="relative z-10">
               {FinalIcon && <FinalIcon className="mx-auto mb-4 h-10 w-10 text-white" />}
               <h2 className="text-3xl font-bold text-white md:text-4xl">{p.finalCta.title}</h2>
               <p className="mx-auto mt-4 max-w-xl text-lg text-neutral-400">{p.finalCta.sub}</p>
-              <div className="mt-8">
+              <Box className="mt-8">
                 <CTARow ctas={p.finalCta.buttons} />
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
-    </div>
+    </Box>
   )
 }
 

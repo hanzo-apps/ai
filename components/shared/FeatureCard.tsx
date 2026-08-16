@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { LucideIcon } from "lucide-react";
 import { BrandColor } from "@/lib/constants/brand";
+import { Box } from '@hanzo/ui'
 
 interface FeatureCardProps {
   title: string;
@@ -95,14 +96,14 @@ export const FeatureListItem: React.FC<FeatureListItemProps> = ({
   icon: Icon,
 }) => {
   return (
-    <div className="flex items-start">
-      <div className="p-2 bg-primary/10 rounded-lg mr-4">
+    <Box className="flex items-start">
+      <Box className="p-2 bg-primary/10 rounded-lg mr-4">
         <Icon className="h-6 w-6 text-foreground" />
-      </div>
+      </Box>
       <div>
         <h3 className="text-xl font-semibold text-foreground mb-1">{title}</h3>
         <p className="text-muted-foreground">{description}</p>
       </div>
-    </div>
+    </Box>
   );
 };

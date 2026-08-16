@@ -3,6 +3,7 @@
 import React from "react";
 import { Send, RefreshCw, Camera, Mic, Paperclip } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 interface MessageInputProps {
   message: string;
@@ -18,7 +19,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
   isTyping 
 }) => {
   return (
-    <div className="p-4 border-t border-neutral-800">
+    <Box className="p-4 border-t border-neutral-800">
       <form onSubmit={handleSendMessage} className="flex items-center">
         <div className="flex items-center space-x-2 mr-2">
           <Button type="button" variant="ghost" size="icon" className="text-muted-foreground hover:text-[var(--white)]">
@@ -51,7 +52,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
           )}
         </Button>
       </form>
-    </div>
+    </Box>
   );
 };
 

@@ -17,6 +17,7 @@ import {
   Copy,
 } from "lucide-react";
 import { MODELS_PHRASE } from '@/lib/data/model-count'
+import { Box } from '@hanzo/ui'
 
 const VALUE_PROPS = [
   {
@@ -117,7 +118,7 @@ const VALUE_PROPS = [
 const WhyHanzo = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -144,7 +145,7 @@ const WhyHanzo = () => {
               transition={{ delay: propIndex * 0.1 }}
             >
               {/* Prop Header */}
-              <div className="mb-8">
+              <Box className="mb-8">
                 <h3
                   className="text-2xl md:text-3xl font-bold mb-2"
                   style={{ color: prop.color }}
@@ -152,10 +153,10 @@ const WhyHanzo = () => {
                   {prop.title}
                 </h3>
                 <p className="text-muted-foreground">{prop.subtitle}</p>
-              </div>
+              </Box>
 
               {/* Features Grid */}
-              <div className="grid md:grid-cols-2 gap-6">
+              <Box className="grid md:grid-cols-2 gap-6">
                 {prop.features.map((feature, featureIndex) => {
                   const Icon = feature.icon;
                   return (
@@ -167,12 +168,12 @@ const WhyHanzo = () => {
                       transition={{ delay: featureIndex * 0.05 }}
                       className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-border transition-colors"
                     >
-                      <div
+                      <Box
                         className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
                         style={{ backgroundColor: `${prop.color}20` }}
                       >
                         <Icon className="w-5 h-5" style={{ color: prop.color }} />
-                      </div>
+                      </Box>
                       <h4 className="text-lg font-semibold text-foreground mb-2">
                         {feature.title}
                       </h4>
@@ -182,11 +183,11 @@ const WhyHanzo = () => {
                     </motion.div>
                   );
                 })}
-              </div>
+              </Box>
             </motion.div>
           ))}
         </div>
-      </div>
+      </Box>
     </section>
   );
 };

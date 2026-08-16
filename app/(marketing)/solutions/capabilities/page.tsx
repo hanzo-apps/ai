@@ -26,6 +26,7 @@ import PartnerCard from "@/components/shared/PartnerCard";
 import { cloudServiceData } from "@/components/index3/cloud-services/cloudServiceData";
 import ChromeText from "@/components/ui/chrome-text";
 import { partners } from "@/lib/constants/brand";
+import { Box } from '@hanzo/ui'
 
 const SolutionCapabilities: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, number>>({});
@@ -46,8 +47,8 @@ const SolutionCapabilities: React.FC = () => {
     const hasMore = capabilities.length > displayCount;
 
     return (
-      <div className="mb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <Box className="mb-16">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence initial={false}>
             {displayItems.map((item, index) => {
               const name = typeof item === 'string' ? item : (item as { name: string }).name;
@@ -64,12 +65,12 @@ const SolutionCapabilities: React.FC = () => {
                   whileHover={{ y: -5 }}
                   className="relative group rounded-xl border border-neutral-800 bg-[var(--black)]/50 p-6 backdrop-blur-sm overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-4">
+                  <Box className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <Box className="relative">
+                    <Box className="flex items-center justify-between mb-4">
                       <Icon className="h-6 w-6 text-foreground" strokeWidth={1.5} />
                       <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                    </div>
+                    </Box>
                     <h3 className="text-xl font-semibold mb-2 group-hover:text-foreground transition-colors">
                       {name}
                     </h3>
@@ -77,7 +78,7 @@ const SolutionCapabilities: React.FC = () => {
                       {description || `Our specialists deliver comprehensive ${name.toLowerCase()} solutions tailored to your organization's unique challenges and goals.`}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mt-4">
+                    <Box className="flex flex-wrap gap-2 mt-4">
                       <Link href={href} className="text-xs flex items-center text-foreground hover:text-foreground/70">
                         <LinkIcon className="h-3 w-3 mr-1" /> Learn more
                       </Link>
@@ -87,13 +88,13 @@ const SolutionCapabilities: React.FC = () => {
                       <a href="#" className="text-xs flex items-center text-foreground/70 hover:text-foreground">
                         <BookOpen className="h-3 w-3 mr-1" /> White paper
                       </a>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
                 </motion.div>
               );
             })}
           </AnimatePresence>
-        </div>
+        </Box>
         {hasMore && (
           <motion.div 
             className="text-center mt-8"
@@ -110,7 +111,7 @@ const SolutionCapabilities: React.FC = () => {
             </button>
           </motion.div>
         )}
-      </div>
+      </Box>
     );
   };
 
@@ -122,45 +123,45 @@ const SolutionCapabilities: React.FC = () => {
       transition={{ duration: 0.4 }}
       className="bg-gradient-to-br from-neutral-900/70 to-background/80 rounded-xl border border-neutral-800 overflow-hidden"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-5">
-        <div className="col-span-3 p-8">
-          <div className="flex items-center gap-2 mb-4">
+      <Box className="grid grid-cols-1 lg:grid-cols-5">
+        <Box className="col-span-3 p-8">
+          <Box className="flex items-center gap-2 mb-4">
             <span className="text-xs text-muted-foreground">Case Study</span>
             <span className="w-1 h-1 rounded-full bg-neutral-500"></span>
             <span className="text-xs px-2 py-1 bg-primary/20 rounded-full text-foreground border border-white/30">
               {industry}
             </span>
-          </div>
+          </Box>
           <h3 className="text-2xl font-bold mb-4 text-[var(--white)]">{title}</h3>
           <p className="text-foreground/80 mb-6">{description}</p>
           
           <div className="space-y-4 mb-6">
-            <div className="flex items-start gap-2">
+            <Box className="flex items-start gap-2">
               <CheckCircle className="h-5 w-5 text-foreground flex-shrink-0 mt-0.5" />
               <p className="text-muted-foreground">Reduced development time by 40% through AI-powered automation</p>
-            </div>
-            <div className="flex items-start gap-2">
+            </Box>
+            <Box className="flex items-start gap-2">
               <CheckCircle className="h-5 w-5 text-foreground flex-shrink-0 mt-0.5" />
               <p className="text-muted-foreground">Improved customer satisfaction scores by 35% with new digital experiences</p>
-            </div>
-            <div className="flex items-start gap-2">
+            </Box>
+            <Box className="flex items-start gap-2">
               <CheckCircle className="h-5 w-5 text-foreground flex-shrink-0 mt-0.5" />
               <p className="text-muted-foreground">High availability with Hanzo's enterprise-grade infrastructure</p>
-            </div>
+            </Box>
           </div>
           
           <Button>
             Read Full Case Study <ArrowRight size={16} />
           </Button>
-        </div>
-        <div className="col-span-2 bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center p-8">
-          <div className="flex flex-col items-center text-center">
+        </Box>
+        <Box className="col-span-2 bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center p-8">
+          <Box className="flex flex-col items-center text-center">
             <Award className="h-16 w-16 text-foreground mb-4" />
-            <div className="text-4xl font-bold text-[var(--white)] mb-2">200%</div>
-            <div className="text-foreground">Return on Investment</div>
-          </div>
-        </div>
-      </div>
+            <Box className="text-4xl font-bold text-[var(--white)] mb-2">200%</Box>
+            <Box className="text-foreground">Return on Investment</Box>
+          </Box>
+        </Box>
+      </Box>
     </motion.div>
   );
 
@@ -171,47 +172,47 @@ const SolutionCapabilities: React.FC = () => {
     const Icon = featuredService.icon;
     
     return (
-      <div className="mb-20">
+      <Box className="mb-20">
         <SectionHeader 
           title="AI & Machine Learning" 
           description="Transform your business with our enterprise-grade AI solutions"
         />
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-          <div className="bg-gradient-to-br from-white/20 to-white/10 rounded-xl border border-border p-8">
-            <div className="mb-6">
-              <div className="h-16 w-16 rounded-lg bg-primary/20 flex items-center justify-center mb-4">
+        <Box className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <Box className="bg-gradient-to-br from-white/20 to-white/10 rounded-xl border border-border p-8">
+            <Box className="mb-6">
+              <Box className="h-16 w-16 rounded-lg bg-primary/20 flex items-center justify-center mb-4">
                 <Icon className="h-10 w-10 text-foreground" />
-              </div>
+              </Box>
               <h3 className="text-2xl font-bold mb-4">Enterprise AI Solutions</h3>
               <p className="text-foreground/80">
                 Deploy, manage, and scale AI models on one platform. Frontier models, vector search, and
                 reasoning models sit behind a single API, and a model you fine-tune runs in your own private
                 deployment.
               </p>
-            </div>
+            </Box>
             
             <div className="space-y-4 mb-8">
               {featuredService.features.map((feature, idx) => (
-                <div key={idx} className="flex items-start gap-3">
+                <Box key={idx} className="flex items-start gap-3">
                   <CheckCircle className="h-5 w-5 text-foreground flex-shrink-0 mt-0.5" />
                   <p className="text-foreground/80">{feature}</p>
-                </div>
+                </Box>
               ))}
             </div>
             
-            <div className="flex flex-wrap gap-4">
+            <Box className="flex flex-wrap gap-4">
               <Button asChild>
                 <Link href="/ai">Explore AI Solutions</Link>
               </Button>
               <Button asChild variant="outline">
                 <a href="#">Request Demo</a>
               </Button>
-            </div>
-          </div>
+            </Box>
+          </Box>
           
           <div className="space-y-6">
-            <div className="bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 p-6">
+            <Box className="bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 p-6">
               <h4 className="text-lg font-semibold mb-3">Case Study: Financial Services</h4>
               <p className="text-muted-foreground mb-4">
                 How a leading investment firm used Hanzo's AI platform to analyze market trends and automate 
@@ -220,9 +221,9 @@ const SolutionCapabilities: React.FC = () => {
               <a href="#" className="text-foreground hover:text-foreground/70 flex items-center gap-1.5">
                 Read case study <ArrowRight size={16} />
               </a>
-            </div>
+            </Box>
 
-            <div className="bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 p-6">
+            <Box className="bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 p-6">
               <h4 className="text-lg font-semibold mb-3">White Paper: Enterprise AI Adoption</h4>
               <p className="text-muted-foreground mb-4">
                 Download our comprehensive guide to implementing AI across large organizations, addressing
@@ -231,9 +232,9 @@ const SolutionCapabilities: React.FC = () => {
               <a href="#" className="text-foreground hover:text-foreground/70 flex items-center gap-1.5">
                 Download white paper <ArrowRight size={16} />
               </a>
-            </div>
+            </Box>
 
-            <div className="bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 p-6">
+            <Box className="bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 p-6">
               <h4 className="text-lg font-semibold mb-3">Webinar: The Future of GenAI in Enterprise</h4>
               <p className="text-muted-foreground mb-4">
                 Join our expert panel discussing how generative AI is transforming enterprise operations and
@@ -242,102 +243,102 @@ const SolutionCapabilities: React.FC = () => {
               <a href="#" className="text-foreground/70 hover:text-foreground flex items-center gap-1.5">
                 Register now <ArrowRight size={16} />
               </a>
-            </div>
+            </Box>
           </div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     );
   };
 
   const renderExpertiseSection = () => (
-    <div className="mb-20">
+    <Box className="mb-20">
       <SectionHeader 
         title="Technical Expertise"
         description="Our team brings deep expertise across multiple technical domains, helping you implement solutions that drive real business results."
       />
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
-        <div className="bg-gradient-to-br from-white/20 to-white/10 p-8 rounded-xl border border-border">
+      <Box className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
+        <Box className="bg-gradient-to-br from-white/20 to-white/10 p-8 rounded-xl border border-border">
           <h3 className="text-2xl font-bold mb-4 text-[var(--white)]">Case Studies</h3>
           <p className="text-foreground/80 mb-6">
             See how we've helped organizations like yours achieve their goals through innovative solutions.
           </p>
           <div className="space-y-4">
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <FileText className="h-5 w-5 text-foreground mr-3" />
                 <span className="text-[var(--white)]">Financial Services Digital Transformation</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <FileText className="h-5 w-5 text-foreground mr-3" />
                 <span className="text-[var(--white)]">Healthcare AI Implementation</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <FileText className="h-5 w-5 text-foreground mr-3" />
                 <span className="text-[var(--white)]">Retail Analytics Platform</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
           </div>
-          <div className="mt-6 text-center">
+          <Box className="mt-6 text-center">
             <Button variant="outline">
               View all case studies <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        <div className="bg-gradient-to-br from-white/20 to-white/10 p-8 rounded-xl border border-border">
+        <Box className="bg-gradient-to-br from-white/20 to-white/10 p-8 rounded-xl border border-border">
           <h3 className="text-2xl font-bold mb-4 text-[var(--white)]">White Papers</h3>
           <p className="text-foreground/80 mb-6">
             Access our thought leadership and research on the latest industry trends and technologies.
           </p>
           <div className="space-y-4">
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <BookOpen className="h-5 w-5 text-foreground/70 mr-3" />
                 <span className="text-[var(--white)]">The Future of AI in Enterprise</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <BookOpen className="h-5 w-5 text-foreground/70 mr-3" />
                 <span className="text-[var(--white)]">Cloud Security Best Practices</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <BookOpen className="h-5 w-5 text-foreground/70 mr-3" />
                 <span className="text-[var(--white)]">Digital Transformation Playbook</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
           </div>
-          <div className="mt-6 text-center">
+          <Box className="mt-6 text-center">
             <Button variant="outline">
               View all white papers <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
   
   const renderPartnerSection = () => (
-    <div className="mb-20 bg-gradient-to-br from-neutral-900/70 to-background/90 p-10 rounded-2xl border border-neutral-800">
+    <Box className="mb-20 bg-gradient-to-br from-neutral-900/70 to-background/90 p-10 rounded-2xl border border-neutral-800">
       <SectionHeader 
         title="Expert Partners" 
         description="Access our specialized agencies and expert talent to accelerate your success"
       />
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <Box className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <PartnerCard
           name={partners.hanzoAgency.name}
           description={partners.hanzoAgency.description}
@@ -356,22 +357,22 @@ const SolutionCapabilities: React.FC = () => {
           primaryAction={{ label: "Visit Sensei Group", href: "https://sensei.group", external: true }}
           secondaryAction={{ label: "Schedule a call", href: "tel:+19137774443", type: "phone" }}
         />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
       
       <main className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-block mb-4">
+        <Box className="max-w-7xl mx-auto">
+          <Box className="text-center max-w-3xl mx-auto mb-16">
+            <Box className="inline-block mb-4">
               <Link href="/solutions" className="text-sm text-muted-foreground hover:text-[var(--white)] flex items-center gap-1">
                 <ChevronRight className="h-4 w-4 rotate-180" /> Back to Solutions
               </Link>
-            </div>
+            </Box>
             <ChromeText as="h1" className="text-4xl sm:text-5xl font-bold mb-6">
               Technical Capabilities
             </ChromeText>
@@ -379,13 +380,13 @@ const SolutionCapabilities: React.FC = () => {
               AI and machine learning, cloud infrastructure, and data platforms — the work we do, and the
               results it produced for the companies we did it for.
             </p>
-          </div>
+          </Box>
 
           {/* Featured Capability Section (AI) */}
           {renderFeaturedCapability()}
           
           {/* Case Study */}
-          <div className="mb-20">
+          <Box className="mb-20">
             <SectionHeader 
               title="Success Stories" 
               description="Real-world results from our enterprise clients"
@@ -404,16 +405,16 @@ const SolutionCapabilities: React.FC = () => {
                 "Our team migrated a healthcare provider's critical patient systems to a secure, compliant cloud infrastructure while implementing real-time analytics for improved patient outcomes and operational efficiency."
               )}
             </div>
-          </div>
+          </Box>
           
           {/* All Capabilities Grid */}
-          <div className="mb-20">
+          <Box className="mb-20">
             <SectionHeader 
               title="Explore Our Capabilities" 
               description="Comprehensive technical expertise to transform your business"
             />
             {renderCapabilityGrid()}
-          </div>
+          </Box>
           
           {/* Resources Section */}
           {renderExpertiseSection()}
@@ -422,13 +423,13 @@ const SolutionCapabilities: React.FC = () => {
           {renderPartnerSection()}
           
           {/* CTA Section */}
-          <div className="mt-20 text-center">
-            <div className="max-w-3xl mx-auto">
+          <Box className="mt-20 text-center">
+            <Box className="max-w-3xl mx-auto">
               <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
               <p className="text-muted-foreground mb-8">
                 Connect with our team to learn how our capabilities can help you achieve your goals.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <Box className="flex flex-wrap justify-center gap-4">
                 <Button asChild size="lg">
                   <Link href="/contact">
                     Get Started
@@ -441,14 +442,14 @@ const SolutionCapabilities: React.FC = () => {
                     <Phone />
                   </a>
                 </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
       </main>
 
       
-    </div>
+    </Box>
   );
 };
 

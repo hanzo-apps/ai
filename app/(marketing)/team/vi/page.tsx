@@ -5,6 +5,7 @@ import { motion } from "@/components/motion";
 import { Lightbulb, MessagesSquare, Bot, Globe, Server, Lock } from "lucide-react";
 import TeamSlack from "@/components/TeamSlack";
 import { Button, toast } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const TeamVi = () => {
   const handleContactSensei = () => {
@@ -15,7 +16,7 @@ const TeamVi = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
       
       <main className="pt-32 pb-16 px-4">
@@ -25,10 +26,10 @@ const TeamVi = () => {
           className="max-w-7xl mx-auto"
         >
           {/* Hero Section */}
-          <div className="text-center mb-16">
-            <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-white to-white/10 mb-4">
+          <Box className="text-center mb-16">
+            <Box className="inline-flex p-3 rounded-xl bg-gradient-to-br from-white to-white/10 mb-4">
               <Lightbulb className="h-8 w-8 text-[var(--white)]" />
-            </div>
+            </Box>
             <h1 className="text-4xl sm:text-5xl font-bold mb-6">
               Meet Vi, Your Visionary Leader
             </h1>
@@ -36,10 +37,10 @@ const TeamVi = () => {
               Your innovative AI visionary leader, guiding the team towards excellence with strategic 
               insights and forward-thinking leadership.
             </p>
-          </div>
+          </Box>
 
           {/* Integration Platforms */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <Box className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <motion.div 
               whileHover={{ y: -5 }}
               className="p-6 rounded-2xl border border-neutral-800 bg-[var(--black)]/50"
@@ -75,13 +76,13 @@ const TeamVi = () => {
                 settles on the first.
               </p>
             </motion.div>
-          </div>
+          </Box>
 
           {/* Demo Chat Interface */}
           <TeamSlack />
 
           {/* Contact Section */}
-          <div className="text-center max-w-2xl mx-auto mt-16">
+          <Box className="text-center max-w-2xl mx-auto mt-16">
             <h2 className="text-2xl font-semibold mb-4">Need Human Assistance?</h2>
             <p className="text-muted-foreground mb-6">
               While Vi is highly capable, sometimes you might need human expertise.
@@ -93,12 +94,12 @@ const TeamVi = () => {
             >
               Contact Sensei Group
             </Button>
-          </div>
+          </Box>
         </motion.div>
       </main>
 
       
-    </div>
+    </Box>
   );
 };
 

@@ -19,6 +19,7 @@ import {
   Clock,
   ChevronRight
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 interface Service {
   name: string;
@@ -100,7 +101,7 @@ const ADDITIONAL_SERVICES: Service[] = [
 const PaaSCapabilities = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-background to-neutral-900/30">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -108,13 +109,13 @@ const PaaSCapabilities = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div
+          <Box
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-4"
             style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
           >
             <Terminal className="w-3.5 h-3.5" />
             Platform-as-a-Service
-          </div>
+          </Box>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             The services an app needs anyway
           </h2>
@@ -126,7 +127,7 @@ const PaaSCapabilities = () => {
         </motion.div>
 
         {/* Core services */}
-        <div className="mb-12">
+        <Box className="mb-12">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -135,7 +136,7 @@ const PaaSCapabilities = () => {
           >
             Core Services
           </motion.h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {CORE_SERVICES.map((service, index) => {
               const Icon = service.icon;
               const content = (
@@ -148,18 +149,18 @@ const PaaSCapabilities = () => {
                     service.href ? "hover:border-white/30 cursor-pointer" : ""
                   }`}
                 >
-                  <div className="flex items-start gap-4">
-                    <div
+                  <Box className="flex items-start gap-4">
+                    <Box
                       className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
                       style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
                     >
                       <Icon className="w-5 h-5" />
-                    </div>
+                    </Box>
                     <div>
                       <h4 className="text-foreground font-medium mb-1">{service.name}</h4>
                       <p className="text-sm text-muted-foreground">{service.description}</p>
                     </div>
-                  </div>
+                  </Box>
                 </motion.div>
               );
 
@@ -171,11 +172,11 @@ const PaaSCapabilities = () => {
                 <div key={service.name}>{content}</div>
               );
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
         {/* Additional services */}
-        <div className="mb-12">
+        <Box className="mb-12">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -184,7 +185,7 @@ const PaaSCapabilities = () => {
           >
             Additional Services
           </motion.h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {ADDITIONAL_SERVICES.map((service, index) => {
               const Icon = service.icon;
               return (
@@ -196,18 +197,18 @@ const PaaSCapabilities = () => {
                   transition={{ delay: index * 0.05 }}
                   className="p-4 rounded-lg bg-background/50 border border-border/50"
                 >
-                  <div className="flex items-center gap-3">
+                  <Box className="flex items-center gap-3">
                     <Icon className="w-4 h-4 text-muted-foreground" />
                     <div>
                       <span className="text-sm font-medium text-foreground">{service.name}</span>
                       <span className="text-xs text-muted-foreground ml-2">{service.description}</span>
                     </div>
-                  </div>
+                  </Box>
                 </motion.div>
               );
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
         {/* CLI showcase */}
         <motion.div
@@ -216,54 +217,54 @@ const PaaSCapabilities = () => {
           viewport={{ once: true }}
           className="bg-secondary/80 border border-border rounded-xl overflow-hidden"
         >
-          <div className="flex items-center gap-3 px-4 py-3 border-b border-border">
-            <div className="flex gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-primary/10" />
-              <div className="w-3 h-3 rounded-full bg-primary/10" />
-              <div className="w-3 h-3 rounded-full bg-primary/10" />
-            </div>
+          <Box className="flex items-center gap-3 px-4 py-3 border-b border-border">
+            <Box className="flex gap-1.5">
+              <Box className="w-3 h-3 rounded-full bg-primary/10" />
+              <Box className="w-3 h-3 rounded-full bg-primary/10" />
+              <Box className="w-3 h-3 rounded-full bg-primary/10" />
+            </Box>
             <span className="text-xs text-muted-foreground font-mono">hanzo platform</span>
-          </div>
-          <div className="p-6 font-mono text-sm">
+          </Box>
+          <Box className="p-6 font-mono text-sm">
             <div className="space-y-3">
-              <div className="text-muted-foreground">
+              <Box className="text-muted-foreground">
                 <span className="text-foreground">$</span> hanzo init my-app
-              </div>
-              <div className="text-muted-foreground">
+              </Box>
+              <Box className="text-muted-foreground">
                 ✓ Created project configuration
-              </div>
-              <div className="text-muted-foreground">
+              </Box>
+              <Box className="text-muted-foreground">
                 ✓ Initialized Auth, Database, Storage
-              </div>
-              <div className="text-muted-foreground">
+              </Box>
+              <Box className="text-muted-foreground">
                 ✓ Generated TypeScript types
-              </div>
-              <div className="mt-4 text-muted-foreground">
+              </Box>
+              <Box className="mt-4 text-muted-foreground">
                 <span className="text-foreground">$</span> hanzo dev
-              </div>
-              <div className="text-muted-foreground">
+              </Box>
+              <Box className="text-muted-foreground">
                 Starting local development server...
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-primary" />
+              </Box>
+              <Box className="flex items-center gap-2">
+                <Box className="w-2 h-2 rounded-full bg-primary" />
                 <span className="text-foreground">
                   Platform running at http://localhost:8000
                 </span>
-              </div>
-              <div className="mt-4 text-muted-foreground">
+              </Box>
+              <Box className="mt-4 text-muted-foreground">
                 <span className="text-foreground">$</span> hanzo deploy
-              </div>
-              <div className="text-muted-foreground">
+              </Box>
+              <Box className="text-muted-foreground">
                 Deploying to production...
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-primary" />
+              </Box>
+              <Box className="flex items-center gap-2">
+                <Box className="w-2 h-2 rounded-full bg-primary" />
                 <span className="text-foreground">
                   Live at https://my-app.hanzo.app
                 </span>
-              </div>
+              </Box>
             </div>
-          </div>
+          </Box>
         </motion.div>
 
         {/* Bottom CTA */}
@@ -273,7 +274,7 @@ const PaaSCapabilities = () => {
           viewport={{ once: true }}
           className="mt-12 text-center"
         >
-          <div className="flex flex-wrap justify-center gap-4">
+          <Box className="flex flex-wrap justify-center gap-4">
             <a
               href="https://docs.hanzo.ai/docs/services/platform"
               target="_blank"
@@ -291,9 +292,9 @@ const PaaSCapabilities = () => {
               Compare to Cloud
               <ChevronRight className="ml-2 h-4 w-4" />
             </Link>
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

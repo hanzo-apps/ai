@@ -4,12 +4,13 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Cpu, Brain, FlaskConical, Sparkles } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const HanzoCodeFrontier = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)]">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <Box className="max-w-7xl mx-auto">
+        <Box className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -17,33 +18,33 @@ const HanzoCodeFrontier = () => {
             transition={{ duration: 0.5 }}
             className="bg-gradient-to-br from-white/20 via-white/10 to-white/15 rounded-xl overflow-hidden border border-border"
           >
-            <div className="p-8 flex flex-col items-center justify-center h-full min-h-80">
+            <Box className="p-8 flex flex-col items-center justify-center h-full min-h-80">
               <Brain className="h-16 w-16 text-foreground mb-6" />
-              <div className="text-3xl font-bold text-center mb-4">
+              <Box className="text-3xl font-bold text-center mb-4">
                 Frontier Intelligence
-              </div>
-              <div className="text-foreground/80 text-center">
+              </Box>
+              <Box className="text-foreground/80 text-center">
                 Custom-trained models specifically optimized for software development
-              </div>
-              <div className="grid grid-cols-2 gap-4 mt-8 w-full">
-                <div className="bg-[var(--black)]/30 rounded-lg p-4 flex items-center">
+              </Box>
+              <Box className="grid grid-cols-2 gap-4 mt-8 w-full">
+                <Box className="bg-[var(--black)]/30 rounded-lg p-4 flex items-center">
                   <Cpu className="h-5 w-5 text-foreground mr-3" />
                   <span className="text-sm">Specialized Code Models</span>
-                </div>
-                <div className="bg-[var(--black)]/30 rounded-lg p-4 flex items-center">
+                </Box>
+                <Box className="bg-[var(--black)]/30 rounded-lg p-4 flex items-center">
                   <FlaskConical className="h-5 w-5 text-foreground mr-3" />
                   <span className="text-sm">Research-Grade AI</span>
-                </div>
-                <div className="bg-[var(--black)]/30 rounded-lg p-4 flex items-center">
+                </Box>
+                <Box className="bg-[var(--black)]/30 rounded-lg p-4 flex items-center">
                   <Sparkles className="h-5 w-5 text-foreground mr-3" />
                   <span className="text-sm">Fine-tuned Reasoning</span>
-                </div>
-                <div className="bg-[var(--black)]/30 rounded-lg p-4 flex items-center">
+                </Box>
+                <Box className="bg-[var(--black)]/30 rounded-lg p-4 flex items-center">
                   <Brain className="h-5 w-5 text-foreground mr-3" />
                   <span className="text-sm">Continuous Learning</span>
-                </div>
-              </div>
-            </div>
+                </Box>
+              </Box>
+            </Box>
           </motion.div>
           
           <motion.div
@@ -87,8 +88,8 @@ const HanzoCodeFrontier = () => {
               </div>
             </div>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

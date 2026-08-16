@@ -5,6 +5,7 @@ import React, { useRef } from "react";
 import { motion } from "@/components/motion";
 import { useScroll, useTransform } from "framer-motion";
 import { ShoppingCart, DollarSign, CreditCard, Zap } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const CommerceAnalytics = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -22,10 +23,10 @@ const CommerceAnalytics = () => {
       className="py-32 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden"
     >
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10 opacity-50"></div>
+      <Box className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10 opacity-50"></Box>
       
       {/* Content */}
-      <div className="max-w-7xl mx-auto relative z-10">
+      <Box className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +40,7 @@ const CommerceAnalytics = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <Box className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div className="space-y-12">
             {[
               {
@@ -66,9 +67,9 @@ const CommerceAnalytics = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="flex"
               >
-                <div className="mr-4 p-3 rounded-xl bg-gradient-to-br from-white/20 to-white/10 border border-border text-foreground">
+                <Box className="mr-4 p-3 rounded-xl bg-gradient-to-br from-white/20 to-white/10 border border-border text-foreground">
                   {feature.icon}
-                </div>
+                </Box>
                 <div>
                   <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
                   <p className="text-muted-foreground">{feature.description}</p>
@@ -81,19 +82,19 @@ const CommerceAnalytics = () => {
             style={{ scale, opacity }}
             className="rounded-xl overflow-hidden bg-gradient-to-br from-neutral-900 to-background border border-neutral-800 shadow-xl"
           >
-            <div className="p-4 border-b border-neutral-800">
-              <div className="flex items-center">
+            <Box className="p-4 border-b border-neutral-800">
+              <Box className="flex items-center">
                 <ShoppingCart className="h-5 w-5 text-foreground mr-2" />
                 <span className="text-[var(--white)] font-medium">Commerce Dashboard</span>
-              </div>
-            </div>
+              </Box>
+            </Box>
             
-            <div className="p-6">
-              <div className="mb-6">
+            <Box className="p-6">
+              <Box className="mb-6">
                 <h4 className="text-lg font-medium mb-4">Sales Performance</h4>
-                <div className="h-40 bg-neutral-800/50 rounded-lg relative overflow-hidden">
+                <Box className="h-40 bg-neutral-800/50 rounded-lg relative overflow-hidden">
                   {/* Bar chart */}
-                  <div className="absolute inset-0 flex items-end justify-around px-4 pb-4">
+                  <Box className="absolute inset-0 flex items-end justify-around px-4 pb-4">
                     {[65, 80, 55, 90, 70, 85, 60].map((height, i) => (
                       <motion.div
                         key={i}
@@ -104,34 +105,34 @@ const CommerceAnalytics = () => {
                         transition={{ duration: 0.5, delay: i * 0.1 }}
                       ></motion.div>
                     ))}
-                  </div>
-                </div>
-              </div>
+                  </Box>
+                </Box>
+              </Box>
               
-              <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="bg-neutral-800/30 p-4 rounded-lg">
-                  <div className="text-sm text-muted-foreground">Conversion Rate</div>
-                  <div className="text-2xl font-bold mt-2">4.78%</div>
-                  <div className="text-foreground/70 text-sm flex items-center mt-1">
+              <Box className="grid grid-cols-2 gap-4 mb-6">
+                <Box className="bg-neutral-800/30 p-4 rounded-lg">
+                  <Box className="text-sm text-muted-foreground">Conversion Rate</Box>
+                  <Box className="text-2xl font-bold mt-2">4.78%</Box>
+                  <Box className="text-foreground/70 text-sm flex items-center mt-1">
                     <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
                     </svg>
                     +0.6%
-                  </div>
-                </div>
-                <div className="bg-neutral-800/30 p-4 rounded-lg">
-                  <div className="text-sm text-muted-foreground">Avg. Order Value</div>
-                  <div className="text-2xl font-bold mt-2">$87.32</div>
-                  <div className="text-foreground/70 text-sm flex items-center mt-1">
+                  </Box>
+                </Box>
+                <Box className="bg-neutral-800/30 p-4 rounded-lg">
+                  <Box className="text-sm text-muted-foreground">Avg. Order Value</Box>
+                  <Box className="text-2xl font-bold mt-2">$87.32</Box>
+                  <Box className="text-foreground/70 text-sm flex items-center mt-1">
                     <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
                     </svg>
                     +2.4%
-                  </div>
-                </div>
-              </div>
+                  </Box>
+                </Box>
+              </Box>
               
-              <div className="border-t border-neutral-800 pt-4">
+              <Box className="border-t border-neutral-800 pt-4">
                 <h4 className="text-lg font-medium mb-4">Product Recommendations</h4>
                 <div className="space-y-3">
                   {[
@@ -139,10 +140,10 @@ const CommerceAnalytics = () => {
                     { name: "Wireless Keyboard", score: 85 },
                     { name: "Smart Watch", score: 79 }
                   ].map((product, i) => (
-                    <div key={i} className="flex items-center justify-between">
+                    <Box key={i} className="flex items-center justify-between">
                       <span className="text-foreground/80">{product.name}</span>
-                      <div className="flex items-center">
-                        <div className="w-24 h-2 bg-neutral-800 rounded-full mr-2 overflow-hidden">
+                      <Box className="flex items-center">
+                        <Box className="w-24 h-2 bg-neutral-800 rounded-full mr-2 overflow-hidden">
                           <motion.div
                             className="h-full bg-primary"
                             initial={{ width: 0 }}
@@ -150,17 +151,17 @@ const CommerceAnalytics = () => {
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.3 + i * 0.1 }}
                           ></motion.div>
-                        </div>
+                        </Box>
                         <span className="text-sm text-foreground">{product.score}%</span>
-                      </div>
-                    </div>
+                      </Box>
+                    </Box>
                   ))}
                 </div>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

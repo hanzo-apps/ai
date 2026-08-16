@@ -25,6 +25,7 @@ import {
   Layers,
   Sparkles
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const infrastructureCategories = [
   {
@@ -110,12 +111,12 @@ const whiteLabelProducts = [
 
 const DigitalAssets = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
 
       {/* Hero */}
       <section className="pt-24 pb-16 px-4 md:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -132,9 +133,9 @@ const DigitalAssets = () => {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <Box className="max-w-5xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -189,7 +190,7 @@ const DigitalAssets = () => {
               Talk to Sales
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Infrastructure Categories */}
@@ -198,7 +199,7 @@ const DigitalAssets = () => {
           key={category.title}
           className={`py-20 px-4 md:px-8 ${categoryIndex % 2 === 1 ? "bg-background" : ""}`}
         >
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -209,7 +210,7 @@ const DigitalAssets = () => {
               <p className="text-xl text-muted-foreground">{category.subtitle}</p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Box className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {category.products.map((product, index) => {
                 const Icon = product.icon;
                 return (
@@ -224,9 +225,9 @@ const DigitalAssets = () => {
                       href={product.href || "#"}
                       className="block bg-secondary/50 border border-border rounded-xl p-5 hover:border-white/30 transition-colors group h-full"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                      <Box className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
                         <Icon className="w-5 h-5 text-foreground" />
-                      </div>
+                      </Box>
                       <h3 className="font-semibold text-foreground mb-1 group-hover:text-foreground transition-colors">
                         {product.name}
                       </h3>
@@ -235,24 +236,24 @@ const DigitalAssets = () => {
                   </motion.div>
                 );
               })}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
       ))}
 
       {/* White Label Products */}
       <section className="py-20 px-4 md:px-8 border-t border-border">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-border mb-6">
+            <Box className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-border mb-6">
               <Sparkles className="w-4 h-4 text-foreground" />
               <span className="text-sm font-medium text-foreground/70">White-Label Solutions</span>
-            </div>
+            </Box>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
               Launch Your Own Products
             </h2>
@@ -262,7 +263,7 @@ const DigitalAssets = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {whiteLabelProducts.map((product, index) => {
               const Icon = product.icon;
               return (
@@ -274,9 +275,9 @@ const DigitalAssets = () => {
                   transition={{ delay: index * 0.05 }}
                   className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-white/30 transition-colors"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center mb-4">
+                  <Box className="w-12 h-12 rounded-xl bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-foreground" />
-                  </div>
+                  </Box>
                   <h3 className="text-xl font-semibold text-foreground mb-2">{product.name}</h3>
                   <p className="text-muted-foreground text-sm mb-4">{product.description}</p>
                   <ul className="space-y-1">
@@ -290,7 +291,7 @@ const DigitalAssets = () => {
                 </motion.div>
               );
             })}
-          </div>
+          </Box>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -308,12 +309,12 @@ const DigitalAssets = () => {
               Contact sales for white-label pricing <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -327,7 +328,7 @@ const DigitalAssets = () => {
               From simple payment integration to launching your own chain—we scale with you.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
+            <Box className="flex flex-wrap justify-center gap-4">
               <a
                 href="https://console.hanzo.ai"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-full transition-colors"
@@ -341,13 +342,13 @@ const DigitalAssets = () => {
               >
                 Read Documentation
               </a>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       
-    </div>
+    </Box>
   );
 };
 

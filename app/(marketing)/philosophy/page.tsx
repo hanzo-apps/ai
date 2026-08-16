@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import ZenBackground from "@/components/zen/ZenBackground";
 import HexagramExplorer from "@/components/zen/HexagramExplorer";
+import { Box } from '@hanzo/ui'
 
 export const metadata: Metadata = {
   title: "The Zen of Hanzo — 64 patterns for intelligent systems",
@@ -89,13 +90,13 @@ export default function PhilosophyPage() {
 
       {/* Hero */}
       <section className="relative overflow-hidden px-4 pb-16 pt-28 md:px-8">
-        <div className="pointer-events-none absolute inset-0 -z-0 overflow-hidden">
+        <Box className="pointer-events-none absolute inset-0 -z-0 overflow-hidden">
           <div
             className="absolute -top-40 left-1/2 h-[680px] w-[680px] -translate-x-1/2 rounded-full opacity-[0.10]"
             style={{ background: "radial-gradient(circle, var(--primary) 0%, transparent 70%)", filter: "blur(120px)" }}
           />
-        </div>
-        <div className="relative z-10 mx-auto max-w-3xl text-center">
+        </Box>
+        <Box className="relative z-10 mx-auto max-w-3xl text-center">
           <h1 className="text-4xl font-medium leading-[1.05] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             The Zen of Hanzo
           </h1>
@@ -114,20 +115,20 @@ export default function PhilosophyPage() {
             </p>
           </div>
 
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <Box className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <a href="#patterns" className={btnPrimary}>
               Explore the 64 patterns <ArrowRight className="h-4 w-4" />
             </a>
             <a href="https://cloud.hanzo.ai" target="_blank" rel="noopener noreferrer" className={btnSecondary}>
               Build with Hanzo
             </a>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Intelligence is always changing */}
       <section className="px-4 py-20 md:px-8">
-        <div className="mx-auto max-w-3xl">
+        <Box className="mx-auto max-w-3xl">
           <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground/50">The premise</p>
           <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
             Intelligence is always changing
@@ -144,13 +145,13 @@ export default function PhilosophyPage() {
             </p>
             <p className="text-foreground">That is the Zen of Hanzo.</p>
           </div>
-        </div>
+        </Box>
       </section>
 
       {/* Five traditions */}
       <section className="border-t border-border/60 px-4 py-20 md:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="max-w-2xl">
+        <Box className="mx-auto max-w-6xl">
+          <Box className="max-w-2xl">
             <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground/50">Five traditions</p>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
               Ancient patterns, modern engineering
@@ -158,28 +159,28 @@ export default function PhilosophyPage() {
             <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
               Hanzo brings together five complementary traditions.
             </p>
-          </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          </Box>
+          <Box className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {TRADITIONS.map((t) => (
-              <div key={t.name} className="rounded-xl border border-border bg-secondary/20 p-6">
+              <Box key={t.name} className="rounded-xl border border-border bg-secondary/20 p-6">
                 <h3 className="text-base font-semibold text-foreground">{t.name}</h3>
                 <p className="mt-1 text-sm font-medium text-foreground/70">{t.lead}</p>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{t.body}</p>
-              </div>
+              </Box>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Synthesis */}
       <section className="border-t border-border/60 px-4 py-20 md:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="max-w-2xl">
+        <Box className="mx-auto max-w-4xl">
+          <Box className="max-w-2xl">
             <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground/50">The synthesis</p>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
               Five operating laws
             </h2>
-          </div>
+          </Box>
           <ol className="mt-8 space-y-px overflow-hidden rounded-xl border border-border">
             {LAWS.map((l, i) => (
               <li key={l.lead} className="flex gap-5 bg-secondary/20 p-6">
@@ -191,13 +192,13 @@ export default function PhilosophyPage() {
               </li>
             ))}
           </ol>
-        </div>
+        </Box>
       </section>
 
       {/* The 64 patterns */}
       <section id="patterns" className="scroll-mt-20 border-t border-border/60 px-4 py-20 md:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-2xl">
+        <Box className="mx-auto max-w-7xl">
+          <Box className="max-w-2xl">
             <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground/50">The 64 patterns</p>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
               Every hexagram is active
@@ -207,60 +208,60 @@ export default function PhilosophyPage() {
               technological ecosystem. The classical title names the condition. The Hanzo principle defines how we
               respond.
             </p>
-          </div>
-          <div className="mt-10">
+          </Box>
+          <Box className="mt-10">
             <HexagramExplorer />
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* How we build */}
       <section className="border-t border-border/60 px-4 py-20 md:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="max-w-2xl">
+        <Box className="mx-auto max-w-6xl">
+          <Box className="max-w-2xl">
             <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground/50">The method</p>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">How we build</h2>
-          </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          </Box>
+          <Box className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {METHOD.map((m, i) => (
-              <div key={m.step} className="rounded-xl border border-border bg-secondary/20 p-5">
+              <Box key={m.step} className="rounded-xl border border-border bg-secondary/20 p-5">
                 <span className="font-mono text-xs text-muted-foreground/40">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-2 text-base font-semibold text-foreground">{m.step}</h3>
                 <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
-              </div>
+              </Box>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Products */}
       <section className="border-t border-border/60 px-4 py-20 md:px-8">
-        <div className="mx-auto max-w-6xl">
-          <div className="max-w-2xl">
+        <Box className="mx-auto max-w-6xl">
+          <Box className="max-w-2xl">
             <p className="text-xs font-mono uppercase tracking-widest text-muted-foreground/50">Across the stack</p>
             <h2 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">One philosophy</h2>
-          </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          </Box>
+          <Box className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {PRODUCTS.map((p) => (
               <Link
                 key={p.name}
                 href={p.href}
                 className="group rounded-xl border border-border bg-secondary/20 p-6 transition-colors hover:border-white/20 hover:bg-secondary/40"
               >
-                <div className="flex items-center justify-between">
+                <Box className="flex items-center justify-between">
                   <h3 className="text-base font-semibold text-foreground">{p.name}</h3>
                   <ArrowRight className="h-4 w-4 text-muted-foreground/40 transition-transform group-hover:translate-x-0.5 group-hover:text-foreground" />
-                </div>
+                </Box>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
               </Link>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Closing */}
       <section className="border-t border-border/60 px-4 py-24 md:px-8">
-        <div className="mx-auto max-w-3xl">
+        <Box className="mx-auto max-w-3xl">
           <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
             Build systems that can change
           </h2>
@@ -294,7 +295,7 @@ export default function PhilosophyPage() {
             </p>
           </blockquote>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <Box className="mt-10 flex flex-wrap gap-3">
             <Link href="/" className={btnPrimary}>
               Explore Hanzo <ArrowRight className="h-4 w-4" />
             </Link>
@@ -304,8 +305,8 @@ export default function PhilosophyPage() {
             <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className={btnSecondary}>
               View the source
             </a>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
     </>
   );

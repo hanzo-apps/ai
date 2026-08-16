@@ -5,6 +5,7 @@ import { motion } from "@/components/motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CopyButton } from "@hanzo/ui/product";
+import { Box } from '@hanzo/ui'
 
 // The one CLI proof-point shown inside the product preview. One demo, no
 // rotation, no step-typing — the same install line the copy button yields.
@@ -80,10 +81,10 @@ const HeroSection = () => {
   return (
     <section className="pt-20 pb-8 px-4 md:px-8 lg:px-12">
       {/* Main Hero Container */}
-      <div className="relative mx-auto w-full max-w-[1400px] min-h-[640px] rounded-2xl border border-border overflow-hidden bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
+      <Box className="relative mx-auto w-full max-w-[1400px] min-h-[640px] rounded-2xl border border-border overflow-hidden bg-gradient-to-br from-neutral-950 via-neutral-900 to-neutral-950">
 
         {/* Background gradients — slow, continuous drift (restores the ambient motion). */}
-        <div className="absolute inset-0 overflow-hidden z-0">
+        <Box className="absolute inset-0 overflow-hidden z-0">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: mounted ? 0.20 : 0, x: [0, 40, 0], y: [0, -30, 0] }}
@@ -114,7 +115,7 @@ const HeroSection = () => {
               filter: "blur(100px)",
             }}
           />
-        </div>
+        </Box>
 
         {/* Grid pattern */}
         <div
@@ -127,7 +128,7 @@ const HeroSection = () => {
         />
 
         {/* Content */}
-        <div className="relative z-10 h-full px-4 sm:px-6 md:px-10 lg:px-12 py-10 sm:py-12 lg:py-16">
+        <Box className="relative z-10 h-full px-4 sm:px-6 md:px-10 lg:px-12 py-10 sm:py-12 lg:py-16">
           <div className="grid xl:grid-cols-[1.1fr_1fr] xl:gap-14 items-center min-w-0">
           {/*
             min-w-0 above is critical: without it, the grid track stretches
@@ -137,7 +138,7 @@ const HeroSection = () => {
           */}
 
             {/* Left: Copy */}
-            <div className="flex flex-col min-w-0">
+            <Box className="flex flex-col min-w-0">
               {/* Eyebrow — V8 badge, now a linked pill (adopts the reference's
                   linked-badge mechanic; V8 copy preserved verbatim). */}
               <motion.div
@@ -242,7 +243,7 @@ const HeroSection = () => {
                 />
                 <span className="font-medium text-foreground/90">&rsquo;17</span>
               </motion.a>
-            </div>
+            </Box>
 
             {/* Right: animated product preview — a browser window framing a
                 stylized console.hanzo.ai, floating gently. Replaces the bare
@@ -259,25 +260,25 @@ const HeroSection = () => {
                 className="rounded-xl border border-border bg-secondary/95 backdrop-blur-sm overflow-hidden shadow-2xl"
               >
                 {/* Browser chrome */}
-                <div className="flex items-center gap-2 px-4 py-2.5 border-b border-border bg-secondary">
-                  <div className="flex gap-1.5">
+                <Box className="flex items-center gap-2 px-4 py-2.5 border-b border-border bg-secondary">
+                  <Box className="flex gap-1.5">
                     {/* The only saturated colour on this hero. @hanzo/design owns
                         these three exactly (--chrome-dot-*), alpha included, so the
                         /70 modifier goes with the hex. */}
-                    <div className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-red)]" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-yellow)]" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-green)]" />
-                  </div>
-                  <div className="ml-2 flex-1 flex items-center justify-center">
+                    <Box className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-red)]" />
+                    <Box className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-yellow)]" />
+                    <Box className="w-2.5 h-2.5 rounded-full bg-[var(--chrome-dot-green)]" />
+                  </Box>
+                  <Box className="ml-2 flex-1 flex items-center justify-center">
                     <span className="text-[11px] text-muted-foreground font-mono px-3 py-1 rounded-md bg-background/60 border border-border/60">
                       console.hanzo.ai
                     </span>
-                  </div>
+                  </Box>
                   <CopyButton value={INSTALL_CMD} label="Copy install command" size={20} id="install-cli" />
-                </div>
+                </Box>
 
                 {/* Console body: sidebar + metric cards + activity + CLI strip */}
-                <div className="bg-background">
+                <Box className="bg-background">
                   {/* The 120px sidebar track and the sidebar itself have to appear at the SAME
                       breakpoint. The sidebar is `hidden sm:flex`, so below `sm` it left the grid
                       entirely while its track stayed — the console body auto-placed into the
@@ -287,7 +288,7 @@ const HeroSection = () => {
                       narrower than 690px and was silently cut off by the card's overflow-hidden. */}
                   <div className="grid grid-cols-1 sm:grid-cols-[120px_minmax(0,1fr)] min-h-[300px]">
                     {/* Sidebar */}
-                    <div className="border-r border-border/60 p-3 hidden sm:flex flex-col gap-1">
+                    <Box className="border-r border-border/60 p-3 hidden sm:flex flex-col gap-1">
                       {CONSOLE_NAV.map((n, i) => (
                         <motion.div
                           key={n}
@@ -299,11 +300,11 @@ const HeroSection = () => {
                           {n}
                         </motion.div>
                       ))}
-                    </div>
+                    </Box>
 
                     {/* Main */}
-                    <div className="p-4">
-                      <div className="grid grid-cols-3 gap-2.5 mb-4">
+                    <Box className="p-4">
+                      <Box className="grid grid-cols-3 gap-2.5 mb-4">
                         {CONSOLE_METRICS.map((m, i) => (
                           <motion.div
                             key={m.label}
@@ -312,16 +313,16 @@ const HeroSection = () => {
                             transition={{ duration: 0.5, delay: 0.6 + i * 0.1 }}
                             className="rounded-lg border border-border/60 bg-secondary/40 p-2.5"
                           >
-                            <div className="text-[10px] text-muted-foreground mb-1 truncate">{m.label}</div>
-                            <div className="text-lg font-semibold" style={{ color: m.accent }}>{m.value}</div>
+                            <Box className="text-[10px] text-muted-foreground mb-1 truncate">{m.label}</Box>
+                            <Box className="text-lg font-semibold" style={{ color: m.accent }}>{m.value}</Box>
                           </motion.div>
                         ))}
-                      </div>
+                      </Box>
 
                       {/* Animated activity bars */}
-                      <div className="rounded-lg border border-border/60 bg-secondary/40 p-3 mb-4">
-                        <div className="text-[10px] text-muted-foreground mb-2">Inference throughput</div>
-                        <div className="flex items-end gap-1 h-14">
+                      <Box className="rounded-lg border border-border/60 bg-secondary/40 p-3 mb-4">
+                        <Box className="text-[10px] text-muted-foreground mb-2">Inference throughput</Box>
+                        <Box className="flex items-end gap-1 h-14">
                           {[40, 65, 45, 80, 55, 90, 70, 95, 60, 85, 50, 75].map((h, i) => (
                             <motion.div
                               key={i}
@@ -332,17 +333,17 @@ const HeroSection = () => {
                               style={{ background: "linear-gradient(to top, var(--neutral-400), var(--pure-white))" }}
                             />
                           ))}
-                        </div>
-                      </div>
+                        </Box>
+                      </Box>
 
                       {/* CLI strip — the dev proof-point, kept compact */}
-                      <div className="rounded-lg border border-border/60 bg-black/60 px-3 py-2 font-mono text-[11px] text-foreground/85 overflow-x-auto whitespace-pre">
+                      <Box className="rounded-lg border border-border/60 bg-black/60 px-3 py-2 font-mono text-[11px] text-foreground/85 overflow-x-auto whitespace-pre">
                         <span className="text-white/70">{DEV_CMD}</span>
                         <span className="inline-block w-1.5 h-3.5 ml-1 align-middle bg-foreground/70 animate-pulse" />
-                      </div>
-                    </div>
+                      </Box>
+                    </Box>
                   </div>
-                </div>
+                </Box>
               </motion.div>
 
               <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
@@ -350,8 +351,8 @@ const HeroSection = () => {
               </p>
             </motion.div>
           </div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

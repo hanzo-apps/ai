@@ -4,6 +4,7 @@
 import React from "react";
 import { LucideIcon } from "lucide-react";
 import { motion } from "@/components/motion";
+import { Box } from '@hanzo/ui'
 interface FeatureCardProps {
   icon: LucideIcon;
   title: string;
@@ -35,12 +36,12 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       transition={{ duration: 0.5, delay: delay * 0.1 }}
       className={`${classes.bg} border ${classes.border} rounded-lg p-6 h-full`}
     >
-      <div className="flex items-center mb-4">
-        <div className="mr-3">
+      <Box className="flex items-center mb-4">
+        <Box className="mr-3">
           <Icon className={`h-6 w-6 ${classes.text}`} />
-        </div>
+        </Box>
         <h3 className="text-xl font-semibold text-[var(--white)]">{title}</h3>
-      </div>
+      </Box>
       <p className="text-foreground/80 mb-4">{description}</p>
       <ul className="space-y-2">
         {features.map((feature, index) => (

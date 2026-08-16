@@ -8,6 +8,7 @@ import {
   BarChart3, Lock, MessageSquare, Layers, Zap
 } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 const capabilities = [
   {
@@ -75,10 +76,10 @@ const capabilities = [
 const UnifiedCapabilities = () => {
   return (
     <section className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-white/10"></div>
+      <Box className="absolute inset-0 bg-gradient-to-b from-white/5 to-white/10"></Box>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+      <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <Box className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -94,9 +95,9 @@ const UnifiedCapabilities = () => {
               already knows who you are
             </p>
           </motion.div>
-        </div>
+        </Box>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {capabilities.map((capability, index) => (
             <motion.div
               key={index}
@@ -111,8 +112,8 @@ const UnifiedCapabilities = () => {
               <p className="text-foreground/80">{capability.description}</p>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

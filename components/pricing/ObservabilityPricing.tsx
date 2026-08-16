@@ -4,6 +4,7 @@ import React from "react"
 import { Button } from "@hanzo/ui"
 import { Check } from "lucide-react"
 import { useServiceCard, formatServicePrice, formatUsageRate } from "@/lib/plans"
+import { Box } from '@hanzo/ui'
 
 // Tiers and the overage rate come from the catalog (@hanzo/plans first paint,
 // GET /v1/pricing/services live) rather than two arrays here. A price only this
@@ -27,7 +28,7 @@ export default function ObservabilityPricing() {
     note: u?.note ?? "",
   };
   return (
-    <div className="mb-20">
+    <Box className="mb-20">
       <h2 className="text-3xl font-bold mb-2">Hanzo Console</h2>
       <p className="text-muted-foreground text-lg mb-8">
         Observability for AI applications. Traces, evals, cost tracking, and prompt management
@@ -35,7 +36,7 @@ export default function ObservabilityPricing() {
       </p>
 
       {/* Tier cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         {tiers.map((tier) => (
           <div
             key={tier.name}
@@ -53,10 +54,10 @@ export default function ObservabilityPricing() {
             <h3 className="text-xl font-semibold mb-2">{tier.name}</h3>
             <p className="text-muted-foreground text-sm mb-4">{tier.description}</p>
 
-            <div className="mb-6">
+            <Box className="mb-6">
               <span className="text-3xl font-bold">{tier.price}</span>
               <span className="text-muted-foreground">{tier.period}</span>
-            </div>
+            </Box>
 
             <ul className="space-y-3 mb-6 flex-1">
               {tier.features.map((feature) => (
@@ -85,21 +86,21 @@ export default function ObservabilityPricing() {
             </Button>
           </div>
         ))}
-      </div>
+      </Box>
 
       {/* Overage */}
-      <div className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50 inline-block mb-8">
+      <Box className="bg-neutral-900/30 rounded-xl p-6 border border-neutral-800/50 inline-block mb-8">
         <h3 className="text-lg font-semibold mb-2">Overage pricing</h3>
-        <div className="text-2xl font-bold mb-1">
+        <Box className="text-2xl font-bold mb-1">
           {overage.rate}<span className="text-base font-normal text-muted-foreground">{overage.unit}</span>
-        </div>
+        </Box>
         <p className="text-muted-foreground text-sm">{overage.note}</p>
-      </div>
+      </Box>
 
       {/* Included */}
-      <div className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800/50">
+      <Box className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800/50">
         <h3 className="text-xl font-semibold mb-4">Included with every plan</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
+        <Box className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
           <div>OpenTelemetry native</div>
           <div>OpenAI SDK integration</div>
           <div>LangChain integration</div>
@@ -108,8 +109,8 @@ export default function ObservabilityPricing() {
           <div>Model cost tracking</div>
           <div>Public API</div>
           <div>Self-hosted option</div>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   )
 }

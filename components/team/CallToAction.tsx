@@ -2,15 +2,16 @@
 
 import { Button } from "@hanzo/ui";
 import { ArrowRight } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const CallToAction = () => {
   return (
-    <div className="mt-16 text-center">
+    <Box className="mt-16 text-center">
       <h2 className="text-3xl font-bold text-foreground mb-4">Ready to Get Started?</h2>
       <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
         Sign in to your workspace, or read how it works first.
       </p>
-      <div className="flex flex-wrap justify-center gap-4">
+      <Box className="flex flex-wrap justify-center gap-4">
         <Button
           size="lg"
           className="text-primary-foreground"
@@ -28,8 +29,8 @@ const CallToAction = () => {
           Read the docs
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

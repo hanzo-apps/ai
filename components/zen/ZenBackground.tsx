@@ -1,9 +1,10 @@
 
 import React from "react";
+import { Box } from '@hanzo/ui'
 
 const ZenBackground: React.FC = () => {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
+    <Box className="fixed inset-0 -z-10 overflow-hidden">
       {/* Subtle dot pattern */}
       <div 
         className="absolute inset-0 opacity-[0.02]"
@@ -16,11 +17,11 @@ const ZenBackground: React.FC = () => {
       />
       
       {/* Ultra-subtle gradient overlays */}
-      <div className="absolute top-0 left-0 right-0 h-[30vh] bg-gradient-to-b from-neutral-950/70 to-transparent" />
-      <div className="absolute left-0 bottom-0 right-0 h-[30vh] bg-gradient-to-t from-neutral-950/70 to-transparent" />
+      <Box className="absolute top-0 left-0 right-0 h-[30vh] bg-gradient-to-b from-neutral-950/70 to-transparent" />
+      <Box className="absolute left-0 bottom-0 right-0 h-[30vh] bg-gradient-to-t from-neutral-950/70 to-transparent" />
       
       {/* Depth radial gradient */}
-      <div 
+      <Box 
         className="absolute inset-0"
         style={{
           background: 'radial-gradient(circle at 50% 30%, rgba(15,15,15,0), rgba(0,0,0,1))'
@@ -38,13 +39,13 @@ const ZenBackground: React.FC = () => {
       />
       
       {/* Vignette effect */}
-      <div 
+      <Box 
         className="absolute inset-0 pointer-events-none"
         style={{
           boxShadow: 'inset 0 0 180px rgba(0,0,0,0.9)'
         }}
       />
-    </div>
+    </Box>
   );
 };
 

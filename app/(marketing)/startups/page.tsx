@@ -21,6 +21,7 @@ import {
   Send,
 } from 'lucide-react'
 import { Button } from '@hanzo/ui'
+import { Box } from '@hanzo/ui'
 
 // Canonical cloud intake endpoint (public startup-program application).
 const APPLY_ENDPOINT =
@@ -178,11 +179,11 @@ export default function StartupsPage() {
     'flex items-center gap-2 text-sm font-medium text-foreground mb-2'
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       <main>
         {/* Hero */}
         <section className="relative pt-28 pb-10 px-4 md:px-8 lg:px-12">
-          <div className="max-w-3xl mx-auto text-center">
+          <Box className="max-w-3xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -236,47 +237,47 @@ export default function StartupsPage() {
                 <a href="https://console.hanzo.ai">Start building free</a>
               </Button>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Pillars */}
         <section className="pb-8 px-4 md:px-8 lg:px-12">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="rounded-xl border border-border bg-secondary/20 p-6">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+          <Box className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Box className="rounded-xl border border-border bg-secondary/20 p-6">
+              <Box className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Coins className="w-5 h-5 text-foreground/80" />
-              </div>
+              </Box>
               <h3 className="text-lg font-semibold mb-2">Start in minutes</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Creating an account is free. Add funds when you are ready and pay
                 only for what you use &mdash; no subscription, no minimums.
               </p>
-            </div>
-            <div className="rounded-xl border border-border bg-secondary/20 p-6">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+            </Box>
+            <Box className="rounded-xl border border-border bg-secondary/20 p-6">
+              <Box className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Cpu className="w-5 h-5 text-foreground/80" />
-              </div>
+              </Box>
               <h3 className="text-lg font-semibold mb-2">Bring your own compute</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Connect your own GPUs and machines. Run cheap on hardware you
                 already have &mdash; we meter the platform, not your iron.
               </p>
-            </div>
-            <div className="rounded-xl border border-border bg-secondary/20 p-6">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+            </Box>
+            <Box className="rounded-xl border border-border bg-secondary/20 p-6">
+              <Box className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <Gift className="w-5 h-5 text-foreground/80" />
-              </div>
+              </Box>
               <h3 className="text-lg font-semibold mb-2">Up to $150,000 in credits</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 For venture-backed startups. Application required, and tier-1 VC
                 backing is required for the credits program.
               </p>
-            </div>
-          </div>
+            </Box>
+          </Box>
 
           {/* Techstars note */}
-          <div className="max-w-5xl mx-auto mt-4">
-            <div className="rounded-xl border border-border bg-primary/5 p-5 flex items-start gap-3">
+          <Box className="max-w-5xl mx-auto mt-4">
+            <Box className="rounded-xl border border-border bg-primary/5 p-5 flex items-start gap-3">
               <Rocket className="w-4 h-4 mt-0.5 text-foreground/70 flex-shrink-0" />
               <p className="text-sm text-muted-foreground leading-relaxed">
                 <span className="text-foreground font-medium">Techstars founders:</span>{' '}
@@ -284,14 +285,14 @@ export default function StartupsPage() {
                 portfolio brand &mdash; mention your batch when you apply and we
                 will match it.
               </p>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Application form */}
         <section id="apply" className="py-14 px-4 md:px-8 lg:px-12 scroll-mt-24">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-10">
+          <Box className="max-w-2xl mx-auto">
+            <Box className="text-center mb-10">
               <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight mb-3">
                 Apply to the program
               </h2>
@@ -299,7 +300,7 @@ export default function StartupsPage() {
                 We review applications weekly. The more you share, the faster we
                 can match you to the right tier.
               </p>
-            </div>
+            </Box>
 
             {submitted ? (
               <motion.div
@@ -308,9 +309,9 @@ export default function StartupsPage() {
                 transition={{ duration: 0.4 }}
                 className="p-10 rounded-xl border border-border bg-primary/5 text-center"
               >
-                <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+                <Box className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
                   <CheckCircle2 className="w-7 h-7 text-foreground/70" />
-                </div>
+                </Box>
                 <h2 className="text-2xl font-semibold text-foreground mb-3">
                   Application received
                 </h2>
@@ -322,7 +323,7 @@ export default function StartupsPage() {
                   Want to start building today? Create an account and pay only
                   for what you use &mdash; no subscription required.
                 </p>
-                <div className="flex flex-wrap justify-center gap-4">
+                <Box className="flex flex-wrap justify-center gap-4">
                   <Button asChild className="bg-primary text-primary-foreground hover:bg-accent">
                     <a href="https://console.hanzo.ai">
                       Start free
@@ -336,7 +337,7 @@ export default function StartupsPage() {
                   >
                     <Link href="/">Back to Home</Link>
                   </Button>
-                </div>
+                </Box>
               </motion.div>
             ) : (
               <motion.form
@@ -347,7 +348,7 @@ export default function StartupsPage() {
                 className="space-y-6"
               >
                 {/* Company + website */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Box className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="company" className={labelClass}>
                       <Building2 className="w-3.5 h-3.5 text-muted-foreground" />
@@ -379,10 +380,10 @@ export default function StartupsPage() {
                       className={inputClass}
                     />
                   </div>
-                </div>
+                </Box>
 
                 {/* Contact name + email */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Box className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="contactName" className={labelClass}>
                       <User className="w-3.5 h-3.5 text-muted-foreground" />
@@ -415,10 +416,10 @@ export default function StartupsPage() {
                       className={inputClass}
                     />
                   </div>
-                </div>
+                </Box>
 
                 {/* Role + stage */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Box className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="role" className={labelClass}>
                       <Briefcase className="w-3.5 h-3.5 text-muted-foreground" />
@@ -457,7 +458,7 @@ export default function StartupsPage() {
                       ))}
                     </select>
                   </div>
-                </div>
+                </Box>
 
                 {/* Investors free text */}
                 <div>
@@ -486,7 +487,7 @@ export default function StartupsPage() {
                       (tier-1 backing unlocks the credits program)
                     </span>
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <Box className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {TIER1_FUNDS.map((fund) => {
                       const selected = formData.tier1Investors.includes(fund)
                       return (
@@ -515,11 +516,11 @@ export default function StartupsPage() {
                         </button>
                       )
                     })}
-                  </div>
+                  </Box>
                 </div>
 
                 {/* Raised + team size */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Box className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="amountRaised" className={labelClass}>
                       <Banknote className="w-3.5 h-3.5 text-muted-foreground" />
@@ -551,7 +552,7 @@ export default function StartupsPage() {
                       className={inputClass}
                     />
                   </div>
-                </div>
+                </Box>
 
                 {/* Building */}
                 <div>
@@ -577,7 +578,7 @@ export default function StartupsPage() {
                     <Cpu className="w-3.5 h-3.5 text-muted-foreground" />
                     How will you use Hanzo?
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <Box className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {USE_CASES.map((uc) => {
                       const selected = formData.useCases.includes(uc.id)
                       return (
@@ -609,7 +610,7 @@ export default function StartupsPage() {
                         </button>
                       )
                     })}
-                  </div>
+                  </Box>
                 </div>
 
                 {/* Infra spend */}
@@ -682,7 +683,7 @@ export default function StartupsPage() {
                 </div>
 
                 {/* Techstars + heard */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Box className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="techstarsBatch" className={labelClass}>
                       <Rocket className="w-3.5 h-3.5 text-muted-foreground" />
@@ -719,10 +720,10 @@ export default function StartupsPage() {
                       ))}
                     </select>
                   </div>
-                </div>
+                </Box>
 
                 {/* Honeypot: visually hidden, off-screen, not tab-reachable. */}
-                <div aria-hidden="true" className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden">
+                <Box aria-hidden="true" className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden">
                   <label htmlFor="hp">Do not fill this in</label>
                   <input
                     type="text"
@@ -733,17 +734,17 @@ export default function StartupsPage() {
                     tabIndex={-1}
                     autoComplete="off"
                   />
-                </div>
+                </Box>
 
                 {/* Error */}
                 {error && (
-                  <div className="p-4 rounded-lg border border-red-500/30 bg-red-500/10 text-sm text-red-300">
+                  <Box className="p-4 rounded-lg border border-red-500/30 bg-red-500/10 text-sm text-red-300">
                     {error}
-                  </div>
+                  </Box>
                 )}
 
                 {/* Submit */}
-                <div className="pt-2">
+                <Box className="pt-2">
                   <Button
                     type="submit"
                     disabled={isSubmitting}
@@ -758,7 +759,7 @@ export default function StartupsPage() {
                       </>
                     )}
                   </Button>
-                </div>
+                </Box>
 
                 <p className="text-xs text-muted-foreground/60">
                   By submitting, you agree to Hanzo&rsquo;s{' '}
@@ -769,12 +770,12 @@ export default function StartupsPage() {
                 </p>
               </motion.form>
             )}
-          </div>
+          </Box>
         </section>
 
         {/* Fallback CTA for everyone */}
         <section className="pb-24 px-4 md:px-8 lg:px-12">
-          <div className="max-w-3xl mx-auto rounded-2xl border border-border bg-secondary/20 p-8 sm:p-10 text-center">
+          <Box className="max-w-3xl mx-auto rounded-2xl border border-border bg-secondary/20 p-8 sm:p-10 text-center">
             <h2 className="text-2xl font-semibold tracking-tight mb-3">
               Not venture-backed yet?
             </h2>
@@ -788,9 +789,9 @@ export default function StartupsPage() {
                 <ArrowRight className="w-4 h-4 ml-2" />
               </a>
             </Button>
-          </div>
+          </Box>
         </section>
       </main>
-    </div>
+    </Box>
   )
 }

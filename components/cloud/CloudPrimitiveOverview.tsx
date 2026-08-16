@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight, BookOpen, Check, Github } from 'lucide-react'
 import { Mockup } from '@/components/product/Mockup'
 import { POSITIONING, type CloudCategory, type Primitive } from '@/lib/data/cloud-primitives'
+import { Box } from '@hanzo/ui'
 
 const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
   ga: 'Generally available',
@@ -33,7 +34,7 @@ export function CloudPrimitiveOverview({
   const Icon = primitive.icon
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       <section className="mx-auto max-w-5xl px-6 pt-28 pb-24">
         {/* Breadcrumb — reads like a cloud console path */}
         <nav className="mb-10 flex items-center gap-2 text-xs text-muted-foreground">
@@ -49,11 +50,11 @@ export function CloudPrimitiveOverview({
         </nav>
 
         {/* Hero */}
-        <div className="flex items-start gap-5">
-          <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-border bg-neutral-900">
+        <Box className="flex items-start gap-5">
+          <Box className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-border bg-neutral-900">
             <Icon className="h-7 w-7 text-foreground" />
-          </div>
-          <div className="min-w-0">
+          </Box>
+          <Box className="min-w-0">
             {primitive.status && (
               <span className="mb-3 inline-flex items-center rounded-full border border-border bg-secondary px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
                 {STATUS_LABEL[primitive.status]}
@@ -61,29 +62,29 @@ export function CloudPrimitiveOverview({
             )}
             <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{primitive.title}</h1>
             {primitive.tagline && <p className="mt-3 text-lg text-muted-foreground">{primitive.tagline}</p>}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
         {/* Open-source + on-chain chips */}
-        <div className="mt-6 flex flex-wrap items-center gap-2 text-xs">
+        <Box className="mt-6 flex flex-wrap items-center gap-2 text-xs">
           <span className="rounded-md border border-border px-2.5 py-1 text-muted-foreground">Open source</span>
           <span className="rounded-md border border-border px-2.5 py-1 text-muted-foreground">On-chain settlement</span>
-        </div>
+        </Box>
 
         {/* What the catalog states — the route that answers for this product,
             and the Google Cloud service it stands in for. */}
         <dl className="mt-8 grid gap-x-10 gap-y-3 text-sm sm:grid-cols-2">
           {primitive.api && (
-            <div className="flex gap-4">
+            <Box className="flex gap-4">
               <dt className="w-24 shrink-0 text-muted-foreground">API</dt>
               <dd className="min-w-0 font-mono text-foreground/80">{primitive.api}</dd>
-            </div>
+            </Box>
           )}
           {primitive.gcp && (
-            <div className="flex gap-4">
+            <Box className="flex gap-4">
               <dt className="w-24 shrink-0 text-muted-foreground">Google Cloud</dt>
               <dd className="min-w-0 text-foreground/80">{primitive.gcp}</dd>
-            </div>
+            </Box>
           )}
         </dl>
 
@@ -102,17 +103,17 @@ export function CloudPrimitiveOverview({
 
         {/* Features */}
         {primitive.features && primitive.features.length > 0 && (
-          <div className="mt-10 grid gap-3 sm:grid-cols-2">
+          <Box className="mt-10 grid gap-3 sm:grid-cols-2">
             {primitive.features.map((feature) => (
-              <div
+              <Box
                 key={feature}
                 className="flex items-start gap-3 rounded-xl border border-border bg-neutral-900/40 p-4"
               >
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-foreground" />
                 <span className="text-sm text-foreground/80">{feature}</span>
-              </div>
+              </Box>
             ))}
-          </div>
+          </Box>
         )}
 
         {/* Positioning line */}
@@ -130,7 +131,7 @@ export function CloudPrimitiveOverview({
             An anchor with the page's own tokens is what CloudLanding already
             uses for exactly this row, so the shape is the house one — and it
             drops a runtime from a page that only needed four links. */}
-        <div className="mt-6 flex flex-wrap gap-3">
+        <Box className="mt-6 flex flex-wrap gap-3">
           <Link
             href="/signup"
             className="inline-flex min-h-11 items-center rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground no-underline transition-opacity hover:opacity-90 hover:no-underline"
@@ -166,9 +167,9 @@ export function CloudPrimitiveOverview({
               Docs
             </a>
           )}
-        </div>
+        </Box>
       </section>
-    </div>
+    </Box>
   )
 }
 

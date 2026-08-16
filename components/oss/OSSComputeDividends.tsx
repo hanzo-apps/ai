@@ -13,6 +13,7 @@ import {
   ArrowRight,
   Coins,
 } from "lucide-react"
+import { Box } from '@hanzo/ui'
 
 interface OSSComputeDividendsProps {
   variant?: "full" | "banner"
@@ -42,7 +43,7 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
   if (variant === "banner") {
     return (
       <section className="py-10 px-4 md:px-8 border-t border-border">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -51,9 +52,9 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
             className="rounded-xl border border-primary/25 p-6 md:p-8"
             style={{ backgroundColor: "color-mix(in srgb, var(--primary) 5%, transparent)" }}
           >
-            <div className="flex flex-col md:flex-row md:items-center gap-6">
-              <div className="flex-1 min-w-0">
-                <div
+            <Box className="flex flex-col md:flex-row md:items-center gap-6">
+              <Box className="flex-1 min-w-0">
+                <Box
                   className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-3"
                   style={{
                     backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)",
@@ -62,7 +63,7 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
                 >
                   <Heart className="w-3.5 h-3.5" />
                   Open Source Compute Dividends
-                </div>
+                </Box>
                 <h3 className="text-xl md:text-2xl font-bold text-foreground mb-2">
                   Up to 5% of compute goes back to OSS authors
                 </h3>
@@ -70,7 +71,7 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
                   Every Hanzo deployment tracks software dependencies via SBOM. When your code powers compute on Hanzo,
                   the authors get paid — automatically.
                 </p>
-                <div className="flex flex-wrap gap-1.5 mt-3">
+                <Box className="flex flex-wrap gap-1.5 mt-3">
                   {PAYOUT_OPTIONS.map((opt) => (
                     <span
                       key={opt}
@@ -79,9 +80,9 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
                       {opt}
                     </span>
                   ))}
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row md:flex-col gap-3 md:min-w-[180px]">
+                </Box>
+              </Box>
+              <Box className="flex flex-col sm:flex-row md:flex-col gap-3 md:min-w-[180px]">
                 <a
                   href="https://console.hanzo.ai?ref=oss-dividends"
                   className="inline-flex items-center justify-center px-5 py-2.5 rounded-full font-medium text-sm transition-all hover:opacity-90 bg-primary text-primary-foreground whitespace-nowrap"
@@ -96,10 +97,10 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
                   How payouts work
                   <ArrowRight className="w-3.5 h-3.5 ml-2" />
                 </a>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
     )
   }
@@ -107,7 +108,7 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
   // full variant
   return (
     <section className="py-20 px-4 md:px-8 border-t border-border">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -116,7 +117,7 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
           transition={{ duration: 0.4 }}
           className="text-center mb-14"
         >
-          <div
+          <Box
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6"
             style={{
               backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)",
@@ -125,7 +126,7 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
           >
             <Heart className="w-3.5 h-3.5" />
             Open Source Compute Dividends
-          </div>
+          </Box>
 
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 tracking-tight">
             Up to 5% of compute goes back to the OSS authors
@@ -139,7 +140,7 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
         </motion.div>
 
         {/* 3 Steps */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">
+        <Box className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-12">
           {STEPS.map((step, i) => {
             const Icon = step.icon
             return (
@@ -154,18 +155,18 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
                 <span className="absolute top-4 right-4 text-xs font-mono text-muted-foreground/40">
                   0{i + 1}
                 </span>
-                <div
+                <Box
                   className="rounded-full p-2 w-fit mb-4"
                   style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
                 >
                   <Icon className="w-5 h-5" style={{ color: "var(--primary)" }} />
-                </div>
+                </Box>
                 <h3 className="font-semibold text-foreground text-sm mb-2">{step.title}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{step.body}</p>
               </motion.div>
             )
           })}
-        </div>
+        </Box>
 
         {/* Transparency callout */}
         <motion.div
@@ -176,13 +177,13 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
           className="rounded-xl border border-primary/30 p-6 mb-10"
           style={{ backgroundColor: "color-mix(in srgb, var(--primary) 6%, transparent)" }}
         >
-          <div className="flex items-start gap-3">
-            <div
+          <Box className="flex items-start gap-3">
+            <Box
               className="mt-0.5 flex-shrink-0 rounded-full p-1.5"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 20%, transparent)" }}
             >
               <Eye className="w-4 h-4" style={{ color: "var(--primary)" }} />
-            </div>
+            </Box>
             <div>
               <h4 className="font-semibold text-foreground text-sm mb-1">Fully transparent payouts</h4>
               <p className="text-xs text-muted-foreground leading-relaxed">
@@ -190,7 +191,7 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
                 customize their split &mdash; for example, 10% to founder, 5% to maintainers, 85% to all contributors.
               </p>
             </div>
-          </div>
+          </Box>
         </motion.div>
 
         {/* CTA buttons */}
@@ -236,7 +237,7 @@ export default function OSSComputeDividends({ variant = "full" }: OSSComputeDivi
             </span>
           ))}
         </motion.div>
-      </div>
+      </Box>
     </section>
   )
 }

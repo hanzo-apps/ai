@@ -2,6 +2,7 @@
 import React from "react";
 import { Button } from "@hanzo/ui";
 import { CostItem } from "./models/project";
+import { Box } from '@hanzo/ui'
 
 interface ProjectCostSectionProps {
   costs: CostItem[];
@@ -11,7 +12,7 @@ interface ProjectCostSectionProps {
 const ProjectCostSection = ({ costs, currentCost }: ProjectCostSectionProps) => {
   return (
     <div>
-      <div className="flex justify-between mb-4">
+      <Box className="flex justify-between mb-4">
         <h4 className="font-medium">Project Cost</h4>
         <Button 
           variant="ghost" 
@@ -20,24 +21,24 @@ const ProjectCostSection = ({ costs, currentCost }: ProjectCostSectionProps) => 
         >
           View Cost by Service
         </Button>
-      </div>
+      </Box>
       
       <div className="space-y-4">
         {costs.map((cost, index) => (
-          <div key={index} className="flex justify-between">
+          <Box key={index} className="flex justify-between">
             <div>
-              <div className="font-medium">{cost.name}</div>
-              <div className="text-xs text-muted-foreground">{cost.usage}</div>
-              <div className="text-xs text-muted-foreground">{cost.rate}</div>
+              <Box className="font-medium">{cost.name}</Box>
+              <Box className="text-xs text-muted-foreground">{cost.usage}</Box>
+              <Box className="text-xs text-muted-foreground">{cost.rate}</Box>
             </div>
-            <div className="font-medium">{cost.cost}</div>
-          </div>
+            <Box className="font-medium">{cost.cost}</Box>
+          </Box>
         ))}
         
-        <div className="pt-4 border-t border-neutral-800 flex justify-between">
-          <div className="text-sm">Metrics are shown as minutely accumulated values</div>
-          <div className="font-bold">{currentCost}</div>
-        </div>
+        <Box className="pt-4 border-t border-neutral-800 flex justify-between">
+          <Box className="text-sm">Metrics are shown as minutely accumulated values</Box>
+          <Box className="font-bold">{currentCost}</Box>
+        </Box>
       </div>
     </div>
   );

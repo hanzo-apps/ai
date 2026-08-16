@@ -4,6 +4,7 @@
 import React from "react";
 import { AlertTriangle, Eye, Zap } from "lucide-react";
 import AIFeatureCard from "./AIFeatureCard";
+import { Box } from '@hanzo/ui'
 
 const AIFeatureList = () => {
   const features = [
@@ -28,7 +29,7 @@ const AIFeatureList = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+    <Box className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
       {features.map((feature, index) => (
         <AIFeatureCard
           key={index}
@@ -39,7 +40,7 @@ const AIFeatureList = () => {
           index={index}
         />
       ))}
-    </div>
+    </Box>
   );
 };
 

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { allModels } from '@zenlm/models'
 import BenchmarkBrowser from '@/components/models/BenchmarkBrowser'
 import { browserGroups, MODELS, isOpenWeightVendor } from '@/lib/leaderboard'
+import { Box } from '@hanzo/ui'
 
 const TITLE = 'The Zen family — Hanzo AI'
 const DESCRIPTION =
@@ -43,23 +44,23 @@ const OPEN_COUNT = MODELS.filter((m) => isOpenWeightVendor(m.vendor)).length
 
 export default function ZenModelsPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-neutral-900 px-4 pb-16 pt-28 text-center">
-        <div
+        <Box
           className="pointer-events-none absolute left-1/2 top-0 z-0 h-[720px] w-[720px] -translate-x-1/2 rounded-full opacity-50"
           style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 68%)', filter: 'blur(100px)' }}
         />
-        <div className="relative z-10 mx-auto max-w-3xl">
+        <Box className="relative z-10 mx-auto max-w-3xl">
           <nav className="mb-6 flex items-center justify-center gap-2 text-sm text-neutral-500">
             <Link href="/models" className="hover:text-white">Models</Link>
             <span>/</span>
             <span className="text-neutral-300">Zen</span>
           </nav>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 text-xs text-neutral-300">
+          <Box className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 text-xs text-neutral-300">
             <span className="h-1.5 w-1.5 rounded-full bg-white" />
             Weights published · run them anywhere
-          </div>
+          </Box>
           <h1 className="mb-5 text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">
             <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">The Zen family</span>
           </h1>
@@ -70,38 +71,38 @@ export default function ZenModelsPage() {
             UPSTREAM-reported for the open ecosystem Zen builds on; only Enso is Hanzo-measured end-to-end.
 
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <Box className="flex flex-wrap justify-center gap-3">
             <Link href="/zen/models" className="rounded-full bg-white px-7 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90">Full Zen catalog</Link>
             <a href="https://console.hanzo.ai" className="rounded-full border border-neutral-700 px-7 py-3 text-sm font-medium text-white transition-colors hover:border-neutral-400">Get API key</a>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Generations */}
       <section className="px-4 py-16">
-        <div className="mx-auto max-w-5xl">
+        <Box className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold">Generations, and what each one is for</h2>
           <p className="mb-8 text-neutral-400">A generation is a training run, not a marketing tier: newer does not mean the older ones stop working, and a small model from an older generation is often the right call. The large ones are Zen MoDE — Mixture of Diverse Experts. Open any generation for specs and prices.</p>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          <Box className="grid grid-cols-2 gap-4 md:grid-cols-4">
             {GENS.map((g) => (
               <Link
                 key={g.id}
                 href="/zen/models"
                 className="flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900/50 p-5 transition-colors hover:border-neutral-600"
               >
-                <div className="text-lg font-semibold text-white">{g.label}</div>
-                <div className="mb-3 text-xs text-neutral-500">{g.desc}</div>
-                <div className="mt-auto font-mono text-2xl font-bold text-white">{g.models.length}</div>
-                <div className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">models</div>
+                <Box className="text-lg font-semibold text-white">{g.label}</Box>
+                <Box className="mb-3 text-xs text-neutral-500">{g.desc}</Box>
+                <Box className="mt-auto font-mono text-2xl font-bold text-white">{g.models.length}</Box>
+                <Box className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">models</Box>
               </Link>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Open-weight landscape — upstream reported */}
       <section className="border-t border-neutral-900 px-4 py-16">
-        <div className="mx-auto max-w-5xl">
+        <Box className="mx-auto max-w-5xl">
           <h2 className="mb-2 text-2xl font-bold">Where open weights stand</h2>
           <p className="mb-6 max-w-3xl text-neutral-400">
             {OPEN_COUNT} open-weight models across the field, by benchmark, so you can see what running your
@@ -110,13 +111,13 @@ export default function ZenModelsPage() {
             see which is which.
           </p>
           <BenchmarkBrowser groups={OPEN_GROUPS} defaultBench="gpqa_diamond" />
-        </div>
+        </Box>
       </section>
 
       {/* Honesty note + CTA */}
       <section className="border-t border-neutral-900 px-4 py-16">
-        <div className="mx-auto max-w-3xl">
-          <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6 text-sm leading-relaxed text-neutral-400">
+        <Box className="mx-auto max-w-3xl">
+          <Box className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6 text-sm leading-relaxed text-neutral-400">
             <p>
               <span className="font-semibold text-white">Why the two labels.</span> A score is only comparable
               to another score run the same way, and most published figures were not. So the table keeps the
@@ -124,13 +125,13 @@ export default function ZenModelsPage() {
               figure a vendor published says so too. Enso is the family we measure end to end on one common
               harness — see it on the Enso page. Everything else on this page is cited, not claimed.
             </p>
-          </div>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          </Box>
+          <Box className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href="/zen/models" className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-opacity hover:opacity-90">Full Zen catalog</Link>
             <Link href="/models/enso" className="rounded-full border border-neutral-700 px-6 py-3 text-sm font-medium text-white transition-colors hover:border-neutral-400">See Enso (measured)</Link>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
-    </div>
+    </Box>
   )
 }

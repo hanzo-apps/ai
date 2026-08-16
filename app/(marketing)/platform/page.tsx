@@ -15,10 +15,11 @@ import { motion } from "@/components/motion";
 import { Github, Cloud, Server, Lock, Code2, Network, Terminal, ArrowRight } from "lucide-react";
 
 import { ProductFooter } from "@/components/products/ProductFooter"
+import { Box } from '@hanzo/ui'
 const DeploymentOptions = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -34,7 +35,7 @@ const DeploymentOptions = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <Box className="grid md:grid-cols-3 gap-6">
           {/* Self-Hosted */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -43,12 +44,12 @@ const DeploymentOptions = () => {
             transition={{ delay: 0.1 }}
             className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-white/30 transition-colors"
           >
-            <div
+            <Box
               className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
             >
               <Server className="w-6 h-6" />
-            </div>
+            </Box>
             <h3 className="text-xl font-bold text-foreground mb-2">Self-Hosted</h3>
             <p className="text-muted-foreground text-sm mb-4">
               One command on a VPS you already pay for. Everything the managed one does, on hardware you can walk up to.
@@ -83,12 +84,12 @@ const DeploymentOptions = () => {
             transition={{ delay: 0.2 }}
             className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-white/30 transition-colors"
           >
-            <div
+            <Box
               className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
             >
               <Cloud className="w-6 h-6" />
-            </div>
+            </Box>
             <h3 className="text-xl font-bold text-foreground mb-2">Hanzo Cloud</h3>
             <p className="text-muted-foreground text-sm mb-4">
               The same platform, run for you. Sign in and deploy — there is no server to stand up first.
@@ -121,12 +122,12 @@ const DeploymentOptions = () => {
             transition={{ delay: 0.3 }}
             className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-white/30 transition-colors"
           >
-            <div
+            <Box
               className="w-12 h-12 rounded-lg flex items-center justify-center mb-4"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
             >
               <Network className="w-6 h-6" />
-            </div>
+            </Box>
             <h3 className="text-xl font-bold text-foreground mb-2">Hybrid</h3>
             <p className="text-muted-foreground text-sm mb-4">
               Run the control plane on your own server and let it deploy out to remote servers and clusters you already have.
@@ -150,8 +151,8 @@ const DeploymentOptions = () => {
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };
@@ -159,22 +160,22 @@ const DeploymentOptions = () => {
 const OpenSourceBenefits = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="bg-gradient-to-br from-neutral-900 to-neutral-800/50 rounded-xl p-8 border border-border"
         >
-          <div className="flex items-center gap-4 mb-8">
+          <Box className="flex items-center gap-4 mb-8">
             <Github className="w-8 h-8 text-foreground" />
             <div>
               <h3 className="text-2xl font-bold text-foreground">Open source, all of it</h3>
               <p className="text-muted-foreground">Apache-2.0. Forked from Dokploy, and it says so in the NOTICE.</p>
             </div>
-          </div>
+          </Box>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <Box className="grid md:grid-cols-3 gap-8">
             <div className="space-y-4">
               <Code2 className="h-10 w-10 text-foreground" />
               <h4 className="text-lg font-bold text-foreground">Apache-2.0</h4>
@@ -198,9 +199,9 @@ const OpenSourceBenefits = () => {
                 When a deploy does something you did not expect, the code that did it is right there, and so is the OpenAPI document the console itself calls.
               </p>
             </div>
-          </div>
+          </Box>
 
-          <div className="mt-8 pt-8 border-t border-border text-center">
+          <Box className="mt-8 pt-8 border-t border-border text-center">
             <a
               href="https://github.com/hanzoai"
               target="_blank"
@@ -210,16 +211,16 @@ const OpenSourceBenefits = () => {
               <Github className="w-4 h-4 mr-2" />
               Star on GitHub
             </a>
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };
 
 const Platform = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)] overflow-x-hidden">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)] overflow-x-hidden">
       
       <ZenBackground />
       
@@ -241,7 +242,7 @@ const Platform = () => {
 </main>
 
       
-    </div>
+    </Box>
   );
 };
 

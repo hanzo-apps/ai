@@ -10,16 +10,17 @@ import { infrastructureLogos } from '@/lib/constants/partner-logos'
 import CloudCategoryShowcase, { CloudCategoryMap } from '@/components/cloud/CloudCategoryShowcase'
 import { POSITIONING } from '@/lib/data/cloud-primitives'
 import { CONSOLE } from '@/components/home/nav-data'
+import { Box } from '@hanzo/ui'
 
 // The products index — one source (lib/data/cloud-primitives.ts) drives the
 // mega-menu, the category landing pages, AND this overview, so nothing drifts.
 export default function Products() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       {/* Hero */}
       <section className="relative overflow-hidden px-4 pb-20 pt-32">
         <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.06)_0%,transparent_70%)] blur-[100px]" />
-        <div className="relative z-10 mx-auto max-w-6xl">
+        <Box className="relative z-10 mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,15 +41,15 @@ export default function Products() {
             <h1 className="mb-6 text-4xl font-bold md:text-6xl">Platform</h1>
             <p className="mx-auto mb-10 max-w-3xl text-lg text-muted-foreground md:text-xl">{POSITIONING}</p>
 
-            <div className="mx-auto mb-10 max-w-2xl rounded-2xl border border-border bg-secondary/50 p-6">
+            <Box className="mx-auto mb-10 max-w-2xl rounded-2xl border border-border bg-secondary/50 p-6">
               <p className="mb-3 text-sm text-muted-foreground">Get started in seconds</p>
-              <div className="flex items-center justify-between rounded-xl bg-background p-4 font-mono">
+              <Box className="flex items-center justify-between rounded-xl bg-background p-4 font-mono">
                 <code className="text-foreground/70">curl -fsSL hanzo.sh | bash</code>
                 <CopyButton value="curl -fsSL hanzo.sh | bash" id="install-cli" />
-              </div>
-            </div>
+              </Box>
+            </Box>
 
-            <div className="flex flex-col justify-center gap-4 sm:flex-row">
+            <Box className="flex flex-col justify-center gap-4 sm:flex-row">
               <Button size="lg" className="rounded-full bg-white text-black hover:opacity-90" asChild>
                 <a href={CONSOLE}>
                   Start building
@@ -66,24 +67,24 @@ export default function Products() {
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </a>
               </Button>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Partners */}
       <section className="border-t border-border px-4 py-12">
-        <div className="mx-auto max-w-6xl text-center">
+        <Box className="mx-auto max-w-6xl text-center">
           <p className="mb-6 text-xs uppercase tracking-widest text-muted-foreground">Runs on the infrastructure you already trust</p>
           <PartnerLogoRow logos={infrastructureLogos} invert className="opacity-70" />
-        </div>
+        </Box>
       </section>
 
       {/* Category grid — each links to its /products/<slug> landing page */}
       <section className="px-4 py-20">
-        <div className="mx-auto max-w-6xl">
+        <Box className="mx-auto max-w-6xl">
           <CloudCategoryMap />
-        </div>
+        </Box>
       </section>
 
       {/* Every product, grouped by category */}
@@ -91,12 +92,12 @@ export default function Products() {
 
       {/* CTA */}
       <section className="border-t border-border px-4 py-24">
-        <div className="mx-auto max-w-4xl text-center">
+        <Box className="mx-auto max-w-4xl text-center">
           <h2 className="mb-6 text-3xl font-bold md:text-4xl">Ready to build?</h2>
           <p className="mb-10 text-lg text-muted-foreground">
             Free tier for every product. No credit card required.
           </p>
-          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+          <Box className="flex flex-col justify-center gap-4 sm:flex-row">
             <Button size="lg" className="rounded-full bg-white text-black hover:opacity-90" asChild>
               <a href={CONSOLE}>
                 Start building
@@ -111,9 +112,9 @@ export default function Products() {
             >
               <Link href="/pricing">See pricing</Link>
             </Button>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
-    </div>
+    </Box>
   )
 }

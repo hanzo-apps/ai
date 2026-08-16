@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { FileText, Search, Code, ShoppingCart } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const UseCaseCard = ({ icon: Icon, title, description }) => {
   return (
@@ -24,7 +25,7 @@ const UseCaseCard = ({ icon: Icon, title, description }) => {
 const HanzoExtensionUseCases = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-950">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +39,7 @@ const HanzoExtensionUseCases = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <UseCaseCard 
             icon={FileText}
             title="Check the change you just made"
@@ -62,8 +63,8 @@ const HanzoExtensionUseCases = () => {
             title="The long boring form"
             description="Multi-step flows that exist only in a UI and have no API behind them. It fills them in and tells you where it got stuck."
           />
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

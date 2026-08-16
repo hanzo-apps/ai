@@ -4,11 +4,12 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Github, Twitter, MessagesSquare, Facebook, Linkedin, Instagram } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const Community = () => {
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-[var(--black)]">
-      <div className="max-w-5xl mx-auto text-center">
+      <Box className="max-w-5xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -19,7 +20,7 @@ const Community = () => {
             Join our Developer Community
           </h2>
           
-          <div className="flex flex-wrap justify-center gap-4">
+          <Box className="flex flex-wrap justify-center gap-4">
             <a 
               href="https://github.com/hanzoai" 
               target="_blank" 
@@ -47,9 +48,9 @@ const Community = () => {
               <Twitter className="mr-2 h-5 w-5 text-[var(--white)]" />
               <span className="text-[var(--white)]">Twitter</span>
             </a>
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

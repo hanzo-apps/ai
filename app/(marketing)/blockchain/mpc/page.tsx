@@ -18,6 +18,7 @@ import {
   Layers,
   RefreshCw
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const features = [
   {
@@ -83,12 +84,12 @@ const useCases = [
 
 const HanzoMPC = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
 
       {/* Hero */}
       <section className="pt-24 pb-16 px-4 md:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -105,9 +106,9 @@ const HanzoMPC = () => {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <Box className="max-w-5xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -157,22 +158,22 @@ const HanzoMPC = () => {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground/70">0</div>
-              <div className="text-sm text-muted-foreground">Single points of failure</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground/70">M-of-N</div>
-              <div className="text-sm text-muted-foreground">Threshold schemes</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground/70">&lt;200ms</div>
-              <div className="text-sm text-muted-foreground">Signing latency</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground/70">FHE</div>
-              <div className="text-sm text-muted-foreground">Encrypted rules</div>
-            </div>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground/70">0</Box>
+              <Box className="text-sm text-muted-foreground">Single points of failure</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground/70">M-of-N</Box>
+              <Box className="text-sm text-muted-foreground">Threshold schemes</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground/70">&lt;200ms</Box>
+              <Box className="text-sm text-muted-foreground">Signing latency</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground/70">FHE</Box>
+              <Box className="text-sm text-muted-foreground">Encrypted rules</Box>
+            </Box>
           </motion.div>
 
           {/* CTAs */}
@@ -196,12 +197,12 @@ const HanzoMPC = () => {
               Contact Sales
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* How It Works */}
       <section className="py-20 px-4 md:px-8 border-t border-border">
-        <div className="max-w-5xl mx-auto">
+        <Box className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -214,7 +215,7 @@ const HanzoMPC = () => {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <Box className="grid md:grid-cols-3 gap-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -222,9 +223,9 @@ const HanzoMPC = () => {
               transition={{ delay: 0 }}
               className="text-center"
             >
-              <div className="w-16 h-16 rounded-2xl bg-primary/5 flex items-center justify-center mx-auto mb-4">
+              <Box className="w-16 h-16 rounded-2xl bg-primary/5 flex items-center justify-center mx-auto mb-4">
                 <Key className="w-8 h-8 text-foreground/70" />
-              </div>
+              </Box>
               <h3 className="text-xl font-semibold text-foreground mb-2">1. Key Generation</h3>
               <p className="text-muted-foreground">
                 Private key is generated as distributed shares. No single party ever holds the complete key.
@@ -238,9 +239,9 @@ const HanzoMPC = () => {
               transition={{ delay: 0.1 }}
               className="text-center"
             >
-              <div className="w-16 h-16 rounded-2xl bg-primary/5 flex items-center justify-center mx-auto mb-4">
+              <Box className="w-16 h-16 rounded-2xl bg-primary/5 flex items-center justify-center mx-auto mb-4">
                 <Lock className="w-8 h-8 text-foreground/70" />
-              </div>
+              </Box>
               <h3 className="text-xl font-semibold text-foreground mb-2">2. Policy Encryption</h3>
               <p className="text-muted-foreground">
                 Spending rules are encrypted with FHE. Policies can be evaluated without decryption.
@@ -254,21 +255,21 @@ const HanzoMPC = () => {
               transition={{ delay: 0.2 }}
               className="text-center"
             >
-              <div className="w-16 h-16 rounded-2xl bg-primary/5 flex items-center justify-center mx-auto mb-4">
+              <Box className="w-16 h-16 rounded-2xl bg-primary/5 flex items-center justify-center mx-auto mb-4">
                 <Zap className="w-8 h-8 text-foreground/70" />
-              </div>
+              </Box>
               <h3 className="text-xl font-semibold text-foreground mb-2">3. Threshold Signing</h3>
               <p className="text-muted-foreground">
                 Parties collaborate to sign. Transaction is broadcast only if policies pass.
               </p>
             </motion.div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Features Grid */}
       <section className="py-20 px-4 md:px-8 bg-background">
-        <div className="max-w-7xl mx-auto">
+        <Box className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -278,7 +279,7 @@ const HanzoMPC = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Enterprise-Grade Features</h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -288,20 +289,20 @@ const HanzoMPC = () => {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-border transition-colors"
               >
-                <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/5">
+                <Box className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/5">
                   <feature.icon className="h-6 w-6 text-foreground/70" />
-                </div>
+                </Box>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground text-sm">{feature.description}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Use Cases */}
       <section className="py-20 px-4 md:px-8">
-        <div className="max-w-5xl mx-auto">
+        <Box className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -311,7 +312,7 @@ const HanzoMPC = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Use Cases</h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <Box className="grid md:grid-cols-2 gap-6">
             {useCases.map((useCase, index) => (
               <motion.div
                 key={useCase.title}
@@ -325,27 +326,27 @@ const HanzoMPC = () => {
                 <p className="text-muted-foreground">{useCase.description}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Code Example */}
       <section className="py-20 px-4 md:px-8 border-t border-border">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="bg-secondary border border-border rounded-xl overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-              </div>
+            <Box className="flex items-center gap-2 px-4 py-2 border-b border-border">
+              <Box className="flex gap-1.5">
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+              </Box>
               <span className="text-xs text-muted-foreground ml-2">mpc-wallet.ts</span>
-            </div>
+            </Box>
             <pre className="p-4 overflow-x-auto text-sm">
               <code className="text-foreground/80">{`import { HanzoMPC } from "@hanzo/blockchain";
 
@@ -376,12 +377,12 @@ const signature = await wallet.sign({
 await wallet.broadcast(signature);`}</code>
             </pre>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -395,7 +396,7 @@ await wallet.broadcast(signature);`}</code>
               MPC + FHE is the future of digital asset custody. Be among the first to adopt.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
+            <Box className="flex flex-wrap justify-center gap-4">
               <a
                 href="https://docs.hanzo.ai/docs/mpc"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-primary/10 hover:bg-primary/10 text-foreground font-medium rounded-full transition-colors"
@@ -409,13 +410,13 @@ await wallet.broadcast(signature);`}</code>
               >
                 Talk to an Expert
               </a>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       
-    </div>
+    </Box>
   );
 };
 

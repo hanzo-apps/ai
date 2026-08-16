@@ -3,12 +3,13 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Search, ArrowRight } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
       {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden">
+      <Box className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
           style={{
@@ -25,9 +26,9 @@ const HeroSection = () => {
             ease: "easeInOut",
           }}
         />
-      </div>
+      </Box>
 
-      <div className="relative z-10 max-w-5xl mx-auto text-center">
+      <Box className="relative z-10 max-w-5xl mx-auto text-center">
         {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -81,22 +82,22 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 0.25 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
         >
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">Text</div>
-            <div className="text-sm text-muted-foreground">Typos and facets</div>
-          </div>
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">Vector</div>
-            <div className="text-sm text-muted-foreground">Your embeddings</div>
-          </div>
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">RRF</div>
-            <div className="text-sm text-muted-foreground">One merged rank</div>
-          </div>
-          <div className="bg-secondary/50 border border-border rounded-xl p-4">
-            <div className="text-2xl font-bold text-foreground/70">RAG</div>
-            <div className="text-sm text-muted-foreground">Answers with sources</div>
-          </div>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">Text</Box>
+            <Box className="text-sm text-muted-foreground">Typos and facets</Box>
+          </Box>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">Vector</Box>
+            <Box className="text-sm text-muted-foreground">Your embeddings</Box>
+          </Box>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">RRF</Box>
+            <Box className="text-sm text-muted-foreground">One merged rank</Box>
+          </Box>
+          <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+            <Box className="text-2xl font-bold text-foreground/70">RAG</Box>
+            <Box className="text-sm text-muted-foreground">Answers with sources</Box>
+          </Box>
         </motion.div>
 
         {/* CTAs */}
@@ -120,7 +121,7 @@ const HeroSection = () => {
             GitHub
           </a>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

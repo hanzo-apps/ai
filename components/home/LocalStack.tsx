@@ -3,6 +3,7 @@
 import { motion } from '@/components/motion'
 import { ArrowUpRight } from 'lucide-react'
 import { SH } from './nav-data'
+import { Box } from '@hanzo/ui'
 
 /**
  * The claim this site was not making.
@@ -98,7 +99,7 @@ const PIECES: Piece[] = [
 export default function LocalStack() {
   return (
     <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <Box className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -125,7 +126,7 @@ export default function LocalStack() {
             — same API, nothing else changes.
           </p>
 
-          <div className="mt-8 flex flex-col items-center gap-3">
+          <Box className="mt-8 flex flex-col items-center gap-3">
             <code className="w-full max-w-md overflow-x-auto whitespace-nowrap rounded-xl border border-neutral-800 bg-neutral-900/60 px-4 py-3 text-left text-sm text-neutral-300">
               curl -fsSL https://hanzo.sh | sh
             </code>
@@ -136,10 +137,10 @@ export default function LocalStack() {
               Install options
               <ArrowUpRight className="h-4 w-4" />
             </a>
-          </div>
+          </Box>
         </motion.div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <Box className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {PIECES.map((p, i) => (
             /* A CARD, not a link. It carries two destinations — the way in and
                the source — and an anchor cannot hold another anchor. */
@@ -151,7 +152,7 @@ export default function LocalStack() {
               transition={{ duration: 0.45, delay: i * 0.06 }}
               className="group relative flex min-h-[200px] flex-col overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-900/40 p-7 transition-colors hover:border-neutral-700"
             >
-              <div
+              <Box
                 className="pointer-events-none absolute inset-0 opacity-70"
                 style={{
                   background:
@@ -160,7 +161,7 @@ export default function LocalStack() {
               />
               <h3 className="relative z-10 text-xl font-semibold text-white">{p.name}</h3>
               <p className="relative z-10 mt-2 text-[15px] leading-relaxed text-neutral-400">{p.body}</p>
-              <div className="relative z-10 mt-auto flex items-center gap-4 pt-6">
+              <Box className="relative z-10 mt-auto flex items-center gap-4 pt-6">
                 <a
                   href={p.get.href}
                   className="hz-tap items-center gap-1.5 text-sm font-medium text-white no-underline hover:no-underline"
@@ -174,11 +175,11 @@ export default function LocalStack() {
                 >
                   Source
                 </a>
-              </div>
+              </Box>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   )
 }

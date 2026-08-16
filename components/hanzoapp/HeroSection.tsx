@@ -17,6 +17,7 @@ import {
   Chrome,
 } from "lucide-react";
 import { CopyButton } from "@hanzo/ui/product";
+import { Box } from '@hanzo/ui'
 
 const PLATFORMS = [
   { id: "web", label: "Web App", icon: Globe, description: "Build in browser" },
@@ -31,24 +32,24 @@ const AppDemo = ({ activeTab }: { activeTab: string }) => {
       title: "hanzo.app",
       content: (
         <div className="space-y-3">
-          <div className="flex items-center gap-2 text-sm">
+          <Box className="flex items-center gap-2 text-sm">
             <Check className="w-4 h-4 text-foreground/70" />
             <span className="text-foreground/70">Workspace synced</span>
-          </div>
-          <div className="bg-secondary/50 rounded-lg p-3">
-            <div className="text-xs text-muted-foreground mb-2">Active Projects</div>
+          </Box>
+          <Box className="bg-secondary/50 rounded-lg p-3">
+            <Box className="text-xs text-muted-foreground mb-2">Active Projects</Box>
             <div className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
+              <Box className="flex items-center justify-between text-sm">
                 <span className="text-foreground">signal-server</span>
                 <span className="text-muted-foreground">12 files changed</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
+              </Box>
+              <Box className="flex items-center justify-between text-sm">
                 <span className="text-foreground">payments-api</span>
                 <span className="text-muted-foreground">3 PRs pending</span>
-              </div>
+              </Box>
             </div>
-          </div>
-          <div className="text-xs text-muted-foreground">Collaborative editing • Real-time sync • Cloud storage</div>
+          </Box>
+          <Box className="text-xs text-muted-foreground">Collaborative editing • Real-time sync • Cloud storage</Box>
         </div>
       ),
     },
@@ -56,25 +57,25 @@ const AppDemo = ({ activeTab }: { activeTab: string }) => {
       title: "Hanzo Desktop",
       content: (
         <div className="space-y-3">
-          <div className="flex items-center gap-2 text-sm">
+          <Box className="flex items-center gap-2 text-sm">
             <Monitor className="w-4 h-4 text-foreground" />
             <span className="text-foreground">Native performance</span>
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            <div className="bg-secondary/50 rounded-lg p-2 text-center">
+          </Box>
+          <Box className="grid grid-cols-3 gap-2">
+            <Box className="bg-secondary/50 rounded-lg p-2 text-center">
               <Apple className="w-5 h-5 mx-auto mb-1 text-muted-foreground" />
               <span className="text-xs text-muted-foreground">macOS</span>
-            </div>
-            <div className="bg-secondary/50 rounded-lg p-2 text-center">
+            </Box>
+            <Box className="bg-secondary/50 rounded-lg p-2 text-center">
               <Monitor className="w-5 h-5 mx-auto mb-1 text-muted-foreground" />
               <span className="text-xs text-muted-foreground">Windows</span>
-            </div>
-            <div className="bg-secondary/50 rounded-lg p-2 text-center">
+            </Box>
+            <Box className="bg-secondary/50 rounded-lg p-2 text-center">
               <Chrome className="w-5 h-5 mx-auto mb-1 text-muted-foreground" />
               <span className="text-xs text-muted-foreground">Linux</span>
-            </div>
-          </div>
-          <div className="text-xs text-muted-foreground">Offline capable • System integrations • Native UI</div>
+            </Box>
+          </Box>
+          <Box className="text-xs text-muted-foreground">Offline capable • System integrations • Native UI</Box>
         </div>
       ),
     },
@@ -82,17 +83,17 @@ const AppDemo = ({ activeTab }: { activeTab: string }) => {
       title: "Local AI Mode",
       content: (
         <div className="space-y-3">
-          <div className="flex items-center gap-2 text-sm">
+          <Box className="flex items-center gap-2 text-sm">
             <Cpu className="w-4 h-4 text-foreground/70" />
             <span className="text-foreground/70">Running locally</span>
-          </div>
-          <div className="bg-secondary/50 rounded-lg p-3 font-mono text-xs">
-            <div className="text-muted-foreground">$ hanzo local start</div>
-            <div className="text-foreground/70 mt-1">✓ zen4-mini loaded (16GB VRAM)</div>
-            <div className="text-foreground/70">✓ MCP tools connected</div>
-            <div className="text-foreground/70">✓ Ready on localhost:8080</div>
-          </div>
-          <div className="text-xs text-muted-foreground">Zero data leaves your machine • Full privacy • GPU accelerated</div>
+          </Box>
+          <Box className="bg-secondary/50 rounded-lg p-3 font-mono text-xs">
+            <Box className="text-muted-foreground">$ hanzo local start</Box>
+            <Box className="text-foreground/70 mt-1">✓ zen4-mini loaded (16GB VRAM)</Box>
+            <Box className="text-foreground/70">✓ MCP tools connected</Box>
+            <Box className="text-foreground/70">✓ Ready on localhost:8080</Box>
+          </Box>
+          <Box className="text-xs text-muted-foreground">Zero data leaves your machine • Full privacy • GPU accelerated</Box>
         </div>
       ),
     },
@@ -100,25 +101,25 @@ const AppDemo = ({ activeTab }: { activeTab: string }) => {
       title: "Hanzo Node",
       content: (
         <div className="space-y-3">
-          <div className="flex items-center gap-2 text-sm">
+          <Box className="flex items-center gap-2 text-sm">
             <Shield className="w-4 h-4" />
             <span>Node active</span>
-          </div>
-          <div className="bg-secondary/50 rounded-lg p-3 font-mono text-xs">
-            <div className="flex justify-between">
+          </Box>
+          <Box className="bg-secondary/50 rounded-lg p-3 font-mono text-xs">
+            <Box className="flex justify-between">
               <span className="text-muted-foreground">Staked:</span>
               <span className="text-foreground">50,000 LUX</span>
-            </div>
-            <div className="flex justify-between">
+            </Box>
+            <Box className="flex justify-between">
               <span className="text-muted-foreground">Earnings:</span>
               <span className="text-foreground/70">+127.4 LUX/day</span>
-            </div>
-            <div className="flex justify-between">
+            </Box>
+            <Box className="flex justify-between">
               <span className="text-muted-foreground">Uptime:</span>
               <span className="text-foreground">99.97%</span>
-            </div>
-          </div>
-          <div className="text-xs text-muted-foreground">Earn rewards • Decentralized compute • Proof of AI</div>
+            </Box>
+          </Box>
+          <Box className="text-xs text-muted-foreground">Earn rewards • Decentralized compute • Proof of AI</Box>
         </div>
       ),
     },
@@ -127,13 +128,13 @@ const AppDemo = ({ activeTab }: { activeTab: string }) => {
   const demo = demos[activeTab];
 
   return (
-    <div className="rounded-xl border border-border bg-secondary/95 backdrop-blur-sm overflow-hidden shadow-2xl h-[320px] flex flex-col">
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background shrink-0">
-        <div className="flex gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-primary/10" />
-          <div className="w-3 h-3 rounded-full bg-primary/10" />
-          <div className="w-3 h-3 rounded-full bg-primary/10" />
-        </div>
+    <Box className="rounded-xl border border-border bg-secondary/95 backdrop-blur-sm overflow-hidden shadow-2xl h-[320px] flex flex-col">
+      <Box className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background shrink-0">
+        <Box className="flex gap-1.5">
+          <Box className="w-3 h-3 rounded-full bg-primary/10" />
+          <Box className="w-3 h-3 rounded-full bg-primary/10" />
+          <Box className="w-3 h-3 rounded-full bg-primary/10" />
+        </Box>
         <AnimatePresence mode="wait">
           <motion.span
             key={activeTab}
@@ -145,8 +146,8 @@ const AppDemo = ({ activeTab }: { activeTab: string }) => {
             {demo.title}
           </motion.span>
         </AnimatePresence>
-      </div>
-      <div className="flex-1 p-4 bg-background overflow-y-auto">
+      </Box>
+      <Box className="flex-1 p-4 bg-background overflow-y-auto">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -158,8 +159,8 @@ const AppDemo = ({ activeTab }: { activeTab: string }) => {
             {demo.content}
           </motion.div>
         </AnimatePresence>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
@@ -171,18 +172,18 @@ const HeroSection = () => {
   return (
     <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-        <div
+      <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
           style={{
             background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
             filter: "blur(100px)",
           }}
         />
-      </div>
+      </Box>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <Box className="max-w-7xl mx-auto relative z-10">
+        <Box className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column */}
           <div>
             <motion.h1
@@ -238,7 +239,7 @@ const HeroSection = () => {
               transition={{ duration: 0.4, delay: 0.15 }}
               className="mb-8"
             >
-              <div className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-secondary border border-border">
+              <Box className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-secondary border border-border">
                 <code className="text-sm font-mono text-foreground/80">{INSTALL}</code>
                 <CopyButton value={INSTALL} label="Copy install command" size={20} id="install-cli" />
                 <a
@@ -249,7 +250,7 @@ const HeroSection = () => {
                 >
                   <ExternalLink className="h-3.5 w-3.5" />
                 </a>
-              </div>
+              </Box>
             </motion.div>
 
             {/* Platform tabs */}
@@ -288,8 +289,8 @@ const HeroSection = () => {
           >
             <AppDemo activeTab={activeTab} />
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

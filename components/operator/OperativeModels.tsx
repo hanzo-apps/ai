@@ -4,17 +4,18 @@ import ModelHeader from "./models/ModelHeader";
 import ModelCard from "./models/ModelCard";
 import ModelFooter from "./models/ModelFooter";
 import { operatorModels } from "./models/operatorModelData";
+import { Box } from '@hanzo/ui'
 
 const OperativeModels = () => {
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 to-background"></div>
+      <Box className="absolute inset-0 bg-gradient-to-b from-neutral-950 to-background"></Box>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ModelHeader />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {operatorModels.map((model, index) => (
             <ModelCard 
               key={index}
@@ -22,10 +23,10 @@ const OperativeModels = () => {
               index={index} 
             />
           ))}
-        </div>
+        </Box>
         
         <ModelFooter />
-      </div>
+      </Box>
     </section>
   );
 };

@@ -13,6 +13,7 @@ import OpenSourceSection from '@/components/landing/OpenSourceSection'
 import HanzoNetworkSection from '@/components/landing/HanzoNetworkSection'
 import PricingPreviewSection from '@/components/landing/PricingPreviewSection'
 import FinalCTASection from '@/components/landing/FinalCTASection'
+import { Box } from '@hanzo/ui'
 
 // Platform overview — the full detailed Hanzo homepage. It moved off the apex
 // `/` (now the chat-centric landing) to `/overview` so it stays part of the
@@ -39,7 +40,7 @@ export const metadata: Metadata = {
 
 export default function OverviewPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <Box className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <HeroSection />
       <TrustedBySection />
       <PlatformOverviewSection />
@@ -54,6 +55,6 @@ export default function OverviewPage() {
       <HanzoNetworkSection />
       <PricingPreviewSection />
       <FinalCTASection />
-    </div>
+    </Box>
   )
 }

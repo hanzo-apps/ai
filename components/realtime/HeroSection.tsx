@@ -5,15 +5,16 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Activity, Radio, Zap, ArrowRight } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const HeroSection = () => {
   return (
     <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent" />
+      <Box className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent" />
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
-          <div className="w-full lg:w-1/2">
+      <Box className="max-w-7xl mx-auto relative z-10">
+        <Box className="flex flex-col lg:flex-row items-center justify-between gap-12">
+          <Box className="w-full lg:w-1/2">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -65,60 +66,60 @@ const HeroSection = () => {
                 View Documentation
               </Button>
             </motion.div>
-          </div>
+          </Box>
           
-          <div className="w-full lg:w-1/2">
+          <Box className="w-full lg:w-1/2">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }} 
               animate={{ opacity: 1, scale: 1 }} 
               transition={{ duration: 0.5, delay: 0.4 }}
               className="bg-[var(--black)]/60 border border-neutral-800 p-6 rounded-xl"
             >
-              <div className="flex justify-between items-center mb-4">
-                <div className="flex items-center">
+              <Box className="flex justify-between items-center mb-4">
+                <Box className="flex items-center">
                   <div className="h-3 w-3 rounded-full bg-primary/10 mr-3 animate-pulse" />
                   <span className="text-foreground/80 text-sm">Live connection</span>
-                </div>
-                <div className="flex items-center">
+                </Box>
+                <Box className="flex items-center">
                   <Radio className="h-4 w-4 text-foreground mr-2" />
                   <span className="text-foreground/80 text-sm">One open stream</span>
-                </div>
-              </div>
+                </Box>
+              </Box>
 
               <div className="space-y-4">
-                <div className="h-14 bg-gradient-to-r from-white/20 to-white/10 rounded-lg border border-white/30 p-4 flex items-center">
+                <Box className="h-14 bg-gradient-to-r from-white/20 to-white/10 rounded-lg border border-white/30 p-4 flex items-center">
                   <Zap className="h-5 w-5 text-foreground mr-3" />
                   <span className="text-neutral-200">Records arrive as they change</span>
-                </div>
+                </Box>
                 
-                <div className="grid grid-cols-3 gap-4">
+                <Box className="grid grid-cols-3 gap-4">
                   {[1, 2, 3].map((i) => (
-                    <div 
+                    <Box 
                       key={i}
                       className="h-24 rounded-lg border border-neutral-800 p-4 flex flex-col justify-center items-center bg-gradient-to-br from-neutral-900 to-neutral-950"
                     >
                       <div className="h-2 w-2 rounded-full bg-primary mb-2 animate-pulse" />
                       <span className="text-xs text-muted-foreground text-center">Client {i}</span>
                       <span className="text-xs text-muted-foreground text-center">Connected</span>
-                    </div>
+                    </Box>
                   ))}
-                </div>
+                </Box>
                 
-                <div className="h-36 bg-neutral-900 rounded-lg border border-neutral-800 p-3 overflow-hidden font-mono text-xs">
-                  <div className="text-foreground/70">// Watch a collection</div>
-                  <div className="text-foreground/80">const stop = await base</div>
-                  <div className="text-foreground/80 pl-4">.collection('messages')</div>
-                  <div className="text-foreground/80 pl-4">.subscribe('*', (e) =&gt; {`{`}</div>
-                  <div className="text-foreground/80 pl-8">console.log(e.action, e.record.id);</div>
-                  <div className="text-foreground/80 pl-8">render(e.record);</div>
-                  <div className="text-foreground/80 pl-4">{`}`});</div>
-                  <div className="text-foreground/80">// create | update | delete</div>
-                </div>
+                <Box className="h-36 bg-neutral-900 rounded-lg border border-neutral-800 p-3 overflow-hidden font-mono text-xs">
+                  <Box className="text-foreground/70">// Watch a collection</Box>
+                  <Box className="text-foreground/80">const stop = await base</Box>
+                  <Box className="text-foreground/80 pl-4">.collection('messages')</Box>
+                  <Box className="text-foreground/80 pl-4">.subscribe('*', (e) =&gt; {`{`}</Box>
+                  <Box className="text-foreground/80 pl-8">console.log(e.action, e.record.id);</Box>
+                  <Box className="text-foreground/80 pl-8">render(e.record);</Box>
+                  <Box className="text-foreground/80 pl-4">{`}`});</Box>
+                  <Box className="text-foreground/80">// create | update | delete</Box>
+                </Box>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
     </section>
   );
 };

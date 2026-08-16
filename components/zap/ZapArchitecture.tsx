@@ -2,10 +2,11 @@
 
 import React from "react";
 import { motion } from "@/components/motion";
+import { Box } from '@hanzo/ui'
 const ZapArchitecture = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/30">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,20 +66,20 @@ const ZapArchitecture = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="grid md:grid-cols-3 gap-6 mt-8"
         >
-          <div className="text-center">
-            <div className="text-3xl font-bold text-foreground/70 mb-2">N:1</div>
-            <div className="text-muted-foreground">Every agent, one address</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-foreground/70 mb-2">1:M</div>
-            <div className="text-muted-foreground">One schema over every backend</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-foreground/70 mb-2">0</div>
-            <div className="text-muted-foreground">Copies of the same tool server</div>
-          </div>
+          <Box className="text-center">
+            <Box className="text-3xl font-bold text-foreground/70 mb-2">N:1</Box>
+            <Box className="text-muted-foreground">Every agent, one address</Box>
+          </Box>
+          <Box className="text-center">
+            <Box className="text-3xl font-bold text-foreground/70 mb-2">1:M</Box>
+            <Box className="text-muted-foreground">One schema over every backend</Box>
+          </Box>
+          <Box className="text-center">
+            <Box className="text-3xl font-bold text-foreground/70 mb-2">0</Box>
+            <Box className="text-muted-foreground">Copies of the same tool server</Box>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

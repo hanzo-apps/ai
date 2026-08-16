@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@hanzo/ui";
 import { Code } from "@hanzo/ui/chat";
+import { Box } from '@hanzo/ui'
 
 // Restrained monochrome "layered depth" motif — Canvas2D, client-only + code-split.
 const DepthField = dynamic(() => import("@/components/webgl/DepthField"), { ssr: false });
@@ -194,8 +195,8 @@ const DeveloperExperienceSection = () => {
   return (
     <section className="bg-background">
       {/* Developer workflow */}
-      <div className="py-24 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto">
+      <Box className="py-24 px-4 md:px-8">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -211,7 +212,7 @@ const DeveloperExperienceSection = () => {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Box className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {WORKFLOW_CARDS.map((card, index) => {
               const Icon = card.icon;
               return (
@@ -223,21 +224,21 @@ const DeveloperExperienceSection = () => {
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   className="p-5 rounded-xl border border-border bg-secondary/50"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
+                  <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5 text-muted-foreground" />
-                  </div>
+                  </Box>
                   <h3 className="text-base font-semibold text-foreground mb-2">{card.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
                 </motion.div>
               );
             })}
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
 
       {/* Hanzo Dev */}
-      <div className="py-24 px-4 md:px-8 border-t border-border/40">
-        <div className="max-w-6xl mx-auto">
+      <Box className="py-24 px-4 md:px-8 border-t border-border/40">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -252,33 +253,33 @@ const DeveloperExperienceSection = () => {
                 terminal removed from the site (was: HeroSection rotation +
                 this duplicate). Now: zero animated terminals, both static.
               */}
-              <div className="rounded-xl border border-border bg-secondary/80 overflow-hidden shadow-2xl">
-                <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
-                  <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-                  </div>
+              <Box className="rounded-xl border border-border bg-secondary/80 overflow-hidden shadow-2xl">
+                <Box className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
+                  <Box className="flex gap-1.5">
+                    <Box className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+                    <Box className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+                    <Box className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+                  </Box>
                   <span className="ml-2 text-[11px] text-muted-foreground font-mono">hanzo dev</span>
-                </div>
-                <div className="p-5 font-mono text-sm bg-background overflow-x-auto">
-                  <div className="mb-2 text-foreground/90 whitespace-pre">
+                </Box>
+                <Box className="p-5 font-mono text-sm bg-background overflow-x-auto">
+                  <Box className="mb-2 text-foreground/90 whitespace-pre">
                     hanzo dev "Fix rate limiting. Add metrics. Add tests. Open a PR."
-                  </div>
-                  <div className="text-muted-foreground mb-1">
+                  </Box>
+                  <Box className="text-muted-foreground mb-1">
                     <span className="text-foreground/70">{"✓"} </span>Plan created
-                  </div>
-                  <div className="text-muted-foreground mb-1">
+                  </Box>
+                  <Box className="text-muted-foreground mb-1">
                     <span className="text-foreground/70">{"✓"} </span>Files updated
-                  </div>
-                  <div className="text-muted-foreground mb-1">
+                  </Box>
+                  <Box className="text-muted-foreground mb-1">
                     <span className="text-foreground/70">{"✓"} </span>Tests passing
-                  </div>
-                  <div className="text-foreground/90">
+                  </Box>
+                  <Box className="text-foreground/90">
                     <span className="text-foreground/70">{"✓"} </span>Pull request opened
-                  </div>
-                </div>
-              </div>
+                  </Box>
+                </Box>
+              </Box>
             </div>
 
             <div className="order-1 lg:order-2 min-w-0">
@@ -314,14 +315,14 @@ const DeveloperExperienceSection = () => {
               </a>
             </div>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
 
       {/* Unified platform */}
-      <div className="relative overflow-hidden py-24 px-4 md:px-8 border-t border-border/40">
+      <Box className="relative overflow-hidden py-24 px-4 md:px-8 border-t border-border/40">
         {/* Restrained "layers of one shared context" depth field, faint and behind. */}
         <DepthField className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-50" />
-        <div className="max-w-6xl mx-auto relative z-10">
+        <Box className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -337,7 +338,7 @@ const DeveloperExperienceSection = () => {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <Box className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {UNIFIED_CARDS.map((card, index) => {
               const Icon = card.icon;
               return (
@@ -349,21 +350,21 @@ const DeveloperExperienceSection = () => {
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   className="p-5 rounded-xl border border-border bg-secondary/50"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
+                  <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5 text-muted-foreground" />
-                  </div>
+                  </Box>
                   <h3 className="text-base font-semibold text-foreground mb-2">{card.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
                 </motion.div>
               );
             })}
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
 
       {/* Remote agents */}
-      <div className="py-24 px-4 md:px-8 border-t border-border/40">
-        <div className="max-w-6xl mx-auto">
+      <Box className="py-24 px-4 md:px-8 border-t border-border/40">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -379,7 +380,7 @@ const DeveloperExperienceSection = () => {
             </p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Box className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {REMOTE_CARDS.map((card, index) => {
               const Icon = card.icon;
               return (
@@ -391,21 +392,21 @@ const DeveloperExperienceSection = () => {
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   className="p-5 rounded-xl border border-border bg-secondary/50"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
+                  <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
                     <Icon className="w-5 h-5 text-muted-foreground" />
-                  </div>
+                  </Box>
                   <h3 className="text-base font-semibold text-foreground mb-2">{card.title}</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
                 </motion.div>
               );
             })}
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
 
       {/* API */}
-      <div className="py-24 px-4 md:px-8 border-t border-border/40">
-        <div className="max-w-6xl mx-auto">
+      <Box className="py-24 px-4 md:px-8 border-t border-border/40">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -413,7 +414,7 @@ const DeveloperExperienceSection = () => {
             transition={{ duration: 0.6 }}
             className="rounded-2xl border border-white/20 bg-gradient-to-br from-white/10 to-transparent p-8 md:p-12"
           >
-            <div className="grid lg:grid-cols-2 gap-8 items-start">
+            <Box className="grid lg:grid-cols-2 gap-8 items-start">
               <div>
                 <p
                   className="inline-flex text-xs font-medium rounded-full px-4 py-2 border mb-6"
@@ -455,10 +456,10 @@ const DeveloperExperienceSection = () => {
                   </TabsContent>
                 ))}
               </Tabs>
-            </div>
+            </Box>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

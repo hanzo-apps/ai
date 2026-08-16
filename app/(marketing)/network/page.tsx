@@ -7,48 +7,49 @@ import ChromeText from "@/components/ui/chrome-text";
 
 import { ProductFooter } from "@/components/products/ProductFooter"
 import Link from 'next/link'
+import { Box } from '@hanzo/ui'
 const Network = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       {/* Hero Section */}
       <section className="py-20 lg:py-32 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="bg-primary/10 border border-border rounded-full px-4 py-1 inline-block mb-4">
+        <Box className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></Box>
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <Box className="text-center max-w-3xl mx-auto mb-16">
+            <Box className="bg-primary/10 border border-border rounded-full px-4 py-1 inline-block mb-4">
               <span className="text-foreground text-sm font-medium">Compute Marketplace</span>
-            </div>
+            </Box>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-white/10">
               Hanzo Network
             </h1>
             <p className="text-xl text-foreground/80 mb-8">
               hanzo.network is the fabric that hanzod nodes form. Put a machine on it and it serves models to whoever the cluster routes there. Ask the fabric for a model and it finds a peer that already has it loaded.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Box className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://docs.hanzo.ai/docs/network" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
                 Buy Compute <ArrowRight className="h-5 w-5" />
               </a>
               <Link href="/node" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
                 Run a Node
               </Link>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
       </section>
 
       {/* Features */}
       <section className="py-20 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+        <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="text-center mb-16">
             <ChromeText as="h2" className="text-3xl font-bold mb-4">
               How the Network Works
             </ChromeText>
             <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
               Machines join, declare what they can serve, and the cluster routes on what is actually loaded
             </p>
-          </div>
+          </Box>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -132,47 +133,47 @@ const Network = () => {
                 Work is ordered on the Hanzo L2 and committed to Lux as a Merkle root, under a stake-weighted validator set. What you can check is what settled, not what a status page says.
               </p>
             </motion.div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* CTA Section */}
       <section className="py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 md:p-12 border border-white/30">
-            <div className="text-center">
+        <Box className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Box className="bg-gradient-to-r from-white/20 to-white/10 rounded-2xl p-8 md:p-12 border border-white/30">
+            <Box className="text-center">
               <h2 className="text-3xl font-bold mb-4">Two ends of the same fabric</h2>
               <p className="text-xl text-foreground/80 mb-8 max-w-3xl mx-auto">
                 Take a key and call it, or bring a machine and serve it. Most people who do the second started by doing the first.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Box className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="https://docs.hanzo.ai/docs/api-keys" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
                   Get an API Key <ArrowRight className="h-5 w-5" />
                 </a>
                 <Link href="/node" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
                   Provide Compute
                 </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
       </section>
 
       <section className="py-16 border-t border-neutral-800">
-        <div className="max-w-3xl mx-auto px-4 text-center">
+        <Box className="max-w-3xl mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Get started with Network</h2>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Box className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="https://docs.hanzo.ai/docs/network" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />
             </a>
             <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 border border-border hover:bg-accent px-6 py-3 rounded-md text-sm font-medium">
               View on GitHub
             </a>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
             <ProductFooter slug="network" name="Network" />
-</div>
+</Box>
   );
 };
 

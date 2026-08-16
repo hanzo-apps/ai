@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { FolderKanban } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const WorkspaceHeader = () => {
   return (
@@ -14,12 +15,12 @@ const WorkspaceHeader = () => {
       transition={{ duration: 0.5 }}
       className="text-center mb-16"
     >
-      <div
+      <Box
         className="inline-flex p-2 rounded-full mb-4"
         style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)", color: "var(--primary)" }}
       >
         <FolderKanban className="h-6 w-6" />
-      </div>
+      </Box>
       <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
         One Workspace for Humans & AI
       </h2>

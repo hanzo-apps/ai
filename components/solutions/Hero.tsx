@@ -4,29 +4,30 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Rocket, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Box } from '@hanzo/ui'
 
 const SolutionsHero: React.FC = () => {
   return (
-    <div className="relative pb-16 overflow-hidden">
+    <Box className="relative pb-16 overflow-hidden">
       {/* Background gradients */}
-      <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-        <div
+      <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
           style={{
             background: `radial-gradient(circle, var(--primary) 0%, transparent 70%)`,
             filter: "blur(100px)",
           }}
         />
-        <div
+        <Box
           className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full opacity-10"
           style={{
             background: `radial-gradient(circle, #ffffff 0%, transparent 70%)`,
             filter: "blur(80px)",
           }}
         />
-      </div>
+      </Box>
 
-      <div className="text-center max-w-4xl mx-auto relative z-10">
+      <Box className="text-center max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -82,8 +83,8 @@ const SolutionsHero: React.FC = () => {
             See the capabilities
           </Link>
         </motion.div>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

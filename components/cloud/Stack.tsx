@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { cloudLayers, type CloudCategory } from '@/lib/data/cloud-primitives'
+import { Box } from '@hanzo/ui'
 
 /**
  * The stack, as something a reader can interrogate.
@@ -110,7 +111,7 @@ export default function Stack() {
 
   return (
     <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+      <Box className="mx-auto max-w-6xl">
         <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
           Point at a layer.
         </h2>
@@ -122,7 +123,7 @@ export default function Stack() {
         <Leader from={rects.from} edge={rects.edge} to={rects.to} />
 
         <div className="mt-14 grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem]">
-          <div ref={colRef} className="flex flex-col gap-1.5">
+          <Box ref={colRef} className="flex flex-col gap-1.5">
             {layers.map((l) => {
               const Icon = l.icon
               const on = picked === l.id
@@ -155,9 +156,9 @@ export default function Stack() {
                 </button>
               )
             })}
-          </div>
+          </Box>
 
-          <div
+          <Box
             ref={panelRef}
             className="h-fit rounded-xl border border-neutral-800 bg-neutral-950/60 p-5 lg:sticky lg:top-24"
           >
@@ -186,9 +187,9 @@ export default function Stack() {
             >
               All {shown.title.toLowerCase()} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
-          </div>
+          </Box>
         </div>
-      </div>
+      </Box>
     </section>
   )
 }

@@ -4,6 +4,7 @@
 import React from 'react';
 import { motion } from '@/components/motion';
 import { Brain, Bot, Code, Server, Database, Shield, Sparkles, Cpu, Microscope, Activity, Scale } from 'lucide-react';
+import { Box } from '@hanzo/ui'
 
 const Features = () => {
   const featuresList = [
@@ -67,10 +68,10 @@ const Features = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-neutral-950 relative overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3/4 h-1/2 bg-primary/10 rounded-full blur-3xl"></div>
+      <Box className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3/4 h-1/2 bg-primary/10 rounded-full blur-3xl"></Box>
       
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
+      <Box className="max-w-7xl mx-auto relative z-10">
+        <Box className="text-center max-w-3xl mx-auto mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -84,9 +85,9 @@ const Features = () => {
               The pieces an AI application needs, already wired to each other and reached with the same key
             </p>
           </motion.div>
-        </div>
+        </Box>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuresList.map((feature, index) => (
             <motion.div
               key={index}
@@ -96,15 +97,15 @@ const Features = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-neutral-900/30 border border-neutral-800 rounded-xl p-6 hover:bg-neutral-900/50 transition-colors"
             >
-              <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+              <Box className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
                 <feature.icon className="h-6 w-6 text-foreground" />
-              </div>
+              </Box>
               <h3 className="text-xl font-semibold text-[var(--white)] mb-2">{feature.title}</h3>
               <p className="text-muted-foreground">{feature.description}</p>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

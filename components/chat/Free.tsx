@@ -17,6 +17,7 @@ import { Chat } from '@hanzo/chat'
 import { freeCopy, hasConsent, grantConsent } from '@hanzo/ai'
 import { YStack } from '@hanzo/gui'
 import { useAi } from '@/hooks/useAi'
+import { Box } from '@hanzo/ui'
 
 const store = () => (typeof window === 'undefined' ? null : window.localStorage)
 
@@ -73,7 +74,7 @@ export function Gate({ children }: { children: ReactNode }) {
   if (agreed) return <>{children}</>
 
   return (
-    <div className="mx-auto max-w-lg rounded-2xl border border-border bg-secondary/20 p-8 text-center">
+    <Box className="mx-auto max-w-lg rounded-2xl border border-border bg-secondary/20 p-8 text-center">
       <h3 className="mb-3 text-lg font-medium">{freeCopy.consentTitle}</h3>
       <p className="mb-5 text-sm text-muted-foreground">{freeCopy.consentBody}</p>
       <ul className="mb-6 space-y-2 text-left text-sm text-muted-foreground">
@@ -105,6 +106,6 @@ export function Gate({ children }: { children: ReactNode }) {
           Privacy
         </Link>
       </p>
-    </div>
+    </Box>
   )
 }

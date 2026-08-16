@@ -5,6 +5,7 @@ import { motion } from "@/components/motion";
 import { AnimatePresence } from "framer-motion";
 import { X, Monitor, Download } from "lucide-react";
 import { current, INSTALL, type Platform } from "@/lib/platform";
+import { Box } from '@hanzo/ui'
 
 const STORAGE_KEY = "hanzo-desktop-banner-dismissed";
 
@@ -50,11 +51,11 @@ const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
             exit={{ opacity: 0, height: 0 }}
             className="bg-gradient-to-r from-neutral-900 to-neutral-800 border-b border-border"
           >
-            <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+            <Box className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+              <Box className="flex items-center gap-3">
+                <Box className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                   <Monitor className="w-4 h-4 text-foreground" />
-                </div>
+                </Box>
                 <div>
                   <p className="text-sm text-foreground font-medium">
                     Hanzo Dev Desktop App
@@ -63,8 +64,8 @@ const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
                     Native performance. All your tools in one place.
                   </p>
                 </div>
-              </div>
-              <div className="flex items-center gap-2">
+              </Box>
+              <Box className="flex items-center gap-2">
                 <a
                   href={downloadUrl || "#"}
                   target="_blank"
@@ -80,8 +81,8 @@ const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
                 >
                   <X className="w-4 h-4" />
                 </button>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
         )}
       </AnimatePresence>
@@ -98,23 +99,23 @@ const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           className="fixed bottom-24 left-6 z-40 max-w-sm"
         >
-          <div className="bg-secondary border border-border rounded-2xl shadow-2xl overflow-hidden">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-border">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center">
+          <Box className="bg-secondary border border-border rounded-2xl shadow-2xl overflow-hidden">
+            <Box className="flex items-center justify-between px-4 py-3 border-b border-border">
+              <Box className="flex items-center gap-2">
+                <Box className="w-6 h-6 rounded-md bg-primary/10 flex items-center justify-center">
                   <Monitor className="w-3.5 h-3.5 text-foreground" />
-                </div>
+                </Box>
                 <span className="text-xs font-medium text-foreground">NEW</span>
-              </div>
+              </Box>
               <button
                 onClick={handleDismiss}
                 className="p-1 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
-            </div>
+            </Box>
 
-            <div className="p-4">
+            <Box className="p-4">
               <h3 className="text-base font-semibold text-foreground mb-1">
                 Get Hanzo Dev for Desktop
               </h3>
@@ -122,7 +123,7 @@ const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
                 Native app with faster performance, offline access, and system integrations.
               </p>
 
-              <div className="flex items-center gap-2">
+              <Box className="flex items-center gap-2">
                 <a
                   href={downloadUrl || "#"}
                   target="_blank"
@@ -138,13 +139,13 @@ const DesktopAppBanner = ({ variant = "floating" }: DesktopAppBannerProps) => {
                 >
                   Learn more
                 </a>
-              </div>
+              </Box>
 
               <p className="mt-3 text-xs text-muted-foreground flex items-center gap-1">
                 {install?.note ?? "macOS, Windows and Linux builds in every release."}
               </p>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </motion.div>
       )}
     </AnimatePresence>

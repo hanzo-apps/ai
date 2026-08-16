@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { INTEGRATIONS, getIntegration, INTEGRATION_CATEGORIES } from '@/lib/integrations'
 import { MODELS_PHRASE } from '@/lib/data/model-count'
+import { Box } from '@hanzo/ui'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -43,14 +44,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 function CodeBlock({ code, lang }: { code: string; lang: string }) {
   return (
-    <div className="rounded-lg border border-border bg-[#0d0d0d] overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 border-b border-border">
+    <Box className="rounded-lg border border-border bg-[#0d0d0d] overflow-hidden">
+      <Box className="flex items-center justify-between px-4 py-2 border-b border-border">
         <span className="text-xs text-muted-foreground font-mono">{lang}</span>
-      </div>
+      </Box>
       <pre className="p-4 overflow-x-auto text-sm text-[#cccccc] font-mono leading-relaxed whitespace-pre">
         <code>{code}</code>
       </pre>
-    </div>
+    </Box>
   )
 }
 
@@ -86,7 +87,7 @@ export default async function IntegrationPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="min-h-screen bg-background">
+      <Box className="min-h-screen bg-background">
         <div className="container mx-auto max-w-4xl px-4 py-20">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-10">
@@ -98,8 +99,8 @@ export default async function IntegrationPage({ params }: Props) {
           </nav>
 
           {/* Header */}
-          <div className="mb-12">
-            <div className="flex items-center gap-4 mb-4">
+          <Box className="mb-12">
+            <Box className="flex items-center gap-4 mb-4">
               <span className="text-4xl">{integration.icon}</span>
               <div>
                 <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
@@ -109,12 +110,12 @@ export default async function IntegrationPage({ params }: Props) {
                   Use Hanzo AI with {integration.name}
                 </h1>
               </div>
-            </div>
+            </Box>
             <p className="text-lg text-muted-foreground max-w-2xl">{integration.description}</p>
-          </div>
+          </Box>
 
           {/* API base info */}
-          <div className="mb-10 rounded-xl border border-brand/20 bg-brand/5 p-5">
+          <Box className="mb-10 rounded-xl border border-brand/20 bg-brand/5 p-5">
             <p className="text-sm text-muted-foreground mb-2">
               <strong className="text-foreground">Base URL:</strong>{' '}
               <code className="font-mono text-brand">https://api.hanzo.ai/v1</code>
@@ -126,12 +127,12 @@ export default async function IntegrationPage({ params }: Props) {
               </Link>{' '}
               · Fully OpenAI-compatible · {MODELS_PHRASE} available
             </p>
-          </div>
+          </Box>
 
           {/* Attribution */}
-          <div className="mb-10 rounded-xl border border-border bg-muted/30 p-5 flex items-start gap-4">
-            <div className="text-2xl">{integration.icon}</div>
-            <div className="flex-1 min-w-0">
+          <Box className="mb-10 rounded-xl border border-border bg-muted/30 p-5 flex items-start gap-4">
+            <Box className="text-2xl">{integration.icon}</Box>
+            <Box className="flex-1 min-w-0">
               <p className="text-sm font-medium text-foreground mb-0.5">
                 Created by{' '}
                 <a
@@ -159,8 +160,8 @@ export default async function IntegrationPage({ params }: Props) {
               <p className="text-xs text-muted-foreground">
                 Hanzo AI is OpenAI-compatible, so existing {integration.name} code works with zero refactoring. We deeply appreciate the {integration.creator} team for building and maintaining this open-source project.
               </p>
-            </div>
-          </div>
+            </Box>
+          </Box>
 
           {/* Code examples */}
           <div className="space-y-10">
@@ -173,14 +174,14 @@ export default async function IntegrationPage({ params }: Props) {
           </div>
 
           {/* Footer CTA */}
-          <div className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
+          <Box className="mt-16 rounded-xl border border-border bg-card p-8 text-center">
             <h2 className="text-2xl font-bold text-foreground mb-3">
               Ready to get started?
             </h2>
             <p className="text-muted-foreground mb-6">
               Create a free account and get your API key. 100K API calls/month free forever.
             </p>
-            <div className="flex items-center justify-center gap-4">
+            <Box className="flex items-center justify-center gap-4">
               <Link
                 href="/signup"
                 className="rounded-lg bg-brand px-6 py-2.5 text-sm font-semibold text-brand-foreground hover:opacity-90 transition-colors"
@@ -193,13 +194,13 @@ export default async function IntegrationPage({ params }: Props) {
               >
                 Browse Models
               </Link>
-            </div>
-          </div>
+            </Box>
+          </Box>
 
           {/* Other integrations */}
-          <div className="mt-12">
+          <Box className="mt-12">
             <h2 className="text-lg font-semibold text-foreground mb-4">More integrations</h2>
-            <div className="flex flex-wrap gap-2">
+            <Box className="flex flex-wrap gap-2">
               {INTEGRATIONS.filter((i) => i.slug !== slug).map((i) => (
                 <Link
                   key={i.slug}
@@ -209,10 +210,10 @@ export default async function IntegrationPage({ params }: Props) {
                   {i.name}
                 </Link>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </div>
-      </div>
+      </Box>
     </>
   )
 }

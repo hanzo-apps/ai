@@ -14,6 +14,7 @@ import {
 import { Button } from '@hanzo/ui'
 import { useAnalytics } from '@hanzo/event/react'
 import { EVENTS } from '@hanzo/event'
+import { Box } from '@hanzo/ui'
 
 const ZEN5_MODELS = [
   { id: 'zen5', label: 'zen5', description: 'Flagship next-gen foundation model' },
@@ -44,11 +45,11 @@ const MOVE_UP = [
 export default function ResearchAccessPage() {
   const analytics = useAnalytics()
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       <main>
         {/* Hero Section */}
         <section className="relative pt-28 pb-12 px-4 md:px-8 lg:px-12">
-          <div className="max-w-3xl mx-auto text-center">
+          <Box className="max-w-3xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -107,12 +108,12 @@ export default function ResearchAccessPage() {
                 <Link href="/zen">Explore Zen models</Link>
               </Button>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Move up the waitlist */}
         <section className="pb-16 px-4 md:px-8 lg:px-12">
-          <div className="max-w-3xl mx-auto">
+          <Box className="max-w-3xl mx-auto">
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -132,7 +133,7 @@ export default function ResearchAccessPage() {
               Earn points to jump ahead. The more you contribute, the sooner you
               get in.
             </motion.p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Box className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {MOVE_UP.map((item, i) => (
                 <motion.div
                   key={item.title}
@@ -151,13 +152,13 @@ export default function ResearchAccessPage() {
                   </p>
                 </motion.div>
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Zen 5 lineup */}
         <section className="pb-16 px-4 md:px-8 lg:px-12">
-          <div className="max-w-2xl mx-auto">
+          <Box className="max-w-2xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -166,7 +167,7 @@ export default function ResearchAccessPage() {
               className="grid grid-cols-1 sm:grid-cols-2 gap-2"
             >
               {ZEN5_MODELS.map((model) => (
-                <div
+                <Box
                   key={model.id}
                   className="flex items-start gap-3 p-3 rounded-lg border border-border bg-secondary/30"
                 >
@@ -179,15 +180,15 @@ export default function ResearchAccessPage() {
                       {model.description}
                     </p>
                   </div>
-                </div>
+                </Box>
               ))}
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Open weights */}
         <section className="pb-24 px-4 md:px-8 lg:px-12">
-          <div className="max-w-2xl mx-auto text-center">
+          <Box className="max-w-2xl mx-auto text-center">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -205,9 +206,9 @@ export default function ResearchAccessPage() {
                 Browse on HuggingFace <ExternalLink className="w-3 h-3" />
               </a>
             </motion.p>
-          </div>
+          </Box>
         </section>
       </main>
-    </div>
+    </Box>
   )
 }

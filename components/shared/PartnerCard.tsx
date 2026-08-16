@@ -2,6 +2,7 @@ import React from "react";
 import { ExternalLink, Mail, Phone, Users, Shield, LucideIcon } from "lucide-react";
 import { Button } from "@hanzo/ui";
 import { BrandColor, partners } from "@/lib/constants/brand";
+import { Box } from '@hanzo/ui'
 
 interface PartnerCardProps {
   name: string;
@@ -55,12 +56,12 @@ const PartnerCard: React.FC<PartnerCardProps> = ({
 
   return (
     <div className={`p-6 ${cardClass} transition-colors h-full`}>
-      <div className="p-3 rounded-lg bg-primary/20 self-start inline-block mb-4">
+      <Box className="p-3 rounded-lg bg-primary/20 self-start inline-block mb-4">
         <Icon className={`h-6 w-6 ${iconClass}`} strokeWidth={1.5} />
-      </div>
+      </Box>
       <h3 className="text-2xl font-bold text-foreground mb-3">{name}</h3>
       <p className="text-foreground/80 mb-5">{description}</p>
-      <div className="flex flex-wrap gap-3">
+      <Box className="flex flex-wrap gap-3">
         {primaryAction && (
           <Button asChild>
             <a
@@ -81,7 +82,7 @@ const PartnerCard: React.FC<PartnerCardProps> = ({
             </a>
           </Button>
         )}
-      </div>
+      </Box>
     </div>
   );
 };
@@ -96,7 +97,7 @@ interface PartnersSectionProps {
 export const PartnersSection: React.FC<PartnersSectionProps> = ({ className = "" }) => {
   return (
     <div className={`bg-gradient-to-br from-neutral-900/70 to-background/90 p-10 rounded-2xl border border-neutral-800 ${className}`}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <Box className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <PartnerCard
           name={partners.hanzoAgency.name}
           description={partners.hanzoAgency.description}
@@ -131,7 +132,7 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({ className = ""
             type: "phone",
           }}
         />
-      </div>
+      </Box>
     </div>
   );
 };

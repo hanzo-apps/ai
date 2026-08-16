@@ -16,6 +16,7 @@ import {
   Layers,
   Cloud,
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const features = [
   {
@@ -59,12 +60,12 @@ const useCases = [
 
 const HanzoIPFS = () => {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
 
       {/* Hero */}
       <section className="pt-24 pb-16 px-4 md:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -81,9 +82,9 @@ const HanzoIPFS = () => {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="max-w-5xl mx-auto relative z-10 text-center">
+        <Box className="max-w-5xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -146,13 +147,13 @@ const HanzoIPFS = () => {
               Documentation
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Features */}
       <section className="py-20 px-4 md:px-8 border-t border-border">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Box className="max-w-6xl mx-auto">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -162,34 +163,34 @@ const HanzoIPFS = () => {
                 transition={{ delay: index * 0.05 }}
                 className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-border transition-colors"
               >
-                <div className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center mb-4">
+                <Box className="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center mb-4">
                   <feature.icon className="w-6 h-6 text-foreground/70" />
-                </div>
+                </Box>
                 <h3 className="text-xl font-semibold text-foreground mb-2">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.description}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Code Example */}
       <section className="py-20 px-4 md:px-8 bg-background">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="bg-secondary border border-border rounded-xl overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-              </div>
+            <Box className="flex items-center gap-2 px-4 py-2 border-b border-border">
+              <Box className="flex gap-1.5">
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+              </Box>
               <span className="text-xs text-muted-foreground ml-2">ipfs.ts</span>
-            </div>
+            </Box>
             <pre className="p-4 overflow-x-auto text-sm">
               <code className="text-foreground/80">{`import { HanzoIPFS } from "@hanzo/storage";
 
@@ -225,12 +226,12 @@ await ipfs.pinFromURL("https://example.com/image.png");
 await ipfs.unpin(cid);`}</code>
             </pre>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Use Cases */}
       <section className="py-20 px-4 md:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -240,7 +241,7 @@ await ipfs.unpin(cid);`}</code>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Use Cases</h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <Box className="grid md:grid-cols-2 gap-4">
             {useCases.map((useCase, index) => (
               <motion.div
                 key={useCase.name}
@@ -254,13 +255,13 @@ await ipfs.unpin(cid);`}</code>
                 <p className="text-sm text-muted-foreground">{useCase.description}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 md:px-8 border-t border-border">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -274,7 +275,7 @@ await ipfs.unpin(cid);`}</code>
               1GB free. Pay only for what you pin. No egress fees.
             </p>
 
-            <div className="flex flex-wrap justify-center gap-4">
+            <Box className="flex flex-wrap justify-center gap-4">
               <a
                 href="https://console.hanzo.ai"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-primary/10 hover:bg-primary/10 text-foreground font-medium rounded-full transition-colors"
@@ -288,13 +289,13 @@ await ipfs.unpin(cid);`}</code>
               >
                 View Pricing
               </a>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       
-    </div>
+    </Box>
   );
 };
 

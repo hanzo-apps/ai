@@ -11,6 +11,7 @@ import {
   type Primitive,
 } from '@/lib/data/cloud-primitives'
 import { Mockup } from '@/components/product/Mockup'
+import { Box } from '@hanzo/ui'
 
 const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
   ga: 'GA',
@@ -34,12 +35,12 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
   if (!category) return null
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       <section className="relative overflow-hidden">
         {/* Hero radial gradient — design-system standard */}
         <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.06)_0%,transparent_70%)] blur-[100px]" />
 
-        <div className="mx-auto max-w-6xl px-6 pt-28 pb-16">
+        <Box className="mx-auto max-w-6xl px-6 pt-28 pb-16">
           {/* Breadcrumb — reads like a cloud console path */}
           <nav className="mb-8 flex items-center gap-2 text-xs text-muted-foreground">
             {/* A breadcrumb is a control, so it says so. `hz-tap` states the
@@ -65,7 +66,7 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
                 tier below the tagline above it. */}
             <p className="mt-3 text-sm text-muted-foreground/80">Open source · On-chain settlement</p>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* The category, shown rather than described — when a shot was captured
@@ -88,7 +89,7 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
 
       {/* Product grid — every leaf in the category, each a real link */}
       <section className="mx-auto max-w-6xl px-6 pb-20">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <Box className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {category.items.map((item, i) => {
             const Icon = item.icon
             const external = isExternal(item)
@@ -99,11 +100,11 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
                 transition={{ duration: 0.4, delay: i * 0.05 }}
                 className="group h-full rounded-xl border border-transparent p-5 transition-colors duration-200 hover:border-white/15 motion-reduce:transition-none"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-primary/5">
+                <Box className="flex items-start justify-between">
+                  <Box className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-primary/5">
                     <Icon className="h-5 w-5 text-foreground" />
-                  </div>
-                  <div className="flex items-center gap-2">
+                  </Box>
+                  <Box className="flex items-center gap-2">
                     {item.status && (
                       <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] text-foreground/60">
                         {STATUS_LABEL[item.status]}
@@ -114,8 +115,8 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
                     ) : (
                       <ArrowRight className="h-4 w-4 text-muted-foreground/40 transition-colors group-hover:text-foreground" />
                     )}
-                  </div>
-                </div>
+                  </Box>
+                </Box>
                 <h3 className="mt-4 flex items-center gap-2 font-semibold transition-colors group-hover:text-foreground">
                   {item.title}
                 </h3>
@@ -133,11 +134,11 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
               </Link>
             )
           })}
-        </div>
+        </Box>
 
         {/* Positioning + CTAs */}
         <p className="mt-14 text-sm text-muted-foreground">{POSITIONING}</p>
-        <div className="mt-6 flex flex-wrap gap-3">
+        <Box className="mt-6 flex flex-wrap gap-3">
           <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Link href="/signup">
               Get started
@@ -160,14 +161,14 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
               Source
             </a>
           </Button>
-        </div>
+        </Box>
       </section>
 
       {/* Other categories — keep the whole taxonomy one click away */}
       <section className="border-t border-border">
-        <div className="mx-auto max-w-6xl px-6 py-12">
+        <Box className="mx-auto max-w-6xl px-6 py-12">
           <p className="mb-5 text-xs uppercase tracking-widest text-muted-foreground">Explore the cloud</p>
-          <div className="flex flex-wrap gap-2">
+          <Box className="flex flex-wrap gap-2">
             {cloudCategories
               .filter((c) => c.title !== category.title)
               .map((c) => (
@@ -179,10 +180,10 @@ export function CloudCategoryOverview({ slug }: { slug: string }) {
                   {c.title}
                 </Link>
               ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
-    </div>
+    </Box>
   )
 }
 

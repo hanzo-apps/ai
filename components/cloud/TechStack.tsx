@@ -3,6 +3,7 @@
 
 import React from "react";
 import { motion } from "@/components/motion";
+import { Box } from '@hanzo/ui'
 const techStacks = [
   "Phoenix Framework",
   "SvelteKit",
@@ -18,8 +19,8 @@ const techStacks = [
 const TechStack = () => {
   return (
     <section id="learn-more" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-wrap justify-center gap-8 mb-16">
+      <Box className="max-w-7xl mx-auto">
+        <Box className="flex flex-wrap justify-center gap-8 mb-16">
           {techStacks.map((tech, index) => (
             <motion.div
               key={tech}
@@ -32,7 +33,7 @@ const TechStack = () => {
               {tech}
             </motion.div>
           ))}
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -58,7 +59,7 @@ const TechStack = () => {
             Build A Cloud For Developers
           </motion.a>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

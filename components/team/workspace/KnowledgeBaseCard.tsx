@@ -5,6 +5,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { FileText, Calendar, Bot } from "lucide-react";
 import { Badge } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const KnowledgeBaseCard = () => {
   return (
@@ -15,7 +16,7 @@ const KnowledgeBaseCard = () => {
       transition={{ duration: 0.5, delay: 0.3 }}
       className="bg-card border border-border rounded-xl overflow-hidden shadow-xl"
     >
-      <div className="border-b border-border p-3 flex items-center">
+      <Box className="border-b border-border p-3 flex items-center">
         <FileText className="h-5 w-5 mr-2" />
         <span className="font-medium text-foreground">Knowledge Base</span>
         <Badge
@@ -25,55 +26,55 @@ const KnowledgeBaseCard = () => {
         >
           Notion-style
         </Badge>
-      </div>
-      <div className="p-4">
-        <div className="bg-secondary/50 rounded-lg p-4">
-          <div className="mb-4 flex items-center justify-between">
+      </Box>
+      <Box className="p-4">
+        <Box className="bg-secondary/50 rounded-lg p-4">
+          <Box className="mb-4 flex items-center justify-between">
             <h3 className="font-medium text-foreground">Company Wiki</h3>
             <div className="flex items-center space-x-2">
-              <div className="text-xs text-foreground/70 flex items-center">
-                <div className="w-5 h-5 rounded-full flex items-center justify-center text-xs mr-1 text-primary-foreground">AI</div>
+              <Box className="text-xs text-foreground/70 flex items-center">
+                <Box className="w-5 h-5 rounded-full flex items-center justify-center text-xs mr-1 text-primary-foreground">AI</Box>
                 <span>Updating</span>
-              </div>
+              </Box>
             </div>
-          </div>
+          </Box>
 
           <div className="space-y-3">
-            <div className="p-2 bg-secondary/50 rounded-md border border-border">
-              <div className="flex items-center mb-1">
+            <Box className="p-2 bg-secondary/50 rounded-md border border-border">
+              <Box className="flex items-center mb-1">
                 <Calendar className="h-4 w-4 mr-2" />
                 <span className="font-medium text-foreground">Onboarding Process</span>
-              </div>
+              </Box>
               <p className="text-xs text-muted-foreground">
                 Step-by-step guide for new employees, updated automatically by HR Bot.
               </p>
-            </div>
+            </Box>
 
-            <div className="p-2 bg-secondary/50 rounded-md border border-border">
-              <div className="flex items-center mb-1">
+            <Box className="p-2 bg-secondary/50 rounded-md border border-border">
+              <Box className="flex items-center mb-1">
                 <FileText className="h-4 w-4 mr-2" />
                 <span className="font-medium text-foreground">Technical Documentation</span>
-              </div>
+              </Box>
               <p className="text-xs text-muted-foreground">
                 API references and architectural diagrams maintained by DevBot.
               </p>
-            </div>
+            </Box>
 
-            <div
+            <Box
               className="p-2 rounded-md"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)" }}
             >
-              <div className="flex items-center mb-1">
+              <Box className="flex items-center mb-1">
                 <Bot className="h-4 w-4 mr-2" />
                 <span className="font-medium text-foreground">AI Activity: Adding Marketing Guidelines</span>
-              </div>
-              <div className="flex items-center text-xs">
+              </Box>
+              <Box className="flex items-center text-xs">
                 <span>ContentBot is updating brand guidelines based on latest team meeting</span>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </motion.div>
   );
 };

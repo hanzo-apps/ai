@@ -5,11 +5,12 @@ import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { ArrowRight, Code, Terminal, Download } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 const GetStartedSection = () => {
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900/50 to-background">
-      <div className="max-w-5xl mx-auto text-center">
+      <Box className="max-w-5xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,17 +25,17 @@ const GetStartedSection = () => {
           </p>
 
           <div className="flex flex-col items-center justify-center space-y-8 mb-12">
-            <div className="bg-neutral-900/50 p-6 rounded-xl border border-neutral-800 w-full max-w-2xl">
-              <div className="flex items-center mb-3">
+            <Box className="bg-neutral-900/50 p-6 rounded-xl border border-neutral-800 w-full max-w-2xl">
+              <Box className="flex items-center mb-3">
                 <Terminal className="h-5 w-5 text-foreground/70 mr-2" />
                 <span className="text-sm text-muted-foreground">Installation Command</span>
-              </div>
-              <div className="font-mono text-lg bg-background/40 p-4 rounded-lg text-neutral-200 overflow-x-auto">
+              </Box>
+              <Box className="font-mono text-lg bg-background/40 p-4 rounded-lg text-neutral-200 overflow-x-auto">
                 curl https://datastore.hanzo.ai/ | sh
-              </div>
-            </div>
+              </Box>
+            </Box>
 
-            <div className="flex flex-wrap justify-center gap-6">
+            <Box className="flex flex-wrap justify-center gap-6">
               <Button size="lg" className="shadow-lg hover:shadow-xl transition-all">
                 <Download className="mr-2 h-5 w-5" />
                 Download
@@ -48,7 +49,7 @@ const GetStartedSection = () => {
                 <Code className="mr-2 h-5 w-5" />
                 View Docs
               </Button>
-            </div>
+            </Box>
           </div>
 
           <motion.div
@@ -62,7 +63,7 @@ const GetStartedSection = () => {
             </Button>
           </motion.div>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

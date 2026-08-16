@@ -16,6 +16,7 @@ import { EVENTS, isoWeek } from '@hanzo/event';
 import { takeSignupIntent } from '@/lib/analytics/signup-intent';
 import { Spinner } from '@hanzo/gui';
 import { useRouter } from 'next/navigation';
+import { Box } from '@hanzo/ui'
 
 const AuthCallbackInner = () => {
   const router = useRouter();
@@ -57,11 +58,11 @@ const AuthCallbackInner = () => {
   }, [handleCallback, router, analytics]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background">
+    <Box className="min-h-screen flex flex-col items-center justify-center bg-background">
       <div className="text-center space-y-6">
         {error ? (
           <>
-            <div className="text-foreground/70 text-xl font-medium">{error}</div>
+            <Box className="text-foreground/70 text-xl font-medium">{error}</Box>
             <p className="text-muted-foreground">Redirecting to login...</p>
           </>
         ) : (
@@ -74,12 +75,12 @@ const AuthCallbackInner = () => {
           </>
         )}
       </div>
-    </div>
+    </Box>
   );
 };
 
 const AuthCallback = () => (
-  <Suspense fallback={<div className="min-h-screen bg-background" />}>
+  <Suspense fallback={<Box className="min-h-screen bg-background" />}>
     <AuthCallbackInner />
   </Suspense>
 );

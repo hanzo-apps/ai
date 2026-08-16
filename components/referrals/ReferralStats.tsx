@@ -2,6 +2,7 @@
 import React from 'react';
 import { Mail, User, DollarSign, Clock } from 'lucide-react';
 import { ReferralStats } from './types';
+import { Box } from '@hanzo/ui'
 
 interface ReferralStatsProps {
   referralStats: ReferralStats;
@@ -9,55 +10,55 @@ interface ReferralStatsProps {
 
 const ReferralStatsComponent = ({ referralStats }: ReferralStatsProps) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
-        <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
+    <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <Box className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
+        <Box className="flex items-center gap-4">
+          <Box className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
             <Mail className="h-6 w-6 text-muted-foreground" />
-          </div>
+          </Box>
           <div>
-            <div className="text-sm text-muted-foreground">Total Invited</div>
-            <div className="text-2xl font-bold">{referralStats.totalInvited}</div>
+            <Box className="text-sm text-muted-foreground">Total Invited</Box>
+            <Box className="text-2xl font-bold">{referralStats.totalInvited}</Box>
           </div>
-        </div>
-      </div>
+        </Box>
+      </Box>
       
-      <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
-        <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
+      <Box className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
+        <Box className="flex items-center gap-4">
+          <Box className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
             <User className="h-6 w-6 text-muted-foreground" />
-          </div>
+          </Box>
           <div>
-            <div className="text-sm text-muted-foreground">Signed Up</div>
-            <div className="text-2xl font-bold">{referralStats.signedUp}</div>
+            <Box className="text-sm text-muted-foreground">Signed Up</Box>
+            <Box className="text-2xl font-bold">{referralStats.signedUp}</Box>
           </div>
-        </div>
-      </div>
+        </Box>
+      </Box>
       
-      <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
-        <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
+      <Box className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
+        <Box className="flex items-center gap-4">
+          <Box className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
             <DollarSign className="h-6 w-6 text-muted-foreground" />
-          </div>
+          </Box>
           <div>
-            <div className="text-sm text-muted-foreground">Credits Earned</div>
-            <div className="text-2xl font-bold">${referralStats.creditsEarned}</div>
+            <Box className="text-sm text-muted-foreground">Credits Earned</Box>
+            <Box className="text-2xl font-bold">${referralStats.creditsEarned}</Box>
           </div>
-        </div>
-      </div>
+        </Box>
+      </Box>
       
-      <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
-        <div className="flex items-center gap-4">
-          <div className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
+      <Box className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
+        <Box className="flex items-center gap-4">
+          <Box className="h-12 w-12 rounded-full bg-neutral-800 flex items-center justify-center">
             <Clock className="h-6 w-6 text-muted-foreground" />
-          </div>
+          </Box>
           <div>
-            <div className="text-sm text-muted-foreground">Pending</div>
-            <div className="text-2xl font-bold">{referralStats.pending}</div>
+            <Box className="text-sm text-muted-foreground">Pending</Box>
+            <Box className="text-2xl font-bold">{referralStats.pending}</Box>
           </div>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

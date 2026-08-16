@@ -13,6 +13,7 @@ import {
 import { Button } from "@hanzo/ui";
 import { ProductFooter } from "@/components/products/ProductFooter";
 import { BRAND } from "@/lib/constants/brand";
+import { Box } from '@hanzo/ui'
 
 export interface CodeExample {
   language: string;
@@ -81,23 +82,23 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
 
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-4 md:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-          <div
+        <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+          <Box
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
             style={{
               background: `radial-gradient(circle, ${accentColor} 0%, transparent 70%)`,
               filter: "blur(100px)",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <Box className="max-w-6xl mx-auto relative z-10">
+          <Box className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left: Product Info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -105,7 +106,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
               transition={{ duration: 0.5 }}
             >
               {/* Available Badge */}
-              <div
+              <Box
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6"
                 style={{ borderColor: `${accentColor}4d`, backgroundColor: `${accentColor}1a` }}
               >
@@ -113,7 +114,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
                 <span className="text-sm font-medium" style={{ color: accentColor }}>
                   Available Now
                 </span>
-              </div>
+              </Box>
 
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-4">
                 <span className="text-foreground">{name}</span>
@@ -122,25 +123,25 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
               <p className="text-lg text-muted-foreground mb-8">{description}</p>
 
               {/* Quick Features */}
-              <div className="grid sm:grid-cols-2 gap-4 mb-8">
+              <Box className="grid sm:grid-cols-2 gap-4 mb-8">
                 {features.slice(0, 4).map((feature, idx) => {
                   const Icon = feature.icon;
                   return (
-                    <div key={idx} className="flex items-start gap-3">
-                      <div
+                    <Box key={idx} className="flex items-start gap-3">
+                      <Box
                         className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
                         style={{ backgroundColor: `${accentColor}1a` }}
                       >
                         <Icon className="w-4 h-4" style={{ color: accentColor }} />
-                      </div>
+                      </Box>
                       <div>
                         <h3 className="font-medium text-foreground text-sm">{feature.title}</h3>
                         <p className="text-xs text-muted-foreground">{feature.description}</p>
                       </div>
-                    </div>
+                    </Box>
                   );
                 })}
-              </div>
+              </Box>
 
               <Link
                 href="/blockchain"
@@ -159,32 +160,32 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
               className="rounded-2xl border border-border bg-secondary/80 p-6 md:p-8"
             >
               {/* Quick Start */}
-              <div className="flex items-center gap-3 mb-6">
-                <div
+              <Box className="flex items-center gap-3 mb-6">
+                <Box
                   className="w-12 h-12 rounded-xl flex items-center justify-center"
                   style={{ backgroundColor: `${accentColor}1a` }}
                 >
                   <ProductIcon className="w-6 h-6" style={{ color: accentColor }} />
-                </div>
+                </Box>
                 <div>
                   <h2 className="text-lg font-semibold text-foreground">Get Your API Key</h2>
                   <p className="text-sm text-muted-foreground">Start building in under 5 minutes</p>
                 </div>
-              </div>
+              </Box>
 
               {/* Performance Stats */}
-              <div className="grid grid-cols-3 gap-4 mb-6">
+              <Box className="grid grid-cols-3 gap-4 mb-6">
                 {[
                   { value: "HA", label: "Failover" },
                   { value: "<50ms", label: "Latency" },
                   { value: "100+", label: "Chains" },
                 ].map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <div className="text-xl font-bold text-foreground">{stat.value}</div>
-                    <div className="text-xs text-muted-foreground">{stat.label}</div>
-                  </div>
+                  <Box key={stat.label} className="text-center">
+                    <Box className="text-xl font-bold text-foreground">{stat.value}</Box>
+                    <Box className="text-xs text-muted-foreground">{stat.label}</Box>
+                  </Box>
                 ))}
-              </div>
+              </Box>
 
               {/* CTA Buttons */}
               <div className="space-y-3">
@@ -212,24 +213,24 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
               </p>
 
               {/* Trust Signals */}
-              <div className="mt-6 pt-6 border-t border-border">
+              <Box className="mt-6 pt-6 border-t border-border">
                 <p className="text-xs text-muted-foreground mb-3">Trusted by developers building:</p>
-                <div className="flex flex-wrap gap-2">
+                <Box className="flex flex-wrap gap-2">
                   {["DeFi", "NFTs", "Payments", "Gaming", "AI Agents"].map((tag) => (
                     <span key={tag} className="px-2 py-1 text-xs rounded-full border border-border text-muted-foreground">
                       {tag}
                     </span>
                   ))}
-                </div>
-              </div>
+                </Box>
+              </Box>
             </motion.div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Features Section */}
       <section className="py-24 px-4 md:px-8 bg-background">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -244,7 +245,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
@@ -256,25 +257,25 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
                   transition={{ duration: 0.4, delay: index * 0.05 }}
                   className="p-6 rounded-xl border border-border bg-secondary/50"
                 >
-                  <div
+                  <Box
                     className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
                     style={{ backgroundColor: `${accentColor}1a` }}
                   >
                     <Icon className="w-5 h-5" style={{ color: accentColor }} />
-                  </div>
+                  </Box>
                   <h3 className="font-semibold text-foreground mb-2">{feature.title}</h3>
                   <p className="text-sm text-muted-foreground">{feature.description}</p>
                 </motion.div>
               );
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Code Examples - Polyglot */}
       {(codeExamples && codeExamples.length > 0) && (
         <section className="py-24 px-4 md:px-8">
-          <div className="max-w-4xl mx-auto">
+          <Box className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -296,7 +297,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
               className="rounded-xl border border-border bg-secondary/80 overflow-hidden"
             >
               {/* Language Tabs */}
-              <div className="flex items-center gap-1 px-4 py-2 border-b border-border bg-background overflow-x-auto">
+              <Box className="flex items-center gap-1 px-4 py-2 border-b border-border bg-background overflow-x-auto">
                 {codeExamples.map((example, idx) => (
                   <button
                     key={example.language}
@@ -310,30 +311,30 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
                     {example.language}
                   </button>
                 ))}
-              </div>
+              </Box>
               {/* File Header */}
-              <div className="flex items-center gap-2 px-4 py-2 border-b border-border bg-secondary/50">
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-primary/10" />
-                </div>
+              <Box className="flex items-center gap-2 px-4 py-2 border-b border-border bg-secondary/50">
+                <Box className="flex gap-1.5">
+                  <Box className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+                  <Box className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+                  <Box className="w-2.5 h-2.5 rounded-full bg-primary/10" />
+                </Box>
                 <span className="ml-2 text-xs text-muted-foreground font-mono">
                   {codeExamples[activeTab]?.filename}
                 </span>
-              </div>
-              <div className="p-4 font-mono text-sm bg-background overflow-x-auto max-h-[500px]">
+              </Box>
+              <Box className="p-4 font-mono text-sm bg-background overflow-x-auto max-h-[500px]">
                 <pre className="text-foreground/80">{codeExamples[activeTab]?.code}</pre>
-              </div>
+              </Box>
             </motion.div>
-          </div>
+          </Box>
         </section>
       )}
 
       {/* Legacy single code example fallback */}
       {codeExample && !codeExamples && (
         <section className="py-24 px-4 md:px-8">
-          <div className="max-w-4xl mx-auto">
+          <Box className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -354,25 +355,25 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
               viewport={{ once: true }}
               className="rounded-xl border border-border bg-secondary/80 overflow-hidden"
             >
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-primary/10" />
-                  <div className="w-3 h-3 rounded-full bg-primary/10" />
-                  <div className="w-3 h-3 rounded-full bg-primary/10" />
-                </div>
+              <Box className="flex items-center gap-2 px-4 py-3 border-b border-border bg-background">
+                <Box className="flex gap-1.5">
+                  <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                  <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                  <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                </Box>
                 <span className="ml-2 text-xs text-muted-foreground font-mono">{codeExample.filename}</span>
-              </div>
-              <div className="p-4 font-mono text-sm bg-background overflow-x-auto">
+              </Box>
+              <Box className="p-4 font-mono text-sm bg-background overflow-x-auto">
                 <pre className="text-foreground/80">{codeExample.code}</pre>
-              </div>
+              </Box>
             </motion.div>
-          </div>
+          </Box>
         </section>
       )}
 
       {/* Use Cases */}
       <section className="py-24 px-4 md:px-8 bg-background">
-        <div className="max-w-6xl mx-auto">
+        <Box className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -384,7 +385,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <Box className="grid md:grid-cols-2 gap-6">
             {useCases.map((useCase, index) => (
               <motion.div
                 key={index}
@@ -398,14 +399,14 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
                 <p className="text-muted-foreground">{useCase.description}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Supported Chains */}
       {chains && chains.length > 0 && (
         <section className="py-24 px-4 md:px-8">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -424,21 +425,21 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
               className="flex flex-wrap justify-center gap-3"
             >
               {chains.map((chain) => (
-                <div
+                <Box
                   key={chain}
                   className="px-4 py-2 rounded-full border border-border bg-secondary/50 text-sm text-foreground/80"
                 >
                   {chain}
-                </div>
+                </Box>
               ))}
             </motion.div>
-          </div>
+          </Box>
         </section>
       )}
 
       {/* Bottom CTA */}
       <section className="py-24 px-4 md:px-8 border-t border-neutral-900">
-        <div className="max-w-4xl mx-auto text-center">
+        <Box className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -450,7 +451,7 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
             <p className="text-lg text-muted-foreground mb-8">
               Get your free API key and ship your first request in under 5 minutes. No credit card required.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Box className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
                 onClick={() => window.open('https://console.hanzo.ai', '_blank')}
                 className="px-6 py-3 rounded-lg font-medium text-black"
@@ -465,14 +466,14 @@ const BlockchainProductLayout: React.FC<BlockchainProductProps> = ({
               >
                 Explore All Web3 Products
               </Link>
-            </div>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Canonical OSS + Deploy footer — one block for every product page. */}
       <ProductFooter slug={slug} name={name} />
-    </div>
+    </Box>
   );
 };
 

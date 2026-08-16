@@ -4,6 +4,7 @@ import React from "react"
 import { Button } from "@hanzo/ui"
 import { Check } from "lucide-react"
 import { useServiceCard, formatServicePrice, formatUsageRate } from "@/lib/plans"
+import { Box } from '@hanzo/ui'
 
 // The tiers and usage rates come from the catalog (@hanzo/plans first paint,
 // GET /v1/pricing/services live). They used to be two arrays here, which is how
@@ -30,7 +31,7 @@ export default function VectorPricing() {
     note: u.note ?? "",
   }));
   return (
-    <div className="mb-20">
+    <Box className="mb-20">
       <h2 className="text-3xl font-bold mb-2">Hanzo Vector</h2>
       <p className="text-muted-foreground text-lg mb-8">
         Managed vector database for semantic search, RAG, and recommendation systems.
@@ -38,7 +39,7 @@ export default function VectorPricing() {
       </p>
 
       {/* Tier cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         {tiers.map((tier) => (
           <div
             key={tier.name}
@@ -56,10 +57,10 @@ export default function VectorPricing() {
             <h3 className="text-xl font-semibold mb-2">{tier.name}</h3>
             <p className="text-muted-foreground text-sm mb-4">{tier.description}</p>
 
-            <div className="mb-6">
+            <Box className="mb-6">
               <span className="text-3xl font-bold">{tier.price}</span>
               <span className="text-muted-foreground">{tier.period}</span>
-            </div>
+            </Box>
 
             <ul className="space-y-3 mb-6 flex-1">
               {tier.features.map((feature) => (
@@ -88,15 +89,15 @@ export default function VectorPricing() {
             </Button>
           </div>
         ))}
-      </div>
+      </Box>
 
       {/* Usage-based pricing */}
-      <div className="mb-8">
+      <Box className="mb-8">
         <h3 className="text-2xl font-semibold mb-2">Usage-based pricing</h3>
         <p className="text-muted-foreground text-sm mb-6">
           Metered on top of your base tier. Pro and Business plans include generous free allocations.
         </p>
-        <div className="overflow-x-auto rounded-xl border border-neutral-800/50">
+        <Box className="overflow-x-auto rounded-xl border border-neutral-800/50">
           <table className="w-full text-left">
             <thead>
               <tr className="border-b border-neutral-800 bg-neutral-900/30">
@@ -117,8 +118,8 @@ export default function VectorPricing() {
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   )
 }

@@ -4,11 +4,12 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Globe, Smartphone, Paintbrush } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const CheckoutExperience = () => {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)]">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -22,7 +23,7 @@ const CheckoutExperience = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+        <Box className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -30,7 +31,7 @@ const CheckoutExperience = () => {
             transition={{ duration: 0.5 }}
             className="bg-neutral-900/30 border border-neutral-800 rounded-lg overflow-hidden"
           >
-            <div className="p-6">
+            <Box className="p-6">
               <h3 className="text-2xl font-bold mb-4">Global Payment Methods</h3>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start gap-2">
@@ -47,14 +48,14 @@ const CheckoutExperience = () => {
                 </li>
               </ul>
 
-              <div className="flex flex-wrap gap-2 mt-4">
+              <Box className="flex flex-wrap gap-2 mt-4">
                 {['Visa', 'Mastercard', 'Amex', 'PayPal', 'Apple Pay', 'Google Pay', 'iDEAL', 'Bancontact', 'SOFORT', '+190 more'].map((method, index) => (
                   <span key={index} className="inline-block px-3 py-1 bg-neutral-800 rounded-full text-sm text-foreground/80">
                     {method}
                   </span>
                 ))}
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
 
           <motion.div
@@ -64,28 +65,28 @@ const CheckoutExperience = () => {
             transition={{ duration: 0.5 }}
             className="flex flex-col justify-between bg-neutral-900/30 border border-neutral-800 rounded-lg overflow-hidden"
           >
-            <div className="p-6">
+            <Box className="p-6">
               <h3 className="text-2xl font-bold mb-4">Checkout Interface</h3>
               <p className="text-muted-foreground mb-6">
                 Fully customizable checkout UI that matches your brand and maximizes conversions.
               </p>
               
-              <div className="bg-neutral-900 border border-neutral-700 rounded-lg p-4 mb-4">
-                <div className="h-8 w-32 bg-neutral-800 rounded mb-3"></div>
-                <div className="grid grid-cols-2 gap-3 mb-3">
-                  <div className="h-10 bg-neutral-800 rounded"></div>
-                  <div className="h-10 bg-neutral-800 rounded"></div>
-                </div>
-                <div className="h-10 bg-neutral-800 rounded mb-3"></div>
-                <div className="h-10 bg-primary rounded"></div>
-              </div>
+              <Box className="bg-neutral-900 border border-neutral-700 rounded-lg p-4 mb-4">
+                <Box className="h-8 w-32 bg-neutral-800 rounded mb-3"></Box>
+                <Box className="grid grid-cols-2 gap-3 mb-3">
+                  <Box className="h-10 bg-neutral-800 rounded"></Box>
+                  <Box className="h-10 bg-neutral-800 rounded"></Box>
+                </Box>
+                <Box className="h-10 bg-neutral-800 rounded mb-3"></Box>
+                <Box className="h-10 bg-primary rounded"></Box>
+              </Box>
               
-              <div className="text-sm text-muted-foreground mt-2 text-center">Customizable checkout flow</div>
-            </div>
+              <Box className="text-sm text-muted-foreground mt-2 text-center">Customizable checkout flow</Box>
+            </Box>
           </motion.div>
-        </div>
+        </Box>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -93,9 +94,9 @@ const CheckoutExperience = () => {
             transition={{ duration: 0.5, delay: 0 }}
             className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <Globe className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold mb-3">Global Reach</h3>
             <p className="text-muted-foreground">
               Regional processors are connectors like any other, so entering a market is a routing rule rather than a new integration.
@@ -109,9 +110,9 @@ const CheckoutExperience = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <Smartphone className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold mb-3">Mobile Optimized</h3>
             <p className="text-muted-foreground">
               Responsive checkout flows designed for high conversion on all devices and screen sizes.
@@ -125,16 +126,16 @@ const CheckoutExperience = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
           >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
+            <Box className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
               <Paintbrush className="h-6 w-6 text-foreground" />
-            </div>
+            </Box>
             <h3 className="text-xl font-semibold mb-3">Fully Customizable</h3>
             <p className="text-muted-foreground">
               Customize every aspect of the checkout experience to match your brand identity.
             </p>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

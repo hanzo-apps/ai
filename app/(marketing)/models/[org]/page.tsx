@@ -11,6 +11,7 @@ import {
   MODALITY_STYLES,
   modelPagePath,
 } from '@/lib/models'
+import { Box } from '@hanzo/ui'
 
 export const revalidate = 3600
 
@@ -79,22 +80,22 @@ export default async function OrgPage({ params }: Props) {
 
   if (orgModels.length === 0) {
     return (
-      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-        <div className="text-center">
+      <Box className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <Box className="text-center">
           <h1 className="text-2xl font-bold mb-2">Provider not found</h1>
           <Link href="/models" className="text-muted-foreground hover:underline">
             ← Back to all models
           </Link>
-        </div>
-      </div>
+        </Box>
+      </Box>
     )
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       {/* Header */}
       <section className="pt-24 pb-12 px-4 border-b border-border">
-        <div className="max-w-5xl mx-auto">
+        <Box className="max-w-5xl mx-auto">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
             <Link href="/models" className="hover:text-foreground transition-colors">
@@ -104,20 +105,20 @@ export default async function OrgPage({ params }: Props) {
             <span className="text-foreground">{providerName}</span>
           </nav>
 
-          <div className="flex items-center gap-4 mb-6">
+          <Box className="flex items-center gap-4 mb-6">
             <ProviderMark org={org} size={48} />
             <div>
               <h1 className="text-3xl md:text-4xl font-bold">{providerName} Models via Hanzo AI</h1>
               <p className="text-muted-foreground mt-1">{orgModels.length} models available</p>
             </div>
-          </div>
+          </Box>
 
           <p className="text-muted-foreground max-w-2xl">
             Access all {orgModels.length} {providerName} model{orgModels.length !== 1 ? 's' : ''} through
             Hanzo's OpenAI-compatible API. Single API key, unified billing, no rate limit juggling.
           </p>
 
-          <div className="flex flex-wrap gap-3 mt-6">
+          <Box className="flex flex-wrap gap-3 mt-6">
             <Link
               href="/signup"
               className="px-5 py-2.5 rounded-lg bg-foreground text-background font-medium text-sm hover:opacity-90 transition-opacity"
@@ -130,14 +131,14 @@ export default async function OrgPage({ params }: Props) {
             >
               API Docs
             </Link>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Model grid */}
       <section className="py-12 px-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Box className="max-w-5xl mx-auto">
+          <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {orgModels.map((model) => {
               const ctx = getModelContext(model)
               return (
@@ -146,16 +147,16 @@ export default async function OrgPage({ params }: Props) {
                   href={modelPagePath(model.id)}
                   className="p-4 rounded-xl border border-border bg-secondary/30 hover:bg-secondary/50 transition-all group flex flex-col gap-3"
                 >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="font-medium text-sm leading-snug group-hover:text-foreground/80 transition-colors">
+                  <Box className="flex items-start justify-between gap-2">
+                    <Box className="font-medium text-sm leading-snug group-hover:text-foreground/80 transition-colors">
                       {model.name}
-                    </div>
+                    </Box>
                     {ctx && (
                       <span className="shrink-0 text-xs text-muted-foreground bg-secondary rounded px-1.5 py-0.5">
                         {formatContext(ctx)}
                       </span>
                     )}
-                  </div>
+                  </Box>
 
                   {model.description && (
                     <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
@@ -163,26 +164,26 @@ export default async function OrgPage({ params }: Props) {
                     </p>
                   )}
 
-                  <div className="flex flex-wrap gap-1 mt-auto">
+                  <Box className="flex flex-wrap gap-1 mt-auto">
                     {(model.modalities ?? []).slice(0, 3).map((m) => (
                       <ModalityBadge key={m} modality={m} />
                     ))}
-                  </div>
+                  </Box>
                 </Link>
               )
             })}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* CTA */}
       <section className="py-12 px-4 border-t border-border bg-secondary/10">
-        <div className="max-w-2xl mx-auto text-center">
+        <Box className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl font-bold mb-3">Use {providerName} models via Hanzo</h2>
           <p className="text-muted-foreground mb-6">
             One API key. Unified billing. OpenAI-compatible. Works with every existing SDK.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <Box className="flex flex-wrap justify-center gap-3">
             <Link
               href="/signup"
               className="px-6 py-3 rounded-lg bg-foreground text-background font-medium text-sm hover:opacity-90 transition-opacity"
@@ -195,9 +196,9 @@ export default async function OrgPage({ params }: Props) {
             >
               Browse All Models
             </Link>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
-    </div>
+    </Box>
   )
 }

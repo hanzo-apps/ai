@@ -6,24 +6,25 @@ import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { Github, Star, ArrowRight } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 const HeroSection = () => {
   return (
     <section className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 bg-[var(--black)] relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-background"></div>
-      <div className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
+      <Box className="absolute inset-0 bg-gradient-to-b from-white/10 to-background"></Box>
+      <Box className="absolute top-20 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></Box>
+      <Box className="absolute bottom-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></Box>
       
-      <div className="max-w-7xl mx-auto relative z-10">
+      <Box className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <div className="inline-block px-4 py-1 mb-6 rounded-full bg-primary/10 border border-white/50 text-foreground/70 text-sm font-medium">
+          <Box className="inline-block px-4 py-1 mb-6 rounded-full bg-primary/10 border border-white/50 text-foreground/70 text-sm font-medium">
             Multi-Agent Simulation Framework
-          </div>
+          </Box>
           
           <ChromeText as="h1" className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
             Hanzo Bot
@@ -35,7 +36,7 @@ const HeroSection = () => {
             consistent personalities and knowledge.
           </p>
           
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
+          <Box className="flex flex-wrap justify-center gap-4 mb-8">
             <Button size="lg">
               Get Started
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -48,14 +49,14 @@ const HeroSection = () => {
             >
               <Github className="mr-2 h-5 w-5" />
               GitHub
-              <div className="ml-2 flex items-center">
+              <Box className="ml-2 flex items-center">
                 <Star className="h-4 w-4 fill-white text-foreground/60 mr-1" />
                 <span className="text-foreground/80 text-sm">Star</span>
-              </div>
+              </Box>
             </Button>
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

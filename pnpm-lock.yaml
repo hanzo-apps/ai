@@ -53,8 +53,8 @@ importers:
         specifier: ^1.4.12
         version: 1.4.12
       '@hanzo/ui':
-        specifier: ^8.0.98
-        version: 8.0.98(ejolrp37dq7tthfemyvkqx7w7q)
+        specifier: ^8.0.102
+        version: 8.0.102(ejolrp37dq7tthfemyvkqx7w7q)
       '@hanzo/usage':
         specifier: '>=0.1.6'
         version: 0.1.6(@hanzo/gui@8.1.1(react-dom@19.2.8(react@19.2.8))(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(@hanzogui/lucide-icons-2@8.1.1(react-dom@19.2.8(react@19.2.8))(react-native-svg@15.15.5(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react@19.2.8))(react@19.2.8)
@@ -1029,8 +1029,8 @@ packages:
       react:
         optional: true
 
-  '@hanzo/ui@8.0.98':
-    resolution: {integrity: sha512-y6dnYeDeTTRRYI9QfLNQmGClmU++jcfqZ8EvOVWzwIqriaRZpPnrulO50U736LEYHpPVhon9FEhs7Z9XubWZnA==}
+  '@hanzo/ui@8.0.102':
+    resolution: {integrity: sha512-9KrYcGeupb/yFrR/5rC9wSMoXctD4ERZxDzJMx/9ars/yXLmXkOGYNVK8PMK8YBsnH60E5YIsx2SHULjU7vGcw==}
     peerDependencies:
       '@hanzo/canvas': '>=0.1.0'
       '@hanzo/cd': '>=0.1.0'
@@ -4717,7 +4717,7 @@ snapshots:
       '@hanzogui/lucide-icons-2': 8.1.1(react-dom@19.2.8(react@19.2.8))(react-native-svg@15.15.5(react-native@0.86.2(@babel/core@8.0.1)(@react-native/metro-config@0.86.2(@babel/core@8.0.1))(@types/react@19.2.18)(react@19.2.8))(react@19.2.8))(react@19.2.8)
       react: 19.2.8
 
-  '@hanzo/ui@8.0.98(ejolrp37dq7tthfemyvkqx7w7q)':
+  '@hanzo/ui@8.0.102(ejolrp37dq7tthfemyvkqx7w7q)':
     dependencies:
       '@hanzo/appearance': 0.1.4(react@19.2.8)
       '@hanzo/brand': 1.4.6(react@19.2.8)

@@ -16,6 +16,7 @@ import {
   Wifi,
   RefreshCw,
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const modes = [
   {
@@ -75,7 +76,7 @@ const modes = [
 const WhyHanzoApp = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-background to-neutral-900/50">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -90,7 +91,7 @@ const WhyHanzoApp = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <Box className="grid md:grid-cols-2 gap-6">
           {modes.map((mode, index) => {
             const Icon = mode.icon;
             return (
@@ -102,14 +103,14 @@ const WhyHanzoApp = () => {
                 transition={{ delay: index * 0.1 }}
                 className="bg-secondary/80 border border-border rounded-xl p-6 hover:border-border transition-colors group"
               >
-                <div className="flex items-start gap-4">
-                  <div
+                <Box className="flex items-start gap-4">
+                  <Box
                     className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0"
                     style={{ backgroundColor: `${mode.color}20` }}
                   >
                     <Icon className="w-6 h-6" style={{ color: mode.color }} />
-                  </div>
-                  <div className="flex-1">
+                  </Box>
+                  <Box className="flex-1">
                     <h3 className="text-lg font-semibold text-foreground mb-1">{mode.title}</h3>
                     <p className="text-sm mb-3" style={{ color: mode.color }}>{mode.tagline}</p>
                     <p className="text-sm text-muted-foreground mb-4">{mode.description}</p>
@@ -117,20 +118,20 @@ const WhyHanzoApp = () => {
                       {mode.features.map((feature) => {
                         const FeatureIcon = feature.icon;
                         return (
-                          <div key={feature.text} className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Box key={feature.text} className="flex items-center gap-2 text-sm text-muted-foreground">
                             <FeatureIcon className="w-4 h-4 text-muted-foreground" />
                             <span>{feature.text}</span>
-                          </div>
+                          </Box>
                         );
                       })}
                     </div>
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               </motion.div>
             );
           })}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

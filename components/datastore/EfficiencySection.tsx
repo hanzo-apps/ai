@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 interface EfficiencyCardProps {
   title: string;
@@ -68,17 +69,17 @@ const EfficiencySection = () => {
 
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900/50">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+      <Box className="max-w-6xl mx-auto">
+        <Box className="text-center mb-16">
           <ChromeText as="h2" className="text-3xl md:text-5xl font-bold mb-6">
             Where the speed comes from
           </ChromeText>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto mb-8">
             Nothing exotic. Read less, decompress less, and touch memory in the order the CPU wants it.
           </p>
-        </div>
+        </Box>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {efficiencyItems.map((item, index) => (
             <EfficiencyCard
               key={index}
@@ -89,8 +90,8 @@ const EfficiencySection = () => {
               delay={item.delay}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

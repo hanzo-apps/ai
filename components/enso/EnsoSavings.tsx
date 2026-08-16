@@ -16,6 +16,7 @@ import { motion } from '@/components/motion'
 import AccuracyCostScatter, { type ScatterPoint } from '@/components/models/AccuracyCostScatter'
 import CostCalculator from '@/components/models/CostCalculator'
 import { MODELS, scatterRows, fmtPrice, ensoSavings, ensoTier, fmtReqCost, reqCost, HARD_FRACTION, TOP_RATE } from '@/lib/leaderboard'
+import { Box } from '@hanzo/ui'
 
 const fade = {
   initial: { opacity: 0, y: 20 },
@@ -87,22 +88,22 @@ const ESCALATION = [
 
 function Head({ n, title, sub }: { n: string; title: string; sub: string }) {
   return (
-    <div className="mb-6">
-      <div className="mb-1 flex items-baseline gap-3">
+    <Box className="mb-6">
+      <Box className="mb-1 flex items-baseline gap-3">
         <span className="font-mono text-sm font-semibold text-neutral-500">{n}</span>
         <h3 className="text-2xl font-bold text-white">{title}</h3>
-      </div>
+      </Box>
       <p className="max-w-3xl text-sm leading-relaxed text-neutral-400">{sub}</p>
-    </div>
+    </Box>
   )
 }
 
 export default function EnsoSavings() {
   return (
     <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-5xl">
+      <Box className="mx-auto max-w-5xl">
         <motion.div {...fade} transition={{ duration: 0.5 }} className="mb-12 text-center">
-          <div className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">Efficiency &amp; savings</div>
+          <Box className="mb-3 text-xs font-semibold uppercase tracking-widest text-neutral-500">Efficiency &amp; savings</Box>
           <h2 className="text-3xl font-bold text-white md:text-4xl">The savings are the product</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-400">
             Enso delivers frontier accuracy and bills a fraction of what always calling a top model costs.
@@ -114,12 +115,12 @@ export default function EnsoSavings() {
         {/* KPI band */}
         <motion.div {...fade} transition={{ duration: 0.5 }} className="grid grid-cols-2 gap-3 md:grid-cols-4">
           {KPIS.map((kpi) => (
-            <div key={kpi.k} className="rounded-xl border border-neutral-800 bg-neutral-900/50 p-4">
-              <div className="flex items-baseline gap-1.5">
-                <div className="text-2xl font-bold text-white md:text-3xl">{kpi.v}</div>
-              </div>
-              <div className="mt-2 font-mono text-[10px] uppercase leading-snug tracking-wider text-neutral-500">{kpi.k}</div>
-            </div>
+            <Box key={kpi.k} className="rounded-xl border border-neutral-800 bg-neutral-900/50 p-4">
+              <Box className="flex items-baseline gap-1.5">
+                <Box className="text-2xl font-bold text-white md:text-3xl">{kpi.v}</Box>
+              </Box>
+              <Box className="mt-2 font-mono text-[10px] uppercase leading-snug tracking-wider text-neutral-500">{kpi.k}</Box>
+            </Box>
           ))}
         </motion.div>
         <p className="mt-3 text-xs leading-relaxed text-neutral-600">
@@ -134,9 +135,9 @@ export default function EnsoSavings() {
             title="Accuracy at cost"
             sub={`The goal is the top-left: high accuracy, low cost. enso-ultra sits there — 98.0% GPQA-Diamond (Hanzo-measured), at ${fmtPrice(ULTRA.price)}/MTok against fable-5 at $42 and ${DEAREST.model} at ${fmtPrice(DEAREST.price)}, both of which score lower. Pro and Flash trade accuracy for even lower cost.`}
           />
-          <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 md:p-6">
+          <Box className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-4 md:p-6">
             <AccuracyCostScatter points={SCATTER} />
-          </div>
+          </Box>
           <p className="mt-4 border-l-2 border-neutral-700 pl-3 text-sm leading-relaxed text-neutral-500">
             A solid ring is Hanzo-measured; a dashed ring is vendor-reported. enso-ultra (98.0%) leads the field on
             accuracy at {fmtPrice(ULTRA.price)}/MTok — the win is accuracy-per-dollar across the three tiers.
@@ -150,7 +151,7 @@ export default function EnsoSavings() {
             title="Frontier accuracy without frontier prices"
             sub="Top-tier results without paying a top-tier rate on every request. Output price per million tokens across models in the field:"
           />
-          <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-5 md:p-6">
+          <Box className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-5 md:p-6">
             <div className="space-y-3">
               {COORD.map((c) => (
                 // The bar is the only thing on this row that carries a quantity, so it is the
@@ -160,10 +161,10 @@ export default function EnsoSavings() {
                 // below `sm` the row stacks: name and price share the top line, the bar spans
                 // the full width beneath it and measures 316px instead of 92px.
                 <div key={c.name} className="grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-2 sm:grid-cols-[10rem_1fr_4.5rem]">
-                  <div className="text-left text-sm sm:text-right">
+                  <Box className="text-left text-sm sm:text-right">
                     <span className={c.banned ? 'font-semibold text-white' : 'text-neutral-300'}>{c.name}</span>
                     {c.banned && <span className="block font-mono text-[10px] text-neutral-500">not used to coordinate</span>}
-                  </div>
+                  </Box>
                   <div className="col-span-2 row-start-2 h-6 overflow-hidden rounded bg-black/40 sm:col-span-1 sm:col-start-2 sm:row-start-1">
                     <div
                       className={`h-full rounded ${c.banned ? 'bg-neutral-600' : 'bg-white'}`}
@@ -174,11 +175,11 @@ export default function EnsoSavings() {
                 </div>
               ))}
             </div>
-            <div className="mt-6 text-center">
+            <Box className="mt-6 text-center">
               <span className="text-4xl font-bold text-white">~{COORD_RATIO}×</span>
               <span className="ml-2 text-sm text-neutral-400">cheaper coordination — for competitive quality</span>
-            </div>
-          </div>
+            </Box>
+          </Box>
           <p className="mt-4 border-l-2 border-neutral-700 pl-3 text-sm leading-relaxed text-neutral-500">
             fable-5 costs {fmtPrice(COORD_MAX)}/MTok and scores 81.3% solo on our harness — a premium coordinator that
             is expensive <em>and</em> worse. The cheap models Enso coordinates run {fmtPrice(Math.min(...COORD.map((c) => c.price)))}–{fmtPrice(3.73)}/MTok:
@@ -193,19 +194,19 @@ export default function EnsoSavings() {
             title="Pay for what each request needs"
             sub="Simple requests cost little; only the hardest work costs more. You pick the tier, and Enso keeps every request inside that price/quality contract."
           />
-          <div className="flex flex-wrap gap-3">
+          <Box className="flex flex-wrap gap-3">
             {ESCALATION.map((s) => (
               <div
                 key={s.t}
                 className={`flex-1 rounded-xl border p-4 ${s.faint ? 'border-neutral-800 bg-black/30' : 'border-neutral-700 bg-neutral-900/60'}`}
                 style={{ minWidth: '10rem' }}
               >
-                <div className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">{s.t}</div>
+                <Box className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">{s.t}</Box>
                 <div className={`mt-1 text-2xl font-bold ${s.faint ? 'text-neutral-500' : 'text-white'}`}>{s.c}</div>
-                <div className="mt-1 text-xs text-neutral-500">{s.d}</div>
+                <Box className="mt-1 text-xs text-neutral-500">{s.d}</Box>
               </div>
             ))}
-          </div>
+          </Box>
           <p className="mt-4 border-l-2 border-neutral-700 pl-3 text-sm leading-relaxed text-neutral-500">
             Everyday requests cost a fraction of always paying the top rate — extra spend goes only to the hard fraction that needs it. Quality and cost are a property of
             the tier you choose, not a caller parameter. Per-request costs at billed token rates, 1K in / 1K out.
@@ -221,7 +222,7 @@ export default function EnsoSavings() {
           />
           <CostCalculator />
         </motion.div>
-      </div>
+      </Box>
     </section>
   )
 }

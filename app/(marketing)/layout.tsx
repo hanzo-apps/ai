@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { SiteHeader, SiteFooter } from '@/components/home/shell'
 import { AccountProvider } from '@/contexts/AccountContext'
 import { ogImages, twitterImages } from '@/lib/constants/og'
+import { Box } from '@hanzo/ui'
 
 const SITE_TITLE = 'Hanzo — the AI cloud for agents and apps'
 const SITE_DESCRIPTION = 'Build, deploy, and govern AI agents with unified access to models, MCP tools, memory, vector search, secure sandboxes, IAM, KMS, and audit logs. Open-source. Self-host or use the cloud.'
@@ -32,7 +33,7 @@ export default function MarketingLayout({
 }) {
   return (
     <AccountProvider>
-      <div className="min-h-screen bg-black text-white">
+      <Box className="min-h-screen bg-black text-white">
         {/* Keyboard users land on the nav first and would otherwise tab through
             every menu on every page before reaching the content. */}
         <a
@@ -44,7 +45,7 @@ export default function MarketingLayout({
         <SiteHeader surface="cloud" />
         <main id="main">{children}</main>
         <SiteFooter surface="cloud" />
-      </div>
+      </Box>
     </AccountProvider>
   )
 }

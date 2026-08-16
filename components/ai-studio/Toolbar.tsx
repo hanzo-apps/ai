@@ -3,6 +3,7 @@
 import React from "react";
 import { PanelLeft, MessageSquare, Save, Play, Share2, Download, Settings } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 interface ToolbarProps {
   showSidebar: boolean;
@@ -22,7 +23,7 @@ const Toolbar = ({
     // to shrink below its content, so the tab strip below pushed this header
     // 126px past a 390px viewport — and the page cannot scroll sideways
     // (globals.css clips it), so those tabs were simply unreachable on a phone.
-    <div className="bg-neutral-900/70 p-2 border-b border-neutral-800 flex items-center min-w-0">
+    <Box className="bg-neutral-900/70 p-2 border-b border-neutral-800 flex items-center min-w-0">
       <Button 
         variant="ghost" 
         size="icon"
@@ -60,7 +61,7 @@ const Toolbar = ({
           <Settings className="h-4 w-4" />
         </Button>
       </div>
-    </div>
+    </Box>
   );
 };
 

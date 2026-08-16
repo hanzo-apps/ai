@@ -9,6 +9,7 @@ import { Mail, MapPin, Calendar, Link as LinkIcon, Edit } from 'lucide-react';
 
 import AccountLayout from '@/components/account/AccountLayout';
 import { useRouter } from "next/navigation";
+import { Box } from '@hanzo/ui'
 
 const UserProfile = () => {
   const { user, currentOrganization } = useAccount();
@@ -35,38 +36,38 @@ const UserProfile = () => {
     <AccountLayout>
       <div className="space-y-8">
         {/* Profile Header */}
-        <div className="flex flex-col md:flex-row gap-8 items-start">
+        <Box className="flex flex-col md:flex-row gap-8 items-start">
           <Avatar className="h-32 w-32 border-4 border-border">
             <AvatarImage src={user.avatar} />
             <AvatarFallback className="text-4xl bg-primary">{user.name.charAt(0)}</AvatarFallback>
           </Avatar>
           
-          <div className="flex-1">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <Box className="flex-1">
+            <Box className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-bold">{user.name}</h1>
                 <p className="text-muted-foreground mt-1">{userProfile.bio}</p>
                 
-                <div className="flex flex-wrap gap-4 mt-4">
-                  <div className="flex items-center text-muted-foreground">
+                <Box className="flex flex-wrap gap-4 mt-4">
+                  <Box className="flex items-center text-muted-foreground">
                     <MapPin className="h-4 w-4 mr-2" />
                     {userProfile.location}
-                  </div>
-                  <div className="flex items-center text-muted-foreground">
+                  </Box>
+                  <Box className="flex items-center text-muted-foreground">
                     <Calendar className="h-4 w-4 mr-2" />
                     Joined {userProfile.joinedDate}
-                  </div>
-                  <div className="flex items-center text-muted-foreground">
+                  </Box>
+                  <Box className="flex items-center text-muted-foreground">
                     <Mail className="h-4 w-4 mr-2" />
                     {user.email}
-                  </div>
-                  <div className="flex items-center text-muted-foreground">
+                  </Box>
+                  <Box className="flex items-center text-muted-foreground">
                     <LinkIcon className="h-4 w-4 mr-2" />
                     <a href={userProfile.website || "#"} target="_blank" rel="noopener noreferrer" className="text-foreground hover:underline">
                       {userProfile.website.replace('https://', '')}
                     </a>
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               </div>
               
               <Button 
@@ -77,36 +78,36 @@ const UserProfile = () => {
                 <Edit className="h-4 w-4 mr-2" />
                 Edit Profile
               </Button>
-            </div>
-          </div>
-        </div>
+            </Box>
+          </Box>
+        </Box>
         
         {/* Organization Info */}
-        <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
+        <Box className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
           <h2 className="text-xl font-medium mb-4">Current Organization</h2>
           <div className="flex items-center space-x-4">
-            <div className="h-12 w-12 bg-neutral-800 rounded-lg flex items-center justify-center text-lg font-bold">
+            <Box className="h-12 w-12 bg-neutral-800 rounded-lg flex items-center justify-center text-lg font-bold">
               {currentOrganization?.name.charAt(0)}
-            </div>
+            </Box>
             <div>
-              <div className="font-medium text-lg">{currentOrganization?.name}</div>
-              <div className="text-sm text-muted-foreground">Role: {currentOrganization?.role}</div>
+              <Box className="font-medium text-lg">{currentOrganization?.name}</Box>
+              <Box className="text-sm text-muted-foreground">Role: {currentOrganization?.role}</Box>
             </div>
           </div>
-        </div>
+        </Box>
         
         {/* Projects */}
-        <div className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
+        <Box className="bg-neutral-900/30 border border-neutral-800 rounded-lg p-6">
           <h2 className="text-xl font-medium mb-4">Recent Projects</h2>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <Box className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {userProfile.projects.map(project => (
-              <div key={project.id} className="bg-neutral-800/50 rounded-lg p-4 hover:bg-neutral-800 transition-colors">
+              <Box key={project.id} className="bg-neutral-800/50 rounded-lg p-4 hover:bg-neutral-800 transition-colors">
                 <h3 className="font-medium">{project.name}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{project.description}</p>
-              </div>
+              </Box>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </div>
     </AccountLayout>
   );

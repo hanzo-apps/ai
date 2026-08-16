@@ -12,6 +12,7 @@ import {
   modelPagePath,
   type ModelData,
 } from '@/lib/models'
+import { Box } from '@hanzo/ui'
 
 export const revalidate = 3600
 
@@ -74,17 +75,17 @@ function ModalityBadge({ modality }: { modality: string }) {
 
 function CodeBlock({ code, lang }: { code: string; lang: string }) {
   return (
-    <div className="rounded-xl bg-background border border-border overflow-hidden">
-      <div className="flex items-center gap-2 px-4 py-2 border-b border-border bg-secondary/30">
+    <Box className="rounded-xl bg-background border border-border overflow-hidden">
+      <Box className="flex items-center gap-2 px-4 py-2 border-b border-border bg-secondary/30">
         <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
         <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
         <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
         <span className="ml-2 text-xs text-muted-foreground font-mono">{lang}</span>
-      </div>
+      </Box>
       <pre className="p-4 text-xs text-foreground/90 font-mono overflow-x-auto leading-relaxed">
         <code>{code}</code>
       </pre>
-    </div>
+    </Box>
   )
 }
 
@@ -187,14 +188,14 @@ export default async function ModelPage({ params }: Props) {
 
   if (!model) {
     return (
-      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-        <div className="text-center">
+      <Box className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <Box className="text-center">
           <h1 className="text-2xl font-bold mb-2">Model not found</h1>
           <Link href="/models" className="text-muted-foreground hover:underline">
             ← Back to all models
           </Link>
-        </div>
-      </div>
+        </Box>
+      </Box>
     )
   }
 
@@ -233,10 +234,10 @@ export default async function ModelPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="min-h-screen bg-background text-foreground">
+      <Box className="min-h-screen bg-background text-foreground">
         {/* Header */}
         <section className="pt-24 pb-12 px-4 border-b border-border">
-          <div className="max-w-4xl mx-auto">
+          <Box className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
             <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8 flex-wrap">
               <Link href="/models" className="hover:text-foreground transition-colors">
@@ -250,11 +251,11 @@ export default async function ModelPage({ params }: Props) {
               <span className="text-foreground">{modelSlug}</span>
             </nav>
 
-            <div className="flex items-start gap-4 mb-6">
+            <Box className="flex items-start gap-4 mb-6">
               <ProviderMark org={org} model={model.id} size={48} className="mt-1" />
               <div>
                 <h1 className="text-3xl md:text-4xl font-bold leading-tight">{model.name}</h1>
-                <div className="flex items-center gap-2 mt-2 flex-wrap">
+                <Box className="flex items-center gap-2 mt-2 flex-wrap">
                   <Link
                     href={`/models/${org}`}
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -266,9 +267,9 @@ export default async function ModelPage({ params }: Props) {
                       {model.tier}
                     </span>
                   )}
-                </div>
+                </Box>
               </div>
-            </div>
+            </Box>
 
             {model.description && (
               <p className="text-muted-foreground text-lg leading-relaxed max-w-3xl mb-6">
@@ -277,14 +278,14 @@ export default async function ModelPage({ params }: Props) {
             )}
 
             {model.modalities && model.modalities.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-6">
+              <Box className="flex flex-wrap gap-2 mb-6">
                 {model.modalities.map((m) => (
                   <ModalityBadge key={m} modality={m} />
                 ))}
-              </div>
+              </Box>
             )}
 
-            <div className="flex flex-wrap gap-3">
+            <Box className="flex flex-wrap gap-3">
               <Link
                 href="/signup"
                 className="px-5 py-2.5 rounded-lg bg-foreground text-background font-medium text-sm hover:opacity-90 transition-opacity"
@@ -323,17 +324,17 @@ export default async function ModelPage({ params }: Props) {
                   GitHub ↗
                 </a>
               )}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Specs + Code */}
         <section className="py-12 px-4">
-          <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
+          <Box className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
             {/* Spec table */}
-            <div className="lg:col-span-2">
+            <Box className="lg:col-span-2">
               <h2 className="text-lg font-semibold mb-4">Specifications</h2>
-              <div className="rounded-xl border border-border overflow-hidden">
+              <Box className="rounded-xl border border-border overflow-hidden">
                 <table className="w-full text-sm">
                   <tbody>
                     {specRows.map((row, i) => (
@@ -351,10 +352,10 @@ export default async function ModelPage({ params }: Props) {
                     ))}
                   </tbody>
                 </table>
-              </div>
+              </Box>
 
               {model.features && model.features.length > 0 && (
-                <div className="mt-6">
+                <Box className="mt-6">
                   <h3 className="text-sm font-semibold mb-3">Features</h3>
                   <ul className="space-y-2">
                     {model.features.map((f) => (
@@ -364,12 +365,12 @@ export default async function ModelPage({ params }: Props) {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </Box>
               )}
-            </div>
+            </Box>
 
             {/* Code examples */}
-            <div className="lg:col-span-3">
+            <Box className="lg:col-span-3">
               <h2 className="text-lg font-semibold mb-4">Quick Start</h2>
               <div className="space-y-4">
                 <CodeBlock code={ts} lang="TypeScript" />
@@ -377,18 +378,18 @@ export default async function ModelPage({ params }: Props) {
                 <CodeBlock code={curl} lang="cURL" />
                 <CodeBlock code={go} lang="Go" />
               </div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Related models */}
         {related.length > 0 && (
           <section className="py-12 px-4 border-t border-border bg-secondary/10">
-            <div className="max-w-4xl mx-auto">
+            <Box className="max-w-4xl mx-auto">
               <h2 className="text-lg font-semibold mb-6">
                 More from {providerName}
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {related.map((m) => {
                   const mCtx = getModelContext(m)
                   return (
@@ -397,43 +398,43 @@ export default async function ModelPage({ params }: Props) {
                       href={modelPagePath(m.id)}
                       className="p-3 rounded-xl border border-border bg-secondary/30 hover:bg-secondary/50 transition-all flex flex-col gap-2"
                     >
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="font-medium text-sm">{m.name}</div>
+                      <Box className="flex items-start justify-between gap-2">
+                        <Box className="font-medium text-sm">{m.name}</Box>
                         {mCtx && (
                           <span className="shrink-0 text-xs text-muted-foreground">
                             {formatContext(mCtx)}
                           </span>
                         )}
-                      </div>
+                      </Box>
                       {m.description && (
                         <p className="text-xs text-muted-foreground line-clamp-2">{m.description}</p>
                       )}
                     </Link>
                   )
                 })}
-              </div>
-              <div className="mt-6">
+              </Box>
+              <Box className="mt-6">
                 <Link
                   href={`/models/${org}`}
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   View all {providerName} models →
                 </Link>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </section>
         )}
 
         {/* CTA */}
         <section className="py-12 px-4 border-t border-border">
-          <div className="max-w-2xl mx-auto text-center">
+          <Box className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl font-bold mb-3">
               Use {model.name} via Hanzo AI
             </h2>
             <p className="text-muted-foreground mb-6">
               One API key. Every major model. OpenAI-compatible. Start free.
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
+            <Box className="flex flex-wrap justify-center gap-3">
               <Link
                 href="/signup"
                 className="px-6 py-3 rounded-lg bg-foreground text-background font-medium text-sm hover:opacity-90 transition-opacity"
@@ -446,10 +447,10 @@ export default async function ModelPage({ params }: Props) {
               >
                 Browse All Models
               </Link>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
-      </div>
+      </Box>
     </>
   )
 }

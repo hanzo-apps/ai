@@ -4,6 +4,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Bot, Braces, Users, Database, FileText, Image, Code, Layers } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const Features = () => {
   const features = [
@@ -51,7 +52,7 @@ const Features = () => {
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[var(--black)]">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,7 +66,7 @@ const Features = () => {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -80,8 +81,8 @@ const Features = () => {
               <p className="text-muted-foreground">{feature.description}</p>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

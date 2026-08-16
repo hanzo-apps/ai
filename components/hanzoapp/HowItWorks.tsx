@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Download, Settings, Rocket, ArrowRight } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const steps = [
   {
@@ -31,7 +32,7 @@ const steps = [
 const HowItWorks = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-5xl mx-auto">
+      <Box className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,42 +62,42 @@ const HowItWorks = () => {
                 className="grid lg:grid-cols-2 gap-8 items-center"
               >
                 <div className={isEven ? "lg:order-2" : ""}>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div
+                  <Box className="flex items-center gap-3 mb-4">
+                    <Box
                       className="w-8 h-8 rounded-lg flex items-center justify-center"
                       style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
                     >
                       <span className="text-sm font-bold">
                         {step.number}
                       </span>
-                    </div>
+                    </Box>
                     <Icon className="w-5 h-5 text-muted-foreground" />
-                  </div>
+                  </Box>
                   <h3 className="text-2xl font-bold text-foreground mb-3">{step.title}</h3>
                   <p className="text-muted-foreground mb-4">{step.description}</p>
                 </div>
 
                 <div className={isEven ? "lg:order-1" : ""}>
-                  <div className="bg-secondary/80 border border-border rounded-xl p-4">
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="flex gap-1.5">
-                        <div className="w-3 h-3 rounded-full bg-primary/10" />
-                        <div className="w-3 h-3 rounded-full bg-primary/10" />
-                        <div className="w-3 h-3 rounded-full bg-primary/10" />
-                      </div>
+                  <Box className="bg-secondary/80 border border-border rounded-xl p-4">
+                    <Box className="flex items-center gap-2 mb-3">
+                      <Box className="flex gap-1.5">
+                        <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                        <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                        <Box className="w-3 h-3 rounded-full bg-primary/10" />
+                      </Box>
                       <span className="text-xs text-muted-foreground font-mono">terminal</span>
-                    </div>
-                    <div className="font-mono text-sm">
+                    </Box>
+                    <Box className="font-mono text-sm">
                       <span className="text-muted-foreground">$ </span>
                       <span className="text-foreground/70">{step.code}</span>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
                 </div>
               </motion.div>
             );
           })}
         </div>
-      </div>
+      </Box>
     </section>
   );
 };

@@ -29,6 +29,7 @@ import SectionHeader from "@/components/zen/SectionHeader";
 import PartnerCard from "@/components/shared/PartnerCard";
 import ChromeText from "@/components/ui/chrome-text";
 import { partners } from "@/lib/constants/brand";
+import { Box } from '@hanzo/ui'
 
 const SolutionIndustries: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, number>>({});
@@ -50,8 +51,8 @@ const SolutionIndustries: React.FC = () => {
     const hasMore = industries.length > displayCount;
 
     return (
-      <div className="mb-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <Box className="mb-16">
+        <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence initial={false}>
             {displayItems.map((item, index) => {
               const itemName = typeof item === 'string' ? item : item.name;
@@ -66,12 +67,12 @@ const SolutionIndustries: React.FC = () => {
                   whileHover={{ y: -5 }}
                   className="relative group rounded-xl border border-neutral-800 bg-[var(--black)]/50 p-6 backdrop-blur-sm overflow-hidden"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-4">
+                  <Box className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <Box className="relative">
+                    <Box className="flex items-center justify-between mb-4">
                       <Icon className="h-6 w-6 text-foreground" strokeWidth={1.5} />
                       <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-                    </div>
+                    </Box>
                     <h3 className="text-xl font-semibold mb-2 group-hover:text-foreground transition-colors">
                       {typeof item === 'string' ? item : item.name}
                     </h3>
@@ -82,7 +83,7 @@ const SolutionIndustries: React.FC = () => {
                       }
                     </p>
                     
-                    <div className="flex flex-wrap gap-2 mt-4">
+                    <Box className="flex flex-wrap gap-2 mt-4">
                       <button
                         onClick={() => setActiveIndustry(itemName)}
                         className="text-xs flex items-center text-foreground hover:text-foreground/70"
@@ -95,13 +96,13 @@ const SolutionIndustries: React.FC = () => {
                       <a href="#" className="text-xs flex items-center text-foreground/70 hover:text-foreground">
                         <BookOpen className="h-3 w-3 mr-1" /> White paper
                       </a>
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
                 </motion.div>
               );
             })}
           </AnimatePresence>
-        </div>
+        </Box>
         {hasMore && (
           <motion.div 
             className="text-center mt-8"
@@ -118,7 +119,7 @@ const SolutionIndustries: React.FC = () => {
             </button>
           </motion.div>
         )}
-      </div>
+      </Box>
     );
   };
 
@@ -266,18 +267,18 @@ const SolutionIndustries: React.FC = () => {
         className="mb-20"
       >
         <div className={`bg-gradient-to-br ${industryCardClass} rounded-xl p-8 mb-10`}>
-          <div className="flex flex-col md:flex-row md:items-center gap-8">
-            <div className="bg-[var(--white)]/10 rounded-full p-6 inline-flex">
+          <Box className="flex flex-col md:flex-row md:items-center gap-8">
+            <Box className="bg-[var(--white)]/10 rounded-full p-6 inline-flex">
               {industry.icon}
-            </div>
+            </Box>
             <div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4">{activeIndustry} Solutions</h3>
               <p className="text-foreground/80">{industry.description}</p>
             </div>
-          </div>
+          </Box>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
+        <Box className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
           <div>
             <h4 className="text-xl font-semibold mb-6 flex items-center">
               <span className="bg-neutral-800 rounded-full h-8 w-8 inline-flex items-center justify-center mr-3 text-sm">1</span>
@@ -307,160 +308,160 @@ const SolutionIndustries: React.FC = () => {
               ))}
             </ul>
           </div>
-        </div>
+        </Box>
         
-        <div className="bg-gradient-to-br from-neutral-900/50 to-background/90 rounded-xl border border-neutral-800 p-8 mb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-            <div className="lg:col-span-3">
+        <Box className="bg-gradient-to-br from-neutral-900/50 to-background/90 rounded-xl border border-neutral-800 p-8 mb-10">
+          <Box className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            <Box className="lg:col-span-3">
               <h4 className="text-xl font-semibold mb-4">Case Study: {industry.caseStudy.title}</h4>
               <p className="text-foreground/80 mb-6">{industry.caseStudy.description}</p>
               <Button className="mb-8">Read Full Case Study <ArrowUpRight className="ml-2 h-4 w-4" /></Button>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <Box className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {industry.caseStudy.results.map((result, idx) => (
-                  <div key={idx} className="bg-[var(--black)]/40 p-4 rounded-lg border border-neutral-800">
+                  <Box key={idx} className="bg-[var(--black)]/40 p-4 rounded-lg border border-neutral-800">
                     <CheckCircle className="h-5 w-5 text-foreground mb-2" />
                     <p className="text-foreground/80">{result}</p>
-                  </div>
+                  </Box>
                 ))}
-              </div>
-            </div>
-            <div className="lg:col-span-2 flex items-center justify-center">
-              <div className="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 p-8 rounded-xl border border-neutral-700 flex flex-col items-center">
+              </Box>
+            </Box>
+            <Box className="lg:col-span-2 flex items-center justify-center">
+              <Box className="bg-gradient-to-br from-neutral-800/50 to-neutral-900/50 p-8 rounded-xl border border-neutral-700 flex flex-col items-center">
                 <Briefcase className="h-16 w-16 text-foreground mb-4" />
                 <span className="text-3xl font-bold text-[var(--white)] mb-2">25+</span>
                 <span className="text-foreground">{activeIndustry} Clients</span>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Box className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <a
             href="#"
             className="block p-6 bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 hover:border-white/30 transition-colors"
           >
-            <div className="flex items-center gap-3 mb-3">
+            <Box className="flex items-center gap-3 mb-3">
               <FileText className="h-5 w-5 text-foreground" />
               <h4 className="font-medium">White Paper</h4>
-            </div>
+            </Box>
             <p className="text-muted-foreground">
               Download our industry trends report: The Future of {activeIndustry} Technology
             </p>
-            <div className="mt-4 text-foreground flex items-center gap-1.5">
+            <Box className="mt-4 text-foreground flex items-center gap-1.5">
               Download Now <ArrowRight size={16} />
-            </div>
+            </Box>
           </a>
 
           <a
             href="#"
             className="block p-6 bg-gradient-to-br from-neutral-900/70 to-background/90 rounded-xl border border-neutral-800 hover:border-white/30 transition-colors"
           >
-            <div className="flex items-center gap-3 mb-3">
+            <Box className="flex items-center gap-3 mb-3">
               <BookOpen className="h-5 w-5 text-foreground/70" />
               <h4 className="font-medium">Webinar</h4>
-            </div>
+            </Box>
             <p className="text-muted-foreground">
               Register for our upcoming webinar: Digital Transformation in {activeIndustry}
             </p>
-            <div className="mt-4 text-foreground/70 flex items-center gap-1.5">
+            <Box className="mt-4 text-foreground/70 flex items-center gap-1.5">
               Register Now <ArrowRight size={16} />
-            </div>
+            </Box>
           </a>
-        </div>
+        </Box>
       </motion.div>
     );
   };
 
   const renderExpertiseSection = () => (
-    <div className="mb-20">
+    <Box className="mb-20">
       <SectionHeader 
         title="Industry Insights"
         description="Gain a competitive edge with our industry-specific expertise and proven methodologies tailored to your sector's unique challenges."
       />
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
-        <div className="bg-gradient-to-br from-white/20 to-white/10 p-8 rounded-xl border border-border">
+      <Box className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
+        <Box className="bg-gradient-to-br from-white/20 to-white/10 p-8 rounded-xl border border-border">
           <h3 className="text-2xl font-bold mb-4 text-[var(--white)]">Case Studies</h3>
           <p className="text-foreground/80 mb-6">
             See how we've helped organizations like yours achieve their goals through innovative solutions.
           </p>
           <div className="space-y-4">
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <FileText className="h-5 w-5 text-foreground mr-3" />
                 <span className="text-[var(--white)]">Financial Services Digital Transformation</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <FileText className="h-5 w-5 text-foreground mr-3" />
                 <span className="text-[var(--white)]">Healthcare AI Implementation</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <FileText className="h-5 w-5 text-foreground mr-3" />
                 <span className="text-[var(--white)]">Retail Analytics Platform</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
           </div>
-          <div className="mt-6 text-center">
+          <Box className="mt-6 text-center">
             <Button variant="outline">
               View all case studies <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
-          </div>
-        </div>
+          </Box>
+        </Box>
 
-        <div className="bg-gradient-to-br from-white/20 to-white/10 p-8 rounded-xl border border-border">
+        <Box className="bg-gradient-to-br from-white/20 to-white/10 p-8 rounded-xl border border-border">
           <h3 className="text-2xl font-bold mb-4 text-[var(--white)]">White Papers</h3>
           <p className="text-foreground/80 mb-6">
             Access our thought leadership and research on the latest industry trends and technologies.
           </p>
           <div className="space-y-4">
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <BookOpen className="h-5 w-5 text-foreground/70 mr-3" />
                 <span className="text-[var(--white)]">The Future of AI in Financial Services</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <BookOpen className="h-5 w-5 text-foreground/70 mr-3" />
                 <span className="text-[var(--white)]">Healthcare Interoperability Challenges</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
             <a href="#" className="flex items-center justify-between p-3 rounded-lg bg-[var(--black)]/40 hover:bg-[var(--black)]/60 transition-colors">
-              <div className="flex items-center">
+              <Box className="flex items-center">
                 <BookOpen className="h-5 w-5 text-foreground/70 mr-3" />
                 <span className="text-[var(--white)]">Digital Transformation in Retail</span>
-              </div>
+              </Box>
               <ExternalLink className="h-4 w-4 text-muted-foreground" />
             </a>
           </div>
-          <div className="mt-6 text-center">
+          <Box className="mt-6 text-center">
             <Button variant="outline">
               View all white papers <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 
   const renderPartnerSection = () => (
-    <div className="mb-20 bg-gradient-to-br from-neutral-900/70 to-background/90 p-10 rounded-2xl border border-neutral-800">
+    <Box className="mb-20 bg-gradient-to-br from-neutral-900/70 to-background/90 p-10 rounded-2xl border border-neutral-800">
       <SectionHeader 
         title="Expert Partners" 
         description="Access our specialized agencies and expert talent to accelerate your success"
       />
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+      <Box className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <PartnerCard
           name={partners.hanzoAgency.name}
           description={partners.hanzoAgency.description}
@@ -479,22 +480,22 @@ const SolutionIndustries: React.FC = () => {
           primaryAction={{ label: "Visit Sensei Group", href: "https://sensei.group", external: true }}
           secondaryAction={{ label: "Schedule a call", href: "tel:+19137774443", type: "phone" }}
         />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       
       
       <main className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-block mb-4">
+        <Box className="max-w-7xl mx-auto">
+          <Box className="text-center max-w-3xl mx-auto mb-16">
+            <Box className="inline-block mb-4">
               <Link href="/solutions" className="text-sm text-muted-foreground hover:text-[var(--white)] flex items-center gap-1">
                 <ChevronRight className="h-4 w-4 rotate-180" /> Back to Solutions
               </Link>
-            </div>
+            </Box>
             <ChromeText as="h1" className="text-4xl sm:text-5xl font-bold mb-6">
               Industry Solutions
             </ChromeText>
@@ -502,9 +503,9 @@ const SolutionIndustries: React.FC = () => {
               We deliver specialized solutions across a wide range of industries, tailored to address your unique 
               challenges and opportunities.
             </p>
-          </div>
+          </Box>
 
-          <div className="mb-12">
+          <Box className="mb-12">
             <div className="flex overflow-x-auto pb-4 hz-scrollbar-none gap-2 justify-center">
               {["Financial Services", "Healthcare", "Retail", "Technology"].map((industry) => (
                 <button
@@ -520,19 +521,19 @@ const SolutionIndustries: React.FC = () => {
                 </button>
               ))}
             </div>
-          </div>
+          </Box>
 
           {/* Active Industry Section */}
           {renderIndustryContent()}
           
           {/* All Industries Grid */}
-          <div className="mb-20">
+          <Box className="mb-20">
             <SectionHeader 
               title="Explore All Industries" 
               description="Comprehensive solutions for every sector"
             />
             {renderIndustryGrid()}
-          </div>
+          </Box>
           
           {/* Resources Section */}
           {renderExpertiseSection()}
@@ -541,13 +542,13 @@ const SolutionIndustries: React.FC = () => {
           {renderPartnerSection()}
           
           {/* CTA Section */}
-          <div className="mt-20 text-center">
-            <div className="max-w-3xl mx-auto">
+          <Box className="mt-20 text-center">
+            <Box className="max-w-3xl mx-auto">
               <h2 className="text-3xl font-bold mb-6">Industry-Specific Solutions</h2>
               <p className="text-muted-foreground mb-8">
                 Discover how our tailored industry solutions can address your specific challenges and opportunities.
               </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              <Box className="flex flex-wrap justify-center gap-4">
                 <Button asChild size="lg">
                   <Link href="/contact">
                     Get Started
@@ -560,14 +561,14 @@ const SolutionIndustries: React.FC = () => {
                     <Mail />
                   </a>
                 </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
       </main>
 
       
-    </div>
+    </Box>
   );
 };
 

@@ -25,6 +25,7 @@ import {
   Keyboard,
   ExternalLink
 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const RECENTLY_SHIPPED = [
   {
@@ -171,7 +172,7 @@ const ALL_FEATURES = [
 const Features = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-background to-neutral-900/50">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -194,16 +195,16 @@ const Features = () => {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <div className="flex items-center gap-3 mb-8">
-            <div
+          <Box className="flex items-center gap-3 mb-8">
+            <Box
               className="px-3 py-1 rounded-full text-xs font-medium"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", color: "var(--primary)" }}
             >
               Recently Shipped
-            </div>
-          </div>
+            </Box>
+          </Box>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <Box className="grid md:grid-cols-2 gap-6">
             {RECENTLY_SHIPPED.map((feature, index) => {
               const Icon = feature.icon;
               return (
@@ -218,17 +219,17 @@ const Features = () => {
                   transition={{ delay: index * 0.1 }}
                   className="bg-secondary/80 border border-border rounded-xl p-6 hover:border-white/30 transition-all group"
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div
+                  <Box className="flex items-start justify-between mb-4">
+                    <Box
                       className="w-12 h-12 rounded-lg flex items-center justify-center"
                       style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
                     >
                       <Icon className="w-6 h-6" />
-                    </div>
+                    </Box>
                     <span className="text-xs font-medium px-2 py-1 rounded-full bg-primary/10 text-foreground/70">
                       New
                     </span>
-                  </div>
+                  </Box>
                   <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-foreground transition-colors">
                     {feature.title}
                   </h3>
@@ -242,11 +243,11 @@ const Features = () => {
                 </motion.a>
               );
             })}
-          </div>
+          </Box>
         </motion.div>
 
         {/* All Features Grid */}
-        <div className="grid md:grid-cols-3 gap-4">
+        <Box className="grid md:grid-cols-3 gap-4">
           {ALL_FEATURES.map((feature, index) => {
             const Icon = feature.icon;
             return (
@@ -258,21 +259,21 @@ const Features = () => {
                 transition={{ delay: (index % 6) * 0.05 }}
                 className="bg-secondary/50 border border-border rounded-xl p-5 hover:border-border transition-colors"
               >
-                <div className="flex items-center gap-3 mb-3">
+                <Box className="flex items-center gap-3 mb-3">
                   <Icon className="w-5 h-5 text-muted-foreground" />
                   <h4 className="text-sm font-medium text-foreground">
                     {feature.title}
                   </h4>
-                </div>
+                </Box>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>
             );
           })}
-        </div>
+        </Box>
 
-      </div>
+      </Box>
     </section>
   );
 };

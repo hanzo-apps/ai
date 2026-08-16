@@ -9,6 +9,7 @@
  */
 import { useState } from 'react'
 import { HARD_FRACTION, TOP_RATE, ensoSavings, ensoTier, fmtReqCost, reqCost } from '@/lib/leaderboard'
+import { Box } from '@hanzo/ui'
 
 // Per-request cost at the one reference mix (1K in / 1K out), derived from the billed
 // tier rates. Every Enso tier is priced at or below the top model, so Enso is cheaper at
@@ -30,13 +31,13 @@ export default function CostCalculator() {
   const savePct = Math.round(ensoSavings(hardFrac) * 100)
 
   return (
-    <div className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6 md:p-8">
+    <Box className="rounded-2xl border border-neutral-800 bg-neutral-900/50 p-6 md:p-8">
       <div className="space-y-5">
         <label className="block">
-          <div className="mb-2 flex items-center justify-between text-sm">
+          <Box className="mb-2 flex items-center justify-between text-sm">
             <span className="text-neutral-300">Requests / month</span>
             <span className="font-mono text-white tabular-nums">{reqs.toLocaleString()}</span>
-          </div>
+          </Box>
           <input
             type="range"
             min={10_000}
@@ -49,10 +50,10 @@ export default function CostCalculator() {
           />
         </label>
         <label className="block">
-          <div className="mb-2 flex items-center justify-between text-sm">
+          <Box className="mb-2 flex items-center justify-between text-sm">
             <span className="text-neutral-300">Hard fraction (needs escalation)</span>
             <span className="font-mono text-white tabular-nums">{hard}%</span>
-          </div>
+          </Box>
           <input
             type="range"
             min={0}
@@ -66,27 +67,27 @@ export default function CostCalculator() {
         </label>
       </div>
 
-      <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <div className="rounded-xl border border-neutral-800 bg-black/40 p-4">
-          <div className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">Always top model</div>
-          <div className="mt-1 font-mono text-2xl font-semibold tabular-nums text-neutral-300">{money(top)}<span className="text-sm text-neutral-600">/mo</span></div>
-        </div>
-        <div className="rounded-xl border border-white/25 bg-white/[0.04] p-4">
-          <div className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">Enso (routed + adaptive)</div>
-          <div className="mt-1 font-mono text-2xl font-semibold tabular-nums text-white">{money(enso)}<span className="text-sm text-neutral-600">/mo</span></div>
-        </div>
-        <div className="rounded-xl border border-neutral-800 bg-black/40 p-4">
-          <div className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">You save</div>
-          <div className="mt-1 font-mono text-2xl font-semibold tabular-nums text-white">{savePct}%</div>
-          <div className="font-mono text-xs text-neutral-500">{money(top - enso)}/mo</div>
-        </div>
-      </div>
+      <Box className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <Box className="rounded-xl border border-neutral-800 bg-black/40 p-4">
+          <Box className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">Always top model</Box>
+          <Box className="mt-1 font-mono text-2xl font-semibold tabular-nums text-neutral-300">{money(top)}<span className="text-sm text-neutral-600">/mo</span></Box>
+        </Box>
+        <Box className="rounded-xl border border-white/25 bg-white/[0.04] p-4">
+          <Box className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">Enso (routed + adaptive)</Box>
+          <Box className="mt-1 font-mono text-2xl font-semibold tabular-nums text-white">{money(enso)}<span className="text-sm text-neutral-600">/mo</span></Box>
+        </Box>
+        <Box className="rounded-xl border border-neutral-800 bg-black/40 p-4">
+          <Box className="font-mono text-[10px] uppercase tracking-wider text-neutral-500">You save</Box>
+          <Box className="mt-1 font-mono text-2xl font-semibold tabular-nums text-white">{savePct}%</Box>
+          <Box className="font-mono text-xs text-neutral-500">{money(top - enso)}/mo</Box>
+        </Box>
+      </Box>
 
       <p className="mt-5 border-l-2 border-neutral-700 pl-3 text-xs leading-relaxed text-neutral-500">
         Model: a top model bills the premium rate on every request ({fmtReqCost(TOP_REQ)}/req); Enso serves the
         easy majority on Flash ({fmtReqCost(FLASH_REQ)}/req) and only the hard fraction escalates to Ultra
         ({fmtReqCost(ULTRA_REQ)}/req). Billed token rates at a 1K-in/1K-out request — your mix sets the exact number.
       </p>
-    </div>
+    </Box>
   )
 }

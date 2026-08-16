@@ -12,6 +12,7 @@ import { Textarea } from "@hanzo/ui";
 import { toast } from 'sonner';
 import { Mail, Key, Shield, UserCircle, MapPin, Phone, Globe, Calendar } from 'lucide-react';
 import AnimatedSection, { AnimatedHeading } from "@/components/ui/animated-section";
+import { Box } from '@hanzo/ui'
 
 
 const Account = () => {
@@ -60,7 +61,7 @@ const Account = () => {
           <h2 className="text-2xl font-medium mb-8">Profile Settings</h2>
         </AnimatedHeading>
 
-        <div className="flex flex-col md:flex-row md:items-center gap-8">
+        <Box className="flex flex-col md:flex-row md:items-center gap-8">
           <Avatar className="h-24 w-24">
             <AvatarImage src={user.avatar} />
             <AvatarFallback className="text-2xl bg-secondary">{user.name.charAt(0)}</AvatarFallback>
@@ -68,10 +69,10 @@ const Account = () => {
           
           <div>
             <h2 className="text-2xl font-medium mb-2">{user.name}</h2>
-            <div className="flex items-center text-muted-foreground">
+            <Box className="flex items-center text-muted-foreground">
               <Mail className="h-4 w-4 mr-2" />
               {user.email}
-            </div>
+            </Box>
             
             <div className="mt-5 space-x-4">
               <Button variant="outline" size="sm" className="bg-[var(--black)] border-border hover:bg-[var(--white)]/5">
@@ -82,9 +83,9 @@ const Account = () => {
               </Button>
             </div>
           </div>
-        </div>
+        </Box>
         
-        <div className="border-t border-border/20 pt-8">
+        <Box className="border-t border-border/20 pt-8">
           <h3 className="text-xl font-medium mb-6">Personal Information</h3>
           
           <form onSubmit={handleProfileSubmit} className="space-y-8 max-w-xl">
@@ -120,7 +121,7 @@ const Account = () => {
               />
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Box className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-2">
                 <Label htmlFor="location" className="text-[var(--white)]">Location</Label>
                 <Input
@@ -143,7 +144,7 @@ const Account = () => {
                   placeholder="+1 (555) 123-4567"
                 />
               </div>
-            </div>
+            </Box>
             
             <div className="space-y-2">
               <Label htmlFor="website" className="text-[var(--white)]">Website</Label>
@@ -157,7 +158,7 @@ const Account = () => {
               />
             </div>
             
-            <div className="flex gap-4 pt-2">
+            <Box className="flex gap-4 pt-2">
               <Button 
                 type="submit" 
                 className="bg-[var(--black)] hover:bg-secondary border border-border"
@@ -173,9 +174,9 @@ const Account = () => {
                   View Public Profile
                 </Button>
               </Link>
-            </div>
+            </Box>
           </form>
-        </div>
+        </Box>
       </div>
     </AnimatedSection>
   );

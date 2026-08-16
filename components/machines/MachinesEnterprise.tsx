@@ -2,6 +2,7 @@
 import React from 'react';
 import { Shield, Database, Server } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 interface EnterpriseFeatureProps {
   icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
@@ -11,7 +12,7 @@ interface EnterpriseFeatureProps {
 
 const EnterpriseFeature = ({ icon: Icon, title, description }: EnterpriseFeatureProps) => {
   return (
-    <div
+    <Box
       className="bg-card rounded-xl p-6 flex flex-col items-center text-center"
       style={{ backgroundColor: "color-mix(in srgb, var(--primary) 5%, transparent)", border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)" }}
     >
@@ -20,7 +21,7 @@ const EnterpriseFeature = ({ icon: Icon, title, description }: EnterpriseFeature
       <p className="text-muted-foreground">
         {description}
       </p>
-    </div>
+    </Box>
   );
 };
 
@@ -45,17 +46,17 @@ const MachinesEnterprise = () => {
 
   return (
     <section className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+      <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Box className="text-center mb-16">
           <ChromeText as="h2" className="text-3xl font-bold mb-4">
             Whose machine it is
           </ChromeText>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Ownership, region and account are decisions the API makes you state
           </p>
-        </div>
+        </Box>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Box className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <EnterpriseFeature
               key={index}
@@ -64,8 +65,8 @@ const MachinesEnterprise = () => {
               description={feature.description}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

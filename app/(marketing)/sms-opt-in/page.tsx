@@ -6,6 +6,7 @@ import Link from "next/link";
 import { MessageSquare, Check } from "lucide-react";
 import { Spinner } from "@hanzo/gui";
 import { SMS_CONSENT_TEXT } from "@/lib/constants/sms-consent";
+import { Box } from '@hanzo/ui'
 
 // The endpoint that records consent (notify service, behind the gateway).
 const CONSENT_ENDPOINT = "https://api.hanzo.ai/v1/notify/consent";
@@ -42,11 +43,11 @@ export default function SmsOptInPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <Box className="min-h-screen bg-background text-foreground">
       <main>
         {/* Hero */}
         <section className="relative pt-28 pb-10 px-4 md:px-8 lg:px-12">
-          <div className="max-w-2xl mx-auto text-center">
+          <Box className="max-w-2xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -74,21 +75,21 @@ export default function SmsOptInPage() {
               Opt in to receive two-factor authentication codes, account and security
               alerts, and transactional notifications by SMS.
             </motion.p>
-          </div>
+          </Box>
         </section>
 
         {/* Form */}
         <section className="pb-24 px-4 md:px-8 lg:px-12">
-          <div className="max-w-xl mx-auto">
+          <Box className="max-w-xl mx-auto">
             {status === "done" ? (
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-neutral-900/50 border border-neutral-800 rounded-xl p-8 text-center"
               >
-                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
+                <Box className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4">
                   <Check className="w-6 h-6 text-white" />
-                </div>
+                </Box>
                 <h2 className="text-xl font-semibold mb-2">You&apos;re opted in</h2>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   Thanks — you&apos;ll now receive SMS from Hanzo at {phone}. You can reply{" "}
@@ -155,9 +156,9 @@ export default function SmsOptInPage() {
                 </p>
               </motion.form>
             )}
-          </div>
+          </Box>
         </section>
       </main>
-    </div>
+    </Box>
   );
 }

@@ -4,11 +4,12 @@ import ModelHeader from "./models/ModelHeader";
 import ModelCategory from "./models/ModelCategory";
 import AdditionalFeatures from "./models/AdditionalFeatures";
 import modelCategories from "./models/data/modelData";
+import { Box } from '@hanzo/ui'
 
 const SupportedModels = () => {
   return (
     <section className="py-24 relative overflow-hidden bg-gradient-to-b from-background to-white/5">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <Box className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <ModelHeader />
 
         {/* Model Categories */}
@@ -22,7 +23,7 @@ const SupportedModels = () => {
 
         {/* Additional Features Section */}
         <AdditionalFeatures />
-      </div>
+      </Box>
     </section>
   );
 };

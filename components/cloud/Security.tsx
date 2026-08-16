@@ -5,11 +5,12 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Shield, Lock, CheckCircle } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 const Security = () => {
   return (
     <section id="security" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-neutral-900 to-background">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -26,7 +27,7 @@ const Security = () => {
           </p>
         </motion.div>
 
-        <div className="flex flex-col md:flex-row gap-16 items-start">
+        <Box className="flex flex-col md:flex-row gap-16 items-start">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -59,7 +60,7 @@ const Security = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex-1"
           >
-            <div className="bg-gradient-to-br from-white/10 to-white/10 rounded-xl p-8 border border-white/30">
+            <Box className="bg-gradient-to-br from-white/10 to-white/10 rounded-xl p-8 border border-white/30">
               <Lock className="w-12 h-12 text-foreground mb-6" />
               <h3 className="text-xl font-bold mb-4">Hanzo.io Security</h3>
               <p className="text-foreground/80 mb-8">
@@ -68,10 +69,10 @@ const Security = () => {
               <Button variant="outline" className="bg-transparent text-[var(--white)] hover:bg-[var(--white)] hover:text-primary-foreground border border-white">
                 <a href="https://hanzo.ai/security">Security Details</a>
               </Button>
-            </div>
+            </Box>
           </motion.div>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

@@ -20,6 +20,7 @@ import {
   UserCheck,
   Check,
 } from "lucide-react"
+import { Box } from '@hanzo/ui'
 
 const pricingTiers = [
   {
@@ -187,7 +188,7 @@ export default function TasksPage() {
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 overflow-hidden">
+        <Box className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
@@ -205,9 +206,9 @@ export default function TasksPage() {
               ease: "easeInOut",
             }}
           />
-        </div>
+        </Box>
 
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
+        <Box className="relative z-10 max-w-5xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -258,24 +259,24 @@ export default function TasksPage() {
             transition={{ duration: 0.5, delay: 0.25 }}
             className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto"
           >
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Durable</div>
-              <div className="text-sm text-muted-foreground">Execution</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">4 SDKs</div>
-              <div className="text-sm text-muted-foreground">
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">Durable</Box>
+              <Box className="text-sm text-muted-foreground">Execution</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">4 SDKs</Box>
+              <Box className="text-sm text-muted-foreground">
                 Go / Py / TS / Java
-              </div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Sagas</div>
-              <div className="text-sm text-muted-foreground">Built-in</div>
-            </div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4">
-              <div className="text-2xl font-bold text-foreground">Free</div>
-              <div className="text-sm text-muted-foreground">25K actions/mo</div>
-            </div>
+              </Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">Sagas</Box>
+              <Box className="text-sm text-muted-foreground">Built-in</Box>
+            </Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4">
+              <Box className="text-2xl font-bold text-foreground">Free</Box>
+              <Box className="text-sm text-muted-foreground">25K actions/mo</Box>
+            </Box>
           </motion.div>
 
           <motion.div
@@ -298,12 +299,12 @@ export default function TasksPage() {
               Documentation
             </a>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Features Grid */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-7xl mx-auto">
+        <Box className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -319,7 +320,7 @@ export default function TasksPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -329,9 +330,9 @@ export default function TasksPage() {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors"
               >
-                <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
+                <Box className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
                   <feature.icon className="h-6 w-6 text-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-lg font-semibold text-foreground mb-2">
                   {feature.title}
                 </h3>
@@ -340,13 +341,13 @@ export default function TasksPage() {
                 </p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Use Cases */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-7xl mx-auto">
+        <Box className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -362,7 +363,7 @@ export default function TasksPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {useCases.map((useCase, index) => (
               <motion.div
                 key={useCase.title}
@@ -372,9 +373,9 @@ export default function TasksPage() {
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 className="bg-secondary/30 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors"
               >
-                <div className="h-10 w-10 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
+                <Box className="h-10 w-10 rounded-lg flex items-center justify-center mb-4 bg-primary/10">
                   <useCase.icon className="h-5 w-5 text-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-lg font-semibold text-foreground mb-2">
                   {useCase.title}
                 </h3>
@@ -383,13 +384,13 @@ export default function TasksPage() {
                 </p>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* SDK Code Examples */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -406,7 +407,7 @@ export default function TasksPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <Box className="grid md:grid-cols-2 gap-6">
             {/* Go Example */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -415,16 +416,16 @@ export default function TasksPage() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="bg-secondary border border-border rounded-xl overflow-hidden"
             >
-              <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                  <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                  <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                </div>
+              <Box className="flex items-center gap-2 px-4 py-2 border-b border-border">
+                <Box className="flex gap-1.5">
+                  <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                  <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                  <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                </Box>
                 <span className="text-xs text-muted-foreground ml-2">
                   workflow.go
                 </span>
-              </div>
+              </Box>
               <pre className="p-4 overflow-x-auto text-sm">
                 <code className="text-foreground/80">{`func OrderWorkflow(ctx workflow.Context,
   order Order) error {
@@ -452,16 +453,16 @@ export default function TasksPage() {
               transition={{ duration: 0.5, delay: 0.15 }}
               className="bg-secondary border border-border rounded-xl overflow-hidden"
             >
-              <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                  <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                  <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                </div>
+              <Box className="flex items-center gap-2 px-4 py-2 border-b border-border">
+                <Box className="flex gap-1.5">
+                  <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                  <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                  <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                </Box>
                 <span className="text-xs text-muted-foreground ml-2">
                   workflow.ts
                 </span>
-              </div>
+              </Box>
               <pre className="p-4 overflow-x-auto text-sm">
                 <code className="text-foreground/80">{`async function orderWorkflow(
   order: Order
@@ -481,13 +482,13 @@ export default function TasksPage() {
 }`}</code>
               </pre>
             </motion.div>
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* Architecture */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -510,16 +511,16 @@ export default function TasksPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="bg-secondary border border-border rounded-xl overflow-hidden"
           >
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-                <div className="w-3 h-3 rounded-full bg-neutral-700" />
-              </div>
+            <Box className="flex items-center gap-2 px-4 py-2 border-b border-border">
+              <Box className="flex gap-1.5">
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+                <Box className="w-3 h-3 rounded-full bg-neutral-700" />
+              </Box>
               <span className="text-xs text-muted-foreground ml-2">
                 architecture
               </span>
-            </div>
+            </Box>
             <pre className="p-6 overflow-x-auto text-sm font-mono">
               <code className="text-foreground/80">{`
   +------------------+     +-------------------+
@@ -540,12 +541,12 @@ export default function TasksPage() {
 `}</code>
             </pre>
           </motion.div>
-        </div>
+        </Box>
       </section>
 
       {/* Pricing */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
-        <div className="max-w-7xl mx-auto">
+        <Box className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -562,7 +563,7 @@ export default function TasksPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Box className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {pricingTiers.map((tier, index) => (
               <motion.div
                 key={tier.name}
@@ -576,41 +577,41 @@ export default function TasksPage() {
                     : "bg-secondary/50 border border-border"
                 }`}
               >
-                <div className="mb-6">
+                <Box className="mb-6">
                   <h3 className="text-lg font-semibold text-foreground mb-1">
                     {tier.name}
                   </h3>
-                  <div className="flex items-baseline gap-1">
+                  <Box className="flex items-baseline gap-1">
                     <span className="text-3xl font-bold text-foreground">
                       {tier.price}
                     </span>
                     <span className="text-sm text-muted-foreground">
                       {tier.period}
                     </span>
-                  </div>
+                  </Box>
                   <p className="text-sm text-muted-foreground mt-2">
                     {tier.description}
                   </p>
-                </div>
+                </Box>
 
                 <div className="space-y-3 mb-6 flex-1">
-                  <div className="text-sm font-medium text-foreground">
+                  <Box className="text-sm font-medium text-foreground">
                     {tier.actions}
-                  </div>
-                  <div className="text-sm text-muted-foreground">
+                  </Box>
+                  <Box className="text-sm text-muted-foreground">
                     {tier.namespaces}
-                  </div>
-                  <div className="border-t border-border pt-3 mt-3">
+                  </Box>
+                  <Box className="border-t border-border pt-3 mt-3">
                     {tier.features.map((feature) => (
-                      <div
+                      <Box
                         key={feature}
                         className="flex items-center gap-2 text-sm text-muted-foreground py-1"
                       >
                         <Check className="w-3.5 h-3.5 text-foreground/60 flex-shrink-0" />
                         {feature}
-                      </div>
+                      </Box>
                     ))}
-                  </div>
+                  </Box>
                 </div>
 
                 <a
@@ -625,13 +626,13 @@ export default function TasksPage() {
                 </a>
               </motion.div>
             ))}
-          </div>
-        </div>
+          </Box>
+        </Box>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+        <Box className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -639,12 +640,12 @@ export default function TasksPage() {
             transition={{ duration: 0.5 }}
             className="relative bg-secondary/50 border border-border rounded-2xl p-8 md:p-12 text-center overflow-hidden"
           >
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-              <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-            </div>
+            <Box className="absolute inset-0 overflow-hidden">
+              <Box className="absolute -top-20 -right-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+              <Box className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+            </Box>
 
-            <div className="relative z-10">
+            <Box className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Build Invincible Applications
               </h2>
@@ -652,7 +653,7 @@ export default function TasksPage() {
                 Free tier includes 25K actions per month. No credit card required.
               </p>
 
-              <div className="flex flex-wrap justify-center gap-4">
+              <Box className="flex flex-wrap justify-center gap-4">
                 <a
                   href="https://console.hanzo.ai"
                   className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors"
@@ -666,11 +667,11 @@ export default function TasksPage() {
                 >
                   View on GitHub
                 </a>
-              </div>
-            </div>
+              </Box>
+            </Box>
           </motion.div>
                 <ProductFooter slug="tasks" name="Tasks" />
-</div>
+</Box>
       </section>
     </>
   )

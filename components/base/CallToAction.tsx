@@ -5,11 +5,12 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { ArrowRight } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const CallToAction = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-950/30">
-      <div className="max-w-5xl mx-auto text-center">
+      <Box className="max-w-5xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,7 +25,7 @@ const CallToAction = () => {
             Hanzo Base's powerful capabilities.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Box className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="primary" borderRadius="$10" paddingHorizontal="$6">
               <span className="py-1 leading-relaxed">Start Building</span>
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -33,9 +34,9 @@ const CallToAction = () => {
               <span className="py-1 leading-relaxed">Read Docs</span>
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-          </div>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

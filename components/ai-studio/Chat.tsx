@@ -8,6 +8,7 @@ const sanitize = (html: string) => {
   return DOMPurify.sanitize(html);
 };
 import { MessageInterface } from "./types";
+import { Box } from '@hanzo/ui'
 
 interface ChatProps {
   conversation: MessageInterface[];
@@ -23,7 +24,7 @@ const Chat = ({
   handleSubmit 
 }: ChatProps) => {
   return (
-    <div className="flex-1 flex flex-col overflow-hidden">
+    <Box className="flex-1 flex flex-col overflow-hidden">
       {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {conversation.map((message, i) => (
@@ -52,9 +53,9 @@ const Chat = ({
       </div>
       
       {/* Input */}
-      <div className="p-4 border-t border-neutral-800">
+      <Box className="p-4 border-t border-neutral-800">
         <form onSubmit={handleSubmit}>
-          <div className="flex items-center">
+          <Box className="flex items-center">
             <input
               type="text"
               value={promptText}
@@ -68,10 +69,10 @@ const Chat = ({
             >
               Send
             </button>
-          </div>
+          </Box>
         </form>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

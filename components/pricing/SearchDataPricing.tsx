@@ -5,6 +5,7 @@ import { Button } from "@hanzo/ui";
 import { Check, Search, Globe, Database, ArrowRight } from "lucide-react";
 import { useServiceCard, formatServicePrice, type ServiceCard } from "@/lib/plans"
 import Link from "next/link";
+import { Box } from '@hanzo/ui'
 
 interface PricingTier {
   name: string;
@@ -35,12 +36,12 @@ function TierCard({ tier }: { tier: PricingTier }) {
       <h3 className="text-xl font-bold mb-1">{tier.name}</h3>
       <p className="text-muted-foreground text-sm mb-5">{tier.description}</p>
 
-      <div className="mb-1">
+      <Box className="mb-1">
         <span className="text-4xl font-bold">{tier.price}</span>
         {tier.period && (
           <span className="text-muted-foreground text-sm">{tier.period}</span>
         )}
-      </div>
+      </Box>
 
       <ul className="space-y-2 text-sm text-muted-foreground my-6 flex-1">
         {tier.features.map((f) => (
@@ -84,11 +85,11 @@ interface ProductSectionProps {
 
 function ProductSection({ title, subtitle, icon, tiers }: ProductSectionProps) {
   return (
-    <div className="mb-16">
-      <div className="flex items-center gap-3 mb-2">
+    <Box className="mb-16">
+      <Box className="flex items-center gap-3 mb-2">
         {icon}
         <h2 className="text-3xl font-bold">{title}</h2>
-      </div>
+      </Box>
       <p className="text-muted-foreground text-lg mb-8">{subtitle}</p>
 
       <div
@@ -102,7 +103,7 @@ function ProductSection({ title, subtitle, icon, tiers }: ProductSectionProps) {
           <TierCard key={tier.name} tier={tier} />
         ))}
       </div>
-    </div>
+    </Box>
   );
 }
 
@@ -127,7 +128,7 @@ export default function SearchDataPricing() {
   const searchTiers = toTiers(useServiceCard("search"));
   const crawlTiers = toTiers(useServiceCard("crawl"));
   return (
-    <div className="max-w-7xl mx-auto mb-16">
+    <Box className="max-w-7xl mx-auto mb-16">
       <ProductSection
         title="Hanzo Search"
         subtitle="AI-powered hybrid search for documentation, help centers, and knowledge bases. Deploy with a single publishable key."
@@ -151,21 +152,21 @@ export default function SearchDataPricing() {
 
           Pointing at the canonical section instead of restating it is the only
           arrangement in which that cannot happen again. */}
-      <div className="mb-16 rounded-xl border border-neutral-800/50 bg-neutral-900/30 p-8">
-        <div className="flex items-center gap-3 mb-3">
+      <Box className="mb-16 rounded-xl border border-neutral-800/50 bg-neutral-900/30 p-8">
+        <Box className="flex items-center gap-3 mb-3">
           <Database className="h-7 w-7 text-foreground" />
           <h2 className="text-2xl font-bold">Hanzo Vector</h2>
-        </div>
+        </Box>
         <p className="text-muted-foreground text-sm">
           Store the embeddings Crawl produces and Search queries. Vector is priced
           with the rest of the managed infrastructure — see the{" "}
           <span className="text-foreground font-medium">Infrastructure</span> tab
           for its tiers and usage rates.
         </p>
-      </div>
+      </Box>
 
       {/* Integration note */}
-      <div className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800/50 mb-12">
+      <Box className="bg-neutral-900/30 rounded-xl p-8 border border-neutral-800/50 mb-12">
         <h3 className="text-xl font-semibold mb-4">
           All products work together
         </h3>
@@ -174,15 +175,15 @@ export default function SearchDataPricing() {
           and serve instant search results with Hanzo Search. All managed through
           a single API key and dashboard.
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
+        <Box className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm text-muted-foreground">
           <div>IAM SSO authentication</div>
           <div>Usage-based billing via Commerce</div>
           <div>Publishable keys for browser use</div>
           <div>KMS-managed secrets</div>
-        </div>
-      </div>
+        </Box>
+      </Box>
 
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <Box className="flex flex-col sm:flex-row gap-4 justify-center">
         <Button
           size="lg"
           className="bg-primary text-primary-foreground hover:bg-neutral-100 px-8"
@@ -200,7 +201,7 @@ export default function SearchDataPricing() {
         <Button size="lg" variant="outline" className="px-8" asChild>
           <Link href="/contact">Talk to Sales</Link>
         </Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

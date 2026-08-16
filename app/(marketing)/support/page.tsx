@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { LifeBuoy, BookOpen, Activity, Mail, MessagesSquare, Github, ArrowUpRight } from 'lucide-react'
+import { Box } from '@hanzo/ui'
 
 export const metadata: Metadata = {
   title: 'Support — Hanzo',
@@ -56,7 +57,7 @@ export default function SupportPage() {
     <main className="relative overflow-hidden">
       {/* Hero */}
       <section className="relative flex flex-col items-center px-4 pb-8 pt-28 text-center sm:px-6 lg:px-8">
-        <div
+        <Box
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-[600px] -translate-x-1/2 rounded-full"
           style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 68%)', filter: 'blur(100px)' }}
@@ -74,7 +75,7 @@ export default function SupportPage() {
 
       {/* Channels */}
       <section className="mx-auto max-w-6xl px-4 pb-24 pt-8 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <Box className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {CHANNELS.map((c) => {
             const Icon = c.icon
             const external = c.href.startsWith('http')
@@ -97,10 +98,10 @@ export default function SupportPage() {
               </a>
             )
           })}
-        </div>
+        </Box>
 
         {/* Enterprise footer note */}
-        <div className="mt-6 rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 text-center">
+        <Box className="mt-6 rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 text-center">
           <p className="text-sm text-neutral-400">
             On an enterprise plan or need a dedicated channel?{' '}
             <a href="mailto:support@hanzo.ai" className="font-medium text-white underline-offset-4 hover:underline">
@@ -108,7 +109,7 @@ export default function SupportPage() {
             </a>{' '}
             and we’ll route you to your team.
           </p>
-        </div>
+        </Box>
       </section>
     </main>
   )

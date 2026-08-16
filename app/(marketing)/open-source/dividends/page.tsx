@@ -19,6 +19,7 @@ import {
   ChevronUp,
   BarChart3,
 } from "lucide-react"
+import { Box } from '@hanzo/ui'
 
 const HOW_IT_WORKS = [
   {
@@ -69,7 +70,7 @@ const FAQ_ITEMS = [
 function FAQItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = React.useState(false)
   return (
-    <div className="border border-border rounded-xl overflow-hidden">
+    <Box className="border border-border rounded-xl overflow-hidden">
       <button
         className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left hover:bg-secondary/30 transition-colors"
         onClick={() => setOpen((v) => !v)}
@@ -83,31 +84,31 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         )}
       </button>
       {open && (
-        <div className="px-6 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-border pt-4 bg-secondary/20">
+        <Box className="px-6 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-border pt-4 bg-secondary/20">
           {a}
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   )
 }
 
 export default function DividendsPage() {
   return (
-    <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
+    <Box className="min-h-screen bg-[var(--black)] text-[var(--white)]">
       <main>
         {/* Hero */}
         <section className="relative pt-24 pb-20 px-4 md:px-8 overflow-hidden">
-          <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-            <div
+          <Box className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+            <Box
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full opacity-10"
               style={{
                 background: "radial-gradient(circle, var(--primary) 0%, transparent 70%)",
                 filter: "blur(90px)",
               }}
             />
-          </div>
+          </Box>
 
-          <div className="max-w-4xl mx-auto text-center relative z-10">
+          <Box className="max-w-4xl mx-auto text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -165,12 +166,12 @@ export default function DividendsPage() {
                 <ArrowRight className="w-4 h-4 ml-2" />
               </a>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Social proof */}
         <section className="py-8 px-4 md:px-8 border-t border-border">
-          <div className="max-w-4xl mx-auto">
+          <Box className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -184,17 +185,17 @@ export default function DividendsPage() {
                 { value: "$1.2M", label: "allocated to date" },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <div className="text-2xl font-bold text-foreground">{stat.value}</div>
-                  <div className="text-xs text-muted-foreground mt-0.5">{stat.label}</div>
+                  <Box className="text-2xl font-bold text-foreground">{stat.value}</Box>
+                  <Box className="text-xs text-muted-foreground mt-0.5">{stat.label}</Box>
                 </div>
               ))}
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* How it works */}
         <section id="how-it-works" className="py-20 px-4 md:px-8 border-t border-border">
-          <div className="max-w-6xl mx-auto">
+          <Box className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -208,7 +209,7 @@ export default function DividendsPage() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {HOW_IT_WORKS.map((item, i) => {
                 const Icon = item.icon
                 return (
@@ -223,24 +224,24 @@ export default function DividendsPage() {
                     <span className="absolute top-4 right-4 text-xs font-mono text-muted-foreground/40">
                       {item.step}
                     </span>
-                    <div
+                    <Box
                       className="rounded-full p-2 w-fit mb-4"
                       style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)" }}
                     >
                       <Icon className="w-5 h-5" style={{ color: "var(--primary)" }} />
-                    </div>
+                    </Box>
                     <h3 className="font-semibold text-foreground text-sm mb-2">{item.title}</h3>
                     <p className="text-xs text-muted-foreground leading-relaxed">{item.body}</p>
                   </motion.div>
                 )
               })}
-            </div>
-          </div>
+            </Box>
+          </Box>
         </section>
 
         {/* Transparency callout */}
         <section className="py-12 px-4 md:px-8 border-t border-border">
-          <div className="max-w-4xl mx-auto">
+          <Box className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -249,12 +250,12 @@ export default function DividendsPage() {
               className="rounded-xl border border-primary/30 p-8 text-center"
               style={{ backgroundColor: "color-mix(in srgb, var(--primary) 6%, transparent)" }}
             >
-              <div
+              <Box
                 className="inline-flex items-center justify-center w-10 h-10 rounded-full mb-5"
                 style={{ backgroundColor: "color-mix(in srgb, var(--primary) 20%, transparent)" }}
               >
                 <Eye className="w-5 h-5" style={{ color: "var(--primary)" }} />
-              </div>
+              </Box>
               <h3 className="text-lg font-bold text-foreground mb-3">All payouts are public</h3>
               <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mx-auto">
                 Every project, every contributor, every amount is visible in our public ledger. Communities can vote
@@ -266,12 +267,12 @@ export default function DividendsPage() {
                 at your repo root.
               </p>
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Trust badges */}
         <section className="py-12 px-4 md:px-8 border-t border-border">
-          <div className="max-w-4xl mx-auto">
+          <Box className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -295,18 +296,18 @@ export default function DividendsPage() {
                 >
                   <badge.icon className="w-4 h-4 flex-shrink-0" style={{ color: "var(--primary)" }} />
                   <div>
-                    <div className="text-xs font-semibold text-foreground">{badge.label}</div>
-                    <div className="text-[11px] text-muted-foreground">{badge.sub}</div>
+                    <Box className="text-xs font-semibold text-foreground">{badge.label}</Box>
+                    <Box className="text-[11px] text-muted-foreground">{badge.sub}</Box>
                   </div>
                 </motion.div>
               ))}
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* FAQ */}
         <section className="py-20 px-4 md:px-8 border-t border-border">
-          <div className="max-w-3xl mx-auto">
+          <Box className="max-w-3xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -328,14 +329,14 @@ export default function DividendsPage() {
                 <FAQItem key={item.q} q={item.q} a={item.a} />
               ))}
             </motion.div>
-          </div>
+          </Box>
         </section>
 
         {/* Bottom CTA */}
         <section className="py-24 px-4 md:px-8 border-t border-border relative overflow-hidden">
-          <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/8 rounded-full blur-3xl pointer-events-none" />
+          <Box className="absolute -top-40 left-1/2 -translate-x-1/2 w-96 h-96 bg-primary/8 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="max-w-3xl mx-auto text-center relative z-10">
+          <Box className="max-w-3xl mx-auto text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -390,9 +391,9 @@ export default function DividendsPage() {
                 Back to Open Source
               </a>
             </motion.div>
-          </div>
+          </Box>
         </section>
       </main>
-    </div>
+    </Box>
   )
 }

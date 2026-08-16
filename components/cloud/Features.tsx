@@ -6,12 +6,13 @@ import { motion } from "@/components/motion";
 import { Cloud, Cpu, Globe, Server, Database, Network, Bot, Lock, Zap } from "lucide-react";
 import { Button } from "@hanzo/ui";
 import Link from 'next/link'
+import { Box } from '@hanzo/ui'
 
 const Features = () => {
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-neutral-900">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+      <Box className="max-w-7xl mx-auto">
+        <Box className="text-center mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -30,9 +31,9 @@ const Features = () => {
           >
             The most flexible and powerful compute platform for AI workloads. Hanzo Machines are hardware-virtualized containers, running on proprietary AI-optimized hardware, that launch instantly and scale automatically with your needs.
           </motion.p>
-        </div>
+        </Box>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mt-20">
+        <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mt-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -116,7 +117,7 @@ const Features = () => {
               Enterprise-grade security with private networking, encryption, audit logging, and GDPR controls.
             </p>
           </motion.div>
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -125,7 +126,7 @@ const Features = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-16 bg-primary/10 rounded-xl p-8 border border-white/30"
         >
-          <div className="flex flex-col md:flex-row items-center">
+          <Box className="flex flex-col md:flex-row items-center">
             <Cloud className="w-14 h-14 text-foreground mb-6 md:mb-0 md:mr-8" />
             <div>
               <h3 className="text-xl font-bold mb-3">Built for AI Engineering</h3>
@@ -133,7 +134,7 @@ const Features = () => {
                 Specialized infrastructure for AI workloads, with optimizations for large language models, computer vision, and other AI tasks. From prototype to production with zero re-architecture.
               </p>
             </div>
-          </div>
+          </Box>
         </motion.div>
 
         <motion.div
@@ -148,7 +149,7 @@ const Features = () => {
             <p className="text-foreground/80 mb-8">
               Paid support packages include a team of actual engineers (not chatbots) who themselves ship code on our platform. Emergency support and guaranteed response times available.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Box className="flex flex-col sm:flex-row justify-center gap-4">
               <Button>
                 Contact Sales
               </Button>
@@ -159,14 +160,14 @@ const Features = () => {
               >
                 Try Free Tier
               </Button>
-            </div>
+            </Box>
             
-            <div className="mt-6 text-muted-foreground text-sm">
+            <Box className="mt-6 text-muted-foreground text-sm">
               Looking for a free, self-hosted alternative? <Link href="/platform" className="text-foreground hover:underline">Check out Hanzo Platform</Link>
-            </div>
+            </Box>
           </div>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

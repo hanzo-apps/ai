@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Terminal, Copy } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const ZapCodeExample = () => {
   const codeLines = [
@@ -18,7 +19,7 @@ const ZapCodeExample = () => {
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+      <Box className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -42,23 +43,23 @@ const ZapCodeExample = () => {
           className="relative"
         >
           {/* Terminal header */}
-          <div className="flex items-center gap-2 px-4 py-3 bg-secondary border border-border rounded-t-xl">
-            <div className="flex gap-1.5">
-              <div className="w-3 h-3 rounded-full bg-primary/10" />
-              <div className="w-3 h-3 rounded-full bg-primary/10" />
-              <div className="w-3 h-3 rounded-full bg-primary/10" />
-            </div>
-            <div className="flex-1 flex items-center justify-center gap-2 text-sm text-muted-foreground">
+          <Box className="flex items-center gap-2 px-4 py-3 bg-secondary border border-border rounded-t-xl">
+            <Box className="flex gap-1.5">
+              <Box className="w-3 h-3 rounded-full bg-primary/10" />
+              <Box className="w-3 h-3 rounded-full bg-primary/10" />
+              <Box className="w-3 h-3 rounded-full bg-primary/10" />
+            </Box>
+            <Box className="flex-1 flex items-center justify-center gap-2 text-sm text-muted-foreground">
               <Terminal className="w-4 h-4" />
               <span>Terminal</span>
-            </div>
+            </Box>
             <button className="p-1 hover:bg-accent rounded transition-colors">
               <Copy className="w-4 h-4 text-muted-foreground" />
             </button>
-          </div>
+          </Box>
 
           {/* Terminal content */}
-          <div className="bg-background/80 backdrop-blur-sm border border-t-0 border-border rounded-b-xl p-6 font-mono text-sm">
+          <Box className="bg-background/80 backdrop-blur-sm border border-t-0 border-border rounded-b-xl p-6 font-mono text-sm">
             {codeLines.map((line, index) => (
               <div key={index} className={line.type === "empty" ? "h-4" : ""}>
                 {line.type === "comment" && (
@@ -69,10 +70,10 @@ const ZapCodeExample = () => {
                 )}
               </div>
             ))}
-          </div>
+          </Box>
 
           {/* Decorative glow */}
-          <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl -z-10" />
+          <Box className="absolute -inset-4 bg-primary/5 rounded-2xl blur-2xl -z-10" />
         </motion.div>
 
         <motion.p
@@ -85,7 +86,7 @@ const ZapCodeExample = () => {
           <span className="text-foreground/70 font-mono">zapd</span> presents the tools and resources of every
           backend as one schema, whether the backend speaks MCP or ZAP.
         </motion.p>
-      </div>
+      </Box>
     </section>
   );
 };

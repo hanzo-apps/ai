@@ -30,6 +30,7 @@ import {
 import TeamGroup from "./TeamGroup";
 import { teamMembers } from "@/lib/constants/team-members";
 import Link from "next/link";
+import { Box } from '@hanzo/ui'
 
 interface Agent {
   name: string;
@@ -68,8 +69,8 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ agent, isOpen, onCl
             className="bg-card border border-border rounded-2xl max-w-lg w-full p-6 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-start justify-between mb-6">
-              <div className="flex items-center">
+            <Box className="flex items-start justify-between mb-6">
+              <Box className="flex items-center">
                 <div className={`p-3 rounded-xl bg-gradient-to-br ${agent.gradient} mr-4`}>
                   <Icon className="h-6 w-6 text-foreground" />
                 </div>
@@ -77,21 +78,21 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ agent, isOpen, onCl
                   <h3 className="text-2xl font-semibold text-foreground">{agent.name}</h3>
                   <p className="text-muted-foreground">{agent.role}</p>
                 </div>
-              </div>
+              </Box>
               <button
                 onClick={onClose}
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <X size={24} />
               </button>
-            </div>
+            </Box>
 
-            <div className="mb-6">
+            <Box className="mb-6">
               <p className="text-muted-foreground">{agent.description}</p>
-            </div>
+            </Box>
 
-            <div className="grid grid-cols-1 gap-4 mb-6">
-              <div className="bg-secondary/50 rounded-xl p-4 border border-border">
+            <Box className="grid grid-cols-1 gap-4 mb-6">
+              <Box className="bg-secondary/50 rounded-xl p-4 border border-border">
                 <h4 className="text-lg font-medium text-foreground mb-2">Expertise</h4>
                 <ul className="space-y-2">
                   <li className="flex items-center text-muted-foreground">
@@ -107,18 +108,18 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ agent, isOpen, onCl
                     Natural language processing
                   </li>
                 </ul>
-              </div>
+              </Box>
 
-              <div className="bg-secondary/50 rounded-xl p-4 border border-border">
+              <Box className="bg-secondary/50 rounded-xl p-4 border border-border">
                 <h4 className="text-lg font-medium text-foreground mb-2">Integration</h4>
                 <p className="text-muted-foreground">
                   Works directly with human teams via natural language interfaces,
                   and integrates with all major productivity tools and platforms.
                 </p>
-              </div>
-            </div>
+              </Box>
+            </Box>
 
-            <div className="flex justify-center">
+            <Box className="flex justify-center">
               <Link
                 // Absolute, because this gallery renders on two hosts from one
                 // build: hanzo.ai/team and the root of hanzo.team. The profile
@@ -133,7 +134,7 @@ const AgentDetailModal: React.FC<AgentDetailModalProps> = ({ agent, isOpen, onCl
                 View Full Profile
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-            </div>
+            </Box>
           </motion.div>
         </motion.div>
       )}
@@ -280,7 +281,7 @@ const AgentGallery = () => {
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -288,12 +289,12 @@ const AgentGallery = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div
+          <Box
             className="inline-flex p-2 rounded-full mb-4"
             style={{ backgroundColor: "color-mix(in srgb, var(--primary) 15%, transparent)", borderColor: "color-mix(in srgb, var(--primary) 20%, transparent)", color: "var(--primary)", border: '1px solid' }}
           >
             <Bot className="h-6 w-6" />
-          </div>
+          </Box>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
             Meet Your AI Team
           </h2>
@@ -324,7 +325,7 @@ const AgentGallery = () => {
           members={creativeAgents} 
           onMemberClick={openAgentDetail}
         />
-      </div>
+      </Box>
 
       <AgentDetailModal 
         agent={selectedAgent}

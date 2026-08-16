@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Faq } from "@/components/ui/faq";
+import { Box } from '@hanzo/ui'
 
 const PricingFAQ = () => {
   // The questions a reader actually arrives with, answered against what we
@@ -64,11 +65,11 @@ const PricingFAQ = () => {
   ];
 
   return (
-    <div className="max-w-3xl mx-auto my-16 px-4">
+    <Box className="max-w-3xl mx-auto my-16 px-4">
       <h2 className="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
       
       <Faq items={faqs} />
-    </div>
+    </Box>
   );
 };
 

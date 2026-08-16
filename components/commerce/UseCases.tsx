@@ -2,6 +2,7 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import { Box } from '@hanzo/ui'
 
 // The `color` prop is gone. It was interpolated into class names
 // (`text-${color}-400`, `from-${color}-500/20`), and Tailwind only generates a
@@ -19,19 +20,19 @@ interface UseCaseCardProps {
 const UseCaseCard = ({ title, description, image, index }: UseCaseCardProps) => {
   return (
     <div className={`relative overflow-hidden rounded-xl border border-neutral-800 ${index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'} flex flex-col h-full`}>
-      <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
+      <Box className="w-full md:w-1/2 p-8 flex flex-col justify-center">
         <h3 className="text-2xl font-bold mb-4 text-foreground">{title}</h3>
         <p className="text-muted-foreground mb-4">{description}</p>
         <Button variant="link" size="sm" className="text-foreground/60 hover:text-foreground/60 p-0 w-fit">
           Learn more <ArrowRight className="ml-1 h-4 w-4" />
         </Button>
-      </div>
-      <div className="w-full md:w-1/2 bg-neutral-900/50 h-48 md:h-auto relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-foreground text-9xl opacity-10 font-bold">{index + 1}</div>
-        </div>
-      </div>
+      </Box>
+      <Box className="w-full md:w-1/2 bg-neutral-900/50 h-48 md:h-auto relative overflow-hidden">
+        <Box className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50"></Box>
+        <Box className="absolute inset-0 flex items-center justify-center">
+          <Box className="text-foreground text-9xl opacity-10 font-bold">{index + 1}</Box>
+        </Box>
+      </Box>
     </div>
   );
 };
@@ -59,14 +60,14 @@ const UseCases = () => {
   return (
     <section className="py-16 bg-[var(--black)]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <Box className="text-center mb-12">
           <h2 className="text-3xl font-bold">When to reach for it</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
             Four shapes that fit. If none of them is yours, a hosted shop is probably the easier answer.
           </p>
-        </div>
+        </Box>
         
-        <div className="grid grid-cols-1 gap-8">
+        <Box className="grid grid-cols-1 gap-8">
           {useCases.map((useCase, index) => (
             <UseCaseCard
               key={index}
@@ -75,7 +76,7 @@ const UseCases = () => {
               index={index}
             />
           ))}
-        </div>
+        </Box>
       </div>
     </section>
   );

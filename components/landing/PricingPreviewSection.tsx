@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import Link from "next/link";
 import { Check, ArrowRight, Sparkles, Building2 } from "lucide-react";
+import { Box } from '@hanzo/ui'
 
 const FREE_FEATURES = [
   "Free to start — pay only for what you use",
@@ -17,7 +18,7 @@ const FREE_FEATURES = [
 const PricingPreviewSection = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-5xl mx-auto">
+      <Box className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +40,7 @@ const PricingPreviewSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <Box className="grid md:grid-cols-2 gap-6">
           {/* Free tier */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -48,10 +49,10 @@ const PricingPreviewSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="p-8 rounded-2xl border border-border bg-secondary/80 backdrop-blur-sm"
           >
-            <div className="flex items-center gap-2 mb-4">
+            <Box className="flex items-center gap-2 mb-4">
               <Sparkles className="w-5 h-5 text-foreground" />
               <span className="text-sm font-medium text-foreground">Free</span>
-            </div>
+            </Box>
             <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
               $0<span className="text-lg font-normal text-muted-foreground">/month</span>
             </h3>
@@ -62,9 +63,9 @@ const PricingPreviewSection = () => {
             <ul className="space-y-3 mb-8">
               {FREE_FEATURES.map((feature) => (
                 <li key={feature} className="flex items-center gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                  <Box className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                     <Check className="w-3 h-3 text-foreground" />
-                  </div>
+                  </Box>
                   <span className="text-foreground/80 text-sm">{feature}</span>
                 </li>
               ))}
@@ -90,10 +91,10 @@ const PricingPreviewSection = () => {
             transition={{ duration: 0.5, delay: 0.15 }}
             className="p-8 rounded-2xl border border-[var(--border)] bg-gradient-to-br from-white/[0.08] to-transparent backdrop-blur-sm"
           >
-            <div className="flex items-center gap-2 mb-4">
+            <Box className="flex items-center gap-2 mb-4">
               <Building2 className="w-5 h-5 text-foreground" />
               <span className="text-sm font-medium text-foreground">Enterprise</span>
-            </div>
+            </Box>
             <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
               Custom
             </h3>
@@ -111,9 +112,9 @@ const PricingPreviewSection = () => {
                 "Solution architect engagement",
               ].map((feature) => (
                 <li key={feature} className="flex items-center gap-3">
-                  <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                  <Box className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
                     <Check className="w-3 h-3 text-foreground" />
-                  </div>
+                  </Box>
                   <span className="text-foreground/80 text-sm">{feature}</span>
                 </li>
               ))}
@@ -127,7 +128,7 @@ const PricingPreviewSection = () => {
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </motion.div>
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -144,7 +145,7 @@ const PricingPreviewSection = () => {
             <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

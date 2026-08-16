@@ -1,11 +1,12 @@
 
 import React from "react";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 const Hero = () => {
   return (
-    <div className="bg-gradient-to-r from-white/20 to-white/10 py-10 px-4">
-      <div className="max-w-7xl mx-auto">
+    <Box className="bg-gradient-to-r from-white/20 to-white/10 py-10 px-4">
+      <Box className="max-w-7xl mx-auto">
         <ChromeText as="h1" className="text-4xl font-bold mb-2">
           Hanzo AI Studio
         </ChromeText>
@@ -15,8 +16,8 @@ const Hero = () => {
           a playground, and a terminal over the same session — so the thing you
           tested is the thing you ship.
         </p>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

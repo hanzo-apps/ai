@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { cloudCategories } from "@/lib/data/cloud-primitives";
+import { Box } from '@hanzo/ui'
 
 // Category overview cards — derived from the ONE cloud-primitive taxonomy
 // (lib/data/cloud-primitives.ts), the same source the mega-menu and the
@@ -23,7 +24,7 @@ const CATEGORY_CARDS = cloudCategories.map((c) => ({
 const PlatformOverviewSection = () => {
   return (
     <section className="py-24 px-4 md:px-8 bg-background">
-      <div className="max-w-6xl mx-auto">
+      <Box className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -39,7 +40,7 @@ const PlatformOverviewSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <Box className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
           {CATEGORY_CARDS.map((card, index) => {
             const Icon = card.icon;
             return (
@@ -52,16 +53,16 @@ const PlatformOverviewSection = () => {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="p-6 rounded-xl border border-border bg-secondary/50 hover:bg-secondary hover:border-border/80 transition-all"
               >
-                <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
+                <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center mb-4">
                   <Icon className="w-5 h-5 text-muted-foreground" />
-                </div>
+                </Box>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{card.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{card.desc}</p>
               </motion.a>
             );
           })}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </section>
   );
 };

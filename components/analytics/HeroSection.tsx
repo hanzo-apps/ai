@@ -6,14 +6,15 @@ import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { ArrowRight, LineChart } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
+import { Box } from '@hanzo/ui'
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-32 overflow-hidden">
-      <div className="absolute inset-0 bg-[var(--black)] z-0" />
+      <Box className="absolute inset-0 bg-[var(--black)] z-0" />
       
       {/* Animated dots/points background */}
-      <div className="absolute inset-0 overflow-hidden opacity-30">
+      <Box className="absolute inset-0 overflow-hidden opacity-30">
         {Array(20).fill(0).map((_, i) => (
           <motion.div
             key={i}
@@ -33,18 +34,18 @@ const HeroSection = () => {
             }}
           />
         ))}
-      </div>
+      </Box>
       
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <Box className="relative z-10 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="mb-8 text-center"
         >
-          <div className="inline-block px-4 py-1 rounded-full bg-primary/10 border border-white/30 text-foreground/70 text-sm font-medium mb-6">
+          <Box className="inline-block px-4 py-1 rounded-full bg-primary/10 border border-white/30 text-foreground/70 text-sm font-medium mb-6">
             Web analytics you host yourself
-          </div>
+          </Box>
           <ChromeText as="h1" className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
             Hanzo Analytics
           </ChromeText>
@@ -77,24 +78,24 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-16 max-w-5xl mx-auto relative"
         >
-          <div className="bg-gradient-to-br from-neutral-900 to-background p-4 rounded-xl border border-neutral-800 shadow-2xl overflow-hidden">
-            <div className="flex items-center justify-between mb-4 border-b border-neutral-800 pb-2">
-              <div className="flex items-center">
+          <Box className="bg-gradient-to-br from-neutral-900 to-background p-4 rounded-xl border border-neutral-800 shadow-2xl overflow-hidden">
+            <Box className="flex items-center justify-between mb-4 border-b border-neutral-800 pb-2">
+              <Box className="flex items-center">
                 <LineChart className="h-5 w-5 text-foreground mr-2" />
                 <span className="text-[var(--white)] font-medium">Hanzo Analytics Dashboard</span>
-              </div>
+              </Box>
               <div className="flex space-x-1">
-                <div className="w-3 h-3 rounded-full bg-primary/10"></div>
-                <div className="w-3 h-3 rounded-full bg-primary/10"></div>
-                <div className="w-3 h-3 rounded-full bg-primary/10"></div>
+                <Box className="w-3 h-3 rounded-full bg-primary/10"></Box>
+                <Box className="w-3 h-3 rounded-full bg-primary/10"></Box>
+                <Box className="w-3 h-3 rounded-full bg-primary/10"></Box>
               </div>
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="col-span-2 bg-neutral-800/50 rounded-lg p-4 h-64">
+            </Box>
+            <Box className="grid grid-cols-3 gap-4">
+              <Box className="col-span-2 bg-neutral-800/50 rounded-lg p-4 h-64">
                 {/* Animated chart lines */}
-                <div className="h-full w-full relative">
-                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-neutral-700"></div>
-                  <div className="absolute left-0 top-0 h-full w-[1px] bg-neutral-700"></div>
+                <Box className="h-full w-full relative">
+                  <Box className="absolute bottom-0 left-0 w-full h-[1px] bg-neutral-700"></Box>
+                  <Box className="absolute left-0 top-0 h-full w-[1px] bg-neutral-700"></Box>
                   
                   {/* Chart line */}
                   <svg className="h-full w-full" viewBox="0 0 100 50">
@@ -117,11 +118,11 @@ const HeroSection = () => {
                       transition={{ duration: 2, delay: 0.8 }}
                     />
                   </svg>
-                </div>
-              </div>
+                </Box>
+              </Box>
               <div className="space-y-4">
-                <div className="bg-neutral-800/50 rounded-lg p-4 h-[30%]">
-                  <div className="text-sm text-muted-foreground">Users</div>
+                <Box className="bg-neutral-800/50 rounded-lg p-4 h-[30%]">
+                  <Box className="text-sm text-muted-foreground">Users</Box>
                   <motion.div 
                     className="text-2xl font-bold text-[var(--white)] mt-1"
                     initial={{ opacity: 0 }}
@@ -130,10 +131,10 @@ const HeroSection = () => {
                   >
                     127,543
                   </motion.div>
-                  <div className="text-foreground/70 text-xs mt-1">+12.4% vs last week</div>
-                </div>
-                <div className="bg-neutral-800/50 rounded-lg p-4 h-[30%]">
-                  <div className="text-sm text-muted-foreground">Conversion Rate</div>
+                  <Box className="text-foreground/70 text-xs mt-1">+12.4% vs last week</Box>
+                </Box>
+                <Box className="bg-neutral-800/50 rounded-lg p-4 h-[30%]">
+                  <Box className="text-sm text-muted-foreground">Conversion Rate</Box>
                   <motion.div 
                     className="text-2xl font-bold text-[var(--white)] mt-1"
                     initial={{ opacity: 0 }}
@@ -142,10 +143,10 @@ const HeroSection = () => {
                   >
                     4.87%
                   </motion.div>
-                  <div className="text-foreground/70 text-xs mt-1">+0.8% vs last week</div>
-                </div>
-                <div className="bg-neutral-800/50 rounded-lg p-4 h-[30%]">
-                  <div className="text-sm text-muted-foreground">Revenue</div>
+                  <Box className="text-foreground/70 text-xs mt-1">+0.8% vs last week</Box>
+                </Box>
+                <Box className="bg-neutral-800/50 rounded-lg p-4 h-[30%]">
+                  <Box className="text-sm text-muted-foreground">Revenue</Box>
                   <motion.div 
                     className="text-2xl font-bold text-[var(--white)] mt-1"
                     initial={{ opacity: 0 }}
@@ -154,13 +155,13 @@ const HeroSection = () => {
                   >
                     $45,892
                   </motion.div>
-                  <div className="text-foreground/70 text-xs mt-1">+15.2% vs last week</div>
-                </div>
+                  <Box className="text-foreground/70 text-xs mt-1">+15.2% vs last week</Box>
+                </Box>
               </div>
-            </div>
-          </div>
+            </Box>
+          </Box>
         </motion.div>
-      </div>
+      </Box>
     </section>
   );
 };

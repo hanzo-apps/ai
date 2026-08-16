@@ -3,6 +3,7 @@
 import { motion } from "@/components/motion";
 import { ExternalLink, GitFork, Heart, Star, Wallet } from "lucide-react";
 import Link from 'next/link'
+import { Box } from '@hanzo/ui'
 
 interface UpstreamProject {
   name: string;
@@ -28,18 +29,18 @@ export function UpstreamAttribution({ upstream, productName }: UpstreamAttributi
       transition={{ duration: 0.6 }}
       className="py-16 px-4 md:px-8 border-t border-border"
     >
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-2 mb-6">
+      <Box className="max-w-4xl mx-auto">
+        <Box className="flex items-center gap-2 mb-6">
           <GitFork className="w-5 h-5 text-foreground" />
           <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
             Built on Open Source
           </span>
-        </div>
+        </Box>
 
-        <div className="bg-gradient-to-br from-neutral-900/80 to-neutral-950 border border-border rounded-xl p-6 md:p-8">
-          <div className="flex flex-col md:flex-row md:items-start gap-6">
+        <Box className="bg-gradient-to-br from-neutral-900/80 to-neutral-950 border border-border rounded-xl p-6 md:p-8">
+          <Box className="flex flex-col md:flex-row md:items-start gap-6">
             {/* Logo/Icon */}
-            <div className="flex-shrink-0">
+            <Box className="flex-shrink-0">
               {upstream.logo ? (
                 <img
                   src={upstream.logo}
@@ -47,15 +48,15 @@ export function UpstreamAttribution({ upstream, productName }: UpstreamAttributi
                   className="w-16 h-16 rounded-lg"
                 />
               ) : (
-                <div className="w-16 h-16 rounded-lg bg-neutral-800 flex items-center justify-center">
+                <Box className="w-16 h-16 rounded-lg bg-neutral-800 flex items-center justify-center">
                   <GitFork className="w-8 h-8 text-muted-foreground" />
-                </div>
+                </Box>
               )}
-            </div>
+            </Box>
 
             {/* Content */}
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
+            <Box className="flex-1">
+              <Box className="flex items-center gap-3 mb-2">
                 <h3 className="text-xl font-semibold text-foreground">
                   Powered by {upstream.name}
                 </h3>
@@ -65,14 +66,14 @@ export function UpstreamAttribution({ upstream, productName }: UpstreamAttributi
                     {upstream.stars}
                   </span>
                 )}
-              </div>
+              </Box>
 
               <p className="text-muted-foreground mb-4">
                 {productName} is built on top of {upstream.name}, an open-source project.
                 {upstream.description}
               </p>
 
-              <div className="flex flex-wrap gap-3">
+              <Box className="flex flex-wrap gap-3">
                 <a
                   href={upstream.github || "#"}
                   target="_blank"
@@ -95,18 +96,18 @@ export function UpstreamAttribution({ upstream, productName }: UpstreamAttributi
                   Visit {upstream.name}
                   <ExternalLink className="w-3 h-3" />
                 </a>
-              </div>
+              </Box>
 
               {upstream.license && (
                 <p className="mt-4 text-xs text-muted-foreground">
                   Licensed under {upstream.license}
                 </p>
               )}
-            </div>
-          </div>
+            </Box>
+          </Box>
 
           {/* Thank you message */}
-          <div className="mt-6 pt-6 border-t border-border">
+          <Box className="mt-6 pt-6 border-t border-border">
             <p className="flex items-center gap-2 text-sm text-muted-foreground">
               <Heart className="w-4 h-4 text-foreground" />
               We're grateful to the {upstream.name} maintainers and community for their incredible work.
@@ -116,9 +117,9 @@ export function UpstreamAttribution({ upstream, productName }: UpstreamAttributi
               Contributors to {upstream.name} earn a share of Hanzo compute revenue through our{' '}
               <Link href="/open-source" className="text-foreground underline hover:no-underline">SBOM-verified revenue sharing program</Link>.
             </p>
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
     </motion.section>
   );
 }

@@ -46,6 +46,7 @@ import {
   type DeploymentType,
   type FeaturedCollection
 } from "@/lib/data/oss-catalog";
+import { Box } from '@hanzo/ui'
 
 // =============================================================================
 // QUICK FILTER CHIPS
@@ -103,34 +104,34 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
         className="flex items-center gap-4 p-4 rounded-lg border border-border bg-secondary/50 hover:border-border transition-colors"
       >
         {/* Icon */}
-        <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center flex-shrink-0">
+        <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center flex-shrink-0">
           {Icon && <Icon className="w-5 h-5 text-muted-foreground" />}
-        </div>
+        </Box>
 
         {/* Content */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
+        <Box className="flex-1 min-w-0">
+          <Box className="flex items-center gap-2 mb-1">
             <h3 className="font-semibold text-foreground truncate">{repo.name}</h3>
             {repo.signals.featured && (
               <Badge variant="outline" className={`text-xs ${getBadgeVariant('featured')}`}>
                 Featured
               </Badge>
             )}
-          </div>
+          </Box>
           <p className="text-sm text-muted-foreground truncate">{repo.description}</p>
-        </div>
+        </Box>
 
         {/* Badges */}
-        <div className="hidden md:flex items-center gap-2">
+        <Box className="hidden md:flex items-center gap-2">
           {repo.languages.slice(0, 2).map(lang => (
             <Badge key={lang} variant="outline" className="text-xs bg-neutral-800 text-muted-foreground border-border">
               {lang}
             </Badge>
           ))}
-        </div>
+        </Box>
 
         {/* Actions */}
-        <div className="flex items-center gap-2">
+        <Box className="flex items-center gap-2">
           {primaryAction && (
             <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
               <a href={primaryAction.url || "#"} target="_blank" rel="noopener noreferrer">
@@ -145,7 +146,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
               </a>
             </Button>
           )}
-        </div>
+        </Box>
       </motion.div>
     );
   }
@@ -157,12 +158,12 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
       className="group flex flex-col rounded-xl border border-border bg-secondary/50 hover:border-border transition-all overflow-hidden"
     >
       {/* Header */}
-      <div className="p-5 pb-3">
-        <div className="flex items-start justify-between mb-3">
-          <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
+      <Box className="p-5 pb-3">
+        <Box className="flex items-start justify-between mb-3">
+          <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center">
             {Icon && <Icon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />}
-          </div>
-          <div className="flex gap-1.5">
+          </Box>
+          <Box className="flex gap-1.5">
             {repo.signals.featured && (
               <Badge variant="outline" className={`text-xs ${getBadgeVariant('featured')}`}>
                 Featured
@@ -176,18 +177,18 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
             <Badge variant="outline" className={`text-xs ${getMaturityBadge(repo.maturity)}`}>
               {repo.maturity.charAt(0).toUpperCase() + repo.maturity.slice(1)}
             </Badge>
-          </div>
-        </div>
+          </Box>
+        </Box>
 
         <h3 className="font-semibold text-foreground mb-1 group-hover:text-foreground transition-colors">
           {repo.name}
         </h3>
         <p className="text-xs text-muted-foreground font-mono mb-2">{repo.slug}</p>
         <p className="text-sm text-muted-foreground line-clamp-2">{repo.description}</p>
-      </div>
+      </Box>
 
       {/* Metadata */}
-      <div className="px-5 pb-3 flex flex-wrap gap-1.5">
+      <Box className="px-5 pb-3 flex flex-wrap gap-1.5">
         {repo.languages.slice(0, 3).map(lang => (
           <Badge key={lang} variant="outline" className="text-xs bg-neutral-800/50 text-muted-foreground border-border">
             {lang}
@@ -203,11 +204,11 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
             Deployable
           </Badge>
         )}
-      </div>
+      </Box>
 
       {/* Upstream Attribution */}
       {repo.upstream && (
-        <div className="px-5 pb-3">
+        <Box className="px-5 pb-3">
           <a
             href={repo.upstream.url || "#"}
             target="_blank"
@@ -216,11 +217,11 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
           >
             Powered by {repo.upstream.name} →
           </a>
-        </div>
+        </Box>
       )}
 
       {/* Actions */}
-      <div className="mt-auto p-4 pt-3 border-t border-border flex items-center gap-2">
+      <Box className="mt-auto p-4 pt-3 border-t border-border flex items-center gap-2">
         {primaryAction ? (
           <Button size="sm" className="hz-tap flex-1 bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
             <a href={primaryAction.url || "#"} target="_blank" rel="noopener noreferrer">
@@ -237,7 +238,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
           </Button>
         ) : null}
 
-        <div className="flex gap-1">
+        <Box className="flex gap-1">
           {repo.actions.docsUrl && (
             <Button size="sm" variant="ghost" className="hz-tap px-2 text-muted-foreground hover:text-foreground" asChild title="Docs">
               <a href={repo.actions.docsUrl || "#"} target="_blank" rel="noopener noreferrer" aria-label="Docs">
@@ -259,8 +260,8 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
               </a>
             </Button>
           )}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </motion.div>
   );
 };
@@ -282,9 +283,9 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ collection, onSelect })
       onClick={() => onSelect(collection.repos)}
       className="flex items-center gap-3 p-4 rounded-xl border border-border bg-secondary/30 hover:border-white/30 hover:bg-secondary/50 transition-all text-left group"
     >
-      <div className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+      <Box className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
         <Icon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-      </div>
+      </Box>
       <div>
         <h4 className="font-medium text-foreground text-sm group-hover:text-foreground transition-colors">
           {collection.title}
@@ -522,9 +523,9 @@ const OSSCatalog: React.FC = () => {
 
   return (
     <section className="py-16 px-4 md:px-8 bg-background min-h-screen">
-      <div className="max-w-7xl mx-auto">
+      <Box className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
+        <Box className="mb-8">
           {/* `h2`. This catalog is a SECTION of /open-source, whose fold already
               carries the page's one `h1`; two of them made the page claim two
               subjects, and the count is exactly what the publish gates check. */}
@@ -534,15 +535,15 @@ const OSSCatalog: React.FC = () => {
           <p className="text-muted-foreground text-lg">
             Open source tools, templates, and infrastructure for building AI applications
           </p>
-        </div>
+        </Box>
 
         {/* Featured Collections */}
         {!selectedCollection && !searchQuery && quickFilter === 'all' && (
-          <div className="mb-10">
+          <Box className="mb-10">
             <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4">
               Quick Start Collections
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {featuredCollections.map(collection => (
                 <CollectionCard
                   key={collection.id}
@@ -550,14 +551,14 @@ const OSSCatalog: React.FC = () => {
                   onSelect={setSelectedCollection}
                 />
               ))}
-            </div>
-          </div>
+            </Box>
+          </Box>
         )}
 
         {/* Top Bar */}
-        <div className="flex flex-col lg:flex-row gap-4 mb-6">
+        <Box className="flex flex-col lg:flex-row gap-4 mb-6">
           {/* Search */}
-          <div className="relative flex-1">
+          <Box className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
               type="text"
@@ -566,10 +567,10 @@ const OSSCatalog: React.FC = () => {
               onChange={e => setSearchQuery(e.target.value)}
               className="pl-10 bg-secondary border-border focus:border-white/50"
             />
-          </div>
+          </Box>
 
           {/* Quick Filters */}
-          <div className="flex gap-2 overflow-x-auto pb-2 lg:pb-0">
+          <Box className="flex gap-2 overflow-x-auto pb-2 lg:pb-0">
             {quickFilters.map(filter => (
               <Button
                 key={filter.value}
@@ -586,10 +587,10 @@ const OSSCatalog: React.FC = () => {
                 {filter.label}
               </Button>
             ))}
-          </div>
+          </Box>
 
           {/* Sort & View */}
-          <div className="flex gap-2">
+          <Box className="flex gap-2">
             {/* v8: the popper lives on the menu ROOT, and `placement` replaces
                 Radix's side/align pair. Content is the portal + focus scope and
                 takes no styling — its chrome comes from the gui tokens. */}
@@ -617,7 +618,7 @@ const OSSCatalog: React.FC = () => {
                 and a control that is a switch has to say which way it is set.
                 The darker background was the only thing saying so, and a screen
                 reader cannot read a background. */}
-            <div className="flex border border-border rounded-md">
+            <Box className="flex border border-border rounded-md">
               <Button
                 variant="ghost"
                 size="sm"
@@ -638,7 +639,7 @@ const OSSCatalog: React.FC = () => {
               >
                 <List className="w-4 h-4" />
               </Button>
-            </div>
+            </Box>
 
             {/* Mobile Filter Button */}
             <>
@@ -663,24 +664,24 @@ const OSSCatalog: React.FC = () => {
                   the sidebar shows — one filter UI, revealed in place. */}
               {filtersOpen && (
                 <div className="lg:hidden fixed inset-x-0 bottom-0 top-16 z-50 flex flex-col border-t border-border bg-background">
-                  <div className="flex items-center justify-between border-b border-border px-4 py-3">
+                  <Box className="flex items-center justify-between border-b border-border px-4 py-3">
                     <span className="text-base font-medium text-foreground">Filters</span>
                     <Button variant="ghost" size="sm" onClick={() => setFiltersOpen(false)} aria-label="Close filters">
                       <X className="w-4 h-4" />
                     </Button>
-                  </div>
-                  <div className="flex-1 overflow-y-auto p-4 pb-24">
+                  </Box>
+                  <Box className="flex-1 overflow-y-auto p-4 pb-24">
                     <FacetRail />
-                  </div>
+                  </Box>
                 </div>
               )}
             </>
-          </div>
-        </div>
+          </Box>
+        </Box>
 
         {/* Active Filters */}
         {(hasActiveFilters || selectedCollection) && (
-          <div className="flex flex-wrap items-center gap-2 mb-6">
+          <Box className="flex flex-wrap items-center gap-2 mb-6">
             <span className="text-sm text-muted-foreground">Active filters:</span>
             {selectedCollection && (
               <Badge variant="outline" className="bg-primary/10 text-foreground border-white/30">
@@ -718,15 +719,15 @@ const OSSCatalog: React.FC = () => {
             >
               Clear all
             </Button>
-          </div>
+          </Box>
         )}
 
         {/* Main Content */}
-        <div className="flex gap-8">
+        <Box className="flex gap-8">
           {/* Facet Rail - Desktop */}
           <aside className="hidden lg:block w-64 flex-shrink-0">
-            <div className="sticky top-24 p-4 rounded-xl border border-border bg-secondary/30">
-              <div className="flex items-center justify-between mb-4">
+            <Box className="sticky top-24 p-4 rounded-xl border border-border bg-secondary/30">
+              <Box className="flex items-center justify-between mb-4">
                 <h3 className="font-medium text-foreground">Filters</h3>
                 {hasActiveFilters && (
                   <button
@@ -736,23 +737,23 @@ const OSSCatalog: React.FC = () => {
                     Clear all
                   </button>
                 )}
-              </div>
+              </Box>
               <FacetRail />
-            </div>
+            </Box>
           </aside>
 
           {/* Results */}
-          <div className="flex-1 min-w-0">
+          <Box className="flex-1 min-w-0">
             {/* Results Count */}
-            <div className="flex items-center justify-between mb-4">
+            <Box className="flex items-center justify-between mb-4">
               <p className="text-sm text-muted-foreground">
                 {filteredRepos.length} {filteredRepos.length === 1 ? 'result' : 'results'}
               </p>
-            </div>
+            </Box>
 
             {/* Featured Row */}
             {featuredRepos.length > 0 && (
-              <div className="mb-8">
+              <Box className="mb-8">
                 <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-4 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-primary" />
                   Hanzo Picks
@@ -766,7 +767,7 @@ const OSSCatalog: React.FC = () => {
                     <RepoCard key={repo.id} repo={repo} view={view} />
                   ))}
                 </div>
-              </div>
+              </Box>
             )}
 
             {/* Main Results */}
@@ -781,16 +782,16 @@ const OSSCatalog: React.FC = () => {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16">
+              <Box className="text-center py-16">
                 <p className="text-muted-foreground mb-4">No results found</p>
                 <Button variant="outline" onClick={clearAllFilters}>
                   Clear filters
                 </Button>
-              </div>
+              </Box>
             )}
-          </div>
-        </div>
-      </div>
+          </Box>
+        </Box>
+      </Box>
     </section>
   );
 };
