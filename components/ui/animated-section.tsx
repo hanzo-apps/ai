@@ -4,7 +4,6 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { MotionProps, HTMLMotionProps } from "framer-motion";
-import { cn } from "@/lib/utils";
 import { sectionAnimation, headingAnimation, staggerContainer } from "./animation-variants";
 
 // Define the allowed HTML elements for the animated section
@@ -42,7 +41,7 @@ const AnimatedSection = ({
       viewport={{ once, amount: viewportAmount }}
       variants={sectionAnimation}
       transition={{ delay }}
-      className={cn("relative", className)}
+      className={className ? `relative ${className}` : 'relative'}
       {...motionProps}
       {...props}
     >

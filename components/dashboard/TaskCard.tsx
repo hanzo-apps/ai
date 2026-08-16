@@ -1,7 +1,6 @@
 
 import React from "react";
 import { Bot, MessageSquare, Paperclip, AlertCircle } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface TaskCardProps {
   task: {
@@ -33,7 +32,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
           <span>HAN-{task.id}</span>
         </div>
         {task.priority && (
-          <div className={cn("h-2 w-2 rounded-full", priorityColors[task.priority])}></div>
+          <div className={`h-2 w-2 rounded-full ${priorityColors[task.priority]}`}></div>
         )}
       </div>
       

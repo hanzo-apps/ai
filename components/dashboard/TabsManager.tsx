@@ -3,7 +3,6 @@
 
 import React, { useState, useEffect } from "react";
 import { X, Plus, LayoutGrid, List, MenuSquare } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 export type TabType = {
   id: string;
@@ -52,10 +51,7 @@ const TabsManager: React.FC<TabsManagerProps> = ({ initialTabs, onAddTab }) => {
           {tabs.map(tab => (
             <div
               key={tab.id}
-              className={cn(
-                "flex items-center px-4 py-2 border-r border-neutral-800 cursor-pointer group transition-colors",
-                activeTabId === tab.id ? "bg-neutral-900" : "hover:bg-neutral-900/50"
-              )}
+              className={`flex items-center px-4 py-2 border-r border-neutral-800 cursor-pointer group transition-colors ${activeTabId === tab.id ? "bg-neutral-900" : "hover:bg-neutral-900/50"}`}
               onClick={() => handleTabClick(tab.id)}
             >
               {tab.icon && <span className="mr-2">{tab.icon}</span>}

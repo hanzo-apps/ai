@@ -51,7 +51,6 @@
     "@hanzogui/shell": "^8.1.22",
     "@hanzogui/web": "^8.1.1",
     "@zenlm/models": "^1.0.4",
-    "clsx": "^2.1.1",
     "dompurify": "^3.4.13",
     "framer-motion": "^13.1.0",
     "lucide-react": "^0.462.0",
@@ -62,7 +61,6 @@
     "react-native-svg": "15.15.5",
     "react-native-web": "^0.21.2",
     "sonner": "^2.0.8",
-    "tailwind-merge": "^3.6.0",
     "uuid": "^14.0.1"
   },
   "devDependencies": {

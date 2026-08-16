@@ -3,7 +3,6 @@
 
 import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@hanzo/ui";
-import { cn } from "@/lib/utils";
 
 interface EndpointProps {
   path: string;
@@ -125,19 +124,19 @@ const APIEndpoints = () => {
         <div className="max-w-5xl mx-auto">
           <Tabs defaultValue="commerce" className="w-full" onValueChange={setActiveCategory}>
             <TabsList className="w-full mb-6 bg-neutral-900/50 border border-neutral-800 rounded-lg p-1 h-auto flex flex-wrap">
-              <TabsTrigger value="commerce" className={cn(tabClasses, "flex-1")}>
+              <TabsTrigger value="commerce" className={`${tabClasses} flex-1`}>
                 Commerce
               </TabsTrigger>
-              <TabsTrigger value="identity" className={cn(tabClasses, "flex-1")}>
+              <TabsTrigger value="identity" className={`${tabClasses} flex-1`}>
                 Identity
               </TabsTrigger>
-              <TabsTrigger value="marketing" className={cn(tabClasses, "flex-1")}>
+              <TabsTrigger value="marketing" className={`${tabClasses} flex-1`}>
                 Marketing
               </TabsTrigger>
-              <TabsTrigger value="payments" className={cn(tabClasses, "flex-1")}>
+              <TabsTrigger value="payments" className={`${tabClasses} flex-1`}>
                 Payments
               </TabsTrigger>
-              <TabsTrigger value="platform" className={cn(tabClasses, "flex-1")}>
+              <TabsTrigger value="platform" className={`${tabClasses} flex-1`}>
                 Platform
               </TabsTrigger>
             </TabsList>

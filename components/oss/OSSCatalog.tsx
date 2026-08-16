@@ -27,7 +27,6 @@ import {
   DropdownMenuTrigger,
   Input,
 } from "@hanzo/ui";
-import { cn } from '@/lib/utils';
 import {
   ossCatalog,
   featuredCollections,
@@ -113,7 +112,7 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
           <div className="flex items-center gap-2 mb-1">
             <h3 className="font-semibold text-foreground truncate">{repo.name}</h3>
             {repo.signals.featured && (
-              <Badge variant="outline" className={cn('text-xs', getBadgeVariant('featured'))}>
+              <Badge variant="outline" className={`text-xs ${getBadgeVariant('featured')}`}>
                 Featured
               </Badge>
             )}
@@ -165,16 +164,16 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo, view }) => {
           </div>
           <div className="flex gap-1.5">
             {repo.signals.featured && (
-              <Badge variant="outline" className={cn('text-xs', getBadgeVariant('featured'))}>
+              <Badge variant="outline" className={`text-xs ${getBadgeVariant('featured')}`}>
                 Featured
               </Badge>
             )}
             {repo.signals.recommended && !repo.signals.featured && (
-              <Badge variant="outline" className={cn('text-xs', getBadgeVariant('recommended'))}>
+              <Badge variant="outline" className={`text-xs ${getBadgeVariant('recommended')}`}>
                 Recommended
               </Badge>
             )}
-            <Badge variant="outline" className={cn('text-xs', getMaturityBadge(repo.maturity))}>
+            <Badge variant="outline" className={`text-xs ${getMaturityBadge(repo.maturity)}`}>
               {repo.maturity.charAt(0).toUpperCase() + repo.maturity.slice(1)}
             </Badge>
           </div>
@@ -333,10 +332,7 @@ const FacetSection: React.FC<FacetSectionProps> = ({
       >
         <span className="text-sm font-medium text-foreground/80">{title}</span>
         <ChevronDown
-          className={cn(
-            'w-4 h-4 text-muted-foreground transition-transform',
-            isOpen && 'rotate-180'
-          )}
+          className={`w-4 h-4 text-muted-foreground transition-transform${isOpen ? ' rotate-180' : ''}`}
         />
       </button>
       <AnimatePresence>
@@ -351,20 +347,14 @@ const FacetSection: React.FC<FacetSectionProps> = ({
               <button
                 key={option.value}
                 onClick={() => toggleOption(option.value)}
-                className={cn(
-                  'flex items-center gap-2 w-full px-2 py-1.5 rounded text-sm transition-colors',
-                  selected.includes(option.value)
+                className={`flex items-center gap-2 w-full px-2 py-1.5 rounded text-sm transition-colors ${selected.includes(option.value)
                     ? 'bg-primary/10 text-foreground'
-                    : 'text-muted-foreground hover:bg-accent hover:text-foreground'
-                )}
+                    : 'text-muted-foreground hover:bg-accent hover:text-foreground'}`}
               >
                 <div
-                  className={cn(
-                    'w-4 h-4 rounded border flex items-center justify-center',
-                    selected.includes(option.value)
+                  className={`w-4 h-4 rounded border flex items-center justify-center ${selected.includes(option.value)
                       ? 'border-white bg-primary'
-                      : 'border-neutral-600'
-                  )}
+                      : 'border-neutral-600'}`}
                 >
                   {selected.includes(option.value) && (
                     <Check className="w-3 h-3 text-foreground" />
@@ -589,12 +579,9 @@ const OSSCatalog: React.FC = () => {
                   setQuickFilter(filter.value);
                   setSelectedCollection(null);
                 }}
-                className={cn(
-                  'whitespace-nowrap',
-                  quickFilter === filter.value
+                className={`whitespace-nowrap ${quickFilter === filter.value
                     ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                    : 'border-border hover:bg-accent'
-                )}
+                    : 'border-border hover:bg-accent'}`}
               >
                 {filter.label}
               </Button>
@@ -618,10 +605,7 @@ const OSSCatalog: React.FC = () => {
                   <DropdownMenuItem
                     key={option.value}
                     onClick={() => setSortBy(option.value)}
-                    className={cn(
-                      'cursor-pointer',
-                      sortBy === option.value && 'text-foreground'
-                    )}
+                    className={`cursor-pointer${sortBy === option.value ? ' text-foreground' : ''}`}
                   >
                     {option.label}
                   </DropdownMenuItem>
@@ -640,7 +624,7 @@ const OSSCatalog: React.FC = () => {
                 aria-label="Grid view"
                 aria-pressed={view === 'grid'}
                 onClick={() => setView('grid')}
-                className={cn('px-2', view === 'grid' && 'bg-neutral-800')}
+                className={`px-2${view === 'grid' ? ' bg-neutral-800' : ''}`}
               >
                 <Grid3X3 className="w-4 h-4" />
               </Button>
@@ -650,7 +634,7 @@ const OSSCatalog: React.FC = () => {
                 aria-label="List view"
                 aria-pressed={view === 'list'}
                 onClick={() => setView('list')}
-                className={cn('px-2', view === 'list' && 'bg-neutral-800')}
+                className={`px-2${view === 'list' ? ' bg-neutral-800' : ''}`}
               >
                 <List className="w-4 h-4" />
               </Button>
@@ -774,11 +758,9 @@ const OSSCatalog: React.FC = () => {
                   Hanzo Picks
                 </h2>
                 <div
-                  className={cn(
-                    view === 'grid'
+                  className={`${view === 'grid'
                       ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'
-                      : 'space-y-3'
-                  )}
+                      : 'space-y-3'}`}
                 >
                   {featuredRepos.map(repo => (
                     <RepoCard key={repo.id} repo={repo} view={view} />
@@ -790,11 +772,9 @@ const OSSCatalog: React.FC = () => {
             {/* Main Results */}
             {mainRepos.length > 0 ? (
               <div
-                className={cn(
-                  view === 'grid'
+                className={`${view === 'grid'
                     ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'
-                    : 'space-y-3'
-                )}
+                    : 'space-y-3'}`}
               >
                 {mainRepos.map(repo => (
                   <RepoCard key={repo.id} repo={repo} view={view} />

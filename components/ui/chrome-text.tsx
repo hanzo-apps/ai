@@ -1,5 +1,4 @@
 import React, { type CSSProperties } from 'react'
-import { cn } from '@/lib/utils'
 
 /**
  * The display heading, and the eyebrow that can sit above it.
@@ -47,18 +46,15 @@ const ChromeText = ({
   preHeadingClassName,
   style,
 }: ChromeTextProps) => (
-  <div className={cn('flex flex-col', preHeading ? 'items-center' : 'items-start')}>
+  <div className={`flex flex-col ${preHeading ? 'items-center' : 'items-start'}`}>
     {preHeading && (
       <div
-        className={cn(
-          'mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs font-medium text-neutral-300',
-          preHeadingClassName
-        )}
+        className={`mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs font-medium text-neutral-300${preHeadingClassName ? ` ${preHeadingClassName}` : ''}`}
       >
         {preHeading}
       </div>
     )}
-    <Component className={cn('hz-display', className)} style={style}>
+    <Component className={className ? `hz-display ${className}` : 'hz-display'} style={style}>
       {children}
     </Component>
   </div>

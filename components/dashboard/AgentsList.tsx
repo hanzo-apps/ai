@@ -7,7 +7,6 @@ import { Bot, Activity, Database, Settings, PlayCircle, StopCircle, Brain, Zap, 
 import { Input } from "@hanzo/ui";
 import { Progress } from "@hanzo/ui";
 import { DummyAgentData, Agent } from "./data";
-import { cn } from "@/lib/utils";
 import AgentDetail from "./AgentDetail";
 import { toast } from "sonner";
 
