@@ -222,9 +222,29 @@ export function SiteHeader({
         { id: 'solutions', label: 'Solutions', href: '/solutions', glyph: 'blocks', hint: 'By industry and by job' },
         { id: 'customers', label: 'Customers', href: '/customers', glyph: 'users', hint: 'Teams building on Hanzo' },
         { id: 'pricing', label: 'Pricing', href: '/pricing', glyph: 'card', hint: 'Plans and rates' },
-        { id: 'agency', label: 'Agency', href: AGENCY, glyph: 'template', hint: 'hanzo.agency', external: true },
         { id: 'contact', label: 'Contact sales', href: '/contact', glyph: 'chat', hint: 'Talk to us' },
       ] as HanzoLink[]).filter((l) => shown(l.href)),
+      groups: [
+        {
+          id: 'by-need',
+          title: 'Solutions',
+          items: ([
+            { id: 'agents', label: 'Agents', href: '/agents' },
+            { id: 'search', label: 'Search', href: '/search' },
+            { id: 'data', label: 'Data', href: '/products/data' },
+            { id: 'compute', label: 'Compute', href: '/products/compute' },
+            { id: 'security', label: 'Security', href: '/security' },
+          ] as HanzoLink[]).filter((l) => shown(l.href)),
+        },
+        {
+          id: 'services',
+          title: 'Services',
+          items: [
+            { id: 'agency', label: 'Agency', href: AGENCY, external: true },
+            { id: 'support', label: 'Enterprise support', href: '/contact' },
+          ] as HanzoLink[],
+        },
+      ],
     },
     {
       id: 'developers',
@@ -238,8 +258,28 @@ export function SiteHeader({
         { id: 'cli', label: 'CLI', href: '/cli', glyph: 'terminal', hint: 'Hanzo from a terminal' },
         { id: 'dev', label: 'Hanzo Dev', href: '/dev', glyph: 'code', hint: 'The coding agent' },
         { id: 'learn', label: 'Learn', href: '/learn', glyph: 'cap', hint: 'Guides and walkthroughs' },
-        { id: 'status', label: 'Status', href: '/status', glyph: 'pulse', hint: 'What is up right now' },
       ] as HanzoLink[]).filter((l) => shown(l.href)),
+      groups: [
+        {
+          id: 'reference',
+          title: 'Resources',
+          items: [
+            { id: 'docs-ref', label: 'Docs', href: DOCS_HOST, external: true },
+            { id: 'quickstart', label: 'Quickstart', href: `${DOCS_HOST}/docs/getting-started`, external: true },
+            { id: 'api-ref', label: 'API reference', href: `${DOCS_HOST}/docs/api`, external: true },
+            { id: 'status', label: 'Status', href: '/status' },
+          ] as HanzoLink[],
+        },
+        {
+          id: 'build-on',
+          title: 'Build on Hanzo',
+          items: ([
+            { id: 'console', label: 'Console', href: CONSOLE, external: true },
+            { id: 'open-source-dev', label: 'Open source', href: '/open-source' },
+            { id: 'mcp', label: 'MCP', href: '/mcp' },
+          ] as HanzoLink[]).filter((l) => shown(l.href)),
+        },
+      ],
     },
     {
       id: 'company',
