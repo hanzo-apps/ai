@@ -213,6 +213,62 @@ export function SiteHeader({
         { id: 'open-source', label: 'Open Source', href: '/open-source', glyph: 'package', hint: 'Every tool we build' },
       ] as HanzoLink[]).filter((l) => shown(l.href)),
     },
+    // Products sits SECOND, between the research and the commercial pitch,
+    // because that is the order a reader asks in: what have you proven, what can
+    // I use, what will it cost. It was missing entirely — every product was
+    // reachable only through Business, which frames a thing you run as a thing
+    // you buy.
+    //
+    // The primary column is the OS read top-down, the same order the homepage
+    // descends: the company, the intelligence, the agents, the cloud beneath
+    // them. Nav and page tell one story, or a reader has to reconcile two.
+    {
+      id: 'products',
+      label: 'Products',
+      href: '/products',
+      glyph: 'blocks',
+      items: ([
+        { id: 'team', label: 'Hanzo Team', href: '/team', glyph: 'users', hint: 'People and AI coworkers' },
+        { id: 'enso', label: 'Enso', href: '/enso', glyph: 'ring', hint: 'The intelligence layer' },
+        { id: 'agents', label: 'Agents', href: '/agents', glyph: 'spark', hint: 'Tools, memory and sandboxes' },
+        { id: 'cloud', label: 'Hanzo Cloud', href: '/cloud', glyph: 'globe', hint: 'The infrastructure beneath' },
+      ] as HanzoLink[]).filter((l) => shown(l.href)),
+      groups: [
+        {
+          id: 'build',
+          title: 'Build',
+          items: ([
+            { id: 'p-dev', label: 'Hanzo Dev', href: '/dev' },
+            { id: 'p-code', label: 'Hanzo Code', href: '/code' },
+            { id: 'p-base', label: 'Base', href: '/base' },
+            { id: 'p-functions', label: 'Functions', href: '/functions' },
+            { id: 'p-tabs', label: 'Tabs', href: '/tabs' },
+            { id: 'p-mcp', label: 'MCP', href: '/mcp' },
+          ] as HanzoLink[]).filter((l) => shown(l.href)),
+        },
+        {
+          id: 'observe',
+          title: 'Observe',
+          items: ([
+            { id: 'p-o11y', label: 'Observability', href: '/o11y' },
+            { id: 'p-insights', label: 'Insights', href: '/insights' },
+            { id: 'p-analytics', label: 'Analytics', href: '/analytics' },
+            { id: 'p-security', label: 'Security', href: '/security' },
+          ] as HanzoLink[]).filter((l) => shown(l.href)),
+        },
+        {
+          id: 'run',
+          title: 'Run',
+          items: ([
+            { id: 'p-compute', label: 'Compute', href: '/products/compute' },
+            { id: 'p-storage', label: 'Storage', href: '/storage' },
+            { id: 'p-database', label: 'Database', href: '/database' },
+            { id: 'p-network', label: 'Network', href: '/network' },
+            { id: 'p-commerce', label: 'Commerce', href: '/commerce' },
+          ] as HanzoLink[]).filter((l) => shown(l.href)),
+        },
+      ],
+    },
     {
       id: 'business',
       label: 'Business',
@@ -294,6 +350,23 @@ export function SiteHeader({
         { id: 'trust', label: 'Trust', href: '/trust', glyph: 'shield', hint: 'Security and compliance' },
         { id: 'investors', label: 'Investors', href: '/investors', glyph: 'card', hint: 'Backing this' },
       ] as HanzoLink[]).filter((l) => shown(l.href)),
+      // The reference gives Company a Resources column, and these four are the
+      // pages a reader looks for AFTER deciding they care who we are: the mark,
+      // how we think, what we fund, and whether it is up right now. None of them
+      // belongs in the primary list — that column is who we are, not what we
+      // publish.
+      groups: [
+        {
+          id: 'company-resources',
+          title: 'Resources',
+          items: ([
+            { id: 'c-brand', label: 'Brand', href: '/brand' },
+            { id: 'c-philosophy', label: 'Philosophy', href: '/philosophy' },
+            { id: 'c-osfund', label: 'Open Source Fund', href: '/open-source-fund' },
+            { id: 'c-status', label: 'Status', href: '/status' },
+          ] as HanzoLink[]).filter((l) => shown(l.href)),
+        },
+      ],
     },
     // Zoo Labs Foundation governs Hanzo, so it is a peer of the company entry
     // rather than a link buried inside it.
