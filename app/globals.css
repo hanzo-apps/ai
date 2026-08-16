@@ -927,6 +927,20 @@ html:root #hanzo-products-menu > div {
   align-items: flex-end;
   gap: 0.625rem;
 }
+/* On a phone the composer is not bottom-CENTRE, it is nearly full width, so its
+   Send button reaches the right edge and the two land on each other: measured at
+   390px, a 35x39 overlap covering 69% of both. The dock sits at a higher
+   z-index, so it won the tap on most of Send — the primary action of the page
+   opened Help instead of sending.
+   
+   Lifting it clear of the rail is the fix rather than lowering its z-index: the
+   dock has to stay above the composer when its panel is open, and an overlap
+   that only resolves by stacking order is still two controls in one place. */
+@media (max-width: 640px) {
+  .hz-help-dock {
+    bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
+}
 /* Small on purpose: it is an affordance, not an action. 28px is under the 44px
    coarse-pointer floor, so it carries its own touch target as a pseudo-element
    rather than growing — the mark stays quiet and the thumb still lands. */
