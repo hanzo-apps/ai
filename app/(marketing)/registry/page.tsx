@@ -6,6 +6,7 @@ import { ArrowRight, Container, Lock, KeyRound, Shield, Zap, Globe, Layers, User
 import ChromeText from "@/components/ui/chrome-text";
 
 import { ProductFooter } from "@/components/products/ProductFooter"
+import Link from 'next/link'
 const Registry = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -162,9 +163,9 @@ const Registry = () => {
                 <a href="https://docs.hanzo.ai/docs/registry" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
                   Quickstart <ArrowRight className="h-5 w-5" />
                 </a>
-                <a href="/iam" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
+                <Link href="/iam" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
                   About IAM
-                </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ import { motion } from "@/components/motion";
 import { Button } from "@hanzo/ui";
 import { Github, ArrowRight } from "lucide-react";
 import ChromeText from "@/components/ui/chrome-text";
+import Link from 'next/link'
 
 const CallToAction = () => {
   return (
@@ -50,7 +51,7 @@ const CallToAction = () => {
           </div>
           
           <div className="mt-12 text-muted-foreground text-sm">
-            Need enterprise features? <a href="/cloud" className="text-foreground hover:text-foreground/70 underline">Check out Hanzo Cloud</a>
+            Need enterprise features? <Link href="/cloud" className="text-foreground hover:text-foreground/70 underline">Check out Hanzo Cloud</Link>
           </div>
         </motion.div>
       </div>

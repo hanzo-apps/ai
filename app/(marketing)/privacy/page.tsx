@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { Shield } from "lucide-react";
+import Link from 'next/link'
 
 const Privacy = () => {
   return (
@@ -184,7 +185,7 @@ const Privacy = () => {
                 <div className="mt-2 text-muted-foreground">
                   <p>Hanzo AI, Inc.</p>
                   <p>Email: <a href="mailto:privacy@hanzo.ai" className="text-foreground hover:underline">privacy@hanzo.ai</a></p>
-                  <p>Web: <a href="/contact" className="text-foreground hover:underline">hanzo.ai/contact</a></p>
+                  <p>Web: <Link href="/contact" className="text-foreground hover:underline">hanzo.ai/contact</Link></p>
                 </div>
               </div>
 

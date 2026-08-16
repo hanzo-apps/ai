@@ -2,6 +2,7 @@
 
 import { ShieldCheck } from 'lucide-react'
 import { Page, PageHero, Section, Prose, CardGrid, Cta, type CardItem } from '@/components/marketing/page-kit'
+import Link from 'next/link'
 
 /**
  * The trust page.
@@ -280,14 +281,14 @@ export default function TrustPage() {
         <Prose>
           <p>
             Send it to <a href="mailto:security@hanzo.ai">security@hanzo.ai</a>. The same address is published
-            at <a href="/.well-known/security.txt">/.well-known/security.txt</a> under RFC 9116, so a scanner
+            at <Link href="/.well-known/security.txt">/.well-known/security.txt</Link> under RFC 9116, so a scanner
             finds it without reading this page. Tell us what you did and what came back; we do not need a
             proof-of-concept exploit to take a report seriously, and we will not threaten anyone who sends one
             in good faith.
           </p>
           <p>
             For the mechanisms in more detail — encryption, infrastructure, what an enterprise agreement adds
-            — see <a href="/security">the security page</a>.
+            — see <Link href="/security">the security page</Link>.
           </p>
         </Prose>
       </Section>

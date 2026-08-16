@@ -172,7 +172,7 @@ export default function PressPage() {
               ))}
             </div>
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-wrap gap-4">
-              <a href="/press/hanzo-press-kit.zip" className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"><Download className="w-4 h-4 mr-2" />Download Press Kit (ZIP)</a>
+              <Link href="/press/hanzo-press-kit.zip" className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-all hover:opacity-90 text-sm bg-primary text-primary-foreground"><Download className="w-4 h-4 mr-2" />Download Press Kit (ZIP)</Link>
               <Link href="/brand" className="inline-flex items-center px-6 py-3 rounded-full font-medium transition-colors border border-border bg-transparent hover:bg-secondary text-sm text-foreground"><Palette className="w-4 h-4 mr-2" />View Brand Guidelines</Link>
             </motion.div>
             <div className="mt-10">

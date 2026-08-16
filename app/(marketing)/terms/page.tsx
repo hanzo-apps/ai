@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "@/components/motion";
 import { FileText } from "lucide-react";
+import Link from 'next/link'
 
 const Terms = () => {
   return (
@@ -90,7 +91,7 @@ const Terms = () => {
                   Our AI Services generate outputs based on your inputs. You retain ownership of your inputs. Subject to these Terms, you own the outputs generated for you, to the extent permitted by law. AI-generated outputs may not be unique and similar outputs may be generated for other users. We do not guarantee the accuracy, completeness, or fitness of any output for a particular purpose.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  We do not use your inputs or outputs to train our foundation models, and we never store your prompts or outputs for model improvement. Separately, to improve how requests are routed to models, we may use anonymous quality signals derived from your usage: this is <strong className="text-foreground/90">opt-in (off by default) for users in the EU, UK, and EEA</strong>, and <strong className="text-foreground/90">on by default — disclosed at sign-up — elsewhere</strong>. Either way, you control it in your account settings and may withdraw at any time. When enabled, an automated system records only a numeric quality score and non-identifying routing metadata to improve model routing — your prompts and outputs are not stored for this purpose. See our <a href="/privacy" className="text-foreground hover:underline">Privacy Policy</a> for details.
+                  We do not use your inputs or outputs to train our foundation models, and we never store your prompts or outputs for model improvement. Separately, to improve how requests are routed to models, we may use anonymous quality signals derived from your usage: this is <strong className="text-foreground/90">opt-in (off by default) for users in the EU, UK, and EEA</strong>, and <strong className="text-foreground/90">on by default — disclosed at sign-up — elsewhere</strong>. Either way, you control it in your account settings and may withdraw at any time. When enabled, an automated system records only a numeric quality score and non-identifying routing metadata to improve model routing — your prompts and outputs are not stored for this purpose. See our <Link href="/privacy" className="text-foreground hover:underline">Privacy Policy</Link> for details.
                 </p>
               </div>
 
@@ -118,7 +119,7 @@ const Terms = () => {
               <div>
                 <h2 className="text-xl font-semibold text-foreground mb-3">9. Privacy</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Your use of the Services is subject to our <a href="/privacy" className="text-foreground hover:underline">Privacy Policy</a>, which describes how we collect, use, and protect your information.
+                  Your use of the Services is subject to our <Link href="/privacy" className="text-foreground hover:underline">Privacy Policy</Link>, which describes how we collect, use, and protect your information.
                 </p>
               </div>
 
@@ -173,7 +174,7 @@ const Terms = () => {
                   <li><strong className="text-foreground/90">Opt-out:</strong> reply <strong className="text-foreground/90">STOP</strong> to any message to unsubscribe; reply <strong className="text-foreground/90">HELP</strong> for help.</li>
                   <li><strong className="text-foreground/90">Frequency:</strong> message frequency varies (e.g., per sign-in for 2FA).</li>
                   <li><strong className="text-foreground/90">Rates:</strong> message and data rates may apply; carriers are not liable for delayed or undelivered messages.</li>
-                  <li><strong className="text-foreground/90">Privacy:</strong> we never sell or share your mobile number with third parties for marketing — see our <a href="/privacy" className="text-foreground hover:underline">Privacy Policy</a>.</li>
+                  <li><strong className="text-foreground/90">Privacy:</strong> we never sell or share your mobile number with third parties for marketing — see our <Link href="/privacy" className="text-foreground hover:underline">Privacy Policy</Link>.</li>
                 </ul>
                 <p className="text-muted-foreground leading-relaxed mt-2">
                   Email communications (transactional and, where you opt in, marketing) are sent by Hanzo or its email providers. You can manage email preferences in your <a href="https://account.hanzo.ai" className="text-foreground hover:underline">account settings</a> or via the unsubscribe link in marketing emails. Transactional and security emails are required for account operation and cannot be unsubscribed.
@@ -188,7 +189,7 @@ const Terms = () => {
                 <div className="mt-2 text-muted-foreground">
                   <p>Hanzo AI, Inc.</p>
                   <p>Email: <a href="mailto:legal@hanzo.ai" className="text-foreground hover:underline">legal@hanzo.ai</a></p>
-                  <p>Web: <a href="/contact" className="text-foreground hover:underline">hanzo.ai/contact</a></p>
+                  <p>Web: <Link href="/contact" className="text-foreground hover:underline">hanzo.ai/contact</Link></p>
                 </div>
               </div>
 

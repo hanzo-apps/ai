@@ -5,6 +5,7 @@ import React from "react";
 import { motion } from "@/components/motion";
 import { Cloud, Cpu, Globe, Server, Database, Network, Bot, Lock, Zap } from "lucide-react";
 import { Button } from "@hanzo/ui";
+import Link from 'next/link'
 
 const Features = () => {
   return (
@@ -161,7 +162,7 @@ const Features = () => {
             </div>
             
             <div className="mt-6 text-muted-foreground text-sm">
-              Looking for a free, self-hosted alternative? <a href="/platform" className="text-foreground hover:underline">Check out Hanzo Platform</a>
+              Looking for a free, self-hosted alternative? <Link href="/platform" className="text-foreground hover:underline">Check out Hanzo Platform</Link>
             </div>
           </div>
         </motion.div>

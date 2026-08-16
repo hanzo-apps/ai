@@ -3,6 +3,7 @@
 import { Users, ArrowUpRight } from 'lucide-react'
 import { Page, PageHero, Section, Prose, Cta } from '@/components/marketing/page-kit'
 import { testimonials } from '@/lib/data/testimonials'
+import Link from 'next/link'
 
 export default function CustomersPage() {
   return (
@@ -37,8 +38,8 @@ export default function CustomersPage() {
         <Prose>
           <p>
             The infrastructure behind these deployments is open source and available to everyone. Start with the{' '}
-            <a href="/learn">docs</a>, browse <a href="https://oss.hanzo.ai/">deployable applications</a>, or{' '}
-            <a href="/contact">talk to us</a> about your workload.
+            <Link href="/learn">docs</Link>, browse <a href="https://oss.hanzo.ai/">deployable applications</a>, or{' '}
+            <Link href="/contact">talk to us</Link> about your workload.
           </p>
         </Prose>
         <div className="mt-6">

@@ -276,12 +276,12 @@ export default function EnsoLanding({ models }: { models: string }) {
               one system rather than across five vendors.
             </p>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-neutral-400">
-              <a href="/agents" className="hover:text-neutral-100">Agents</a>
-              <a href="/tabs" className="hover:text-neutral-100">Sandboxes</a>
-              <a href="/team" className="hover:text-neutral-100">Company context</a>
-              <a href="/cloud" className="hover:text-neutral-100">Hanzo Cloud</a>
-              <a href="/o11y" className="hover:text-neutral-100">Observability</a>
-              <a href="/insights" className="hover:text-neutral-100">Insights</a>
+              <Link href="/agents" className="hover:text-neutral-100">Agents</Link>
+              <Link href="/tabs" className="hover:text-neutral-100">Sandboxes</Link>
+              <Link href="/team" className="hover:text-neutral-100">Company context</Link>
+              <Link href="/cloud" className="hover:text-neutral-100">Hanzo Cloud</Link>
+              <Link href="/o11y" className="hover:text-neutral-100">Observability</Link>
+              <Link href="/insights" className="hover:text-neutral-100">Insights</Link>
             </div>
           </div>
         </section>

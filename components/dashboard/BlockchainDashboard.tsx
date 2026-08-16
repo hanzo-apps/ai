@@ -15,6 +15,7 @@ import {
   Clock,
   Server
 } from "lucide-react";
+import Link from 'next/link'
 
 interface ChainStatus {
   name: string;
@@ -138,9 +139,9 @@ const BlockchainDashboard = () => {
             <Globe className="w-4 h-4 text-foreground" />
             Chain Status
           </h3>
-          <a href="/status" className="text-sm text-foreground hover:underline flex items-center gap-1">
+          <Link href="/status" className="text-sm text-foreground hover:underline flex items-center gap-1">
             View all <ExternalLink className="w-3 h-3" />
-          </a>
+          </Link>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {chains.map((chain) => (
@@ -219,21 +220,21 @@ const BlockchainDashboard = () => {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <a href="/blockchain/chains" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30 transition-colors group">
+        <Link href="/blockchain/chains" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30 transition-colors group">
           <Server className="w-6 h-6 text-foreground mb-2" />
           <h4 className="font-medium mb-1">RPC Endpoints</h4>
           <p className="text-sm text-muted-foreground">Configure chain connections and endpoints</p>
-        </a>
-        <a href="/blockchain/webhooks" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30 transition-colors group">
+        </Link>
+        <Link href="/blockchain/webhooks" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30 transition-colors group">
           <Webhook className="w-6 h-6 text-foreground mb-2" />
           <h4 className="font-medium mb-1">Webhooks</h4>
           <p className="text-sm text-muted-foreground">Set up event notifications</p>
-        </a>
-        <a href="/blockchain/wallets" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30 transition-colors group">
+        </Link>
+        <Link href="/blockchain/wallets" className="bg-secondary/50 border border-border rounded-xl p-4 hover:border-white/30 transition-colors group">
           <Shield className="w-6 h-6 text-foreground mb-2" />
           <h4 className="font-medium mb-1">Smart Wallets</h4>
           <p className="text-sm text-muted-foreground">ERC-4337 account abstraction</p>
-        </a>
+        </Link>
       </div>
     </div>
   );

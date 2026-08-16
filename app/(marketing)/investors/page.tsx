@@ -2,6 +2,7 @@
 
 import { Building2, FileText, Landmark, Mail, Scale, Users } from 'lucide-react'
 import { CardGrid, Cta, Page, PageHero, Prose, Section } from '@/components/marketing/page-kit'
+import Link from 'next/link'
 
 
 /**
@@ -112,7 +113,7 @@ export default function InvestorsPage() {
         <Prose>
           <p>
             Announcements, company facts and brand assets — including the logo pack and partner
-            marks — are on the <a href="/press">press page</a>. Media enquiries go to{' '}
+            marks — are on the <Link href="/press">press page</Link>. Media enquiries go to{' '}
             <a href="mailto:press@hanzo.ai">press@hanzo.ai</a>.
           </p>
         </Prose>

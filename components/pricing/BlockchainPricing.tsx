@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@hanzo/ui";
 import { Check, Server, Search, Wallet, Shield, Zap, Bell, Database, Layers } from "lucide-react";
 import { loadBlockchain, fallbackBlockchain, formatCatalogPrice, type BlockchainCatalog } from "@/lib/plans";
+import Link from 'next/link'
 
 // Icons are presentation, so they stay here — the catalog prices a product, it
 // does not choose a glyph. Keyed by catalog id so a renamed product keeps its icon
@@ -141,7 +142,7 @@ const BlockchainPricing = () => {
 
         <p className="text-sm text-muted-foreground text-center">
           All plans include WebSocket support, JSON-RPC & REST APIs, and auto-scaling.
-          <a href="/blockchain" className="text-foreground hover:underline ml-1">Compare all features →</a>
+          <Link href="/blockchain" className="text-foreground hover:underline ml-1">Compare all features →</Link>
         </p>
       </div>
 

@@ -8,6 +8,7 @@ import { LucideIcon, ExternalLink, Mail, Phone, Shield, Users } from "lucide-rea
 import TeamSlack from "@/components/TeamSlack";
 import { Button, toast } from "@hanzo/ui";
 import { teamMembers, TeamMemberId } from "@/lib/constants/team-members";
+import Link from 'next/link'
 
 interface TeamMemberPageProps {
   memberId: TeamMemberId;
@@ -98,10 +99,10 @@ const TeamMemberPage = ({ memberId }: TeamMemberPageProps) => {
                     Work with Hanzo Agency
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </Button>
-                  <a href="/contact" className="flex items-center gap-2 px-5 py-2.5 border border-white/40 hover:border-white/30 rounded-md text-foreground hover:text-foreground/70 transition-colors">
+                  <Link href="/contact" className="flex items-center gap-2 px-5 py-2.5 border border-white/40 hover:border-white/30 rounded-md text-foreground hover:text-foreground/70 transition-colors">
                     <span>Learn more</span>
                     <Mail size={14} />
-                  </a>
+                  </Link>
                 </div>
               </div>
               

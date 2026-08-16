@@ -22,6 +22,7 @@ import {
   Users,
 } from 'lucide-react'
 import { Page, PageHero, Section, CardGrid, Prose, type CardItem } from '@/components/marketing/page-kit'
+import Link from 'next/link'
 
 /**
  * Two words, defined once, carried by every block on the page.
@@ -347,7 +348,7 @@ export default function RiskClient() {
       <Section title="What this is not">
         <Prose>
           <p>
-            Hanzo does not process payments — your processor does, and <a href="/commerce">Hanzo Commerce</a> owns the
+            Hanzo does not process payments — your processor does, and <Link href="/commerce">Hanzo Commerce</Link> owns the
             money plane. There is no dispute-network integration today: Risk assembles the evidence, you submit it. No
             figure on this page is a customer result, because the decide plane has not carried customer traffic yet.
             When it has, the numbers here will be ours and measured.
@@ -362,8 +363,8 @@ export default function RiskClient() {
           <p>
             Anti-money-laundering compliance and fraud prevention are related jobs, not one job. <strong>/v1/aml</strong>{' '}
             is the compliance face, <strong>/v1/risk</strong> is the decide plane, and one engine serves both. Nearby:{' '}
-            <a href="/idv">identity verification</a> for proving who somebody is, <a href="/guard">Guard</a> for what a
-            model is allowed to say, and <a href="/analytics">Analytics</a> for the event plane the model reads.
+            <Link href="/idv">identity verification</Link> for proving who somebody is, <Link href="/guard">Guard</Link> for what a
+            model is allowed to say, and <Link href="/analytics">Analytics</Link> for the event plane the model reads.
           </p>
         </Prose>
       </Section>

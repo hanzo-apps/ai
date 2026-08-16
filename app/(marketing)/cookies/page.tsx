@@ -2,6 +2,7 @@
 
 import { Cookie } from 'lucide-react'
 import { Page, PageHero, Section, Prose, CardGrid, type CardItem } from '@/components/marketing/page-kit'
+import Link from 'next/link'
 
 const CATEGORIES: CardItem[] = [
   {
@@ -60,9 +61,9 @@ export default function CookiesPage() {
       <Section title="More">
         <Prose>
           <p>
-            This policy sits alongside our <a href="/privacy">Privacy Policy</a> and{' '}
-            <a href="/terms">Terms of Service</a>. If you have a question about it, or want to make a data request,
-            contact us at <a href="/contact">hanzo.ai/contact</a>.
+            This policy sits alongside our <Link href="/privacy">Privacy Policy</Link> and{' '}
+            <Link href="/terms">Terms of Service</Link>. If you have a question about it, or want to make a data request,
+            contact us at <Link href="/contact">hanzo.ai/contact</Link>.
           </p>
         </Prose>
       </Section>

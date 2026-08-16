@@ -256,12 +256,11 @@ function Hero({ layers, models }: { layers: number; models: string | null }) {
           just the one whose width is written down. */}
       <div className="mx-auto grid w-full max-w-[1600px] items-center gap-8 sm:gap-12 xl:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] xl:gap-14 2xl:max-w-[1800px]">
         <div>
-          {/* THE POSITIONING, and it is one sentence long: what this is, and
-              what it does for you. The eyebrow names the CATEGORY, because a
-              reader who has never heard of us needs to know what KIND of thing
-              this is before the promise means anything. */}
+          {/* The eyebrow places this product in the estate: Hanzo OS is the
+              category, Hanzo Cloud is where it runs. A reader who lands here
+              from hanzo.ai should not have to work out how the two relate. */}
           <p style={rise(0)} className="hz-rise text-sm font-medium uppercase tracking-[0.14em] text-neutral-500">
-            The Cloud Virtualization Platform
+            The AI-native cloud beneath Hanzo OS
           </p>
 
           <h1
@@ -289,7 +288,7 @@ function Hero({ layers, models }: { layers: number; models: string | null }) {
           >
             Bare metal in your rack, the cloud accounts you already pay for, and
             the hyperscalers&rsquo; regions — compute, networking, identity and services —
-            answer as one cloud. You build against one thing instead of five.
+            answer as one cloud. Run Hanzo OS on it, or on infrastructure you control.
           </p>
 
           {/* The one number on the fold, and it is asked of the gateway at read

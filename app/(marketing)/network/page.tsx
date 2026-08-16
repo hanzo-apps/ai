@@ -6,6 +6,7 @@ import { ArrowRight, Network as NetworkIcon, Coins, Globe, Shield, Cpu, Zap, Ser
 import ChromeText from "@/components/ui/chrome-text";
 
 import { ProductFooter } from "@/components/products/ProductFooter"
+import Link from 'next/link'
 const Network = () => {
   return (
     <div className="min-h-screen bg-[var(--black)] text-[var(--white)]">
@@ -27,9 +28,9 @@ const Network = () => {
               <a href="https://docs.hanzo.ai/docs/network" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
                 Buy Compute <ArrowRight className="h-5 w-5" />
               </a>
-              <a href="/node" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
+              <Link href="/node" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
                 Run a Node
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -148,9 +149,9 @@ const Network = () => {
                 <a href="https://docs.hanzo.ai/docs/api-keys" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
                   Get an API Key <ArrowRight className="h-5 w-5" />
                 </a>
-                <a href="/node" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
+                <Link href="/node" className="inline-flex items-center justify-center gap-2 border border-white/30 text-[var(--white)] hover:bg-primary/10 px-8 py-4 rounded-md text-lg font-medium">
                   Provide Compute
-                </a>
+                </Link>
               </div>
             </div>
           </div>

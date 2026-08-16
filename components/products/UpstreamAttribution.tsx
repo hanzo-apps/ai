@@ -2,6 +2,7 @@
 
 import { motion } from "@/components/motion";
 import { ExternalLink, GitFork, Heart, Star, Wallet } from "lucide-react";
+import Link from 'next/link'
 
 interface UpstreamProject {
   name: string;
@@ -113,7 +114,7 @@ export function UpstreamAttribution({ upstream, productName }: UpstreamAttributi
             <p className="flex items-center gap-2 text-sm text-muted-foreground mt-2">
               <Wallet className="w-4 h-4 text-foreground" />
               Contributors to {upstream.name} earn a share of Hanzo compute revenue through our{' '}
-              <a href="/open-source" className="text-foreground underline hover:no-underline">SBOM-verified revenue sharing program</a>.
+              <Link href="/open-source" className="text-foreground underline hover:no-underline">SBOM-verified revenue sharing program</Link>.
             </p>
           </div>
         </div>

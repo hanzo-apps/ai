@@ -430,10 +430,10 @@ const SolutionCapabilities: React.FC = () => {
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button asChild size="lg">
-                  <a href="/contact">
+                  <Link href="/contact">
                     Get Started
                     <ChevronRight />
-                  </a>
+                  </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline">
                   <a href="tel:+19137774443">
