@@ -58,3 +58,7 @@ iam.db
 
 # scratch next build output
 .next-uidefect/
+
+# stray probe scripts
+.probe-tmp.mjs
+_*.mjs
