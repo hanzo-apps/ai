@@ -329,7 +329,7 @@ const { text } = await generateText({
       {
         lang: 'typescript',
         label: 'Streaming route handler',
-        code: `// app/api/chat/route.ts
+        code: `// app/v1/chat/route.ts
 import { streamText } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
 
@@ -355,7 +355,7 @@ import { useChat } from "ai/react";
 
 export default function Chat() {
   const { messages, input, handleSubmit, handleInputChange } = useChat({
-    api: "/api/chat",
+    api: "/v1/chat",
   });
   return (
     <form onSubmit={handleSubmit}>
@@ -1183,8 +1183,8 @@ for await (const chunk of stream) {
       },
       {
         lang: 'typescript',
-        label: 'Next.js API route',
-        code: `// app/api/generate/route.ts
+        label: 'Next.js route',
+        code: `// app/v1/generate/route.ts
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
