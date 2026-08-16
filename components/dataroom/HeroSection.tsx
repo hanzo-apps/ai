@@ -23,8 +23,10 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-foreground/80 text-lg md:text-xl mb-8 max-w-3xl mx-auto">
-            Share documents with real-time page-by-page analytics. Track engagement, control access,
-            and present with custom branding. Built for fundraising, due diligence, and investor updates.
+            You send a link instead of an attachment, and the link keeps working for you after
+            it leaves. Who opened it, which pages they read, how long they stayed on each one —
+            and you can change your mind about access after the fact, which an emailed PDF
+            never let you do.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">

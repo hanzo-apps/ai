@@ -28,18 +28,18 @@ const Features = () => {
   const features = [
     {
       icon: <BarChart3 className="h-6 w-6 text-foreground/60" />,
-      title: "Page-by-Page Analytics",
-      description: "Track how recipients engage with every page. See time spent, completion rates, and revisits in real time."
+      title: "Page-by-page analytics",
+      description: "Time spent on each page, how far they got, and whether they came back. Which page an investor re-read twice tells you what the next call is about."
     },
     {
       icon: <FolderLock className="h-6 w-6 text-foreground/60" />,
-      title: "Secure Data Rooms",
-      description: "Organize documents into structured folders for due diligence, fundraising, or any multi-document workflow."
+      title: "Data rooms",
+      description: "A folder tree rather than a single file, shared as one link. Diligence is forty documents and a hundred questions, and both sides need to know what is in scope."
     },
     {
       icon: <Shield className="h-6 w-6 text-foreground/60" />,
-      title: "Access Controls",
-      description: "Password protection, email verification, NDA agreements, expiration dates, and download restrictions."
+      title: "Access controls",
+      description: "A password, a verified email, an NDA to accept, an expiry date, downloads off. Set them per link, so the same document can be open to one person and shut to another."
     },
     {
       icon: <Paintbrush className="h-6 w-6 text-foreground/60" />,
@@ -49,12 +49,12 @@ const Features = () => {
     {
       icon: <Eye className="h-6 w-6 text-foreground/60" />,
       title: "Watermarking",
-      description: "Dynamic watermarks with viewer information. Protect sensitive documents from unauthorized sharing."
+      description: "The viewer's own email printed across every page. It does not make a screenshot impossible; it makes an anonymous one impossible, which is the part that changes behaviour."
     },
     {
       icon: <Mail className="h-6 w-6 text-foreground/60" />,
-      title: "Email Verification",
-      description: "Require verified email before viewing. Know exactly who is accessing your documents."
+      title: "Email verification",
+      description: "A code to the address before the document opens. Otherwise a forwarded link is a stranger, and your analytics are counting the wrong person."
     },
     {
       icon: <Globe className="h-6 w-6 text-foreground/60" />,
@@ -64,7 +64,7 @@ const Features = () => {
     {
       icon: <Webhook className="h-6 w-6 text-foreground/60" />,
       title: "Webhooks",
-      description: "Real-time notifications when documents are viewed. Integrate with your CRM and workflow tools."
+      description: "A view fires an event. Knowing someone opened the deck while you are still in the thread is worth more than knowing it on Monday."
     },
     {
       icon: <Users className="h-6 w-6 text-foreground/60" />,
@@ -82,9 +82,9 @@ const Features = () => {
     <section className="py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Share Documents With Full Visibility</h2>
+          <h2 className="text-3xl font-bold mb-4">A link you still control</h2>
           <p className="text-foreground/80 text-lg max-w-2xl mx-auto">
-            Know exactly how recipients engage with your documents. Control access, track analytics, and present professionally.
+            Every setting here is per link, so one document can be shared ten different ways.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">

@@ -9,9 +9,10 @@ const CallToAction = () => {
     <section className="py-16 bg-gradient-to-b from-background to-neutral-900/40">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center mb-10">
-          <h2 className="text-3xl font-bold mb-6">Ready to Manage Your Equity?</h2>
+          <h2 className="text-3xl font-bold mb-6">Put the current table in, then model the round</h2>
           <p className="text-lg text-foreground/80 mb-8">
-            Join startups and growth companies that trust Hanzo Cap Table to manage their equity.
+            Import what you have today. The useful part starts when you ask what the next
+            price does to it.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

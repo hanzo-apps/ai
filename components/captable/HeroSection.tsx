@@ -23,8 +23,10 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-foreground/80 text-lg md:text-xl mb-8 max-w-3xl mx-auto">
-            The open-source alternative to Carta. Manage share classes, stock options, SAFEs,
-            convertible notes, and equity plans with full audit trails and built-in e-signing.
+            Who owns what, and what happens to that when you raise again. Share classes,
+            option grants with their vesting, SAFEs and convertible notes are modelled as
+            what they are, so a round is something you can run before you sign it rather
+            than a spreadsheet somebody rebuilds each time.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">

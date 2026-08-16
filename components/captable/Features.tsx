@@ -28,8 +28,8 @@ const Features = () => {
   const features = [
     {
       icon: <PieChart className="h-6 w-6 text-foreground/60" />,
-      title: "Cap Table Management",
-      description: "Real-time ownership tracking with fully-diluted calculations. Model dilution scenarios across fundraising rounds."
+      title: "Ownership, fully diluted",
+      description: "The number that matters is not how many shares exist, it is what everyone owns once the options and the notes convert. That is the default view here."
     },
     {
       icon: <Coins className="h-6 w-6 text-foreground/60" />,
@@ -38,13 +38,13 @@ const Features = () => {
     },
     {
       icon: <Target className="h-6 w-6 text-foreground/60" />,
-      title: "Stock Options",
-      description: "ISO and NSO option grants with cliff, linear, and custom vesting schedules. 409A valuation tracking."
+      title: "Option grants",
+      description: "ISO and NSO, with the cliff and the schedule attached to the grant. Vested-to-date is computed from the dates rather than typed in and left to rot."
     },
     {
       icon: <Banknote className="h-6 w-6 text-foreground/60" />,
-      title: "SAFEs & Convertible Notes",
-      description: "Y Combinator SAFE management with conversion modeling. Track notes with interest, caps, and discounts."
+      title: "SAFEs and notes",
+      description: "Caps, discounts and interest held as terms, not as a note in a folder. What they convert into at a given price is a calculation you can run before you agree to it."
     },
     {
       icon: <FileText className="h-6 w-6 text-foreground/60" />,
@@ -58,13 +58,13 @@ const Features = () => {
     },
     {
       icon: <Users className="h-6 w-6 text-foreground/60" />,
-      title: "Stakeholder Management",
-      description: "Manage founders, employees, investors, and advisors. Track vesting schedules and exercise windows."
+      title: "Stakeholders",
+      description: "Founders, employees, investors and advisors, each seeing their own holding and nobody else's. The exercise window after someone leaves is a date the system knows, not one they have to remember."
     },
     {
       icon: <TrendingUp className="h-6 w-6 text-foreground/60" />,
-      title: "Waterfall Analysis",
-      description: "Model liquidation scenarios to understand payout distributions at various exit valuations."
+      title: "Waterfall",
+      description: "At an exit price, who gets paid and in what order. Preferences mean the founders' share is not their percentage, and this is where that becomes visible."
     },
     {
       icon: <Shield className="h-6 w-6 text-foreground/60" />,
@@ -82,9 +82,9 @@ const Features = () => {
     <section className="py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Complete Equity Management</h2>
+          <h2 className="text-3xl font-bold mb-4">The instruments, modelled</h2>
           <p className="text-foreground/80 text-lg max-w-2xl mx-auto">
-            Everything you need to manage your cap table, from incorporation to IPO. No spreadsheets required.
+            A spreadsheet can hold these numbers. It cannot tell you what they become at the next price.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
