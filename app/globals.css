@@ -898,3 +898,43 @@ html:root #hanzo-products-menu > div {
     animation: none;
   }
 }
+
+/* The appearance dock — bottom-right, clear of the composer that docks
+   bottom-centre. It carries the bottom safe-area inset itself, because it is
+   `position: fixed` and body's inset cannot reach it. */
+.hz-appearance-dock {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+.hz-appearance-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--border, rgb(255 255 255 / 0.12));
+  background: var(--background, #000);
+  color: var(--muted-foreground, #a1a1aa);
+  transition: color 0.15s, border-color 0.15s;
+}
+.hz-appearance-button:hover {
+  color: var(--foreground, #fff);
+  border-color: rgb(255 255 255 / 0.3);
+}
+.hz-appearance-panel {
+  width: min(20rem, calc(100vw - 2rem));
+  max-height: min(32rem, calc(100dvh - 6rem));
+  overflow-y: auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--border, rgb(255 255 255 / 0.12));
+  background: var(--background, #000);
+  box-shadow: 0 16px 48px rgb(0 0 0 / 0.6);
+}

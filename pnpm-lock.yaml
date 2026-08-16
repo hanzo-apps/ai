@@ -16,6 +16,9 @@ importers:
       '@hanzo/ai':
         specifier: ^0.3.8
         version: 0.3.8
+      '@hanzo/appearance':
+        specifier: ^0.1.4
+        version: 0.1.4(react@19.2.8)
       '@hanzo/brand':
         specifier: ^1.4.6
         version: 1.4.6(react@19.2.8)

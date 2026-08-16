@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@hanzo/ai": "^0.3.8",
+    "@hanzo/appearance": "^0.1.4",
     "@hanzo/brand": "^1.4.6",
     "@hanzo/chat": "^1.0.3",
     "@hanzo/composer": "^0.1.2",

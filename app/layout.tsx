@@ -24,6 +24,7 @@ import '@hanzo/ui/glass.css'
 import './gui.css'
 import { ogImages, twitterImages } from '@/lib/constants/og'
 import mark from '@/lib/data/mark.json'
+import AppearanceDock from '@/components/home/AppearanceDock'
 
 const geist = Geist({
   variable: '--font-geist',
@@ -131,6 +132,9 @@ export default function RootLayout({
         >
           <GuiProvider>
             <Providers>{children}</Providers>
+            {/* Every page, one control: the reader's own type size, density and
+                accent, written to the knobs @hanzo/design multiplies. */}
+            <AppearanceDock />
           </GuiProvider>
         </ThemeProvider>
         {/* No analytics tag here: pageviews AND interaction autocapture already ride
