@@ -6,6 +6,7 @@
 
 import dynamic from 'next/dynamic'
 import { Box } from '@hanzo/ui'
+import { CHAT } from './nav-data'
 
 /**
  * The fold: the globe, and the sentence that says what it is.
@@ -101,8 +102,15 @@ export default function Fold() {
         </p>
 
         <Box className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          {/* The SAME place every other "Try Hanzo" goes. This one pointed at
+              cloud.hanzo.ai while the nav's identical label, the bottom CTA and
+              cloud's own bar all pointed at chat — so the loudest button on the
+              company's front door was the one that disagreed with the other
+              three, and it sent a curious stranger to a Kubernetes page.
+              Hanzo Cloud is still one click away: the bar's Platform entry is a
+              link to it, and the secondary beside this opens the OS itself. */}
           <a
-            href="https://cloud.hanzo.ai"
+            href={CHAT}
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black transition-opacity hover:opacity-90"
           >
             Try Hanzo

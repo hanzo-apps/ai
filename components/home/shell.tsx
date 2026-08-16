@@ -307,6 +307,14 @@ export function SiteHeader({
         },
       ],
     },
+    // Pricing is TOP LEVEL, because that is where a buyer looks for it and
+    // because it was effectively unreachable from here. It lived inside the
+    // Solutions menu, and a menu's items are not in the document until the menu
+    // opens — so an audit of the rendered page found ZERO links to pricing on
+    // the site that owns the pricing page, while hanzo.chat and insights both
+    // send people to it. Two of our own surfaces linked it and the owner did
+    // not.
+    { id: 'pricing', label: 'Pricing', href: '/pricing', glyph: 'card' },
     // Zoo Labs Foundation governs Hanzo, and it is the one entry here that
     // leaves for another institution — so it is a LINK, last, wearing the
     // marker that says so, rather than a section that opens.
