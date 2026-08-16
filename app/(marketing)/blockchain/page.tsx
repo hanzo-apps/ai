@@ -33,7 +33,7 @@ const CAPABILITIES = [
     id: "nodes",
     icon: Server,
     title: "Blockchain Nodes & Data",
-    description: "Access any chain with managed node infrastructure",
+    description: "Read a chain without running a node for it",
     features: [
       "Multi-chain RPC endpoints (EVM, Solana, Cosmos, etc.)",
       "Archive nodes for historical data access",
@@ -46,7 +46,7 @@ const CAPABILITIES = [
     id: "wallet",
     icon: Wallet,
     title: "Wallet & Key Management",
-    description: "Enterprise-grade key infrastructure",
+    description: "Where the keys live, and what has to happen before one signs",
     features: [
       "MPC (Multi-Party Computation) wallets",
       "Hardware Security Module (HSM) integration",
@@ -59,7 +59,7 @@ const CAPABILITIES = [
     id: "payments",
     icon: CreditCard,
     title: "On-Chain Payments",
-    description: "Accept crypto payments seamlessly",
+    description: "Take a stablecoin the way you would take a card",
     features: [
       "Stablecoin payment processing (USDC, USDT, DAI)",
       "Native token support across chains",
@@ -72,7 +72,7 @@ const CAPABILITIES = [
     id: "contracts",
     icon: FileCode,
     title: "Smart Contract Management",
-    description: "Deploy and interact with contracts at scale",
+    description: "Ship a contract to several chains and keep track of what you shipped",
     features: [
       "Contract deployment across multiple chains",
       "ABI management and verification",
@@ -111,7 +111,7 @@ const CAPABILITIES = [
     id: "indexing",
     icon: Search,
     title: "Blockchain Indexing",
-    description: "Query blockchain data with GraphQL",
+    description: "Ask a question a chain cannot answer in one call",
     features: [
       "Custom subgraph deployment",
       "Real-time indexing and caching",
@@ -221,13 +221,16 @@ const Blockchain = () => {
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
-              <span className="text-foreground">The Web3 Developer Platform.</span>
+              <span className="text-foreground">One API key, every chain.</span>
               <br />
-              <span className="text-muted-foreground">AI-Native. Blazing Fast.</span>
+              <span className="text-muted-foreground">And an agent that can use it.</span>
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              Ship your first blockchain request in under 5 minutes. Multi-chain RPC, Token & NFT APIs, Smart Wallets, webhooks, and more—with AI agent integration built-in.
+              RPC endpoints, token and NFT data, smart wallets, and webhooks — reached the same way
+              whichever chain you are on. Reading a balance on Ethereum and reading one on Solana are
+              the same call with a different argument, so the chain becomes a parameter instead of a
+              rewrite. The same calls are exposed as tools, so an agent can make them too.
             </p>
 
             {/* CTA Buttons */}
@@ -254,7 +257,7 @@ const Blockchain = () => {
               </Button>
             </motion.div>
             <p className="text-xs text-muted-foreground mt-4">
-              100+ chains supported. No credit card required.
+              Start on the free tier. No credit card required.
             </p>
           </motion.div>
 
@@ -305,10 +308,10 @@ const Blockchain = () => {
             className="grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {[
-              { value: "HA", label: "High availability", detail: "Automatic failover" },
-              { value: "<50ms", label: "Avg Latency", detail: "Global edge network" },
-              { value: "100+", label: "Chains Supported", detail: "EVM, Solana, Cosmos" },
-              { value: "10B+", label: "Requests Served", detail: "And counting" },
+              { value: "One key", label: "Every chain", detail: "The chain is an argument" },
+              { value: "Archive", label: "Full history", detail: "Not just recent state" },
+              { value: "Push", label: "Webhooks and sockets", detail: "Instead of polling" },
+              { value: "Tools", label: "Agent-callable", detail: "The same calls you make" },
             ].map((stat, idx) => (
               <motion.div
                 key={stat.label}
@@ -337,10 +340,11 @@ const Blockchain = () => {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-              Developer Suite
+              The pieces
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to build, deploy, and scale Web3 applications. One API key, every chain.
+              Each one answers a question you would otherwise run a node to answer. They share a key,
+              an address scheme, and a chain argument, so reaching for a second one costs you a line.
             </p>
           </motion.div>
 
@@ -388,10 +392,12 @@ const Blockchain = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-              Complete Web3 Infrastructure
+              What sits behind the key
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to build decentralized applications, from blockchain data access to compliance tools.
+              An app that touches a chain ends up needing most of this — a node to read from, somewhere
+              to keep keys, a way to hear about a transaction that already happened. Open a group to see
+              what it covers.
             </p>
           </motion.div>
 
@@ -466,11 +472,14 @@ const Blockchain = () => {
                 <span className="text-sm font-medium text-foreground">Unified Platform</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-                AI + Web3.<br />
-                <span className="text-muted-foreground">Better Together.</span>
+                An agent with<br />
+                <span className="text-muted-foreground">an address.</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
-                Combine Hanzo's AI capabilities with blockchain infrastructure. Let AI agents manage wallets, execute transactions, and interact with smart contracts autonomously.
+                These calls are exposed as tools, so an agent can make them the way you would. It reads a
+                balance, builds a transaction, and signs under whatever policy you put on the key — the
+                same policy that governs a person. What an agent may spend is a rule on the wallet, not a
+                promise in a prompt.
               </p>
               <ul className="space-y-3 mb-8">
                 {[
@@ -593,10 +602,10 @@ await agent.run(\`
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-              Multi-Chain from Day One
+              The chains
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Support for all major blockchain networks, with more being added continuously.
+              Adding one is our work, not yours — the call you already wrote takes a different argument.
             </p>
           </motion.div>
 
@@ -642,10 +651,11 @@ await agent.run(\`
               <Blocks className="w-8 h-8 text-foreground" />
             </div>
             <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-              Ready to Build on Web3?
+              Make the first call
             </h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
-              Start building with multi-chain RPC, Token APIs, NFT APIs, Smart Wallets, and more. No credit card required.
+              A key from the console reaches the RPC endpoints, the token and NFT data, the wallets and
+              the webhooks. Pick a chain and read something. No credit card required.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -673,7 +683,7 @@ await agent.run(\`
               </span>
               <span className="flex items-center gap-2">
                 <Globe className="w-4 h-4" />
-                100+ chains supported
+                One key, every chain
               </span>
               <span className="flex items-center gap-2">
                 <Zap className="w-4 h-4" />
