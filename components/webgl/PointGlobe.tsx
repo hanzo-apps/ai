@@ -467,12 +467,9 @@ export default function PointGlobe({
      * near-to-far falloff is the same at any distance and needs no rescaling.
      */
     const FRAME = 3.15
-    // 0.83 -> 1.08, thirty percent larger. Past 1.0 the sphere is wider than the
-    // frame that held it edge to edge, so the silhouette bleeds off the short
-    // side — deliberate on the fold, where the globe IS the picture and a
-    // hairline of black around it reads as a small globe in a large box. Nothing
-    // else moves: point sizes measure against FRAME, so the dots grow with it.
-    const SCALE = 1.08
+    // Just under 1, so the sphere fills the fold and still closes inside it —
+    // at 1 it touches the short edges, past 1 the silhouette bleeds off them.
+    const SCALE = 0.918
     const camDist = FRAME / SCALE
     view[0] = 1; view[5] = 1; view[10] = 1; view[15] = 1; view[14] = -camDist
 
