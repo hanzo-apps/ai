@@ -1,7 +1,7 @@
 'use client'
 
-// What the free tier has to say for itself, in one place for both surfaces that
-// offer it (/chat and the try-it box on /models).
+// What the free tier has to say for itself: the agreement, and the standing
+// notice above a thread free is answering. The chat it guards is Conversation.
 //
 // Free costs nothing and in exchange it is data-shared. The Terms ask for
 // agreement before the first free request, so `Gate` asks once and records it;
@@ -13,39 +13,10 @@
 
 import { useEffect, useState, type ReactNode } from 'react'
 import Link from 'next/link'
-import { Chat } from '@hanzo/chat'
 import { freeCopy, hasConsent, grantConsent } from '@hanzo/ai'
-import { YStack } from '@hanzo/gui'
-import { useAi } from '@/hooks/useAi'
 import { Box } from '@hanzo/ui'
 
 const store = () => (typeof window === 'undefined' ? null : window.localStorage)
-
-/**
- * The free chat a signed-out visitor gets: agree once, then a bounded thread on
- * the free pool with the notice standing over it. Renders nothing until the
- * browser has it (the export prerenders signed-out) or when no widget key was
- * built in, so the page falls back to whatever it shows instead.
- */
-export function Try({ placeholder }: { placeholder: string }) {
-  const { client, model, free, ready } = useAi()
-  if (!ready || !free || !client) return null
-
-  return (
-    <Gate>
-      <YStack
-        height={620}
-        width="100%"
-        maxWidth={880}
-        marginHorizontal="auto"
-        className="overflow-hidden rounded-2xl border border-border bg-secondary/20"
-      >
-        <Chat client={client} model={model} placeholder={placeholder} />
-      </YStack>
-      <Notice />
-    </Gate>
-  )
-}
 
 /** The standing line. Links to this site's own privacy route. */
 export function Notice() {
