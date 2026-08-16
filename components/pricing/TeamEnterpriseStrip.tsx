@@ -79,8 +79,15 @@ const TeamEnterpriseStrip = () => {
   // reads between viewing prices and reaching checkout, and these CTAs were
   // absent from it. `plan` is the catalog id, so it joins to the id billing
   // and pay file their side of the funnel under.
-  const choose = (plan: string, cta: string) =>
+  //
+  // Sent at once rather than on the batch timer. Contact sales navigates THIS
+  // tab, and a batch still queued when the document goes away is never issued —
+  // measured in Chromium, that click put nothing on the wire at all. billing
+  // flushes the same way before it hands a buyer to the card form.
+  const choose = (plan: string, cta: string) => {
     analytics.capture(EVENTS.PLAN_CLICKED, { plan, cta });
+    analytics.flush(true);
+  };
   // Annual is the headline because it is the cheaper of the two and the one a
   // company buying seats will take; monthly is the footnote. Both are read, so
   // a plan sold at a single price simply states that price and no footnote.
