@@ -56,8 +56,17 @@ export default function Fold() {
 
       {/* The picture carries the top edge now, so this band opens tight against
           it and keeps its full weight below — `pt-8` where it used to be a
-          symmetrical `py-24`. */}
-      <section className="mx-auto max-w-3xl px-4 pb-24 pt-8 text-center sm:px-6 sm:pb-28 lg:px-8">
+          symmetrical `py-24`.
+
+          The side inset is `--page-gutter` (app/globals.css), the column
+          `@hanzogui/shell` stands the header and its drapes in. It only bites
+          under ~880px, where the 768 column stops fitting — which is exactly
+          where a reader can see the copy and the bar above it start at two
+          different places. */}
+      <section
+        className="mx-auto max-w-3xl pb-24 pt-8 text-center sm:pb-28"
+        style={{ paddingInline: 'var(--page-gutter)' }}
+      >
         {/* The line names the CATEGORY, because the previous one named two
             capabilities. "We train the models and run the cloud under them" is
             true, and it is a description of what we do rather than of what it

@@ -94,8 +94,10 @@ export default function Composer() {
     if (item.href) window.location.href = item.href
   }
 
+  // The side inset is `--page-gutter`, carried by `.hz-dock` in app/globals.css
+  // — the same column the header and its drapes stand in.
   return (
-    <div className="hz-dock px-4 sm:px-6 lg:px-8">
+    <div className="hz-dock">
       <form onSubmit={submit} className="hz-composer mx-auto w-full max-w-xl">
         {/* Glass, the same material as the header at the other edge —
             `--hz-chrome` (app/globals.css). The pill carries it ALONE now: the

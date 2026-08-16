@@ -687,12 +687,28 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
      it rather than the whole viewport pushed down by it. Measured on the live
      header: 60px. */
   --hz-header: 60px;
+  /* THE PAGE GUTTER — one inset for the chrome and the page under it.
+     `@hanzogui/shell` states this exact value as its own GUTTER and lays the
+     header and both mega-menu drapes on it, so a page that reads this token
+     starts its content in the same column the brand mark and the menu links
+     start in, at every width, with nothing measured. Written here rather than
+     imported because the token has to exist for the page whether or not the
+     chrome is mounted; it is one value in two places on purpose, and they are
+     the same value.
+     Measured against the shell: 20px at 390, 30.72 at 768, 40.96 at 1024,
+     57.6 at 1440 — where the fold and the composer read 16 / 24 / 32 / 32. */
+  --page-gutter: clamp(20px, 4vw, 72px);
 }
 
 .hz-dock {
   position: sticky;
   bottom: 0;
   z-index: var(--z-sticky);
+  /* The composer sits on the page gutter, so the one control at the bottom edge
+     is inset by the same rule as the bar at the top edge. It was three hand-set
+     steps of its own (16 / 24 / 32) against the header's 20 / 30.72 / 57.6, and
+     a bar that lines up with nothing reads as belonging to nothing. */
+  padding-inline: var(--page-gutter);
   /* COMPACT. The band measured 59px around a 36px composer — 23px of it was
      nothing, on the fold, where every pixel the bar takes is a pixel of the
      picture. 6px above and 8px below wraps the pill closely and still clears
