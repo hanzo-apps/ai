@@ -343,6 +343,15 @@ ONE component library, ONE token source, ONE way to style.
   suite. Screenshot baselines are the precondition for the rest of the
   migration, not an optional extra. Convert by route, verify by rendering.
 
+  **A breakpoint object is REPLACED by a spread, never merged with one.**
+  `$sm={{ paddingVertical: '$10' }} {...GUTTER}` where `GUTTER` carries its own
+  `$sm` leaves only the gutter's half; JSX assigns whole keys, and `$sm` is one
+  key. The base props sit beside it and land, so the element is right at 390px
+  and quietly wrong at 640 — the sixth defect of the same shape. State one `$sm`
+  per element, inline. Read the shipped markup to check: gui writes each
+  breakpoint property as its own class (`_pt-_sm_c-space-10`) under
+  `@media (min-width: 640px)`, so a property that lost has no class at all.
+
 - **`Box` and `tw` from `@hanzo/ui` are the intended path, and it is BLOCKED
   on two of the properties it needs most.** `tw` maps a class to a gui style
   prop and hands back what it does not know in `rest`, so nothing is dropped
@@ -982,6 +991,34 @@ clamp on `[data-hanzo-edit]`, and 64px of `.hz-dock` clearance to keep the
 composer above the launcher) and went with it. Do not put it back; the door for
 editing this site is this repo.
 
+## /account is a section, and its layout owns the frame
+
+`app/(marketing)/account/layout.tsx` states the gutter, the measure and the
+rhythm once, and asks who is reading before a page renders. A page under it is
+its content and nothing else — no background, no `<main>`, no measure of its
+own, and no check of its own for a session.
+
+- **The frame**: 16px gutter, 32px from `$sm`; measure 1024, centred. Wider than
+  page-kit's 896 because these are forms and tables rather than prose, and each
+  form caps itself at 576 through `components/account/form.tsx`.
+- **`Form` and `Field`** are the two shapes every page here is made of. They
+  carry the measure and the label-to-control spacing so a page never guesses at
+  either; four pages had guessed differently, and one had reached for a
+  `<div className="space-y-2">` per field.
+- **The session is settled ONCE.** `useIam()` in the layout: nothing while it
+  resolves, the sign-in door with no user, the page with one. A page that still
+  narrows `user` writes `if (!user) return null` — that is a type narrowing, not
+  a second answer to the question.
+- **Sizes are gui props, because `@hanzo/ui` 8 reads props and not classes.**
+  `<Avatar className="h-24 w-24">` renders at the component's default 32, and
+  `space-x-4` on a row of gui Buttons stacks them: a gui Button is a
+  block-level flex box, so the margin utility never applies. Use `size={96}` and
+  an `XStack gap`. This is the same silent-drop family the UI substrate section
+  catalogues, met from the other direction.
+- **`/account` is in `PRIVATE`** (`lib/publish.ts`), so the export ships the
+  frame with an empty measure and fills it after hydration. That is the honest
+  static answer — a file cannot know who fetched it — and nothing indexes it.
+
 ## Static Export
 
 `next.config.ts` uses `output: 'export'`. GitHub Pages has never been the target
@@ -1240,3 +1277,13 @@ before it is believed.
 literals on purpose. They are the only public surfaces stating the true
 4/20 · 2/4 · 5/25, so they convert to readers AFTER the catalog is authoritative
 — flipping them first replaces right numbers with an empty feed.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
