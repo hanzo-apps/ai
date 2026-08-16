@@ -1,12 +1,32 @@
 {
   "source": "https://api.hanzo.ai/v1/blueprint/sbom",
-  "fetched": "2026-08-15T20:11:56.866Z",
+  "fetched": "2026-08-16T04:00:26.139Z",
   "rateCard": {
     "microUsdPerVcpuHour": 12000,
     "microUsdPerGbHour": 6000,
     "basis": "DigitalOcean droplet retail + Hanzo platform margin (estimate)"
   },
   "blueprints": [
+    {
+      "id": "qdrant",
+      "images": [
+        "qdrant/qdrant:v1.12.4"
+      ],
+      "services": 1,
+      "vcpuHr": 0.25,
+      "gbHr": 0.5,
+      "centsPerMonth": 438
+    },
+    {
+      "id": "traefik",
+      "images": [
+        "traefik:v3.2"
+      ],
+      "services": 1,
+      "vcpuHr": 0.5,
+      "gbHr": 0.5,
+      "centsPerMonth": 657
+    },
     {
       "id": "redis",
       "images": [
@@ -16,6 +36,18 @@
       "vcpuHr": 0.5,
       "gbHr": 1,
       "centsPerMonth": 876
+    },
+    {
+      "id": "grafana",
+      "images": [
+        "grafana/grafana:11.3.0",
+        "grafana/loki:3.2.0",
+        "prom/prometheus:v3.0.0"
+      ],
+      "services": 3,
+      "vcpuHr": 0.75,
+      "gbHr": 1.5,
+      "centsPerMonth": 1314
     },
     {
       "id": "postgres",
@@ -39,6 +71,28 @@
       "centsPerMonth": 1971
     },
     {
+      "id": "gitea",
+      "images": [
+        "postgres:16-alpine",
+        "gitea/gitea:1.22"
+      ],
+      "services": 2,
+      "vcpuHr": 1.25,
+      "gbHr": 2.5,
+      "centsPerMonth": 2190
+    },
+    {
+      "id": "keycloak",
+      "images": [
+        "postgres:16-alpine",
+        "quay.io/keycloak/keycloak:26.0"
+      ],
+      "services": 2,
+      "vcpuHr": 1.25,
+      "gbHr": 2.5,
+      "centsPerMonth": 2190
+    },
+    {
       "id": "ghost",
       "images": [
         "mysql:8",
@@ -59,6 +113,16 @@
       "vcpuHr": 2,
       "gbHr": 4,
       "centsPerMonth": 3504
+    },
+    {
+      "id": "ollama",
+      "images": [
+        "ollama/ollama:0.5.4"
+      ],
+      "services": 1,
+      "vcpuHr": 2,
+      "gbHr": 8,
+      "centsPerMonth": 5256
     }
   ]
 }

@@ -263,11 +263,11 @@ export const solutionsData: SolutionData[] = [
   {
     slug: ['industries', 'healthcare'],
     title: 'Healthcare AI',
-    subtitle: 'HIPAA-compliant AI infrastructure for healthcare organizations',
+    subtitle: 'AI infrastructure for healthcare — encrypted, audited, and in the region you choose',
     description: 'Accelerate care delivery with AI that meets the highest standards of security, compliance, and accuracy. Built for EHR integration, clinical workflows, and patient engagement.',
     badge: 'Industry',
     features: [
-      { title: 'HIPAA Compliance', description: 'End-to-end encryption, audit logs, and BAAs available. Data never leaves your designated region.' },
+      { title: 'HIPAA safeguards', description: 'End-to-end encryption, audit logs, and BAAs available. Data never leaves your designated region.' },
       { title: 'Clinical NLP', description: 'Extract structured data from clinical notes, discharge summaries, and lab reports with medical-grade accuracy.' },
       { title: 'EHR Integration', description: 'Native FHIR R4 support. Connect to Epic, Cerner, and all major EHR systems.' },
       { title: 'Medical Imaging', description: 'AI-assisted radiology, pathology, and dermatology. Flag findings for clinician review.' },

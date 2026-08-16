@@ -43,12 +43,10 @@ export default function TreasuryPage() {
             and fees are written as transactions you can replay — which is what you need the
             day someone asks where a particular dollar went.
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} className="grid grid-cols-2 gap-4 mb-12 max-w-md max-w-3xl mx-auto">
             <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Auto</div><div className="text-sm text-muted-foreground">Sweep</div></div>
             <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Real-time</div><div className="text-sm text-muted-foreground">Recon</div></div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">MPC</div><div className="text-sm text-muted-foreground">Custody</div></div>
-            <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">SOC 2</div><div className="text-sm text-muted-foreground">In-Audit</div></div>
-          </motion.div>
+            </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap justify-center gap-4">
             <a href="https://docs.hanzo.ai/docs/skills/hanzo-treasury" className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-accent text-primary-foreground font-medium rounded-full transition-colors">Get Started <ArrowRight className="w-4 h-4" /></a>
             <a href="https://github.com/hanzoai" className="inline-flex items-center gap-2 px-8 py-3 bg-transparent border border-border hover:border-neutral-500 text-foreground font-medium rounded-full transition-colors">GitHub</a>
@@ -66,8 +64,7 @@ export default function TreasuryPage() {
             {[
               { icon: Banknote, title: "Double-entry ledger", description: "A transaction is a set of postings with a source and a destination, and it is rejected unless it balances. Entries are immutable — a correction is another transaction, so history stays true." },
               { icon: GitMerge, title: "Reconciliation", description: "Match what the ledger believes against what a payment provider reports, and surface the rows that disagree. The breaks are the output; agreeing totals need no attention." },
-              { icon: Vault, title: "MPC Custody", description: "Threshold-signed crypto custody via luxfi/mpc. No single point of compromise. Approval workflows with quorum policies and HSM signers." },
-              { icon: Wallet, title: "Multi-Bank", description: "Native integrations with JPMorgan, Mercury, Brex, Modern Treasury, Wise. ACH, wire, RTP, FedNow. SWIFT for international." },
+              { icon: Wallet, title: "Accounts and balances", description: "Hold balances per account and per currency, and move between them as ledger transactions. What an account settles against is configured per deployment." },
               { icon: RefreshCw, title: "Wallets with holds", description: "Multi-currency virtual wallets that can hold an amount and release it later. That is how you take money at checkout and pay a seller on delivery without the balance lying in between." },
               { icon: Shield, title: "Flows and webhooks", description: "Longer sequences — capture, split, pay out, retry — run as orchestrated flows, and every change of financial state is delivered as an event you can subscribe to." },
             ].map((feature, index) => (

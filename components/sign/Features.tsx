@@ -49,7 +49,7 @@ const Features = () => {
     {
       icon: <Shield className="h-6 w-6 text-foreground/60" />,
       title: "Security & Compliance",
-      description: "End-to-end encryption, SOC 2 ready, and GDPR compliant. Your documents are safe."
+      description: "End-to-end encryption, a signed trail on every document, and data that stays in the region you choose."
     },
     {
       icon: <Layers className="h-6 w-6 text-foreground/60" />,

@@ -279,11 +279,18 @@ const Enterprise = () => {
               <Sparkles className="w-8 h-8 mx-auto mb-4" />
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Security & Compliance</h2>
               <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
-                Where we stand today. An audit in progress is listed as an audit in progress.
+                What a security review asks for, and where to get it.
               </p>
 
               <div className="flex flex-wrap justify-center gap-3">
-                {["SOC 2 Audit in Progress", "GDPR Ready", "CCPA Compliant", "HIPAA BAA Available", "Enterprise SSO"].map((badge) => (
+                {[
+                  "Continual internal audits",
+                  "Audit report on request",
+                  "GDPR",
+                  "CCPA",
+                  "HIPAA BAA available",
+                  "Enterprise SSO",
+                ].map((badge) => (
                   <div
                     key={badge}
                     className="flex items-center gap-2 px-4 py-2 rounded-lg bg-secondary border border-border"

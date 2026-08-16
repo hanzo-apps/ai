@@ -53,35 +53,6 @@ const Compliance = () => {
             </ul>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-neutral-900/30 border border-neutral-800 p-6 rounded-lg"
-          >
-            <div className="bg-neutral-800/50 p-3 rounded-full w-fit mb-4">
-              <Receipt className="h-6 w-6 text-foreground" />
-            </div>
-            <h3 className="text-xl font-semibold mb-3">Merchant of Record</h3>
-            <p className="text-muted-foreground mb-4">
-              Hanzo takes liability for taxes and compliance, acting as your merchant of record.
-            </p>
-            <ul className="space-y-2 text-muted-foreground">
-              <li className="flex items-start gap-2">
-                <span className="text-foreground">•</span>
-                <span>Simplified global expansion</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-foreground">•</span>
-                <span>Legal entity management</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-foreground">•</span>
-                <span>Compliant invoicing worldwide</span>
-              </li>
-            </ul>
-          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -3,32 +3,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "@/components/motion";
-import { Github, Star, Download, Users } from "lucide-react";
+import { Github } from "lucide-react";
 import { Button } from "@hanzo/ui";
-
-const statsItems = [
-  { 
-    icon: <Download className="h-6 w-6 text-foreground/70" />,
-    value: 17,
-    suffix: "M+",
-    label: "Downloads",
-    countUpDuration: 2
-  },
-  { 
-    icon: <Star className="h-6 w-6 text-foreground/60" />,
-    value: 25,
-    suffix: "K+",
-    label: "GitHub Stars",
-    countUpDuration: 2.2
-  },
-  { 
-    icon: <Users className="h-6 w-6 text-foreground/70" />,
-    value: 280,
-    suffix: "+",
-    label: "Contributors",
-    countUpDuration: 1.8
-  }
-];
 
 const OpenSource = () => {
   const [isInView, setIsInView] = useState(false);
@@ -50,47 +26,6 @@ const OpenSource = () => {
               Hanzo Analytics is fully open-source, fostering innovation and collaboration among thousands of global developers.
             </p>
             
-            <div className="grid grid-cols-3 gap-6 mb-8">
-              {statsItems.map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                    transition: {
-                      duration: 0.5,
-                      delay: index * 0.1
-                    }
-                  }}
-                  viewport={{ once: true }}
-                  className="text-center p-4"
-                  onViewportEnter={() => {
-                    if (!isInView) {
-                      setIsInView(true);
-                    }
-                  }}
-                >
-                  <div className="flex justify-center mb-2">{item.icon}</div>
-                  <div className="flex justify-center items-baseline">
-                    {/* The tally starts when the card arrives; the NUMBER does not
-                        wait for it. This span was `initial={{opacity:0}}` with the
-                        fade gated on the same viewport event, so until it fired the
-                        figure was blank beside a visible "M+" — and if it never
-                        fired, permanently. It reads 0 and then counts. */}
-                    <span className="text-3xl font-bold">
-                      {isInView ? (
-                        <CountUp end={item.value} duration={item.countUpDuration} />
-                      ) : (
-                        0
-                      )}
-                    </span>
-                    <span className="text-3xl font-bold">{item.suffix}</span>
-                  </div>
-                  <div className="text-muted-foreground text-sm mt-1">{item.label}</div>
-                </motion.div>
-              ))}
-            </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
               <Button variant="outline" className="flex items-center gap-2" size="sm">
@@ -199,32 +134,5 @@ const OpenSource = () => {
   );
 };
 
-// Simple CountUp component
-const CountUp = ({ end, duration = 2 }) => {
-  const [count, setCount] = useState(0);
-  
-  useEffect(() => {
-    let startTime: number;
-    let animationFrame: number;
-    
-    const updateCount = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-      setCount(Math.floor(progress * end));
-      
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(updateCount);
-      }
-    };
-    
-    animationFrame = requestAnimationFrame(updateCount);
-    
-    return () => {
-      cancelAnimationFrame(animationFrame);
-    };
-  }, [end, duration]);
-  
-  return <>{count}</>;
-};
 
 export default OpenSource;

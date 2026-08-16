@@ -106,7 +106,7 @@ const PricingPreviewSection = () => {
                 "Higher API and storage limits",
                 "Private cloud or on-prem deployment",
                 "SLAs and dedicated support",
-                "SOC 2 readiness, HIPAA BAA available",
+                "Audit report and BAA on request",
                 "Custom contracts and procurement",
                 "Solution architect engagement",
               ].map((feature) => (

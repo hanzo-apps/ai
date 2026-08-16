@@ -21,17 +21,7 @@ const suiteItems = [
     title: "Normalized webhooks",
     description: "Every processor announces a settlement differently. You subscribe to one event shape and keep it when you add or drop a provider."
   },
-  {
-    icon: <CardIcon className="h-6 w-6 text-foreground" />,
-    title: "Issuing",
-    description: "Create and manage physical and virtual cards for your teams or customers."
-  },
-  {
-    icon: <Coins className="h-6 w-6 text-foreground" />,
-    title: "Capital",
-    description: "Access financing options to fuel your growth."
-  }
-];
+    ];
 
 const PaymentsSuite = () => {
   return (

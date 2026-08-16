@@ -10,8 +10,8 @@ import { read, serveExport } from './export'
  * drifts here is a claim somebody procured on.
  *
  * The failure this guards against has already happened once on our own
- * surfaces: hanzo.industries said "SOC 2 Type II certified" while hanzo.ai said
- * "assessment planned", and neither had an artifact behind it. The /security
+ * surfaces: two sites gave two different answers about the same framework on
+ * the same day, and neither had an artifact behind either one. The /security
  * badge row was the same defect in a quieter form — four framework names, each
  * with a green checkmark, and the qualifiers that made them honest sat in a
  * `description` field the markup never rendered.
