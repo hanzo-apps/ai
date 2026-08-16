@@ -42,9 +42,11 @@ const Integrations = () => {
     <section className="py-16 bg-[var(--black)]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold">Integrations</h2>
+          <h2 className="text-3xl font-bold">Who takes the money</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Connect directly with your existing technology stack and third-party services.
+            The processor is a setting, not an architecture. Each one gets its own webhook
+            endpoint, so adding a second — or leaving the first — is a change here rather
+            than a change in your checkout.
           </p>
         </div>
         

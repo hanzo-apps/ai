@@ -29,53 +29,53 @@ const Features = () => {
   const features = [
     {
       icon: <ShoppingCart className="h-6 w-6 text-foreground/60" />,
-      title: "Headless Shopping Carts",
-      description: "Flexible cart management with customizable checkout flows for any frontend."
+      title: "Carts",
+      description: "A cart is a real object with its own id, so someone can leave and come back, and you can look at what they left in it."
     },
     {
       icon: <Package className="h-6 w-6 text-foreground/60" />,
-      title: "Product Management",
-      description: "Powerful catalog management with variants, collections, and custom attributes."
+      title: "Products and variants",
+      description: "A product holds the description; a variant holds the size, the colour and the price. Stock is tracked on the variant, which is the thing people actually buy."
     },
     {
       icon: <CreditCard className="h-6 w-6 text-foreground/60" />,
-      title: "Payment Processing",
-      description: "Native integration with multiple payment gateways and subscription billing."
+      title: "Authorize and capture",
+      description: "Two steps, not one. Hold the money when the order is placed and take it when the box ships, which is what your accountant and your customer both expect."
     },
     {
       icon: <Gift className="h-6 w-6 text-foreground/60" />,
-      title: "Promotions & Discounts",
-      description: "Create complex discount rules, coupons, and loyalty programs."
+      title: "Coupons and discounts",
+      description: "Applied to a cart or to an invoice, and recorded as their own line. The reason a total came out lower survives the transaction."
     },
     {
       icon: <Tags className="h-6 w-6 text-foreground/60" />,
-      title: "Dynamic Pricing",
-      description: "Implement sophisticated pricing strategies with targeted rules and segmentation."
+      title: "Prices per store",
+      description: "One catalogue can answer differently for different stores. The product does not have to be duplicated to be priced twice."
     },
     {
       icon: <BarChart className="h-6 w-6 text-foreground/60" />,
-      title: "Analytics & Reporting",
-      description: "Real-time insights into sales, inventory, customer behavior, and more."
+      title: "Subscriptions",
+      description: "Plans, prices and renewals sit in the same service as the orders, so a customer who buys once and subscribes once is one customer with one history."
     },
     {
       icon: <Truck className="h-6 w-6 text-foreground/60" />,
-      title: "Order Management",
-      description: "Complete visibility and control over the entire order lifecycle."
+      title: "Orders, refunds and returns",
+      description: "The whole life of an order, including the parts nobody demos. A return is a first-class object rather than a note in a support ticket."
     },
     {
       icon: <Globe className="h-6 w-6 text-foreground/60" />,
-      title: "Multi-channel Selling",
-      description: "Sell across websites, mobile apps, social media, and marketplaces."
+      title: "Many stores, one install",
+      description: "Stores are scoped by organisation, so an agency or a marketplace runs several without running several copies of this."
     },
     {
       icon: <Shield className="h-6 w-6 text-foreground/60" />,
-      title: "Fraud Protection",
-      description: "Advanced security features to protect your business and customers."
+      title: "It never sees a card",
+      description: "Card numbers are tokenized in a separate service and this one only ever holds the token. That is a smaller thing to secure, and a much smaller thing to be audited on."
     },
     {
       icon: <Database className="h-6 w-6 text-foreground/60" />,
-      title: "Scalable Infrastructure",
-      description: "Built for high-volume transactions with enterprise-grade reliability."
+      title: "Your data, per tenant",
+      description: "Each organisation's records live in its own store. Isolation is a file boundary rather than a WHERE clause somebody has to remember to write."
     }
   ];
 
@@ -83,9 +83,9 @@ const Features = () => {
     <section className="py-16 bg-[var(--black)]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold">Powerful E-commerce Features</h2>
+          <h2 className="text-3xl font-bold">What it keeps track of</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to build exceptional shopping experiences, all through a simple API-first approach.
+            The nouns a shop is made of, each one addressable and none of them assuming what your site looks like.
           </p>
         </div>
         

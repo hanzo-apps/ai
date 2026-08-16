@@ -25,8 +25,10 @@ const HeroSection = () => {
           </h1>
           
           <p className="text-foreground/80 text-lg md:text-xl mb-8 max-w-3xl mx-auto">
-            A powerful headless e-commerce platform with API-first architecture. 
-            Build custom shopping experiences with modular components that scale.
+            Products, carts, checkout, orders and returns behind an API, with no storefront
+            attached. You write the front end; this keeps the catalogue, takes the payment
+            and remembers what happened. Card numbers are tokenized somewhere else, so the
+            store never holds one.
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">

@@ -39,20 +39,20 @@ const UseCaseCard = ({ title, description, image, index }: UseCaseCardProps) => 
 const UseCases = () => {
   const useCases = [
     {
-      title: "Direct-to-Consumer (DTC) Brands",
-      description: "Create unique shopping experiences that reflect your brand identity with custom storefronts powered by our API-first platform."
+      title: "A storefront you designed",
+      description: "You have a front end you like and do not want a theme system telling you how it works. This gives you the catalogue, the cart and the checkout as calls, and stays out of the rendering."
     },
     {
-      title: "Multi-channel Retailers",
-      description: "Sell across web, mobile, social media, and marketplaces with a unified backend for inventory and orders."
+      title: "One catalogue, several stores",
+      description: "A brand with regional shops, or an agency running stores for clients. Stores are scoped by organisation and can price the same product differently."
     },
     {
-      title: "Subscription Businesses",
-      description: "Build flexible subscription models with automated recurring billing, customizable frequencies, and easy customer management."
+      title: "Selling a subscription and a thing",
+      description: "Hardware with a plan, or a course with a membership. Orders and subscriptions are in one service, so the customer has one history rather than two accounts."
     },
     {
-      title: "Enterprise B2B Commerce",
-      description: "Power complex B2B sales with account-based pricing, bulk ordering, approval workflows, and personalized catalogs."
+      title: "Taking payment inside your own product",
+      description: "You are not building a shop, you are charging for what you already made. Use the checkout, the invoices and the meters, and ignore the rest."
     }
   ];
 
@@ -60,9 +60,9 @@ const UseCases = () => {
     <section className="py-16 bg-[var(--black)]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold">Use Cases</h2>
+          <h2 className="text-3xl font-bold">When to reach for it</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            See how businesses use Hanzo Commerce to create exceptional shopping experiences.
+            Four shapes that fit. If none of them is yours, a hosted shop is probably the easier answer.
           </p>
         </div>
         

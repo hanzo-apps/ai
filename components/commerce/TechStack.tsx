@@ -24,33 +24,33 @@ const TechStack = () => {
   const techItems = [
     {
       icon: <Server className="h-8 w-8 text-foreground/60" />,
-      title: "Cloud-Native Architecture",
-      description: "Built on serverless infrastructure that scales automatically with your business demands."
+      title: "One Go binary",
+      description: "A single container with no queue, no cache tier and no companion services to stand up beside it. Run it locally the same way it runs in production."
     },
     {
       icon: <Database className="h-8 w-8 text-foreground/60" />,
-      title: "Real-time Data",
-      description: "Access to real-time inventory, pricing, and customer data across all sales channels."
+      title: "A store per organisation",
+      description: "Tenants are separated by where their data lives rather than by a column, so one tenant's query cannot reach another's rows."
     },
     {
       icon: <Shield className="h-8 w-8 text-foreground/60" />,
-      title: "Enterprise Security",
-      description: "Payment-grade security with encryption at rest and in transit for all sensitive data."
+      title: "Outside the card boundary",
+      description: "Card numbers are tokenized by a separate service. This one is connected to that boundary without being inside it, which is the whole point of drawing one."
     },
     {
       icon: <Zap className="h-8 w-8 text-foreground/60" />,
-      title: "High Performance",
-      description: "Low latency APIs with global CDN distribution for lightning-fast experiences."
+      title: "Identity from Hanzo IAM",
+      description: "Sign-in, organisations and tokens come from IAM. There is no second user table here to fall out of step with the first."
     },
     {
       icon: <Layers className="h-8 w-8 text-foreground/60" />,
-      title: "Composable Architecture",
-      description: "Mix and match components to create custom solutions tailored to your specific needs."
+      title: "Mounts into the cloud binary",
+      description: "It runs on its own or as a subsystem inside the unified Hanzo Cloud binary. Same code, same routes, one fewer process to operate."
     },
     {
       icon: <GitBranch className="h-8 w-8 text-foreground/60" />,
-      title: "Developer Workflow",
-      description: "Full CI/CD support with staging environments and version control integration."
+      title: "Open source",
+      description: "MIT or Apache-2.0, your choice. Read how your money is handled instead of taking our word for it."
     }
   ];
 
@@ -58,9 +58,9 @@ const TechStack = () => {
     <section className="py-16 bg-gradient-to-b from-neutral-900/30 to-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold">Technology Stack</h2>
+          <h2 className="text-3xl font-bold">What you are running</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Built on modern technologies for performance, security, and scalability.
+            Worth knowing before you put your revenue behind it.
           </p>
         </div>
         

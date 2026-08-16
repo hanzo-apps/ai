@@ -36,10 +36,13 @@ export default function BillingPage() {
             <span className="bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">Billing</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} className="text-2xl md:text-3xl font-medium text-foreground mb-4">
-            Subscription billing, metering, and invoicing
+            Subscriptions, usage, invoices
           </motion.p>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Recurring subscriptions, usage-based pricing, prorated upgrades, dunning, and tax. One API for every billing model — flat, tiered, volume, graduated, and metered.
+            Charge a fixed price, charge for what someone used, or charge for both on the
+            same invoice. Plans, prices, meters, coupons and credits are separate objects,
+            so a pricing change is a new price rather than a migration — and your servers
+            never hold a card number to do any of it.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto">
             <div className="bg-secondary/50 border border-border rounded-xl p-4"><div className="text-2xl font-bold text-foreground">Any Model</div><div className="text-sm text-muted-foreground">Pricing</div></div>
@@ -57,17 +60,17 @@ export default function BillingPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Every Pricing Model, One API</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">From simple subscriptions to complex metered usage with overages.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">The objects you bill with</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">Small pieces that compose, rather than one plan type that has to cover every case.</p>
           </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Layers, title: "Subscriptions", description: "Recurring plans with proration, trials, coupons, add-ons, and quantity-based billing. Built-in upgrade/downgrade flows." },
-              { icon: Gauge, title: "Usage Metering", description: "Real-time event ingestion at scale. Aggregate by sum, max, unique, or last value. Tiered, volume, or graduated rates." },
-              { icon: Receipt, title: "Invoicing", description: "PDF invoices, hosted payment pages, automatic line-item generation, and credit notes. Localized in 30+ languages." },
-              { icon: RefreshCw, title: "Dunning", description: "Configurable retry schedules, smart card updaters, email reminders, and grace periods. Recover failed payments automatically." },
-              { icon: Shield, title: "Tax Compliance", description: "Automatic tax calculation for US sales tax, EU VAT, GST, and 50+ jurisdictions. Stripe Tax and Avalara integrations." },
-              { icon: Zap, title: "Webhooks & Events", description: "Subscribe to invoice.created, subscription.updated, charge.failed, and 40+ events. At-least-once delivery with retries." },
+              { icon: Layers, title: "Plans and prices", description: "A plan says what someone gets. A price says what it costs. Keeping them apart is what lets you change a price without touching anyone already on the old one." },
+              { icon: Gauge, title: "Meters", description: "Post an event when something is used and the meter aggregates it. The invoice reads the meter at the end of the period, so nobody has to add up rows by hand." },
+              { icon: Receipt, title: "Invoices", description: "Line items assembled from the subscription and the meters, with tax calculated on the invoice itself. Preview one before it is issued, which is when a pricing mistake is still cheap." },
+              { icon: RefreshCw, title: "Credits and refunds", description: "Issue credit against a balance, or refund a payment that already settled. Both leave a record, because a customer arguing about a bill is really arguing about a history." },
+              { icon: Shield, title: "Coupons and discounts", description: "Apply one to a subscription or to a single invoice. A discount is an object on the invoice rather than an adjusted number, so the reason the total changed is still legible." },
+              { icon: Zap, title: "Webhooks", description: "The provider tells us a payment settled and we tell you. One endpoint per provider, so adding a second processor does not mean a second integration on your side." },
             ].map((feature, index) => (
               <motion.div key={feature.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.05 }} className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors">
                 <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 bg-primary/10"><feature.icon className="h-6 w-6 text-foreground" /></div>
@@ -82,7 +85,7 @@ export default function BillingPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
         <div className="max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Meter Anything. Bill Anything.</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Report the use, then charge for it</h2>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="bg-secondary border border-border rounded-xl overflow-hidden">
             <div className="flex items-center gap-2 px-4 py-2 border-b border-border"><div className="flex gap-1.5"><div className="w-3 h-3 rounded-full bg-neutral-700" /><div className="w-3 h-3 rounded-full bg-neutral-700" /><div className="w-3 h-3 rounded-full bg-neutral-700" /></div><span className="text-xs text-muted-foreground ml-2">meter.ts</span></div>
@@ -110,7 +113,7 @@ await billing.subscriptions.create({
 
       <section className="py-16 border-t border-neutral-800">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold mb-4">Get started with Billing</h2>
+          <h2 className="text-2xl font-bold mb-4">Send your first meter event</h2>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="https://docs.hanzo.ai/docs/billing" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-md text-sm font-medium">
               Read the docs <ArrowRight className="h-4 w-4" />
