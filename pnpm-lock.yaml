@@ -71,8 +71,8 @@ importers:
         specifier: ^8.1.1
         version: 8.1.1(next@16.3.1(@babel/core@8.0.1)(@playwright/test@1.62.1)(@types/node@26.2.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@hanzogui/shell':
-        specifier: ^8.1.28
-        version: 8.1.28(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^8.1.29
+        version: 8.1.29(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@hanzogui/web':
         specifier: ^8.1.1
         version: 8.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1452,8 +1452,8 @@ packages:
     peerDependencies:
       react: '>=19'
 
-  '@hanzogui/shell@8.1.28':
-    resolution: {integrity: sha512-3RiNeWXlsxLR59Iyrztt9/MGjWEn79uieuDl1Y/9227s7schXj+gyqdaiag5ekFDj0DeLosN6HkaQDOf3QAFww==}
+  '@hanzogui/shell@8.1.29':
+    resolution: {integrity: sha512-EJtYGkiQ+D4JJ2XBkxlGLFuyeNIwFojWO5lszLFeA2DGy22bzfX6LPaip+mqR97x6EfnkJaXEtViguuTtlPi5Q==}
     peerDependencies:
       react: '*'
       react-dom: '*'
@@ -5592,7 +5592,7 @@ snapshots:
     transitivePeerDependencies:
       - react-dom
 
-  '@hanzogui/shell@8.1.28(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@hanzogui/shell@8.1.29(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
