@@ -258,7 +258,7 @@ export function SiteHeader({
       href: '/dev',
       glyph: 'code',
       items: ([
-        { id: 'docs', label: 'Docs', href: DOCS_HOST, glyph: 'book', hint: 'docs.hanzo.ai', external: true },
+        { id: 'docs', label: 'Documentation', href: DOCS_HOST, glyph: 'book', hint: 'docs.hanzo.ai', external: true },
         { id: 'api', label: 'API', href: '/api', glyph: 'gateway', hint: 'One endpoint, one key' },
         { id: 'sdks', label: 'SDKs', href: '/sdks', glyph: 'package', hint: 'Python, TypeScript, Go, Rust' },
         { id: 'cli', label: 'CLI', href: '/cli', glyph: 'terminal', hint: 'Hanzo from a terminal' },
@@ -270,7 +270,6 @@ export function SiteHeader({
           id: 'reference',
           title: 'Resources',
           items: [
-            { id: 'docs-ref', label: 'Docs', href: DOCS_HOST, external: true },
             { id: 'quickstart', label: 'Quickstart', href: `${DOCS_HOST}/docs/getting-started`, external: true },
             { id: 'api-ref', label: 'API reference', href: `${DOCS_HOST}/docs/api`, external: true },
             { id: 'status', label: 'Status', href: '/status' },
