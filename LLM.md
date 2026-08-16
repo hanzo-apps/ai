@@ -206,12 +206,60 @@ ONE component library, ONE token source, ONE way to style.
 - **Provider**: `components/GuiProvider.tsx` hands gui's generated CSS to the
   prerender via `useServerInsertedHTML`. Without it a statically exported page
   ships markup whose classes have no rules until hydration.
-- **Tailwind is NOT gone**: 63,151 utility class tokens (1,560 distinct)
-  across 485 files still need converting to gui props. `tailwind.config.ts`
-  (dead — v4 is CSS-first and never read it), `tailwindcss-animate`,
-  `components.json`, `@tailwindcss/typography` and `autoprefixer` ARE gone, as
-  are shadcn and `@radix-ui/*` (0 lockfile references). Convert files to gui
+- **Tailwind is NOT gone**: **58,424 utility class tokens, 1,293 distinct,
+  across 456 files** — counted from `git ls-files` sources by pulling every
+  `className`/`class` attribute AND every string literal inside a
+  `className={…}` expression, since `cn('text-xs', …)` hides classes from a
+  plain attribute scan. `tailwind.config.ts` (dead — v4 is CSS-first and never
+  read it), `tailwindcss-animate`, `components.json`,
+  `@tailwindcss/typography` and `autoprefixer` ARE gone. Convert files to gui
   props; do not add new utility classes.
+
+  The earlier figures here (63,151 / 1,560 / 485) were high and are corrected
+  above. A count taken from a build directory drifts the moment source moves.
+
+- **Radix is GONE, and the primitives it used to serve now come from
+  `@hanzo/ui`.** Zero by four independent probes — `package.json`,
+  `pnpm-lock.yaml`, `node_modules/.pnpm` (so nothing transitive either), and
+  source imports. `class-variance-authority`, `cmdk` and shadcn are absent the
+  same way; the only survivors of that era are `clsx` and `tailwind-merge` in
+  one file each. What proves the migration landed rather than merely that the
+  dependency left: the radix-shaped names this site imports — `Dialog`,
+  `DropdownMenu`, `Select`, `Tabs`, `Avatar`, `Progress`, `Popover` — resolve
+  through the `@hanzo/ui` root barrel, and all 30 of them are on it.
+  `Accordion` comes from gui's own, as this file already says it must.
+
+  Adoption is deeper than a class count suggests: **139 files import
+  `@hanzo/ui`** and 18 import `@hanzo/gui`. The one real second system left is
+  icons — **400 files import `lucide-react` directly against 2 on
+  `@hanzogui/lucide-icons-2`**, which is the same "two vocabularies for one
+  job" shape as the utility classes and is not tracked anywhere else.
+
+- **No Tailwind class on this site is dead.** All 1,293 resolve, measured
+  against a FRESH compile of current source (`@tailwindcss/postcss` over
+  `app/globals.css`, 204,712 bytes) plus every authored stylesheet, every
+  inline `<style>` block, and the `@hanzo/design` tokens. `bg-grid-white` and
+  `scrollbar-hide` were deleted from source; `hover:border-white/30` and `/50`
+  do emit; `prose` survives only as `hz-prose`. The bug family named here is
+  closed — but keep the technique, because it is how the next one is found.
+
+  **Four traps manufacture false positives, and each one cost a wrong answer.**
+  Never subtract against a committed `out/` — a build 56 seconds older than an
+  edit reported `sm:pb-28` dead when a fresh compile emits it. Tailwind escapes
+  a leading digit as a hex code with a trailing space (`2xl:` is `.\32 xl\:`),
+  so a naive `\\(.)` unescaper truncates the class; unescape properly or parse
+  selectors. `space-y-*` emits with a `>:not(:last-child)` suffix rather than
+  `{`. And stripping a variant to test its base is invalid — `border-white/30`
+  existing says nothing about `hover:border-white/30`.
+
+- **Interpolated classes: 19 stem sites in source, and only two are classes.**
+  `ts-c-${cov[i]}` and `ts-e-${r.ev}` in `app/(marketing)/calculator/page.tsx`,
+  both safe — that is the page's LOCAL `ts-` namespace in its own `<style>`
+  block, and every union member is enumerated (four `Cov` values against four
+  rules, five `Ev` against four, `internal` and `repo` sharing one). The other
+  seventeen are React keys, ids and `htmlFor`, which Tailwind never had to see.
+  `text-${color}` and `from-${color}` in `components/commerce/UseCases.tsx` are
+  inside the comment documenting that bug's fix — the grep hits prose, not code.
 
   **Why the remaining conversion is not a codemod.** gui silently ignores a
   prop it does not know — in a JSX spread there is no error and no type
@@ -225,13 +273,40 @@ ONE component library, ONE token source, ONE way to style.
   suite. Screenshot baselines are the precondition for the rest of the
   migration, not an optional extra. Convert by route, verify by rendering.
 
-- **A Tailwind class that does not exist fails silently too**, which is its own
-  bug family — `bg-grid-white`, `scrollbar-hide`, `prose`,
-  `hover:border-white/30/50` all emitted nothing while looking like styling.
-  To find them: extract every class token from source, extract every class
-  selector from `out/_next/static/css/*.css`, subtract. Read the difference
-  rather than applying it — `ts-*` and `text-gradient-steel` are real, and
-  live in local `<style>` blocks.
+- **`Box` and `tw` from `@hanzo/ui` are the intended path, and it is BLOCKED
+  on two of the properties it needs most.** `tw` maps a class to a gui style
+  prop and hands back what it does not know in `rest`, so nothing is dropped
+  by the adapter; `Box` renders that onto a gui element and passes `rest`
+  through as a class name. Coverage over this site's vocabulary is real —
+  **1,040 of 1,293 distinct classes convert, 97.5% of all uses** — and the
+  remainder is mostly gradients (`bg-gradient-to-*`, `from-*`, `to-*`), the
+  local `hz-` and `ts-` namespaces, and `group`/`container`.
+
+  Measured on `/pricing` at 1280x900, converting one 20-line component with
+  four classes: geometry held EXACTLY (768px wide, 224px auto side margins,
+  48px beneath, page height 3891 both ways) while **two computed properties
+  regressed**. `textAlign` reached the DOM as the raw attribute
+  `textalign="center"` with no atomic class behind it and computed `start`
+  instead of `center`; `display` never applied and the element became
+  flex-column. The change was reverted.
+
+  Both are the silent-drop shape again, one level down — the ADAPTER is honest
+  and the element underneath cannot express the value. This is why geometry
+  and a screenshot are not enough on their own: the picture was unchanged
+  because a child happened to centre itself, and only reading computed style
+  showed the loss. `display` (3,150 uses) and `textAlign` (807 uses) are the
+  third and eighth most common properties `tw` emits, so this is roughly four
+  thousand call sites, not an edge.
+
+  The `display` half is substrate drift and is already fixed upstream: the
+  INSTALLED `@hanzo/ui` 8.0.86 spreads props straight onto `YStack`, while the
+  canonical tree states `display="block"` on it and records what taking the
+  Stack's flex default instead cost — 77 of 225 elements on one page becoming
+  flex containers nobody asked for. `textAlign` is NOT fixed there; canonical
+  spreads it the same way, so an upgrade alone is unlikely to help and must be
+  re-measured rather than assumed. Pin `@hanzo/ui` exactly before converting
+  anything — the range here is `^8.0.83` and it currently floats to 8.0.86,
+  which means the substrate can move underneath a migration mid-flight.
 
 - **Plain CSS goes in the `hz-` namespace** (`.hz-prose`, `.hz-grid`,
   `.hz-scrollbar-none`), parameterised by CSS custom properties. This is where
