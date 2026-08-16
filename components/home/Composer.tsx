@@ -100,10 +100,10 @@ export default function Composer() {
     <div className="hz-dock">
       <form onSubmit={submit} className="hz-composer mx-auto w-full max-w-xl">
         {/* Glass, the same material as the header at the other edge —
-            `--hz-chrome` (app/globals.css). The pill carries it ALONE now: the
-            band it sits in is transparent, because tinting the full width to
-            hold one centred control drew a shade across the bottom of every
-            page. Chrome where there is a control; nothing where there is not. */}
+            `.hz-glass` (app/globals.css). The pill carries it ALONE: the band it
+            sits in is transparent, because tinting the full width to hold one
+            centred control drew a shade across the bottom of every page. Chrome
+            where there is a control; nothing where there is not. */}
         {/* ONE EDGE, DRAWN ONCE. @hanzo/composer already rings this pill — a
             1.5px conic band on `.hz-composer::before`, masked to the perimeter,
             brighter where the light would fall and dimmer where it would not.
@@ -112,14 +112,7 @@ export default function Composer() {
             control read as an outline drawn around a hole rather than as a
             surface with a lit rim. The band is the edge; the fill and the blur
             under it are the rest. */}
-        <Box
-          className="flex items-center gap-1.5 rounded-full p-[4px]"
-          style={{
-            background: 'var(--hz-chrome)',
-            backdropFilter: 'var(--hz-chrome-blur)',
-            WebkitBackdropFilter: 'var(--hz-chrome-blur)',
-          }}
-        >
+        <Box className="hz-glass flex items-center gap-1.5 rounded-full p-[4px]">
           {/* Opens UPWARD — the bar lives at the bottom of the viewport, so
               `top-start` is the only placement with room to render into. */}
           <DropdownMenu placement="top-start">

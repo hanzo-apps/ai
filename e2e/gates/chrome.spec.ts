@@ -66,8 +66,17 @@ test.describe('header chrome', () => {
     const twice = hrefs.filter((href, i) => hrefs.indexOf(href) !== i)
     expect([...new Set(twice)], 'the bar offers one destination twice').toEqual([])
 
-    // And nothing re-introduces the second sign-in by another route.
-    await expect(bar.getByText('Sign in', { exact: true })).toHaveCount(0)
+    // The bar offers a sign-in again, because a reader who is signed out needs
+    // the door and the header is where they look for it. So the scar is stated
+    // as what was actually wrong — sign-in and the CTA on ONE host — rather than
+    // as the absence of the control that happened to be carrying it.
+    const hostOf = async (label: string) => {
+      const href = await bar.locator('> a').filter({ hasText: label }).first().getAttribute('href')
+      return href ? new URL(href, base).host : null
+    }
+    const [cta, signIn] = await Promise.all([hostOf('Try Hanzo'), hostOf('Sign in')])
+    expect(signIn, 'the bar carries a sign-in door').toBeTruthy()
+    expect(signIn, 'sign-in is not a second copy of the CTA').not.toBe(cta)
   })
 
   test('docs leaves the bar and stays on the page', async ({ page }) => {
