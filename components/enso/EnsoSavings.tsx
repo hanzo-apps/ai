@@ -57,15 +57,24 @@ const SAVED = Math.round(ensoSavings() * 100)
 // while most competitors' come from Artificial Analysis or Vals AI. A number that
 // tops a field it was measured on by the party who benefits has to say so ON the
 // tile — a reader who discovers it later discounts every other figure here.
-const ULTRA_SOURCE = ULTRA.scores.gpqa_diamond?.source === 'hanzo-measured'
-  ? 'Hanzo-measured'
-  : ULTRA.scores.gpqa_diamond?.source ?? ''
+const G = ULTRA.scores.gpqa_diamond
+// The count, not just the percentage. 98.0% is 194 right out of 198, and a
+// reader who can see that can check it; one who cannot has to take the number
+// on trust. It also survives an edit: a percentage nobody can write as an
+// integer count over n did not come from a run, which is the test that rejected
+// a proposed 96.3 (190.67 correct) and kept the real 96.0.
+const ULTRA_EVIDENCE =
+  G?.correct && G?.n
+    ? `${G.correct}/${G.n} correct · Hanzo-measured`
+    : G?.source === 'hanzo-measured'
+      ? 'Hanzo-measured'
+      : (G?.source ?? '')
 
 const KPIS = [
-  { v: '98.0%', k: `GPQA-Diamond · enso-ultra · ${ULTRA_SOURCE}` },
+  { v: '98.0%', k: `GPQA-Diamond · enso-ultra · ${ULTRA_EVIDENCE}` },
   { v: `${ULTRA_RATIO}× cheaper`, k: `than ${DEAREST.model}, which scores ${DEAREST.value}%` },
   { v: `${SAVED}%`, k: `saved vs always calling a top model, at ${HARD_FRACTION * 100}% hard` },
-  { v: '3 tiers', k: 'Flash 92.9 · Pro 96.0 · Ultra 98.0 GPQA' },
+  { v: '3 tiers', k: 'One GPQA set of 198, three routing pools: 184 · 190 · 194 correct' },
 ]
 
 // Per-request costs at the one reference mix (1K in / 1K out), derived from the

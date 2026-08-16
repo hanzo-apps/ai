@@ -56,7 +56,10 @@
       "scores": {
         "gpqa_diamond": {
           "value": 98.0,
-          "source": "hanzo-measured"
+          "source": "hanzo-measured",
+          "correct": 194,
+          "n": 198,
+          "pool": "full pool"
         },
         "charxiv_reasoning": {
           "value": 85.5,
@@ -76,7 +79,10 @@
       "scores": {
         "gpqa_diamond": {
           "value": 96.0,
-          "source": "hanzo-measured"
+          "source": "hanzo-measured",
+          "correct": 190,
+          "n": 198,
+          "pool": "mid pool, ≤$8/MTok"
         },
         "livecodebench": {
           "value": 92.0,
@@ -100,7 +106,10 @@
       "scores": {
         "gpqa_diamond": {
           "value": 92.9,
-          "source": "hanzo-measured"
+          "source": "hanzo-measured",
+          "correct": 184,
+          "n": 198,
+          "pool": "cheap pool, ≤$5/MTok"
         }
       },
       "price": 4,
@@ -124,11 +133,11 @@
       "scores": {
         "mmlu_pro": {
           "value": 87.4,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis)"
         },
         "gpqa_diamond": {
           "value": 93.2,
-          "source": "LLM Stats \u2014 GPQA leaderboard (self-reported, src OpenAI)"
+          "source": "LLM Stats — GPQA leaderboard (self-reported, src OpenAI)"
         }
       },
       "price": 138.6,
@@ -152,7 +161,7 @@
       "scores": {
         "livecodebench": {
           "value": 88.5,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -188,7 +197,7 @@
       "scores": {
         "livecodebench": {
           "value": 87.8,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -212,7 +221,7 @@
       "scores": {
         "livecodebench": {
           "value": 87.5,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -224,7 +233,7 @@
       "scores": {
         "livecodebench": {
           "value": 87.3,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -252,7 +261,7 @@
       "scores": {
         "livecodebench": {
           "value": 86.8,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -264,7 +273,7 @@
       "scores": {
         "mmlu_pro": {
           "value": 86.8,
-          "source": "DigitalOcean \u2014 State of the Union's Open Source AI (general models table + prose)"
+          "source": "DigitalOcean — State of the Union's Open Source AI (general models table + prose)"
         }
       },
       "price": null,
@@ -276,7 +285,7 @@
       "scores": {
         "livecodebench": {
           "value": 86.6,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -300,7 +309,7 @@
       "scores": {
         "livecodebench": {
           "value": 86.0,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -312,7 +321,7 @@
       "scores": {
         "livecodebench": {
           "value": 85.9,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -324,7 +333,7 @@
       "scores": {
         "livecodebench": {
           "value": 85.4,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -348,7 +357,7 @@
       "scores": {
         "livecodebench": {
           "value": 85.3,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -372,7 +381,7 @@
       "scores": {
         "livecodebench": {
           "value": 84.1,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -384,7 +393,7 @@
       "scores": {
         "livecodebench": {
           "value": 83.9,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -396,7 +405,7 @@
       "scores": {
         "livecodebench": {
           "value": 83.9,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -408,7 +417,7 @@
       "scores": {
         "livecodebench_pro": {
           "value": 1412.0,
-          "source": "CodeSOTA \u2014 LiveCodeBench Pro leaderboard"
+          "source": "CodeSOTA — LiveCodeBench Pro leaderboard"
         },
         "tau2_bench": {
           "value": 72.0,
@@ -416,11 +425,11 @@
         },
         "mmlu_pro": {
           "value": 86.0,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis; non-thinking; Thinking variant = 87.5 on same page)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis; non-thinking; Thinking variant = 87.5 on same page)"
         },
         "gpqa_diamond": {
           "value": 81.6,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "mrcr_v2": {
           "value": 47.1,
@@ -436,7 +445,7 @@
       "scores": {
         "livecodebench": {
           "value": 83.7,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -448,7 +457,7 @@
       "scores": {
         "mmlu_pro": {
           "value": 83.7,
-          "source": "CodeSOTA \u2014 MMLU-Pro Leaderboard (vendor self-reported; rank 19)"
+          "source": "CodeSOTA — MMLU-Pro Leaderboard (vendor self-reported; rank 19)"
         }
       },
       "price": null,
@@ -460,7 +469,7 @@
       "scores": {
         "livecodebench": {
           "value": 83.6,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -472,7 +481,7 @@
       "scores": {
         "livecodebench": {
           "value": 83.2,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -496,7 +505,7 @@
       "scores": {
         "gpqa_diamond": {
           "value": 82.7,
-          "source": "LLM Stats \u2014 GPQA leaderboard (self-reported, src build.nvidia.com)"
+          "source": "LLM Stats — GPQA leaderboard (self-reported, src build.nvidia.com)"
         }
       },
       "price": 0.4,
@@ -508,7 +517,7 @@
       "scores": {
         "swe_bench_pro": {
           "value": 22.7,
-          "source": "SWE-Bench Pro paper (arXiv:2509.16941v1), Table 1 \u2014 public set (N=731), SWE-Agent scaffold"
+          "source": "SWE-Bench Pro paper (arXiv:2509.16941v1), Table 1 — public set (N=731), SWE-Agent scaffold"
         },
         "tau2_bench": {
           "value": 56.0,
@@ -516,11 +525,11 @@
         },
         "mmlu_pro": {
           "value": 88.0,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis)"
         },
         "gpqa_diamond": {
           "value": 76.3,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         }
       },
       "price": 63.0,
@@ -532,7 +541,7 @@
       "scores": {
         "livecodebench": {
           "value": 82.1,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -544,7 +553,7 @@
       "scores": {
         "livecodebench": {
           "value": 81.9,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -556,7 +565,7 @@
       "scores": {
         "livecodebench": {
           "value": 81.4,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -568,7 +577,7 @@
       "scores": {
         "livecodebench": {
           "value": 80.7,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -580,7 +589,7 @@
       "scores": {
         "livecodebench": {
           "value": 80.4,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -632,7 +641,7 @@
       "scores": {
         "livecodebench": {
           "value": 79.2,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -644,7 +653,7 @@
       "scores": {
         "livecodebench": {
           "value": 79.2,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -668,11 +677,11 @@
       "scores": {
         "swe_bench_pro": {
           "value": 38.7,
-          "source": "Scale Labs \u2014 SWE-Bench Pro Public Leaderboard"
+          "source": "Scale Labs — SWE-Bench Pro Public Leaderboard"
         },
         "mmlu_pro": {
           "value": 78.8,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis)"
         }
       },
       "price": null,
@@ -684,7 +693,7 @@
       "scores": {
         "livecodebench_pro": {
           "value": 1161.0,
-          "source": "CodeSOTA \u2014 LiveCodeBench Pro leaderboard"
+          "source": "CodeSOTA — LiveCodeBench Pro leaderboard"
         },
         "terminal_bench": {
           "value": 19.1,
@@ -692,7 +701,7 @@
         },
         "mmlu_pro": {
           "value": 84.4,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis; row label 'R1', DeepSeek)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis; row label 'R1', DeepSeek)"
         },
         "gpqa_diamond": {
           "value": 71.5,
@@ -716,15 +725,15 @@
         },
         "mmlu_pro": {
           "value": 80.0,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis; non-thinking)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis; non-thinking)"
         },
         "gpqa_diamond": {
           "value": 72.2,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "mrcr_v2": {
           "value": 13.8,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": null,
@@ -760,7 +769,7 @@
         },
         "livecodebench_pro": {
           "value": 2887.0,
-          "source": "CodeSOTA \u2014 LiveCodeBench Pro leaderboard"
+          "source": "CodeSOTA — LiveCodeBench Pro leaderboard"
         },
         "terminal_bench": {
           "value": 73.8,
@@ -772,7 +781,7 @@
         },
         "mmlu_pro": {
           "value": 91.0,
-          "source": "Vals AI \u2014 MMLU Pro leaderboard"
+          "source": "Vals AI — MMLU Pro leaderboard"
         },
         "humanitys_last_exam": {
           "value": 44.7,
@@ -780,7 +789,7 @@
         },
         "mrcr_v2": {
           "value": 57.6,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": null,
@@ -792,7 +801,7 @@
       "scores": {
         "livecodebench": {
           "value": 73.0,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -804,7 +813,7 @@
       "scores": {
         "livecodebench": {
           "value": 71.5,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -832,7 +841,7 @@
         },
         "swe_bench_pro": {
           "value": 29.9,
-          "source": "Scale Labs \u2014 SWE-Bench Pro Public Leaderboard"
+          "source": "Scale Labs — SWE-Bench Pro Public Leaderboard"
         },
         "livecodebench_pro": {
           "value": 2393.0,
@@ -844,7 +853,7 @@
         },
         "gpqa_diamond": {
           "value": 91.7,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 35.5,
@@ -856,7 +865,7 @@
         },
         "aime_2025": {
           "value": 99.0,
-          "source": "Artificial Analysis \u2014 AIME 2025 Benchmark Leaderboard"
+          "source": "Artificial Analysis — AIME 2025 Benchmark Leaderboard"
         }
       },
       "price": 11.55,
@@ -880,7 +889,7 @@
       "scores": {
         "livecodebench": {
           "value": 70.2,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -892,7 +901,7 @@
       "scores": {
         "livecodebench": {
           "value": 70.2,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -904,7 +913,7 @@
       "scores": {
         "livecodebench_pro": {
           "value": 1010.0,
-          "source": "CodeSOTA \u2014 LiveCodeBench Pro leaderboard"
+          "source": "CodeSOTA — LiveCodeBench Pro leaderboard"
         },
         "scicode": {
           "value": 41.0,
@@ -916,11 +925,11 @@
         },
         "mmlu_pro": {
           "value": 85.3,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis)"
         },
         "gpqa_diamond": {
           "value": 84.1,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "charxiv_reasoning": {
           "value": 78.6,
@@ -964,7 +973,7 @@
         },
         "mrcr_v2": {
           "value": 83.0,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": 8.25,
@@ -976,7 +985,7 @@
       "scores": {
         "livecodebench": {
           "value": 69.5,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -1012,7 +1021,7 @@
         },
         "mrcr_v2": {
           "value": 75.2,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": 21.0,
@@ -1024,7 +1033,7 @@
       "scores": {
         "mmlu_pro": {
           "value": 68.5,
-          "source": "CodeSOTA \u2014 MMLU-Pro Leaderboard (vendor self-reported; rank 49; requested as 'MiMo V2.5')"
+          "source": "CodeSOTA — MMLU-Pro Leaderboard (vendor self-reported; rank 49; requested as 'MiMo V2.5')"
         }
       },
       "price": 2.52,
@@ -1036,7 +1045,7 @@
       "scores": {
         "livecodebench": {
           "value": 66.5,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -1068,7 +1077,7 @@
         },
         "gpqa_diamond": {
           "value": 91.7,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 41.6,
@@ -1076,7 +1085,7 @@
         },
         "mrcr_v2": {
           "value": 67.8,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": 12.5,
@@ -1096,11 +1105,11 @@
         },
         "mmlu_pro": {
           "value": 89.5,
-          "source": "Artificial Analysis \u2014 MMLU-Pro Benchmark Leaderboard (page header ranking prose)"
+          "source": "Artificial Analysis — MMLU-Pro Benchmark Leaderboard (page header ranking prose)"
         },
         "gpqa_diamond": {
           "value": 85.9,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 28.4,
@@ -1128,7 +1137,7 @@
         },
         "mmlu_pro": {
           "value": 87.5,
-          "source": "CodeSOTA \u2014 MMLU-Pro Leaderboard (vendor self-reported; rank 4)"
+          "source": "CodeSOTA — MMLU-Pro Leaderboard (vendor self-reported; rank 4)"
         },
         "humanitys_last_exam": {
           "value": 35.9,
@@ -1136,7 +1145,7 @@
         },
         "mrcr_v2": {
           "value": 48.4,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": 2.5,
@@ -1164,7 +1173,7 @@
         },
         "gpqa_diamond": {
           "value": 65.4,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "charxiv_reasoning": {
           "value": 56.7,
@@ -1196,11 +1205,11 @@
         },
         "mmlu_pro": {
           "value": 80.5,
-          "source": "DigitalOcean \u2014 State of the Union's Open Source AI (general-purpose models table)"
+          "source": "DigitalOcean — State of the Union's Open Source AI (general-purpose models table)"
         },
         "gpqa_diamond": {
           "value": 69.4,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard (Fireworks-hosted)"
+          "source": "Vals AI — GPQA Diamond leaderboard (Fireworks-hosted)"
         }
       },
       "price": 0.75,
@@ -1212,11 +1221,11 @@
       "scores": {
         "mmlu_pro": {
           "value": 71.3,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis)"
         },
         "gpqa_diamond": {
           "value": 50.5,
-          "source": "LLM Stats \u2014 GPQA leaderboard (self-reported, src Meta MODEL_CARD)"
+          "source": "LLM Stats — GPQA leaderboard (self-reported, src Meta MODEL_CARD)"
         }
       },
       "price": null,
@@ -1232,11 +1241,11 @@
         },
         "mmlu_pro": {
           "value": 86.0,
-          "source": "CodeSOTA \u2014 MMLU-Pro Leaderboard (vendor self-reported; rank 12)"
+          "source": "CodeSOTA — MMLU-Pro Leaderboard (vendor self-reported; rank 12)"
         },
         "gpqa_diamond": {
           "value": 83.3,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 27.2,
@@ -1256,11 +1265,11 @@
         },
         "swe_bench_pro": {
           "value": 41.8,
-          "source": "Scale Labs \u2014 SWE-Bench Pro Public Leaderboard"
+          "source": "Scale Labs — SWE-Bench Pro Public Leaderboard"
         },
         "livecodebench_pro": {
           "value": 2176.0,
-          "source": "CodeSOTA \u2014 LiveCodeBench Pro leaderboard"
+          "source": "CodeSOTA — LiveCodeBench Pro leaderboard"
         },
         "terminal_bench": {
           "value": 35.2,
@@ -1276,7 +1285,7 @@
         },
         "gpqa_diamond": {
           "value": 85.6,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 25.3,
@@ -1284,7 +1293,7 @@
         },
         "aime_2025": {
           "value": 94.6,
-          "source": "OpenAI \u2014 Introducing GPT-5"
+          "source": "OpenAI — Introducing GPT-5"
         }
       },
       "price": 8.25,
@@ -1304,7 +1313,7 @@
         },
         "gpqa_diamond": {
           "value": 85.6,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 40.1,
@@ -1312,7 +1321,7 @@
         },
         "mrcr_v2": {
           "value": 51.6,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": 3.73,
@@ -1328,7 +1337,7 @@
         },
         "livecodebench": {
           "value": 81.5,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         },
         "scicode": {
           "value": 43.1,
@@ -1336,7 +1345,7 @@
         },
         "gpqa_diamond": {
           "value": 81.6,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 25.2,
@@ -1352,7 +1361,7 @@
       "scores": {
         "gpqa_diamond": {
           "value": 86.1,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 26.6,
@@ -1376,11 +1385,11 @@
         },
         "mmlu_pro": {
           "value": 83.7,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis; non-thinking 'DeepSeek V3.2')"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis; non-thinking 'DeepSeek V3.2')"
         },
         "gpqa_diamond": {
           "value": 80.3,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 22.2,
@@ -1400,11 +1409,11 @@
         },
         "mmlu_pro": {
           "value": 80.1,
-          "source": "CodeSOTA \u2014 MMLU-Pro Leaderboard (vendor self-reported; rank 37)"
+          "source": "CodeSOTA — MMLU-Pro Leaderboard (vendor self-reported; rank 37)"
         },
         "gpqa_diamond": {
           "value": 82.1,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 19.1,
@@ -1420,7 +1429,7 @@
       "scores": {
         "livecodebench": {
           "value": 54.7,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -1444,7 +1453,7 @@
         },
         "gpqa_diamond": {
           "value": 80.3,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 14.6,
@@ -1464,7 +1473,7 @@
         },
         "swe_bench_pro": {
           "value": 16.2,
-          "source": "Scale Labs \u2014 SWE-Bench Pro Public Leaderboard"
+          "source": "Scale Labs — SWE-Bench Pro Public Leaderboard"
         },
         "livecodebench_pro": {
           "value": 1299.0,
@@ -1480,7 +1489,7 @@
         },
         "gpqa_diamond": {
           "value": 78.5,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard (Fireworks-hosted)"
+          "source": "Vals AI — GPQA Diamond leaderboard (Fireworks-hosted)"
         },
         "humanitys_last_exam": {
           "value": 18.5,
@@ -1504,7 +1513,7 @@
         },
         "gpqa_diamond": {
           "value": 85.6,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 30.0,
@@ -1512,7 +1521,7 @@
         },
         "mrcr_v2": {
           "value": 72.4,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": null,
@@ -1532,7 +1541,7 @@
         },
         "gpqa_diamond": {
           "value": 84.5,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 28.0,
@@ -1540,7 +1549,7 @@
         },
         "mrcr_v2": {
           "value": 27.4,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": 3.63,
@@ -1568,11 +1577,11 @@
         },
         "mmlu_pro": {
           "value": 79.1,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis; o3 Mini High = 80.2 on same page)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis; o3 Mini High = 80.2 on same page)"
         },
         "gpqa_diamond": {
           "value": 75.5,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 12.3,
@@ -1592,7 +1601,7 @@
       "scores": {
         "livecodebench": {
           "value": 50.3,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -1612,11 +1621,11 @@
         },
         "mmlu_pro": {
           "value": 84.1,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis)"
         },
         "gpqa_diamond": {
           "value": 73.2,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 8.0,
@@ -1636,11 +1645,11 @@
       "scores": {
         "swe_bench_pro": {
           "value": 13.5,
-          "source": "SWE-Bench Pro paper (arXiv:2509.16941v1), Table 1 \u2014 public set (N=731), SWE-Agent scaffold"
+          "source": "SWE-Bench Pro paper (arXiv:2509.16941v1), Table 1 — public set (N=731), SWE-Agent scaffold"
         },
         "livecodebench_pro": {
           "value": 1769.0,
-          "source": "CodeSOTA \u2014 LiveCodeBench Pro leaderboard"
+          "source": "CodeSOTA — LiveCodeBench Pro leaderboard"
         },
         "scicode": {
           "value": 42.8,
@@ -1648,7 +1657,7 @@
         },
         "mmlu_pro": {
           "value": 86.2,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis)"
         },
         "humanitys_last_exam": {
           "value": 21.6,
@@ -1672,7 +1681,7 @@
         },
         "livecodebench": {
           "value": 0.8,
-          "source": "LLM-Stats \u2014 LiveCodeBench v6 (provider self-reported)"
+          "source": "LLM-Stats — LiveCodeBench v6 (provider self-reported)"
         },
         "scicode": {
           "value": 49.0,
@@ -1680,11 +1689,11 @@
         },
         "mmlu_pro": {
           "value": 87.1,
-          "source": "CodeSOTA \u2014 MMLU-Pro Leaderboard (vendor self-reported; rank 5)"
+          "source": "CodeSOTA — MMLU-Pro Leaderboard (vendor self-reported; rank 5)"
         },
         "gpqa_diamond": {
           "value": 84.1,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 29.4,
@@ -1692,7 +1701,7 @@
         },
         "mrcr_v2": {
           "value": 33.0,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": 1.69,
@@ -1708,7 +1717,7 @@
         },
         "livecodebench": {
           "value": 0.8,
-          "source": "LLM-Stats \u2014 LiveCodeBench v6 (provider self-reported)"
+          "source": "LLM-Stats — LiveCodeBench v6 (provider self-reported)"
         },
         "scicode": {
           "value": 42.0,
@@ -1716,11 +1725,11 @@
         },
         "mmlu_pro": {
           "value": 87.8,
-          "source": "CodeSOTA \u2014 MMLU-Pro Leaderboard (vendor self-reported; rank 3)"
+          "source": "CodeSOTA — MMLU-Pro Leaderboard (vendor self-reported; rank 3)"
         },
         "gpqa_diamond": {
           "value": 88.4,
-          "source": "LLM Stats \u2014 GPQA leaderboard (self-reported, src qwenlm.github.io)"
+          "source": "LLM Stats — GPQA leaderboard (self-reported, src qwenlm.github.io)"
         },
         "humanitys_last_exam": {
           "value": 27.3,
@@ -1736,7 +1745,7 @@
       "scores": {
         "livecodebench": {
           "value": 47.3,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -1764,7 +1773,7 @@
         },
         "gpqa_diamond": {
           "value": 68.9,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard (Fireworks-hosted)"
+          "source": "Vals AI — GPQA Diamond leaderboard (Fireworks-hosted)"
         },
         "humanitys_last_exam": {
           "value": 9.8,
@@ -1804,7 +1813,7 @@
         },
         "gpqa_diamond": {
           "value": 63.4,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 7.7,
@@ -1824,7 +1833,7 @@
         },
         "livecodebench": {
           "value": 0.9,
-          "source": "LLM-Stats \u2014 LiveCodeBench v6 (provider self-reported)"
+          "source": "LLM-Stats — LiveCodeBench v6 (provider self-reported)"
         },
         "scicode": {
           "value": 53.5,
@@ -1832,7 +1841,7 @@
         },
         "gpqa_diamond": {
           "value": 89.1,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 35.9,
@@ -1840,7 +1849,7 @@
         },
         "mrcr_v2": {
           "value": 39.0,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": 2.71,
@@ -1852,7 +1861,7 @@
       "scores": {
         "livecodebench": {
           "value": 43.4,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -1868,7 +1877,7 @@
         },
         "swe_bench_pro": {
           "value": 4.9,
-          "source": "SWE-Bench Pro paper (arXiv:2509.16941v1), Table 1 \u2014 public set (N=731), SWE-Agent scaffold"
+          "source": "SWE-Bench Pro paper (arXiv:2509.16941v1), Table 1 — public set (N=731), SWE-Agent scaffold"
         },
         "livecodebench_pro": {
           "value": 210.0,
@@ -1884,7 +1893,7 @@
         },
         "gpqa_diamond": {
           "value": 53.8,
-          "source": "Vals AI \u2014 GPQA Diamond leaderboard"
+          "source": "Vals AI — GPQA Diamond leaderboard"
         },
         "humanitys_last_exam": {
           "value": 2.7,
@@ -1900,7 +1909,7 @@
       "scores": {
         "livecodebench": {
           "value": 41.2,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -1932,7 +1941,7 @@
         },
         "mmlu_pro": {
           "value": 72.7,
-          "source": "Price Per Token \u2014 MMLU-Pro Leaderboard (data from Artificial Analysis; non-thinking; Qwen3 32B Thinking = 79.8 on same page)"
+          "source": "Price Per Token — MMLU-Pro Leaderboard (data from Artificial Analysis; non-thinking; Qwen3 32B Thinking = 79.8 on same page)"
         },
         "humanitys_last_exam": {
           "value": 8.3,
@@ -1952,7 +1961,7 @@
       "scores": {
         "livecodebench": {
           "value": 36.3,
-          "source": "Vals AI \u2014 LiveCodeBench (v6)"
+          "source": "Vals AI — LiveCodeBench (v6)"
         }
       },
       "price": null,
@@ -1984,11 +1993,11 @@
         },
         "livecodebench": {
           "value": 0.8,
-          "source": "LLM-Stats \u2014 LiveCodeBench v6 (provider self-reported)"
+          "source": "LLM-Stats — LiveCodeBench v6 (provider self-reported)"
         },
         "gpqa_diamond": {
           "value": 84.3,
-          "source": "LLM Stats \u2014 GPQA leaderboard (self-reported, src HF blog/gemma4)"
+          "source": "LLM Stats — GPQA leaderboard (self-reported, src HF blog/gemma4)"
         },
         "humanitys_last_exam": {
           "value": 22.7,
@@ -2104,7 +2113,7 @@
         },
         "livecodebench": {
           "value": 0.9,
-          "source": "LLM-Stats \u2014 LiveCodeBench v6 (provider self-reported)"
+          "source": "LLM-Stats — LiveCodeBench v6 (provider self-reported)"
         },
         "scicode": {
           "value": 39.9,
@@ -2144,7 +2153,7 @@
       "scores": {
         "livecodebench": {
           "value": 0.8,
-          "source": "LLM-Stats \u2014 LiveCodeBench v6 (provider self-reported)"
+          "source": "LLM-Stats — LiveCodeBench v6 (provider self-reported)"
         }
       },
       "price": 0.44,
@@ -2156,7 +2165,7 @@
       "scores": {
         "livecodebench": {
           "value": 0.8,
-          "source": "LLM-Stats \u2014 LiveCodeBench v6 (provider self-reported)"
+          "source": "LLM-Stats — LiveCodeBench v6 (provider self-reported)"
         }
       },
       "price": 0.41,
@@ -2168,7 +2177,7 @@
       "scores": {
         "livecodebench": {
           "value": 0.7,
-          "source": "LLM-Stats \u2014 LiveCodeBench v6 (provider self-reported)"
+          "source": "LLM-Stats — LiveCodeBench v6 (provider self-reported)"
         }
       },
       "price": 0.44,
@@ -2180,7 +2189,7 @@
       "scores": {
         "swe_bench_pro": {
           "value": 59.1,
-          "source": "Scale Labs \u2014 SWE-Bench Pro Public Leaderboard"
+          "source": "Scale Labs — SWE-Bench Pro Public Leaderboard"
         }
       },
       "price": 12.5,
@@ -2192,7 +2201,7 @@
       "scores": {
         "swe_bench_pro": {
           "value": 45.9,
-          "source": "Scale Labs \u2014 SWE-Bench Pro Public Leaderboard"
+          "source": "Scale Labs — SWE-Bench Pro Public Leaderboard"
         }
       },
       "price": null,
@@ -2204,7 +2213,7 @@
       "scores": {
         "swe_bench_pro": {
           "value": 46.1,
-          "source": "Scale Labs \u2014 SWE-Bench Pro Public Leaderboard"
+          "source": "Scale Labs — SWE-Bench Pro Public Leaderboard"
         }
       },
       "price": null,
@@ -2216,7 +2225,7 @@
       "scores": {
         "swe_bench_pro": {
           "value": 43.6,
-          "source": "Scale Labs \u2014 SWE-Bench Pro Public Leaderboard"
+          "source": "Scale Labs — SWE-Bench Pro Public Leaderboard"
         }
       },
       "price": null,
@@ -2228,7 +2237,7 @@
       "scores": {
         "swe_bench_pro": {
           "value": 39.5,
-          "source": "Scale Labs \u2014 SWE-Bench Pro Public Leaderboard"
+          "source": "Scale Labs — SWE-Bench Pro Public Leaderboard"
         }
       },
       "price": null,
@@ -2240,7 +2249,7 @@
       "scores": {
         "swe_bench_pro": {
           "value": 15.6,
-          "source": "Scale Labs \u2014 SWE-Bench Pro Public Leaderboard"
+          "source": "Scale Labs — SWE-Bench Pro Public Leaderboard"
         }
       },
       "price": null,
@@ -2252,7 +2261,7 @@
       "scores": {
         "swe_bench_pro": {
           "value": 5.2,
-          "source": "Scale Labs \u2014 SWE-Bench Pro Public Leaderboard"
+          "source": "Scale Labs — SWE-Bench Pro Public Leaderboard"
         }
       },
       "price": null,
@@ -2264,14 +2273,14 @@
       "scores": {
         "swe_bench_pro": {
           "value": 3.4,
-          "source": "SWE-Bench Pro paper (arXiv:2509.16941v1), Table 1 \u2014 public set (N=731), SWE-Agent scaffold"
+          "source": "SWE-Bench Pro paper (arXiv:2509.16941v1), Table 1 — public set (N=731), SWE-Agent scaffold"
         }
       },
       "price": null,
       "intelligence": null
     },
     {
-      "model": "gpt-5.5-\u2014-codex-agent",
+      "model": "gpt-5.5-—-codex-agent",
       "vendor": "OpenAI",
       "scores": {
         "terminal_bench": {
@@ -2283,7 +2292,7 @@
       "intelligence": null
     },
     {
-      "model": "gpt-5.4-\u2014-codex-cli",
+      "model": "gpt-5.4-—-codex-cli",
       "vendor": "OpenAI",
       "scores": {
         "terminal_bench": {
@@ -2295,7 +2304,7 @@
       "intelligence": null
     },
     {
-      "model": "gpt-5.3-codex-\u2014-codex-cli",
+      "model": "gpt-5.3-codex-—-codex-cli",
       "vendor": "OpenAI",
       "scores": {
         "terminal_bench": {
@@ -2307,7 +2316,7 @@
       "intelligence": null
     },
     {
-      "model": "opus-4.8-\u2014-code-agent",
+      "model": "opus-4.8-—-code-agent",
       "vendor": "Anthropic",
       "scores": {
         "terminal_bench": {
@@ -2319,7 +2328,7 @@
       "intelligence": null
     },
     {
-      "model": "sonnet-4.6-\u2014-code",
+      "model": "sonnet-4.6-—-code",
       "vendor": "Anthropic",
       "scores": {
         "terminal_bench": {
@@ -2331,7 +2340,7 @@
       "intelligence": null
     },
     {
-      "model": "glm-5.1-\u2014-code-agent",
+      "model": "glm-5.1-—-code-agent",
       "vendor": "Zhipu",
       "scores": {
         "terminal_bench": {
@@ -2384,7 +2393,7 @@
       "scores": {
         "mrcr_v2": {
           "value": 38.1,
-          "source": "Context Arena (ZeroEval) \u2014 GDM-MRCRv2 Full (8-Needle) API"
+          "source": "Context Arena (ZeroEval) — GDM-MRCRv2 Full (8-Needle) API"
         }
       },
       "price": 0.4,

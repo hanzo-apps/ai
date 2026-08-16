@@ -19,6 +19,16 @@ export type BenchId = string
 export interface Score {
   value: number
   source: string
+  /** Correct answers and set size, where the run recorded them. A percentage
+   *  that cannot be written as an integer count over `n` did not come from a
+   *  run — that test is what rejected a proposed 96.3 over n=198 (190.67
+   *  correct) and kept the real 96.0 (190/198). Carrying the count is what lets
+   *  a reader, or the next editor, apply it. */
+  correct?: number
+  n?: number
+  /** What distinguishes one enso tier from another: the price cap on the pool
+   *  the router may choose from. Same benchmark set, same day, three pools. */
+  pool?: string
 }
 
 export interface LbModel {
