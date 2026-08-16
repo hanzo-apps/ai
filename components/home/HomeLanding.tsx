@@ -1,6 +1,10 @@
 import { SiteHeader, SiteFooter } from './shell'
 import Fold from './Fold'
+import SystemArchitecture from './SystemArchitecture'
 import EnsoHero from './EnsoHero'
+import AgentRuntime from './AgentRuntime'
+import LearnLoop from './LearnLoop'
+import OneInterface from './OneInterface'
 import CloudCategories from './CloudCategories'
 import Research from './Research'
 import BuildStory from './BuildStory'
@@ -57,13 +61,22 @@ export default function HomeLanding() {
     <div className="min-h-screen bg-black text-white">
       <SiteHeader surface="ai" />
       <main>
-        {/* Research sits second, not fifth. A research-led company puts the
-            research where a reader lands; the products it pays for follow. */}
+        {/* The page descends the stack. It states the category, shows the
+            architecture, then proves it a layer at a time — intelligence,
+            execution, the company, what it learns, what it runs on — before it
+            ever shows a catalog. Research moved DOWN from second for the same
+            reason: papers are evidence for a claim, and a reader has to have
+            been given the claim first. The catalog and the library are the last
+            two things on the page because they are the proof, not the pitch. */}
         <Fold />
-        <Research />
+        <SystemArchitecture />
         <EnsoHero />
+        <AgentRuntime />
+        <LearnLoop />
+        <OneInterface />
         <LocalStack />
         <CloudCategories />
+        <Research />
         <BuildStory />
         <Composer />
       </main>

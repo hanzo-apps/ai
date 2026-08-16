@@ -57,20 +57,53 @@ export default function Fold() {
           it and keeps its full weight below — `pt-8` where it used to be a
           symmetrical `py-24`. */}
       <section className="mx-auto max-w-3xl px-4 pb-24 pt-8 text-center sm:px-6 sm:pb-28 lg:px-8">
-        {/* Research first, product second. This is the company's front door,
-            and a reader arriving at it is asking who we are before what we
-            sell -- the API, the layers and the pricing all have their own
-            pages and every one of them is a click away. What is true of us and
-            of almost nobody else is that we train the models AND run the cloud
-            under them, and publish the weights and the papers. That is the
-            sentence. */}
+        {/* The line names the CATEGORY, because the previous one named two
+            capabilities. "We train the models and run the cloud under them" is
+            true, and it is a description of what we do rather than of what it
+            gets you — a reader has to assemble the consequence themselves. The
+            consequence is the product: the layers were designed together, so
+            there are no seams to pay for. That is a category, and a category is
+            what a front door should state. */}
+        <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
+          Hanzo OS
+        </p>
         <h1 className="hz-display">
-          We train the models and run the cloud under them.
+          The operating system for agentic companies.
         </h1>
+        <p className="mx-auto mt-5 max-w-2xl text-2xl leading-snug text-neutral-200 sm:text-3xl">
+          Give your company intelligence.
+        </p>
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-neutral-400">
-          Zen is open weights, from something that fits on a laptop up to frontier. Enso is
-          ours, and it routes across them. The papers, the methods and the results that did
-          not work are public.
+          Hanzo OS unifies Enso, autonomous agents, company context, secure execution,
+          full-stack observability, and the cloud beneath them — so people and agents think,
+          act, learn and scale as one system.
+        </p>
+
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="https://cloud.hanzo.ai"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black transition-opacity hover:opacity-90"
+          >
+            Start building
+          </a>
+          <a
+            href="#system"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-neutral-700 px-7 text-sm font-medium text-white transition-colors hover:border-neutral-400"
+          >
+            Explore Hanzo OS
+          </a>
+        </div>
+
+        {/* Trust markers, and they sit HERE rather than in the headline: a
+            headline carrying its own credentials is a headline about us. */}
+        <p className="mt-8 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-sm text-neutral-500">
+          <span className="text-neutral-400">Open source</span>
+          <span aria-hidden className="text-neutral-700">·</span>
+          <span className="text-neutral-400">Fully observable</span>
+          <span aria-hidden className="text-neutral-700">·</span>
+          <span className="text-neutral-400">Run anywhere</span>
+          <span aria-hidden className="text-neutral-700">·</span>
+          <span>Techstars ’17</span>
         </p>
       </section>
     </>

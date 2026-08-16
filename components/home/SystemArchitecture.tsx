@@ -1,0 +1,118 @@
+/**
+ * The system, drawn as layers — the section the page's whole argument rests on.
+ *
+ * The claim everywhere else is "designed together". A reader cannot check that
+ * against a list of product names, and a catalog is what the page reached for
+ * before this section existed: ten cards, each true, none of them showing that
+ * the layers touch. So this draws the stack, and the stack is the evidence.
+ *
+ * It reads UPWARD deliberately. Infrastructure is the floor, intelligence sits
+ * on it, execution on that, and the company interface on top — the direction a
+ * request actually travels, and the opposite of how an org chart is drawn. The
+ * two side planes are not a fifth and sixth layer: learning and governance cut
+ * ACROSS every layer, which is the difference between a property of the system
+ * and another product in it, and drawing them as columns beside the stack is the
+ * only honest way to say so.
+ *
+ * The arrows are real glyphs in the DOM rather than an image, so the diagram
+ * translates, reflows, selects and reads aloud. A picture of a sentence is not a
+ * sentence.
+ */
+const LAYERS = [
+  {
+    name: 'Hanzo Team',
+    body: 'Humans, AI coworkers, goals, projects, knowledge and approvals.',
+    href: 'https://hanzo.team',
+  },
+  {
+    name: 'Agent execution',
+    body: 'Roles, memory, tools, workflows, Tabs and secure sandboxes.',
+    href: 'https://tabs.hanzo.ai',
+  },
+  {
+    name: 'Enso',
+    body: 'Reasoning, routing, models and planning.',
+    href: '/enso',
+  },
+  {
+    name: 'Hanzo Cloud',
+    body: 'Compute, data, networking, identity, storage, deployment, billing and APIs.',
+    href: 'https://cloud.hanzo.ai',
+  },
+]
+
+const PLANES = [
+  {
+    name: 'Learn & adapt',
+    body: 'Insights, traces, evaluations, experiments and outcomes.',
+    href: 'https://insights.hanzo.ai',
+  },
+  {
+    name: 'Govern & secure',
+    body: 'Identity, permissions, policy, secrets, audit, approvals and post-quantum.',
+    href: '/security',
+  },
+]
+
+export default function SystemArchitecture() {
+  return (
+    <section id="system" className="mx-auto max-w-5xl scroll-mt-24 px-4 py-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-2xl text-center">
+        <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
+          The system
+        </p>
+        <h2 className="hz-display text-4xl sm:text-5xl">One OS. Every layer of the company.</h2>
+        <p className="mx-auto mt-5 text-lg leading-relaxed text-neutral-400">
+          Most companies assemble AI, communication, project management, analytics,
+          infrastructure, identity, security and billing from separate vendors, then pay to
+          make them behave as one thing. Hanzo was designed as one system.
+        </p>
+      </div>
+
+      {/* The stack. Column-reverse so the DOM reads bottom-up — infrastructure
+          first, the way the system is built — while the eye reads top-down. */}
+      <div className="mt-14 flex flex-col-reverse gap-3">
+        {[...LAYERS].reverse().map((layer, i) => (
+          <div key={layer.name}>
+            <a
+              href={layer.href}
+              className="block rounded-2xl border border-neutral-800 bg-white/[0.02] px-6 py-5 transition-colors hover:border-neutral-600"
+            >
+              <div className="text-base font-medium text-white">{layer.name}</div>
+              <div className="mt-1 text-sm leading-relaxed text-neutral-400">{layer.body}</div>
+            </a>
+            {/* An arrow between layers, never after the last one. */}
+            {i < LAYERS.length - 1 ? (
+              <div aria-hidden className="flex justify-center py-1 text-neutral-600">
+                ↑
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-10 grid gap-3 sm:grid-cols-2">
+        {PLANES.map((plane) => (
+          <a
+            key={plane.name}
+            href={plane.href}
+            className="rounded-2xl border border-dashed border-neutral-800 px-6 py-5 transition-colors hover:border-neutral-600"
+          >
+            <div className="text-base font-medium text-white">{plane.name}</div>
+            <div className="mt-1 text-sm leading-relaxed text-neutral-400">{plane.body}</div>
+          </a>
+        ))}
+      </div>
+
+      {/* What "one system" actually buys, in the terms an engineer can verify.
+          Not a benefit list — each line names a thing that exists once. */}
+      <div className="mx-auto mt-14 max-w-2xl text-center text-lg leading-relaxed text-neutral-300">
+        <p>One company context.</p>
+        <p>One intelligence layer.</p>
+        <p>One agent runtime.</p>
+        <p>One policy plane.</p>
+        <p>One operational record.</p>
+      </div>
+    </section>
+  )
+}

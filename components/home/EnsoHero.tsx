@@ -31,14 +31,14 @@ export default function EnsoHero() {
 
       <div className="relative z-10 mx-auto max-w-4xl text-center">
         <motion.a
-          href="/platform"
+          href="/enso"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
           className="mb-8 inline-flex min-h-11 items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 transition-colors hover:border-neutral-600"
         >
           <EnsoLogo size={16} className="text-white" />
-          <span className="text-sm font-medium text-neutral-200">The AI-native cloud</span>
+          <span className="text-sm font-medium text-neutral-200">Enso · the intelligence layer</span>
           <ArrowRight className="h-3.5 w-3.5 text-neutral-500" />
         </motion.a>
 
@@ -58,7 +58,7 @@ export default function EnsoHero() {
           className="text-balance text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
         >
           <span className="bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
-            Everything AI needs. Built together.
+            Intelligence at the center.
           </span>
         </motion.h2>
 
@@ -68,9 +68,9 @@ export default function EnsoHero() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mx-auto mt-6 max-w-2xl text-lg text-neutral-300 sm:text-xl"
         >
-          From Enso to the infrastructure beneath it, Hanzo unifies models, agents, compute, data,
-          security, and observability in one open-source platform. Start on your machine. Scale
-          across a cluster. Keep the same API.
+          Enso reads the objective, understands the context, and puts the right intelligence
+          behind the work. Fast when it can be. Powerful when it needs to be. Governed by your
+          company’s policies, through one API across the system.
         </motion.p>
 
         <motion.div
@@ -80,35 +80,33 @@ export default function EnsoHero() {
           className="mt-9 flex flex-wrap items-center justify-center gap-3"
         >
           <a
-            href="https://cloud.hanzo.ai"
+            href="/enso"
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 text-sm font-medium text-black transition-opacity hover:opacity-90"
           >
-            Start building <ArrowRight className="h-4 w-4" />
+            Try Enso <ArrowRight className="h-4 w-4" />
           </a>
           <a
-            href="/platform"
+            href="/models/enso"
             className="inline-flex min-h-11 items-center gap-2 rounded-full border border-neutral-700 px-7 text-sm font-medium text-white transition-colors hover:border-neutral-400"
           >
-            Explore the platform
+            View measured results
           </a>
         </motion.div>
 
         <motion.a
-          href="/platform"
+          href="/models/enso"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           className="hz-tap group mt-8 inline-flex flex-wrap items-center justify-center gap-x-2.5 gap-y-2 text-sm text-neutral-400 transition-colors hover:text-white"
         >
-          <span className="text-neutral-300 group-hover:text-white">Enso</span>
+          <span className="text-neutral-300 group-hover:text-white">Flash</span>
           <span aria-hidden className="text-neutral-700">·</span>
-          <span className="text-neutral-300 group-hover:text-white">Full-stack observability</span>
+          <span className="text-neutral-300 group-hover:text-white">Pro</span>
           <span aria-hidden className="text-neutral-700">·</span>
-          <span className="text-neutral-300 group-hover:text-white">One API</span>
-          <span aria-hidden className="text-neutral-700">·</span>
-          <span className="text-neutral-300 group-hover:text-white">Open source</span>
-          <span aria-hidden className="text-neutral-700">·</span>
-          <span>Techstars ’17</span>
+          <span className="text-neutral-300 group-hover:text-white">Ultra</span>
+          <span aria-hidden className="text-neutral-700">—</span>
+          <span>one OpenAI- and Anthropic-compatible API</span>
         </motion.a>
       </div>
     </section>
