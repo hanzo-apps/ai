@@ -147,66 +147,25 @@ export function fallbackPlans(category: string): SubscriptionPlan[] {
 }
 
 /**
- * What a paid plan actually grants each month, and whether that covers its price.
+ * The feature lines minus the ones that promise a monthly credit.
  *
- * The credit is the strongest thing this page can say and it sat buried as the
- * last bullet in a feature list. It belongs beside the price — but only at the
- * amount the biller really pays out, which is NOT the field the feature strings
- * were written from.
- *
- * READ THE FIELD THE GRANT READS. commerce's IncludedMonthlyCents
- * (api/billing/plans.go) resolves the monthly allotment in this order:
- * includedCloudCredits, then includedCloudCreditsPerUser, then
- * includedCreditUsd. The order matters because plans set more than one: a plan
- * advertising includedCreditUsd while carrying a smaller includedCloudCredits
- * is granted the SMALLER number, and a page reading the advertised field states
- * a figure no account ever receives. Mirroring the precedence here means the
- * card and the ledger cannot disagree — whatever commerce decides to grant is
- * what the page claims, with no second opinion to keep in sync.
- *
- * `whole` is measured, not declared. It says the credit covers the whole
- * subscription price, so "every dollar back" appears only where that is
- * arithmetic rather than aspiration.
- */
-export interface Credit {
-  /** Dollars of spendable credit granted each month. */
-  amount: number;
-  /** The credit covers the whole subscription price. */
-  whole: boolean;
-}
-
-export function credit(plan: SubscriptionPlan): Credit | null {
-  const l = plan.limits;
-  const amount =
-    l?.includedCloudCredits ?? l?.includedCloudCreditsPerUser ?? l?.includedCreditUsd;
-  if (amount == null || amount <= 0) return null;
-  const monthly = plan.priceMonthly;
-  return { amount, whole: monthly != null && monthly > 0 && amount >= monthly };
-}
-
-/**
- * The feature lines minus the one that restates the monthly credit.
- *
- * Every plan carries a bullet like "$49 of credit each month", written from the
- * advertised field rather than the granted one. Beside a block that states the
- * granted amount, that bullet is both a duplicate and a contradiction — one
- * card claiming two different numbers for the same thing, which is worse than
- * either number alone.
- *
- * The credit is stated ONCE, in the block, at the amount that is paid.
+ * Every paid row carries a bullet like "$49 of credit each month". We do not
+ * sell a credit, and the figure is not what the biller pays either — commerce's
+ * IncludedMonthlyCents resolves the monthly allotment from includedCloudCredits
+ * first, so the row advertising $49 mints $25. Wrong number, offer we do not
+ * make: it does not belong on a card.
  *
  * The line is written three ways across the catalog and the published package —
  * "$5 of credit each month", "250 compute/API credits per month", "$5 of
- * foundational API gateway credits included" — so matching the month alone left
- * the third one sitting under its own box. It has to say CREDIT, and then
- * either name a month or name a figure.
+ * foundational API gateway credits included" — so a match on the month alone
+ * left the third one standing. It has to say CREDIT, and then either name a
+ * month or name a figure.
  *
- * Checked against every row commerce serves: it takes those four lines and
- * nothing else. "Centralized, KMS-backed credentials" is not a credit, and
- * Team's "$25 per user per month" never claims to be one.
+ * Checked against every row commerce serves: it takes those lines and nothing
+ * else. "Centralized, KMS-backed credentials" is not a credit, and Team's "$25
+ * per user per month" never claims to be one.
  */
-export function featuresBeside(credit: Credit | null, features: string[]): string[] {
-  if (!credit) return features;
+export function sellableFeatures(features: string[]): string[] {
   return features.filter(
     (f) => !(/credit/i.test(f) && (/\$\d/.test(f) || /month/i.test(f)))
   );

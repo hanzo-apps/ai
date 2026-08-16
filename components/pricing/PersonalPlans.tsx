@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import PricingPlan from "./PricingPlan";
 import { Code, Zap, Users, Rocket, Sparkles } from "lucide-react";
-import { loadPlans, fallbackPlans, credit, featuresBeside, type SubscriptionPlan } from "@/lib/plans";
+import { loadPlans, fallbackPlans, sellableFeatures, type SubscriptionPlan } from "@/lib/plans";
 import { Box } from '@hanzo/ui'
 
 const PLAN_ICONS: Record<string, React.ReactNode> = {
@@ -48,12 +48,16 @@ const SIGNUP_URL = "https://console.hanzo.ai";
  */
 const FREE = {
   name: "Free",
-  description: "Everything you need to try Hanzo. An account, the free model pool, and the tools around it.",
+  // Kept no longer than the longest catalog description (Go, 82 chars). The
+  // card reserves a fixed block for this so every button lands on one line, and
+  // a description that outruns the reserve pushes only its own card's button
+  // down — which is what a 103-character first draft did at 1024.
+  description: "An account, the free models, and a little compute to try Hanzo properly.",
   features: [
-    "Chat and the app on Enso Free, our free model pool",
-    "Web search, file uploads and voice",
-    "Research and deep modes",
-    "Rate limited, and the best models stay on the paid plans",
+    "The free models, with a daily limit",
+    "A small amount of sandbox compute",
+    "Chat, the desktop app, and web search",
+    "Community support",
     "Every open source release and model, free to self-host",
   ],
 };
@@ -104,16 +108,18 @@ const PersonalPlans = () => {
 
   return (
     <Box className="max-w-6xl mx-auto mb-12">
-      {/* The value exchange, before the prices rather than after them.
+      {/* The question a reader arrives with, answered before the prices.
 
-          The measured funnel says readers reach this page, see a monthly price
-          next to AI they can get for nothing, and leave — 120 arrivals to 3
-          plan clicks. They leave because the page never answers the only
-          question they have, so it is answered here, first, in one sentence. */}
+          The measured funnel says they land here, see a monthly price next to
+          AI they can get for nothing, and leave — 120 arrivals to 3 plan
+          clicks. They leave because the page never answered it, so it is
+          answered first, plainly, and in terms of what a plan actually buys:
+          better models, higher limits, more compute. Nothing else is on offer
+          and the page should not imply there is. */}
       <p className="max-w-2xl mx-auto mb-10 text-center text-base text-muted-foreground">
         <span className="text-foreground font-medium">Why pay when the AI is free?</span>{" "}
-        Free runs on our free model pool, rate limited. Paid opens the best models,
-        lifts the limits, and includes credit every month to spend on AI or compute.
+        Free gets you the free models with a daily limit and a little sandbox
+        compute. Paid gets you the best models, higher limits, and real compute.
       </p>
 
       <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
@@ -125,18 +131,10 @@ const PersonalPlans = () => {
           billingPeriod="/month"
           description={FREE.description}
           features={FREE.features}
-          // Free states the same fact the paid cards state, at zero. It keeps
-          // the row aligned without a reserved blank, and it puts the credit on
-          // the ladder where a reader compares rungs.
-          credit={{ amount: 0, whole: false }}
           checkoutUrl={SIGNUP_URL}
           ctaLabel="Get started free"
         />
-        {plans.map((plan) => {
-          // Derived once per card: the block states the credit, and the feature
-          // list drops the line that would state it again at a different number.
-          const granted = credit(plan);
-          return (
+        {plans.map((plan) => (
           <PricingPlan
             key={plan.id}
             name={plan.name}
@@ -144,14 +142,12 @@ const PersonalPlans = () => {
             price={formatPrice(plan)}
             billingPeriod={billingPeriod(plan)}
             description={plan.description}
-            features={featuresBeside(granted, plan.features)}
-            credit={granted}
+            features={sellableFeatures(plan.features)}
             popular={plan.popular}
             checkoutUrl={planCheckoutUrl(plan)}
             ctaLabel={planCtaLabel()}
           />
-          );
-        })}
+        ))}
       </Box>
 
       {/* The free path is now a card, not a footnote, so this line carries the

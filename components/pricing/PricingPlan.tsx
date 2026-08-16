@@ -5,7 +5,6 @@ import { Button } from "@hanzo/ui";
 import { Check } from "lucide-react";
 import { useAnalytics } from "@hanzo/event/react";
 import { EVENTS } from "@hanzo/event";
-import type { Credit } from "@/lib/plans";
 import { Box } from '@hanzo/ui'
 
 interface PricingPlanProps {
@@ -15,8 +14,6 @@ interface PricingPlanProps {
   billingPeriod?: string;
   description: string;
   features: string[];
-  /** The monthly credit this plan returns, derived from the catalog. */
-  credit?: Credit | null;
   popular?: boolean;
   customColor?: string;
   showDetails?: boolean;
@@ -35,7 +32,6 @@ const PricingPlan = ({
   billingPeriod,
   description,
   features,
-  credit,
   popular = false,
   customColor,
   showDetails = false,
@@ -180,54 +176,6 @@ const PricingPlan = ({
             <span className="text-muted-foreground">{billingPeriod}</span>
           )}
         </Box>
-
-        {/* The offer, against the number it modifies.
-
-            This is the whole point of the card and it used to be the last
-            bullet under a fold: the money comes back. A reader who stops at
-            "$19/month" has read half the price. The amount is derived from the
-            field the biller pays from, so no card can overstate its plan.
-
-            ONE SENTENCE PAIR, ON EVERY CARD, ZERO INCLUDED. Two earlier
-            attempts aligned the row by hand and both failed, for the same
-            reason in different clothes: a reserved blank of a guessed height,
-            then a real box holding DIFFERENT words. Cards five across leave the
-            box ~113px, where "Paid plans add credit." takes one line and
-            "Spend it on AI or compute." takes two — 14.66px of drift that
-            dragged the free card's button off the row, and more at 1024 where
-            the headlines split too.
-
-            Same strings wrap the same way at every width, so the free card
-            says $0 rather than saying it differently. Nothing to keep in sync
-            and no constant to get wrong; only the styling is dimmed, which
-            cannot change a line count. */}
-        {/* Only for a card whose caller states a credit. The other five
-            surfaces that render this component sell things with no monthly
-            allotment at all, and an unasked-for "$0" box on a captable tier
-            would be an answer to a question nobody put. `undefined` is "not
-            applicable"; `null` and zero both mean "none, and worth saying". */}
-        {credit !== undefined && (
-          <div
-            className={`mb-4 rounded-xl border px-4 py-3 ${
-              credit && credit.amount > 0
-                ? "border-neutral-700 bg-neutral-900/60"
-                : "border-neutral-800 bg-transparent"
-            }`}
-          >
-            <p
-              className={`text-sm font-semibold ${
-                credit && credit.amount > 0 ? "text-foreground" : "text-muted-foreground"
-              }`}
-            >
-              {`$${(credit?.amount ?? 0).toLocaleString("en-US")} ${
-                credit?.whole ? "back" : "credit"
-              } every month`}
-            </p>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Spend it on AI or compute.
-            </p>
-          </div>
-        )}
 
         <p className="text-muted-foreground md:min-h-[8.75rem]">{description}</p>
       </Box>

@@ -14,7 +14,6 @@ import InfrastructurePricing from "@/components/pricing/InfrastructurePricing"
 import PricingFAQ from "@/components/pricing/PricingFAQ"
 import BillingManagement from "@/components/pricing/BillingManagement"
 import PricingCallouts from "@/components/pricing/PricingCallouts"
-import { Box } from '@hanzo/ui'
 
 // Three tabs, because there are three buyers and they want different pages.
 // Someone buying for themselves needs a ladder; someone buying for a company
@@ -90,18 +89,18 @@ export default function PricingPage() {
   }
 
   return (
-    <Box className="min-h-screen bg-background text-foreground">
-      <Box className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
         <PricingHeader />
 
         {/* Tab Navigation */}
-        <Box className="max-w-3xl mx-auto mb-12">
+        <div className="max-w-3xl mx-auto mb-12">
           <p className="text-center text-muted-foreground mb-6">
-            Start free. Move up for the best models, higher limits and credit
-            every month.
+            Start free. Move up for the best models, higher limits and more
+            compute.
           </p>
-          <Box className="flex justify-center">
-            <Box className="bg-neutral-900/50 rounded-full p-1 border border-neutral-800">
+          <div className="flex justify-center">
+            <div className="bg-neutral-900/50 rounded-full p-1 border border-neutral-800">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -115,16 +114,16 @@ export default function PricingPage() {
                   {tab.label}
                 </button>
               ))}
-            </Box>
-          </Box>
-        </Box>
+            </div>
+          </div>
+        </div>
 
         {/* Tab Content */}
         {renderTabContent()}
 
         {/* Callouts */}
         <PricingCallouts />
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 }

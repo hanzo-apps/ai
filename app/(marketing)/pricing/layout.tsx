@@ -9,10 +9,10 @@ import { ogImages, twitterImages } from '@/lib/constants/og'
 
 export const metadata: Metadata = {
   title: 'Pricing — Hanzo AI',
-  description: 'Start free on our free models. Paid plans open the best models, lift the limits and include spendable credit every month. Business is per user with a two seat minimum; Enterprise is custom.',
+  description: 'Start free on our free models with a daily limit. Paid plans open the best models, raise the limits and add real compute. Business is per user with a two seat minimum; Enterprise is custom.',
   openGraph: {
     title: 'Pricing — Hanzo AI',
-    description: 'Start free on our free models. Paid plans open the best models, lift the limits and include spendable credit every month. Business is per user with a two seat minimum; Enterprise is custom.',
+    description: 'Start free on our free models with a daily limit. Paid plans open the best models, raise the limits and add real compute. Business is per user with a two seat minimum; Enterprise is custom.',
     url: 'https://hanzo.ai/pricing',
     siteName: 'Hanzo AI',
     type: 'website',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing — Hanzo AI',
-    description: 'Start free on our free models. Paid plans open the best models, lift the limits and include spendable credit every month. Business is per user with a two seat minimum; Enterprise is custom.',
+    description: 'Start free on our free models with a daily limit. Paid plans open the best models, raise the limits and add real compute. Business is per user with a two seat minimum; Enterprise is custom.',
     images: twitterImages,
   },
 }

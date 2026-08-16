@@ -1,14 +1,12 @@
 
 import React from "react";
 import { Faq } from "@/components/ui/faq";
-import { Box } from '@hanzo/ui'
 
 const PricingFAQ = () => {
   // The questions a reader actually arrives with, answered against what we
-  // actually sell. The old list described a ladder that no longer exists —
-  // "Plus", a free tier "for everyone", and credits framed as a CAP ("within
-  // the plan limits") when they are a GRANT. That last one mattered most: it
-  // taught the reader the opposite of the offer.
+  // actually sell: access and capacity. The old list described a ladder that no
+  // longer exists — "Plus", and a free tier "for everyone" — and talked about
+  // credits, which is not something we offer.
   //
   // No price is written here. Prices live in the catalog and the cards read
   // them; an answer that names a number is a second copy that goes stale the
@@ -16,27 +14,27 @@ const PricingFAQ = () => {
   const faqs = [
     {
       question: "Why pay when the AI is free?",
-      answer: "Free runs on our free model pool and is rate limited. Paid opens the best models, lifts the limits, and includes spendable credit every month — so a good part of what you pay comes back to you as usage. Each plan card shows exactly how much."
+      answer: "Free gets you the free models with a daily limit and a little sandbox compute. Paid gets you the best models, higher limits, and real compute. You are paying for access and capacity — the better the plan, the more of both."
     },
     {
-      question: "What is the monthly credit?",
-      answer: "Every paid plan includes spendable credit each month, usable on AI or on compute. The amount differs by plan and each card states it. It renews every billing cycle and is spent before your balance is."
+      question: "What do I get for paying more?",
+      answer: "Three things, and they move together: which models you can call, how much you can call them, and how much compute you can run. Each card lists what that plan opens up."
     },
     {
       question: "Is it free to use?",
-      answer: "Yes — create an account and use chat and the app on our free models, with a limited amount of use each day. There is no card required and no credit granted at signup; the free tier is free because the models are, not because we hand out a balance. Everything open source is also free to download and run yourself."
+      answer: "Yes. Create an account and use the free models with a daily limit, plus a small amount of sandbox compute. No card required, and nothing is granted to your balance at signup. Everything open source is also free to download and run yourself."
     },
     {
       question: "What happens when I hit the free limit?",
-      answer: "The limit is a rate, so it clears shortly. If you keep hitting it, a paid plan raises the ceiling, opens the best models and adds monthly credit."
+      answer: "Your allowance renews. If you are hitting it regularly, a paid plan raises the ceiling and opens the better models."
     },
     {
       question: "How does pricing work?",
-      answer: "Two ways to pay, and you can use both. A monthly plan gives you higher limits, better models and a credit allowance each month. Pay as you go bills only for what you actually use, at the published per-model rates, with no subscription and no monthly minimum."
+      answer: "Two ways to pay, and you can use both. A monthly plan raises your limits and opens the better models. Pay as you go bills only for what you actually use, at the published per-model rates, with no subscription and no monthly minimum."
     },
     {
       question: "What counts as usage?",
-      answer: "Model calls are billed on tokens in and tokens out at the rate published for that model. Compute is billed for what you run. Your plan credit is spent first, and anything beyond it draws on your balance."
+      answer: "Model calls are billed on tokens in and tokens out at the rate published for that model. Compute is billed for what you run. Anything your plan does not cover draws on your balance."
     },
     {
       question: "How are users counted on Business?",
@@ -65,11 +63,11 @@ const PricingFAQ = () => {
   ];
 
   return (
-    <Box className="max-w-3xl mx-auto my-16 px-4">
+    <div className="max-w-3xl mx-auto my-16 px-4">
       <h2 className="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
       
       <Faq items={faqs} />
-    </Box>
+    </div>
   );
 };
 

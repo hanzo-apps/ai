@@ -169,9 +169,11 @@ function CloudComputePricing() {
                   {plan.popular && (
                     <span className="text-xs bg-primary/20 text-primary px-2 py-0.5 rounded-full">Most Popular</span>
                   )}
-                  {plan.freeTier && (
-                    <span className="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">Free ${plan.priceMonthly} Credit</span>
-                  )}
+                  {/* A "Free $49 Credit" badge used to sit here, built by
+                      reading a freeTier boolean and printing the plan's own
+                      price next to the word Credit. Nothing grants that, and
+                      the flag never claimed to: it says the product has a free
+                      tier, not that we hand over its monthly price. */}
                 </Box>
               </Box>
               <p className="text-muted-foreground text-sm mb-4">{plan.description}</p>
