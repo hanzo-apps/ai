@@ -1,22 +1,18 @@
 'use client'
 
+import React from 'react'
+import { YStack, Text } from '@hanzo/gui'
+import InvoicesList from '@/components/invoices/InvoicesList'
+import InvoicesSummary from '@/components/invoices/InvoicesSummary'
 
-import React from 'react';
-import InvoicesList from '@/components/invoices/InvoicesList';
-import InvoicesSummary from '@/components/invoices/InvoicesSummary';
-import AnimatedSection, { AnimatedHeading } from "@/components/ui/animated-section";
-
-const Invoices = () => {
+export default function Invoices() {
   return (
-    <AnimatedSection>
-      <AnimatedHeading>Invoices</AnimatedHeading>
-      
-      <div className="space-y-8">
-        <InvoicesSummary />
-        <InvoicesList />
-      </div>
-    </AnimatedSection>
-  );
-};
-
-export default Invoices;
+    <YStack gap="$9">
+      <Text render="h1" fontSize="$8" fontWeight="500" color="$foreground">
+        Invoices
+      </Text>
+      <InvoicesSummary />
+      <InvoicesList />
+    </YStack>
+  )
+}

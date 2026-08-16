@@ -16,14 +16,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   Input,
-  Label,
   Textarea,
 } from "@hanzo/ui";
 import { DataTable, StatusTag } from "@hanzo/ui/product";
 import { XStack, YStack, Text } from "@hanzo/gui";
-import { Building, User, UserPlus, MoreVertical, Upload, MapPin, Globe, Link as LinkIcon } from 'lucide-react';
+import { Building, UserPlus, MoreVertical, Upload } from 'lucide-react';
 import { toast } from 'sonner';
-import AnimatedSection, { AnimatedHeading } from "@/components/ui/animated-section";
+import { Field, Form } from '@/components/account/form';
 import {
   createInvitation,
   inviteLink,
@@ -31,7 +30,6 @@ import {
   withdrawInvitation,
   type Invitation,
 } from '@/lib/hanzo/team';
-import { Box } from '@hanzo/ui'
 
 
 const Organization = () => {
@@ -120,154 +118,170 @@ const Organization = () => {
   };
 
   if (!currentOrganization) {
-    return <div>No organization selected.</div>;
+    return (
+      <YStack gap="$3">
+        <Text render="h1" fontSize="$8" fontWeight="500" color="$foreground">
+          Organization
+        </Text>
+        <Text fontSize="$4" color="$mutedForeground">
+          No organization selected.
+        </Text>
+      </YStack>
+    );
   }
 
   return (
-    <AnimatedSection>
-      <div className="space-y-8">
-        <AnimatedHeading>
-          <h2 className="text-2xl font-bold mb-6">Organization Settings</h2>
-        </AnimatedHeading>
+    <YStack gap="$9">
+      <Text render="h1" fontSize="$8" fontWeight="500" color="$foreground">
+        Organization
+      </Text>
 
-        <Box className="flex flex-col md:flex-row md:items-center gap-6">
-          <Box className="h-24 w-24 bg-neutral-900/30 rounded-xl flex items-center justify-center">
-            <Building className="h-12 w-12 text-muted-foreground" />
-          </Box>
-          
-          <div>
-            <h2 className="text-2xl font-bold mb-2">{currentOrganization.name}</h2>
-            <Box className="text-muted-foreground">
-              {currentOrganization.role === 'owner' ? 'You are the owner of this organization' : 
-                `You are a ${currentOrganization.role} in this organization`}
-            </Box>
-            
-            <div className="mt-4 space-x-4">
-              <Button variant="outline" size="sm" className="bg-[var(--black)] border-neutral-800/30 hover:bg-neutral-900/30 space-x-2">
-                <Upload className="h-4 w-4" />
-                <span>Upload Logo</span>
+      <YStack gap="$5" $sm={{ flexDirection: 'row', alignItems: 'center', gap: '$7' }}>
+        <YStack width={96} height={96} alignItems="center" justifyContent="center" borderRadius="$4" backgroundColor="$color3">
+          <Building size={40} color="var(--muted-foreground)" />
+        </YStack>
+
+        <YStack gap="$3">
+          <Text render="h2" fontSize="$7" fontWeight="500" color="$foreground">
+            {currentOrganization.name}
+          </Text>
+          <Text fontSize="$3" color="$mutedForeground">
+            {currentOrganization.role === 'owner'
+              ? 'You are the owner of this organization'
+              : `You are a ${currentOrganization.role} in this organization`}
+          </Text>
+
+          <XStack gap="$3" flexWrap="wrap">
+            <Button variant="outline" size="sm" gap="$2">
+              <Upload size={16} />
+              <span>Upload logo</span>
+            </Button>
+            <Link href="/organization-profile" style={{ textDecoration: 'none' }}>
+              <Button variant="outline" size="sm">
+                View public profile
               </Button>
-              <Link href="/organization-profile">
-                <Button variant="outline" size="sm" className="bg-[var(--black)] border-neutral-800/30 hover:bg-neutral-900/30">
-                  View Public Profile
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </Box>
-        
-        <Box className="border-t border-neutral-800/10 pt-6">
-          <h3 className="text-xl font-medium mb-4">Organization Details</h3>
-          
-          <form onSubmit={handleSubmit} className="space-y-6 max-w-xl">
-            <div className="space-y-2">
-              <Label htmlFor="orgName">Organization Name</Label>
-              <Input
-                id="orgName"
-                value={orgName}
-                onChange={(e) => setOrgName(e.target.value)}
-                className="bg-neutral-900/20 border-neutral-800/30"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="orgDescription">Description</Label>
-              <Textarea
-                id="orgDescription"
-                value={orgDescription}
-                onChange={(e) => setOrgDescription(e.target.value)}
-                className="bg-neutral-900/20 border-neutral-800/30 min-h-24"
-                placeholder="Tell us about your organization"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="orgWebsite">Website</Label>
+            </Link>
+          </XStack>
+        </YStack>
+      </YStack>
+
+      <YStack gap="$6" paddingTop="$8" borderTopWidth={1} borderColor="$border">
+        <Text render="h2" fontSize="$6" fontWeight="500" color="$foreground">
+          Organization details
+        </Text>
+
+        <Form onSubmit={handleSubmit}>
+          <Field id="orgName" label="Organization name">
+            <Input id="orgName" value={orgName} onChange={(e) => setOrgName(e.target.value)} />
+          </Field>
+
+          <Field id="orgDescription" label="Description">
+            <Textarea
+              id="orgDescription"
+              value={orgDescription}
+              onChange={(e) => setOrgDescription(e.target.value)}
+              placeholder="Tell us about your organization"
+            />
+          </Field>
+
+          <XStack gap="$6" flexWrap="wrap">
+            <Field id="orgWebsite" label="Website" grow>
               <Input
                 id="orgWebsite"
                 value={orgWebsite}
                 onChange={(e) => setOrgWebsite(e.target.value)}
-                className="bg-neutral-900/20 border-neutral-800/30"
                 placeholder="https://example.com"
               />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="orgLocation">Location</Label>
+            </Field>
+            <Field id="orgLocation" label="Location" grow>
               <Input
                 id="orgLocation"
                 value={orgLocation}
                 onChange={(e) => setOrgLocation(e.target.value)}
-                className="bg-neutral-900/20 border-neutral-800/30"
                 placeholder="City, Country"
               />
-            </div>
-            
-            <Button type="submit" className="bg-neutral-900 hover:bg-neutral-800 border-none">
-              Update Organization
-            </Button>
-          </form>
-        </Box>
+            </Field>
+          </XStack>
 
-        <Box className="pt-6">
-          <Box className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-medium">Team Members</h3>
-            
-            <Button onClick={() => setInviteOpen((v) => !v)} className="space-x-2 bg-neutral-900 hover:bg-neutral-800 border-none">
-              <UserPlus className="h-4 w-4" />
+          <XStack paddingTop="$2">
+            <Button type="submit">Update organization</Button>
+          </XStack>
+        </Form>
+      </YStack>
+
+      <YStack gap="$5" paddingTop="$8" borderTopWidth={1} borderColor="$border">
+          <XStack alignItems="center" justifyContent="space-between" gap="$4" flexWrap="wrap">
+            <Text render="h2" fontSize="$6" fontWeight="500" color="$foreground">
+              Team members
+            </Text>
+
+            <Button onPress={() => setInviteOpen((v) => !v)} gap="$2">
+              <UserPlus size={16} />
               <span>Invite member</span>
             </Button>
-          </Box>
+          </XStack>
 
           {inviteOpen && (
-            <Box className="flex items-center gap-3 mb-4">
+            <XStack alignItems="center" gap="$3" flexWrap="wrap">
               <Input
                 type="email"
                 value={inviteEmail}
                 onChangeText={(t: string) => setInviteEmail(t)}
                 placeholder="Email to pin the invite to (optional)"
                 aria-label="Invite email"
-                className="max-w-sm"
+                flexGrow={1}
+                flexBasis={220}
+                maxWidth={384}
               />
-              <Button
-                onClick={handleCreateInvitation}
-                disabled={inviteBusy}
-                className="bg-neutral-900 hover:bg-neutral-800 border-none"
-              >
+              <Button onPress={handleCreateInvitation} disabled={inviteBusy}>
                 {inviteBusy ? 'Creating…' : 'Create invite link'}
               </Button>
-            </Box>
+            </XStack>
           )}
 
           {pending.length > 0 && (
-            <Box className="mb-6">
-              <h4 className="text-sm font-medium text-neutral-400 mb-2">Pending invitations</h4>
-              <div className="space-y-2">
-                {pending.map((inv) => (
-                  <Box key={`${inv.owner}/${inv.name}`} className="flex items-center justify-between rounded-lg border border-neutral-800 px-4 py-2">
-                    <Box className="min-w-0">
-                      <Box className="text-sm truncate">{inv.email || 'Anyone with the link'}</Box>
-                      <Box className="text-xs text-neutral-500 font-mono truncate">{inviteLink(inv.code)}</Box>
-                    </Box>
-                    <Box className="flex items-center gap-2 shrink-0">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={async () => {
-                          await navigator.clipboard.writeText(inviteLink(inv.code)).catch(() => {});
-                          toast.success('Invite link copied');
-                        }}
-                      >
-                        Copy link
-                      </Button>
-                      <Button variant="ghost" size="sm" onClick={() => handleWithdraw(inv)}>
-                        Withdraw
-                      </Button>
-                    </Box>
-                  </Box>
-                ))}
-              </div>
-            </Box>
+            <YStack gap="$2">
+              <Text fontSize="$2" fontWeight="500" color="$mutedForeground">
+                Pending invitations
+              </Text>
+              {pending.map((inv) => (
+                <XStack
+                  key={`${inv.owner}/${inv.name}`}
+                  alignItems="center"
+                  justifyContent="space-between"
+                  gap="$3"
+                  borderRadius="$3"
+                  borderWidth={1}
+                  borderColor="$border"
+                  paddingHorizontal="$4"
+                  paddingVertical="$2"
+                >
+                  <YStack minWidth={0} flexShrink={1}>
+                    <Text fontSize="$3" color="$foreground" numberOfLines={1}>
+                      {inv.email || 'Anyone with the link'}
+                    </Text>
+                    <Text fontSize="$2" fontFamily="$mono" color="$mutedForeground" numberOfLines={1}>
+                      {inviteLink(inv.code)}
+                    </Text>
+                  </YStack>
+                  <XStack alignItems="center" gap="$2" flexShrink={0}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onPress={async () => {
+                        await navigator.clipboard.writeText(inviteLink(inv.code)).catch(() => {})
+                        toast.success('Invite link copied')
+                      }}
+                    >
+                      Copy link
+                    </Button>
+                    <Button variant="ghost" size="sm" onPress={() => handleWithdraw(inv)}>
+                      Withdraw
+                    </Button>
+                  </XStack>
+                </XStack>
+              ))}
+            </YStack>
           )}
 
           <DataTable
@@ -277,7 +291,7 @@ const Organization = () => {
                 header: 'User',
                 render: (member: TeamMember) => (
                   <XStack alignItems="center" gap="$3">
-                    <Avatar className="h-8 w-8">
+                    <Avatar>
                       {member.avatar ? <AvatarImage src={member.avatar} /> : null}
                       <AvatarFallback>
                         {member.name.split(" ").map((part: string) => part[0]).slice(0, 2).join("")}
@@ -303,7 +317,7 @@ const Organization = () => {
                   <DropdownMenu placement="bottom-end">
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="sm" aria-label="Member actions">
-                        <MoreVertical className="h-4 w-4" />
+                        <MoreVertical size={16} />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
@@ -319,9 +333,8 @@ const Organization = () => {
             rowKey={(m: TeamMember) => m.id}
             empty="No team members yet. Invite someone to get started."
           />
-        </Box>
-      </div>
-    </AnimatedSection>
+      </YStack>
+    </YStack>
   );
 };
 

@@ -1,185 +1,155 @@
 'use client'
 
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { XStack, YStack, Text } from '@hanzo/gui'
+import { Avatar, AvatarFallback, AvatarImage, Button, Input, Textarea } from '@hanzo/ui'
+import { Mail } from 'lucide-react'
+import { toast } from 'sonner'
+import { Field, Form } from '@/components/account/form'
+import { useAccount } from '@/contexts/AccountContext'
 
-import React, { useState, useEffect } from 'react';
-import { useAccount } from '@/contexts/AccountContext';
-import { Avatar, AvatarFallback, AvatarImage } from "@hanzo/ui";
-import { Button } from "@hanzo/ui";
-import { Input } from "@hanzo/ui";
-import { Label } from "@hanzo/ui";
-import { Textarea } from "@hanzo/ui";
-import { toast } from 'sonner';
-import { Mail, Key, Shield, UserCircle, MapPin, Phone, Globe, Calendar } from 'lucide-react';
-import AnimatedSection, { AnimatedHeading } from "@/components/ui/animated-section";
-import { Box } from '@hanzo/ui'
+/**
+ * The reader's own profile.
+ *
+ * The avatar, the buttons and the fields each stated their size in utility
+ * classes, and `@hanzo/ui` 8 is gui underneath — it reads props, not classes —
+ * so a 96px avatar rendered at the component's default 32 and a row of buttons
+ * stacked. Sizes and spacing are gui props here for that reason.
+ */
+export default function Account() {
+  const { user, updateUserProfile } = useAccount()
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [bio, setBio] = useState('')
+  const [location, setLocation] = useState('')
+  const [website, setWebsite] = useState('')
+  const [phone, setPhone] = useState('')
 
-
-const Account = () => {
-  const { user, updateUserProfile } = useAccount();
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [bio, setBio] = useState('');
-  const [location, setLocation] = useState('');
-  const [website, setWebsite] = useState('');
-  const [phone, setPhone] = useState('');
-  
   useEffect(() => {
-    if (user) {
-      setFullName(user.name || '');
-      setEmail(user.email || '');
-      setBio(user.bio || '');
-      setLocation(user.location || '');
-      setWebsite(user.website || '');
-      setPhone(user.phone || '');
-    }
-  }, [user]);
-  
-  const handleProfileSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    updateUserProfile({
-      name: fullName,
-      email,
-      bio,
-      location,
-      website,
-      phone
-    });
-    
-    toast.success('Profile updated successfully');
-  };
+    if (!user) return
+    setFullName(user.name || '')
+    setEmail(user.email || '')
+    setBio(user.bio || '')
+    setLocation(user.location || '')
+    setWebsite(user.website || '')
+    setPhone(user.phone || '')
+  }, [user])
 
-  if (!user) {
-    return <div>Please sign in to access your account.</div>;
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault()
+    updateUserProfile({ name: fullName, email, bio, location, website, phone })
+    toast.success('Profile updated')
   }
 
+  // The layout has already asked whether anyone is signed in.
+  if (!user) return null
+
   return (
-    <AnimatedSection>
-      <div className="space-y-10">
-        <AnimatedHeading>
-          <h2 className="text-2xl font-medium mb-8">Profile Settings</h2>
-        </AnimatedHeading>
+    <YStack gap="$9">
+      <Text render="h1" fontSize="$8" fontWeight="500" color="$foreground">
+        Profile
+      </Text>
 
-        <Box className="flex flex-col md:flex-row md:items-center gap-8">
-          <Avatar className="h-24 w-24">
-            <AvatarImage src={user.avatar} />
-            <AvatarFallback className="text-2xl bg-secondary">{user.name.charAt(0)}</AvatarFallback>
-          </Avatar>
-          
-          <div>
-            <h2 className="text-2xl font-medium mb-2">{user.name}</h2>
-            <Box className="flex items-center text-muted-foreground">
-              <Mail className="h-4 w-4 mr-2" />
+      <YStack gap="$5" $sm={{ flexDirection: 'row', alignItems: 'center', gap: '$7' }}>
+        <Avatar size={96}>
+          <AvatarImage src={user.avatar} />
+          <AvatarFallback>
+            <Text fontSize={34} color="$color11">
+              {user.name.charAt(0)}
+            </Text>
+          </AvatarFallback>
+        </Avatar>
+
+        <YStack gap="$3">
+          <Text render="h2" fontSize="$7" fontWeight="500" color="$foreground">
+            {user.name}
+          </Text>
+          <XStack alignItems="center" gap="$2">
+            <Mail size={16} color="var(--muted-foreground)" />
+            <Text fontSize="$3" color="$mutedForeground">
               {user.email}
-            </Box>
-            
-            <div className="mt-5 space-x-4">
-              <Button variant="outline" size="sm" className="bg-[var(--black)] border-border hover:bg-[var(--white)]/5">
-                Upload New Picture
-              </Button>
-              <Button variant="outline" size="sm" className="bg-[var(--black)] border-border hover:bg-[var(--white)]/5 text-foreground/70 hover:text-foreground/70 hover:bg-primary/5">
-                Remove
-              </Button>
-            </div>
-          </div>
-        </Box>
-        
-        <Box className="border-t border-border/20 pt-8">
-          <h3 className="text-xl font-medium mb-6">Personal Information</h3>
-          
-          <form onSubmit={handleProfileSubmit} className="space-y-8 max-w-xl">
-            <div className="space-y-2">
-              <Label htmlFor="fullName" className="text-[var(--white)]">Full Name</Label>
-              <Input
-                id="fullName"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                className="bg-[var(--black)]/40 border-border focus:border-border"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-[var(--white)]">Email Address</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-[var(--black)]/40 border-border focus:border-border"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="bio" className="text-[var(--white)]">Bio</Label>
-              <Textarea
-                id="bio"
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                className="bg-[var(--black)]/40 border-border focus:border-border min-h-24"
-                placeholder="Tell us about yourself"
-              />
-            </div>
-            
-            <Box className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-2">
-                <Label htmlFor="location" className="text-[var(--white)]">Location</Label>
-                <Input
-                  id="location"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  className="bg-[var(--black)]/40 border-border focus:border-border"
-                  placeholder="City, Country"
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="phone" className="text-[var(--white)]">Phone Number</Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="bg-[var(--black)]/40 border-border focus:border-border"
-                  placeholder="+1 (555) 123-4567"
-                />
-              </div>
-            </Box>
-            
-            <div className="space-y-2">
-              <Label htmlFor="website" className="text-[var(--white)]">Website</Label>
-              <Input
-                id="website"
-                type="url"
-                value={website}
-                onChange={(e) => setWebsite(e.target.value)}
-                className="bg-[var(--black)]/40 border-border focus:border-border"
-                placeholder="https://example.com"
-              />
-            </div>
-            
-            <Box className="flex gap-4 pt-2">
-              <Button 
-                type="submit" 
-                className="bg-[var(--black)] hover:bg-secondary border border-border"
-              >
-                Update Profile
-              </Button>
-              <Link href="/user-profile">
-                <Button 
-                  type="button" 
-                  variant="outline" 
-                  className="bg-[var(--black)] border-border hover:bg-[var(--white)]/5"
-                >
-                  View Public Profile
-                </Button>
-              </Link>
-            </Box>
-          </form>
-        </Box>
-      </div>
-    </AnimatedSection>
-  );
-};
+            </Text>
+          </XStack>
+          <XStack gap="$3" flexWrap="wrap">
+            <Button variant="outline" size="sm">
+              Upload new picture
+            </Button>
+            <Button variant="ghost" size="sm">
+              Remove
+            </Button>
+          </XStack>
+        </YStack>
+      </YStack>
 
-export default Account;
+      <YStack gap="$6" paddingTop="$8" borderTopWidth={1} borderColor="$border">
+        <Text render="h2" fontSize="$6" fontWeight="500" color="$foreground">
+          Personal information
+        </Text>
+
+        <Form onSubmit={submit}>
+          <Field id="fullName" label="Full name">
+            <Input id="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} />
+          </Field>
+
+          <Field id="email" label="Email address">
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Field>
+
+          <Field id="bio" label="Bio">
+            <Textarea
+              id="bio"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              placeholder="Tell us about yourself"
+            />
+          </Field>
+
+          <XStack gap="$6" flexWrap="wrap">
+            <Field id="location" label="Location" grow>
+              <Input
+                id="location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                placeholder="City, Country"
+              />
+            </Field>
+            <Field id="phone" label="Phone number" grow>
+              <Input
+                id="phone"
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="+1 (555) 123-4567"
+              />
+            </Field>
+          </XStack>
+
+          <Field id="website" label="Website">
+            <Input
+              id="website"
+              type="url"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+              placeholder="https://example.com"
+            />
+          </Field>
+
+          <XStack gap="$3" flexWrap="wrap" paddingTop="$2">
+            <Button type="submit">Update profile</Button>
+            <Link href="/user-profile" style={{ textDecoration: 'none' }}>
+              <Button type="button" variant="outline">
+                View public profile
+              </Button>
+            </Link>
+          </XStack>
+        </Form>
+      </YStack>
+    </YStack>
+  )
+}

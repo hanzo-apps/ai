@@ -1,68 +1,52 @@
 'use client'
 
+import React from 'react'
+import { XStack, YStack, Text } from '@hanzo/gui'
+import { Button, Checkbox, Input, Label } from '@hanzo/ui'
+import { toast } from 'sonner'
+import { Field, Form } from '@/components/account/form'
+import { useAccount } from '@/contexts/AccountContext'
 
-import React from 'react';
-import { Button } from "@hanzo/ui";
-import { Input } from "@hanzo/ui";
-import { Label } from "@hanzo/ui";
-import { useAccount } from '@/contexts/AccountContext';
-import { toast } from 'sonner';
-import AnimatedSection, { AnimatedHeading } from "@/components/ui/animated-section";
+const NOTICES = [
+  { id: 'marketing', label: 'Marketing updates' },
+  { id: 'security', label: 'Security alerts' },
+]
 
-const AccountSettings = () => {
-  const { user, updateUserProfile } = useAccount();
+export default function AccountSettings() {
+  const { user } = useAccount()
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast.success('Settings updated successfully');
-  };
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault()
+    toast.success('Settings updated')
+  }
 
   return (
-    <AnimatedSection>
-      <AnimatedHeading>Account Settings</AnimatedHeading>
-      
-      <form onSubmit={handleSubmit} className="space-y-6 max-w-xl mt-8">
-        <div className="space-y-2">
-          <Label htmlFor="email">Email Address</Label>
-          <Input
-            id="email"
-            type="email"
-            value={user?.email || ''}
-            disabled
-            className="bg-neutral-900/20 border-neutral-800/30"
-          />
-        </div>
+    <YStack gap="$9">
+      <Text render="h1" fontSize="$8" fontWeight="500" color="$foreground">
+        Settings
+      </Text>
 
-        <div className="space-y-2">
-          <Label htmlFor="notifications">Email Notifications</Label>
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                id="marketing"
-                className="rounded border-neutral-800/30 bg-neutral-900/20"
-                defaultChecked
-              />
-              <label htmlFor="marketing">Marketing updates</label>
-            </div>
-            <div className="flex items-center space-x-2">
-              <input
-                type="checkbox"
-                id="security"
-                className="rounded border-neutral-800/30 bg-neutral-900/20"
-                defaultChecked
-              />
-              <label htmlFor="security">Security alerts</label>
-            </div>
-          </div>
-        </div>
+      <Form onSubmit={submit}>
+        <Field id="email" label="Email address">
+          <Input id="email" type="email" value={user?.email || ''} disabled />
+        </Field>
 
-        <Button type="submit" className="bg-neutral-900 hover:bg-neutral-800 border-none">
-          Save Changes
-        </Button>
-      </form>
-    </AnimatedSection>
-  );
-};
+        <YStack gap="$3">
+          <Text fontSize="$3" fontWeight="500" color="$foreground">
+            Email notifications
+          </Text>
+          {NOTICES.map((n) => (
+            <XStack key={n.id} alignItems="center" gap="$3">
+              <Checkbox id={n.id} defaultChecked />
+              <Label htmlFor={n.id}>{n.label}</Label>
+            </XStack>
+          ))}
+        </YStack>
 
-export default AccountSettings;
+        <XStack paddingTop="$2">
+          <Button type="submit">Save changes</Button>
+        </XStack>
+      </Form>
+    </YStack>
+  )
+}
