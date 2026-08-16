@@ -467,7 +467,7 @@ export default function PointGlobe({
      * near-to-far falloff is the same at any distance and needs no rescaling.
      */
     const FRAME = 3.15
-    const SCALE = 0.5
+    const SCALE = 0.83
     const camDist = FRAME / SCALE
     view[0] = 1; view[5] = 1; view[10] = 1; view[15] = 1; view[14] = -camDist
 
