@@ -31,7 +31,6 @@ const OUT = join(process.cwd(), 'out')
  * the pair is wrong: the bar must not link docs, and the page must.
  */
 const DOCS = 'https://docs.hanzo.ai'
-const CONSOLE = 'https://console.hanzo.ai'
 
 test.describe('header chrome', () => {
   let base: string
@@ -44,17 +43,30 @@ test.describe('header chrome', () => {
   })
   test.afterAll(async () => stop())
 
-  test('one console door, not two', async ({ page }) => {
+  test('no door is offered twice', async ({ page }) => {
     await page.goto(`${base}/`)
     const bar = page.locator('header[data-hanzo-shell]')
     await expect(bar).toBeVisible()
 
     // Direct children only: the CTAs live in the bar itself, never in a drape.
-    const doors = bar.locator(`> a[href^="${CONSOLE}"]`)
-    await expect(doors).toHaveCount(1)
-    await expect(doors.first()).toHaveText('Try Hanzo')
+    //
+    // The rule is that the bar's two most valuable slots may not spend
+    // themselves on ONE destination — which is what happened when "Sign in" and
+    // the primary CTA were both console.hanzo.ai, and the pair then needed a CSS
+    // `order` override whose only job was to arrange a duplicate. Written as
+    // "exactly one console link" it asserted where that door points, and the bar
+    // has since moved it: the pill is `Try Hanzo` to chat, because the console is
+    // where you go once you have an account. So it counts DUPLICATES, which is
+    // the scar, and says nothing about which hosts the bar chooses.
+    const hrefs = (
+      await bar.locator('> a[href]').evaluateAll((rows) => rows.map((r) => r.getAttribute('href')))
+    ).filter((href): href is string => !!href)
+    expect(hrefs.length, 'the bar carries actions').toBeGreaterThan(0)
 
-    // And nothing re-introduces the word by another route.
+    const twice = hrefs.filter((href, i) => hrefs.indexOf(href) !== i)
+    expect([...new Set(twice)], 'the bar offers one destination twice').toEqual([])
+
+    // And nothing re-introduces the second sign-in by another route.
     await expect(bar.getByText('Sign in', { exact: true })).toHaveCount(0)
   })
 
@@ -111,14 +123,19 @@ test.describe('header chrome', () => {
     // menu naming a route the export does not carry is the one failure a
     // header can ship that looks perfect. That holds for whichever menus the
     // bar has this week.
-    const labels = await bar
+    // The NAV's menus. The bar carries two other things that declare
+    // `aria-haspopup` — the Hanzo mark's menu and the Try Hanzo pill — and both
+    // open on a CLICK, so sweeping the whole bar hovers a pill that never
+    // answers. The local nav is the set this gate is about.
+    const nav = bar.locator('nav')
+    const labels = await nav
       .locator('a[aria-haspopup="dialog"]')
       .evaluateAll((rows) => rows.map((row) => row.textContent?.trim() ?? ''))
-    expect(labels.length, 'the bar carries menus').toBeGreaterThan(0)
+    expect(labels.length, 'the nav carries menus').toBeGreaterThan(0)
 
     const seen = new Set<string>()
     for (const label of labels) {
-      const trigger = bar.locator(`a[aria-haspopup="dialog"]`).filter({ hasText: label }).first()
+      const trigger = nav.locator('a[aria-haspopup="dialog"]').filter({ hasText: label }).first()
       const card = page.getByRole('dialog', { name: label })
       await expect(async () => {
         await trigger.hover()
