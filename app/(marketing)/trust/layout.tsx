@@ -10,9 +10,9 @@ import { pageMeta } from '@/lib/page-meta'
 // that answers it is better for both of us than one they have to click to find
 // out. It is also the wording that cannot rot into an implied claim.
 export const metadata: Metadata = pageMeta({
-  title: 'The controls, not a badge',
+  title: 'Security you can read',
   description:
-    'Hanzo does not hold SOC 2, ISO 27001, or FedRAMP. This page names the controls behind the product instead — how you get in, what a credential reaches, what is logged, and where keys live.',
+    'The controls behind the product — how you get in, what a credential reaches, what is logged, and where keys live. Continual internal audits, with the report on request.',
   path: '/trust',
 })
 

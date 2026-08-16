@@ -32,10 +32,11 @@ import {
  * the markup never rendered, so what shipped was four certifications with a tick
  * beside them and nothing anywhere saying we hold none of them.
  *
- * The certification question now has exactly one answer, at /trust, and it opens
- * by saying what we do not hold. This page describes mechanisms; that one holds
- * the position. Two pages answering it is how the qualifier got lost the first
- * time.
+ * The certification question now has exactly one answer, at /trust: continual
+ * internal audits, the report on request, and a scoping conversation for a
+ * reviewer who runs on a named framework. This page describes mechanisms; that
+ * one holds the position. Two pages answering it is how the qualifier got lost
+ * the first time.
  */
 
 const SECURITY_FEATURES = [
@@ -182,9 +183,9 @@ const Security = () => {
                 transition={{ duration: 0.4, delay: 0.2 }}
                 className="text-sm text-muted-foreground"
               >
-                Hanzo holds no SOC 2, ISO 27001 or FedRAMP report.{" "}
+                Continual internal audits, with the report on request.{" "}
                 <Link href="/trust" className="text-foreground underline underline-offset-4">
-                  What we do claim, and how to check it
+                  The controls, and how to check them
                 </Link>
                 .
               </motion.p>

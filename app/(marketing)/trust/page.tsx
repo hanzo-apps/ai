@@ -194,10 +194,10 @@ export default function TrustPage() {
             against the code rather than against a summary of it.
           </p>
           <p>
-            On the frameworks themselves, plainly, because a security reviewer establishes this in one email
-            and it should not cost you the email: Hanzo does not hold SOC 2, ISO 27001, or FedRAMP today.
-            Formal certification is scoped per enterprise engagement — tell us which framework your process
-            runs on and what your reviewer needs to see, and we will scope it with you.
+            On frameworks: we audit ourselves continually and send the report on request — ask and it comes
+            back, no questionnaire first. If your review runs on a named framework, tell us which one and what
+            your reviewer needs to see. We scope it with you as part of the engagement, at the speed of the
+            engagement rather than a calendar.
           </p>
           <p>
             If a control you need is not on this page, ask. Where we have it we will show you the code, and
