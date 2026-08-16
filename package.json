@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "next build --webpack && node scripts/noindex.mjs && node scripts/wellknown.mjs && node scripts/llms.mjs",
+    "build": "next build --webpack && node scripts/noindex.mjs && node scripts/canonical.mjs && node scripts/wellknown.mjs && node scripts/llms.mjs",
     "typecheck": "tsc --noEmit",
     "start": "next start",
     "lint": "eslint .",
