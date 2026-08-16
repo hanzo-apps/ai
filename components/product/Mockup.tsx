@@ -30,11 +30,36 @@ import { useEffect, useRef, useState } from 'react'
  * (the platform stack). One of the two, never both: a component that takes two
  * ways to say where its film is has two ways to be pointed at nothing.
  */
+/**
+ * `ratio` is EMPTY by default, and that is the whole fix for a picture that sat
+ * adrift in its own panel.
+ *
+ * It used to default to `aspect-video`, which is a shape stated in CSS about a
+ * file this component cannot see. The plates are rendered into a fixed 1920x1080
+ * frame whatever the window inside them measures, so most carried a band of
+ * page-black around the chrome — public/workload's window is 1480x700, which is
+ * 51% padding — and because the padding made the FILE 16:9, the CSS and the file
+ * agreed exactly. Nothing was measurably wrong. The film simply rendered small in
+ * the middle of its box with dead space on four sides, and no number pointed at it.
+ *
+ * `scripts/crop-shots.sh` takes the padding out of the asset. Once it is gone the
+ * file is 2.11:1, or 1.70:1, or whatever that particular window happens to be —
+ * and a hardcoded 16:9 would then squash it, which is the same defect wearing the
+ * opposite sign. So the asset states its own shape and this states none: one
+ * source of truth, and a film cropped tomorrow needs no edit here.
+ *
+ * No layout shift comes with it. `poster` is the first frame at the film's exact
+ * dimensions, so the box is established by the poster before any video metadata
+ * arrives — which is also why the crop script moves the stills with the film
+ * rather than leaving them behind.
+ *
+ * A caller that genuinely needs a fixed box still passes one.
+ */
 export function Mockup({
   slug,
   base: at,
   alt,
-  ratio = 'aspect-video',
+  ratio = '',
 }: {
   slug?: string
   base?: string

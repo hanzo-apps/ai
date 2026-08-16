@@ -1,57 +1,67 @@
 {
   "source": "https://api.hanzo.ai/v1/commerce/catalog?brand=hanzo",
   "document": "https://api.hanzo.ai/v1/openapi.json",
-  "fetched": "2026-08-16T15:43:11.130Z",
+  "fetched": "2026-08-16T21:40:12.610Z",
   "categories": [
     {
       "id": "ai",
       "label": "AI",
-      "order": 0
+      "order": 0,
+      "color": "violet"
     },
     {
       "id": "compute",
       "label": "Compute",
-      "order": 1
+      "order": 1,
+      "color": "blue"
     },
     {
       "id": "data",
       "label": "Data",
-      "order": 2
+      "order": 2,
+      "color": "cyan"
     },
     {
       "id": "network",
       "label": "Network",
-      "order": 3
+      "order": 3,
+      "color": "sky"
     },
     {
       "id": "security",
       "label": "Security",
-      "order": 4
+      "order": 4,
+      "color": "red"
     },
     {
       "id": "dev",
       "label": "Dev",
-      "order": 5
+      "order": 5,
+      "color": "indigo"
     },
     {
       "id": "infrastructure",
       "label": "Infrastructure",
-      "order": 6
+      "order": 6,
+      "color": "teal"
     },
     {
       "id": "observe",
       "label": "Observe",
-      "order": 7
+      "order": 7,
+      "color": "green"
     },
     {
       "id": "web3",
       "label": "Web3",
-      "order": 8
+      "order": 8,
+      "color": "amber"
     },
     {
       "id": "apps",
       "label": "Apps",
-      "order": 9
+      "order": 9,
+      "color": "pink"
     }
   ],
   "products": [
