@@ -85,7 +85,11 @@ test.describe('the command palette', () => {
       // through most sentences on the site, and answering that is what makes a
       // search untrustworthy. The docs row, and almost nothing else.
       const docs = await results(page, 'docs')
-      expect(docs[0]).toBe('Docs')
+      // 'Documentation', not 'Docs'. One destination carried both names — the
+      // header CTA said one, a nav row said the other, and the palette ranked
+      // them against each other. docs.hanzo.ai has a single name now, and this
+      // is it.
+      expect(docs[0]).toBe('Documentation')
       expect(docs.length).toBeLessThanOrEqual(3)
 
       // No query is a dead end — whatever was typed can always be asked.
