@@ -9,13 +9,44 @@ function svg(tag, attrs) {
   return n;
 }
 
-/* Sidebar nav: icon + a label-width bar. Structure, never words. */
+/* One mark, drawn from the node data lucide draws it with. The row is the
+   product's own icon; a row with no icon keeps the plain box. */
+function mark(node) {
+  if (!node || !node.length) return el("span", "ico");
+  var s = svg("svg", {
+    class: "ico",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    "stroke-width": "2",
+    "stroke-linecap": "round",
+    "stroke-linejoin": "round",
+  });
+  for (var i = 0; i < node.length; i++) {
+    var tag = node[i][0];
+    var attrs = node[i][1] || {};
+    var out = {};
+    // `key` is React's, not SVG's.
+    for (var k in attrs) if (k !== "key") out[k] = attrs[k];
+    s.appendChild(svg(tag, out));
+  }
+  return s;
+}
+
+/* Sidebar nav: the product's mark and its neighbours, each beside a
+   label-width bar. The marks are real and the words are not — a name would
+   have to be invented, and the icons are already in the catalog. */
 function sidebar(ctx, selectedAt) {
   var s = el("div", "side");
   s.appendChild(el("div", "s on", { width: "96px", height: "12px", marginBottom: "10px" }));
+  var icons = ctx.icons || [];
   for (var i = 0; i < 9; i++) {
     var nav = el("div", "nav" + (i === selectedAt ? " sel" : ""));
-    nav.appendChild(el("span", "ico"));
+    // The selected row wears the product's own mark; the rest wear its
+    // neighbours', in catalog order, so a sidebar reads as that product's
+    // corner of the console.
+    var at = i === selectedAt ? 0 : (i < selectedAt ? i + 1 : i);
+    nav.appendChild(mark(icons[at % (icons.length || 1)]));
     var b = el("span", "s" + (i === selectedAt ? "" : " lo"));
     b.style.width = Math.round(58 + ctx.r() * 78) + "px";
     b.style.height = "9px";

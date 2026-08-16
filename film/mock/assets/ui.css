@@ -186,6 +186,19 @@ body {
   background: var(--accent);
 }
 
+/* A mark drawn from the product's own catalog icon strokes; it does not fill,
+   so it must outrank the box above rather than sit on top of it. The plain box
+   stays for a product whose icon the package cannot draw. */
+.nav svg.ico {
+  background: none;
+  color: #59637a;
+}
+
+.nav.sel svg.ico {
+  background: none;
+  color: var(--accent);
+}
+
 /* status chip — colour carries the meaning, no label */
 .chip {
   display: block;

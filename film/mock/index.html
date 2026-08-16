@@ -13,7 +13,8 @@
     ]},
     {"id":"accent","type":"color","label":"Accent","default":"#8b5cf6"},
     {"id":"seed","type":"number","label":"Seed","default":1},
-    {"id":"slug","type":"string","label":"Slug","default":"preview"}
+    {"id":"slug","type":"string","label":"Slug","default":"preview"},
+    {"id":"icons","type":"string","label":"Icons","default":"[]"}
   ]'
 >
   <head>
@@ -57,12 +58,22 @@
         root.style.setProperty("--accent", v.accent || "#8b5cf6");
 
         var tl = gsap.timeline({ paused: true });
+        // The marks the sidebar wears, as lucide's own node data. A film that
+        // cannot read them draws the plain boxes it always did.
+        var icons = [];
+        try {
+          icons = JSON.parse(v.icons || "[]");
+        } catch (e) {
+          icons = [];
+        }
+
         var ctx = {
           app: document.getElementById("app"),
           main: document.getElementById("main"),
           r: rng(v.seed || 1),
           tl: tl,
           dur: 6,
+          icons: icons,
         };
 
         (KIT[v.archetype] || KIT.terminal)(ctx);

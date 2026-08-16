@@ -64,6 +64,62 @@ const BY_CATEGORY = {
 
 const surfaceOf = (p) => BY_ID.get(p.id) ?? BY_CATEGORY[p.category] ?? "table";
 
+/* The mark a product already names in the catalog, as the node data lucide
+ * draws it with — read from the installed package rather than copied, so a
+ * film wears the same icon the site renders and neither can drift. The files
+ * are generated and shaped `createLucideIcon("Name", [ … ])`, so the literal
+ * is evaluated rather than parsed. A name the package does not carry yields
+ * nothing, and the sidebar falls back to its plain box. */
+const LUCIDE = join(ROOT, "..", "..", "node_modules", "lucide-react", "dist", "esm");
+
+/* Which file each exported name is drawn from, read from the package's own
+ * export map. A filename guessed from the name is wrong for every icon lucide
+ * has renamed — `BarChart3` is an alias and its drawing lives in
+ * `chart-column.js` — and the map is where the package says so. */
+const fileOf = (() => {
+  const map = new Map();
+  const src = readFileSync(join(LUCIDE, "lucide-react.js"), "utf8");
+  for (const line of src.split("\n")) {
+    const from = /from '\.\/(icons\/[^']+)'/.exec(line);
+    if (!from) continue;
+    for (const m of line.matchAll(/default as ([A-Za-z0-9]+)/g)) map.set(m[1], from[1]);
+  }
+  return (name) => map.get(name);
+})();
+
+const nodeCache = new Map();
+const iconNode = (name) => {
+  if (!name) return [];
+  if (nodeCache.has(name)) return nodeCache.get(name);
+  let node = [];
+  const file = fileOf(name);
+  if (file) {
+    try {
+      const src = readFileSync(join(LUCIDE, file), "utf8");
+      const open = src.indexOf("[", src.indexOf("createLucideIcon("));
+      const close = src.lastIndexOf("]");
+      const got =
+        open >= 0 && close > open ? new Function("return " + src.slice(open, close + 1))() : null;
+      node = Array.isArray(got) ? got : [];
+    } catch {
+      node = [];
+    }
+  }
+  nodeCache.set(name, node);
+  return node;
+};
+
+/* The catalog names the mark `iconKey`; `icon` is what the site's own synced
+ * projection of it calls the same field. */
+const iconOf = (p) => p.iconKey ?? p.icon;
+
+/* The product's own mark first, then its category's, in catalog order: a
+ * sidebar that reads as that product's corner of the console. */
+const marksFor = (p, products) => {
+  const kin = products.filter((q) => q.category === p.category && q.id !== p.id);
+  return [p, ...kin].slice(0, 9).map((q) => iconNode(iconOf(q)));
+};
+
 /* Stable per-product variation: same product, same film, whatever the order. */
 const seedOf = (id) => parseInt(createHash("sha256").update(id).digest("hex").slice(0, 8), 16) % 100000;
 
@@ -108,6 +164,7 @@ const main = async () => {
     archetype: surfaceOf(p),
     accent: HEX[p.brandColor] ?? HEX.slate,
     seed: seedOf(p.id),
+    icons: JSON.stringify(marksFor(p, products)),
   }));
   if (only) rows = rows.filter((r) => only.includes(r.slug));
   if (!rows.length) throw new Error("no products matched");
