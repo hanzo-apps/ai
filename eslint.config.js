@@ -74,6 +74,18 @@ export default [
       'react-hooks/exhaustive-deps': 'warn',
       'react-hooks/rules-of-hooks': 'warn',
 
+      // The React Compiler rules the plugin began shipping in v7. The two lines
+      // above named the plugin's whole surface when it had two rules, so the
+      // recommended set spread above now arrives with twelve more at error and
+      // the policy stated in this block stops covering them. These five report;
+      // each one names a real pattern worth repairing. A rule the plugin adds
+      // later lands at error and stops the run, which is where it gets read.
+      'react-hooks/set-state-in-effect': 'warn',
+      'react-hooks/refs': 'warn',
+      'react-hooks/purity': 'warn',
+      'react-hooks/static-components': 'warn',
+      'react-hooks/immutability': 'warn',
+
       // One door for `motion`, so a scroll reveal cannot go back to shipping
       // real copy at `opacity: 0` and waiting for an observer to take it back.
       // Only the NAME is restricted: everything else framer-motion exports
