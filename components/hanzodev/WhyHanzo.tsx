@@ -23,7 +23,7 @@ const VALUE_PROPS = [
   {
     title: "Stay in your flow",
     subtitle: "The all-in-one agentic engineering platform",
-    color: "#d4d4d4",
+    color: "var(--neutral-300)",
     features: [
       {
         icon: Smartphone,
@@ -54,7 +54,7 @@ const VALUE_PROPS = [
   {
     title: "1000x every dev",
     subtitle: "Multiply your engineering output",
-    color: "#a3a3a3",
+    color: "var(--neutral-400)",
     features: [
       {
         icon: Users,
@@ -85,7 +85,7 @@ const VALUE_PROPS = [
   {
     title: "Accelerate AI ROI",
     subtitle: "Enterprise-grade AI management",
-    color: "#ffffff",
+    color: "var(--pure-white)",
     features: [
       {
         icon: Shield,
@@ -170,7 +170,7 @@ const WhyHanzo = () => {
                     >
                       <Box
                         className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
-                        style={{ backgroundColor: `${prop.color}20` }}
+                        style={{ backgroundColor: `color-mix(in srgb, ${prop.color} 12.5%, transparent)` }}
                       >
                         <Icon className="w-5 h-5" style={{ color: prop.color }} />
                       </Box>

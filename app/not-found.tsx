@@ -20,7 +20,7 @@ export default function NotFound() {
             <Box
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-5"
               style={{
-                background: 'radial-gradient(circle, #ffffff 0%, transparent 70%)',
+                background: 'radial-gradient(circle, var(--pure-white) 0%, transparent 70%)',
                 filter: 'blur(100px)',
               }}
             />

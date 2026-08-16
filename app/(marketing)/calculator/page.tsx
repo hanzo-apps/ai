@@ -676,7 +676,7 @@ html.dark .ts{
 .ts table{width:100%;border-collapse:collapse;font-size:.85rem}
 .ts th,.ts td{text-align:left;padding:.45rem .7rem;border-bottom:1px solid var(--line);white-space:nowrap}
 .ts th{position:sticky;top:0;background:var(--panel);font-size:.65rem;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--dim);z-index:1}
+  text-transform:uppercase;color:var(--dim);z-index:var(--z-raised)}
 .ts tbody tr:last-child td{border-bottom:none}
 .ts td.ts-r,.ts th.ts-r{text-align:right}
 .ts .ts-svc{font-family:var(--mono);font-size:.76rem;color:var(--dim)}

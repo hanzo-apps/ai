@@ -974,7 +974,7 @@ function Close() {
       <Box className="pointer-events-none absolute inset-0">
         <div
           className="absolute left-1/2 top-1/2 h-[500px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.12]"
-          style={{ background: "radial-gradient(circle, #ffffff 0%, transparent 70%)", filter: "blur(120px)" }}
+          style={{ background: "radial-gradient(circle, var(--pure-white) 0%, transparent 70%)", filter: "blur(120px)" }}
         />
       </Box>
       <Box className="relative z-10 mx-auto max-w-3xl text-center">

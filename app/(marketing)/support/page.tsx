@@ -60,7 +60,7 @@ export default function SupportPage() {
         <Box
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-[600px] -translate-x-1/2 rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 68%)', filter: 'blur(100px)' }}
+          style={{ background: 'radial-gradient(circle, var(--white-08) 0%, transparent 68%)', filter: 'blur(100px)' }}
         />
         <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-1.5 text-sm text-neutral-300">
           <LifeBuoy className="h-4 w-4" /> Support

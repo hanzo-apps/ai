@@ -24,8 +24,8 @@ export const DummyTaskData: Task[] = [
       { id: "u1", name: "Alex Chen" }
     ],
     labels: [
-      { id: "l1", name: "Research", color: "#a3a3a3" },
-      { id: "l2", name: "AI", color: "#737373" }
+      { id: "l1", name: "Research", color: "var(--neutral-400)" },
+      { id: "l2", name: "AI", color: "var(--neutral-500)" }
     ],
     agentCount: 2,
     messageCount: 5
@@ -39,8 +39,8 @@ export const DummyTaskData: Task[] = [
       { id: "u2", name: "Sarah Kim" }
     ],
     labels: [
-      { id: "l3", name: "Development", color: "#737373" },
-      { id: "l4", name: "Agent", color: "#d4d4d4" }
+      { id: "l3", name: "Development", color: "var(--neutral-500)" },
+      { id: "l4", name: "Agent", color: "var(--neutral-300)" }
     ],
     messageCount: 3
   },
@@ -52,7 +52,7 @@ export const DummyTaskData: Task[] = [
       { id: "u3", name: "Miguel Rodriguez" }
     ],
     labels: [
-      { id: "l5", name: "Design", color: "#525252" }
+      { id: "l5", name: "Design", color: "var(--neutral-600)" }
     ]
   },
   {
@@ -64,7 +64,7 @@ export const DummyTaskData: Task[] = [
       { id: "u4", name: "Dev Four" }
     ],
     labels: [
-      { id: "l6", name: "Optimization", color: "#d4d4d4" }
+      { id: "l6", name: "Optimization", color: "var(--neutral-300)" }
     ],
     agentCount: 1
   },
@@ -78,8 +78,8 @@ export const DummyTaskData: Task[] = [
       { id: "u1", name: "Alex Chen" }
     ],
     labels: [
-      { id: "l7", name: "Integration", color: "#737373" },
-      { id: "l8", name: "Database", color: "#525252" }
+      { id: "l7", name: "Integration", color: "var(--neutral-500)" },
+      { id: "l8", name: "Database", color: "var(--neutral-600)" }
     ],
     agentCount: 1,
     messageCount: 8,
@@ -93,7 +93,7 @@ export const DummyTaskData: Task[] = [
       { id: "u5", name: "Jakub Nowak" }
     ],
     labels: [
-      { id: "l9", name: "Analytics", color: "#d4d4d4" }
+      { id: "l9", name: "Analytics", color: "var(--neutral-300)" }
     ],
     messageCount: 2
   },
@@ -105,7 +105,7 @@ export const DummyTaskData: Task[] = [
       { id: "u6", name: "Emily Johnson" }
     ],
     labels: [
-      { id: "l10", name: "Documentation", color: "#a3a3a3" }
+      { id: "l10", name: "Documentation", color: "var(--neutral-400)" }
     ],
     messageCount: 4
   },
@@ -119,7 +119,7 @@ export const DummyTaskData: Task[] = [
       { id: "u4", name: "Dev Four" }
     ],
     labels: [
-      { id: "l11", name: "DevOps", color: "#525252" }
+      { id: "l11", name: "DevOps", color: "var(--neutral-600)" }
     ],
     messageCount: 7,
     dueDate: "2023-07-01"

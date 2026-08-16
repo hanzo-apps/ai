@@ -175,7 +175,7 @@ export default function EnsoLanding({ models }: { models: string }) {
           <Box className="pointer-events-none absolute inset-0 overflow-hidden">
             <motion.div
               className="absolute left-1/2 top-1/2 h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full"
-              style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 68%)', filter: 'blur(110px)' }}
+              style={{ background: 'radial-gradient(circle, var(--white-10) 0%, transparent 68%)', filter: 'blur(110px)' }}
               animate={{ scale: [1, 1.08, 1], opacity: [0.4, 0.6, 0.4] }}
               transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
             />

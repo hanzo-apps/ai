@@ -192,7 +192,7 @@ const Blockchain = () => {
           <Box
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
             style={{
-              background: `radial-gradient(circle, #ffffff 0%, transparent 70%)`,
+              background: `radial-gradient(circle, var(--pure-white) 0%, transparent 70%)`,
               filter: "blur(100px)",
             }}
           />
@@ -233,7 +233,7 @@ const Blockchain = () => {
             >
               <Button
                 className="px-8 py-3 rounded-lg font-medium transition-all"
-                style={{ backgroundColor: "#ffffff" }}
+                style={{ backgroundColor: "var(--pure-white)" }}
                 onClick={() => window.open('https://console.hanzo.ai', '_blank')}
               >
                 Start Building Free
@@ -596,7 +596,7 @@ await agent.run(\`
             <Box className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Button
                 className="px-8 py-3 rounded-lg font-medium"
-                style={{ backgroundColor: "#ffffff" }}
+                style={{ backgroundColor: "var(--pure-white)" }}
                 onClick={() => window.open('https://console.hanzo.ai', '_blank')}
               >
                 Get Started Free

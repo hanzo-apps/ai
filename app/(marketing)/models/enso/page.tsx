@@ -42,7 +42,7 @@ export default function EnsoModelsPage() {
       <section className="relative overflow-hidden border-b border-neutral-900 px-4 pb-16 pt-28 text-center">
         <Box
           className="pointer-events-none absolute left-1/2 top-0 z-0 h-[720px] w-[720px] -translate-x-1/2 rounded-full opacity-50"
-          style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 68%)', filter: 'blur(100px)' }}
+          style={{ background: 'radial-gradient(circle, var(--white-10) 0%, transparent 68%)', filter: 'blur(100px)' }}
         />
         <Box className="relative z-10 mx-auto max-w-3xl">
           <nav className="mb-6 flex items-center justify-center gap-2 text-sm text-neutral-500">

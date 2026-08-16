@@ -31,9 +31,7 @@ const STAT_BAND: ReadonlyArray<{ label: string; href: string; dynamic?: "models"
 // snapshot of console.hanzo.ai (NOT a screenshot, so it never goes stale). Each
 // metric animates in on mount, restoring the motion the static terminal dropped.
 // Monochrome: three steps down the TEXT RANK ladder give subtle variety without
-// introducing hue. These were three raw hexes off lib/constants/brand.ts
-// (#ffffff / #d4d4d4 / #a3a3a3); the ranks are what those hexes were
-// approximating, and they are the values that retune with the theme.
+// introducing hue, and each rank retunes with the theme.
 const CONSOLE_METRICS = [
   { label: "Agents running", value: "12", accent: "var(--text-primary)" },
   { label: "Requests / min", value: "48.2k", accent: "var(--text-secondary)" },

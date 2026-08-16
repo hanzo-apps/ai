@@ -21,7 +21,7 @@ export default function DocDBPage() {
         <Box className="absolute inset-0 overflow-hidden">
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
-            style={{ background: "radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%)", filter: "blur(100px)" }}
+            style={{ background: "radial-gradient(circle, var(--white-08) 0%, transparent 70%)", filter: "blur(100px)" }}
             animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           />

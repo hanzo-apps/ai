@@ -24,7 +24,7 @@ export default function VisorPage() {
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
             style={{
               background:
-                "radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%)",
+                "radial-gradient(circle, var(--white-08) 0%, transparent 70%)",
               filter: "blur(100px)",
             }}
             animate={{

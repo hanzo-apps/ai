@@ -46,7 +46,7 @@ export default function CareersPage() {
         {/* Hero Section */}
         <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
           <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15" style={{ background: "radial-gradient(circle, #ffffff 0%, transparent 70%)", filter: "blur(100px)" }} />
+            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15" style={{ background: "radial-gradient(circle, var(--pure-white) 0%, transparent 70%)", filter: "blur(100px)" }} />
           </Box>
 
           <Box className="max-w-5xl mx-auto relative z-10">

@@ -23,7 +23,7 @@ const MachinesHero = () => {
           </Box>
           <h1
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent"
-            style={{ backgroundImage: `linear-gradient(to right, var(--primary), #a3a3a3)` }}
+            style={{ backgroundImage: `linear-gradient(to right, var(--primary), var(--neutral-400))` }}
           >
             Hanzo Machines
           </h1>

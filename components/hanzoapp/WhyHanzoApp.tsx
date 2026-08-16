@@ -30,7 +30,7 @@ const modes = [
       { icon: Users, text: "Real-time collaboration" },
       { icon: RefreshCw, text: "Auto-save and versioning" },
     ],
-    color: "#d4d4d4",
+    color: "var(--neutral-300)",
   },
   {
     id: "desktop",
@@ -43,7 +43,7 @@ const modes = [
       { icon: Wifi, text: "Works offline" },
       { icon: HardDrive, text: "Local file access" },
     ],
-    color: "#a3a3a3",
+    color: "var(--neutral-400)",
   },
   {
     id: "local",
@@ -56,7 +56,7 @@ const modes = [
       { icon: Cpu, text: "GPU accelerated" },
       { icon: Zap, text: "Zero latency" },
     ],
-    color: "#ffffff",
+    color: "var(--pure-white)",
   },
   {
     id: "node",
@@ -106,7 +106,7 @@ const WhyHanzoApp = () => {
                 <Box className="flex items-start gap-4">
                   <Box
                     className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ backgroundColor: `${mode.color}20` }}
+                    style={{ backgroundColor: `color-mix(in srgb, ${mode.color} 12.5%, transparent)` }}
                   >
                     <Icon className="w-6 h-6" style={{ color: mode.color }} />
                   </Box>

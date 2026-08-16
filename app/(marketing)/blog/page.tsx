@@ -140,7 +140,7 @@ export default function BlogPage() {
         {/* Hero */}
         <section className="relative pt-24 pb-16 px-4 md:px-8 lg:px-12 overflow-hidden">
           <Box className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
-            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15" style={{ background: "radial-gradient(circle, #ffffff 0%, transparent 70%)", filter: "blur(100px)" }} />
+            <Box className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15" style={{ background: "radial-gradient(circle, var(--pure-white) 0%, transparent 70%)", filter: "blur(100px)" }} />
           </Box>
           <Box className="max-w-5xl mx-auto relative z-10 text-center">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6 bg-primary/20 text-foreground">

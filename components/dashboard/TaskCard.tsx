@@ -58,7 +58,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
             <span
               key={label.id}
               className="px-2 py-0.5 text-xs rounded-full border text-neutral-200"
-              style={{ backgroundColor: `${label.color}20`, borderColor: `${label.color}59` }}
+              style={{ backgroundColor: `color-mix(in srgb, ${label.color} 12.5%, transparent)`, borderColor: `color-mix(in srgb, ${label.color} 35%, transparent)` }}
             >
               {label.name}
             </span>

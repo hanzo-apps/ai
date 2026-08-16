@@ -31,7 +31,7 @@ const LabelsList: React.FC<LabelsListProps> = ({ labels = [], onRemove }) => {
           <Box 
             key={label.id}
             className="flex items-center gap-2 px-2 py-1 rounded text-sm"
-            style={{ backgroundColor: `${label.color}20`, color: label.color }}
+            style={{ backgroundColor: `color-mix(in srgb, ${label.color} 12.5%, transparent)`, color: label.color }}
           >
             <span>{label.name}</span>
             <button onClick={() => onRemove && onRemove(label.id)}>

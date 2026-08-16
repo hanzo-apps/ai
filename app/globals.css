@@ -692,7 +692,7 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
 .hz-dock {
   position: sticky;
   bottom: 0;
-  z-index: 20;
+  z-index: var(--z-sticky);
   /* COMPACT. The band measured 59px around a 36px composer — 23px of it was
      nothing, on the fold, where every pixel the bar takes is a pixel of the
      picture. 6px above and 8px below wraps the pill closely and still clears
@@ -925,7 +925,9 @@ html:root #hanzo-products-menu > div {
   position: fixed;
   right: 1rem;
   bottom: calc(1rem + env(safe-area-inset-bottom));
-  z-index: 60;
+  /* Above .hz-dock, the composer rail it shares the bottom edge with, and below
+     the scrim a dialog draws. Its panel is a menu of controls. */
+  z-index: var(--z-dropdown);
   display: flex;
   flex-direction: column;
   align-items: flex-end;

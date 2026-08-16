@@ -196,7 +196,7 @@ export default async function ModelsPage() {
       <section className="relative overflow-hidden border-b border-neutral-900 px-6 pb-24 pt-32 text-center md:pb-28">
         <Box
           className="pointer-events-none absolute left-1/2 top-0 z-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full opacity-60"
-          style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.10) 0%, transparent 68%)', filter: 'blur(100px)' }}
+          style={{ background: 'radial-gradient(circle, var(--white-10) 0%, transparent 68%)', filter: 'blur(100px)' }}
         />
         <Box className="relative z-10 mx-auto max-w-4xl">
           <Box className="mb-8 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-white/5 px-4 py-2 text-xs text-neutral-300">

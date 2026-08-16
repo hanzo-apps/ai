@@ -89,7 +89,7 @@ const CATEGORIES: Category[] = [
     name: "AI & Agents",
     description: "Build intelligent applications with foundation models and agent frameworks",
     icon: Brain,
-    color: "#ffffff",
+    color: "var(--pure-white)",
     products: [
       { name: "Hanzo Models", description: "Foundation models API", icon: Brain, href: "/ai" },
       { name: "Zen", description: "Multimodal AI engine", icon: Sparkles, href: "/ai" },
@@ -107,7 +107,7 @@ const CATEGORIES: Category[] = [
     name: "Developer Tools",
     description: "Everything you need to build, test, and deploy applications",
     icon: Terminal,
-    color: "#d4d4d4",
+    color: "var(--neutral-300)",
     products: [
       { name: "Hanzo Dev", description: "AI coding assistant", icon: Terminal, href: "/dev" },
       { name: "CLI", description: "Command line tools", icon: Terminal, href: "https://hanzo.app/download" },
@@ -125,7 +125,7 @@ const CATEGORIES: Category[] = [
     name: "App Platform",
     description: "Build and scale applications with managed backend services",
     icon: Layers,
-    color: "#a3a3a3",
+    color: "var(--neutral-400)",
     products: [
       { name: "Hanzo Base", description: "Backend-as-a-Service", icon: Database, href: "/base" },
       { name: "Auth", description: "Authentication & SSO", icon: Shield, href: "/identity" },
@@ -143,7 +143,7 @@ const CATEGORIES: Category[] = [
     name: "Cloud Infrastructure",
     description: "Global infrastructure for compute, networking, and storage",
     icon: CloudCog,
-    color: "#d4d4d4",
+    color: "var(--neutral-300)",
     products: [
       { name: "Edge", description: "Edge computing", icon: Globe, href: "/edge" },
       { name: "Gateway", description: "API gateway", icon: Router },
@@ -161,7 +161,7 @@ const CATEGORIES: Category[] = [
     name: "Databases & Search",
     description: "Managed databases, vector stores, and search engines",
     icon: Database,
-    color: "#a3a3a3",
+    color: "var(--neutral-400)",
     products: [
       { name: "SQL", description: "PostgreSQL managed", icon: Table },
       { name: "SQL Vector", description: "pgvector enabled", icon: Table, href: "/vector" },
@@ -179,7 +179,7 @@ const CATEGORIES: Category[] = [
     name: "Integrations & Automation",
     description: "Connect systems and automate workflows across your stack",
     icon: Workflow,
-    color: "#d4d4d4",
+    color: "var(--neutral-300)",
     products: [
       { name: "Automations", description: "Workflow automation", icon: Workflow, href: "/automations" },
       { name: "Connectors", description: "Pre-built integrations", icon: Puzzle },
@@ -197,7 +197,7 @@ const CATEGORIES: Category[] = [
     name: "Security & Governance",
     description: "Enterprise security, compliance, and access management",
     icon: Shield,
-    color: "#a3a3a3",
+    color: "var(--neutral-400)",
     products: [
       { name: "IAM", description: "Identity & access", icon: Users },
       { name: "Policy", description: "Policy engine", icon: FileCheck },
@@ -215,7 +215,7 @@ const CATEGORIES: Category[] = [
     name: "Observability & Operations",
     description: "Monitor, debug, and operate your applications at scale",
     icon: Activity,
-    color: "#d4d4d4",
+    color: "var(--neutral-300)",
     products: [
       { name: "Telemetry", description: "OpenTelemetry", icon: Activity, href: "/analytics" },
       { name: "Metrics", description: "Time-series metrics", icon: LineChart },
@@ -233,7 +233,7 @@ const CATEGORIES: Category[] = [
     name: "Hosting & Delivery",
     description: "Deploy and deliver applications globally with zero config",
     icon: Rocket,
-    color: "#a3a3a3",
+    color: "var(--neutral-400)",
     products: [
       { name: "Deploy", description: "Git deployments", icon: Rocket },
       { name: "Containers", description: "Container hosting", icon: Container },
@@ -298,7 +298,7 @@ const ProductCatalog = () => {
                 >
                   <div
                     className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: `${category.color}20` }}
+                    style={{ backgroundColor: `color-mix(in srgb, ${category.color} 12.5%, transparent)` }}
                   >
                     <CategoryIcon
                       className="w-6 h-6"

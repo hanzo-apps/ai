@@ -22,14 +22,14 @@ const TeamHero = () => {
         <Box
           className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full opacity-10"
           style={{
-            background: `radial-gradient(circle, #ffffff 0%, transparent 70%)`,
+            background: `radial-gradient(circle, var(--pure-white) 0%, transparent 70%)`,
             filter: "blur(80px)",
           }}
         />
         <Box
           className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full opacity-10"
           style={{
-            background: `radial-gradient(circle, #a3a3a3 0%, transparent 70%)`,
+            background: `radial-gradient(circle, var(--neutral-400) 0%, transparent 70%)`,
             filter: "blur(80px)",
           }}
         />
