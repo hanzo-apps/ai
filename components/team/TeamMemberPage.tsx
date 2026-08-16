@@ -87,8 +87,8 @@ const TeamMemberPage = ({ memberId }: TeamMemberPageProps) => {
                 </div>
                 <h3 className="text-2xl font-bold text-[var(--white)] mb-3">Hanzo Agency</h3>
                 <p className="text-foreground/80 mb-5">
-                  {member.name} collaborates with our creative agency to help brands transform their digital
-                  presence using advanced AI-powered design and marketing strategies.
+                  {member.name} works with Hanzo Agency on brand identity, design, content, and
+                  campaigns, produced with the same AI tools we build.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Button

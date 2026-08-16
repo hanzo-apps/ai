@@ -7,7 +7,7 @@ import { pageMeta } from '@/lib/page-meta'
 // itself say the same thing.
 export const metadata: Metadata = pageMeta({
   title: 'Gas Manager',
-  description: 'Paymaster-as-a-Service for account abstraction. Sponsor gas fees for your users, set spending policies, and create seamless gasless experiences across chains.',
+  description: 'Paymaster-as-a-Service for account abstraction. Sponsor gas fees, set limits per user and per operation, and let users transact without a native token.',
   path: '/blockchain/gas',
 })
 

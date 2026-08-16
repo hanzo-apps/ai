@@ -160,11 +160,11 @@ const AuditFeatures = () => {
           <div className="flex justify-center gap-8 flex-wrap">
             <div className="flex items-center">
               <Lock className="h-6 w-6 mr-2" />
-              <span className="text-muted-foreground">SOC 2*</span>
+              <span className="text-muted-foreground">SOC 2 compatible</span>
             </div>
             <div className="flex items-center">
               <Lock className="h-6 w-6 mr-2" />
-              <span className="text-muted-foreground">HIPAA Ready</span>
+              <span className="text-muted-foreground">HIPAA BAA available</span>
             </div>
             <div className="flex items-center">
               <Lock className="h-6 w-6 mr-2" />
@@ -179,7 +179,7 @@ const AuditFeatures = () => {
               <span className="text-muted-foreground">High Availability</span>
             </div>
           </div>
-          <p className="text-xs text-muted-foreground/60 mt-4">*SOC 2 audit in progress</p>
+          <p className="text-xs text-muted-foreground/60 mt-4">Audit report available upon request.</p>
         </motion.div>
       </div>
     </section>

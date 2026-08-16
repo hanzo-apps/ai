@@ -13,7 +13,7 @@ export const teamMembers = {
         icon: Bot,
         color: "text-neutral-400",
         title: "System Architecture",
-        description: "Designs robust and scalable system architectures for complex applications."
+        description: "Plans how services, data, and interfaces fit together as an application grows."
       },
       {
         icon: Code2,
@@ -47,7 +47,7 @@ export const teamMembers = {
         icon: Bot,
         color: "text-neutral-500",
         title: "Design Systems",
-        description: "Develops comprehensive design systems for consistent brand experiences."
+        description: "Builds design systems so every screen shares one set of type, color, and spacing."
       },
       {
         icon: Settings,
@@ -81,7 +81,7 @@ export const teamMembers = {
         icon: Scale,
         color: "text-neutral-400",
         title: "System Security",
-        description: "Implements and maintains robust security protocols and practices."
+        description: "Sets access controls, rotates keys, and keeps systems patched."
       }
     ]
   },
@@ -125,7 +125,7 @@ export const teamMembers = {
         icon: HelpCircle,
         color: "text-neutral-400",
         title: "User Support",
-        description: "Provides comprehensive technical support and problem resolution."
+        description: "Answers technical questions and works a problem until it is closed."
       },
       {
         icon: MessageCircle,
@@ -229,7 +229,7 @@ export const teamMembers = {
     name: "Core",
     title: "Meet Core, Your AI Core Engineer",
     role: "AI Core Engineer",
-    description: "Your expert AI core engineer, building robust system foundations.",
+    description: "Your AI core engineer, building the infrastructure every other service runs on.",
     gradient: "from-neutral-400 to-neutral-600",
     mainIcon: Settings,
     features: [
@@ -265,7 +265,7 @@ export const teamMembers = {
         icon: DollarSign,
         color: "text-neutral-400",
         title: "Financial Analysis",
-        description: "Provides comprehensive financial analysis and reporting."
+        description: "Models revenue, cost, and cash, and reports what moved."
       },
       {
         icon: Bot,

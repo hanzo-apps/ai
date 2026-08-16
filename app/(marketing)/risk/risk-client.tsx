@@ -34,7 +34,7 @@ import { Page, PageHero, Section, CardGrid, Prose, type CardItem } from '@/compo
  * tense while every card around them was labelled honestly.
  */
 const NOW = 'Available now'
-const SOON = 'Coming soon'
+const BUILDING = 'In development'
 
 /* The compliance face — live at api.hanzo.ai/v1/aml, behind Hanzo identity. */
 const COMPLIANCE: CardItem[] = [
@@ -87,21 +87,21 @@ const LIFECYCLE: CardItem[] = [
   {
     icon: UserPlus,
     title: 'Signup and onboarding',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'Multi-account abuse, free-trial abuse, account sharing and account fraud, judged when the account is created. The device and pairing signals exist for exactly one question: are several nominally unrelated customers acting as one?',
   },
   {
     icon: CreditCard,
     title: 'Payment',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'Card testing, transaction fraud and bot-driven payment abuse, scored at authorization time. The hot path is meant to read velocity counters held in memory, not the warehouse, so a payment decision does not fail when analytics does.',
   },
   {
     icon: Receipt,
     title: 'Ongoing and post-purchase',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'Pay-as-you-go abuse, negative balances and payout fraud, plus the disputes that arrive weeks later. A resolved dispute is a label, and the label goes back into the model that made the call.',
   },
@@ -112,28 +112,28 @@ const SUBJECTS: CardItem[] = [
   {
     icon: Users,
     title: 'Accounts',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'Score any account on the platform, at signup and continuously afterwards. Covers multi-account abuse, free-trial abuse, account sharing, account takeover and account fraud. A merchant on your platform is an account too, so onboarding and ongoing monitoring run off the same score.',
   },
   {
     icon: CreditCard,
     title: 'Transactions',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'Score a transaction at authorization and return an action, a score and the reasons behind it. Covers card testing, transaction fraud and payment abuse across whatever methods and processors you already use.',
   },
   {
     icon: Gauge,
     title: 'Abuse',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'Score the usage plane, not only the money: pay-as-you-go abuse, credential stuffing, scraping, quota abuse and spam. This is the plane that defends an AI product, where the loss is inference spend rather than a chargeback.',
   },
   {
     icon: Landmark,
     title: 'Disputes',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'Assemble what a dispute response needs — the decision, the rules that fired, the values behind it and the identity of the model that produced it — out of a tamper-evident record. Hanzo does not process payments and has no dispute-network integration; the evidence is yours to submit.',
   },
@@ -144,21 +144,21 @@ const CONTROLS: CardItem[] = [
   {
     icon: ScrollText,
     title: 'Custom rules',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'Write rules over your own fields in the same vocabulary the shipped library uses, and replay them over your own history before you turn them on.',
   },
   {
     icon: ListChecks,
     title: 'Lists',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'Allow and deny lists over addresses, emails, accounts, card ranges, networks and devices, referenced directly from a rule. Your lists are yours; a designation from a sanctions authority is not editable by a tenant, and the two never merge.',
   },
   {
     icon: Boxes,
     title: 'Suppression',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'Suppress an activation you have already judged. A suppressed hit is recorded as suppressed rather than dropped, because silence must never read back as a clean result.',
   },
@@ -169,14 +169,14 @@ const DEPLOYMENT: CardItem[] = [
   {
     icon: Plug,
     title: 'Keep the processor you have',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'Risk takes signals and returns a decision. It never touches a processor, so nothing about your payment stack has to move and there is no migration to schedule.',
   },
   {
     icon: Code2,
     title: 'Pure API',
-    meta: SOON,
+    meta: BUILDING,
     description:
       'One call from your own system: send what you know, get back an action, a score and the reasons. A signup, a payment, a session and an agent are the same call — the stage is a field, not a different endpoint.',
   },
@@ -186,22 +186,22 @@ const DEPLOYMENT: CardItem[] = [
 const PLANS: CardItem[] = [
   {
     title: 'Lite',
-    meta: SOON,
+    meta: BUILDING,
     description: 'The smallest useful shape: screening on one stage, the shipped rules, and the record behind every decision.',
   },
   {
     title: 'Standard',
-    meta: SOON,
+    meta: BUILDING,
     description: 'The full lifecycle — signup, payment and post-purchase — with rules and lists of your own.',
   },
   {
     title: 'Plus',
-    meta: SOON,
+    meta: BUILDING,
     description: 'A model trained on your own event surface, with the search over model shape that finds which one to use.',
   },
   {
     title: 'Pro',
-    meta: SOON,
+    meta: BUILDING,
     description: 'Platform and marketplace controls, the compliance face alongside the decide plane, and the retention that goes with it.',
   },
 ]
@@ -213,7 +213,7 @@ export default function RiskClient() {
         eyebrow="Risk"
         icon={ShieldAlert}
         title="One risk plane for accounts, payments and agents"
-        lede={`Two faces over one engine, at two different stages. ${NOW} — the compliance face, at api.hanzo.ai/v1/aml: monitoring, alerts, cases, rules, sanctions screening, relationship lookback and a retained-record clock. ${SOON} — the decide plane, which will score an account, a transaction, a session or an agent and return a decision you can explain, from a model trained on your organization's own data rather than a pooled model of somebody else's traffic.`}
+        lede={`Two faces over one engine, at two different stages. ${NOW} — the compliance face, at api.hanzo.ai/v1/aml: monitoring, alerts, cases, rules, sanctions screening, relationship lookback and a retained-record clock. ${BUILDING} — the decide plane, which will score an account, a transaction, a session or an agent and return a decision you can explain, from a model trained on your organization's own data rather than a pooled model of somebody else's traffic.`}
       />
 
       <Section title="Where this is today">
@@ -245,21 +245,21 @@ export default function RiskClient() {
 
       <Section
         title="The customer lifecycle"
-        lede={`${SOON}. Loss does not arrive at one moment, so the plane will not watch one moment. Same call, same record, same model at each stage — the stage is a field.`}
+        lede={`${BUILDING}. Loss does not arrive at one moment, so the plane will not watch one moment. Same call, same record, same model at each stage — the stage is a field.`}
       >
         <CardGrid items={LIFECYCLE} columns={3} />
       </Section>
 
       <Section
         title="What it decides on"
-        lede={`${SOON}. Fraud is a use of a scoring plane, not a product that sits beside one. One call will judge an account, a transaction, a session or an agent.`}
+        lede={`${BUILDING}. Fraud is a use of a scoring plane, not a product that sits beside one. One call will judge an account, a transaction, a session or an agent.`}
       >
         <CardGrid items={SUBJECTS} columns={2} />
       </Section>
 
       <Section
         title="Your data, your model"
-        lede={`${SOON}. The door your events already arrive through is live; reading that surface as features, and training on it, is what is being built.`}
+        lede={`${BUILDING}. The door your events already arrive through is live; reading that surface as features, and training on it, is what is being built.`}
       >
         <Prose>
           <p>
@@ -291,7 +291,7 @@ export default function RiskClient() {
 
       <Section
         title="Agents are not bots"
-        lede={`${SOON}. This is the argument for building the decide plane here rather than buying one, not a description of something running today.`}
+        lede={`${BUILDING}. This is the argument for building the decide plane here rather than buying one, not a description of something running today.`}
       >
         <Prose>
           <p>
@@ -311,11 +311,11 @@ export default function RiskClient() {
         </Prose>
       </Section>
 
-      <Section title="Rules, lists and suppression" lede={`${SOON}.`}>
+      <Section title="Rules, lists and suppression" lede={`${BUILDING}.`}>
         <CardGrid items={CONTROLS} columns={3} />
       </Section>
 
-      <Section title="Platforms and marketplaces" lede={`${SOON}.`}>
+      <Section title="Platforms and marketplaces" lede={`${BUILDING}.`}>
         <Prose>
           <p>
             If you run a platform, your risk is your sellers as much as your buyers. Risk will <em>declare</em> a control
@@ -332,14 +332,14 @@ export default function RiskClient() {
 
       <Section
         title="How it connects"
-        lede={`${SOON}. Risk will ingest signals and return a decision. Everything about how you take money stays where it is.`}
+        lede={`${BUILDING}. Risk will ingest signals and return a decision. Everything about how you take money stays where it is.`}
       >
         <CardGrid items={DEPLOYMENT} columns={2} />
       </Section>
 
       <Section
         title="Plans"
-        lede={`${SOON}. Four tiers, each a subscription with screens included and metered beyond that on the Hanzo bill you already have. A screen is one decision about one transaction, account or customer. Nothing here is priced yet.`}
+        lede={`${BUILDING}. Four tiers, each a subscription with screens included and metered beyond that on the Hanzo bill you already have. A screen is one decision about one transaction, account or customer. Nothing here is priced yet.`}
       >
         <CardGrid items={PLANS} columns={2} />
       </Section>

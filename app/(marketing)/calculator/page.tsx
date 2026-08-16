@@ -280,7 +280,7 @@ export default function CalculatorPage() {
             <b>107 vendor and managed-service dependencies consolidated into one plane</b> · ~90% lower
             compute and eligible-inference costs in selected workloads.
           </p>
-          <p className="ts-label">Founder-attested; measured evidence pack in progress.</p>
+          <p className="ts-label">Founder-attested.</p>
         </section>
 
         <section>

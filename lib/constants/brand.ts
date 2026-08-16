@@ -107,7 +107,7 @@ export const brandClasses = {
 export const partners = {
   hanzoAgency: {
     name: "Hanzo Agency",
-    description: "Our AI-powered creative agency helps brands transform their digital presence with cutting-edge design, content, and marketing strategies powered by artificial intelligence.",
+    description: "Our creative agency: brand identity, design, content, and campaigns, produced with the same AI tools we build.",
     url: "https://hanzo.agency",
     tagline: "AI-powered creative & marketing",
     color: "primary" as const,

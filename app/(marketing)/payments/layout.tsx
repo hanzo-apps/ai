@@ -7,7 +7,7 @@ import { pageMeta } from '@/lib/page-meta'
 // itself say the same thing.
 export const metadata: Metadata = pageMeta({
   title: 'Hanzo Payments',
-  description: 'Effortlessly accept payments, manage subscriptions, and scale globally.',
+  description: 'One integration, and the processor becomes a routing decision. A switch between your checkout and the companies that move the money.',
   path: '/payments',
 })
 

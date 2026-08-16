@@ -25,6 +25,7 @@ import SectionHeader from "@/components/zen/SectionHeader";
 import PartnerCard from "@/components/shared/PartnerCard";
 import { cloudServiceData } from "@/components/index3/cloud-services/cloudServiceData";
 import ChromeText from "@/components/ui/chrome-text";
+import { partners } from "@/lib/constants/brand";
 
 const SolutionCapabilities: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, number>>({});
@@ -184,9 +185,9 @@ const SolutionCapabilities: React.FC = () => {
               </div>
               <h3 className="text-2xl font-bold mb-4">Enterprise AI Solutions</h3>
               <p className="text-foreground/80">
-                Deploy, manage, and scale AI models with unmatched performance and security. Our AI platform
-                provides seamless access to frontier models, private model customization, and robust security for
-                enterprise deployments.
+                Deploy, manage, and scale AI models on one platform. Frontier models, vector search, and
+                reasoning models sit behind a single API, and a model you fine-tune runs in your own private
+                deployment.
               </p>
             </div>
             
@@ -338,9 +339,9 @@ const SolutionCapabilities: React.FC = () => {
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <PartnerCard
-          name="Hanzo Agency"
-          description="Our AI-powered creative agency helps brands transform their digital presence with cutting-edge design, content, and marketing strategies powered by artificial intelligence."
-          url="https://hanzo.agency"
+          name={partners.hanzoAgency.name}
+          description={partners.hanzoAgency.description}
+          url={partners.hanzoAgency.url}
           icon={Users}
           color="primary"
           primaryAction={{ label: "Visit Hanzo Agency", href: "https://hanzo.agency", external: true }}
@@ -375,8 +376,8 @@ const SolutionCapabilities: React.FC = () => {
               Technical Capabilities
             </ChromeText>
             <p className="text-muted-foreground text-lg">
-              Our comprehensive technical capabilities span across a wide range of disciplines, empowering your 
-              organization to stay at the forefront of innovation.
+              AI and machine learning, cloud infrastructure, and data platforms — the work we do, and the
+              results it produced for the companies we did it for.
             </p>
           </div>
 

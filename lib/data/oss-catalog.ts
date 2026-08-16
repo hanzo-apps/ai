@@ -502,7 +502,7 @@ export const ossCatalog: OSSRepo[] = [
     id: 'kotlin-sdk',
     name: 'Kotlin SDK',
     slug: 'hanzo-kt/sdk',
-    description: 'Full cloud SDK for Kotlin. Coroutine-native client for JVM and Android — ai.hanzo:sdk. Maven Central publish in progress; installable via JitPack today.',
+    description: 'Full cloud SDK for Kotlin. Coroutine-native client for JVM and Android, installed from JitPack.',
     type: 'sdk',
     categories: ['Developer Tools'],
     languages: ['Kotlin'],

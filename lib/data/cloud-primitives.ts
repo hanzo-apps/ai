@@ -59,7 +59,7 @@ import snapshot from './catalog.json' with { type: 'json' }
 // `cloudLayers` below for what it means and who else reads it.
 import depth from './stack.json' with { type: 'json' }
 
-export type PrimitiveStatus = 'ga' | 'beta' | 'coming'
+export type PrimitiveStatus = 'ga' | 'beta'
 export type CloudIcon = ComponentType<{ className?: string; size?: number | string }>
 
 export interface Primitive {

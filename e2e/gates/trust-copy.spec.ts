@@ -17,13 +17,26 @@ import { read, serveExport } from './export'
  * `description` field the markup never rendered.
  *
  * So the assertions below are written as RULES, not as searches for the
- * sentence that broke last time. A framework may be named only where the same
- * sentence denies holding it; "certified" may not appear at all. Either can be
- * satisfied by rewriting, and neither can be satisfied by implying.
+ * sentence that broke last time. A framework may be named where the sentence is
+ * about control alignment or about a document we do send; "certified" may not
+ * appear at all. Neither can be satisfied by implying.
+ *
+ * The rule used to be the opposite: a framework could be named ONLY in a
+ * sentence denying we held it. That produced true copy with a second problem —
+ * the denial went into this page's meta description, which is what a search
+ * engine prints for someone searching whether we are certified, so the answer
+ * opened by listing three absences. A hedge fails for the same reason it always
+ * did, and now so does a denial: both are answers to a question nobody asked.
  */
 
 const FRAMEWORKS = /\b(SOC ?2|ISO ?27001|FedRAMP|PCI ?DSS|HITRUST)\b/gi
 const DENIAL = /\b(no|not|never|without|neither|nor)\b/i
+/** The sentence shapes that make naming a framework legitimate. */
+const ALIGNED = /\b(compatible with|compliant with|built to|aligned (to|with)|available (up)?on request|on request|internal audits?)\b/i
+/** Claims to a certificate. No phrasing rescues one of these. */
+const CERTIFICATE = /\b(certified|certification|accredited|attestation)\b/i
+/** Hedges. Each reads as a claim to a skimming buyer and dates itself on ship. */
+const HEDGE = /\b(in ?progress|in ?audit|assessment planned|planned|readiness|ready|scoped|towards?|underway|scheduled)\b/i
 
 interface Rendered {
   text: string
@@ -68,30 +81,45 @@ test('the rendered page is the page, and not an empty read of it', () => {
   expect(words(), 'innerText, not stripped markup').not.toMatch(/<[a-z/]|class=|style=/i)
 })
 
-test('no framework is named except to deny holding it', () => {
+test('a framework is named only to describe controls or offer a document', () => {
   // The RULE, scoped to a sentence rather than to a character distance — a bound
   // of "within N characters" is satisfied by rewording, which is not the same as
   // being true. Written this way, no paraphrase of a certification claim can
   // come back, which a `not.toContain` of last time's sentence could not promise.
-  const claimed = sentences().filter((s) => FRAMEWORKS.test(s) && !DENIAL.test(s))
-  expect(claimed, `a framework named without a denial:\n${claimed.join('\n')}`).toEqual([])
-  // And the page must actually deny them, rather than pass this by saying nothing.
-  expect(words(), 'the position must be stated').toMatch(
-    /Hanzo does not hold SOC 2, ISO 27001, or FedRAMP/,
+  const loose = sentences().filter(
+    (s) => FRAMEWORKS.test(s) && !ALIGNED.test(s) && !DENIAL.test(s),
   )
+  expect(loose, `a framework named as neither alignment nor offer:\n${loose.join('\n')}`).toEqual([])
+  // And the page must actually take a position, rather than pass by saying nothing.
+  expect(words(), 'the position must be stated').toMatch(/compatible with SOC 2/i)
+  expect(words(), 'and the document offered').toMatch(/available upon request/i)
 })
 
-test('the page never says certified, compliant, or attested', () => {
+test('the position is stated positively, never as a list of absences', () => {
+  // The regression this replaces: "Hanzo does not hold SOC 2, ISO 27001, or
+  // FedRAMP" was this page's own meta description for months. It was true, and
+  // it was the sentence Google printed under our name for that exact search.
+  const denials = sentences().filter((s) => FRAMEWORKS.test(s) && /\b(do not|does not|don't|no longer|hold no)\b/i.test(s))
+  expect(denials, `a framework named to say we lack it:\n${denials.join('\n')}`).toEqual([])
+})
+
+test('the page never claims a certificate', () => {
   const text = words()
   expect(text, 'a certificate is a document we do not have').not.toMatch(/\bcertified\b/i)
   expect(text, 'nor an accreditation').not.toMatch(/\baccredited\b/i)
-  // "compliant with X" is the same claim wearing a different coat. The word
-  // "compliance" alone is fine in prose about a customer's own process; the
-  // relational form is the one that asserts a finding about us.
-  expect(text, 'no "compliant with"').not.toMatch(/\bcompliant with\b/i)
-  expect(text, 'nobody has attested to anything').not.toMatch(/\battestation|\battested\b/i)
-  expect(text, 'no audit has been performed, so no report exists').not.toMatch(
-    /\b(audit report|Type (I|II) report|our (auditor|assessor))\b/i,
+  expect(text, 'nor a formal attestation').not.toMatch(/\battestation\b/i)
+  // "compliant with X" used to be banned here as the same claim wearing a
+  // different coat. It is not the same claim: it describes our controls, where
+  // "certified" describes a document an auditor issued. The certificate words
+  // above are the ones no context can make true.
+  //
+  // "audit report" is likewise allowed now — we run continual INTERNAL audits
+  // and send that report. What stays banned is the shape that implies a third
+  // party performed it, which is the thing we cannot produce.
+  expect(text, 'no auditor of ours').not.toMatch(/\bour (auditor|assessor)\b/i)
+  expect(text, 'nor the certificate artifact by name').not.toMatch(/\bType (I|II) report\b/i)
+  expect(text, "and our audits are ours, not a third party's").not.toMatch(
+    /\b(independent|third.?party|external)\s+(audit|auditor|assessment|assessor)/i,
   )
 })
 
@@ -101,7 +129,11 @@ test('no timeline is promised, and no certification is said to be coming', () =>
   // replaces. A date is a promise; "scoped per engagement" is a fact.
   expect(text).not.toMatch(/\b(assessment|audit|certification|report)\s+(is\s+)?(planned|underway|in progress|scheduled|coming)\b/i)
   expect(text).not.toMatch(/\bwe (will|expect to|plan to|aim to)\s+(be|become|obtain|achieve|complete)\b/i)
-  expect(text, 'the claim we do make').toContain('scoped per enterprise engagement')
+  // And no hedge beside a framework in any spelling. "SOC 2 ready" and "Type II
+  // readiness" were the two that kept coming back, each reading as a claim to
+  // anyone skimming and each stale the month after it shipped.
+  const hedged = sentences().filter((s) => FRAMEWORKS.test(s) && HEDGE.test(s))
+  expect(hedged, `a framework named beside a hedge:\n${hedged.join('\n')}`).toEqual([])
 })
 
 test('no availability figure, because that number is contractual', () => {

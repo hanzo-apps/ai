@@ -20,7 +20,7 @@ const HanzoWallet = () => {
       slug="wallet"
       name="Hanzo Wallet"
       tagline="Unified wallet infrastructure for Web3"
-      description="A complete wallet solution for Lux and EVM chains. Offer embedded wallets for seamless user onboarding or server wallets for programmatic access—all with enterprise-grade key management."
+      description="A complete wallet solution for Lux and EVM chains. Embedded wallets appear the moment a user signs in with email, social, or a passkey. Server wallets sign from your backend. Keys stay under MPC or an HSM."
       icon={Wallet}
       features={[
         {

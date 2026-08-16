@@ -39,7 +39,8 @@ const Security = () => {
               {[
                 "Single Sign-On",
                 "Guaranteed Support Response Times",
-                "SOC 2 audit in progress",
+                "SOC 2 compatible",
+                "Audit report available upon request",
                 "Memory-safe Rust and Go stack",
                 "CI/CD Integration"
               ].map((feature, index) => (
@@ -62,7 +63,7 @@ const Security = () => {
               <Lock className="w-12 h-12 text-foreground mb-6" />
               <h3 className="text-xl font-bold mb-4">Hanzo.io Security</h3>
               <p className="text-foreground/80 mb-8">
-                Our security team works around the clock to ensure your applications and data are protected. We employ industry-leading practices and regularly undergo independent security audits.
+                Our security team works around the clock to ensure your applications and data are protected. We employ industry-leading practices and audit our controls continually, with the report available upon request.
               </p>
               <Button variant="outline" className="bg-transparent text-[var(--white)] hover:bg-[var(--white)] hover:text-primary-foreground border border-white">
                 <a href="https://hanzo.ai/security">Security Details</a>

@@ -6,8 +6,8 @@ import { pageMeta } from '@/lib/page-meta'
 // its <h1> and the description its lede, so a tab, a search result and the page
 // itself say the same thing.
 export const metadata: Metadata = pageMeta({
-  title: 'Build the future of AI.',
-  description: 'Join a team passionate about democratizing access to AI and creating technology that empowers developers worldwide.',
+  title: 'Compilers, cryptography, and the cloud they run on',
+  description: 'Hanzo is a small team building an open AI cloud — the inference engine, the models, the backend services, and the agents that use them.',
   path: '/careers',
 })
 

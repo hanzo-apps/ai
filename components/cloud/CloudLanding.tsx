@@ -526,7 +526,7 @@ function Terms() {
 
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              World-class service.
+              Support in the open.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-neutral-400">
               The source is public, so an answer can be a commit and a bug can be fixed in the open —

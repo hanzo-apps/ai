@@ -436,7 +436,7 @@ const chatCompletion = await client.chatCompletion({
   {
     slug: 'autogen',
     name: 'AutoGen',
-    description: 'Build multi-agent systems with Microsoft AutoGen using Hanzo AI as the LLM backend. Hanzo\'s OpenAI-compatible API works seamlessly with AutoGen\'s agent orchestration.',
+    description: 'Build multi-agent systems with Microsoft AutoGen. Set base_url to api.hanzo.ai/v1 in the AutoGen config, name a Hanzo model, and the agents run on it.',
     category: 'framework',
     icon: '🤝',
     upstream: 'https://github.com/microsoft/autogen',
@@ -648,7 +648,7 @@ optimized = teleprompter.compile(program, trainset=train_data)`,
   {
     slug: 'haystack',
     name: 'Haystack',
-    description: 'Build production-ready NLP pipelines and RAG systems with Haystack using Hanzo AI as the LLM provider. Haystack\'s OpenAI integration works seamlessly.',
+    description: 'Build NLP pipelines and RAG systems with Haystack. Point OpenAIChatGenerator at api.hanzo.ai/v1, name a Hanzo model, and the pipeline runs unchanged.',
     category: 'framework',
     icon: '🌾',
     upstream: 'https://github.com/deepset-ai/haystack',

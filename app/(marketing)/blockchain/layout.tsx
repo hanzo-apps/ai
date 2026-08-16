@@ -6,7 +6,7 @@ import { pageMeta } from '@/lib/page-meta'
 // its <h1> and the description its lede, so a tab, a search result and the page
 // itself say the same thing.
 export const metadata: Metadata = pageMeta({
-  title: 'The Web3 Developer Platform. AI-Native. Blazing Fast.',
+  title: 'One API key, every chain. And an agent that can use it.',
   description: 'Ship your first blockchain request in under 5 minutes.',
   path: '/blockchain',
 })

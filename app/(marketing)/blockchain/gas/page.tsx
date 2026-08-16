@@ -20,7 +20,7 @@ const HanzoGas = () => {
       slug="gas"
       name="Gas Manager"
       tagline="Sponsor gas for your users"
-      description="Paymaster-as-a-Service for account abstraction. Sponsor gas fees for your users, set spending policies, and create seamless gasless experiences across chains."
+      description="Paymaster-as-a-Service for account abstraction. Sponsor gas fees, set limits per user and per operation, and let users transact without a native token."
       icon={Zap}
       features={[
         {
@@ -76,7 +76,7 @@ const HanzoGas = () => {
         },
         {
           title: "Gaming",
-          description: "Sponsor in-game transactions for seamless gameplay.",
+          description: "Sponsor in-game transactions so players never stop to buy gas.",
         },
         {
           title: "NFT Minting",

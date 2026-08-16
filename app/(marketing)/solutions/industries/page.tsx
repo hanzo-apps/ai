@@ -28,6 +28,7 @@ import { Button } from "@hanzo/ui";
 import SectionHeader from "@/components/zen/SectionHeader";
 import PartnerCard from "@/components/shared/PartnerCard";
 import ChromeText from "@/components/ui/chrome-text";
+import { partners } from "@/lib/constants/brand";
 
 const SolutionIndustries: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, number>>({});
@@ -195,7 +196,7 @@ const SolutionIndustries: React.FC = () => {
       "Retail": {
         icon: <ShoppingBag className="h-10 w-10 text-foreground" />,
         color: "brand",
-        description: "We help retailers create seamless omnichannel experiences, optimize supply chains, and leverage data for personalized customer engagement.",
+        description: "We connect online and in-store commerce, forecast demand across the supply chain, and turn customer data into personalized offers.",
         challenges: [
           "Omnichannel customer experience",
           "Supply chain optimization",
@@ -461,9 +462,9 @@ const SolutionIndustries: React.FC = () => {
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <PartnerCard
-          name="Hanzo Agency"
-          description="Our AI-powered creative agency helps brands transform their digital presence with cutting-edge design, content, and marketing strategies powered by artificial intelligence."
-          url="https://hanzo.agency"
+          name={partners.hanzoAgency.name}
+          description={partners.hanzoAgency.description}
+          url={partners.hanzoAgency.url}
           icon={Users}
           color="primary"
           primaryAction={{ label: "Visit Hanzo Agency", href: "https://hanzo.agency", external: true }}

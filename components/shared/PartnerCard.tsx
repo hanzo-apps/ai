@@ -1,7 +1,7 @@
 import React from "react";
 import { ExternalLink, Mail, Phone, Users, Shield, LucideIcon } from "lucide-react";
 import { Button } from "@hanzo/ui";
-import { BrandColor } from "@/lib/constants/brand";
+import { BrandColor, partners } from "@/lib/constants/brand";
 
 interface PartnerCardProps {
   name: string;
@@ -98,9 +98,9 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({ className = ""
     <div className={`bg-gradient-to-br from-neutral-900/70 to-background/90 p-10 rounded-2xl border border-neutral-800 ${className}`}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <PartnerCard
-          name="Hanzo Agency"
-          description="Our creative agency. Design, content, and marketing campaigns, made with the same AI stack we sell."
-          url="https://hanzo.agency"
+          name={partners.hanzoAgency.name}
+          description={partners.hanzoAgency.description}
+          url={partners.hanzoAgency.url}
           icon={Users}
           color="primary"
           primaryAction={{

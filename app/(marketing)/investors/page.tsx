@@ -101,7 +101,7 @@ export default function InvestorsPage() {
               icon: FileText,
               title: 'Security',
               description:
-                'Our security posture, disclosure process and the compliance work in progress.',
+                'Our security posture, disclosure process and the audit report available upon request.',
               href: '/security',
             },
           ]}

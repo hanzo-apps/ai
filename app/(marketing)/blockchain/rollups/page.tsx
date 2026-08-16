@@ -41,7 +41,7 @@ const HanzoRollups = () => {
         {
           icon: ArrowUpDown,
           title: "Native Bridging",
-          description: "Built-in bridges for seamless L1 ↔ L2 asset transfers.",
+          description: "Deposit and withdraw between L1 and L2 on bridges that ship with the rollup.",
         },
         {
           icon: Database,

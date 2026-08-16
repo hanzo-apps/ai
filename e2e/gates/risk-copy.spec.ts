@@ -16,7 +16,7 @@ import { read, serveExport } from './export'
  */
 
 const NOW = 'Available now'
-const SOON = 'Coming soon'
+const BUILDING = 'In development'
 
 /**
  * The page as a reader sees it, read out of the RENDERED DOM.
@@ -117,9 +117,9 @@ test('the hero says which half is live, in the sentence most likely to be quoted
   // looked, and it is the sentence a screenshot crops to.
   const hero = rendered.sections.find((s) => s.level === 'H1')!.text
   expect(hero, `the hero must carry "${NOW}"`).toContain(NOW)
-  expect(hero, `the hero must carry "${SOON}"`).toContain(SOON)
+  expect(hero, `the hero must carry "${BUILDING}"`).toContain(BUILDING)
   expect(hero, 'the live half is the compliance face').toMatch(/Available now[\s\S]{0,80}compliance face/)
-  expect(hero, 'the unbuilt half is future tense, not present').toMatch(/Coming soon[\s\S]{0,60}decide plane/)
+  expect(hero, 'the unbuilt half is labelled as unbuilt').toMatch(/In development[\s\S]{0,60}decide plane/)
   expect(hero, 'the claim as it read').not.toContain('Hanzo Risk scores an entity')
   expect(hero, 'nothing unbuilt is claimed in the present tense here').not.toMatch(
     /decide plane[^.]{0,40}\b(scores|returns|reads|decides)\b/,
@@ -290,7 +290,7 @@ test('every block that states a capability says which of the two it is', () => {
   const framing = ['Where this is today', 'What this is not', 'Next']
   const unmarked = rendered.sections
     .filter((s) => s.heading && !framing.includes(s.heading))
-    .filter((s) => !s.text.includes(NOW) && !s.text.includes(SOON))
+    .filter((s) => !s.text.includes(NOW) && !s.text.includes(BUILDING))
     .map((s) => s.heading)
   expect(unmarked, `blocks that state a capability with no status: ${unmarked.join(' | ')}`).toEqual([])
 })
@@ -299,7 +299,7 @@ test('the three sections that were present-tense now read as unbuilt', () => {
   for (const heading of ['Your data, your model', 'Agents are not bots', 'Platforms and marketplaces']) {
     const section = rendered.sections.find((s) => s.heading === heading)
     expect(section, `${heading} must be a section on the page`).toBeTruthy()
-    expect(section!.text.includes(SOON), `${heading} must be marked "${SOON}"`).toBe(true)
+    expect(section!.text.includes(BUILDING), `${heading} must be marked "${BUILDING}"`).toBe(true)
   }
   const text = words()
   // The specific present-tense assertions that described nothing running.

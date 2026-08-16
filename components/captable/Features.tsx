@@ -69,7 +69,7 @@ const Features = () => {
     {
       icon: <Shield className="h-6 w-6 text-foreground/60" />,
       title: "Audit Trail",
-      description: "Complete audit history for every transaction. SOC 2 ready compliance and data integrity."
+      description: "Complete audit history for every transaction. SOC 2 compatible controls and data integrity."
     },
     {
       icon: <Fingerprint className="h-6 w-6 text-foreground/60" />,

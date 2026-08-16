@@ -1,8 +1,6 @@
 
 import React from "react";
 import Chat from "./Chat";
-import Playground from "./Playground";
-import Terminal from "./Terminal";
 import { MessageInterface } from "./types";
 
 interface ContentProps {
@@ -30,10 +28,6 @@ const Content = ({
           handleSubmit={handleSubmit}
         />
       )}
-      
-      {activeTab === "playground" && <Playground />}
-      
-      {activeTab === "terminal" && <Terminal />}
     </div>
   );
 };

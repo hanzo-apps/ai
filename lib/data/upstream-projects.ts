@@ -28,8 +28,6 @@ export interface ProductSDK {
   url: string;
   installCommand: string;
   docsUrl?: string;
-  /** 'ga' = published & resolves today; 'soon' = canonical target, not yet published. */
-  status?: 'ga' | 'soon';
 }
 
 export interface ProductCommunity {
@@ -76,7 +74,7 @@ export const upstreamProjects: Record<string, UpstreamProject> = {
     stars: '35k+',
     creator: 'Langflow AI / Gabriel Luiz',
     creatorUrl: 'https://github.com/langflow-ai',
-    gratitude: 'Langflow\'s visual workflow approach transformed how we think about AI pipeline composition.',
+    gratitude: 'Langflow put the pipeline on a canvas: drag a node, connect it, and see the path the data takes.',
     sbomPackages: ['langflow'],
     revenueShareEligible: true,
   },
@@ -246,7 +244,7 @@ export const upstreamProjects: Record<string, UpstreamProject> = {
   // Search & Data
   meilisearch: {
     name: 'Meilisearch',
-    description: 'Lightning fast search engine. Typo-tolerant, relevant, and easy to use.',
+    description: 'Search engine built for search-as-you-type. Typo-tolerant, relevant, and easy to use.',
     url: 'https://meilisearch.com',
     github: 'https://github.com/meilisearch/meilisearch',
     license: 'MIT',
@@ -281,7 +279,7 @@ export const upstreamProjects: Record<string, UpstreamProject> = {
     stars: '32k+',
     creator: 'vLLM Project / Woosuk Kwon',
     creatorUrl: 'https://github.com/vllm-project',
-    gratitude: 'vLLM\'s PagedAttention revolutionized LLM serving. The single most important inference optimization of the generation.',
+    gratitude: 'vLLM\'s PagedAttention treats the KV cache like virtual memory, and that one idea set the shape of modern LLM serving.',
     sbomPackages: ['vllm'],
     revenueShareEligible: true,
   },
@@ -330,12 +328,11 @@ export const productUpstreamMap: Record<string, string> = {
 // package is hanzoai/sdk. AI + agents flagship is a separate line (pip install
 // hanzo / @hanzo/ai) — see /sdks for the full two-line story.
 //
-// status reflects what actually resolves TODAY (verified against PyPI / npm /
-// Go modules / crates.io / SwiftPM): Python (hanzoai), Go, TypeScript
-// (@hanzo/sdk), Rust (`cargo add hanzo` → crates.io), and Swift (SwiftPM git
-// `hanzo-swift/sdk` @ 8.0.0) are GA. C++ and Kotlin show their canonical target
-// command and are marked 'soon' until the registry publish lands (Kotlin has a
-// working JitPack install today).
+// Every entry here resolves TODAY, and each install command is verified against
+// the registry that serves it: Python (hanzoai on PyPI), Go, TypeScript
+// (@hanzo/sdk on npm), Rust (`cargo add hanzo` → crates.io), Swift (SwiftPM git
+// `hanzo-swift/sdk` @ 8.0.0) and Kotlin (JitPack). A language belongs in this
+// list once its command runs — the list is what ships, not what is planned.
 export const hanzoSDKs: ProductSDK[] = [
   {
     language: 'python',
@@ -344,8 +341,7 @@ export const hanzoSDKs: ProductSDK[] = [
     registry: 'PyPI',
     url: 'https://pypi.org/project/hanzoai/',
     installCommand: 'pip install hanzoai',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/python',
-    status: 'ga'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/python'
   },
   {
     language: 'go',
@@ -354,8 +350,7 @@ export const hanzoSDKs: ProductSDK[] = [
     registry: 'Go Modules',
     url: 'https://pkg.go.dev/github.com/hanzoai/go-sdk',
     installCommand: 'go get github.com/hanzoai/go-sdk',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/go',
-    status: 'ga'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/go'
   },
   {
     language: 'typescript',
@@ -364,8 +359,7 @@ export const hanzoSDKs: ProductSDK[] = [
     registry: 'npm',
     url: 'https://www.npmjs.com/package/@hanzo/sdk',
     installCommand: 'npm install @hanzo/sdk',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/typescript',
-    status: 'ga'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/typescript'
   },
   {
     language: 'rust',
@@ -374,18 +368,7 @@ export const hanzoSDKs: ProductSDK[] = [
     registry: 'crates.io',
     url: 'https://github.com/hanzo-rs/sdk',
     installCommand: 'cargo add hanzo',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/rust',
-    status: 'ga'
-  },
-  {
-    language: 'cpp',
-    name: 'Hanzo C++ SDK',
-    package: 'hanzo-cpp/sdk',
-    registry: 'CMake',
-    url: 'https://github.com/hanzo-cpp/sdk',
-    installCommand: 'find_package(hanzo)',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/cpp',
-    status: 'soon'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/rust'
   },
   {
     language: 'swift',
@@ -394,18 +377,16 @@ export const hanzoSDKs: ProductSDK[] = [
     registry: 'SwiftPM',
     url: 'https://github.com/hanzo-swift',
     installCommand: '.package(url: "https://github.com/hanzo-swift/sdk")',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/swift',
-    status: 'ga'
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/swift'
   },
   {
     language: 'kotlin',
     name: 'Hanzo Kotlin SDK',
-    package: 'ai.hanzo:sdk',
-    registry: 'Maven',
-    url: 'https://github.com/hanzo-kt',
-    installCommand: 'implementation("ai.hanzo:sdk")',
-    docsUrl: 'https://docs.hanzo.ai/docs/sdks/kotlin',
-    status: 'soon'
+    package: 'hanzo-kt/sdk',
+    registry: 'JitPack',
+    url: 'https://github.com/hanzo-kt/sdk',
+    installCommand: 'implementation("com.github.hanzo-kt:sdk:v8.0.0")',
+    docsUrl: 'https://docs.hanzo.ai/docs/sdks/kotlin'
   }
 ];
 

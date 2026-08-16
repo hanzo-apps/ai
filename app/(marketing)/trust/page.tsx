@@ -10,11 +10,11 @@ import { Page, PageHero, Section, Prose, CardGrid, Cta, type CardItem } from '@/
  * written here, and nothing is on this page that could not be pointed at.
  *
  * It leads with what a reviewer can GET — a questionnaire answered, a working
- * session, the control detail, a framework scoped to their engagement — because
- * that is the useful half and it is all available. The frameworks we do not hold
- * are stated too, once, in a section that says so plainly. Opening with the
- * denial made the page argue against itself: a reviewer establishes that fact in
- * one email either way, so it costs nothing to say and everything to lead with.
+ * session, the control detail, a conversation about their framework — because
+ * that is the useful half and it is all available. Where we stand on frameworks
+ * is stated once, near the end, as what IS true: controls built to be compatible
+ * with SOC 2, audited continually, the report there for the asking. The page
+ * used to open with what we lack, which made it argue against itself.
  *
  * The banned claim is not a word, it is a shape: anything that lets a reader
  * conclude a report exists. `e2e/gates/trust-copy.spec.ts` holds the page to
@@ -239,14 +239,15 @@ export default function TrustPage() {
       </Section>
 
       <Section
-        title="Status, stated plainly"
-        lede="So your reviewer can establish this here rather than by asking, and so nothing on this page can be relied on that should not be."
+        title="Where we stand"
+        lede="Everything a reviewer establishes in the first email, answered here instead."
       >
         <Prose>
           <p>
-            <strong>Frameworks.</strong> We do not hold SOC 2, ISO 27001, FedRAMP, PCI DSS, or HITRUST today,
-            and this page mirrors no audit platform. Certification is scoped per engagement — the fourth card
-            above is how that conversation starts.
+            <strong>Frameworks.</strong> Our controls are built to be compatible with SOC 2, and we audit
+            them continually. The audit report is available upon request — ask and it comes back, no
+            questionnaire first. If your review runs on a named framework, the fourth card above is how that
+            conversation starts.
           </p>
           <p>
             {/* No full stop after this label. The copy gate reads the page one

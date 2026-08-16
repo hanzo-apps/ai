@@ -1088,11 +1088,27 @@ boxes in the rendered DOM over ALL pairs: a check that filters by side
 reproduces the very blind spot that caused the bug, and will report clean.
 
 
-## Certification Claims (Honest)
+## What we say about frameworks
 
-- SOC 2: "Audit in Progress" (not "Certified")
-- HIPAA: "HIPAA Ready" / "BAA Available" (not "Compliant")
-- ISO 27001: removed (not yet certified)
+Two sentences get confused, and only one is a lie. "SOC 2 certified" claims a
+certificate from an auditor. "Compatible with SOC 2" claims our controls are
+built to that framework. The second is true and is what we say.
+
+- Say: "compatible with SOC 2", "built to", "continual internal audits",
+  "audit report available upon request", "BAA available".
+- Never: "certified", "certification", "accredited", "attestation", "audited by
+  independent/third-party auditors".
+- Never hedge: "audit in progress", "assessment planned", "SOC 2 ready",
+  "readiness", "scoped per engagement", "working toward". A hedge reads as a
+  claim to a buyer skimming, and it dates itself the day it ships.
+- Never state the negative either. Saying what we lack is what put "Hanzo does
+  not hold SOC 2, ISO 27001, or FedRAMP" into /trust's meta description — the
+  line a search engine prints for anyone searching whether we are certified.
+
+`ci/bin/certclaims` enforces exactly this and runs in the build. It reads one
+line at a time, so keep a framework name and a document offer on separate lines
+or in separate entries.
+
 - No specific datacenter locations; use "Global High-Performance Edge"
 
 

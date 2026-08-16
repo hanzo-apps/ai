@@ -47,8 +47,8 @@ const TeamDev = () => {
               <MessagesSquare className="h-8 w-8 text-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">Chat Integration</h3>
               <p className="text-muted-foreground">
-                Available on Slack, Mattermost, and Hanzo Chat for seamless collaboration
-                and real-time assistance.
+                Available on Slack, Mattermost, and Hanzo Chat. Ask in the channel you
+                already work in, and the answer comes back there.
               </p>
             </motion.div>
 

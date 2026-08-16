@@ -125,7 +125,7 @@ const Security = () => {
                   <div>
                     <h4 className="text-lg font-medium mb-2">Data Privacy Commitment</h4>
                     <p className="text-muted-foreground">
-                      We believe privacy is a fundamental right. Hanzo Analytics is designed with privacy-first principles and gives you full control over your data collection practices.
+                      Hanzo Analytics collects what a report uses and nothing else. You choose where the data lives, how long it is kept, and who on your team can read it, and you can export or delete it on request.
                     </p>
                     <a href="#privacy-policy" className="inline-block mt-3 text-foreground hover:text-foreground/70 transition-colors">
                       Read our privacy policy →

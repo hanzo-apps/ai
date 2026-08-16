@@ -7,7 +7,7 @@ import { pageMeta } from '@/lib/page-meta'
 // itself say the same thing.
 export const metadata: Metadata = pageMeta({
   title: 'Technical Capabilities',
-  description: 'Our comprehensive technical capabilities span across a wide range of disciplines, empowering your organization to stay at the forefront of innovation.',
+  description: 'AI and machine learning, cloud infrastructure, and data platforms — the work we do, and the results it produced for the companies we did it for.',
   path: '/solutions/capabilities',
 })
 

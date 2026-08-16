@@ -6,7 +6,6 @@ import { POSITIONING, type CloudCategory, type Primitive } from '@/lib/data/clou
 const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
   ga: 'Generally available',
   beta: 'Beta',
-  coming: 'Coming soon',
 }
 
 /**

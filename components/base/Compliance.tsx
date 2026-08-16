@@ -28,11 +28,15 @@ const Compliance = () => {
               <div className="mt-4 flex flex-wrap gap-4">
                 <div className="flex items-center bg-primary/10 border border-white/30 rounded-md px-3 py-1">
                   <Lock className="h-4 w-4 text-foreground mr-2" />
-                  <span className="text-foreground/70 text-sm">SOC 2 Audit in Progress</span>
+                  <span className="text-foreground/70 text-sm">SOC 2 compatible</span>
                 </div>
                 <div className="flex items-center bg-primary/10 border border-white/30 rounded-md px-3 py-1">
                   <Lock className="h-4 w-4 text-foreground mr-2" />
-                  <span className="text-foreground/70 text-sm">HIPAA BAA Available</span>
+                  <span className="text-foreground/70 text-sm">Audit report available upon request</span>
+                </div>
+                <div className="flex items-center bg-primary/10 border border-white/30 rounded-md px-3 py-1">
+                  <Lock className="h-4 w-4 text-foreground mr-2" />
+                  <span className="text-foreground/70 text-sm">HIPAA BAA available</span>
                 </div>
               </div>
             </div>

@@ -148,16 +148,6 @@ const CAPABILITIES = [
   },
 ];
 
-// Roadmap items
-const ROADMAP = [
-  { phase: "Q4 2025", title: "Multi-Chain RPC & Indexing", status: "complete" },
-  { phase: "Q1 2026", title: "Token, NFT & Transfers APIs", status: "complete" },
-  { phase: "Q1 2026", title: "Smart Wallets & ERC-4337 Bundler", status: "complete" },
-  { phase: "Q1 2026", title: "Webhooks, WebSockets & Gas Manager", status: "complete" },
-  { phase: "Q2 2026", title: "Cross-Chain Bridges & Oracles", status: "in-progress" },
-  { phase: "Q2 2026", title: "DeFi Aggregation & DEX APIs", status: "planned" },
-];
-
 // Product pages - Core APIs
 const PRODUCTS = [
   // Core Infrastructure
@@ -535,62 +525,6 @@ await agent.run(\`
         </div>
       </section>
 
-      {/* Roadmap Section */}
-      <section className="py-24 px-4 md:px-8 bg-background">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-              Development Roadmap
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              Our planned timeline for launching Web3 infrastructure.
-            </p>
-          </motion.div>
-
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-neutral-800" />
-
-            <div className="space-y-8">
-              {ROADMAP.map((item, index) => (
-                <motion.div
-                  key={item.phase}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className={`relative flex items-center gap-6 ${
-                    index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-                >
-                  {/* Timeline dot */}
-                  <div className="absolute left-4 md:left-1/2 w-3 h-3 rounded-full -translate-x-1/2 bg-primary" />
-
-                  {/* Content */}
-                  <div className={`ml-12 md:ml-0 md:w-1/2 ${index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12"}`}>
-                    <div className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-foreground border border-white/30 mb-2">
-                      {item.phase}
-                    </div>
-                    <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                    <span className={`text-sm ${
-                      item.status === "complete" ? "text-foreground/70" :
-                      item.status === "in-progress" ? "text-foreground/60" : "text-muted-foreground"
-                    }`}>
-                      {item.status === "complete" ? "Complete" :
-                       item.status === "in-progress" ? "In Progress" : "Planned"}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Supported Chains */}
       <section className="py-24 px-4 md:px-8">

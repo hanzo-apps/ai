@@ -7,7 +7,7 @@ import { pageMeta } from '@/lib/page-meta'
 // itself say the same thing.
 export const metadata: Metadata = pageMeta({
   title: 'Meet Core, Your AI Core Engineer',
-  description: 'Your expert AI core engineer, building robust system foundations.',
+  description: 'Your AI core engineer, building the infrastructure every other service runs on.',
   path: '/team/core',
 })
 

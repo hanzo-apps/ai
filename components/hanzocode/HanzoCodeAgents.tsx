@@ -40,7 +40,7 @@ const HanzoCodeAgents: React.FC = () => {
         >
           <h2 className="text-3xl font-bold mb-4">Autonomous Agentic Control</h2>
           <p className="text-xl text-foreground/80 max-w-3xl mx-auto">
-            Harness the full power of intelligent agents that can operate your editor alongside you
+            Agents work in your editor alongside you, with the same access to the project that you have
           </p>
         </motion.div>
         

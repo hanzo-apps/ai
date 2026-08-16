@@ -18,7 +18,7 @@ const HumanAIIntegration = () => {
     {
       icon: <Video className="h-10 w-10" />,
       title: "Train via Zoom",
-      description: "Simply have a Zoom call with your AI agents. They learn by watching and listening, just like a human team member would."
+      description: "Join a Zoom call with your AI agents. They watch the screen and listen to the call, and what they pick up they keep."
     },
     {
       icon: <Monitor className="h-10 w-10" />,

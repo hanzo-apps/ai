@@ -13,7 +13,7 @@ const features = [
   },
   {
     icon: <Zap className="h-6 w-6" />,
-    title: "Lightning Fast",
+    title: "Low Latency",
     description: "Optimized inference with custom routing and advanced caching."
   },
   {

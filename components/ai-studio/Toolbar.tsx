@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { PanelLeft, MessageSquare, Layers, Terminal, Save, Play, Share2, Download, Settings } from "lucide-react";
+import { PanelLeft, MessageSquare, Save, Play, Share2, Download, Settings } from "lucide-react";
 import { Button } from "@hanzo/ui";
 
 interface ToolbarProps {
@@ -40,22 +40,6 @@ const Toolbar = ({
           className="text-sm"
         >
           <MessageSquare className="h-4 w-4 mr-1" /> Chat
-        </Button>
-        <Button 
-          variant={activeTab === "playground" ? "secondary" : "ghost"}
-          size="sm" 
-          onClick={() => setActiveTab("playground")}
-          className="text-sm"
-        >
-          <Layers className="h-4 w-4 mr-1" /> Playground
-        </Button>
-        <Button 
-          variant={activeTab === "terminal" ? "secondary" : "ghost"} 
-          size="sm"
-          onClick={() => setActiveTab("terminal")}
-          className="text-sm"
-        >
-          <Terminal className="h-4 w-4 mr-1" /> Terminal
         </Button>
       </div>
       

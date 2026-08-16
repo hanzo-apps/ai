@@ -76,7 +76,7 @@ const HanzoSmartWallets = () => {
         },
         {
           title: "Gaming",
-          description: "Session keys for seamless in-game transactions.",
+          description: "Session keys sign in-game actions without prompting on every move.",
         },
         {
           title: "Enterprise Treasury",

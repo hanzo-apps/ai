@@ -142,7 +142,7 @@ export const solutionsData: SolutionData[] = [
     slug: ['audio'],
     title: 'Voice & Audio',
     subtitle: 'Speech recognition and synthesis at any scale',
-    description: 'Build voice-first experiences with state-of-the-art ASR, TTS, and real-time audio streaming. Hanzo\'s audio stack supports 50+ languages with human-level accuracy.',
+    description: 'Build voice-first products: streaming and batch ASR, natural TTS, and live two-way voice. 50+ languages, speaker diarization, and a <300ms round-trip.',
     badge: 'Use Case',
     features: [
       { title: 'Speech Recognition (ASR)', description: 'Zen Scribe for transcription — streaming and batch. 50+ languages, speaker diarization, punctuation.' },

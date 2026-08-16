@@ -47,8 +47,8 @@ const TeamVi = () => {
               <MessagesSquare className="h-8 w-8 text-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">Strategic Vision</h3>
               <p className="text-muted-foreground">
-                Develops comprehensive strategies and roadmaps for sustainable growth
-                and innovation.
+                Turns a goal into a roadmap: what ships first, what it depends on,
+                and what it costs.
               </p>
             </motion.div>
 
@@ -71,8 +71,8 @@ const TeamVi = () => {
               <Lock className="h-8 w-8 text-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">Innovation Drive</h3>
               <p className="text-muted-foreground">
-                Promotes cutting-edge solutions and encourages creative problem-solving
-                across all projects.
+                Proposes new approaches and pushes for a second option before the team
+                settles on the first.
               </p>
             </motion.div>
           </div>

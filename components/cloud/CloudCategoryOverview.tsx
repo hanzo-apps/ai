@@ -15,7 +15,6 @@ import { Mockup } from '@/components/product/Mockup'
 const STATUS_LABEL: Record<NonNullable<Primitive['status']>, string> = {
   ga: 'GA',
   beta: 'Beta',
-  coming: 'Soon',
 }
 
 const isExternal = (item: Primitive) => /^https?:\/\//.test(item.href)
