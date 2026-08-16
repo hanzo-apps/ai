@@ -104,7 +104,7 @@ const PersonalPlans = () => {
   return (
     <div className="max-w-6xl mx-auto mb-12">
       {/* The value exchange, before the prices rather than after them.
-​
+
           The measured funnel says readers reach this page, see a monthly price
           next to AI they can get for nothing, and leave — 120 arrivals to 3
           plan clicks. They leave because the page never answers the only
