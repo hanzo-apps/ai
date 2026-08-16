@@ -105,7 +105,10 @@ const PersonalPlans = () => {
       {/* Free leads, because everyone starts there — and it leads because the
           catalog puts it first, not because a card was placed ahead of the
           list. */}
-      <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      {/* Columns match the rungs the catalog serves. A count short of the set
+          strands the last card alone on its own row — Max, the top tier, 773px
+          below the others and under the fold at 1280 and 1440. */}
+      <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
         {ladder.map((plan) => {
           const free = plan.priceMonthly === 0;
           return (
