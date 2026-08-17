@@ -1299,10 +1299,14 @@ and negates the argument inside the function.
 
 It is the substrate's silent-drop family again, and its signature is that the
 element is placed exactly wrong rather than unplaced: read the computed
-`transform` off the positioned wrapper, where a correct one is NEGATIVE. 23
-`<Box>` call sites carry the idiom; a plain `<div className>` never reaches the
-adapter and was always right, which is why the two look identical in source and
-only one of them moved.
+`transform` off the positioned wrapper, where a correct one is NEGATIVE.
+
+**47 `<Box>` call sites across 44 files carry the idiom, against 57 on
+`motion.div` and 7 on a plain `div`** — and only the first 47 ever reached the
+adapter, which is why the three look identical in source and one of them moved.
+Count them by walking BACK from the class to its opening tag: a grep for the
+class and the tag on ONE line reports 23, because most of this site writes the
+tag and the `className` on separate lines.
 
 ## Model prices have one owner, and the snapshot is not a copy of it
 
