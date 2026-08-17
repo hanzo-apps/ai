@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { SiteHeader, SiteFooter } from '@/components/home/shell'
+import { SiteHeader, SiteFooter, SURFACE } from '@/components/home/shell'
 import { AccountProvider } from '@/contexts/AccountContext'
 import { ogImages, twitterImages } from '@/lib/constants/og'
 import { Box } from '@hanzo/ui'
@@ -42,9 +42,14 @@ export default function MarketingLayout({
         >
           Skip to content
         </a>
-        <SiteHeader surface="cloud" />
+        {/* The BUILD says which site this is — see SURFACE in components/home/shell.
+            This was hardcoded `cloud`, and since hanzo.ai and cloud.hanzo.ai are
+            two deployments of this one tree, every page here wore Hanzo Cloud's
+            brand: /models introduced itself as Hanzo Cloud while the root said
+            Hanzo AI, two pages of one site reading as two companies. */}
+        <SiteHeader surface={SURFACE} />
         <main id="main">{children}</main>
-        <SiteFooter surface="cloud" />
+        <SiteFooter surface={SURFACE} />
       </Box>
     </AccountProvider>
   )

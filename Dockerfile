@@ -61,6 +61,17 @@ RUN case "$PUBLISHABLE_KEY" in \
 # Large export (hundreds of pages): the default Node heap OOMs it — same
 # headroom the CF-Pages deploy lane uses (.hanzo/workflows/deploy.yml).
 COPY . .
+
+# WHICH SITE this image is. hanzo.ai and cloud.hanzo.ai are two builds of this
+# one tree — SITE_ROOT below only chooses which page lands at `/`, so without
+# this both hosts wore whichever brand the layout happened to name, and
+# hanzo.ai/models introduced itself as Hanzo Cloud. `ai` is the default because
+# this tree's own host is hanzo.ai; the cloud lane passes `cloud`. Next inlines
+# NEXT_PUBLIC_* at build time, so the export carries its answer with no runtime
+# check — which is why it has to be set HERE, before the build, not beside the
+# page copy after it.
+ARG NEXT_PUBLIC_SURFACE=ai
+ENV NEXT_PUBLIC_SURFACE=$NEXT_PUBLIC_SURFACE
 RUN NODE_OPTIONS=--max-old-space-size=8192 pnpm build
 
 # Prove the key was INLINED, not merely supplied: a bundler change that stopped

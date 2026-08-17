@@ -119,6 +119,7 @@ jobs:
           push: true
           build-args: |
             SITE_ROOT=cloud
+            NEXT_PUBLIC_SURFACE=cloud
 
       # build-push-action can exit 0 before the manifest resolves, so a green run
       # could still leave the CR pinned to a tag that ImagePullBackOffs. Prove it

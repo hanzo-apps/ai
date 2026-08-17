@@ -131,6 +131,25 @@ const SITE_PAGES: HanzoCommandEntry[] = pages.map((page) => ({
  * session and runs no OAuth, and console.hanzo.ai owns auth. Both faces point
  * there, so signing in means the same thing wherever you are.
  */
+/**
+ * WHICH SITE this build is, decided once at build time.
+ *
+ * hanzo.ai and cloud.hanzo.ai are two deployments of ONE tree: a single
+ * `(marketing)` route group, one layout, the same 138 pages. So a surface
+ * hardcoded in that layout cannot tell them apart — whatever it says, both
+ * builds say it. It said `cloud`, and hanzo.ai/models introduced itself as
+ * Hanzo Cloud while the site's own root said Hanzo AI, so a visitor moving
+ * between two pages of one site crossed what looked like two companies.
+ *
+ * The surface is a property of the BUILD, not of a page, so it comes from the
+ * build. `ai` is the default because this tree's own host is hanzo.ai; the
+ * cloud image sets NEXT_PUBLIC_SURFACE=cloud in its lane (.hanzo/workflows/
+ * cloud.yml). Next inlines NEXT_PUBLIC_* at build time, so a static export
+ * carries the answer with no runtime check.
+ */
+export const SURFACE: 'ai' | 'cloud' =
+  process.env.NEXT_PUBLIC_SURFACE === 'cloud' ? 'cloud' : 'ai'
+
 export function SiteHeader({
   surface,
   currentCategoryId,
