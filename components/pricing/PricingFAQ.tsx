@@ -11,6 +11,13 @@ const PricingFAQ = () => {
   // No price is written here. Prices live in the catalog and the cards read
   // them; an answer that names a number is a second copy that goes stale the
   // day pricing moves, which is exactly how "Plus $100" outlived Plus.
+  //
+  // An answer may only describe a purchase a reader can complete. Every paid row
+  // in the catalog carries a priceAnnual AND serves `interval: "monthly"`, and
+  // subscribe takes a plan and a quantity with no interval beside them — so the
+  // annual column is a published number that nothing charges. The annual
+  // question is therefore answered no, and no surface on this page quotes that
+  // column.
   const faqs = [
     {
       question: "Why pay when the AI is free?",
@@ -45,8 +52,8 @@ const PricingFAQ = () => {
       answer: "Yes. Upgrading takes effect immediately and you are billed the prorated difference. Downgrading takes effect at the end of the current billing period."
     },
     {
-      question: "Do you offer a discount for annual billing?",
-      answer: "Yes. Annual billing is cheaper per month than month to month on every paid plan, and the saving is shown on each plan before you buy."
+      question: "Do you offer annual billing?",
+      answer: "No. Every paid plan is month to month at the price on its card, and you can cancel any time."
     },
     {
       question: "What are my payment options?",

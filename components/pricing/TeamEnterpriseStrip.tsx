@@ -15,10 +15,11 @@ import { Box } from '@hanzo/ui'
 // published a $9999 figure that belongs to hanzo.agency rather than here.
 //
 // They are two sentences, so they are rendered as two sentences. Team has one
-// real number worth stating up front — $25 per user, minimum two seats — and
-// Enterprise has none, because its price is the outcome of a conversation. A
-// card with "Custom" where the price goes is a card that exists to look
-// symmetrical.
+// real number worth stating up front — the seat price, over the seat minimum —
+// and it is stated the way the personal ladder states its own, in the same
+// figure at the same weight. Enterprise has no number, because its price is the
+// outcome of a conversation. A card with "Custom" where the price goes is a card
+// that exists to look symmetrical.
 //
 // Both controls are anchors via `asChild`. @hanzo/ui's Button with a bare
 // onClick renders a div[role=button], which is focusable but never fires on
@@ -70,8 +71,12 @@ function useEntrySeat(): SubscriptionPlan | undefined {
 
 const TeamEnterpriseStrip = () => {
   const seat = useEntrySeat();
+  // The seat price is the MONTHLY one, because month to month is the only term
+  // the checkout sells: every catalog row serves `interval: "monthly"`, and
+  // subscribe takes a plan and a quantity with no interval beside them. The row
+  // publishes a priceAnnual too, and it is a number nothing charges — so it is
+  // not read here, and no other surface on this page reads it either.
   const monthly = seat?.priceMonthly ?? null;
-  const annual = seat?.priceAnnual ?? null;
   const minSeats = Number(seat?.limits?.minSeats) || 2;
   const analytics = useAnalytics();
   // The same event the ladder above reports, from the two cards that were
@@ -88,10 +93,6 @@ const TeamEnterpriseStrip = () => {
     analytics.capture(EVENTS.PLAN_CLICKED, { plan, cta });
     analytics.flush(true);
   };
-  // Annual is the headline because it is the cheaper of the two and the one a
-  // company buying seats will take; monthly is the footnote. Both are read, so
-  // a plan sold at a single price simply states that price and no footnote.
-  const headline = annual ?? monthly;
   return (
   <Box className="max-w-6xl mx-auto mb-16 grid grid-cols-1 md:grid-cols-2 gap-6">
     {/* Every line of this card — the price, the seat minimum, the door it opens
@@ -104,21 +105,18 @@ const TeamEnterpriseStrip = () => {
         <Users className="h-5 w-5 text-muted-foreground" />
         <h3 className="text-lg font-medium">Business</h3>
       </Box>
+      {/* The price, in the figure and the weight the personal ladder states its
+          own in, over the unit it is charged in. A price set in body copy reads
+          as a smaller offer than the same price set as a headline, and this is
+          the largest tier a reader can buy without a conversation. */}
+      <Box className="flex items-baseline gap-1 mb-2">
+        <span className="text-4xl font-bold">${monthly}</span>
+        <span className="text-muted-foreground">/user/month</span>
+      </Box>
       <p className="text-sm text-muted-foreground mb-6 leading-relaxed flex-1">
-        <span className="text-foreground font-medium">
-          ${headline} per user per month
-        </span>
-        , minimum {minSeats} seats. A secure workspace with company context: org
+        Minimum {minSeats} seats. A secure workspace with company context: org
         projects and shared history, SSO via Hanzo IAM, roles, and one unified
         bill for everyone.
-        {annual != null && monthly != null && annual !== monthly && (
-          <>
-            {" "}
-            <span className="text-muted-foreground/80">
-              Billed annually. Month to month it is ${monthly} per user.
-            </span>
-          </>
-        )}
       </p>
       <Button asChild variant="outline" className="w-full border-border">
         <a
