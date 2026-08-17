@@ -90,11 +90,13 @@ test.describe('header chrome', () => {
     // …and into the menu. Open it and read the row, rather than trusting that
     // the registry still holds it: the registry DID hold it throughout the bug.
     //
-    // The trigger is named by @hanzogui/shell and it says "Hanzo" (it said "Meet
-    // Hanzo" through 8.1.18). `exact` matters: "Search Hanzo or ask AI" is also
-    // a button in this bar, and the wordmark beside it is a link of the same
-    // name. What is asserted is unchanged — only who spells the label.
-    await page.getByRole('button', { name: 'Hanzo', exact: true }).click()
+    // The brand is the first thing the bar draws and the door to the rest of it,
+    // so it is asked for by that — the first control here that opens a dialog —
+    // rather than by its tag or its label. @hanzogui/shell owns both and moves
+    // both: the label read "Meet Hanzo", then "Hanzo", and now the surface's own
+    // name ("Hanzo AI"), and the control is a button on the page it points at and
+    // a link everywhere else. Neither is what this test is about.
+    await bar.locator('[aria-haspopup="dialog"]').first().click()
     const menu = page.locator('#hanzo-meet-menu')
     await expect(menu).toBeVisible()
     await expect(menu.getByRole('link', { name: 'Documentation' })).toBeVisible()
