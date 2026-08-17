@@ -1235,6 +1235,30 @@ or in separate entries.
 - No specific datacenter locations; use "Global High-Performance Edge"
 
 
+## /referral offers no code, because no door redeems one
+
+`ReferralHeader` already carried this lesson for the signup credit — "A page
+cannot offer money the biller will not pay" — and the coupon half outlived it.
+`TryFreeCoupon` displayed `TRYFREE` with a copy button, a Redeem button, and two
+cards promising a $5/mo Bot trial and $5 of compute credits. It POSTed to
+`/v1/coupon/redeem`, which **api.hanzo.ai does not serve**: cloud mounts
+commerce's `api/resources` leaf and deliberately not `api/coupon`, so the whole
+validate/redeem surface exists only in commerce's standalone route table. The
+promise was unkeepable at the door, not merely unwired.
+
+Redeemable codes are not a thing we sell. cloud's `apps/marketing/promos.go`
+compiles `campaignsLive = false`, purges its one campaign row on every boot, and
+states that credit enters an org only by a manual admin grant. Hanzo's real
+discount is the codeless platform promo (`percentOff` on a plan, applied by
+`subscribe_card.go` with nothing typed). Do not reintroduce a code field here.
+
+**The referral half is a separate, still-open defect.** `lib/hanzo/referrals.ts`
+calls `/v1/user/{id}/referrers`, `/v1/referrer` and `/v1/referrer/invite`; the
+fleet serves `/v1/referrals` and `/v1/referrals/claim`. Different noun, so those
+reads answer 404 today and the page's stats render empty. Fixing it is a contract
+decision about the referral surface, not a rename — check `GET /v1/openapi.json`
+before touching it.
+
 ## Model prices have one owner, and the snapshot is not a copy of it
 
 A per-token rate is owned by the catalog in commerce.hanzo.ai and published at

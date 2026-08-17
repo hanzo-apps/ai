@@ -14,11 +14,3 @@ export interface ReferralRecord {
   date: string
   credits: number
 }
-
-export interface CouponReward {
-  type: 'bot-trial' | 'compute-credits'
-  description: string
-  value: number
-  duration?: string
-  redeemUrl: string
-}

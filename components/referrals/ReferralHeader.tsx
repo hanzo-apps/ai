@@ -17,8 +17,7 @@ const ReferralHeader = () => {
               on a zero balance by design. A page cannot offer money the biller
               will not pay. */}
           <p className="text-lg text-foreground/80">
-            Earn credit for every developer you refer with code{' '}
-            <span className="font-mono font-bold text-white">TRYFREE</span>
+            Earn credit for every developer you refer
           </p>
         </Box>
       </Box>
