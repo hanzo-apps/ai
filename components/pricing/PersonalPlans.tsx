@@ -34,6 +34,17 @@ const SIGNUP_URL = "https://console.hanzo.ai";
 const isSellable = (p: SubscriptionPlan) =>
   !p.contactSales && p.priceMonthly != null;
 
+// One literal per rung count, because Tailwind reads the source for class names
+// and never sees one that is assembled at run time.
+const LG_COLUMNS: Record<number, string> = {
+  1: "lg:grid-cols-1",
+  2: "lg:grid-cols-2",
+  3: "lg:grid-cols-3",
+  4: "lg:grid-cols-4",
+  5: "lg:grid-cols-5",
+  6: "lg:grid-cols-6",
+};
+
 // There is no static ladder here any more. It used to be a hand-copied array of
 // plan rows, which is precisely how this page came to publish Pro at one price
 // while billing charged another: a copy cannot know its source moved. The
@@ -105,10 +116,14 @@ const PersonalPlans = () => {
       {/* Free leads, because everyone starts there — and it leads because the
           catalog puts it first, not because a card was placed ahead of the
           list. */}
-      {/* Columns match the rungs the catalog serves. A count short of the set
-          strands the last card alone on its own row — Max, the top tier, 773px
-          below the others and under the fold at 1280 and 1440. */}
-      <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+      {/* Columns match the rungs the catalog serves — counted from the ladder
+          rather than written down beside it, so dropping a rung cannot leave the
+          two disagreeing. A count short of the set strands the last card alone on
+          its own row. A count over it holds a track no card fills, which reads as
+          a card that failed to load and squeezes every other card to pay for the
+          gap. Spelled out per width because Tailwind emits only the class names
+          it can read in the source. */}
+      <Box className={`grid grid-cols-1 sm:grid-cols-2 ${LG_COLUMNS[ladder.length] ?? "lg:grid-cols-4"} gap-6 mb-8`}>
         {ladder.map((plan) => {
           const free = plan.priceMonthly === 0;
           return (
