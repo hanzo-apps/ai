@@ -183,12 +183,15 @@ test('the header pill is a real link, and it leaves for the product', async ({ p
     const pill = page.getByRole('banner').getByRole('link', { name: 'Try Hanzo' })
     const href = await pill.getAttribute('href')
     expect(href, 'the pill leaves this site for the product').toMatch(/^https:\/\//)
+    await expect(pill, 'the trip off this site opens its own tab').toHaveAttribute('target', '_blank')
 
-    // And it opens nothing on the way: the site's answer to "try Hanzo" is the
-    // product, so a dialog here is a chooser standing in front of it. Which host
-    // it chooses is chrome.spec's subject, not this one's.
-    await pill.click()
-    await expect(page.locator('[role="dialog"]')).toHaveCount(0)
+    // And it offers no chooser on the way: the site's answer to "try Hanzo" is
+    // the product, so a menu here would stand in front of it. `aria-haspopup` is
+    // what the four nav entries carry and this does not, so it is the contract
+    // to read — and reading beats clicking, because the pill opens a real tab on
+    // another host and the gate that publishes this site must not need that host
+    // to be up. Which host it chooses is chrome.spec's subject, not this one's.
+    await expect(pill).not.toHaveAttribute('aria-haspopup')
   } finally {
     await server.close()
   }
