@@ -407,22 +407,16 @@ export function SiteHeader({
   // DOM order is already the right order and the override is gone rather than
   // kept as decoration.
   //
-  // The pill OPENS THE DOORS rather than taking one. "Try Hanzo" as a single
-  // href answers a question nobody asked: a visitor arrives wanting to build an
-  // app, or to keep data somewhere, or to chat, or to code from a terminal, and
-  // any one destination is wrong for most of them. `tryMenu` opens the canonical
-  // TRY_HANZO_GROUPS — Chat · App · Team · Studio · Bot · Cloud · Base · Dev,
-  // and the installs beside them — while `href` stays the fallback the pill
-  // still carries, so it is a real link before hydration and without JS.
+  // CHAT, and now as the whole answer rather than a fallback. The menu is gone:
+  // this site's default action is to put a visitor in front of the product, and
+  // hanzo.chat is that product — the console is where you go once you have an
+  // account. A menu asked which door before the visitor had any reason to have a
+  // preference, and every one of its rows is still a click away in Platform.
   //
-  // It arrives WITH its pin, in one commit. The prop landed here once ahead of
-  // the package that declares it and turned main red: this site has no
-  // `ignoreBuildErrors`, so an unknown prop is a failed BUILD, not a warning.
-  // The fallback is CHAT, not the console. This href is what the pill means
-  // before hydration and without JS, and it is the default a click lands on — so
-  // it should be the door most visitors actually want. The console is where you
-  // go once you have an account; chat is where you go to find out.
-  const TRY = { ...base.primaryCTA, label: 'Try Hanzo', href: CHAT }
+  // `external` marks the trip OFF this site, which is what the arrow says. It is
+  // the honest glyph here: hanzo.ai owns no session and no chat, so the pill
+  // genuinely leaves.
+  const TRY = { ...base.primaryCTA, label: 'Try Hanzo', href: CHAT, external: true }
 
   // Who is reading this page.
   //
@@ -443,7 +437,13 @@ export function SiteHeader({
         // A person is their name where we have one; the address is the only
         // other thing they will recognise as themselves.
         user: user ? { name: user.name ?? user.email, email: user.email } : null,
-        onSignIn: login,
+        // Signing in LANDS somewhere, and this site is not it. hanzo.ai owns no
+        // session-bearing surface — reading a session is all it does — so a
+        // stranger who signs in here arrives back on a marketing page having
+        // gained nothing they can see. hanzo.chat is where an account becomes
+        // useful, and it authenticates through the same issuer, so the trip is
+        // one hop rather than two.
+        onSignIn: goToChat,
         onSignOut: logout,
       }
 
@@ -474,7 +474,6 @@ export function SiteHeader({
         currentCategoryId={currentCategoryId}
         onAskHanzo={goToChat}
         auth={auth}
-        tryMenu
       />
     </>
   )
