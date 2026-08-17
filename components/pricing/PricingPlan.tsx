@@ -68,9 +68,15 @@ const PricingPlan = ({
   // and hands the behaviour back to a real <a>.
   const ctaProps = (cta: string, url: string) => ({
     href: url,
-    target: '_blank',
     rel: 'noopener noreferrer',
     onClick: () => track(cta),
+  });
+  // A REFERENCE opens a new tab. The docs, the source and a sales calendar are
+  // things you consult ALONGSIDE the ladder, so taking the ladder away to show
+  // them is the wrong trade — you come back to compare.
+  const asideProps = (cta: string, url: string) => ({
+    ...ctaProps(cta, url),
+    target: '_blank',
   });
   const primaryLabel = ctaLabel || "Get Started";
 
@@ -93,7 +99,7 @@ const PricingPlan = ({
     if (contactSalesUrl) {
       return (
         <Button asChild className={`w-full mb-8 ${buttonClass}`}>
-          <a {...ctaProps('Contact Sales', contactSalesUrl)}>Contact Sales</a>
+          <a {...asideProps('Contact Sales', contactSalesUrl)}>Contact Sales</a>
         </Button>
       );
     }
@@ -132,6 +138,14 @@ const PricingPlan = ({
       );
     }
     // Real checkout — starts the subscription against the live billing stack.
+    //
+    // IN THIS TAB. Buying is not consulting a reference, it is leaving the
+    // ladder for a place you either finish at or come back from — and a new tab
+    // takes the coming back away: the checkout opens with an empty history, so
+    // Back is dead and the ladder the buyer was comparing is stranded behind a
+    // tab strip. Same-tab navigation makes Back mean what it says the whole way
+    // to the card, which is what a buyer reaches for when they want to check
+    // the tier below this one.
     if (checkoutUrl) {
       return (
         <Button asChild className={`w-full mb-8 ${buttonClass}`}>
@@ -143,7 +157,7 @@ const PricingPlan = ({
     if (githubLink || name === "Dev") {
       return (
         <Button asChild className={`w-full mb-8 ${buttonClass}`}>
-          <a {...ctaProps('Get on GitHub', 'https://github.com/hanzoai/')}>Get on GitHub</a>
+          <a {...asideProps('Get on GitHub', 'https://github.com/hanzoai/')}>Get on GitHub</a>
         </Button>
       );
     }

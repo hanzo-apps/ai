@@ -118,10 +118,11 @@ const TeamEnterpriseStrip = () => {
         projects and shared history, SSO via Hanzo IAM, roles, and one unified
         bill for everyone.
       </p>
+      {/* In this tab, like every other checkout on the page — a new one opens
+          with an empty history and strands the ladder behind a tab strip. */}
       <Button asChild variant="outline" className="w-full border-border">
         <a
           href={planCheckoutUrl(seat)}
-          target="_blank"
           rel="noopener noreferrer"
           onClick={() => choose(seat.id, "Get started")}
         >
