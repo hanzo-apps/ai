@@ -727,6 +727,36 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
   background: var(--background) !important;
 }
 
+/* The bar's INK follows the page too, or the line above only half-happened.
+   Making the bar wear this page's ground is a promise about both sides of the
+   contrast: on a light page the near-white bar kept the dark theme's white
+   text, so the wordmark measured 1.07:1 against it and every nav link 1.04:1 —
+   AA wants 4.5:1. The whole nav was there and unreadable, and only the "Try
+   Hanzo" pill survived because it paints its own ground and carries its own ink.
+
+   No `!important` and no per-element selectors, because none are needed: the
+   shell writes its inks as `var(--white-92, …)` / `var(--white-60, …)` with the
+   white only as a FALLBACK. Undefined is what made them white; defining them is
+   the whole fix, and it reaches all sixty-odd inline uses at once.
+
+   Scoped to the BAR, and that scope is the whole care here. These names mean a
+   hue, and @hanzo/design is right to keep them white in both themes: this page
+   spends `--white-10` on the radial glows under the heroes and on hover fills,
+   fifty-odd uses outside the header on the homepage alone, every one of which
+   wants white on a light page too. Turning them black globally would trade a
+   readable nav for black glows on every landing page. Custom properties
+   inherit, so stating them on the header reaches the nav links inside it and
+   stops there.
+
+   Only under `.light`. In the dark theme the header inherits the white ones and
+   nothing about it changes. */
+.light header[data-hanzo-shell] {
+  --white-92: rgb(0 0 0 / 0.92);
+  --white-60: rgb(0 0 0 / 0.6);
+  --white-45: rgb(0 0 0 / 0.45);
+  --white-10: rgb(0 0 0 / 0.1);
+}
+
 /* NO hairline on either band, and that is the glass being glass.
    The line existed to mirror the header's, from when both were opaque and an
    edge was the only thing saying "chrome starts here". Glass says it already —
