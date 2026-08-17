@@ -1389,6 +1389,16 @@ slug (`sitedeploy --slug hanzo-ai`). So two lanes with unrelated trees race for
 one slug and whichever ran last wins. That is the reason work can land here,
 pass review, and never appear on the site.
 
+**A RED GATE has the identical symptom, and it is the cheaper thing to rule out
+first.** `pnpm gates` is a step in the publishing job, so a failing gate leaves
+the push green and the site untouched — which reads exactly like losing the
+race. The two are told apart by `last-modified` on any page: the collision
+REPLACES the build, so the timestamp moves and the content is someone else's;
+a red gate publishes nothing, so the timestamp does not move at all. Run
+`pnpm build && pnpm gates` locally before reaching for this section — a gate can
+be red because its SUBJECT was deliberately deleted, and then it is the gate that
+is stale rather than the site that is losing.
+
 The container path in `universe/charts/app/values/hanzo/a.yaml`
 (`ghcr.io/hanzoai/a:v0.1.0`) is leftover — deploy.yml's own header records the
 move to the Sites plane and why: "all to hand back bytes."
