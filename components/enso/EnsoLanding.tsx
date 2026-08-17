@@ -263,7 +263,7 @@ export default function EnsoLanding({ models }: { models: string }) {
             model API is deciding exactly this. */}
         <section className="border-t border-neutral-900 px-4 py-24 sm:px-6 lg:px-8">
           <Box className="mx-auto max-w-3xl">
-            <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
+            <p className="mb-4 text-sm font-medium uppercase tracking-[0.2em] text-neutral-400">
               Built into Hanzo OS
             </p>
             <h2 className="text-3xl font-medium tracking-tight text-neutral-100 sm:text-4xl">

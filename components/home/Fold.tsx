@@ -79,7 +79,7 @@ export default function Fold() {
             front door asks to be read as the age of what is under it, and what
             is under it is this year's system — the claim it invites is one the
             page then has to spend words walking back. */}
-        <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
+        <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-400">
           Hanzo OS
         </p>
         <h1 className="hz-display">

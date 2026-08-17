@@ -59,7 +59,7 @@ export default function SystemArchitecture() {
   return (
     <section id="system" className="mx-auto max-w-5xl scroll-mt-24 px-4 py-24 sm:px-6 lg:px-8">
       <Box className="mx-auto max-w-2xl text-center">
-        <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
+        <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-400">
           The system
         </p>
         <h2 className="hz-display text-4xl sm:text-5xl">One OS. Every layer of the company.</h2>

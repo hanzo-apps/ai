@@ -53,7 +53,7 @@ export default function Infrastructure() {
   return (
     <section className="mx-auto max-w-5xl px-4 py-24 sm:px-6 lg:px-8">
       <Box className="mx-auto max-w-2xl text-center">
-        <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
+        <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-400">
           Hanzo Cloud
         </p>
         <h2 className="hz-display text-4xl sm:text-5xl">AI-native all the way down.</h2>
