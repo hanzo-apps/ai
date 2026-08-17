@@ -706,6 +706,25 @@ html.no-js .t_unmounted :is(.is_View, .is_Text) {
    ran straight through the globe. */
 :root:root header[data-hanzo-shell] {
   border-bottom-color: transparent !important;
+
+  /* AND the bar takes THIS page's ground, which is the whole point of it being
+     opaque. @hanzogui/shell 8.1.45 made the bar wear the plane — one material
+     from the top of the screen to the bottom of an open menu, so there is no
+     boundary to see — and then spent `CHROME.panel`, a flat #000, as the
+     material. Its own comment says what that value is: "the ground hanzo.chat
+     paints the page with. NOT hanzo.ai's", measured, and left alone because the
+     same constant is also the ink on the white CTA — a split it hands to
+     "whoever is looking at the screen".
+
+     Looked, at 1440x900: the bar ran 0,0,0 to row 59 and the page 10,10,10 from
+     row 60, so the seam the opaque bar exists to remove was drawn by the bar
+     itself. --background is what this page paints, so the bar wearing the plane
+     and the bar reading this token are the same sentence.
+
+     `!important` for the reason the line above it carries: the shell writes the
+     background INLINE, and an inline declaration outranks every selector at
+     every specificity. Delete this the day the shell reads the token itself. */
+  background: var(--background) !important;
 }
 
 /* NO hairline on either band, and that is the glass being glass.
