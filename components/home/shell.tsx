@@ -191,12 +191,12 @@ export function SiteHeader({
     //
     // `/products` is withdrawn, so there is no local page to point at either.
     // One list, one home, and a door to it from here.
-    // On hanzo.ai only. cloud.hanzo.ai IS the page this points at, so on that
-    // surface the taxonomy renders as the menu below and a link to itself would
-    // be the door you are already standing in.
-    ...(surface === 'cloud'
-      ? []
-      : [{ id: 'platform', label: 'Platform', href: CLOUD, external: true, glyph: 'blocks' } as HanzoNav]),
+    // Platform is NOT in this nav, on either surface. It is cloud.hanzo.ai's own
+    // subject, and cloud is its own site: naming it here put a bare link to
+    // another property in the middle of this one's sections, reading as a
+    // seventh peer of Developers and Research rather than as a door out. On
+    // cloud itself it was already absent, being the page you are standing in.
+    // The way to the cloud is the CTA and the Hanzo menu, both of which name it.
     {
       id: 'developers',
       label: 'Developers',
