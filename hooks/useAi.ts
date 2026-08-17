@@ -25,7 +25,7 @@ import { createAiClient, type AiClient } from '@hanzo/ai'
 // reaches every build lane rather than the ones that remember a build arg. An
 // env var still wins, so a lane can point at another gateway without a code
 // change.
-const WIDGET = process.env.NEXT_PUBLIC_HANZO_WIDGET_KEY || 'hz_ycMEWl9u1Z4S6OkZw3NiVcunDexT4Y9yqHQXJTm9KI8ig4k0'
+const WIDGET = process.env.NEXT_PUBLIC_HANZO_WIDGET_KEY || 'hz_btmSARo3rHytpINmR7kU8iHpIOEfo8ypPwNf3njAJ0t1ASaY'
 
 /** The gateway's own free pool: one id that always answers free, whichever route
  *  happens to be carrying it. Never a vendor `:free` id — those come and go
