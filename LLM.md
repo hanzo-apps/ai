@@ -1259,6 +1259,51 @@ reads answer 404 today and the page's stats render empty. Fixing it is a contrac
 decision about the referral surface, not a rename — check `GET /v1/openapi.json`
 before touching it.
 
+## /pricing quotes the monthly column, because it is the only one that charges
+
+Every row `GET /v1/billing/plans` serves carries a `priceAnnual` AND an
+`interval` of `"monthly"` — `go` 800/700, `pro` 1900/1650, `max` 9900/8325,
+`team` 2500/2000, in cents. Commerce sells an annual term as its own catalog row;
+none is published, and `subscribeCardRequest` takes a plan and a quantity with no
+interval beside them. So **the annual column is a number nothing charges**, and
+the same rule `/referral` above states applies to it: a page may not quote a
+price no door completes.
+
+Two surfaces quoted it and no longer do. The FAQ answered the annual question
+"Yes… and the saving is shown on each plan before you buy" — a discount nobody
+could select, beside a saving no card displayed. The Business card headlined
+`priceAnnual ?? priceMonthly` under the words "per user per month", so it
+advertised $20 on a seat billed $25 and dimmed the real rate at the end of the
+paragraph. Both read `priceMonthly` now, and `priceAnnual` is read nowhere in
+this repo.
+
+**Do not build a billing-period switcher to close the gap.** A toggle that moved
+the quoted price would name a number the card is never charged — the same defect
+in a control instead of a sentence. Annual becomes sellable when commerce
+publishes rows with `interval: "year"` and subscribe carries the term; until
+then the honest surface is the one that exists.
+
+`DatastorePricing` keeps a Monthly/Annual toggle and is NOT this. It is a rate
+card for a managed service off `/v1/pricing/services`, with its own
+`discounts.annual.percent`, and it discounts a displayed rate rather than
+selecting a subscription term. Different catalog, different door.
+
+## `-translate-*` on a `<Box>` needs @hanzo/ui >= 8.0.108
+
+`tw` decides what a negative class may set from the PROPERTY NAME
+(`NEGATABLE = /^(margin|top|right|bottom|left|zIndex|translate)/`), then negates
+the value. That handled a number and a bare percentage and not a transform
+FUNCTION, so `-translate-x-1/2` reached the DOM as `translateX(+half)` — the
+centring idiom pushed a full width the wrong way. 8.0.108 adds `TRANSFORM_FN`
+and negates the argument inside the function.
+
+It is the substrate's silent-drop family again, and its signature is that the
+element is placed exactly wrong rather than unplaced: read the computed
+`transform` off the positioned wrapper, where a correct one is NEGATIVE. 23
+`<Box>` call sites carry the idiom; a plain `<div className>` never reaches the
+adapter and was always right, which is why the two look identical in source and
+only one of them moved.
+
 ## Model prices have one owner, and the snapshot is not a copy of it
 
 A per-token rate is owned by the catalog in commerce.hanzo.ai and published at
