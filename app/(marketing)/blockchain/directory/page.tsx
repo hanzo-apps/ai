@@ -394,7 +394,7 @@ const ChainDirectory = () => {
                 placeholder="Search chains..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-white/50"
+                className="w-full pl-10 pr-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder-muted-foreground"
               />
             </Box>
 

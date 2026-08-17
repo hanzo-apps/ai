@@ -454,16 +454,6 @@ html:root {
    Nothing loses a focus indicator: the two rules are one ring, moved. */
 :root:root :is(input, textarea).bg-transparent:focus-visible {
   outline: none;
-  /* The ring is drawn TWICE, by two different properties, and moving the
-     outline alone leaves the other one in place. @hanzo/design's base layer
-     draws focus as a SHADOW — `:where(input,select,textarea):focus-visible
-     { border-color: var(--border-focus); box-shadow: var(--ring-focus) }` —
-     while the rule above draws an OUTLINE. Measured on the chat bar after the
-     outline moved: still `0 0 0 3px rgba(255,255,255,.1)`, a soft white
-     rectangle inside the pill where the hard one had been. Both belong to the
-     wrapper now, so both are cleared here. */
-  box-shadow: none;
-  border-color: transparent;
 }
 
 /* Softer on a WRAPPER, and the reason is perimeter, not preference.

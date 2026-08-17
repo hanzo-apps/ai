@@ -97,7 +97,7 @@ const HeroSection = () => {
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 placeholder="How can I help you today?"
-                className="w-full bg-secondary border border-border rounded-xl px-5 py-4 pr-36 text-base text-foreground placeholder-muted-foreground focus:outline-none focus:border-ring transition-colors"
+                className="w-full bg-secondary border border-border rounded-xl px-5 py-4 pr-36 text-base text-foreground placeholder-muted-foreground transition-colors"
               />
               <Button
                 type="submit"

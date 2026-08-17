@@ -565,7 +565,7 @@ const OSSCatalog: React.FC = () => {
               placeholder="Search repos, templates, tools..."
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              className="pl-10 bg-secondary border-border focus:border-white/50"
+              className="pl-10 bg-secondary border-border"
             />
           </Box>
 

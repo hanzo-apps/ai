@@ -174,7 +174,7 @@ export default function StartupsPage() {
   }
 
   const inputClass =
-    'w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all'
+    'w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground transition-all'
   const labelClass =
     'flex items-center gap-2 text-sm font-medium text-foreground mb-2'
 

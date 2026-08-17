@@ -644,7 +644,6 @@ html.dark .ts{
 .ts .ts-in{font:inherit;font-family:var(--mono);font-size:.85rem;width:100%;padding:.3rem .45rem;
   background:var(--bg);border:1px solid var(--line);color:var(--ink)}
 .ts .ts-price{width:5.5rem;text-align:right}
-.ts input:focus-visible,.ts button:focus-visible{outline:2px solid var(--save);outline-offset:2px}
 
 .ts .ts-tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:.9rem}
 .ts .ts-tier{background:var(--panel);border:1px solid var(--line);padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.3rem}

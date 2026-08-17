@@ -61,7 +61,7 @@ const Chat = ({
               value={promptText}
               onChange={(e) => setPromptText(e.target.value)}
               placeholder="Send a message..."
-              className="flex-1 bg-neutral-800/50 border border-neutral-700 rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white/30"
+              className="flex-1 bg-neutral-800/50 border border-neutral-700 rounded-l-md px-4 py-2"
             />
             <button 
               type="submit" 

@@ -47,7 +47,7 @@ const TaskDetailModal: React.FC<TaskDetailModalProps> = ({
             <Input 
               value={editedTask.title}
               onChange={handleTitleChange}
-              className="text-xl font-semibold mt-2 bg-transparent border-none focus:ring-0 px-0 h-auto"
+              className="text-xl font-semibold mt-2 bg-transparent border-none px-0 h-auto"
             />
           </DialogTitle>
         </DialogHeader>

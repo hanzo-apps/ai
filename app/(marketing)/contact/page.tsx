@@ -191,7 +191,7 @@ export default function ContactPage() {
                           onChange={handleChange}
                           required
                           placeholder="Your name"
-                          className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all"
+                          className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground transition-all"
                         />
                       </div>
                       <div>
@@ -206,7 +206,7 @@ export default function ContactPage() {
                           onChange={handleChange}
                           required
                           placeholder="your.email@example.com"
-                          className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all"
+                          className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground transition-all"
                         />
                       </div>
                     </Box>
@@ -223,7 +223,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         required
                         placeholder="What is this regarding?"
-                        className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all"
+                        className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground transition-all"
                       />
                     </div>
 
@@ -239,7 +239,7 @@ export default function ContactPage() {
                         required
                         rows={5}
                         placeholder="Tell us how we can help..."
-                        className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all resize-none"
+                        className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder-muted-foreground transition-all resize-none"
                       />
                     </div>
 

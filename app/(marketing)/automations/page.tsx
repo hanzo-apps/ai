@@ -209,7 +209,7 @@ const Automations = () => {
                   placeholder="Search integrations..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 rounded-full bg-secondary border border-border text-foreground placeholder-muted-foreground focus:outline-none focus:border-white/50 transition-colors"
+                  className="w-full pl-12 pr-4 py-3 rounded-full bg-secondary border border-border text-foreground placeholder-muted-foreground transition-colors"
                 />
               </Box>
             </motion.div>

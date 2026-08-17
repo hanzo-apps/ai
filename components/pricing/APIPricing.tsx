@@ -713,7 +713,7 @@ const APIPricing = () => {
                 placeholder="Search models..."
                 value={search}
                 onChange={(e) => { setSearch(e.target.value); setShowCount(MODELS_PER_PAGE); }}
-                className="w-full pl-9 pr-4 py-2 rounded-lg bg-secondary border border-border text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:border-ring"
+                className="w-full pl-9 pr-4 py-2 rounded-lg bg-secondary border border-border text-sm text-foreground placeholder-muted-foreground"
               />
             </Box>
 
@@ -723,7 +723,7 @@ const APIPricing = () => {
               <select
                 value={selectedProvider}
                 onChange={(e) => { setSelectedProvider(e.target.value); setShowCount(MODELS_PER_PAGE); }}
-                className="pl-8 pr-8 py-2 rounded-lg bg-secondary border border-border text-sm text-foreground appearance-none cursor-pointer focus:outline-none focus:border-ring"
+                className="pl-8 pr-8 py-2 rounded-lg bg-secondary border border-border text-sm text-foreground appearance-none cursor-pointer"
               >
                 <option value="all">All Providers ({providers.length})</option>
                 {providers.map((p) => (

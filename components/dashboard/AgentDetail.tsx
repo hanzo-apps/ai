@@ -109,7 +109,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
               name="name"
               value={editedAgent.name}
               onChange={handleInputChange}
-              className="text-xl font-semibold bg-transparent border-none focus:ring-0 px-0 h-auto"
+              className="text-xl font-semibold bg-transparent border-none px-0 h-auto"
             />
           </DialogTitle>
         </DialogHeader>
@@ -183,7 +183,7 @@ const AgentDetail: React.FC<AgentDetailProps> = ({ agent, onClose, onUpdate }) =
                       name="model"
                       value={editedAgent.model}
                       onChange={handleInputChange}
-                      className="bg-transparent border-none p-0 focus:ring-0"
+                      className="bg-transparent border-none p-0"
                     />
                   </Box>
                 </div>

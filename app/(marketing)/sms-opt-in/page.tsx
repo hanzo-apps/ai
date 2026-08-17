@@ -119,7 +119,7 @@ export default function SmsOptInPage() {
                     placeholder="+1 (555) 000-0000"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full rounded-lg bg-neutral-950 border border-neutral-800 px-4 py-3 text-sm outline-none focus:border-neutral-600 transition-colors"
+                    className="w-full rounded-lg bg-neutral-950 border border-neutral-800 px-4 py-3 text-sm transition-colors"
                   />
                 </div>
 

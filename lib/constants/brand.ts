@@ -94,13 +94,6 @@ export const brandClasses = {
     secondary: "bg-white/10 border border-white/30 text-white/70",
   },
 
-  // Focus ring patterns
-  ring: {
-    primary: "focus:ring-white/30",
-    secondary: "focus:ring-white/20",
-    primaryOffset: "focus:ring-2 focus:ring-white/30 focus:ring-offset-2",
-    secondaryOffset: "focus:ring-2 focus:ring-white/20 focus:ring-offset-2",
-  },
 } as const;
 
 // Partner data for reusable partner cards

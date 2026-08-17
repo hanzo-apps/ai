@@ -51,7 +51,7 @@ function ProviderTile({ p }: { p: { id: string; name: string; icon?: string } })
       rel="noopener noreferrer"
       aria-label={`Connect ${p.name}`}
       title={p.name}
-      className="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-border bg-secondary/40 transition-all duration-200 hover:bg-secondary hover:border-foreground/25 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      className="group flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-border bg-secondary/40 transition-all duration-200 hover:bg-secondary hover:border-foreground/25 hover:-translate-y-0.5"
     >
       <Mark src={icon ? `/providers/${icon}.svg` : null} name={p.name} />
       <span className="text-[11px] text-muted-foreground text-center leading-tight transition-colors duration-200 group-hover:text-foreground">
