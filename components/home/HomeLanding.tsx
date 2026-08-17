@@ -10,6 +10,7 @@ import LearnLoop from './LearnLoop'
 import OneInterface from './OneInterface'
 import Infrastructure from './Infrastructure'
 import CloudCategories from './CloudCategories'
+import { WatchItWork } from './WatchItWork'
 import Research from './Research'
 import Proof from './Proof'
 import Security from './Security'
@@ -106,6 +107,7 @@ export default async function HomeLanding() {
         <Security />
         <OneInterface />
         <LocalStack />
+        <WatchItWork />
         <Research />
         <CloudCategories />
         <Together />
