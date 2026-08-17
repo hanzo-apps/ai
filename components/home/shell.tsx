@@ -147,14 +147,38 @@ const SITE_PAGES: HanzoCommandEntry[] = pages.map((page) => ({
  * cloud.yml). Next inlines NEXT_PUBLIC_* at build time, so a static export
  * carries the answer with no runtime check.
  */
-export const SURFACE: 'ai' | 'cloud' =
-  process.env.NEXT_PUBLIC_SURFACE === 'cloud' ? 'cloud' : 'ai'
+/**
+ * The surfaces this export can be built as.
+ *
+ * `team` is here because hanzo.team is ALREADY served from this build and had
+ * no way to say so: the only options were `ai` and `cloud`, so it came out as
+ * the cloud one — measured live, its logo carried the accessible name "Hanzo
+ * Cloud" and linked to cloud.hanzo.ai, on the AI-teammates site, at every
+ * width. The shell's registry has carried a correct `team` surface the whole
+ * time (brandName "Hanzo Team", its own CTAs); nothing could select it.
+ *
+ * `resolveSurface` takes any registry id and answers by id then by host, so
+ * adding a name here is the whole change — there is no second table to keep.
+ */
+export type Surface = 'ai' | 'cloud' | 'team'
+
+const SURFACES: readonly Surface[] = ['ai', 'cloud', 'team']
+
+/**
+ * A build says which surface it is, and an unknown value is `ai` rather than a
+ * crash: this is read at module scope in a static export, so a typo in a deploy
+ * lane would otherwise take the whole site down rather than mislabel a bar.
+ */
+export const SURFACE: Surface =
+  (SURFACES as readonly string[]).includes(process.env.NEXT_PUBLIC_SURFACE ?? '')
+    ? (process.env.NEXT_PUBLIC_SURFACE as Surface)
+    : 'ai'
 
 export function SiteHeader({
   surface,
   currentCategoryId,
 }: {
-  surface: 'ai' | 'cloud'
+  surface: Surface
   currentCategoryId?: string
 }) {
   const base = resolveSurface(surface)
@@ -457,6 +481,6 @@ export function SiteHeader({
 }
 
 /** The footer, same on every face. `currentProductId` marks where you are. */
-export function SiteFooter({ surface }: { surface: 'ai' | 'cloud' }) {
+export function SiteFooter({ surface }: { surface: Surface }) {
   return <HanzoFooter currentProductId={surface} visible={shown} />
 }
