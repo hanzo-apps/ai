@@ -32,7 +32,7 @@ const EXISTING = /<link[^>]+rel=["']canonical["']/i
 
 /**
  * cloud.hanzo.ai's ROOT is this file, copied over index.html at image build
- * (see the Dockerfile's SITE_ROOT). As a route it is `/cloud`, and that is what
+ * (see the Dockerfile's SURFACE). As a route it is `/cloud`, and that is what
  * it must claim: the two are the same page — identical h1, within 80 characters
  * of each other — so the host's front door points at the page hanzo.ai
  * publishes rather than competing with it.

@@ -38,7 +38,7 @@ const SERVE = 'hanzo serve cloud'
 
 /**
  * cloud.hanzo.ai's front door — the body of `app/(marketing)/cloud/page.tsx`,
- * promoted to this host's web root by the Dockerfile's `SITE_ROOT=cloud`.
+ * promoted to this host's web root by the Dockerfile's `SURFACE=cloud`.
  *
  * It renders the PAGE only. The header and footer come from the shared
  * `(marketing)` layout, which is the same chrome hanzo.ai wears — so the two

@@ -30,7 +30,7 @@ export default function Products() {
             {/* The section is Platform, and it is the SAME heading on both
                 hosts because there is only one of this page. hanzo.ai and
                 cloud.hanzo.ai are one static export of one tree; the Dockerfile's
-                SITE_ROOT copies a chosen page over index.html, so the two hosts
+                SURFACE copies a chosen page over index.html, so the two hosts
                 differ at `/` and NOWHERE else. A per-host heading would have to
                 read the hostname in the browser, which puts the page's one h1
                 outside the HTML a crawler reads and gives the tree a second,

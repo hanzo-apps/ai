@@ -4,12 +4,10 @@ name: Team
 # charts/app/values/hanzo/team-www.yaml in the universe repo. Static export via
 # the Dockerfile, served by ghcr.io/hanzoai/static.
 #
-# Same lane as cloud.yml with one argument changed. The Dockerfile's SITE_ROOT
-# picks which exported page becomes index.html, so one repo and one build serve
-# every marketing host: SITE_ROOT=cloud is cloud.hanzo.ai, SITE_ROOT=team is the
-# app/(marketing)/team page already served at hanzo.ai/team. Nothing about the
-# page is host-specific — it carries no relative links, so the same bytes are
-# correct on both hosts.
+# Same lane as cloud.yml with one word changed. SURFACE names which site this
+# image is: it picks the exported page that becomes index.html — here the
+# app/(marketing)/team page already served at hanzo.ai/team — and the brand the
+# bar wears on it. One repo, one build, every marketing host.
 #
 # Named team-www (matching the Deployment `team-www`) so it can never collide
 # with ghcr.io/hanzoai/team, the Go backend, or ghcr.io/hanzoai/team-docs, the
@@ -84,7 +82,7 @@ jobs:
           provenance: false
           push: true
           build-args: |
-            SITE_ROOT=team
+            SURFACE=team
 
       # build-push-action can exit 0 before the manifest resolves, so a green run
       # could still leave the pin naming a tag that ImagePullBackOffs. Prove it

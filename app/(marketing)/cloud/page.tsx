@@ -10,7 +10,7 @@ import { ogImages, twitterImages } from '@/lib/constants/og'
 // below.
 //
 // One title, three places. This page is cloud.hanzo.ai's ROOT (Dockerfile
-// `SITE_ROOT=cloud` copies cloud.html over index.html), and it declared only an
+// `SURFACE=cloud` copies cloud.html over index.html), and it declared only an
 // openGraph block — so `twitter:title` fell through to the ROOT layout and a
 // share of this host announced two different products depending on which
 // scraper read it. A `twitter` block that restates the page title is not

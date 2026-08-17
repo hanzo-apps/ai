@@ -35,7 +35,7 @@ RUN pnpm install --frozen-lockfile
 # fetched, because it is publishable: it ships in the client bundle by
 # construction, so it is site identity rather than a secret. It defaults rather
 # than being required because six lanes build this repo and a build arg only
-# reaches the ones that remember to pass it — cloud.yml passed SITE_ROOT alone,
+# reaches the ones that remember to pass it — cloud.yml named its site alone,
 # so the lane that cut the live image supplied no key at all. A default is what
 # makes every lane produce a keyed artifact, including lanes not edited here.
 #
@@ -62,17 +62,22 @@ RUN case "$PUBLISHABLE_KEY" in \
 # headroom the CF-Pages deploy lane uses (.hanzo/workflows/deploy.yml).
 COPY . .
 
-# WHICH SITE this image is. hanzo.ai and cloud.hanzo.ai are two builds of this
-# one tree — SITE_ROOT below only chooses which page lands at `/`, so without
-# this both hosts wore whichever brand the layout happened to name, and
-# hanzo.ai/models introduced itself as Hanzo Cloud. `ai` is the default because
-# this tree's own host is hanzo.ai; the cloud lane passes `cloud`. Next inlines
-# NEXT_PUBLIC_* at build time, so the export carries its answer with no runtime
-# check — which is why it has to be set HERE, before the build, not beside the
-# page copy after it.
-ARG NEXT_PUBLIC_SURFACE=ai
-ENV NEXT_PUBLIC_SURFACE=$NEXT_PUBLIC_SURFACE
-RUN NODE_OPTIONS=--max-old-space-size=8192 pnpm build
+# WHICH SITE this image is. hanzo.ai, cloud.hanzo.ai and hanzo.team are builds
+# of one tree, and being a site means two things: which page lands at `/`, and
+# which brand the bar wears on every page. Those were two arguments, so a lane
+# could pass one and forget the other — and the team lane did, which is how
+# hanzo.team came to answer to a name that was not its own.
+#
+# They are one fact, so they are one argument. `ai` is the default because this
+# tree's own host is hanzo.ai; each other lane names itself once.
+#
+# Next inlines NEXT_PUBLIC_* at build time, so the export carries its answer
+# with no runtime check — which is why the brand is set HERE, before the build,
+# even though the page copy that reads the same value comes after it.
+ARG SURFACE=ai
+RUN set -eu; \
+    export NEXT_PUBLIC_SURFACE="$SURFACE"; \
+    NODE_OPTIONS=--max-old-space-size=8192 pnpm build
 
 # Prove the key was INLINED, not merely supplied: a bundler change that stopped
 # reading the env var would rebuild the exact keyless artifact the ARG check
@@ -88,12 +93,14 @@ RUN grep -rqF "$NEXT_PUBLIC_PUBLISHABLE_KEY" out/_next/static || \
 # trailingSlash:false Next emits out/cloud.html (flat file); _next assets are
 # absolute so they resolve from / unchanged. (The old detailed /overview
 # homepage stays served at its own /overview route on the same export.)
-# Which exported page is `/`. cloud.hanzo.ai=cloud, apex=index (already the root).
-ARG SITE_ROOT=index
+# The same SURFACE, now naming the page that becomes `/`. The apex is already
+# rooted at index.html; every other surface is a page of this export, so a
+# misspelled surface is a missing file and dies here rather than shipping a host
+# wearing the apex's bar.
 RUN set -eu; \
-    if [ "${SITE_ROOT}" != "index" ]; then \
-      [ -f "out/${SITE_ROOT}.html" ] || { echo "FATAL: out/${SITE_ROOT}.html not exported"; exit 1; }; \
-      cp "out/${SITE_ROOT}.html" out/index.html; \
+    if [ "${SURFACE}" != "ai" ]; then \
+      [ -f "out/${SURFACE}.html" ] || { echo "FATAL: out/${SURFACE}.html not exported"; exit 1; }; \
+      cp "out/${SURFACE}.html" out/index.html; \
     fi; \
     [ -f out/index.html ] || { echo "FATAL: no out/index.html"; exit 1; }
 

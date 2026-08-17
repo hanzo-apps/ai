@@ -101,7 +101,7 @@ jobs:
       # bundle by construction, so it is site identity rather than a secret, and
       # fetching a value every visitor already holds bought nothing.
       #
-      # It bought a failure mode instead. This lane once passed SITE_ROOT alone
+      # It bought a failure mode instead. This lane once named its site alone
       # and cut keyless images for exactly that reason: a build arg only reaches
       # the lanes that remember it. A default reaches every lane, this one
       # included, and the Dockerfile still refuses an explicitly empty value.
@@ -118,8 +118,7 @@ jobs:
           provenance: false
           push: true
           build-args: |
-            SITE_ROOT=cloud
-            NEXT_PUBLIC_SURFACE=cloud
+            SURFACE=cloud
 
       # build-push-action can exit 0 before the manifest resolves, so a green run
       # could still leave the CR pinned to a tag that ImagePullBackOffs. Prove it

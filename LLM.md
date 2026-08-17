@@ -202,8 +202,8 @@ This ONE static export (`out/`) serves TWO sites — split by host, not by build
    help with?" composer forwards to `hanzo.chat/?q=…`; nav deep-links to
    cloud.hanzo.ai; **Foundation → zoo.ngo** (Zoo Labs governs Hanzo).
 2. **cloud.hanzo.ai** (`ghcr.io/hanzoai/cloud-www` on `hanzoai/static`) — the
-   **detailed product/marketing site**. `Dockerfile` takes `ARG SITE_ROOT` and
-   `.hanzo/workflows/cloud.yml` passes `SITE_ROOT=cloud`, so it copies
+   **detailed product/marketing site**. `Dockerfile` takes `ARG SURFACE` and
+   `.hanzo/workflows/cloud.yml` passes `SURFACE=cloud`, so it copies
    `out/cloud.html` over `out/index.html` and this host's ROOT is
    **`app/(marketing)/cloud/page.tsx`** (`components/cloud/CloudLanding`) while
    every deep `(marketing)/*` page (docdb, vector, kv, iam, …) serves beneath
@@ -1303,3 +1303,29 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Two publishers write to the Sites slug `hanzo-ai` (2026-08-16, open)
+
+The site served at hanzo.ai deploys from `git.hanzo.ai/z/hanzo-ai` — a personal
+namespace whose 33 commits are all titled "Update from hanzo.app". It shares NO
+ancestor with this repo: `git merge-base` reports unrelated histories, and this
+tree is 1804 commits ahead of it.
+
+Meanwhile this repo's own `.hanzo/workflows/deploy.yml` publishes to the SAME
+slug (`sitedeploy --slug hanzo-ai`). So two lanes with unrelated trees race for
+one slug and whichever ran last wins. That is the reason work can land here,
+pass review, and never appear on the site.
+
+The container path in `universe/charts/app/values/hanzo/a.yaml`
+(`ghcr.io/hanzoai/a:v0.1.0`) is leftover — deploy.yml's own header records the
+move to the Sites plane and why: "all to hand back bytes."
+
+To resolve, in this order, and steps 2-3 are unsafe before 1:
+  1. RENAME forge `hanzoai/hanzo.ai` -> `hanzo-apps/ai`. Rename, not create: it
+     keeps the history and the forge writes the redirect, so stale clones and
+     the four repos already bitten by silent GitHub renames keep resolving.
+     Needs forge admin — the git API binds `create`/`mirror` to the caller's org
+     (`hanzo`) and exposes no rename.
+  2. `hanzo platform sites update hanzo-ai` -> repo `https://git.hanzo.ai/hanzo-apps/ai`.
+  3. Retire the builder lane writing the slug from `z/hanzo-ai`, or the rename
+     fixes the address and leaves the collision.

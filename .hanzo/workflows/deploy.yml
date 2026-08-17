@@ -85,7 +85,7 @@ jobs:
       #
       # Fetching it was itself the defect. deploy/PUBLISHABLE_KEY is one shared
       # ORG key, and only lanes that remember to read AND pass it produce a keyed
-      # artifact — cloud.yml passed SITE_ROOT alone. A declared key reaches all
+      # artifact — cloud.yml named its site alone. A declared key reaches all
       # six lanes, including the ones nobody edits.
       #
       # It is also the wrong key to want: cloud files a PROJECT key's events with
