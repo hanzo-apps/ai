@@ -71,8 +71,8 @@ importers:
         specifier: ^8.1.1
         version: 8.1.1(next@16.3.1(@babel/core@8.0.1)(@playwright/test@1.62.1)(@types/node@26.2.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@hanzogui/shell':
-        specifier: 8.1.45
-        version: 8.1.45(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: 8.1.46
+        version: 8.1.46(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@hanzogui/web':
         specifier: ^8.1.1
         version: 8.1.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -1453,8 +1453,8 @@ packages:
     peerDependencies:
       react: '>=19'
 
-  '@hanzogui/shell@8.1.45':
-    resolution: {integrity: sha512-FOoBsjO1NtNBw4v7Puz/7W8GW4wzh+P37v3M3Futlt4N8LaikAuhvBrv2a7m8qMRzpAum8gjsnn9kwlM71qXaQ==}
+  '@hanzogui/shell@8.1.46':
+    resolution: {integrity: sha512-sSuTwu8rqU9bpsm61/4qYf+Pq9bI5JBzFF02dK4w75oyKosB6IsHStBmDr/yQCT2q8KuBQWvt92hl7owtJrSig==}
     peerDependencies:
       react: '*'
       react-dom: '*'
@@ -5594,7 +5594,7 @@ snapshots:
     transitivePeerDependencies:
       - react-dom
 
-  '@hanzogui/shell@8.1.45(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@hanzogui/shell@8.1.46(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
@@ -6232,7 +6232,9 @@ snapshots:
       metro-runtime: 0.84.4
     transitivePeerDependencies:
       - '@babel/core'
+      - bufferutil
       - supports-color
+      - utf-8-validate
 
   '@react-native/normalize-color@2.1.0': {}
 

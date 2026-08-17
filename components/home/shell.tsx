@@ -474,6 +474,11 @@ export function SiteHeader({
         currentCategoryId={currentCategoryId}
         onAskHanzo={goToChat}
         auth={auth}
+        // Last in the row, past the identity cluster. The pill is what a visitor
+        // came for and it leaves for the product; the account control only says
+        // whether the browser already knows them, so the end of the row — where
+        // the eye lands — belongs to the pill.
+        primaryLast
       />
     </>
   )
