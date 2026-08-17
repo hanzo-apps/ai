@@ -1,5 +1,5 @@
 /**
- * Hanzo Referral & Coupon API Client
+ * Hanzo Referral API Client
  *
  * Connects to the Commerce backend at api.hanzo.ai/v1
  * All endpoints require Bearer token auth from hanzo.id OAuth2.
@@ -83,28 +83,6 @@ export interface ReferralRecord {
   credits: number
 }
 
-export interface CouponValidation {
-  valid: boolean
-  coupon?: {
-    id: string
-    code: string
-    type: string
-    amount: number
-    name: string
-    enabled: boolean
-  }
-  rewards?: CouponReward[]
-  error?: string
-}
-
-export interface CouponReward {
-  type: 'bot-trial' | 'compute-credits'
-  description: string
-  value: number // cents
-  duration?: string
-  redeemUrl: string
-}
-
 // --- Referrer (referral links) ---
 
 export async function getUserReferrers(userId: string): Promise<Referrer[]> {
@@ -160,22 +138,6 @@ export async function getReferralHistory(userId: string): Promise<ReferralRecord
     date: r.createdAt ?? '',
     credits: r.fee ? Math.round(r.fee.amount / 100) : 0,
   }))
-}
-
-// --- Coupon validation ---
-
-export async function validateCoupon(code: string): Promise<CouponValidation> {
-  return apiFetch<CouponValidation>(`/coupon/validate`, {
-    method: 'POST',
-    body: JSON.stringify({ code }),
-  })
-}
-
-export async function redeemCoupon(code: string): Promise<{ success: boolean; rewards: CouponReward[] }> {
-  return apiFetch(`/coupon/redeem`, {
-    method: 'POST',
-    body: JSON.stringify({ code }),
-  })
 }
 
 // --- Email invites ---

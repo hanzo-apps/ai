@@ -8,7 +8,6 @@ import ReferralLink from '@/components/referrals/ReferralLink'
 import ReferralStatsComponent from '@/components/referrals/ReferralStats'
 import ReferralHistory from '@/components/referrals/ReferralHistory'
 import HowItWorks from '@/components/referrals/HowItWorks'
-import TryFreeCoupon from '@/components/referrals/TryFreeCoupon'
 import { ReferralRecord, ReferralStats as ReferralStatsType } from '@/components/referrals/types'
 import {
   getUserReferrers,
@@ -104,7 +103,6 @@ const ReferralProgram = () => {
         ) : (
           <>
             <ReferralLink referralLink={referralLink} referralCode={referralCode} />
-            <TryFreeCoupon />
             <ReferralStatsComponent referralStats={stats} />
             {history.length > 0 && <ReferralHistory referralHistory={history} />}
             <HowItWorks />

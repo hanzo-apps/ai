@@ -16,7 +16,7 @@ const HowItWorks = () => {
             <h3 className="font-medium">Share Your Link</h3>
           </Box>
           <p className="text-sm text-muted-foreground">
-            Share your unique referral link or the <span className="font-mono text-white">TRYFREE</span> coupon code with friends and colleagues
+            Share your unique referral link with friends and colleagues
           </p>
         </Box>
 
