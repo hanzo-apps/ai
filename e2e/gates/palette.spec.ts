@@ -2,13 +2,17 @@ import { test, expect, type Page } from '@playwright/test'
 import { serveExport } from './export'
 
 /**
- * ⌘K, and the doors behind the primary action.
+ * ⌘K.
  *
- * Both are `@hanzogui/shell`'s, and both are asserted HERE because this repo is
- * where they are wired to real data: the palette can only find /pricing because
+ * It is `@hanzogui/shell`'s, and it is asserted HERE because this repo is where
+ * it is wired to real data: the palette can only find /pricing because
  * `components/home/shell.tsx` hands it `lib/data/pages.json`, and that file is
  * written at prebuild by walking `app/`. A test in the package would prove the
  * matcher works on a fixture; this proves the site is searchable.
+ *
+ * The palette's own doors group is one of the three lists it ranks and is
+ * asserted below. The header pill is NOT a door onto that group — it is a
+ * direct link to hanzo.chat, and where it points is chrome.spec's subject.
  *
  * Against `out/` — the bytes that ship — because the whole chain has to hold:
  * the walk found the routes, the snapshot got bundled, and the palette hydrated.
@@ -163,40 +167,28 @@ test.describe('the command palette', () => {
   })
 })
 
-test('the doors card stays small', async ({ page }) => {
+test('the header pill is a real link, and it leaves for the product', async ({ page }) => {
   const server = await serveExport()
   try {
     await page.setViewportSize({ width: 1280, height: 900 })
     await page.goto(server.url + '/', { waitUntil: 'load' })
     await hydrated(page)
+
     // A LINK, not a button: the pill carries `primaryCTA.href` so it goes
     // somewhere before hydration and for anyone without JavaScript.
     //
-    // Scoped to the BANNER, because this is the header's doors pill and the
-    // page is free to carry a CTA of its own by the same name — one does, and
-    // an unscoped role query matches both and refuses to guess.
-    await page.getByRole('banner').getByRole('link', { name: 'Try Hanzo' }).click()
+    // Scoped to the BANNER, because the page is free to carry a CTA of its own
+    // by the same name — one does, and an unscoped role query matches both and
+    // refuses to guess.
+    const pill = page.getByRole('banner').getByRole('link', { name: 'Try Hanzo' })
+    const href = await pill.getAttribute('href')
+    expect(href, 'the pill leaves this site for the product').toMatch(/^https:\/\//)
 
-    const card = page.locator('[role="dialog"][aria-label="Try Hanzo"]')
-    await expect(card).toBeVisible()
-    const box = (await card.boundingBox())!
-
-    // It held 466x443 for thirteen links. The ceiling is what stops the
-    // padding creeping back one comfortable value at a time.
-    //
-    // 450, from 430, and the reason is not padding: this site handed gui a
-    // 244-line token table of its own and now takes @hanzo/ui's, where several
-    // rungs are a different pixel. Every box inside a shell card is measured in
-    // those rungs, so the card moved when the table did. Measured six times on
-    // the export: 440.0 five times and 445.5 on a cold font cache, height 337
-    // against a 380 ceiling nobody has moved. Still far under the 466 this
-    // exists to prevent, and it still fails if padding creeps back toward it.
-    expect(box.width).toBeLessThanOrEqual(450)
-    expect(box.height).toBeLessThanOrEqual(380)
-
-    // Every door is a real link, and it still lines up with the header's edge.
-    await expect(card.locator('a')).toHaveCount(13)
-    expect(Math.round(box.x + box.width)).toBe(1280 - 16)
+    // And it opens nothing on the way: the site's answer to "try Hanzo" is the
+    // product, so a dialog here is a chooser standing in front of it. Which host
+    // it chooses is chrome.spec's subject, not this one's.
+    await pill.click()
+    await expect(page.locator('[role="dialog"]')).toHaveCount(0)
   } finally {
     await server.close()
   }
