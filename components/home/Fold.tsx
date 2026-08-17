@@ -97,7 +97,11 @@ export default function Fold() {
           Enso, AI coworkers, the apps your company runs on, secure execution, data,
           observability and Kubernetes-native infrastructure — designed as one system.
         </p>
-        <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-neutral-500">
+        {/* neutral-400, not 500, for the reason LocalStack already gives: #737373
+            does not clear AA on this ground. It measured 4.22:1 at 15px against
+            --background, and the tier below the lead paragraph is carried by
+            size here rather than by a shade that fails to be readable. */}
+        <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-neutral-400">
           Run Hanzo OS on Hanzo Cloud or your own infrastructure.
         </p>
 

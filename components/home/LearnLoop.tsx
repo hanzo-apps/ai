@@ -49,7 +49,7 @@ export default function LearnLoop() {
                   words as well as in layout — the return edge is the whole idea
                   and a grid cannot draw it. */}
               {i === STEPS.length - 1 ? (
-                <span className="text-sm text-neutral-500">→ back to Sense</span>
+                <span className="text-sm text-neutral-400">→ back to Sense</span>
               ) : null}
             </Box>
             <Box className="mt-1 text-sm leading-relaxed text-neutral-400">{step.body}</Box>
