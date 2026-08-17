@@ -90,13 +90,18 @@ test.describe('header chrome', () => {
     // …and into the menu. Open it and read the row, rather than trusting that
     // the registry still holds it: the registry DID hold it throughout the bug.
     //
-    // The brand is the first thing the bar draws and the door to the rest of it,
-    // so it is asked for by that — the first control here that opens a dialog —
-    // rather than by its tag or its label. @hanzogui/shell owns both and moves
-    // both: the label read "Meet Hanzo", then "Hanzo", and now the surface's own
-    // name ("Hanzo AI"), and the control is a button on the page it points at and
-    // a link everywhere else. Neither is what this test is about.
-    await bar.locator('[aria-haspopup="dialog"]').first().click()
+    // The menu opens by RESTING on the name — @hanzogui/shell says so, and the
+    // trigger carries no onClick of its own. A click happens to work on a warm
+    // desktop and does not headless, where the pointer sequence a click syn-
+    // thesises can outrun the open. Hovering is what a reader does and what the
+    // component listens for, and the assertion below polls, so an open that
+    // takes a moment still counts.
+    //
+    // The trigger is asked for as the first control in the bar that opens a
+    // dialog, rather than by tag or label: the wordmark beside it is a link of
+    // the same name, and shell moves the label ("Meet Hanzo", then "Hanzo", and
+    // the surface's own name on other properties). Neither is what this is about.
+    await bar.locator('[aria-haspopup="dialog"]').first().hover()
     const menu = page.locator('#hanzo-meet-menu')
     await expect(menu).toBeVisible()
     await expect(menu.getByRole('link', { name: 'Documentation' })).toBeVisible()
