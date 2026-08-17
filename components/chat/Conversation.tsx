@@ -43,20 +43,18 @@ export function Conversation({
         return <Thread client={client} model={model} placeholder={placeholder} idle={idle} />
     }
 
+    // The gate wraps the THREAD, never `idle`. `idle` is the page — on the home
+    // route it is the entire site — and wrapping it meant a signed-out visitor
+    // was met by a consent dialog where the homepage should be, before they had
+    // asked anything. Consent is owed when someone sends, not when they arrive.
     return (
-        <Gate>
-            <Thread
-                client={client}
-                model={model}
-                placeholder={placeholder}
-                idle={
-                    <>
-                        <Notice />
-                        {idle}
-                    </>
-                }
-            />
-        </Gate>
+        <>
+            <Gate>
+                <Thread client={client} model={model} placeholder={placeholder} />
+            </Gate>
+            <Notice />
+            {idle}
+        </>
     )
 }
 
