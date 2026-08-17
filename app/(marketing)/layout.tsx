@@ -33,7 +33,7 @@ export default function MarketingLayout({
 }) {
   return (
     <AccountProvider>
-      <Box className="min-h-screen bg-black text-white">
+      <Box className="min-h-screen bg-background text-white">
         {/* Keyboard users land on the nav first and would otherwise tab through
             every menu on every page before reaching the content. */}
         <a

@@ -72,8 +72,17 @@ export default async function HomeLanding() {
      one read of the registry, and the page cannot drift from it. */
   const { total: modelCount } = await fetchModels()
 
+  /* bg-background, never bg-black. `bg-black` is a literal `#000` by the time
+     @hanzo/ui's class bridge is done with it, and it had outlived the reason it
+     was written — it predates the token layer entirely. It cost two things.
+     @hanzogui/shell tunes its floating panels against a page it measured at
+     rgb(10,10,10), so a #000 canvas flattens the rung a panel is supposed to
+     sit above; and the composer's contrast gate composites against
+     document.body, which has been var(--background) all along, so the gate was
+     scoring a page that was not the one on screen. The token also follows the
+     theme, which a literal cannot. */
   return (
-    <Box className="min-h-screen bg-black text-white">
+    <Box className="min-h-screen bg-background text-white">
       <SiteHeader surface="ai" />
       <main>
         {/* The page descends the stack. It states the category, shows the

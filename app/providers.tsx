@@ -171,7 +171,7 @@ export function iamTraits(user: unknown): Record<string, unknown> | undefined {
  *  this just keeps the page usable. */
 function Crashed(_error: Error, reset: () => void) {
   return (
-    <Box className="flex min-h-screen flex-col items-center justify-center gap-4 bg-black px-6 text-center text-white">
+    <Box className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background px-6 text-center text-white">
       <p className="text-lg font-medium">Something went wrong.</p>
       <button
         onClick={reset}

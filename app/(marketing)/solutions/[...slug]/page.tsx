@@ -47,7 +47,7 @@ export default async function SolutionPage({ params }: PageProps) {
   const isStack = solution.badge === 'Stack' || solution.badge === 'Stacks'
 
   return (
-    <Box className="min-h-screen bg-black text-white">
+    <Box className="min-h-screen bg-background text-white">
       <main className="pt-32 pb-24 px-4 sm:px-6 lg:px-8">
         <Box className="max-w-7xl mx-auto">
 

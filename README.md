@@ -203,5 +203,5 @@ Use these color classes consistently:
 - Muted text: `text-neutral-400` or `text-neutral-500` (less important text)
 - Primary accent: `text-purple-400` or background `bg-purple-600`
 - Secondary accent: `text-blue-400` or background `bg-blue-600`
-- Backgrounds: `bg-[var(--black)]`, `bg-gray-900/50`, or `bg-gray-900/20`
+- Backgrounds: `bg-background` for a page canvas (`--black` is a palette literal, not the page surface), `bg-gray-900/50`, or `bg-gray-900/20`
 - Borders: `border-gray-800` or `border-purple-500/30` for accents

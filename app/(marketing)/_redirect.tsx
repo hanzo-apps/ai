@@ -11,7 +11,7 @@ export default function Redirect({ to }: { to: string }) {
     }
   }, [to])
   return (
-    <Box className="min-h-screen bg-black flex items-center justify-center">
+    <Box className="min-h-screen bg-background flex items-center justify-center">
       <p className="text-white/50 text-sm">Redirecting...</p>
     </Box>
   )

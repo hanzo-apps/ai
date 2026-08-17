@@ -45,10 +45,15 @@ themselves, and the SVG logo source.
 
 ### 2.2 Palette
 
+These are read from `@hanzo/design` (`tokens/colors.css`), which is the one place
+they are set. The values below are quoted so this table can be checked against
+it — they are not a second declaration, and a copy that drifts is how a `#000`
+page canvas outlived the token that replaced it.
+
 | Token | Value | Use |
 |---|---|---|
-| `--background` | `#000000` | Page surface |
-| `--foreground` | `#ffffff` | Primary type |
+| `--background` | `#0a0a0a` | Page surface |
+| `--foreground` | `#fafafa` | Primary type |
 | `--brand` | `#e4e4e7` | Active accent (rare) |
 | `--brand-muted` | `#a3a3a3` | Hover / muted accent |
 | `text-white` | `rgb(255 255 255)` | Headings, primary copy |

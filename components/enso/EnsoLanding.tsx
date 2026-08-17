@@ -169,7 +169,7 @@ export default function EnsoLanding({ models }: { models: string }) {
     <>
       <SiteHeader surface="ai" />
 
-      <main className="bg-black pt-16 text-white">
+      <main className="bg-background pt-16 text-white">
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <section className="relative flex min-h-[88vh] items-center justify-center overflow-hidden px-4 py-24 sm:px-6 lg:px-8">
           <Box className="pointer-events-none absolute inset-0 overflow-hidden">
