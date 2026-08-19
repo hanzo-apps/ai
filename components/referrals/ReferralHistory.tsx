@@ -18,13 +18,6 @@ const columns = [
     header: 'Status',
     render: (r: ReferralRecord) => <StatusTag status={r.status} />,
   },
-  {
-    key: 'credits',
-    header: 'Credits',
-    align: 'right' as const,
-    mono: true,
-    render: (r: ReferralRecord) => (r.credits > 0 ? `$${r.credits}` : '—'),
-  },
 ]
 
 const ReferralHistory = ({ referralHistory }: ReferralHistoryProps) => (

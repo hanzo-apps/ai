@@ -26,7 +26,6 @@ const ReferralProgram = () => {
   const [stats, setStats] = useState<ReferralStatsType>({
     totalInvited: 0,
     signedUp: 0,
-    creditsEarned: 0,
     pending: 0,
   })
   const [history, setHistory] = useState<ReferralRecord[]>([])

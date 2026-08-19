@@ -24,11 +24,18 @@ export default function PricingCallouts() {
             <h3 className="text-xl font-bold text-foreground mb-3">
               Earn While You Build
             </h3>
+            {/* No amount, because a referral pays none: claiming a code records
+                an attribution edge, and the sweep that qualifies it moves no
+                money. This said $20 of credit, which nothing grants, and "5% at
+                Partner tier" — the level-2 rate read as a headline. What a
+                referral is worth is an affiliate commission on margin, at a rate
+                the affiliate program owns, so link that door rather than keep a
+                second copy of its number here. */}
             <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-              $20 in AI credits for every developer you refer. Unlock revenue share up to 5% at Partner tier.
+              Refer a developer. Once they start spending, you earn commission through the affiliate program.
             </p>
             <a
-              href="/referral"
+              href="/affiliate"
               className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-foreground hover:text-white transition-colors"
             >
               Learn More

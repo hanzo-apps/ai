@@ -39,10 +39,13 @@ const HowItWorks = () => {
             <Box className="h-8 w-8 rounded-full bg-primary/10 text-foreground flex items-center justify-center mr-3">
               3
             </Box>
-            <h3 className="font-medium">You Earn Credits</h3>
+            <h3 className="font-medium">It Qualifies</h3>
           </Box>
+          {/* Qualification is metered spend, not a paid plan, and it pays no
+              credit. This promised $5 while /pricing promised $20; nothing
+              grants either. What is owed is an affiliate commission. */}
           <p className="text-sm text-muted-foreground">
-            You receive $5 in credits for each successful referral that converts to a paid plan
+            A referral qualifies once they actually spend. Commission for qualified referrals is settled through the affiliate program
           </p>
         </Box>
       </Box>

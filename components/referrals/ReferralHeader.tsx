@@ -12,12 +12,14 @@ const ReferralHeader = () => {
         </Box>
         <Box className="text-center">
           <h1 className="text-3xl font-bold mb-2">Referral Program</h1>
-          {/* What the referrer earns. It used to promise the person they refer
-              a credit on signup, and nothing grants one: account creation lands
-              on a zero balance by design. A page cannot offer money the biller
-              will not pay. */}
+          {/* It used to promise the person they refer a credit on signup, and
+              nothing grants one: account creation lands on a zero balance by
+              design. A page cannot offer money the biller will not pay, and the
+              referrer's half is no different — credit reaches an org only by a
+              manual admin grant, which no referral triggers. So this says what
+              the page does. */}
           <p className="text-lg text-foreground/80">
-            Earn credit for every developer you refer
+            Track every developer you refer
           </p>
         </Box>
       </Box>

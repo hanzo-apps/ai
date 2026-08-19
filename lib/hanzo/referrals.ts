@@ -70,7 +70,6 @@ export interface Referral {
 export interface ReferralStats {
   totalInvited: number
   signedUp: number
-  creditsEarned: number
   pending: number
 }
 
@@ -80,7 +79,6 @@ export interface ReferralRecord {
   name: string
   status: 'completed' | 'pending' | 'revoked'
   date: string
-  credits: number
 }
 
 // --- Referrer (referral links) ---
@@ -112,15 +110,10 @@ export async function getReferralStats(userId: string): Promise<ReferralStats> {
 
   const completed = referrals.filter(r => !r.revoked && !r.blacklisted)
   const pending = referrals.filter(r => r.revoked === false && !r.fee)
-  const creditsEarned = completed.reduce(
-    (sum, r) => sum + (r.fee?.amount ?? 0),
-    0,
-  )
 
   return {
     totalInvited: referrers.length,
     signedUp: completed.length,
-    creditsEarned: Math.round(creditsEarned / 100), // cents → dollars
     pending: pending.length,
   }
 }
@@ -136,7 +129,6 @@ export async function getReferralHistory(userId: string): Promise<ReferralRecord
     name: '',
     status: r.revoked ? 'revoked' : r.fee ? 'completed' : 'pending',
     date: r.createdAt ?? '',
-    credits: r.fee ? Math.round(r.fee.amount / 100) : 0,
   }))
 }
 
