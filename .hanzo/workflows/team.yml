@@ -32,6 +32,10 @@ permissions:
 on:
   push:
     branches: [main]
+    # A release is a tag. Without this the only way to cut a semver was a human
+    # opening the UI and typing one, so nobody did, and the pins drifted onto
+    # sha tags because that was the only thing the lane produced.
+    tags: ['v*']
   workflow_dispatch:
     inputs:
       tag:
@@ -66,6 +70,13 @@ jobs:
           set -euo pipefail
           if [ -n "${{ inputs.tag }}" ]; then
             tag="${{ inputs.tag }}"
+          elif [ "${GITHUB_REF_TYPE:-}" = tag ]; then
+            # One tree, one version: a v* tag names every image this repo cuts,
+            # so cloud-www and team-www carry the same number and a reader can
+            # tell at a glance whether two hosts are serving the same commit.
+            # They used to run version lines of their own — 0.1.3 against
+            # 0.1.16, from one source tree — which says nothing to anybody.
+            tag="${GITHUB_REF_NAME#v}"
           else
             tag="sha-$(echo "$GITHUB_SHA" | cut -c1-7)"
           fi
