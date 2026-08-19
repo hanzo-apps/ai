@@ -1256,8 +1256,36 @@ discount is the codeless platform promo (`percentOff` on a plan, applied by
 calls `/v1/user/{id}/referrers`, `/v1/referrer` and `/v1/referrer/invite`; the
 fleet serves `/v1/referrals` and `/v1/referrals/claim`. Different noun, so those
 reads answer 404 today and the page's stats render empty. Fixing it is a contract
-decision about the referral surface, not a rename — check `GET /v1/openapi.json`
-before touching it.
+decision about the referral surface, not a rename.
+
+### A referral pays nothing, and the openapi read settles it
+
+That check has now been made, so make it once. `GET /v1/referrals` answers
+`{code, link, counts{total,signup,qualified}, referrals[]}`, and a row is
+`{id, referee, status, createdAt, qualifiedAt}` — **no money field on any shape.**
+The served descriptions say why in as many words: claim "grants nothing, and
+neither does anything downstream of it… No credit is ever issued from this
+package", the admin directory "carries no amounts because this package issues
+none", and the sweep that advances `signup → qualified` on the referee's first
+metered spend "moves NO money".
+
+So both amounts the site used to quote were invented. `/pricing` said "$20 in AI
+credits for every developer you refer" and `/referral` said "$5 in credits" for
+the same act. The $20 is a stale echo of `referrerCreditCents: 2000` in
+commerce's `config/referral-program.json`, whose claim handler mints nothing and
+whose route `api.hanzo.ai` never mounts; the $5 traces to nothing at all. Credit
+still enters an org exactly one way — a manual admin grant.
+
+What a qualified referral is worth is an **affiliate commission**: `rateBps` of
+Hanzo's MARGIN (default 2000 = 20% of margin, never of the customer's bill),
+levels 2 and 3 platform-wide at 5% and 2%, accrued as a payable and settled by
+wire or wallet. That is why "up to 5% at Partner tier" was wrong twice: 5% is the
+level-2 rate, and the served system has no tiers, only applied/approved/suspended.
+Only an approved affiliate accrues, so the earning callout links `/affiliate`.
+
+The rate has one owner and this repo is not it. When wiring the page to the real
+endpoint, render `counts` and never reintroduce an amount — a referral is not
+given one to render.
 
 ## /pricing quotes the monthly column, because it is the only one that charges
 
