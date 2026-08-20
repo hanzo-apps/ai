@@ -69,8 +69,29 @@ import { CATALOG_URL, DOCUMENT_URL, KNOWN_UNSERVED, read, serves } from "./catal
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const SNAPSHOT = resolve(ROOT, "lib/data/catalog.json");
+const FAMILIES = resolve(ROOT, "lib/data/families.json");
 const TOUR = resolve(ROOT, "lib/data/tour.json");
 const DRY_RUN = process.argv.includes("--dry-run");
+
+const VERBS = new Set(["get", "post", "put", "patch", "delete", "head", "options"]);
+
+/** The family a path belongs to — the first segment after `/v1/`, or null. */
+const family = (path) => (String(path ?? "").match(/^\/v1\/([^/]+)/) ?? [])[1] ?? null;
+
+/**
+ * A tag's description as one line about the family.
+ *
+ * The document writes these as Go package docs — "Package vector is …" — so the
+ * opening names a package rather than the family the line already names, and
+ * the sentences after the first are addressed to someone reading that package
+ * rather than calling it. Both come off; nothing else is touched, because past
+ * this point it is the API describing itself and not this repo describing it.
+ */
+const summarize = (description = "") => {
+  const first = description.trim().split(/(?<=\.)\s+/)[0] ?? "";
+  const body = first.replace(/^Package\s+\S+\s+(?:is\s+)?/, "");
+  return body ? body[0].toUpperCase() + body.slice(1) : "";
+};
 
 const load = (path) => {
   try {
@@ -102,6 +123,90 @@ const keep = (why) => {
   return 0;
 };
 
+/**
+ * The families, out of the same document, into their own snapshot.
+ *
+ * A family is the first segment after `/v1/`, which is exactly what the document
+ * tags its operations by — so the document STATES its families, one tag each,
+ * with a sentence saying what the family is for. That makes "everything Hanzo
+ * serves" a READ rather than a list somebody keeps, which is the whole reason
+ * `/skill.md` can be handed to an agent and left alone (`scripts/skill.mjs`).
+ *
+ * BESIDE the catalog, not inside it, for two reasons. `lib/data/catalog.json` is
+ * imported by the mega-menu and ships in the browser bundle, where a hundred and
+ * eighty API summaries are dead weight. And the two answers have different
+ * authorities: a product shrinking is a catalog fact and trips the ratchet
+ * below, but a family is a fact about the DOCUMENT and must not be withheld
+ * because a product line moved. One probe, two snapshots, two gates.
+ *
+ * The category is the catalog's, read off every advertised product rather than
+ * the reachable ones: which category a product sits in is true whether or not
+ * that particular path answers today.
+ */
+function writeFamilies(catalog, document) {
+  const category = new Map();
+  for (const p of catalog.products) {
+    const f = family(p.apiPath);
+    if (f && !category.has(f)) {
+      category.set(f, catalog.categories.find((c) => c.label === p.category)?.id ?? p.category);
+    }
+  }
+
+  const operations = new Map();
+  for (const item of Object.values(document?.paths ?? {})) {
+    for (const [method, op] of Object.entries(item)) {
+      if (!VERBS.has(method)) continue;
+      for (const tag of op?.tags ?? []) operations.set(tag, (operations.get(tag) ?? 0) + 1);
+    }
+  }
+
+  const families = (document?.tags ?? []).map((t) => ({
+    name: t.name,
+    category: category.get(t.name) ?? null,
+    operations: operations.get(t.name) ?? 0,
+    summary: summarize(t.description),
+  }));
+
+  const held = load(FAMILIES)?.families?.length ?? 0;
+  console.log(
+    `[families] ${families.length} declared · ${families.filter((f) => f.category).length} the catalog places · ` +
+      `${families.reduce((n, f) => n + f.operations, 0)} operations` +
+      (held ? ` (committed snapshot holds ${held})` : "")
+  );
+
+  // A sentence on many families describes the PACKAGE that mounts them, not any
+  // one of them, so `/v1/models` ends up reading as a note about how hanzoai/ai
+  // is wired into the binary. Rewriting it here would be this repo inventing an
+  // API description; the fix is the package's own doc comment. So it is printed
+  // instead — the manifest ships what the document says, and what the document
+  // says badly is named on every build until someone fixes it at the source.
+  const shared = new Map();
+  for (const f of families) if (f.summary) shared.set(f.summary, (shared.get(f.summary) ?? 0) + 1);
+  for (const [summary, n] of [...shared].filter(([, n]) => n > 3).sort((a, b) => b[1] - a[1])) {
+    console.warn(`[families] ${n} families share one sentence — ${summary.slice(0, 60)}…`);
+  }
+  // Same ratchet as the catalog's, for the same reason: a document that declares
+  // fewer families than the one on disk is far likelier to be a degraded read
+  // than a hundred families being retired at once, and writing it would quietly
+  // shorten the manifest an agent trusts.
+  if (families.length < held) {
+    console.warn(
+      `[families] keeping the committed snapshot — the document declares ${families.length}, fewer than ${held}`
+    );
+    return;
+  }
+  if (DRY_RUN) {
+    console.log(`[families] --dry-run: would write ${FAMILIES}`);
+    return;
+  }
+
+  writeFileSync(
+    FAMILIES,
+    JSON.stringify({ document: DOCUMENT_URL, fetched: new Date().toISOString(), families }, null, 2) + "\n"
+  );
+  console.log(`[families] wrote ${FAMILIES}`);
+}
+
 async function main() {
   const current = load(SNAPSHOT);
 
@@ -127,6 +232,8 @@ async function main() {
     if (!current) throw new Error("the served document has no paths and there is no snapshot on disk");
     return keep("the served document carries no paths, so nothing could be judged reachable");
   }
+
+  writeFamilies(catalog, document);
 
   const rendered = [];
   const excluded = [];
@@ -228,7 +335,7 @@ async function main() {
   };
 
   if (DRY_RUN) {
-    console.log(`[catalog] --dry-run: would write ${SNAPSHOT}`);
+    console.log(`[catalog] --dry-run: would write ${SNAPSHOT} and ${FAMILIES}`);
     return 0;
   }
 
