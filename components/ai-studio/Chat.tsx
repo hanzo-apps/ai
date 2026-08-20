@@ -60,7 +60,12 @@ const Chat = ({
               value={promptText}
               onChange={(e) => setPromptText(e.target.value)}
               placeholder="Send a message..."
-              className="flex-1 bg-neutral-800/50 border border-neutral-700 rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white/30"
+              // min-w-0: a flex item's automatic minimum size is its content, and
+              // for an input that is the ~20 characters its `size` defaults to. So
+              // `flex-1` could not shrink it below ~230px and the Send button beside
+              // it was pushed 192px past a 390px viewport, where `overflow-x: clip`
+              // makes it unreachable rather than merely awkward.
+              className="min-w-0 flex-1 bg-neutral-800/50 border border-neutral-700 rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-white/30"
             />
             <button 
               type="submit" 

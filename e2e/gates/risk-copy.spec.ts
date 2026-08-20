@@ -212,6 +212,40 @@ test('the rule library claims replay, and does not claim activation', () => {
   expect(text, 'the sentence that implied an activation switch').not.toContain('before you turn it on')
 })
 
+test('the relationship lookback answers one party, and is credited with nothing else', () => {
+  // `POST /v1/aml/relationships/search` resolves the name to a pseudonym and calls
+  // retention.Ledger.Lookback(purpose, org, party, now). That reads the records
+  // indexed under ONE party, keeps the ones whose Class is a relationship, and
+  // answers AMLR Art. 78: Maintained, Current, the Natures found, the record ids,
+  // the window, and Examined — which the ledger carries precisely to show the
+  // answer came from an index rather than a scan.
+  //
+  // It never reads a transaction. So the card's "look back across the
+  // relationships around a subject … which is where structuring across several
+  // accounts becomes visible" credited this route with two things it does not do:
+  // a walk over the relationships AROUND a party (there is no counterparty graph
+  // anywhere in the engine), and a detection. Structuring across a customer's own
+  // accounts IS caught, by a different plane — the `structuring-accounts` rule at
+  // ingest — and attributing it here is the kind of claim that reaches support as
+  // "your product said it would show me this".
+  const text = words()
+  expect(text, 'the question it answers').toMatch(/business relationship with a named party/i)
+  expect(text, 'the window Art. 78 sets').toMatch(/last five years/i)
+  expect(text, 'and the nature, which the answer carries alongside existence').toMatch(/what its nature was/i)
+  expect(text, 'an index lookup, which is what "speedily" needs').toMatch(/does not grow with the ledger/i)
+  expect(text, 'and the boundary: it reads one plane, not both').toMatch(/reads relationships and not transactions/i)
+  // The RULE, not the one sentence that broke it, and scoped to a sentence rather
+  // than to a character distance — a bound of "within N characters" is satisfied by
+  // rewording, which is not the same as being true. A detection or a graph may not
+  // be named in the same breath as the lookback, because the lookback does neither.
+  const credited = text
+    .split(/(?<=[.!?])\s+/)
+    .filter((s) => /\brelationships?\b/i.test(s) && /structur|counterpart|graph|link analys|network analys/i.test(s))
+  expect(credited, `the lookback credited with work it does not do:\n${credited.join('\n')}`).toEqual([])
+  // The sentence as it read.
+  expect(text, 'the claim, verbatim').not.toContain('structuring across several accounts becomes visible')
+})
+
 test('the unmet requirements are named here, and no reader is sent to a stale list', () => {
   // The page used to say "read it before you plan around this", pointing at
   // GET /v1/aml/catalog's `gaps`. That list is a static literal in the engine
