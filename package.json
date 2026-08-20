@@ -49,7 +49,7 @@
     "@hanzogui/config": "^8.1.1",
     "@hanzogui/lucide-icons-2": "^8.1.1",
     "@hanzogui/next-theme": "^8.1.1",
-    "@hanzogui/shell": "^8.1.50",
+    "@hanzogui/shell": "^8.1.51",
     "@hanzogui/web": "^8.1.1",
     "@zenlm/models": "^1.0.4",
     "dompurify": "^3.4.13",
