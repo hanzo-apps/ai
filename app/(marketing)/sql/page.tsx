@@ -37,10 +37,10 @@ export default function SQLPage() {
             <span className="bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">SQL</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} className="text-2xl md:text-3xl font-medium text-foreground mb-4">
-            PostgreSQL 18, run for you
+            Hanzo SQL 18, run for you
           </motion.p>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            This is Postgres itself, not a reimplementation of it, so your driver, your ORM and psql connect the way they always have. Five extensions are enabled before you get the connection string — pgvector for embeddings, pg_trgm for fuzzy text, btree_gin for mixed indexes, uuid-ossp for keys, and pg_stat_statements so the slow query is already recorded when you go looking for it.
+            This is the engine itself, not a reimplementation of it, so your driver, your ORM and psql connect the way they always have. Five extensions are enabled before you get the connection string — pgvector for embeddings, pg_trgm for fuzzy text, btree_gin for mixed indexes, uuid-ossp for keys, and pg_stat_statements so the slow query is already recorded when you go looking for it.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto">
             <Box className="bg-secondary/50 border border-border rounded-xl p-4"><Box className="text-2xl font-bold text-foreground">PG 18</Box><Box className="text-sm text-muted-foreground">Version</Box></Box>
@@ -83,7 +83,7 @@ export default function SQLPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
         <Box className="max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">It is Postgres. That is the feature.</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Your driver already speaks it. That is the feature.</h2>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }} className="bg-secondary border border-border rounded-xl overflow-hidden">
             <Box className="flex items-center gap-2 px-4 py-2 border-b border-border"><Box className="flex gap-1.5"><Box className="w-3 h-3 rounded-full bg-neutral-700" /><Box className="w-3 h-3 rounded-full bg-neutral-700" /><Box className="w-3 h-3 rounded-full bg-neutral-700" /></Box><span className="text-xs text-muted-foreground ml-2">schema.sql</span></Box>
