@@ -120,6 +120,17 @@ test('every build-arg a workflow passes names an ARG its Dockerfile declares', (
  */
 const PUBLISH = 'hanzoai/ci/.github/actions/site'
 
+/**
+ * The forge that serves the action may be named in the ref, and both forms are
+ * the same action: `hanzoai/ci/...@v1` and
+ * `https://git.hanzo.ai/hanzoai/ci/...@v1`. Matching only the bare form read
+ * the host being added as the publish being REMOVED — this gate went red, the
+ * step before the publish is `pnpm gates`, and the apex stopped shipping while
+ * every page in the export was correct.
+ */
+const uses = (ref = '') =>
+  new RegExp(`^\\s*uses:\\s*(?:https://\\S+/)?${PUBLISH}@${ref}`, 'm')
+
 test('the workflow that publishes the apex runs the gates before it publishes', () => {
   // Workflows on one trigger do not order themselves. cicd.yml (which runs
   // `hanzo.yml`'s gates) and deploy.yml both fire on push to main, neither waits
@@ -127,22 +138,18 @@ test('the workflow that publishes the apex runs the gates before it publishes', 
   // therefore does not stop the other publishing. So the check has to sit in the
   // job that publishes, and this says it does — the ordering, not merely the
   // presence, because a gate that runs after the publish is a report.
-  const publishing = workflows().filter(({ text }) =>
-    new RegExp(`^\\s*uses:\\s*${PUBLISH}@`, 'm').test(text),
-  )
+  const publishing = workflows().filter(({ text }) => uses().test(text))
   expect(publishing.map(({ name }) => name), `no workflow publishes the apex via ${PUBLISH}`).not.toEqual([])
   for (const { name, text } of publishing) {
     const gates = text.indexOf('pnpm gates')
-    const publish = text.search(new RegExp(`^\\s*uses:\\s*${PUBLISH}@`, 'm'))
+    const publish = text.search(uses())
     expect(gates, `${name} publishes the apex and never runs the gates`).toBeGreaterThan(-1)
     expect(gates, `${name} runs the gates AFTER it publishes, which is a report`).toBeLessThan(publish)
   }
 })
 
 test('the apex publish pins the action and carries the one credential it needs', () => {
-  const [apex] = workflows().filter(({ text }) =>
-    new RegExp(`^\\s*uses:\\s*${PUBLISH}@`, 'm').test(text),
-  )
+  const [apex] = workflows().filter(({ text }) => uses().test(text))
   // Say which action is missing. Reading `.text` off nothing throws
   // "Cannot read properties of undefined", which is how a rename upstream
   // reported itself as a broken test rather than as an unpublishable site.
@@ -150,9 +157,7 @@ test('the apex publish pins the action and carries the one credential it needs',
   // A floating action ref is the same defect as a floating image tag: the build
   // that ships becomes unnameable. bin/site resolves the action ref as its
   // OWN script ref, so @v1 is what makes "which publisher ran" answerable.
-  expect(apex.text, `${apex.name} must pin the publish action to a ref`).toMatch(
-    new RegExp(`uses:\\s*${PUBLISH}@v\\d`),
-  )
+  expect(apex.text, `${apex.name} must pin the publish action to a ref`).toMatch(uses('v\\d'))
   // ONE credential. The 202 returns a prefix-scoped, short-lived presigned POST
   // grant, so CI needs no bucket key — SITES_S3_* is the standing shared-bucket
   // credential the grant replaced, and any repo holding it could overwrite every
