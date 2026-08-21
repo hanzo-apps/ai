@@ -30,7 +30,7 @@ export default function SQLPage() {
         <Box className="relative z-10 max-w-5xl mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-border mb-8">
             <Database className="w-4 h-4 text-foreground" />
-            <span className="text-sm font-medium text-foreground/80">Managed PostgreSQL</span>
+            <span className="text-sm font-medium text-foreground/80">Relational Database</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="text-5xl md:text-7xl font-bold mb-6">
             <span className="text-foreground">Hanzo</span>{" "}
@@ -58,13 +58,13 @@ export default function SQLPage() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-border">
         <Box className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Postgres, without the pager duty</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Hanzo SQL, without the pager duty</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">You write the queries. We take the upgrades, the archiving and the replicas.</p>
           </motion.div>
           <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: Layers, title: "pgvector", description: "An embedding is a column beside the row it describes, so nearest-neighbour search and a WHERE clause are one query against one store. HNSW and IVFFlat indexes, cosine, L2 or inner product." },
-              { icon: Zap, title: "Connection Pooling", description: "Built-in PgBouncer. Handle thousands of connections without overloading PostgreSQL." },
+              { icon: Zap, title: "Connection Pooling", description: "Built-in PgBouncer. Handle thousands of connections without overloading the database." },
               { icon: GitBranch, title: "Branching", description: "Create database branches for development and testing. Instant copy-on-write clones." },
               { icon: Shield, title: "Backups you don’t schedule", description: "The write-ahead log is archived as it is written, so recovery targets a second rather than the last nightly dump. Name a timestamp and the database comes back as it stood." },
               { icon: BarChart3, title: "Query Insights", description: "pg_stat_statements is on from first boot, so the query that got slow last Tuesday was already being counted. Calls, total and mean time, rows and buffer hits, per normalised statement." },

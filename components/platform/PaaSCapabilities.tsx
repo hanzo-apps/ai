@@ -43,7 +43,7 @@ const CORE_SERVICES: Service[] = [
   },
   {
     name: "Database",
-    description: "PostgreSQL, vector search, and real-time subscriptions",
+    description: "SQL, vector search, and real-time subscriptions",
     icon: Database,
     href: "/datastore",
   },

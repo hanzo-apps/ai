@@ -36,15 +36,15 @@ export default function DocDBPage() {
             <span className="bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent">DocDB</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }} className="text-2xl md:text-3xl font-medium text-foreground mb-4">
-            Documents on the MongoDB wire, stored in PostgreSQL
+            Documents on the MongoDB wire, stored in Hanzo SQL
           </motion.p>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            DocDB answers the MongoDB wire protocol on 27017 and stores nothing itself: it translates each command into SQL and runs it against PostgreSQL. Your driver connects, your documents go in as documents — and the same data is sitting in a database you can also point a SQL client at, back up and replicate the way you already do.
+            DocDB answers the MongoDB wire protocol on 27017 and stores nothing itself: it translates each command into SQL and runs it against Hanzo SQL. Your driver connects, your documents go in as documents — and the same data is sitting in a database you can also point a SQL client at, back up and replicate the way you already do.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-3xl mx-auto">
             <Box className="bg-secondary/50 border border-border rounded-xl p-4"><Box className="text-2xl font-bold text-foreground">27017</Box><Box className="text-sm text-muted-foreground">Wire protocol</Box></Box>
             <Box className="bg-secondary/50 border border-border rounded-xl p-4"><Box className="text-2xl font-bold text-foreground">ACID</Box><Box className="text-sm text-muted-foreground">Transactions</Box></Box>
-            <Box className="bg-secondary/50 border border-border rounded-xl p-4"><Box className="text-2xl font-bold text-foreground">PostgreSQL</Box><Box className="text-sm text-muted-foreground">Engine</Box></Box>
+            <Box className="bg-secondary/50 border border-border rounded-xl p-4"><Box className="text-2xl font-bold text-foreground">Hanzo SQL</Box><Box className="text-sm text-muted-foreground">Engine</Box></Box>
             <Box className="bg-secondary/50 border border-border rounded-xl p-4"><Box className="text-2xl font-bold text-foreground">HTTP</Box><Box className="text-sm text-muted-foreground">And MCP</Box></Box>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="flex flex-wrap justify-center gap-4">
@@ -63,10 +63,10 @@ export default function DocDBPage() {
           <Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: Network, title: "The wire protocol, not a REST shim", description: "DocDB speaks MongoDB 5.0 and later on the wire, so pymongo, mongoose, the Go driver and mongosh connect to it directly. Around sixty commands are implemented — find, insert, update, delete, findAndModify, distinct, count, createIndexes, explain and the rest." },
-              { icon: Layers, title: "Aggregation runs in the database", description: "A pipeline is translated to SQL and executed where the data is, not pulled across the wire and reduced in your process. explain returns the plan the query actually took — a PostgreSQL plan, for something you wrote as a pipeline." },
-              { icon: Shield, title: "Transactions, and someone else's durability", description: "Multi-document writes commit or roll back together under PostgreSQL's MVCC. Backups, point-in-time recovery and replicas belong to the database — DocDB holds no state of its own, so there is nothing here that can be lost separately." },
-              { icon: Search, title: "Indexes are real indexes", description: "createIndex from the driver builds a PostgreSQL index, and listIndexes reads back what is actually there. Nothing is emulated in a layer above the planner, so an index you create is one the planner can use." },
-              { icon: GitBranch, title: "The SQL side door", description: "The documents are rows in PostgreSQL, so a reporting tool, a dbt model or a psql session can read them where they sit. The reporting copy and the operational copy are the same copy." },
+              { icon: Layers, title: "Aggregation runs in the database", description: "A pipeline is translated to SQL and executed where the data is, not pulled across the wire and reduced in your process. explain returns the plan the query actually took — a Hanzo SQL plan, for something you wrote as a pipeline." },
+              { icon: Shield, title: "Transactions, and someone else's durability", description: "Multi-document writes commit or roll back together under Hanzo SQL's MVCC. Backups, point-in-time recovery and replicas belong to the database — DocDB holds no state of its own, so there is nothing here that can be lost separately." },
+              { icon: Search, title: "Indexes are real indexes", description: "createIndex from the driver builds a Hanzo SQL index, and listIndexes reads back what is actually there. Nothing is emulated in a layer above the planner, so an index you create is one the planner can use." },
+              { icon: GitBranch, title: "The SQL side door", description: "The documents are rows in Hanzo SQL, so a reporting tool, a dbt model or a psql session can read them where they sit. The reporting copy and the operational copy are the same copy." },
               { icon: Zap, title: "An HTTP door and an agent door", description: "The same collections answer over plain HTTP — /action/find, /action/insertOne, /action/aggregate and the rest, with an OpenAPI document to generate from — and over the Model Context Protocol, so an agent can list databases and query them with no driver at all." },
             ].map((feature, index) => (
               <motion.div key={feature.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.05 }} className="bg-secondary/50 border border-border rounded-xl p-6 hover:border-neutral-600 transition-colors">

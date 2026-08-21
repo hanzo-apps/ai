@@ -28,7 +28,7 @@ const FEATURES = [
 const FeatureDemo = ({ activeTab }: { activeTab: string }) => {
   const demos: Record<string, { title: string; code: string }> = {
     database: {
-      title: "PostgreSQL + pgvector",
+      title: "Hanzo SQL + pgvector",
       code: `const { data, error } = await hanzo
   .from('products')
   .select('*')
@@ -183,7 +183,7 @@ const HeroSection = () => {
               transition={{ duration: 0.4, delay: 0.1 }}
               className="text-base lg:text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl"
             >
-              PostgreSQL database, authentication, edge functions, realtime subscriptions, and storage. Everything you need, nothing you don't.
+              Hanzo SQL, authentication, edge functions, realtime subscriptions, and storage. Everything you need, nothing you don't.
             </motion.p>
 
             {/* CTAs */}

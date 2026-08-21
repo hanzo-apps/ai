@@ -163,7 +163,7 @@ const CATEGORIES: Category[] = [
     icon: Database,
     color: "var(--neutral-400)",
     products: [
-      { name: "SQL", description: "PostgreSQL managed", icon: Table },
+      { name: "SQL", description: "Relational database", icon: Table },
       { name: "SQL Vector", description: "pgvector enabled", icon: Table, href: "/vector" },
       { name: "DocumentDB", description: "Document database", icon: FileJson },
       { name: "KV", description: "Key-value store", icon: Key },

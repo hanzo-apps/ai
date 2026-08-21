@@ -606,7 +606,7 @@ export const ossCatalog: OSSRepo[] = [
     id: 'sql',
     name: 'SQL',
     slug: 'hanzoai/sql',
-    description: 'Managed PostgreSQL with pgvector. SQL + vector search in one database.',
+    description: 'Managed relational database with pgvector. SQL and vector search in one store.',
     type: 'core',
     categories: ['Databases & Search'],
     languages: ['SQL'],

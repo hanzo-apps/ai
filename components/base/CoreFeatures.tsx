@@ -14,7 +14,7 @@ const CoreFeatures = () => {
   const features = [
     {
       icon: Database,
-      title: "Postgres Database",
+      title: "Hanzo SQL",
       description: "Enterprise-grade relational database with security built-in.",
       features: [
         "Fully portable and extensible relational database",

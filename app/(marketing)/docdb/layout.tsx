@@ -7,7 +7,7 @@ import { pageMeta } from '@/lib/page-meta'
 // itself say the same thing.
 export const metadata: Metadata = pageMeta({
   title: 'Hanzo DocDB',
-  description: 'Drop-in MongoDB wire-protocol compatibility on top of PostgreSQL.',
+  description: 'Drop-in MongoDB wire-protocol compatibility on top of Hanzo SQL.',
   path: '/docdb',
 })
 
