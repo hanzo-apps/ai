@@ -253,11 +253,21 @@ export function Providers({ children }: { children: ReactNode }) {
         // to their org and user. Signed out -> the publishable key, which is
         // admission for anonymous traffic and nothing more.
         //
-        // Never as `ingestKey`: the SDK resolves the credential as
-        // `ingestKey ?? token`, so passing it there makes the key win even for a
-        // signed-in visitor and leaves getToken unreachable. Folding the key into
-        // the resolver inverts it to `token ?? key`.
-        getToken: () => getToken() ?? INGEST_KEY,
+        // The key rides `ingestKey`, its own slot. It was folded into getToken to
+        // beat an `ingestKey ?? token` precedence that no longer exists — the SDK
+        // resolves `token ?? key`, because a bearer names a real principal and a
+        // pk- names one org for everybody holding it, so the key must never
+        // displace someone who has been vouched for. Folding it in also put a pk-
+        // in the TOKEN slot, and a token suppresses sendBeacon, so anonymous
+        // unload events gave up the beacon for nothing.
+        //
+        // It stays EXPLICIT here because it is the hanzo-ai PROJECT key, which is
+        // narrower than the org key the host would otherwise resolve: cloud files
+        // these events with product=hanzo-ai, where the org-wide key lands them
+        // with product empty. A surface wanting only its brand's key now passes
+        // nothing at all.
+        getToken,
+        ingestKey: INGEST_KEY,
         enabled,
         // `environment` is omitted so the SDK takes it from NODE_ENV: `next build`
         // stamps production, `next dev` stamps development.
