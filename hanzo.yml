@@ -2,8 +2,10 @@
 # hanzoai/ci reusable workflow (.hanzo/workflows/cicd.yml).
 #
 # hanzo.ai is a STATIC site (Next.js `output: export`). It ships to
-# https://hanzo.ai via Cloudflare Pages in its OWN workflow (.hanzo/workflows/
-# deploy.yml, CF creds from KMS) — NOT a container image. So there is no
+# https://hanzo.ai through the Sites plane in its OWN workflow
+# (.hanzo/workflows/deploy.yml, which calls hanzoai/ci's site action and
+# publishes to our own object store behind hanzoai/ingress) — NOT a container
+# image, and not Cloudflare Pages, which it left. So there is no
 # `images:` build and no operator `deploy:` here: the prior
 # `ghcr.io/hanzoai/cloud-site` image was vestigial (unused by the live site) and,
 # because this repo lives in the hanzo-apps org, its GITHUB_TOKEN cannot push to
@@ -61,12 +63,11 @@ test:
   # No pnpm version here. `packageManager` in package.json is the one place it
   # is stated, corepack reads it, and a second pin was BOTH wrong (it named
   # 10.33.4 against a 9.15.0 lockfile) and inert (corepack prefers the manifest).
-  # `.github/workflows/deploy.yml` says the same thing by passing no `version:`.
+  # `.hanzo/workflows/deploy.yml` says the same thing by passing no `version:`.
   #
   # No Node version either, for the same reason: `.nvmrc` and `engines` name the
-  # floor (22.18 — wrangler needs 22, and `scripts/noindex.mjs` reads
-  # `lib/publish` directly, which needs the type stripping Node does for itself
-  # from 22.18). If the reusable provisions something older this step fails on
+  # floor (22.18 — `scripts/noindex.mjs` reads `lib/publish` directly, which
+  # needs the type stripping Node does for itself from 22.18). If the reusable provisions something older this step fails on
   # the import, loudly, which is the right way for a floor to be wrong.
   - name: gates
     run: |
