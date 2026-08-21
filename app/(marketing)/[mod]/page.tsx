@@ -5,6 +5,11 @@ import { OWNED, goImport, repoOf } from '@/lib/go-modules'
 
 type Params = { params: Promise<{ mod: string }> }
 
+// The listed modules are the whole set: a name that is not one of them is not a
+// module, and must fall through to the site's own not-found rather than become a
+// page. In a static export an unlisted param has nowhere to be rendered anyway.
+export const dynamicParams = false
+
 export function generateStaticParams() {
   return OWNED.map((mod) => ({ mod }))
 }

@@ -30,6 +30,12 @@ export function pageMeta(opts: {
   description: string
   /** Absolute path, for the canonical URL. */
   path: string
+  /**
+   * Tags a page needs that nothing else models. Today that is the `go-import`
+   * pair a Go module's own path must serve — invisible to a reader, and the
+   * whole of what `go get hanzo.ai/<name>` reads.
+   */
+  other?: Metadata['other']
 }): Metadata {
   const title = `${opts.title} — Hanzo AI`
   const { description } = opts
@@ -41,5 +47,6 @@ export function pageMeta(opts: {
     alternates: { canonical: opts.path },
     openGraph: { title, description, url, siteName: 'Hanzo AI', type: 'website' },
     twitter: { card: 'summary_large_image', title, description },
+    ...(opts.other ? { other: opts.other } : {}),
   }
 }
