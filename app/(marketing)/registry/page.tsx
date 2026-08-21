@@ -23,7 +23,7 @@ const Registry = () => {
               Hanzo Registry
             </h1>
             <p className="text-xl text-foreground/80 mb-8">
-              A private registry for your container images at registry.hanzo.ai. It serves the OCI distribution API, so docker, podman, buildkit, skopeo and crane already know how to talk to it — and the credential is a short-lived token minted by your Hanzo IAM login, not a password living in a dockerconfigjson secret.
+              A private registry for your container images at oci.hanzo.ai. It serves the OCI distribution API, so docker, podman, buildkit, skopeo and crane already know how to talk to it — and the credential is a short-lived token minted by your Hanzo IAM login, not a password living in a dockerconfigjson secret.
             </p>
             <Box className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://docs.hanzo.ai/docs/registry" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-md text-lg font-medium">
