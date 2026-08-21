@@ -104,7 +104,7 @@ priced by `/v1/pricing` (AI) or the plan tier, and is gated by the org's
 | Projects | `/platform` | `/v1/projects/*` (125) · `/v1/platform/*` (124) | per-project / seat · entitlement `platform` |
 | Environments | `/cloud/environments` | `/v1/platform/*` (`clients/platform`, 124) | per-env · entitlement `platform` |
 | Builds | `/cloud/builds` | `/v1/paas/*` (`clients/paas`, 128) + arcd | per-build-minute · entitlement `builds` |
-| Registry | `/registry` | `registry.hanzo.ai` (own deployment, S3-backed) | per-GB stored · entitlement `registry` |
+| Registry | `/registry` | `oci.hanzo.ai` (own deployment, S3-backed) | per-GB stored · entitlement `registry` |
 | Releases | `/cloud/releases` | `/v1/paas/*` (`clients/paas`, 128) | per-deploy · entitlement `releases` |
 | Pipelines | `/cloud/pipelines` | `/v1/automations/*` (`clients/automations`, 148) | per-run · entitlement `pipelines` |
 
@@ -163,7 +163,7 @@ surfaces that consume other services' `/v1`, not standalone billable services.
   tier (`gateway`/`ingress`), which routes *to* the cloud binary.
 - **Environments / Builds / Releases / Pipelines** (`/cloud/*`) — facets of
   `platform`/`paas`/`automations`, not separate mounts.
-- **Registry** (`/registry`) — its own S3-backed deployment (`registry.hanzo.ai`),
+- **Registry** (`/registry`) — its own S3-backed deployment (`oci.hanzo.ai`),
   outside the fused `cloud` binary by design.
 
 No menu leaf points at a service that does not exist.

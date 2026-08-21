@@ -60,7 +60,7 @@ const ROWS: Row[] = [
   { name: 'Event routing / CDP', replaces: 'Segment', hanzo: 'destinations · tracker', k: 22, basis: 'f', cov: 'full', ev: 'repo' },
   { name: 'Git hosting', replaces: 'GitHub Enterprise', hanzo: 'git (git.hanzo.ai)', k: 8, basis: 'e', cov: 'full', ev: 'internal' },
   { name: 'CI/CD', replaces: 'CircleCI / Actions', hanzo: 'hanzoai/ci · arc runners', k: 18, basis: 'e', cov: 'full', ev: 'internal' },
-  { name: 'Container registry', replaces: 'ECR / Docker Hub', hanzo: 'registry (registry.hanzo.ai)', k: 4, basis: 'e', cov: 'full', ev: 'internal' },
+  { name: 'Container registry', replaces: 'ECR / Docker Hub', hanzo: 'registry (oci.hanzo.ai)', k: 4, basis: 'e', cov: 'full', ev: 'internal' },
   { name: 'PaaS / app hosting', replaces: 'Vercel / Heroku', hanzo: 'paas · deploy · functions', k: 13, basis: 'e', cov: 'full', ev: 'internal' },
   { name: 'App backend / BaaS', replaces: 'Supabase / Firebase', hanzo: 'base · docdb · orm', k: 15, basis: 'f', cov: 'full', ev: 'internal' },
   { name: 'Queues & streaming', replaces: 'Confluent / SQS', hanzo: 'pubsub (NATS) · kafka', k: 10, basis: 'f', cov: 'full', ev: 'repo' },

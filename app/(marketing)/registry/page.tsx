@@ -40,11 +40,11 @@ const Registry = () => {
             <div className="absolute inset-0 hz-grid [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
             <pre className="text-sm sm:text-base overflow-x-auto bg-[var(--black)]/50 p-4 rounded-lg border border-white/30">
               <code className="text-foreground/80">
-                <span className="text-foreground/60">$</span> <span className="text-foreground">hanzo</span> <span className="text-[var(--white)]">login registry.hanzo.ai</span>
+                <span className="text-foreground/60">$</span> <span className="text-foreground">hanzo</span> <span className="text-[var(--white)]">login oci.hanzo.ai</span>
                 <br/>
                 <span className="text-foreground/60"># IAM mints a short-lived token</span>
                 <br/>
-                <span className="text-foreground/60">$</span> <span className="text-foreground">docker push</span> <span className="text-[var(--white)]">registry.hanzo.ai/acme/api:v1.2.3</span>
+                <span className="text-foreground/60">$</span> <span className="text-foreground">docker push</span> <span className="text-[var(--white)]">oci.hanzo.ai/acme/api:v1.2.3</span>
               </code>
             </pre>
           </Box>
