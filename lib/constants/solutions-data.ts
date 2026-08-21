@@ -221,7 +221,7 @@ export const solutionsData: SolutionData[] = [
     ],
     useCases: ['SaaS product analytics', 'GDPR/CCPA compliance', 'Enterprise internal analytics', 'Privacy-first products'],
     cta: 'Deploy analytics',
-    ctaHref: 'https://insights-app.hanzo.ai',
+    ctaHref: 'https://insights.hanzo.ai',
   },
   {
     slug: ['stacks', 'ecommerce'],
